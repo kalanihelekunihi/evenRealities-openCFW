@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "scope": "Read-only revalidation of the interrupted campaign's touch reset pseudocode and independent review",
+  "target": {
+    "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "touch_payload": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+    "touch_payload_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d"
+  },
+  "historical_campaign": {
+    "campaign_id": "20260930T190500Z",
+    "status": "cleared after P2 interruption; assignments are not resumed",
+    "g1_receipt": "g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json",
+    "g1_receipt_sha256": "fe17aa5a4e7456a81f342c3ca6d67233b065c42dd5c5a09917bb8e603e4d6610",
+    "coverage_ledger": "g2/build/pseudocode-first/20260930T190500Z/inventory/coverage.jsonl",
+    "coverage_ledger_sha256": "db366503c7f5cdb5ab6ee891c0a7ef24a1ea2451f3c5e7f0b2bdb2073a214b0f",
+    "payload_bytes": 4300283,
+    "payload_unknown_bytes_in_g1_ledger": 4299919,
+    "payload_code_bytes_classified_in_g1_ledger": 0,
+    "note": "The G1 byte ledger is an initial partition; historical P2 outputs were not promoted into its classifications. These numbers do not measure how many candidate pseudocode files exist."
+  },
+  "bounded_reuse_candidate": {
+    "function": "touch:flash reset startup 0x4674..0x46dc",
+    "payload_span": [5012, 5116],
+    "image_span": [4980, 5084],
+    "pseudocode": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/pseudocode.md",
+    "function_record": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/function-record.json",
+    "instruction_correspondence": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/instruction-correspondence.json",
+    "independent_review": "g2/build/pseudocode-first/20260930T190500Z/reviews/P2-touch-reset-independent-review-131/001/review.json",
+    "independent_review_sha256": "de1d87bf064cf9473ccd7a27c5bd09b50fa2ce16e4c48624bb4b7e0344abf2f9",
+    "review_decision": "pass_bounded_instruction_backed_reset_pseudocode",
+    "review_input_hashes_rechecked": 20,
+    "review_input_hash_failures": 0,
+    "body_bytes": 104,
+    "body_sha256": "db0963144ca483b44bfb640b4a31207f3d90b3cb1cfbc342d19f6217f47cfb2a",
+    "instructions": 47,
+    "instruction_partition": "Contiguous; concatenated instruction bytes equal official touch payload[5012:5116]",
+    "canonical_changes": [],
+    "reuse_status": "Authenticated bounded candidate for later campaign admission; not canonical corpus promotion or a G2/G3 gate pass"
+  },
+  "limitations": [
+    "The old campaign remains cleared, and this audit does not resume its assignments or update its state.",
+    "The review is limited to one touch reset body and its cited effects; callees, global denominator, hardware behavior and C source completeness remain separate.",
+    "A new campaign must validate reused evidence and reconcile all six payloads before corpus freeze or new C implementation assignments."
+  ]
+}

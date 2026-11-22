@@ -39,14 +39,14 @@
         "g2-em9305"
       ],
       "kind": "producing_compiler",
-      "detail": "MetaWare is not available on PATH; current ARM-only provider selector does not cover ARC code."
+      "detail": "MetaWare is not available on PATH. The ARC provider selector now qualifies relocation-free exact matches from open GCC; relocation-bearing functions, producing configuration and the remaining stock image are unqualified."
     },
     {
       "payloads": [
         "g2-codec"
       ],
       "kind": "configuration_and_placement",
-      "detail": "C-SKY toolchain exists separately; complete producing configuration, bank/load placement and selected exact source providers remain unqualified."
+      "detail": "Open C-SKY GCC now supplies relocation-free exact source matches, but complete producing configuration, bank/load placement, relocation-bearing functions and the remaining stock image are unqualified."
     },
     {
       "payloads": [

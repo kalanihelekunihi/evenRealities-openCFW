@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "title": "Mismatch pair through completed DFU (stock vs openCFW) after 0xFC4E + FD01/FD07 fixes",
+  "scope": "Emulator-only. No hardware flash. No commit. Case-reply disarm (3) not in this step.",
+  "model_fixes_this_step": {
+    "FD01": "Unmapped main NVM (<0x00F00000) reads as erased 0xFF so commit_52eefa can read 0x402000 after NVMEraseMain",
+    "FD07": "Corrected to EMSMM plen==2 {bank_sel,page}; INFO page 1 maps to 0x00402000 (erase_info_52e948)"
+  },
+  "evidence_sources": [
+    "display_ble_hci_radio_update_attempt.c / update_crc.c / commit.c / erase_info.c / reconfigure.c",
+    "EMSMM_NVMErasePage.c: plen==2 {0,page<0x40}|{1,page<4}",
+    "paired Renode runs stock-dfu-mismatch.resc / opencfw-dfu-mismatch.resc"
+  ],
+  "unit_tests": "7 passed (fc4e/fd06/fd03/fd07) in 55.59s",
+  "stock": {
+    "log": "/Users/kalani/Repo/evenRealities-OpenCFW/build/em9305-nor-20261122/stock-dfu-mismatch.log",
+    "sha256": "6a0d6c55b336d1ad8a1ff82de9cc41fbd8ad3d2e08b5b9a15437021d2e1dc50a",
+    "hci_host_packets_logged": 922,
+    "fd06_erase_main": 1,
+    "fc4e_crc_commands": 4,
+    "crc32_results": [
+      "[0x00300000,0x003000E0) = 0xD2C17B4C",
+      "[0x00300400,0x00300690) = 0x6E09DDA8",
+      "[0x00302000,0x00302038) = 0xDA9653E5",
+      "[0x00302400,0x00335BC8) = 0xE498BC06"
+    ],
+    "fd07_info_erase": 1,
+    "fd03_commit_402000": 1,
+    "advertising_010A200101": 1,
+    "missing_fixtures": 0,
+    "unmodeled": [],
+    "sysresetreq": true,
+    "sbl_wired_load": false,
+    "otapointer_after_8s": "0x00000000",
+    "config_mode_after_8s": "False",
+    "nvm_main_erased": "False",
+    "unsupported_count": "0x00000000",
+    "host_packet_count_monitor": "0x0000003A",
+    "end_pc": "0x44adfa"
+  },
+  "opencfw": {
+    "log": "/Users/kalani/Repo/evenRealities-OpenCFW/build/em9305-nor-20261122/opencfw-dfu-mismatch.log",
+    "sha256": "4b96cf68996ce4e5cc50d2c1d367e2a3d1280ca617db909cff13a5c0b24932c6",
+    "hci_host_packets_logged": 866,
+    "fd06_erase_main": 1,
+    "fc4e_crc_commands": 4,
+    "crc32_results": [
+      "[0x00300000,0x003000E0) = 0xD2C17B4C",
+      "[0x00300400,0x00300690) = 0x6E09DDA8",
+      "[0x00302000,0x00302038) = 0xDA9653E5",
+      "[0x00302400,0x00335BC8) = 0xE498BC06"
+    ],
+    "fd07_info_erase": 1,
+    "fd03_commit_402000": 1,
+    "advertising_010A200101": 0,
+    "missing_fixtures": 0,
+    "unmodeled": [],
+    "sysresetreq": true,
+    "sbl_wired_load": true,
+    "otapointer_after_8s": "0xAFD1363A",
+    "config_mode_after_8s": "False",
+    "nvm_main_erased": "False",
+    "unsupported_count": "0x00000000",
+    "host_packet_count_monitor": "0x00000000",
+    "end_pc": "0x0"
+  },
+  "compare": {
+    "crc_results_identical": true,
+    "dfu_hci_completed_both": true,
+    "dfu_hci_markers": "1x FD06 erase, 4x FC4E CRC (same digests), 1x FD07 INFO erase @0x402000, 1x FD03 commit write @0x402000, unsupported 0, unmodeled none",
+    "post_dfu_divergence": {
+      "stock": "continues to LE advertising 010A200101; end PC 0x44adfa; OTAPOINTER 0",
+      "opencfw": "SYSRESETREQ immediately after INFO erase/commit; g2.reset sees sticky OTAPOINTER=0xAFD1363A \u2192 SBL wired-load, application not entered; no advertising; end PC 0"
+    },
+    "verdict": "DFU image path completed on both. openCFW does not finish post-DFU bring-up because a SYSRESETREQ hits the sticky OTAP SBL trap."
+  },
+  "artifacts": {
+    "G2EM9305.cs": "c86973f7c2fc27bbb21309e7fea603079f156d71e4752ce8fbcdb08bc7236f4c",
+    "test_em9305_transport.py": "5a971a586b7c4bb17cedaea231564987028a6195f004a435d5cf0d2ae20fb357",
+    "stock-dfu-mismatch.resc": "0e1e47a4784bc7b0b0314eb1f10be8c54db65165c2b8527a3dd13f05b3b8d33b",
+    "opencfw-dfu-mismatch.resc": "d552fc6f053ed5309b78fab526a5071b483d01a7313710862e388cf6880644d8",
+    "stock-dfu-mismatch.log": "6a0d6c55b336d1ad8a1ff82de9cc41fbd8ad3d2e08b5b9a15437021d2e1dc50a",
+    "opencfw-dfu-mismatch.log": "4b96cf68996ce4e5cc50d2c1d367e2a3d1280ca617db909cff13a5c0b24932c6"
+  },
+  "next": "(3) case-reply disarm with pogo product-test frame. Optional follow-on: openCFW post-DFU SYSRESETREQ / OTAPOINTER SBL trap."
+}

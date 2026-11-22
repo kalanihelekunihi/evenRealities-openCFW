@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical P1 coverage draft 012 adding the 72-byte Apollo main scatter table as data in each view.",
+  "supersedes": {"path": "g2/evidence/g2-20261112-p1-apollo-main-tail-coverage-index.json", "sha256": "d95cac86306c602405d6074fedc388b590b0663b14cc591bed1e0692b4417f34"},
+  "artifacts": {
+    "producer_script": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-012/001/classify.py", "sha256": "b7ef29eca8f26ed360c6dea93799d3de16b6d9da133b33457c3df366478e7cde"},
+    "coverage_draft_012": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-012/001/coverage-draft.jsonl", "sha256": "0f6bf99eedb0003d965dbce4f26fb9171f32ce58871b876045f4b7cfc8e21dd0"},
+    "producer_receipt": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-012/001/receipt.json", "sha256": "4a71f663be21236bcb79b1ea5d3436ff9255a26ccc69614cd5f7c4a2fccca500"},
+    "independent_review": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-scatter-coverage-review-001/001/review.json", "sha256": "5f772d8a19625e91413c45e0d933a43f5e20ed6b07e2e818e91f07cb89f5ed08"},
+    "main_scatter_index": {"path": "g2/evidence/g2-20261112-p1-apollo-main-scatter-index.json", "sha256": "32113955d219155f37cfb43c066d268ded132797f671a2bb2ae13d2a7143512d"}
+  },
+  "classification": {"full_ota_payload_data_span": [3298280,3298352], "post_preamble_flash_data_span": [3298248,3298320], "bytes_per_view": 72},
+  "counts": {"coverage_rows": 107, "coverage_scopes": 40, "unknown_payload_bytes": 4176969, "unknown_image_bytes": 5671619},
+  "provenance_caveat": "Replay trace script-pin drift is disclosed by the scatter index; direct locked table bytes and static references ground the data classification.",
+  "limits": ["No physical execution, whole-main discovery or G1 claim."],
+  "status": {"canonical_admission": "none", "g1": "not_run"}
+}

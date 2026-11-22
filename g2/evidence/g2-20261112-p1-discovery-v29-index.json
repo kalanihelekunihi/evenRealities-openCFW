@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery revision 029 incorporating bounded EM9305 loader predicates and section-code slot route",
+  "artifacts": {
+    "discovery_draft_029": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/029/discovery-draft.jsonl",
+      "sha256": "9306039ecb80396c1ee1bcaaa596f631147cf80198c0db8d69a0df177e5fab99"
+    },
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/029/reproduce.py",
+      "sha256": "e0b50905f29be19314872b2773b615e9fc964e0a25c99a174b606b8a09325744"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/029/receipt.json",
+      "sha256": "b61d4a9931b46d3450060379033a7dbb9946e1616c206ae6dc6fd47afb490dfc"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v29-review-001/001/review.json",
+      "sha256": "e01677ad9dbb13175ac0f957a4e4dd1b040ee45dc37d08219e8285204932d2b1"
+    },
+    "loader_predicates_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-loader-predicates-index.json",
+      "sha256": "86a7875ce16b7cba5f8c12ac8e259ed8632a1c880af9580efc9aa17eaba2b3c0"
+    },
+    "section_slot_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-section-slot-origin-index.json",
+      "sha256": "c615fa020f0399a0bdaa186169fbe3a7e088c43142f54a6a6ee942d14067e73c"
+    },
+    "predecessor_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/028/discovery-draft.jsonl",
+      "sha256": "8b151be1b4524bc15dbb4567fa1db4d62422ef5daeb6ac795028951693e6215b"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "Five local selector checks and conditional locked FHDR slot-3 route are reviewed; scanner acceptance and physical/external NVM selection remain open.",
+    "EM9305 and other payload whole-image discovery remain open.",
+    "No canonical inventory, pseudocode completion or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v28-index.json",
+    "sha256": "efe9180fcd45a1655dc27f6559de7ac4e3bafff472f939ca71d1db4696ab1a0f"
+  }
+}

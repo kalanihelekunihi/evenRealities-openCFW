@@ -1,0 +1,60 @@
+{
+  "campaign_id": "20261112T092142Z",
+  "g1_status": "not_run",
+  "ghidra": {
+    "analyze_headless_exists": true,
+    "application_properties_sha256": "19a74006a0351da7da1a8ee00ea0e864e672b1cb0c6e7132cdd210c9d672868c",
+    "application_version_line": "application.version=12.1.4",
+    "arc_processor_present": false,
+    "arm_processor_present": true,
+    "csky_processor_present": true,
+    "root": "/opt/homebrew/Cellar/ghidra/12.1.4/libexec"
+  },
+  "java": {
+    "exists": true,
+    "exit_code": 0,
+    "path": "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home/bin/java",
+    "version_output": "openjdk version \"21.0.12.1\" 2026-08-18"
+  },
+  "objdump_tools": [
+    {
+      "exists": true,
+      "family": "Arm GNU objdump",
+      "historical_pin_sha256": "3843c00e27aca1a9c283d1e4cddf3b5db895a6ff6b2500e86f08d0d1126cd500",
+      "matches_historical_pin": true,
+      "path": "/opt/homebrew/bin/arm-none-eabi-objdump",
+      "sha256": "3843c00e27aca1a9c283d1e4cddf3b5db895a6ff6b2500e86f08d0d1126cd500",
+      "size": 1517152,
+      "version_exit_code": 0,
+      "version_first_line": "GNU objdump (GNU Binutils) 2.47.20260726"
+    },
+    {
+      "exists": true,
+      "family": "ARC GNU objdump",
+      "historical_pin_sha256": "72e6b6472976159e135ea363dee4a1580b0921699ead22357e24503eddb0fdf3",
+      "matches_historical_pin": true,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/arc-binutils-001/prefix/bin/arc-elf32-objdump",
+      "sha256": "72e6b6472976159e135ea363dee4a1580b0921699ead22357e24503eddb0fdf3",
+      "size": 2200424,
+      "version_exit_code": 0,
+      "version_first_line": "GNU objdump (GNU Binutils) 2.45.1"
+    },
+    {
+      "exists": true,
+      "family": "C-SKY objdump",
+      "historical_pin_sha256": "7150f7ffc2ac163f3d2d465620e5dac96df4b29411e5d0944419c41657cc2382",
+      "matches_historical_pin": true,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+      "sha256": "7150f7ffc2ac163f3d2d465620e5dac96df4b29411e5d0944419c41657cc2382",
+      "size": 1715960,
+      "version_exit_code": 0,
+      "version_first_line": "GNU objdump (GNU Binutils) 2.27"
+    }
+  ],
+  "old_analysis_plan_path": "g2/build/pseudocode-first/20260930T190500Z/inventory/analysis-plan.json",
+  "old_analysis_plan_sha256": "19e924b7c477c69a7ec899c22d04e061590ca4cfbe4d3315fbe248ebdd4b341f",
+  "qualification": "availability_only",
+  "schema_version": 1,
+  "scope": "Current local tool existence, binary hashes and version outputs only; no full-image decoder calibration or semantics qualification.",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

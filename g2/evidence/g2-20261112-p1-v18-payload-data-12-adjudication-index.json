@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked 12 v18 payload data row-level adjudications against locked payloads",
+  "artifacts": {
+    "row_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-data-12-canonical-review-pilot-001/001/review.py",
+      "sha256": "d2ed5e673a99c473e88397f5f6f0d9f39a94132ec57055c62be2e69c1de3bcdb"
+    },
+    "row_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-data-12-canonical-review-pilot-001/001/report.json",
+      "sha256": "ff8bec6c5fb8ef6edec94506d44630c787cb9fa3ed77a3933aea2f6a1f68ad18"
+    },
+    "row_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-data-12-canonical-review-pilot-001/001/receipt.json",
+      "sha256": "913b4485e1fdc31aa87c32b06ecf2f0951a3134f1c51b121c6b7e1f8f471a663"
+    },
+    "coordinator_check_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-data-12-coordinator-check-001/001/check.py",
+      "sha256": "a4bc14cee74af7def12387ecacf72098f73e1d1e8b0d02cf2dab18d114376a2a"
+    },
+    "coordinator_check": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-data-12-coordinator-check-001/001/review.json",
+      "sha256": "bb7eef59b57255489b1e2441d3a7099ff1a1128238ac3217ed30930bf9e2aa5c"
+    },
+    "candidate_v18": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018/001/coverage-draft.jsonl",
+      "sha256": "e2446cc92c63055a458335d15b2f7ef2018214f31831134436962ec7ea7f384e"
+    }
+  },
+  "result": {
+    "payload_data_rows": 12,
+    "pass_bounded": 12,
+    "revise": 0,
+    "evidence_pins_verified": 38,
+    "canonical_row_hashes_computed": 12,
+    "validator_review_records_created": 0
+  },
+  "limits": [
+    "Codec weight span has stock transfer/data role but no internally decoded tensor grammar or microcode exclusion.",
+    "No authenticated registry, nested-image discovery closure, canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

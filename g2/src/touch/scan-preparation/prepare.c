@@ -1,6 +1,6 @@
 /* Independent stock71c8/7064/69c4 composition. Synthetic offline only.
  * External end-of-init callback is dispatched if present; tests use null.
- * ISR callback address is stock metadata, not a native ISR implementation.
+ * ISR callback is bound to the source-owned scan handler.
  * Saturated measurement scope excludes widgettype7 alternate ABI. */
 #include "prepare.h"
 #include "../clock-selection/clock.h"
@@ -11,6 +11,7 @@
 #include "../scan-watchdog/watchdog.h"
 #include "../saturated-scan/scan.h"
 #include "../max-raw/max_raw.h"
+#include "../scan-isr/isr.h"
 extern uint32_t Cy_MSCLP_Configure(volatile uint32_t *,const void *,uint32_t,void *);
 static uint8_t *ptr(const uint8_t *c,unsigned off){return *(uint8_t *const *)(c+off);}
 static uint16_t u16(const uint8_t *c,unsigned off){return *(const uint16_t *)(c+off);}
@@ -46,7 +47,7 @@ uint32_t touch_prepare_scan_fields(uint8_t *c){
  uint32_t status=touch_initialize_source_clock(c);uint8_t *i=ptr(c,8),*common=ptr(c,0);
  ptr(c,28)[21]=0;i[82]=0;i[116]=common[41];i[117]=common[42];i[76]=common[43];
  status|=touch_generate_base(c);touch_generate_all_slots(0,c);touch_generate_all_slots(1,c);
- *(uint32_t *)(i+16)=0x6781u;*(uint32_t *)(i+40)=touch_timer_cycles(*(uint32_t *)(i+36),c);
+ *(void (**)(uint8_t *))(i+16)=touch_scan_isr;*(uint32_t *)(i+40)=touch_timer_cycles(*(uint32_t *)(i+36),c);
  return status;
 }
 static uint32_t saturated(uint32_t *out,uint32_t id,uint32_t slot,uint32_t mode,uint8_t *c){

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded semantic reviews of six v017 package child-payload rows",
+  "artifacts": {
+    "review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-002/001/review.py",
+      "sha256": "72b4c5bfd2c4c7d4567aa6b0d7baae8fed77419cd9d37ecf85dbcd4299b489af"
+    },
+    "review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-002/001/review.json",
+      "sha256": "06f02ce2bb1c953c80b1c533c94e9f1886a9142619ae4c5e6800d75cff988060"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-002/001/receipt.json",
+      "sha256": "4e26fcbd6e90fa454428c53993c335bf500f8d939cbb936aa4fe1b65bab7d655"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-002-independent-review-001/001/review.json",
+      "sha256": "8fa45e73c937b1120f99c0254541c8215a66007320529d1539c5979ab71ce218"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "reviewed_candidate_rows": 6,
+    "package_child_payload_rows": 6,
+    "checks": "TOC, 128-byte component headers, CRC-32C, official payload equality and hashes, v017 intervals and evidence input pins",
+    "decisions": "PASS_BOUNDED for six outer package child-payload rows",
+    "validator_trusted_review_ids_assigned": 0
+  },
+  "limits": [
+    "Inner payload code/data classification and six package component-header rows are outside this review.",
+    "No authenticated campaign reviewer registry or canonical coverage.jsonl admission exists.",
+    "No G1, G2, or C implementation authorization follows."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

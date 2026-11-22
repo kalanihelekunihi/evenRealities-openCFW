@@ -1,0 +1,323 @@
+{
+  "campaign_id": "20261112T092142Z",
+  "current_replay_script": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/replay.py",
+    "sha256": "e7b4c6e89a32d67e307e09392d4b5e13d224bb3cb12f2df822bd791ec20ddb2f"
+  },
+  "execution": {
+    "argv": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/replay.py"
+    ],
+    "exit_code": 0,
+    "stderr": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/stdout.txt",
+      "sha256": "ddd287da5aaa61828713c3a166ae0d658ec935353f729ef0c8828cc31b6dbd31"
+    },
+    "working_directory": "/Users/kalani/Repo/evenRealities-openCFW"
+  },
+  "g1_status": "not_run",
+  "historical_script_sha256": "49adb284e084ec344b149c1b075c99ebe575b4c2509e840782237c5d6df55108",
+  "images": [
+    {
+      "historical_transform_receipt": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-main-transforms-012/001/transform-20000000.json",
+        "sha256": "41b02195d87ccf49d513ecf778ad3f5590ae14fc102952075234774f97b66000"
+      },
+      "image_id": "apollo_main:decoded:20000000",
+      "matches_historical_output": true,
+      "output_path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/decoded-20000000.bin",
+      "output_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+      "output_size": 17752,
+      "source_raw_image_span": [
+        3512478,
+        3523342
+      ],
+      "source_span_sha256": "bf6c95e35e2a134d1d1098e3e8e6a9b47ae8b9bdadcd996f2fff81673e8e07cb",
+      "source_wrapped_payload_span": [
+        3512510,
+        3523374
+      ]
+    },
+    {
+      "historical_transform_receipt": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-main-transforms-012/001/transform-20080000.json",
+        "sha256": "b573799e81c8386060c05138bab333336cf66e405721b154824b2486fb29e8ab"
+      },
+      "image_id": "apollo_main:decoded:20080000",
+      "matches_historical_output": true,
+      "output_path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/decoded-20080000.bin",
+      "output_sha256": "a5be949c41cf1e9a7d4a6b4aa6e3a6cb2f9c9bcb3a04a866d15e49e3976a7d0c",
+      "output_size": 769646,
+      "source_raw_image_span": [
+        3503863,
+        3512478
+      ],
+      "source_span_sha256": "94c9d167550d2abee7c9d2c74c861de5f1d48ea0745c08f5a2c5ad0bfde88106",
+      "source_wrapped_payload_span": [
+        3503895,
+        3512510
+      ]
+    }
+  ],
+  "locked_main_payload": {
+    "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "size": 3523396
+  },
+  "predecessor": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/fresh-replay-receipt.json",
+    "sha256": "2d033002d02b955078a8ec4c1d2c23cb8fc189ce7077e0f7cab2a17bdb80ecf4"
+  },
+  "schema_version": 1,
+  "scope": "Fresh bounded stock-handler replay of two Apollo main RAM startup transforms; no G1 admission, full source load proof outside recorded dynamic observations, C implementation, or hardware behavior.",
+  "script_delta": "Only output directory changed; exact text comparison passed. Historical worker/identity/prestate records remain inputs.",
+  "script_sha256": "e7b4c6e89a32d67e307e09392d4b5e13d224bb3cb12f2df822bd791ec20ddb2f",
+  "source_parent_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "status": "replayed_pending_independent_review",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "tool_files": [
+    {
+      "current_sha256": "6f9a3b000ebc27d5392ff2bb30c48ed0cde18ef11d9aa48330482b079edf0ff9",
+      "historical_pin_sha256": "6f9a3b000ebc27d5392ff2bb30c48ed0cde18ef11d9aa48330482b079edf0ff9",
+      "historical_version": "3.13.15 (main, Aug  5 2026, 12:25:43) [Clang 21.0.0 (clang-2100.3.34.2)]",
+      "matches_historical_pin": true,
+      "name": "interpreter_or_script",
+      "path": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+    },
+    {
+      "current_sha256": "49adb284e084ec344b149c1b075c99ebe575b4c2509e840782237c5d6df55108",
+      "historical_pin_sha256": "49adb284e084ec344b149c1b075c99ebe575b4c2509e840782237c5d6df55108",
+      "historical_version": null,
+      "matches_historical_pin": true,
+      "name": "interpreter_or_script",
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-main-canonical-replay-009/001/replay.py"
+    },
+    {
+      "current_sha256": "9ad32123bca674cf205c308fd4d0d2a4db877c9dc2afac4feab7c84c8cf7043b",
+      "historical_pin_sha256": "9ad32123bca674cf205c308fd4d0d2a4db877c9dc2afac4feab7c84c8cf7043b",
+      "historical_version": "2.1.4",
+      "matches_historical_pin": true,
+      "name": "unicorn",
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/__init__.py"
+    },
+    {
+      "current_sha256": "62ffe84341f4288e309040e06555b81798031817d32fd19a945e250813f872f0",
+      "historical_pin_sha256": "62ffe84341f4288e309040e06555b81798031817d32fd19a945e250813f872f0",
+      "historical_version": "2.1.4",
+      "matches_historical_pin": true,
+      "name": "unicorn",
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/unicorn_py3/unicorn.py"
+    },
+    {
+      "current_sha256": "7207c8e3d7a63118fb0bca73e01816797fd51b1d8a39a4cbc7abfd562ee59c85",
+      "historical_pin_sha256": "7207c8e3d7a63118fb0bca73e01816797fd51b1d8a39a4cbc7abfd562ee59c85",
+      "historical_version": "2.1.4",
+      "matches_historical_pin": true,
+      "name": "unicorn",
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/lib/libunicorn.2.dylib"
+    }
+  ],
+  "tool_scope": "Interpreter, old script, and Unicorn library files match pinned historical hashes; new script differs only in output directory. This is tool-file identity, not emulator semantic validation.",
+  "trace": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/trace-results.json",
+    "records": [
+      {
+        "all_backreferences_in_prior_output": true,
+        "backreference_load_count": 12870,
+        "backreferences_to_unwritten_or_future_bytes": 0,
+        "conditional_source_load_site_counts": {
+          "0x43a142": {
+            "callbacks": 383,
+            "executed": 383,
+            "skipped": 0
+          },
+          "0x43a172": {
+            "callbacks": 290,
+            "executed": 290,
+            "skipped": 0
+          }
+        },
+        "descriptor": "0x75d3f4",
+        "descriptor_words": {
+          "destination": "0x20000000",
+          "encoded_length": "0x54e0",
+          "signed_source_offset": "0x344aa"
+        },
+        "guarded_source_load_candidates_at_end": [],
+        "instruction_count": 176196,
+        "output_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+        "output_size": 17752,
+        "output_span": [
+          536870912,
+          536888664
+        ],
+        "return_r0": "0x75d400",
+        "return_to_sentinel": true,
+        "source_bytes": 10864,
+        "source_effective_address_set_exact": true,
+        "source_end_guard_observations": [
+          {
+            "cpsr": "0x600001f3",
+            "memory_load_candidate_executes": null,
+            "pc": "0x43a134",
+            "r3": 7947022,
+            "r4": 7947022
+          },
+          {
+            "cpsr": "0x600001f3",
+            "memory_load_candidate_executes": null,
+            "pc": "0x43a136",
+            "r3": 7947022,
+            "r4": 7947022
+          }
+        ],
+        "source_end_it_successors": [],
+        "source_exit_branch_successors": [
+          {
+            "branch_pc": "0x43a136",
+            "r3": 7947022,
+            "r4": 7947022,
+            "target_next_executed_pc": "0x43a194"
+          }
+        ],
+        "source_load_count": 10864,
+        "source_load_sites": {
+          "0x43a138": 2610,
+          "0x43a142": 383,
+          "0x43a14e": 90,
+          "0x43a156": 4882,
+          "0x43a166": 2609,
+          "0x43a172": 290
+        },
+        "source_payload_span": [
+          3512510,
+          3523374
+        ],
+        "source_span": [
+          7936158,
+          7947022
+        ],
+        "stack_pop_post_sp": "0x203ff000",
+        "stack_pop_pre_sp": "0x203feff0",
+        "stack_write_span": [
+          541061104,
+          541061120
+        ],
+        "unexpected_writes": 0,
+        "write_coverage_complete": true
+      },
+      {
+        "all_backreferences_in_prior_output": true,
+        "backreference_load_count": 769575,
+        "backreferences_to_unwritten_or_future_bytes": 0,
+        "conditional_source_load_site_counts": {
+          "0x43a142": {
+            "callbacks": 7,
+            "executed": 7,
+            "skipped": 0
+          },
+          "0x43a172": {
+            "callbacks": 7,
+            "executed": 7,
+            "skipped": 0
+          }
+        },
+        "descriptor": "0x75d404",
+        "descriptor_words": {
+          "destination": "0x20080000",
+          "encoded_length": "0x434e",
+          "signed_source_offset": "0x322f3"
+        },
+        "guarded_source_load_candidates_at_end": [],
+        "instruction_count": 5467009,
+        "output_sha256": "a5be949c41cf1e9a7d4a6b4aa6e3a6cb2f9c9bcb3a04a866d15e49e3976a7d0c",
+        "output_size": 769646,
+        "output_span": [
+          537395200,
+          538164846
+        ],
+        "return_r0": "0x75d410",
+        "return_to_sentinel": true,
+        "source_bytes": 8615,
+        "source_effective_address_set_exact": true,
+        "source_end_guard_observations": [
+          {
+            "cpsr": "0x200001f3",
+            "memory_load_candidate_executes": null,
+            "pc": "0x43a16e",
+            "r3": 7936158,
+            "r4": 7936158
+          },
+          {
+            "cpsr": "0x800001f3",
+            "memory_load_candidate_executes": null,
+            "pc": "0x43a170",
+            "r3": 7936158,
+            "r4": 7936158
+          },
+          {
+            "cpsr": "0x600001f3",
+            "memory_load_candidate_executes": null,
+            "pc": "0x43a134",
+            "r3": 7936158,
+            "r4": 7936158
+          },
+          {
+            "cpsr": "0x600001f3",
+            "memory_load_candidate_executes": null,
+            "pc": "0x43a136",
+            "r3": 7936158,
+            "r4": 7936158
+          }
+        ],
+        "source_end_it_successors": [
+          {
+            "cpsr_before_it": "0x800001f3",
+            "it_pc": "0x43a170",
+            "next_executed_pc": "0x43a176",
+            "r3": 7936158
+          }
+        ],
+        "source_exit_branch_successors": [
+          {
+            "branch_pc": "0x43a136",
+            "r3": 7936158,
+            "r4": 7936158,
+            "target_next_executed_pc": "0x43a194"
+          }
+        ],
+        "source_load_count": 8615,
+        "source_load_sites": {
+          "0x43a138": 2846,
+          "0x43a142": 7,
+          "0x43a14e": 2838,
+          "0x43a156": 71,
+          "0x43a166": 2846,
+          "0x43a172": 7
+        },
+        "source_payload_span": [
+          3503895,
+          3512510
+        ],
+        "source_span": [
+          7927543,
+          7936158
+        ],
+        "stack_pop_post_sp": "0x203ff000",
+        "stack_pop_pre_sp": "0x203feff0",
+        "stack_write_span": [
+          541061104,
+          541061120
+        ],
+        "unexpected_writes": 0,
+        "write_coverage_complete": true
+      }
+    ],
+    "sha256": "ba7d940cff47fc100a581191f05c0ef0a99023e210bcfd0b3d500b222ebbb799"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Reviewed v2 coverage review-record and trusted registry assembly workpack",
+  "artifacts": {
+    "workpack_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-review-registry-workpack-001/001/workpack.py",
+      "sha256": "df9f8375392d5b7ae42b2a94f723ff01e51efbe2e28e241ded0433873fccaa61"
+    },
+    "workpack_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-review-registry-workpack-001/001/report.json",
+      "sha256": "fe0c6f15f1194d6baee7c6fb2afd836cd99c7647b5c7cd2d5dc1cbec41e58ea6"
+    },
+    "workpack_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-review-registry-workpack-001/001/receipt.json",
+      "sha256": "8a92e0f0e2d3993725234a165f4b5a0992724217e0b38d02bcbf850863564969"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-review-registry-workpack-independent-review-001/001/review.json",
+      "sha256": "2bd4341f76fe4e09428c1cdec509a4acc0ee8664d3d9fdba65538dd2bcecac7d"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "example_rows": 5,
+    "canonical_record_hash_algorithm_checked": true,
+    "required_review_input_roles": ["record", "source", "evidence"],
+    "acyclic_assembly_order": "assign IDs, finalize canonical coverage.jsonl, hash review records and their inputs, authenticate reviewer registry, bind identity and external pin"
+  },
+  "limits": [
+    "Required input hashes are a validator-enforced subset; additional valid inputs are permitted.",
+    "No reviewer identities, reviews.jsonl, trusted registry, out-of-band pin, or canonical inventory were created.",
+    "No G1 gate result or C implementation authorization follows."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

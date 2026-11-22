@@ -2,6 +2,2716 @@ STATUS: IN-PROGRESS
 
 # G2 compilable-C reconstruction ledger
 
+## Verified mid-level helpers + standard memcpy/memset — 2026-11-22 (10:48 AM CST, America/Chicago)
+
+Bottom-up batch 2, same method as the leaf batch: idiomatic scalar-float
+C, function-level compare against typographic bodies on Renode M55, then
+replace only what passed. `fg_memcpy` / `fg_memset` now call standard
+`memcpy` / `memset` instead of the typographic IAR bodies. No `fg_call`.
+Emulator only; no flash; no commit.
+
+**Verified (13,508 cases, 0 mismatches on the replaced symbols).** MAGIC
+`0xF6A11E02`, final PC `0x30000000`.
+
+| Symbol | Cases | Notes |
+| --- | ---: | --- |
+| `fg_memcpy` | 1472 | standard `memcpy`; vs IAR forward-copy, sizes 0..200, align 0..7 |
+| `fg_memset` | 912 | standard `memset`; sizes 0..200, several fills and alignments |
+| `fg_439ca4` | 1 | stores `0x21` to `fg_iar_err[0]` |
+| `fg_4397a8` | 1056 | nonnegative `sqrt`; negative → error + qNaN `0x7FFFFFFF` |
+| `fg_439e9c` | 2976 | 3-float max, skip leading `43a0f4` hit |
+| `fg_439f24` | 2976 | 3-float min, same skip |
+| `fg_439fb4` | 768 | 3-byte nonzero index list, return count 0..3 |
+| `fg_43ba6c` | 9 | `fabs` of `2*count` floats; `out={count,2}` |
+| `fg_43bc58` | 10 | `fabs` of `p[1]` floats; `out={1,p[1]}` |
+| `fg_43baf4` | 3328 | two-double integer-ABI predicate (`!C` of `43c0b0`) |
+
+**Not replaced.** `fg_43a5dc` (quadratic interpolation) had 1 mismatch
+in 288 cases: a canonical qNaN `t` (which `43a0f4` does not treat as
+special) produced VFP NaN payload `0x7FC00001` vs C `0x7FC00000`. The
+typographic body stays in `g2c_fuel_gauge_cores.S`.
+
+**Production replace.** Extended `g2c_fuel_gauge_leaves.c` / `.h`.
+Removed typographic `fg_memcpy`, `fg_439be4`, `fg_memset`,
+`fg_memset_inner`, `fg_4397a8`, `fg_439ca4`, `fg_439e9c`, `fg_439f24`,
+`fg_439fb4`, `fg_43ba6c`, `fg_43bc58`, `fg_43baf4`, and `fg_43c0b0`.
+Ten typographic globals remain: `fg_43a5dc`, `fg_439ce0`, `fg_439fe4`,
+`fg_43bb14`, `fg_43bc84`, `fg_43be18`, `fg_43bfac`,
+`nrf_model_process_43a698`, `nrf_model_init_43a1b0`,
+`nrf_model_ttf_58eac4`.
+
+**Not in this batch.** apollo-main was not rebuilt and the
+version-match paired sim was not re-run (that check is due after a few
+batches; this is batch 2). Linker-report string unchanged. Official
+`opencfw-otap-disarm.app.bin` was not overwritten.
+
+Evidence:
+[`g2-20261122-fuel-gauge-mid-c.json`](../evidence/g2-20261122-fuel-gauge-mid-c.json).
+Harness: `build/fuel-gauge-recon-20261122/c-leaves/mid_test.bin`.
+
+
+## Verified leaf-callee C (bottom-up, no trampoline) — 2026-11-22 (10:35 AM CST, America/Chicago)
+
+Changed approach as asked. The machine-level CFG lifter (`fg_cpu` +
+`fg_call`) is not the translation method; that WIP remains in
+`build/fuel-gauge-recon-20261122/c-lift/` and is still **not
+verified**. This batch goes bottom-up: idiomatic scalar-float C for
+true leaf callees, function-level compare against the typographic
+bodies on the Renode M55 golden, then replace those typographic
+bodies one batch at a time. No `fg_call` trampoline; normal AAPCS
+(hard-float for s0/s1 leaves, integer r0:r1 for `fg_43a110` /
+`fg_43a19c` / `fg_43a5b0`). Emulator only; no flash; no commit.
+
+**Verified (12,464 cases, 0 mismatches).** MAGIC `0xF6A11E01`, COUNT
+68 words, MISMATCH 0, final PC `0x30000000`. Inputs were IEEE
+specials (signed zeros, denorms, inf, qNaN, sNaN) plus xorshift
+randoms (seed `0xC0FFEE`); two-arg leaves also ran the specials ×
+specials grid.
+
+| Symbol | Cases | Notes |
+| --- | ---: | --- |
+| `fg_43a110` | 1060 | f32 bits → f64 bits, including denormals and sNaN quieting |
+| `fg_43a19c` | 1280 | dual high-word qNaN-style HI check, not isnan/isfinite |
+| `fg_43a0f4` | 1060 | promote s0 via 43a110, then 43a19c |
+| `fg_439efc` | 2320 | min-like; ARM unordered LT; +0 vs ±0 returns b |
+| `fg_439f88` | 2320 | max-like; -0 vs ±0 takes b; a NaN selects b |
+| `fg_43a5b0` | 2084 | floor-like bit chop; ±0 preserved; Inf/NaN unchanged |
+| `fg_43a5a0` | 2084 | hard-float wrapper around 43a5b0 |
+| `nrf_model_tte_params_58eab0` | 256 | copy two floats to model state +0x48 / +0x4c |
+
+**Production replace.** Added
+`g2c_fuel_gauge_leaves.c` / `.h` and a `sources.json` unit (clang,
+`g2-apollo-main-1`). Removed the eight typographic bodies from
+`g2c_fuel_gauge_cores.S` (23 typographic globals remain, including
+process, init, ttf, memcpy/memset, and mid-level helpers). Remaining
+`.S` `bl` sites now resolve to the C symbols.
+
+**Not in this batch.** Mid-level helpers, `nrf_model_process_43a698`,
+and `nrf_model_init_43a1b0` are still typographic. The linker-report
+canned "source-only uncalibrated" string is unchanged. apollo-main
+was not rebuilt and paired sims were not re-run. Official
+`opencfw-otap-disarm.app.bin` was not overwritten.
+
+Evidence:
+[`g2-20261122-fuel-gauge-leaves-c.json`](../evidence/g2-20261122-fuel-gauge-leaves-c.json).
+Harness: `build/fuel-gauge-recon-20261122/c-leaves/`.
+
+
+## WIP C lift of nrf_model_process_43a698 — 2026-11-22 (10:23 AM CST, America/Chicago)
+
+Biggest core first, as asked. This batch is **not verified**. Production
+`g2c_fuel_gauge_cores.S` is unchanged; the typographic body was not
+removed. No linker-report string fix, no apollo-main rebuild, no paired
+sims, no flash, no commit.
+
+**Intent.** Replace the typographic process core (4864 B, 1458 reachable
+insns) with scalar C, expanding MVE to 4-lane float operations and
+DLS/LE to counted loops. Callees stay typographic for this batch and
+are called through a small `fg_call` trampoline. Work lives only under
+`build/fuel-gauge-recon-20261122/c-lift/`.
+
+**Lifter fixes so far.** Condition-suffix mis-parses (`movs`/`dls`);
+`sl` vs `s-register`; VMOV immediates taken from the objdump `@
+0x40000000` annotation (the `#0` form is 2.0); PC-relative `vldr`/`adr`
+now read baked `core_proc.bin` pool bytes via `fg_stock_ptr`; `fg_call`
+saves the cpu pointer and hardware SP in BSS so typographic helpers
+cannot clobber them.
+
+**Renode M55.** The standalone EVENBAT harness writes MAGIC
+`0xF6A11E00` but COUNT stays 0 after 2 s of guest time (250 MIPS). PC
+remains around typographic `memcpy`. A helper-call log showed a sane
+first `memcpy(..., 8)` as call 9, then the run never finished. No
+golden compare (EVENBAT / 24 random / param_9 mutant) was completed.
+
+Next: finish debugging this process lift until it matches `golden2` /
+`mutant2`, then remove the process body from `.S`. Evidence:
+[`g2-20261122-fuel-gauge-process-c-lift-wip.json`](../evidence/g2-20261122-fuel-gauge-process-c-lift-wip.json).
+
+
+
+## Verified nrf_fuel_gauge C + MVE cores rebuilt and paired sims — 2026-11-22 (10:00 AM CST, America/Chicago)
+
+Follow-on to the Renode-M55 golden and in-tree replacement below. Emulator
+only; no flash; no commit. Official `opencfw-otap-disarm.app.bin` was not
+overwritten. `source_completeness_proven` stays **false**.
+
+**Build.** `sources.py` 2719/2719, 0 failures, 0 duplicate strong symbols,
+21 composed unresolved. Linked image
+`build/g2-apollo-recovery-20261122-fuel-gauge-c-link/g2-apollo-main/g2-apollo-main.bin`
+is **3,629,904 B**, SHA-256
+`78e7cd88d07aaafe9427e42ec915b81a7f1eeddcc50924221ecf40bf37b20457`,
+reset PC `0x0052EA35` (SP `0x2007FB00`). That is +9,860 B versus the
+gc-fnsec image (typographic cores vs the source-only estimate). Installed
+only as `build/em9305-nor-20261122/opencfw-fuel-gauge-c.app.bin`. The
+linker report's canned "source-only uncalibrated" qualification string
+was not edited.
+
+**Version-match (8 s).** CHIPREV stays `0x22`. OTAP `0xAFD1363A` at 0.01 s
+and `0` at 8 s. Host packets `0x3A`, unsupported `0`, advertising
+`010A200101`, display frame
+`0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492`.
+End PC `0x4ce6ec` (layout; gc was `0x4cbdd4`, stock `0x44adfa`).
+
+**Forced-mismatch DFU (controller word `00010304`, 8 s, completed path).**
+922 HCI host packets, identical opcode histogram to stock: 1× FD06
+`NVMEraseMain`; 857× FD03; 4× FC4E CRC32 with the same digests
+(`0xD2C17B4C`, `0x6E09DDA8`, `0xDA9653E5`, `0xE498BC06`); 1× FD07 INFO
+erase at `0x00402000`; 1× FD03 commit at `0x00402000` starting
+`00020404`; SYSRESETREQ; SBL *application* handoff (not wired-load)
+VTOR `0x00438000` SP `0x2007FB00` PC `0x0052EA35`; then advertising
+`010A200101`. At 8 s: OTAP `0`, config mode false, `NvmMainErased`
+false, unsupported 0, host monitor `0x3A`. Same display hash.
+
+Verdict: PASS. Evidence:
+[`g2-20261122-fuel-gauge-c-paired-sims.json`](../evidence/g2-20261122-fuel-gauge-c-paired-sims.json).
+
+
+## Renode M55 golden and typographic nrf_fuel_gauge translation — 2026-11-22 (09:51 AM CST, America/Chicago)
+
+Supersedes the 09:21 AM CST Unicorn NOP+hook harness note. That method
+is **not** the official golden: NOP-patching 155 MVE sites would corrupt
+computed values. `qemu-system-arm -M mps3-an547` has M55/MVE but does
+not map stock `0x00438000`, and this machine has no `qemu-arm`
+user-mode. The reference is **Renode 1.17** (`cortex-m55`, native MVE
+and LOB), RESULT at `0x20068000` (away from SP `0x2007FB00`).
+
+**Golden (real EVENBAT at `0x00646BF8`).** `init(NULL)` / null model
+return -22. `init(4.10 V, 0 A, 25 C)` returns 0; first process SOC
+70.84683990478516, yhat 4.099989414215088, r0 2.3588204383850098, T
+truncated to 26 C, TTE 0, TTF NaN. At 4.20 V rest, SOC
+80.03155517578125. After 120 s at 50 mA from 4.20 V: SOC
+78.98108673095703, TTE 27427.212890625. Doubling EVENBAT `param_9[0]`
+doubles r0 to 4.7176408767700195; first rest SOC is unchanged. 24
+xorshift cases (seed `0xC0FFEE` after init 4.05 V).
+
+**Translation.** C wrappers in `g2c_fuel_gauge_source.c` plus typographic
+relocation of `0x43A698` / `0x43A1B0` and callees in
+`g2c_fuel_gauge_cores.S` (MVE/LOB kept as `.byte`; hard-float AAPCS).
+Not a portable scalar lift. Cores use profile `g2-apollo-main-mve-1`
+(`-mcpu=cortex-m55`). Apple clang rejected `.arch_extension mve`, so
+those directives were stripped (bytes do not need them). IAR `expf` /
+`logf` go through the existing in-tree shims.
+
+**Match.** Tag-aligned records against `golden2` / `mutant2` are
+bit-exact through end-tag `0xE0D00000`, including all 24 random cases
+and the `param_9` mutant. Raw 2048-byte dumps are not SHA-identical
+because the stock harness overwrote tag `0x1001` with the count word.
+The source-only estimate was **replaced** in-tree (`sources.json`
+units 4880). Evidence:
+[`g2-20261122-nrf-fuel-gauge-renode-m55-c-recon.json`](../evidence/g2-20261122-nrf-fuel-gauge-renode-m55-c-recon.json).
+
+
+
+## Stock nrf_fuel_gauge Unicorn harness — 2026-11-22 (09:21 AM CST, America/Chicago)
+
+Item (2). Emulator/host only; no flash; no commit. The source-only estimate
+in `g2c_fuel_gauge_source.c` was **not** replaced: a verified C body of the
+stock algorithm is not ready yet.
+
+**Stock identity.** The linked library is **c205a2 / 2025-04-28**, not the
+in-tree Nordic 1.0.1 M4 `.a`. EVENBAT tables were already extracted
+(`0x00646BF8`, name at `+0x15C0`). Entries: init `0x0043C150`, ext-state
+`0x0055F74C`, process `0x0055F848`, TTE `0x0055F994`/`0x0058EABC`, TTF
+`0x0055F9A0`/`0x0058EAC4`. Model state lives at `0x20070CE0` (0xE8 bytes,
+TTE at `+0x84`, model pointer at `+0xE0`).
+
+**Why this is not a straight decompile-and-link.** Stock IAR code uses MVE
+(155 sites: `vstrw`/`vldrw`, `vmul`/`vadd`/`vsub.f32` on Q regs, `vdup.32`,
+structured `vld4`/`vst4`) and 16 Armv8.1-M `dls`/`le` loops, plus one
+`vcvt.f64.f32` isfinite helper. Unicorn has no native MVE or low-overhead
+loops. A Cortex-M7 Unicorn harness now patches those sites to NOP and
+emulates them from an objdump site table. `qemu-system-arm` *does* provide
+`mps3-an547` (M55), but that machine does not map the stock 0x00438000
+window, so it was not used as the golden this step.
+
+**Golden results (real EVENBAT).** `init(NULL)` and `init` with a null
+model return -22. `init(4.10 V, 0 A, 25 C)` returns 0, writes the
+adjusted voltage, sets ext-block `{idle, 1.0, 1.0, NaN, NaN}`, and stores
+the EVENBAT pointer. First `process` at 4.10 V rest yields SOC
+70.84684, yhat 4.09999, r0 2.35882 (EVENBAT `param_9[0]`), T truncated
+to 26 C. At 4.20 V rest, SOC is 80.03156. After 120 s at 50 mA
+discharge, SOC 78.98109 and TTE 27427 s; TTF is NaN while not set up
+to charge. Doubling EVENBAT `param_9[0]` doubles reported r0
+(2.35882 → 4.71764); the harness is sensitive to the real table.
+
+**Not done.** The process core at `0x0043A698` / `0x0043A1B0` has not
+been rewritten as verified C, so the source-only voltage/coulomb
+estimate remains. No rebuild and no paired Renode runs (image
+unchanged). Evidence:
+[`g2-20261122-nrf-fuel-gauge-stock-harness.json`](../evidence/g2-20261122-nrf-fuel-gauge-stock-harness.json).
+
+
+## Full forced-mismatch DFU pair on gc-fnsec — 2026-11-22 (09:05 AM CST, America/Chicago)
+
+Item (1). Emulator only; no flash; no commit. Re-checked the already-run
+8 s `opencfw-gc-fnsec-dfu-mismatch` pair against stock. The same fixture
+is the completed-DFU path (controller word `00010304`); the prior
+gc-fnsec note that called it "bring-up, not a completed DFU cycle" was
+wrong.
+
+**Sequence, identical on stock and gc-fnsec (922 HCI host packets):**
+enter config mode; 1× FD06 `NVMEraseMain`; 857× FD03 program writes
+from `0x00300000` through `0x00402000`; 4× FC4E CRC32
+`[0x00300000,0x003000E0)=0xD2C17B4C`,
+`[0x00300400,0x00300690)=0x6E09DDA8`,
+`[0x00302000,0x00302038)=0xDA9653E5`,
+`[0x00302400,0x00335BC8)=0xE498BC06`; 1× FD07 INFO erase at
+`0x00402000`; 1× FD03 commit at `0x00402000` starting `00020404`
+(stock 4.4.2.0 version word, replacing the mismatch fixture);
+SYSRESETREQ; SBL *application* handoff (not wired-load) at VTOR
+`0x00438000` SP `0x2007FB00`; advertising enable `010A200101`. At 8 s:
+OTAP `0`, config mode false, `NvmMainErased` false, unsupported 0, host
+monitor `0x3A`. Display frame hash still `0c5cc90b…`. Handoff/end PCs
+differ only by image layout (stock `0x005E4233`/`0x44adfa`, gc
+`0x0052C11D`/`0x4cbdd4`).
+
+Verdict: PASS. Erase, CRC, commit, and post-DFU handoff match stock.
+Evidence:
+[`g2-20261122-gc-fnsec-dfu-complete-pair.json`](../evidence/g2-20261122-gc-fnsec-dfu-complete-pair.json).
+
+
+## Apollo-main -ffunction-sections and --gc-sections adopted — 2026-11-22 (09:02 AM CST, America/Chicago)
+
+Item (3). Official `opencfw-otap-disarm.app.bin` was not overwritten. No
+flash; no commit. `source_completeness_proven` stays **false**. `-Oz`
+was not applied.
+
+**Build changes.** Added `-ffunction-sections -fdata-sections` to the 17
+`g2-apollo-main-*` profiles that lacked them (26 already had both).
+`link_g2_sources.py` now passes `-Wl,--gc-sections` for apollo-main too.
+The linker script already KEEP'd `.isr_vector`, `kvdb_migration`, the
+OTA flag page, and bond records; it now also KEEP's `.itcm_text*` and
+`.ramfunc*` so region-table ramfuncs survive gc.
+
+Function-sections made the existing strong pair
+`am_hal_sysctrl_aircr_reset` (self_recovery override vs generated HAL)
+visible to the compose duplicate check. Followed the existing `#if 0`
+pattern on the generated HAL function so the intentional
+`g2_recovery_reset_app` disarm-then-SYSRESETREQ remains the only
+definition.
+
+**Image.** `build/g2-apollo-recovery-20261122-gc-fnsec-link`: 2718/2718
+compiled, 0 dups, 21 composed unresolved. **3,620,044 B** (SHA-256
+`1f6078706a075e32a4bc93f51bb49a0745d0e0d867b6c8874697940c77ecebcb`),
+SP `0x2007FB00`, reset PC `0x0052C11D`, end `0x007ABCCC`. Saved
+**199,404 B** versus the 3,819,448 B otap-disarm image. Still +96,680
+versus stock 3,523,364. Headroom to `0x007FE000`: **336,692 B**, so
+`-Oz` was not required. ITCM ramfuncs kept at `0x58..0x70`; recovery
+reset kept. `wrap_main_image` accepted the image.
+
+**Paired sims (CHIPREV 0x22, same NOR fixture, stock 24-byte ITCM
+overlay).** Both match the established otap-disarm 8 s baseline:
+
+- Version-match: OTAP `0xAFD1363A` at 0.01 s, `0` at 8 s; 58 host
+  packets; 0 unsupported; advertising enable `010A200101`; display
+  frame hash `0c5cc90b…` (same stock-identical hash as before); OTA
+  flag `nv_program` at `0x007FE000`.
+- DFU-mismatch: same OTAP/host/advertising/display results; SBL
+  *application* handoff (not wired-load); `ConfigurationMode` still
+  false and `NvmMainErased` still false at 8 s, as in the prior
+  8 s fixture (that run is bring-up, not a completed DFU cycle).
+
+Evidence:
+[`g2-20261122-apollo-main-gc-fnsec.json`](../evidence/g2-20261122-apollo-main-gc-fnsec.json).
+
+
+## Slot-fit check (3.82 MB apollo-main, 246 KB EM9305) — 2026-11-22 (08:53 AM CST, America/Chicago)
+
+Critical boot check before adopting gc. Host arithmetic only; no flash;
+no commit.
+
+**Apollo-main current image fits.** `opencfw-otap-disarm.app.bin` is
+3,819,448 bytes, loaded at `0x00438000`, ending at `0x007DC7B8`
+(confirmed from ELF PT_LOAD physical addresses). The hard install end
+is the bootloader-owned OTA flag page at **`0x007FE000`**
+(`MAIN_UPDATE_FLAG`; `wrap_main_image` / `validate_apollo_main` /
+`.ld` ASSERT). Max installed app is 3,956,736 B. Headroom: **137,288
+B**. Bond records at `0x007FF000` are after that page and are not
+reached. SBL ROM `0x00400000–0x00410000` and the bootloader slot
+`0x00410000–0x00438000` are not overlapped.
+
+The 32-byte OTA preamble sits at file/`0x00437FE0` and is skipped by
+the DFU programmer; OTA is single-slot into the same MRAM app window
+(no proven rollback). The 22-bit Ambiq standard-image size field allows
+up to 4,194,303 B including the header (wrapped size would be
+3,819,480). The Renode HLE SBL `maxStorage` (3,964,928; default
+`0x003C8000`) extends past `0x007FE000` and must not be used as the
+install cap.
+
+littlefs (`NOR 0x01400000–0x01FC0000`) and FlashDB `kvdb`/`NVdb`
+(`0x01FC0000–0x02000000`) live on the 32 MiB MX25U25643G, not in MRAM,
+so growing the app does not overlap them. The first 20 MiB of NOR is
+uncharacterised (resources / possible staged images) and is far larger
+than 3.82 MB; that download location is unverified.
+
+The item-(b) `/tmp` gc-probe (3,671,520 B, end `0x007B85E0`) also fits,
+with 285,216 B of headroom.
+
+**EM9305 source package also fits.** 246,040 B is the host container,
+not a flat load. NVM is `0x00300000–0x00380000` (512 KiB). Source
+records: bootloader 1,160 B ending `0x00300488` (under the `0x00302000`
+ASSERT), record 2 56 B, application 244,708 B ending **`0x0033DFE4`**,
+**270,364 B** before `0x00380000`. Stock app ended at `0x00335BC8`.
+Datasheet window is `0x00302400–0x00380000` with no FOTA updater record
+in the stock package; the grown source app stays inside it. Region
+overflow would fail the EM9305 link.
+
+Evidence:
+[`g2-20261122-slot-fit-check.json`](../evidence/g2-20261122-slot-fit-check.json).
+
+## Item (a) outcome: real KWS weights, one algorithm still synthetic — 2026-11-22 (08:53 AM CST, America/Chicago)
+
+Asked after the (a) extraction/verification step.
+
+**Yes: the real KWS weights and command stream are already extracted
+and are what packaging uses.** They are not a synthetic all-zero
+fixture. Official `firmware_codec.bin` windows: commands
+`[0x18D90, 0x1B15C)` = 9,164 B (SHA-256 `c38ed6d2…`); weights
+`[0x1B15C, 0x3893C)` = 120,800 B (SHA-256
+`397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf`).
+Asset `g2/src/codec/npu/kws_weights_2_2_6_10.bin`; C translation
+`kws_weights_source.c`. `make source-bundle` already passes
+`--codec-a-weights-from-source`. Verifier
+`g2/tools/verify_stock_data_assets.py` exits 0. Wake-word was not
+executed in sim (no GX8002/NPU in Renode).
+
+**Other stock tables also extracted and bit-exact:** EVENBAT
+`struct battery_model` 5,632 B; 29 ROM font uint8 arrays (167,200 B);
+app L8 image pixel arrays (6 arrays, bit-exact once comments are
+stripped). All are present in the current openCFW image.
+
+**Still synthetic / not extractable as data:** only the Nordic
+fuel-gauge *algorithm* in `g2c_fuel_gauge_source.c` (uncalibrated
+voltage/coulomb stand-in). The EVENBAT *tables* are stock; the
+proprietary `nrf_fuel_gauge` body is not. The KWS weight *bytes* are
+stock; the internal tensor grammar is unproven but that is not
+placeholder data.
+
+Full write-up: 8:50 AM CST section below, and
+[`g2-20261122-stock-data-assets.json`](../evidence/g2-20261122-stock-data-assets.json).
+
+
+## EM9305 +34,092 B attribution — 2026-11-22 (08:48 AM CST, America/Chicago)
+
+Functionality-first item (c). Host analysis of the latest complete
+source-link image (`build/g2-current-source-bundle-diagnostic-20261112T1130Z`).
+No EM9305 rebuild, no official-image change, no flash, no device, no
+commit. `source_completeness_proven` stays **false**. The 22 Nov recovery
+NOR still packages official `firmware_ble_em9305.bin` (SHA-256
+`91a38f7fc0…`), not this candidate.
+
+Stock package is 211,948 bytes (124-byte metadata + 211,824 payload) and
+has **four** records: `0x00300000` 224 B, `0x00300400` 656 B,
+`0x00302000` 56 B, `0x00302400` 210,888 B (application). The 12 Nov
+source-candidate package is 246,040 bytes (**+34,092**; Nov 11 quoted
++36,748 against an older/implied 248,696-byte package). It has **three**
+records:
+
+- `0x00300000` 1,160 B C NVM bootloader (roles of stock records 0 and 1,
+  different layout; ends at `0x00300488`, overlapping the stock
+  `0x00300400` slot; not a verbatim concatenation of those records).
+- `0x00302000` 56 B record 2, same length as stock but different CRC
+  fields because they are finalized from the linked application.
+- `0x00302400` 244,708 B application (**+33,820** vs stock 210,888,
+  +16.0%). This is almost the whole packaged gap.
+
+**`-O` level is not the apollo-main story.** All 768 linked units are
+already `-Os -fno-tree-loop-distribute-patterns` (766 on profile 1, 2
+on profile 2), with no `-ffunction-sections` in the profiles. Compiler
+is GNU ARC 15.2.0. The application gap is therefore GNU-vs-stock
+codegen and/or unused code trapped in a merged `.text` (map: vectors
+1,024 + `.text` 233,120 + `.rodata` 4,838, plus smaller contributions),
+not an `-O2`/`-Oz` mix. That split was not measured.
+
+**Unused upstream already trimmed only where named.** The final link
+does not pass `--gc-sections`. `g2-em9305.ld` `/DISCARD/` already drops
+1,256 B of unmodified QP/C 6.5.1 APIs stock does not link (`QTicker_*`,
+`QK_schedLock`, `QHsm_isIn`, upstream `QF_init`/`QF_run`/`QF_bzero`,
+`QEQueue_*`). A broader unused-function trim would need
+`-ffunction-sections`; enabling gc was previously rejected because it
+dropped the image too far and broke freestanding memcpy. Not repeated
+here.
+
+No official rebuild and no sim of a new EM9305 image. Bootloader
+selection/reset equivalence and a physical EM9305 run remain
+unverified.
+
+Evidence:
+[`g2-20261122-em9305-size-attribution.json`](../evidence/g2-20261122-em9305-size-attribution.json).
+
+
+## Apollo-main +296,084 B attribution — 2026-11-22 (8:43 AM CST, America/Chicago)
+
+Functionality-first item (b). Host analysis of the already-linked
+`opencfw-otap-disarm` apollo-main image. No official rebuild, no flash,
+no device, no commit. `source_completeness_proven` stays **false**.
+
+Current `opencfw-otap-disarm.app.bin` is 3,819,448 bytes versus stock
+`stock.app.bin` 3,523,364 (**+296,084**). A `/tmp` probe link of the
+same composed `g2-apollo-main.o` with `-Wl,--gc-sections` (not adopted)
+produced 3,671,520 bytes and therefore accounts for **147,928 B** of
+the growth. **148,156 B** would still remain versus stock after that
+probe. The probe image was not sim-run.
+
+**Duplicated code: not the image-level cause.** The final ELF has no
+duplicate global symbol names. Current compose is `arm-none-eabi-ld -r`
+plus `defsym` aliases; `sources.json` has no `ld_flags` and does not
+pass `--allow-multiple-definition`. The three names
+`g2_log_transport_vformat_unbounded`, `g2_flashdb_vformat`, and
+`audio_heap_formatter` are aliases of one 3,252-byte body, not
+triplicate code. Repeated local `OUTLINED_FUNCTION_*` names are
+compiler outlining. The 35 unique 3,600-byte `pixels_*` frames are all
+present verbatim in stock.
+
+**Unused upstream, measured lower bound 147,928 flash bytes.** Final
+link explicitly omits `--gc-sections` for `g2-apollo-main`
+(`tools/build/link_g2_sources.py`). Compose is also `ld -r` without
+gc, so leftovers stay in the image. The composed object still has
+6,850 `.text.*` function sections (985,930 B) from the 708 units built
+with `-ffunction-sections`; those can be discarded at final link. The
+other 1,960 units were compiled without `-ffunction-sections` and have
+already been merged into a 948,952-byte `.text` that gc cannot trim at
+function grain.
+
+The probe drops 1,868 named symbols. Flash-resident examples:
+
+- `am_hal_pin_fn_list` (7,168 B): unused Ambiq HAL pin-function table;
+  not present as a byte span in stock; dropped by the probe.
+- `ft_adobe_glyph_list` (55,997 B): **kept** and present in stock;
+  referenced by `ft_get_adobe_glyph_index` — not extra bloat.
+- LC3 PLC/HR helpers (`lc3_plc_*`, `lc3_hr_setup_decoder`, related
+  synthesizers): `sources.json` already notes `lc3_plc_*` are absent
+  from stock and would be dropped by a final `--gc-sections` link.
+- Unused LVGL widgets and indev paths (dropdown, table, chart, menu,
+  encoder/keypad).
+- LZ4 compress-side (`LZ4_compress_generic_validated`, 2,248 B).
+
+**`-O` level differences: present, not quantified.** Linked mix is
+2,134 units at `-O2` and 534 at `-Oz` (default profile
+`g2-apollo-main-1` is `-O2` without function-sections, 1,791 units).
+Clang is `-mcpu=cortex-m55+nomve`. Stock is IAR. No `-Oz` rebuild was
+run, so the share of the remaining 148,156 B that is optimizer vs
+unused code trapped in merged `.text`/`.rodata` vs `+nomve`/`-fno-inline`
+is not measured.
+
+Not done: did not enable `--gc-sections` on the official apollo-main
+link, did not recompile the 1,960 units with `-ffunction-sections`,
+did not sim the probe image. Next: (c) EM9305.
+
+Evidence:
+[`g2-20261122-apollo-main-size-attribution.json`](../evidence/g2-20261122-apollo-main-size-attribution.json).
+
+
+## Stock data assets (KWS weights and other tables) — 2026-11-22 (8:50 AM CST, America/Chicago)
+
+Functionality-first item (a). Host verification only; no flash; no device;
+no commit. Codec GX8002/NPU is not in Renode, so wake-word was not
+executed in sim.
+
+**KWS weights were already extracted (11–12 Nov 2026) and are not a
+synthetic all-zero fixture in the current tree.** `make source-bundle`
+already passes `--codec-a-weights-from-source`. This step re-checked the
+bytes and recorded offsets/format.
+
+- Official `firmware_codec.bin` SHA-256
+  `b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0`.
+- Command stream: FWPK/`firmware_codec` `[0x18D90, 0x1B15C)` = BINH A
+  `[0xF804, 0x11BD0)`, 9,164 bytes, SHA-256 `c38ed6d2…`, staged to DRAM
+  `0x20003304`. Field-level C emitters already reproduce this window.
+- Weights: `[0x1B15C, 0x3893C)` = BINH A `[0x11BD0, 0x2F3B0)`, 120,800
+  bytes, SHA-256 `397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf`,
+  staged to DRAM `0x200056D0`. Asset
+  `g2/src/codec/npu/kws_weights_2_2_6_10.bin`; C translation
+  `kws_weights_source.c` (`g2_kws_weights_source[30200]`, section
+  `.g2_kws_weights`) packs to the same bytes. Stock BINH A NPU tail is
+  exactly cmd+weights (`0xF804+9164+120800=0x2F3B0`, start of BINH B).
+- Format: LVP_KWS gxNPU command stream + trained weight bank. Sizes are
+  firmware getters (`movi r0,9164`; `movi r0,55264` + `bseti r0,16`).
+  Word0 is `0xa79bab66` (not zlib CRC of the rest). Internal tensor
+  grammar remains unproven.
+
+**Other stock data already in source, re-verified:**
+- EVENBAT `struct battery_model` (5,632 B) from VA `0x646BF8`, name at
+  +`0x15C0`; present in current `opencfw-otap-disarm` (different
+  address).
+- ROM fonts: 29 uint8 arrays, 167,200 bytes, bit-exact vs official OTA,
+  all present in the current openCFW image. LVGL 9 fmt_txt.
+- App L8 images: pixel arrays bit-exact vs stock (one listing has a
+  comment `0x` token; first `0x190` bytes still match) and present in
+  the openCFW image.
+
+**Still a placeholder, not extractable as tables:**
+`g2c_fuel_gauge_source.c` — uncalibrated source-only Nordic API stand-in.
+The EVENBAT *tables* are stock; the *algorithm* is not.
+
+Verifier: `g2/tools/verify_stock_data_assets.py` (exits 0). Sim note:
+boot-time display frames were already stock-identical in the 22 Nov
+paired Renode run.
+
+No commit. Next: (b) attribute apollo-main +296 KB growth.
+
+Evidence:
+[`g2-20261122-stock-data-assets.json`](../evidence/g2-20261122-stock-data-assets.json).
+
+## Source-completeness triage (biggest first) — 2026-11-22 (8:35 AM CST, America/Chicago)
+
+Opened the source-completeness work after the SBL recovery tool. No
+rebuild, no flash, no commit. `source_completeness_proven` stays
+**false**.
+
+The compare tool and the 12 Nov 2026 diagnostic already state the bar:
+all six official components and the whole bundle still differ from the
+locked 4,301,227-byte 2.2.6.10 artifact; link success is not coverage or
+stock identity; G1–G6 remain `not_run`. The flag is not something to
+flip from this triage.
+
+**Biggest first.** Apollo-main. Current
+`opencfw-otap-disarm.app.bin` is 3,819,448 bytes versus stock
+`stock.app.bin` 3,523,364 (**+296,084**; Nov 11 was +295,664 before the
+intentional-reset disarm hooks). ELF: text+rodata 3,638,133, data
+181,312, BSS 3,422,620. This payload is already a strict source link
+(no external binary archive, no binary fuel-gauge). The delta is
+compiler/placement/data image, not a missing library. Same-offset
+equality is only ~4% because layout diverges immediately (reset vector
+stock `0x005E4233` vs openCFW `0x0059427D`). Sim functional bring-up
+through advertising, DFU, case-reply and the new SBL recovery path is
+strong; hardware boot equivalence is not.
+
+**Then, by Nov 11 size delta:** EM9305 +36,748; bootloader +5,633;
+touch −5,644 (smaller than stock — possibly missing content); case
++4,416; codec packaged size matched and KWS commands were exact, but
+weights were synthetic and the component is not byte-identical.
+
+Next closeable no-hardware step on the biggest component: attribute the
++296,084 bytes against pre-compose objects/sections, then move to
+EM9305.
+
+Evidence:
+[`g2-20261122-source-completeness-triage.json`](../evidence/g2-20261122-source-completeness-triage.json).
+
+## Host SBL recovery tool sim-verified — 2026-11-22 (8:30 AM CST, America/Chicago)
+
+Built and sim-verified a host-side tool that would reflash official stock
+2.2.6.10 over the Apollo510 wired-update protocol. Emulator-only; no
+device opened; no flash; no commit.
+
+**Dev temples in SBL?** Probably not. The current pair was bricked on
+pre-arm builds, so a hang does not leave `OTAPOINTER=0xAFD1363A`. The
+tool is the recovery path if a later recovery-arm image hangs before
+disarm (or any temple that is actually in wired-load).
+
+**Sim extension.** `G2Apollo510_SblWired` is an HLE of the documented
+AmbiqSuite 5.2.0 `uart_wired_update` framing (HELLO / 96-byte STATUS /
+OTADESC `0x7FE000` / UPDATE / DATA / RESET), entered from
+`wdt.HandoffAfterSystemReset` when the recovery key is still set. It
+is not the protected SBL ROM. Existing tests stay unchanged unless the
+peripheral is instantiated.
+
+**E2E against that SBL.** OpenCFW `opencfw-otap-disarm` arms at 0.01 s,
+unexpected reset → wired-load (CPU halted). Host
+`g2/tools/sbl-recovery` sends official
+`ota_s200_firmware_ota.bin` (SHA-256
+`36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863`,
+3,523,396 bytes). HELLO returns STATUS (`maxStorage=3964928`); bad CRC
+and early DATA are rejected; 431 UART DATA frames + RESET program the
+payload at `0x00438000` (SHA-256 matches `stock.app.bin`
+`19044a72…`), clear OTAP, and hand off `SP=0x2007FB00` /
+`PC=0x005E4233`. Postflight still running (PC `0x42`, ITCM delay).
+
+**Hardware hookup** (fail-closed; not executed): USB Smart Case →
+YHM2510 pogo, one sacrificial temple, route reg7=5/3, baud 1 M then
+115200, case DATA 997 bytes, HELLO immediately after a real wired-load
+entry, require a CRC-valid STATUS before UPDATE. No STATUS: stop. See
+`g2/tools/sbl-recovery/README.md`.
+
+No commit. Next: source completeness (`source_completeness_proven=false`
+and the six-component differences), biggest first.
+
+Evidence:
+[`g2-20261122-sbl-recovery-sim.json`](../evidence/g2-20261122-sbl-recovery-sim.json).
+
+## (3) case-reply disarm + pre-ADV unexpected reset — 2026-11-22 (8:15 AM CST, America/Chicago)
+
+Emulator-only on `opencfw-otap-disarm.app.bin` (SHA-256
+`7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd`,
+reset `0x0059427d`). No rebuild. No flash. No commit.
+
+**(3) case-reply.** First inject used the wrong frame (`01 00 00 00 00 84`)
+and/or raced ADV (~0.28 s clears OTAP). Correct recipe from boot-trace
+STATUS: uart2 `24 00 01 00 A7`. To isolate the case path from ADV disarm:
+boot past ADV (OTAP→0), re-arm `OTAPOINTER=0xAFD1363A` via MMIO, inject the
+frame. Result: uart2 TX
+`5A A5 FF 09 24 01 03 05 02 02 06 0A 03 4B` (matches prior stock/openCFW
+byte-identical reply), OTAP→0, `machine Reset` → `g2.reset` **SBL
+application handoff** (not wired-load).
+`DEV_BoxRevcMsgProcess` → successful product-test send →
+`g2_recovery_disarm_healthy` is live in Renode.
+
+**Unexpected reset before advertising.** `opencfw-early-reset-armed.resc`:
+arm at 0.01 s (`OTAP=0xAFD1363A`, host packets 0), then `machine Reset`.
+`g2.reset: SBL wired-load (OTAPOINTER=0xAFD1363A); application not entered`,
+CPU halted, PC 0. **This is the intended recovery** for an app-dead /
+watchdog-class reset while still armed — same signature as the post-DFU
+trap before the intentional-reset disarm fix. Recovery still needs a host
+on the pogo/SBL wired-load path.
+
+**Remaining risk.** Pogo/SBL reachability and probe-bridge HELLO on real
+silicon are unproven. Both dev-pair temples are already bricked on pre-arm
+builds (cannot arm retroactively). Crash-loop gate still unwired. Sim still
+does not reproduce the hardware early hang.
+
+**Next.** No further high-value no-hardware item for this recovery campaign:
+NVM/FD01/FD07/FC4E, mismatch DFU, intentional-reset disarm, ADV disarm,
+case-reply disarm, and pre-ADV reset→wired-load are covered. Needs a
+sacrificial/healthy temple flash — see hardware-test-plan §2026-11-22.
+
+Evidence:
+[`g2-20261122-case-reply-and-early-reset.json`](../evidence/g2-20261122-case-reply-and-early-reset.json).
+
+## Disarm early OTAP before intentional software reset — 2026-11-22 (7:58 AM CST, America/Chicago)
+
+Fixed the openCFW post-DFU OTAP/SBL trap. Emulator-only; no flash; no
+commit. (3) not in this step.
+
+**Stock also SYSRESETREQs.** After the INFO commit both stock and
+openCFW logs show `nvic: Resetting platform with SYSRESETREQ`. Stock
+then gets `g2.reset: SBL application handoff` because `OTAPOINTER=0`.
+openCFW kept `OTAPOINTER=0xAFD1363A` from `g2_recovery_arm_early` and
+landed in `SBL wired-load; application not entered` — no advertising.
+That is the same signature as an app-dead temple: early arm, then any
+reset before advertising/case-reply disarm, with no host on the wired
+path.
+
+**Audit.** Intentional apollo-main software resets:
+`am_hal_sysctrl_aircr_reset` / `audio_ble_radio_ready_44b0ae` (post-DFU
+reconfigure and many callers), `g2_log_fatal_idle` (AIRCR), and
+`audio_ble_ota_reset_event` (RSTGEN SWPOR/SWPOI). Touch/case/bootloader
+resets are other binaries. A reset meant to enter SBL must leave the
+key armed and skip these helpers.
+
+**Fix.** `g2_recovery_reset_app()` disarms + clears the crash-loop
+streak, then AIRCR. Strong overrides of `am_hal_sysctrl_aircr_reset` and
+`audio_ble_radio_ready_44b0ae` call it. `g2_log_fatal_idle` and
+`audio_ble_ota_reset_event` disarm first. Relinked image
+`build/g2-apollo-recovery-20261122-otap-disarm-link/.../g2-apollo-main.bin`
+(reset `0x0059427d`).
+
+**Verify.** Version-match 8 s: arm at 0.01 s (`0xAFD1363A`), disarm by
+8 s (`0`), advertising `010A200101`, unsupported 0, end PC `0x543528`.
+Mismatch DFU 8 s: 1× erase, 4× CRC, INFO `0xFD07`, SYSRESETREQ →
+**application handoff** PC `0x0059427D` (not wired-load), OTAP=0,
+advertising yes, unsupported 0. Matches stock post-DFU bring-up.
+
+No commit. Next: (3).
+Evidence:
+[`g2-20261122-otap-disarm-before-reset.json`](../evidence/g2-20261122-otap-disarm-before-reset.json).
+
+## Mismatch pair through completed DFU — 2026-11-22 (7:39 AM CST, America/Chicago)
+
+Ran stock 2.2.6.10 and openCFW ITCM-VMA recovery on the mismatch
+controller through a completed DFU and compared. Emulator-only; no
+flash; no commit. (3) not in this step.
+
+**Model fixes required for completion.** After `0xFC4E`, stock still
+looped DFU because `commit_52eefa` reads `0x402000` after `NVMEraseMain`
+and our FD01 treated erased holes as missing (`0x0C`). FD01 now returns
+`0xFF` for unmapped main NVM `<0x00F00000`. FD07 was also wrong (LE32
+address); stock `EMSMM_NVMErasePage` / `erase_info_52e948` use plen 2
+`{bank_sel,page}` with INFO page 1 at `0x00402000`. Transport tests: 7
+passed (55.59 s).
+
+**DFU HCI (both).** One `NVMEraseMain`, 856 image `0xFD03` writes
+covering the four CRC windows with zero gaps, four `0xFC4E` CRC32
+results identical on both sides
+(`0xD2C17B4C`, `0x6E09DDA8`, `0xDA9653E5`, `0xE498BC06`), one INFO
+`0xFD07` erase at `0x402000`, one commit `0xFD03` write at `0x402000`,
+unsupported 0, unmodeled none.
+
+**Post-DFU divergence.** Stock continues to advertising `010A200101`,
+end PC `0x44adfa`, `OTAPOINTER=0`. openCFW issues `SYSRESETREQ` right
+after the INFO commit; `g2.reset` sees sticky `OTAPOINTER=0xAFD1363A`
+and stays in SBL wired-load (application not entered) — no advertising,
+end PC `0`. DFU image path completed; openCFW bring-up after DFU did not.
+
+No commit. Next: (3) case-reply disarm. Follow-on gap: openCFW
+post-DFU reset / OTAP SBL trap.
+Evidence:
+[`g2-20261122-em9305-dfu-mismatch-pair.json`](../evidence/g2-20261122-em9305-dfu-mismatch-pair.json).
+
+## EM9305 HCI 0xFC4E CRC32 — 2026-11-22 (7:25 AM CST, America/Chicago)
+
+Modeled vendor CRC in `~/Repo/g2-firmware-emulator` (local changes only,
+no commit). No hardware flash. The mismatch DFU pair and (3) are not in
+this step.
+
+**Evidence.** `audio_ble_radio_crc_remote_52e6ac` sends `014EFC08` plus
+start/end LE32 and requires Command Complete `response[6]==0` with CRC32
+LE32 at `[7..10]`. Local twin `audio_ble_radio_crc_local_4d34f8` and
+`nvm_bootloader.c` `crc32_nvm` use reflected poly `0xedb88320`. The prior
+NVM mismatch log showed two unmodeled `014EFC0800003000E0003000` calls
+(`[0x00300000, 0x003000e0)`).
+
+**Model.** `ProcessVendorCrcCommand` for `0xFC4E`: CM required (`0x2F`
+outside); `plen==8` and `end>=start` else `0x12`; CRC over `[start,end)`
+from `memoryFixtures`, missing bytes as erased `0xFF`; returns status 0
+plus CRC LE32.
+
+**Verification.** Three new FC4E transport tests plus prior FD06/FD03
+tests: 6 passed in 23.13 s (CM gate, written-payload CRC match
+`0x55b401a7` for `aabbccdd`, erased-FF gap CRC).
+
+No commit. Next: stock + openCFW mismatch through a completed DFU,
+then (3).
+Evidence:
+[`g2-20261122-em9305-fc4e-crc.json`](../evidence/g2-20261122-em9305-fc4e-crc.json).
+
+## EM9305 NVM program/erase (0xFD06 first) — 2026-11-22 (7:21 AM CST, America/Chicago)
+
+Implemented controller NVM erase/program in
+`~/Repo/g2-firmware-emulator` (local changes only, no commit). No
+hardware flash. A completed DFU and (3) are not in this step.
+
+**Evidence.** `audio_ble_radio_update_erase_52e9b4` sends `0106FD00`
+and requires Command Complete `response[6]==0`.
+`EMSMM_NVMEraseMain` allows the command only when the CM magic is
+`0x53535353`/`0xa9a9a9a9` and `plen==0` (else `0x2f`/`0x12`).
+`WriteAtAddress`/`WriteContinue` are `0xFD03`/`0xFD04`. The model maps
+CM magic to the existing `configurationMode` flag from the GPIO15
+`recover_stop` clock.
+
+**Model.** `0xFD06`/`0xFD05` clear `memoryFixtures` below `0x00F00000`
+(keeps RF `0x00F0xxxx`), set `NvmMainErased`. `0xFD03`/`0xFD04` write
+into fixtures under CM. `0xFD07` clears a functional 4 KiB page window
+(not a measured page size). `0xFD01` boot reads are unchanged.
+Synthetic fixtures for prepare registers `0xF0040C`/`0xF0041C` were
+added to `controller-peripherals.resc`.
+
+**Verification.** Three transport tests passed (21.67 s): erase
+outside CM returns `0x2F`; erase in CM clears the version fixture and
+keeps trim; `0xFD03` write then `0xFD01` readback. An 8 s openCFW
+mismatch run (`opencfw-itcm-vma.app.bin`) logged two
+`NVMEraseMain` successes (`NvmMainErased=True`, `ConfigurationMode=True`),
+then 1714 `0xFD03` write packets (1778 host packets total). No missing
+fixtures. The remaining unmodeled opcode is `0xFC4E`
+(`014EFC0800003000E0003000`) from
+`audio_ble_radio_crc_remote_52e6ac` — CRC32 for
+`update_current`/`update_check`. Unsupported count 2. Advertising
+`010A200101` still issued; end PC `0x5432f8`. Erase+program ran; DFU
+is not complete without `0xFC4E`.
+
+No commit. Next: model `0xFC4E` CRC (and remaining finalize), re-run
+the mismatch pair through a completed DFU, then (3).
+Evidence:
+[`g2-20261122-em9305-nvm-erase-write.json`](../evidence/g2-20261122-em9305-nvm-erase-write.json).
+
+## ITCM VMA for .itcm_text / .ramfunc — 2026-11-22 (7:11 AM CST, America/Chicago)
+
+Audited stock vs openCFW ITCM/ramfunc placement and fixed
+`g2-apollo-main.ld` so Ambiq `.itcm_text` (and any `.ramfunc`) get an
+ITCM VMA with an MRAM LMA, copied at startup. Rebuilt apollo-main and
+re-ran both sims. No hardware flash. NVM is not in this step.
+
+**Stock.** ITCM is 256 KB at `0x00000000`. The only startup copy into
+ITCM is the LZ77 row at `0x75D3E0`, which installs the 24-byte
+delay/memcpy helper at `0x40..0x58`. IAR `.textrw` is documented as
+VMA ITCM / LMA MRAM. Stock `am_hal_delay_us` at `0x4807a0` (MRAM)
+`bl`s `0x40`. `nv_program_main2` is bootrom; `am_hal_mram_*` callers
+stay in MRAM and call into bootrom. The spotmgr WFI helper (when
+present) copies a six-instruction WFI sequence onto the stack, not
+into ITCM.
+
+**OpenCFW before.** `g2-apollo-main.ld` merged `*(.itcm_text)` into
+MRAM `.text`. The only linked contributor was `am_hal_utils.c`
+(`br_util_delay_cycles`, `internal_hal_read_word`,
+`internal_hal_read_words`, 0x18 B). Upstream
+`am_hal_spotmgr_wfi_wait` is `.itcm_text` but the generated boot
+`pcm2_2` object the build links does not contain it. No `.ramfunc`
+sections appear under clang. Leaving those helpers in MRAM is a
+structural risk for any path that must run while MRAM is busy or
+powered down, and it was the GPIO15 delay-loop bug.
+
+**Fix.** ITCM MEMORY at ORIGIN `0x58` (leaves `0x40..0x58` for the
+stock overlay). New `.itcm_text` output section:
+`*(.itcm_text*) *(.ramfunc*) > ITCM AT > MRAM`, with
+`__itcm_text_{start,end}` and `__itcm_text_load_start`. Region table
+gains a `g2c_copy_init3` row after the overlay copy. Restored
+local-label 16-bit `bne` loops in `br_util_delay_cycles` and
+`internal_hal_read_words` (GNU assembled global-symbol `BNE` as
+`bne.w`). Linked image
+`build/g2-apollo-recovery-20261122-itcm-vma-link/g2-apollo-main/g2-apollo-main.bin`,
+3,818,888 B, SHA-256 `0bdd25a853051788b598c526465a1a770c219b1f87c5b9cf96409d9fe665a232`, SP `0x2007FB00`,
+reset PC `0x0059404d`. `br_util_delay_cycles` is now VMA `0x58` / LMA
+`0x007a6cd8` (`subs; bne.n; bx lr`). `am_hal_delay_us` stays in MRAM
+and calls into ITCM (stock pattern). Overlay at `0x40` unchanged.
+
+**Sim.** Version-match 8 s CHIPREV=`0x22`: 56 HCI packets, identical to
+the advertising-disarm baseline, including `010A200101`; frames hash
+`0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492`;
+OTAP arm then disarm; end PC `0x5432f8`. Mismatch 8 s: configuration
+mode False→True, two enter-CM logs, `0106FD00`, 61 host packets,
+advertising, end PC `0x5432f8`.
+
+No commit. Next: NVM program/erase starting with `0xFD06`, then the
+mismatch pair through a completed DFU, then (3).
+Evidence:
+[`g2-20261122-itcm-vma-ramfunc.json`](../evidence/g2-20261122-itcm-vma-ramfunc.json).
+
+## GPIO15 wait_pulse delay: stock vs openCFW, ITCM loop — 2026-11-22 (7:03 AM CST, America/Chicago)
+
+Compared the stock and openCFW `wait_pulse` / `delay_us` paths
+statically, then made openCFW run the same delay spin from ITCM as
+stock. Rebuilt apollo-main (incremental `am_hal_utils` + relink) and
+re-ran the version-match and mismatch sims. No hardware flash. NVM is
+not in this step. The SoC is Apollo510 (Ambiq MRAM/ITCM; the request
+said Apollo4).
+
+**Instruction sequence and iteration count match; the spin location
+did not.** Stock `wait_pulse` at `0x52e854` and openCFW at
+`0x0046ad80` both issue `(duration*1000)/33` pulses (1212 for
+duration 40) of GPIO15=0, `delay_us(16)`, GPIO15=1, `delay_us(16)`.
+OpenCFW uses a `umull` magic `/33` and returns early if
+`duration*1000 < 33`, which is not taken here. The wrapper
+`0x491102` / `g2_norflash_delay_us_491102` still delegates to
+`am_hal_delay_us`. Calibration is the same in both images: read
+`0x40021000` bits `[4:3]` (stock `ubfx` cmp 2, openCFW `and #24` cmp
+16 — equivalent); if not high-performance, `count = us*32` and
+overhead 15; if HP 250 MHz, `count = us*32*250/96` and overhead 24.
+Those constants are 32.0 / 250.0 / 96.0. The 3-cycle-per-iteration
+assumption is the HAL comment and `32*3 = 96` cycles/µs at 96 MHz.
+
+**Where it executes.** Stock `am_hal_delay_us` at `0x4807a0` (MRAM)
+ends in `bl 0x40`. The 24-byte ITCM helper there is
+`subs r0,#1; bne; bx lr` plus a word-copy, bytes
+`0138fdd17047704750f8043b41f8043b013af9d170477047` (SHA-256
+`0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83`).
+The Nov 11 openCFW overlay in `g2c_gnu_init.c` is byte-identical and
+is copied to `0x40` by the region table, so the overlay *covers* the
+stock delay loop. But openCFW `am_hal_delay_us` called
+`br_util_delay_cycles` at `0x00600744` in **MRAM**:
+`g2-apollo-main.ld` places `.itcm_text` in the MRAM `.text` output
+section, and `BNE br_util_delay_cycles` against the global symbol
+assembles as a 32-bit `bne.w`, not the overlay's 16-bit `bne`.
+
+**Period estimate.** For `delay_us(16)` in 96 MHz LP mode, both
+images request 497 iterations: stock ITCM at 3 cycles is 15.53 µs of
+spin (prologue cancelled by the 15-iter overhead). In 250 MHz HP
+mode, 1309 iterations, 15.71 µs. A pulse is two of those plus two
+GPIO writes, nominally ~32 µs plus HAL. If openCFW's old MRAM
+`bne.w` loop hit I-cache, one extra cycle would stretch each
+half-pulse by about 33%. If I-cache missed or was off, uncached MRAM
+wait states on a 6-byte loop would make the pulse longer, not
+shorter; a 2–3× stretch is a plausible order of magnitude, not a
+measured datasheet wait-state number. Renode is not cycle-accurate
+for MRAM vs ITCM, so the sims below cannot prove silicon periods.
+
+**Fix.** `br_util_delay_cycles` now tail-calls `itcm_countdown_loop`,
+defined in `g2-apollo-main.ld` as `0x00000041` (Thumb entry of the
+overlay countdown). The linked image is `b.w 0x40` at `0x00600744`;
+calibration is unchanged. Image
+`build/g2-apollo-recovery-20261122-itcm-delay-link/g2-apollo-main/g2-apollo-main.bin`,
+3,818,872 B (8 B smaller than the 22 Nov recovery image), SHA-256
+`8ed8fdebe3020154e7a599cfa0b46b6b72138e9d6a9291ba3e2215c78eb8921c`,
+SP `0x2007FB00`, reset PC `0x0059404d`.
+
+**Sim.** Version-match 8 s, CHIPREV=`0x22`: 56 HCI packets, byte-
+identical to the 6:08 AM CST advertising-disarm openCFW run,
+including `010A200101`; two display frames with hash
+`0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492`;
+OTAP `0` → `0xAFD1363A` at 0.01 s → `0` at 8 s; end PC `0x5432f8`.
+Mismatch 8 s: configuration mode False then True, two enter-CM logs,
+then `0106FD00`, 61 host packets, advertising, end PC `0x5432f8`.
+`recover_stop` still completes; `0xFD06` is still unmodeled.
+
+The evidenced openCFW-vs-stock GPIO15 spin-loop difference is closed
+in the image. Whether that difference (or remaining GPIO HAL /
+prologue differences) caused the app-dead temples remains a
+hypothesis: official 2.2.6.10 came up, and there is still no factory
+trim dump or GPIO15 trace.
+
+No commit. Next: NVM program/erase starting with `0xFD06`, then the
+mismatch pair through a completed DFU, then (3) the case-reply
+disarm with a pogo product-test frame.
+Evidence:
+[`g2-20261122-gpio15-delay-itcm.json`](../evidence/g2-20261122-gpio15-delay-itcm.json).
+
+## recover_stop completable in the EM9305 model — 2026-11-22 (6:49 AM CST, America/Chicago)
+
+Made `audio_ble_radio_recover_stop_52e8be` completable in
+`~/Repo/g2-firmware-emulator` (local changes only, no commit). No
+hardware flash. NVM program/erase is not in this step.
+
+**What was missing.** `0x40010410` bit `0x00200000` is already GPIO
+InputRead3 bit 21 — GPIO117, the EM9305 Ready line — so the status
+wait did not need a GPIO-model change. `context_check` already
+succeeds because the model emits vendor event `04 FF 01 01` on RESET
+deassert. `recover_stop` uses the same RESET line, then pulses GPIO15
+and waits with no timeout for a *different* event, `04 FF 01 03`.
+GPIO15 was not wired to the controller, and the model never emitted
+`03`, so the mismatch path hung in that untimed loop until the
+watchdog.
+
+**What was added.** GPIO15 is now `em9305@2`, the configuration clock
+cited by `display_ble_hci_radio_recover_pulse.c` /
+`recover_stop.c` and by `g2/docs/reference/findings-cross-cutting.md`.
+The wiring is inferred from that protocol, not from a measured
+schematic net name. `wait_pulse(40)` issues `(40*1000)/33 ≈ 1212`
+high/low pairs with the microsecond delay wrapper
+`audio_ble_hci_boot_delay_491102(16)`; the finding's "40 pulses" is
+the duration argument, not the edge count. After eight rising edges
+on GPIO15 following RESET release (a functional threshold, not a
+measured silicon count) the model enters configuration mode and
+enqueues `04 FF 01 03`. If the normal `04 FF 01 01` startup event is
+still unconsumed, it is replaced so `recover_stop` does not first
+memcmp-fail it. RESET without the clock is unchanged (`04 FF 01 01`).
+
+**Verification.** Six transport tests passed in 29.79 s, including the
+original RESET-ready `04 FF 01 01` case, enter-CM during and after
+startup, and a seven-edge negative. An 8 s stock 2.2.6.10 mismatch
+run (`stock-recover-stop.resc`, controller word `00010304`) logged
+`EM9305 entered configuration mode after 8 GPIO15 rising edges`
+twice, then left the previous two-`0xFD01` hang. Next HCI was
+`0106FD00` (`0xFD06`, `audio_ble_radio_update_erase_52e9b4` /
+`EMSMM_NVMEraseMain`), which is still unmodeled, plus a missing
+fixture read at `0x00F0040C`. `ConfigurationMode` was False then
+True; host packets 61; unsupported 3; no WDT. After the failed erase
+the stack still issued `010A200101` and ended at `PC=0x44adfa`, the
+same end PC as the version-match stock 8 s run. That is not a
+completed DFU.
+
+**App-dead / GPIO15 timing.** The untimed `recover_stop` wait could
+explain the app-dead temples, but only on paths that enter
+`recover_stop`, and only as a hypothesis. Official 2.2.6.10 came up
+on the later-bricked pair, so on that silicon `recover_stop` either
+was not entered or it completed under official timing. The realistic
+post-official MAIN-only path is version-match: with the trim-7
+fixture and a successful `context_check`, acquire skips
+`recover_stop`, and that path still does not reproduce app-dead in
+sim. `recover_stop` *is* entered if `context_check` returns 5, if
+factory trim bits `[12:7]` are not 7, or later from
+`audio_ble_radio_attempt_52edf0` (mismatch DFU). If (a) or (b) is
+true on the real board, every boot including official would enter
+`recover_stop`. Official came up, so the EM9305 did emit
+`04 FF 01 03` for stock's GPIO15 pulse train. OpenCFW uses the same
+`wait_pulse` source, but delays run from MRAM (`am_hal_delay_us` /
+`g2_norflash_delay_us_491102`) rather than stock's ITCM-resident
+delay. If that changes pulse width or period enough that the EM9305
+never enters CM, `recover_stop` never sees `04 FF 01 03` and hangs
+until the watchdog — no advertising, no case frame, matching the
+brick. That is residual (iii). It is not proven: there is no factory
+trim dump and no GPIO15 trace, and the sim trim-7 fixture hides the
+trim-mismatch acquire path. Do not treat this as the established
+brick cause.
+
+No commit. Next: implement NVM program/erase (starting with
+`0xFD06`), then re-run the mismatch pair through a completed DFU,
+then (3) the case-reply disarm with a pogo product-test frame.
+Evidence:
+[`g2-20261122-recover-stop-completable.json`](../evidence/g2-20261122-recover-stop-completable.json).
+
+## g2.reset macro, sticky MCUCTRL, and the 0xF04B88 loop — 2026-11-22 (6:38 AM CST, America/Chicago)
+
+Registered a proper machine reset macro in
+`~/Repo/g2-firmware-emulator` (local changes only, no commit) and
+traced why the mismatch path kept re-issuing the `0xF04B88` read. No
+hardware flash. The EM9305 NVM program/erase model is not in this
+step.
+
+**What stock expects from `0xF04B88`.** The first mismatch HCI packet
+`0101FD05884BF00008` is `audio_ble_radio_recover_read_52f094`
+(`display_ble_hci_radio_recover_commands.c`), called from
+`audio_ble_radio_context_recover_52f0f8` during
+`audio_ble_hci_radio_acquire_52dd94` (before the `0x00402000` version
+read). It fetches eight bytes from controller address `0x00F04B88`
+(`REG_RF_XO_SEQ_DIG`). From the first little-endian word `R`, stock
+computes `old = ((R>>8)&0x1F)<<1 | ((R>>7)&1)` — that is bits
+`[12:7]` — and compares it to the requested value `7`. The existing
+fixture `synthetic-rf-trim-7` (`8003000000000000`, word `0x00000380`)
+already has bits `[12:7] = 7`, so the compare matches and
+`context_recover` returns without calling `recover_stop`. This read
+does not loop because the fixture is wrong.
+
+**Why the read repeated in the 60 s mismatch run.** After the matching
+trim read and the version read, the mismatch path later enters
+`audio_ble_radio_attempt_52edf0`, which calls
+`audio_ble_radio_recover_stop_52e8be`. That routine resets the radio
+on GPIO `0x5D`, pulses GPIO15, and waits with no timeout for GPIO
+`0x40010410` bit `0x00200000` plus vendor event `04 FF 01 03`. The
+EM9305 model never emits that event, so the wait runs until the
+watchdog fires. The previous incomplete reset (no `g2.reset` macro)
+then restarted the application, and acquire issued the same two
+`0xFD01` reads again. The repeat is a WDT restart, not a trim retry.
+Closing `recover_stop` (vendor event plus the GPIO bit) is the next
+model gap before NVM erase/write can run.
+
+**g2.reset and sticky MCUCTRL.** `G2Apollo510_AudioMcuControl.Reset()`
+now preserves `CHIPREV` (`0x4002000C`) and `OTAPOINTER` (`0x40020264`):
+the first is a silicon identity, the second is the SBL recovery latch.
+`renode/g2-reset.resc` registers the current machine's `reset` macro
+and calls `wdt HandoffAfterSystemReset`. After peripherals reset, an
+unarmed `OTAPOINTER` reloads VTOR/SP/PC from the application vector at
+`0x00438000`; if `OTAPOINTER` is still `0xAFD1363A`, the CPU is halted
+and the application is not entered. The image is not reloaded. The
+macro is included from `renode/boot.resc` and from both temples in
+`renode/paired.resc`. Tests that previously required the "macro is not
+registered" warning were updated:
+`test_renode_boot_health.py`, `test_firmware_ble_reconnect.py`,
+`test_paired_scenarios.py`.
+
+**Verification** (`build/em9305-nor-20261122/g2-reset-handoff.resc`):
+an unarmed `machine Reset` kept `CHIPREV=0x22` and
+`OTAPOINTER=0x11111111`, re-entered `PC=0x5e4232` / `SP=0x2007fb00`,
+and logged `g2.reset: SBL application handoff`. An armed reset kept
+`OTAPOINTER=0xAFD1363A`, halted the CPU (`IsHalted=True`, `PC=0x0`),
+and logged `g2.reset: SBL wired-load`. The missing-macro warning did
+not appear. No commit. Next: emit the `recover_stop` vendor event and
+implement NVM program/erase, then re-run the mismatch pair through a
+completed DFU.
+Evidence:
+[`g2-20261122-g2-reset-and-f04b88.json`](../evidence/g2-20261122-g2-reset-and-f04b88.json).
+
+## Version-mismatch paired sim, 60 virtual seconds — 2026-11-22 (6:28 AM CST, America/Chicago)
+
+Extended the 5:55 AM CST version-mismatch Renode pair from 8 to 60
+virtual seconds, with PC peeks at 0, 8, 30, and 60 s. Same inputs: stock
+2.2.6.10 and the 12 Nov 2026 diagnostic openCFW main
+(`opencfw.app.bin`, reset PC `0x00594005`), NOR
+`69efc6d023779beec9dada757ec9fe852f9454b4b84bae6fe8421c703f35c9d1` with
+official `firmware/ble_em9305.bin`, controller word forced to
+`00 01 03 04` (4.3.1.0). No source or emulator change. No hardware flash.
+
+**HCI stayed the same two `0xFD01` reads, repeated after watchdog
+resets.** Stock and openCFW each emitted 10 host packets, byte-identical,
+all either `0101FD05884BF00008` (read `0x00F04B88` length 8) or
+`0101FD050020400004` (read `0x00402000` length 4). No new opcodes, no
+unmodeled EM9305 command, no advertising enable `010A200101`, and no
+program/erase HCI. The 8 s peek matched the earlier mismatch: stock
+`0x42` (ITCM `am_hal_delay_us`), openCFW `0x6006f6` (inside
+`br_util_delay_cycles` at `0x006006f4`). At 30 s both were still in
+those same delay sites.
+
+**Watchdog resets start after the 8 s window.** Each image took four
+WDT resets in 60 virtual seconds (`wdt: Watchog reset triggered`). The
+emulator then logs `No action for reset - macro g2.reset is not
+registered` and only reloads the scripted CPU PC/SP, which is not a
+full SoC or SBL reset. After every such restart both images repeat the
+same two version-check reads and fall back into the delay. At 60 s
+stock was at `0x4807be`, inside its MRAM `am_hal_delay_us` (function
+starts at `0x4807a0`; the `movs r1, #15` path that `bl 0x40` into the
+ITCM overlay). OpenCFW was at `0x6006f4`, the start of
+`br_util_delay_cycles`. Those are equivalent mid-delay states, not an
+openCFW-only hang. End-PC difference is layout plus where the 60 s
+slice landed after the fourth incomplete WDT restart.
+
+This still does not reproduce the version-match app-dead failure, and
+it does not show a completed DFU. The next no-hardware item remains
+implementing EM9305 NVM program/erase and the recover/reconfigure/
+finalize HCI in the Renode model, then re-running this mismatch pair.
+Evidence:
+[`g2-20261122-em9305-mismatch-60s-renode.json`](../evidence/g2-20261122-em9305-mismatch-60s-renode.json),
+working files under `build/em9305-nor-20261122/`.
+
+## Early recovery arm: advertising-enable disarm — 2026-11-22 (6:08 AM CST, America/Chicago)
+
+Made the early SBL recovery arm safer to ship, with evidence only. The
+stronger-evidenced choice was to **keep the unconditional early arm** and
+**also disarm at BLE advertising enable**. The crash-loop gate
+(`g2_self_recovery_boot_check`) stays unwired: the bricked temples' reset
+signature was never captured, and an early hang may never produce a
+watchdog streak; replacing the early arm with that gate would drop
+recovery for such a hang. The 2 Nov 2026 diagnosis and hook comments
+already recommended an advertising disarm so an out-of-case temple is
+not left armed. Upstream Cordio `HciLeSetAdvEnableCmd` was not edited.
+
+`g2_recovery_disarm_on_advertising()` was added in
+`system/self-recovery/self_recovery.c` (calls `g2_recovery_disarm_healthy()`
+then `g2_self_recovery_mark_healthy()`). It is invoked immediately after
+`HciLeSetAdvEnableCmd(1)` in the two first-party enable=1 sites:
+`audio_ble_dm_adv_start_4b9e88` and `audio_ble_dm_adv_start_directed`.
+The existing charging-case product-test disarm in `box_uart_mgr.c` is
+unchanged. A comment in `iar_cmain.c` and
+`g2/docs/reference/self-recovery-arming.md` were updated to match.
+
+Apollo-main was rebuilt from a fresh out dir (`sources.py --payload
+g2-apollo-main --jobs 4`: 2718/2718 compiled, 0 known failures) and
+relinked to `build/g2-apollo-recovery-20261122-link/g2-apollo-main/`
+(3,818,880 bytes, SHA-256
+`9d7bcc5edf64a893c47dc49fb0f124fceea4598bf39aaaaca750df9ce4e3cac2`,
+SP `0x2007FB00`, reset PC `0x0059404d`). That is 80 bytes larger than
+the 12 Nov 2026 diagnostic image; the reset PC moved `0x48` from
+`0x00594005`.
+
+**Paired version-match NOR sim, CHIPREV=0x22 fixture.** The modeled
+MCUCTRL `Reset()` zeroes CHIPREV, so the default sim skips the arm
+(`(rev & 0xff) < 0x22`). Both stock 2.2.6.10 and the new openCFW image
+ran 8 virtual seconds on the unchanged NOR
+(`69efc6d023779beec9dada757ec9fe852f9454b4b84bae6fe8421c703f35c9d1`,
+controller 4.4.2.0, official `firmware/ble_em9305.bin` present), with
+`sysbus WriteDoubleWord 0x4002000C 0x22` after `cpu Reset`. Stock and
+openCFW emitted the same 56 HCI host packets (byte-for-byte), including
+advertising enable `010A200101`, and both latched two display frames with
+hash `0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492`.
+Those HCI and frames are also identical to the 5:55 AM CST CHIPREV=0
+version-match baseline (the CHIPREV fixture did not change the observed
+boot path). End PCs: stock `0x44adfa` (unchanged), openCFW `0x5432f8`
+(layout only; `+0x48` from the prior `0x5432b0`).
+
+**Arm and disarm.** OpenCFW `MCUCTRL.OTAPOINTER` (`0x40020264`) was `0`
+before run, `0xAFD1363A` (the recovery key) after 0.01 virtual seconds,
+and `0` again after 8 seconds. CHIPREV stayed `0x22`. Stock OTAPOINTER
+stayed `0` at all three peeks. Scripted CPU/watchpoint hooks failed to
+log (Python names `sysbus`/`machine` are not in the hook namespace) and
+were logging-only; two error pairs nevertheless coincide with the early
+arm window and with the approach to `010A200101`. The peeks are the
+authoritative evidence. The case-reply disarm path was not the path
+exercised in this run.
+
+No hardware was flashed. The hang is still unreproduced. Wired SBL
+recovery remains unproven on hardware. Residuals (ii) real months-old
+littlefs/FlashDB content and (iii) silicon GPIO15/I2C timing are
+unchanged and still need user/hardware data (listed in the step return).
+Evidence:
+[`g2-20261122-recovery-advertising-disarm-renode.json`](../evidence/g2-20261122-recovery-advertising-disarm-renode.json),
+working files under `build/em9305-nor-20261122/` and
+`build/g2-apollo-recovery-20261122-link/`.
+
+## EM9305 NOR paired-sim experiment — 2026-11-22 (5:55 AM CST, America/Chicago)
+
+Put the official packed `firmware/ble_em9305.bin` on the modeled NOR and
+ran stock 2.2.6.10 against the current source-linked openCFW main. No
+hardware was flashed, and no Apollo source was changed.
+
+The 211,948-byte official payload already has the 16-byte stock header
+(`version=0x04040200`, `total_length=0x33b70`, `record_count=4`,
+`erase_pages_size=29`). Stock 2.2.6.10 was booted 12 virtual seconds on a
+blank MX25U25643G (56 HCI packets, advertising enable `010A200101`, ended
+at `0x44adfa`) and formatted littlefs at `0x1400000` (4096-byte blocks,
+3008 blocks). A host injector built from the pinned littlefs 2.10.1
+sources wrote the official image to `firmware/ble_em9305.bin`; a read-back
+from that filesystem matched the official bytes. NOR with the file:
+SHA-256 `69efc6d023779beec9dada757ec9fe852f9454b4b84bae6fe8421c703f35c9d1`.
+
+**Version match (the realistic post-official-2.2.6.10 MAIN-only case).**
+The controller fixture stayed at bundled 4.4.2.0 (`0x00402000` =
+`00 02 04 04`), equal to the file header. Stock and openCFW each ran 8
+virtual seconds on that NOR, with controller and display peripherals.
+Both emitted the same 56 HCI host packets (byte-for-byte), including
+advertising enable `010A200101`, and both latched two display frames with
+hash `0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492`.
+End PCs differ only by image layout (`0x44adfa` stock, `0x5432b0`
+openCFW). This path does not hang and does not explain the dev-pair
+app-dead failure.
+
+**Version mismatch (forced DFU).** The controller word was set to
+`00 01 03 04` (`0x04030100`) so the stock byte-wise compare would request
+an update. Both images sent the same two HCI packets — vendor `0xFD01`
+reads, the second being command `0x00402000` length 4 — and neither
+reached advertising in 8 virtual seconds. Stock ended at `0x42` (the
+ITCM `am_hal_delay_us` busy loop). OpenCFW ended at `0x6006f6`, inside
+`br_util_delay_cycles` at `0x6006f4`, which is the OpenCFW tail-call of
+the same delay. These are equivalent mid-delay states, not an openCFW-
+only hang. The EM9305 model does not implement controller NVM
+program/erase, so this campaign cannot show whether a completed update
+would later diverge.
+
+**Early-arm recovery hook (review only).** `g2_recovery_arm_early()` is
+still called from `low_level_init_5e4228` in `iar_cmain.c`, and
+`g2_recovery_disarm_healthy()` is still called only after a charging-case
+product-test reply in `box_uart_mgr.c`. The 2 Nov 2026 diagnosis already
+recorded that this arms unconditionally and would leave an out-of-case
+temple armed. The safer crash-loop gate (`g2_self_recovery_boot_check`,
+five consecutive watchdog resets, plus `g2_self_recovery_mark_healthy`)
+is present and still intentionally unwired, because the bricked temples'
+reset signature was never captured. This hook was not changed here: any
+boot-path edit needs its own Apollo rebuild and paired-sim check, and
+this experiment did not require a firmware fix. It is not safe to ship
+as-is. Recommended next edit, when that rebuild is planned: unwire the
+unconditional early arm, or also disarm at BLE advertising enable, and
+keep the crash-loop gate unwired until a reset signature exists.
+
+**FLAGS.** No source fix. Hardware boot remains unverified. Residuals
+(ii) real months-old littlefs/FlashDB content and (iii) silicon
+GPIO15/I2C timing are unchanged. Evidence:
+[`g2-20261122-em9305-nor-paired-renode.json`](../evidence/g2-20261122-em9305-nor-paired-renode.json),
+working files under `build/em9305-nor-20261122/`.
+
+## Boot-readiness assessment — 2026-11-22 (5:19 AM CST, America/Chicago)
+
+Tree check on Kalanis MacBook Pro (`a5e5f44e-b1aa-42a0-b2ae-84d3adf8f1fe`).
+The 22 Nov 2026 request arrived from the iPhone, which does not hold the
+working copy. `sources.json` SHA-256 is still
+`2642826fc64847042e1eb46f4f6c6312e3f8646a3c71db34d466df14a716e37f`, the
+manifest hashed by the 12 Nov 2026 current-source diagnostic. Dirty
+`g2/src` mtimes are earlier than that diagnostic, so the uncommitted G2
+source changes were already compiled and linked. This session did not
+touch `r1/`, and it did not start another full build.
+
+The October wave-28 leftover blocks are already C. `stock_residual_code.c`
+(30 Oct 2026 bulk lift) contains `bsp_LinkLayerTimeEventCallback`
+(`opencfw_em9305_stock_315658`), `EMSystem_TransmitCM`
+(`opencfw_em9305_stock_305ab4`), and `QF_poolInit`
+(`opencfw_em9305_stock_3111a8`). The last of those is a typed wrapper
+that forwards to upstream QP/C 6.5.1 `QF_poolInit` in
+`qpc-port/qf_dyn_unit.c`. Remaining EM9305 assembly is the QK SWI
+context switch in `application/qk_port_swi.c` (architectural; a compiler
+ISR prologue cannot express the SWI0/SWI1 frame hand-over). The manifest
+still has one disabled, unlinked upstream assembler unit
+(`cy_syslib_gcc.S`). The historical 17-row Apollo residual-ownership
+list was closed on 11 Nov 2026.
+
+**Compile and link (12 Nov 2026 diagnostic, still current for this
+manifest).** 4,879 registered units, 4,874 enabled C units, all compiled;
+strict seven-payload source link with no external binary archive and no
+binary fuel-gauge library. `source_completeness_proven` is false.
+Apollo-main is 3,818,800 bytes (OTA package 3,818,832). The
+six-component source candidate is 4,639,776 bytes against the locked
+4,301,227-byte bundle; every component and the whole bundle differ from
+stock. Evidence:
+[`g2-20261112-current-source-diagnostic-review-index.json`](../evidence/g2-20261112-current-source-diagnostic-review-index.json),
+`build/g2-current-source-bundle-diagnostic-20261112T1130Z/link-report.json`.
+
+**Simulator.** The 10 Nov 2026 Renode run of the then-current
+source-linked Apollo-main image emitted 56 HCI host packets, including
+advertising enable `010A200101`, and paused at `0x542c80`. The 2 Nov 2026
+paired campaign against stock 2.2.6.10 found no reconstruction-vs-stock
+divergence at any modeled interface through BLE advertising, including
+fixture perturbations (EM9305 version mismatch, low battery, in-case
+boot, touch/IMU bursts, and a pogo product-test frame). Littlefs on the
+emulator's real MX25 model was largely excluded: the reconstruction
+boots to BLE on a stock-written array. The simulator does not reproduce
+the hardware hang. Recipes and exclusions:
+`g2/docs/reference/boot-hang-diagnosis.md`,
+`build/boot-trace/STATUS.md`,
+`build/boot-trace/g2-current-20261110-renode.log`.
+
+**Hardware is not boot-ready.** Official 2.2.6.10 was installed and
+came up; openCFW main (MAIN-only containers from 31 Oct and 1 Nov 2026)
+left both dev-pair temples present but application-dead: no advertising,
+no case-bridge frame. RAM-init Fix 43 was necessary and is not
+sufficient. Do not flash the primary pair. Present software mitigations
+in the tree: Fix 43 (DTCM gap zero), Fix 51 (bounded HWID ADC poll), and
+the 11 Nov 2026 ITCM `0x40..0x58` overlay copy. The early-arm SBL
+recovery hook is in the tree but must not ship as-is: it arms
+unconditionally and only disarms after a pogo reply, so an out-of-case
+temple would stay armed. The fuel-gauge provider is a source-only
+uncalibrated voltage/flow estimate, not Nordic's proprietary model.
+
+**FLAGS.** No physical boot proof. Images are not byte-identical to
+stock. The hang lives in device responses or timing the simulator does
+not produce. Residuals that still cannot be closed from existing sim
+evidence: (i) the EM9305 firmware-update branch, which is live on
+hardware NOR (`firmware/ble_em9305.bin`) and has never been run in
+Renode because the modeled filesystem lacks that file; (ii) months of
+real littlefs/FlashDB content (an internal assert; low probability);
+(iii) silicon-level GPIO15 pulse and I2C-settle timing under
+MRAM-executed delays. Closing (i) would be a paired-sim experiment, not
+another flash. Observation from a bricked temple (debug UART or SWD)
+is still the only way to prove a hardware fix. This assessment does
+not mark any image hardware-ready.
+
+## Apollo boot vector candidates narrowed — 2026-11-12
+
+An independent review checked all 15 vector-like bootloader candidates
+against the locked bytes and startup references. One primary vector is
+supported, 13 candidate starts are rejected, and raw `0x5304` remains
+unresolved because its proposed stack address lacks a verified writable map.
+The byte roles of the rejected low-stack matches and whole-boot discovery
+remain open. Evidence:
+[`g2-20261112-p1-apollo-boot-vector-candidates-index.json`](../evidence/g2-20261112-p1-apollo-boot-vector-candidates-index.json).
+Reviewed noncanonical discovery revision 017 carries this narrowed vector
+item without closing the bootloader's broader pointer and writer routes:
+[`g2-20261112-p1-discovery-v17-index.json`](../evidence/g2-20261112-p1-discovery-v17-index.json).
+A later review rejects raw `0x5304` as a vector start: both words are
+directly loaded as literals, one is a callback pointer, and the proposed
+stack address lies in a region the [Apollo510 datasheet](https://contentportal.ambiq.com/documents/20123/2877485/Apollo510-SoC-Datasheet.pdf)
+marks Reserved/X rather than documented writable stack. Boot-specific
+remapping and the nearby uncensused routine remain open. Evidence:
+[`g2-20261112-p1-apollo-boot-vector-5304-resolution-index.json`](../evidence/g2-20261112-p1-apollo-boot-vector-5304-resolution-index.json).
+
+## Touch flash-row copy source bounded — 2026-11-12
+
+The 128-byte copy at touch runtime `0x8D74` takes its source from the second
+argument to `Cy_Flash_WriteRow`. One local caller supplies a zeroed stack
+buffer; another forwards and advances its own caller-supplied pointer. The
+upstream origin of that pointer and indirect caller routes remain open, so
+this does not exclude executable data from other paths. Evidence:
+[`g2-20261112-p1-touch-flash-copy-origin-index.json`](../evidence/g2-20261112-p1-touch-flash-copy-origin-index.json).
+
+A corrected and independently reviewed caller uptrace verifies the `0x4811`
+callback installed from the `0x48A8` literal and two indirect EEPROM write
+routes. Its 15 checked Thumb call edges lead to RAM or stack staging, with
+some paths merging existing EEPROM rows. The caller-supplied `param_2`
+source remains unknown, and no fixed firmware-flash source interval is
+established. Evidence:
+[`g2-20261112-p1-touch-flash-copy-uptrace-index.json`](../evidence/g2-20261112-p1-touch-flash-copy-uptrace-index.json).
+Reviewed noncanonical discovery revision 018 carries the corrected route
+description and retains seven open items:
+[`g2-20261112-p1-discovery-v18-index.json`](../evidence/g2-20261112-p1-discovery-v18-index.json).
+A further independently reviewed trace identifies the callback source as a
+RAM EEPROM record at `0x200009D0` for both direct write callers. Startup
+loads the record through the true read adapter; defaults, baseline changes,
+and hold changes are staged in RAM before write. The producer of a separate
+input buffer at `0x200009A1` remains unresolved. Evidence:
+[`g2-20261112-p1-touch-param2-origin-index.json`](../evidence/g2-20261112-p1-touch-param2-origin-index.json).
+Reviewed noncanonical discovery revision 020 incorporates this RAM-source
+finding and the bounded boot vector rejection while retaining seven open
+items and the boot remap caveat:
+[`g2-20261112-p1-discovery-v20-index.json`](../evidence/g2-20261112-p1-discovery-v20-index.json).
+An independently reviewed instruction trace identifies the separate
+`0x200009A1` hold input as payload in the configured I2C receive buffer.
+Command 7 dispatches through a nine-entry table to the hold setter. No
+physical sender was observed, and other writers and indirect aliases remain
+open. Evidence:
+[`g2-20261112-p1-touch-i2c-input-producer-index.json`](../evidence/g2-20261112-p1-touch-i2c-input-producer-index.json).
+Reviewed noncanonical discovery revision 021 carries the configured receive
+route and keeps the unobserved sender, aliases, other writers and unrelated
+copy paths open:
+[`g2-20261112-p1-discovery-v21-index.json`](../evidence/g2-20261112-p1-discovery-v21-index.json).
+
+## Apollo main function overlap classified — 2026-11-12
+
+An independently reviewed whole-census byte audit checked all 7,449
+historical Apollo main function rows. Their exact AddressSet ranges do not
+overlap and cover 1,394,848 bytes; 7,448 contiguous body-envelope hashes
+match locked bytes, while one oversized envelope has no exporter hash.
+The 2,128,548-byte full-OTA complement remains unclassified. An envelope
+hash is not a code-unit or entry-closure proof. Evidence:
+[`g2-20261112-p1-apollo-main-census-byte-coverage-index.json`](../evidence/g2-20261112-p1-apollo-main-census-byte-coverage-index.json).
+An attempted bulk `code` classification passed range arithmetic but failed
+independent semantic review because the census lacks an instruction/code-unit
+map. The reviewed coverage revision 014 remains current; those historical
+function ranges retain their previous ledger classifications.
+The rejection and unchanged gate status are pinned in
+[`g2-20261112-p1-apollo-main-census-coverage-rejection-index.json`](../evidence/g2-20261112-p1-apollo-main-census-coverage-rejection-index.json).
+The original Ghidra 12.1.2 project and listing export are absent. A reviewed
+tooling investigation specifies a fresh, private Ghidra import and code-unit
+export for the 7,758 historical ranges, with explicit reconciliation before
+any bulk code classification. That investigation preceded the fresh export
+described below. Evidence:
+[`g2-20261112-p1-apollo-main-codeunit-map-investigation-index.json`](../evidence/g2-20261112-p1-apollo-main-codeunit-map-investigation-index.json).
+A fresh Ghidra 12.1.4 import then exported Listing CodeUnits for all 7,758
+historical ranges. Independent review reconciled 1,394,848 bytes: 1,260,803
+bytes are instructions in that new listing, 134,045 are undefined, and none
+are defined data. The new analysis associates 715 historical entries with no
+matching current function. It is not the missing Ghidra 12.1.2 project, and
+no bulk code coverage was admitted. Evidence:
+[`g2-20261112-p1-apollo-main-fresh-codeunit-export-index.json`](../evidence/g2-20261112-p1-apollo-main-fresh-codeunit-export-index.json).
+A conservative filter over whole instruction units with matching fresh and
+historical function ownership yields 1,251,072 candidate bytes across 6,734
+functions. It has no data overlap with current coverage, but instruction
+encodings have not been independently verified. The candidate is indexed
+without adding code rows to the ledger:
+[`g2-20261112-p1-apollo-main-code-candidate-index.json`](../evidence/g2-20261112-p1-apollo-main-code-candidate-index.json).
+GNU objdump independently agrees on the start and width of all 473,945
+selected Thumb units across 2,465 isolated runs. This is decoder agreement,
+not proof that every byte is semantically code; the candidate remains
+unadmitted. Evidence:
+[`g2-20261112-p1-apollo-main-code-candidate-objdump-index.json`](../evidence/g2-20261112-p1-apollo-main-code-candidate-objdump-index.json).
+
+An independent review verifies the separate 72-byte Apollo main scatter table
+at runtime `[0x75D3C8,0x75D410)`, its four callback entries, five destination
+contracts and three contiguous compressed source spans. The table bytes are
+data in reviewed noncanonical coverage revision 012: 107 rows across 40
+scopes, 4,176,969 unknown payload bytes. The replay traces have a script-pin
+drift caveat; direct locked bytes and static references support the table
+classification. Physical execution and G1 remain open. Evidence:
+[`g2-20261112-p1-apollo-main-scatter-index.json`](../evidence/g2-20261112-p1-apollo-main-scatter-index.json),
+[`g2-20261112-p1-apollo-main-scatter-coverage-index.json`](../evidence/g2-20261112-p1-apollo-main-scatter-coverage-index.json).
+
+Reviewed noncanonical discovery revision 014 corrects the Apollo main scope
+wording: the three literal words and static scatter dispatcher route are
+verified; the two adjacent raw gaps, runtime reachability, and whole-image
+discovery remain open. Its six payload rows retain 33 image IDs and seven
+unresolved discovery items. Evidence:
+[`g2-20261112-p1-discovery-v14-index.json`](../evidence/g2-20261112-p1-discovery-v14-index.json).
+
+A subsequent independently reviewed audit verified eight directly loaded
+string-pointer words at main post-preamble raw `[143616,143648)` (full OTA
+`[143648,143680)`). The 32-byte span is data in noncanonical coverage
+revision 013, which has 109 rows across 40 scopes and 4,176,937 unknown
+payload bytes. Discovery revision 015 removes that span from its open item;
+the preceding two-byte zero halfword, full residual sweep and runtime route
+reachability remain open. It retains six payload rows, 33 image IDs and seven
+unresolved items. Evidence:
+[`g2-20261112-p1-apollo-main-postpreamble-refs-index.json`](../evidence/g2-20261112-p1-apollo-main-postpreamble-refs-index.json),
+[`g2-20261112-p1-apollo-main-postpreamble-coverage-index.json`](../evidence/g2-20261112-p1-apollo-main-postpreamble-coverage-index.json),
+[`g2-20261112-p1-discovery-v15-index.json`](../evidence/g2-20261112-p1-discovery-v15-index.json).
+
+The immediately following 44-byte main region at post-preamble raw
+`[143648,143692)` contains nine string pointers and two Thumb function
+pointers, with 29 direct literal loads checked at instruction boundaries.
+Noncanonical coverage revision 014 classifies that exact region as data in
+both views: 111 rows, 40 scopes and 4,176,893 unknown payload bytes.
+Discovery revision 016 retains the same seven open items. Evidence:
+[`g2-20261112-p1-apollo-main-next-pointer-cluster-index.json`](../evidence/g2-20261112-p1-apollo-main-next-pointer-cluster-index.json),
+[`g2-20261112-p1-apollo-main-next-pointer-coverage-index.json`](../evidence/g2-20261112-p1-apollo-main-next-pointer-coverage-index.json),
+[`g2-20261112-p1-discovery-v16-index.json`](../evidence/g2-20261112-p1-discovery-v16-index.json).
+
+An independent review verified the locked stock function `FUN_0045adf4` by
+hashing its full 766-byte body. The noncanonical P1 ledger now marks its
+66-byte overlap at full OTA offsets `[143568,143634)` as code, with the same
+bytes at post-preamble image offsets `[143536,143602)`. Revision 008 left
+the following 14 bytes unknown. A subsequent independently reviewed audit
+identified 12 of them as three directly referenced literal words at full
+OTA `[143636,143648)`, leaving the `0x0000` halfword at
+`[143634,143636)` unknown. Reviewed noncanonical coverage revision 011
+classifies those 12 bytes in each view; it has 103 rows, 40 scopes and
+4,177,041 unknown payload bytes. Main image discovery and G1 remain open.
+Evidence:
+[`g2-20261112-p1-apollo-main-offset-code-index.json`](../evidence/g2-20261112-p1-apollo-main-offset-code-index.json),
+[`g2-20261112-p1-apollo-main-code-coverage-index.json`](../evidence/g2-20261112-p1-apollo-main-code-coverage-index.json),
+[`g2-20261112-p1-apollo-main-tail-literals-index.json`](../evidence/g2-20261112-p1-apollo-main-tail-literals-index.json),
+[`g2-20261112-p1-apollo-main-tail-coverage-index.json`](../evidence/g2-20261112-p1-apollo-main-tail-coverage-index.json).
+
+Revision 011's immutable index uses an earlier filename for its four-byte
+case-tail predecessor. The predecessor now has its distinct filename, and the
+older 48-byte literal-pool index is restored byte-for-byte at its original
+path. The historical path mismatch and corrected relationship are recorded in
+[`g2-20261112-p1-coverage-path-correction-index.json`](../evidence/g2-20261112-p1-coverage-path-correction-index.json).
+
+## Codec conditional load routes checked — 2026-11-12
+
+An independent review verified the locked codec's static A/B reader spans,
+transfer formulas, entries, and guards. A marker at `0x20033FFC` selects an
+alternate transfer; B's loader also checks boot mode `2`. The actual marker
+and mode values, physical XIP mapping, and an alternate destination alias are
+still unverified, so the conditional inventory remains open. Evidence:
+[`g2-20261112-p1-codec-conditional-route-index.json`](../evidence/g2-20261112-p1-codec-conditional-route-index.json).
+A separate review confirms that the alternate A-loader plan copies B
+stage-two bytes to `0x20003000` but targets entry `0x10003100`; the normal
+B plan loads the same bytes to `0x10003000`. The required executable alias,
+runtime guard values, and physical XIP mapping remain unproven. Evidence:
+[`g2-20261112-p1-codec-alternate-destination-index.json`](../evidence/g2-20261112-p1-codec-alternate-destination-index.json).
+Reviewed noncanonical discovery revision 022 carries those static route and
+accelerator findings while retaining two codec and seven total open items:
+[`g2-20261112-p1-discovery-v22-index.json`](../evidence/g2-20261112-p1-discovery-v22-index.json).
+
+## Case tail data spans reviewed — 2026-11-12
+
+The bounded whole-case residual scan reproduced all 435 historical function
+body hashes and the 12,680-byte complement in 296 intervals. Exact known
+executable-header signatures had no hits. A second vector-shaped pair at raw
+`0x6A18` resolves to a task/thread literal pool; 95 aligned flash-looking
+numbers remain candidates, including 54 that target exact census entries.
+These checks do not close markerless content, the reference graph, or G1.
+Evidence:
+[`g2-20261112-p1-case-whole-residual-index.json`](../evidence/g2-20261112-p1-case-whole-residual-index.json).
+
+The separate bounded descriptor audit now identifies case raw
+`[0xD26C,0xD406)` as RTOS timer/task/event/reset records and consumed lookup
+maps, and `[0xD93C,0xD95C)` as two startup transform records. The six raw
+bytes before `0xD26C` remain unknown. The shift map is evidenced only through
+`0xD406`; its following two zeros are outside that table audit. This adds
+442 reviewed data bytes per case view. The noncanonical ledger revision 009
+has 97 rows across 40 scopes and 4,177,057 unknown payload bytes. Evidence:
+[`g2-20261112-p1-case-descriptor-tail-index.json`](../evidence/g2-20261112-p1-case-descriptor-tail-index.json),
+[`g2-20261112-p1-case-descriptor-coverage-index.json`](../evidence/g2-20261112-p1-case-descriptor-coverage-index.json).
+
+A follow-on instruction and literal audit verified raw `[0xD268,0xD26C)` as
+the `0x20000090` RAM pointer loaded by `case_copy_head8_to_tail8`. Raw
+`[0xD266,0xD268)` remains unknown despite fitting an alignment gap. The
+reviewed noncanonical ledger revision 010 classifies only those four bytes as
+data, leaving 4,177,053 unknown payload bytes across 99 rows and 40 scopes.
+Reviewed discovery revision 012 narrows the case tail open item to the two
+unknown bytes while retaining seven open items overall. Evidence:
+[`g2-20261112-p1-case-tail-literal-index.json`](../evidence/g2-20261112-p1-case-tail-literal-index.json),
+[`g2-20261112-p1-case-tail-literal-coverage-index.json`](../evidence/g2-20261112-p1-case-tail-literal-coverage-index.json),
+[`g2-20261112-p1-discovery-v12-index.json`](../evidence/g2-20261112-p1-discovery-v12-index.json).
+
+A bounded follow-up checked the two-byte case raw gap `[0xD266,0xD268)`.
+The preceding function returns immediately before it, and the next word is
+its directly loaded RAM-pointer literal. No direct branch to the gap appeared
+in the pinned function census, but the zero halfword can encode a Thumb
+instruction, so its classification remains unknown. Evidence:
+[`g2-20261112-p1-case-d266-halfword-index.json`](../evidence/g2-20261112-p1-case-d266-halfword-index.json).
+
+The earlier noncanonical P1 coverage draft revision 007 classified case raw `[0xD406,0xD93C)`
+as a string-bearing region with NUL and alignment bytes, and
+`[0xD95C,0xD9C4)` as the reviewed startup transform source. Descriptor and
+table candidates around them, plus the final four `FF` bytes, remain unknown.
+With those exact spans, revision 007 had 91 rows across 40 scopes and 4,177,565
+unknown payload bytes. G1 remains `not_run`. Evidence:
+[`g2-20261112-p1-case-tail-coverage-index.json`](../evidence/g2-20261112-p1-case-tail-coverage-index.json).
+
+## Apollo startup table provenance corrected — 2026-11-12
+
+An independent review traced bootloader raw `[143580,143600)` to runtime
+`[0x4330DC,0x4330F0)` and bootloader raw `[143600,143648)` to
+`[0x4330F0,0x433120)`. `0x4330F0` is both the second descriptor start and
+the startup callback's return cursor. The earlier main discovery review
+imported these bootloader descriptors as main evidence. In **main
+post-preamble raw** coordinates, `[143580,143602)` is verified stock
+function code, including the entire alleged 20-byte zero table; raw
+`[143602,143648)` remains unresolved. The documented main scatter table at
+`0x75D3C8` is separate. Reviewed noncanonical discovery revision 012 carries
+this correction across all six payload rows and retains seven open discovery
+items. This does not close main discovery or G1. Evidence:
+[`g2-20261112-p1-apollo-table-provenance-index-v2.json`](../evidence/g2-20261112-p1-apollo-table-provenance-index-v2.json),
+[`g2-20261112-p1-discovery-v12-index.json`](../evidence/g2-20261112-p1-discovery-v12-index.json).
+
+## Apollo main residual marker sweep reviewed — 2026-11-12
+
+A bounded scan of the locked Apollo main image found two `FWPK` literals that
+fail the known touch and codec layouts, plus 375 zlib-like prefixes with no
+complete stream under the tested decoder. It did not establish another image.
+It also exposed a table claim that was subsequently traced to the bootloader.
+The separate main scatter table at `0x75D3C8` remains a distinct route.
+Evidence:
+[`g2-20261112-p1-apollo-main-residual-index.json`](../evidence/g2-20261112-p1-apollo-main-residual-index.json).
+
+## EM9305 residual record sweep corrected and reviewed — 2026-11-12
+
+The current-campaign bounded ARC sweep verifies all four record bytes and
+correctly places record 3 at loaded `[0x302400,0x335BC8)`. Its reviewed
+936-byte INI table begins at `0x335820`; the table extent follows the
+descriptor walk to the record end, not the marker alone. Linear branch and
+address-word matches remain candidates because disassembly can include data.
+External NVM record selection and a complete reference sweep remain open.
+Evidence:
+[`g2-20261112-p1-em9305-residual-index.json`](../evidence/g2-20261112-p1-em9305-residual-index.json).
+
+## Case historical function-range complement measured — 2026-11-12
+
+The independently reproduced historical case census covers 43,072 of 55,752
+raw bytes through its listed function AddressSet ranges. Its 12,680-byte
+complement spans 296 intervals and includes the known 48-byte literal pool.
+The complement remains unclassified; this count is a discovery worklist, not
+a claim that all listed bytes are code or that all other bytes are data.
+Evidence:
+[`g2-20261112-p1-case-range-partition-index.json`](../evidence/g2-20261112-p1-case-range-partition-index.json).
+
+## Codec GXNPU structural partition reproduced — 2026-11-12
+
+A bounded current-campaign audit verified the 9,164-byte GXNPU command span
+as 212 contiguous structural records and the following 120,800-byte weight
+span in the locked codec payload. The conditional BINH A/B runtime routes,
+opaque-region executable content, and command semantics remain unresolved.
+The audit passed independent review within that scope; G1 remains `not_run`.
+Evidence:
+[`g2-20261112-p1-codec-residual-index.json`](../evidence/g2-20261112-p1-codec-residual-index.json).
+A later independent review round-tripped all 212 records as typed
+accelerator operation commands and confirmed the adjacent weight buffer.
+Vendor task structures distinguish command and weight buffers, but the
+available comparator model differs from the locked artifact. The slot-6
+weight binding, full operation semantics, and weight internals remain open;
+the command and weight spans were not blanket-classified as passive data.
+Evidence:
+[`g2-20261112-p1-gxnpu-command-semantics-index.json`](../evidence/g2-20261112-p1-gxnpu-command-semantics-index.json).
+
+## Apollo boot and touch byte classifications reviewed — 2026-11-12
+
+The noncanonical P1 coverage draft now marks the Apollo bootloader's decoded
+24-byte ITCM helper as code and its 4 KiB zero-fill output as data. It also
+marks the exact 56-byte touch pin-function word array at runtime `0xB4C4` as
+data in both the FWPK payload and flash-image views. Both changes passed
+independent review. That revision had 83 rows across 40 scopes and left
+4,179,003 payload bytes unknown; the case-tail revision above supersedes
+those totals. Evidence:
+[`g2-20261112-p1-apollo-touch-coverage-index.json`](../evidence/g2-20261112-p1-apollo-touch-coverage-index.json).
+
+## Apollo boot startup output interiors triaged — 2026-11-12
+
+An independent bounded scan reproduced the three startup output hashes. The
+24-byte ITCM output linear-decodes as ten Thumb instructions; the 1,371-byte
+DTCM output contains structured initialized data and opaque words; the 4 KiB
+SSRAM output is all zero. Four DTCM words point into that SSRAM region, but
+their consumers remain unproven. This narrows the decoded-image inventory
+without closing its interior references or the full bootloader sweep. Evidence:
+[`g2-20261112-p1-apollo-boot-interior-index.json`](../evidence/g2-20261112-p1-apollo-boot-interior-index.json).
+
+## Current source snapshot compiles and links, bundle differs — 2026-11-12
+
+The current G2 manifest registers 4,879 units; 4,874 enabled C units compile
+across all seven payload groups. Every relocatable composition and the strict
+seven-image final link succeeds with no duplicate strong symbols or external
+binary archive. Codec KWS weights enter as a C-compiled data unit. A
+six-component source candidate assembled from these images is 4,639,776 bytes
+versus the locked 4,301,227-byte bundle. All six component candidates and the
+whole bundle differ from stock. This diagnostic does not qualify source
+coverage, all-C semantics, byte identity, or hardware boot. Evidence:
+[`g2-20261112-current-source-diagnostic-review-index.json`](../evidence/g2-20261112-current-source-diagnostic-review-index.json).
+
+## Touch and Apollo bootloader discovery drafts narrowed — 2026-11-12
+
+Within the locked touch payload, the primary vector table is copied from flash
+to SRAM at reset, and the startup descriptor copies 964 bytes of initialized
+data. Four other aligned vector-like pairs are callback or context data.
+Thirteen non-reset calls to the byte-copy helper now have bounded local
+argument traces. One stages 56 bytes of pin-function configuration words from
+`0xB4C4`; inherited caller state and later use remain unresolved. A bounded
+Apollo bootloader sweep reproduced 731 in-range pointer-pattern windows and
+15 vector-heuristic candidates without establishing a new nested image; those
+leads and the full flash/reference sweep remain open. Independent reviews
+accepted the bounded evidence and the noncanonical six-payload discovery draft
+revision 010, which still lists seven unresolved discovery items. The three
+Apollo boot startup outputs have separately reviewed bounded replays; their
+interior references remain open. G1 remains `not_run`. Evidence:
+[`g2-20261112-p1-discovery-v10-index.json`](../evidence/g2-20261112-p1-discovery-v10-index.json).
+
+## Case historical function census reproduced — 2026-11-12
+
+The current campaign independently verified all 435 historical case function
+body hashes against the locked case payload, using the Ghidra exporter's
+contiguous first-to-last byte hash rule. Each recorded AddressSet range total
+also matches its `body_bytes`. A listed-range Thumb scan returned 119
+candidate functions with indirect transfers or selected startup behavior.
+These are leads, not a complete call, writer, or nested-image census. The
+case whole-image reference sweep and G1 remain open. Evidence:
+[`g2-20261112-p1-case-whole-reference-index.json`](../evidence/g2-20261112-p1-case-whole-reference-index.json).
+
+## Case residual scan and literal pool reviewed — 2026-11-12
+
+A bounded scan of the locked case image found no additional exact `EVEN`,
+`FWPK`, `BINH`, ELF, `MZ`, or `FWMH` markers. An aligned vector heuristic
+found the primary vector at raw offset 0 and a second vector-like pair at
+`0x6A18`. The latter is part of a twelve-word PC-relative literal pool:
+the apparent stack pointer and reset address are loaded as ordinary data.
+The reviewer checked the wrapper checksum and both Thumb load instructions.
+The full nested-image/reference sweep remains open.
+
+All 22 listed Thumb load sites for that 48-byte pool now match the locked
+instructions and word values. The noncanonical coverage draft classifies
+raw case `[0x6A10,0x6A40)` and wrapped payload `[0x6A30,0x6A60)` as `data`.
+It has 79 rows across 40 scopes and 4,179,059 unknown payload bytes; G1
+remains `not_run`. The discovery and coverage evidence are indexed in
+[`g2-20261112-p1-case-discovery-ledger-index.json`](../evidence/g2-20261112-p1-case-discovery-ledger-index.json)
+and
+[`g2-20261112-p1-case-literal-coverage-index.json`](../evidence/g2-20261112-p1-case-literal-coverage-index.json).
+
+## EM9305 NVM bootloader metadata checked — 2026-11-12
+
+The second small EM9305 NVM record ends in a 12-byte `INI\x02` table at
+package offsets `[992,1004)` (loaded `[0x300684,0x300690)`). It contains
+only a zero terminator and creates no RAM child image. Bounded ARC
+disassembly also shows the record-0 entry calling code in record 1. An
+independent review checked the exact bytes and coordinates; its first
+coverage review miscounted child-image bytes as payload bytes, and the
+corrected review uses payload scopes only.
+
+The current noncanonical coverage draft classifies those 12 payload bytes
+as container, leaving 4,179,107 unknown payload bytes across 75 rows and
+40 scopes. The discovery draft still has seven open items, including full
+EM9305 code/data and reference sweeps. A separate full linear disassembly
+census of the two small records found 72 printed direct control references:
+seven from record 0 to record 1, eleven in the reverse direction, and one
+external target. Raw GNU disassembly emitted `.word` for four record-1
+instructions, and one register jump needs target analysis. The census does
+not close the sweep or admit G1.
+Evidence and corrected review hashes are indexed in
+[`g2-20261112-p1-em9305-small-record-index.json`](../evidence/g2-20261112-p1-em9305-small-record-index.json).
+The disassembly census and its bounded review are indexed in
+[`g2-20261112-p1-em9305-small-record-census-index.json`](../evidence/g2-20261112-p1-em9305-small-record-census-index.json).
+A pinned reproduction script and independent rerun of both full record
+disassemblies are indexed in
+[`g2-20261112-p1-em9305-small-record-census-repro-index.json`](../evidence/g2-20261112-p1-em9305-small-record-census-repro-index.json).
+A further independent review places three of the four undecoded record-1
+words immediately after decoded delayed branches and the fourth at a target
+of two decoded branches. They remain executable candidates with unknown ARC
+instruction semantics, distinct from the `INI` metadata tail. External NVM
+selection and G1 remain open. Evidence:
+[`g2-20261112-p1-em9305-small-word-flow-index.json`](../evidence/g2-20261112-p1-em9305-small-word-flow-index.json).
+An earlier reviewed index incorrectly assigned three LOG2 mnemonics and left
+the fourth unnamed. Its audit applied an opcode-unmangling path disabled in
+the pinned Binutils build. Preserve its raw bytes and offsets, but its
+per-word mnemonic assignments are superseded. Historical evidence:
+[`g2-20261112-p1-em9305-arc-extension-words-index.json`](../evidence/g2-20261112-p1-em9305-arc-extension-words-index.json).
+A new independent review checked the locked words against exhaustive GNU ARC
+assembler operand matrices, the vendor APEX declarations, and the vendor
+`COMMON_hw_crc32` ELF. The four words are `crc32b r3,r3,r12` at `0x30041C`,
+`crc32 r3,r3,r2` at `0x30042E`, `crc32b r3,r3,r2` at `0x30043C`, and
+`bswp32 r1,r3` at `0x300440`. The first three bytes sequences match the
+vendor ELF; its 72-byte function differs from stock at only two byte
+offsets. Exact hardware effects, external NVM selection, whole-record
+coverage and G1 remain open. Correction evidence:
+[`g2-20261112-p1-em9305-apex-encoding-correction-index.json`](../evidence/g2-20261112-p1-em9305-apex-encoding-correction-index.json).
+An independent address-aligned comparison with the vendor DI04 ELF found
+14 function symbol ranges in its 620-byte `.text` section. Five function
+slices match the locked record byte for byte. The vendor section layout
+diverges at `0x30066C`: stock linear instructions continue through
+`0x300682`, while the vendor ELF uses `.initdat` starting there. Vendor
+boundaries for differing stock code are therefore only leads. The stock
+empty `INI` table begins at `0x300684`; external NVM selection and G1 remain
+open. Evidence:
+[`g2-20261112-p1-em9305-vendor-elf-boundary-index.json`](../evidence/g2-20261112-p1-em9305-vendor-elf-boundary-index.json).
+The five byte-identical function slices also pass a separate stock
+instruction check: 178 bytes are gap-free instructions with no data directives
+or padding in the pinned linear disassembly. Reviewed noncanonical coverage
+draft 016 classifies those bytes as code in both the EM9305 payload and
+record-1 image ledgers. It retains 40 complete ledger scopes and 127 rows;
+4,176,715 payload bytes and 5,671,365 image-view bytes remain `unknown`.
+This is bounded classification, with no canonical admission or G1 pass.
+Evidence:
+[`g2-20261112-p1-em9305-exact-code-coverage-index.json`](../evidence/g2-20261112-p1-em9305-exact-code-coverage-index.json).
+An independently rerun ARC object with the vendor CRC and byte-swap
+extension declarations now decodes the entire 644-byte record-1 pre-`INI`
+span into 249 contiguous, byte-matching instruction units. It closes the
+earlier four decoder gaps in this bounded linear listing. The temporary
+`.incbin` wrapper is analysis-only; linear decoding does not prove every byte
+is executable or reachable. Evidence:
+[`g2-20261112-p1-em9305-record1-extmap-index.json`](../evidence/g2-20261112-p1-em9305-record1-extmap-index.json).
+The current campaign independently rechecked the locked `FHDR` execution
+field at payload offset `1004+30`: it points to `0x302028`. The 10-byte
+record-2 entry sets SP to `0x80F978` and branches directly to `0x30ED80`,
+which lies in record 3 and begins with a decoded `enter_s`. Record 0 contains
+a bounded call path through `getMainFunction` and `jumpToFunction`; actual
+boot-ROM selection and device-state header choice remain unverified. This
+supersedes the earlier `not_qualified` entry-decode status for this static
+route only. Evidence:
+[`g2-20261112-p1-em9305-header-execution-route-index.json`](../evidence/g2-20261112-p1-em9305-header-execution-route-index.json).
+Reviewed noncanonical discovery revision 023 incorporates these EM9305
+findings while retaining seven unresolved items across the six payloads.
+It does not claim runtime selection of this route or exhaustive image
+discovery. Evidence:
+[`g2-20261112-p1-discovery-v23-index.json`](../evidence/g2-20261112-p1-discovery-v23-index.json).
+
+## EM9305 entry and startup table checked — 2026-11-12
+
+The locked 10-byte ARC NVM entry sets SP and branches to the application
+boot loop. Stock ARC disassembly then identifies the `INI` table at
+`0x335820..0x335BC8`: three positive copy rows match all three current
+RAM child byte slices, one negative row describes 19,840 generated zero
+bytes, and a zero sentinel ends at the application record's EOF. The first
+copy and zero row depend on a runtime input; physical execution was not
+observed. An independent review checked the coordinates, instruction path,
+copy routine, hashes and branch conditions.
+
+The EM9305 discovery item now names the remaining sweep of records 0 and 1
+and application bytes outside that table. The six-payload draft still has
+seven open items and no canonical G1 admission. Evidence and review hashes
+are indexed in
+[`g2-20261112-p1-em9305-startup-index.json`](../evidence/g2-20261112-p1-em9305-startup-index.json).
+
+## Apollo zero-fill startup selection reviewed — 2026-11-12
+
+The locked Apollo main and bootloader reset vectors enter image-local stack
+setup, then startup code that calls a guard returning 1 and selects the
+scatter-table runner. Each first table callback resolves by signed displacement
+to its stock zero-fill handler. The two records per image match the previously
+reviewed generated RAM zero spans. An independent review checked the reset
+chain, table bounds, callback targets and zero-span accounting.
+
+The current six-payload discovery draft now has seven explicit open items,
+down from nine. Both Apollo residual flash/reference sweeps remain open, and
+the draft is still noncanonical. This static path does not establish physical
+boot, G1 admission or complete pseudocode. The report, review, draft and
+hashes are indexed in
+[`g2-20261112-p1-apollo-zero-startup-index.json`](../evidence/g2-20261112-p1-apollo-zero-startup-index.json).
+
+## KWS command handoff checked in stock instructions — 2026-11-12
+
+The locked BINH-A XIP loader selects the exact 9,164-byte command span at
+type2-local offset `0xF804`. Stock C-SKY instructions pass its destination
+through the saved task at `0x2002E85C`; a later SRAM caller carries task
+word `+0x14` into the SNPU descriptor at `+0x40`. The indirect flash-read
+callback's successful execution and the engine's downstream behavior were
+not observed. An independent review checked the offsets and byte slices.
+
+The command span remains `unknown` in the P1 coverage draft because its full
+accelerator instruction extent and semantics are not established. This is
+bounded inventory evidence, not G1 admission or pseudocode completion. The
+report, corrected review and exact input hashes are indexed in
+[`g2-20261112-p1-kws-command-execution-index.json`](../evidence/g2-20261112-p1-kws-command-execution-index.json).
+
+## Six-payload discovery draft and codec weight classification — 2026-11-12
+
+A new-campaign discovery draft lists all 33 current image IDs across the six
+locked payloads and binds current wrapper, record, signature and replay
+evidence. That revision carried nine explicit discovery open items. Independent bounded
+reviews confirmed the EM9305 record/child coordinates, the touch wrapper's
+two CRC-32C checks, rejection of two Apollo-main `FWPK` byte-pattern hits
+under the known formats, and the four Apollo zero-init table records. The
+zero-fill spans are generated RAM state, not encoded firmware images.
+
+The codec coverage candidate now classifies the exact 120,800-byte trained
+KWS weight span as data. The 9,164-byte GXNPU command span remains `unknown`
+in this ledger: its 212 record boundaries and bytes are established; a separate
+stock-instruction review confirms its task handoff, while full accelerator
+instruction extent and control semantics remain unresolved.
+The candidate has 72 rows across 40 scopes and 4,179,119 unknown payload
+bytes, down by 120,800 from the prior draft. The discovery and coverage
+reviews are bounded; neither draft is canonically admitted, and G1–G6 remain
+`not_run`. Evidence and exact hashes are indexed in
+[`g2-20261112-p1-discovery-and-codec-ledger-index.json`](../evidence/g2-20261112-p1-discovery-and-codec-ledger-index.json).
+
+## GXNPU command structure checked for the P1 analysis plan — 2026-11-12
+
+The local gxDNN decoder walks the locked codec's 9,164-byte KWS command
+stream as 212 contiguous typed records, without a raw fallback, and
+re-encodes the exact stock bytes. An independent raw-header walk reproduces
+the boundaries and per-command hashes; 26 focused decoder/source tests pass.
+One record has an explicit link and 83 headers preserve bits with unresolved
+meaning. Geometry/control semantics, weight interpretation, execution effects
+and the full C-SKY decoder sweep remain open.
+
+A revised six-payload architecture-plan candidate now describes this local
+structural decoder and the bounded C-SKY disassembly/manual-recovery route.
+Its independent review accepts the plan only within that scope. Neither the
+decoder evidence nor the plan is canonical G1 admission. Receipts, the 212-row
+boundary ledger and review hashes are indexed in
+[`g2-20261112-p1-gxnpu-structural-decoder-index.json`](../evidence/g2-20261112-p1-gxnpu-structural-decoder-index.json).
+
+## Current-campaign image and coverage record drafts reviewed within bounded scope — 2026-11-12
+
+A 33-row image draft now points to the current-campaign byte materializations.
+It explicitly marks inherited architecture, mapping, container, entry and
+transform interpretations as unreviewed; historical decoded-transform
+receipts are provenance only. A separate 70-row coverage draft partitions
+the package, six payloads and 33 image scopes. Independent bounded reviews
+verified the draft image bytes and lineage, all 40 interval partitions,
+140 evidence file hashes and the 4,299,919 unknown *payload* bytes.
+
+Additional bounded reviews checked codec FWPK record CRCs and its 13 nested
+image byte lineages, plus touch/case wrappers and startup copies. The codec
+NPU command stream still needs accelerator instruction classification, and
+none of these checks proves exhaustive image discovery or all runtime load
+mappings. The schema-v2 inventory validator passes 40 local adversarial tests,
+but the active campaign lacks canonical reviewed inventory records and its
+trusted review registry. These drafts have no admission or G1 gate effect.
+Artifacts and exact review hashes are indexed in
+[`g2-20261112-p1-inventory-draft-review-index.json`](../evidence/g2-20261112-p1-inventory-draft-review-index.json).
+
+## All 33 historical image outputs materialized in current campaign — 2026-11-12
+
+The new campaign now has byte-exact local outputs for all 33 image IDs in the
+historical P1 inventory: 19 other identity slices, seven EM9305 identity
+slices, and seven freshly replayed decoded images. The 19 other identity
+slices were independently checked against locked payloads and recursive
+parent spans. The aggregate index verifies every output size and hash against
+the historical row and rejects missing or duplicate IDs.
+
+These checks establish bounded byte lineage, not discovery completeness,
+all runtime load mappings, code/data classification, or canonical inventory
+admission. G1–G6 remain `not_run`. The output paths and review pins are in
+[`g2-20261112-p1-all-image-materializations-index.json`](../evidence/g2-20261112-p1-all-image-materializations-index.json).
+
+## EM9305 stock record package and image bytes checked — 2026-11-12
+
+The active campaign parsed the locked 211,948-byte EM9305 payload directly.
+Its four contiguous file records, 124-byte metadata block, 29 erase-sector
+IDs, sparse target addresses, and package EOF closure agree with the current
+record parser and a byte-exact package rebuild. The 40-byte FHDR fields and
+both CRCs reproduce from the stock bytes. Its firmware CRC covers a 10-byte
+entry, six erased bytes within record 2, a 968-byte inter-record erased gap,
+and the 210,888-byte application record.
+
+Four record images and three nested initialized-RAM byte slices were
+materialized under the new campaign. Their source slices and hashes passed a
+corrected independent bounded review. The RAM destination mappings remain
+historical candidates, and the ARC entry instruction semantics and discovery
+completeness are not established by this review. These are image candidates,
+not canonically admitted inventory records. G1–G6 remain `not_run`. Evidence,
+review and materialization hashes are indexed in
+[`g2-20261112-p1-em9305-record-index.json`](../evidence/g2-20261112-p1-em9305-record-index.json).
+
+## All seven historical decoded image outputs replay in the new campaign — 2026-11-12
+
+Fresh stock-handler executions against the locked case, Apollo bootloader,
+and Apollo main payloads reproduce all seven historical decoded-image hashes.
+The case replay yields 420 initialized RAM bytes and a 10,980-byte zero-fill
+region with the same source-read and destination-write observations. The
+bootloader replay reproduces its 24-, 1,371-, and 4,096-byte images under both
+zero and `0xA5` RAM prestates. Apollo main reproduces its 24-, 17,752-, and
+769,646-byte outputs, with observed complete source-load sets and destination
+writes for the two large RAM transforms. Four corrected independent reviews
+accept these as bounded replay evidence.
+
+The executions inherit some historical descriptor and parameter selection and
+use Unicorn rather than device execution. Their outputs are still candidates,
+not newly admitted canonical image records. G1–G6 remain `not_run`. The
+current-campaign receipts, exact source/output hashes, review decisions and
+limits are indexed in
+[`g2-20261112-p1-decoded-image-replay-index.json`](../evidence/g2-20261112-p1-decoded-image-replay-index.json).
+
+## Current P1 bounded reviews narrow the G1 work — 2026-11-12
+
+The historical G1 registry still hashes all 125 reviews, but 23 have 40
+changed input references; the other 102 have current matching input files.
+The current ARM, ARC and C-SKY objdump binaries match their historical hashes
+and versions. Static comparison finds the selected outer EVENOTA validator
+functions unchanged, while the parser file as a whole changed. Installed
+Ghidra 12.1.4 has a C-SKY processor module but its CK804EF semantics remain
+unqualified. A corrected architecture-plan candidate records that distinction.
+
+Independent bounded reviews checked four root images and 18 historical
+coverage intervals against the locked bytes and current references. The
+primary image spans, mappings and vector facts remain supported; the case
+alternate-bank alias is generic and target-specific placement in that bank
+remains unproven. The 18 interval classifications remain supported, with no
+claim about the unknown payload contents. The architecture-plan correction
+passed its narrow review, but the full plan and new-campaign review registry
+still need canonical validation. G1–G6 remain `not_run`. Evidence and exact
+review hashes:
+[`g2-20261112-p1-bounded-review-integration.json`](../evidence/g2-20261112-p1-bounded-review-integration.json).
+
+## Historical P1 image and coverage records are byte-checked for reuse — 2026-11-12
+
+The active campaign independently checked all 33 historical image records
+against the locked payload bytes and their parent-image slices. All 26 identity
+transforms match exactly. Seven decoded outputs and their saved receipt
+source/output pins match; the decode executions have not been replayed. Four
+image evidence references to `g2/docs/reference/memory-map.md` are stale.
+The 70 historical coverage intervals partition the bundle, six payloads, and
+33 images without gaps or overlaps, and their 140 evidence file hashes still
+match. The ledger classifies 4,299,919 of 4,300,283 payload bytes as unknown.
+These are reuse candidates, with no canonical admission or G1 gate effect.
+The current full P1 validator stops on the old campaign because its
+outer-container receipt pins an earlier `open_cfw.py` hash; it has not passed
+the later checks against that historical record. The bounded new-campaign
+revalidation attempt is saved under
+`g2/build/pseudocode-first/20261112T092142Z/receipts/historical-g1-revalidation.json`.
+The new campaign still needs reviewed mapping, discovery, analysis-plan, and
+classification records. Evidence:
+[`g2-20261112-historical-image-reuse-audit.json`](../evidence/g2-20261112-historical-image-reuse-audit.json),
+[`g2-20261112-historical-coverage-reuse-audit.json`](../evidence/g2-20261112-historical-coverage-reuse-audit.json).
+
+All six old discovery records still enumerate the same 33 image IDs, and
+their evidence file hashes match. Six old architecture plans also match the
+locked target and payload set, but 18 of their source-document evidence
+references are stale across `memory-map.md`, `firmware-formats.md`, and
+`docs/tooling.md`. Their content and reviews need a fresh campaign decision.
+Evidence:
+[`g2-20261112-historical-plan-reuse-audit.json`](../evidence/g2-20261112-historical-plan-reuse-audit.json).
+
+The old G1 review registry still hashes all 125 review records. Across 979
+input references, 102 reviews have no stale inputs.
+Twenty-three reviews have 40 stale inputs: one architecture-plan review,
+18 coverage reviews, and four root-image reviews. The changed inputs are
+`docs/tooling.md`, `firmware-formats.md`, `memory-map.md`, and
+`g2/tools/open_cfw.py`. Historical reviewer identities and pass decisions do
+not establish new-campaign independent review. Evidence:
+[`g2-20261112-historical-g1-review-reuse-audit.json`](../evidence/g2-20261112-historical-g1-review-reuse-audit.json).
+
+## New G2 campaign authenticates its target, P1 remains open — 2026-11-12
+
+Campaign `20261112T092142Z` now has a fresh identity and outer-container
+preflight: the locked 4,301,227-byte bundle, six payloads, six TOC entries,
+headers, CRCs and exact EOF closure revalidate with the current parser. The
+current package verifier reproduces the locked hash. A later tracked change to
+the provenance document's licensing footer explains why that document no
+longer matches its historical target-lock pin; the firmware hashes within it
+are unchanged. The target lock itself was not changed. This preflight does not
+pass G1: nested-image accounting, byte classifications and independent reviews
+still need new-campaign validation. Evidence:
+[`g2-20261112-campaign-identity-preflight.json`](../evidence/g2-20261112-campaign-identity-preflight.json).
+
+## Touch reset P2 evidence revalidated, corpus gate remains open — 2026-11-12
+
+The interrupted campaign's independent review of the touch reset body
+`0x4674..0x46dc` remains hash-consistent: all 20 cited input files match their
+recorded hashes, and its 47 contiguous instruction records reproduce the 104
+bytes at the corresponding offsets in the locked touch payload. This is a
+bounded reusable pseudocode candidate; it has not been promoted into a new
+canonical corpus. The G1 ledger still classifies 4,299,919 of 4,300,283
+payload bytes as unknown and no payload bytes as reviewed code. G2–G6 remain
+unrun. Evidence:
+[`touch-reset-p2-reuse-audit-20261112.json`](../evidence/touch-reset-p2-reuse-audit-20261112.json).
+
+The case `0x080002d6` P2 candidate also still matches its 58 stock bytes and
+all 39 candidate artifact pins. Three source-document input hashes have since
+changed, and its historical review is explicitly scoped and unadmitted. It
+needs a new scoped review before reuse in a new corpus. Evidence:
+[`case-02d6-p2-reuse-audit-20261112.json`](../evidence/case-02d6-p2-reuse-audit-20261112.json).
+
+## EM9305 scan, auxiliary field and cycle callbacks have single owners — 2026-11-12
+
+The native `0x31ec40` scan callback and `0x323bac` auxiliary-field encoder now
+use their standalone C bodies; duplicate controller bodies were removed. The
+retained scan callback preserves the stock channel and mask load order, and
+the encoder calls the stock current-channel getter. Native `0x32b618` is a
+branch to `0x32b9a4`, but the stock setup registers both addresses. The C
+registration now uses the tail stub and one retained callback body as distinct
+functions. An unlinked alternate `0x31e4a0` state-machine body was also
+removed, leaving its existing linked implementation.
+
+The full G2 build compiled 4,874 enabled units in all seven payload groups
+without failures or duplicate strong symbols. The source bundle link used no
+external binary archive and emitted a 4,639,776-byte candidate, SHA-256
+`ae32d5125ede926d22f5a221558340d18a236c91220c307bc9064530d8a5e086`.
+It differs from the 4,301,227-byte locked OTA. The focused EM9305 build
+compiled 768 of 768 units and linked a 246,040-byte candidate package, 520
+bytes smaller than the prior focused candidate and different from the
+211,948-byte official image. Four three-variant exact-body probes compiled but
+selected no new stock-exact regions; some lacked native symbol anchors or
+isolated bindings. The manifest still marks five units `build:false` and 121
+units `link:false`, including alternate candidates and probes. Whole-firmware
+source completeness and hardware behavior remain unproven. Evidence:
+[`em9305-scan-aux-cycle-single-owners-20261112.json`](../evidence/em9305-scan-aux-cycle-single-owners-20261112.json).
+
+## EM9305 event, allocator and PHY guard have single owners — 2026-11-12
+
+The duplicate `0x30e858` LL event, `0x316c58` connection allocator, and
+`0x332f80` PHY capability guard now have one source body each. The retained
+allocator follows the stock 912-byte halfword multiply and final base reload.
+The retained event body uses explicit volatile stores for the stock event
+layout and store order.
+
+The full G2 build compiled 4,876 enabled units across all seven payload groups
+without failures or duplicate strong symbols. Its source-only OTA candidate is
+4,640,700 bytes, SHA-256
+`c3de8d22e77ea9cca8ab78e192e11ab542ad0f9cb6e34db45b7b8726254c3eef`,
+which differs from the 4,301,227-byte locked artifact. The EM9305 package is
+246,964 bytes, 960 bytes smaller than the prior candidate. The event is still not
+stock-exact: three compiler variants yielded a 34-byte body against the
+32-byte stock span. A controller qualification pass found 11 exact regions,
+all already in the main source plan. The official EM9305 image remains
+211,948 bytes; complete source ownership and hardware behavior remain
+unproven. Evidence:
+[`em9305-phy-event-allocator-single-owners-20261112.json`](../evidence/em9305-phy-event-allocator-single-owners-20261112.json).
+
+## EM9305 queue and scan paths gain single source owners — 2026-11-12
+
+Seven further EM9305 stock addresses now have one C source owner. The
+procedure-pending check at `0x307434` uses the source-owned stock table; the
+`0x307cb8` state getter, three queue helpers, and the `0x322884` event release
+path no longer have duplicate bodies. The retained `0x325740` scan cleanup
+advances its second queue pointer by 48 on each iteration, matching the stock
+disassembly; the removed copy repeatedly used the same queue.
+
+The full G2 source build compiled 4,878 enabled units across seven payload
+groups with no failures or duplicate strong symbols. The source bundle target
+linked all seven groups and emitted a 4,641,660-byte OTA candidate, SHA-256
+`97a369da6e4ee510580fd3cf863d97cf5ed66cf1edcf91ff72c1175b888ad216`.
+It differs from the 4,301,227-byte locked OTA. The EM9305 component package
+is 247,924 bytes, 340 bytes smaller than the prior source candidate, and
+differs from the 211,948-byte official image. Full source ownership, hardware
+behavior, and G2 gates G2–G6 remain unproven. Evidence:
+[`em9305-queue-scan-single-owners-20261112.json`](../evidence/em9305-queue-scan-single-owners-20261112.json).
+
+## Four EM9305 native addresses have single source owners — 2026-11-12
+
+Four EM9305 native addresses had duplicate C implementations. The unused
+`0x317498` buffer-clear function and `0x3245ec` callback wrapper were removed;
+their referenced implementations remain. All callers of the `0x3027f4`
+64-bit logical shift now use one `(low, high, count)` function declaration and
+source body, matching the stock register argument order. The duplicate
+`0x310230` signed power clamp was also removed, and all its callers use the
+retained one-argument body.
+
+The full G2 build after the first removal compiled 4,880 enabled units and
+composed all seven payload groups without failures or duplicate strong symbols.
+The final focused EM9305 build compiled 774 units without failures or duplicate
+strong symbols, and its strict source link produced a 248,264-byte candidate
+package with no external binary archive. That package is 172 bytes smaller
+than the previous source candidate but is not identical to the 211,948-byte
+official EM9305 image. Source completeness, hardware boot, and G2 gates G2–G6
+remain unproven. Evidence:
+[`em9305-single-source-owners-20261112.json`](../evidence/em9305-single-source-owners-20261112.json).
+
+## Codec optimization and EM9305 ARC calls qualify — 2026-11-12
+
+An optimization sweep over the 88 UART stage-2 C units found six additional
+stock-exact codec functions: five compiled with `-Os` and one with `-Og`.
+They add 200 source-built bytes. `-Oz` is unsupported by the pinned C-SKY GCC
+6.3 compiler and did not produce candidate objects. The hybrid now sources
+1,216 codec bytes and retains 201,756 codec bytes as binary pull-through.
+Evidence: [`codec-uart-stage2-optimization-exact-c-20261112.json`](../evidence/codec-uart-stage2-optimization-exact-c-20261112.json).
+
+ARC qualification now compiles EM9305 C with individual function sections and
+links relocation-bearing functions only to inventoried stock targets. All 775
+candidate units compiled; 13 new callers and function pointers matched their
+complete stock bodies, adding 64 source-built bytes. The hybrid now sources
+182 EM9305 bytes and retains 211,586 bytes as binary pull-through. The locked
+OTA hash still depends on that pull-through. The G2 workflow's whole-firmware
+pseudocode and source-completeness gates remain unrun. Evidence:
+[`em9305-arc-relocation-exact-c-20261112.json`](../evidence/em9305-arc-relocation-exact-c-20261112.json).
+
+## Codec UART stage 2 resolves exact C-SKY calls — 2026-11-12
+
+The qualifier now links isolated C-SKY functions with call relocations only
+when each source symbol's four-digit address suffix is also listed as a callee
+in the authenticated stock caller corpus. Six existing C functions from five
+UART stage-2 units match their complete stock bodies after that link, adding
+134 source-built bytes. The hybrid now sources 1,016 codec bytes and retains
+201,956 codec bytes as binary pull-through. Its OTA hash matches the locked
+artifact through that pull-through.
+
+The selected callers still bind to stock callee addresses. Their dependency
+closure, the complete source-only codec, and hardware boot are not verified.
+Full passes over the 27 stage-1 and 88 stage-2 UART C units compiled every
+unit and found no additional exact regions under the current anchors and
+compiler settings.
+Evidence: [`codec-uart-stage2-relocation-exact-c-20261112.json`](../evidence/codec-uart-stage2-relocation-exact-c-20261112.json).
+
+## Codec UART stage 2 gains exact C-SKY regions — 2026-11-12
+
+The UART stage-2 C units use four-digit virtual-address suffixes, which the
+qualifier previously missed. The stage-specific selector now expands those
+suffixes under the `0x10000000` UART base and still requires an authenticated
+corpus body hash, exact function size, no relocations, and full compiled-byte
+equality at the stored offset. Seven functions from five existing C units
+qualified, adding 174 source-built bytes. The hybrid now sources 882 codec
+bytes and retains 202,090 codec bytes as binary pull-through.
+
+The rebuilt hybrid has the locked OTA hash through that pull-through. The
+source-only OTA, remaining stage-2 functions, and hardware behavior remain
+unverified or nonidentical. Evidence:
+[`codec-uart-stage2-short-suffix-exact-c-20261112.json`](../evidence/codec-uart-stage2-short-suffix-exact-c-20261112.json).
+
+## Codec KWS weights now come from compiled C — 2026-11-12
+
+The authenticated 120,800-byte non-executable KWS weight asset is represented
+as a C `uint32_t` data unit under `g2/src/codec/npu/`. The G2 source manifest
+compiles it with C-SKY GCC but keeps its section separate from the codec
+executable image. `make source-bundle` extracts the named immutable section
+from that verified object and checks its full SHA-256 against the existing
+stock-derived provenance. The original binary remains a verification
+reference, not an input to this source-bundle path.
+
+The full G2 build compiled 4,881 enabled units with no failures or duplicate
+strong symbols, and all seven strict source groups linked. The C-weight BINH A
+and complete source-candidate OTA are byte-identical to a reference build
+using the authenticated binary weight asset. The source candidate remains
+4,642,172 bytes, SHA-256
+`6ab074068ce35fc4bcd83c1aae89fc4f25140edf8c8f8203d83361c1c05ec9dc`,
+which differs from the locked 4,301,227-byte OTA. Model training provenance,
+recognition behavior, whole-firmware source completeness and hardware boot
+remain unproven. Evidence:
+[`codec-kws-weights-compiled-c-20261112.json`](../evidence/codec-kws-weights-compiled-c-20261112.json).
+
+## Codec A stage 1 gains exact C-SKY regions — 2026-11-11
+
+The BINH A stage-1 inventory offsets were independently checked against the
+locked FWPK bytes. Three relocation-free functions from two existing C units
+match their complete stock spans: `__reg_set_val`,
+`__module_get_div.isra.1`, and the bus-wait helper. They add 62 source-built
+bytes. The rebuilt hybrid now sources 708 codec bytes and retains 202,264
+codec bytes as binary pull-through. Its locked OTA hash still depends on that
+pull-through.
+
+Most stage-1 code, relocation-bearing functions, model weights, full source
+ownership, and hardware boot remain unproven. Evidence:
+[`codec-a-stage1-exact-csky-c-20261111.json`](../evidence/codec-a-stage1-exact-csky-c-20261111.json).
+
+## Codec UART stage 1 gains exact C-SKY regions — 2026-11-11
+
+The UART boot-stage corpora were mapped to their separate stored spans in the
+authenticated codec FWPK. A full pass compiled 115 existing UART C units.
+Seven stage-1 functions from three units then qualified by exact inventory
+name, full stock-body size, relocation-free compiler output and complete byte
+equality at their anchored offsets. They add 186 source-built bytes. The
+hybrid now sources 646 codec bytes and retains 202,326 codec bytes as binary
+pull-through; the locked OTA hash still depends on that pull-through.
+
+No UART stage-2 function qualified in this pass. C-SKY instruction/data
+classification, relocation-bearing functions, model weights, full source
+ownership and hardware boot remain unproven. Evidence:
+[`codec-uart-stage1-first-exact-csky-c-20261111.json`](../evidence/codec-uart-stage1-first-exact-csky-c-20261111.json).
+
+## Codec A gains exact C-SKY XIP regions — 2026-11-11
+
+The image-A XIP and SRAM Ghidra function inventories were mapped to the
+authenticated codec FWPK and checked against their full stored-body hashes.
+Qualification of the current C-SKY manifest units selected 33 new
+relocation-free XIP functions from 17 existing C units, totaling 356 bytes.
+The eight image-B functions selected earlier were rediscovered but not
+duplicated. The rebuilt hybrid now sources 460 codec bytes and retains
+202,512 codec bytes as binary pull-through; the locked OTA hash still depends
+on that pull-through.
+
+No image-A SRAM function qualified in this pass. C-SKY instruction/data
+classification, relocation-bearing functions, codec stage 1, model weights,
+full source ownership and hardware boot remain unresolved. Evidence:
+[`codec-a-first-exact-csky-c-20261111.json`](../evidence/codec-a-first-exact-csky-c-20261111.json).
+
+## EM9305 gains exact ARC source regions — 2026-11-11
+
+The qualifier now reads little-endian ARC ELF32 function symbols and maps
+inventoried record-3 entries to stored offsets in the locked EM9305 image.
+Fourteen relocation-free functions from seven existing C units match their
+complete stock spans, totaling 118 bytes. The six-payload hybrid now sources
+bytes from every payload, including 118 EM9305 bytes; the EM9305 image still
+has 211,650 binary pull-through bytes. The locked OTA hash is retained through
+that pull-through, while source completeness remains unproven.
+
+ARC sections do not have the ARM mapping symbols used for instruction/data
+classification, so strict coverage conservatively calls the 118 bytes
+compiled but unclassified. Relocation-bearing ARC functions remain outside
+this exact-byte qualifier. Evidence:
+[`em9305-first-exact-arc-c-20261111.json`](../evidence/em9305-first-exact-arc-c-20261111.json).
+
+## Codec B gains exact C-SKY source regions — 2026-11-11
+
+The qualifier now reads little-endian C-SKY ELF32 function symbols and maps
+image-B SRAM entries to their stored offsets in the locked codec FWPK. Eight
+relocation-free functions from seven existing C units match the complete
+stock function spans, totaling 104 bytes. The hybrid builder now accepts the
+fingerprinted open C-SKY GCC and sources those bytes. Its codec pull-through
+falls to 202,868 bytes while the full OTA retains the locked hash.
+
+The raw Ghidra corpus supplies candidate boundaries; exact size and complete
+byte equality are the selection gates. C-SKY sections lack the ARM mapping
+symbols used for instruction/data classification, so strict coverage counts
+the 104 bytes as compiled but unclassified. `sources-check` passed. The
+source-only OTA is still nonidentical, and relocation-bearing C-SKY functions
+remain outside this qualifier. Evidence:
+[`codec-b-first-exact-csky-c-20261111.json`](../evidence/codec-b-first-exact-csky-c-20261111.json).
+
+## Four ARM payloads gain exact C regions — 2026-11-11
+
+The source qualifier now accepts a payload filter, allowing a full scan of
+Apollo main, case and bootloader C units under their recorded profiles. It
+selected 93 additional nonoverlapping stock regions totaling 612 bytes:
+86 Apollo-main functions (544 bytes), one case boot context switch (34 bytes)
+and six bootloader functions (34 bytes). Only qualifier-generated selections
+entered `tools/build/source-plan.json`; production-profile variants remain
+separate when an older qualified unit used different compiler flags.
+
+The current hybrid has 654 source-built Apollo-main bytes, 58 case bytes,
+34 bootloader bytes and 7,090 touch bytes. Its locked OTA hash is preserved
+through pull-through. The unchanged source manifest has a previous passing
+4,880-unit full C compile and seven strict links; `sources-check` and the new
+hybrid build passed. The source-only OTA is still nonidentical, and the codec
+and EM9305 payloads have no qualified C executable bytes in this hybrid
+accounting. Evidence:
+[`g2-arm-four-payload-exact-c-20261111.json`](../evidence/g2-arm-four-payload-exact-c-20261111.json).
+
+## Touch clock, power-management and SysTick exact C — 2026-11-11
+
+The production GCC 14.2 profile qualified eleven additional named touch
+functions from the existing Infineon C units: four clock functions, four
+power-management functions and three SysTick functions. Their 1,168-byte
+combined stock ranges have no overlap with prior selections, and each passed
+anchored full linked byte equality. Only the qualifier's generated regions
+were added to `tools/build/source-plan.json`.
+
+The hybrid touch payload now sources 7,090 bytes, including 6,398 C executable
+bytes and 692 compiled data bytes. The full OTA hybrid retains the locked
+4,301,227-byte hash through binary pull-through. `sources-check` passed, the
+focused touch build compiled 105/105 units with no duplicate strong symbols,
+and its strict link produced a 33,384-byte image. The source manifest is
+unchanged from the previous full 4,880-unit passing compile. Full source
+completeness and standalone OTA byte equality remain unproven. Evidence:
+[`touch-clock-pm-systick-exact-c-20261111.json`](../evidence/touch-clock-pm-systick-exact-c-20261111.json).
+
+## Apollo exact cached-TTE helper — 2026-11-11
+
+The locked six-byte helper at `0x58EABC..0x58EAC2` loads a float from model
+state offset `0x84` and returns it. A typed C state view and accessor now
+compile to those exact six bytes under the production Apollo profile. The
+source qualifier selected this bounded region, and the hybrid build now
+sources 110 Apollo bytes, up from 104. The hybrid OTA retains the locked hash
+because all other Apollo bytes are pulled through from the authenticated
+artifact; this is not a complete source build.
+
+`sources-check` passed. The full source build compiled 4,880/4,880 enabled C
+units with zero failures or duplicate strong symbols, and all seven strict
+source links passed without an external executable archive. The standalone
+4,642,172-byte source OTA candidate, SHA-256
+`6ab074068ce35fc4bcd83c1aae89fc4f25140edf8c8f8203d83361c1c05ec9dc`,
+differs from the locked 4,301,227-byte OTA. The broader fuel-gauge model and
+whole-firmware source completeness remain unproven. Evidence:
+[`apollo-fuel-gauge-tte-exact-c-helper-20261111.json`](../evidence/apollo-fuel-gauge-tte-exact-c-helper-20261111.json).
+
+## Apollo fuel-gauge time getters — 2026-11-11
+
+The locked TTE getter at `0x55F994` returns a cached model float. The source
+candidate now caches its approximate TTE value when processing a sample and
+returns that field directly. The locked TTF wrapper at `0x55F9A0` permits
+charge states CC, CC_VBUS_LIMITED and CV only when the stored termination
+current is not NaN; the source candidate now applies that gate before its
+approximate estimator. Twelve getter assertions and the previous nine
+current-selection assertions passed with warnings treated as errors.
+
+`sources-check` passed. The full build compiled 4,879/4,879 enabled C units
+with no failures or duplicate strong symbols, and all seven strict source
+links passed without an external binary archive. Apollo main is 3,818,800
+bytes. The 4,642,172-byte source OTA candidate, SHA-256
+`c57946b80438bcadc87db96a473d6c4d15404433e776368abb2af9530c5e364d`,
+still differs from the locked artifact. The proprietary battery estimator,
+including its 424-byte TTF helper, remains unrecovered; numeric time estimates
+and hardware behavior are unverified. Evidence:
+[`apollo-fuel-gauge-time-getters-20261111.json`](../evidence/apollo-fuel-gauge-time-getters-20261111.json).
+
+## Apollo fuel-gauge process current selection — 2026-11-11
+
+The locked `nrf_fuel_gauge_process` wrapper at `0x55F848..0x55F974` selects
+its charging path from the current's sign bit or VBUS state. In CC charge
+state it uses a non-NaN stored charge limit directly; otherwise it applies
+the charge factor. The discharging path applies the discharge factor. The
+existing source-only C provider now follows those observed branches instead
+of choosing a factor from the current sign alone. A host harness passed nine
+branch assertions with warnings treated as errors.
+
+`sources-check` passed. The full build compiled 4,879/4,879 enabled C units
+with no failures or duplicate strong symbols, and all seven strict source
+links passed without an external binary archive. The resulting Apollo-main
+image is 3,818,768 bytes. The 4,642,140-byte source OTA candidate, SHA-256
+`397db410b45e5479c857c15c3cb99463c5b06960c96032407368303c58f6983d`,
+still differs from the locked OTA. The larger Nordic estimator and its
+calibration remain unrecovered; the C process model is not byte-identical or
+hardware-qualified. Evidence:
+[`apollo-fuel-gauge-process-current-contract-20261111.json`](../evidence/apollo-fuel-gauge-process-current-contract-20261111.json).
+
+## Apollo pad-configuration source cells — 2026-11-11
+
+The radio power and NOR clock selectors now index their source-owned pad
+configuration words directly instead of translating stock RAM addresses in
+C. A comparison against the preceding sources preserved all 48 radio
+pin-to-cell mappings and 30 NOR clock mappings. The 87 initialized words match
+the captured stock RAM initialization span exactly. The radio selector's
+`setting` parameter now agrees with its 32-bit call-site declaration.
+
+`sources-check` passed. The full build compiled 4,879/4,879 enabled C units
+without failures or duplicate strong symbols; all seven strict source links
+passed without an external binary archive. The 4,642,076-byte source OTA
+candidate has SHA-256
+`fd52e4a5a711db0144cef23707b78cf1ca2e2eba10c7496a65fa91f2c6d82640`.
+It differs from the locked OTA, and the six zero-initialized radio pad cells
+still lack a recovered runtime writer. This change does not establish whole
+firmware source completeness or hardware behavior. Evidence:
+[`apollo-pad-config-source-20261111.json`](../evidence/apollo-pad-config-source-20261111.json).
+
+## Touch zero-table RAM and clock symbols — 2026-11-11
+
+The locked flash clock backup/restore code passes `0x20000F04` to SROM.
+Source C now owns the bounded 24-byte backup buffer there. The reset-copied
+DeepSleep descriptor now relocates to an 8-byte parameter object at
+`0x20000CCC`, and the three EEPROM write/erase paths share a source-owned
+512-byte scratch object at `0x20000CD4`. The linked descriptor parameter
+pointer equals the locked reset-copy value. Application delay code also uses
+the existing source-owned clock globals instead of fixed RAM literals. The
+focused 105-unit touch compile and strict link passed; the touch image is
+33,384 bytes. Its object relocations and all seven relevant RAM placements
+are recorded in
+[`touch-zero-table-ram-source-20261111.json`](../evidence/touch-zero-table-ram-source-20261111.json).
+The full G2 gate compiled 4,879/4,879 enabled C units without failures or
+duplicate strong symbols and linked all seven payloads without an external
+binary archive. Its 4,642,076-byte source candidate OTA, SHA-256
+`5c44e67944365899484b4f79959f24895f49c59b03360413d2f63bec5cdb4380`,
+differs from the locked artifact. Physical SROM effects, whole-firmware source
+completeness, byte equality and hardware behavior remain unverified.
+
+## Touch widget and EEPROM provider RAM — 2026-11-11
+
+The locked EEPROM initializer passes a 48-byte provider table at
+`0x20000ED4`. That table is now a source-owned BSS object with an exact linker
+placement assertion. The widget configuration table also held 12 literal RAM
+pointers for runtime contexts, sensor contexts, position history, filter
+history and debounce state. Its fields now relocate to the corresponding C
+objects, including one bounded 24-byte zeroed processing block at
+`0x200009E4`. All 12 linked pointer values match the locked table. The focused
+105-unit touch compile and strict link passed, and the 33,288-byte touch image
+is byte-for-byte unchanged from the preceding candidate. This closes the
+layout references. The full G2 gate compiled 4,879/4,879 enabled C units
+without failures or duplicate strong symbols and linked all seven payloads
+without an external binary archive. Its 4,641,980-byte source candidate OTA,
+SHA-256 `2b6faec5bd61caaa1bf16437021e2672a400cf94daeadedf17258dd610cdf78b`,
+still differs from the locked artifact. The scratch block's internal behavior,
+whole-firmware source completeness, and hardware behavior remain unverified.
+Evidence:
+[`touch-widget-and-provider-ram-source-20261111.json`](../evidence/touch-widget-and-provider-ram-source-20261111.json).
+
+## Touch application RAM source ownership — 2026-11-11
+
+The stock zero table covers `0x200008A8..0x20000F58`, but the touch
+application still reached its EEPROM, I²C, gesture, report, and saved-record
+state through fixed RAM literals. Added 15 source-owned objects for those
+cells and exact linker-placement assertions. The existing source-owned
+CapSense root context at `0x200004EC` now has a shared C type and symbolic
+references from the application, report, I²C callback and interrupt paths.
+All 16 symbols have their expected addresses and sizes in the focused ELF;
+the calibration object has relocations to the named state rather than fixed
+addresses. The focused 105-unit touch compile and strict link passed. Its
+touch image is 33,288 bytes, compared with 33,148 before this change. The
+hybrid build still has 5,922 source-built and 28,510 binary pull-through
+touch bytes. The full G2 gate compiled 4,879/4,879 enabled C units without
+failures or duplicate strong symbols and linked all seven payloads without
+an external binary archive. Its 4,641,980-byte source candidate OTA, SHA-256
+`2b6faec5bd61caaa1bf16437021e2672a400cf94daeadedf17258dd610cdf78b`,
+differs from the locked artifact. Whole-image source completeness and hardware
+behavior remain unverified. Evidence:
+[`touch-application-ram-source-20261111.json`](../evidence/touch-application-ram-source-20261111.json).
+
+## Touch active-shield source paths — 2026-11-11
+
+The locked common configuration has two shield pins and mode `1`, which the
+pinned CapSense headers define as active shield. The C configuration had
+disabled shield compilation even though the reset-copy source owns the two
+shield pin records. Enabled the active-shield vendor paths. The focused
+104-unit touch compile and strict link passed, retaining
+`Cy_CapSense_SetShieldPinsInDesiredState`; the linked touch image grew from
+32,904 to 33,148 bytes. The source qualifier found no new shield-specific
+byte-identical function, so the source plan is unchanged. The hybrid build
+still has 5,922 source-built and 28,510 binary pull-through touch bytes.
+The full G2 gate compiled 4,878/4,878 enabled C units without failures or
+duplicate strong symbols and linked all seven payloads without an external
+binary archive. Its 4,641,840-byte source candidate OTA, SHA-256
+`e1e8f3c9b94bfabe5dd1e0f5741e9f5ddd92854783e960264a1297644a5bd98b`,
+differs from the locked artifact. Source completeness and hardware behavior
+remain unverified. Evidence:
+[`touch-active-shield-source-20261111.json`](../evidence/touch-active-shield-source-20261111.json).
+
+## Touch automatic CapDAC source paths — 2026-11-11
+
+The locked widget CDAC settings are `0x1AA`, `0x1A1` and `0x115`. The first
+two request automatic reference, fine, compensation and/or divider calibration,
+but the generated-config stand-in left the vendor C feature switches undefined,
+which removed those branches at preprocessing. Enabled the corresponding CSD
+and aggregate switches. The focused 104-unit touch compile and strict link
+passed, and the source-linked touch image grew from 30,576 to 32,904 bytes.
+The previously absent reference, fine, compensation, divider and verification
+functions are now retained from the pinned Infineon C source. Eight stock
+calibration functions have semantic source owners; their byte identity is not
+claimed. The production qualifier separately selected three complete stock
+functions, adding 300 exact source-built bytes. The hybrid touch breakdown is
+5,922 source-built bytes and 28,510 binary pull-through bytes. The full G2
+gate compiled 4,878/4,878 enabled C units with no failures or duplicate
+strong symbols and linked all seven source payloads without an external
+binary archive. Its 4,641,596-byte source candidate OTA, SHA-256
+`07d47cec2e89b63a2bf0133fe3a97ca0244832aab512d5332641aff1ba9946e7`,
+differs from the locked artifact. Source completeness and hardware behavior
+remain unverified. Evidence:
+[`touch-cdac-auto-source-20261111.json`](../evidence/touch-cdac-auto-source-20261111.json).
+
+## Locked touch cardinalities and exact widget providers — 2026-11-11
+
+The CapSense generated-config stand-in used five widgets, eight sensors,
+eight pins and eight active slots. The authenticated common/widget records
+instead specify three widgets, nine sensors, five pins, and five active plus
+four low-power slots. Updated the compile-time cardinalities, including two
+shield pins and a four-sensor maximum per widget. The corrected vendor C
+matches the locked 50-byte `Cy_CapSense_IsWidgetActive` and 38-byte
+`Cy_CapSense_IsWidgetEnabled` functions exactly. The report and main loop now
+call the vendor widget-activity provider, and the duplicate local function
+is removed. Both exact bodies are in the source plan. The focused 104-unit
+touch compile and strict link passed; the hybrid build accepted all existing
+and new selections, yielding 5,622 source-built touch bytes and 28,810 bytes
+of binary pull-through. The full G2 gate compiled 4,878/4,878 enabled C units
+without failures or duplicate strong symbols and linked all seven payloads
+without an external binary archive. Its 4,639,268-byte source candidate OTA,
+SHA-256 `5f7c7acf6099ece67cab0f8b9b9013abcb72cd9dd28ce003dce619552aca6603`,
+differs from the locked artifact. Other feature flags, whole-image source
+completeness, and hardware behavior remain unverified. Evidence:
+[`touch-capsense-cardinalities-and-widget-provider-20261111.json`](../evidence/touch-capsense-cardinalities-and-widget-provider-20261111.json).
+
+## Source-owned touch bootstrap log strings — 2026-11-11
+
+Nine strings passed to the Touch bootstrap/save logger were still represented
+by fixed addresses in the locked flash image. The C candidate now defines
+their exact text and uses source symbol relocations at each call site. All
+nine linked NUL-terminated strings match their locked bytes. The stock logger
+itself returns zero, so this closes its data references without claiming
+working logging. The focused touch image is 30,592 bytes and has no aligned
+pointer words into the stock flash tail beyond the image, apart from two
+linker end-value words. This scan does not cover indirect or unaligned values.
+The focused 104-unit compile and strict link passed. The full G2 gate then
+compiled 4,878/4,878 enabled C units with no failures or duplicate strong
+symbols and linked all seven source payloads without an external binary
+archive. The 4,639,284-byte source candidate OTA has SHA-256
+`334027612a05760dc400d7c262270f65095f24a0a2d79217815bef7cca909148`
+and differs from the locked artifact. Evidence:
+[`touch-log-strings-source-20261111.json`](../evidence/touch-log-strings-source-20261111.json).
+
+## Touch scan callback and electrode data relocation — 2026-11-11
+
+The scan-preparation C candidate previously stored the stock Thumb address
+`0x6781` into the interrupt callback slot. It now stores the source-owned
+`touch_scan_isr` function pointer, and the unused second-stage binding helper
+has been removed. The object has an ARM relocation to the ISR; the current
+strict link discards both scan-preparation and ISR functions, so this is a
+compiled candidate dependency rather than a live-image call.
+
+The retained widget configuration table also pointed at three stock flash
+addresses for electrode records. Those fields now point to groups 0, 4 and 8
+of the existing C electrode array. The strict link retains all 72 electrode
+bytes and resolves the table fields to `0xA30C`, `0xA32C` and `0xA34C` in the
+30,200-byte touch image. The focused 104-unit touch compile and strict link
+passed. The full G2 gate compiled 4,878/4,878 enabled C units without failures
+or duplicate strong symbols and linked all seven payloads without an external
+binary archive. Its source candidate OTA is 4,638,892 bytes, SHA-256
+`1c2b3858bfc58812b60940e1d002ee6fcf83e8355f07d6548565d6c70c2efd57`,
+which differs from the locked artifact. Source completeness and hardware
+operation remain unverified. Evidence:
+[`touch-scan-and-electrode-source-relocation-20261111.json`](../evidence/touch-scan-and-electrode-source-relocation-20261111.json).
+
+## Touch CapSense source identities and exact low-power query — 2026-11-11
+
+Four previously unverified stock touch functions now have named providers in
+the pinned Infineon CapSense C units: the reference/fine CDAC frame writer
+`0x5E64`, compensation CDAC writer `0x5ECC`, low-power activity query
+`0x7CF8`, and configuration integrity check `0x7D92`. Their stock pseudocode
+matches the source control flow and data offsets, and all four symbols appear
+in the current source-linked touch ELF. The production Arm GNU 14.2 qualifier
+matched both structure functions byte for byte. The 76-byte integrity check
+was already selected; the 12-byte low-power query is newly selected into
+`tools/build/source-plan.json`. The hybrid touch coverage is now 5,534
+source-built bytes and 28,898 binary pull-through bytes. The authenticated
+hybrid bundle still matches stock, but that equality depends on pull-through;
+source completeness and hardware behavior remain unproven. Evidence:
+[`touch-capsense-source-owner-20261111.json`](../evidence/touch-capsense-source-owner-20261111.json).
+
+## Live touch report gesture source closure — 2026-11-11
+
+The touch calibration/report C candidate called the stock Thumb address
+`0x4071` for its 874-byte gesture machine. The independently reconstructed
+`touch_gesture_step` and `touch_gesture_speed` were already in the G2 manifest
+but not linked into the report path. The report now calls the C function.
+The focused 104-unit touch build passed without failures or duplicate strong
+symbols. Its strict source link contains both gesture providers, and the
+linked report function's `bl` reaches `touch_gesture_step` at `0x8BD0`. The
+touch image grew from 29,024 to 30,128 bytes. The current gesture and speed
+source differs from the previously differential-validated source by comments
+only, so its bounded behavioral evidence still applies. The full G2 gate then
+compiled 4,878/4,878 enabled C units with no failures or duplicate strong
+symbols; all seven strict source links passed without an external binary
+archive. The other six payload binaries are unchanged. The source candidate
+bundle is 4,638,820 bytes, SHA-256
+`1055de9e5469ec48322f51b25f3aca61b2a633d9dc18723358a9c10fd2f9485b`,
+and differs from the locked 4,301,227-byte OTA. Analog acquisition,
+physical timing, whole-touch source completeness and stock byte identity
+remain unverified. Evidence:
+[`touch-report-gesture-source-closure-20261111.json`](../evidence/touch-report-gesture-source-closure-20261111.json).
+
+## LVGL null-output callback exact-source selection — 2026-11-11
+
+The locked Apollo image's callback word at `0x48400C` is `0x00483031`,
+pointing to the Thumb function at `0x483030`. That function is the two-byte
+`bx lr` used as LVGL's null-output callback. The linked upstream LVGL
+`_out_null` has the same two bytes. Named the stock function in the Apollo
+symbol census, then ran the production Clang qualifier against
+`lv_sprintf_builtin.c`; it selected the exact body into
+`tools/build/source-plan.json`. The authenticated hybrid builder accepted the
+selection and reproduced the locked OTA hash. Its Apollo-main coverage now
+includes 104 source-built bytes and 2,869,422 binary pull-through bytes. This
+selection adds exact source for one function; the hybrid's equality does not
+prove complete source coverage. Evidence:
+[`apollo-lvgl-null-output-exact-source-20261111.json`](../evidence/apollo-lvgl-null-output-exact-source-20261111.json).
+
+## Apollo historical residual source-owner closure — 2026-11-11
+
+Audited the 17 functions (1,150 stock bytes) in the wave 27 residual list
+against the current G2 manifest and strict source-linked Apollo ELF. All 17
+have identifiable C source owners and linked symbols. Fifteen are upstream or
+local-vendor source units; the existing first-party oscillator wait helpers
+account for the other two. Added stock-address anchors to those two C
+functions and source-owner rows to the coverage map. The 8-byte word-reader
+wrapper is `am_hal_read_words`; the 2-byte no-op callback is LVGL's
+`_out_null`. The linked `_out_null` body matches the stock two-byte SHA-256;
+the Ambiq word-reader wrapper is a four-byte tail call against the stock
+eight-byte call/return. This resolves that historical source-ownership list
+only. Whole-bundle byte identity, current whole-image census coverage and
+hardware behavior remain open. `make sources-check` passed, and the full G2
+`make sources` gate compiled 4,878/4,878 enabled C units with zero failures or
+duplicate strong symbols across seven payloads. The strict source link then
+produced all seven images with no external binary archive; its report still
+sets `source_completeness_proven=false`. The Apollo-main image remains
+3,818,704 bytes, SHA-256
+`ed06d9ac0927b68d4d3ee4d7656bb5ed5e6a02d672f96e83c4d07e6e216535b4`.
+Evidence:
+[`apollo-historical-residual-source-owners-batch-20261111.json`](../evidence/apollo-historical-residual-source-owners-batch-20261111.json).
+
+## Apollo startup comparator exact source qualification — 2026-11-11
+
+The locked Apollo image contains two prioritized initialization functions
+missing from the 8,844-row historical symbol census: the eight-byte comparator
+at `0x5BF0B4` and the 72-byte runner at `0x5BF0BC`. Their authenticated
+boundaries and hashes are now in `g2/symbols/apollo_main.tsv`. The comparator's
+existing C body now constrains its two field loads to the stock `r0`, `r1`
+order. Production Clang emits the exact stock eight bytes, so
+`qualify_sources.py` selected that region into `tools/build/source-plan.json`.
+The runner still fails exact relocation-pattern qualification and remains a C
+candidate.
+
+`make sources-check` passes. Full `make sources` compiled 4,878/4,878 enabled
+C units with no failures or duplicate strong symbols, and all seven strict
+source links passed without an external binary archive. The linked comparator
+at `0x593520` matches the locked function hash. Apollo-main remains
+3,818,704 bytes; only two bytes differ from the preceding source candidate,
+both in the comparator instruction order. Its new SHA-256 is
+`ed06d9ac0927b68d4d3ee4d7656bb5ed5e6a02d672f96e83c4d07e6e216535b4`.
+The other six payload binaries are unchanged. The two new census rows and one
+exact source region do not establish whole-image completeness, bundle byte
+identity, or hardware boot. `make source-bundle` assembled the six-component
+candidate with the authenticated KWS weight data. It is 4,637,716 bytes,
+SHA-256 `465eca238c463156aa131a9933d51862f82ee7f88e2c23a4fbc753e646a3f039`;
+14 bytes differ from the preceding candidate after the two instruction-byte
+changes and wrapper checksum updates. It still differs from the locked
+4,301,227-byte OTA. Evidence:
+[`apollo-init-table-stock-census-20261111.json`](../evidence/apollo-init-table-stock-census-20261111.json).
+
+## Apollo initialization-table callback C contract — 2026-11-11
+
+The 23-entry prioritized startup table declared its callbacks as returning
+`void`, while the linked C providers return a status word. The table and runner
+now use `int32_t (*)(void)` consistently, and the TLSF pool initializer's
+source declaration returns `int32_t` like the other providers. The runner
+still ignores each status. The RTC, product logger, and onboarding-news
+entries already resolve to their C implementations through manifest aliases;
+the old source comment calling them missing was stale.
+
+`make sources-check` passes. The full G2 build compiled 4,878/4,878 enabled C
+units with no failures or duplicate strong symbols; all seven strict source
+links passed with no final undefined symbols or external binary archive. All
+seven payload binary hashes match the preceding full build, including the
+Apollo-main binary at SHA-256
+`0c66b1e174fe7a8a0369f52f194df0ace9cd6f52e9784dacfa430472cd682f1f`.
+This C contract correction does not establish source completeness, stock byte
+identity, or hardware boot. Evidence:
+[`apollo-init-table-callback-types-20261111.json`](../evidence/apollo-init-table-callback-types-20261111.json).
+
+## Nordic fuel-gauge external-state contract — 2026-11-11
+
+The locked `nrf_fuel_gauge_ext_state_update` body at `0x0055F74C..0x0055F842`
+has an authenticated 246-byte hash. Its C source candidate had diverged in
+observable cases: it rejected updates before initialization, cleared the
+charge state on VBUS disconnect, rejected positive infinity as a correction
+factor, and stored charge limits with the wrong sign. The existing C provider
+now follows the stock case dispatch, first-byte charge-state read, IEEE-754
+NaN/sign/zero checks, and negative-absolute limit storage. A focused host
+harness passed 21 assertions covering these branches. The full G2 build
+compiled 4,878/4,878 enabled C units with no failures or duplicate strong
+symbols; all seven strict source links passed with no undefined symbols or
+external binary archive. Only Apollo-main changed from the preceding source
+bundle. Its image is 3,818,704 bytes, SHA-256
+`0c66b1e174fe7a8a0369f52f194df0ace9cd6f52e9784dacfa430472cd682f1f`.
+The six-component source OTA candidate is 4,637,716 bytes, SHA-256
+`cfb4d1c9b56f464dca01b9280eb5d95474bf1d0bd44e6bf8ec414904612e599c`;
+it still differs from the locked OTA. The Nordic SOC and time-prediction
+model remains an uncalibrated source-only candidate. Evidence:
+[`apollo-fuel-gauge-external-state-stock-contract-20261111.json`](../evidence/apollo-fuel-gauge-external-state-stock-contract-20261111.json).
+
+## Apollo I2C/UART initialized data ownership — 2026-11-11
+
+The `g2_stock_ram_20000c20` array represented a 24-byte MPU record plus
+248 bytes already defined as I2C configuration, bus rows, UART configuration,
+receive queues, and the start of channel state in other C units. The extra
+copy carried three literal pointers to the stock I2C config at `0x20000C0C`
+and four to stock UART buffers at `0x200B9C20..0x200BA820`. Current source
+references use this array only as an MPU record at its base. Its C definition
+now contains just the six MPU words. The six linked words are unchanged,
+including both pointers relocated to the source-owned 8 KiB IOM buffer. The
+MPU symbol shrank from 272 to 24 bytes, while the separately linked I2C and
+UART owner symbols remain present. The Apollo-main image is 248 bytes shorter.
+
+The full G2 build compiled 4,878/4,878 enabled C units with no failures or
+duplicate strong symbols, and all seven strict source links passed with no
+undefined symbols or external binary archive. The six-component source OTA
+candidate is 4,637,812 bytes, SHA-256
+`70e4b00b8baa54f5af30e3d47f4a589d489e7f828c594d764ade95fbb4a48de2`.
+It differs from the locked 4,301,227-byte OTA. The presence of the named
+owners does not establish exact contents of every I2C/UART record or physical
+behavior. Evidence:
+[`apollo-i2c-uart-initialized-data-ownership-20261111.json`](../evidence/apollo-i2c-uart-initialized-data-ownership-20261111.json).
+
+## Apollo NemaVG table RAM relocation — 2026-11-11
+
+The locked table at `0x005232D0` starts with the RAM address `0x20074EFC`,
+the Nema context cell. Its C reconstruction still embedded that stock address,
+while the source linker placed the named context cell at `0x200A25D8`. The
+table now takes the address of the C object. In the focused Apollo-main link,
+the first word is `0x200A25D8`; the other twelve words still match stock.
+Only three bytes of the 3,819,048-byte linked Apollo image changed.
+All 2,717 Apollo-main C units compiled, with no failures or duplicate strong
+symbols, and its strict link passed. The later full G2 build retains the
+relocated table pointer; its final Apollo-main image is 3,818,800 bytes,
+SHA-256 `28f904cb79cd6cd00ce820aeab0f5b0f72f7aef636b475d667aa490ec758b262`.
+This resolves one relocated data pointer. A lexical scan of 2,525 Apollo C
+and header files records 212 remaining address-looking tokens across 29
+files; packed descriptors, bit masks and stock-offset indices are included,
+so these tokens require semantic review before any is called a dangling
+pointer. Evidence:
+[`apollo-nema-arc-context-relocation-20261111.json`](../evidence/apollo-nema-arc-context-relocation-20261111.json),
+[`apollo-ram-literal-source-audit-20261111.json`](../evidence/apollo-ram-literal-source-audit-20261111.json).
+
 ## CASE interfunction frontier classified — 2026-11-11
 
 The locked CASE interfunction gap frontier now has 349 classified rows
@@ -23,16 +2733,22 @@ in the source-linked CASE image. Their linked addresses differ from stock,
 and reachability of the isolated `BX LR` remains unproved. The CASE CRT now
 calls separate C word-copy and zero helpers matching the stock loop contracts.
 
-The focused CASE build compiles 359 C units with no duplicate strong symbols
-and passes its strict link. Its image is 60,184 bytes, SHA-256
+The full G2 build compiled 4,878/4,878 enabled C units with no failures or
+duplicate strong symbols. All seven strict source links passed with no
+undefined symbols or external binary archive. The source-linked CASE image
+is 60,184 bytes, SHA-256
 `8b764c6315d429cf06051f87fa9c010ca3adba4e25c5350ec8904d95fe01846d`.
-The all-payload build and source bundle for this final change are pending.
+The six-component source-candidate OTA is 4,638,060 bytes, SHA-256
+`c9eee6a709de8ca80262347c521e7cc01e9153e2daa575a851acd26361706a30`;
+it differs from the locked 4,301,227-byte OTA. Physical behavior, complete
+code/data coverage, and stock equivalence remain unverified.
 Evidence: `g2/evidence/case-pc-literal-coverage-{complete,partial,unaligned}-20261111.json`,
 `case-residual-executable-coverage-20261111.json`,
 `case-scheduler-residual-coverage-20261111.json`,
 `case-zero-alignment-coverage-20261111.json`,
 `case-tail-string-coverage-20261111.json`, and
-`case-retained-entry-c-coverage-20261111.json`.
+`case-retained-entry-c-coverage-20261111.json`. Final build receipts and
+payload hashes are in `case-frontier-final-source-build-20261111.json`.
 
 ## CASE ADC startup branch correction — 2026-11-11
 
@@ -1271,7 +3987,7 @@ for this user-authorized campaign. Historical workflow gates/evidence remain unc
 EvenHub SDK is excluded. Compilation and relocatable composition do not prove
 complete firmware, final linkage, or hardware operation.
 
-## Payload inventory
+## Historical payload inventory (2026-10-26 baseline)
 
 | Payload | Registered units | Assembly syntax | Opaque markers | Candidate/unverified triage | Unresolved (report scope) |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -1328,7 +4044,7 @@ Case zero unresolved does not establish source completeness.
   FreeRTOS and vendor providers. No new dependency version is asserted or vendored
   without a fresh match. This wave closes a missing first-party helper instead.
 
-## Unresolved
+## Historical unresolved checklist (2026-10-26 baseline)
 
 - [ ] Complete full G2 source build and record fresh counts.
 - [ ] Close Apollo-main unresolved functions, data, runtime and linker symbols.

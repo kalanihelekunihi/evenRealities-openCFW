@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery revision 031 with ARCv2 EM ISA-backed EM9305 sparse-NVM alignment",
+  "artifacts": {
+    "discovery_draft_031": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/031/discovery-draft.jsonl",
+      "sha256": "4080d0470cb188a80e473443c1d86558c9daa05a5daf4ab4ec4c9445c3a8a7bb"
+    },
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/031/reproduce.py",
+      "sha256": "7f891f23faf58a4764783e4676d1d4dfbbd99163be08879335f08b1bebe234b6"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/031/receipt.json",
+      "sha256": "d79de4fa2ce885bf1d2769a878ce429a0c74f2c0091054bc0121714939826eaa"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v31-review-001/001/review.json",
+      "sha256": "ccf6643fe9d8aa3d1e455982930b1fb32522e7bcb8d427702317228954ff02cc"
+    },
+    "sparse_nvm_v2_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-sparse-nvm-replay-v2-index.json",
+      "sha256": "3ece7df03d8a75305c289e422c45649c1713c31cbdffe790385ec5101acb7cfd"
+    },
+    "predecessor_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/030/discovery-draft.jsonl",
+      "sha256": "d2949095e6559550b8926011094edd4303cddba3ea5d8f5e42a5fc5f55bff1d9"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "ISA-backed BMSKN alignment resolves only the modeled scan-mask uncertainty; synthetic FF-filled NVM and zlib CRC remain bounded evidence.",
+    "Stock ARC CRC execution, physical NVM contents, competing headers, external boot-ROM selection, and whole-image discovery remain open.",
+    "No canonical inventory admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v30-index.json",
+    "sha256": "2cbbe10dee8ffd233761f9604936413e3c54ee0f585e2d1fc04c92a81b1a833c"
+  }
+}

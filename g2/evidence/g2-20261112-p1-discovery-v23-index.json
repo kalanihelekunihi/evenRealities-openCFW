@@ -1,0 +1,57 @@
+{
+  "artifacts": {
+    "discovery_draft_023": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/023/discovery-draft.jsonl",
+      "sha256": "3e26a910d85a9b1442602b46a70e2f5cf9e989c77b96bf79efe76fdd465edc2e"
+    },
+    "fhdr_route_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-header-execution-route-index.json",
+      "sha256": "1d33801eb3c4364d66e9f85af4c8adb603f9e96b534911b6903a9f7766049ef7"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v23-review-001/001/review.json",
+      "sha256": "6d9b708f65ceaaef8f0b1b0c938946ea19f25937b3419404569f69d5331d1a25"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v23-review-001/001/review.py",
+      "sha256": "264b1f62aa800d463bed3970297b8dee5b087ffaf760ea65cfb19b8d16a8c95f"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/023/receipt.json",
+      "sha256": "90829f647a9868138a40a61a5cc03be81a2580610e3f4b7415382d07e013fb98"
+    },
+    "record1_extmap_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-record1-extmap-index.json",
+      "sha256": "9d8be94185030a5cbf0bf7fddec16be88c2b8b046c0c800bbef258486bd28e8f"
+    },
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/023/reproduce.py",
+      "sha256": "1ccc538ab3164cf65bbae565e594e90744df56aba2fc31dce3794a024f902bca"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v23-review-001/001/receipt.json",
+      "sha256": "fb446c1cd82d64b01425fcf0936b8f2e5b13826941941213501087c80d0ec344"
+    }
+  },
+  "campaign_id": "20261112T092142Z",
+  "counts": {
+    "image_ids": 33,
+    "payload_rows": 6,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "EM9305 decode is linear and its FHDR path is a static candidate; external NVM and device selection remain unresolved.",
+    "No exhaustive discovery, canonical admission or G1 claim."
+  ],
+  "schema_version": 1,
+  "scope": "Independently reviewed noncanonical discovery draft revision 023 narrowing EM9305 APEX decoder and FHDR static entry route claims.",
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v22-index.json",
+    "sha256": "accc3c8b0d1dad00508736dd1ad30798e0d242d7998ad68b38249cecd888440d"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

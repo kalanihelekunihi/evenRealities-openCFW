@@ -1,0 +1,33 @@
+{
+  "added_functions": [
+    "crc32_mpeg2",
+    "wrap_codec_binh_a",
+    "wrap_codec_binh_b",
+    "wrap_codec_fwpk",
+    "wrap_codec_uart_boot",
+    "wrap_touch_source_image"
+  ],
+  "admission": "none",
+  "changed_functions": [
+    "main",
+    "validate_touch",
+    "wrap_touch_image"
+  ],
+  "current_source_sha256": "e3ace482eb5d7e112e246c3a940649db8ac63139c0d66f43f4780d4d79734860",
+  "g1_status": "not_run",
+  "historical_campaign_id": "20260930T190500Z",
+  "new_campaign_id": "20261112T092142Z",
+  "parser_path": "g2/tools/open_cfw.py",
+  "pinned_source_git_commit": "cfd10634a0f0",
+  "pinned_source_sha256": "5721966cb09b6a0833fe5a018750fffcef6c850f4aad8acdb4e31c8d3864101b",
+  "removed_functions": [],
+  "schema_version": 1,
+  "scope": "Static AST comparison of old pinned and current parser functions; does not establish independent coverage review or G1 pass.",
+  "semantic_limit": "AST identity of selected functions does not prove that every dependent call or manifest interpretation is unchanged. Current locked-bundle verification passed separately in identity preflight.",
+  "unchanged_outer_validation_functions": {
+    "c_string": true,
+    "crc32c_msb": true,
+    "u32le": true,
+    "validate_evenota_image": true
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Bounded G2 case exact-marker and aligned-vector discovery; instruction-backed resolution of the vector-like pair at raw offset 0x6A18.",
+  "artifacts": {
+    "scan_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-residual-discovery-001/001/discover.py",
+      "sha256": "cc9c46bf699625ccd23982cb175869148405f9852c84d618714911ec49192bfd"
+    },
+    "scan_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-residual-discovery-001/001/report.json",
+      "sha256": "4ae3f6f9bd2346765d3f597a1833af7a8bb803f103c74d02951cc4190c493c79"
+    },
+    "scan_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-residual-discovery-001/001/receipt.json",
+      "sha256": "dcec85143d93c14c7732e96cd3fc2cbcc4e204ae153c805893445dc14cedb5d1"
+    },
+    "candidate_resolution_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-residual-discovery-001/002/report.json",
+      "sha256": "7e1583f6409551261626266da0c8c84fe74be667793c5af09b57ed4e26d44c2b"
+    },
+    "candidate_resolution_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-residual-discovery-001/002/receipt.json",
+      "sha256": "98a71b17eb063962ddd0a6d001cd7c2351d5fd4d8df32630c25d34ef3c718f31"
+    },
+    "independent_review": {
+      "path": "g2/evidence/g2-20261112-p1-case-residual-review.json",
+      "sha256": "74bf5be76deebb9f26a6267bb6792414603483082dc45f4e386f676a790e2ceb",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-residual-review-001/001/review-v2.json"
+    }
+  },
+  "confirmed": [
+    "The locked case payload has a 32-byte EVEN wrapper and 55,752-byte raw flash image; stored length and big-endian additive checksum match the raw image.",
+    "The exact known-marker scan has no raw-image hits for EVEN, FWPK, BINH, 0x7F454C46 (ELF), MZ or FWMH.",
+    "The aligned heuristic finds a primary vector at raw offset 0 and a second vector-like pair at raw 0x6A18. The latter is a 12-word PC-relative literal pool with two independently checked Thumb LDR load sites, not a separate vector table."
+  ],
+  "counts": {
+    "raw_image_bytes": 55752,
+    "aligned_active_flash_pointer_words": 97,
+    "vector_like_pairs": 2,
+    "primary_vector_like_pairs": 1,
+    "resolved_false_positive_pairs": 1,
+    "unresolved_vector_like_pairs_under_this_heuristic": 0
+  },
+  "limits": [
+    "Exact marker and aligned-word heuristics cannot exclude markerless, transformed or undocumented nested programs.",
+    "No whole-image reference or code/data sweep, canonical G1 admission, complete pseudocode, source completion or byte identity."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

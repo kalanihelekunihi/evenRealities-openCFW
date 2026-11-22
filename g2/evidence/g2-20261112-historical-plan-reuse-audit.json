@@ -1,0 +1,781 @@
+{
+  "admission": "none",
+  "analysis_plan_path": "g2/build/pseudocode-first/20260930T190500Z/inventory/analysis-plan.json",
+  "analysis_plan_sha256": "19e924b7c477c69a7ec899c22d04e061590ca4cfbe4d3315fbe248ebdd4b341f",
+  "architecture_plan_count": 6,
+  "discovered_image_count": 33,
+  "discovery_count": 6,
+  "discovery_path": "g2/build/pseudocode-first/20260930T190500Z/inventory/discovery-reconciliation.jsonl",
+  "discovery_sha256": "c559e1f2f3255956b841295185d168c9a64d97a22a795e4f9e072cad92424635",
+  "evidence_checks": [
+    {
+      "actual_sha256": "232c30c9239b24861f30f62010f5abaf7b74d3a0cd103431eea8b420f8a8a808",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": true,
+      "owner": "discovery:apollo_bootloader",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/nested-image-discovery-reconciliation-065/003/reconciliation.json",
+      "pinned_sha256": "232c30c9239b24861f30f62010f5abaf7b74d3a0cd103431eea8b420f8a8a808"
+    },
+    {
+      "actual_sha256": "4008f1ea8deeec70722433bdf56941c2ab546fe6e2dec92c579cf82611725de6",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": true,
+      "owner": "discovery:apollo_bootloader",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-reviewed-candidate-composition-072/002/images-proposal.jsonl",
+      "pinned_sha256": "4008f1ea8deeec70722433bdf56941c2ab546fe6e2dec92c579cf82611725de6"
+    },
+    {
+      "actual_sha256": "ff125c6bb3a311b124e46b1ed3ea0a221392a43dc249a45c0277f9b16bc7a45f",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": true,
+      "owner": "discovery:apollo_bootloader",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-inventory-signature-reconciliation-064/001/scan.json",
+      "pinned_sha256": "ff125c6bb3a311b124e46b1ed3ea0a221392a43dc249a45c0277f9b16bc7a45f"
+    },
+    {
+      "actual_sha256": "bcc2fbd8d4bdf510a1c5ff957f88de4e6f77ea5ac83fe3b9ad4ef309fffa9c84",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": true,
+      "owner": "discovery:apollo_bootloader",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/bootloader-initializers-002/review-002.json",
+      "pinned_sha256": "bcc2fbd8d4bdf510a1c5ff957f88de4e6f77ea5ac83fe3b9ad4ef309fffa9c84"
+    },
+    {
+      "actual_sha256": "b71f2399c54d60a8263aa23242bb667b6393f6005a1c9cc1270b2280231edbe4",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": true,
+      "owner": "discovery:apollo_bootloader",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/boot-canonical-replay-016/review-016.json",
+      "pinned_sha256": "b71f2399c54d60a8263aa23242bb667b6393f6005a1c9cc1270b2280231edbe4"
+    },
+    {
+      "actual_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": true,
+      "owner": "discovery:apollo_bootloader",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "pinned_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "actual_sha256": "232c30c9239b24861f30f62010f5abaf7b74d3a0cd103431eea8b420f8a8a808",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": true,
+      "owner": "discovery:apollo_main",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/nested-image-discovery-reconciliation-065/003/reconciliation.json",
+      "pinned_sha256": "232c30c9239b24861f30f62010f5abaf7b74d3a0cd103431eea8b420f8a8a808"
+    },
+    {
+      "actual_sha256": "4008f1ea8deeec70722433bdf56941c2ab546fe6e2dec92c579cf82611725de6",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": true,
+      "owner": "discovery:apollo_main",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-reviewed-candidate-composition-072/002/images-proposal.jsonl",
+      "pinned_sha256": "4008f1ea8deeec70722433bdf56941c2ab546fe6e2dec92c579cf82611725de6"
+    },
+    {
+      "actual_sha256": "ff125c6bb3a311b124e46b1ed3ea0a221392a43dc249a45c0277f9b16bc7a45f",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": true,
+      "owner": "discovery:apollo_main",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-inventory-signature-reconciliation-064/001/scan.json",
+      "pinned_sha256": "ff125c6bb3a311b124e46b1ed3ea0a221392a43dc249a45c0277f9b16bc7a45f"
+    },
+    {
+      "actual_sha256": "55e8f406530944a3c2606c388a0b96a0268bf4fbfc1e6770306e9b42ea80dd16",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": true,
+      "owner": "discovery:apollo_main",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-inventory-signature-reconciliation-064/001/apollo-main-fwpk-candidate-check.json",
+      "pinned_sha256": "55e8f406530944a3c2606c388a0b96a0268bf4fbfc1e6770306e9b42ea80dd16"
+    },
+    {
+      "actual_sha256": "bb322662cb9cc353a0e567010df6b2eefb19e1c5daf41b5d498a8539efca3c7b",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": true,
+      "owner": "discovery:apollo_main",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-fwpk-literal-references-077/001/references.json",
+      "pinned_sha256": "bb322662cb9cc353a0e567010df6b2eefb19e1c5daf41b5d498a8539efca3c7b"
+    },
+    {
+      "actual_sha256": "7e45e5d1cf9776999cf0071e00fea5a2764a7c2baf886173085d24d7d84ba99f",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": true,
+      "owner": "discovery:apollo_main",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/apollo-main-initializers-005/review-005.json",
+      "pinned_sha256": "7e45e5d1cf9776999cf0071e00fea5a2764a7c2baf886173085d24d7d84ba99f"
+    },
+    {
+      "actual_sha256": "4095df23e0eebe305f26040d59978fed15f051f0d019cc5c1bdaab3039490a12",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": true,
+      "owner": "discovery:apollo_main",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/apollo-main-canonical-replay-010/review-010.json",
+      "pinned_sha256": "4095df23e0eebe305f26040d59978fed15f051f0d019cc5c1bdaab3039490a12"
+    },
+    {
+      "actual_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": true,
+      "owner": "discovery:apollo_main",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "pinned_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "actual_sha256": "232c30c9239b24861f30f62010f5abaf7b74d3a0cd103431eea8b420f8a8a808",
+      "input_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_pin": true,
+      "owner": "discovery:ble_em9305",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/nested-image-discovery-reconciliation-065/003/reconciliation.json",
+      "pinned_sha256": "232c30c9239b24861f30f62010f5abaf7b74d3a0cd103431eea8b420f8a8a808"
+    },
+    {
+      "actual_sha256": "4008f1ea8deeec70722433bdf56941c2ab546fe6e2dec92c579cf82611725de6",
+      "input_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_pin": true,
+      "owner": "discovery:ble_em9305",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-reviewed-candidate-composition-072/002/images-proposal.jsonl",
+      "pinned_sha256": "4008f1ea8deeec70722433bdf56941c2ab546fe6e2dec92c579cf82611725de6"
+    },
+    {
+      "actual_sha256": "2a3a6d58d36e4bcf840d25d88e367d3047ae0d45d0420ffbeff8e5659ad531c5",
+      "input_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_pin": true,
+      "owner": "discovery:ble_em9305",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/em9305-package-001/review.json",
+      "pinned_sha256": "2a3a6d58d36e4bcf840d25d88e367d3047ae0d45d0420ffbeff8e5659ad531c5"
+    },
+    {
+      "actual_sha256": "d5bb993a6a54cac3b808a21bdcc0312c16c09b73b2b537a333a210da08cfe782",
+      "input_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_pin": true,
+      "owner": "discovery:ble_em9305",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/em9305-startup-mappings-002/review-001.json",
+      "pinned_sha256": "d5bb993a6a54cac3b808a21bdcc0312c16c09b73b2b537a333a210da08cfe782"
+    },
+    {
+      "actual_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "input_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_pin": true,
+      "owner": "discovery:ble_em9305",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "pinned_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "actual_sha256": "232c30c9239b24861f30f62010f5abaf7b74d3a0cd103431eea8b420f8a8a808",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": true,
+      "owner": "discovery:case",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/nested-image-discovery-reconciliation-065/003/reconciliation.json",
+      "pinned_sha256": "232c30c9239b24861f30f62010f5abaf7b74d3a0cd103431eea8b420f8a8a808"
+    },
+    {
+      "actual_sha256": "4008f1ea8deeec70722433bdf56941c2ab546fe6e2dec92c579cf82611725de6",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": true,
+      "owner": "discovery:case",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-reviewed-candidate-composition-072/002/images-proposal.jsonl",
+      "pinned_sha256": "4008f1ea8deeec70722433bdf56941c2ab546fe6e2dec92c579cf82611725de6"
+    },
+    {
+      "actual_sha256": "27acc0f9734a64c992dd484a7178ccb8ce8efecc765fe7a1df711b237f49a85d",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": true,
+      "owner": "discovery:case",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/case-startup-transform-001/review.json",
+      "pinned_sha256": "27acc0f9734a64c992dd484a7178ccb8ce8efecc765fe7a1df711b237f49a85d"
+    },
+    {
+      "actual_sha256": "5d9ce49a41429b4d68dd4df100fa3abe24757e33e8e2bd24275df0acf012e29a",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": true,
+      "owner": "discovery:case",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/case-reset-root-002/review.json",
+      "pinned_sha256": "5d9ce49a41429b4d68dd4df100fa3abe24757e33e8e2bd24275df0acf012e29a"
+    },
+    {
+      "actual_sha256": "08bcecbbe818de16596ab151641cb10193ee092731064a6d325e6c4dc113eaa1",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": true,
+      "owner": "discovery:case",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/case-scatter-indirect-root-018/finding.json",
+      "pinned_sha256": "08bcecbbe818de16596ab151641cb10193ee092731064a6d325e6c4dc113eaa1"
+    },
+    {
+      "actual_sha256": "726e38ade3b0f3fede40d5ab24ebb87d0a87eeaa4762888351cfcdb38d5487e8",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": true,
+      "owner": "discovery:case",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/case-computed-pc-root-022/finding.json",
+      "pinned_sha256": "726e38ade3b0f3fede40d5ab24ebb87d0a87eeaa4762888351cfcdb38d5487e8"
+    },
+    {
+      "actual_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": true,
+      "owner": "discovery:case",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "pinned_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "actual_sha256": "232c30c9239b24861f30f62010f5abaf7b74d3a0cd103431eea8b420f8a8a808",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/nested-image-discovery-reconciliation-065/003/reconciliation.json",
+      "pinned_sha256": "232c30c9239b24861f30f62010f5abaf7b74d3a0cd103431eea8b420f8a8a808"
+    },
+    {
+      "actual_sha256": "4008f1ea8deeec70722433bdf56941c2ab546fe6e2dec92c579cf82611725de6",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-reviewed-candidate-composition-072/002/images-proposal.jsonl",
+      "pinned_sha256": "4008f1ea8deeec70722433bdf56941c2ab546fe6e2dec92c579cf82611725de6"
+    },
+    {
+      "actual_sha256": "faa4eb495fb7c613ac9ccdec9f529c318a1f8f5a8e0512942f2cc13eb379b535",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-stage2-container-ancestry-050/002/review.json",
+      "pinned_sha256": "faa4eb495fb7c613ac9ccdec9f529c318a1f8f5a8e0512942f2cc13eb379b535"
+    },
+    {
+      "actual_sha256": "f3be0c87b1b7b3632f8f88560be6ecd310fbb22d7f7db68349e1b28e406ade62",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-software-transfer-root-review-037/review.json",
+      "pinned_sha256": "f3be0c87b1b7b3632f8f88560be6ecd310fbb22d7f7db68349e1b28e406ade62"
+    },
+    {
+      "actual_sha256": "96936139137e6b6dd7a3b0fbd087620c01f08df8f4af56edce899baab6381d57",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-flash-loader-startup-001/review-002.json",
+      "pinned_sha256": "96936139137e6b6dd7a3b0fbd087620c01f08df8f4af56edce899baab6381d57"
+    },
+    {
+      "actual_sha256": "f49a1e60732412af6da9718ba9c164cb424accf7b28c123c4e678cc3109f53b8",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-candidate-composition-073/review.json",
+      "pinned_sha256": "f49a1e60732412af6da9718ba9c164cb424accf7b28c123c4e678cc3109f53b8"
+    },
+    {
+      "actual_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "pinned_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "actual_sha256": "3dd2b3e7c50de10aec3544d1c2dd8fd6a40eb70c219ebc450dd8ce8041c2333e",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/execution-contract-candidates-independent-085/image-accounting-reviews.jsonl",
+      "pinned_sha256": "3dd2b3e7c50de10aec3544d1c2dd8fd6a40eb70c219ebc450dd8ce8041c2333e"
+    },
+    {
+      "actual_sha256": "b60125f2c2b27c74d6fa8bc87e219c28736351b1515f48bda7c9bfa4055e0467",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/execution-contract-candidates-independent-085/execution-contract-model-reviews.jsonl",
+      "pinned_sha256": "b60125f2c2b27c74d6fa8bc87e219c28736351b1515f48bda7c9bfa4055e0467"
+    },
+    {
+      "actual_sha256": "f69f0bcd1891098d20f5ceb29213e74efcd6a441106a6904c9fcfb9845b62ace",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/final-accounting-transform-review-095/002/image-accounting-review-rows.jsonl",
+      "pinned_sha256": "f69f0bcd1891098d20f5ceb29213e74efcd6a441106a6904c9fcfb9845b62ace"
+    },
+    {
+      "actual_sha256": "3115f39feb7cd3a24f8054f93cec417ca1ef6701a6ebca25207a5f58e1093489",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/final-accounting-transform-review-095/002/decoded-transform-review-rows.jsonl",
+      "pinned_sha256": "3115f39feb7cd3a24f8054f93cec417ca1ef6701a6ebca25207a5f58e1093489"
+    },
+    {
+      "actual_sha256": "2cf6a2018714be0c51ebbc97ea2c0598f49e8bb908e68e4a28d037948a3fb802",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/execution-contract-candidates-independent-085/image-accounting-review-receipt.json",
+      "pinned_sha256": "2cf6a2018714be0c51ebbc97ea2c0598f49e8bb908e68e4a28d037948a3fb802"
+    },
+    {
+      "actual_sha256": "44ba51503483dfbf8e407dc8aca7e7026532ce9a76f6794c27cfc0288080c7e3",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/execution-contract-candidates-independent-085/execution-contract-model-review-receipt.json",
+      "pinned_sha256": "44ba51503483dfbf8e407dc8aca7e7026532ce9a76f6794c27cfc0288080c7e3"
+    },
+    {
+      "actual_sha256": "23b0aa909defc1e2f70b8218fe039372a8c7490cff548e9afbc408a574fe19ac",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/final-accounting-transform-review-095/002/receipt.json",
+      "pinned_sha256": "23b0aa909defc1e2f70b8218fe039372a8c7490cff548e9afbc408a574fe19ac"
+    },
+    {
+      "actual_sha256": "e723d88dbded1123e89543b4cad2e370d05c0f4e2ec477994f9e44fed9f8b6fe",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/fixed-accounting-transform-bindings-root-101/002/receipt.json",
+      "pinned_sha256": "e723d88dbded1123e89543b4cad2e370d05c0f4e2ec477994f9e44fed9f8b6fe"
+    },
+    {
+      "actual_sha256": "67ba1e19434689faf654c2fe0bc46df1aef24b650f8939b48c56d528d87e9682",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "discovery:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-accounting-review-bindings-root-102/receipt.json",
+      "pinned_sha256": "67ba1e19434689faf654c2fe0bc46df1aef24b650f8939b48c56d528d87e9682"
+    },
+    {
+      "actual_sha256": "232c30c9239b24861f30f62010f5abaf7b74d3a0cd103431eea8b420f8a8a808",
+      "input_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "matches_pin": true,
+      "owner": "discovery:touch",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/nested-image-discovery-reconciliation-065/003/reconciliation.json",
+      "pinned_sha256": "232c30c9239b24861f30f62010f5abaf7b74d3a0cd103431eea8b420f8a8a808"
+    },
+    {
+      "actual_sha256": "4008f1ea8deeec70722433bdf56941c2ab546fe6e2dec92c579cf82611725de6",
+      "input_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "matches_pin": true,
+      "owner": "discovery:touch",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-reviewed-candidate-composition-072/002/images-proposal.jsonl",
+      "pinned_sha256": "4008f1ea8deeec70722433bdf56941c2ab546fe6e2dec92c579cf82611725de6"
+    },
+    {
+      "actual_sha256": "20faff26f7faaa9011814a1a1734f4eb899a2ce0a30e5e864b599e0aa16f884a",
+      "input_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "matches_pin": true,
+      "owner": "discovery:touch",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/touch-startup-mapping-review-001.json",
+      "pinned_sha256": "20faff26f7faaa9011814a1a1734f4eb899a2ce0a30e5e864b599e0aa16f884a"
+    },
+    {
+      "actual_sha256": "17893f753f32d210243882656b34bff49857a7d06b97dc46b5a908c8e87fae12",
+      "input_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "matches_pin": true,
+      "owner": "discovery:touch",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/touch-vector-roots-003/review.json",
+      "pinned_sha256": "17893f753f32d210243882656b34bff49857a7d06b97dc46b5a908c8e87fae12"
+    },
+    {
+      "actual_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "input_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "matches_pin": true,
+      "owner": "discovery:touch",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "pinned_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "actual_sha256": "336f076e414de498948a0302ce41e6b39b1138c47a4e560731193eac754db408",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": false,
+      "owner": "plan:apollo_main",
+      "path": "g2/docs/reference/memory-map.md",
+      "pinned_sha256": "3779e487c2bd94985dd8a4b053a610902b2a8b326e9c9c893f7f4f5612dab94a"
+    },
+    {
+      "actual_sha256": "380c53ea096fef93415784cf3d0da3ce6846314b4edf4ac8be0658be6753c242",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": true,
+      "owner": "plan:apollo_main",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/apollo-initialization-map-candidate-002.json",
+      "pinned_sha256": "380c53ea096fef93415784cf3d0da3ce6846314b4edf4ac8be0658be6753c242"
+    },
+    {
+      "actual_sha256": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": false,
+      "owner": "plan:apollo_main",
+      "path": "g2/docs/reference/firmware-formats.md",
+      "pinned_sha256": "b3df6c4c5dd55d6c1fef419b2e4fbacf7312208f122a68271ee34e79ea943016"
+    },
+    {
+      "actual_sha256": "debe676f21160ed5c2a58d0078651f69c0d907436de7e20e496ad46d3144138a",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": false,
+      "owner": "plan:apollo_main",
+      "path": "docs/tooling.md",
+      "pinned_sha256": "044f0e93e4e09e56a19a1b6ccfba86c237cb3f389f1d59d7c64fd607686bcd0d"
+    },
+    {
+      "actual_sha256": "047f85abe2dcdfc243705f8d76168d45a383da3143182783966fde1df0b9d0f8",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": true,
+      "owner": "plan:apollo_main",
+      "path": "g2/docs/reference/decompilation-status.md",
+      "pinned_sha256": "047f85abe2dcdfc243705f8d76168d45a383da3143182783966fde1df0b9d0f8"
+    },
+    {
+      "actual_sha256": "688adfadc9949220d1a21ff7e2e30e181f238cf7a69a9d649662bb843e41a742",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": true,
+      "owner": "plan:apollo_main",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/tools/arm-binutils-observed-030/receipt.json",
+      "pinned_sha256": "688adfadc9949220d1a21ff7e2e30e181f238cf7a69a9d649662bb843e41a742"
+    },
+    {
+      "actual_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matches_pin": true,
+      "owner": "plan:apollo_main",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "pinned_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "actual_sha256": "336f076e414de498948a0302ce41e6b39b1138c47a4e560731193eac754db408",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": false,
+      "owner": "plan:apollo_bootloader",
+      "path": "g2/docs/reference/memory-map.md",
+      "pinned_sha256": "3779e487c2bd94985dd8a4b053a610902b2a8b326e9c9c893f7f4f5612dab94a"
+    },
+    {
+      "actual_sha256": "19ec86f8ee8887f805672e469d32d94bf3cbf9da8e3f25a508bf5cbf9dda34e7",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": true,
+      "owner": "plan:apollo_bootloader",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-bootloader-inventory-001/001/inventory-candidate.json",
+      "pinned_sha256": "19ec86f8ee8887f805672e469d32d94bf3cbf9da8e3f25a508bf5cbf9dda34e7"
+    },
+    {
+      "actual_sha256": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": false,
+      "owner": "plan:apollo_bootloader",
+      "path": "g2/docs/reference/firmware-formats.md",
+      "pinned_sha256": "b3df6c4c5dd55d6c1fef419b2e4fbacf7312208f122a68271ee34e79ea943016"
+    },
+    {
+      "actual_sha256": "debe676f21160ed5c2a58d0078651f69c0d907436de7e20e496ad46d3144138a",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": false,
+      "owner": "plan:apollo_bootloader",
+      "path": "docs/tooling.md",
+      "pinned_sha256": "044f0e93e4e09e56a19a1b6ccfba86c237cb3f389f1d59d7c64fd607686bcd0d"
+    },
+    {
+      "actual_sha256": "047f85abe2dcdfc243705f8d76168d45a383da3143182783966fde1df0b9d0f8",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": true,
+      "owner": "plan:apollo_bootloader",
+      "path": "g2/docs/reference/decompilation-status.md",
+      "pinned_sha256": "047f85abe2dcdfc243705f8d76168d45a383da3143182783966fde1df0b9d0f8"
+    },
+    {
+      "actual_sha256": "688adfadc9949220d1a21ff7e2e30e181f238cf7a69a9d649662bb843e41a742",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": true,
+      "owner": "plan:apollo_bootloader",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/tools/arm-binutils-observed-030/receipt.json",
+      "pinned_sha256": "688adfadc9949220d1a21ff7e2e30e181f238cf7a69a9d649662bb843e41a742"
+    },
+    {
+      "actual_sha256": "ae03bd426239348050c1f20bca0176a474675554fa0aaa19f40ddada99329897",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": true,
+      "owner": "plan:apollo_bootloader",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/apollo-bootloader-initialization-map-candidate-002.json",
+      "pinned_sha256": "ae03bd426239348050c1f20bca0176a474675554fa0aaa19f40ddada99329897"
+    },
+    {
+      "actual_sha256": "bcc2fbd8d4bdf510a1c5ff957f88de4e6f77ea5ac83fe3b9ad4ef309fffa9c84",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": true,
+      "owner": "plan:apollo_bootloader",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/bootloader-initializers-002/review-002.json",
+      "pinned_sha256": "bcc2fbd8d4bdf510a1c5ff957f88de4e6f77ea5ac83fe3b9ad4ef309fffa9c84"
+    },
+    {
+      "actual_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "input_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "matches_pin": true,
+      "owner": "plan:apollo_bootloader",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "pinned_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "actual_sha256": "336f076e414de498948a0302ce41e6b39b1138c47a4e560731193eac754db408",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": false,
+      "owner": "plan:case",
+      "path": "g2/docs/reference/memory-map.md",
+      "pinned_sha256": "3779e487c2bd94985dd8a4b053a610902b2a8b326e9c9c893f7f4f5612dab94a"
+    },
+    {
+      "actual_sha256": "27acc0f9734a64c992dd484a7178ccb8ce8efecc765fe7a1df711b237f49a85d",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": true,
+      "owner": "plan:case",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/case-startup-transform-001/review.json",
+      "pinned_sha256": "27acc0f9734a64c992dd484a7178ccb8ce8efecc765fe7a1df711b237f49a85d"
+    },
+    {
+      "actual_sha256": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": false,
+      "owner": "plan:case",
+      "path": "g2/docs/reference/firmware-formats.md",
+      "pinned_sha256": "b3df6c4c5dd55d6c1fef419b2e4fbacf7312208f122a68271ee34e79ea943016"
+    },
+    {
+      "actual_sha256": "debe676f21160ed5c2a58d0078651f69c0d907436de7e20e496ad46d3144138a",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": false,
+      "owner": "plan:case",
+      "path": "docs/tooling.md",
+      "pinned_sha256": "044f0e93e4e09e56a19a1b6ccfba86c237cb3f389f1d59d7c64fd607686bcd0d"
+    },
+    {
+      "actual_sha256": "047f85abe2dcdfc243705f8d76168d45a383da3143182783966fde1df0b9d0f8",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": true,
+      "owner": "plan:case",
+      "path": "g2/docs/reference/decompilation-status.md",
+      "pinned_sha256": "047f85abe2dcdfc243705f8d76168d45a383da3143182783966fde1df0b9d0f8"
+    },
+    {
+      "actual_sha256": "688adfadc9949220d1a21ff7e2e30e181f238cf7a69a9d649662bb843e41a742",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": true,
+      "owner": "plan:case",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/tools/arm-binutils-observed-030/receipt.json",
+      "pinned_sha256": "688adfadc9949220d1a21ff7e2e30e181f238cf7a69a9d649662bb843e41a742"
+    },
+    {
+      "actual_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "input_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "matches_pin": true,
+      "owner": "plan:case",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "pinned_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "actual_sha256": "336f076e414de498948a0302ce41e6b39b1138c47a4e560731193eac754db408",
+      "input_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "matches_pin": false,
+      "owner": "plan:touch",
+      "path": "g2/docs/reference/memory-map.md",
+      "pinned_sha256": "3779e487c2bd94985dd8a4b053a610902b2a8b326e9c9c893f7f4f5612dab94a"
+    },
+    {
+      "actual_sha256": "20faff26f7faaa9011814a1a1734f4eb899a2ce0a30e5e864b599e0aa16f884a",
+      "input_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "matches_pin": true,
+      "owner": "plan:touch",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/touch-startup-mapping-review-001.json",
+      "pinned_sha256": "20faff26f7faaa9011814a1a1734f4eb899a2ce0a30e5e864b599e0aa16f884a"
+    },
+    {
+      "actual_sha256": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83",
+      "input_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "matches_pin": false,
+      "owner": "plan:touch",
+      "path": "g2/docs/reference/firmware-formats.md",
+      "pinned_sha256": "b3df6c4c5dd55d6c1fef419b2e4fbacf7312208f122a68271ee34e79ea943016"
+    },
+    {
+      "actual_sha256": "debe676f21160ed5c2a58d0078651f69c0d907436de7e20e496ad46d3144138a",
+      "input_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "matches_pin": false,
+      "owner": "plan:touch",
+      "path": "docs/tooling.md",
+      "pinned_sha256": "044f0e93e4e09e56a19a1b6ccfba86c237cb3f389f1d59d7c64fd607686bcd0d"
+    },
+    {
+      "actual_sha256": "047f85abe2dcdfc243705f8d76168d45a383da3143182783966fde1df0b9d0f8",
+      "input_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "matches_pin": true,
+      "owner": "plan:touch",
+      "path": "g2/docs/reference/decompilation-status.md",
+      "pinned_sha256": "047f85abe2dcdfc243705f8d76168d45a383da3143182783966fde1df0b9d0f8"
+    },
+    {
+      "actual_sha256": "688adfadc9949220d1a21ff7e2e30e181f238cf7a69a9d649662bb843e41a742",
+      "input_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "matches_pin": true,
+      "owner": "plan:touch",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/tools/arm-binutils-observed-030/receipt.json",
+      "pinned_sha256": "688adfadc9949220d1a21ff7e2e30e181f238cf7a69a9d649662bb843e41a742"
+    },
+    {
+      "actual_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "input_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "matches_pin": true,
+      "owner": "plan:touch",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "pinned_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "actual_sha256": "336f076e414de498948a0302ce41e6b39b1138c47a4e560731193eac754db408",
+      "input_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_pin": false,
+      "owner": "plan:ble_em9305",
+      "path": "g2/docs/reference/memory-map.md",
+      "pinned_sha256": "3779e487c2bd94985dd8a4b053a610902b2a8b326e9c9c893f7f4f5612dab94a"
+    },
+    {
+      "actual_sha256": "2a3a6d58d36e4bcf840d25d88e367d3047ae0d45d0420ffbeff8e5659ad531c5",
+      "input_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_pin": true,
+      "owner": "plan:ble_em9305",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/em9305-package-001/review.json",
+      "pinned_sha256": "2a3a6d58d36e4bcf840d25d88e367d3047ae0d45d0420ffbeff8e5659ad531c5"
+    },
+    {
+      "actual_sha256": "2c86daab298dd4d623b250311d1862abcba1b6419eba4534ca16c36f74c6c5eb",
+      "input_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_pin": true,
+      "owner": "plan:ble_em9305",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/tools/arc-binutils-001/build-receipt.json",
+      "pinned_sha256": "2c86daab298dd4d623b250311d1862abcba1b6419eba4534ca16c36f74c6c5eb"
+    },
+    {
+      "actual_sha256": "67363b41db45b40fe2c8ce9dc90b00dd04201f53dd0d2b11a1735b05e3e92622",
+      "input_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_pin": true,
+      "owner": "plan:ble_em9305",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/tools/arc-binutils-001/calibration/historical-comparison.json",
+      "pinned_sha256": "67363b41db45b40fe2c8ce9dc90b00dd04201f53dd0d2b11a1735b05e3e92622"
+    },
+    {
+      "actual_sha256": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83",
+      "input_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_pin": false,
+      "owner": "plan:ble_em9305",
+      "path": "g2/docs/reference/firmware-formats.md",
+      "pinned_sha256": "b3df6c4c5dd55d6c1fef419b2e4fbacf7312208f122a68271ee34e79ea943016"
+    },
+    {
+      "actual_sha256": "debe676f21160ed5c2a58d0078651f69c0d907436de7e20e496ad46d3144138a",
+      "input_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_pin": false,
+      "owner": "plan:ble_em9305",
+      "path": "docs/tooling.md",
+      "pinned_sha256": "044f0e93e4e09e56a19a1b6ccfba86c237cb3f389f1d59d7c64fd607686bcd0d"
+    },
+    {
+      "actual_sha256": "047f85abe2dcdfc243705f8d76168d45a383da3143182783966fde1df0b9d0f8",
+      "input_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_pin": true,
+      "owner": "plan:ble_em9305",
+      "path": "g2/docs/reference/decompilation-status.md",
+      "pinned_sha256": "047f85abe2dcdfc243705f8d76168d45a383da3143182783966fde1df0b9d0f8"
+    },
+    {
+      "actual_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "input_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_pin": true,
+      "owner": "plan:ble_em9305",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "pinned_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "actual_sha256": "336f076e414de498948a0302ce41e6b39b1138c47a4e560731193eac754db408",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": false,
+      "owner": "plan:codec",
+      "path": "g2/docs/reference/memory-map.md",
+      "pinned_sha256": "3779e487c2bd94985dd8a4b053a610902b2a8b326e9c9c893f7f4f5612dab94a"
+    },
+    {
+      "actual_sha256": "1e86b1b382e1c6e7724d5453d64a513aade02ac70f6d720b5985b77a1b3870df",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "plan:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/codec-nesting.json",
+      "pinned_sha256": "1e86b1b382e1c6e7724d5453d64a513aade02ac70f6d720b5985b77a1b3870df"
+    },
+    {
+      "actual_sha256": "96936139137e6b6dd7a3b0fbd087620c01f08df8f4af56edce899baab6381d57",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "plan:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-flash-loader-startup-001/review-002.json",
+      "pinned_sha256": "96936139137e6b6dd7a3b0fbd087620c01f08df8f4af56edce899baab6381d57"
+    },
+    {
+      "actual_sha256": "d898ec0cbcecc14dad100382979974b8e8dae143f2c846253820b1ec72514062",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "plan:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/csky-semantics-audit-001.json",
+      "pinned_sha256": "d898ec0cbcecc14dad100382979974b8e8dae143f2c846253820b1ec72514062"
+    },
+    {
+      "actual_sha256": "397f4a08cda836ec3ef0a8045c6c87518f59cd6497465acd3bf7bf5ec0995c13",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "plan:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-codec-decoder-calibration-001/001/receipt.json",
+      "pinned_sha256": "397f4a08cda836ec3ef0a8045c6c87518f59cd6497465acd3bf7bf5ec0995c13"
+    },
+    {
+      "actual_sha256": "9012732a91ff591a65126e62bc53a2187d8f0f98c4a604508daeb184533e2bba",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "plan:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/receipt.md",
+      "pinned_sha256": "9012732a91ff591a65126e62bc53a2187d8f0f98c4a604508daeb184533e2bba"
+    },
+    {
+      "actual_sha256": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": false,
+      "owner": "plan:codec",
+      "path": "g2/docs/reference/firmware-formats.md",
+      "pinned_sha256": "b3df6c4c5dd55d6c1fef419b2e4fbacf7312208f122a68271ee34e79ea943016"
+    },
+    {
+      "actual_sha256": "debe676f21160ed5c2a58d0078651f69c0d907436de7e20e496ad46d3144138a",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": false,
+      "owner": "plan:codec",
+      "path": "docs/tooling.md",
+      "pinned_sha256": "044f0e93e4e09e56a19a1b6ccfba86c237cb3f389f1d59d7c64fd607686bcd0d"
+    },
+    {
+      "actual_sha256": "047f85abe2dcdfc243705f8d76168d45a383da3143182783966fde1df0b9d0f8",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "plan:codec",
+      "path": "g2/docs/reference/decompilation-status.md",
+      "pinned_sha256": "047f85abe2dcdfc243705f8d76168d45a383da3143182783966fde1df0b9d0f8"
+    },
+    {
+      "actual_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "input_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "matches_pin": true,
+      "owner": "plan:codec",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "pinned_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    }
+  ],
+  "evidence_reference_count": 95,
+  "g1_status": "not_run",
+  "historical_campaign_id": "20260930T190500Z",
+  "new_campaign_id": "20261112T092142Z",
+  "schema_version": 1,
+  "scope": "Historical discovery and architecture plan file pins and basic set consistency; no independent mapping, decoder, review, or G1 admission.",
+  "stale_evidence_reference_count": 18,
+  "structural_errors": [],
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

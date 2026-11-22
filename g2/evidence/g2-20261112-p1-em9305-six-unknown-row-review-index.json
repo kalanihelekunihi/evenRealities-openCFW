@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded byte accounting for six v017 EM9305 payload unknown rows",
+  "artifacts": {
+    "review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-012/001/review.py",
+      "sha256": "94c96fd1fc109875a1bcdf6577e044cc6eea2332576ce98ef0c2309f8a016036"
+    },
+    "review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-012/001/review.json",
+      "sha256": "9430edbfc9749e7f48d4904a9a268d5e2b9647b049e0635a6ce5001fa5924547"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-012/001/receipt.json",
+      "sha256": "95580eb8b2b9bd3c4b33be0fb2a10380a77627191f9957f7e537e2454bae83fd"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-012-independent-review-001/001/review.json",
+      "sha256": "95e4d7d64fabbf838d656b108dd146b0a735492744ec6789af6e4c9271f14106"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "em9305_payload_unknown_rows": 6,
+    "bounded_accounted_unknown_rows": 6,
+    "rows_needing_known_boundary_refinement": [
+      "ble_em9305:0000007c:000001a4",
+      "ble_em9305:000003a6:000003e0",
+      "ble_em9305:000003ec:00033bec"
+    ],
+    "remaining_single_record_unknown_rows": 3,
+    "validator_trusted_review_ids_assigned": 0
+  },
+  "limits": [
+    "The producer's blanket recommendation to refine all six rows is narrowed by independent review: three may remain explicit unknowns with supplemental record-local evidence.",
+    "The largest row contains FHDR, entry/pad, record-3 code/INI/child payloads and unclassified bytes; its entry decode remains not_qualified.",
+    "No authenticated reviewer registry, canonical admission, G1 or G2 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

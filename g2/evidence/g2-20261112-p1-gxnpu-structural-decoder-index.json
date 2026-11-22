@@ -1,0 +1,48 @@
+{
+  "artifacts": {
+    "decoder_ledger": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-decoder-calibration-001/001/command-boundaries.json",
+      "sha256": "fdf5748090fba4c31b13df8ddc23cf77e563f5c3b40b7f253d94dd41a79723fb"
+    },
+    "decoder_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-decoder-calibration-001/001/receipt.json",
+      "sha256": "4a1bc82aa6ed8c6641e4549e76a154c54d48fef4e0009e9d1a8dcf6e1395cdc8"
+    },
+    "decoder_review": {
+      "path": "g2/evidence/g2-20261112-p1-gxnpu-decoder-review.json",
+      "sha256": "28a449d13167be697ce6c09e5d92b2e9a068b024bdf44564096d2b78b36ff295"
+    },
+    "decoder_source": {
+      "path": "g2/tools/gxdnn_command_emitter.py",
+      "sha256": "67bece9822820e6b4c5d99b890e5f7f8275cba758755c026cb40698eb45f81da"
+    },
+    "plan_candidate": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-gxnpu-003/001/analysis-plan-candidate-003.json",
+      "sha256": "b16fee3c62b9874fde3fe6ce86bf95aa23d5370d911f8673eb7ec55c7cbdf9a5"
+    },
+    "plan_review": {
+      "path": "g2/evidence/g2-20261112-p1-gxnpu-plan-review.json",
+      "sha256": "c9e66032740c10543efb50ad0cdde31d2bcad1573d23c8c0150c0dae5b53ea0b"
+    }
+  },
+  "campaign_id": "20261112T092142Z",
+  "checks": {
+    "codec_command_bytes": 9164,
+    "command_records": 212,
+    "explicit_link_records": 1,
+    "focused_unittest_count": 26,
+    "independent_raw_header_walk_records": 212,
+    "nonzero_reserved_header_records": 83,
+    "raw_fallback_records": 0,
+    "typed_roundtrip_byte_exact": true
+  },
+  "schema_version": 1,
+  "scope": "Locked codec GXNPU command stream structural decoder calibration and six-payload architecture plan candidate. Byte structure checked; full accelerator/C-SKY semantics and G1 remain open.",
+  "status": {
+    "decoder_review": "bounded structural pass",
+    "g1": "not_run",
+    "p2_semantic_completeness": "unproven",
+    "plan_review": "accept_with_limits; noncanonical"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

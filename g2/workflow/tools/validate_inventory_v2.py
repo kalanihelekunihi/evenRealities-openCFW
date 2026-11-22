@@ -91,6 +91,7 @@ DECODED_RECIPES = {"thumb-stock-handler-unicorn-v1", "apollo-iar3-itcm-stock-han
                    "apollo-iar3-fixed-reviewed-stock-handler-unicorn-v2"}
 IAR3_RECIPE = "apollo-iar3-itcm-stock-handler-unicorn-v1"
 IAR3_FIXED_RECIPE = "apollo-iar3-fixed-reviewed-stock-handler-unicorn-v2"
+PINNED_IAR3_REVIEW_CAMPAIGN = "20260930T190500Z"
 APOLLO_REVIEW_004_PATH = "g2/build/pseudocode-first/20260930T190500Z/reviews/apollo-itcm-transform-004/review-004.json"
 APOLLO_REVIEW_004_SHA256 = "5df7bf4e1c7f6aaa12b36628e87adbe49057e6f0a5af15c4d26005eb70cf4772"
 APOLLO_MAIN_REVIEW_005_PATH = "g2/build/pseudocode-first/20260930T190500Z/reviews/apollo-main-initializers-005/review-005.json"
@@ -850,6 +851,45 @@ def type_span(value: Any) -> list[int] | None:
     return value
 
 
+def validate_resolved_address_spaces(image: dict[str, Any]) -> None:
+    """Require a reversible, complete byte map in each declared address space."""
+    size = image.get("size")
+    if type(size) is not int or size <= 0:
+        fail(f"resolved image has invalid size: {image.get('id')}")
+    seen_space_ids: set[str] = set()
+    for space in image["address_spaces"]:
+        if not isinstance(space, dict) or not isinstance(space.get("id"), str) or not space["id"]:
+            fail(f"incomplete address-space mapping: {image.get('id')}")
+        if space["id"] in seen_space_ids:
+            fail(f"duplicate address-space id: {image.get('id')}")
+        seen_space_ids.add(space["id"])
+        maps = space.get("mappings")
+        if not isinstance(maps, list) or not maps:
+            fail(f"incomplete address-space mapping: {image.get('id')}")
+        ordered = []
+        for m in maps:
+            if not isinstance(m, dict) or any(type(m.get(k)) is not int for k in
+                    ("image_start", "image_end", "loaded_start", "loaded_end")):
+                fail(f"non-integer mapping bounds: {image.get('id')}")
+            start, end = m["image_start"], m["image_end"]
+            loaded_start, loaded_end = m["loaded_start"], m["loaded_end"]
+            if (start < 0 or end <= start or end > size or loaded_start < 0
+                    or loaded_end <= loaded_start or end - start != loaded_end - loaded_start):
+                fail(f"invalid file-to-loaded-address bounds: {image.get('id')}")
+            ordered.append((start, end, loaded_start, loaded_end))
+        cursor = 0
+        for start, end, _, _ in sorted(ordered):
+            if start != cursor:
+                fail(f"resolved image mapping has gap or overlap: {image.get('id')}")
+            cursor = end
+        if cursor != size:
+            fail(f"resolved image mapping does not cover image: {image.get('id')}")
+        by_loaded = sorted(ordered, key=lambda item: item[2])
+        for left, right in zip(by_loaded, by_loaded[1:]):
+            if left[3] > right[2]:
+                fail(f"resolved image loaded addresses overlap: {image.get('id')}")
+
+
 def validate_mapping_model(image: dict[str, Any], image_by_id: dict[str, dict[str, Any]],
                            component_size: int, expected_source: str,
                            execution_contract_review: Callable[[dict[str, Any], dict[str, Any]], None] | None = None) -> None:
@@ -861,6 +901,7 @@ def validate_mapping_model(image: dict[str, Any], image_by_id: dict[str, dict[st
             fail("resolved image mapping requires concrete numeric address spaces")
         if "mapping_model" in image:
             fail("resolved numeric mappings cannot carry an alternate mapping model")
+        validate_resolved_address_spaces(image)
         return
     if status not in {"container_only", "parametric", "conditional", "software_transfer", "execution_contract"}:
         fail(f"unresolved mapping facts: {image.get('id')}")
@@ -1075,14 +1116,17 @@ def verify_iar3_fixed_record(payload_id: str, descriptor_runtime: int, words: li
     return expected
 
 
-def verify_iar3_review_basis(basis: dict[str, Any], campaign_id: str, target_hash: str,
+def verify_iar3_review_basis(basis: dict[str, Any], target_hash: str,
                              expected: dict[str, Any]) -> None:
     path, file_hash = expected["review"]
     if basis != {"path": path, "sha256": file_hash}:
         fail("IAR3 fixed transform lacks its exact pinned independent review basis")
     hash_bound_file(basis, "IAR3 fixed review basis")
     review = read_json(ROOT / path)
-    if (review.get("campaign_id") != campaign_id or review.get("decision") != expected["decision"]
+    # This pinned review is a historical mapping basis. The current campaign's
+    # transform and image still require their own independently reviewed records.
+    if (review.get("campaign_id") != PINNED_IAR3_REVIEW_CAMPAIGN
+            or review.get("decision") != expected["decision"]
             or not review.get("reviewer")):
         fail("IAR3 fixed review basis has the wrong campaign or decision")
     if expected["review_kind"] == "apollo_main":
@@ -1125,25 +1169,131 @@ def verify_iar3_review_basis(basis: dict[str, Any], campaign_id: str, target_has
 
 
 def verify_fresh_main_execution(receipt: dict[str, Any], output: dict[str, Any],
-                               descriptor_runtime: int) -> dict[str, Any]:
+                               descriptor_runtime: int, target_hash: str) -> dict[str, Any]:
     """Bind the main RAM transform to its separately captured canonical replay."""
     ref = receipt.get("fresh_execution_receipt", {})
-    expected_path = ("g2/build/pseudocode-first/20260930T190500Z/attempts/"
-                     "P1-apollo-main-canonical-replay-009/001/execution-receipt.json")
+    campaign_id = receipt.get("campaign_id")
+    if campaign_id == PINNED_IAR3_REVIEW_CAMPAIGN:
+        expected_path = ("g2/build/pseudocode-first/20260930T190500Z/attempts/"
+                         "P1-apollo-main-canonical-replay-009/001/execution-receipt.json")
+    else:
+        expected_path = (f"g2/build/pseudocode-first/{campaign_id}/attempts/"
+                         "P1-main-ram-transform-replay-001/001/fresh-replay-receipt-002.json")
     if not isinstance(ref, dict) or ref.get("path") != expected_path:
         fail("Apollo main RAM transform lacks the fresh canonical replay receipt")
     hash_bound_file(ref, "Apollo main fresh execution receipt")
     fresh = read_json(ROOT / expected_path)
     toolchain, execution = receipt.get("toolchain", {}), receipt.get("execution", {})
-    if (fresh.get("schema_version") != 1 or fresh.get("campaign_id") != "20260930T190500Z"
-            or fresh.get("source_payload", {}).get("sha256") != APOLLO_MAIN_SHA256
-            or fresh.get("toolchain") != toolchain or fresh.get("execution") != execution):
-        fail("Apollo main canonical execution provenance differs from the transform receipt")
-    found = [row for row in fresh.get("outputs", []) if row.get("descriptor") == hex(descriptor_runtime)]
-    if (len(found) != 1 or found[0].get("path") != output.get("path")
-            or found[0].get("size") != output.get("size")
-            or found[0].get("sha256") != output.get("sha256")):
-        fail("Apollo main canonical replay output does not match the fixed transform")
+    if campaign_id == PINNED_IAR3_REVIEW_CAMPAIGN:
+        if (fresh.get("schema_version") != 1 or fresh.get("campaign_id") != campaign_id
+                or fresh.get("source_payload", {}).get("sha256") != APOLLO_MAIN_SHA256
+                or fresh.get("toolchain") != toolchain or fresh.get("execution") != execution):
+            fail("Apollo main canonical execution provenance differs from the transform receipt")
+        found = [row for row in fresh.get("outputs", []) if row.get("descriptor") == hex(descriptor_runtime)]
+        if (len(found) != 1 or found[0].get("path") != output.get("path")
+                or found[0].get("size") != output.get("size")
+                or found[0].get("sha256") != output.get("sha256")):
+            fail("Apollo main canonical replay output does not match the fixed transform")
+        return ref
+
+    if (fresh.get("schema_version") != 1 or fresh.get("campaign_id") != campaign_id
+            or fresh.get("target_sha256") != target_hash
+            or fresh.get("locked_main_payload", {}).get("sha256") != APOLLO_MAIN_SHA256
+            or fresh.get("source_parent_sha256") != receipt.get("source", {}).get("parent_content_sha256")
+            or fresh.get("current_replay_script") != toolchain.get("script")
+            or any(fresh.get("execution", {}).get(k) != execution.get(k)
+                   for k in ("argv", "exit_code", "stdout", "stderr"))):
+        fail("Apollo main current replay provenance differs from the transform receipt")
+    trace_ref = receipt.get("trace_results", {})
+    trace = fresh.get("trace", {})
+    if (not isinstance(trace_ref, dict) or trace_ref != {k: trace.get(k) for k in ("path", "sha256")}):
+        fail("Apollo main current replay trace differs from the transform receipt")
+    hash_bound_file(trace_ref, "Apollo main current replay trace")
+    trace_file = read_json(ROOT / trace_ref["path"])
+    if trace.get("records") != trace_file.get("records"):
+        fail("Apollo main current replay trace records differ from the hash-bound trace file")
+    image_id = {0x75D3F4: "apollo_main:decoded:20000000",
+                0x75D404: "apollo_main:decoded:20080000"}.get(descriptor_runtime)
+    found = [row for row in fresh.get("images", []) if row.get("image_id") == image_id]
+    source = receipt.get("source", {})
+    if (len(found) != 1 or found[0].get("output_path") != output.get("path")
+            or found[0].get("output_size") != output.get("size")
+            or found[0].get("output_sha256") != output.get("sha256")
+            or found[0].get("source_raw_image_span") != source.get("source_span")
+            or found[0].get("source_span_sha256") != source.get("source_span_sha256")):
+        fail("Apollo main current replay source/output differs from the fixed transform")
+    trace_rows = [row for row in trace.get("records", []) if row.get("descriptor") == hex(descriptor_runtime)]
+    if (len(trace_rows) != 1 or trace_rows[0].get("output_size") != output.get("size")
+            or trace_rows[0].get("output_sha256") != output.get("sha256")
+            or trace_rows[0].get("source_effective_address_set_exact") is not True
+            or trace_rows[0].get("all_backreferences_in_prior_output") is not True
+            or trace_rows[0].get("return_to_sentinel") is not True):
+        fail("Apollo main current replay trace does not support the fixed transform")
+    return ref
+
+
+def verify_current_replay_receipt(receipt: dict[str, Any], image: dict[str, Any],
+                                  target_hash: str) -> dict[str, Any]:
+    """Bind every current-campaign decoded row to its replay command and output."""
+    ref = receipt.get("fresh_execution_receipt")
+    if not isinstance(ref, dict):
+        fail("current decoded transform lacks a fresh replay receipt")
+    campaign_id = receipt.get("campaign_id")
+    script = receipt.get("toolchain", {}).get("script", {})
+    replay_path = ref.get("path", "")
+    script_path = script.get("path", "")
+    prefix = f"g2/build/pseudocode-first/{campaign_id}/attempts/"
+    if (not isinstance(replay_path, str) or not replay_path.startswith(prefix)
+            or pathlib.PurePosixPath(replay_path).is_absolute()
+            or ".." in pathlib.PurePosixPath(replay_path).parts
+            or pathlib.PurePosixPath(replay_path).parent != pathlib.PurePosixPath(script_path).parent
+            or pathlib.PurePosixPath(replay_path).name not in
+            {"fresh-replay-receipt.json", "fresh-replay-receipt-002.json"}):
+        fail("current decoded transform replay receipt is outside its recorded command directory")
+    hash_bound_file(ref, "current decoded transform replay receipt")
+    fresh = read_json(ROOT / replay_path)
+    execution = receipt.get("execution", {})
+    if (fresh.get("schema_version") != 1 or fresh.get("campaign_id") != campaign_id
+            or fresh.get("target_sha256") != target_hash
+            or any(fresh.get("execution", {}).get(k) != execution.get(k)
+                   for k in ("argv", "exit_code", "stdout", "stderr"))):
+        fail("current decoded transform replay identity or execution differs")
+    replay_script_hash = (fresh.get("script_sha256") or
+                          fresh.get("current_replay_script", {}).get("sha256") or
+                          next((item.get("current_sha256") for item in fresh.get("outputs", [])
+                                if item.get("name") == "replay.py"), None))
+    if replay_script_hash != script.get("sha256"):
+        fail("current decoded transform replay script differs")
+    output = receipt.get("output", {})
+    matching_outputs = []
+    if fresh.get("output", {}).get("path") == output.get("path"):
+        matching_outputs.append((fresh["output"].get("sha256"), fresh["output"].get("size")))
+    matching_outputs += [(item.get("output_sha256"), item.get("output_size"))
+                         for item in fresh.get("images", [])
+                         if item.get("image_id") == image.get("id") and item.get("output_path") == output.get("path")]
+    matching_outputs += [(item.get("current_sha256"), item.get("size"))
+                         for item in fresh.get("outputs", []) if item.get("path") == output.get("path")]
+    if matching_outputs != [(output.get("sha256"), output.get("size"))]:
+        fail("current decoded transform replay output differs")
+    source = receipt.get("source", {})
+    fresh_source = fresh.get("source", {})
+    image_rows = [item for item in fresh.get("images", []) if item.get("image_id") == image.get("id")]
+    if not fresh_source and not image_rows:
+        fail("current decoded transform replay lacks its source-byte relation")
+    source_span = (fresh_source.get("raw_image_span") or fresh_source.get("source_span"))
+    source_hash = (fresh_source.get("source_sha256") or fresh_source.get("source_span_sha256"))
+    if fresh_source and (source_span != source.get("source_span")
+                         or source_hash != source.get("source_span_sha256")):
+        fail("current decoded transform replay source span differs")
+    parent_hash = (fresh_source.get("parent_content_sha256") or fresh_source.get("parent_flash_sha256")
+                   or fresh.get("source_parent_sha256") or fresh.get("locked_bootloader", {}).get("sha256"))
+    if parent_hash != source.get("parent_content_sha256"):
+        fail("current decoded transform replay parent differs")
+    if fresh.get("images") and (len(image_rows) != 1
+                                or (image_rows[0].get("source_raw_image_span") or image_rows[0].get("source_span"))
+                                != source.get("source_span")
+                                or image_rows[0].get("source_span_sha256") != source.get("source_span_sha256")):
+        fail("current decoded transform replay image source differs")
     return ref
 
 
@@ -1622,7 +1772,8 @@ def verify(campaign: pathlib.Path, trusted_registry_sha256: str) -> None:
                     basis_record = read_json(ROOT / APOLLO_REVIEW_004_PATH)
                     facts = basis_record.get("authenticated_input", {})
                     mapped_facts = basis_record.get("transform_mapping_result", {})
-                    if (basis_record.get("campaign_id") != campaign_id or basis_record.get("decision") != "pass"
+                    if (basis_record.get("campaign_id") != PINNED_IAR3_REVIEW_CAMPAIGN
+                            or basis_record.get("decision") != "pass"
                             or not basis_record.get("author") or not basis_record.get("reviewer")
                             or basis_record.get("author") == basis_record.get("reviewer")
                             or facts.get("bundle_sha256") != target_hash or facts.get("apollo_main_sha256") != APOLLO_MAIN_SHA256
@@ -1650,11 +1801,10 @@ def verify(campaign: pathlib.Path, trusted_registry_sha256: str) -> None:
                         image["content_sha256"], destination_runtime, dispatch["runtime_address"],
                         dispatch_word, handler["runtime_entry"], handler["bytes_sha256"],
                         handler_runtime, handler_span[1] - handler_span[0])
-                    verify_iar3_review_basis(receipt.get("review_basis", {}), campaign_id,
-                                             target_hash, checked)
+                    verify_iar3_review_basis(receipt.get("review_basis", {}), target_hash, checked)
                     if checked["review_kind"] == "apollo_main" and descriptor_runtime[0] in {0x75D3F4, 0x75D404}:
                         fresh_execution_ref = verify_fresh_main_execution(receipt, output_receipt,
-                                                                           descriptor_runtime[0])
+                                                                           descriptor_runtime[0], target_hash)
             toolchain = receipt.get("toolchain", {})
             python_tool = toolchain.get("python", {})
             script = toolchain.get("script", {})
@@ -1683,6 +1833,11 @@ def verify(campaign: pathlib.Path, trusted_registry_sha256: str) -> None:
                 fail(f"decoded transform actual argv/exit receipt mismatch: {image['id']}")
             for stream_name in ("stdout", "stderr"):
                 hash_bound_file(execution.get(stream_name, {}), f"decoded transform {stream_name}:{image['id']}")
+            if target["target_id"] == "official-s200-v2.2.6.10" and campaign_id != PINNED_IAR3_REVIEW_CAMPAIGN:
+                current_ref = verify_current_replay_receipt(receipt, image, target_hash)
+                if fresh_execution_ref is not None and current_ref != fresh_execution_ref:
+                    fail("current decoded transform replay disagrees with its fixed RAM trace")
+                fresh_execution_ref = current_ref
             transform_review_inputs = {
                 ("transform_receipt", receipt_ref["path"], receipt_ref["sha256"]),
                 ("source", parent_path, expected_source),

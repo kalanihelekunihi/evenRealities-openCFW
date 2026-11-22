@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "title": "Version-mismatch paired Renode run extended to 60 virtual seconds",
+  "scope": "Same inputs as the 5:55 AM CST 8s mismatch experiment (stock 2.2.6.10 vs 12 Nov diagnostic openCFW main, NOR with official firmware/ble_em9305.bin, controller word forced to 4.3.1.0). RunFor extended to 60 virtual seconds with PC peeks at 0/8/30/60s. No source or emulator change. No hardware flash.",
+  "inputs": {
+    "stock_app": {
+      "path": "build/em9305-nor-20261122/stock.app.bin",
+      "bytes": 3523364,
+      "sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+      "reset_pc": "0x005E4233",
+      "sp": "0x2007FB00"
+    },
+    "opencfw_app": {
+      "path": "build/em9305-nor-20261122/opencfw.app.bin",
+      "source": "build/g2-current-source-bundle-diagnostic-20261112T1130Z/g2-apollo-main/g2-apollo-main.bin",
+      "bytes": 3818800,
+      "sha256": "39d36f4c74dde972ee5669fa00f97f38b3465aea0379eae5667fd774c233f08a",
+      "reset_pc": "0x00594005",
+      "sp": "0x2007FB00",
+      "note": "Same diagnostic image as the 8s mismatch, not the later advertising-disarm rebuild, so this is a direct extension of that experiment. CHIPREV stayed at the model default 0, so the early-arm hook would have been a no-op even on the newer image."
+    },
+    "itcm_overlay": {
+      "path": "build/em9305-nor-20261122/itcm.bin",
+      "bytes": 24,
+      "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83"
+    },
+    "nor_with_em9305": {
+      "path": "build/em9305-nor-20261122/nor-with-em9305.bin",
+      "bytes": 33554432,
+      "sha256": "69efc6d023779beec9dada757ec9fe852f9454b4b84bae6fe8421c703f35c9d1"
+    },
+    "controller_version": {
+      "address": "0x00402000",
+      "fixture": "00010304",
+      "name": "forced-controller-version-4.3.1.0-mismatch",
+      "resc": "build/em9305-nor-20261122/controller-mismatch.resc"
+    }
+  },
+  "runs": {
+    "stock-mismatch-60s": {
+      "resc": "build/em9305-nor-20261122/stock-mismatch-60s.resc",
+      "resc_sha256": "6059d8dc35ef929b2c52e9cfc61236df9fc773a461c6ad45f71aa216a5fe84fa",
+      "log": "build/em9305-nor-20261122/stock-mismatch-60s.log",
+      "log_sha256": "c974e14c0b48537e577c17e8b910fb23e024c982a79057457662983012464281",
+      "hci_count": 10,
+      "hci_unique": [
+        "0101FD05884BF00008",
+        "0101FD050020400004"
+      ],
+      "advertising_enable": false,
+      "wdt_resets": 4,
+      "pc": {
+        "after_0s": "0x5e4232",
+        "after_8s": "0x42",
+        "after_30s": "0x42",
+        "after_60s": "0x4807be"
+      },
+      "pc_after_60s_site": "Inside stock am_hal_delay_us at 0x4807a0 (movs r1, #15 at 0x4807be, then bl 0x40 to the ITCM delay overlay). Same delay family as the 8s/30s ITCM PC 0x42."
+    },
+    "opencfw-mismatch-60s": {
+      "resc": "build/em9305-nor-20261122/opencfw-mismatch-60s.resc",
+      "resc_sha256": "40d37d0b3924d1bff56a413e414c2ebf1e4d2598c711497c6d4e6dffc871887e",
+      "log": "build/em9305-nor-20261122/opencfw-mismatch-60s.log",
+      "log_sha256": "364b07df6a4707bf930c41c8e1f11ee366412fab844774f3b5e6aa4bd165170c",
+      "hci_count": 10,
+      "hci_unique": [
+        "0101FD05884BF00008",
+        "0101FD050020400004"
+      ],
+      "advertising_enable": false,
+      "wdt_resets": 4,
+      "pc": {
+        "after_0s": "0x594004",
+        "after_8s": "0x6006f6",
+        "after_30s": "0x6006f6",
+        "after_60s": "0x6006f4"
+      },
+      "pc_after_60s_site": "br_util_delay_cycles at 0x006006f4 (.itcm_text). The 8s mismatch ended at 0x6006f6, one instruction inside the same helper."
+    }
+  },
+  "findings": {
+    "hci_identical": true,
+    "hci_count": 10,
+    "hci_unique_count": 2,
+    "hci_new_opcodes_vs_8s": false,
+    "advertising": false,
+    "unmodeled_em9305_opcodes": [],
+    "wdt_resets_each": 4,
+    "wdt_first_seen_after_8s_peek": true,
+    "dfu_program_erase_hci_observed": false,
+    "end_pc_equivalent_mid_delay": true,
+    "openCFW_divergence": false,
+    "source_fix_applied": false,
+    "emulator_limits": [
+      "The EM9305 model still does not implement controller NVM program/erase, so the recover/reconfigure/finalize path never issues those HCI commands in this run.",
+      "On watchdog reset the model logs 'No action for reset - macro g2.reset is not registered' and only reloads the scripted CPU PC/SP (stock 0x5E4233, openCFW 0x594005). That is not a full SoC or SBL reset. After each such restart both images repeat the same two 0xFD01 reads."
+    ],
+    "hardware_hang_reproduced": false
+  }
+}

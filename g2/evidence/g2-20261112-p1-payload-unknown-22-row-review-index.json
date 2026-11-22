@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "All 22 v017 payload unknown candidate rows have bounded byte accounting and independent review",
+  "artifacts": {
+    "codec_six_unknown_row_index": {
+      "path": "g2/evidence/g2-20261112-p1-codec-six-unknown-row-review-index.json",
+      "sha256": "da10bcf3035b9636d3d86c540b219d2d2ddff9d810c8a26be2b495446c71a55c"
+    },
+    "em9305_six_unknown_row_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-six-unknown-row-review-index.json",
+      "sha256": "accb681fd46c6d05ffdc90dbeef6f0a8a4b9ab6cb72d9556ed667e30c645ad0d"
+    },
+    "touch_case_five_unknown_row_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-case-five-unknown-row-review-index.json",
+      "sha256": "4f768e6567537b5907c0667795e8e60d3a7827fd317c0134058f72d8d9ec0797"
+    },
+    "apollo_five_unknown_row_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-014/001/review.py",
+      "sha256": "160eeb887253798594dd515298dc2e8af02203cb2d1b46cb25c45eb4d69bb430"
+    },
+    "apollo_five_unknown_row_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-014/001/review.json",
+      "sha256": "d984d443ee68977a3f633490439553787f311b3bf5c4f698ebbc83ae33d808f8"
+    },
+    "apollo_five_unknown_row_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-014/001/receipt.json",
+      "sha256": "3f4cbf5aa5bd169905b846c9451c17a445fe1dce94fba2b96ee24d8c83c10229"
+    },
+    "apollo_five_independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-014-independent-review-001/001/review.json",
+      "sha256": "6b44c4ff2b8547d9a791137817aa0ad3c32f03cf7860a891571fb25e3e9b9ffb"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "payload_unknown_rows": 22,
+    "bounded_accounted_unknown_rows": 22,
+    "distribution": {
+      "codec": 6,
+      "ble_em9305": 6,
+      "touch": 2,
+      "case": 3,
+      "apollo_main": 4,
+      "apollo_bootloader": 1
+    },
+    "validator_trusted_review_ids_assigned": 0
+  },
+  "limits": [
+    "Many coarse unknown rows contain known code, data, vector, loader, or transform-source islands that need explicit subrange ledgers or stronger row evidence before G1.",
+    "Historical function-range unions are nonexhaustive and do not establish complete control flow or pseudocode.",
+    "The Apollo main two-byte startup gap remains unknown; RAM transform interiors and external route selection remain open.",
+    "No authenticated reviewer registry, canonical admission, G1 or G2 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

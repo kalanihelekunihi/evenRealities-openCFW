@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Reviewed current-campaign P1 canonical-readiness triage and bounded coverage scope correction; no G1 admission",
+  "artifacts": {
+    "image_audit": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-canonical-readiness-audit-001/001/report.json",
+      "sha256": "4d81bc43cf90b4753a029c7547b3e6b7fb7c91c72a15525579b7bb91ec473712"
+    },
+    "ledger_audit": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-canonical-readiness-audit-001/001/ledger-report.json",
+      "sha256": "6c666c2ae2b062375f0fc7d2bb5b7bc0954651ce415411ca5bd488fcbed14a84"
+    },
+    "independent_audit_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-canonical-readiness-review-001/001/review.json",
+      "sha256": "395f1ff109a15c0d5495a8ee69b1443cb722d513e81774a56d14ccb692e0aae8"
+    },
+    "validator_review_addendum": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-canonical-readiness-review-addendum-001/001/review.json",
+      "sha256": "bce0a3e8e61844ce476bc275c77e690f08216b351783da0ef2bcb059ab1f563e"
+    },
+    "coverage_v017": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-scope-binding-017/001/coverage-draft.jsonl",
+      "sha256": "7c382fa747be54caa9121ab6212e3585cbc77184dc9c7b26d258e3b1b896b84b"
+    },
+    "coverage_correction_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-scope-binding-017/001/receipt.json",
+      "sha256": "2beecd23df2125ae20c3af653be87903549c4ea44bd283681d0c45be174fb126"
+    },
+    "coverage_correction_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-scope-binding-review-001/001/review.json",
+      "sha256": "8d133ed15a251aea23609cbb5a955ed9762c99c62695d848080e8732819bba90"
+    },
+    "validator": {
+      "path": "g2/workflow/tools/validate_inventory_v2.py",
+      "sha256": "4f61c1e643f06a0f0e19a20b9bab47774587a9583181e01be4a387b67eb4beca"
+    }
+  },
+  "result": {
+    "image_candidate_count": 33,
+    "image_source_and_output_file_integrity_checks_pass": 33,
+    "stale_image_evidence_refs": 4,
+    "stale_image_evidence_unique_paths": 1,
+    "historical_decoded_transform_receipts_needing_current_campaign_replacement": 7,
+    "coverage_candidate_rows": 127,
+    "coverage_scope_count": 40,
+    "coverage_exact_partitions": 40,
+    "coverage_scope_input_corrections_reviewed": 16,
+    "coverage_scope_input_mismatches_after_v017": 0,
+    "coverage_rows_missing_independent_review": 127,
+    "images_missing_accounting_review": 33,
+    "discovery_unresolved_items": 7,
+    "historical_iar3_review_basis_validator_mismatch": "corrected by pinned historical review campaign check; six bases directly verified",
+    "canonical_registry": "absent"
+  },
+  "limits": [
+    "Image file integrity does not establish decoded transform execution or semantic provenance.",
+    "Coverage v017 is a reviewed candidate correction; individual rows and classifications still require independent admission review.",
+    "Historical mapping review bases do not replace current-campaign transform and image reviews.",
+    "G1-G6 remain not_run; no P2, C implementation, or byte-identical source-build claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

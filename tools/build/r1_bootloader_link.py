@@ -68,13 +68,38 @@ def main():
     layout = ROOT / 'r1/config-recovered/openr1_bootloader.ld'
     mdk = ROOT / 'vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk'
     elf = out / 'bootloader.elf'
-    command = [linker, '--gc-sections', '-L', str(mdk), '-T', str(layout),
+    source_ble_layout = bool(device.get('normal_svc') and device.get('cordio_rtc0'))
+    command = [linker, '--gc-sections',
+               *(['--defsym', 'R1_CORDIO_BOOT_RAM_ORIGIN=0x200064a8']
+                 if source_ble_layout else []),
+               '-L', str(mdk), '-T', str(layout),
                '-Map', str(out / 'bootloader.map'), '-o', str(elf), *map(str, objects)]
     result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
     log = result.stdout + result.stderr
     (out / 'link.log').write_text(log)
     undefined = sorted(set(re.findall(r"undefined reference to [`']([^'`]+)'", log)))
     map_text = (out / 'bootloader.map').read_text() if (out / 'bootloader.map').is_file() else ''
+    flash_end = None
+    for section in re.finditer(
+            r'^\.[^\s]+\s+0x([0-9a-fA-F]+)\s+0x([0-9a-fA-F]+)'
+            r'(?:\s+load address 0x([0-9a-fA-F]+))?',
+            map_text, re.MULTILINE):
+        section_name = section.group(0).split()[0]
+        if section_name in ('.bss', '.heap', '.stack', '.noinit'):
+            continue
+        vma, size = int(section.group(1), 16), int(section.group(2), 16)
+        lma = int(section.group(3), 16) if section.group(3) else vma
+        if size and 0xf8000 <= lma < 0xfe000:
+            flash_end = max(flash_end or 0, lma + size)
+    flash_used_bytes = flash_end - 0xf8000 if flash_end is not None else None
+    flash_headroom_bytes = (0x6000 - flash_used_bytes
+                            if flash_used_bytes is not None else None)
+    flash_overflow_match = re.search(
+        r"region [`']?FLASH['`]? overflowed by (\d+) bytes", log)
+    flash_overflow_bytes = (int(flash_overflow_match.group(1))
+                            if flash_overflow_match else
+                            max(0, -flash_headroom_bytes)
+                            if flash_headroom_bytes is not None else None)
     ram_region = re.search(r'^RAM\s+0x([0-9a-fA-F]+)\s+0x([0-9a-fA-F]+)',
                            map_text, re.MULTILINE)
     ram_origin = int(ram_region.group(1), 16) if ram_region else None
@@ -181,7 +206,11 @@ def main():
         'image_valid': image_valid, 'image_path': str(image) if image_valid else None,
         'image_bytes': image_bytes, 'image_sha256': image_sha256,
         'image_flash_capacity_bytes': 0x6000,
+        'flash_used_bytes': flash_used_bytes,
+        'flash_headroom_bytes': flash_headroom_bytes,
+        'flash_overflow_bytes': flash_overflow_bytes,
         'ram_origin': ram_origin, 'ram_capacity_bytes': ram_capacity,
+        'source_ble_ram_layout': source_ble_layout,
         'bss_end': bss_end, 'heap_base': heap_base, 'heap_limit': heap_limit,
         'stack_limit': stack_limit, 'stack_top': stack_top,
         'heap_reservation_bytes': (heap_limit - heap_base
@@ -201,6 +230,9 @@ def main():
         'limits': 'The raw bootloader flash region excludes UICR, settings and MBR pages; full bundle contents and physical boot require separate verification.'}
     (out / 'report.json').write_text(json.dumps(receipt, indent=2) + '\n')
     print(json.dumps({'linked': receipt['linked'], 'undefined_references': undefined,
+                      'flash_used_bytes': flash_used_bytes,
+                      'flash_headroom_bytes': flash_headroom_bytes,
+                      'flash_overflow_bytes': flash_overflow_bytes,
                       'vector_valid': vector_valid, 'ram_layout_valid': ram_layout_valid,
                       'image_valid': image_valid,
                       'image_bytes': image_bytes, 'report': str(out / 'report.json')}))

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "reviewed_revision": "005",
+  "draft_sha256": "bfd23c7aeb4af1181e39db39b03532994fd6ad90c9db5052e317aca0de6091a5",
+  "receipt_sha256": "0737b4b645fb1f4e660dd04fd7b276ae7c0f5f40d8cf94f3ae3ac05a402f4761",
+  "verdict": "SUPPORTED_WITH_BOUNDED_SCOPE",
+  "checks": {
+    "draft_and_receipt_hashes_and_chain": {
+      "result": "PASS",
+      "previous_draft_sha256": "1872c533e91e1dac8c4b589271599904fb4739be96fa0b50f74d8a70fa26a7c7",
+      "receipt_previous_draft_sha256": "1872c533e91e1dac8c4b589271599904fb4739be96fa0b50f74d8a70fa26a7c7"
+    },
+    "delta_scope": {
+      "result": "PASS",
+      "payload_rows_with_content_changes": [
+        "ble_em9305"
+      ],
+      "other_rows": "revision and predecessor metadata only",
+      "em_changed_fields": [
+        "evidence",
+        "predecessor_draft",
+        "resolved_in_revision_005",
+        "revision",
+        "scope_note",
+        "unresolved"
+      ],
+      "new_evidence_pins": [
+        {
+          "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-sweep-001/001/report.json",
+          "sha256": "7297f7634a3d38e4f521dfeeaf6df0cab4c8c809f77239b42e09bfe344fece90",
+          "file_hash_verified": true
+        },
+        {
+          "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-review-001/001/review.json",
+          "sha256": "aeaa6eb5e502259afb3befd821f7e5439cd03b22aa4d3b8bc7cf80c5de838247",
+          "file_hash_verified": true
+        }
+      ]
+    },
+    "counts_and_gate": {
+      "result": "PASS",
+      "payload_rows": 6,
+      "image_ids": 33,
+      "unique_image_ids": 33,
+      "unresolved_items": 7,
+      "gate_effect": "none; G1 remains not_run",
+      "all_admission_status_none": true
+    },
+    "em9305_scope_and_open_items": {
+      "result": "PASS",
+      "resolved": [
+        "Reviewed empty record-1 INI metadata table at package [992,1004); no encoded RAM child."
+      ],
+      "unresolved": [
+        "Complete code/data and reference sweep of EM9305 records 0 and 1 beyond their reviewed empty INI table, and the remaining application bytes beyond its reviewed INI table; external NVM record selection remains conditional."
+      ],
+      "external_record_selection": "conditional"
+    }
+  },
+  "conclusion": "Revision 005 correctly makes a bounded EM9305 update based on the reviewed small-record report: the empty record-1 INI metadata table is identified, while residual code/data/reference work remains open. The remaining five payload contents are unchanged from revision 004 apart from revision-chain metadata. The six-row, 33-ID, seven-unresolved inventory and no-G1-admission state are preserved.",
+  "limits": [
+    "This review validates the draft delta, pins, receipt and stated scope; it does not independently establish the historical claims in the six rows.",
+    "No G1 admission or runtime/boot execution claim is made."
+  ]
+}

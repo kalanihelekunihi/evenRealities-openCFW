@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded five-check EM9305 record-1 loader selector against locked record bytes",
+  "artifacts": {
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-loader-predicates-001/001/receipt.json",
+      "sha256": "a1b107c83b625c4d6946f7c7e9efe72fd769fdbe66c6b9ea011912a3d435f286"
+    },
+    "producer_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-loader-predicates-001/001/report.json",
+      "sha256": "c9659ee2f270e00ab968e1a4270a9748090b429d4077ed9fa511de45ecbc16ad"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-loader-predicates-review-001/001/review.json",
+      "sha256": "38378dcdcfe643d1aacade5d167367e29dd4d987701790add156380a91961a8e"
+    }
+  },
+  "result": {
+    "byte_checked_spans": 7,
+    "instruction_facts": 32,
+    "selector_order": [
+      "0x30053c",
+      "0x300620",
+      "0x300570",
+      "0x3005b4",
+      "0x3005f0"
+    ],
+    "review_verdict": "qualified_pass_with_semantic_caveat"
+  },
+  "limits": [
+    "VPACK2HL lane ordering remains dependent on a pinned ARCv2 EM ISA definition.",
+    "Runtime descriptor contents, boot MMIO state, external NVM candidates, CRC acceptance and physical ROM record selection remain unresolved.",
+    "Record code/data census, complete image discovery and G1 remain open."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

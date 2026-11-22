@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded static codec alternate BINH destination and entry plan, with runtime alias unresolved.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-codec-conditional-route-index.json",
+    "sha256": "5da9c766361551fe61ea13664b2fe817147e1fcac135d9360db6b2585b39323a"
+  },
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-alternate-destination-alias-audit-001/001/audit.py",
+      "sha256": "cf20dd0bd7ca0a622881f953bcd3acf657152f78447f563381a02e7cc2caaf43"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-alternate-destination-alias-audit-001/001/report.json",
+      "sha256": "baf32541fb3d3e50a869012740c036679738bd07a1ce56016983220992ca31ae"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-alternate-destination-alias-audit-001/001/receipt.json",
+      "sha256": "1ebde9c66dad51d80db59336cf751e78c52a1a59239e5d7356ba3497b36c7d98"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-alternate-destination-alias-review-001/001/review.json",
+      "sha256": "a7f516f3f1daaffde3708c1430acf019d7b6425de0a63561a44653c059b9b99b"
+    }
+  },
+  "result": {
+    "b_stage2_codec_span": [
+      "0x323b4",
+      "0x46440"
+    ],
+    "b_stage2_bytes": 82060,
+    "a_alternate_destination": "0x20003000",
+    "b_normal_destination": "0x10003000",
+    "common_entry": "0x10003100",
+    "alias_proven": false
+  },
+  "limits": [
+    "Route semantics were checked against pinned stock-disassembly contracts and bytes, not fresh independent C-SKY decode.",
+    "Marker and mode runtime values, physical route selection, executable alias and SDK-derived XIP mapping remain unresolved.",
+    "No additional nested image or G1 closure claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

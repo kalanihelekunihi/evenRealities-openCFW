@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "title": "GPIO15 wait_pulse delay path: stock vs openCFW static compare, ITCM loop fix",
+  "scope": "Static compare of wait_pulse/delay_us, then make openCFW's spin loop use the same ITCM 0x40 overlay as stock. Rebuild apollo-main (incremental am_hal_utils + relink). Re-run version-match and mismatch sims. No hardware flash. NVM not in this step. SoC is Apollo510 (Ambiq MRAM/ITCM split; the request said Apollo4).",
+  "wait_pulse": {
+    "stock": "0x52e854, (duration*1000)/udiv 33 iterations, each gpio15=0, bl 0x491102(16), gpio15=1, bl 0x491102(16). duration 40 => 1212 iterations.",
+    "opencfw": "0x0046ad80, same 1212 count via umull magic 0x3e0f83e1>>3 (= /33), same gpio15=0, delay_us(16), gpio15=1, delay_us(16). Early-out if duration*1000 < 33 (not taken for 40).",
+    "gpio_hal": "Stock uses 0x480f0c pinconfig and 0x480fd6 write; openCFW uses am_hal_gpio_pinconfig / am_hal_gpio_state_write. Possible extra non-dominant overhead; the designed pulse width is delay_us(16)+delay_us(16)."
+  },
+  "delay_us_wrapper": {
+    "stock_491102": "push; bl 0x4807a0; pop",
+    "opencfw_52015c": "b.w am_hal_delay_us (0x0060075c after this link)"
+  },
+  "calibration": {
+    "match": true,
+    "clock_reg": "0x40021000, bits [4:3] (stock ubfx #3,#2 cmp #2; openCFW and #24 cmp #16 \u2014 equivalent). SDK names this PWRCTRL MCUPERFSTATUS: LP 96 MHz vs HP 250 MHz.",
+    "lp_96mhz": "count = us*32 (vcvt #5 or *32.0f), overhead 15",
+    "hp_250mhz": "count = us*32*250/96, overhead 24",
+    "constants": {
+      "32.0": "0x42000000",
+      "250.0": "0x437a0000",
+      "96.0": "0x42c00000"
+    },
+    "loop_assumption": "3 cycles per iteration (HAL comment; 32*3=96 cycles/us at 96 MHz)"
+  },
+  "itcm_overlay": {
+    "bytes": "0138fdd17047704750f8043b41f8043b013af9d170477047",
+    "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+    "stock": "IAR LZ77 row installs this 24-byte helper at 0x40. am_hal_delay_us 0x4807a0 ends in bl 0x40 (16-bit bne countdown).",
+    "opencfw_before": "g2c_gnu_init copies the same 24 bytes to 0x40 (Nov 11 overlay). The Nov 11 overlay therefore covers the stock delay loop, but openCFW am_hal_delay_us did not call it.",
+    "opencfw_before_spin": "br_util_delay_cycles at 0x00600744 in MRAM (.itcm_text was merged into MRAM .text by g2-apollo-main.ld). Loop is subs; bne.w (32-bit) to the global symbol; bx lr."
+  },
+  "period_estimate": {
+    "delay_us_16_lp": {
+      "iters": 497,
+      "stock_spin_us": "497*3/96e6 = 15.53 us (prologue cancelled by the 15-iter overhead)"
+    },
+    "delay_us_16_hp": {
+      "iters": 1309,
+      "stock_spin_us": "1309*3/250e6 = 15.71 us"
+    },
+    "per_pulse": "two delay_us(16) plus two GPIO writes, nominally ~32 us plus GPIO HAL",
+    "opencfw_before_if_icache_hits": "A 32-bit bne.w in a 6-byte MRAM loop may be 3 or 4 cycles once cached. Four cycles would stretch each half-pulse by about 33% (~21 us vs ~16 us). Estimate, not measured.",
+    "opencfw_before_if_uncached": "The HAL places this routine in .itcm_text specifically so fetch bypasses I-cache and stays 3 cycles. Uncached MRAM wait states on a 6-byte loop would make the pulse longer, not shorter. A 2-3x stretch is a plausible order of magnitude without a measured wait-state number from the Apollo510 datasheet.",
+    "sim_limitation": "Renode is not cycle-accurate for MRAM vs ITCM wait states. The re-runs are functional regressions, not a silicon period proof."
+  },
+  "fix": {
+    "am_hal_utils.c": "br_util_delay_cycles tail-calls itcm_countdown_loop",
+    "g2-apollo-main.ld": "itcm_countdown_loop = 0x00000041 (Thumb entry of the overlay countdown)",
+    "linked": "br_util_delay_cycles at 0x00600744 is b.w 0x40; am_hal_delay_us (0x0060075c) still bhi.w br_util_delay_cycles; calibration unchanged",
+    "image": {
+      "path": "build/g2-apollo-recovery-20261122-itcm-delay-link/g2-apollo-main/g2-apollo-main.bin",
+      "bytes": 3818872,
+      "sha256": "8ed8fdebe3020154e7a599cfa0b46b6b72138e9d6a9291ba3e2215c78eb8921c",
+      "sp": "0x2007FB00",
+      "reset_pc": "0x0059404d",
+      "note": "8 bytes smaller than the 22 Nov recovery image (3,818,880 B); shrink is the shorter trampoline."
+    }
+  },
+  "verification": {
+    "version_match_8s": {
+      "resc": "build/em9305-nor-20261122/opencfw-itcm-delay-chiprev22.resc",
+      "log": "build/em9305-nor-20261122/opencfw-itcm-delay-chiprev22.log",
+      "hci_count": 56,
+      "hci_identical_to_recovery_baseline": true,
+      "advertising_enable": true,
+      "display_frame_count": 2,
+      "display_frame_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "otapointer": {
+        "before": "0x0",
+        "after_0.01s": "0xAFD1363A",
+        "after_8s": "0x0"
+      },
+      "end_pc": "0x5432f8",
+      "note": "Identical HCI and frames to the 6:08 AM CST advertising-disarm CHIPREV=0x22 openCFW run. Arm then disarm still observed. recover_stop not entered on the version-match path."
+    },
+    "mismatch_8s": {
+      "resc": "build/em9305-nor-20261122/opencfw-itcm-delay-mismatch.resc",
+      "log": "build/em9305-nor-20261122/opencfw-itcm-delay-mismatch.log",
+      "configuration_mode": {
+        "before": false,
+        "after_8s": true
+      },
+      "entered_configuration_mode_log": 2,
+      "host_packet_count": 61,
+      "first_new_hci": "0106FD00",
+      "advertising_enable": true,
+      "end_pc": "0x5432f8",
+      "note": "recover_stop still completes after the trampoline (0x40 is preloaded and later installed by g2c_gnu_init). DFU erase 0xFD06 remains unmodeled."
+    }
+  },
+  "app_dead": {
+    "software_gap_closed": "OpenCFW's GPIO15 pulse spin loop now uses the same ITCM 16-bit countdown as stock. The previously evidenced MRAM/bne.w difference is no longer present in the image.",
+    "still_hypothesis": "Whether that difference (or remaining GPIO HAL / delay-prologue differences) caused the app-dead temples is still unproven. Official 2.2.6.10 came up, so recover_stop either was not entered or completed under official timing. No factory trim dump and no GPIO15 traces."
+  },
+  "artifacts": {
+    "am_hal_utils.c": "1427874f6e8fb2f5513e6e51a7d4325b0cc5fbb92baf675e40e698d25ff638dd",
+    "g2-apollo-main.ld": "85f60e5303c38e0176a270ffb3200b872faa4d7a1f576928f5b36b9c2cb070f2",
+    "g2-apollo-main.bin": "8ed8fdebe3020154e7a599cfa0b46b6b72138e9d6a9291ba3e2215c78eb8921c",
+    "opencfw-itcm-delay-chiprev22.resc": "ff880f2b9bce9762f580e77f9d8dde92a8fc666c5c4c82bcd5fe4455c34b4690",
+    "opencfw-itcm-delay-chiprev22.log": "0c6ea9ada56fea2dd25d59845b909c301a85eb5e2350fbb0715479939831e61d",
+    "opencfw-itcm-delay-mismatch.resc": "625041d06e9827d56a95b8d03f1c3341a96499287b3052446f810b56057ea8e1",
+    "opencfw-itcm-delay-mismatch.log": "ff94a2347eff3643db568976b9ae84db7242cec60d93d332d81192874ae74ba0"
+  },
+  "next": "Implement EM9305 NVM program/erase starting with HCI 0xFD06 EMSMM_NVMEraseMain, then the mismatch pair through a completed DFU, then (3) case-reply disarm with a pogo product-test frame."
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 024 incorporating bounded Apollo bootloader descriptor and code-candidate findings",
+  "artifacts": {
+    "discovery_draft_024": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/024/discovery-draft.jsonl",
+      "sha256": "72d97a1bd56c65ecb97ec0ab1804941f60d64926be3b3efae15cf9024ac4ef0b"
+    },
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/024/reproduce.py",
+      "sha256": "570a93d05843235a7fff8254814e46f352e27299f74ce40ea9e5c27ba62f182b"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/024/receipt.json",
+      "sha256": "c1fd3ad4aea8cc7871aa0372c3163e6b0090a4a083388287c554e1194708aecb"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v24-review-001/001/review.py",
+      "sha256": "d57094ed911f6500ce3d1c7c4e24de71dccc789ef0813d3b86b2ed80c751b3e3"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v24-review-001/001/review.json",
+      "sha256": "5df21d9dab0c4ea7912dd8b5a7d16e06392bbdbeff5197ba2bd4bf18c8fc7df8"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v24-review-001/001/receipt.json",
+      "sha256": "f0e15a486c5780e6c037f6f0daa3f7ce7611568db5eb6ad5ca42a9f34e4b3b65"
+    },
+    "predecessor_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/023/discovery-draft.jsonl",
+      "sha256": "3e26a910d85a9b1442602b46a70e2f5cf9e989c77b96bf79efe76fdd465edc2e"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "The Apollo bootloader descriptor and code-candidate findings are bounded; decoded DTCM consumers, pointer windows, alias/remap and whole-image discovery remain open.",
+    "No canonical inventory admission, pseudocode completion or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v23-index.json",
+    "sha256": "4387066c3e46b78ae495362b010f1e8650b87b8164d799adf4cd6a699e940893"
+  }
+}

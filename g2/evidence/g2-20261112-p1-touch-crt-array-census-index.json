@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded touch CRT copy-table, constructor route and two historical census omissions",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-crt-array-census-001/001/audit.py",
+      "sha256": "74ae53b89793666f4166743bf2ff5993fd8ea0b404e5a28239912a9651492993"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-crt-array-census-001/001/report.json",
+      "sha256": "13bb7a03b0e51e9245e4af50e0b7a7cfe7eb8f8a92b25c130289f1fccb6afae1"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-crt-array-census-001/001/receipt.json",
+      "sha256": "70aae33f551fb9a3d6919da78fd2188bb99820499b0f11c3180d061c33ab736a"
+    },
+    "pinned_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-callsites-001/003/disassembly.txt",
+      "sha256": "672e00ac29340527e1fb1bdcf086257cd7c34674967c1411040fb6348f4b439a"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-crt-array-census-review-001/001/review.json",
+      "sha256": "994f0c5703c9827a4b58acf4fdb6b09e15d86c7ebbd8aac595a8b5d29f0873e3"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-crt-array-census-review-001/001/receipt.json",
+      "sha256": "396ad598cbc5e3d744888cd7866a7028b3756ae330111c6359017cb5bed28595"
+    }
+  },
+  "result": {
+    "review_verdict": "SUPPORTED_WITH_SCOPE_CAVEAT",
+    "copy_tuple": "flash 0xB58C..0xB950 -> RAM 0x200004C0..0x20000884, 0xF1 words",
+    "copied_pointers": "flash 0xB948/0xB94C hold Thumb pointers 0x3435/0x3409, mapped to RAM 0x2000087C/0x20000880",
+    "init_array": "Reset path reaches 0x34A6 call to 0xA9E4; its one-entry local init array at RAM 0x2000087C calls 0x3434 through 0xAA14/AA16.",
+    "historical_census": "308 rows omit audited entries 0x3408 and 0x3434; consolidated symbols and exact stock code-plus-literal extents confirm both shipped spans.",
+    "other_absent_symbol_entries": [
+      "0x33C0",
+      "0x3960"
+    ]
+  },
+  "limits": [
+    "The 0x3408 pointer is adjacent to the local init-array end; this route does not establish execution of 0x3408.",
+    "The hashed 0x3408..0x3434 and 0x3434..0x3458 extents include literal/data bytes; do not count every byte as executable instructions.",
+    "The two audited omissions are not an exhaustive touch function census; 0x33C0 and 0x3960 remain separate leads.",
+    "No hardware boot observation, whole-image discovery, canonical inventory admission, pseudocode completeness or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

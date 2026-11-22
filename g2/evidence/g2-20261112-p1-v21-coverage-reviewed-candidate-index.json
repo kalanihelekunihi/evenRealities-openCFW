@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Noncanonical 191-row v21 coverage candidate, coordinator byte check and independent semantic PASS with limits",
+  "artifacts": {
+    "generator": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-021/001/generate.py",
+      "sha256": "1dd58327b22400d390b8963eab8fd6ddcbfd00f37afacfd9ba17c9845318b319"
+    },
+    "candidate": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-021/001/coverage-v21-candidate.jsonl",
+      "sha256": "6de760ce01542b3cc3051aacca7ee7d95f553347c1a12d4e15e92f7233c2898e"
+    },
+    "producer_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-021/001/report.json",
+      "sha256": "988eea511ecb8f2c28e399f2ab305ef276c515e0f7b1d1625961a860c77f1f49"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-021/001/receipt.json",
+      "sha256": "36a91ad4e59d0e4587529545999b9281867c0ec5feb6c5dff54c85591b408ac9"
+    },
+    "coordinator_check_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-021-coordinator-check-001/001/check.py",
+      "sha256": "f9c84203e83e1e57cef76bef69733ccb90a729412f230821020124e34cba564c"
+    },
+    "coordinator_check": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-021-coordinator-check-001/001/review.json",
+      "sha256": "af241ecc69890e128dbabc5db82dd17d81709d10f243e41567a6b8b6e5782618"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-021-independent-review-001/001/review.py",
+      "sha256": "ff7b7594a9fe1a3d71ae014df87f311aec4723a921bf763f67e7f17862e6d246"
+    },
+    "independent_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-021-independent-review-001/001/report.json",
+      "sha256": "7234ceec17b5844482a478dc252e55d6db099f003f33af9b9ab2163e0887ee6d"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-021-independent-review-001/001/receipt.json",
+      "sha256": "373572a0cc3e689ab851ca70e16875df59a12d907d0ee3f5e4f11dd4f8462349"
+    }
+  },
+  "result": {
+    "source_rows": 163,
+    "candidate_rows": 191,
+    "exact_scope_partitions": 40,
+    "replacement_interval_hashes_verified": 37,
+    "evidence_pins_verified": 837,
+    "changed_source_rows": 9,
+    "independent_verdict": "PASS_WITH_LIMITS",
+    "validator_review_records_created": 0
+  },
+  "limits": [
+    "EM9305 copied child payloads and interstitial alignment bytes retain unknown classification.",
+    "Codec GXNPU internal executable boundaries and actual runtime mapping remain unresolved.",
+    "The draft lacks authenticated row review IDs, registry and discovery closure; G1 and G2 remain not_run.",
+    "Compilation of existing C is separate from source completeness and byte identity."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

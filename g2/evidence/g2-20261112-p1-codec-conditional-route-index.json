@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed static codec BINH A/B reader and conditional transfer routes, with hardware selection premises kept open.",
+  "artifacts": {
+    "route_audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-conditional-routes-001/001/audit.py",
+      "sha256": "e3d25482041068e81d971a945cdce924b59bc1c5846f59540debfbb4f774e310"
+    },
+    "route_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-conditional-routes-001/001/report.json",
+      "sha256": "4afd6fbe7c71cbb7fc3d90361dd77bb2926a857f8b6b83aaddeabc2aa1035764"
+    },
+    "route_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-conditional-routes-001/001/receipt.json",
+      "sha256": "3f0b8de535152b61d70c7185830aeb14e64c15ec2df4d2fdd3984146ea527fb1"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-conditional-routes-review-001/001/review.json",
+      "sha256": "d6eeeb1c118d054c16fe6faa55b45f6a036a6e9d59d933aa0f22c4cd64ead4ab"
+    },
+    "predecessor_codec_residual_index": {
+      "path": "g2/evidence/g2-20261112-p1-codec-residual-index.json",
+      "sha256": "fecc77995233649a69d50bd83c02d28d882340a5478f0ebff7cdabe17c3b4bf1"
+    }
+  },
+  "result": {
+    "a_xip_nor_span": [
+      "0x3004",
+      "0xbe88"
+    ],
+    "a_xip_bytes": 36484,
+    "a_sram_load": "0x10023400",
+    "a_sram_bytes": 14716,
+    "a_reset": "0x10023500",
+    "b_stage1_load": "0x10000000",
+    "b_stage1_entry": "0x10000100",
+    "b_stage2_nor_source": "0x323b4",
+    "b_stage2_load": "0x10003000",
+    "b_stage2_bytes": 82060,
+    "b_stage2_entry": "0x10003100",
+    "b_mode_guard": "*(u32*)0x20001720 == 2",
+    "alternate_marker_guard": "*(u32*)0x20033ffc == 0xaabbccdd"
+  },
+  "limits": [
+    "Actual boot mode and marker values and physical route execution are unverified.",
+    "A XIP run base follows an SDK default inference and requires device mapping qualification.",
+    "A alternate transfer destination alias and hardware behavior remain unresolved.",
+    "No full codec nested-image closure, G1 admission or source completeness claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

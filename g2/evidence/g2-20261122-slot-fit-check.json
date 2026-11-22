@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "time_local": "2026-11-22 08:53 CST",
+  "title": "Slot-fit check: current 3,819,448 B apollo-main and 246,040 B EM9305 source package both fit stock partitions; hard apollo install end is 0x007FE000, 137,288 B of headroom",
+  "scope": "Host arithmetic against the stock memory map, packager checks, SBL STATUS, and the already-linked opencfw-otap-disarm / 12 Nov EM9305 source-candidate images. No flash. No commit.",
+  "verdict": {
+    "apollo_main_current_fits": true,
+    "em9305_source_candidate_fits": true,
+    "would_current_image_overlap_ota_flag_or_bonds": false,
+    "would_current_image_overlap_littlefs_or_kv": false,
+    "sbl_22bit_envelope_ok": true,
+    "brick_risk_from_current_sizes": "No: the current 3.82 MB app ends at 0x007DC7B8, 137,288 bytes before the bootloader-owned OTA flag page at 0x007FE000. Do not treat the HLE SBL maxStorage (3,964,928 B) as the install limit; it extends past 0x007FE000."
+  },
+  "apollo_main": {
+    "image": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "bytes": 3819448,
+    "load_base": "0x00438000",
+    "image_end": "0x007DC7B8",
+    "phdr_end_confirmed": true,
+    "stock_app_end": "0x00794324",
+    "stock_app_bytes": 3523364,
+    "limits": {
+      "sbl_rom_reserved": {
+        "start": "0x00400000",
+        "end": "0x00410000",
+        "bytes": 65536,
+        "note": "Must not be overwritten. App does not start until 0x00438000."
+      },
+      "bootloader_slot": {
+        "start": "0x00410000",
+        "end": "0x00438000",
+        "stock_image_end": "0x00434477",
+        "headroom_to_app": 15241
+      },
+      "ota_preamble_position": {
+        "start": "0x00437FE0",
+        "end": "0x00438000",
+        "bytes": 32,
+        "note": "File header only; DFU programmer skips it and programs the raw image at 0x00438000. Not part of the installed app span."
+      },
+      "app_slot_hard_end": {
+        "address": "0x007FE000",
+        "source": "MAIN_UPDATE_FLAG in g2/tools/open_cfw.py; g2-apollo-main.ld ASSERT; documented bootloader-owned update flag (16 B) at 0x007FE000. wrap_main_image and validate_apollo_main reject any image whose run_base+size exceeds this."
+      },
+      "max_installed_app_bytes": 3956736,
+      "headroom_bytes": 137288,
+      "bond_records": {
+        "start": "0x007FF000",
+        "size": "0xA00",
+        "note": "After the flag page; current image does not reach it."
+      },
+      "mram_chip_end": "0x00800000",
+      "sbl_22bit_envelope_max_file_bytes": 4194303,
+      "sbl_22bit_note": "g2_sbl_image.py: standard-image size is 22 bits (control & 0x3FFFFF), including the 32-byte header. OpenCFW wrapped size would be 3,819,480, well under 4,194,303. wrap_main_image also has a 24-bit check (0x00FFFFFF).",
+      "hle_sbl_maxStorage": {
+        "bytes": 3964928,
+        "hex": "0x003C7C00",
+        "sim": "Renode G2Apollo510_SblWired default MaxStorage is 0x003C8000 (exactly the linker MRAM LENGTH 0x438000..0x800000). The 22 Nov HLE run reported 3,964,928. Both extend past 0x007FE000 (0x438000+0x3C8000=0x800000). Do not use this as the install cap."
+      },
+      "hle_sbl_maxUpdateBytes": 3965392,
+      "ota_staging": {
+        "mram": "Single-slot. Ordinary G2 application OTA has no proven rollback (open_cfw.py). DFU writes the raw image into the same 0x00438000..0x007FE000 slot after stripping the 32-byte preamble.",
+        "nor": "External MX25U25643G 32 MiB: [0x00000000, 0x01400000) 20 MiB is 'not characterised (resources, staged images, other)' \u2014 large enough for a 3.82 MB staged file if that is where the download lives, but the location is unverified. littlefs and FlashDB start at 0x01400000 and are outside MRAM."
+      }
+    },
+    "non_overlap": {
+      "littlefs": {
+        "nor_offset": "0x01400000",
+        "end": "0x01FC0000",
+        "geometry": "3008 x 4 KiB, littlefs 2.10.1",
+        "overlaps_mram_app": false
+      },
+      "flashdb_kvdb_sysenv": {
+        "nor_offset": "0x01FC0000",
+        "end": "0x01FF8000",
+        "size": "224 KiB",
+        "overlaps_mram_app": false
+      },
+      "flashdb_nvdb_factory": {
+        "nor_offset": "0x01FF8000",
+        "end": "0x02000000",
+        "size": "32 KiB",
+        "overlaps_mram_app": false
+      },
+      "kvdb_migration_section": "KEEP'd in the app .text; it is code/data inside the image, not a NOR KV overlap."
+    },
+    "gc_probe_still_fits": {
+      "bytes": 3671520,
+      "end": "0x007B85E0",
+      "headroom_to_flag": 285216,
+      "note": "The /tmp --gc-sections probe from item (b) is smaller and also fits. It was not adopted as the official image in (b)."
+    }
+  },
+  "em9305": {
+    "source_package_bytes": 246040,
+    "note": "246,040 is the host-side record container, not a flat 246 KB load at 0x00300000. Records are placed at their target addresses with gaps preserved.",
+    "nvm": {
+      "start": "0x00300000",
+      "end": "0x00380000",
+      "bytes": 524288,
+      "source": "EM9305 DS Table 5-1 and g2-em9305.ld MEMORY NVM; overflow fails the link by region size."
+    },
+    "records": [
+      {
+        "addr": "0x00300000",
+        "bytes": 1160,
+        "end": "0x00300488",
+        "limit": "must be <= 0x00302000 (ASSERT)",
+        "fits": true
+      },
+      {
+        "addr": "0x00302000",
+        "bytes": 56,
+        "end": "0x00302038",
+        "fits": true
+      },
+      {
+        "addr": "0x00302400",
+        "bytes": 244708,
+        "end": "0x0033DFE4",
+        "stock_end": "0x00335BC8",
+        "nvm_end": "0x00380000",
+        "headroom_bytes": 270364,
+        "fits": true
+      }
+    ],
+    "datasheet_app_window": "0x00302400..0x00380000; stock package has no FOTA updater record (wave13-loadable-images.md). Growing the app from 0x00335BC8 to 0x0033DFE4 stays inside that window.",
+    "stock_package_bytes": 211948
+  },
+  "not_flashed": true
+}

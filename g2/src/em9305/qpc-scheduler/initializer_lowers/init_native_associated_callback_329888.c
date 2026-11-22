@@ -43,8 +43,8 @@ extern void opencfw_em9305_associated_child_32a4c0(uintptr_t record,
 extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t length);
 extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t task,
                                                      uintptr_t message);
-extern uint64_t opencfw_em9305_radio_shift_3027f4(uint32_t low,uint32_t high,
-                                                  uint32_t count);
+extern uint64_t opencfw_em9305_child_3027f4(uint32_t low,uint32_t high,
+                                             uint32_t count);
 extern uint32_t opencfw_em9305_init_secondary_time_317ebc(uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_auxiliary_guard_interval(void);
 extern uint32_t opencfw_em9305_radio_channels_317ac0(uintptr_t record);
@@ -231,7 +231,7 @@ static void report_channels(uintptr_t object,uintptr_t conn)
             w16(message+2u,0x6b01u);
             w16(message,(uint8_t)conn_index(conn));
             for(uint32_t channel=0u;channel<37u;channel++){
-                uint64_t bits=opencfw_em9305_radio_shift_3027f4(r32(0x805aa0u),
+                uint64_t bits=opencfw_em9305_child_3027f4(r32(0x805aa0u),
                     r32(0x805aa4u),channel);
                 w8(message+4u+channel,((uint32_t)bits&1u)?0u:3u);
             }

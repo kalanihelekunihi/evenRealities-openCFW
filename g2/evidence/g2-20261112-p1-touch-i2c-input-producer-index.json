@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded touch I2C receive-buffer input path to EEPROM hold-field setter.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-touch-param2-origin-index.json",
+    "sha256": "4dc5fc6d88cc5a07c9b442e59fd13d16507669f358ea1faaf7c98b561f3ebd7e"
+  },
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-input-producer-001/001/audit.py",
+      "sha256": "78ef810551a2465672119eae5146c4423c10abd0049906d9ec062742cc874450"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-input-producer-001/001/report.json",
+      "sha256": "5692dd9612bfee02b147358a584417171bb0a30ffcb71089e3a199aede936e72"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-input-producer-001/001/receipt.json",
+      "sha256": "129481da150dbaa10008d70d8e67ceabeaada4636105d130769ef38de9fc0e3e"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-input-producer-review-001/001/review.json",
+      "sha256": "df3f2e5db395bcd9f2f524bd470b46a800a6a299950bc6f3c4411c812fd29ec4"
+    }
+  },
+  "result": {
+    "rx_buffer_base": "0x200009a0",
+    "hold_payload_address": "0x200009a1",
+    "irq_handler": "0x3700",
+    "callback_pointer": "0x3701",
+    "dispatch_table": "0xb0c4",
+    "dispatch_entries": 9,
+    "hold_command": 7,
+    "hold_setter": "0x37c8",
+    "payload_load": "0x37f6"
+  },
+  "limits": [
+    "Configured runtime I2C RX path is supported; physical sender/transaction and indirect aliases are not closed.",
+    "Other writers and baseline upstream source remain open.",
+    "No fixed firmware flash source, nested executable-copy exclusion, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

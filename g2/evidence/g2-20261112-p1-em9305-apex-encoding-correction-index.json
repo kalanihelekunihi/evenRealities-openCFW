@@ -1,0 +1,55 @@
+{
+  "artifacts": {
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-apex-7-12-001/001/receipt.json",
+      "sha256": "3f9a0a779b07e0e1becb10a6396823726863c19205416d100bcc3a07a446e70c"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-apex-7-12-001/001/report.json",
+      "sha256": "29a7f01c33b574f98233a60e34921cbef014f4d941e05c33530f2fae557d3d81"
+    },
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-apex-7-12-001/001/audit.py",
+      "sha256": "f8e643fb33c2eadedee5854c0cbb72d8d19e4baffd085ef7c94d0928c54da51c"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-apex-correction-review-001/001/review.json",
+      "sha256": "497a05cefb03dc3aa645bb658896f0e896a93aca2f72e4936426bef8bb45b790"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-apex-correction-review-001/001/review.py",
+      "sha256": "b1a02190822fa9fcaa219e60bb06af7e327451a3da4a70dcbe04bc2e4f4fb831"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-apex-correction-review-001/001/receipt.json",
+      "sha256": "f5a7883a524c285e56169d7922a84ad8bc46bf9141192a57784478ad775a0cb7"
+    }
+  },
+  "campaign_id": "20261112T092142Z",
+  "limits": [
+    "Mnemonic and register encodings established for vendor APEX configuration; exact operational/flag semantics remain open.",
+    "External/runtime NVM selection and on-device execution remain unverified.",
+    "No whole-record or whole-payload classification, canonical admission, or G1 claim."
+  ],
+  "result": {
+    "instructions": {
+      "0x30041c": "crc32b r3,r3,r12",
+      "0x30042e": "crc32 r3,r3,r2",
+      "0x30043c": "crc32b r3,r3,r2",
+      "0x300440": "bswp32 r1,r3"
+    },
+    "old_mnemonic_assignment": "superseded: disabled opcode unmangling path was applied; 2-operand LOG2 declarations do not match these 3-operand CRC words",
+    "vendor_symbol": "COMMON_hw_crc32 at 0x300400, 72 bytes; first three candidate words match vendor ELF, whole body differs at two byte offsets"
+  },
+  "schema_version": 1,
+  "scope": "Independently reviewed correction of four EM9305 record-1 ARC APEX instruction names and register encodings.",
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-arc-extension-words-index.json",
+    "sha256": "037782c4e565f9404d4f7fa76bb5aea53588468b0b74a0228e9fd0f0ed21b27e"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

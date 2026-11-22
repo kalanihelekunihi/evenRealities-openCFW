@@ -1,11 +1,16 @@
 /* SPDX-License-Identifier: MIT
  * Authored ABI transcription of three locked G2 Touch widget records.
  * Field offsets match pinned Infineon CapSense 5.0 LP type at commit
- * a4aa9306f7e4323994902f0baf5b1570ffbbfe59. Fixed stock pointers
- * require linker placement and product configuration validation.
+ * a4aa9306f7e4323994902f0baf5b1570ffbbfe59. Runtime pointers relocate
+ * to source-owned RAM; product configuration behavior remains unverified.
  */
 #include <stdint.h>
 #include <stddef.h>
+#include "reset_generated_common_config.h"
+#include "reset_widget_contexts.h"
+#include "reset_sensor_contexts.h"
+#include "reset_position_history.h"
+#include "../application/ram_state.h"
 
 typedef struct {
     uint32_t ptrWdContext;
@@ -109,9 +114,9 @@ _Static_assert(offsetof(touch_widget_config_abi, cdacConfig) == 142, "cdacConfig
 const touch_widget_config_abi touch_generated_widget_config[3]
     __attribute__((section(".touch_rodata.widget_config"), used)) = {
     {
-        .ptrWdContext = 0x20000548u,
-        .ptrSnsContext = 0x200005fcu,
-        .ptrEltdConfig = 0xb2e4u,
+        .ptrWdContext = (uint32_t)(uintptr_t)&touch_reset_widgets[0],
+        .ptrSnsContext = (uint32_t)(uintptr_t)&touch_reset_sensors[0],
+        .ptrEltdConfig = (uint32_t)&touch_generated_electrodes[0],
         .ptrEltdCapacitance = 0x0u,
         .ptrSnsCapacitance = 0x0u,
         .ptrBslnInv = 0x0u,
@@ -119,7 +124,7 @@ const touch_widget_config_abi touch_generated_widget_config[3]
         .ptrRawFilterHistory = 0x0u,
         .ptrRawFilterHistoryLow = 0x0u,
         .iirCoeff = 0x40u,
-        .ptrDebounceArr = 0x200009f4u,
+        .ptrDebounceArr = (uint32_t)(uintptr_t)&touch_widget_processing_ram[16],
         .ptrDiplexTable = 0x0u,
         .centroidConfig = 0x0u,
         .xResolution = 0x0u,
@@ -158,9 +163,9 @@ const touch_widget_config_abi touch_generated_widget_config[3]
         .cdacConfig = 0x1aau,
     },
     {
-        .ptrWdContext = 0x20000584u,
-        .ptrSnsContext = 0x20000624u,
-        .ptrEltdConfig = 0xb304u,
+        .ptrWdContext = (uint32_t)(uintptr_t)&touch_reset_widgets[1],
+        .ptrSnsContext = (uint32_t)(uintptr_t)&touch_reset_sensors[4],
+        .ptrEltdConfig = (uint32_t)&touch_generated_electrodes[4],
         .ptrEltdCapacitance = 0x0u,
         .ptrSnsCapacitance = 0x0u,
         .ptrBslnInv = 0x0u,
@@ -168,7 +173,7 @@ const touch_widget_config_abi touch_generated_widget_config[3]
         .ptrRawFilterHistory = 0x0u,
         .ptrRawFilterHistoryLow = 0x0u,
         .iirCoeff = 0x40u,
-        .ptrDebounceArr = 0x200009f8u,
+        .ptrDebounceArr = (uint32_t)(uintptr_t)&touch_widget_processing_ram[20],
         .ptrDiplexTable = 0x0u,
         .centroidConfig = 0x1u,
         .xResolution = 0xc8u,
@@ -176,7 +181,7 @@ const touch_widget_config_abi touch_generated_widget_config[3]
         .numSns = 0x4u,
         .numCols = 0x4u,
         .numRows = 0x0u,
-        .ptrPosFilterHistory = 0x20000848u,
+        .ptrPosFilterHistory = (uint32_t)(uintptr_t)&touch_reset_position_history,
         .ptrCsxTouchHistory = 0x0u,
         .ptrCsxTouchBuffer = 0x0u,
         .ptrCsdTouchBuffer = 0x0u,
@@ -207,17 +212,17 @@ const touch_widget_config_abi touch_generated_widget_config[3]
         .cdacConfig = 0x1a1u,
     },
     {
-        .ptrWdContext = 0x200005c0u,
-        .ptrSnsContext = 0x2000064cu,
-        .ptrEltdConfig = 0xb324u,
+        .ptrWdContext = (uint32_t)(uintptr_t)&touch_reset_widgets[2],
+        .ptrSnsContext = (uint32_t)(uintptr_t)&touch_reset_sensors[8],
+        .ptrEltdConfig = (uint32_t)&touch_generated_electrodes[8],
         .ptrEltdCapacitance = 0x0u,
         .ptrSnsCapacitance = 0x0u,
         .ptrBslnInv = 0x0u,
         .ptrNoiseEnvelope = 0x0u,
-        .ptrRawFilterHistory = 0x200009e8u,
-        .ptrRawFilterHistoryLow = 0x200009e4u,
+        .ptrRawFilterHistory = (uint32_t)(uintptr_t)&touch_widget_processing_ram[4],
+        .ptrRawFilterHistoryLow = (uint32_t)(uintptr_t)&touch_widget_processing_ram[0],
         .iirCoeff = 0x40u,
-        .ptrDebounceArr = 0x200009f9u,
+        .ptrDebounceArr = (uint32_t)(uintptr_t)&touch_widget_processing_ram[21],
         .ptrDiplexTable = 0x0u,
         .centroidConfig = 0x0u,
         .xResolution = 0x0u,

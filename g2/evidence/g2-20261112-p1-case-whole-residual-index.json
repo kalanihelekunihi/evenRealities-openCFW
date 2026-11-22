@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded whole-case residual signature, vector, pointer and transform-route audit.",
+  "artifacts": {
+    "audit_script": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-whole-residual-scan-001/001/audit.py", "sha256": "e397a12cf60864c9a855fdf69f1feecd8266a1440da6ccd7cf6b5678390730b3"},
+    "audit_report": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-whole-residual-scan-001/001/report.json", "sha256": "0dcba710cf6d77f8f27f6b55f553bc53f6c59a1ffa520168072d2ecf08395514"},
+    "audit_receipt": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-whole-residual-scan-001/001/receipt.json", "sha256": "ac389264aed2edddf2c7f0ded46b37c147469fb0fc274338e800fea7215b5f69"},
+    "independent_review": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-whole-residual-review-001/001/review.json", "sha256": "3bdd55bbd81b189a93dd20ce193c227aebe6d9a6f77efcb860298a811e8bfc78"}
+  },
+  "result": {
+    "historical_function_bodies_reverified": 435,
+    "complement_bytes": 12680,
+    "complement_intervals": 296,
+    "tested_executable_header_signature_hits": 0,
+    "vector_heuristic_candidates": 2,
+    "primary_vector_at_raw_zero": true,
+    "false_vector_at_raw_0x6a18": "PC-relative task/thread literal pool",
+    "aligned_active_flash_numeric_candidates": 95,
+    "numeric_candidates_targeting_exact_census_entries": 54,
+    "startup_104_byte_source_to_420_byte_ram_output_verified": true,
+    "startup_10980_byte_zero_output_verified": true
+  },
+  "limits": [
+    "Exact marker searches cannot exclude markerless, transformed, compressed, encrypted or custom child content.",
+    "Unaligned/encoded pointers, complete reference graph, dynamic writer parameter binding and complement code/data roles remain open.",
+    "The verified census hashes prove listed-body identity, not census completeness or whole-image discovery."
+  ],
+  "status": {"canonical_admission": "none", "g1": "not_run"}
+}

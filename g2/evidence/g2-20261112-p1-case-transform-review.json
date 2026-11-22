@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "review_id": "P1-case-transform-review-003",
+  "decision": "pass",
+  "inputs": [
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/replay.py",
+      "size": 5964,
+      "sha256": "a8f3fce983950f9992e2a2973bfed8b0768fc954f43138fc313eacd7cd701fda"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/fresh-replay-receipt.json",
+      "size": 9580,
+      "sha256": "8b05a0c925b8896772379b83cbd4c8226b0e64bf86a16b20fea455f70e163e93"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/emulation-receipt.json",
+      "size": 11257,
+      "sha256": "9bf3feaaf4298149ea329a7c6ffa6d556062ca920be5f748f874f275be581354"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/stdout.txt",
+      "size": 2314,
+      "sha256": "19f60f7be3963eb8cdfd8f7226b5c8698c91ab2af8595dd87e7b73363607e699"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/stderr.txt",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/ram-initialized-0x20000000.bin",
+      "size": 420,
+      "sha256": "d91efcf9f5409364aa0e3791d1084418682e76414c5a7b588c3c484daa0dd89a"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/ram-zero-fill-0x200001A4.bin",
+      "size": 10980,
+      "sha256": "c32493cf41d8477e6dc14efe4d95d92b9333c52806b5173cc42bcdc9294b1f2a"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-case-canonical-replay-014/001/replay.py",
+      "size": 5964,
+      "sha256": "26b79c842f0c022997cd07d3930a071bdda2545bd034d2c0f3f63fbf208c6c69"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-case-canonical-replay-014/001/transform-20000000.json",
+      "size": 4415,
+      "sha256": "ae75343013a7e7f67f38ef783b1c609f0ba5e2e73177910900eabfb0b197868f"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-case-canonical-replay-014/001/ram-initialized-0x20000000.bin",
+      "size": 420,
+      "sha256": "d91efcf9f5409364aa0e3791d1084418682e76414c5a7b588c3c484daa0dd89a"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-case-canonical-replay-014/001/ram-zero-fill-0x200001A4.bin",
+      "size": 10980,
+      "sha256": "c32493cf41d8477e6dc14efe4d95d92b9333c52806b5173cc42bcdc9294b1f2a"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "size": 55784,
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+    },
+    {
+      "path": "g2/workflow/target.json",
+      "size": 3546,
+      "sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff"
+    },
+    {
+      "path": "historical replay script text comparison",
+      "result": "only OUT assignment differs"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-review-001/001/review.json",
+      "size": 6993,
+      "sha256": "f1fe072b0f709fe8e76917b18c0c43dd7977c39a38c7bf26452b94dfe99802ff",
+      "role": "prior review retained unchanged; coordinate labels corrected in this immutable review-002"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-review-001/001/review-002.json",
+      "size": 8486,
+      "sha256": "c240ef99332576a05b8d7c7083489d1d67ce0ef35e2d53e44907b1debbaea78a",
+      "role": "superseded prior review; source for review-003 corrections"
+    }
+  ],
+  "checks": {
+    "locked_case_payload": {
+      "expected_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "verified": true,
+      "note": "Payload size/hash and EVEN header; wrapper checksum 0x7367642f verified."
+    },
+    "descriptor_and_handler": {
+      "descriptor_runtime_address": "0x0800D93C",
+      "descriptor_raw_image_span": [
+        55612,
+        55628
+      ],
+      "descriptor_words": [
+        "0x0800D95C",
+        "0x20000000",
+        "0x1A4",
+        "0x080002D6"
+      ],
+      "second_descriptor_words": [
+        "0x0800D9C4",
+        "0x200001A4",
+        "0x2AE4",
+        "0x08009200"
+      ],
+      "handler_span_raw_image": [
+        726,
+        806
+      ],
+      "handler_decompress_entry": "0x080002D6",
+      "handler_zero_fill_entry": "0x08009200",
+      "verified": true,
+      "note": "Historical transform descriptor.image_span is raw case:flash image offset [55612,55628); the same bytes are firmware_box.bin wrapped case-payload offsets [55644,55660). Descriptor address 0x0800D93C maps to raw offset 0xD93C (55612), then +32 for the wrapper. Handler raw span [726,806) maps to wrapped case-payload span [758,838).",
+      "descriptor_wrapped_case_payload_span": [
+        55644,
+        55660
+      ],
+      "descriptor_runtime_address_raw_image_offset": 55612,
+      "handler_span_wrapped_case_payload": [
+        758,
+        838
+      ],
+      "handler_span_note": "Handler image spans from the historical transform receipt are raw-image coordinates; wrapped firmware_box.bin coordinates add the 32-byte EVEN header."
+    },
+    "source_payload_span": {
+      "runtime_span": [
+        "0x0800D95C",
+        "0x0800D9C4"
+      ],
+      "size": 104,
+      "sha256": "472083284ba94332c5783c720a938429b0b1cd2863b25371e6b9ba945633f809",
+      "verified": true,
+      "raw_image_span": [
+        55644,
+        55748
+      ],
+      "wrapped_case_payload_span": [
+        55676,
+        55780
+      ],
+      "coordinate_note": "Historical source.source_span is raw case:flash image coordinates; wrapped firmware_box.bin case payload offsets add 32 bytes. These are not outer EVENOTA package offsets."
+    },
+    "outputs": {
+      "decompress": {
+        "size": 420,
+        "sha256": "d91efcf9f5409364aa0e3791d1084418682e76414c5a7b588c3c484daa0dd89a",
+        "equals_historical": true
+      },
+      "zero_fill": {
+        "size": 10980,
+        "sha256": "c32493cf41d8477e6dc14efe4d95d92b9333c52806b5173cc42bcdc9294b1f2a",
+        "equals_historical": true
+      }
+    },
+    "paired_emulation_observations": {
+      "decompress": {
+        "read_hook_firmware_reads": 104,
+        "read_hook_source_span": [
+          "0x0800D95C",
+          "0x0800D9C4"
+        ],
+        "writes": 420,
+        "write_span": [
+          "0x20000000",
+          "0x200001A4"
+        ],
+        "returns_both_runs": true,
+        "registers_and_output_equal": true
+      },
+      "zero_fill": {
+        "read_hook_firmware_reads": 0,
+        "writes": 10980,
+        "write_span": [
+          "0x200001A4",
+          "0x20002C88"
+        ],
+        "returns_both_runs": true,
+        "registers_and_output_equal": true
+      }
+    },
+    "script_delta": {
+      "verified": true,
+      "detail": "Only OUT path changed."
+    },
+    "tool_pins": {
+      "python": "3.13.15",
+      "capstone": "5.0.7",
+      "unicorn": "2.1.4",
+      "all_receipt_file_sha256_pins_verified": true,
+      "fresh_run_exit_code": 0,
+      "stderr_empty": true
+    },
+    "coordinator_receipt": {
+      "verified": true,
+      "note": "Fresh receipt hashes and sizes match files; verified all tool file pins. Current payload source/descriptor/handler spans match documented offset conventions."
+    }
+  },
+  "limitations": [
+    "Bounded replay of two case-startup handlers only; not full startup, whole case image reconstruction, or G1 qualification.",
+    "Emulation assumes the configured RAM, stack, entry register arguments, and sentinel return environment; no on-device execution was performed.",
+    "The decompressor read hook confirms 104 distinct source bytes accessed within the 104-byte source interval, not access order or semantic correctness beyond this payload.",
+    "Zero-fill handler does not read its descriptor source pointer; this is consistent with it writing zero words, but does not generalize to other payloads or startup behavior.",
+    "Register/output equality is a paired run with and without read instrumentation, not an independent implementation or toolchain cross-check."
+  ],
+  "correction_note": "Removes ambiguous legacy coordinate fields from review-002; coordinate spans are explicitly labeled as extracted raw case image or firmware_box.bin wrapped case payload. No G1 claim.",
+  "supersedes": "P1-case-transform-review-002"
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Bounded vendor-backed EM9305 resident-ROM address/name/prototype candidates and stock ABI use",
+  "artifacts": {
+    "entry_hop_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-entry-hop-index.json",
+      "sha256": "9f1deadb6dae046f1b125cfb8bfb4befb1324f8f08ef1e087d53e709937c6cb4"
+    },
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-resident-interface-001/001/audit.py",
+      "sha256": "35a1bceaef45d94085d7168201351fcb491f90c74a7ab85849e838e455039002"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-resident-interface-001/001/report.json",
+      "sha256": "44beed7f529a5de2d0276c9e6324b27ee3be81ff7a8489e8843988b45aca8495"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-resident-interface-001/001/receipt.json",
+      "sha256": "827fcb06074983288c942509cf26c313bb191a1c33c0768846299490c828a765"
+    },
+    "stock_callsite": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-resident-interface-001/001/callsite.bin",
+      "sha256": "4a87087f12226dfad79d8a926e8a1d22ac2f6192805967aaca7aafd907945508"
+    },
+    "stock_callsite_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-resident-interface-001/001/callsite.objdump.txt",
+      "sha256": "ba4d48f5721f8429fb0c1a3e1e85758a71a506a0f909fa489a90622e5a3635ca"
+    },
+    "vendor_symbol_lines": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-resident-interface-001/001/vendor-symbols.txt",
+      "sha256": "459aa3f7f915db7c802e2127255a2404a23383da025a41fb66565e1d99faefec"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-resident-interface-review-001/001/review.json",
+      "sha256": "f773ea9114ca7fd8c932fed32cbed0e5c17b666c5b8a77703df11a4750707098"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-resident-interface-review-001/001/receipt.json",
+      "sha256": "1d8cf0f7865273e07d9f9714a716e87734077965ea6772e0a364de3b18bfdbee"
+    }
+  },
+  "result": {
+    "stock_callsite": "0x0030ed80",
+    "interfaces": [
+      {
+        "address": "0x00103180",
+        "vendor_name": "NVMINFO_CheckVBAT1_1p7v_StepUpModeFlag",
+        "vendor_prototype": "bool (void)",
+        "observed_use": "return r0 tested against zero"
+      },
+      {
+        "address": "0x00104ce4",
+        "vendor_name": "VoltMon_SetVbat1p7Lvl",
+        "vendor_prototype": "void (bool)",
+        "observed_use": "called with r0=1 on nonzero first return"
+      }
+    ],
+    "verdict": "BOUNDED_PASS_WITH_LIMITS"
+  },
+  "limits": [
+    "Vendor DI05 weak symbols and SDK declarations do not authenticate the G2 resident ROM implementation or revision.",
+    "Actual ROM side effects, timing and silicon execution remain unobserved.",
+    "External functions are outside shipped OTA coverage; their P2 behavioral contracts require further review.",
+    "No canonical inventory admission or G1 gate change."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

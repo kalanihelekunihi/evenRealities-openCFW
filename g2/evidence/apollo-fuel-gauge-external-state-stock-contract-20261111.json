@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "stock": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "artifact_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "entry": "0x0055F74C",
+    "end_exclusive": "0x0055F842",
+    "body_bytes": 246,
+    "body_sha256": "834b76758125fd0e1786b3fecf6b6cf7277bd8d607982a0b6d07fdeac732010a",
+    "state_pointer_literal_address": "0x0055F844",
+    "state_pointer_value": "0x20073DD0",
+    "corpus": "g2/research/corpus/apollo-main/ghidra/decomp/bundles/apollo-decomp-11.c"
+  },
+  "recovered_contract": [
+    {
+      "cases": "0, 1",
+      "evidence": "0x55F78A..55F79A",
+      "behavior": "set or clear VBUS flag and return zero, without a prior initialized check or charge-state reset"
+    },
+    {
+      "case": "2",
+      "evidence": "0x55F79C..55F7AA",
+      "behavior": "require data pointer, read its first byte, accept values 0..5, write the charge state"
+    },
+    {
+      "cases": "3, 4",
+      "evidence": "0x55F7AC..55F800",
+      "behavior": "require data pointer and a non-NaN, nonzero float with clear sign bit; positive infinity is accepted"
+    },
+    {
+      "cases": "5, 6",
+      "evidence": "0x55F75C..55F788 and 0x55F802..55F83A",
+      "behavior": "require data pointer and non-NaN, nonzero float; store negative absolute value, including negative infinity"
+    },
+    {
+      "case": "invalid",
+      "evidence": "0x55F83C..55F840",
+      "behavior": "return -22"
+    }
+  ],
+  "source": {
+    "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_source.c",
+    "sha256": "54eaec77da55c139ca5dc49b1bcc21c115e3082b4e22a4a46ea78ff7301c449d",
+    "method": "replace only the external-state API logic in the existing C source provider; preserve the distinct experimental process model and shared state"
+  },
+  "host_check": {
+    "harness": "build/g2-fuel-gauge-ext-state-20261111/check.c",
+    "command": "cc -std=c11 -O2 -Wall -Wextra -Werror build/g2-fuel-gauge-ext-state-20261111/check.c -lm -o build/g2-fuel-gauge-ext-state-20261111/check && build/g2-fuel-gauge-ext-state-20261111/check",
+    "assertions": 21,
+    "exit_code": 0,
+    "cases": [
+      "update before initialization",
+      "charge-state low byte",
+      "VBUS disconnect retains charge state",
+      "positive infinity correction",
+      "negative and signed-zero correction rejection",
+      "NaN rejection",
+      "negative absolute charge limit and termination current",
+      "zero rejection",
+      "positive infinity charge limit",
+      "null data and unknown type"
+    ]
+  },
+  "limits": [
+    "The rest of the Nordic fuel gauge is an uncalibrated source-only candidate; this evidence does not establish stock-equivalent SOC or time predictions.",
+    "The host harness verifies selected source behavior; it is not an ARM emulator run or physical battery validation."
+  ],
+  "product_call_site": {
+    "source": "g2/src/apollo-main/drivers/power/npm1300/npmx_main_driver.c",
+    "current_limit_value_amperes": 0.096,
+    "termination_current_value_amperes": 0.0096,
+    "meaning": "npmx_fuel_gauge_init feeds both positive values to cases 5 and 6; stock updater stores their negative magnitudes."
+  },
+  "full_source_build": {
+    "source_receipt": "build/g2-fuel-gauge-ext-state-all-20261111/report.json",
+    "source_receipt_sha256": "580b9b4db983ae47266312483bb66355c736671084111e448f965afa3ba45321",
+    "compiled_c_units": 4878,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_receipt": "build/g2-fuel-gauge-ext-state-all-link-20261111/link-report.json",
+    "strict_link_receipt_sha256": "72304ac39b2502f624a6031e261297c5bea8776b943621dc1254e511bc9eb670",
+    "strict_payload_links": 7,
+    "final_undefined_symbols": 0,
+    "external_binary_archive_used": false,
+    "apollo_main_image_bytes": 3818704,
+    "apollo_main_image_sha256": "0c66b1e174fe7a8a0369f52f194df0ace9cd6f52e9784dacfa430472cd682f1f",
+    "bundle_receipt": "build/g2-fuel-gauge-ext-state-all-bundle-20261111/link-report.json",
+    "bundle_receipt_sha256": "36ac91bbbd8c0a138ef7254c69bd5c766fd4c05ef8f28cf74e95653fe02412da",
+    "source_candidate_bundle_bytes": 4637716,
+    "source_candidate_bundle_sha256": "cfb4d1c9b56f464dca01b9280eb5d95474bf1d0bd44e6bf8ec414904612e599c",
+    "matches_locked_target": false
+  }
+}

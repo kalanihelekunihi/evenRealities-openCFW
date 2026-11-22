@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked candidate v18 per-row readiness and exact source-byte partition across 40 scopes",
+  "artifacts": {
+    "matrix_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-canonical-coverage-review-readiness-001/001/build_matrix.py",
+      "sha256": "2641bcf3946c6722daad821e6fc49fa66c36527e70f78ba9a430036f6cbb9071"
+    },
+    "matrix": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-canonical-coverage-review-readiness-001/001/readiness-matrix.json",
+      "sha256": "0bb6a291fa410c052223ad803d768533626af9fd6203c12fb6bd87c50ed789bd"
+    },
+    "matrix_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-canonical-coverage-review-readiness-001/001/receipt.json",
+      "sha256": "ddf32c434571573127c370d832355edf300cc055d4b6804a4a6acc5e3687e955"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-canonical-coverage-readiness-independent-review-001/001/review.py",
+      "sha256": "4b4714733e0c1bfecc70200bd38973e1844902b6950794cd03e5d0b31bc913cf"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-canonical-coverage-readiness-independent-review-001/001/review.json",
+      "sha256": "ed4830b9360d11543da9ed33b97f61115985023219876cc4058c3b70ce9e0622"
+    },
+    "candidate_v18": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018/001/coverage-draft.jsonl",
+      "sha256": "e2446cc92c63055a458335d15b2f7ef2018214f31831134436962ec7ea7f384e"
+    }
+  },
+  "result": {
+    "candidate_rows": 127,
+    "package_payload_rows": 67,
+    "image_rows": 60,
+    "image_scopes": 33,
+    "total_scopes": 40,
+    "unknown_rows": 63,
+    "canonical_review_ids_assigned": 0
+  },
+  "limits": [
+    "Exact byte partition and workpack bindings do not provide validator-format per-row reviews or trusted reviewer registry.",
+    "Image discovery and physical mappings remain open.",
+    "No canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

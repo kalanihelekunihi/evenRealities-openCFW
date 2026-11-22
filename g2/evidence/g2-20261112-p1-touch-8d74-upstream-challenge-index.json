@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed, reproducible bounded touch 0x8D74 EEPROM row-source trace",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-8d74-upstream-challenge-001/002/audit.py",
+      "sha256": "02b4ae792c3e582e42d005e2d34083aa09a7a909efcea4e67a1b1449709e324a"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-8d74-upstream-challenge-001/002/report.json",
+      "sha256": "524fdbafd4c92a80baeacf1de3c8204943ed7889e1cbd4126280b68903d0c732"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-8d74-upstream-challenge-001/002/receipt.json",
+      "sha256": "3ec6d02e071caac948e8505a2719cbe65030143298a2e9289108909682a6ccc3"
+    },
+    "disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-8d74-upstream-challenge-001/002/disassembly.txt",
+      "sha256": "9593209a8cff767ef2b6299b91ba7a3c116303453c37f9a699d1bd16505d7480"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-8d74-upstream-challenge-review-001/002/review.json",
+      "sha256": "615e0f2b05a3c1702a5f8a3cdbbe1d753c5dcf110587b0e68f32b42379bd31e5"
+    },
+    "prior_copy_route_challenge_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-copy-route-challenge-index.json",
+      "sha256": "91409bf1a4150997efbd346f1cef7bae584b455d46c894bf0491e3945729521b"
+    }
+  },
+  "result": {
+    "zero_caller": "0x47E6: 512-byte zero-filled stack buffer",
+    "dynamic_caller": "0x483A: incoming r3 source, 128-byte row increments",
+    "row_copy_site": "0x8D74",
+    "bounded_adapter_record": "8 bytes at 0x200009D0",
+    "review_verdict": "pass_bounded_reproducible"
+  },
+  "limits": [
+    "No fixed source interval in the locked touch image is established on observed paths.",
+    "Protocol input 0x200009A1, callback aliases, indirect callers and all writers remain unresolved.",
+    "No global nested-image exclusion, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 016 adding the Apollo main 44-byte pointer cluster while retaining residual routes.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v15-index.json",
+    "sha256": "43cc4db7fd32709866de489d4308b55768bcbb048e7b2e4dbee819ff14f63592"
+  },
+  "artifacts": {
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/016/reproduce.py",
+      "sha256": "19b8fc70a62f4ee76d01b1f59b93fbe879f7eac6c43ffd4fae369dd2d93a791d"
+    },
+    "discovery_draft_016": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/016/discovery-draft.jsonl",
+      "sha256": "16b1f655f7bb1e61efd949b193a510d42c4c1c1df9cd05dca13bef1b1bb0cbc8"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/016/receipt.json",
+      "sha256": "dedb77bdfef96befc516f778bb13d07e2d4823ec455767a6f52062aaeeb486e7"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v16-review-001/001/review.json",
+      "sha256": "1ac1e492bc799520cd29452475f5e69e5fa2c8a7c6245d5666b87643584e3732"
+    },
+    "pointer_cluster_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-next-pointer-cluster-index.json",
+      "sha256": "666c6f9583e2d1026238eae618e769b77dcde675d5ff5090c9db37b55b723ffb"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "Adjacent main zero halfword, residual/reference/writer routes and runtime reachability remain open.",
+    "No canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

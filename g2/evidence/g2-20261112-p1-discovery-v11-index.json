@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 011 correcting Apollo main table provenance and adding case tail descriptor evidence.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v10-index.json",
+    "sha256": "fa8c530d3754b027adaa8109b2cef6d2067b944d757848c00bbdc46414808adc"
+  },
+  "artifacts": {
+    "producer_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/011/revise.py",
+      "sha256": "a597221882cbf7071134aec205a65fdb90984c10424d4280c93da0d1dfbe8daf"
+    },
+    "discovery_draft_011": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/011/discovery-draft.jsonl",
+      "sha256": "9c957cfc793845ab274383b88add9d2fe135a6d32062862580433bb746023128"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/011/receipt.json",
+      "sha256": "1c46d3fe19fe13901346554b583756ba1916492c410070281283eb1220ee35ea"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v11-review-001/001/review.json",
+      "sha256": "d246f59a4af04e8bfcaefd81edd30cafaddf40c3a84bdad732133bda02601475"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7,
+    "evidence_references_verified": 95
+  },
+  "limits": [
+    "Every payload discovery row remains a candidate with an open item.",
+    "No canonical admission, complete nested-image discovery or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

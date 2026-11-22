@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "time_local": "2026-11-22 08:50 CST",
+  "title": "Stock data assets: KWS weights/commands re-verified; fonts, images, EVENBAT checked; remaining placeholder is the fuel-gauge algorithm",
+  "scope": "Host verification against official 2.2.6.10 blobs. No hardware. No flash. No commit. Codec GX8002 is not executed in Renode.",
+  "kws": {
+    "already_extracted": true,
+    "note": "The 2026-11-11/12 extraction is still in-tree and is what make source-bundle uses (--codec-a-weights-from-source). This step re-verified it and recorded format/offsets. It was not still a synthetic all-zero fixture.",
+    "stock_component": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "stock_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "command_window": {
+      "firmware_codec_offset": "0x00018D90",
+      "firmware_codec_end": "0x0001B15C",
+      "binh_a_main_image_offset": "0x0000F804",
+      "bytes": 9164,
+      "sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+      "dram_load": "0x20003304",
+      "source": "g2/src/codec/npu/kws_*_commands.c field-level emitters; make kws-command-stream"
+    },
+    "weight_window": {
+      "firmware_codec_offset": "0x0001B15C",
+      "firmware_codec_end": "0x0003893C",
+      "binh_a_main_image_offset": "0x00011BD0",
+      "bytes": 120800,
+      "sha256": "397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf",
+      "dram_load": "0x200056D0",
+      "asset": "g2/src/codec/npu/kws_weights_2_2_6_10.bin",
+      "c_source": "g2/src/codec/npu/kws_weights_source.c",
+      "c_symbol": "g2_kws_weights_source[30200]",
+      "c_section": ".g2_kws_weights",
+      "manifest_link": false,
+      "packaging": "make source-bundle passes --codec-a-weights-from-source with provenance codec-a-kws-trained-weights-20261111.json"
+    },
+    "format": {
+      "identity": "LVP_KWS gxNPU model: command stream immediately followed by trained weights; no third section (0xF804+9164+120800=0x2F3B0 starts BINH B)",
+      "size_getters": "command length movi r0,9164 at flash 0x8BF4; weight length movi r0,55264 + bseti r0,16 = 120800 at flash 0x8BFC",
+      "endianness": "little-endian uint32 words in the C translation",
+      "header_word0": "0xa79bab66 (not zlib CRC-32 of the remainder; internal tensor grammar still unproven)",
+      "command_stream": "212 GXNPU commands, field-level C already emits the exact 9164 stock bytes",
+      "wrapper": "wrap_codec_binh_a concatenates npu_commands (0x23CC) + npu_weights (0x1D7E0)"
+    },
+    "sim": {
+      "gx8002_in_renode": false,
+      "host_verification": "extracted bin, C words, and stock FWPK spans are byte-identical; stock BINH A NPU tail is cmd+weights",
+      "wake_word_not_executed": true
+    }
+  },
+  "other_extracted_stock_data": {
+    "evenbat_battery_model": {
+      "source": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_npm1300_battery_model.c",
+      "format": "nrf_fuel_gauge 1.0.1 struct battery_model, 5632 bytes, name EVENBAT at +0x15C0",
+      "stock_va": "0x646BF8",
+      "ota_file_offset": "0x20ec18",
+      "present_in_current_opencfw_image": true,
+      "opencfw_file_offset": 2347896
+    },
+    "rom_fonts_uint8_arrays": {
+      "source": "g2/src/apollo-main/ui/S6-fonts-residual-data/rom_fonts_data.c",
+      "format": "LVGL 9 fmt_txt (LV_FONT_FMT_TXT_LARGE=1, 16-byte glyph dsc, plain-aligned bitmaps bpp 4)",
+      "arrays_verified_bit_exact": 29,
+      "bytes_verified": 167200,
+      "all_present_in_current_opencfw_image": true
+    },
+    "app_image_assets": {
+      "source": "g2/src/apollo-main/app/S6-fonts-residual-data/app_image_assets_data.c",
+      "format": "LVGL 9 L8 lv_image_dsc_t (28 bytes, header 0x619) + pixel arrays",
+      "arrays_verified_bit_exact": 6,
+      "note": "All six uint8 pixel arrays match official OTA once comments are stripped (a '20x20' size note must not be parsed as 0x20)."
+    }
+  },
+  "remaining_placeholders": [
+    {
+      "item": "Nordic fuel-gauge algorithm",
+      "file": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_source.c",
+      "status": "The EVENBAT calibration tables are stock. The provider itself is still a source-only uncalibrated voltage/coulomb estimate, not the proprietary Nordic nrf_fuel_gauge algorithm (stock reports c205a2 / 2025-04-28).",
+      "extractable_as_data": false
+    },
+    {
+      "item": "KWS internal tensor layout",
+      "status": "Weight bytes are stock, but layer/tensor grammar inside the 120,800-byte bank is not independently proven."
+    }
+  ],
+  "sim_notes": "GX8002/NPU is not in the G2 Apollo Renode model, so wake-word cannot be sim-executed here. Boot-time display frames were already byte-identical stock vs openCFW in the 22 Nov CHIPREV=0x22 paired Renode run (hash 0c5cc90b\u2026). Current openCFW image contains the verified EVENBAT, font bitmaps, and image pixels (layout addresses differ).",
+  "verifier": "g2/tools/verify_stock_data_assets.py"
+}

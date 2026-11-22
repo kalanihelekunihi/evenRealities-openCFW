@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed 44-byte Apollo main post-preamble pointer cluster immediately after the earlier eight-word string pool.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-postpreamble-next-refs-001/001/audit.py",
+      "sha256": "aa16cb8bb7b1843041e7d94666c3629381dda1f55d743561d140e191d8c9142c"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-postpreamble-next-refs-001/001/report.json",
+      "sha256": "ed0a7478d9a85383b7f179454d95def6b8f58d0f0451eb5c1f484662c7293ba4"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-postpreamble-next-refs-001/001/receipt.json",
+      "sha256": "f3d0be9e728dffe37b27a9f4d8d246845700c76d6d154d8e114c8a225c883fab"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-postpreamble-next-refs-review-001/001/review.json",
+      "sha256": "aaeb2c40c121d16b58edd86124cc600dac7a080a065f5f0c306b4812c3d8fd48"
+    }
+  },
+  "result": {
+    "post_preamble_raw_data_span": [
+      143648,
+      143692
+    ],
+    "full_ota_file_data_span": [
+      143680,
+      143724
+    ],
+    "runtime_data_span": [
+      "0x45b120",
+      "0x45b14c"
+    ],
+    "literal_words": 11,
+    "in_image_string_pointers": 9,
+    "thumb_function_pointers": 2,
+    "direct_thumb_ldr_references": 29,
+    "following_historical_function_entry": "0x45b14c"
+  },
+  "limits": [
+    "Reference scan is bounded to historical census and direct literal loads.",
+    "No nested-image or whole-main discovery closure, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

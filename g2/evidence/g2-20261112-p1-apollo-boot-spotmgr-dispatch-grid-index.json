@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded stock SpotMgr selector replay for every old/new state pair 0 through 19, plus instruction-backed local DTCM table dispatch routes",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-dispatch-grid-001/002/audit.py",
+      "sha256": "79b9464e760e8b8a445a1127cdcc88d66445d49c6810d4c88ec36473dbccb4e9"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-dispatch-grid-001/002/report.json",
+      "sha256": "a99feb17abb8322c0172b294b984145a5003ec8d62164b03d69f4c93c021b18f"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-dispatch-grid-001/002/receipt.json",
+      "sha256": "9978f82a4e657e8a1d9806bb93bd146e73aef55a20b79e57cd37ee7ddaf18967"
+    },
+    "state_grid": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-dispatch-grid-001/002/state-grid.json",
+      "sha256": "df704a1cfe7adfcb3458ee670e9d9b73e6ed18a867dbf7ff9f1105aa1e174799"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-dispatch-grid-review-001/001/review.py",
+      "sha256": "1598536090411e78cafd07c1d18f693f104a20d9d77f2aeb01c4910ebd3b0841"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-dispatch-grid-review-001/001/review.json",
+      "sha256": "6ecdf7865854ee2b587691174a7930417ef57b63695937289153f3f7f44731f5"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-dispatch-grid-review-001/001/receipt.json",
+      "sha256": "7751980ce344ff1e51961c3e40c373aa0469b2ce14965964ec5890556620316d"
+    },
+    "rejected_hooked_attempt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-dispatch-grid-001/001/failure.json",
+      "sha256": "868b0fc0d94ab93df6e468a211819e1740bc5538654ddef1434e5aaa223677f4"
+    }
+  },
+  "result": {
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS",
+    "state_domain": "All 400 ordered old/new pairs with each value 0..19 inclusive, replayed with 0x00 and 0xA5 RAM prestates.",
+    "prestate_agreement": true,
+    "status_zero_pairs": 304,
+    "status_seven_pairs": 96,
+    "slot_7_pairs": 15,
+    "slot_22_pairs": 1,
+    "slot_24_pairs": 54,
+    "slot_25_pairs": 0,
+    "slot_26_pairs": 96,
+    "slot_26_local_effect": "For this grid, selector 26 always returns status 7; independently verified BNE instructions skip each of three local BLX table calls on nonzero status.",
+    "dispatch_table": "27 Thumb pointers at decoded DTCM 0x20000158..0x200001C4; three stock literal loads at 0x42A472, 0x42A4A2 and 0x42A534 feed indirect calls."
+  },
+  "limits": [
+    "The producer report uses [0,20] for the input ranges; its enumeration and this index mean 0..19 inclusive.",
+    "The failed memory-write-hook attempt is excluded. Only the clean replay and independent reproduction support the grid.",
+    "The grid does not prove global hardware state bounds, device reachability, all table consumers, or absence of other indirect targets.",
+    "No canonical inventory admission, complete G1 route closure, pseudocode completion or C source-completeness claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

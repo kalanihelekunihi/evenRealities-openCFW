@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed GNU objdump Thumb instruction-boundary validation of the non-admitting Apollo main code candidate.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-main-code-candidate-index.json",
+    "sha256": "90601d78888da1b7a3a35ef927c3580a55c31a5cf70be350a9b6765f8f3a7d21"
+  },
+  "artifacts": {
+    "validator_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-objdump-validation-001/001/validate.py",
+      "sha256": "263e4e82a10f91dcc1143dbbc0549c170117527a9eecbc9c17e2a76175af046a"
+    },
+    "validator_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-objdump-validation-001/001/report.json",
+      "sha256": "d26dd33e2d25c4d3308d0b9b30feb74f3305a199e3c76500fb0b84b2d6cbc198"
+    },
+    "validator_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-objdump-validation-001/001/receipt.json",
+      "sha256": "0700fefa4fdb8c8cd858cd5228c85ff0a71201b0432a20180bf99e08f97be469"
+    },
+    "mismatch_file": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-objdump-validation-001/001/mismatches.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-objdump-validation-review-001/001/review.json",
+      "sha256": "09f7698e8e986841703d88839afbf5ed9e81c1a7f980d7e20c0077f429dc9f10"
+    }
+  },
+  "toolchain": {
+    "binary": "/opt/homebrew/bin/arm-none-eabi-objdump",
+    "binutils_version": "2.47.20260726",
+    "options": "-D -b binary -m arm -Mforce-thumb; isolated runs with VMA=file offset+0x437FE0"
+  },
+  "result": {
+    "candidate_units": 473945,
+    "isolated_runs": 2465,
+    "candidate_bytes": 1251072,
+    "missing_or_extra_starts": 0,
+    "instruction_width_mismatches": 0,
+    "opcode_byte_mismatches": 0
+  },
+  "decision": "not_admitted",
+  "limits": [
+    "Printed opcode bytes come from the same locked OTA; independent support is decoder start/width agreement.",
+    "Two decoders agreeing on an encoding does not establish semantic code at every address.",
+    "Fresh Ghidra 12.1.4 does not recreate missing 12.1.2 project; no coverage or G1 change."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

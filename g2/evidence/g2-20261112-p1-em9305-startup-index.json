@@ -1,0 +1,52 @@
+{
+  "artifacts": {
+    "discovery_draft_004": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/004/discovery-draft.jsonl",
+      "sha256": "1872c533e91e1dac8c4b589271599904fb4739be96fa0b50f74d8a70fa26a7c7"
+    },
+    "discovery_receipt_004": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/004/receipt.json",
+      "sha256": "01e690bce5bef1fada262eaf9673f19c327b868397118b8cc5694dcacb703ece"
+    },
+    "discovery_review": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-startup-discovery-review.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-startup-review-001/001/discovery-review.json",
+      "sha256": "96de76fc19a4f9b856469dd0ac6d9729c937d3cb6075fba52541ca9da325f95a"
+    },
+    "stock_startup_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-startup-table-001/002/report.json",
+      "sha256": "17656ab9c2028691ad2ba3d23997a45d8d115bc326d19502e5d5d03d1ba015a6"
+    },
+    "stock_startup_review": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-startup-review.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-startup-review-001/001/review-v2.json",
+      "sha256": "576231f710857c55af256ee6ff14d1a6c127a22f1c25749d9c30fe3f8478ac80"
+    }
+  },
+  "campaign_id": "20261112T092142Z",
+  "confirmed": [
+    "10-byte NVM entry sets SP and branches to the application boot loop under ARCv2 EM disassembly.",
+    "The INI table has exactly three positive copy rows, one negative zero-fill row and a zero sentinel at record-3 EOF.",
+    "Positive payloads match the three current RAM child images byte for byte; zero-fill output is generated RAM state."
+  ],
+  "counts": {
+    "copy_children": 3,
+    "discovery_payload_rows": 6,
+    "discovery_unresolved_remaining": 7,
+    "generated_zero_bytes": 19840,
+    "ini_table_bytes": 936,
+    "listed_image_ids": 33
+  },
+  "limits": [
+    "Runtime selection, physical execution, and hardware-dependent branches are unobserved.",
+    "Records 0/1 and application bytes beyond this INI table still need nested-image/reference sweeps.",
+    "No canonical G1 admission, full pseudocode, source completion or byte identity."
+  ],
+  "schema_version": 1,
+  "scope": "Bounded P1 stock EM9305 ARC NVM entry, application INI startup table, three encoded RAM children, one generated zero span, and noncanonical discovery refinement.",
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

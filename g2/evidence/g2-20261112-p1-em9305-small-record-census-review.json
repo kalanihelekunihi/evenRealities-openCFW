@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "review_id": "P1-em9305-small-record-census-review-001/001",
+  "campaign_id": "20261112T092142Z",
+  "verdict": "SUPPORTED_WITH_BOUNDED_SCOPE",
+  "admission": "none",
+  "reviewed_report": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-census-001/001/report.json",
+    "sha256": "29948ec4c8aca457d2edd126a7577d0e7efec4b80d037253018b8b5c75112e7e"
+  },
+  "checks": {
+    "pinned_inputs_and_full_objdump_hashes": {
+      "result": "PASS",
+      "package_path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+      "package_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "objdump_sha256": "72e6b6472976159e135ea363dee4a1580b0921699ead22357e24503eddb0fdf3",
+      "materialized_record_hashes_and_objdump_hashes_match_report": true
+    },
+    "linear_rows_and_direct_reference_counts": {
+      "result": "PASS",
+      "record0_direct_refs": 13,
+      "record1_direct_refs": 59,
+      "total": 72,
+      "record0_to_record1": 7,
+      "record1_to_record0": 11,
+      "external_or_other": 1,
+      "external_target": "0x103f14",
+      "scope_note": "Counts are for parsed direct control references in the supplied bounded candidate spans."
+    },
+    "word_rows_and_record0_tail": {
+      "result": "PASS",
+      "record1_word_addresses": [
+        "0x30041c",
+        "0x30042e",
+        "0x30043c",
+        "0x300440"
+      ],
+      "word_raw": [
+        "3b02 0303",
+        "3b00 0083",
+        "3b02 0083",
+        "392f 00cc"
+      ],
+      "record0_tail_address": "0x3000de",
+      "record0_tail_bytes": "ffff"
+    },
+    "record1_tail_and_register_jump": {
+      "result": "PASS",
+      "register_jump_address": "0x300538",
+      "instruction": "j_s [r0]",
+      "candidate_linear_code_end_exclusive": "0x300684",
+      "empty_ini_table_span": "0x300684..0x300690",
+      "package_span": "[992,1004)",
+      "bytes_hex": "494e49020000000000000000"
+    },
+    "parser_and_interpretation_limits": {
+      "result": "BOUNDED",
+      "details": [
+        "The report contains the computed rows and counts but no parser source, command line for the full dumps, or parser implementation hash; exact parser reproducibility was therefore not established in this review.",
+        "The parser is evidently relying on objdump textual instruction mnemonics and printed semicolon target comments; direct target counts do not include register-indirect jumps or non-control references.",
+        "Linear disassembly may decode embedded data as instructions and does not discover alternate entry points; .word rows are unresolved and can encode instruction bits despite objdump directive formatting.",
+        "The four undecoded .word rows occur in the linear stream; any apparent branch target to 0x300440 is an objdump-decoded branch elsewhere, not semantics of a .word row."
+      ]
+    }
+  },
+  "issues": [],
+  "limits": [
+    "This verifies the report against the pinned package, record materializations, objdump text and tool hash, and audits bounded linear direct-reference counts.",
+    "No recursive control-flow completeness, embedded-program census, runtime selection/execution, canonical G1 admission, pseudocode completeness, source completeness or byte identity."
+  ],
+  "gate_effect": "none; G1 remains not_run"
+}

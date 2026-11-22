@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "target": "C-compiled non-executable KWS weight data in the G2 source-candidate bundle",
+  "source": {
+    "file": "g2/src/codec/npu/kws_weights_source.c",
+    "sha256": "3a7a40b85f1a5949a97c81864baf0a408eafd3f23ba6cb9fc8fc5a922eb966d3",
+    "manifest": "g2/src/sources.json",
+    "manifest_sha256": "1de4756f9156b30be8289cab38604fd182cd2af2c73dafc544897ce5bb32395d",
+    "source_data_symbol": "g2_kws_weights_source",
+    "compiled_object": "build/g2-kws-c-weights-final-full-20261111/g2/g2-codec-a/g2__src__codec__npu__kws_weights_source.c.o",
+    "compiled_object_sha256": "7b780b3f6dcadcf6aa8728e9a16d90814fa8b9724dd1f7c4fd81937379cff343",
+    "section": ".g2_kws_weights",
+    "section_bytes": 120800,
+    "section_sha256": "397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf"
+  },
+  "authenticated_reference": {
+    "asset": "g2/src/codec/npu/kws_weights_2_2_6_10.bin",
+    "asset_sha256": "397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf",
+    "provenance": "g2/evidence/codec-a-kws-trained-weights-20261111.json",
+    "stock_component": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "stock_weight_offset": [
+      110940,
+      231740
+    ]
+  },
+  "verification": {
+    "full_source_report": "build/g2-kws-c-weights-final-full-20261111/report.json",
+    "full_source_report_sha256": "02b55253d6a57e6186af91aef01d3cb9fa74d79c61acd2e0d95399e2f835dbd6",
+    "enabled_compiled_units": 4881,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "source_bundle_report": "build/g2-kws-c-weights-final-bundle-20261112/link-report.json",
+    "source_bundle_report_sha256": "4830d690c3af5cd25634febd8e29627a242654b34b5b84c7274554b955a990dc",
+    "binary_reference_bundle_report": "build/g2-kws-binary-reference-bundle-20261112/link-report.json",
+    "binary_reference_bundle_report_sha256": "d6969833fed66f91fb3567e52ca8ab98bd58194bf5846f177ad50ef7b10a7ae9",
+    "source_binh_a_sha256": "9844a864349370e9ee099d878ecad621f56f533ae18ef5fef13e5a595984af08",
+    "reference_binh_a_sha256": "9844a864349370e9ee099d878ecad621f56f533ae18ef5fef13e5a595984af08",
+    "binh_a_byte_identical_to_binary_weight_path": true,
+    "source_candidate_bundle": "build/g2-kws-c-weights-final-bundle-20261112/g2-source-candidate.evenota.bin",
+    "source_candidate_bytes": 4642172,
+    "source_candidate_sha256": "6ab074068ce35fc4bcd83c1aae89fc4f25140edf8c8f8203d83361c1c05ec9dc",
+    "binary_reference_bundle_sha256": "6ab074068ce35fc4bcd83c1aae89fc4f25140edf8c8f8203d83361c1c05ec9dc",
+    "candidate_byte_identical_to_binary_weight_path": true,
+    "locked_ota_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "matches_locked_ota": false,
+    "source_completeness_proven": false
+  },
+  "limits": [
+    "The C unit preserves the authenticated trained data bytes but does not reconstruct model training provenance or establish recognition behavior.",
+    "The source-candidate bundle still differs in size and hash from the locked OTA; other executable and data regions remain incomplete.",
+    "The binary weight asset remains as a verification reference and is not an input to the make source-bundle path."
+  ]
+}

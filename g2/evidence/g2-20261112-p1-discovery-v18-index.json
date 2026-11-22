@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 018 adding corrected touch EEPROM-write callback source trace while retaining dynamic-source unknowns.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v17-index.json",
+    "sha256": "fa9deb49803c9a4080c85a4cfef2b03434492d760f72d26ba9de53e33670a5a0"
+  },
+  "artifacts": {
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/018/reproduce.py",
+      "sha256": "df87d86bfc081de407a6f9cea3b814d073f035549f0f85873cbee7187dcc3569"
+    },
+    "discovery_draft_018": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/018/discovery-draft.jsonl",
+      "sha256": "87a386e33815ff6ccde167237b59a69a25c6fe260a2921822bd03c409c02e7f7"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/018/receipt.json",
+      "sha256": "f354ebdccdbf51349fef5bc79817ab05916f1ff00b3f6360a325348cf5e3f9e8"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v18-review-001/001/review.json",
+      "sha256": "6d36f84f49b98abb6f8d4bc40e9184782e29b7b0fd10ebe8e0ce991ea95cbbf9"
+    },
+    "touch_uptrace_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-flash-copy-uptrace-index.json",
+      "sha256": "d29f357cdd58ca4c863000a6cc65fd69ebd4a9794e359f34b06f92c0024bfe2b"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "Caller-supplied touch param_2 source/content, other helper callsites and indirect routes remain open.",
+    "All payloads retain unresolved discovery items; no canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

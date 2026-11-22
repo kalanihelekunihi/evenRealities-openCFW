@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded sparse EM9305 package/NVM model and conditional header/firmware CRC path",
+  "artifacts": {
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-sparse-nvm-replay-001/001/receipt.json",
+      "sha256": "d6c94e02f232b24ca44f4661d65d624b081587f6c78a1b6e51f6bd01dfdae7a9"
+    },
+    "producer_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-sparse-nvm-replay-001/001/report.json",
+      "sha256": "643b15b6cecc532054cd5943310412e58d5e3a95f36a5181e17add42be7c5f5d"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-sparse-nvm-review-001/001/review.json",
+      "sha256": "c286b084a8fb4e40c42974d68ada3e00f6e92be21a6885d0d465f45b3846d9da"
+    },
+    "section_slot_origin_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-section-slot-origin-index.json",
+      "sha256": "c615fa020f0399a0bdaa186169fbe3a7e088c43142f54a6a6ee942d14067e73c"
+    },
+    "fhdr_replay_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-fhdr-replay-index.json",
+      "sha256": "4762b30618f8fd483fc6b802daaac7d35110e63c7462299b6bae418d580ea472"
+    }
+  },
+  "result": {
+    "modeled_first_scan": "0x302000",
+    "modeled_second_scan_start": "0x304000",
+    "modeled_second_scan_result": null,
+    "header_crc32": "0x87303b94",
+    "firmware_crc32": "0xceb7f4f3",
+    "erased_gap_bytes": 968,
+    "review_verdict": "BOUNDED_MODEL_PASS_WITH_STOCK_EXECUTION_AND_PHYSICAL_LIMITS"
+  },
+  "limits": [
+    "Synthetic FF-filled NVM and zlib are model inputs, not observed device contents or execution of stock ARC CRC instructions.",
+    "BMSKN arbitrary-input alignment, external competing headers, MMIO state and physical record selection remain unproved.",
+    "Full EM9305 discovery and G1 remain open."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

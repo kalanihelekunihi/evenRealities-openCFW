@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Reproducible bounded ARC linear disassembly and direct-control-reference census of EM9305 NVM records 0/1.",
+  "artifacts": {
+    "script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-census-002/001/reproduce.py",
+      "sha256": "2a7b89c5104006879d69116d1e9aef68762061712ac73a47e1afc1459a366884"
+    },
+    "report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-census-002/001/report.json",
+      "sha256": "e07ade1c6dbaf7514acfe30dfc6e0b49c882d63ac41784bb16637dfa645bb8f3"
+    },
+    "record0_full_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-census-002/001/record0-full.objdump.txt",
+      "sha256": "785e94ad341c0b50395bc18b65feaf6e2fd9a11df41f7a2b80755e1541b5353e"
+    },
+    "record1_full_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-census-002/001/record1-full.objdump.txt",
+      "sha256": "3296b598850bcf91fdb9c4493c8e59a1036416e4047704c248b1ffdd727f2ce6"
+    },
+    "independent_review": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-small-record-census-repro-review.json",
+      "sha256": "4a046936d3e08b44b8f33fdc68f15f43c4a029b69481788b993848b4be489195",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-census-review-002/001/review.json"
+    }
+  },
+  "counts": {
+    "printed_direct_control_refs": 72,
+    "record0_to_record1": 7,
+    "record1_to_record0": 11,
+    "external_or_other": 1,
+    "undecoded_word_rows": 4
+  },
+  "limits": [
+    "Linear disassembly and objdump text parsing are not exhaustive code/data or embedded-program discovery.",
+    "Four undecoded ARC words and a register jump require further analysis.",
+    "No canonical G1 admission, complete pseudocode, source completion or byte identity."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "supersedes_index": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-small-record-census-index.json",
+    "sha256": "dfe47411e22ccc92d7a6b9854ed3cc38da11cd90125ca692a9f27beec766b89d"
+  }
+}

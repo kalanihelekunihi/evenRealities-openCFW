@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded triage of 15 Apollo bootloader vector-heuristic candidates.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-vector-candidates-audit-001/001/audit.py",
+      "sha256": "591fe3a0b33b5edab4e32e90d4868d820198b7f7d7472b09122db9624f2aef86"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-vector-candidates-audit-001/001/report.json",
+      "sha256": "edb142ac2adefb6080fb37bc47aa7d2f4042f47643430c5c0f352eacd1c0324c"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-vector-candidates-audit-001/001/receipt.json",
+      "sha256": "8035c4e6736a44ae5c0b6f0a47ba54e17cc579b2c55181b633c1bcbcd3335e56"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-vector-candidates-review-001/001/review.json",
+      "sha256": "e27665f4c806a8b98fe03988cd5f9a226fd056eef2849fce107ab5118d718bc4"
+    }
+  },
+  "result": {
+    "candidate_vector_starts": 15,
+    "primary_vector_supported": 1,
+    "rejected_as_vector_starts": 13,
+    "unresolved_vector_start_raw_offset": "0x5304",
+    "unresolved_first_word": "0x000FFC08",
+    "unresolved_second_word": "0x004150D9"
+  },
+  "limits": [
+    "Rejection as vector start does not classify all candidate bytes.",
+    "Boot-specific writable mapping for 0x000FFC08 is unresolved.",
+    "No full boot discovery, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

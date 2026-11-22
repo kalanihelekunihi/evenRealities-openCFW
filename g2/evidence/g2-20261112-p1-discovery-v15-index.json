@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 015 resolving the Apollo main 32-byte string-pointer pool while keeping residual routes open.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v14-index.json",
+    "sha256": "fe95201c24341041a75775ded207de0771c9d020c994ef209a3a8ca4b727d9fb"
+  },
+  "artifacts": {
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/015/reproduce.py",
+      "sha256": "832237d23c5ba6f7953e2026d0ad64d1c1d6a0b8a1254f7d0baad0ce2ec884f2"
+    },
+    "discovery_draft_015": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/015/discovery-draft.jsonl",
+      "sha256": "2659c8465a333252eb9e09432a83069eba0002bbbe3fb5999eacc11ce071dc66"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/015/receipt.json",
+      "sha256": "3fb41d59c14089d636928e0b1cd4c1beadf1b0dfffca4f397d56fc22dfbed1dc"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v15-review-001/001/review.json",
+      "sha256": "f617188ddd15eb0e5e5e3477d1c26f162e840ce77534c3af25cfd5875cafe189"
+    },
+    "main_literals_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-postpreamble-refs-index.json",
+      "sha256": "62867cde853a352515253439225d48918bf5b6e1fb3305c80060e0a5440d9813"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "Adjacent main zero halfword, residual/reference/writer routes and runtime reachability remain open.",
+    "No canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

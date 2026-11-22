@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Read-only installed Ghidra processor-language availability and file-hash preflight for six G2 payloads",
+  "artifacts": {
+    "preflight_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-ghidra-processor-spec-preflight-001/001/preflight.py",
+      "sha256": "58c0b49477f269b6b5b2e6a6e5c95b3d546c960790d0edf4a437f6065b98ef15"
+    },
+    "preflight_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-ghidra-processor-spec-preflight-001/001/report.json",
+      "sha256": "3351e38b72ebfbc355fd44a691334f4eb95bc99f7a52c5060c9c27d232f1d74a"
+    },
+    "preflight_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-ghidra-processor-spec-preflight-001/001/receipt.json",
+      "sha256": "120212d7aa30c2583316ebacd3e6a3081e97a1ca40f79ffbdaa7353818c36171"
+    },
+    "coordinator_check_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-ghidra-processor-spec-coordinator-check-001/001/check.py",
+      "sha256": "d0088f6831fdbe4e4500501e9b87373a9bd29e1ccab195cd1de82e9e4cab0dd9"
+    },
+    "coordinator_check": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-ghidra-processor-spec-coordinator-check-001/001/review.json",
+      "sha256": "1e6b31bc62a335246183636b3b3995002fc38283a1169d74834323d68903d451"
+    }
+  },
+  "result": {
+    "installed_ghidra_version": "12.1.4",
+    "processor_files_hashed": 97,
+    "arm_language_candidate": "ARM:LE:32:v8-m",
+    "csky_language_candidate": "CSKY_V2:LE:32:default",
+    "installed_arc_arcv2_language_found": false,
+    "p2_processor_specs_qualified": false
+  },
+  "limits": [
+    "ARM and C-SKY language availability is not qualification for Cortex-M55 MVE, M0+ or CK804EF behavior.",
+    "No installed Ghidra ARC/ARCv2 processor module was found for EM9305; a supported, qualified route is required before P2 projects.",
+    "No analysis project, decompilation, G1 or P2 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

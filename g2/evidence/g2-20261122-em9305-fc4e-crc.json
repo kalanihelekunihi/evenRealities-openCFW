@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "title": "EM9305 HCI 0xFC4E CRC32 (audio_ble_radio_crc_remote)",
+  "scope": "Emulator-only vendor CRC model in ~/Repo/g2-firmware-emulator (no commit). No hardware flash. Mismatch DFU pair and (3) case-reply disarm are not in this step.",
+  "evidence_sources": [
+    "display_ble_hci_radio_crc_remote.c: packet 014EFC08 + start/end LE32; response[6]==0, CRC LE32 at [7..10]",
+    "display_ble_hci_radio_crc_local.c / audio_ble_radio_crc_local_4d34f8: reflected poly 0xedb88320, init 0xffffffff, final invert",
+    "em9305/bootloader/nvm_bootloader.c crc32_nvm: same algorithm over NVM bytes",
+    "display_ble_hci_radio_update_crc.c: update_current/update_check call crc_remote over image rows",
+    "prior mismatch log: 014EFC0800003000E0003000 twice (start 0x00300000 end 0x003000e0)"
+  ],
+  "model": {
+    "opcode": "0xFC4E",
+    "plen": 8,
+    "range": "[start, end) exclusive end",
+    "configurationMode": "required; status 0x2F outside CM (same gate as EMSMM NVM)",
+    "invalid": "plen!=8 or end<start \u2192 status 0x12",
+    "crc": "reflected 0xEDB88320 over fixture bytes; missing addresses read as erased 0xFF",
+    "response": "Command Complete status + CRC32 LE32"
+  },
+  "unit_tests": {
+    "result": "6 passed in 23.13s (fc4e + fd06 + fd03)",
+    "fc4e_names": [
+      "test_fc4e_crc_requires_configuration_mode",
+      "test_fc4e_crc_matches_written_payload",
+      "test_fc4e_crc_missing_bytes_read_as_erased_ff"
+    ]
+  },
+  "artifacts": {
+    "G2EM9305.cs": "02eb5394aafa53b882a5fb337257be6f0cc85292c5d2c9a1c21b2b2c9b1fbc3d",
+    "test_em9305_transport.py": "54b4f7f7645d9f14ab04bb6d3902f96656e554645dfcfc29986d0b6904f79d58"
+  },
+  "next": "Re-run stock + openCFW mismatch pair through a completed DFU and compare; then (3) case-reply disarm."
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "review_id": "P1-touch-apollo-fwpk-review-001-v2",
+  "candidate_path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-apollo-fwpk-check-001/002/report.json",
+  "supersedes_review": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-apollo-fwpk-review-001/001/review.json",
+  "assessment": "verified_within_stated_scope",
+  "scope": "Independent byte-level check of corrected report window-size/span/hash declarations, predecessor and input pins, reflected touch CRC-32C values, FWPK hit count, and known codec/touch layout bounds.",
+  "predecessor_pin": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-apollo-fwpk-check-001/001/report.json",
+    "expected_sha256": "71dc90a98bf3aa1ec780f6622182371e22e106e7ce531858b0f9aa8d73162d0c",
+    "verified": true
+  },
+  "input_pins_verified": true,
+  "inputs": {
+    "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+    "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "g2/tools/open_cfw.py": "e3ace482eb5d7e112e246c3a940649db8ac63139c0d66f43f4780d4d79734860"
+  },
+  "touch": {
+    "payload_size": 34464,
+    "fwpk_fields_le_u32_at_0x10": [
+      3,
+      34432,
+      32,
+      1214729159
+    ],
+    "application_span": [
+      32,
+      34464
+    ],
+    "reflected_crc32c_application": 1214729159,
+    "declared_application_crc32c": 1214729159,
+    "reflected_crc32c_programmed_image": 4150064884,
+    "declared_programmed_image_crc32c": 4150064884,
+    "verified": true
+  },
+  "apollo_main": {
+    "payload_size": 3523396,
+    "all_FWPK_magic_offsets": [
+      1216744,
+      1312804
+    ],
+    "hit_count": 2,
+    "hits": [
+      {
+        "payload_offset": 1216744,
+        "window_size": 40,
+        "window_span": [
+          1216744,
+          1216784
+        ],
+        "computed_window_sha256": "4e6e4a4a0e352d2a1053453bc877486b7eb68fef8ea42726b0132a5106f4fa35",
+        "reported_window_sha256": "4e6e4a4a0e352d2a1053453bc877486b7eb68fef8ea42726b0132a5106f4fa35",
+        "codec_record_count_field": 7273272,
+        "codec_table_end_from_header": 116372368,
+        "codec_layout_bounds_valid": false,
+        "touch_application_size_field": 7440560,
+        "touch_application_offset_field": 7708392,
+        "touch_span_end": 15144260,
+        "touch_layout_bounds_valid": false
+      },
+      {
+        "payload_offset": 1312804,
+        "window_size": 40,
+        "window_span": [
+          1312804,
+          1312844
+        ],
+        "computed_window_sha256": "4cee5f38f810c6f1c9d2ff61588af4d4819e55d522975cb39f4910ae28526327",
+        "reported_window_sha256": "4cee5f38f810c6f1c9d2ff61588af4d4819e55d522975cb39f4910ae28526327",
+        "codec_record_count_field": 7362224,
+        "codec_table_end_from_header": 117795600,
+        "codec_layout_bounds_valid": false,
+        "touch_application_size_field": 3574597504,
+        "touch_application_offset_field": 2416085024,
+        "touch_span_end": 4234193891,
+        "touch_layout_bounds_valid": false
+      }
+    ],
+    "verified": "Both and only two FWPK byte-pattern hits occur in Apollo-main. Both 40-byte spans and SHA-256 values match report. Both codec record counts exceed the known codec maximum and their resulting tables exceed payload bounds; both touch application spans exceed payload bounds."
+  },
+  "scope_limit": "The result is limited to the known codec and touch layouts. It does not establish absence of arbitrary other nested formats or G1 discovery/completion.",
+  "g1_status": "not_run",
+  "no_arbitrary_format_absence_or_g1_claim": true
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded EM9305 four-record marker/address-word/linear-ARC sweep; corrected record-3 table coordinates.",
+  "artifacts": {
+    "corrected_sweep_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-residual-001/002/sweep.py",
+      "sha256": "42e16a0141673eddff02944895b80756c844e9ff1a6e273abcb9c7ec1985f4e0"
+    },
+    "corrected_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-residual-001/002/report.json",
+      "sha256": "dd0a97462597f4acf08bf959e40bc97f2c550b53d56da3183d5777a1063218fa"
+    },
+    "corrected_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-residual-001/002/receipt.json",
+      "sha256": "0c510f27d06735d8870d67b17dc9bea3f1eaf697a19f3988c9907e4b0d89db65"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-residual-review-001/002/review.json",
+      "sha256": "f4e008ab4b9df86154e74751a43cbf8434a3be4d37dff4550dd1508832276e44"
+    },
+    "startup_table_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-startup-table-001/002/report.json",
+      "sha256": "17656ab9c2028691ad2ba3d23997a45d8d115bc326d19502e5d5d03d1ba015a6"
+    },
+    "startup_table_independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-startup-review-001/001/review-v2.json",
+      "sha256": "576231f710857c55af256ee6ff14d1a6c127a22f1c25749d9c30fe3f8478ac80"
+    }
+  },
+  "result": {
+    "locked_payload_bytes": 211948,
+    "record3_loaded_span": [
+      "0x302400",
+      "0x335bc8"
+    ],
+    "reviewed_ini_table_package_span": [
+      211012,
+      211948
+    ],
+    "reviewed_ini_table_loaded_span": [
+      "0x335820",
+      "0x335bc8"
+    ],
+    "reviewed_ini_table_bytes": 936,
+    "linear_branch_annotation_candidates_by_record": [
+      13,
+      60,
+      7,
+      14785
+    ],
+    "cross_record_candidates": {
+      "0_to_1": 7,
+      "1_to_0": 11,
+      "2_to_3": 1
+    },
+    "record3_aligned_loaded_address_word_candidates": 803,
+    "additional_nested_image_established": false
+  },
+  "limits": [
+    "Linear ARC disassembly can decode embedded data as instructions; counts are nominations, not CFG or reachability.",
+    "The INI table extent depends on separately reviewed descriptor/terminator evidence, not marker bytes alone.",
+    "External NVM record selection and whole-record reference discovery remain unresolved.",
+    "No G1 admission or source completeness claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

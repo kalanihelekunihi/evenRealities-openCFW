@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "touch scan callback source relocation and live widget electrode data relocation",
+  "source_changes": [
+    {
+      "path": "g2/src/touch/scan-preparation/prepare.c",
+      "sha256": "dd47ca02fdbe9586eb01dfb756dead0fe2385f83cf47571ad811a5531045df60"
+    },
+    {
+      "path": "g2/src/touch/scan-isr/isr.c",
+      "sha256": "2d1824c4bf91076c762b4b2c9d08386656567222920e20bf60a08c9810532054"
+    },
+    {
+      "path": "g2/src/touch/scan-isr/isr.h",
+      "sha256": "7c8fee253d2f7a975f1bba2a6797e13b2329547aa8207585e171af7d875d3c6d"
+    },
+    {
+      "path": "g2/src/touch/reset-layout/reset_generated_widget_config.c",
+      "sha256": "fc6573945669d927b89eb444de5d8c760a76a4202a1ba1a90274a03002f47fe4"
+    }
+  ],
+  "stock_pseudocode": [
+    "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/00005fba.c",
+    "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/00006780.c",
+    "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/000071c8.c"
+  ],
+  "scan_callback": {
+    "old_value": "0x00006781",
+    "source_symbol": "touch_scan_isr",
+    "object_relocation": "R_ARM_ABS32 in touch_prepare_scan_fields and touch_prepare_scan",
+    "strict_link_reachability": "scan preparation and ISR functions are garbage-collected from current touch image; the relocation closes the compiled candidate path, not a live linked call"
+  },
+  "electrode_data": {
+    "stock_widget_pointer_values": [
+      "0x0000B2E4",
+      "0x0000B304",
+      "0x0000B324"
+    ],
+    "source_symbol": "touch_generated_electrodes",
+    "source_group_indices": [
+      0,
+      4,
+      8
+    ],
+    "linked_electrode_address": "0x0000A30C",
+    "linked_widget_address": "0x0000A354",
+    "linked_widget_pointer_values": [
+      "0x0000A30C",
+      "0x0000A32C",
+      "0x0000A34C"
+    ],
+    "linked_pointers_match_source_groups": true,
+    "electrode_bytes_retained": 72
+  },
+  "focused_compile_report": "build/g2-touch-electrodes-20261111/report.json",
+  "focused_compile_report_sha256": "4b0c3fd81dff772575550aa3d673026d3ddb8f5df8784cf606a74df684b86200",
+  "strict_link_report": "build/g2-touch-electrodes-link-20261111/link-report.json",
+  "strict_link_report_sha256": "31cc5d96fa41641ab6e7c71da68dee7dfabb97944852c1224603808c79ceaaaf",
+  "previous_touch_image": {
+    "path": "build/g2-touch-scan-callback-link-20261111/g2-touch/g2-touch.bin",
+    "bytes": 30128,
+    "sha256": "33fec6add0d8314a19c8d58784986e0457d02cc73d1a543e7b8afd058452542a"
+  },
+  "current_touch_image": {
+    "path": "build/g2-touch-electrodes-link-20261111/g2-touch/g2-touch.bin",
+    "bytes": 30200,
+    "sha256": "9063301233ada755a46a66c4215d8a32f152e771233e31c8aaa4e4a2340bf8ce"
+  },
+  "limits": [
+    "The source-linked touch image is not stock byte-identical.",
+    "The link report still states source_completeness_proven=false.",
+    "RAM pointer layout, physical interrupt timing, and device behavior are not hardware-validated."
+  ],
+  "full_build": {
+    "report": "build/g2-touch-scan-all-20261111/report.json",
+    "report_sha256": "d1d0f3a6c5233ccbc5aab99e1a6640b871309b6b6dd12f5ca9f3a2c8348847ab",
+    "compiled_units": 4878,
+    "failed_units": 0,
+    "manifest_changed_during_build": false,
+    "duplicate_strong_symbols": 0,
+    "changed_source_hashes_match_report": true
+  },
+  "full_source_link": {
+    "report": "build/g2-touch-electrodes-bundle-20261111/link-report.json",
+    "report_sha256": "bb2ffab2ac66f471e91c84a8270eb6df81d651e0c06e828b4761fc45102d96bf",
+    "payload_count": 7,
+    "external_binary_archive_used": false,
+    "source_completeness_proven": false,
+    "touch_binary_bytes": 30200,
+    "touch_binary_sha256": "9063301233ada755a46a66c4215d8a32f152e771233e31c8aaa4e4a2340bf8ce"
+  },
+  "source_candidate_bundle": {
+    "path": "build/g2-touch-electrodes-bundle-20261111/g2-source-candidate.evenota.bin",
+    "bytes": 4638892,
+    "sha256": "1c2b3858bfc58812b60940e1d002ee6fcf83e8355f07d6548565d6c70c2efd57",
+    "matches_locked_target": false
+  }
+}

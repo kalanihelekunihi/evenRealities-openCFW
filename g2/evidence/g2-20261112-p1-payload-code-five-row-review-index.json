@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded instruction classification for all five v017 payload code candidate rows",
+  "artifacts": {
+    "review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-009/001/review.py",
+      "sha256": "5eedaa4208644e189531226eedab48eaa3de64d448e40352d3e79c0fc405751d"
+    },
+    "review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-009/001/review.json",
+      "sha256": "56fc0ac9b72b2f2f033fdf63f4f3051fa6a4f553b54bdb41c81b48e9f512f0d3"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-009/001/receipt.json",
+      "sha256": "fc2ca0b26b47e3e76bc1bcc20f0dcd8eb9879b6207ecceb61590126b3945ae3c"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-009-independent-review-001/001/review.json",
+      "sha256": "0382f79a22aa7af065a28d29f1382135edd1dcd72cb14e47e14959a9fbbafadf"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "payload_code_rows": 5,
+    "bounded_reviewed_payload_code_rows": 5,
+    "em9305_arcv2_em_rows": 4,
+    "apollo_main_thumb_function_suffix_rows": 1,
+    "validator_trusted_review_ids_assigned": 0
+  },
+  "limits": [
+    "The Apollo interval begins inside a larger function; it is not an independent entry.",
+    "Linear/local instruction evidence does not establish complete pseudocode or neighboring unknown roles.",
+    "No authenticated reviewer registry, canonical admission, or G1/G2 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

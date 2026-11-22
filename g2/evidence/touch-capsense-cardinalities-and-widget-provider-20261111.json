@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "locked touch CapSense product cardinalities and exact source widget query providers",
+  "stock_image": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "stock_image_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "stock_fwpk_header_bytes": 32,
+  "stock_common_config_flash_va": "0x0000B2A8",
+  "stock_common_cardinalities": {
+    "pins": 5,
+    "sensors": 9,
+    "total_slots": 9,
+    "widgets": 3,
+    "shield_pins": 2
+  },
+  "stock_widget_config_flash_va": "0x0000B0F8",
+  "stock_widgets": [
+    {
+      "num_sensors": 4,
+      "first_slot": 0,
+      "num_slots": 4
+    },
+    {
+      "num_sensors": 4,
+      "first_slot": 0,
+      "num_slots": 4
+    },
+    {
+      "num_sensors": 1,
+      "first_slot": 4,
+      "num_slots": 1
+    }
+  ],
+  "active_slot_count": 5,
+  "low_power_slot_count": 4,
+  "source_changes": [
+    {
+      "path": "g2/src/touch/vendor/cycfg_capsense_defines.h",
+      "sha256": "4f0e42d9c66a2e74d17a22386183f7747fef8c0e44bd3f19c9dd3a8f75ac790a"
+    },
+    {
+      "path": "g2/src/touch/application/app_main.c",
+      "sha256": "98a3d75abfe7121a98b71b4f0ada4c935df3fe933de4cefb339646a5298ed096"
+    },
+    {
+      "path": "g2/src/touch/calibration/calibration.c",
+      "sha256": "6cdd14cc069c70a10250ee37ad4e480bcfb1b6313c1c754b19b7593e63500437"
+    },
+    {
+      "path": "g2/src/touch/calibration/calibration.h",
+      "sha256": "7f1cb61c7821dadc9dfe294af7e96a48d96556fc4a4272f9adfdf05b92708e56"
+    }
+  ],
+  "exact_functions": [
+    {
+      "symbol": "Cy_CapSense_IsWidgetActive",
+      "stock_address": "0x00007D04",
+      "linked_address": "0x00004E58",
+      "bytes": 50,
+      "sha256": "e891e275255ea5adb71dfc1f5cff7b17f749f9331bfbab43e8ffa4e39bd84cca",
+      "linked_bytes_equal_stock": true
+    },
+    {
+      "symbol": "Cy_CapSense_IsWidgetEnabled",
+      "stock_address": "0x00007DDE",
+      "linked_address": "0x00004ED6",
+      "bytes": 38,
+      "sha256": "04863cc89e87cbbf1c246de7a064379bdf28500b2bff60ede7f1037845b65bf6",
+      "linked_bytes_equal_stock": true
+    }
+  ],
+  "retained_call_sites": [
+    "0x00006C5E touch_calibration_report -> Cy_CapSense_IsWidgetActive",
+    "0x000099E2 and 0x00009A20 main -> Cy_CapSense_IsWidgetActive"
+  ],
+  "first_party_duplicate_removed": "touch_widget_active",
+  "qualifier_report": "build/g2-touch-cardinality-structure-qualify-20261111/qualification.json",
+  "qualifier_report_sha256": "e2c8e10c56aa0c33edd0004245730769284e566d628e88e2ebe23a9bc68ada19",
+  "source_plan": "tools/build/source-plan.json",
+  "source_plan_sha256": "7ec139245ea23199d9b22778036c42eb66a369734f83cbaa541e1e63a5b634fd",
+  "plan_exact_regions_added": 2,
+  "focused_build_report": "build/g2-touch-cardinality-provider-final-20261111/report.json",
+  "focused_build_report_sha256": "018fff6e13db9fdde1386ddb6d1573f67dd6c370c8f92d7b3cd7e6465d1eb4e1",
+  "focused_link_report": "build/g2-touch-cardinality-provider-final-link-20261111/link-report.json",
+  "focused_link_report_sha256": "23e838987e1e7865ea9ce223c58a6e42b98fd517d6b5675394d096ca7c7651f6",
+  "focused_touch_image": {
+    "bytes": 30576,
+    "sha256": "d8b3a55151c4bd06549d1ea95f660f99c2b7739263d1d74c384ab01452d1806d"
+  },
+  "hybrid_report": "build/g2-touch-cardinality-hybrid-20261111/build-report.json",
+  "hybrid_report_sha256": "b1a15cdeee15b2a39e9052a961190a2eecf66e02b45cd9c28450b350df96762a",
+  "hybrid_touch_source_built_bytes": 5622,
+  "hybrid_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "limits": [
+    "Other CapSense compile-time feature toggles remain generated-design defaults and require validation.",
+    "The exact function matches prove two bounded code bodies only, not whole-touch source completeness or hardware behavior.",
+    "The hybrid bundle retains binary pull-through and does not prove a source-identical OTA."
+  ],
+  "hybrid_touch_binary_pull_through_bytes": 28810,
+  "full_build": {
+    "report": "build/g2-touch-cardinality-all-20261111/report.json",
+    "report_sha256": "c2f5a67a6501010e711ff2819c68e64de3999f59a5350872d574d4f14ca2bd82",
+    "compiled_units": 4878,
+    "failed_units": 0,
+    "manifest_changed_during_build": false,
+    "current_c_source_hashes_match_report": true
+  },
+  "full_strict_link": {
+    "report": "build/g2-touch-cardinality-bundle-20261111/link-report.json",
+    "report_sha256": "247a611efec65160f06732048d2fa362817c182a7c9435d5e52867f49b64df85",
+    "payload_count": 7,
+    "external_binary_archive_used": false,
+    "source_completeness_proven": false
+  },
+  "source_candidate_bundle": {
+    "path": "build/g2-touch-cardinality-bundle-20261111/g2-source-candidate.evenota.bin",
+    "bytes": 4639268,
+    "sha256": "5f7c7acf6099ece67cab0f8b9b9013abcb72cd9dd28ce003dce619552aca6603",
+    "matches_locked_target": false
+  }
+}

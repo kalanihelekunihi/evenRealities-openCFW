@@ -1,0 +1,1319 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "target": "Additional exact C body coverage across Apollo main, case, and Apollo bootloader",
+  "qualifier": {
+    "tool": "tools/build/qualify_sources.py",
+    "payload_filter_added": true,
+    "command_pattern": "python3 tools/build/qualify_sources.py --out <receipt-dir> --jobs <n> --match-functions --payload <g2-payload>",
+    "receipt_source_plans": {
+      "build/g2-apollo-main-full-qual-20261111/source-plan.json": "cf2720630a7cec614fac50e9877377be1090e08cf9a62c49b06b099ad3fa1123",
+      "build/g2-case-full-qual-20261111/source-plan.json": "c9dd90622abcb330c231a060f7a823d1845031303b6fba34481dcc22d280c431",
+      "build/g2-bootloader-full-qual-20261111/source-plan.json": "67f89ffddfa6915b69d986e19d6d46841dc947413d27602c8d537a4bed22dd14"
+    },
+    "new_regions": [
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "audio_terminal_session_index_i16_5eca44",
+        "source": "g2/src/apollo-main/app/terminal-session/terminal_session_list_small_children_20261016.c",
+        "stock_offset": [
+          1788516,
+          1788520
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "615e7a734dcc84073bc4ab90ebe0f03aba2fe34d225d9fa6debbe861203bed11",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "audio_terminal_status_low_5e4f10",
+        "source": "g2/src/apollo-main/app/terminal-ui/terminal_ui_action_status_5e7022.c",
+        "stock_offset": [
+          1756976,
+          1756980
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "952beac4ed6fe10a2de94037d8295a333b4a796f6ce6ed3a09b86d74e60004ca",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "audio_ble_slave_finish_4b3aea",
+        "source": "g2/src/apollo-main/audio/master-dispatch/slave_finish_children_a.c",
+        "stock_offset": [
+          506634,
+          506636
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "hciEvtParseLeScanTimeout",
+        "source": "g2/src/apollo-main/ble/hci-tables/source_linked_decoders.c",
+        "stock_offset": [
+          1254728,
+          1254730
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "smprScActOobSetup",
+        "source": "g2/src/apollo-main/ble/smp-tables/smpr_sc_act.c",
+        "stock_offset": [
+          1753120,
+          1753128
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "2a43add7a549e97c68c78df9dc7426a70da8ba405877d5eb8ba2db8120786026",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "display_driver_uled_option_type1_noop_5bd39c",
+        "source": "g2/src/apollo-main/drivers/display/display-uled/display_driver_uled_option_leaf_pair.c",
+        "stock_offset": [
+          1594300,
+          1594304
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "semantic_distortion_predicate_true_5cf32c",
+        "source": "g2/src/apollo-main/drivers/display/distortion-screen/distortion_screen_event_5cf330.c",
+        "stock_offset": [
+          1667916,
+          1667920
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "g2_norflash_init_540ed0",
+        "source": "g2/src/apollo-main/drivers/flash/fal-norflash/fal-norflash-init.c",
+        "stock_offset": [
+          1085168,
+          1085172
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "audio_uart_ambiq_color_pack_4b15a6",
+        "source": "g2/src/apollo-main/graphics/ambiq-buffer-handlers/color_resolve.c",
+        "stock_offset": [
+          497094,
+          497108
+        ],
+        "bytes": 14,
+        "stock_body_sha256": "520b40f24cb6bff5207f35f800cd387766fb7254fb51538f0f01261e40da9c7e",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "audio_uart_ambiq_label_rect_copy_53fa94",
+        "source": "g2/src/apollo-main/graphics/ambiq-buffer-handlers/label_rect_copy.c",
+        "stock_offset": [
+          1079988,
+          1080006
+        ],
+        "bytes": 18,
+        "stock_body_sha256": "f73e45d66d1de715a1cb3942d89782eb1b96f870340fc063782c50ee367fc9a6",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "audio_uart_lv_style_removed_44ce2a",
+        "source": "g2/src/apollo-main/ui/lvgl/lv-style-removed/style_removed.c",
+        "stock_offset": [
+          85578,
+          85580
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "hub_empty_hook",
+        "source": "g2/src/apollo-main/drivers/peripherals/sensor-hub/sensor_hub.c",
+        "stock_offset": [
+          453958,
+          453960
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "semantic_noop_sample_callback",
+        "source": "g2/src/apollo-main/drivers/peripherals/imu-icm45608/imu_icm45608.c",
+        "stock_offset": [
+          447168,
+          447170
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "nmi_handler_4397a6",
+        "source": "g2/src/apollo-main/runtime/p-01-iar-runtime/iar_runtime_p01.c",
+        "stock_offset": [
+          6086,
+          6088
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "575fc8fa9e92ffe7d57a6aef6f1168f39da04f07d6bcd5b5e17883bff7b33165",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "memcpy_439e90",
+        "source": "g2/src/apollo-main/runtime/p-01-iar-runtime/iar_runtime_p01.c",
+        "stock_offset": [
+          7856,
+          7868
+        ],
+        "bytes": 12,
+        "stock_body_sha256": "6f346ef9c2e2f8e361b9c3e090cf7f8fc194b23dfda2a233baeec822a94026f9",
+        "match_evidence": {
+          "method": "independently named native entry and all unrelocated bytes, followed by full linked equality",
+          "fixed_bytes": 8,
+          "compiled_pattern_sha256": "712119821e97bdf6787ea7cfef6cf3744670deb231c47a7b68d47d9ab6cd9103",
+          "relocations": [
+            {
+              "symbol": "audio_uart_checksum_copy",
+              "offset": 4,
+              "relocation_type": 10,
+              "address": 4430821,
+              "role": "native_function"
+            }
+          ]
+        },
+        "bindings": {
+          "audio_uart_checksum_copy": 4430821
+        }
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "threadBleProductionLoopInit",
+        "source": "g2/src/apollo-main/ble/thread-ble-production/thread_ble_production.c",
+        "stock_offset": [
+          1049468,
+          1049470
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "threadBleProductionStart",
+        "source": "g2/src/apollo-main/ble/thread-ble-production/thread_ble_production.c",
+        "stock_offset": [
+          1049544,
+          1049546
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "nvdbSensorCaldataAgLoadAndMigrate",
+        "source": "g2/src/apollo-main/storage/nvdb/service_nvdb_sensor_caldata.c",
+        "stock_offset": [
+          858554,
+          858558
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "semantic_TouchFrameCommand",
+        "source": "g2/src/apollo-main/drivers/peripherals/touch-dfu/service_touch_dfu.c",
+        "stock_offset": [
+          1211652,
+          1211656
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "1553f81e87c4b8d5bd081297d34b7b90f8352109f7fd335ef99ca30e51dbacff",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "semantic_TouchFrameInit",
+        "source": "g2/src/apollo-main/drivers/peripherals/touch-dfu/service_touch_dfu.c",
+        "stock_offset": [
+          1211708,
+          1211714
+        ],
+        "bytes": 6,
+        "stock_body_sha256": "85a5a103b1f2948e3a3fd16df4eb8414c165673fcda38bd7177d5027a57e3e1c",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "semantic_TouchFrameSetCommand",
+        "source": "g2/src/apollo-main/drivers/peripherals/touch-dfu/service_touch_dfu.c",
+        "stock_offset": [
+          1211714,
+          1211718
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "80ca354ef7deaa612a44e74bba7c6cc9fe0716866d113694c89b17eaa0d845b1",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "threadBleMsgTxApplicationInit",
+        "source": "g2/src/apollo-main/ble/p-03-ble-msgtx/thread_ble_msgtx.c",
+        "stock_offset": [
+          250664,
+          250666
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "threadBleMsgTxThreadInitHook",
+        "source": "g2/src/apollo-main/ble/p-03-ble-msgtx/thread_ble_msgtx.c",
+        "stock_offset": [
+          250706,
+          250708
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "g2_irq_save_47dce4",
+        "source": "g2/src/apollo-main/system/p-05-tracepoint-defer/tracepoint_defer.c",
+        "stock_offset": [
+          285956,
+          285964
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "720733fcf19a5635fcab0791fcc2b007294712bb27536443ff79490821c168cf",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "iar_ascii_fold_lower_481830",
+        "source": "g2/src/apollo-main/runtime/p-06-iar-dlib/iar_dlib_p06.c",
+        "stock_offset": [
+          301136,
+          301142
+        ],
+        "bytes": 6,
+        "stock_body_sha256": "ba0e75482a025061a99348c4060bc9de61f721b82599d840f94f2ac532612778",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "semantic_gray_screen_predicate_true",
+        "source": "g2/src/apollo-main/ui/p-16-pdt-screens/pdt_screen_helpers.c",
+        "stock_offset": [
+          1668762,
+          1668766
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "semantic_production_test_predicate_true",
+        "source": "g2/src/apollo-main/ui/p-16-pdt-screens/pdt_screen_helpers.c",
+        "stock_offset": [
+          1669134,
+          1669138
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "elog_atomic_store_4488ec",
+        "source": "g2/src/apollo-main/system/a-03-elog-async/elog_async_transport.c",
+        "stock_offset": [
+          67852,
+          67860
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "e5f5e62dc71878f964110f3a656adbc03cd55c51f0aaa0542b6ead80f99430e8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "elog_atomic_load_4488f4",
+        "source": "g2/src/apollo-main/system/a-03-elog-async/elog_async_transport.c",
+        "stock_offset": [
+          67860,
+          67868
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "e0af382433dcd2fe57b105589adcbeb5b7862f9c9cbc16ce06cf1c73f6e61c2e",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "menu_focus_anim_exec_noop_4611d4",
+        "source": "g2/src/apollo-main/ui/a-08-menu-page/menu_page.c",
+        "stock_offset": [
+          168436,
+          168438
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "menu_item_styles_hook_462db4",
+        "source": "g2/src/apollo-main/ui/a-09-menu-page/menu_page_navigation.c",
+        "stock_offset": [
+          175572,
+          175574
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "threadBleMsgRxApplicationInit",
+        "source": "g2/src/apollo-main/ble/a-13-ble-msgrx/thread_ble_msgrx.c",
+        "stock_offset": [
+          355912,
+          355914
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "threadBleMsgRxThreadInitHook",
+        "source": "g2/src/apollo-main/ble/a-13-ble-msgrx/thread_ble_msgrx.c",
+        "stock_offset": [
+          355954,
+          355956
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "silent_mode_noop_callback",
+        "source": "g2/src/apollo-main/app/a-11-silent-mode/silent_mode_ui.c",
+        "stock_offset": [
+          201870,
+          201872
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "thread_notification_init_hook",
+        "source": "g2/src/apollo-main/app/a-12-thread-notification/thread_notification.c",
+        "stock_offset": [
+          352748,
+          352750
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "threadBleWsfLoopInit",
+        "source": "g2/src/apollo-main/ble/a-23-thread-ble-wsf/thread_ble_wsf.c",
+        "stock_offset": [
+          625408,
+          625410
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "aeabi_d2iz_4d42f8",
+        "source": "g2/src/apollo-main/runtime/a-24-iar-dlib/iar_double_a24.c",
+        "stock_offset": [
+          639768,
+          639782
+        ],
+        "bytes": 14,
+        "stock_body_sha256": "daf9ec9c6b365a60c5c647bdb311426a1f4847c759b8ab957aadc4a80991bfe3",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "aeabi_i2d_4d4306",
+        "source": "g2/src/apollo-main/runtime/a-24-iar-dlib/iar_double_a24.c",
+        "stock_offset": [
+          639782,
+          639796
+        ],
+        "bytes": 14,
+        "stock_body_sha256": "c9579fcb2a7fb1705e7ae6728d3316185c25614a220956526a3e0c4a506e40cb",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "aeabi_d2uiz_4d4338",
+        "source": "g2/src/apollo-main/runtime/a-24-iar-dlib/iar_double_a24.c",
+        "stock_offset": [
+          639832,
+          639846
+        ],
+        "bytes": 14,
+        "stock_body_sha256": "b552ee0f9ab3cc9530f3479a7bfc090ae478dfb17d185c0afdbc0eddd0d6d85d",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "aeabi_ui2d_4d4346",
+        "source": "g2/src/apollo-main/runtime/a-24-iar-dlib/iar_double_a24.c",
+        "stock_offset": [
+          639846,
+          639860
+        ],
+        "bytes": 14,
+        "stock_body_sha256": "cc2efa764fc8a6f57ea98cd3877f8cc1aa811c92d9c11a2ce8db3865254d81b1",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "board_config_empty_hook_509132",
+        "source": "g2/src/apollo-main/app/a-41-board-config/board_config.c",
+        "stock_offset": [
+          856402,
+          856404
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "double_to_float_541bca",
+        "source": "g2/src/apollo-main/runtime/a-47-iar-dlib/iar_dtento_a47.c",
+        "stock_offset": [
+          1088490,
+          1088504
+        ],
+        "bytes": 14,
+        "stock_body_sha256": "0568c0ead9a5d5eb73b73c2c16f19f657f1bd9d24fc9b1186be4ba048ef8d169",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "navigation_focus_change_anim_exec_cb_54cb56",
+        "source": "g2/src/apollo-main/ui/a-51-navigation-ui/navigation_ui_select.c",
+        "stock_offset": [
+          1133430,
+          1133432
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "am_default_isr_5e4250",
+        "source": "g2/src/apollo-main/runtime/a-67-iar-startup/startup_handlers.c",
+        "stock_offset": [
+          1753712,
+          1753714
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "575fc8fa9e92ffe7d57a6aef6f1168f39da04f07d6bcd5b5e17883bff7b33165",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "terminal_ui_query_scroll_y_5e4cd4",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "stock_offset": [
+          1756404,
+          1756408
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "952beac4ed6fe10a2de94037d8295a333b4a796f6ce6ed3a09b86d74e60004ca",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "terminal_ui_query_click_index_5e4d00",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "stock_offset": [
+          1756448,
+          1756452
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "dd0175750064b59435d9763a100d21415aa1e2b8e5dca9a2ebc58f37ab3c9ed5",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "terminal_ui_confirm_scroll_y_5e4e06",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "stock_offset": [
+          1756710,
+          1756714
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "952beac4ed6fe10a2de94037d8295a333b4a796f6ce6ed3a09b86d74e60004ca",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "ft_lcd_padding",
+        "source": "third-party/upstream/freetype/src/base/ftbase.c",
+        "stock_offset": [
+          970582,
+          970596
+        ],
+        "bytes": 14,
+        "stock_body_sha256": "5af0040dfb1b5fb22373f8cfc11585abd7b0f8a09b110a7e5520f4f3ef1c2b41",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "af_autofitter_done",
+        "source": "third-party/upstream/freetype/src/autofit/autofit.c",
+        "stock_offset": [
+          1522164,
+          1522166
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "cff_cmap_encoding_done",
+        "source": "third-party/upstream/freetype/src/cff/cff.c",
+        "stock_offset": [
+          1523498,
+          1523504
+        ],
+        "bytes": 6,
+        "stock_body_sha256": "bc7f0bc51acf61c75c206ca28e5e0d2c7fb4e8dfdcb6076dffe45857be5d2369",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "cff_driver_done",
+        "source": "third-party/upstream/freetype/src/cff/cff.c",
+        "stock_offset": [
+          1540400,
+          1540402
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "cff_blend_clear",
+        "source": "third-party/upstream/freetype/src/cff/cff.c",
+        "stock_offset": [
+          1533004,
+          1533020
+        ],
+        "bytes": 16,
+        "stock_body_sha256": "54ccb41845a9c9c032c74f3126dddf97bc36de71dba4164d69fddfd444da8794",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "tt_driver_done",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1839208,
+          1839210
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Write_CVT",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1820534,
+          1820544
+        ],
+        "bytes": 10,
+        "stock_body_sha256": "e25d9800ebbe0369c216c85eb4f3e604848ebbd43d044ea7d82a7a5cc087e5c1",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Read_CVT",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1820496,
+          1820506
+        ],
+        "bytes": 10,
+        "stock_body_sha256": "ddac8fcf1933d30d830603324d6a7cf63e009bd8742893930971dcc4e4f413ff",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Current_Ppem",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1820468,
+          1820474
+        ],
+        "bytes": 6,
+        "stock_body_sha256": "4cbb9d85fc782d01faa2f334e6f591f7940cab9d2137a0edc5af5e4ac6619912",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_FLIPON",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1825478,
+          1825486
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "9a171c997ef3c1e8ad981088391bdefac386ee938318ca305814c1744331b911",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_FLIPOFF",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1825486,
+          1825494
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "b9a09b704eb767049b699b1f856e38ca4e66cfe9d89438cc017d8a679f5b8139",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_DEPTH",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1822538,
+          1822544
+        ],
+        "bytes": 6,
+        "stock_body_sha256": "8daef9ece78be130a1c9294ae5b7811985fda129c8f7e8de03d79a35424e3585",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_SRP2",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1825424,
+          1825432
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "3404e7849064886dfebc5ec7b60bfe83d35ab08bd3af782f65005136218ef70e",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_DUP",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1822514,
+          1822520
+        ],
+        "bytes": 6,
+        "stock_body_sha256": "a4024da8bd1117c3aad31d2cb74177401bf75239df866897f4d3c37fa9f37c04",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_SRP0",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1825408,
+          1825416
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "c0a2aa4a374b850715baef577ebdda9a974b7bcfc93809bb593a0bc308cf3f1d",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_SRP1",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1825416,
+          1825424
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "b73a13ecc849f8e209db77ddd36215258b399fe1cb57a284eff984059dc2f155",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_SCVTCI",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1825440,
+          1825448
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "40a751e596920b2cc5473e7737f8935d5745296e4d570e275550c9e94831e4d3",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_SSWCI",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1825448,
+          1825456
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "869be8bfd2828a232a96b8842ada6ec737791c7090cbc2068a36d985252fe5ba",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_DEBUG",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1823120,
+          1823126
+        ],
+        "bytes": 6,
+        "stock_body_sha256": "6bd48590e234efe0ab8edd1ee0bfcbd1e946de9073b9296090cc9b9d615f2f4a",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_CLEAR",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1822522,
+          1822528
+        ],
+        "bytes": 6,
+        "stock_body_sha256": "432095ccc7d86bf867abd40200c13bec5eb1c242c51f4d0c48145036d99261a3",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_SDB",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1825496,
+          1825504
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "69eafedc2a1beffada9a5a61f366bfbebf3b78185126b3a65de22a5d00ca4f5c",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_SMD",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1825432,
+          1825440
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "4bbb42e47151ed9222f645ed244f6bb8b4001711b15557c68bbe07a52ff56889",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_GETDATA",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1833246,
+          1833252
+        ],
+        "bytes": 6,
+        "stock_body_sha256": "3820e970ffd34000ef1a4e70eb13bea2d0e975f0d295db37eb99a946b81b5e06",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "Ins_NEG",
+        "source": "third-party/upstream/freetype/src/truetype/truetype.c",
+        "stock_offset": [
+          1822878,
+          1822886
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "b9635ac155ec7466305fa6194e614e20d84d1cb380aac83f5b76f496dd9bf58b",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "lfs_alloc_ckpoint",
+        "source": "third-party/upstream/littlefs/lfs.c",
+        "stock_offset": [
+          602368,
+          602374
+        ],
+        "bytes": 6,
+        "stock_body_sha256": "74d41d77541fa368dfc90160c9fc3a8dfd62d891ea72f29ef9c115465b71a32c",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "lfs_scmp",
+        "source": "third-party/upstream/littlefs/lfs.c",
+        "stock_offset": [
+          600018,
+          600022
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "787fad2973d1b4f1c6c585f29ee07707e6951499c3772a9e8e4e1bc997ba94fe",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "vRaisePrivilege",
+        "source": "third-party/upstream/freertos-kernel/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c",
+        "stock_offset": [
+          1843358,
+          1843372
+        ],
+        "bytes": 14,
+        "stock_body_sha256": "29bceedf776515c291813e4eecd9a836378b81550c42d08aee35cf15df3bd8db",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "ulSetInterruptMask",
+        "source": "third-party/upstream/freertos-kernel/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c",
+        "stock_offset": [
+          1843396,
+          1843418
+        ],
+        "bytes": 22,
+        "stock_body_sha256": "f6bd0708e653c8e8880e33e298f9dc8ede1305c9386ea4ca5ff554d4022dc323",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "vClearInterruptMask",
+        "source": "third-party/upstream/freertos-kernel/portable/GCC/ARM_CM55_NTZ/non_secure/portasm.c",
+        "stock_offset": [
+          1843418,
+          1843432
+        ],
+        "bytes": 14,
+        "stock_body_sha256": "97532a7902b38e1551198dd647d0fcdc3a6f19315b6491058a813c7643e0028a",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "am_hal_triple_read",
+        "source": "build/generated/g2/ambiqhal-apollo510/am_hal_global.c",
+        "stock_offset": [
+          645288,
+          645316
+        ],
+        "bytes": 28,
+        "stock_body_sha256": "7d5250344a7e889515915c327cf7a10ce0a248a7be5b86784de3f5f3633542cd",
+        "match_evidence": {
+          "method": "unique unrelocated bytes at inventoried native function entry, followed by full linked equality",
+          "fixed_bytes": 28,
+          "compiled_pattern_sha256": "7d5250344a7e889515915c327cf7a10ce0a248a7be5b86784de3f5f3633542cd",
+          "relocations": []
+        },
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "dmConnUpdActNone",
+        "source": "build/generated/g2/cordio/ble-host/sources/stack/dm/dm_conn.c",
+        "stock_offset": [
+          517456,
+          517458
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "attEmptyDataCback",
+        "source": "build/generated/g2/cordio/ble-host/sources/stack/att/att_main.c",
+        "stock_offset": [
+          511756,
+          511758
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "attEmptyConnCback",
+        "source": "build/generated/g2/cordio/ble-host/sources/stack/att/att_main.c",
+        "stock_offset": [
+          511752,
+          511754
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "attEmptyL2cCocCback",
+        "source": "build/generated/g2/cordio/ble-host/sources/stack/att/att_main.c",
+        "stock_offset": [
+          511754,
+          511756
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "attcProcReadRsp",
+        "source": "build/generated/g2/cordio/ble-host/sources/stack/att/attc_proc.c",
+        "stock_offset": [
+          513018,
+          513020
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "attcProcWriteRsp",
+        "source": "build/generated/g2/cordio/ble-host/sources/stack/att/attc_proc.c",
+        "stock_offset": [
+          513020,
+          513026
+        ],
+        "bytes": 6,
+        "stock_body_sha256": "6dad3656ba471c4e672c84ec9b50fdb114f05644493311b5b945116d88af1970",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "attcProcReadMultVarRsp",
+        "source": "build/generated/g2/cordio/ble-host/sources/stack/att/attc_proc.c",
+        "stock_offset": [
+          513026,
+          513028
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "smpActNone",
+        "source": "build/generated/g2/cordio/ble-host/sources/stack/smp/smp_act.c",
+        "stock_offset": [
+          1271294,
+          1271296
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-main",
+        "symbol": "smpActAttemptRcvd",
+        "source": "build/generated/g2/cordio/ble-host/sources/stack/smp/smp_act.c",
+        "stock_offset": [
+          1273334,
+          1273342
+        ],
+        "bytes": 8,
+        "stock_body_sha256": "32bb35189452cd383790f5f0b6b31c8b3b0db4e8aff434b5d39012ce1ae981ae",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-case",
+        "symbol": "case_boot_context_switch",
+        "source": "g2/src/case/startup/application_boot_context_switch_candidate.c",
+        "stock_offset": [
+          236,
+          270
+        ],
+        "bytes": 34,
+        "stock_body_sha256": "f49d8f8446de83a1745ce951d6c4acb16a4272d3a1a549fbc083b5806add6397",
+        "match_evidence": {
+          "method": "unique unrelocated bytes at inventoried native function entry, followed by full linked equality",
+          "fixed_bytes": 34,
+          "compiled_pattern_sha256": "f49d8f8446de83a1745ce951d6c4acb16a4272d3a1a549fbc083b5806add6397",
+          "relocations": []
+        },
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-bootloader",
+        "symbol": "lfs_alloc_ckpoint",
+        "source": "g2/src/apollo-bootloader/filesystem/upstream/lfs.c",
+        "stock_offset": [
+          3560,
+          3566
+        ],
+        "bytes": 6,
+        "stock_body_sha256": "74d41d77541fa368dfc90160c9fc3a8dfd62d891ea72f29ef9c115465b71a32c",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-bootloader",
+        "symbol": "lfs_scmp",
+        "source": "g2/src/apollo-bootloader/filesystem/upstream/lfs.c",
+        "stock_offset": [
+          1210,
+          1214
+        ],
+        "bytes": 4,
+        "stock_body_sha256": "787fad2973d1b4f1c6c585f29ee07707e6951499c3772a9e8e4e1bc997ba94fe",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-bootloader",
+        "symbol": "opencfw_boot_empty_leaf_42e276",
+        "source": "g2/src/apollo-bootloader/runtime-memory/native_empty_leaves.c",
+        "stock_offset": [
+          123510,
+          123512
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-bootloader",
+        "symbol": "opencfw_boot_vector_handoff",
+        "source": "g2/src/apollo-bootloader/update-core/handoff.c",
+        "stock_offset": [
+          122000,
+          122018
+        ],
+        "bytes": 18,
+        "stock_body_sha256": "71c5efb5c61ed7560ffa777e2f1ae2a3c65f0cace89f79de6e95b57f64673d6d",
+        "match_evidence": {
+          "method": "unique unrelocated bytes at inventoried native function entry, followed by full linked equality",
+          "fixed_bytes": 18,
+          "compiled_pattern_sha256": "71c5efb5c61ed7560ffa777e2f1ae2a3c65f0cace89f79de6e95b57f64673d6d",
+          "relocations": []
+        },
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-bootloader",
+        "symbol": "noop_callback_0042dd98",
+        "source": "g2/src/apollo-bootloader/dfu-task/noop_callback_42dd98.c",
+        "stock_offset": [
+          122264,
+          122266
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      },
+      {
+        "payload": "g2-apollo-bootloader",
+        "symbol": "mspi_dummy_callback",
+        "source": "third-party/upstream/ambiqhal-apollo510-sdk5.0.0/mcu/apollo510/hal/mcu/am_hal_mspi.c",
+        "stock_offset": [
+          84342,
+          84344
+        ],
+        "bytes": 2,
+        "stock_body_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "match_evidence": null,
+        "bindings": {}
+      }
+    ],
+    "new_regions_count": 93,
+    "new_regions_bytes": 612,
+    "new_regions_overlap_prior": false,
+    "integrated_source_plan": "tools/build/source-plan.json",
+    "integrated_source_plan_sha256": "d688e294db22727b87ccccfe446454bbd45549ad527a54cfc7ca550877da705b"
+  },
+  "verification": {
+    "hybrid_report": "build/g2-arm-four-payload-qual-hybrid-20261111/build-report.json",
+    "hybrid_report_sha256": "54d0b3c41b4541180eb06c6945bdb62370d85bc7ddc74c9d4516689d0ea32bc0",
+    "hybrid_bundle": {
+      "file": "g2-openCFW-s200_v2.2.6.10.evenota.bin",
+      "size": 4301227,
+      "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+    },
+    "source_completeness_proven": false,
+    "source_built_payload_bytes": {
+      "g2-apollo-bootloader": 34,
+      "g2-apollo-main": 654,
+      "g2-case": 58,
+      "g2-codec": 0,
+      "g2-em9305": 0,
+      "g2-touch": 7090
+    },
+    "coverage_report": "build/g2-arm-four-payload-qual-hybrid-20261111/coverage.json",
+    "coverage_report_sha256": "c23aea9ce5c7afce3949a76fdc6d26e320db99446dfb486907207e7f7401f09c",
+    "compiled_classification_by_payload": {
+      "g2-apollo-bootloader": {
+        "c_executable": 34,
+        "compiled_data": 0
+      },
+      "g2-apollo-main": {
+        "c_executable": 654,
+        "compiled_data": 0
+      },
+      "g2-case": {
+        "c_executable": 54,
+        "compiled_data": 4
+      },
+      "g2-codec": {
+        "c_executable": 0,
+        "compiled_data": 0
+      },
+      "g2-em9305": {
+        "c_executable": 0,
+        "compiled_data": 0
+      },
+      "g2-touch": {
+        "c_executable": 6398,
+        "compiled_data": 692
+      }
+    },
+    "source_manifest_sha256": "dbf49e41c631a38500cc8343d25ea698764960f8871e97320bf8c6d745ac3358",
+    "source_manifest_unchanged_since_previous_full_compile": true,
+    "previous_full_source_compile_report": "build/g2-gauge-tte-helper-all-20261111/report.json",
+    "previous_full_source_compile_report_sha256": "43430a81927f2ce11c91add139e6cd52bc76352142029e6bf86a970f52481e87",
+    "previous_full_source_compiled_units": 4880,
+    "previous_full_strict_link_report": "build/g2-gauge-tte-helper-bundle-qualified-20261111/link-report.json"
+  },
+  "limits": [
+    "The hybrid bundle still pulls through executable and unclassified stock bytes; its locked hash does not prove source completeness.",
+    "No codec or EM9305 C executable bytes are qualified in the current hybrid accounting.",
+    "The source-only OTA candidate remains nonidentical to the locked official bundle.",
+    "The 4,880-unit full compile was previously verified for the unchanged source manifest; this turn verified a new hybrid source plan rather than rerunning the full source compile."
+  ]
+}

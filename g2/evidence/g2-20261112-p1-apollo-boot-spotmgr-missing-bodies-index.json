@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded code-span candidates for two DTCM-pointer-addressed Apollo bootloader SpotMgr routines absent from the historical function census",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-missing-bodies-001/001/audit.py",
+      "sha256": "b2830ea61601cd87034e37e88b5094c7c065fc1208c6c209f88ae5a9ed381a27"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-missing-bodies-001/001/report.json",
+      "sha256": "5dba48975e79a692cfc1ff004f7ccdcf84476002f9147fbdc0a20bc9c2cb5d93"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-missing-bodies-001/001/receipt.json",
+      "sha256": "7484ee54d76e42defb1d47962f3582a6f34139a2c599952bd793fa24cfd72856"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-missing-bodies-review-001/001/review.json",
+      "sha256": "361e49f16d06e0659c3faf443561030c92c71124d188d1145f83466a901a3a39"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-missing-bodies-review-001/001/receipt.json",
+      "sha256": "af5e97a1f3609e4a55ab2697129a6d52c257fb6c58e7aa85fadf8f419d692b49"
+    }
+  },
+  "result": {
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS",
+    "slot_7_candidate": {
+      "runtime_span": ["0x428920", "0x428a78"],
+      "raw_span": [100640, 100984],
+      "bytes": 344,
+      "body_sha256": "852a295b0650321492f6fbb7b9b503c6d20fdb12a19186bb2b04b1d1322fb0ee"
+    },
+    "following_literal_pool": ["0x428a78", "0x428a94"],
+    "slot_22_candidate": {
+      "runtime_span": ["0x429e00", "0x429f68"],
+      "raw_span": [105984, 106344],
+      "bytes": 360,
+      "body_sha256": "c8da6d473cfbd8edb11a14c65ce9d532da1371e58c86d06343d58ddd0a18a4c2"
+    },
+    "census_overlap": false
+  },
+  "limits": [
+    "These are supported code-span candidates, not control-flow-complete function boundaries or reviewed pseudocode.",
+    "Provisional source-order names and these two spans do not close the DTCM consumers, entire bootloader census or G1."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

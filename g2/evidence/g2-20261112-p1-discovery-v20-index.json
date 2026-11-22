@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 020 integrating bounded boot-vector rejection and touch RAM source while preserving boot remap caveat.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v18-index.json",
+    "sha256": "1fd6e3c8cb86078ea63cd4a3417fa521ad4fdf4c2e1722d4fdcb1bd06371e556"
+  },
+  "artifacts": {
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/020/reproduce.py",
+      "sha256": "eb9b3ca994650799effa70ae0465283342ffe75201783caf5251275d04e6c21f"
+    },
+    "discovery_draft_020": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/020/discovery-draft.jsonl",
+      "sha256": "e1eeb463a4ea4f8db0e57a7352b9dc9fae90de83b1bf58d2257b7d800dee3471"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/020/receipt.json",
+      "sha256": "f1102483dc0ab0a86ed92f81615585c407e4e743b3579d06580330837532f554"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v20-review-001/001/review.json",
+      "sha256": "ff3fd856c48cb16c53702b662a28e2ebcde3870c63088dc14e049516f5244b32"
+    },
+    "rejected_v19_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v19-review-001/001/review.json",
+      "sha256": "b6ff789368e981fc0c7d90ecd83132edb79ab536285177ebe55e77e9fbca0ff8"
+    },
+    "boot_5304_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-boot-vector-5304-resolution-index.json",
+      "sha256": "09858926c54bd61ee4d5f3b816e1227ef16d54473110ab55443ded4ad222989f"
+    },
+    "touch_param2_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-param2-origin-index.json",
+      "sha256": "4dc5fc6d88cc5a07c9b442e59fd13d16507669f358ea1faaf7c98b561f3ebd7e"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "Boot-specific alias/remap, uncensused routine and broader pointer/writer routes remain open.",
+    "Touch input 0x200009A1 producer and other copy routes remain open.",
+    "No canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

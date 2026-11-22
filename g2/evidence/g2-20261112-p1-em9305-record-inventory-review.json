@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "review_id": "P1-em9305-record-review-001/001-v3",
+  "campaign_id": "20261112T092142Z",
+  "decision": "accept_bytes_for_candidate_review_only",
+  "admission": "none",
+  "inputs": {
+    "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin": {
+      "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "current_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "matches_recorded": true
+    },
+    "g2/workflow/target.json": {
+      "sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+      "current_sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+      "matches_recorded": true
+    },
+    "g2/tools/em9305_source_image/record_package.py": {
+      "sha256": "33c4be40013dfcfcc786dc569e3fd108a1b9845aba211458b252a9d527e85ee4",
+      "current_sha256": "33c4be40013dfcfcc786dc569e3fd108a1b9845aba211458b252a9d527e85ee4",
+      "matches_recorded": true
+    },
+    "g2/docs/reference/firmware-formats.md": {
+      "sha256": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83",
+      "current_sha256": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83",
+      "matches_recorded": true
+    },
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl": {
+      "sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "current_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+      "matches_recorded": true
+    },
+    "g2/evidence/g2-20261112-p1-em9305-record-inventory.json": {
+      "sha256": "ae5d8b93df20b8c3fb6974676b002fd4ebecdaccb8d39abef5fab9e6813b35ee",
+      "current_sha256": "ae5d8b93df20b8c3fb6974676b002fd4ebecdaccb8d39abef5fab9e6813b35ee",
+      "matches_recorded": true
+    },
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-image-materialization-001/001/receipt.json": {
+      "sha256": "539f28a68b6aeb1f39be25b58bae808d128a7aa06b69844fabb4cb4d309eb552",
+      "current_sha256": "539f28a68b6aeb1f39be25b58bae808d128a7aa06b69844fabb4cb4d309eb552",
+      "matches_recorded": true
+    },
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-image-materialization-001/001/images-candidate.jsonl": {
+      "sha256": "af4adb23a557f1cf82447186e333797d31eb69f4fb5d40fe09d6a3703ffaf11a",
+      "current_sha256": "af4adb23a557f1cf82447186e333797d31eb69f4fb5d40fe09d6a3703ffaf11a",
+      "matches_recorded": true
+    }
+  },
+  "checks": {
+    "package_size": 211948,
+    "package_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "record_count": 4,
+    "metadata_size": 124,
+    "erase_sector_ids": [
+      0,
+      0,
+      1,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "four_records": [
+      {
+        "id": "ble_em9305:record-0",
+        "file_span": [
+          124,
+          348
+        ],
+        "target_span": [
+          3145728,
+          3145952
+        ],
+        "size": 224,
+        "candidate_sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+        "source_slice_sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+        "report_sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+        "matches_source_and_report": true
+      },
+      {
+        "id": "ble_em9305:record-1",
+        "file_span": [
+          348,
+          1004
+        ],
+        "target_span": [
+          3146752,
+          3147408
+        ],
+        "size": 656,
+        "candidate_sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b",
+        "source_slice_sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b",
+        "report_sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b",
+        "matches_source_and_report": true
+      },
+      {
+        "id": "ble_em9305:record-2",
+        "file_span": [
+          1004,
+          1060
+        ],
+        "target_span": [
+          3153920,
+          3153976
+        ],
+        "size": 56,
+        "candidate_sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f",
+        "source_slice_sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f",
+        "report_sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f",
+        "matches_source_and_report": true
+      },
+      {
+        "id": "ble_em9305:record-3",
+        "file_span": [
+          1060,
+          211948
+        ],
+        "target_span": [
+          3154944,
+          3365832
+        ],
+        "size": 210888,
+        "candidate_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+        "source_slice_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+        "report_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+        "matches_source_and_report": true
+      }
+    ],
+    "all_four_record_slices_match": true,
+    "fhdr_raw_hex": "464844520028030028203000a03b0300f3f4b7ceffffffff00000000000028203000943b30870000",
+    "fhdr_fields": {
+      "alignment": 0,
+      "header_length": 40,
+      "section_code": 3,
+      "rfu": 0,
+      "firmware_start": 3153960,
+      "firmware_size": 211872,
+      "firmware_crc32": 3468162291,
+      "emcore_crc32": 4294967295,
+      "options": 0,
+      "firmware_version": 0,
+      "execution": 3153960,
+      "header_crc32": 2268085140
+    },
+    "fhdr_crc": {
+      "header_crc_computed": 2268085140,
+      "header_crc_declared": 2268085140,
+      "header_crc_matches": true,
+      "firmware_crc_computed": 3468162291,
+      "firmware_crc_declared": 3468162291,
+      "firmware_span_length": 211872,
+      "entry_file_span": [
+        1044,
+        1054
+      ],
+      "entry_target_span": [
+        3153960,
+        3153970
+      ],
+      "record2_erased_padding_target_span": [
+        3153970,
+        3153976
+      ],
+      "inter_record_erased_gap_target_span": [
+        3153976,
+        3154944
+      ],
+      "gap_bytes": 968,
+      "combined_erased_bytes_after_entry": 974,
+      "firmware_crc_matches": true
+    },
+    "seven_materialized_candidates": [
+      {
+        "id": "ble_em9305:record-0",
+        "file_span": [
+          124,
+          348
+        ],
+        "target_span": [
+          3145728,
+          3145952
+        ],
+        "size": 224,
+        "candidate_sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+        "source_slice_sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+        "report_sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+        "matches_source_and_report": true
+      },
+      {
+        "id": "ble_em9305:record-1",
+        "file_span": [
+          348,
+          1004
+        ],
+        "target_span": [
+          3146752,
+          3147408
+        ],
+        "size": 656,
+        "candidate_sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b",
+        "source_slice_sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b",
+        "report_sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b",
+        "matches_source_and_report": true
+      },
+      {
+        "id": "ble_em9305:record-2",
+        "file_span": [
+          1004,
+          1060
+        ],
+        "target_span": [
+          3153920,
+          3153976
+        ],
+        "size": 56,
+        "candidate_sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f",
+        "source_slice_sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f",
+        "report_sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f",
+        "matches_source_and_report": true
+      },
+      {
+        "id": "ble_em9305:record-3",
+        "file_span": [
+          1060,
+          211948
+        ],
+        "target_span": [
+          3154944,
+          3365832
+        ],
+        "size": 210888,
+        "candidate_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+        "source_slice_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+        "report_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+        "matches_source_and_report": true
+      },
+      {
+        "id": "ble_em9305:ram-initialized-0",
+        "source_span_package_global": [
+          211024,
+          211093
+        ],
+        "parent_record3_relative_span": [
+          209964,
+          210033
+        ],
+        "initialized_ram_target_span": [
+          8393400,
+          8393469
+        ],
+        "materialized_sha256": "72c72af0f2727ed0b2188fca6de6668e9c90c27a8eace1126a4307c9a8fb223d",
+        "parent_slice_sha256": "72c72af0f2727ed0b2188fca6de6668e9c90c27a8eace1126a4307c9a8fb223d",
+        "expected_historical_sha256": "72c72af0f2727ed0b2188fca6de6668e9c90c27a8eace1126a4307c9a8fb223d",
+        "size": 69,
+        "matches_parent_and_expected": true,
+        "source_span_record3_relative": [
+          209964,
+          210033
+        ],
+        "package_global_slice_sha256": "72c72af0f2727ed0b2188fca6de6668e9c90c27a8eace1126a4307c9a8fb223d",
+        "matches_parent_slice": true,
+        "matches_package_global_slice": true,
+        "matches_expected_historical_hash": true
+      },
+      {
+        "id": "ble_em9305:ram-initialized-1",
+        "source_span_package_global": [
+          211104,
+          211880
+        ],
+        "parent_record3_relative_span": [
+          210044,
+          210820
+        ],
+        "initialized_ram_target_span": [
+          8452844,
+          8453620
+        ],
+        "materialized_sha256": "b0d0e122e43221e514b847df46b7f18eb08f3f0e94757e574d24486b39c3746b",
+        "parent_slice_sha256": "b0d0e122e43221e514b847df46b7f18eb08f3f0e94757e574d24486b39c3746b",
+        "expected_historical_sha256": "b0d0e122e43221e514b847df46b7f18eb08f3f0e94757e574d24486b39c3746b",
+        "size": 776,
+        "matches_parent_and_expected": true,
+        "source_span_record3_relative": [
+          210044,
+          210820
+        ],
+        "package_global_slice_sha256": "b0d0e122e43221e514b847df46b7f18eb08f3f0e94757e574d24486b39c3746b",
+        "matches_parent_slice": true,
+        "matches_package_global_slice": true,
+        "matches_expected_historical_hash": true
+      },
+      {
+        "id": "ble_em9305:ram-initialized-2",
+        "source_span_package_global": [
+          211888,
+          211932
+        ],
+        "parent_record3_relative_span": [
+          210828,
+          210872
+        ],
+        "initialized_ram_target_span": [
+          8453620,
+          8453664
+        ],
+        "materialized_sha256": "1a2dad76dc9de4334783462ea0b99870ad504ddfe3f7033c2ec2635d0e9a9b9d",
+        "parent_slice_sha256": "1a2dad76dc9de4334783462ea0b99870ad504ddfe3f7033c2ec2635d0e9a9b9d",
+        "expected_historical_sha256": "1a2dad76dc9de4334783462ea0b99870ad504ddfe3f7033c2ec2635d0e9a9b9d",
+        "size": 44,
+        "matches_parent_and_expected": true,
+        "source_span_record3_relative": [
+          210828,
+          210872
+        ],
+        "package_global_slice_sha256": "1a2dad76dc9de4334783462ea0b99870ad504ddfe3f7033c2ec2635d0e9a9b9d",
+        "matches_parent_slice": true,
+        "matches_package_global_slice": true,
+        "matches_expected_historical_hash": true
+      }
+    ],
+    "all_seven_candidate_hashes_and_lineage_match": true,
+    "candidate_receipt_sha_matches": true,
+    "all_input_pins_match": true
+  },
+  "findings": [
+    "The earlier v1 review had erroneous FHDR field offsets; this version uses the packed SDK structure and direct byte offsets: prefix bytes 0..3 are FHDR, alignment/header length/section/RFU are bytes 4..7, and execution is u32 at byte 30.",
+    "The 968-byte quantity is the inter-record target gap [0x302038,0x302400). Record-2 trailing six erased bytes occupy [0x302032,0x302038), so there are 974 erased bytes following the 10-byte entry in the firmware CRC span. The reported 211872-byte span and CRC 0xCEB7F4F3 reproduce exactly.",
+    "All four record candidates match locked source slices and report hashes. Three RAM candidates match their record-3-relative parent slices [209964,210033), [210044,210820), and [210828,210872), and the expected hashes. Initialized-RAM destination spans are a separate address space.",
+    "The report and materialization remain candidate evidence only; this review does not admit inventory records. NVM entry bytes were not instruction-decoded.",
+    "For child records, historical source spans are parent record-3 coordinates; the corresponding package-global spans are record-3 file start 1060 plus each relative endpoint. All three materialized child byte arrays match both parent-relative slices and corrected package-global slices."
+  ],
+  "limits": [
+    "No NVM entry instruction semantics inferred from objdump or raw bytes.",
+    "No independent discovery completeness proof.",
+    "No canonical admission or G1 claim."
+  ]
+}

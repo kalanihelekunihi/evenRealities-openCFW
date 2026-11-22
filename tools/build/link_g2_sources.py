@@ -16,6 +16,7 @@ import sys
 from pathlib import Path
 
 from em9305_record2 import APP_BASE, NVM_BASE, split_bootloader_image
+from source_providers import functions as source_functions
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -84,6 +85,38 @@ def codec_b_stage1_objects(source_out: Path, report: dict) -> list[Path]:
     return objects
 
 
+def codec_a_weights_from_source(source_out: Path, report: dict) -> tuple[bytes, dict]:
+    """Read only the named, C-compiled non-executable model data symbol."""
+    source = "g2/src/codec/npu/kws_weights_source.c"
+    rows = [row for row in report["devices"]["g2"]["units"]
+            if row["source"] == source]
+    if len(rows) != 1:
+        raise RuntimeError(f"codec A weight C unit count changed: {len(rows)}")
+    row = rows[0]
+    obj = Path(row["object"])
+    expected_dir = source_out / "g2/g2-codec-a"
+    if (row["payload"] != "g2-codec-a" or row["link"] is not False
+            or row["returncode"] != 0 or obj.parent != expected_dir
+            or not obj.is_file() or digest(obj) != row["object_sha256"]):
+        raise RuntimeError("codec A weight C object is not a verified compile")
+    symbols = [symbol for symbol in source_functions(obj, include_objects=True)
+               if symbol["symbol"] == "g2_kws_weights_source"]
+    if len(symbols) != 1:
+        raise RuntimeError("codec A compiled weight symbol is missing or ambiguous")
+    symbol = symbols[0]
+    if (symbol["machine"] != 252 or symbol["symbol_kind"] != "data"
+            or symbol["section"] != ".g2_kws_weights" or symbol["executable"]
+            or symbol["writable"] or symbol["relocations"]
+            or symbol["size"] != 0x1D7E0 or len(symbol["data"]) != 0x1D7E0):
+        raise RuntimeError("codec A compiled weight section is not immutable data of the locked size")
+    return symbol["data"], {
+        "source": source, "object": str(obj.relative_to(ROOT)),
+        "object_sha256": row["object_sha256"], "section": symbol["section"],
+        "symbol": symbol["symbol"], "bytes": symbol["size"],
+        "sha256": hashlib.sha256(symbol["data"]).hexdigest(),
+    }
+
+
 def codec_a_binh_stage1_objects(source_out: Path, report: dict) -> list[Path]:
     """Verify the separately compiled BINH A boot block candidates."""
     rows = [row for row in report["devices"]["g2"]["units"]
@@ -147,7 +180,10 @@ def arm_link(payload: str, obj: Path, out: Path, log: Path) -> None:
         script = "g2/src/touch/link/g2-touch.ld"
         cpu = ["-mcpu=cortex-m0plus", "-mthumb"]
         extras = []
-    gc_sections = [] if payload == "g2-apollo-main" else ["-Wl,--gc-sections"]
+    # apollo-main: --gc-sections is safe with KEEP on vectors, kvdb_migration,
+    # ITCM/ramfunc, the OTA flag page, and bond records. The image must still
+    # end at or before MAIN_UPDATE_FLAG 0x007FE000 (wrap_main_image / ASSERT).
+    gc_sections = ["-Wl,--gc-sections"]
     run(["arm-none-eabi-gcc", *cpu, "-nostartfiles", "-nostdlib", "-T", script,
          f"-Wl,-Map={out / (payload + '.map')}", "-Wl,--no-warn-rwx-segments",
          *gc_sections, "-o", str(out / f"{payload}.elf"), str(obj), *extras, "-lgcc"], log)
@@ -350,12 +386,16 @@ def main() -> int:
     parser.add_argument("--payload", choices=PAYLOADS, action="append")
     parser.add_argument("--codec-a-weights", type=Path,
                         help="declared 120800-byte NPU weight asset for a codec candidate")
+    parser.add_argument("--codec-a-weights-from-source", action="store_true",
+                        help="use the verified C-compiled KWS weight data unit")
     parser.add_argument("--codec-a-weights-provenance", type=Path,
                         help="JSON provenance for --codec-a-weights; recorded in the link receipt")
     parser.add_argument("--bundle-candidate", action="store_true",
                         help="assemble all seven linked payloads into a six-component G2 OTA candidate")
     args = parser.parse_args()
-    if bool(args.codec_a_weights) != bool(args.codec_a_weights_provenance):
+    if args.codec_a_weights and args.codec_a_weights_from_source:
+        parser.error("choose either external or C-compiled codec A weights")
+    if bool(args.codec_a_weights or args.codec_a_weights_from_source) != bool(args.codec_a_weights_provenance):
         parser.error("codec A weights and their provenance must be supplied together")
     source_out = args.source_out.resolve()
     out_root = args.out.resolve()
@@ -365,20 +405,26 @@ def main() -> int:
     report = json.loads(report_path.read_text())
     check_inputs(source_out, report)
     selected = args.payload or PAYLOADS
-    if args.bundle_candidate and not args.codec_a_weights:
+    if args.bundle_candidate and not (args.codec_a_weights or args.codec_a_weights_from_source):
         parser.error("--bundle-candidate requires declared codec A weights")
     if args.bundle_candidate and set(selected) != set(PAYLOADS):
         parser.error("--bundle-candidate requires all seven G2 source payloads")
-    if args.codec_a_weights and "g2-codec-a" not in selected:
+    if (args.codec_a_weights or args.codec_a_weights_from_source) and "g2-codec-a" not in selected:
         parser.error("--codec-a-weights requires the g2-codec-a payload")
     weights = None
+    weights_source_info = None
     weights_provenance = None
-    if args.codec_a_weights:
-        weight_path = args.codec_a_weights.resolve()
+    if args.codec_a_weights or args.codec_a_weights_from_source:
         provenance_path = args.codec_a_weights_provenance.resolve()
-        if not weight_path.is_file() or not provenance_path.is_file():
-            parser.error("codec A weights and provenance must be existing files")
-        weights = weight_path.read_bytes()
+        if not provenance_path.is_file():
+            parser.error("codec A weight provenance must be an existing file")
+        if args.codec_a_weights_from_source:
+            weights, weights_source_info = codec_a_weights_from_source(source_out, report)
+        else:
+            weight_path = args.codec_a_weights.resolve()
+            if not weight_path.is_file():
+                parser.error("codec A weights must be an existing file")
+            weights = weight_path.read_bytes()
         if len(weights) != 0x1D7E0:
             parser.error("codec A NPU weights must be exactly 120800 bytes")
         try:
@@ -454,9 +500,11 @@ def main() -> int:
                 results[payload]["binh_a_source_candidate"] = {
                     "bytes": image_a.stat().st_size, "sha256": digest(image_a),
                     "weight_bytes": len(weights), "weight_sha256": digest_bytes(weights),
+                    "weight_origin": "C-compiled data unit" if args.codec_a_weights_from_source else "declared external data asset",
+                    "weight_source": weights_source_info,
                     "weight_provenance_sha256": digest(args.codec_a_weights_provenance.resolve()),
                     "weight_provenance": weights_provenance,
-                    "qualification": "source-linked code and C-authored commands with an externally declared weight asset; byte identity, model provenance, and hardware behavior are not inferred"}
+                    "qualification": "source-linked code and C-authored commands with verified weight data; byte identity, model provenance, and hardware behavior are not inferred"}
         if payload == "g2-codec-b":
             stage1 = out / f"{payload}-stage1.bin"
             stage2 = out / f"{payload}-stage2.bin"
@@ -512,7 +560,7 @@ def main() -> int:
             (codec_b / "g2-codec-b-binh-source-candidate.bin").read_bytes()))
         results["g2-codec-a"]["fwpk_source_candidate"] = {
             "bytes": fwpk.stat().st_size, "sha256": digest(fwpk),
-            "qualification": "source-linked codec regions with a declared external weight asset; not byte-identical or hardware-qualified"}
+            "qualification": "source-linked codec regions with verified weight data; not byte-identical or hardware-qualified"}
     bundle_receipt = None
     if args.bundle_candidate:
         manifest_path = ROOT / "g2/manifests/g2-2.2.6.10.json"
@@ -543,7 +591,7 @@ def main() -> int:
                  "sha256": digest_bytes(components[component["name"]])}
                 for component, entry in zip(manifest["components"], entries)
             ],
-            "qualification": "six-component source-candidate OTA using an externally declared codec weight asset; structure validated, source completeness and device behavior unproven",
+            "qualification": "six-component source-candidate OTA using verified codec weight data; structure validated, source completeness and device behavior unproven",
         }
     receipt = {"schema": 1, "source_completeness_proven": False,
                "source_report_sha256": digest(report_path),
@@ -551,7 +599,7 @@ def main() -> int:
                "external_binary_archive_used": False,
                "binary_fuel_gauge_sha256": None,
                "payloads": results,
-               "qualification": "Compilation and final linkage, plus a separately emitted C-authored codec A NPU command region. Complete codec packaging requires a declared weight input and source-linked codec B; stock equivalence and hardware boot remain unproven. EM9305 bootloader is a C candidate spanning stock records 0 and 1; source-only fuel gauge is uncalibrated; whole-artifact C completeness remains unproven."}
+               "qualification": "Compilation and final linkage of all seven source payload groups, plus a separately emitted C-authored codec A NPU command region. Codec B is source-linked; complete codec packaging requires verified weight input. Stock equivalence and hardware boot remain unproven. EM9305 bootloader is a C candidate spanning stock records 0 and 1; source-only fuel gauge is uncalibrated; whole-artifact C completeness remains unproven."}
     if bundle_receipt is not None:
         receipt["g2_bundle_source_candidate"] = bundle_receipt
     out_root.mkdir(parents=True, exist_ok=True)

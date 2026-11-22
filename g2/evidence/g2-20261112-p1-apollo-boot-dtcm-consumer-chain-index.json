@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded Apollo bootloader caller chain to DTCM callback slot 26",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-dtcm-consumer-challenge-001/001/audit.py",
+      "sha256": "36e40d72a63fef1adc2eb76657970ba1b54a93141ffb809b897c50f4049667c1"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-dtcm-consumer-challenge-001/001/report.json",
+      "sha256": "96cf1a76b470bb62cbc3086344054c931e47d98f6c427cc3bc4d878aa02674ec"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-dtcm-consumer-challenge-001/001/receipt.json",
+      "sha256": "26d2bb244150060bd52aec6086679b69ce7dd7aea6c33a41fa0c9645956c3679"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-dtcm-consumer-challenge-review-001/001/review.json",
+      "sha256": "7ba7143d74f8be06bd5ea64e53ea9e8be3d64d9246ed682e96a25b6b7a70c281"
+    }
+  },
+  "result": {
+    "conditional_caller_chain": [
+      "0x42AB52",
+      "0x42A4BC",
+      "0x42A43A",
+      "DTCM[0x200001C0]",
+      "0x42A034"
+    ],
+    "callback_index": 26,
+    "slot_thumb_pointer": "0x42A035",
+    "target_first_instruction": "BX LR",
+    "additional_image_established": false
+  },
+  "limits": [
+    "This adds one caller chain; the callback table, dispatcher and return leaf were already bounded by prior evidence.",
+    "Conditional static path does not prove hardware execution or close other DTCM consumers.",
+    "No whole-bootloader discovery, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

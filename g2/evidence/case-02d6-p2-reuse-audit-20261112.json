@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "scope": "Read-only revalidation of the interrupted campaign's case 0x080002d6 P2 candidate and scoped review",
+  "historical_campaign": "20260930T190500Z",
+  "candidate": {
+    "directory": "g2/build/pseudocode-first/20260930T190500Z/analysis/case-02d6-recovery-1002/001",
+    "receipt": "g2/build/pseudocode-first/20260930T190500Z/analysis/case-02d6-recovery-1002/001/receipt.json",
+    "receipt_sha256": "3ad7a8b91eb9f73894071760d1f9642be484e5232e32822e71c572b11e99250c",
+    "pseudocode_sha256": "d4c2a9519da7a45781785f31e7db957e4b387aa9f69b1c1f1d6a67908048bdd6",
+    "artifact_pins_rechecked": 39,
+    "artifact_pin_failures": 0,
+    "source_input_pins_rechecked": 13,
+    "source_input_pin_failures": 3
+  },
+  "body": {
+    "runtime_span": [134218454, 134218512],
+    "image_span": [726, 784],
+    "payload_span": [758, 816],
+    "bytes": 58,
+    "sha256": "69fe36d77bb8c738e666160d85769990680fe1f0522b7fda0e3f31bd81b02dca",
+    "official_payload": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "official_payload_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+    "direct_official_byte_match": true
+  },
+  "historical_review": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/P2-case-02d6-independent-review-1048/001/review.json",
+    "sha256": "ab5c579a000afd3499344e9061053b91f552dbf043e3b610d8fd473b8260ef57",
+    "decision": "PASS_SCOPED",
+    "canonical_admission": false,
+    "scope_limit": "The reviewed row-0 decoder and specific callback table do not close the peer callback, all callers, or firmware-wide control flow."
+  },
+  "drifted_source_inputs": [
+    {
+      "path": "g2/docs/reference/memory-map.md",
+      "historical_sha256": "3779e487c2bd94985dd8a4b053a610902b2a8b326e9c9c893f7f4f5612dab94a",
+      "current_sha256": "336f076e414de498948a0302ce41e6b39b1138c47a4e560731193eac754db408"
+    },
+    {
+      "path": "docs/tooling.md",
+      "historical_sha256": "044f0e93e4e09e56a19a1b6ccfba86c237cb3f389f1d59d7c64fd607686bcd0d",
+      "current_sha256": "debe676f21160ed5c2a58d0078651f69c0d907436de7e20e496ad46d3144138a"
+    },
+    {
+      "path": "g2/workflow/README.md",
+      "historical_sha256": "c715de303825203510c8b009bbcb58ba7682f449170031fb095e2171c7340e6f",
+      "current_sha256": "86fe727775cb7990626822114b13a0357728c560405c36ea76afeae7ff1baed4"
+    }
+  ],
+  "reuse_status": "Original body bytes and candidate artifacts remain authenticated, but three source-document input pins are stale. A new scoped review against current documents is required before campaign admission; no G2/G3 pass is claimed."
+}

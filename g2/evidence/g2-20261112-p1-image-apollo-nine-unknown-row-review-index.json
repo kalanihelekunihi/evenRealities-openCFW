@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded audit of all nine selected v017 Apollo main/bootloader unknown image rows",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-apollo-unknown-workpack-001/001/audit.py",
+      "sha256": "c46fa8d241254997856625aa37a8827f99a36f837900ef607502661897b0479f"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-apollo-unknown-workpack-001/001/report.json",
+      "sha256": "49ec68341127782f8bdf526ff6d72b972d8586a02cd6ad30ffcbb210c7300294"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-apollo-unknown-workpack-001/001/receipt.json",
+      "sha256": "6c2f14d9c13492a277f4a79d3a60517b179382c8fce4ebfe3e24dffd3de390be"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-apollo-unknown-independent-review-001/001/review.json",
+      "sha256": "0674cde6a1e99e11c686b2819bfb65fbbf6d5e29f80934f0648f56b5124db780"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-apollo-unknown-independent-review-001/001/review.py",
+      "sha256": "5d924be7d77398828273191b31cb9ee438e3aa9a4afc8572001665af773c43f3"
+    }
+  },
+  "result": {
+    "selected_unknown_image_rows": 9,
+    "bounded_reviewed_rows": 9,
+    "materialization_and_evidence_pins_checked": true,
+    "transform_outputs_checked": 5,
+    "unknowns_promoted": 0,
+    "canonical_review_ids_assigned": 0
+  },
+  "review_finding": "Finer code/data subledgers are not automatically a G1 prerequisite; PROCEDURE.md permits uncertain spans as unknown at G1. Mapping and initial ledger remain G1 requirements.",
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

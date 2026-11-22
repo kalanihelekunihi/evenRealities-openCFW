@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "historical_map": "g2/docs/apollo-coverage-map.md",
+  "source_report": "build/g2-fuel-gauge-ext-state-all-20261111/report.json",
+  "source_report_sha256": "580b9b4db983ae47266312483bb66355c736671084111e448f965afa3ba45321",
+  "strict_link_report": "build/g2-fuel-gauge-ext-state-all-link-20261111/link-report.json",
+  "strict_link_report_sha256": "72304ac39b2502f624a6031e261297c5bea8776b943621dc1254e511bc9eb670",
+  "linked_elf": "build/g2-fuel-gauge-ext-state-all-link-20261111/g2-apollo-main/g2-apollo-main.elf",
+  "linked_elf_sha256": "8fb98cd023ee41fc97e9202b249109d840b40965f149e0859d7d5fa8e18b6022",
+  "rows": [
+    {
+      "stock_address": "0x004D3DDA",
+      "stock_body_bytes": 354,
+      "source_symbol": "infoX_read",
+      "linked_symbol_address": "0x005FFD30",
+      "source_unit": "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_info.c",
+      "source_sha256": "e958f9552eb4a2b7070f410c856600c0bb56494bc112db930f3d1b4c7d0f1f6c",
+      "object_sha256": "6a3b06041ef9dc92714b955e19a1dd4247b6309ba2f3c9ced15b5cca05397fc8",
+      "evidence": "stock INFO0/INFO1 selector and SHADOWVALID behavior matches the SDK infoX_read family; no instruction equivalence asserted"
+    },
+    {
+      "stock_address": "0x005346E4",
+      "stock_body_bytes": 296,
+      "source_symbol": "appServerHandleDbHashUpdate",
+      "linked_symbol_address": "0x0050568C",
+      "source_unit": "{gen}/cordio/ble-profiles/sources/apps/app/app_server.c",
+      "source_sha256": "b9bbebb8b2377585fce7c9eeb247ab859ea225154a9a3a8616907f76afaddfe2",
+      "object_sha256": "e1ea69292759832bb123617daceeb113f59388921fe2962c7f4b79f83a0b2feb",
+      "evidence": "stock decompile calls AppDbGetDbHash, 16-byte memcmp, AppDbSetDbHash, AppDbSetClientChangeAwareState, AttsCsfSetClientChangeAwareState and GattSendServiceChangedInd in the same control flow as Cordio app_server.c"
+    }
+  ],
+  "qualification": "These two historical residual addresses have current compiled C owners. Name/call semantics and linkage do not prove byte identity or full Apollo function coverage; the other residual rows require a fresh audit."
+}

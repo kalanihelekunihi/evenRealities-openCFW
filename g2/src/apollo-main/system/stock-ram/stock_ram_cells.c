@@ -1379,25 +1379,15 @@ _Alignas(8) uint32_t g2_stock_ram_200007a0[0x14u] = {
     0x00000001u, 0x00000009u, W(g2_stock_ram_20094400,0x0u), 0x00010100u, W(g2_stock_ram_20094400,0x25806u), 0x00000000u,
     0x00000001u, 0xffffffffu
 };
-/* stock RAM 0x20000c20..0x20000d30 (initialized; RAM pointers relocated)
- * Fix 36: words 0..5 = MPU region 0xb over the IOM NB buffer (stock 0x2035ce18..0x2035ee17
- * = g2_i2c_iom_nb_txn_buffer, peripherals_data.c). Only the base is used. Words 6.. duplicate
- * peripherals_data.c (0x20000c38 iom config, 0x20000c4c bus table) and board_data.c
- * (0x20000d0c rx buffers) and are unused here. */
+/* stock RAM 0x20000c20..0x20000c38: MPU region 0xb over the IOM NB buffer
+ * (stock 0x2035ce18..0x2035ee17 = g2_i2c_iom_nb_txn_buffer). The old 0x44-word
+ * copy extended through 0x20000d30, duplicating the I2C config/bus table in
+ * peripherals_data.c and UART records in board_data.c. Code uses only this
+ * six-word MPU record; the duplicate tail also held stale stock RAM pointers. */
 extern unsigned char g2ref_g2_i2c_iom_nb_txn_buffer[] __asm__("g2_i2c_iom_nb_txn_buffer");
-_Alignas(8) uint32_t g2_stock_ram_20000c20[0x44u] = {
-    0x0000000bu, W(g2_i2c_iom_nb_txn_buffer,0x0u), 0x00010100u, W(g2_i2c_iom_nb_txn_buffer,0x1fffu), 0x00000000u, 0x00000001u,
-    0x00000001u, 0x000f4240u, 0x00000000u, W(g2_i2c_iom_nb_txn_buffer,0x0u), 0x00000800u, 0x00000000u,
-    0x00000000u, 0x00000000u, 0x00000000u, 0x00000001u, 0x00000000u, 0x00000000u,
-    0x00000000u, 0x00000002u, 0x00000000u, W(g2_i2c_pins_786020,0x0u), 0x20000c0cu, 0x00000003u,
-    0x00000000u, 0x00000000u, 0x00000000u, 0x00000004u, 0x00000000u, W(g2_i2c_pins_786030,0x0u),
-    W(g2_stock_ram_20000c20,0x18u), 0x00000005u, 0x00000000u, W(g2_i2c_pins_786040,0x0u), 0x20000c0cu, 0x00000006u,
-    0x00000000u, 0x00000000u, 0x00000000u, 0x00000007u, 0x00000000u, W(g2_i2c_pins_786050,0x0u),
-    0x20000c0cu, 0x000e1000u, 0x00000203u, 0x02020000u, 0x00000000u, 0x000f4240u,
-    0x00000203u, 0x02020000u, 0x00000000u, 0x00038400u, 0x00000203u, 0x02020000u,
-    0x00000000u, 0x00000000u, 0x00000000u, 0x00000000u, 0x200b9c20u, 0x00000000u,
-    0x00000000u, 0x00000000u, 0x200ba020u, 0x00000400u, 0x200ba420u, 0x00000000u,
-    0x200ba820u, 0x00000000u
+_Alignas(8) uint32_t g2_stock_ram_20000c20[6] = {
+    0x0000000bu, W(g2_i2c_iom_nb_txn_buffer,0x0u), 0x00010100u,
+    W(g2_i2c_iom_nb_txn_buffer,0x1fffu), 0x00000000u, 0x00000001u
 };
 extern unsigned char g2ref_g2_stock_ram_200704e8[] __asm__("g2_stock_ram_200704e8");
 extern unsigned char g2ref_legal_regulatory_input_handler_5bf146[] __asm__("legal_regulatory_input_handler_5bf146");

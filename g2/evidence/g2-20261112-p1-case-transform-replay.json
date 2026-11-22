@@ -1,0 +1,243 @@
+{
+  "campaign_id": "20261112T092142Z",
+  "execution": {
+    "argv": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/replay.py"
+    ],
+    "exit_code": 0,
+    "stderr": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/stdout.txt",
+      "sha256": "19f60f7be3963eb8cdfd8f7226b5c8698c91ab2af8595dd87e7b73363607e699"
+    },
+    "working_directory": "/Users/kalani/Repo/evenRealities-openCFW"
+  },
+  "g1_status": "not_run",
+  "historical_transform_receipt": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-case-canonical-replay-014/001/transform-20000000.json",
+    "sha256": "ae75343013a7e7f67f38ef783b1c609f0ba5e2e73177910900eabfb0b197868f"
+  },
+  "locked_case_payload": {
+    "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+    "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+    "size": 55784
+  },
+  "observations": [
+    {
+      "destination_span": [
+        "0x20000000",
+        "0x200001a4"
+      ],
+      "handler": "0x80002d6",
+      "label": "decompress",
+      "observed_write_byte_count": 420,
+      "observed_write_span": [
+        "0x20000000",
+        "0x200001a4"
+      ],
+      "output_sha256": "d91efcf9f5409364aa0e3791d1084418682e76414c5a7b588c3c484daa0dd89a",
+      "output_size": 420,
+      "paired_output_and_registers_equal": true,
+      "read_hook_firmware_reads": 104,
+      "read_hook_package_source_span": [
+        55676,
+        55780
+      ],
+      "read_hook_source_span": [
+        "0x800d95c",
+        "0x800d9c4"
+      ],
+      "registers_no_read_hook": [
+        "0x0",
+        "0x200001a4",
+        "0x0",
+        "0x0",
+        "0x0",
+        "0x0",
+        "0x0",
+        "0x30000800"
+      ],
+      "registers_read_hook": [
+        "0x0",
+        "0x200001a4",
+        "0x0",
+        "0x0",
+        "0x0",
+        "0x0",
+        "0x0",
+        "0x30000800"
+      ],
+      "return_sentinel_reached_both_runs": true,
+      "zero_source_semantics": null
+    },
+    {
+      "destination_span": [
+        "0x200001A4",
+        "0x20002C88"
+      ],
+      "handler": "0x8009200",
+      "label": "zero_fill",
+      "observed_write_byte_count": 10980,
+      "observed_write_span": [
+        "0x200001a4",
+        "0x20002c88"
+      ],
+      "output_sha256": "c32493cf41d8477e6dc14efe4d95d92b9333c52806b5173cc42bcdc9294b1f2a",
+      "output_size": 10980,
+      "paired_output_and_registers_equal": true,
+      "read_hook_firmware_reads": 0,
+      "read_hook_package_source_span": null,
+      "read_hook_source_span": null,
+      "registers_no_read_hook": [
+        "0x0",
+        "0x20002c88",
+        "0x0",
+        "0x0",
+        "0x0",
+        "0x0",
+        "0x0",
+        "0x30000800"
+      ],
+      "registers_read_hook": [
+        "0x0",
+        "0x20002c88",
+        "0x0",
+        "0x0",
+        "0x0",
+        "0x0",
+        "0x0",
+        "0x30000800"
+      ],
+      "return_sentinel_reached_both_runs": true,
+      "zero_source_semantics": "descriptor source pointer is passed in r0 but the handler performs no firmware-image memory reads; output is generated as zero words."
+    }
+  ],
+  "outputs": [
+    {
+      "current_sha256": "a8f3fce983950f9992e2a2973bfed8b0768fc954f43138fc313eacd7cd701fda",
+      "historical_sha256": "26b79c842f0c022997cd07d3930a071bdda2545bd034d2c0f3f63fbf208c6c69",
+      "identical_to_historical": false,
+      "name": "replay.py",
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/replay.py",
+      "size": 5964
+    },
+    {
+      "current_sha256": "d91efcf9f5409364aa0e3791d1084418682e76414c5a7b588c3c484daa0dd89a",
+      "historical_sha256": "d91efcf9f5409364aa0e3791d1084418682e76414c5a7b588c3c484daa0dd89a",
+      "identical_to_historical": true,
+      "name": "ram-initialized-0x20000000.bin",
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/ram-initialized-0x20000000.bin",
+      "size": 420
+    },
+    {
+      "current_sha256": "c32493cf41d8477e6dc14efe4d95d92b9333c52806b5173cc42bcdc9294b1f2a",
+      "historical_sha256": "c32493cf41d8477e6dc14efe4d95d92b9333c52806b5173cc42bcdc9294b1f2a",
+      "identical_to_historical": true,
+      "name": "ram-zero-fill-0x200001A4.bin",
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/ram-zero-fill-0x200001A4.bin",
+      "size": 10980
+    },
+    {
+      "current_sha256": "9bf3feaaf4298149ea329a7c6ffa6d556062ca920be5f748f874f275be581354",
+      "historical_sha256": "9bf3feaaf4298149ea329a7c6ffa6d556062ca920be5f748f874f275be581354",
+      "identical_to_historical": true,
+      "name": "emulation-receipt.json",
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/emulation-receipt.json",
+      "size": 11257
+    },
+    {
+      "current_sha256": "19f60f7be3963eb8cdfd8f7226b5c8698c91ab2af8595dd87e7b73363607e699",
+      "historical_sha256": "19f60f7be3963eb8cdfd8f7226b5c8698c91ab2af8595dd87e7b73363607e699",
+      "identical_to_historical": true,
+      "name": "stdout.txt",
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/stdout.txt",
+      "size": 2314
+    },
+    {
+      "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "historical_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "identical_to_historical": true,
+      "name": "stderr.txt",
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/stderr.txt",
+      "size": 0
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Fresh bounded replay of stock case initialization handlers against locked case payload; no G1 admission or C implementation claim.",
+  "script_delta": "Only OUT path changed from cleared campaign to current attempt; exact text comparison passed.",
+  "source": {
+    "descriptor_sha256": "b509d3b28d9c98abc512d042c065be1dd9a3bb06196c0ce0ad7623a4cdf7b8c8",
+    "descriptor_span": [
+      55612,
+      55628
+    ],
+    "handler_sha256": "0959020d8620c6ce067521e7d4c49eb2f0f3a665d4bd267f5ed6e326e2fa3b2e",
+    "handler_span": [
+      726,
+      806
+    ],
+    "parent_flash_sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+    "source_span": [
+      55644,
+      55748
+    ],
+    "source_span_sha256": "472083284ba94332c5783c720a938429b0b1cd2863b25371e6b9ba945633f809"
+  },
+  "status": "replayed_pending_independent_review",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "tool_files": [
+    {
+      "current_sha256": "6f9a3b000ebc27d5392ff2bb30c48ed0cde18ef11d9aa48330482b079edf0ff9",
+      "matches_historical_pin": true,
+      "name": "python_or_script",
+      "path": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "pinned_sha256": "6f9a3b000ebc27d5392ff2bb30c48ed0cde18ef11d9aa48330482b079edf0ff9"
+    },
+    {
+      "current_sha256": "26b79c842f0c022997cd07d3930a071bdda2545bd034d2c0f3f63fbf208c6c69",
+      "matches_historical_pin": true,
+      "name": "python_or_script",
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-case-canonical-replay-014/001/replay.py",
+      "pinned_sha256": "26b79c842f0c022997cd07d3930a071bdda2545bd034d2c0f3f63fbf208c6c69"
+    },
+    {
+      "current_sha256": "9ad32123bca674cf205c308fd4d0d2a4db877c9dc2afac4feab7c84c8cf7043b",
+      "matches_historical_pin": true,
+      "name": "unicorn",
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/__init__.py",
+      "pinned_sha256": "9ad32123bca674cf205c308fd4d0d2a4db877c9dc2afac4feab7c84c8cf7043b"
+    },
+    {
+      "current_sha256": "62ffe84341f4288e309040e06555b81798031817d32fd19a945e250813f872f0",
+      "matches_historical_pin": true,
+      "name": "unicorn",
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/unicorn_py3/unicorn.py",
+      "pinned_sha256": "62ffe84341f4288e309040e06555b81798031817d32fd19a945e250813f872f0"
+    },
+    {
+      "current_sha256": "7207c8e3d7a63118fb0bca73e01816797fd51b1d8a39a4cbc7abfd562ee59c85",
+      "matches_historical_pin": true,
+      "name": "unicorn",
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/lib/libunicorn.2.dylib",
+      "pinned_sha256": "7207c8e3d7a63118fb0bca73e01816797fd51b1d8a39a4cbc7abfd562ee59c85"
+    },
+    {
+      "current_sha256": "6f8a27fe069aa89a46974e189b5365d56eb5e02c2fd581d2fbfad7fbba51549f",
+      "matches_historical_pin": true,
+      "name": "capstone",
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/capstone/__init__.py",
+      "pinned_sha256": "6f8a27fe069aa89a46974e189b5365d56eb5e02c2fd581d2fbfad7fbba51549f"
+    },
+    {
+      "current_sha256": "016084c6e70d929249a2abb22f1afda95095294e6cd70f509964ffc54006bf94",
+      "matches_historical_pin": true,
+      "name": "capstone",
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/capstone/lib/libcapstone.dylib",
+      "pinned_sha256": "016084c6e70d929249a2abb22f1afda95095294e6cd70f509964ffc54006bf94"
+    }
+  ]
+}

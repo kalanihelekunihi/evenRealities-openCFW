@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Bounded Apollo bootloader LE32 pointer-pattern triage and independent locked-byte recount",
+  "artifacts": {
+    "triage_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-nested-image-pointer-triage-001/002/triage.py",
+      "sha256": "8eae2cf30d529bef00a3d864ac91d3f380d7ad8b8cfd60e8051a3f563f987251"
+    },
+    "triage_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-nested-image-pointer-triage-001/002/report.json",
+      "sha256": "fdea276f2c2b85fbc84be6ff74737256ab1ef1ea6d81f35e931bafeb25a3b5a1"
+    },
+    "triage_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-nested-image-pointer-triage-001/002/receipt.json",
+      "sha256": "94bec4e54287a8c71c2a70b82a474bbeab1ccbaba69823c6d59cbae0bed43ef1"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-pointer-triage-review-001/001/review.py",
+      "sha256": "25f358dc95a66fd97fbcc808e4c552527b798f26a4a698749fe03be35be2131a"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-pointer-triage-review-001/001/review.json",
+      "sha256": "c6068fd16cd84844a5db08e60eeb3fced8347b544923d8170325cd9fd03d8154"
+    }
+  },
+  "result": {
+    "verdict": "PASS_WITH_LIMITS",
+    "overlapping_le32_windows": 731,
+    "distinct_normalized_targets": 552,
+    "windows_starting_in_historical_unknown_spans": 580,
+    "current_decoded_children_rechecked": 3,
+    "new_child_mapped": false,
+    "code_entry_lead": "0x00411c4c",
+    "v21_boot_payload_unknown_bytes": 148015
+  },
+  "limits": [
+    "Pattern hits are heuristic and are not counts of real pointers or nested images.",
+    "The historical code census is incomplete; the code-like lead needs later instruction and control-flow review.",
+    "Whole-image writer, reference, transformed-source and executable-byte sweeps remain open.",
+    "No canonical admission or G1/P2 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

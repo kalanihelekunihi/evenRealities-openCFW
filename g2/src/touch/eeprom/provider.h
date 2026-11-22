@@ -14,6 +14,7 @@ _Static_assert(__builtin_offsetof(touch_eeprom_context_layout,sector_bytes)==4,"
 _Static_assert(__builtin_offsetof(touch_eeprom_context_layout,logical_capacity)==8,"capacity offset");
 _Static_assert(sizeof(touch_eeprom_context_layout)==32,"stock context size");
 _Static_assert(__builtin_offsetof(touch_eeprom_context_layout,provider_address)==28,"provider offset");
+extern uint8_t touch_eeprom_scratch_ram[512];
 uint32_t touch_flash_status(void);
 bool touch_flash_valid_addr(uint32_t address);
 uint32_t touch_flash_row_number(uint32_t address);

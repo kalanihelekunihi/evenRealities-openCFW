@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Evidence path correction for the noncanonical P1 coverage sequence; classifications and review verdicts unchanged.",
+  "issue": "The immutable revision-011 main-tail coverage index supersedes a four-byte case-tail literal index by a pathname already owned by the older 48-byte case literal-pool index. The four-byte index was moved to a distinct name and the original 48-byte file restored byte-for-byte from the captured command output. The revision-011 supersedes pathname remains historically incorrect; its expected SHA resolves at the distinct four-byte index path.",
+  "historical_records": {
+    "older_48_byte_index": {
+      "path": "g2/evidence/g2-20261112-p1-case-literal-coverage-index.json",
+      "sha256": "f751419466a604a25e9c6e0fbac11fbc129289e9a2969deaddc5fadbee0e64a1"
+    },
+    "four_byte_case_tail_index": {
+      "path": "g2/evidence/g2-20261112-p1-case-tail-literal-coverage-index.json",
+      "sha256": "3b1c274c5192106742aafac61ede3495719670d02ab94a1979ad2ac720e07cfa"
+    },
+    "main_tail_coverage_011": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-tail-coverage-index.json",
+      "sha256": "d95cac86306c602405d6074fedc388b590b0663b14cc591bed1e0692b4417f34"
+    },
+    "main_scatter_coverage_012": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-scatter-coverage-index.json",
+      "sha256": "415a07e9855e36003417c243907e584089ff73fd066c94ab345179eca402b866"
+    }
+  },
+  "corrected_relation": {
+    "revision_011_supersedes": {
+      "path": "g2/evidence/g2-20261112-p1-case-tail-literal-coverage-index.json",
+      "sha256": "3b1c274c5192106742aafac61ede3495719670d02ab94a1979ad2ac720e07cfa"
+    },
+    "revision_012_supersedes": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-tail-coverage-index.json",
+      "sha256": "d95cac86306c602405d6074fedc388b590b0663b14cc591bed1e0692b4417f34"
+    }
+  },
+  "current_draft": {
+    "coverage_draft_012": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-012/001/coverage-draft.jsonl",
+      "sha256": "0f6bf99eedb0003d965dbce4f26fb9171f32ce58871b876045f4b7cfc8e21dd0"
+    },
+    "review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-scatter-coverage-review-001/001/review.json",
+      "sha256": "5f772d8a19625e91413c45e0d933a43f5e20ed6b07e2e818e91f07cb89f5ed08"
+    }
+  },
+  "counts": {
+    "coverage_rows": 107,
+    "coverage_scopes": 40,
+    "unknown_payload_bytes": 4176969,
+    "unknown_image_bytes": 5671619
+  },
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "limits": [
+    "This correction is a sidecar; it does not rewrite immutable historical indexes or assert full chain closure."
+  ]
+}

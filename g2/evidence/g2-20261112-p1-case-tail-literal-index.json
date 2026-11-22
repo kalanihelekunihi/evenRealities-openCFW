@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded case PC-relative literal at raw 0xD268 and adjacent unknown zero halfword.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-tail-descriptors-followup-001/001/audit.py",
+      "sha256": "f0f70c2779d15d6022709151c7d5a90c222278f746928671550917720c820c0b"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-tail-descriptors-followup-001/001/report.json",
+      "sha256": "0ad47e800e942f0fe44ccae272d985126732e5befd14dcf306160267b1dc53be"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-tail-descriptors-followup-001/001/receipt.json",
+      "sha256": "cee7ff4ee910ccf72f306593ce30758475b0ea94d674741768acb734af70330f"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-tail-literal-review-001/001/review.json",
+      "sha256": "828d115c597f6e0849e1b0f48605118d109d918769bde3e3d51a30ea8e7f3e89"
+    }
+  },
+  "result": {
+    "consumer_function": "case_copy_head8_to_tail8 at 0x0800D250",
+    "instruction_halfword": "0x4A05",
+    "instruction": "LDR literal r2, [PC, #20]",
+    "literal_raw_span": [53864, 53868],
+    "literal_hex_span": ["0xd268", "0xd26c"],
+    "literal_runtime_address": "0x0800D268",
+    "literal_value": "0x20000090",
+    "literal_role": "RAM source pointer for an eight-byte copy to source+8",
+    "adjacent_unknown_raw_span": [53862, 53864],
+    "adjacent_unknown_hex_span": ["0xd266", "0xd268"]
+  },
+  "limits": [
+    "The two preceding zero bytes fit literal alignment but remain unknown; no padding/non-use proof.",
+    "No whole-image reference closure or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

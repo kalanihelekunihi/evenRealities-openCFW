@@ -100,7 +100,11 @@
 #define xPortSysTickHandler SysTick_Handler
 #elif (configTICK_SOURCE == FREERTOS_USE_RTC)
 #define configSYSTICK_CLOCK_HZ (32768UL)
+#if defined(R1_CORDIO_RTC0)
+#define xPortSysTickHandler RTC0_IRQHandler
+#else
 #define xPortSysTickHandler RTC1_IRQHandler
+#endif
 #else
 #error Unsupported configTICK_SOURCE value
 #endif

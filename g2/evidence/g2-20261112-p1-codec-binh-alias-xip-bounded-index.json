@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded codec BINH-B alternate loader and BINH-A XIP candidate-address audit",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-binh-executable-alias-xip-audit-001/001/audit.py",
+      "sha256": "4950761ab580b2bb18c0cff9889416039be31393fa8b9d739dd1b22073e09677"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-binh-executable-alias-xip-audit-001/001/report.json",
+      "sha256": "1a09f12c958d0f42f89cda76a93e24eccd7f391fcbb54c230c15d60b4c57503a"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-binh-executable-alias-xip-audit-001/001/receipt.json",
+      "sha256": "a753b5e56f620b77f77a1d41f938d3136ae544ca22720fef8cd5a48b649a8cb1"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-binh-executable-alias-xip-review-001/001/review.py",
+      "sha256": "80a696093c3f57bc30b5bb9f1a7367a32958d13dfd06c7d6316ff214b123e35d"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-binh-executable-alias-xip-review-001/001/review.json",
+      "sha256": "14d54b9bd957dcbfc520dca5f75cad775c40a693f0f1dea7d07329a2a3c318a1"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-binh-executable-alias-xip-review-001/001/receipt.json",
+      "sha256": "4f2b5d8f1e56fbff3375fcccc3cc488b8a317c22d2dd5c7e10741e9239480aba"
+    },
+    "discovery_v33": {
+      "path": "g2/evidence/g2-20261112-p1-discovery-v33-index.json",
+      "sha256": "455c9f5723fcf9a5fbaa30179cfc95637da5d7b830734371f4b5c0407ad2a7d8"
+    }
+  },
+  "external_vendor_context": {
+    "url": "https://document.nationalchip.com/en/software/lvp/SDK%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/SDK%E5%BC%80%E5%8F%91_FAQ/flash_demo/flash_demo/",
+    "observed_on": "2026-11-12",
+    "scope": "NationalChip flash demo documents sample CONFIG_FLASH_XIP_BASE 0x10200000 plus flash_addr; not the locked G2 configuration"
+  },
+  "result": {
+    "binh_b_stage2_bytes": 82060,
+    "normal_write": "0x10003000",
+    "alternate_write": "0x20003000",
+    "entry": "0x10003100",
+    "xip_candidate_span": [
+      "0x10203004",
+      "0x1020be88"
+    ],
+    "physical_alias_proven": false,
+    "g2_live_config_proven": false
+  },
+  "limits": [
+    "Stock route selection, physical I/D alias, XIP controller aperture, and live boot mode remain external or unproven premises.",
+    "No canonical admission, image-discovery closure, or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

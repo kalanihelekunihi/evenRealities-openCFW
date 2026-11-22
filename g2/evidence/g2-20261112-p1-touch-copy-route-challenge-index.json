@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Reviewed bounded reconciliation of 13 non-reset touch copy callsites and the pin-function table copy",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-discovery-challenge-001/001/audit.py",
+      "sha256": "48d0a36f5bb7b17247e4999efa90afb03ad1039ce9022c030e9c5033209245d8"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-discovery-challenge-001/001/report.json",
+      "sha256": "ed6e455ca6d0727f7a4b987da40bdb0abc9fd471a7730c9dcb4f0b7c74f17b11"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-discovery-challenge-001/001/receipt.json",
+      "sha256": "64f851153ffb2a068fc50c76245d9d6afcdbb687b2ab042a72f4dac1dc221a26"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-discovery-challenge-review-001/001/review.json",
+      "sha256": "edc1745a01a009262df8b60b59cfc174e35a4b6d150a757810f8edb2b7a56caa"
+    }
+  },
+  "result": {
+    "non_reset_callsites": 13,
+    "fixed_table_copy": "0x50FA: 56 bytes 0xB4C4..0xB4FC to stack",
+    "dynamic_source_open": "0x8D74",
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS"
+  },
+  "limits": [
+    "The 0x50FA observed consumer uses pin-function configuration words; destination aliases and later uses remain open.",
+    "The 0x8D74 source can arrive through caller-controlled bytes; indirect routes and nested-image exclusion remain open.",
+    "Objdump binary/version was not pinned by producer; G1 open."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

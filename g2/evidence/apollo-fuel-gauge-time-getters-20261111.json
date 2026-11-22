@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "Nordic fuel-gauge TTE cache and TTF eligibility in the G2 source-only candidate",
+  "locked": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "artifact_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "virtual_to_file_offset": "address - 0x438000 + 0x20",
+    "tte_wrapper": {
+      "entry": "0x0055F994",
+      "end_exclusive": "0x0055F9A0",
+      "bytes": 12,
+      "sha256": "063e8e9e2461b0e6cfcf01102adbbe6b787dbd80a226a25baff8f7580b7a795d",
+      "behavior": "load model pointer then tail branch to 0x58EABC; helper loads one float at model+0x84 and returns",
+      "helper_entry": "0x0058EABC",
+      "helper_bytes": 6,
+      "helper_sha256": "a29db9c2ce0c7f482781ee7b90ab5a0b79baa516c5a1a0de83579e9d3336914a"
+    },
+    "ttf_wrapper": {
+      "entry": "0x0055F9A0",
+      "end_exclusive": "0x0055F9DC",
+      "bytes": 60,
+      "sha256": "b647b9e5344c261858a4dd4248ece6295a2b0093e5dadbbee9d9ec7cfd28c5fb",
+      "behavior": "return quiet NaN if stored termination current is NaN or charge state is outside 2,3,4; call 0x58EAC4 with mode 1 for states 2,3 and mode 0 for state 4",
+      "fallback_float_bits": "0x7FC00000",
+      "model_helper_entry": "0x0058EAC4",
+      "model_helper_bytes": 424,
+      "model_helper_sha256": "6549c25479e0ba53cea44bb60d8248df1bb77bdac471817ae262957d12914127"
+    },
+    "pseudocode": "g2/research/corpus/apollo-main/ghidra/decomp/bundles/apollo-decomp-11.c:1332; model helper in apollo-decomp-12.c:6961"
+  },
+  "source": {
+    "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_source.c",
+    "sha256": "e99be94c6c75277bf6a680f525c867d912d5339be17acc77157a79c77aab013c",
+    "change": "Cache the source-only TTE estimate at process time and make the TTE getter a direct cached read; gate TTF on non-NaN termination current and charge states CC, CC_VBUS_LIMITED or CV before the approximate estimator."
+  },
+  "verification": {
+    "getter_harness": "build/g2-gauge-getters-20261111/check.c",
+    "getter_assertions": 12,
+    "previous_current_selection_harness": "build/g2-gauge-current-20261111/current_contract.c",
+    "previous_current_selection_assertions_repassed": 9,
+    "host_compiler_flags": "clang -std=c11 -Wall -Wextra -Werror -I. -lm",
+    "sources_check": "4884 units, 4545 source files, one not built",
+    "focused_source_report": "build/g2-gauge-getters-apollo-20261111/report.json",
+    "focused_compiled_units": 2717,
+    "focused_strict_link": "build/g2-gauge-getters-apollo-link-20261111/link-report.json",
+    "full_source_report": "build/g2-gauge-getters-all-20261111/report.json",
+    "full_source_report_sha256": "359923f2cb35db078daecaf4344c419df8a0d9033d56a51d9765a8bec957f6df",
+    "full_compiled_units": 4879,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "manifest_changed_during_build": false,
+    "full_link_report": "build/g2-gauge-getters-bundle-20261111/link-report.json",
+    "full_link_report_sha256": "628b9a34b2d441823a9af707cbd6c2b066466fa040cbb0632ba3c059a1035255",
+    "payloads_linked": 7,
+    "external_binary_archive_used": false,
+    "apollo_binary_bytes": 3818800,
+    "apollo_binary_sha256": "b87eef3eeec3b6a8bc1079907b9a0084b85b1499ebd5935900914b8056ccf511",
+    "source_bundle_bytes": 4642172,
+    "source_bundle_sha256": "c57946b80438bcadc87db96a473d6c4d15404433e776368abb2af9530c5e364d",
+    "matches_locked_target": false
+  },
+  "limits": [
+    "The cached TTE value and TTF estimate use the source-only voltage/charge model; the 424-byte proprietary TTF estimator and battery model remain unrecovered.",
+    "The source TTF estimator retains an initialization/current-sign guard below the verified stock wrapper gate. Its numeric outputs are not claimed to match stock.",
+    "The source-only OTA is not byte-identical, full source completeness is unproven, and physical battery behavior has not been tested."
+  ]
+}

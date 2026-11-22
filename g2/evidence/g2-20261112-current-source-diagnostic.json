@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-12",
+  "scope": "Current G2 source-manifest diagnostic compile, strict final link and six-component source-candidate bundle comparison. This is not a gated campaign C reconstruction result.",
+  "source_manifest": {
+    "path": "g2/src/sources.json",
+    "sha256": "2642826fc64847042e1eb46f4f6c6312e3f8646a3c71db34d466df14a716e37f",
+    "units": 4879,
+    "enabled_units": 4874,
+    "enabled_c_units": 4874,
+    "disabled_assembly_units": 1
+  },
+  "source_build_report": {
+    "path": "build/g2-current-source-diagnostic-20261112T1130Z/report.json",
+    "sha256": "f7708024552fcf8da25597dd9b9235d7fa01e17c3c61d4f6309e1d2f7ddb9583",
+    "all_enabled_compiled": true,
+    "all_relocatable_compositions_succeeded": true,
+    "duplicate_strong_symbols": 0,
+    "manifest_changed_during_build": false
+  },
+  "strict_link_report": {
+    "path": "build/g2-current-source-bundle-diagnostic-20261112T1130Z/link-report.json",
+    "sha256": "3769cc0163bf72f7a6f31081b0809df1b4fd9df104560e519531234cfa6e67d7",
+    "payloads_linked": 7,
+    "external_binary_archive_used": false,
+    "source_completeness_proven": false,
+    "codec_weight_origin": "C-compiled data unit"
+  },
+  "comparison": {
+    "components": [
+      {
+        "id": "codec",
+        "candidate": {
+          "path": "build/g2-current-source-bundle-diagnostic-20261112T1130Z/g2-codec-a/g2-codec-a-fwpk-source-candidate.bin",
+          "bytes": 326092,
+          "sha256": "ff6eb1969d50cd2bbedb57a48585e708d3f6c11a2f0819b7d21e906e086c1280"
+        },
+        "locked": {
+          "path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+          "bytes": 326092,
+          "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
+        },
+        "same_size": true,
+        "byte_identical": false,
+        "first_mismatch_offset": 28,
+        "matching_bytes_in_common_span": 158191,
+        "common_span_bytes": 326092
+      },
+      {
+        "id": "ble_em9305",
+        "candidate": {
+          "path": "build/g2-current-source-bundle-diagnostic-20261112T1130Z/g2-em9305/g2-em9305-source-candidate-package.bin",
+          "bytes": 246040,
+          "sha256": "7ca232f6197a2ccc0912f7256dfcf94211a5bfe56f7de5669c25e1d8fd92f418"
+        },
+        "locked": {
+          "path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+          "bytes": 211948,
+          "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9"
+        },
+        "same_size": false,
+        "byte_identical": false,
+        "first_mismatch_offset": 4,
+        "matching_bytes_in_common_span": 4390,
+        "common_span_bytes": 211948
+      },
+      {
+        "id": "touch",
+        "candidate": {
+          "path": "build/g2-current-source-bundle-diagnostic-20261112T1130Z/g2-touch/g2-touch-source-candidate-package.bin",
+          "bytes": 33420,
+          "sha256": "6b36f5012daa2f6936537b6190c001f0823db397d22923875b92b64bf212032d"
+        },
+        "locked": {
+          "path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+          "bytes": 34464,
+          "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d"
+        },
+        "same_size": false,
+        "byte_identical": false,
+        "first_mismatch_offset": 20,
+        "matching_bytes_in_common_span": 1526,
+        "common_span_bytes": 33420
+      },
+      {
+        "id": "case",
+        "candidate": {
+          "path": "build/g2-current-source-bundle-diagnostic-20261112T1130Z/g2-case/g2-case-source-candidate-package.bin",
+          "bytes": 60216,
+          "sha256": "3ca4ac48ce316fc4c1dbfda135b0145193833bcf2e8e11568ae5cf18dea31322"
+        },
+        "locked": {
+          "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+          "bytes": 55784,
+          "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+        },
+        "same_size": false,
+        "byte_identical": false,
+        "first_mismatch_offset": 10,
+        "matching_bytes_in_common_span": 1520,
+        "common_span_bytes": 55784
+      },
+      {
+        "id": "apollo_bootloader",
+        "candidate": {
+          "path": "build/g2-current-source-bundle-diagnostic-20261112T1130Z/g2-apollo-bootloader/g2-apollo-bootloader.bin",
+          "bytes": 154232,
+          "sha256": "90094f1c7b9b1986c9576146f4b2aa866ab668011938a00048c7b031ff5cf5c1"
+        },
+        "locked": {
+          "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+          "bytes": 148599,
+          "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+        },
+        "same_size": false,
+        "byte_identical": false,
+        "first_mismatch_offset": 4,
+        "matching_bytes_in_common_span": 4152,
+        "common_span_bytes": 148599
+      },
+      {
+        "id": "apollo_main",
+        "candidate": {
+          "path": "build/g2-current-source-bundle-diagnostic-20261112T1130Z/g2-apollo-main/g2-apollo-main-source-candidate-package.bin",
+          "bytes": 3818832,
+          "sha256": "6ddf4c5abbcd5a573ec8f3f85a1ca19a897998be6ce26813b76a3d0a5fd5832b"
+        },
+        "locked": {
+          "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+          "bytes": 3523396,
+          "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+        },
+        "same_size": false,
+        "byte_identical": false,
+        "first_mismatch_offset": 0,
+        "matching_bytes_in_common_span": 141188,
+        "common_span_bytes": 3523396
+      }
+    ],
+    "bundle": {
+      "candidate": {
+        "path": "build/g2-current-source-bundle-diagnostic-20261112T1130Z/g2-source-candidate.evenota.bin",
+        "bytes": 4639776,
+        "sha256": "ae32d5125ede926d22f5a221558340d18a236c91220c307bc9064530d8a5e086"
+      },
+      "locked": {
+        "path": "g2/build/reference/package/g2-openCFW-s200_v2.2.6.10.evenota.bin",
+        "bytes": 4301227,
+        "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+      },
+      "same_size": false,
+      "byte_identical": false,
+      "first_mismatch_offset": 76,
+      "matching_bytes_in_common_span": 299621,
+      "common_span_bytes": 4301227
+    }
+  },
+  "limits": [
+    "The C units include architecture inline assembly; a strict all-C semantic claim is not established.",
+    "Compiler/linker success does not establish source coverage, stock behavior, firmware byte identity, or hardware boot.",
+    "All six component candidates and the whole candidate differ from the locked official bytes.",
+    "The active pseudocode-first campaign remains P1; G1 through G6 remain not_run."
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "scope": "G2 EM9305 native scan, auxiliary field, and associated-cycle callback ownership",
+  "stock_disassembly": "g2/research/corpus/em9305/objdump/open-2026-09-29/em9305-0x302400-0x335BC8.s",
+  "resolved_addresses": [
+    {
+      "address": "0x31ec40",
+      "stock_span": "0x31ec40..0x31ed34",
+      "owner": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_scan_callback_31ec40.c:opencfw_em9305_scan_callback_31ec40",
+      "removed_symbol": "opencfw_em9305_init_schedule_finish_31ec40",
+      "reason": "The standalone scan callback is the single linked owner. The controller caller now invokes it; the retained body loads record+201 before record+351 and loads the radio address high word before the low word at the native call site."
+    },
+    {
+      "address": "0x323bac",
+      "stock_span": "0x323bac..0x323c0a",
+      "owner": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_323bac.c:opencfw_em9305_child_323bac",
+      "removed_symbol": "opencfw_em9305_compose_pointer_encode_323bac",
+      "reason": "The retained body calls native 0x303f5c before encoding the three-byte auxiliary field, as the stock function does; the controller caller now uses it."
+    },
+    {
+      "address": "0x32b618",
+      "stock_span": "0x32b618..0x32b61c",
+      "owner": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_associated_cycle_tail_32b618.c:opencfw_em9305_associated_cycle_tail_32b618",
+      "removed_alias": "opencfw_em9305_child_32b618=opencfw_em9305_child_32b9a4",
+      "reason": "Stock 0x32b618 is a four-byte branch to 0x32b9a4, and native 0x32b61c registers the two addresses separately. The source callback registration now points to the retained tail C function and callback C function separately."
+    },
+    {
+      "address": "0x32b9a4",
+      "stock_span": "0x32b9a4..0x32bb3e",
+      "owner": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_associated_cycle_callback_32b9a4.c:opencfw_em9305_associated_cycle_callback_32b9a4",
+      "removed_source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_32b9a4.c",
+      "reason": "The duplicate callback body was removed. The retained body is the one used by the tail and now by the callback registration; its behavior remains a candidate requiring native review."
+    },
+    {
+      "address": "0x31e4a0",
+      "stock_span": "0x31e4a0..0x31e5ec",
+      "owner": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_31e4a0.c:opencfw_em9305_child_31e4a0",
+      "removed_source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_mode_parent.c",
+      "reason": "An unlinked alternate defined the same stock function. The linked implementation and its callers remain; removing the alternate has no linked behavior effect."
+    }
+  ],
+  "validation": {
+    "manifest_check": "make -C g2 sources-check: 4879 units, 4540 source files, 1 not built",
+    "em9305_compile_report": "build/g2-em9305-scan-aux-cycle-final-20261112/report.json",
+    "compiled_units": 768,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "compose_returncode": 0,
+    "source_link_report": "build/g2-em9305-scan-aux-cycle-final-link-20261112/link-report.json",
+    "external_binary_archive_used": false,
+    "source_completeness_proven": false,
+    "source_binary_bytes": 244708,
+    "source_binary_sha256": "982600f794074a92a4b60e5ad05f607bc830409f6d96c3013e82a450f1478a0b",
+    "source_package_bytes": 246040,
+    "source_package_sha256": "7ca232f6197a2ccc0912f7256dfcf94211a5bfe56f7de5669c25e1d8fd92f418",
+    "previous_source_package_bytes": 246560,
+    "previous_source_package_sha256": "a1dfe7afd7141cf892d8ece1defe174b6f04cc10ea75c5101bfa7c8340f1b26e",
+    "official_image_bytes": 211948,
+    "official_image_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "full_g2_source_report": "build/g2-scan-aux-cycle-full-20261112/report.json",
+    "full_g2_compiled_units": 4874,
+    "full_g2_failed_units": 0,
+    "full_g2_duplicate_strong_symbols": 0,
+    "full_g2_composed_payload_groups": 7,
+    "manifest_build_disabled_units": 5,
+    "manifest_link_disabled_units": 121,
+    "source_bundle_report": "build/g2-scan-aux-cycle-source-bundle-20261112/link-report.json",
+    "source_bundle_bytes": 4639776,
+    "source_bundle_sha256": "ae32d5125ede926d22f5a221558340d18a236c91220c307bc9064530d8a5e086",
+    "locked_bundle_bytes": 4301227,
+    "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "matches_locked_bundle": false,
+    "linked_callback_symbols": {
+      "opencfw_em9305_associated_cycle_callback_32b9a4": "0x0031fe44",
+      "opencfw_em9305_associated_cycle_tail_32b618": "0x00320074"
+    },
+    "exact_body_qualification": {
+      "sources": [
+        "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_323bac.c",
+        "g2/src/em9305/qpc-scheduler/initializer_lowers/init_associated_cycle_tail_32b618.c",
+        "g2/src/em9305/qpc-scheduler/initializer_lowers/init_associated_cycle_callback_32b9a4.c",
+        "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_scan_callback_31ec40.c"
+      ],
+      "reports": [
+        "build/g2-em9305-aux-323bac-qualify-20261112/qualification.json",
+        "build/g2-em9305-cycle-tail-32b618-qualify-20261112/qualification.json",
+        "build/g2-em9305-cycle-callback-32b9a4-qualify-20261112/qualification.json",
+        "build/g2-em9305-scan-callback-31ec40-qualify-20261112/qualification.json"
+      ],
+      "optimizations": ["recorded", "Os", "Og"],
+      "compiled_candidate_units": 12,
+      "selected_regions": 0,
+      "note": "Some isolated probes lacked native symbol anchors or resolvable native bindings; no byte-identity claim is drawn from their lack of selection."
+    }
+  },
+  "qualification": "These addresses have one C source owner each. The source link is a firmware candidate, not a proof of whole-firmware source completeness, stock byte identity, or hardware behavior."
+}

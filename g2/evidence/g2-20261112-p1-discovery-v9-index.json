@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical P1 discovery draft revision 009, adding bounded Apollo boot decoded-output and touch byte-copy caller analysis.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v8-index.json",
+    "sha256": "4bef5ef02b26bc60a2cc85faa13a583f4233767e7f58520e4c76e15617b32a32"
+  },
+  "artifacts": {
+    "discovery_draft_009": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/009/discovery-draft.jsonl",
+      "sha256": "00645b592260b2e90e99b902e89f7f3c4080fc6c93bc3dd5acd1a3f43a37ece3"
+    },
+    "discovery_receipt_009": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/009/receipt.json",
+      "sha256": "e24aa13d91740595f4f0c2c94ce0bc0581c0f71cbc303aa775c53bb53cea138a"
+    },
+    "independent_draft_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-v9-review-001/001/review.json",
+      "sha256": "962ce9bb1a9078791ce501cff514d79648a2c03c64b6a08abc99d92e247371d6"
+    },
+    "apollo_boot_interior_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-boot-interior-index.json",
+      "sha256": "91951dd2b14399a2b85114c24b586e2297d35921e33216f99d623fcc02f743f1"
+    },
+    "touch_copy_callsite_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-copy-callsites-index.json",
+      "sha256": "ce5efcf53d0370f40ec438a04b3e1726c46f820309f7db22159638880d35e0c7"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "Apollo boot DTCM consumers, descriptor parameter provenance and residual writer/reference sweep remain open.",
+    "Touch inherited caller dataflow, indirect routes and whole-image discovery remain open.",
+    "No canonical G1 admission or source completion claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

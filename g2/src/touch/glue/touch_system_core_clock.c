@@ -3,13 +3,11 @@
  * (delay globals already live in reset_data.c).
  */
 #include <stdint.h>
+#include "touch_clock_state.h"
 /* W14: stock reset-copy word RAM 0x20000878 (flash 0xb944) = 0x016e3600 = 24 MHz;
  * matches reset_owned_data.c and the 24 MHz delay globals. Was 48000000u (no evidence). */
 uint32_t SystemCoreClock = 24000000u;
 extern uint32_t Cy_SysClk_ClkHfGetFrequency(void);
-extern uint32_t cy_delay32kMs;
-extern uint8_t cy_delayFreqMhz;
-extern uint32_t cy_delayFreqKhz;
 
 /* W15 evidence: stock 0x4734..0x4768 (/tmp/touch.s disasm):
  *   f = bl 0x46f8 (HFCLK freq: IMO freq 0x9f9c with CLK_SELECT divider rounding,

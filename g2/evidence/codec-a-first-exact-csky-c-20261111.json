@@ -1,0 +1,405 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "target": "Exact source-built image-A XIP C functions in the locked G2 codec FWPK",
+  "stock": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "artifact_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "image_a_xip_inventory": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl",
+    "image_a_sram_inventory": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_sram/functions-000.jsonl",
+    "image_a_xip_mapping": "stored offset = 0x958C + (virtual address - 0x10200000), bounded to [0xC590,0x15414)",
+    "image_a_sram_mapping": "stored offset = 0x15414 + (virtual address - 0x10023400), bounded to [0x15414,0x18D90)"
+  },
+  "qualification": {
+    "receipt": "build/g2-codec-a-exact-provenance-20261111/source-plan.json",
+    "receipt_sha256": "e6ada62855f630c83799cdb6f8718d044245afdfbfed50a6e40e33202c0958fe",
+    "candidate_units": 17,
+    "selected_image_a_units": 17,
+    "selected_image_a_regions": [
+      {
+        "symbol": "gx8002_resident_analog_config_update_10203c74",
+        "source": "g2/src/codec/app-callback/resident_board_init.c",
+        "stock_offset": [
+          53760,
+          53774
+        ],
+        "bytes": 14,
+        "sha256": "2aa386a345530d6c7fb60c8e4aa88720f2976c929784b6881e30cfa0ed951355",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_strncmp_10206c7c",
+        "source": "g2/src/codec/app-callback/resident_flash_otp_mode.c",
+        "stock_offset": [
+          66056,
+          66092
+        ],
+        "bytes": 36,
+        "sha256": "99203ae3a7ed9eac1856425e6d64f0f6a2d25055c09271b87a715bfd40259f3e",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_strlen_10206ca0",
+        "source": "g2/src/codec/app-callback/resident_flash_otp_mode.c",
+        "stock_offset": [
+          66092,
+          66108
+        ],
+        "bytes": 16,
+        "sha256": "d2ba3aa1d60d38f0b0edeb549a629cd031637df2e8273af5242ee8acd2d6f0c9",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_aout_select_hw_config_10205374",
+        "source": "g2/src/codec/app-callback/resident_xip_aout_dispatch.c",
+        "stock_offset": [
+          59648,
+          59652
+        ],
+        "bytes": 4,
+        "sha256": "6c38aaa5145516acadf8fb4361d4d6ab79bde7e51d854a41943fdae5802a794b",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_watchdog_ping_102067a0",
+        "source": "g2/src/codec/app-callback/resident_xip_app_ticks.c",
+        "stock_offset": [
+          64812,
+          64822
+        ],
+        "bytes": 10,
+        "sha256": "75a3350b641ef0ca252160dec01f5d2246c3ba7fc7f9380545d7fb3dd9dd1a7e",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_aout_set_fixed_src_10204cdc",
+        "source": "g2/src/codec/app-callback/resident_xip_audio_output_controls.c",
+        "stock_offset": [
+          57960,
+          57992
+        ],
+        "bytes": 32,
+        "sha256": "3fde30e7dee668ce7a3b59a474cc969374f39527a85da00bd5faa978e02bb5d4",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_aout_get_sdc_addr_10204cfc",
+        "source": "g2/src/codec/app-callback/resident_xip_audio_output_controls.c",
+        "stock_offset": [
+          57992,
+          58000
+        ],
+        "bytes": 8,
+        "sha256": "1669d6ea6ca93791f449784ff4c334d6a40cb365b03f045f5baecc9d18a1acba",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_aout_frame_over_enable_102049c8",
+        "source": "g2/src/codec/app-callback/resident_xip_audio_output_isr.c",
+        "stock_offset": [
+          57172,
+          57188
+        ],
+        "bytes": 16,
+        "sha256": "9b52c83c5f9c6f6851237b180e84c9b5318522a4bbaa6a3ec7cc1ff5a8951ac5",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_aout_play_check_idle_102049d8",
+        "source": "g2/src/codec/app-callback/resident_xip_audio_output_isr.c",
+        "stock_offset": [
+          57188,
+          57204
+        ],
+        "bytes": 16,
+        "sha256": "9c960076d4b5fc0513a9ccb1e83047d56e15db6a275cf2c16ce67aed79d54620",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_ctc_offset_clear_10208b64",
+        "source": "g2/src/codec/app-callback/resident_xip_ctc_offset_clear.c",
+        "stock_offset": [
+          73968,
+          73970
+        ],
+        "bytes": 2,
+        "sha256": "a66cbe65e89770347114954fbe7175e78060be256bea5b7e5c21cae54f56dd9a",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_idle_tick_1020861c",
+        "source": "g2/src/codec/app-callback/resident_xip_idle_leaves.c",
+        "stock_offset": [
+          72616,
+          72618
+        ],
+        "bytes": 2,
+        "sha256": "a66cbe65e89770347114954fbe7175e78060be256bea5b7e5c21cae54f56dd9a",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_idle_buffer_initialize_10208620",
+        "source": "g2/src/codec/app-callback/resident_xip_idle_leaves.c",
+        "stock_offset": [
+          72620,
+          72624
+        ],
+        "bytes": 4,
+        "sha256": "45370350a684766b91f6812212e07e5548ee4513419b4ebad49d55184bbcc347",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_aout_get_mute_10204cd4",
+        "source": "g2/src/codec/app-callback/resident_xip_misc_native_leaves.c",
+        "stock_offset": [
+          57952,
+          57958
+        ],
+        "bytes": 6,
+        "sha256": "2ce42ea9b212bb4d277e278fba0a3417a92f730eab912e020fb198bb5ac72621",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_ctc_model_output_10208c60",
+        "source": "g2/src/codec/app-callback/resident_xip_misc_native_leaves.c",
+        "stock_offset": [
+          74220,
+          74228
+        ],
+        "bytes": 8,
+        "sha256": "ffd5ae7a1cf361e478c56a5f2334db4d7ab17d32e9e4660c377f243e5e0c3db6",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_uart_flush_10203598",
+        "source": "g2/src/codec/app-callback/resident_xip_misc_native_leaves.c",
+        "stock_offset": [
+          52004,
+          52026
+        ],
+        "bytes": 22,
+        "sha256": "1343be75d1a8758d2ecec16522cb3be950b1b3b272de2fb262a3da418c23c6d8",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_model_cmd_size_10208bf4",
+        "source": "g2/src/codec/app-callback/resident_xip_model_sizes.c",
+        "stock_offset": [
+          74112,
+          74118
+        ],
+        "bytes": 6,
+        "sha256": "f1696730dce84d40bae6ffb7652cb8587c148d339af3f9c7b4bc1fab6170c711",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_model_weight_size_10208bfc",
+        "source": "g2/src/codec/app-callback/resident_xip_model_sizes.c",
+        "stock_offset": [
+          74120,
+          74128
+        ],
+        "bytes": 8,
+        "sha256": "9e42c34e2845d3cb222c3a9fdb7052c5afe7295954eac0b05cdfde745c2a0628",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_model_ops_size_10208c04",
+        "source": "g2/src/codec/app-callback/resident_xip_model_sizes.c",
+        "stock_offset": [
+          74128,
+          74132
+        ],
+        "bytes": 4,
+        "sha256": "45370350a684766b91f6812212e07e5548ee4513419b4ebad49d55184bbcc347",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_model_tmp_size_10208c10",
+        "source": "g2/src/codec/app-callback/resident_xip_model_sizes.c",
+        "stock_offset": [
+          74140,
+          74144
+        ],
+        "bytes": 4,
+        "sha256": "121a905852ec4e098f07b7890d24bb5ac863f1ab9ef50247a25391d4b4350b5d",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_register_read_102055ec",
+        "source": "g2/src/codec/app-callback/resident_xip_npu_register_helpers.c",
+        "stock_offset": [
+          60280,
+          60284
+        ],
+        "bytes": 4,
+        "sha256": "533f729244a3fb5e28373c4db14612484712e0d059683b35ff9d07112def6325",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_register_write_102055f0",
+        "source": "g2/src/codec/app-callback/resident_xip_npu_register_helpers.c",
+        "stock_offset": [
+          60284,
+          60288
+        ],
+        "bytes": 4,
+        "sha256": "7d95518500e0843644c6a570f2fde503019dc6d7577e8dbaebe97792ced2a905",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_snpu_device_initialize_102055a8",
+        "source": "g2/src/codec/app-callback/resident_xip_snpu_children.c",
+        "stock_offset": [
+          60212,
+          60214
+        ],
+        "bytes": 2,
+        "sha256": "a66cbe65e89770347114954fbe7175e78060be256bea5b7e5c21cae54f56dd9a",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_snpu_device_exit_102055ac",
+        "source": "g2/src/codec/app-callback/resident_xip_snpu_children.c",
+        "stock_offset": [
+          60216,
+          60218
+        ],
+        "bytes": 2,
+        "sha256": "a66cbe65e89770347114954fbe7175e78060be256bea5b7e5c21cae54f56dd9a",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_spi_cleanup_10206164",
+        "source": "g2/src/codec/app-callback/resident_xip_spi_leaves.c",
+        "stock_offset": [
+          63216,
+          63228
+        ],
+        "bytes": 12,
+        "sha256": "7106625a18c7c6cd2c6b3da75c7b4641c5283be27d6481ab3601b09a8b399482",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_spi_isr_10206170",
+        "source": "g2/src/codec/app-callback/resident_xip_spi_leaves.c",
+        "stock_offset": [
+          63228,
+          63260
+        ],
+        "bytes": 32,
+        "sha256": "41f80726223e7f56079c5563cb09ecbf36cbb098a9c2c2ceff98be9dcb9f83f7",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_rtc_start_tick_102066a0",
+        "source": "g2/src/codec/app-callback/resident_xip_system_leaves.c",
+        "stock_offset": [
+          64556,
+          64568
+        ],
+        "bytes": 12,
+        "sha256": "cea843ce448d0824dd98ed1a517ea02a97f178f23e5778ffbf895ea2f9d9211c",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_rtc_set_tick_102066b0",
+        "source": "g2/src/codec/app-callback/resident_xip_system_leaves.c",
+        "stock_offset": [
+          64572,
+          64578
+        ],
+        "bytes": 6,
+        "sha256": "3c9a26d6d26edffa106be9cc08486ad7af621170f79d1c0375bf128dc388d68c",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_tws_frame_10206eac",
+        "source": "g2/src/codec/app-callback/resident_xip_tws_buffer_leaves.c",
+        "stock_offset": [
+          66616,
+          66644
+        ],
+        "bytes": 28,
+        "sha256": "3a8fb654b24cedb254fa8a7188797e5c357c5a515ae9c471205b9c661d9e155f",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_tws_context_gap_10206f80",
+        "source": "g2/src/codec/app-callback/resident_xip_tws_buffer_leaves.c",
+        "stock_offset": [
+          66828,
+          66832
+        ],
+        "bytes": 4,
+        "sha256": "535d43ea65c8b7bb04cc91c468cc834ffe6940dd4c4ccdc9b6cf14209940263f",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_tws_event_pointer_10208c68",
+        "source": "g2/src/codec/app-callback/resident_xip_tws_buffer_leaves.c",
+        "stock_offset": [
+          74228,
+          74230
+        ],
+        "bytes": 2,
+        "sha256": "a66cbe65e89770347114954fbe7175e78060be256bea5b7e5c21cae54f56dd9a",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_tws_next_pointer_10208c6c",
+        "source": "g2/src/codec/app-callback/resident_xip_tws_buffer_leaves.c",
+        "stock_offset": [
+          74232,
+          74238
+        ],
+        "bytes": 6,
+        "sha256": "2fdec7e2ba49640dc3190bd0a2d7e9f2d5426b306837cd7c8de7f28c7ceb22d3",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_tws_clock_10206e9c",
+        "source": "g2/src/codec/app-callback/resident_xip_tws_context.c",
+        "stock_offset": [
+          66600,
+          66604
+        ],
+        "bytes": 4,
+        "sha256": "6c38aaa5145516acadf8fb4361d4d6ab79bde7e51d854a41943fdae5802a794b",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_xip_uart_channel_lookup_10207ac0",
+        "source": "g2/src/codec/app-callback/resident_xip_uart_async_lowers.c",
+        "stock_offset": [
+          69708,
+          69728
+        ],
+        "bytes": 20,
+        "sha256": "20bebd4df139baa1cbd19859d05f6da51b6a2bf71ecec10d4d7d4eee2ede4a01",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip/functions-000.jsonl"
+      }
+    ],
+    "selected_image_a_bytes": 356,
+    "existing_image_b_regions_reselected": 8,
+    "policy": "authenticated corpus body hash, inventoried size, no relocations, and complete compiled byte equality at anchored stock offset",
+    "integrated_plan": "tools/build/source-plan.json",
+    "integrated_plan_sha256": "c7a820cd1ba6f9f3bea5bd1c867584bb34ea9b418b69bb33b1117dffeef5f5e1"
+  },
+  "verification": {
+    "hybrid_report": "build/g2-codec-a-exact-final-20261111/build-report.json",
+    "hybrid_report_sha256": "1769bf1e51208c3542ff13c73bb897ec2d954280d98ef754b3e43740153564e4",
+    "coverage_report": "build/g2-codec-a-exact-final-20261111/coverage.json",
+    "coverage_report_sha256": "dad7f151d5c142b37770843bbb8c57b518704f232c52536c38cfb17d5f08f136",
+    "bundle_size": 4301227,
+    "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "codec_source_built_bytes": 460,
+    "codec_pull_through_bytes": 202512,
+    "source_completeness_proven": false
+  },
+  "limits": [
+    "All 33 new selected functions lie in image-A XIP; no image-A SRAM function qualified in this pass.",
+    "C-SKY compiled function bytes remain unclassified as code/data by strict coverage.",
+    "Relocation-bearing functions, codec stage-1 segments, model weights, full FWPK source ownership, source-only OTA equality and hardware boot remain unproven."
+  ]
+}

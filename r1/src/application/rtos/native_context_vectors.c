@@ -1,4 +1,5 @@
 /* R1 2.2.6.0009 application vectors, indexed from flash 0x27000.
+ * The source-built Cordio variant gives RTC0 to the R1 tick and RTC1 to Cordio.
  * Reserved words are zero. Stock default IRQs share one terminal handler.
  * Fault adapters remain explicit providers until reconstructed. */
 #include <stdint.h>
@@ -15,6 +16,12 @@ void SVC_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void POWER_CLOCK_IRQHandler(void);
+#if defined(R1_CORDIO_RTC0)
+void RADIO_IRQHandler(void);
+void TIMER0_IRQHandler(void);
+void TIMER1_IRQHandler(void);
+void CCM_AAR_IRQHandler(void);
+#endif
 void nrfx_prs_box_4_irq_handler(void);
 void SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQHandler(void);
 void SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQHandler(void);
@@ -23,6 +30,9 @@ void GPIOTE_IRQHandler(void);
 void SAADC_IRQHandler(void);
 void TIMER2_IRQHandler(void);
 void WDT_IRQHandler(void);
+#if defined(R1_CORDIO_RTC0)
+void RTC0_IRQHandler(void);
+#endif
 void RTC1_IRQHandler(void);
 void r1_task_flag_set_1(void);
 void TIMER4_IRQHandler(void);
@@ -69,21 +79,38 @@ const r1_vector_handler r1_application_vectors[128]
     [14] = PendSV_Handler,
     [15] = SysTick_Handler,
     [16] = POWER_CLOCK_IRQHandler,
+#if defined(R1_CORDIO_RTC0)
+    [17] = RADIO_IRQHandler,
+#else
     [17] = r1_default_irq_handler,
+#endif
     [18] = nrfx_prs_box_4_irq_handler,
     [19] = SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQHandler,
     [20] = SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQHandler,
     [21] = NFCT_IRQHandler,
     [22] = GPIOTE_IRQHandler,
     [23] = SAADC_IRQHandler,
+#if defined(R1_CORDIO_RTC0)
+    [24] = TIMER0_IRQHandler,
+    [25] = TIMER1_IRQHandler,
+#else
     [24] = r1_default_irq_handler,
     [25] = r1_default_irq_handler,
+#endif
     [26] = TIMER2_IRQHandler,
+#if defined(R1_CORDIO_RTC0)
+    [27] = RTC0_IRQHandler,
+#else
     [27] = r1_default_irq_handler,
+#endif
     [28] = r1_default_irq_handler,
     [29] = r1_default_irq_handler,
     [30] = r1_default_irq_handler,
+#if defined(R1_CORDIO_RTC0)
+    [31] = CCM_AAR_IRQHandler,
+#else
     [31] = r1_default_irq_handler,
+#endif
     [32] = WDT_IRQHandler,
     [33] = RTC1_IRQHandler,
     [34] = r1_default_irq_handler,

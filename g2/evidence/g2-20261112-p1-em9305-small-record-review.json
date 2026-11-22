@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "reviewed_report_sha256": "7297f7634a3d38e4f521dfeeaf6df0cab4c8c809f77239b42e09bfe344fece90",
+  "verdict": "SUPPORTED_WITH_BOUNDED_SCOPE",
+  "checks": {
+    "package_and_record_hashes_slices_and_coordinates": {
+      "result": "PASS",
+      "package_size": 211948,
+      "package_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "records": {
+        "ble_em9305:record-0": {
+          "file_sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+          "size": 224,
+          "package_slice_equal": true,
+          "loaded_span": [
+            3145728,
+            3145952
+          ],
+          "package_span": [
+            124,
+            348
+          ]
+        },
+        "ble_em9305:record-1": {
+          "file_sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b",
+          "size": 656,
+          "package_slice_equal": true,
+          "loaded_span": [
+            3146752,
+            3147408
+          ],
+          "package_span": [
+            348,
+            1004
+          ]
+        }
+      }
+    },
+    "record1_ini_marker_and_zero_sentinel": {
+      "result": "PASS",
+      "loaded_span": [
+        3147396,
+        3147408
+      ],
+      "package_span": [
+        992,
+        1004
+      ],
+      "record1_span": [
+        644,
+        656
+      ],
+      "bytes_hex": "494e49020000000000000000",
+      "row_descriptors": 0,
+      "sha256": "25347c0d017d91e70a28f5dbcdbb28140bb291442560877fa228333097d97178"
+    },
+    "package_wide_exact_marker_scan": {
+      "result": "PASS",
+      "offsets": {
+        "494e4902": [
+          992,
+          211012
+        ],
+        "00020404": [
+          0
+        ],
+        "46484452": [
+          1004
+        ]
+      },
+      "scope": "Exact literal byte patterns only; does not rule out undocumented/nonliteral formats."
+    },
+    "record0_tail": {
+      "result": "PASS",
+      "loaded_span": [
+        3145950,
+        3145952
+      ],
+      "package_span": [
+        346,
+        348
+      ],
+      "bytes_hex": "ffff",
+      "interpretation": "Two FF bytes after the decoded return sequence; boundary remains a candidate, not a complete function census."
+    },
+    "arc_disassembly_and_bounded_call_observation": {
+      "result": "PASS",
+      "artifacts": {
+        "record0_entry": "0699b92ca2477d0665e463d4343b5763aa88ab27bb0506de176e4dac919d0a02",
+        "record0_tail": "6d80689c503b32449880f17eee14ca3eae646acc4e5b26c086593f5d3a57c094",
+        "record1_tail": "6644bfb8a60311de2c94b516d130c4700eb0cd0a984a64a4f3a36e23874318df"
+      },
+      "observation": "Record-0 entry contains direct calls into record-1 code; bounded disassembly only."
+    }
+  },
+  "conclusion": "The 12-byte record-1 suffix is an empty INI-framed metadata table (magic plus zero sentinel words), with no encoded RAM child. Together with the bounded entry calls this is consistent with one split NVM bootloader region.",
+  "limits": [
+    "Does not establish that external boot ROM selects or executes these records or processes this table at runtime.",
+    "Does not establish universal absence of embedded programs elsewhere in these records or remaining package bytes.",
+    "Exact marker scan cannot exclude undocumented or nonliteral structures.",
+    "Does not provide complete ARC pseudocode, source completion, or byte identity."
+  ]
+}

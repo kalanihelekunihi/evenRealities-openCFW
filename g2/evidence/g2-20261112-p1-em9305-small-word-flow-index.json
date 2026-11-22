@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded control-flow positions for four undecoded EM9305 NVM record-1 words.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-word-leads-001/001/audit.py",
+      "sha256": "1e747d5bcb0274b47b6862f508fbace0658b378245aaa6c599b88ba1afe64b7b"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-word-leads-001/001/report.json",
+      "sha256": "67b5bc461b8007f26b87fa2cce01b3c2b25254474f2d2c10035340082001ef87"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-word-leads-001/001/receipt.json",
+      "sha256": "49ceca0bf9d3b40e94f9fc831eea41b1b86b730050e46cc32b3fe0490721d180"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-word-leads-review-001/001/review.json",
+      "sha256": "9bf947477ad76883cd6ab4a71ffc13eb5e34d3b976df1b04f4086a79e800aae7"
+    },
+    "prior_census": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-small-record-census-index.json",
+      "sha256": "dfe47411e22ccc92d7a6b9854ed3cc38da11cd90125ca692a9f27beec766b89d"
+    }
+  },
+  "result": {
+    "record_runtime_start": "0x300400",
+    "candidate_word_runtime_addresses": [
+      "0x30041c",
+      "0x30042e",
+      "0x30043c",
+      "0x300440"
+    ],
+    "delayed_branch_following_words": 3,
+    "two_branch_target_words": 1,
+    "candidate_classification": "unresolved executable candidates",
+    "separate_ini_metadata_runtime_span": [
+      "0x300684",
+      "0x300690"
+    ]
+  },
+  "limits": [
+    "ARC objdump emits .word for all four; exact instruction semantics are unresolved.",
+    "External NVM selection and hardware boot route remain conditional.",
+    "No canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

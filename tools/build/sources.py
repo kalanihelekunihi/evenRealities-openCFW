@@ -4,6 +4,8 @@
 
     python3 tools/build/sources.py check  [--device g2|r1]
     python3 tools/build/sources.py build  [--device g2|r1] [--payload ID] [--out DIR] [--jobs N]
+    python3 tools/build/sources.py build --device r1 --normal-svc --out DIR
+    python3 tools/build/sources.py build --device r1 --normal-svc --cordio-rtc0 --out DIR
 
 The manifests are ``g2/src/sources.json`` and ``r1/src/sources.json``. Each
 unit names one source file, the payload it belongs to and a compile profile.
@@ -52,6 +54,14 @@ def units_of(manifest, payload=None):
         merged = dict(defaults.get(unit["payload"], {}))
         merged.update(unit)
         yield merged
+
+
+def selected_for_build(unit, cordio_rtc0=False):
+    """Keep optional Cordio providers out of the stock-compatible R1 link."""
+    variant = unit.get("variant")
+    if variant not in (None, "cordio-rtc0"):
+        raise ValueError(f"unsupported source variant {variant!r}: {unit['source']}")
+    return unit.get("build", True) and (variant is None or cordio_rtc0)
 
 
 # --- ELF symbol census (ELF32 little-endian: ARM, C-SKY, ARC) -------------
@@ -132,12 +142,21 @@ def render(args, ctx):
     return [a.format(**ctx) for a in args]
 
 
-def unit_argv(manifest, unit, ctx):
+def unit_argv(manifest, unit, ctx, normal_svc=False, cordio_rtc0=False):
     profile = manifest["profiles"][unit["profile"]]
     extra = []
     # Diagnostic sim builds only (unset by default): extra clang flags for apollo-main units.
     if unit.get("payload") == "g2-apollo-main" and os.environ.get("G2_SIM_EXTRA_CFLAGS"):
         extra = os.environ["G2_SIM_EXTRA_CFLAGS"].split()
+    if normal_svc and unit["payload"].startswith("r1-"):
+        extra.append("-DSVCALL_AS_NORMAL_FUNCTION")
+    if cordio_rtc0 and unit["payload"] == "r1-application":
+        extra.append("-DR1_CORDIO_RTC0=1")
+        # The pinned legacy clock driver otherwise disables POWER_CLOCK_IRQn
+        # on nrf_sdh enable and routes HFCLK through three S140 calls. The
+        # nrfx must keep the clock interrupt and direct HFCLK path.
+        if unit["source"] == "vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy/nrf_drv_clock.c":
+            extra.append("-USOFTDEVICE_PRESENT")
     return render(profile + unit.get("flags", []) + extra, ctx)
 
 
@@ -176,18 +195,18 @@ def source_path(unit, gen):
     return ROOT / unit["source"]
 
 
-def compile_host(manifest, toolchains, unit, out, gen):
+def compile_host(manifest, toolchains, unit, out, gen, normal_svc=False, cordio_rtc0=False):
     tc = toolchains[unit["toolchain"]]
     ctx = tc.context(out, gen)
     obj = out / object_name(unit["source"])
     dep = obj.with_suffix(".d")
-    argv = tc.prefix(out, gen) + unit_argv(manifest, unit, ctx) + [
+    argv = tc.prefix(out, gen) + unit_argv(manifest, unit, ctx, normal_svc, cordio_rtc0) + [
         "-MD", "-MF", str(dep), "-c", str(source_path(unit, gen)), "-o", str(obj)]
     proc = subprocess.run(argv, cwd=ROOT, capture_output=True, text=True)
     return finish(unit, obj, argv, proc.returncode, proc.stdout + proc.stderr, gen)
 
 
-def compile_docker(manifest, toolchains, units, out, gen):
+def compile_docker(manifest, toolchains, units, out, gen, normal_svc=False, cordio_rtc0=False):
     """One container run per toolchain; every unit still gets its own log and status."""
     tc = toolchains[units[0]["toolchain"]]
     ctx = tc.context(out, gen)
@@ -196,7 +215,7 @@ def compile_docker(manifest, toolchains, units, out, gen):
     commands = []
     for i, unit in enumerate(units):
         obj = object_name(unit["source"])
-        argv = [cc] + unit_argv(manifest, unit, ctx) + [
+        argv = [cc] + unit_argv(manifest, unit, ctx, normal_svc, cordio_rtc0) + [
             "-MD", "-MF", f"/out/{obj[:-2]}.d", "-c", unit["source"].format(gen="/gen") if unit["source"].startswith("{gen}/") else "/repo/" + unit["source"],
             "-o", f"/out/{obj}"]
         commands.append(argv)
@@ -308,7 +327,8 @@ def build(args):
         gen = (args.out / "generated" / device).resolve()
         out.mkdir(parents=True, exist_ok=True)
         generated = generate(manifest, gen)
-        selected = [u for u in units_of(manifest, args.payload) if u.get("build", True)]
+        selected = [u for u in units_of(manifest, args.payload)
+                    if selected_for_build(u, args.cordio_rtc0)]
         host = [u for u in selected if not toolchains[u["toolchain"]].docker]
         docker = {}
         for u in selected:
@@ -319,11 +339,11 @@ def build(args):
             d = out / payload
             d.mkdir(exist_ok=True)
             print(f"{device}: {payload}: {len(group)} units in {name}", flush=True)
-            rows += compile_docker(manifest, toolchains, group, d, gen)
+            rows += compile_docker(manifest, toolchains, group, d, gen, args.normal_svc, args.cordio_rtc0)
         with ThreadPoolExecutor(args.jobs) as pool:
             for u in host:
                 (out / u["payload"]).mkdir(exist_ok=True)
-            rows += list(pool.map(lambda u: compile_host(manifest, toolchains, u, out / u["payload"], gen), host))
+            rows += list(pool.map(lambda u: compile_host(manifest, toolchains, u, out / u["payload"], gen, args.normal_svc, args.cordio_rtc0), host))
         payloads = {}
         for payload in sorted({r["payload"] for r in rows}):
             prow = [r for r in rows if r["payload"] == payload]
@@ -370,7 +390,9 @@ def build(args):
             failed = True
         report["devices"][device] = {"manifest_sha256": manifest_sha256,
                                      "manifest_changed_during_build": manifest_changed, "generated": generated,
-                                     "payloads": payloads, "units": rows}
+                                     "payloads": payloads, "units": rows,
+                                     "normal_svc": args.normal_svc,
+                                     "cordio_rtc0": args.cordio_rtc0}
     report["source_completeness"] = "not established by compilation"
     (args.out / "report.json").write_text(json.dumps(report, indent=1) + "\n")
     print(f"report: {args.out / 'report.json'}")
@@ -394,6 +416,10 @@ def check(args):
                 problems.append(f"{device}: {u['source']}: unknown profile {u['profile']}")
             if u["toolchain"] not in manifest["toolchains"]:
                 problems.append(f"{device}: {u['source']}: unknown toolchain {u['toolchain']}")
+            if u.get("variant") not in (None, "cordio-rtc0"):
+                problems.append(f"{device}: {u['source']}: unknown variant {u['variant']!r}")
+            if u.get("variant") == "cordio-rtc0" and (device != "r1" or u["payload"] != "r1-application"):
+                problems.append(f"{device}: {u['source']}: Cordio variant belongs to R1 application")
         for s, us in listed.items():
             if len({u["payload"] for u in us}) != len(us):
                 problems.append(f"{device}: {s} listed twice for one payload")
@@ -416,8 +442,16 @@ def main():
     p.add_argument("--out", type=Path, default=ROOT / "build/sources")
     p.add_argument("--jobs", type=int, default=os.cpu_count() or 4)
     p.add_argument("--no-compose", action="store_true", help="skip the per-payload relocatable link")
+    p.add_argument("--normal-svc", action="store_true",
+                   help="compile R1 Nordic SVC calls as external C functions; source-composition probe only")
+    p.add_argument("--cordio-rtc0", action="store_true",
+                   help="reserve RTC1 for the R1 Cordio source candidate; requires --normal-svc")
     args = p.parse_args()
     args.devices = [args.device] if args.device else list(DEVICES)
+    if args.normal_svc and (args.command != "build" or args.device != "r1"):
+        p.error("--normal-svc requires build --device r1")
+    if args.cordio_rtc0 and not args.normal_svc:
+        p.error("--cordio-rtc0 requires --normal-svc")
     if args.command == "build":
         if args.out.exists() and any(args.out.iterdir()):
             p.error(f"{args.out} is not empty; choose a fresh output directory")

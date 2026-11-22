@@ -38,37 +38,37 @@ uint32_t g2_stock_ram_2000006c[87] __attribute__((aligned(4))) = {
     0x00000c00u, 0x00000c00u, 0x00000c00u, 0x00000001u, 0x00000000u, 0x00f42400u,
     0x00000000u, 0x00000000u, 0x00000000u,
 };
-#define V(a) (&g2_stock_ram_2000006c[((a) - 0x2000006cu) / 4u])
+#define PAD_WORD(index) (&g2_stock_ram_2000006c[index])
 
 static const clock_request_t group0_leaf[] = {
-    {0xc7u,V(0x20000138u)},{0x40u,V(0x2000013cu)},
-    {0x41u,V(0x20000140u)},{0x48u,V(0x2000015cu)},
+    {0xc7u,PAD_WORD(51u)},{0x40u,PAD_WORD(52u)},
+    {0x41u,PAD_WORD(53u)},{0x48u,PAD_WORD(60u)},
 };
 static const clock_request_t group0_mid[] = {
-    {0x42u,V(0x20000144u)},{0x43u,V(0x20000148u)},
+    {0x42u,PAD_WORD(54u)},{0x43u,PAD_WORD(55u)},
 };
 static const clock_request_t group0_high[] = {
-    {0x44u,V(0x2000014cu)},{0x45u,V(0x20000150u)},
-    {0x46u,V(0x20000154u)},{0x47u,V(0x20000158u)},
+    {0x44u,PAD_WORD(56u)},{0x45u,PAD_WORD(57u)},
+    {0x46u,PAD_WORD(58u)},{0x47u,PAD_WORD(59u)},
 };
 static const clock_request_t group0_top[] = {
-    {0x25u,V(0x20000160u)},{0x26u,V(0x20000164u)},
-    {0x27u,V(0x20000168u)},{0x28u,V(0x2000016cu)},
-    {0x29u,V(0x20000170u)},{0x2au,V(0x20000174u)},
-    {0x2bu,V(0x20000178u)},{0x2cu,V(0x2000017cu)},
-    {0x2du,V(0x20000180u)},
+    {0x25u,PAD_WORD(61u)},{0x26u,PAD_WORD(62u)},
+    {0x27u,PAD_WORD(63u)},{0x28u,PAD_WORD(64u)},
+    {0x29u,PAD_WORD(65u)},{0x2au,PAD_WORD(66u)},
+    {0x2bu,PAD_WORD(67u)},{0x2cu,PAD_WORD(68u)},
+    {0x2du,PAD_WORD(69u)},
 };
 static const clock_request_t group1_leaf[] = {
-    {0x31u,V(0x20000184u)},{0x5fu,V(0x20000188u)},
-    {0x60u,V(0x2000018cu)},{0x67u,V(0x200001a8u)},
-    {0x68u,V(0x200001acu)},
+    {0x31u,PAD_WORD(70u)},{0x5fu,PAD_WORD(71u)},
+    {0x60u,PAD_WORD(72u)},{0x67u,PAD_WORD(79u)},
+    {0x68u,PAD_WORD(80u)},
 };
 static const clock_request_t group1_mid[] = {
-    {0x61u,V(0x20000190u)},{0x62u,V(0x20000194u)},
+    {0x61u,PAD_WORD(73u)},{0x62u,PAD_WORD(74u)},
 };
 static const clock_request_t group1_high[] = {
-    {0x63u,V(0x20000198u)},{0x64u,V(0x2000019cu)},
-    {0x65u,V(0x200001a0u)},{0x66u,V(0x200001a4u)},
+    {0x63u,PAD_WORD(75u)},{0x64u,PAD_WORD(76u)},
+    {0x65u,PAD_WORD(77u)},{0x66u,PAD_WORD(78u)},
 };
 
 static void request_group(const clock_request_t *entries, size_t count)

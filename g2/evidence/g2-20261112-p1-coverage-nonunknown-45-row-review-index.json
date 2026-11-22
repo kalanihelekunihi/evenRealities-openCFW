@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "All 45 nonunknown package and payload v017 candidate rows have unique bounded semantic workpacks and independent checks",
+  "artifacts": {
+    "package_15_row_index": {
+      "path": "g2/evidence/g2-20261112-p1-package-coverage-15-row-review-index.json",
+      "sha256": "5bbb1d56fad2831dfd209d710e2cd9a44719f19db086d26e67686794b3cbf3ad"
+    },
+    "codec_container_8_row_index": {
+      "path": "g2/evidence/g2-20261112-p1-codec-container-eight-row-review-index.json",
+      "sha256": "1b91a1168d6e706dbeed82d975120beb4202769f1b73fd2fd3db3306dfa2142a"
+    },
+    "four_payload_prefix_row_index": {
+      "path": "g2/evidence/g2-20261112-p1-four-payload-prefix-row-review-index.json",
+      "sha256": "a91412eaca0ae634f132aa18e2fdb95806929b4035a6f1933aa9b179e2e39ef3"
+    },
+    "payload_data_12_row_index": {
+      "path": "g2/evidence/g2-20261112-p1-payload-data-12-row-review-index.json",
+      "sha256": "5d719d49baae3a7002b203dc28a0ae732c26329fd5200092811d2ed8e81646c7"
+    },
+    "payload_code_5_row_index": {
+      "path": "g2/evidence/g2-20261112-p1-payload-code-five-row-review-index.json",
+      "sha256": "f0bf87b7246dd84f7f8411c88c2e631f66e6c6842dd382a95438acbe413d2718"
+    },
+    "em9305_container_row_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-010/001/review.py",
+      "sha256": "6f0cfa75b513bbc74f7253a1743013692d7842a933e672648f000edfd5adf793"
+    },
+    "em9305_container_row_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-010/001/review.json",
+      "sha256": "158546ad11b3185a6120995747bdf517bc4cb54e7fd78bedf8a1d414a2e6b539"
+    },
+    "em9305_container_row_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-010/001/receipt.json",
+      "sha256": "977c85a34bb84eb04eeb54a4e310289064ac946feac090eff5a5363aac00413e"
+    },
+    "independent_union_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-010-independent-review-001/001/review.json",
+      "sha256": "8361837ea098752302e66e80a3cd860d8f5519a28022709f664d328db144763e"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "unique_nonunknown_package_and_payload_rows": 45,
+    "workpack_duplicate_row_ids": 0,
+    "workpack_missing_nonunknown_rows": 0,
+    "distribution": {
+      "package_container": 15,
+      "payload_container": 13,
+      "payload_data": 12,
+      "payload_code": 5
+    },
+    "payload_unknown_rows": 22,
+    "image_scope_rows": 60,
+    "validator_trusted_review_ids_assigned": 0
+  },
+  "limits": [
+    "These are bounded candidate row reviews, not authenticated v2 reviews.jsonl entries.",
+    "All 127 coverage rows still lack canonical review IDs; 22 payload unknown rows and 60 image-scope rows remain outside this union.",
+    "No exhaustive nested-image discovery, G1, G2, or C implementation authorization follows."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

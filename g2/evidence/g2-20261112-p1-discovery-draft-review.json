@@ -1,0 +1,233 @@
+{
+  "bounded_decision": {
+    "canonical_admission": "none",
+    "claim_limit": "This review validates immutable pins, image identity partition, and bounded wording only; it does not establish exhaustive nested-image discovery or G1.",
+    "g1_status": "not_run",
+    "next_action": "No revision-002 correction identified by this bounded check. Keep all six rows noncanonical and unresolved pending separately reviewed discovery-completeness work and applicable workflow gates."
+  },
+  "campaign_id": "20261112T092142Z",
+  "checks": {
+    "claim_limits": {
+      "details": "Each row remains candidate_with_explicit_discovery_open_items, admission_status none, review_id null, historical claims marked unreviewed, and scope note excludes universal-format absence, G1, P2 semantics, function-root completeness, and code/data classification.",
+      "status": "pass"
+    },
+    "evidence_pins": {
+      "details": "All evidence files exist and every record SHA-256 pin matches current bytes, including added Apollo review and touch report/review pins.",
+      "status": "pass"
+    },
+    "image_ids": {
+      "details": "All six sets are unchanged from revision 001 and exactly partition the corresponding groups in current index; no missing, duplicate, or extra IDs.",
+      "draft_count": 33,
+      "indexed_count": 33,
+      "partitions": {
+        "apollo_bootloader": 4,
+        "apollo_main": 4,
+        "ble_em9305": 7,
+        "case": 2,
+        "codec": 13,
+        "touch": 3
+      },
+      "status": "pass"
+    },
+    "prior_findings_addressed": {
+      "details": "Apollo records now cite the current independent bounded zero-init review and describe the remaining question as runtime initializer selection/inventory accounting. Touch now cites corrected CRC/FWPK report and independent v2 review; its unresolved item is bounded to exhaustive reference/nested-format sweep beyond the verified wrapper/startup copies.",
+      "status": "pass"
+    }
+  },
+  "decision": "accept_bounded_revision_with_discovery_open",
+  "findings": [],
+  "inputs": [
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-fwpk-literal-references-077/001/references.json",
+      "sha256": "bb322662cb9cc353a0e567010df6b2eefb19e1c5daf41b5d498a8539efca3c7b"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-inventory-signature-reconciliation-064/001/apollo-main-fwpk-candidate-check.json",
+      "sha256": "55e8f406530944a3c2606c388a0b96a0268bf4fbfc1e6770306e9b42ea80dd16"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-inventory-signature-reconciliation-064/001/scan.json",
+      "sha256": "ff125c6bb3a311b124e46b1ed3ea0a221392a43dc249a45c0277f9b16bc7a45f"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-reviewed-candidate-composition-072/002/images-proposal.jsonl",
+      "sha256": "4008f1ea8deeec70722433bdf56941c2ab546fe6e2dec92c579cf82611725de6"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/apollo-main-canonical-replay-010/review-010.json",
+      "sha256": "4095df23e0eebe305f26040d59978fed15f051f0d019cc5c1bdaab3039490a12"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/apollo-main-initializers-005/review-005.json",
+      "sha256": "7e45e5d1cf9776999cf0071e00fea5a2764a7c2baf886173085d24d7d84ba99f"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/boot-canonical-replay-016/review-016.json",
+      "sha256": "b71f2399c54d60a8263aa23242bb667b6393f6005a1c9cc1270b2280231edbe4"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/bootloader-initializers-002/review-002.json",
+      "sha256": "bcc2fbd8d4bdf510a1c5ff957f88de4e6f77ea5ac83fe3b9ad4ef309fffa9c84"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/case-computed-pc-root-022/finding.json",
+      "sha256": "726e38ade3b0f3fede40d5ab24ebb87d0a87eeaa4762888351cfcdb38d5487e8"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/case-reset-root-002/review.json",
+      "sha256": "5d9ce49a41429b4d68dd4df100fa3abe24757e33e8e2bd24275df0acf012e29a"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/case-scatter-indirect-root-018/finding.json",
+      "sha256": "08bcecbbe818de16596ab151641cb10193ee092731064a6d325e6c4dc113eaa1"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/case-startup-transform-001/review.json",
+      "sha256": "27acc0f9734a64c992dd484a7178ccb8ce8efecc765fe7a1df711b237f49a85d"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-accounting-review-bindings-root-102/receipt.json",
+      "sha256": "67ba1e19434689faf654c2fe0bc46df1aef24b650f8939b48c56d528d87e9682"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-candidate-composition-073/review.json",
+      "sha256": "f49a1e60732412af6da9718ba9c164cb424accf7b28c123c4e678cc3109f53b8"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-flash-loader-startup-001/review-002.json",
+      "sha256": "96936139137e6b6dd7a3b0fbd087620c01f08df8f4af56edce899baab6381d57"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-software-transfer-root-review-037/review.json",
+      "sha256": "f3be0c87b1b7b3632f8f88560be6ecd310fbb22d7f7db68349e1b28e406ade62"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-stage2-container-ancestry-050/002/review.json",
+      "sha256": "faa4eb495fb7c613ac9ccdec9f529c318a1f8f5a8e0512942f2cc13eb379b535"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/em9305-package-001/review.json",
+      "sha256": "2a3a6d58d36e4bcf840d25d88e367d3047ae0d45d0420ffbeff8e5659ad531c5"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/em9305-startup-mappings-002/review-001.json",
+      "sha256": "d5bb993a6a54cac3b808a21bdcc0312c16c09b73b2b537a333a210da08cfe782"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/execution-contract-candidates-independent-085/execution-contract-model-review-receipt.json",
+      "sha256": "44ba51503483dfbf8e407dc8aca7e7026532ce9a76f6794c27cfc0288080c7e3"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/execution-contract-candidates-independent-085/execution-contract-model-reviews.jsonl",
+      "sha256": "b60125f2c2b27c74d6fa8bc87e219c28736351b1515f48bda7c9bfa4055e0467"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/execution-contract-candidates-independent-085/image-accounting-review-receipt.json",
+      "sha256": "2cf6a2018714be0c51ebbc97ea2c0598f49e8bb908e68e4a28d037948a3fb802"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/execution-contract-candidates-independent-085/image-accounting-reviews.jsonl",
+      "sha256": "3dd2b3e7c50de10aec3544d1c2dd8fd6a40eb70c219ebc450dd8ce8041c2333e"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/final-accounting-transform-review-095/002/decoded-transform-review-rows.jsonl",
+      "sha256": "3115f39feb7cd3a24f8054f93cec417ca1ef6701a6ebca25207a5f58e1093489"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/final-accounting-transform-review-095/002/image-accounting-review-rows.jsonl",
+      "sha256": "f69f0bcd1891098d20f5ceb29213e74efcd6a441106a6904c9fcfb9845b62ace"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/final-accounting-transform-review-095/002/receipt.json",
+      "sha256": "23b0aa909defc1e2f70b8218fe039372a8c7490cff548e9afbc408a574fe19ac"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/fixed-accounting-transform-bindings-root-101/002/receipt.json",
+      "sha256": "e723d88dbded1123e89543b4cad2e370d05c0f4e2ec477994f9e44fed9f8b6fe"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/nested-image-discovery-reconciliation-065/003/reconciliation.json",
+      "sha256": "232c30c9239b24861f30f62010f5abaf7b74d3a0cd103431eea8b420f8a8a808"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/touch-startup-mapping-review-001.json",
+      "sha256": "20faff26f7faaa9011814a1a1734f4eb899a2ce0a30e5e864b599e0aa16f884a"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/touch-vector-roots-003/review.json",
+      "sha256": "17893f753f32d210243882656b34bff49857a7d06b97dc46b5a908c8e87fae12"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-zero-init-ledger-001/001/ledger.json",
+      "sha256": "e4a9870e1007f0f9a4dbc5769e9b65fd3ff1d13a13c587399e6df87ef2a7c7ab"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-zero-review-001/001/review.json",
+      "sha256": "2c1bb2f6f851293be6418c4ff1b855a3b564477ca5cd00175ba6bad231a09004"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-discovery-review-001/001/findings-v3.json",
+      "sha256": "a57be899b3f33dfb1815d404a4a33772889a6064055f634eaa69438faf64a504"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/002/discovery-draft.jsonl",
+      "sha256": "c58a34582de82fcf4d59c2ee793e663261072907ae27dec2708cef1f3429f198"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/002/receipt.json",
+      "sha256": "a4e03c55a505e39c86152455b8fba0cbbda3cbdb6860ba2476bf66a6958f061f"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-review-001/001/findings.json",
+      "sha256": "59a9b6a45e4bd414e0c12754c169bbd76cfeb7eba1576502a35edf40ae195d4c"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-discovery-review-001/001/findings.json",
+      "sha256": "8eda75fd58a3ea1ab009d22f5a6081f42b24c8821934a33e01712cfa6d8ff5ab"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-signature-sweep-001/001/scan.json",
+      "sha256": "7263bd5272da1e44d1045fd0f30f1fcb25ec10500eee9408fbdb0280c1508a98"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-apollo-fwpk-check-001/002/report.json",
+      "sha256": "acf9aa2563a449167c422c97499662d6f432ad237887f590a811bf6596818815"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-apollo-fwpk-review-001/001/review-v2.json",
+      "sha256": "4e791defab9569a6d52c5e2c0dcb036d5ef80f18663fbeffe2c961cb35c0f58f"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-case-discovery-review-001/001/findings-v2.json",
+      "sha256": "719ba0bef1c308157750fc4a80e09af3c69b3b33cf0e809141d33692a864f25c"
+    },
+    {
+      "path": "g2/evidence/g2-20261112-p1-all-image-materializations-index.json",
+      "sha256": "b37f1fed89bb1addee808ab51dbf06455c2a54a2e39fa52a484dfe0aae40e26d"
+    },
+    {
+      "path": "g2/evidence/g2-20261112-p1-case-transform-replay.json",
+      "sha256": "8b05a0c925b8896772379b83cbd4c8226b0e64bf86a16b20fea455f70e163e93"
+    },
+    {
+      "path": "g2/evidence/g2-20261112-p1-decoded-image-replay-index.json",
+      "sha256": "2127742282b8582a9915938773b3faf2bad66c23ec1bb79cdf412b4e3c186229"
+    },
+    {
+      "path": "g2/evidence/g2-20261112-p1-em9305-record-index.json",
+      "sha256": "417806858c143f7952b2c2fad0bc90e6566eaa6edec586188268996f663b01c8"
+    },
+    {
+      "path": "g2/evidence/g2-20261112-p1-gxnpu-structural-decoder-index.json",
+      "sha256": "e40afe42cf22d786d971edc4440b54b867f8087b0bad8f35423b7321a146823e"
+    }
+  ],
+  "review_id": "P1-discovery-draft-review-001/002",
+  "reviewer": "independent",
+  "schema_version": 1,
+  "scope": "Independent re-review of revision 002 against predecessor findings: pin integrity, IDs, added Apollo zero and touch FWPK review evidence, unresolved wording, and claim limits. No G1 claim."
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed Apollo main full-file offset mapping and exact stock function-body overlap at disputed table-like offsets.",
+  "artifacts": {
+    "corrected_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-offset-semantics-001/002/analyze.py",
+      "sha256": "7e9fdc6c890080ee976ebb3a11923f9d9edce5c1eb375ad8f65351bfc3764c9a"
+    },
+    "corrected_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-offset-semantics-001/002/report.json",
+      "sha256": "51651b6b32180c0ee18dabc58a338dc11a4597c147789c950aceeaf590d40a04"
+    },
+    "corrected_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-offset-semantics-001/002/receipt.json",
+      "sha256": "4ed0a9c5b2949bb571723fccb251fcc90e306c7dc31e05c5141bccc8a17928cb"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-offset-review-001/002/review.json",
+      "sha256": "d398a9a8c6171467a3d8b047b04facb81b84a1f6b5f2f5985f4642549a40bbe4"
+    },
+    "rejected_predecessor_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-offset-review-001/001/review.json",
+      "sha256": "85a192e47796966add02c7e102f5d94f1d39778ab76fb812f6e31bc77af23dff"
+    }
+  },
+  "result": {
+    "ota_preamble_bytes": 32,
+    "runtime_mapping": "runtime = full_file_offset + 0x437FE0",
+    "corpus_function": "FUN_0045adf4",
+    "verified_function_body_file_span": [
+      142868,
+      143634
+    ],
+    "verified_function_body_bytes": 766,
+    "reviewed_code_file_span": [
+      143568,
+      143634
+    ],
+    "reviewed_code_bytes": 66,
+    "unresolved_file_span": [
+      143634,
+      143648
+    ],
+    "unresolved_bytes": 14,
+    "reviewed_code_runtime_span": [
+      "0x45b0b0",
+      "0x45b0f2"
+    ]
+  },
+  "limits": [
+    "The 14 trailing bytes are not established as a table or code.",
+    "Bootloader descriptors at equal numeric file offsets are a different payload and cannot determine main byte roles.",
+    "No whole-image code/data or nested-image closure, G1 or P2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

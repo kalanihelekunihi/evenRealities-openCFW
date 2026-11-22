@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "review_id": "P1-em9305-small-record-census-review-002/001",
+  "campaign_id": "20261112T092142Z",
+  "verdict": "SUPPORTED_WITH_BOUNDED_SCOPE",
+  "admission": "none",
+  "reviewed_report": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-census-002/001/report.json",
+    "sha256": "e07ade1c6dbaf7514acfe30dfc6e0b49c882d63ac41784bb16637dfa645bb8f3"
+  },
+  "checks": {
+    "pinned_inputs_and_reproduction": {
+      "result": "PASS",
+      "package_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "objdump_sha256": "72e6b6472976159e135ea363dee4a1580b0921699ead22357e24503eddb0fdf3",
+      "script_sha256": "2a7b89c5104006879d69116d1e9aef68762061712ac73a47e1afc1459a366884",
+      "record_images_and_disassembly_hashes_match": true,
+      "private_rerun_disassemblies_byte_for_byte_match": true,
+      "objdump_argv": "Both recorded invocations use the pinned arc-elf32-objdump with -D -b binary -m arc:em -EL and --adjust-vma 0x300000 / 0x300400 on the corresponding materialized package slices."
+    },
+    "package_spans_and_direct_reference_counts": {
+      "result": "PASS",
+      "package_spans": {
+        "record0": [124, 348],
+        "record1": [348, 1004]
+      },
+      "record0_direct_refs": 13,
+      "record1_direct_refs": 59,
+      "direct_refs_total": 72,
+      "record0_to_record1": 7,
+      "record1_to_record0": 11,
+      "external_or_other": 1,
+      "external_target": "0x103f14",
+      "counts_match_prior_census_001": true
+    },
+    "undecoded_words_and_boundary_evidence": {
+      "result": "PASS",
+      "record1_word_rows": [
+        {"address": "0x30041c", "raw": "3b02 0303"},
+        {"address": "0x30042e", "raw": "3b00 0083"},
+        {"address": "0x30043c", "raw": "3b02 0083"},
+        {"address": "0x300440", "raw": "392f 00cc"}
+      ],
+      "record0_tail_bytes_at_0x3000de": "ffff",
+      "record1_register_jump_at_0x300538": "j_s [r0]",
+      "record1_empty_ini_metadata_span": "0x300684..0x300690"
+    },
+    "parser_and_interpretation_limits": {
+      "result": "BOUNDED",
+      "details": [
+        "The new source script makes command construction and textual parsing reproducible; it recognizes candidate control mnemonics by prefix and extracts only objdump's printed ;0x... targets. The counts therefore describe those parsed annotations in the stated candidate spans, not a proof that every annotation is control flow or that all references were found.",
+        "Linear disassembly can interpret data as instructions and does not find alternate entries. Four .word rows remain unresolved; the branch annotation targeting 0x300440 does not resolve the semantics of the .word at that address.",
+        "Register-indirect transfers and non-control references are outside the direct-reference counts. The census excludes record 3, external ROM execution, runtime selection, and embedded-format discovery."
+      ]
+    }
+  },
+  "issues": [],
+  "limits": [
+    "This independently verifies pinned inputs, package record materializations, full objdump outputs, reproduction, and reported bounded counts.",
+    "It establishes no recursive control-flow completeness, code/data classification, canonical G1 admission, complete pseudocode, source completeness, or byte identity."
+  ],
+  "gate_effect": "none; G1 remains not_run"
+}

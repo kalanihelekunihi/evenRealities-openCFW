@@ -383,7 +383,6 @@ SOURCES_OUT ?= build/g2-c-wave
 SOURCE_LINK_OUT ?= build/g2-source-images
 SOURCE_LINK_FLAGS ?=
 SOURCE_BUNDLE_OUT ?= build/g2-source-bundle
-KWS_WEIGHTS ?= g2/src/codec/npu/kws_weights_2_2_6_10.bin
 KWS_WEIGHTS_PROVENANCE ?= g2/evidence/codec-a-kws-trained-weights-20261111.json
 KWS_COMMAND_OUT ?= ../build/g2-kws/commands.bin
 sources:
@@ -393,6 +392,6 @@ sources-check:
 source-link:
 	cd .. && $(PYTHON) tools/build/link_g2_sources.py --source-out "$(SOURCES_OUT)" --out "$(SOURCE_LINK_OUT)" $(SOURCE_LINK_FLAGS)
 source-bundle:
-	cd .. && $(PYTHON) tools/build/link_g2_sources.py --source-out "$(SOURCES_OUT)" --out "$(SOURCE_BUNDLE_OUT)" --codec-a-weights "$(KWS_WEIGHTS)" --codec-a-weights-provenance "$(KWS_WEIGHTS_PROVENANCE)" --bundle-candidate
+	cd .. && $(PYTHON) tools/build/link_g2_sources.py --source-out "$(SOURCES_OUT)" --out "$(SOURCE_BUNDLE_OUT)" --codec-a-weights-from-source --codec-a-weights-provenance "$(KWS_WEIGHTS_PROVENANCE)" --bundle-candidate
 kws-command-stream:
 	$(PYTHON) tools/build_kws_command_stream.py --out "$(KWS_COMMAND_OUT)"

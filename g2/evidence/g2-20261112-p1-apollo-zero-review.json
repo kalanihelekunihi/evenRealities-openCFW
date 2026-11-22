@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "attempt_id": "P1-apollo-zero-review-001/001",
+  "reviewer": "independent",
+  "scope": "Independent byte-level review of Apollo main and bootloader zero-init table extraction and deterministic generated zero-span ledger. No G1 claim.",
+  "decision": "accept_bounded_ledger",
+  "inputs": [
+    {
+      "path": "g2/workflow/target.json",
+      "size": 3546,
+      "sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff"
+    },
+    {
+      "path": "g2/manifests/g2-2.2.6.10.json",
+      "size": 9602,
+      "sha256": "1e6f7da11f63cf063098de2213a304e0a15fe99e9a932cdef9fedf32d2856c61"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "size": 3523396,
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+      "size": 148599,
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/identity.json",
+      "size": 2733,
+      "sha256": "2dbba3e34ef59158bf05bed2cf24c455b91f3b7119856ed9c8826cc916f121fe"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-zero-init-ledger-001/001/ledger.json",
+      "size": 2778,
+      "sha256": "e4a9870e1007f0f9a4dbc5769e9b65fd3ff1d13a13c587399e6df87ef2a7c7ab"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-other-identity-materialization-001/001/manifest.json",
+      "size": 17935,
+      "sha256": "f6dae8b541c69fa68986666b1f5da05f36ce55c2a52594a5230d3786961c8fcf"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-other-identity-materialization-001/001/00-apollo_main-flash.bin",
+      "size": 3523364,
+      "sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-other-identity-materialization-001/001/01-apollo_bootloader-flash.bin",
+      "size": 148599,
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+    },
+    {
+      "path": "g2/docs/reference/findings-apollo-platform.md",
+      "size": 80526,
+      "sha256": "a68229ca2a9bae03eb09467403019407eb2e67c93cf34b5ad1fb9c43204c7c79"
+    },
+    {
+      "path": "g2/docs/reference/firmware-formats.md",
+      "size": 20692,
+      "sha256": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-initialization-transforms-002/002/receipt.json",
+      "size": 29474,
+      "sha256": "0bbd5728cdbfcf62cd6e4fd19f8e0cce7e5d4861daa30444b7fd90962191fb7c"
+    }
+  ],
+  "checks": {
+    "locked_identity": {
+      "status": "pass",
+      "details": "Locked target and manifest are pinned; current flash materializations are pinned and their SHA-256 values match the ledger entries. Main image load base 0x438000 and bootloader base 0x410000 agree with active image materialization mapping; main wrapped-vs-stripped coordinate distinction was retained."
+    },
+    "table_offsets_and_bytes": {
+      "status": "pass",
+      "details": "For each image, runtime table start minus load base equals the ledger image offset. Direct little-endian unpack of 24 bytes confirms exactly one dispatch word, two (size,destination) pairs, and zero sentinel. Table-byte SHA-256 matches."
+    },
+    "generated_zero_spans": {
+      "status": "pass",
+      "details": "For all four records, independently recomputed size and destination + size exactly match span endpoints; SHA-256(bytes(size)) matches generated_zero_sha256. These are deterministic RAM zero bytes."
+    },
+    "nested_image_distinction": {
+      "status": "pass",
+      "details": "The four outputs describe zero-filled destination RAM intervals only. Encoded nested/compressed images are separate flash source spans and are not included in these zero-byte hashes or claimed as decoded outputs."
+    },
+    "historical_cross_check": {
+      "status": "consistent_with_distilled_reference",
+      "details": "The consolidated Apollo platform reference documents main zero-init rows 0x70AF0 -> 0x20004558 and 0x240FD4 -> 0x2013BE70, absolute destinations, and zero-init handler flag convention. Current review independently confirms these main rows from current materialized image bytes. Bootloader records were checked directly from current bootloader bytes; historical replay receipts are pinned only as contextual references, not treated as proof."
+    }
+  },
+  "tables": [
+    {
+      "payload_id": "apollo_main",
+      "image_path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-other-identity-materialization-001/001/00-apollo_main-flash.bin",
+      "image_size": 3523364,
+      "image_sha256_recomputed": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+      "image_sha256_ledger": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+      "image_hash_match": true,
+      "image_load_base": 4423680,
+      "table_runtime_span": [
+        7721928,
+        7721952
+      ],
+      "table_image_span_recomputed": [
+        3298248,
+        3298272
+      ],
+      "table_image_span_ledger": [
+        3298248,
+        3298272
+      ],
+      "offset_and_extent_match": true,
+      "table_bytes_hex": "57cce9fff00a070058450020d40f240070be132000000000",
+      "table_words_le_hex": [
+        "0xffe9cc57",
+        "0x70af0",
+        "0x20004558",
+        "0x240fd4",
+        "0x2013be70",
+        "0x0"
+      ],
+      "table_sha256_recomputed": "2a52162870b1f1b036f1769e75dabcf475f17eb6c37c85ffcabcb9dcfd064e15",
+      "table_sha256_ledger": "2a52162870b1f1b036f1769e75dabcf475f17eb6c37c85ffcabcb9dcfd064e15",
+      "table_hash_match": true,
+      "dispatch_word": 4293512279,
+      "dispatch_word_ledger": 4293512279,
+      "dispatch_match": true,
+      "records": [
+        {
+          "index": 0,
+          "table_size": 461552,
+          "table_destination": 536888664,
+          "destination_span_recomputed": [
+            536888664,
+            537350216
+          ],
+          "ledger_destination_span": [
+            536888664,
+            537350216
+          ],
+          "size_matches_ledger": true,
+          "exact_end_arithmetic": 537350216,
+          "generated_zero_bytes_length": 461552,
+          "generated_zero_sha256_recomputed": "49abc6bbc3f1af86dd8a4f67ea26bc7e5ed29f6fcb908ceb14165ce1c1ebe839",
+          "ledger_generated_zero_sha256": "49abc6bbc3f1af86dd8a4f67ea26bc7e5ed29f6fcb908ceb14165ce1c1ebe839",
+          "span_match": true,
+          "zero_hash_match": true
+        },
+        {
+          "index": 1,
+          "table_size": 2363348,
+          "table_destination": 538164848,
+          "destination_span_recomputed": [
+            538164848,
+            540528196
+          ],
+          "ledger_destination_span": [
+            538164848,
+            540528196
+          ],
+          "size_matches_ledger": true,
+          "exact_end_arithmetic": 540528196,
+          "generated_zero_bytes_length": 2363348,
+          "generated_zero_sha256_recomputed": "3d225747a37369337b9ddd8dd13aa501ecae162a13aadad4f65bf88ca55636e0",
+          "ledger_generated_zero_sha256": "3d225747a37369337b9ddd8dd13aa501ecae162a13aadad4f65bf88ca55636e0",
+          "span_match": true,
+          "zero_hash_match": true
+        }
+      ],
+      "zero_sentinel_recomputed": 0,
+      "zero_sentinel_ledger": 0,
+      "sentinel_match": true
+    },
+    {
+      "payload_id": "apollo_bootloader",
+      "image_path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-other-identity-materialization-001/001/01-apollo_bootloader-flash.bin",
+      "image_size": 148599,
+      "image_sha256_recomputed": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "image_sha256_ledger": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "image_hash_match": true,
+      "image_load_base": 4259840,
+      "table_runtime_span": [
+        4403416,
+        4403440
+      ],
+      "table_image_span_recomputed": [
+        143576,
+        143600
+      ],
+      "table_image_span_ledger": [
+        143576,
+        143600
+      ],
+      "offset_and_extent_match": true,
+      "table_bytes_hex": "61edffff6c6c02005c050020004107000010082000000000",
+      "table_words_le_hex": [
+        "0xffffed61",
+        "0x26c6c",
+        "0x2000055c",
+        "0x74100",
+        "0x20081000",
+        "0x0"
+      ],
+      "table_sha256_recomputed": "c3bc96a72c259e5aea0d41e96c6b1c558db3cac75b1f3ff0f17afc7ecd49f882",
+      "table_sha256_ledger": "c3bc96a72c259e5aea0d41e96c6b1c558db3cac75b1f3ff0f17afc7ecd49f882",
+      "table_hash_match": true,
+      "dispatch_word": 4294962529,
+      "dispatch_word_ledger": 4294962529,
+      "dispatch_match": true,
+      "records": [
+        {
+          "index": 0,
+          "table_size": 158828,
+          "table_destination": 536872284,
+          "destination_span_recomputed": [
+            536872284,
+            537031112
+          ],
+          "ledger_destination_span": [
+            536872284,
+            537031112
+          ],
+          "size_matches_ledger": true,
+          "exact_end_arithmetic": 537031112,
+          "generated_zero_bytes_length": 158828,
+          "generated_zero_sha256_recomputed": "0ef445b0c24370d5770a5de60bfaa2d1a51a6c59788b222b6d9ab81c9eefd323",
+          "ledger_generated_zero_sha256": "0ef445b0c24370d5770a5de60bfaa2d1a51a6c59788b222b6d9ab81c9eefd323",
+          "span_match": true,
+          "zero_hash_match": true
+        },
+        {
+          "index": 1,
+          "table_size": 475392,
+          "table_destination": 537399296,
+          "destination_span_recomputed": [
+            537399296,
+            537874688
+          ],
+          "ledger_destination_span": [
+            537399296,
+            537874688
+          ],
+          "size_matches_ledger": true,
+          "exact_end_arithmetic": 537874688,
+          "generated_zero_bytes_length": 475392,
+          "generated_zero_sha256_recomputed": "467cada3810e8ed4535c260186dc229bb66359356b5280f5170a92e7ddd7f04e",
+          "ledger_generated_zero_sha256": "467cada3810e8ed4535c260186dc229bb66359356b5280f5170a92e7ddd7f04e",
+          "span_match": true,
+          "zero_hash_match": true
+        }
+      ],
+      "zero_sentinel_recomputed": 0,
+      "zero_sentinel_ledger": 0,
+      "sentinel_match": true
+    }
+  ],
+  "limitations": [
+    "Review validates ledger extraction and arithmetic, not control-flow reachability, startup invocation, runtime handler selection, or timing.",
+    "No execution of either zero-init handler was performed in this review; execution/selection remains separate historical evidence.",
+    "No G1 gate, pseudocode corpus freeze, source completeness, or firmware byte-identity claim is made.",
+    "Zero-span SHA-256 is a hash of generated all-zero bytes of the listed length; it does not establish that the device actually reached or retained that RAM state."
+  ]
+}

@@ -5,6 +5,7 @@ typedef void (*audio_dm_adv_action_t)(void *message);
 
 extern uint8_t audio_ble_dm_adv_control[];
 extern void HciLeSetAdvEnableCmd(uint8_t enable);
+extern void g2_recovery_disarm_on_advertising(void);
 extern void audio_ble_dm_adv_config_lower_4b9a80(uint8_t type,
                                                   uint8_t peer_type,
                                                   const uint8_t *peer_address);
@@ -58,6 +59,8 @@ void audio_ble_dm_adv_start_4b9e88(void *message)
         audio_dm_adv_store16(audio_ble_dm_adv_control + 0x20u,
                              audio_dm_adv_load16(bytes + 8u));
         HciLeSetAdvEnableCmd(1u);
+        /* openCFW: disarm early SBL recovery arm now that advertising is on. */
+        g2_recovery_disarm_on_advertising();
     }
 }
 

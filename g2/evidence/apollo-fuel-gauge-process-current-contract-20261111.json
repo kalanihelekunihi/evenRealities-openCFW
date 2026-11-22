@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "Nordic fuel-gauge process current-selection contract in the G2 source-only candidate",
+  "locked_process": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "artifact_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "entry": "0x0055F848",
+    "end_exclusive": "0x0055F974",
+    "bytes": 300,
+    "sha256": "e79c88a4914f4523a09054798291040874f4d2a3a395f76022aeb6ecfb7f4ecc",
+    "virtual_to_file_offset": "address - 0x438000 + 0x20",
+    "independent_pseudocode": "g2/research/corpus/apollo-main/ghidra/decomp/bundles/apollo-decomp-11.c:1265"
+  },
+  "recovered_branch": [
+    {
+      "range": "0x55F854..0x55F870",
+      "fact": "The raw IEEE-754 current sign bit selects the charging branch; nonnegative current selects it only while the VBUS byte is set."
+    },
+    {
+      "range": "0x55F870..0x55F89C",
+      "fact": "In the charging branch, a non-NaN stored charge limit is used directly only when charge state equals 2 (CC); otherwise current is multiplied by the charge correction factor."
+    },
+    {
+      "range": "0x55F902..0x55F91A",
+      "fact": "The discharging branch multiplies current by the discharge correction factor."
+    }
+  ],
+  "source": {
+    "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_source.c",
+    "sha256": "30aed35c64a851307c481784a5642d3d8f43c17c0009c6d37c1ccf89284129af",
+    "change": "Replaced the old sign-only factor choice with the observed sign/VBUS/CC-limit branches in corrected_current; the existing gauge state and source-only model remain."
+  },
+  "verification": {
+    "host_harness": "build/g2-gauge-current-20261111/current_contract.c",
+    "host_command": "clang -std=c11 -Wall -Wextra -Werror -I. build/g2-gauge-current-20261111/current_contract.c -lm -o build/g2-gauge-current-20261111/current_contract_werror && build/g2-gauge-current-20261111/current_contract_werror",
+    "assertions": 9,
+    "focused_apollo_source_report": "build/g2-gauge-current-apollo-20261111/report.json",
+    "focused_apollo_compiled_units": 2717,
+    "focused_apollo_strict_link": "build/g2-gauge-current-apollo-link-20261111/link-report.json",
+    "sources_check": "4884 units, 4545 source files, 1 not built",
+    "full_source_report": "build/g2-gauge-current-all-20261111/report.json",
+    "full_source_report_sha256": "2f745c11de0a6917a863ad388bad775f213de9cad7f5c580701085aa9059c974",
+    "full_compiled_units": 4879,
+    "full_failures": 0,
+    "full_duplicate_strong_symbols": 0,
+    "manifest_changed_during_build": false,
+    "full_strict_link_report": "build/g2-gauge-current-bundle-20261111/link-report.json",
+    "full_strict_link_report_sha256": "963986f103435d6c1c4e5c78c66ffba322330564b7d8045b8e106b0b9fc539f5",
+    "strict_payload_links": 7,
+    "external_binary_archive_used": false,
+    "apollo_binary_bytes": 3818768,
+    "apollo_binary_sha256": "db4b582cd6058c4a910db610af95ead37ef4a0c2cae64f5b243a7d44a70bbc1a",
+    "source_bundle_bytes": 4642140,
+    "source_bundle_sha256": "397db410b45e5479c857c15c3cb99463c5b06960c96032407368303c58f6983d",
+    "matches_locked_target": false
+  },
+  "limits": [
+    "The stock process also invokes large proprietary model functions at 0x43A698 and 0x43A1B0; this C model remains deliberately uncalibrated and is not byte-identical.",
+    "The source model retains finite-input and time-interval guards not seen in the 300-byte stock wrapper; complete input equivalence is not claimed.",
+    "This host branch check and source link do not establish physical battery behavior, whole-firmware source completeness, or OTA byte identity."
+  ]
+}

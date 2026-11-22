@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "G1 validator now rejects incomplete or non-reversible numeric maps for resolved images",
+  "artifacts": {
+    "validator": {
+      "path": "g2/workflow/tools/validate_inventory_v2.py",
+      "sha256": "9fa25320e269db13960bdc9e15119d3d8c9d16295fb97fe4f1837a7a9d412c0b"
+    },
+    "tests": {
+      "path": "g2/tests/test_validate_inventory_v2.py",
+      "sha256": "1adc904f66d77f47de3064ff39791d14aa34925e04b9e18cc5e826123a509226"
+    },
+    "candidate_images": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-all-image-row-draft-006/001/images-draft.jsonl",
+      "sha256": "23416dfd32268f5075be5df5a76c52843ab3c12151341c89a2dc80bd1287cb7b"
+    },
+    "focused_test_output": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-resolved-map-validator-001/001/unittest.txt",
+      "sha256": "bb62e6f09c8e952a07abe130d28ae3160235fe728250283ef8ca9fae4a721df2"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-resolved-map-validator-001/002/receipt.json",
+      "sha256": "d480db9b87d642083c1973f27488e9e1f4398fa413df5593f198e841fa7050bb"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-resolved-map-validator-review-001/001/review.json",
+      "sha256": "ef71ab3b7afff4eef0d28b7a9a900362d3aa5f2246db767d0854a5ba9be1431e"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-resolved-map-validator-review-001/001/receipt.json",
+      "sha256": "43c3f1b5a5811c798b870038c5ec7f74aea6ddb0018bbe5c2a7a7de81c018a80"
+    }
+  },
+  "result": {
+    "focused_validator_tests": "41 pass",
+    "current_resolved_image_candidates": "20 pass",
+    "independent_review": "BOUNDED_PASS_WITH_LIMITS",
+    "invalid_map_cases_rejected": 8
+  },
+  "limits": [
+    "Checks mapping geometry, not factual loaded-address bases or cross-image overlays.",
+    "Current image rows remain candidates without canonical accounting reviews; G1 remains not_run."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed conditional allocation of current discovery gaps to G1, P2 and scoped external premises",
+  "artifacts": {
+    "discovery_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/023/discovery-draft.jsonl",
+      "sha256": "3e26a910d85a9b1442602b46a70e2f5cf9e989c77b96bf79efe76fdd465edc2e"
+    },
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-phase-boundary-001/003/audit.py",
+      "sha256": "697c401bc876c9f3a7251d64826d5e928457515693d0db818591a39cea2d5369"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-phase-boundary-001/003/report.json",
+      "sha256": "8202b920cf4cb3cc5064c7c0434809f28bc425611c2053068b27b32058ed2c95"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-phase-boundary-001/003/receipt.json",
+      "sha256": "6e689ec6e9d1851a8981d8c6717c159b5ec75ce71521f835a52d9273dddd3ccb"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-phase-boundary-review-003/001/review.json",
+      "sha256": "79df16488758318fea3b0e76a0b892325d414d3f5cf2cfec3dcbe3eddfe1e4c0"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-phase-boundary-review-003/001/receipt.json",
+      "sha256": "7265efe31f5c3bffb8bc24db8dd5ffaa356bf69cce811a15e389df53f1e0a94c"
+    }
+  },
+  "result": {
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS",
+    "payloads": 6,
+    "original_unresolved_entries": 7,
+    "g1_open_actions": 12,
+    "p2_candidate_topics": 10,
+    "external_premise_topics": 4
+  },
+  "limits": [
+    "All seven discovery entries remain unresolved; classification does not close an image or route fact.",
+    "Unknown byte roles may remain in a reviewed G1 ledger only after all possibly affected nested-image and artifact-derived transfer/address facts are bounded.",
+    "This proposal and review are not canonical inventory admission or a gate receipt."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

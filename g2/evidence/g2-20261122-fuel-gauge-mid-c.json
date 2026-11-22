@@ -1,0 +1,140 @@
+{
+  "title": "nrf_fuel_gauge mid-level helpers + standard memcpy/memset: function-level Renode M55 verified",
+  "status": "VERIFIED",
+  "when": "2026-11-22 10:48 AM CST (America/Chicago)",
+  "approach": "Bottom-up batch 2. Idiomatic scalar-float C; fg_memcpy/fg_memset call standard memcpy/memset (not typographic IAR). Function-level compare vs typographic stock on Renode 1.17 Cortex-M55. No fg_call trampoline.",
+  "harness": {
+    "dir": "build/fuel-gauge-recon-20261122/c-leaves/",
+    "resc": "mid.resc",
+    "platform": "Renode 1.17.0+20261102gite8c7c2d28, cortex-m55, FpuEnabled, CPACR 0x00F00000, SP 0x2007FB00, RESULT 0x20068000, halt 0x30000000",
+    "magic": "0xF6A11E02",
+    "count_words": 84,
+    "mismatch_total_final_run": 1,
+    "mismatch_note": "The remaining 1 mismatch is typographic-only fg_43a5dc (NaN payload 0x7FC00001 vs 0x7FC00000 on a canonical-qNaN t that 43a0f4 does not treat as special). 43a5dc was NOT replaced.",
+    "pc_at_end": "0x30000000"
+  },
+  "verified": [
+    {
+      "symbol": "fg_memcpy",
+      "cases": 1472,
+      "fails": 0,
+      "notes": "Wraps standard memcpy. Compared to typographic IAR forward-copy (fg_439be4) on sizes 0..200 and src/dst alignments 0..7. Return value is dst. No overlap path in stock IAR either."
+    },
+    {
+      "symbol": "fg_memset",
+      "cases": 912,
+      "fails": 0,
+      "notes": "Wraps standard memset. Compared to typographic wrapper+inner on sizes 0..200, alignments 0..7, fills 0/1/0x5A/0xFF/0x100/-1."
+    },
+    {
+      "symbol": "fg_439ca4",
+      "cases": 1,
+      "fails": 0,
+      "notes": "IAR error helper: stores 0x21 to fg_iar_err[0]."
+    },
+    {
+      "symbol": "fg_4397a8",
+      "cases": 1056,
+      "fails": 0,
+      "notes": "vsqrt of nonnegative s0; if s0 < 0, fg_439ca4 and return qNaN 0x7FFFFFFF. Bit-exact vs typographic including signed zero, inf, NaN, and the error side effect."
+    },
+    {
+      "symbol": "fg_439e9c",
+      "cases": 2976,
+      "fails": 0,
+      "notes": "Max of a 3-float window, skipping a leading 43a0f4 hit. VSELGT (unordered keeps the running max)."
+    },
+    {
+      "symbol": "fg_439f24",
+      "cases": 2976,
+      "fails": 0,
+      "notes": "Min of a 3-float window, same predicate skip. IT MI only on a strict less-than."
+    },
+    {
+      "symbol": "fg_439fb4",
+      "cases": 768,
+      "fails": 0,
+      "notes": "Scan 3 bytes, write 1-based indices of nonzeros, return count 0..3."
+    },
+    {
+      "symbol": "fg_43ba6c",
+      "cases": 9,
+      "fails": 0,
+      "notes": "fabs of 2*count floats; out[0]=count, out[1]=2. Sign bit cleared, including NaN and -0."
+    },
+    {
+      "symbol": "fg_43bc58",
+      "cases": 10,
+      "fails": 0,
+      "notes": "fabs of p[1] floats; out[0]=1, out[1]=p[1]."
+    },
+    {
+      "symbol": "fg_43baf4",
+      "cases": 3328,
+      "fails": 0,
+      "notes": "Integer-ABI predicate on two doubles (wrapper around typographic 43c0b0 + sbcs/negs = !C)."
+    }
+  ],
+  "not_replaced": [
+    {
+      "symbol": "fg_43a5dc",
+      "cases": 288,
+      "fails": 1,
+      "notes": "Quadratic interpolation is otherwise ready, but one canonical-qNaN t (43a0f4 returns 0) produced VFP NaN payload 0x7FC00001 vs C 0x7FC00000. Left typographic."
+    }
+  ],
+  "production_replace": {
+    "updated": [
+      {
+        "path": "/Users/kalani/Repo/evenRealities-OpenCFW/g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+        "sha256": "916456e51623f2fb2832ad601b5282d294d69e9f563175b695851e350d4eeaec",
+        "bytes": 10719
+      },
+      {
+        "path": "/Users/kalani/Repo/evenRealities-OpenCFW/g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.h",
+        "sha256": "01a98229506b1c8f129c0fdeeea290d302b44f279f7286a7066b9f62ef63ca8f",
+        "bytes": 1094
+      },
+      {
+        "path": "/Users/kalani/Repo/evenRealities-OpenCFW/g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_cores.S",
+        "sha256": "0c26381cb5133335bff8982b5ce115b5d7c407d9d561bbd207cd557012124c76",
+        "bytes": 54866
+      }
+    ],
+    "cores_remaining_globals": [
+      "fg_439ce0",
+      "fg_439fe4",
+      "nrf_model_init_43a1b0",
+      "fg_43a5dc",
+      "nrf_model_process_43a698",
+      "fg_43bb14",
+      "fg_43bc84",
+      "fg_43be18",
+      "fg_43bfac",
+      "nrf_model_ttf_58eac4"
+    ]
+  },
+  "artifacts": {
+    "results_bin": {
+      "path": "/Users/kalani/Repo/evenRealities-OpenCFW/build/fuel-gauge-recon-20261122/c-leaves/mid_results.bin",
+      "sha256": "263e24a26d82d0c5838a4e3c2d4b413ffa3284ef72f95ae5e6d645d095bf1fac",
+      "bytes": 2048
+    },
+    "test_bin": {
+      "path": "/Users/kalani/Repo/evenRealities-OpenCFW/build/fuel-gauge-recon-20261122/c-leaves/mid_test.bin",
+      "sha256": "5b84f1ee936d2955c34aedcb675be344097747081febf15e2258ea8ef89af2e6",
+      "bytes": 6472
+    },
+    "test_log": {
+      "path": "/Users/kalani/Repo/evenRealities-OpenCFW/build/fuel-gauge-recon-20261122/c-leaves/mid.log",
+      "sha256": "372b33917e33a3a993048b271902d05fd77a9ab93f5438993dbc7ab85c6a79d4",
+      "bytes": 861
+    }
+  },
+  "not_done": [
+    "Remaining typographic: 43a5dc, 439ce0, 439fe4, 43bb14, 43bc84, 43be18, 43bfac, process, init, ttf.",
+    "Linker-report canned 'source-only uncalibrated' string not edited.",
+    "apollo-main was not rebuilt; version-match paired sim not run in this batch (due after a few batches).",
+    "Official opencfw-otap-disarm.app.bin was not overwritten. No flash, no git."
+  ]
+}

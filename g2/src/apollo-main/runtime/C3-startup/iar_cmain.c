@@ -59,7 +59,7 @@ void iar_cmain_5e4294(void) __attribute__((noreturn));
  * the ADC hw-id poll), so even a boot that hangs early leaves the temple
  * recoverable over the case pogo link. Touches only MMIO + a .noinit cell, so
  * it is safe before RAM-init. Disarmed once the app answers the case
- * (DEV_BoxRevcMsgProcess). See system/self-recovery/self_recovery.c. */
+ * (DEV_BoxRevcMsgProcess) or when BLE advertising is enabled. See system/self-recovery/self_recovery.c. */
 extern void g2_recovery_arm_early(void);
 
 /* Stock 0x005e4228 (__low_level_init): VTOR = main vector table 0x438000. */

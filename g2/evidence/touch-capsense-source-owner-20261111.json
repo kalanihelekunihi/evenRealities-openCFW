@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "four formerly unverified touch CapSense function identities",
+  "rows": [
+    {
+      "stock_address": "0x00005E64",
+      "stock_bytes": 98,
+      "stock_sha256": "eea7d108d821d99e816c9756777d1045ced26574c092e3a4adb40d0581b24d92",
+      "source_symbol": "Cy_CapSense_SetWidgetFrameRefCdacCodes",
+      "source_file": "third-party/reference/infineon-capsense-v5/cy_capsense_sensing_lp.c",
+      "source_sha256": "17b6468dde45c16c8f63cef048d5d8b240cc4ee5f55b82d37bd8d77ace95c23f",
+      "manifest_link": true,
+      "linked": {
+        "linked_address": "0x00004F64",
+        "linked_size": 92
+      },
+      "exact_source_selection": null
+    },
+    {
+      "stock_address": "0x00005ECC",
+      "stock_bytes": 100,
+      "stock_sha256": "64f9683826e314f2ac032d69487a829a98cd6ed9a1ea204c99aaa136f4828da8",
+      "source_symbol": "Cy_CapSense_SetWidgetFrameCompCdacCode",
+      "source_file": "third-party/reference/infineon-capsense-v5/cy_capsense_sensing_lp.c",
+      "source_sha256": "17b6468dde45c16c8f63cef048d5d8b240cc4ee5f55b82d37bd8d77ace95c23f",
+      "manifest_link": true,
+      "linked": {
+        "linked_address": "0x00004FC0",
+        "linked_size": 104
+      },
+      "exact_source_selection": null
+    },
+    {
+      "stock_address": "0x00007CF8",
+      "stock_bytes": 12,
+      "stock_sha256": "f7ac013b016d26823e8e0794daa3efa0443dceb9a4993dd9afc3f555fc2cb06d",
+      "source_symbol": "Cy_CapSense_IsAnyLpWidgetActive",
+      "source_file": "third-party/reference/infineon-capsense-v5/cy_capsense_structure.c",
+      "source_sha256": "1834546b0d0ff441a77deb93e97eb91c5de93b4df7b9b0dc908ad9a88809db93",
+      "manifest_link": true,
+      "linked": {
+        "linked_address": "0x00004E4C",
+        "linked_size": 12
+      },
+      "exact_source_selection": {
+        "payload": "g2-touch",
+        "symbol": "Cy_CapSense_IsAnyLpWidgetActive",
+        "start": 18968,
+        "end": 18980,
+        "sha256": "f7ac013b016d26823e8e0794daa3efa0443dceb9a4993dd9afc3f555fc2cb06d",
+        "evidence": "g2/symbols/touch.tsv"
+      }
+    },
+    {
+      "stock_address": "0x00007D92",
+      "stock_bytes": 76,
+      "stock_sha256": "305059b8256a3c4645a944b46d59cb48a7a0b2c6f146cd4c43fdd6a96f565e5a",
+      "source_symbol": "Cy_CapSense_CheckConfigIntegrity",
+      "source_file": "third-party/reference/infineon-capsense-v5/cy_capsense_structure.c",
+      "source_sha256": "1834546b0d0ff441a77deb93e97eb91c5de93b4df7b9b0dc908ad9a88809db93",
+      "manifest_link": true,
+      "linked": {
+        "linked_address": "0x00004E58",
+        "linked_size": 76
+      },
+      "exact_source_selection": {
+        "start": 19122,
+        "end": 19198,
+        "address": 32146,
+        "bindings": {},
+        "match_evidence": {
+          "method": "unique unrelocated bytes at inventoried native function entry, followed by full linked equality",
+          "fixed_bytes": 76,
+          "compiled_pattern_sha256": "305059b8256a3c4645a944b46d59cb48a7a0b2c6f146cd4c43fdd6a96f565e5a",
+          "relocations": []
+        },
+        "payload": "g2-touch",
+        "symbol": "Cy_CapSense_CheckConfigIntegrity",
+        "sha256": "305059b8256a3c4645a944b46d59cb48a7a0b2c6f146cd4c43fdd6a96f565e5a",
+        "evidence": "g2/symbols/touch.tsv"
+      }
+    }
+  ],
+  "qualification_reports": [
+    {
+      "path": "build/g2-touch-capsense-structure-qualify-20261111/qualification.json",
+      "sha256": "d1bdcf9151ef10a9112494d00866cd2465687292faf48a758e347c753db3e3af"
+    },
+    {
+      "path": "build/g2-touch-capsense-lp-qualify-20261111/qualification.json",
+      "sha256": "99039dec386b45a41e68524991f5828f40b99b5e57d5d34e03c1c6d9917d227e"
+    }
+  ],
+  "source_plan": "tools/build/source-plan.json",
+  "source_plan_sha256": "33b513975ad285c3224a8344228db8b61bd76a0bb3dcff1b5e24554daf4df3cb",
+  "hybrid_build_report": "build/g2-touch-capsense-owner-hybrid-20261111/build-report.json",
+  "hybrid_build_report_sha256": "655ee53fe739966ee4a0f9bbf3a343532914ee0315436b88ce99670005bde9b1",
+  "hybrid_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "touch_source_built_bytes": 5534,
+  "touch_binary_pull_through_bytes": 28898,
+  "new_exact_source_bytes": 12,
+  "source_completeness_proven": false,
+  "limits": [
+    "The CDAC writer identities are source-body/control-flow matches, not exact compiled bytes.",
+    "The hybrid bundle remains stock-identical by binary pull-through and does not establish all-C completeness or hardware behavior."
+  ]
+}

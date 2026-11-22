@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-22 09:05 AM CST (America/Chicago)",
+  "title": "Full forced-mismatch DFU pair on gc-fnsec apollo-main (controller word 00010304)",
+  "scope": "Emulator-only. No hardware flash. No commit. Official opencfw-otap-disarm.app.bin was not overwritten.",
+  "note": "The 8s fixture used by the gc-fnsec adoption run is the same completed-DFU pair as stock-dfu-mismatch / opencfw-otap-disarm-dfu-mismatch. The prior gc evidence note that called it 'bring-up, not a completed DFU cycle' was incorrect; this record parses the HCI and model log of that already-run pair.",
+  "controller_word": "00010304",
+  "fixture": "forced-controller-version-4.3.1.0-mismatch at 0x00402000 via controller-mismatch.resc",
+  "image": "build/em9305-nor-20261122/opencfw-gc-fnsec.app.bin (3,620,044 B, reset PC 0x0052C11D)",
+  "stock_image": "build/em9305-nor-20261122/stock.app.bin",
+  "run_duration_s": 8,
+  "stock": {
+    "resc": "build/em9305-nor-20261122/stock-dfu-mismatch.resc",
+    "log": "build/em9305-nor-20261122/stock-dfu-mismatch.log",
+    "log_sha256": "6a0d6c55b336d1ad8a1ff82de9cc41fbd8ad3d2e08b5b9a15437021d2e1dc50a",
+    "hci_host_packets": 922,
+    "fd06_erase_main": 1,
+    "fd03_nvm_program_writes": 857,
+    "fc4e_crc_commands": 4,
+    "crc32_results": [
+      "[0x00300000,0x003000E0) = 0xD2C17B4C",
+      "[0x00300400,0x00300690) = 0x6E09DDA8",
+      "[0x00302000,0x00302038) = 0xDA9653E5",
+      "[0x00302400,0x00335BC8) = 0xE498BC06"
+    ],
+    "fd07_info_erase": "NVMErasePage INFO sel=1 page=1 @0x00402000",
+    "fd03_commit_402000": {
+      "count": 1,
+      "plen": 252,
+      "data_prefix": "00020404ffffffff"
+    },
+    "sysresetreq": true,
+    "sbl_application_handoff": true,
+    "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x005E4233",
+    "sbl_wired_load": false,
+    "advertising_010A200101": 1,
+    "otap_after_8s": "0x00000000",
+    "config_mode_after_8s": false,
+    "nvm_main_erased_after_8s": false,
+    "unsupported_count": "0x00000000",
+    "host_packet_count": "0x0000003A",
+    "end_pc": "0x44adfa"
+  },
+  "opencfw_gc_fnsec": {
+    "resc": "build/em9305-nor-20261122/opencfw-gc-fnsec-dfu-mismatch.resc",
+    "log": "build/em9305-nor-20261122/opencfw-gc-fnsec-dfu-mismatch.log",
+    "log_sha256": "15cd7f1cabb61a8d4d6762d28022c7a9e601ef0f7dd795c334a9a781cd9eaa9b",
+    "run_started_cst": "2026-11-22 09:00:59 CST",
+    "hci_host_packets": 922,
+    "fd06_erase_main": 1,
+    "fd03_nvm_program_writes": 857,
+    "fc4e_crc_commands": 4,
+    "crc32_results": [
+      "[0x00300000,0x003000E0) = 0xD2C17B4C",
+      "[0x00300400,0x00300690) = 0x6E09DDA8",
+      "[0x00302000,0x00302038) = 0xDA9653E5",
+      "[0x00302400,0x00335BC8) = 0xE498BC06"
+    ],
+    "fd07_info_erase": "NVMErasePage INFO sel=1 page=1 @0x00402000",
+    "fd03_commit_402000": {
+      "count": 1,
+      "plen": 252,
+      "data_prefix": "00020404ffffffff"
+    },
+    "sysresetreq": true,
+    "sbl_application_handoff": true,
+    "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0052C11D",
+    "sbl_wired_load": false,
+    "advertising_010A200101": 1,
+    "display_frame_sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+    "otap_after_0_01s": "0xAFD1363A",
+    "otap_after_8s": "0x00000000",
+    "config_mode_after_8s": false,
+    "nvm_main_erased_after_8s": false,
+    "unsupported_count": "0x00000000",
+    "host_packet_count": "0x0000003A",
+    "end_pc": "0x4cbdd4"
+  },
+  "compare": {
+    "crc_results_identical": true,
+    "fd03_commit_payload_prefix_identical": true,
+    "fd03_write_count_identical": true,
+    "dfu_hci_completed_both": true,
+    "dfu_hci_markers": "1x FD06 erase, 857x FD03 NVM program (same addr range 0x00300000..0x00402000), 4x FC4E CRC (same digests), 1x FD07 INFO erase @0x00402000, 1x FD03 commit @0x00402000 starting 00020404 (stock 4.4.2.0 version word, replacing the 00010304 mismatch fixture), then SYSRESETREQ",
+    "post_dfu_handoff": "Both take SBL application handoff (not wired-load) at VTOR 0x00438000 SP 0x2007FB00, then advertise 010A200101. OTAP 0, config mode false, NVM_MAIN_ERASED false, unsupported 0, host packet monitor 0x3A. End PC and handoff PC differ by image layout (stock 0x005E4233/0x44adfa, gc 0x0052C11D/0x4cbdd4).",
+    "matches_otap_disarm_completed_pair": true,
+    "verdict": "PASS. The gc-fnsec image completes the same forced-mismatch DFU path as stock: erase, CRC, commit, and post-DFU application handoff with advertising. The earlier OTAP SBL wired-load trap is still disarmed."
+  }
+}

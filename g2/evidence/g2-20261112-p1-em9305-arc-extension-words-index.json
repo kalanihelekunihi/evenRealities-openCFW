@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded ARC extension-group mnemonic IDs for four EM9305 record-1 executable candidates.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-small-word-flow-index.json",
+    "sha256": "269acbcfac82d99ef185e84e531af3ea76f309303f28a378d90d49a0645a2d6a"
+  },
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-arc-extension-decode-002/001/audit.py",
+      "sha256": "935b6b0eccc36c9279697d058da5db86b4712d764777d107a8925c9a2ada3060"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-arc-extension-decode-002/001/report.json",
+      "sha256": "2a9bcd047e4a206838a98c49c407018b0eb725662a9a9d2e31da09720e4cfb48"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-arc-extension-decode-002/001/receipt.json",
+      "sha256": "d18179bf242471436a1ea6960cb8f8f5584d15d24395a32372e8d8498006f4ab"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-arc-extension-decode-review-002/001/review.json",
+      "sha256": "f9ac60bf51f336d68db745e42fed5107da97929b583e4907f221d024c661a365"
+    },
+    "rejected_previous_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-arc-extension-decode-review-001/001/review.json",
+      "sha256": "8b3db321afead4d1ea74e978011792b384f3c3827091800f2103993df0c1ef4c"
+    }
+  },
+  "result": {
+    "mnemonic_ids": {
+      "0x30041c": "log2p0 (7/1)",
+      "0x30042e": "log2p1 (7/0)",
+      "0x30043c": "log2p0 (7/1)",
+      "0x300440": "unnamed (7/12)"
+    },
+    "exact_operands_known": false,
+    "exact_effects_known": false
+  },
+  "limits": [
+    "Repo-local declarations support mnemonic IDs for three words but not exact operands, effects, zero or flag behavior.",
+    "GNU raw decode lacks an EM9305 extension map; Rizin generic output is not authoritative.",
+    "External NVM selection and hardware boot remain conditional.",
+    "No canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

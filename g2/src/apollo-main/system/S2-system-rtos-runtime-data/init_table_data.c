@@ -6,39 +6,39 @@
  *
  * Records decoded from the stock image (VA = file offset + 0x437fe0); each
  * function is resolved by address to its linked g2/src definition. Three
- * functions (0x47ee60, 0x5bf9f6, 0x50af86) have no g2/src definition or TSV
- * row yet and are referenced by provisional g2_init_entry_<addr> names. */
+ * functions (0x47ee60, 0x5bf9f6, 0x50af86) are linked through the manifest's
+ * g2_init_entry_<addr> aliases to the RTC, logger, and news FIFO C providers. */
 #include <stdint.h>
 
 typedef struct {
-    void (*fn)(void);   /* +0x0 */
+    int32_t (*fn)(void); /* +0x0: status is ignored by the runner */
     int32_t priority;   /* +0x4 */
 } g2_init_entry_t;
 _Static_assert(sizeof(g2_init_entry_t) == 8u, "init table record");
 
-void audio_file_redirect_init_474d9c(void); /* 0x474d9c */
-void audio_file_tlsf_pool_init_5eda64(void); /* 0x5eda64 */
-void board_init_5093ac(void); /* 0x5093ac */
-void board_init_5cdd14(void); /* 0x5cdd14 */
-void board_power_init_5093d4(void); /* 0x5093d4 */
-void g2_init_entry_47ee60(void); /* 0x47ee60 */
-void g2_init_entry_50af86(void); /* 0x50af86 */
-void g2_init_entry_5bf9f6(void); /* 0x5bf9f6 */
-void kvdbAlsScaleDefaultInitialize(void); /* 0x4aeca4 */
-void kvdbRingDefaultInitialize(void); /* 0x5d9b6c */
-void kvdbSettingDefaultInitialize(void); /* 0x4aeb20 */
-void kvdbTemperatureUnitDefaultInitialize(void); /* 0x49b014 */
-void kvdbTerminalModeDefaultInitialize(void); /* 0x4b03e0 */
-void kvdbTimeDefaultInitialize(void); /* 0x585618 */
-void kvdbTimeFormatDefaultInitialize(void); /* 0x49ae90 */
-void kvdbUniversalSettingDefaultInitialize(void); /* 0x49ad0c */
-void nvdbAdvMagicDefaultCrcInitialize(void); /* 0x5d9ed0 */
-void nvdbBuzzerDefaultCrcInitialize(void); /* 0x58f9d4 */
-void nvdbMacDefaultInitialize(void); /* 0x5d9f48 */
-void nvdbSensorCaldataAgDefaultInitialize(void); /* 0x509984 */
-void nvdbSensorCaldataDefaultInitialize(void); /* 0x509764 */
-void nvdbSysDtDefaultInitialize(void); /* 0x4aee28 */
-void productModeDefaultCrcInitialize(void); /* 0x4abd90 */
+int32_t audio_file_redirect_init_474d9c(void); /* 0x474d9c */
+int32_t audio_file_tlsf_pool_init_5eda64(void); /* 0x5eda64 */
+int32_t board_init_5093ac(void); /* 0x5093ac */
+int32_t board_init_5cdd14(void); /* 0x5cdd14 */
+int32_t board_power_init_5093d4(void); /* 0x5093d4 */
+int32_t g2_init_entry_47ee60(void); /* 0x47ee60 */
+int32_t g2_init_entry_50af86(void); /* 0x50af86 */
+int32_t g2_init_entry_5bf9f6(void); /* 0x5bf9f6 */
+int32_t kvdbAlsScaleDefaultInitialize(void); /* 0x4aeca4 */
+int32_t kvdbRingDefaultInitialize(void); /* 0x5d9b6c */
+int32_t kvdbSettingDefaultInitialize(void); /* 0x4aeb20 */
+int32_t kvdbTemperatureUnitDefaultInitialize(void); /* 0x49b014 */
+int32_t kvdbTerminalModeDefaultInitialize(void); /* 0x4b03e0 */
+int32_t kvdbTimeDefaultInitialize(void); /* 0x585618 */
+int32_t kvdbTimeFormatDefaultInitialize(void); /* 0x49ae90 */
+int32_t kvdbUniversalSettingDefaultInitialize(void); /* 0x49ad0c */
+int32_t nvdbAdvMagicDefaultCrcInitialize(void); /* 0x5d9ed0 */
+int32_t nvdbBuzzerDefaultCrcInitialize(void); /* 0x58f9d4 */
+int32_t nvdbMacDefaultInitialize(void); /* 0x5d9f48 */
+int32_t nvdbSensorCaldataAgDefaultInitialize(void); /* 0x509984 */
+int32_t nvdbSensorCaldataDefaultInitialize(void); /* 0x509764 */
+int32_t nvdbSysDtDefaultInitialize(void); /* 0x4aee28 */
+int32_t productModeDefaultCrcInitialize(void); /* 0x4abd90 */
 
 /* ROM 0x6d1e0c */
 const g2_init_entry_t g2_init_table_start_6d1e0c[23] __attribute__((aligned(4))) = {

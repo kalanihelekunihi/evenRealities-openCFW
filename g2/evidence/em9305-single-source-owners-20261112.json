@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "scope": "G2 EM9305 duplicate native-address implementations",
+  "stock_disassembly": "g2/research/corpus/em9305/objdump/open-2026-09-29/em9305-0x302400-0x335BC8.s",
+  "resolved_addresses": [
+    {
+      "address": "0x317498",
+      "stock_span": "0x317498..0x3174d6",
+      "owner": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_product_buffers.c",
+      "removed": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_dispatch_child_317498.c",
+      "reason": "The removed function had no callers; the retained function preserves the second memset return and its native-address callers."
+    },
+    {
+      "address": "0x3245ec",
+      "stock_span": "0x3245ec..0x324628",
+      "owner": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_callback_3245ec.c",
+      "removed_symbol": "opencfw_em9305_radio_encode_3245ec",
+      "removed_from": "g2/src/em9305/qpc-scheduler/controller_init.c",
+      "reason": "The removed function had no callers; the retained callback is installed at 0x805c9c and preserves the stock five-byte header store order."
+    },
+    {
+      "address": "0x3027f4",
+      "stock_span": "0x3027f4..0x30281e",
+      "owner": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_3027f4.c",
+      "removed_symbol": "opencfw_em9305_radio_shift_3027f4",
+      "removed_from": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_secondary_channel_324c68.c",
+      "reason": "All source call sites now use one (low, high, count) declaration and implementation. Stock caller 0x325854 loads low into R0 and high into R1 before the call."
+    },
+    {
+      "address": "0x310230",
+      "stock_span": "0x310230..0x310260",
+      "owner": "g2/src/em9305/qpc-scheduler/controller_init.c:opencfw_em9305_ll_signed_clamp_310230",
+      "removed_symbol": "opencfw_em9305_command_radio_power_310230",
+      "removed_from": "g2/src/em9305/qpc-scheduler/controller_init.c",
+      "reason": "Both bodies made the same signed radio-power clamp; the removed wrapper ignored its second parameter. Its callers now use the retained one-argument body."
+    }
+  ],
+  "validation": {
+    "manifest_check": "make -C g2 sources-check: 4885 units, 4546 source files, 1 not built",
+    "full_g2_compile_after_first_removal": {
+      "report": "build/g2-em9305-single-317498-full-20261112/report.json",
+      "compiled_units": 4880,
+      "failed_units": 0,
+      "duplicate_strong_symbols": 0,
+      "composed_payload_groups": 7
+    },
+    "focused_em9305_compile_after_all_changes": {
+      "report": "build/g2-em9305-single-owners-power-final-20261112/report.json",
+      "compiled_units": 774,
+      "failed_units": 0,
+      "duplicate_strong_symbols": 0,
+      "composed_unresolved_symbols": 9,
+      "compose_returncode": 0
+    },
+    "focused_em9305_link": {
+      "report": "build/g2-em9305-single-owners-power-final-link-20261112/link-report.json",
+      "linked_elf_symbols": [
+        "opencfw_em9305_child_3027f4",
+        "opencfw_em9305_init_child_317498",
+        "opencfw_em9305_init_callback_3245ec",
+        "opencfw_em9305_ll_signed_clamp_310230"
+      ],
+      "binary_bytes": 246932,
+      "binary_sha256": "28bcd247d8e263c525c43232caad8d39498e996da050832e7fde84b980a52890",
+      "source_package_bytes": 248264,
+      "source_package_sha256": "b9b84007c6a927d8d45be163141b68613a6f683d8de55877980f5fca2d64c36e",
+      "external_binary_archive_used": false,
+      "source_completeness_proven": false
+    },
+    "previous_source_package": {
+      "report": "build/g2-kws-c-weights-final-bundle-20261112/link-report.json",
+      "bytes": 248436,
+      "sha256": "fc1946b254a3597a9373d3135e35de7c2a26efad36804cb234195d0d0c39e62e"
+    },
+    "official_em9305_image": {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+      "bytes": 211948,
+      "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9"
+    }
+  },
+  "qualification": "Single source ownership and C compilation/linkage are established for the four affected stock addresses. Stock byte identity, complete source ownership, hardware behavior, and G2 workflow gates G2-G6 remain unproven."
+}

@@ -24,7 +24,8 @@ def functions(path, include_objects=False):
     if data[:6] != b'\x7fELF\x01\x01':
         raise ValueError('requires little-endian ELF32')
     header = struct.unpack_from('<16sHHIIIIIHHHHHH', data)
-    if header[2] != 40: raise ValueError('requires ARM ELF machine')
+    machine = header[2]
+    if machine not in (40, 195, 252): raise ValueError('requires ARM, ARC, or C-SKY ELF machine')
     sections = [struct.unpack_from('<IIIIIIIIII', data, header[6] + i*header[11]) for i in range(header[12])]
     def content(s): return data[s[4]:s[4]+s[5]]
     def string(table, offset): return table[offset:].split(b'\0', 1)[0].decode()
@@ -37,7 +38,7 @@ def functions(path, include_objects=False):
         for offset in range(table[4], table[4]+table[5], table[9]):
             name,value,size,info,other,index = struct.unpack_from('<IIIBBH',data,offset)
             label=string(strings,name)
-            if label.startswith(('$t','$a','$d')) and index < len(sections):
+            if machine == 40 and label.startswith(('$t','$a','$d')) and index < len(sections):
                 mappings.setdefault(index,[]).append(((value & ~1)-sections[index][3], 'data' if label.startswith('$d') else 'code'))
     for table in sections:
         if table[1] != 2: continue
@@ -48,7 +49,7 @@ def functions(path, include_objects=False):
             if symbol_type not in ((1,2) if include_objects else (2,)) or index == 0 or index >= len(sections) or not size: continue
             section = sections[index]
             if section[1]==8:continue  # BSS has no stored provider bytes.
-            native_value=(value & ~1) if symbol_type==2 else value
+            native_value=(value & ~1) if machine == 40 and symbol_type==2 else value
             lo = native_value - section[3]
             relocations = []
             relocation_symbols = []
@@ -79,7 +80,7 @@ def functions(path, include_objects=False):
             for left,right in zip(points,points[1:]):
                 kind='data' if symbol_type==1 and not section[2]&4 else next((k for a,k in reversed(markers) if a<=left),'unknown')
                 parts.append(dict(start=left-lo,end=right-lo,kind=kind))
-            result.append(dict(content_ranges=parts, symbol=string(strings, name), section=string(names, section[0]),
+            result.append(dict(machine=machine, content_ranges=parts, symbol=string(strings, name), section=string(names, section[0]),
                                symbol_kind='data' if symbol_type==1 else 'function', writable=bool(section[2]&1), address=native_value, size=size, data=content(section)[lo:lo+size], relocations=relocations,
                                relocation_symbols=relocation_symbols, relocation_records=relocation_records,
                                executable=bool(section[2] & 4)))
@@ -145,8 +146,12 @@ def build_selected(plan, stage, devices):
                     raise ValueError('selected provider has unqualified relocations')
                 data, link_command = link_function(directory/'unit.o', function, item['address'],
                                                     item['bindings'], directory/('link-'+provider_name))
+                linker = (ROOT/'vendor-cache/g2/csky-abiv2-gcc-6.3/bin/csky-abiv2-elf-ld'
+                          if function['machine'] == 252 else
+                          ROOT/'vendor-cache/g2/arc-gnu-2026.03/toolchain/arc_gnu_prebuilt_elf32_le_linux_install/arc-multilib-elf32/bin/arc-elf32-ld'
+                          if function['machine'] == 195 else Path(shutil.which(link_command[0])))
                 receipt.setdefault('links', []).append(dict(argv=link_command,
-                    linker_sha256=sha(shutil.which(link_command[0])),
+                    linker=str(linker), linker_sha256=sha(linker),
                     layout_sha256=sha(directory/('link-'+provider_name)/'layout.ld')))
             if hashlib.sha256(data).hexdigest() != item['sha256']:
                 raise ValueError('selected source bytes changed: '+item['symbol'])
@@ -164,6 +169,12 @@ def build_selected(plan, stage, devices):
 
 def link_function(obj, function, start_address, bindings, directory):
     """Link one function section using recorded stock symbol bindings only."""
+    if function['machine'] == 252:
+        return link_csky_function(obj, function, start_address, bindings, directory)
+    if function['machine'] == 195:
+        return link_arc_function(obj, function, start_address, bindings, directory)
+    if function['machine'] != 40:
+        raise ValueError('unsupported isolated relocation architecture')
     # A function sharing .text with other bodies cannot be isolated by this path.
     if not function['section'].startswith('.text.'):
         raise ValueError('function has no isolated text section')
@@ -208,3 +219,89 @@ def link_function(obj, function, start_address, bindings, directory):
     if result is None or result['relocations'] or result['size'] != function['size'] or result['address'] != start_address:
         raise ValueError('linked function shape changed')
     return result['data'], command
+
+
+def link_csky_function(obj, function, start_address, bindings, directory):
+    """Resolve only isolated C-SKY call relocations to proven stock callees."""
+    if function['machine'] != 252 or not function['section'].startswith('.text.'):
+        raise ValueError('C-SKY function lacks an isolated text section')
+    if any(record['type'] != 19 or record['symbol'] not in bindings
+           for record in function['relocation_records']):
+        raise ValueError('C-SKY provider has an unsupported or unbound relocation')
+    if any(not isinstance(address, int) or address < 0x10000000 or address >= 0x10010000
+           for address in bindings.values()):
+        raise ValueError('C-SKY callee binding is outside the UART virtual image')
+    sharing = [candidate for candidate in functions(obj)
+               if candidate['section'] == function['section']]
+    if len(sharing) != 1 or sharing[0]['symbol'] != function['symbol']:
+        raise ValueError('C-SKY function section is not isolated')
+    directory.mkdir(parents=True, exist_ok=True)
+    script = directory/'layout.ld'
+    script.write_text(f'SECTIONS {{ .provider 0x{start_address:x} : '
+                      f'{{ *({function["section"]}) }} /DISCARD/ : {{ *(*) }} }}\n')
+    tool = (ROOT/'vendor-cache/g2/csky-abiv2-gcc-6.3').resolve()
+    linker = tool/'bin/csky-abiv2-elf-ld'
+    if not linker.is_file():
+        raise ValueError('C-SKY linker is unavailable')
+    elf = directory/'provider.elf'
+    command = ['docker', 'run', '--rm', '--network=none', '--platform', 'linux/amd64',
+               '--mount', f'type=bind,src={tool},dst=/tool,readonly',
+               '--mount', f'type=bind,src={Path(obj).parent.resolve()},dst=/input,readonly',
+               '--mount', f'type=bind,src={directory.resolve()},dst=/output',
+               '--entrypoint', '/tool/bin/csky-abiv2-elf-ld', 'ubuntu:24.04',
+               '-T', '/output/layout.ld', '-o', '/output/provider.elf',
+               f'/input/{Path(obj).name}',
+               *[f'--defsym={name}=0x{address:x}' for name,address in sorted(bindings.items())]]
+    process = subprocess.run(command, capture_output=True, text=True)
+    (directory/'link.log').write_text(process.stdout+process.stderr)
+    if process.returncode:
+        raise ValueError('C-SKY stock bindings do not close isolated function link')
+    result = [f for f in functions(elf) if f['symbol'] == function['symbol']]
+    if (len(result) != 1 or result[0]['relocations'] or result[0]['size'] != function['size']
+            or result[0]['address'] != start_address):
+        raise ValueError('C-SKY linked function shape changed')
+    return result[0]['data'], command
+
+
+def link_arc_function(obj, function, start_address, bindings, directory):
+    """Resolve isolated ARC calls and code pointers against inventoried entries."""
+    if function['machine'] != 195 or not function['section'].startswith('.text.'):
+        raise ValueError('ARC function lacks an isolated text section')
+    if any(record['type'] not in (16, 17, 27) or record['weak_undefined'] or
+           record['symbol'] not in bindings for record in function['relocation_records']):
+        raise ValueError('ARC provider has an unsupported or unbound relocation')
+    if any(not isinstance(address, int) or address < 0x302400 or address >= 0x335bc8
+           for address in bindings.values()):
+        raise ValueError('ARC binding is outside the inventoried record-3 image')
+    sharing = [candidate for candidate in functions(obj)
+               if candidate['section'] == function['section']]
+    if len(sharing) != 1 or sharing[0]['symbol'] != function['symbol']:
+        raise ValueError('ARC function section is not isolated')
+    directory.mkdir(parents=True, exist_ok=True)
+    script = directory/'layout.ld'
+    script.write_text(f'SECTIONS {{ .provider 0x{start_address:x} : '
+                      f'{{ *({function["section"]}) }} /DISCARD/ : {{ *(*) }} }}\n')
+    tool = (ROOT/'vendor-cache/g2/arc-gnu-2026.03/toolchain/'
+            'arc_gnu_prebuilt_elf32_le_linux_install/arc-multilib-elf32').resolve()
+    linker = tool/'bin/arc-elf32-ld'
+    if not linker.is_file():
+        raise ValueError('ARC linker is unavailable')
+    elf = directory/'provider.elf'
+    command = ['docker', 'run', '--rm', '--network=none', '--platform', 'linux/amd64',
+               '--mount', f'type=bind,src={tool},dst=/tool,readonly',
+               '--mount', f'type=bind,src={Path(obj).parent.resolve()},dst=/input,readonly',
+               '--mount', f'type=bind,src={directory.resolve()},dst=/output',
+               '--entrypoint', '/tool/bin/arc-elf32-ld',
+               'opencfw/iar-base:10.10.2-local',
+               '-T', '/output/layout.ld', '-o', '/output/provider.elf',
+               f'/input/{Path(obj).name}',
+               *[f'--defsym={name}=0x{address:x}' for name,address in sorted(bindings.items())]]
+    process = subprocess.run(command, capture_output=True, text=True)
+    (directory/'link.log').write_text(process.stdout+process.stderr)
+    if process.returncode:
+        raise ValueError('ARC stock bindings do not close isolated function link')
+    result = [f for f in functions(elf) if f['symbol'] == function['symbol']]
+    if (len(result) != 1 or result[0]['relocations'] or result[0]['size'] != function['size']
+            or result[0]['address'] != start_address):
+        raise ValueError('ARC linked function shape changed')
+    return result[0]['data'], command

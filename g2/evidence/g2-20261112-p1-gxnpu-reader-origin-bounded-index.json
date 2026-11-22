@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Locked GXNPU source-offset and reader-callback route, bounded to instruction-backed conditional software requests",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-reader-callback-origin-001/001/audit.py",
+      "sha256": "09e26fa51b36703896dbc92f25031e9bfacb9002a476f2f28b7cb25fd863c1f1"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-reader-callback-origin-001/001/report.json",
+      "sha256": "36fbb4ef6744aaaba4bc404998f295d14809ef49b7c61f54c87ea1819a265a27"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-reader-callback-origin-001/001/receipt.json",
+      "sha256": "f04f4df423bfcc07cdbbf63703472236e8c89b10a4d66978c6638fe754c14aba"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-reader-origin-independent-review-001/001/review.py",
+      "sha256": "70ec7f6105f6ad45a46ad0e57a7eb2d81fbdb4091f97ec0fae74078f03d1611f"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-reader-origin-independent-review-001/001/review.json",
+      "sha256": "b27a6c8a1b5c52c495a9b09a621da967f01c41c5d7cdfdfea65392bde8198021"
+    }
+  },
+  "result": {
+    "verdict": "PASS_WITH_LIMITS",
+    "command_source_offset": "0x0000f804",
+    "command_length": 9164,
+    "weights_source_offset": "0x00011bd0",
+    "weights_length": 120800,
+    "candidate_reader_handle_producer": "XIP 0x6d26 -> SRAM 0x1002475c",
+    "read_dispatch": "SRAM 0x100247b8 invokes callback at handle+4",
+    "corrected_later_helper": "XIP 0x8c14 copies 32 bytes of context after both reads; it does not produce the handle",
+    "g1_mapping": "unresolved"
+  },
+  "limits": [
+    "Source offsets and sizes match the locked command and weight child spans only under the candidate parent-origin mapping.",
+    "The callback target, source aperture, successful transfers and destination readback are not established.",
+    "The candidate C-SKY cross-image disassembly requires P2 processor qualification; accelerator task binding and execution remain unproved.",
+    "No canonical admission or G1/G2 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

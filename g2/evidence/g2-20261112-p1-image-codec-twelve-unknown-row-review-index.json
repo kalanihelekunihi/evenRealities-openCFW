@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded accounting and structural audit of 12 codec image unknown rows",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-codec-unknown-workpack-001/001/review.py",
+      "sha256": "7de5c04f07ba1618380837ce04725a02e163f33985640adfe531a1ebd84931a1"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-codec-unknown-workpack-001/001/review.json",
+      "sha256": "098f1b629042865b23bd36921ab694b0d9700f2011ee93e2385a06221137a25a"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-codec-unknown-workpack-001/001/receipt.json",
+      "sha256": "f7f041377da5ac1618f2609d9fa37d37ac1d7f594479e43dd2ec8a5a08e6d34c"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-codec-unknown-independent-review-001/001/review.json",
+      "sha256": "a9c8fc36e2aeaaa8b7676003195fa446225e7e6a7a87cba01591a9859db6d4d1"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-codec-unknown-independent-review-001/001/review.py",
+      "sha256": "7ff76780692b1bb110e924976a666a9168ed733ca7120c70eb796eb02ef22305"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-codec-unknown-independent-review-001/001/receipt.json",
+      "sha256": "cdb385f60c2c5422a6b9eceea349b0ffb441f9e9a59770c5ba21afca5401e026"
+    }
+  },
+  "result": {
+    "selected_unknown_image_rows": 12,
+    "bounded_reviewed_rows": 12,
+    "unknowns_promoted": 0,
+    "canonical_review_ids_assigned": 0,
+    "gxnpu_command_records_structurally_checked": 212
+  },
+  "limits": [
+    "Finer code/data subledgers are P2 work unless a specific source, destination, mapping, guard or image discovery gap blocks G1.",
+    "No canonical admission, authenticated registry, or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

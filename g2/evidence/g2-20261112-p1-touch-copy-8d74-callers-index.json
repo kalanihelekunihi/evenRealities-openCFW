@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded direct-caller provenance for touch 0x8D74 stack copy",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-8d74-callers-001/003/audit.py",
+      "sha256": "47509c7bd5d4d3c43a9b03be1879ec0e6cccb122555a93f0de2bfe8a1bbb5768"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-8d74-callers-001/003/report.json",
+      "sha256": "139857ada2394d5a9bf9b32af7535a8062537cfa4f80d45476ac68fd623e254f"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-8d74-callers-001/003/receipt.json",
+      "sha256": "ed332f223e1685e753a8c87028d64a43748e71f442f30c38d04775cd6705c8a5"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-8d74-callers-review-002/001/review.json",
+      "sha256": "fded24222d0ba739e33b38141a62ef52869684b3f33b5a291e851ac8cb7e5383"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-8d74-callers-review-002/001/receipt.json",
+      "sha256": "791b3b2c764e92ca518f35ec84c6178c9ec3860024ccbc5f4f2f3fa7128aee42"
+    },
+    "current_upstream_origin": {
+      "path": "g2/evidence/g2-20261112-p1-touch-param2-origin-index.json",
+      "sha256": "4dc5fc6d88cc5a07c9b442e59fd13d16507669f358ea1faaf7c98b561f3ebd7e"
+    }
+  },
+  "result": {
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS",
+    "direct_callers_to_0x8d50": ["0x47e6", "0x483a"],
+    "zero_route": "0x47E6 passes a 512-byte zero-filled caller stack buffer",
+    "dynamic_route": "0x483A passes incoming r3 through r5; observed upstream routes stage runtime or EEPROM-derived content in RAM/stack",
+    "local_copy": "0x8D74 copies 128 bytes to its own stack buffer after a nonzero-source guard"
+  },
+  "limits": [
+    "The ultimate dynamic input, indirect calls, and later uses of staged bytes remain open.",
+    "No fixed firmware-flash source interval, nested-image exclusion, whole-image CFG or canonical inventory admission is established."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded case writer and historical direct-callee census audit",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-writer-lookup-g1-closure-001/001/audit.py",
+      "sha256": "976132926c0fac2db993ec47fb4d325a474964ee275ba583cee43dd2a55f6a7f"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-writer-lookup-g1-closure-001/001/report.json",
+      "sha256": "48dd35372eb9ea3909d1f54fa75a19b535bb6102a946aabc179cd8b35914f0af"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-writer-lookup-g1-closure-001/001/receipt.json",
+      "sha256": "c5bc5427d8d6b43c673a7dd17248fe1f78f05b55d42c4ec65afd525f58187c4e"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-writer-lookup-g1-independent-review-001/001/review.py",
+      "sha256": "9ef5582a0f26fae05072b0233cad80d3e2d3be8206f997b7255d1110efecc5dd"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-writer-lookup-g1-independent-review-001/001/review.json",
+      "sha256": "f1b13cd431bccf5f46459c3961673b4acced6b7ec1805e31e05c37a7092f3598"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-writer-lookup-g1-independent-review-001/001/receipt.json",
+      "sha256": "f5bb80ed9b73d810fb3f9b96083ac3f8579c819f19e5b4505a758972c620b734"
+    }
+  },
+  "result": {
+    "case_raw_bytes": 55752,
+    "historical_census_functions": 435,
+    "recorded_direct_callers_to_08002e04": 1,
+    "whole_image_discovery_closed": false
+  },
+  "limits": [
+    "Direct-callee census is not a lookup-consumer or indirect reference census.",
+    "Runtime UART source, lookup bounds and other writers remain open.",
+    "No canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

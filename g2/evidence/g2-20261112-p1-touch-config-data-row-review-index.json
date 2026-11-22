@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded data classification for touch payload [0x81e4,0x821c)",
+  "artifacts": {
+    "review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-007/001/review.py",
+      "sha256": "112f908057b1644d06afd817db0e5852ecbf421d5a5da94182790363779df311"
+    },
+    "review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-007/001/review.json",
+      "sha256": "7428f641f96165667194224c2e3ad03315e46877d3b500a7f044bbe0f74bf1bb"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-007/001/receipt.json",
+      "sha256": "3a0d34fc49a9042089281a93930442318f7edd7839cc7c269a8355c2ee2a903d"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-007-independent-review-001/001/review.py",
+      "sha256": "27f8e8f176f4e9ecad76543086353a96ba6c0ecbd81672e5c22f0d4e7aa0081f"
+    },
+    "independent_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-007-independent-review-001/001/review.json",
+      "sha256": "130cee950ea69999f15b2980781c04de00d1ba27333e9f9a8a5d1b8c1b3ef46e"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-007-independent-review-001/001/receipt.json",
+      "sha256": "76108c4bae0e9c1f1137f4765d89b5a2181c26d0a7b6a0bfbebb94ea6f277bad"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "row_id": "touch:000081e4:0000821c",
+    "length": 56,
+    "classification": "bounded pin-function configuration data",
+    "validator_trusted_review_id_assigned": false
+  },
+  "limits": [
+    "Destination aliasing, later selector writes, indirect callers, and global control flow remain open.",
+    "No authenticated reviewer registry, canonical admission, or G1 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

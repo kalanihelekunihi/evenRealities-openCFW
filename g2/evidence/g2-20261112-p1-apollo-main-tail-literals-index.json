@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed three directly referenced Apollo main literal words following FUN_0045adf4.",
+  "artifacts": {
+    "audit_script": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-tail-literals-001/001/audit.py", "sha256": "a3739e04428e0d64397c78edac321a43a2a5161bcf2ff6b0956231a49fe527d8"},
+    "audit_report": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-tail-literals-001/001/report.json", "sha256": "9b9833b9eea0f5c3e9bcee9767bd2f13e30288983a285d5a7dfd5749471c2aff"},
+    "audit_receipt": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-tail-literals-001/001/receipt.json", "sha256": "672e70c06bc9407bb623d8bd3ef1eb2b9b860cc0d7bd0ea61bf504e8ff180ffc"},
+    "independent_review": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-tail-literals-review-001/001/review.json", "sha256": "e413d92407366abf10a7afb4065ac4f33eedd6b88daf2057c8b89ff3cd9db5c9"}
+  },
+  "result": {
+    "preceding_function": "FUN_0045adf4 ends at runtime 0x45B0F2",
+    "unknown_full_ota_file_span": [143634, 143636],
+    "unknown_runtime_span": ["0x45b0f2", "0x45b0f4"],
+    "reviewed_data_full_ota_file_span": [143636, 143648],
+    "reviewed_data_post_preamble_raw_span": [143604, 143616],
+    "reviewed_data_runtime_span": ["0x45b0f4", "0x45b100"],
+    "literal_words": ["0x20075024", "0x00765790", "0x00705fb8"],
+    "direct_ldr_w_reference_counts": [4, 3, 18]
+  },
+  "limits": ["The leading zero halfword remains unknown; no padding or non-use proof.", "No complete main image or G1 claim."],
+  "status": {"canonical_admission": "none", "g1": "not_run"}
+}

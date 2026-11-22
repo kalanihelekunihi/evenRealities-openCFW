@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Reviewed noncanonical P1 coverage revisions 005 and 006: Apollo boot derived ITCM/zero output and exact touch pin-function configuration data.",
+  "predecessor_case_coverage_index": {
+    "path": "g2/evidence/g2-20261112-p1-case-literal-coverage-index.json",
+    "sha256": "f751419466a604a25e9c6e0fbac11fbc129289e9a2969deaddc5fadbee0e64a1"
+  },
+  "artifacts": {
+    "coverage_draft_005": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-005/001/coverage-draft.jsonl",
+      "sha256": "c19aaf9d354267f4dfef2d84a1bf126ff3305ad55f532f049d45208e5fb00ac8"
+    },
+    "coverage_receipt_005": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-005/001/receipt.json",
+      "sha256": "ed5433c04626314b284d1eac466dd5924417da1245e838ae37f37183df07dcd4"
+    },
+    "apollo_boot_delta_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-coverage-delta-review-001/001/review.json",
+      "sha256": "0489503cc59cc98cbdd51ed73efb97570747fc1b1e7f59a03b5ab7d79bba4b24"
+    },
+    "coverage_draft_006": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-006/001/coverage-draft.jsonl",
+      "sha256": "d75f15aadfa73c98696b3841271f4bdf4bbc02c072d450b5fa02e845e1df64be"
+    },
+    "coverage_receipt_006": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-006/001/receipt.json",
+      "sha256": "2be00ba40c877253dfd3046d8456a42fdc904f1c08e6cb1473c042ca06dadcdc"
+    },
+    "touch_delta_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-coverage-delta-review-001/001/review.json",
+      "sha256": "57b1b2215b63e2b6454398153fd10bdab5ba0f2981ad2c1f12cf83eb8745bb0e"
+    },
+    "apollo_boot_interior_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-boot-interior-index.json",
+      "sha256": "91951dd2b14399a2b85114c24b586e2297d35921e33216f99d623fcc02f743f1"
+    },
+    "touch_copy_callsite_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-copy-callsites-index.json",
+      "sha256": "ce5efcf53d0370f40ec438a04b3e1726c46f820309f7db22159638880d35e0c7"
+    }
+  },
+  "classifications": [
+    {
+      "scope": "apollo_bootloader:decoded:00000040",
+      "kind": "code",
+      "bytes": 24
+    },
+    {
+      "scope": "apollo_bootloader:decoded:20080000",
+      "kind": "data",
+      "bytes": 4096
+    },
+    {
+      "scope": "touch payload",
+      "kind": "data",
+      "span": [
+        33252,
+        33308
+      ],
+      "bytes": 56
+    },
+    {
+      "scope": "touch:flash",
+      "kind": "data",
+      "span": [
+        33220,
+        33276
+      ],
+      "bytes": 56
+    }
+  ],
+  "counts": {
+    "coverage_rows": 83,
+    "coverage_scopes": 40,
+    "unknown_payload_bytes": 4179003,
+    "unknown_image_bytes": 5673653
+  },
+  "limits": [
+    "Classification is bounded to exact derived outputs and 56 stock touch data bytes.",
+    "Apollo DTCM output, touch caller dataflow, most source bytes and all unresolved discovery routes remain open.",
+    "No canonical G1 admission or G2 coverage claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

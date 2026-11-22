@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded scan of flash-range address words in decoded Apollo bootloader DTCM startup output against the historical function census",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-dtcm-code-pointers-001/001/audit.py",
+      "sha256": "b155fd7043f59de3b591a8820d2f5ff603ea3440c67005db51354f70ec7846f9"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-dtcm-code-pointers-001/001/report.json",
+      "sha256": "d67c59762031b68ed1256fcd40435f632b6a927c12bb2eae87439d8390dc4141"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-dtcm-code-pointers-001/001/receipt.json",
+      "sha256": "784dfa25236a289a2f3b27a0fd20f81e4d5dae4959397955b56a160e0ac16a6c"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-dtcm-code-pointers-review-001/001/review.json",
+      "sha256": "c41a29e87d0842198ab7afdca3bbad66575c1b76f6e9d356c1fb3b6c1ad78c7e"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-dtcm-code-pointers-review-001/001/receipt.json",
+      "sha256": "948ddfa79df4c754300ab5c5b630b60ea92a9e0bea83f9bfa671b789bb3eeaa8"
+    }
+  },
+  "result": {
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS",
+    "decoded_dtcm_bytes": 1371,
+    "aligned_words_scanned": 342,
+    "flash_range_address_words": 63,
+    "odd_thumb_address_leads": 34,
+    "odd_exact_historical_census_entries": 29,
+    "even_flash_address_leads": 29,
+    "uncensused_odd_targets": ["0x428920", "0x429e00", "0x42a030", "0x42a032", "0x42a034"],
+    "target_head_observation": "The first two start with Thumb push/stmdb prologues; the last three are consecutive two-byte bx lr leaves. All five are outside historical census ranges."
+  },
+  "limits": [
+    "Odd flash-range words are code-pointer leads, not automatically admitted code or exhaustive references.",
+    "Full body boundaries for 0x428920 and 0x429E00, consumer paths and the remaining decoded DTCM roles are unresolved.",
+    "No additional nested image, complete bootloader inventory, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

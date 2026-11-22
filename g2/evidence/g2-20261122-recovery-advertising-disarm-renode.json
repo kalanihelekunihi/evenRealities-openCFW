@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "title": "Early recovery arm made ship-safer by BLE advertising-enable disarm",
+  "scope": "Keep unconditional early arm; add first-party disarm at HciLeSetAdvEnableCmd(1). Rebuild Apollo-main. Version-match NOR paired Renode with CHIPREV=0x22 fixture. No hardware flash. Crash-loop gate left unwired.",
+  "choice": {
+    "selected": "also_disarm_at_ble_advertising_enable",
+    "rejected": "replace_early_arm_with_crash_loop_gate",
+    "reason": "The 2 Nov 2026 diagnosis and hook comments already recommended an advertising disarm so out-of-case temples do not stay armed. The first-party enable=1 sites and the sim path that emits HCI 010A200101 (audio_ble_dm_adv_start_4b9e88) are known. The crash-loop gate remains intentionally unwired: the bricked temples' reset signature was never captured, and an early hang may never increment a watchdog streak. Replacing the early arm with that gate would drop recovery for a hang that never reaches a WDT reset."
+  },
+  "source_edits": {
+    "self_recovery_c": {
+      "path": "g2/src/apollo-main/system/self-recovery/self_recovery.c",
+      "sha256": "997b76d12f2ecee2b78088dd7781850fee8d9646f92ebc9732c3c756f3ac985e",
+      "bytes": 9276,
+      "note": "Added g2_recovery_disarm_on_advertising() which calls g2_recovery_disarm_healthy() then g2_self_recovery_mark_healthy()."
+    },
+    "adv_start_undirected": {
+      "path": "g2/src/apollo-main/ble/ble-dm/display_ble_dm_adv_msg_4ba6ac.c",
+      "sha256": "49a4bf547a928af9b4a9ca52ad2a3cf8e95ee0bd76c1cbeb256956b6c086233f",
+      "bytes": 3499,
+      "note": "Call g2_recovery_disarm_on_advertising() immediately after HciLeSetAdvEnableCmd(1u) in audio_ble_dm_adv_start_4b9e88."
+    },
+    "adv_start_directed": {
+      "path": "g2/src/apollo-main/ble/ble-dm/display_ble_dm_adv_start_directed_4ba6d4_20261017.c",
+      "sha256": "76f5bb5a74694bef67b37510f473a218af4309ef011a7fadd51ce12b5804ce53",
+      "bytes": 3078,
+      "note": "Same call after HciLeSetAdvEnableCmd(1u) in the directed start. Upstream Cordio HciLeSetAdvEnableCmd was not edited."
+    },
+    "iar_cmain_comment": {
+      "path": "g2/src/apollo-main/runtime/C3-startup/iar_cmain.c",
+      "sha256": "3b432062384c3cfc6e3807799e0afcb737d14c38af8400186d6db70d61a415c1",
+      "bytes": 4497,
+      "note": "Comment only: disarm also happens when BLE advertising is enabled."
+    }
+  },
+  "build": {
+    "compile": {
+      "out": "build/g2-apollo-recovery-20261122",
+      "command": "python3 tools/build/sources.py build --device g2 --payload g2-apollo-main --out build/g2-apollo-recovery-20261122 --jobs 4",
+      "result": "g2-apollo-main: 2718/2718 compiled (0 known failures)",
+      "report_sha256": "ab41b59a33c1f9518247f05c5b1fd2bb356de353e823c4619ec10f42f77fbf74"
+    },
+    "link": {
+      "out": "build/g2-apollo-recovery-20261122-link",
+      "command": "python3 tools/build/link_g2_sources.py --source-out build/g2-apollo-recovery-20261122 --out build/g2-apollo-recovery-20261122-link --payload g2-apollo-main",
+      "bytes": 3818880,
+      "sha256": "9d7bcc5edf64a893c47dc49fb0f124fceea4598bf39aaaaca750df9ce4e3cac2",
+      "sp": "0x2007FB00",
+      "reset_pc": "0x0059404d",
+      "previous_diagnostic_bytes": 3818800,
+      "previous_diagnostic_sha256": "39d36f4c74dde972ee5669fa00f97f38b3465aea0379eae5667fd774c233f08a",
+      "previous_reset_pc": "0x00594005",
+      "size_delta_bytes": 80,
+      "symbols": {
+        "audio_ble_dm_adv_start_4b9e88": "0x00466ff8",
+        "audio_ble_dm_adv_start_directed_4ba6d4": "0x004670c8",
+        "g2_recovery_arm_early": "0x004c086c",
+        "g2_recovery_disarm_healthy": "0x004c08c4",
+        "g2_recovery_disarm_on_advertising": "0x004c08f8"
+      },
+      "elf_sha256": "197071712eac949dbc7c1feeb70cb39c1b67dec823a59cfe6845acd62761ddb3",
+      "link_report_sha256": "e59d209589bd63c085750b38c3e6853995d7d9480f1ced603ff2cf41011280db"
+    }
+  },
+  "inputs": {
+    "stock_app": {
+      "path": "build/em9305-nor-20261122/stock.app.bin",
+      "bytes": 3523364,
+      "sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+      "reset_pc": "0x005E4233",
+      "sp": "0x2007FB00"
+    },
+    "opencfw_app": {
+      "path": "build/g2-apollo-recovery-20261122-link/g2-apollo-main/g2-apollo-main.bin",
+      "copy": "build/em9305-nor-20261122/opencfw-recovery.app.bin",
+      "bytes": 3818880,
+      "sha256": "9d7bcc5edf64a893c47dc49fb0f124fceea4598bf39aaaaca750df9ce4e3cac2",
+      "reset_pc": "0x0059404d",
+      "sp": "0x2007FB00"
+    },
+    "itcm_overlay": {
+      "path": "build/em9305-nor-20261122/itcm.bin",
+      "bytes": 24,
+      "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+      "note": "Preloaded at 0x40 for both images."
+    },
+    "nor_with_em9305": {
+      "path": "build/em9305-nor-20261122/nor-with-em9305.bin",
+      "bytes": 33554432,
+      "sha256": "69efc6d023779beec9dada757ec9fe852f9454b4b84bae6fe8421c703f35c9d1",
+      "note": "Unchanged version-match NOR from the 5:55 AM CST experiment. Controller fixture remains bundled 4.4.2.0."
+    },
+    "chiprev_fixture": {
+      "address": "0x4002000C",
+      "value": "0x00000022",
+      "reason": "MCUCTRL Reset() zeroes CHIPREV. (rev & 0xff) < 0x22 skips g2_recovery_arm_early(), so the default sim cannot observe arm/disarm. Written after cpu Reset, before RunFor. Same fixture on stock and openCFW."
+    }
+  },
+  "runs": {
+    "stock-chiprev22": {
+      "resc": "build/em9305-nor-20261122/stock-chiprev22.resc",
+      "resc_sha256": "6b1e0de90c72871ed46fe4112e684ca66d4d59250a90dc8fce66dc23722c31c2",
+      "log": "build/em9305-nor-20261122/stock-chiprev22.log",
+      "log_sha256": "5f29e70cb3d88a18d83c358edf5d591ae44c74c0aa797cac965975b7bce7d909",
+      "hci_count": 56,
+      "advertising_enable": true,
+      "display_frame_count": 2,
+      "display_frame_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "end_pc": "0x44adfa",
+      "chiprev": {
+        "fixture": "0x00000022",
+        "after_0_01s": "0x00000022",
+        "after_8s": "0x00000022"
+      },
+      "otapointer": {
+        "before": "0x00000000",
+        "after_0_01s": "0x00000000",
+        "after_8s": "0x00000000"
+      },
+      "note": "Stock never writes the recovery key. CHIPREV=0x22 did not change HCI or frames versus the CHIPREV=0 version-match baseline."
+    },
+    "opencfw-chiprev22": {
+      "resc": "build/em9305-nor-20261122/opencfw-chiprev22.resc",
+      "resc_sha256": "e093fb4fac5d468b6119294b463ac5d51194b4debf4df7c955d33d7e334f305c",
+      "log": "build/em9305-nor-20261122/opencfw-chiprev22.log",
+      "log_sha256": "fdb25b51fad5e396431b6398ab82e982d7a43672abea08fd67095eae6473b191",
+      "hci_count": 56,
+      "advertising_enable": true,
+      "display_frame_count": 2,
+      "display_frame_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "end_pc": "0x5432f8",
+      "chiprev": {
+        "fixture": "0x00000022",
+        "after_0_01s": "0x00000022",
+        "after_8s": "0x00000022"
+      },
+      "otapointer": {
+        "before": "0x00000000",
+        "after_0_01s": "0xAFD1363A",
+        "after_8s": "0x00000000"
+      },
+      "hook_script_errors": "cpu AddHook and sysbus AddWatchpointHook Python snippets failed (sysbus/machine not in the hook namespace) and were logging-only. Two error pairs occurred: at the 0.01s arm window, and immediately before the trailing advertising HCI (01052006 ... 010A200101). Authoritative evidence is the OTAPOINTER peeks."
+    }
+  },
+  "findings": {
+    "hci_identical_stock_vs_opencfw_chiprev22": true,
+    "hci_identical_to_chiprev0_version_match_baseline": true,
+    "hci_count": 56,
+    "advertising": true,
+    "display_frame_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+    "display_frames_unchanged": true,
+    "chiprev_fixture_changed_hci_vs_baseline": false,
+    "end_pc": {
+      "stock": "0x44adfa",
+      "opencfw": "0x5432f8",
+      "note": "OpenCFW end PC moved 0x48 from the prior 0x5432b0, matching the 0x48 reset-PC layout shift from 0x00594005 to 0x0059404d."
+    },
+    "arm_observed": true,
+    "disarm_observed": true,
+    "stock_otapointer_stayed_zero": true,
+    "hardware_hang_reproduced": false,
+    "crash_loop_gate_wired": false,
+    "safe_to_flash_hardware": false
+  }
+}

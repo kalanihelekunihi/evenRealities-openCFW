@@ -2,7 +2,7 @@
  * Synthetic ARM32 offline contexts; LP count>0, coherent allocated slots. */
 #include "isr.h"
 #include "../mode/mode.h"
-#include "../scan-preparation/prepare.h"
+#include "../reset-layout/reset_capsense_context.h"
 static uint8_t *ptr(const uint8_t *c,unsigned n){return *(uint8_t *const *)(c+n);}
 static uint16_t u16(const uint8_t *c,unsigned n){return *(const uint16_t *)(c+n);}
 static volatile uint32_t *hardware(const uint8_t *c){return *(volatile uint32_t **)ptr(ptr(c,0),8);}
@@ -66,7 +66,6 @@ void touch_scan_isr(uint8_t *c){
   else{hw[0]&=0x7fffffffu;hw[0x144/4]=0x100u;*(uint16_t *)(common+4)=(uint16_t)(u16(common,4)+1u);touch_clear_busy(c);}
  }
 }
-uint32_t touch_prepare_scan_isr_bound(uint8_t *c){uint32_t status=touch_prepare_scan(c);*(void (**)(uint8_t *))(ptr(c,8)+16)=touch_scan_isr;return status;}
 /* Stock5fba/5c98 dispatch arguments are ignored except for context.
  * Callback must already be initialized; stock has no null guard. */
 /* Stock 0x00005FBA (touch_sub_2cba) */
@@ -76,4 +75,4 @@ void touch_interrupt_dispatch(uint32_t channel,uint8_t *c){
 /* Stock 0x00005C98 (touch_sub_2998) */
 void touch_msclp_interrupt(volatile uint32_t *block,uint8_t *c){(void)block;touch_interrupt_dispatch(0,c);}
 /* Stock 0x00003948 (touch_platform_0648_configure) */
-void touch_project_msclp_irq(void){touch_msclp_interrupt((volatile uint32_t *)0x40290000u,(uint8_t *)0x200004ecu);}
+void touch_project_msclp_irq(void){touch_msclp_interrupt((volatile uint32_t *)0x40290000u,(uint8_t *)&touch_reset_capsense_context);}

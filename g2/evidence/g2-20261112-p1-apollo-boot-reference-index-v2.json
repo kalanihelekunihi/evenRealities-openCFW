@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Bounded Apollo bootloader signature, vector heuristic and pointer-window discovery sweep; independently reproduced.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-reference-audit-001/001/audit.py",
+      "sha256": "d9940d9847afd139e12b2b6121c88593180296353ad4a69761f945b5358d3327"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-reference-audit-001/001/report.json",
+      "sha256": "bc7d86a13f68faf51b5da9b51d858200411219a57ed991080a86632db71723fd"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-reference-audit-001/001/receipt.json",
+      "sha256": "53656c1c43007a2e2844624c618e54ace5604bc4b3b8e2337a03a39e068cf5c5"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-reference-review-001/001/review.md",
+      "sha256": "8d03252092abb4990d30e00e9ce23e209b0245e8a04725637c6bdbd7113a6c4a"
+    },
+    "bounded_transform_replay_review": {
+      "path": "g2/evidence/g2-20261112-p1-boot-transform-review.json",
+      "sha256": "550dd528298f9c6a8ebdf935ecb0e42e564067c2943b07c7b468e02a3664945b"
+    },
+    "decoded_image_replay_index": {
+      "path": "g2/evidence/g2-20261112-p1-decoded-image-replay-index.json",
+      "sha256": "2127742282b8582a9915938773b3faf2bad66c23ec1bb79cdf412b4e3c186229"
+    }
+  },
+  "result": {
+    "payload_bytes": 148599,
+    "pointer_pattern_windows": 731,
+    "vector_heuristic_candidates": 15,
+    "additional_nested_image_established": false,
+    "startup_output_replay_reviewed_bounded": true,
+    "decoded_output_interior_classification_complete": false
+  },
+  "limits": [
+    "Pointer windows and vector heuristics are leads, not a code-reference census.",
+    "No code/data closure, transformed-image absence or G1 admission claim.",
+    "Three startup output bytes have bounded current-campaign replay review; parameter selection and decoded-output interior classification remain outside this sweep."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "revision": "002",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-boot-reference-index.json",
+    "sha256": "a6de02f716d31910db27459ae9a03fd2e2828711e53a2482cf8be189155e1618",
+    "correction": "Three startup output bytes have an existing independently reviewed bounded replay; decoded-output interior discovery remains open."
+  }
+}

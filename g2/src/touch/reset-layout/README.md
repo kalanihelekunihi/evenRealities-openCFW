@@ -1,5 +1,15 @@
 # Touch reset table source/layout candidate
 
+The current source-linked widget table points to the C-defined electrode
+array at indices 0, 4 and 8. The 72-byte array is retained in the touch
+image; its three widget pointers resolve to `0xA30C`, `0xA32C` and `0xA34C`.
+This relocation is recorded in
+[`touch-scan-and-electrode-source-relocation-20261111.json`](../../../evidence/touch-scan-and-electrode-source-relocation-20261111.json).
+The table's 12 RAM pointer fields now relocate to source-owned widget and
+sensor contexts, position history, and a bounded zeroed processing block.
+Their linked values match the locked records; see
+[`touch-widget-and-provider-ram-source-20261111.json`](../../../evidence/touch-widget-and-provider-ram-source-20261111.json).
+
 `reset_prefix.c` source-defines the bounded boot register write and interrupt
 mask at `0x4674..0x467e`; `reset_suffix.c` source-defines vector relocation
 and VTOR at `0x467e..0x4692`; `reset_tables.c` source-defines the word copy

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 022 narrowing codec GXNPU command and alternate destination route claims.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v21-index.json",
+    "sha256": "ebeedb58ce0554d5cb79e0aaf5892d54e51124513571a196cfaaa6d943b78182"
+  },
+  "artifacts": {
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/022/reproduce.py",
+      "sha256": "ebe4e6eea643f6442a3d20acc60817231a5b12c171658748d6767bed2c576c49"
+    },
+    "discovery_draft_022": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/022/discovery-draft.jsonl",
+      "sha256": "ea8016826180def680223558e2fbea50162e12355883d527557e1777dee1f772"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/022/receipt.json",
+      "sha256": "7efac1847c1ed71cf9ee259f7604d9312956100363261dc997e4223c747a5d58"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v22-review-001/001/review.json",
+      "sha256": "1c815c990b18ed8b87e0e857cc522bc586f68a38a7419e1bebd1db340dc5e486"
+    },
+    "gxnpu_command_index": {
+      "path": "g2/evidence/g2-20261112-p1-gxnpu-command-semantics-index.json",
+      "sha256": "499a2cb6fc6ff69502b649d23aff86653d43ec1e910971e29e59d6aa22cd21b4"
+    },
+    "codec_alias_index": {
+      "path": "g2/evidence/g2-20261112-p1-codec-alternate-destination-index.json",
+      "sha256": "eb5a7d54919cd7722c5aa5cd6dbc10c739bbf674f4ddec613f8df258c48ff085"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "Codec runtime alias/guards/XIP, weight internals and possible microcode remain open.",
+    "No canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -20,10 +20,11 @@ def validate_license_free(plan, recipes=None):
             compiler = argv[3]
             if unit.get('compiler_path') != compiler or not unit.get('compiler_sha256'):
                 raise ValueError('license-free GCC wrapper requires a fingerprinted compiler')
-            if Path(compiler).name != 'arm-none-eabi-gcc':
-                raise ValueError('license-free mode only admits Clang and ARM GNU GCC')
+            compiler_name = Path(compiler).name
+            if compiler_name not in ('arm-none-eabi-gcc', 'csky-abiv2-elf-gcc', 'arc-elf32-gcc'):
+                raise ValueError('license-free mode admits fingerprinted ARM, C-SKY, and ARC GNU GCC')
             command = None
-            family = 'gcc'
+            family = {'csky-abiv2-elf-gcc': 'csky-gcc', 'arc-elf32-gcc': 'arc-gcc'}.get(compiler_name, 'gcc')
         else:
             raise ValueError('unapproved compiler driver in license-free mode: '+str(argv[:3]))
         identity = unit.get('compiler_path',argv[0])
@@ -34,4 +35,4 @@ def validate_license_free(plan, recipes=None):
             tools[identity] = dict(family=family,version=version,sha256=unit.get('compiler_sha256'))
     linker=subprocess.run(['arm-none-eabi-ld','--version'],capture_output=True,text=True,check=True).stdout
     if 'GNU ld' not in linker:raise ValueError('license-free mode requires GNU ARM ld')
-    return dict(linker_version=linker,mode='license-free',compilers=tools,policy='Clang and fingerprinted ARM GNU GCC via the repository driver; no proprietary compiler invocation or activation.')
+    return dict(linker_version=linker,mode='license-free',compilers=tools,policy='Clang and fingerprinted ARM/C-SKY/ARC GNU GCC via the repository driver; no proprietary compiler invocation or activation.')

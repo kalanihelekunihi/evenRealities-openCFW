@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "title": "ITCM VMA for .itcm_text / .ramfunc: linker + region-table copy",
+  "scope": "Audit stock vs openCFW ITCM/ramfunc placement; fix g2-apollo-main.ld so .itcm_text has ITCM VMA and MRAM LMA, copied at startup. Rebuild apollo-main. Re-run version-match and mismatch sims. No hardware flash. NVM not in this step.",
+  "audit": {
+    "stock_itcm": {
+      "window": "0x00000000..0x0003FFFF (256 KB, am_reg_base_addresses.h)",
+      "startup_copy": "Region table 0x75D3E0 LZ77 row installs 24 B at 0x40..0x58 (delay countdown + word copy). No other stock startup row targets ITCM.",
+      "iar_section": ".textrw: VMA ITCM, LMA MRAM (findings-apollo-platform.md). Stock main's delay_us at 0x4807a0 (MRAM) bl's 0x40.",
+      "mram_busy": "nv_program_main2 is bootrom. am_hal_mram_* callers live in MRAM and call into bootrom; no openCFW .itcm_text MRAM-wait helper was linked. spotmgr WFI helper copies a 6-instruction WFI sequence onto the stack (WFIRAM) rather than requiring .itcm_text for the WFI itself."
+    },
+    "opencfw_before": {
+      "problem": "g2-apollo-main.ld merged *(.itcm_text) into MRAM .text. Ambiq HAL functions marked .itcm_text therefore executed from MRAM.",
+      "linked_itcm_text_contributors": [
+        "am_hal_utils.c: br_util_delay_cycles, internal_hal_read_word, internal_hal_read_words (0x18 B total in the image)"
+      ],
+      "not_in_image": [
+        "am_hal_spotmgr_pcm2_2.c am_hal_spotmgr_wfi_wait (.itcm_text in upstream source) is absent from the generated boot pcm2_2 object that the build links",
+        "No .ramfunc sections present in any apollo-main object under clang (IAR __ramfunc path unused)"
+      ],
+      "app_dead_angle": "Code that must run while MRAM is busy or powered down cannot fetch from MRAM. The only linked .itcm_text was the delay/read helpers; they are also performance-critical for GPIO15. A true MRAM-busy hang was not reproduced, but leaving ramfuncs in MRAM is a strong structural risk."
+    }
+  },
+  "fix": {
+    "linker": {
+      "ITCM": "ORIGIN 0x58, LENGTH 0x3FFA8 (leaves 0x40..0x58 for the stock overlay)",
+      "section": ".itcm_text : { *(.itcm_text*); *(.ramfunc*); } > ITCM AT > MRAM",
+      "symbols": "__itcm_text_start / __itcm_text_end / __itcm_text_load_start"
+    },
+    "region_table": "New g2c_copy_init3 row: __itcm_text_load_start -> __itcm_text_start..__itcm_text_end, after the 0x40 overlay copy and before .data",
+    "am_hal_utils": "Restored local-label 16-bit bne loops for br_util_delay_cycles and internal_hal_read_words (GNU assembled global-symbol BNE as bne.w).",
+    "image": {
+      "path": "build/g2-apollo-recovery-20261122-itcm-vma-link/g2-apollo-main/g2-apollo-main.bin",
+      "bytes": 3818888,
+      "sha256": "0bdd25a853051788b598c526465a1a770c219b1f87c5b9cf96409d9fe665a232",
+      "sp": "0x2007FB00",
+      "reset_pc": "0x0059404d",
+      "br_util_delay_cycles": {
+        "vma": "0x00000058",
+        "lma": "0x007a6cd8",
+        "encoding": "subs; bne.n; bx lr"
+      },
+      "internal_hal_read_words": {
+        "vma": "0x00000062",
+        "encoding": "local-label bne.n"
+      },
+      "am_hal_delay_us": {
+        "vma": "0x00600744",
+        "note": "stays in MRAM; calls ITCM br_util (stock pattern)"
+      },
+      "overlay": "still copied to 0x40..0x58; preloaded itcm.bin unchanged"
+    }
+  },
+  "verification": {
+    "version_match_8s": {
+      "resc": "build/em9305-nor-20261122/opencfw-itcm-vma-chiprev22.resc",
+      "log": "build/em9305-nor-20261122/opencfw-itcm-vma-chiprev22.log",
+      "hci_count": 56,
+      "hci_identical_to_advertising_disarm_baseline": true,
+      "advertising_enable": true,
+      "display_frame_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "otapointer": {
+        "after_0.01s": "0xAFD1363A",
+        "after_8s": "0x0"
+      },
+      "end_pc": "0x5432f8"
+    },
+    "mismatch_8s": {
+      "resc": "build/em9305-nor-20261122/opencfw-itcm-vma-mismatch.resc",
+      "log": "build/em9305-nor-20261122/opencfw-itcm-vma-mismatch.log",
+      "configuration_mode": {
+        "before": false,
+        "after_8s": true
+      },
+      "entered_configuration_mode_log": 2,
+      "host_packet_count": 61,
+      "first_new_hci": "0106FD00",
+      "advertising_enable": true,
+      "end_pc": "0x5432f8"
+    }
+  },
+  "artifacts": {
+    "g2-apollo-main.ld": "53d015b84610288ad63382fb1d75a5b6ce1a3ff4c7b654189da2644be4ee7494",
+    "g2c_gnu_init.c": "8b1bbc23fd10cd90b34a12697eb8c7955887969d112a984e4e4217ceee199d46",
+    "am_hal_utils.c": "80aee508be5dbced25e690944fa21210309357440aaf688d15a7335e0b2cb5b5",
+    "g2-apollo-main.bin": "0bdd25a853051788b598c526465a1a770c219b1f87c5b9cf96409d9fe665a232",
+    "match_resc": "7ed2405beb3bb45c01a5fa7ae287c72b9e72fd07a1e02069f387c46e7a9df1e4",
+    "match_log": "9d4ab1f3ed42ea96f42c0ee55b468951b70f954ad56804b080d06f3a949f8583",
+    "mismatch_resc": "f84bc97d1f825fad1cc3a0c6ab01108ebb0fb533ad5af9b483dec2e1e9babbe4",
+    "mismatch_log": "0f88619bbf679e1f1b9037122745db9c433391050ddb6d48836645b9e0be61cb"
+  },
+  "next": "Implement EM9305 NVM program/erase starting with HCI 0xFD06 EMSMM_NVMEraseMain, then the mismatch pair through a completed DFU, then (3) case-reply disarm."
+}

@@ -504,7 +504,7 @@ class InventoryValidatorTests(unittest.TestCase):
                 self.assertEqual(digest(output), row["output_sha256"])
                 validator.verify_iar3_review_basis(
                     {"path": row["review"][0], "sha256": row["review"][1]},
-                    "20260930T190500Z", "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa", row)
+                    "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa", row)
 
     def test_iar3_fixed_recipe_rejects_mutated_tuple_and_review_basis(self):
         row = validator.IAR3_FIXED_RECORDS[("apollo_main", 0x75D3F4)]
@@ -525,7 +525,7 @@ class InventoryValidatorTests(unittest.TestCase):
             validator.verify_iar3_fixed_record("apollo_main", 0x75D3FC, *args[2:])
         with self.assertRaisesRegex(ValueError, "exact pinned independent review"):
             validator.verify_iar3_review_basis({"path": row["review"][0], "sha256": "0" * 64},
-                "20260930T190500Z", "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa", row)
+                "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa", row)
 
     def test_container_only_mapping_needs_verified_container_and_exact_children(self):
         parent = {"id": "container", "payload_id": "codec", "parent_image_id": None,
@@ -546,6 +546,28 @@ class InventoryValidatorTests(unittest.TestCase):
         parent["address_spaces"] = [{"id": "made-up", "mappings": []}]
         with self.assertRaisesRegex(ValueError, "must not invent fixed runtime"):
             validator.validate_mapping_model(parent, {"container": parent, "child": child}, 10, self.evidence_hash)
+
+    def test_resolved_numeric_mapping_must_be_complete_and_reversible(self):
+        image = {"id": "mapped", "size": 10, "mapping_status": "resolved",
+                 "address_spaces": [{"id": "ram", "mappings": [
+                     {"image_start": 0, "image_end": 5, "loaded_start": 100, "loaded_end": 105},
+                     {"image_start": 5, "image_end": 10, "loaded_start": 200, "loaded_end": 205}]}]}
+        validator.validate_mapping_model(image, {}, 10, "unused")
+        first, second = image["address_spaces"][0]["mappings"]
+        second["image_start"], second["loaded_end"] = 6, 204
+        with self.assertRaisesRegex(ValueError, "gap or overlap"):
+            validator.validate_mapping_model(image, {}, 10, "unused")
+        second["image_start"], second["loaded_end"] = 4, 206
+        with self.assertRaisesRegex(ValueError, "gap or overlap"):
+            validator.validate_mapping_model(image, {}, 10, "unused")
+        second["image_start"], second["loaded_end"] = 5, 205
+        second["loaded_start"], second["loaded_end"] = 102, 107
+        with self.assertRaisesRegex(ValueError, "loaded addresses overlap"):
+            validator.validate_mapping_model(image, {}, 10, "unused")
+        second["loaded_start"], second["loaded_end"] = 200, 205
+        image["address_spaces"].append(image["address_spaces"][0].copy())
+        with self.assertRaisesRegex(ValueError, "duplicate address-space id"):
+            validator.validate_mapping_model(image, {}, 10, "unused")
 
     def test_parametric_mapping_requires_external_parameter_and_reviewed_guard(self):
         validator.ROOT = self.old_root
@@ -972,6 +994,7 @@ class InventoryValidatorTests(unittest.TestCase):
     def test_main_ram_fresh_replay_provenance_is_required_and_matches_outputs(self):
         repo = self.old_root
         validator.ROOT = repo
+        target_hash = "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
         base = "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-main-transforms-012/001/"
         for descriptor, output_path in (
             (0x75D3F4, "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-main-canonical-replay-009/001/decoded-20000000.bin"),
@@ -980,12 +1003,12 @@ class InventoryValidatorTests(unittest.TestCase):
             receipt = json.loads((repo / f"{base}transform-{0x20000000 if descriptor == 0x75D3F4 else 0x20080000:08x}.json").read_text())
             output = receipt["output"]
             self.assertEqual(output["path"], output_path)
-            ref = validator.verify_fresh_main_execution(receipt, output, descriptor)
+            ref = validator.verify_fresh_main_execution(receipt, output, descriptor, target_hash)
             self.assertEqual(ref["path"], receipt["fresh_execution_receipt"]["path"])
             forged = dict(receipt)
             forged.pop("fresh_execution_receipt")
             with self.assertRaisesRegex(ValueError, "lacks the fresh canonical replay"):
-                validator.verify_fresh_main_execution(forged, output, descriptor)
+                validator.verify_fresh_main_execution(forged, output, descriptor, target_hash)
 
     def test_valid_decoded_image_requires_bound_independent_review(self):
         self.add_decoded_child()

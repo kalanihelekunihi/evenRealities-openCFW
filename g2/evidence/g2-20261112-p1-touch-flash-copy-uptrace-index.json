@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded indirect caller uptrace from touch 0x4810 into EEPROM write routes.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-touch-flash-copy-origin-index.json",
+    "sha256": "4d774d682961e24ce3bef0a9ddc59c0c8f321dee88428111397e4d1e6fa3bdc3"
+  },
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-flash-copy-origin-uptrace-003/001/audit.py",
+      "sha256": "7fb33a447d85b81a9f2a3cd7d33c6595b549f2b6ad8916350f6c82932c90fe43"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-flash-copy-origin-uptrace-003/001/report.json",
+      "sha256": "7862c06989b7760cc5e3dcabd2610c2af8b292b4cbf76c8bbfd7ccefae16256f"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-flash-copy-origin-uptrace-003/001/receipt.json",
+      "sha256": "26624394f47833146b81b1fececef1b170b897bcd05150a6503a1fdb6685d165"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-flash-copy-uptrace-review-002/001/review.json",
+      "sha256": "2e88082d64379c881642c3f6ec59b0ca63c408dcba9bd524eae823aef27e20a3"
+    },
+    "rejected_previous_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-flash-copy-uptrace-review-001/001/review.json",
+      "sha256": "52d6c6c34fa6160cc3a81c2d954a9cfda6c58cbeaecf902fb56636cefd0fe150"
+    }
+  },
+  "result": {
+    "target_function": "0x4810",
+    "callback_literal_address": "0x48a8",
+    "callback_pointer": "0x4811",
+    "indirect_blx_sites": [
+      "0x7eee",
+      "0x7f52"
+    ],
+    "corrected_second_route_load": "0x7f48",
+    "exact_thumb_bl_edges_checked": 15,
+    "route": "EEPROM write",
+    "staging": "RAM or stack, some merged with existing EEPROM rows"
+  },
+  "limits": [
+    "Origin of caller-supplied param_2 region/content remains unknown.",
+    "No fixed source firmware-flash byte interval is established; no nested executable-copy exclusion.",
+    "No whole touch discovery, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

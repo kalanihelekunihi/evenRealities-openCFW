@@ -7,10 +7,16 @@ extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t event);
 uint32_t opencfw_em9305_associated_cycle_event_30e858(uint32_t handle, uint32_t status,
                                                       uint32_t count)
 {
-    uint8_t event[8];
-    *(uint32_t *)&event[0]=0x35u<<16;
-    event[4]=(uint8_t)handle;
-    event[6]=(uint8_t)count;
-    event[5]=(uint8_t)status;
-    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);
+    volatile struct {
+        uint32_t prefix;
+        uint8_t handle;
+        uint8_t status;
+        uint8_t count;
+        uint8_t unused;
+    } event;
+    event.handle=(uint8_t)handle;
+    event.prefix=0x35u<<16;
+    event.count=(uint8_t)count;
+    event.status=(uint8_t)status;
+    return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
 }

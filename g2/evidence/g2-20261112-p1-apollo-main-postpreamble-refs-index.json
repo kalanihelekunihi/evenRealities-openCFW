@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed eight directly referenced Apollo main string-pointer literals immediately following FUN_0045adf4.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-postpreamble-refs-001/001/audit.py",
+      "sha256": "f1559771087c8244f80e4cda6741626d98c1845904173ba1fa0d8e73b96fd94b"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-postpreamble-refs-001/001/report.json",
+      "sha256": "6216fee117da53c0037a6d814830bababdee31eefa2b42adc5c711e5896bd7de"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-postpreamble-refs-001/001/receipt.json",
+      "sha256": "76767682042303cd2914e00956e79a409fedbf327d82c0c61d7ee995ce41f379"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-postpreamble-refs-review-001/001/review.json",
+      "sha256": "2aac03bf2a5091f1b8580f7bfd26eda98a75bdc79bea49a4b55330981099e8ba"
+    }
+  },
+  "result": {
+    "post_preamble_raw_data_span": [
+      143616,
+      143648
+    ],
+    "full_ota_file_data_span": [
+      143648,
+      143680
+    ],
+    "runtime_data_span": [
+      "0x45b100",
+      "0x45b120"
+    ],
+    "literal_words": 8,
+    "direct_thumb_ldr_references": 34,
+    "reviewed_consumer_functions": 10,
+    "adjacent_unknown_post_preamble_raw_span": [
+      143602,
+      143604
+    ]
+  },
+  "limits": [
+    "Direct-literal scan is bounded to historical census ranges; indirect, computed and unrecorded references are not exhausted.",
+    "The adjacent zero halfword remains unknown.",
+    "No whole-image discovery or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

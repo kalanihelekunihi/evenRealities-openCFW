@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "review_id": "P1-case-residual-review-001/001-draft006",
+  "decision": "pass_with_scope_note",
+  "inputs": {
+    "revision_005": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/005/discovery-draft.jsonl",
+      "size": 31152,
+      "sha256": "bfd23c7aeb4af1181e39db39b03532994fd6ad90c9db5052e317aca0de6091a5"
+    },
+    "revision_006": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/006/discovery-draft.jsonl",
+      "size": 31735,
+      "sha256": "f1be5ef5dfa415d81bc861ed85e219bbd1f77effefc18b469409869c4e45a164",
+      "receipt_hash_matches": true
+    },
+    "case_residual_discovery_index": {
+      "path": "g2/evidence/g2-20261112-p1-case-residual-discovery-index.json",
+      "sha256": "d129feaf24b47707002d7d0dac06cd293da4050170b496ba067a87d24e3d40fb",
+      "receipt_pin_matches": true,
+      "case_row_pin_matches": true
+    }
+  },
+  "comparison": {
+    "jsonl_rows": 6,
+    "non_case_rows": "Only revision and predecessor_draft metadata differ between 005 and 006; substantive fields are unchanged.",
+    "case_row_changes": [
+      "revision and predecessor_draft metadata",
+      "adds the residual discovery index evidence pin",
+      "adds resolved_in_revision_006 describing the bounded marker/vector finding",
+      "narrows scope wording to the wrapper/startup and exact-marker/vector-heuristic reconciliation, explicitly leaving the full sweep open",
+      "updates the unresolved item to require the complete whole-image code/data and reference sweep"
+    ],
+    "no_unrelated_substantive_changes": true
+  },
+  "receipt_checks": {
+    "payload_rows": 6,
+    "distinct_payload_ids": 6,
+    "distinct_image_ids": 33,
+    "unresolved_items": 7,
+    "counts_match_receipt": true,
+    "gate_effect": "none; G1 remains not_run"
+  },
+  "case_content_review": {
+    "evidence_index_hash_verified": true,
+    "resolved_claim_scope": "The reviewed pair at raw offset 0x6A18 is locally resolved as PC-relative literal-pool data; the exact listed-marker scan found no listed markers in the raw case image.",
+    "open_item": "Complete whole-image code/data and reference sweep for nested executable programs beyond the reviewed wrapper, startup copies and raw 0x6A18 literal pool.",
+    "open_item_appropriately_scoped": true,
+    "no_g1_claim": true,
+    "assessment": "The case row retains candidate status, admission_status none, review_id null, and historical claims marked unreviewed. Its limited finding does not claim global nested-image absence, canonical admission, complete pseudocode, source completion, or byte identity."
+  },
+  "scope_note": "Review confirms the revision diff and receipt/index pins. It does not independently redo the binary analysis; the referenced residual-discovery review is the evidence for those findings. No gate effect is asserted."
+}

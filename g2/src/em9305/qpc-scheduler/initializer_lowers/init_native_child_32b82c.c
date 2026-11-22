@@ -16,8 +16,8 @@ extern uint32_t opencfw_em9305_scan_random_30c478(void);
 extern uint32_t opencfw_em9305_crc_update_304678(uint32_t state,uint32_t count,
                                                  uintptr_t input);
 extern uint32_t opencfw_em9305_ll_mask_count_30c414(uint32_t low,uint32_t high);
-extern uint32_t opencfw_em9305_child_30e858(uint32_t value0,uint32_t value1,
-                                            uint32_t value2);
+extern uint32_t opencfw_em9305_associated_cycle_event_30e858(uint32_t value0,
+    uint32_t value1,uint32_t value2);
 extern uint32_t opencfw_em9305_associated_schedule_insert_312da4(uintptr_t object,
                                                                  uintptr_t tie);
 extern uint32_t opencfw_em9305_associated_channel_seed_324c98(uintptr_t channels,
@@ -63,7 +63,7 @@ uint32_t opencfw_em9305_child_32b82c(uintptr_t record,uintptr_t object)
     destination=r32(record+2812u);
     uint32_t id=r8(record+1u);
     w8(destination+79u,channels);
-    (void)opencfw_em9305_child_30e858(id,r8(destination+78u),channels);
+    (void)opencfw_em9305_associated_cycle_event_30e858(id,r8(destination+78u),channels);
     for(;;){
         uint32_t inserted=opencfw_em9305_associated_schedule_insert_312da4(object,0u);
         uint32_t index=r8(record+799u);

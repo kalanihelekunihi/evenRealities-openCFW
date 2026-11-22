@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical P1 coverage draft revision 008 for a 66-byte Apollo main stock function overlap.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-case-tail-coverage-index.json",
+    "sha256": "cae241fe5e8ff8202fc4d3f5c18ffed95b69986ed83cf0150007f474b8ae14f6"
+  },
+  "artifacts": {
+    "coverage_producer_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-008/001/classify.py",
+      "sha256": "f463643a0875076628ab90c198aecc9f55c56952b3aad3fdd6be27de9b279680"
+    },
+    "coverage_draft_008": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-008/001/coverage-draft.jsonl",
+      "sha256": "b745cba2fc07ca65a581ad7ee54da0fb8e5faea9d9b9f0ed47b1242ea0b853f9"
+    },
+    "coverage_receipt_008": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-008/001/receipt.json",
+      "sha256": "157468a6e0c03840193bff9ee7004eff25619c983be54036940ffaf4ac0c3963"
+    },
+    "independent_coverage_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-coverage-review-001/001/review.json",
+      "sha256": "a608aac5a8c51e7ef106eda995d1d9e640b0bb25695b96d6b0da3d925819c1f4"
+    },
+    "main_offset_code_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-offset-code-index.json",
+      "sha256": "b94a4701a04955297fed62959567d983c17d8d8ebe272b57289454bdc35b0250"
+    }
+  },
+  "classification": {
+    "main_payload_full_ota_file_code_span": [143568, 143634],
+    "main_flash_post_preamble_raw_code_span": [143536, 143602],
+    "code_bytes_each_view": 66,
+    "unresolved_tail_full_ota_file_span": [143634, 143648],
+    "unresolved_tail_post_preamble_raw_span": [143602, 143616],
+    "tail_ledger_kind": "unknown within larger unknown rows"
+  },
+  "counts": {
+    "coverage_rows": 95,
+    "coverage_scopes": 40,
+    "unknown_payload_bytes": 4177499,
+    "unknown_image_bytes": 5672149
+  },
+  "limits": [
+    "The 14-byte tail is not identified as code or table.",
+    "No complete main discovery or P2 pseudocode coverage claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

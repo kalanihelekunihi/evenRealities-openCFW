@@ -21,7 +21,7 @@ THIRD_PARTY_DIR := third-party
 .PHONY: all help \
         build open-build test verify clean sources sources-check sources-qualify \
         g2 g2-build g2-test g2-verify g2-clean \
-        r1 r1-test r1-verify r1-clean r1-source-link r1-source-regions \
+        r1 r1-test r1-verify r1-clean r1-source-link r1-source-regions r1-source-firmware \
         third-party third-party-submodules third-party-fetched tools \
         cut-verify blockers
 
@@ -54,6 +54,7 @@ help:
 	@echo '  r1-verify        corpus + exact-byte image oracle (needs official images)'
 	@echo '  r1-source-link   compile R1 sources and strictly link application and bootloader regions'
 	@echo '  r1-source-regions export a sparse HEX of the checked C-linked regions and UICR'
+	@echo '  r1-source-firmware compile and link the source-only C MBR, Cordio, application and DFU bootloader'
 	@echo
 	@echo 'R1 vendor archives: third-party/fetched/README.md; images: r1/blobs/official/*/PROVENANCE.md.'
 	@echo 'G2 targets need the official OTA blobs; see g2/blobs/official/*/PROVENANCE.md.'
@@ -134,6 +135,18 @@ r1-source-link:
 
 r1-source-regions: r1-source-link
 	$(PYTHON) tools/build/r1_source_regions.py --application-report "$(R1_LINK_OUT)/report.json" --bootloader-report "$(R1_BOOT_LINK_OUT)/report.json" --out "$(R1_REGIONS_OUT)"
+
+R1_C_SOURCE_OUT ?= build/r1-source-firmware-sources
+R1_C_APP_OUT ?= build/r1-source-firmware-application
+R1_C_BOOT_OUT ?= build/r1-source-firmware-bootloader
+R1_C_MBR_OUT ?= build/r1-source-firmware-mbr
+R1_C_HEX_OUT ?= build/r1-source-firmware-hex
+r1-source-firmware:
+	$(PYTHON) tools/build/sources.py build --device r1 --normal-svc --cordio-rtc0 --out "$(R1_C_SOURCE_OUT)"
+	$(PYTHON) tools/build/r1_application_link.py --report "$(R1_C_SOURCE_OUT)/report.json" --out "$(R1_C_APP_OUT)"
+	$(PYTHON) tools/build/r1_bootloader_link.py --report "$(R1_C_SOURCE_OUT)/report.json" --out "$(R1_C_BOOT_OUT)"
+	$(PYTHON) tools/build/r1_mbr_link.py --report "$(R1_C_SOURCE_OUT)/report.json" --out "$(R1_C_MBR_OUT)"
+	$(PYTHON) tools/build/r1_source_firmware_regions.py --application-report "$(R1_C_APP_OUT)/report.json" --bootloader-report "$(R1_C_BOOT_OUT)/report.json" --mbr-report "$(R1_C_MBR_OUT)/report.json" --out "$(R1_C_HEX_OUT)"
 
 r1-clean:
 	$(MAKE) -C $(R1_DIR) clean

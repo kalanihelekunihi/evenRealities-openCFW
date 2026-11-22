@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Bounded independently reviewed byte and linear Thumb triage of three Apollo bootloader startup outputs.",
+  "artifacts": {
+    "interior_scan_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-decoded-interiors-001/001/scan_outputs.py",
+      "sha256": "efe51e7403504b07784d4aff405d5008e10f0e1c995c9b87052a71154edcb519"
+    },
+    "interior_scan_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-decoded-interiors-001/001/decode-scan.json",
+      "sha256": "59e53784ef3d190b7993fd1adb5e52d0ff8a4b3556bb196b6500246614c5229f"
+    },
+    "interior_observations": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-decoded-interiors-001/001/observations.json",
+      "sha256": "f90769d7133eb034346d91f67a50248f0f19ecacbec014dc04ffe721fd836026"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-decoded-interiors-review-001/001/review.json",
+      "sha256": "79ff3ddb0e4d5689bae56dd7918f623b9e09ec0aa3eccd6fdf4e2cdcf49cad25"
+    },
+    "independent_rerun": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-decoded-interiors-review-001/001/decode-scan.json",
+      "sha256": "5021b043424c1ca76537ee4030340370b6321f1dc3653813e401ec123ee2ed57"
+    },
+    "bounded_replay_review": {
+      "path": "g2/evidence/g2-20261112-p1-boot-transform-review.json",
+      "sha256": "550dd528298f9c6a8ebdf935ecb0e42e564067c2943b07c7b468e02a3664945b"
+    }
+  },
+  "result": {
+    "itcm_helper_bytes": 24,
+    "itcm_linear_thumb_instructions": 10,
+    "dtcm_output_bytes": 1371,
+    "dtcm_nonzero_bytes": 650,
+    "ssram_zero_fill_bytes": 4096,
+    "dtcm_ssram_pointer_word_offsets": [
+      "0x430",
+      "0x440",
+      "0x448",
+      "0x450"
+    ],
+    "additional_nested_program_established": false
+  },
+  "limits": [
+    "Linear Thumb decoding is not a control-flow or code/data proof.",
+    "DTCM output includes opaque words; consumer behavior and all interior references are unresolved.",
+    "Output replay parameters depend on a historical receipt, without independent descriptor rediscovery.",
+    "No whole-image discovery closure or G1 admission."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

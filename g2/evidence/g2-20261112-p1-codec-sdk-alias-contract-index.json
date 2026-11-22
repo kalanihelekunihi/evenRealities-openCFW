@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed stock BINH-B dual-address literals and pinned NationalChip SDK software mapping contract",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-sdk-alias-contract-001/001/audit.py",
+      "sha256": "b60651faf845973231d9127b9d0bf4de09886e16de33e980193c9d0106e9aa63"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-sdk-alias-contract-001/001/report.json",
+      "sha256": "a930744840a87c4c0622b4166461b5f072421e97f2c62ee4336f588be0ce779f"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-sdk-alias-contract-001/001/receipt.json",
+      "sha256": "88e02341e2e41bded9022bde38947745bdba13509e26769a8c3618deb5644c18"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-sdk-alias-contract-review-001/001/review.json",
+      "sha256": "0cd44bcbc46cb6f2be1b3008ccb00a880a39f30b88d86d9c13db4c6eec2114ed"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-sdk-alias-contract-review-001/001/receipt.json",
+      "sha256": "e15e3d83a1b6f68057bc5c8223a95363b4510bc92ac73c8a6e90fb2871a6abbe"
+    },
+    "prior_alternate_destination": {
+      "path": "g2/evidence/g2-20261112-p1-codec-alternate-destination-index.json",
+      "sha256": "eb5a7d54919cd7722c5aa5cd6dbc10c739bbf674f4ddec613f8df258c48ff085"
+    }
+  },
+  "result": {
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS",
+    "pinned_sdk_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "stock_B_loaded_tail": ["0x10016f60", "0x1001708c"],
+    "aligned_D_bus_tail_literals": 36,
+    "aligned_I_bus_tail_literals": 0,
+    "sdk_model": "Equal-sized 0x10000000 I-bus and 0x20000000 D-bus views; stage-2 text reserves matching D-bus space; multiboot loader writes through D-bus and jumps through I-bus.",
+    "stock_alternate": "B stage-2 copied to 0x20003000 with entry 0x10003100; consistent with SDK formulas for a 0x3000 second-image NPU reservation."
+  },
+  "limits": [
+    "SDK configuration selection and physical memory alias are not proved by the stock package or software sources.",
+    "The SDK XIP base 0x10200000 is a software default, not an observed controller mapping.",
+    "Aligned literal counts do not establish runtime use, whole codec image closure or an additional image absence."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

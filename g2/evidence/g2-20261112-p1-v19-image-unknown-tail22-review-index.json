@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Exact image-only selection and byte review of final 22 of 42 v19 unknown image rows",
+  "artifacts": {
+    "row_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v19-image-unknown-tail-canonical-review-pilot-001/002/review.py",
+      "sha256": "2592d2f4af8e7ba93f29b6c84a2ae47dac5196a119087f6c891bcd1300f226fa"
+    },
+    "row_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v19-image-unknown-tail-canonical-review-pilot-001/002/report.json",
+      "sha256": "a86a3a029f40121d3c536ebcd77e6df21db43287e281ee73dcc36f89b79ef8bb"
+    },
+    "row_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v19-image-unknown-tail-canonical-review-pilot-001/002/receipt.json",
+      "sha256": "2f88b663ac0d0936f6a431f77de1aaa4f757301d55fcc0a75f72a503de244581"
+    },
+    "coordinator_check_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v19-image-unknown-tail-coordinator-check-001/001/check.py",
+      "sha256": "a4a5d785d45b3136e693928ca0b84fd7e09d1b96a0f305b7b14b9d3569d63c0e"
+    },
+    "coordinator_check": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v19-image-unknown-tail-coordinator-check-001/001/review.json",
+      "sha256": "59050b1e2eeb51a6bc9b772c565694e2f5c660f445963dacf6a61a1f12bdf9fc"
+    },
+    "candidate_v19": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-019/001/coverage-draft.jsonl",
+      "sha256": "b9b3e334ac76ee110c9ce43f3d6c3af15587f6338cb93c25619e5a2766cc6a4f"
+    }
+  },
+  "result": {
+    "image_unknown_total": 42,
+    "selected_tail_rows": 22,
+    "pass_explicit_unknown_at_g1": 22,
+    "revise": 0,
+    "evidence_pins_verified_by_coordinator": 50,
+    "validator_review_records_created": 0
+  },
+  "limits": [
+    "The /001 tail pilot selected overlapping mixed-scope rows and is superseded by /002.",
+    "Unknown code/data semantics, GXNPU internal program boundaries and nested-image discovery remain unresolved.",
+    "No authenticated registry, canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

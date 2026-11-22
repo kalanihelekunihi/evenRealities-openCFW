@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Reviewed bounded BINH-A stage-two static task slot flow into an accelerator descriptor field",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-slot6-reachdefs-001/002/audit.py",
+      "sha256": "721400438c1113654c56e36bf02d574b15ee7cef10d6bd0c99e2d79bd025e267"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-slot6-reachdefs-001/002/report.json",
+      "sha256": "36ea7085b937f57372e2af5cde5025726388b48d5e67cbdf73c5fb2c7c2516e0"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-slot6-reachdefs-001/002/receipt.json",
+      "sha256": "77c15eb8dafbba95f71e08f6065bf37a188e9b4bb190dc766db6d200713b439a"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-slot6-reachdefs-review-001/002/review.json",
+      "sha256": "ba5345af5d9037d9e5b5e5a9cadb5bb6c2568d2a68c3e856dd9f13f76521bb4c"
+    }
+  },
+  "result": {
+    "reader_source_offset": 72656,
+    "reader_size": 120800,
+    "reader_destination": "current task +0x1C",
+    "conditional_saved_global": "0x2002E85C",
+    "static_downstream_flow": "global +0x1C to consumer task +0x1C to descriptor +0x70",
+    "two_run_artifact_hashes_identical": true
+  },
+  "limits": [
+    "The indirect reader callback write and success are not established.",
+    "Physical DRAM/bus mapping and the meaning of descriptor +0x70 are unproved.",
+    "This does not classify internal weight bytes or prove runtime accelerator use.",
+    "No canonical inventory admission or G1 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

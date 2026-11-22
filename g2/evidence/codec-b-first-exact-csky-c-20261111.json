@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "target": "First exact source-built C-SKY codec B functions in the locked G2 FWPK",
+  "stock": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "artifact_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "image_b_sram_file_offset": "0x3B940",
+    "image_b_sram_virtual_base": "0x10003000",
+    "raw_boundary_corpus": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_b_sram/functions-000.jsonl"
+  },
+  "qualification": {
+    "receipt": "build/g2-codec-b-csky-exact-qual-20261111/source-plan.json",
+    "receipt_sha256": "4655a9bd7f16a228ee00f73c238729b559f89fdc76f98ffbb4db76cb45452b93",
+    "candidate_units": 7,
+    "compiled_units": 7,
+    "selected_regions": [
+      {
+        "symbol": "gx8002_image_b_audio_one_10009f8c",
+        "source": "g2/src/codec/image-b-sram/backup_audio_frame_helpers.c",
+        "stock_offset": [
+          272588,
+          272592
+        ],
+        "bytes": 4,
+        "sha256": "535d43ea65c8b7bb04cc91c468cc834ffe6940dd4c4ccdc9b6cf14209940263f"
+      },
+      {
+        "symbol": "gx8002_image_b_audio_ring_empty_1000a00c",
+        "source": "g2/src/codec/image-b-sram/backup_audio_ring.c",
+        "stock_offset": [
+          272716,
+          272726
+        ],
+        "bytes": 10,
+        "sha256": "bc6d60f81dfc11f3f53d02427b0026e5f4bafde64a7523070778e7fe9852b679"
+      },
+      {
+        "symbol": "gx8002_image_b_fabs_double_1000fc58",
+        "source": "g2/src/codec/image-b-sram/backup_fabs_double.c",
+        "stock_offset": [
+          296344,
+          296348
+        ],
+        "bytes": 4,
+        "sha256": "ac409375174bff36bd23931642e76de0e25fc022103bfd9cdb5000225abb4969"
+      },
+      {
+        "symbol": "gx8002_image_b_imcra_c_size_1000ec2c",
+        "source": "g2/src/codec/image-b-sram/backup_imcra_substate_a.c",
+        "stock_offset": [
+          292204,
+          292214
+        ],
+        "bytes": 10,
+        "sha256": "0e7ff02983d8192619edabb40b0e4416227912672dc5b29664b707ad9aa8eb0c"
+      },
+      {
+        "symbol": "gx8002_image_b_irq_save_1000486c",
+        "source": "g2/src/codec/image-b-sram/backup_irq_mask.c",
+        "stock_offset": [
+          250284,
+          250294
+        ],
+        "bytes": 10,
+        "sha256": "9c1f817c9205b13c6e97621f3d835dfd96fc53350e495c1f6ebf710555a72fd4"
+      },
+      {
+        "symbol": "gx8002_image_b_irq_restore_10004878",
+        "source": "g2/src/codec/image-b-sram/backup_irq_mask.c",
+        "stock_offset": [
+          250296,
+          250302
+        ],
+        "bytes": 6,
+        "sha256": "7593678031624d1ed8d5c3c73c205df650f800e7727bf28e3ef0b40df48cce75"
+      },
+      {
+        "symbol": "gx8002_image_b_spi_master_irq_10008288",
+        "source": "g2/src/codec/image-b-sram/backup_spi_irq.c",
+        "stock_offset": [
+          265160,
+          265192
+        ],
+        "bytes": 32,
+        "sha256": "41f80726223e7f56079c5563cb09ecbf36cbb098a9c2c2ceff98be9dcb9f83f7"
+      },
+      {
+        "symbol": "gx8002_image_b_cache_stage_10004d94",
+        "source": "g2/src/codec/image-b-sram/backup_stage2_cache_initialize_children.c",
+        "stock_offset": [
+          251604,
+          251632
+        ],
+        "bytes": 28,
+        "sha256": "de26cd734aaad6ac58691a97198cc748940292c504bf8d854870cc695b9fc9fb"
+      }
+    ],
+    "selected_bytes": 104,
+    "policy": "only relocation-free C-SKY ELF32 functions with a raw stock entry, exact size, and full byte equality; raw boundaries alone never qualify a region",
+    "compiler_sha256": "d39414b37d4d47c044254b1f91844d63be586ce913005c2330061f490d1d899f",
+    "integrated_plan": "tools/build/source-plan.json",
+    "integrated_plan_sha256": "022b5099124d16f5d23977632da13b3a5df184c676aeaf65b408fadc2d23d76c"
+  },
+  "verification": {
+    "hybrid_report": "build/g2-codec-b-csky-exact-hybrid-20261111/build-report.json",
+    "hybrid_report_sha256": "7e88f5f9e0d52e5139291048aab6b3bac712723bd961566c153b70b78aaae261",
+    "hybrid_bundle": {
+      "file": "g2-openCFW-s200_v2.2.6.10.evenota.bin",
+      "size": 4301227,
+      "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+    },
+    "codec_source_built_bytes": 104,
+    "codec_pull_through_bytes": 202868,
+    "coverage_report": "build/g2-codec-b-csky-exact-hybrid-20261111/coverage.json",
+    "coverage_report_sha256": "c070882b52abd428ed9dbb1aa0dbbc5f1477c7929baf1dedfa1eb1c15abacbdc",
+    "codec_compiled_unclassified_bytes": 104,
+    "sources_check": "4885 units, 4546 source files, 1 intentional linker-only not-built unit",
+    "source_completeness_proven": false
+  },
+  "limits": [
+    "C-SKY ELF sections have no ARM mapping symbols; these 104 compiled bytes remain conservatively unclassified as code versus literal data in the strict coverage table.",
+    "Relocation-bearing C-SKY functions are not yet qualified by the new verifier.",
+    "The codec image still has 202,868 binary pull-through bytes, and the source-only G2 OTA remains nonidentical to stock."
+  ]
+}

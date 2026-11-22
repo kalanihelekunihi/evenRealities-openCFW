@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded direct-call route to touch 0x49E0 conditional eight-byte record copy",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-record-copy-49e0-001/002/audit.py",
+      "sha256": "ad5234c883e077e98d3687110407d3d4b459bb24d4d536bbec31b6e8199fffd3"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-record-copy-49e0-001/002/report.json",
+      "sha256": "c910d627d422f435e9b509808d3e7141d195d643276ee42e34e042d128c7a96c"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-record-copy-49e0-001/002/receipt.json",
+      "sha256": "72cc7bed2cb4b693e2cc88799338a5826a0666a247ba3a19b9a3b28d5764d3c4"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-record-copy-49e0-review-002/001/review.json",
+      "sha256": "70c7c7123dbfad02da6cd66e871089f331a207abb764fb5995f62fc48acc9053"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-record-copy-49e0-review-002/001/receipt.json",
+      "sha256": "a168ac600d17eaebbf8551d1a696fad3b9ad0c1a081d9dae2d9f91e2e59266d3"
+    }
+  },
+  "result": {
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS",
+    "direct_caller_chain": ["0x5bba -> 0x5a94", "0x5b78 -> 0x4a2a", "0x4a98 -> 0x49d4", "0x49e0 -> 0xaa2c"],
+    "local_copy": "Bit 1 of the incoming flags guards an eight-byte copy from incoming r1 to incoming r2.",
+    "source_on_observed_chain": "The source base is a pointer to a stack record at the 0x5A94 frame SP+8, advanced by eight bytes for each preceding first-loop iteration.",
+    "destination_on_observed_chain": "The destination base is loaded through the context+60 pointer, advanced by eight times the flag-derived stride for each preceding first-loop iteration.",
+    "first_loop_count": "Zero when the context count byte is 0xFF; otherwise min(temp[4], context count)."
+  },
+  "limits": [
+    "The copy depends on runtime flags, count and control flow; runtime reachability and record contents are not closed.",
+    "Destination memory class, indirect callers, other routes and later uses remain unresolved.",
+    "No fixed stock-image source span or nested-image exclusion is established."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

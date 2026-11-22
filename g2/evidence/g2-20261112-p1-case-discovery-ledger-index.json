@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Noncanonical six-payload discovery draft revision 006: case marker scan and vector-like pair review, with full case sweep still open.",
+  "artifacts": {
+    "case_residual_discovery_index": {
+      "path": "g2/evidence/g2-20261112-p1-case-residual-discovery-index.json",
+      "sha256": "d129feaf24b47707002d7d0dac06cd293da4050170b496ba067a87d24e3d40fb"
+    },
+    "discovery_draft_006": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/006/discovery-draft.jsonl",
+      "sha256": "f1be5ef5dfa415d81bc861ed85e219bbd1f77effefc18b469409869c4e45a164"
+    },
+    "discovery_receipt_006": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/006/receipt.json",
+      "sha256": "9722c93a89028cd141579322bdf249fc77f68278ec76c99b53b253ea27615e97"
+    },
+    "discovery_review": {
+      "path": "g2/evidence/g2-20261112-p1-case-residual-discovery-draft-review.json",
+      "sha256": "12142d548227a77a9b2b9316f6d9312f9b245ab9c13e7e1616d7565903a15b57",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-residual-review-001/001/discovery-review.json"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "listed_image_ids": 33,
+    "unresolved_items": 7
+  },
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "limits": [
+    "The exact-marker scan and local literal-pool resolution do not establish whole-image discovery.",
+    "No canonical G1 admission, complete pseudocode, source completion or byte identity."
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked static parameter provenance of three Apollo bootloader decoder descriptors and separate zero handler",
+  "artifacts": {
+    "producer_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-transform-parameter-provenance-001/001/audit.py",
+      "sha256": "a4f9af7f25c9869242c384520c436fbcacb2ed34d38d6365906ad7c76df13a8a"
+    },
+    "producer_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-transform-parameter-provenance-001/001/report.json",
+      "sha256": "51d5b55aa36d7530a09ad38baa160d06b6d5e48464565781a12d7928df070fa1"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-transform-parameter-provenance-001/001/receipt.json",
+      "sha256": "24a3e4994de21f894ffa7ef1e9a904483096a8af9ac812adcf3c02fc547fbd58"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-transform-parameter-provenance-independent-review-001/001/review.py",
+      "sha256": "9141c351f14946b5207b47de87d44a476b1d2f1104ad56ce458e04a1eefd2cfc"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-transform-parameter-provenance-independent-review-001/001/review.json",
+      "sha256": "fdc5774841ce1850cacfc98cacd780602ac269663a749cf1aea8206d62b34adc"
+    },
+    "selected_coverage_v17": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "decoder_rows": 3,
+    "encoded_source_union_raw_span": [
+      147904,
+      148599
+    ],
+    "destinations": [
+      "0x40",
+      "0x20000000",
+      "0x20080000"
+    ],
+    "decoded_output_sizes_from_reviewed_replay": [
+      24,
+      1371,
+      4096
+    ],
+    "zero_handler_target_adjacent_to_0x20080000": "0x20081000",
+    "v17_20080000_classification_basis_requires_correction": true
+  },
+  "limits": [
+    "Static descriptor source/destination/guard facts only; physical mappings, runtime execution and output entry remain unproven.",
+    "No sweep of other copy/decode routes or G1 admission."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

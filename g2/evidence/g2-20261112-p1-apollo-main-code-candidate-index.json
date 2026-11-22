@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed non-admitting Apollo main instruction-unit candidate filter from fresh Ghidra listing and historical byte-verified ranges.",
+  "artifacts": {
+    "candidate_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-code-classification-candidate-001/001/analyze.py",
+      "sha256": "d4fda1691083f9ab6ba21f90d12c54ad0ccfffc3c5e6caed835c7366343e4e1d"
+    },
+    "candidate_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-code-classification-candidate-001/001/report.json",
+      "sha256": "8ab25c4b4ab31464fb47d385736c5cd44def4c6eb3dc7cc8be9b8e18952316b8"
+    },
+    "candidate_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-code-classification-candidate-001/001/receipt.json",
+      "sha256": "c690cba2b90b3f4ed71c8d97e591421081cdc6e24e43fe2bc41585cb607e3dd0"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-code-candidate-review-001/001/review.json",
+      "sha256": "9a066d565ef1c033118d6bcfd57d786c507a2af1eb744374dec6cb7975234429"
+    },
+    "fresh_codeunit_export": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-fresh-codeunit-export-index.json",
+      "sha256": "b305dc60d833c985f5e2950251740117b09334ad6eb19cdf2518d17634dc21e9"
+    }
+  },
+  "candidate_counts": {
+    "complete_instruction_units": 473945,
+    "historical_function_entries": 6734,
+    "unique_candidate_bytes": 1251072,
+    "candidate_intervals": 2465,
+    "current_draft_014_code_overlap_bytes": 66,
+    "current_draft_014_unknown_overlap_bytes": 1251006,
+    "current_draft_014_data_overlap_bytes": 0
+  },
+  "decision": "not_admitted",
+  "reason": "Fresh listing TSV lacks opcode bytes and independent instruction-boundary/decoder verification; historical project is absent.",
+  "limits": [
+    "The 56-byte null-hash historical row and crossing/undefined/function-mismatch units are excluded.",
+    "No coverage draft, canonical ledger or G1 change."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

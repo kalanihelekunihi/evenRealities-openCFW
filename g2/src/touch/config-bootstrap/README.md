@@ -3,7 +3,14 @@
 Independent source for bootstrap0x395c, application adapters0x3520/3568/35b0,
 EEPROM erase0x8ae0 and software delay0xa2f0. Fixed ARM32 guest addresses;
 this module composes the preserved `eeprom_offline` and `eeprom_init_offline`.
-It is not linked into production firmware or accepted checkpoints.
+It is linked into the current source-candidate touch image; no production
+firmware or hardware behavior is validated by that link.
+
+The nine locked bootstrap/save log strings now have C-owned definitions,
+including the shared color reset string. Their linked bytes match stock and
+the calls no longer retain fixed pointers into the old flash tail. The stock
+logger remains a return-zero leaf. See
+[`touch-log-strings-source-20261111.json`](../../../evidence/touch-log-strings-source-20261111.json).
 
 Saved record is8 bytes: little-endian magic0x45564e55,baselineu16,parameteru16.
 A successful read plus matching magic accepts the record. Parameterzero becomes1000

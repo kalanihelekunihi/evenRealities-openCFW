@@ -5,11 +5,17 @@
 
 SEARCH_DIR(.)
 /* Runtime providers come from the validated source composition. */
+/* The source BLE runtime reserves 0x20000000..0x200064A7. The stock
+ * bootloader keeps its captured RAM origin unless the strict source link
+ * explicitly supplies the higher origin. */
+R1_BOOT_RAM_ORIGIN = DEFINED(R1_CORDIO_BOOT_RAM_ORIGIN) ?
+                     R1_CORDIO_BOOT_RAM_ORIGIN : 0x20005978;
 
 MEMORY
 {
   FLASH (rx) : ORIGIN = 0xf8000, LENGTH = 0x6000
-  RAM (rwx) :  ORIGIN = 0x20005978, LENGTH = 0x3a688
+  RAM (rwx) :  ORIGIN = R1_BOOT_RAM_ORIGIN,
+               LENGTH = 0x20040000 - R1_BOOT_RAM_ORIGIN
   uicr_bootloader_start_address (r) : ORIGIN = 0x10001014, LENGTH = 0x4
   bootloader_settings_page (r) : ORIGIN = 0x000FF000, LENGTH = 0x1000
   uicr_mbr_params_page (r) : ORIGIN = 0x10001018, LENGTH = 0x4

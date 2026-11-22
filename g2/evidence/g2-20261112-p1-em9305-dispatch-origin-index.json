@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Current-campaign bounded stock EM9305 NVM register-jump origin and locked FHDR target",
+  "artifacts": {
+    "fhdr_replay_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-fhdr-replay-index.json",
+      "sha256": "4762b30618f8fd483fc6b802daaac7d35110e63c7462299b6bae418d580ea472"
+    },
+    "record0_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-census-001/001/record0-full.objdump.txt",
+      "sha256": "7835668b3ab4c2cc97b20f7a6fdfe6b6277fa5b1d6a963f2048a7349320aa6c3"
+    },
+    "record1_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-census-001/001/record1-full.objdump.txt",
+      "sha256": "a78e7ad1cc2af2c7093dc04c3cc5ef151f9858adf26ab09af38cc657ff304f4b"
+    },
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-dispatch-origin-001/001/audit.py",
+      "sha256": "edf1b54aaebcc663457711d3fd992193e606dbaef1628666e4729f0928b82213"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-dispatch-origin-001/001/report.json",
+      "sha256": "50e3916bfe2159ab1a0873303c93aa407c8f1b0701065a397f0681f9228669a0"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-dispatch-origin-001/001/receipt.json",
+      "sha256": "55142b6f5b18a5ccf4edc33cbf74d3647fc710856a73dc47a5412edd84cbab4b"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-dispatch-origin-review-001/001/review.json",
+      "sha256": "e5d904e6ea3b237164e6a341b8f6e8a10e750e9239b726fd231fac0abbbb94ac"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-dispatch-origin-review-001/001/receipt.json",
+      "sha256": "eff641635860a48ee50d59f04890cf224a967693bd3a53f51d4042cc0ba2e8f5"
+    }
+  },
+  "result": {
+    "locked_customer_fhdr_entry": "0x00302028",
+    "register_jump": "0x00300538",
+    "selector": "0x003004d8",
+    "selector_priority_calls": 5,
+    "instruction_spans_byte_checked_by_independent_review": 6,
+    "literal_fhdr_markers_in_locked_component": 1,
+    "verdict": "BOUNDED_PASS_WITH_LIMITS"
+  },
+  "limits": [
+    "The producer token-matches disassembly; independent review additionally compared exact disassembly bytes against locked spans.",
+    "Runtime boot-mode, CRC state, external NVM headers and physical record selection can change the selected target.",
+    "This does not close the record 0/1 code/data/reference census or G1."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

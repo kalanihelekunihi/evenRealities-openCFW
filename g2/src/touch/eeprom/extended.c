@@ -20,7 +20,7 @@ uint32_t touch_extended_write(uint32_t address,const uint8_t *data,uint32_t size
  uint32_t capacity=*(uint16_t *)(context+22),rows=div32(size-1u,capacity)+1u,sequence[2];
  touch_integrity(sequence,context);
  uint32_t cursor=*(uint32_t *)(context+24),status=0,merge=0;
- uint8_t *scratch=(uint8_t *)0x20000cd4u;uint32_t physical=*(uint16_t *)(context+2);
+ uint8_t *scratch=touch_eeprom_scratch_ram;uint32_t physical=*(uint16_t *)(context+2);
  for(uint32_t i=0;i<rows;i++) {
   cursor=next_row(cursor,context);sequence[0]++;
   for(uint32_t j=0;j<physical;j++)scratch[j]=0;

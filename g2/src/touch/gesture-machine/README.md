@@ -1,4 +1,4 @@
-# Touch gesture machine — independent offline source
+# Touch gesture machine — source-linked C
 
 `gesture.c` reconstructs `0x4070..0x43da` and attention rearm `0x3afc`.
 It composes independently validated speed and software-delay source; the
@@ -12,7 +12,10 @@ Counters are not established milliseconds. Attention writes and delay loops
 are verified offline against original instructions; electrical GPIO behavior,
 interrupt timing and physical duration remain unverified.
 
-The report/calibration composition loads selected native code into offline
-fixed-address guest sections. It is not a production payload, exact-byte build,
-hardware patch or independent source closure of the analog scan engine.
+The touch source-linked report path now calls `touch_gesture_step` directly,
+and its speed helper is also linked from C. The earlier report/calibration
+composition loaded selected native code into offline fixed-address guest
+sections; that validation remains bounded to its recorded fixtures. The
+source-linked payload is not an exact-byte rebuild or independent source
+closure of the analog scan engine.
 See analysis (`pre-consolidation:g2/analysis/touch-gesture-machine-closure-2026-10-08/REPORT.md`).

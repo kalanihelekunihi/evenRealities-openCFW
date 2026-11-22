@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical P1 discovery draft revision 008; corrects Apollo boot startup-output bounded replay review status.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v7-index.json",
+    "sha256": "f6d3c1f0b91c4598ebcaaa82a0bb75c35f13831a2806a97d37ea1ad1b765e621"
+  },
+  "artifacts": {
+    "discovery_draft_008": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/008/discovery-draft.jsonl",
+      "sha256": "773f7e643510e353cab02deeeb500ff66e19349f0f0f79adf1b03c97c13ed55f"
+    },
+    "discovery_receipt_008": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/008/receipt.json",
+      "sha256": "018a3a6750db0bb58e01eb892a7f11f0a503bd947f5d4d459129d5794dc8efd3"
+    },
+    "independent_correction_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-v8-review-001/001/review.json",
+      "sha256": "07cf0f05a93b156a7102b8e4e49bc721da38a367c0777b9de33c8f5b6301982e"
+    },
+    "apollo_boot_reference_index_v2": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-boot-reference-index-v2.json",
+      "sha256": "bf9e029365d23f634f5cbb716fb8dd0e8f20d29dfb32814e27f188f56acec2bc"
+    },
+    "touch_residual_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-residual-index.json",
+      "sha256": "f7c47e333b82530e5cb57dfe17344a78b564cbe05103a8b0fa5b20d66f361f6e"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "Apollo boot decoded output interiors and replay parameter rediscovery remain open despite bounded replay of output bytes.",
+    "Touch copy-helper callers beyond reset, Apollo pointer/vector leads, and whole-image discovery remain open.",
+    "No canonical G1 admission or source reconstruction claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

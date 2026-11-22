@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "target": "Exact C-built UART boot stage-2 functions in locked G2 codec FWPK",
+  "stock": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "artifact_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "stage2_inventory": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage2/functions-000.jsonl",
+    "mapping": "stored offset = 0x50 + (virtual address - 0x10000000), bounded to [0x2850,0x958C)"
+  },
+  "qualification": {
+    "receipt": "build/g2-codec-uart-stage2-short-suffix-exact-20261112/source-plan.json",
+    "receipt_sha256": "63906750fd3ec64f8ac123cf6e408461e09196dfcaa0420be6539143357a9e61",
+    "candidate_units": 5,
+    "selected_units": 5,
+    "selected_regions": [
+      {
+        "symbol": "gx8002_uart_stage2_interrupt_tail_3194",
+        "source": "g2/src/codec/app-callback/uart_stage2_cache.c",
+        "stock_offset": [
+          12772,
+          12800
+        ],
+        "bytes": 28,
+        "sha256": "de26cd734aaad6ac58691a97198cc748940292c504bf8d854870cc695b9fc9fb",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage2/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_uart_stage2_dcache_disable_31b4",
+        "source": "g2/src/codec/app-callback/uart_stage2_cache.c",
+        "stock_offset": [
+          12804,
+          12834
+        ],
+        "bytes": 30,
+        "sha256": "a2922a5163bfb7cc0a080dda5938270704fbf15951e64348e5dbe8a67baead9f",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage2/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_uart_stage2_strncmp_6294",
+        "source": "g2/src/codec/app-callback/uart_stage2_command_lookup.c",
+        "stock_offset": [
+          25316,
+          25392
+        ],
+        "bytes": 76,
+        "sha256": "52ba5e6261771fc09b537af4056a863022d771a5e0a78d05a9c9ba70eacb727d",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage2/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_uart_stage2_irq_save_3110",
+        "source": "g2/src/codec/app-callback/uart_stage2_irq_setup.c",
+        "stock_offset": [
+          12640,
+          12650
+        ],
+        "bytes": 10,
+        "sha256": "9c1f817c9205b13c6e97621f3d835dfd96fc53350e495c1f6ebf710555a72fd4",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage2/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_uart_stage2_irq_restore_311c",
+        "source": "g2/src/codec/app-callback/uart_stage2_irq_setup.c",
+        "stock_offset": [
+          12652,
+          12658
+        ],
+        "bytes": 6,
+        "sha256": "7593678031624d1ed8d5c3c73c205df650f800e7727bf28e3ef0b40df48cce75",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage2/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_uart_stage2_runtime_boot_2a3c",
+        "source": "g2/src/codec/app-callback/uart_stage2_small.c",
+        "stock_offset": [
+          10892,
+          10906
+        ],
+        "bytes": 14,
+        "sha256": "2aa386a345530d6c7fb60c8e4aa88720f2976c929784b6881e30cfa0ed951355",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage2/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_uart_stage2_watchdog_kick_44fc",
+        "source": "g2/src/codec/app-callback/uart_stage2_watchdog_kick.c",
+        "stock_offset": [
+          17740,
+          17750
+        ],
+        "bytes": 10,
+        "sha256": "75a3350b641ef0ca252160dec01f5d2246c3ba7fc7f9380545d7fb3dd9dd1a7e",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage2/functions-000.jsonl"
+      }
+    ],
+    "selected_bytes": 174,
+    "policy": "four-digit C symbol suffix expanded under UART virtual base, authenticated corpus body hash, exact function size, no relocations, and full compiled-byte equality at anchored stock offset",
+    "integrated_plan": "tools/build/source-plan.json",
+    "integrated_plan_sha256": "2edf75b53b764b580253f0a6f09c0d1d6d7e493045b4e592e44d6ae64d16a16f"
+  },
+  "verification": {
+    "hybrid_report": "build/g2-codec-uart-stage2-exact-hybrid-20261112/build-report.json",
+    "hybrid_report_sha256": "0fd1eac67296cbb03d1af1de6bc9ec60baae259970623f8c5e910dc324b62ca6",
+    "coverage_report": "build/g2-codec-uart-stage2-exact-hybrid-20261112/coverage.json",
+    "coverage_report_sha256": "aa0bbf59328c4c009e39b93438cb5d44dc7a682bbfb6fdca7f8fad79ad084847",
+    "bundle_size": 4301227,
+    "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "codec_source_built_bytes": 882,
+    "codec_pull_through_bytes": 202090,
+    "source_completeness_proven": false
+  },
+  "limits": [
+    "Seven of the UART stage-2 C functions qualified in this pass; the remainder still need source and compiler/relocation qualification.",
+    "C-SKY compiled function bytes remain unclassified as code/data by strict coverage.",
+    "The full codec FWPK and source-only OTA remain nonidentical to stock; hardware boot is unverified."
+  ]
+}

@@ -8,7 +8,9 @@
  * returns the next row) with one plain copy row for .data and one zero row
  * for .bss. The stock LZ77 row at 0x75d3e0 targets ITCM 0x40; the GNU
  * replacement copies the same 24-byte source-defined helper image there.
- * Symbols come from g2/src/apollo-main/link/g2-apollo-main.ld.
+ * A further plain copy row loads Ambiq .itcm_text / .ramfunc from their
+ * MRAM LMA into ITCM VMA (>= 0x58), matching stock .textrw. Symbols come
+ * from g2/src/apollo-main/link/g2-apollo-main.ld.
  * Not stock behaviour (openCFW GNU completion).
  *
  * Fix 43 (RAM-init, 2026-11-01): stock cstartup zero-inits DTCM through
@@ -73,6 +75,8 @@ __asm__(
     "iar_region_table_base_75d3c8:\n"
     "  .word g2c_copy_init3 - .\n"
     "  .word g2c_itcm_overlay_start, 0x40, 0x58\n"
+    "  .word g2c_copy_init3 - .\n"
+    "  .word __itcm_text_load_start, __itcm_text_start, __itcm_text_end\n"
     "  .word g2c_copy_init3 - .\n"
     "  .word __data_load_start, __data_start, __data_end\n"
     "  .word g2c_zero_init3 - .\n"

@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "stock G2 touch active-shield vendor C paths",
+  "stock_image": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "stock_image_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "stock_fwpk_header_bytes": 32,
+  "stock_common_config_flash_va": "0x0000B2A8",
+  "stock_common_config_fields": {
+    "csdShieldNumPin": {
+      "offset": 44,
+      "value": 2
+    },
+    "csdShieldMode": {
+      "offset": 51,
+      "value": 1
+    }
+  },
+  "mode_definition": "third-party/reference/infineon-capsense-v5/cy_capsense_common.h:596",
+  "shield_pin_source": "g2/src/touch/reset-layout/reset_channel_pending.c",
+  "changed_header": "g2/src/touch/vendor/cycfg_capsense_defines.h",
+  "changed_header_sha256": "baaaec78755b4ba8bbda7cb2d74abab673779a801260bca0f1b9330b9b703a09",
+  "enabled_macros": [
+    "CY_CAPSENSE_CSD_SHIELD_EN",
+    "CY_CAPSENSE_SHIELD_ACTIVE_EN"
+  ],
+  "disabled_macro": "CY_CAPSENSE_SHIELD_PASSIVE_EN",
+  "focused_build_report": "build/g2-touch-shield-20261111/report.json",
+  "focused_build_report_sha256": "941130a7924242c440254e1d08b3dfd8bef3861cafbb3997a16ce308dd902718",
+  "focused_link_report": "build/g2-touch-shield-link-20261111/link-report.json",
+  "focused_link_report_sha256": "e8b9931c5e3ef40fc6fe42ded65346dec05d7e494772eb7d9321488c01fd9558",
+  "previous_touch_image": {
+    "path": "build/g2-touch-cdac-link-20261111/g2-touch/g2-touch.bin",
+    "bytes": 32904,
+    "sha256": "ff95a25ef43fb7a3a9c7fec089630a4f3cae91205c7c3d4c593b1f29ea5c9dd1"
+  },
+  "current_focused_touch_image": {
+    "path": "build/g2-touch-shield-link-20261111/g2-touch/g2-touch.bin",
+    "bytes": 33148,
+    "sha256": "ace5b386683783b0486bf6fbebefb0eaa2c63d4eb0cacaf9794a19cc61e735c2"
+  },
+  "new_linked_vendor_symbol": "Cy_CapSense_SetShieldPinsInDesiredState",
+  "qualifier_reports": [
+    "build/g2-touch-shield-generator-qualify-20261111/qualification.json",
+    "build/g2-touch-shield-sensing-qualify-20261111/qualification.json"
+  ],
+  "source_plan_changed": false,
+  "hybrid_report": "build/g2-touch-shield-hybrid-20261111/build-report.json",
+  "hybrid_report_sha256": "2ee3314400f097ebff220b8d76edb5b35103d688987a49cc252b1bf3b0aac5ed",
+  "hybrid_touch_totals": {
+    "resource-file": 32,
+    "binary-pull-through": 28510,
+    "source-built": 5922
+  },
+  "limits": [
+    "The newly linked shield-pin setup function is source-owned but not byte-qualified against stock.",
+    "The hybrid bundle still uses binary pull-through; full source completeness, locked bundle equality, and hardware behavior are unverified."
+  ],
+  "stock_shield_electrodes": {
+    "flash_va": "0x0000B32C",
+    "bytes": "3cb300000001000044b3000000010000"
+  },
+  "stock_shield_pins": {
+    "flash_va": "0x0000B33C",
+    "bytes": "00020440000700000002044001080000"
+  },
+  "full_build_report": "build/g2-touch-shield-all-20261111/report.json",
+  "full_build_report_sha256": "af71f6ff936df20e865e3f0089aedb1ca4b2bd638c347eb8012853ab15bb62fd",
+  "full_build_compiled_units": 4878,
+  "full_build_failed_units": 0,
+  "full_build_duplicate_strong_symbols": 0,
+  "manifest_changed_during_build": false,
+  "source_bundle_link_report": "build/g2-touch-shield-bundle-20261111/link-report.json",
+  "source_bundle_link_report_sha256": "ec401d38cfe6fc7ce901449e33f4fc5068a7258278d7cb0bad0db51b64d975d3",
+  "strict_linked_payloads": [
+    "g2-apollo-bootloader",
+    "g2-apollo-main",
+    "g2-case",
+    "g2-codec-a",
+    "g2-codec-b",
+    "g2-em9305",
+    "g2-touch"
+  ],
+  "external_binary_archive_used": false,
+  "source_candidate_bundle": {
+    "bytes": 4641840,
+    "sha256": "e1e8f3c9b94bfabe5dd1e0f5741e9f5ddd92854783e960264a1297644a5bd98b",
+    "locked_target_bytes": 4301227,
+    "locked_target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "matches_locked_target": false,
+    "source_completeness_proven": false
+  }
+}

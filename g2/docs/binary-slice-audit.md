@@ -1,5 +1,13 @@
 # G2 binary-slice audit (2026-10-26)
 
+This is a historical snapshot. The 2026-11-11 Apollo source audit found 212
+address-looking integer tokens across 29 first-party C/header files after
+symbolic RAM relocations and removal of a duplicate initialized-data tail.
+Those tokens include packed descriptors and bit masks; the count is not
+directly comparable to the literal-use counts below, and it does not prove
+all pointer uses are resolved. See
+[`apollo-ram-literal-source-audit-20261111.json`](../evidence/apollo-ram-literal-source-audit-20261111.json).
+
 Question: is each g2 component plain compilable C, or does it depend on slicing the stock image?
 
 Method: grep for `.incbin`, `-I binary` and `.bin` INCLUDEs; byte-overlap of each final ELF against the stock 2.2.6.10 blobs (32-byte windows, /tmp/overlap.py, attributed per source with /tmp/bysrc.py); asm-transcription share of FUNC bytes (/tmp/asmshare.py).

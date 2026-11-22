@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "title": "EM9305 NVM program/erase: HCI 0xFD06 first, plus 0xFD03/0xFD04",
+  "scope": "Emulator-only NVM model in ~/Repo/g2-firmware-emulator (no commit). No hardware flash. DFU completion and case-reply disarm are not in this step.",
+  "evidence_sources": [
+    "display_ble_hci_radio_update_erase.c: 0106FD00, require response[6]==0",
+    "display_ble_hci_radio_write_command.c: 0103FD (address LE32 + payload)",
+    "EMSMM_NVMEraseMain.c / WriteAtAddress.c / WriteContinue.c: magic CM, status 0/0x12/0x2f/0x0c",
+    "em9305_hci_cmd_tables.c: 0xFD06 EMSMM_NVMEraseMain, 0xFD03 WriteAtAddress, 0xFD04 WriteContinue"
+  ],
+  "model": {
+    "configurationMode": "stands in for magic 0x53535353 / 0xa9a9a9a9",
+    "FD06_NVMEraseMain": "CM required; plen 0; clears memoryFixtures below 0x00F00000 (keeps RF 0x00F0xxxx); NvmMainErased=true",
+    "FD05_NVMEraseFull": "same clear as main (functional)",
+    "FD07_NVMErasePage": "CM + LE32 address; clears 4 KiB window (not a measured page size)",
+    "FD03_WriteAtAddress": "CM + plen>=5; writes payload into memoryFixtures; sets write cursor",
+    "FD04_WriteContinue": "CM + pending cursor; appends at cursor",
+    "FD01": "unchanged fixture read path (boot trim/version before CM)",
+    "prepare_fixtures": "0x00F0040C and 0x00F0041C synthetic zeros added to controller-peripherals.resc"
+  },
+  "unit_tests": {
+    "result": "3 passed in 21.67s",
+    "names": [
+      "test_fd06_erase_requires_configuration_mode",
+      "test_fd06_erase_in_configuration_mode_clears_main_fixtures",
+      "test_fd03_write_then_fd01_readback"
+    ]
+  },
+  "firmware_verification": {
+    "image": "opencfw-itcm-vma.app.bin (ITCM-VMA recovery image)",
+    "script": "build/em9305-nor-20261122/opencfw-itcm-vma-mismatch.resc",
+    "log": "build/em9305-nor-20261122/opencfw-nvm-erase-mismatch.log",
+    "virtual_seconds": 8,
+    "configuration_mode_after": true,
+    "nvm_main_erased": true,
+    "host_packet_count": 1778,
+    "fd06_count": 2,
+    "fd03_count": 1714,
+    "unmodeled": [
+      "0xFC4E",
+      "0xFC4E"
+    ],
+    "fc4e": {
+      "hci": "014EFC0800003000E0003000",
+      "source": "audio_ble_radio_crc_remote_52e6ac in display_ble_hci_radio_crc_remote.c",
+      "role": "CRC32 over [start,end) for update_current / update_check",
+      "status": "still unmodeled \u2014 next gap for a completed DFU check"
+    },
+    "unsupported_command_count": 2,
+    "missing_fixtures": [],
+    "advertising_enable": true,
+    "end_pc": "0x5432f8",
+    "note": "Erase and program path ran. Two FD06 successes, then a large FD03 write stream. DFU is not complete: 0xFC4E CRC is unmodeled so update_check cannot succeed. Advertising still came up on the mismatched controller."
+  },
+  "artifacts": {
+    "G2EM9305.cs": "616086999272979b610ff307d79330e57e5990ddde883d18a2ec91216da41236",
+    "controller-peripherals.resc": "9cb96283d06599e5cf98c2983ca6d16fc0c08f034e258bec7ba8560532ab30e8",
+    "controller-mismatch.resc": "25e8405b308cd73c9f3caf307e622e660e7a5e22e555c268f89c26c720cb796b",
+    "test_em9305_transport.py": "4e903d6a034aa55bb3871f8b7d53ad2948ef4c9fc61fe9c791da80c59f56762a",
+    "opencfw-nvm-erase-mismatch.log": "682c2f6325f628f7f1fcfbb24cce51ca4c8dbc538e3b02a635a9b8d71d8c8a26",
+    "opencfw-itcm-vma-mismatch.resc": "d552fc6f053ed5309b78fab526a5071b483d01a7313710862e388cf6880644d8"
+  },
+  "next": "Model HCI 0xFC4E CRC32 (and any remaining recover/finalize), re-run the mismatch pair through a completed DFU, then (3) case-reply disarm with a pogo product-test frame."
+}

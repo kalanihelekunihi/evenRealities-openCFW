@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "review_id": "P1-case-literal-pool-review-001/001",
+  "result": "pass_with_scope_limits",
+  "reviewed": [
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-literal-pool-classification-001/001/verify.py",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-literal-pool-classification-001/001/report.json",
+    "g2/evidence/case-pc-literal-coverage-unaligned-20261111.json",
+    "g2/blobs/official/g2-2.2.6.10/firmware_box.raw.bin",
+    "g2/blobs/official/g2-2.2.6.10/firmware_box.bin"
+  ],
+  "checks": {
+    "locked_raw_sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+    "locked_wrapped_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+    "raw_wrapped_relation": "wrapped[32:] equals raw byte-for-byte",
+    "raw_span": "[0x6A10,0x6A40), 48 bytes",
+    "wrapped_span": "[0x6A30,0x6A60), 48 bytes",
+    "runtime_span": "[0x08006A10,0x08006A40)",
+    "pool_sha256": "efec68a4de2cb26c8b203f31767ea9491ac7079778636d40f86477ace1ef538e",
+    "pool_hex": "6cd20008719d0008b80000204dbb000885960008edb7000891bb000871ab00081d6e00082d7f000801720008ed820008",
+    "literal_words": 12,
+    "load_sites": 22,
+    "all_sites_verified_as_16_bit_thumb_pc_relative_ldr": true,
+    "all_pc_relative_target_arithmetic_matches_recorded_word": true,
+    "reported_source_hashes_match_current_files": true,
+    "verification_script_execution": "passed; emitted 12 words, 22 sites, 48 bytes"
+  },
+  "historical_evidence": {
+    "source_sha256": "8ac8e9e31c38ae2ac9160c76ab81c98bbc3875070a42a35fdf6bbeb3e6a2b5b5",
+    "parent_span": "[0x08006A0E,0x08006A40), 50 bytes",
+    "classification_split": "[0x08006A0E,0x08006A10) remains unsupported; [0x08006A10,0x08006A40) is the 48-byte typed PC-relative literal candidate",
+    "agreement": "all 12 word values and all 22 load site coordinates in the prior evidence agree with the independently checked locked bytes"
+  },
+  "assessment": "Local data classification for exactly these 48 bytes is justified: each complete aligned little-endian word is the computed destination of at least one listed 16-bit Thumb PC-relative LDR instruction, and every listed opcode and target was checked against the locked raw image. The 2-byte predecessor remains outside this classification.",
+  "limitations": [
+    "Load-site coordinates are inherited from the historical evidence; this review verifies each listed instruction and its arithmetic but does not independently discover every LDR reference in the image.",
+    "The check does not prove that any site is reachable or executed at runtime, nor that the image has no additional entry points or nested executable content.",
+    "The 48-byte local classification does not classify neighboring bytes or establish whole-image pseudocode coverage, source completeness, or byte-identical rebuild qualification.",
+    "The verifier validates its own listed candidates; it does not independently establish the historical evidence's Ghidra function-range authentication or GNU disassembly provenance."
+  ],
+  "gate_effect": "none"
+}

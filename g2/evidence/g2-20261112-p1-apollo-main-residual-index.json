@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reproduced bounded Apollo main known-marker and zlib-like prefix sweep with corrected startup-table coordinate reconciliation.",
+  "artifacts": {
+    "corrected_sweep_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-residual-001/002/sweep.py",
+      "sha256": "e4e37a946f7a0acd8179bd72f956a5e525c099debfdbd59215ff80626af88908"
+    },
+    "corrected_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-residual-001/002/report.json",
+      "sha256": "a7f012e721fada02b34b5a0c587c7e5cc34f6b622f9140d2c94c0373e85b4278"
+    },
+    "corrected_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-residual-001/002/receipt.json",
+      "sha256": "1f47059c95ed69f25beabc5db7083be9e07d8e98438c59de70468a2fdc87859f"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-residual-review-001/002/review.md",
+      "sha256": "e77a6268f574c45f5e02068df77c72ccf787baa1267f59dec512113cabb18ebe"
+    }
+  },
+  "result": {
+    "locked_apollo_main_payload_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "fwpk_marker_hits": 2,
+    "known_layout_accepted_fwpk_hits": 0,
+    "zlib_like_prefixes": 375,
+    "complete_zlib_streams": 0,
+    "additional_nested_image_established": false,
+    "startup_table_raw_summary_span": [
+      143568,
+      143632
+    ],
+    "startup_table_runtime_summary_span": [
+      "0x45b0d0",
+      "0x45b110"
+    ],
+    "startup_table_raw_detail_span": [
+      143580,
+      143648
+    ],
+    "startup_table_runtime_detail_span": [
+      "0x45b0dc",
+      "0x45b120"
+    ],
+    "separate_documented_scatter_table_runtime_span": [
+      "0x75d3c8",
+      "0x75d410"
+    ]
+  },
+  "limits": [
+    "The current discovery-review claim 0x4330F0..0x433130 is inconsistent with the stated Apollo main mapping; table identity and ordering are unresolved.",
+    "Exact marker and zlib-like prefix sweeps do not exclude markerless, transformed or indirect runtime programs.",
+    "No full image code/data/reference closure or G1 admission."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

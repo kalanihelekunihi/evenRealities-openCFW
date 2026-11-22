@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked 15 v18 package container row-level adjudications against locked EVENOTA bytes",
+  "artifacts": {
+    "row_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-package-15-row-canonical-review-pilot-001/001/review.py",
+      "sha256": "1b48cd95739dbdc53989440f21c7b3ea278d417fc708cf5c3ab0e5003d91abfe"
+    },
+    "row_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-package-15-row-canonical-review-pilot-001/001/report.json",
+      "sha256": "d0ff93aef13391678150736cffd21c10e47a82152e2dcfefd9af5e4292bc353b"
+    },
+    "row_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-package-15-row-canonical-review-pilot-001/001/receipt.json",
+      "sha256": "ac24c281e4e3ecf8b8af7aeddff8452566f8ba0a9843d16cbcba9d4cdc56fd99"
+    },
+    "coordinator_check_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-package-15-row-canonical-review-pilot-independent-check-001/001/check.py",
+      "sha256": "f6918eed8f2522d7b34273c016db75852a0368c7aa812606e4d5d211bcd6a147"
+    },
+    "coordinator_check": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-package-15-row-canonical-review-pilot-independent-check-001/001/review.json",
+      "sha256": "81fc97c86e57b4e42c7b7b1c34b64617cfedc803010c10a689ecde8863850d3a"
+    },
+    "candidate_v18": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018/001/coverage-draft.jsonl",
+      "sha256": "e2446cc92c63055a458335d15b2f7ef2018214f31831134436962ec7ea7f384e"
+    }
+  },
+  "result": {
+    "package_rows": 15,
+    "pass_bounded": 15,
+    "revise": 0,
+    "exact_package_partition": true,
+    "canonical_row_hashes_computed": 15,
+    "validator_review_records_created": 0
+  },
+  "limits": [
+    "Container classification is at package scope; nested payload semantics remain separately reviewed.",
+    "No authenticated reviewer registry, canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

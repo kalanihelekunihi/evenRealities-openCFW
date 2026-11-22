@@ -8,6 +8,12 @@
 
 extern uint32_t __StackTop;
 extern void Reset_Handler(void);
+#if defined(SVCALL_AS_NORMAL_FUNCTION)
+extern void r1_bootloader_cordio_irq_forward(void);
+#define R1_CORDIO_IRQ(name) r1_bootloader_cordio_irq_forward
+#else
+#define R1_CORDIO_IRQ(name) name
+#endif
 
 /* Match the pinned GCC startup's default 16 KiB stack and 16 KiB heap.
  * nrf_common.ld places these sections and computes __StackLimit/Top. */
@@ -91,24 +97,24 @@ const uintptr_t __isr_vector[128]
     [12] = VECTOR(DebugMon_Handler),
     [14] = VECTOR(PendSV_Handler),
     [15] = VECTOR(SysTick_Handler),
-    [16] = VECTOR(POWER_CLOCK_IRQHandler),
-    [17] = VECTOR(RADIO_IRQHandler),
+    [16] = VECTOR(R1_CORDIO_IRQ(POWER_CLOCK_IRQHandler)),
+    [17] = VECTOR(R1_CORDIO_IRQ(RADIO_IRQHandler)),
     [18] = VECTOR(UARTE0_UART0_IRQHandler),
     [19] = VECTOR(SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQHandler),
     [20] = VECTOR(SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQHandler),
     [21] = VECTOR(NFCT_IRQHandler),
     [22] = VECTOR(GPIOTE_IRQHandler),
     [23] = VECTOR(SAADC_IRQHandler),
-    [24] = VECTOR(TIMER0_IRQHandler),
-    [25] = VECTOR(TIMER1_IRQHandler),
+    [24] = VECTOR(R1_CORDIO_IRQ(TIMER0_IRQHandler)),
+    [25] = VECTOR(R1_CORDIO_IRQ(TIMER1_IRQHandler)),
     [26] = VECTOR(TIMER2_IRQHandler),
     [27] = VECTOR(RTC0_IRQHandler),
     [28] = VECTOR(TEMP_IRQHandler),
     [29] = VECTOR(RNG_IRQHandler),
     [30] = VECTOR(ECB_IRQHandler),
-    [31] = VECTOR(CCM_AAR_IRQHandler),
+    [31] = VECTOR(R1_CORDIO_IRQ(CCM_AAR_IRQHandler)),
     [32] = VECTOR(WDT_IRQHandler),
-    [33] = VECTOR(RTC1_IRQHandler),
+    [33] = VECTOR(R1_CORDIO_IRQ(RTC1_IRQHandler)),
     [34] = VECTOR(QDEC_IRQHandler),
     [35] = VECTOR(COMP_LPCOMP_IRQHandler),
     [36] = VECTOR(SWI0_EGU0_IRQHandler),

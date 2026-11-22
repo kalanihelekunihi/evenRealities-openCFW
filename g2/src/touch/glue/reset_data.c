@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "touch_clock_state.h"
 
 /* Locked reset-copy initializer, corroborated by vendor system_cat2.c's
  * 24 MHz default-clock formulas. Runtime SystemInit updates are separate. */

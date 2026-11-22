@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded audit of eight touch/case image unknown rows",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-touch-case-unknown-workpack-001/001/audit.py",
+      "sha256": "1f7b9ed1c0a4668cc6a646297122914e64789ebd7b1dafec1eacdf8413c5bb00"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-touch-case-unknown-workpack-001/001/report.json",
+      "sha256": "7995377c255903d5789a3eb3e290d34edbec0aefc1470daa0c6dd0c6b03bc5bb"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-touch-case-unknown-workpack-001/001/receipt.json",
+      "sha256": "8261531a59e201167f54e6f7b529beb02719b8f4b765557b878773f936091000"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-touch-case-unknown-independent-review-001/001/review.json",
+      "sha256": "cefeae115c32b709aa46b20db6ad00c74ff6950c8e856ae91b04e257226aee53"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-touch-case-unknown-independent-review-001/001/review.py",
+      "sha256": "cbf619dc64a77adf6f4e67cc4b55d819a0ff5a10aae1d74f92110bddc2a7fdb4"
+    }
+  },
+  "result": {
+    "selected_unknown_image_rows": 8,
+    "bounded_reviewed_rows": 8,
+    "unknowns_promoted": 0,
+    "canonical_review_ids_assigned": 0,
+    "touch_ram_source_byte_equality_checked": true,
+    "case_transform_source_pin_checked": true
+  },
+  "limits": [
+    "Finer code/data subledgers are P2 work unless a specific source, destination, mapping, guard or image discovery gap blocks G1.",
+    "No canonical admission, authenticated registry, or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

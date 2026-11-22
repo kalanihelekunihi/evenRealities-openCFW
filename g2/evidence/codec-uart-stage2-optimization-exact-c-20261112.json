@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "target": "Exact C-built G2 codec UART stage-2 functions under supported GCC optimization variants",
+  "stock": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "artifact_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "inventory": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage2/functions-000.jsonl",
+    "inventory_sha256": "d0f06dfb029337f5515417ea8b1f3b16ae13ba828ffef8ab6bce8ff143e3240b"
+  },
+  "qualification": {
+    "receipt": "build/g2-codec-uart-stage2-opt-matrix-qual-20261112/source-plan.json",
+    "receipt_sha256": "2b499d5ed8fc8125544678dec6ae24a244a05f0ebda26238dae9fb1fab1129cc",
+    "audit": "build/g2-codec-uart-stage2-opt-matrix-qual-20261112/qualification.json",
+    "audit_sha256": "ad66c37d0216091f24a837e13489d4468b34be6ab712cde7a0dced761c2c411c",
+    "candidate_units": 264,
+    "compiled_units": 176,
+    "unsupported_variant": "-Oz: GCC 6.3 rejects this optimization spelling",
+    "selected_regions": [
+      {
+        "symbol": "gx8002_uart_stage2_spi_enable_387c",
+        "source": "g2/src/codec/app-callback/uart_stage2_gap_small.c",
+        "optimization": "-Os",
+        "stock_offset": [
+          14540,
+          14598
+        ],
+        "bytes": 58,
+        "sha256": "10cfd58986b187a933f8e1be984511e5786cc1df00f4ef7bec811872287ddfda",
+        "bindings": {
+          "gx8002_uart_stage2_spi_read_34a4": "0x100034a4",
+          "gx8002_uart_stage2_spi_write_35a8": "0x100035a8",
+          "gx8002_uart_stage2_spi_wait_ready_385c": "0x1000385c"
+        }
+      },
+      {
+        "symbol": "gx8002_uart_stage2_spi_enable_pair_38b8",
+        "source": "g2/src/codec/app-callback/uart_stage2_gap_small.c",
+        "optimization": "-Os",
+        "stock_offset": [
+          14600,
+          14666
+        ],
+        "bytes": 66,
+        "sha256": "e75fb48d65f20bde6e5cbabf69c1f00cca85c76df3886fa1c012d643d4c9cd50",
+        "bindings": {
+          "gx8002_uart_stage2_spi_read_34a4": "0x100034a4",
+          "gx8002_uart_stage2_spi_write_35a8": "0x100035a8",
+          "gx8002_uart_stage2_spi_wait_ready_385c": "0x1000385c"
+        }
+      },
+      {
+        "symbol": "gx8002_uart_stage2_pool_free_wrapper_6168",
+        "source": "g2/src/codec/app-callback/uart_stage2_pool_wrappers.c",
+        "optimization": "-Os",
+        "stock_offset": [
+          25016,
+          25024
+        ],
+        "bytes": 8,
+        "sha256": "a8d2053faa21656bd4def9c5933ed4c9c013520e45d946e35f3d9bbc2314a08e",
+        "bindings": {
+          "gx8002_uart_stage2_pool_free_6154": "0x10006154"
+        }
+      },
+      {
+        "symbol": "gx8002_uart_stage2_serialdown_finish_token_5604",
+        "source": "g2/src/codec/app-callback/uart_stage2_serialdown_helpers.c",
+        "optimization": "-Os",
+        "stock_offset": [
+          22100,
+          22134
+        ],
+        "bytes": 34,
+        "sha256": "b94438cf06eb33437f8f7af9cc85e1516da566a2788932f46ec25370e43ee968",
+        "bindings": {
+          "gx8002_uart_stage2_console_putc_2a60": "0x10002a60"
+        }
+      },
+      {
+        "symbol": "gx8002_uart_stage2_set_ldo_analog_voltage_4408",
+        "source": "g2/src/codec/app-callback/uart_stage2_small.c",
+        "optimization": "-Og",
+        "stock_offset": [
+          17496,
+          17522
+        ],
+        "bytes": 26,
+        "sha256": "186307ebae05a90ec23c21fa8645add9b1680ed47915a8db2d90da963321a73f",
+        "bindings": {}
+      },
+      {
+        "symbol": "gx8002_uart_stage2_shell_rx_ready_6170",
+        "source": "g2/src/codec/app-callback/uart_stage2_uart_helpers.c",
+        "optimization": "-Os",
+        "stock_offset": [
+          25024,
+          25032
+        ],
+        "bytes": 8,
+        "sha256": "e51e9645f5de54463967565c418b6683e10aa3166b72597c1e2399325950eb17",
+        "bindings": {
+          "gx8002_uart_stage2_console_rx_ready_2a98": "0x10002a98"
+        }
+      }
+    ],
+    "selected_bytes": 200,
+    "integrated_plan": "tools/build/source-plan.json",
+    "integrated_plan_sha256": "d66e3ff67c08c59e384e88f6e1121ee7633050df99fd47aaeafabbeb820cff41",
+    "policy": "Only complete stock-anchored functions with matching size and SHA-256 enter the plan. Relocation-bearing functions bind only stock-corpus-listed callees and must match after isolated C-SKY link."
+  },
+  "verification": {
+    "hybrid_report": "build/g2-codec-opt-arc-reloc-exact-hybrid-20261112/build-report.json",
+    "hybrid_report_sha256": "d9a460468f28acccd096ab33722591811d48a0ced7fff6f846e2d0ea11291a87",
+    "coverage_report": "build/g2-codec-opt-arc-reloc-exact-hybrid-20261112/coverage.json",
+    "coverage_report_sha256": "d22bdfd7b26e45a2eef6cc27d0f3cad748fad9e0fe5ed0ca04cae8ddddd876e1",
+    "bundle_size": 4301227,
+    "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "source_completeness_proven": false,
+    "codec_source_built_bytes": 1216,
+    "codec_pull_through_bytes": 201756
+  },
+  "limits": [
+    "The optimization sweep covered the 88 stage-2 UART C units; it does not establish complete codec source ownership.",
+    "The hybrid OTA hash still depends on codec and other payload binary pull-through.",
+    "The G2 workflow pseudocode and source-completeness gates remain unrun; hardware boot is unverified."
+  ]
+}

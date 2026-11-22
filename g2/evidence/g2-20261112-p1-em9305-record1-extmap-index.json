@@ -1,0 +1,68 @@
+{
+  "addresses_prior_decoder_gap": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-small-record-census-repro-index.json",
+    "sha256": "c297772124a799d35f7dde3d58c461d90dbf3b39443e17bac1c7662197c37d19"
+  },
+  "artifacts": {
+    "code_units": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-record1-extmap-001/001/code-units.jsonl",
+      "sha256": "6f0d2bec9e6230ed33b6781244f93fa059a05f4817a6842126a2bdf16ca094d8"
+    },
+    "disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-record1-extmap-001/001/record1-extmap.objdump.txt",
+      "sha256": "8fe70e3aad31acff4403b887a9dd332af815840b75908b0d4b58f6d8b99e30bc"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-record1-extmap-review-001/001/review.json",
+      "sha256": "e5f22396e0f814fdf130c16e75a3098cc408ffc20b3608bb6ea46b94ce7fb100"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-record1-extmap-review-001/001/review.py",
+      "sha256": "fd72cd8a33791d1aa7a3a2fbc67f140f651af079dc0bdfbab0257afc3339902f"
+    },
+    "receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-record1-extmap-001/001/receipt.json",
+      "sha256": "a88214c32f7fcee37b72f695df23e2a740635b318e45bbf58be2ef687fb12355"
+    },
+    "report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-record1-extmap-001/001/report.json",
+      "sha256": "2070ebd101b4124d88b9678973ffa30dcbeacca82b7cfc294858324b6ba77d1f"
+    },
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-record1-extmap-001/001/reproduce.py",
+      "sha256": "23508896dc92f4526d6492d49eeeaab59d0a606752915da2f028cad339912937"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-record1-extmap-review-001/001/receipt.json",
+      "sha256": "a47506f9bbb8f07c58f8f37c329d58ae9492c7b23225459bdaff45ceceaa6efe"
+    }
+  },
+  "campaign_id": "20261112T092142Z",
+  "limits": [
+    "A linear decode cannot establish code role or runtime reachability for all 644 bytes.",
+    "The .incbin wrapper is an analysis fixture, not C reconstruction or a firmware build input.",
+    "External NVM selection, whole-record discovery, canonical admission and G1 remain open."
+  ],
+  "result": {
+    "byte_roundtrip_exact": true,
+    "code_unit_partition_exact": true,
+    "code_units": 249,
+    "decoded_bytes": 644,
+    "record1_decoded_payload_span": [
+      348,
+      992
+    ],
+    "record1_decoded_runtime_span": [
+      "0x300400",
+      "0x300684"
+    ],
+    "unrecognized_decoder_rows": 0
+  },
+  "schema_version": 1,
+  "scope": "Independently reviewed linear ARC code-unit map for EM9305 record-1 pre-INI bytes with vendor APEX extension names.",
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

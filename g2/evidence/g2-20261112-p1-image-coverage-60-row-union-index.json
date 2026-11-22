@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed exact row-ID union of five image-scope workpacks and 67 package/payload rows against selected v017",
+  "artifacts": {
+    "union_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-60-row-union-001/001/audit.py",
+      "sha256": "e1f6d346cb4c4ce80daf47af755cb4e9ef345944d540923bb01e2da2a6d9b0c4"
+    },
+    "union_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-60-row-union-001/001/report.json",
+      "sha256": "1ed65dc9bd4e037b780842f4d10eaf375de338a4e67e2eaa5c5b4369aa6b56eb"
+    },
+    "union_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-60-row-union-001/001/receipt.json",
+      "sha256": "c0d71054768c9226e3d21ead2152ebb1e76f39ea367728609751c278858ac98f"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-60-row-union-independent-review-001/001/review.py",
+      "sha256": "352437e940274d2ebcf390e1d81d38e5b965492d22d24587508227ccd0bdb464"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-60-row-union-independent-review-001/001/review.json",
+      "sha256": "36c85e4450a433064d5284ce0239d42202fce4be08dd20c0c8500aa2d9c331d4"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-60-row-union-independent-review-001/001/receipt.json",
+      "sha256": "8bfcea5fdc6b54aae724348c4d46a65a74e20e28dc04868e6b756fb5d396e0a4"
+    },
+    "package_payload_union_index": {
+      "path": "g2/evidence/g2-20261112-p1-package-payload-67-row-union-index.json",
+      "sha256": "5f8b287f5a28751d0524a9e8933099af46290b7de500c81dd438cc707a3864c1"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "image_candidate_rows": 60,
+    "image_workpacks": 5,
+    "nonunknown_image_rows": 20,
+    "unknown_image_rows": 40,
+    "package_payload_rows_separately_reviewed": 67,
+    "all_scope_rows": 127,
+    "missing_ids": 0,
+    "extra_ids": 0,
+    "duplicate_ids": 0,
+    "canonical_review_ids_assigned": 0
+  },
+  "limits": [
+    "Exact workpack row coverage does not re-adjudicate every classification, admit canonical records, or prove image discovery closure.",
+    "Four stale pins in older readiness indexes are documented separately as a fixed snapshot; current selected row files are hash-pinned here."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

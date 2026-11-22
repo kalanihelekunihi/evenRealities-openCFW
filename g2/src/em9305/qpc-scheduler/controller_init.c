@@ -6353,13 +6353,7 @@ uint32_t opencfw_em9305_ll_link_process_318740(uintptr_t record,uintptr_t decode
 uint32_t opencfw_em9305_dispatch_32fc88(void) { return 0u; }
 extern uintptr_t opencfw_em9305_ll_link_pending_30858c(void);
 /* Native31ba54..31ba78: consume pending state0/1 queue after four-byte prefix. */
-uintptr_t opencfw_em9305_ll_pending_packet_take_31ba54(uintptr_t state)
-{
- uint32_t value=*(volatile uint8_t *)state;
- if(value!=0u && value!=1u) return 0u;
- volatile uint8_t handler;
- return opencfw_em9305_wsf_event_remove(state+4u,(uintptr_t)&handler);
-}
+extern uintptr_t opencfw_em9305_dispatch_child_31ba54(uintptr_t state);
 extern uint32_t opencfw_em9305_ll_link_restart_308614(uint32_t);
 extern uint32_t opencfw_em9305_ll_link_dispatch_331d94(uintptr_t);
 /* Native331d94..331dc0: optional packet accounting, release and restart. */
@@ -7318,12 +7312,12 @@ uint32_t opencfw_em9305_ll_slot_flag_307480(uint32_t id,uint32_t mask)
 
 /* Native30e054..30e0d4: preserve id saved in BL delay slot before first child,
  * validate slot state and construct/send the thirty-byte task command. */
-extern uint32_t opencfw_em9305_ll_slot_pending_307434(uint32_t id,uint32_t operation);
+extern uint32_t opencfw_em9305_child_307434(uint32_t id,uint32_t operation);
 extern uint32_t opencfw_em9305_ll_slot_callback_3072f0(uint32_t id);
 uint32_t opencfw_em9305_ll_command_30e054(uint32_t id,uintptr_t first,
                                        uint32_t value,uintptr_t second)
 {
- if(opencfw_em9305_ll_slot_pending_307434(id,24u)!=0u) return 12u;
+ if(opencfw_em9305_child_307434(id,24u)!=0u) return 12u;
  if(opencfw_em9305_ll_slot_callback_3072f0(id)!=0u) return 12u;
  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
@@ -7352,27 +7346,6 @@ uint32_t opencfw_em9305_ll_slot_callback_3072f0(uint32_t id)
  if(callback==0u) return 0u;
  return ((uint32_t (*)(uint32_t))callback)(id);
 }
-/* Source-owned operation-to-pending-bit mapping, native ROM334479..334488.
- * Product data, not executable instructions. Bound to authenticated EM image
- * by slot-pending-map-receipt.json; only indices0..14 are permitted. */
-static const uint8_t opencfw_em9305_slot_pending_map[15]={
- 17u,1u,0u,19u,1u,1u,2u,3u,1u,1u,4u,21u,5u,6u,7u
-};
-/* Native307434..307480: sparse operation filter then code or pending-bit test. */
-uint32_t opencfw_em9305_ll_slot_pending_307434(uint32_t id,uint32_t operation)
-{
- uint32_t index=operation-21u;
- if(index>14u) return 0u;
- if(((0x7ccfu>>index)&1u)==0u) return 0u;
- uint32_t offset=opencfw_em9305_slot_offset(id);
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
- uintptr_t slot=slots+offset;
- uint32_t code=opencfw_em9305_slot_pending_map[index];
- if(*(volatile uint8_t *)(slot+635u)==code) return 1u;
- uint32_t flags=*(volatile uint32_t *)(slot+644u); /* native LD.AS161 */
- return ((flags>>code)&1u)!=0u;
-}
-
 extern uint32_t opencfw_em9305_ll_flags_command_30d54c(uint32_t id,uintptr_t flags);
 /* Native332490..3324e0: private command0xfff7 builds two normalized flags. */
 uint32_t opencfw_em9305_dispatch_332490(uintptr_t request,uintptr_t input)
@@ -7581,7 +7554,7 @@ extern uint32_t opencfw_em9305_ll_mask_count_30c414(uint32_t low,uint32_t high);
 /* Native30cf88..30d00c: pending/state gate, masked feature words and command. */
 uint32_t opencfw_em9305_ll_mask_command_30cf88(uint32_t id,uintptr_t input)
 {
- if(opencfw_em9305_ll_slot_pending_307434(id,22u)!=0u) return 12u;
+ if(opencfw_em9305_child_307434(id,22u)!=0u) return 12u;
  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
@@ -8552,7 +8525,7 @@ uint32_t opencfw_em9305_ll_private_radio_30d8fc(uint32_t mask,uint32_t gain,uint
   if(id>=*(volatile uint8_t *)(config+34u)) return 0u;
   if(opencfw_em9305_ll_slot_active_30731c(id)==0u) continue;
   if(opencfw_em9305_ll_slot_state_306fdc(id)!=1u) continue;
-  if(opencfw_em9305_ll_slot_pending_307434(id,33u)!=0u) return 12u;
+  if(opencfw_em9305_child_307434(id,33u)!=0u) return 12u;
   uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
   if(message==0u) continue;
   *(volatile uint16_t *)(message+2u)=0x2101u;
@@ -8690,7 +8663,7 @@ uint32_t opencfw_em9305_ll_connection_read_mark_309030(uint32_t id)
 /* Native30c860..30c8c6: pending read path precedes max-slot validation. */
 uint32_t opencfw_em9305_ll_connection_read_30c860(uint32_t id)
 {
- if(opencfw_em9305_ll_slot_pending_307434(id,27u)!=0u) {
+ if(opencfw_em9305_child_307434(id,27u)!=0u) {
   if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 12u;
   if(opencfw_em9305_ll_connection_read_ready_3073ec(id)==0u) return 12u;
   (void)opencfw_em9305_ll_connection_read_mark_309030(id);
@@ -8713,7 +8686,7 @@ uint32_t opencfw_em9305_ll_connection_action_30c8c8(uint32_t id)
  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
- if(opencfw_em9305_ll_slot_pending_307434(id,28u)!=0u) return 12u;
+ if(opencfw_em9305_child_307434(id,28u)!=0u) return 12u;
  uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
  if(message==0u) return 0u;
  *(volatile uint16_t *)(message+2u)=0x1c01u;
@@ -8790,7 +8763,7 @@ uint32_t opencfw_em9305_ll_connection_times_30d3c4(uint32_t id,uint32_t size,uin
  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
- if(opencfw_em9305_ll_slot_pending_307434(id,31u)!=0u) return 12u;
+ if(opencfw_em9305_child_307434(id,31u)!=0u) return 12u;
  if(((size-252u)&65535u)<0xff1fu || timing<328u) return 18u;
  config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
  uint32_t version=*(volatile uint8_t *)(config+4u);
@@ -8814,7 +8787,7 @@ uint32_t opencfw_em9305_ll_connection_parameters_30b1b0(uint32_t id,uintptr_t co
  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
- if(opencfw_em9305_ll_slot_pending_307434(id,21u)!=0u) return 12u;
+ if(opencfw_em9305_child_307434(id,21u)!=0u) return 12u;
  if(opencfw_em9305_ll_slot_state_306fdc(id)==1u &&
     (*(volatile uint8_t *)(uintptr_t)0x805a94u&2u)==0u) return 12u;
  uint32_t status=opencfw_em9305_ll_connection_parameters_validate_30a6b4(controls);
@@ -9511,15 +9484,7 @@ uintptr_t opencfw_em9305_ll_primary_pending_30853c(void)
  return 0u;
 }
 /* Native317624..317650: enabled stream or state-zero/one consumes queue. */
-uintptr_t opencfw_em9305_ll_stream_take_317624(uintptr_t record)
-{
- if(*(volatile uint8_t *)(record+108u)==0u) {
-  uint32_t state=*(volatile uint8_t *)(record+44u);
-  if(state!=0u && state!=1u) return 0u;
- }
- uint8_t handler;
- return opencfw_em9305_wsf_event_remove(record+48u,(uintptr_t)&handler);
-}
+extern uintptr_t opencfw_em9305_dispatch_child_317624(uintptr_t record);
 /* Native30858c..308612: forward link scan followed by eligible streams.
  * Limits are reread on every iteration; config pointers reload after a
  * child returns zero, while the record base reloads every iteration. */
@@ -9533,7 +9498,7 @@ uintptr_t opencfw_em9305_ll_link_pending_30858c(void)
    offset=(uint32_t)index*(uint32_t)(int32_t)(int16_t)stride;
    uintptr_t record=base+offset;
    if(*(volatile uint8_t *)record!=0u && *(volatile uint8_t *)(record+532u)==0u) {
-    uintptr_t packet=opencfw_em9305_ll_pending_packet_take_31ba54(record+532u);
+    uintptr_t packet=opencfw_em9305_dispatch_child_31ba54(record+532u);
     if(packet!=0u) return packet;
     config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
    }
@@ -9547,7 +9512,7 @@ uintptr_t opencfw_em9305_ll_link_pending_30858c(void)
   if(*(volatile uint8_t *)record!=0u) {
    uintptr_t state=*(volatile uint32_t *)(record+4u);
    if(*(volatile uint8_t *)(state+3u)==0u && *(volatile uint8_t *)(record+44u)==0u) {
-    uintptr_t packet=opencfw_em9305_ll_stream_take_317624(record);
+    uintptr_t packet=opencfw_em9305_dispatch_child_317624(record);
     if(packet!=0u) return packet;
     config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
    }
@@ -10935,7 +10900,7 @@ uintptr_t opencfw_em9305_radio_stream_allocate_316ad4(uintptr_t record)
 /* Native31ac84..31ace0: record deactivation, child release and queue drain.
  * Native has no defined result contract; all selected consumers discard R0. */
 extern void opencfw_em9305_radio_stream_release_31ace0(uintptr_t);
-extern void opencfw_em9305_radio_record_queue_step_317320(uintptr_t);
+extern void opencfw_em9305_child_317320(uintptr_t);
 void opencfw_em9305_radio_record_release_31ac84(uintptr_t record)
 {
  *(volatile uint8_t *)record=0u;
@@ -10949,13 +10914,7 @@ void opencfw_em9305_radio_record_release_31ac84(uintptr_t record)
  }
  if(*(volatile uint8_t *)(record+3u)==1u)
   while(opencfw_em9305_wsf_queue_empty(record+184u)==0u)
-   opencfw_em9305_radio_record_queue_step_317320(record);
-}
-/* Native317320..317334: remove raw queued node then release pool node. */
-void opencfw_em9305_radio_record_queue_step_317320(uintptr_t record)
-{
- uintptr_t node=opencfw_em9305_wsf_queue_remove(record+184u);
- if(node!=0u) (void)opencfw_em9305_wsf_pool_release(node);
+   opencfw_em9305_child_317320(record);
 }
 /* Native31ace0..31ad64: deactivate stream and drain mode-specific queues. */
 extern uintptr_t opencfw_em9305_radio_stream_receive_take_317508(uintptr_t);
@@ -10978,7 +10937,7 @@ void opencfw_em9305_radio_stream_release_31ace0(uintptr_t stream)
   while((payload=opencfw_em9305_radio_stream_receive_take_317508(stream))!=0u)
    (void)opencfw_em9305_ll_receive_buffer_release_31761c(payload);
   uintptr_t event;
-  while((event=opencfw_em9305_ll_stream_take_317624(stream))!=0u){
+  while((event=opencfw_em9305_dispatch_child_317624(stream))!=0u){
    (void)opencfw_em9305_wsf_event_release(event);
    (void)opencfw_em9305_wsf_critical_enter();
    uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805addu;
@@ -12107,14 +12066,6 @@ uint32_t opencfw_em9305_radio_encode_324594(uintptr_t record,uintptr_t output,ui
  event[4]=0u;event[3]=0u;event[2]=0u;event[1]=0u;event[0]=7u;
  return opencfw_em9305_radio_compose_323dc0(record,0u,(uint8_t)flags,0u,(uintptr_t)event,length,output,7u,count);
 }
-/* Native3245ec..324628: null-record composition with explicit byte flags. */
-uint32_t opencfw_em9305_radio_encode_3245ec(uint32_t flags,uintptr_t output,uintptr_t length,uint32_t count)
-{
- uint8_t event[5];
- event[0]=7u;event[4]=0u;event[3]=0u;event[2]=0u;event[1]=0u;
- return opencfw_em9305_radio_compose_323dc0(0u,0u,(uint8_t)flags,0u,(uintptr_t)event,length,output,8u,count);
-}
-
 extern uint32_t opencfw_em9305_radio_channels_317ac0(uintptr_t);
 extern uint32_t opencfw_em9305_radio_phy_tables_31b6cc(uintptr_t);
 extern uint32_t opencfw_em9305_radio_limit_317b10(uintptr_t,uintptr_t);
@@ -14656,13 +14607,8 @@ uint32_t opencfw_em9305_dispatch_3316e0(uintptr_t request,uintptr_t input)
 
 /* Authenticated PHY policy332f3c/332f80 and providers30d4e4/30dd04.
  * Feature checks precede protocol validation; disabled PHY fields zeroed. */
-uint32_t opencfw_em9305_command_phy_capable_332f80(uint32_t first,uint32_t second)
-{
- uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805a94u;
- if((flags&256u)==0u&&((first|second)&2u)!=0u)return 0u;
- if((flags&2048u)==0u&&((first|second)&4u)!=0u)return 0u;
- return 1u;
-}
+extern uint32_t opencfw_em9305_config_phy_pair_valid_332f80(uint32_t first,
+                                                              uint32_t second);
 uint32_t opencfw_em9305_command_phy_validate_332f3c(uint32_t mode,uint32_t first,uint32_t second,uint32_t kind)
 {
  if(kind>2u||(mode&~3u)!=0u||(first|second)>7u)return 17u;
@@ -14673,7 +14619,7 @@ uint32_t opencfw_em9305_command_phy_validate_332f3c(uint32_t mode,uint32_t first
 }
 uint32_t opencfw_em9305_command_30d4e4(uint32_t mode,uint32_t first,uint32_t second)
 {
- if(opencfw_em9305_command_phy_capable_332f80(first,second)==0u)return 17u;
+ if(opencfw_em9305_config_phy_pair_valid_332f80(first,second)==0u)return 17u;
  uint32_t status=opencfw_em9305_command_phy_validate_332f3c(mode,first,second,0u);
  if(status!=0u)return status;
  if((mode&2u)!=0u)second=0u;
@@ -14688,8 +14634,8 @@ uint32_t opencfw_em9305_command_30dd04(uint32_t id,uint32_t mode,uint32_t first,
  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
  if(id>=*(volatile uint8_t *)(config+34u))return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u)return 2u;
- if(opencfw_em9305_ll_slot_pending_307434(id,32u)!=0u)return 12u;
- if(opencfw_em9305_command_phy_capable_332f80(first,second)==0u)return 17u;
+ if(opencfw_em9305_child_307434(id,32u)!=0u)return 12u;
+ if(opencfw_em9305_config_phy_pair_valid_332f80(first,second)==0u)return 17u;
  uint32_t status=opencfw_em9305_command_phy_validate_332f3c(mode,first,second,kind);
  if(status!=0u)return status;
  uintptr_t message=opencfw_em9305_wsf_event_allocate(10u);
@@ -16225,7 +16171,6 @@ uint32_t opencfw_em9305_config_phy_pair_valid_332f80(uint32_t first,uint32_t sec
  return 1u;
 }
 
-extern uint32_t opencfw_em9305_config_phy_pair_valid_332f80(uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_config_basic_apply_3087ec(uintptr_t,uintptr_t);
 static inline uint32_t opencfw_em9305_config_basic_stride(uint32_t i)
 {uint32_t result;result=(uint32_t)i*10u;return result;}
@@ -17373,7 +17318,6 @@ uint32_t opencfw_em9305_dispatch_331dc0(uintptr_t request,uintptr_t input)
 }
 
 extern uint32_t opencfw_em9305_command_advertising_data_notify_306a7c(uint32_t);
-extern uint32_t opencfw_em9305_command_radio_power_310230(int32_t,uint32_t);
 /* Native30cee4..30ceee: caller input R0 survives the byte store. */
 uint32_t opencfw_em9305_command_vendor_byte_30cee4(int32_t value)
 {*(volatile uint8_t *)(uintptr_t)0x805a9cu=(uint8_t)value;return (uint32_t)value;}
@@ -17411,7 +17355,7 @@ uint32_t opencfw_em9305_command_advertising_power_30bb50(uintptr_t output)
 {
  if(opencfw_em9305_ll_connection_gate_30e524()==0u)return 12u;
  int32_t requested=(int8_t)*(volatile uint8_t *)(uintptr_t)0x805a9cu;
- uint32_t actual=opencfw_em9305_command_radio_power_310230(requested,0u);
+ uint32_t actual=opencfw_em9305_ll_signed_clamp_310230((uint32_t)requested);
  *(volatile uint8_t *)output=(uint8_t)actual;
  return 0u;
 }
@@ -17442,18 +17386,6 @@ uint32_t opencfw_em9305_command_advertising_parameters_30ce18(uint32_t minimum,u
  *(volatile uint32_t *)(state+12u)=(uint32_t)value;
  *(volatile uint32_t *)(state+16u)=(uint32_t)(value>>32u);
  return 0u;
-}
-
-/* Native310230..310260: signed live upper/lower caps and measured query. */
-uint32_t opencfw_em9305_command_radio_power_310230(int32_t requested,uint32_t unused)
-{
- (void)unused;
- int32_t measured=(int32_t)opencfw_em9305_radio_status_311a00(1u);
- int32_t upper=(int8_t)*(volatile uint8_t *)(uintptr_t)0x8012b8u;
- if(upper>measured)upper=measured;
- if(upper<requested)return (uint32_t)upper;
- int32_t lower=(int8_t)*(volatile uint8_t *)(uintptr_t)0x8012b9u;
- return (uint32_t)(lower>requested?lower:requested);
 }
 
 extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
@@ -17653,7 +17585,7 @@ uint32_t opencfw_em9305_command_packet_count_30c7b0(uintptr_t output)
 {if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t count=*(volatile uint8_t *)(config+12u);*(volatile uint8_t *)output=(uint8_t)count;return 0u;}
 /* Native30bd8c tail306ee8..306f08: initial output sentinel before lookup. */
 uint32_t opencfw_em9305_command_packet_power_30bd8c(uint32_t id,uintptr_t output)
-{*(volatile uint8_t *)output=129u;uintptr_t record=opencfw_em9305_radio_record_find_31aa64((uint8_t)id);if(record==0u)return 66u;int32_t requested=*(volatile int8_t *)(record+60u);uint32_t power=opencfw_em9305_command_radio_power_310230(requested,0u);*(volatile uint8_t *)output=(uint8_t)power;return 0u;}
+{*(volatile uint8_t *)output=129u;uintptr_t record=opencfw_em9305_radio_record_find_31aa64((uint8_t)id);if(record==0u)return 66u;int32_t requested=*(volatile int8_t *)(record+60u);uint32_t power=opencfw_em9305_ll_signed_clamp_310230((uint32_t)requested);*(volatile uint8_t *)output=(uint8_t)power;return 0u;}
 
 /* Native31ac54..31ac82: capture notification flag before clearing active byte. */
 void opencfw_em9305_command_record_clear_31ac54(uintptr_t record)
@@ -20513,7 +20445,7 @@ extra_fields:
  if(aux!=0u&&record!=0u){(void)opencfw_em9305_compose_aux_encode_324438(record,end);end+=18u;present|=32u;}
  if(power!=0u&&record!=0u){
   int32_t requested=*(volatile int8_t *)(record+2314u);
-  uint32_t actual=opencfw_em9305_command_radio_power_310230(requested,1u);
+  uint32_t actual=opencfw_em9305_ll_signed_clamp_310230((uint32_t)requested);
   *(volatile uint8_t *)end=(uint8_t)actual;end+=1u;present|=64u;
  }
  if(type==4u||type==7u||(record!=0u&&type==2u&&*(volatile uint8_t *)(record+2809u)!=0u)){
@@ -20624,26 +20556,8 @@ uint32_t opencfw_em9305_compose_action_32366c(uintptr_t record,uintptr_t output)
 /* Native312bb4..312bbe: duration piece with 300-unit guard. */
 uint32_t opencfw_em9305_compose_duration_guard_312bb4(uint32_t phy,uint32_t mode,uint32_t size)
 {return opencfw_em9305_radio_duration_piece_312b88(phy,mode,size)+300u;}
-/* Native323bac..323c08: auxiliary pointer field. Return retains native R0
- * (PHY high bits); the serialized byte2 is computed in native R2. */
-uint32_t opencfw_em9305_compose_pointer_encode_323bac(uintptr_t record,uint32_t duration,uint32_t channel,uintptr_t output)
-{
- uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805c18u;
- uint32_t metric=*(volatile uint16_t *)configuration;
- uint32_t quotient,selector;
- if(duration<0x3bfc4u){uint32_t reciprocal=0x11111112u;
-  quotient=(uint32_t)(((uint64_t)duration*(uint32_t)reciprocal)>>32);
-  quotient>>=1;selector=0u;
- }else{uint32_t reciprocal=0x69d0369eu;
-  quotient=(uint32_t)(((uint64_t)duration*(uint32_t)reciprocal)>>32);
-  quotient=((duration<<1)+duration+quotient)>>10;selector=128u;
- }
- volatile uint8_t *o=(volatile uint8_t *)output;
- o[0]=(uint8_t)(((metric<51u?1u:0u)<<6)|channel|selector);
- uint32_t phy=*(volatile uint8_t *)(record+63u);o[1]=(uint8_t)quotient;
- uint32_t bits=(phy==2u?1u:(phy==3u?2u:0u))<<13;
- o[2]=(uint8_t)((quotient|bits)>>8);return bits;
-}
+extern uint32_t opencfw_em9305_child_323bac(uintptr_t record,
+    uint32_t duration,uint32_t channel,uintptr_t output);
 /* Native32412c..324274: complete eight-way finalization switch. */
 uint32_t opencfw_em9305_compose_finalize_32412c(uintptr_t record,uintptr_t cursor,uintptr_t header,uint32_t present,uint32_t type)
 {
@@ -20682,7 +20596,7 @@ uint32_t opencfw_em9305_compose_finalize_32412c(uintptr_t record,uintptr_t curso
   channel=*(volatile uint8_t *)(record+2784u);
   *(volatile uint32_t *)(record+2780u)=bounded;
  }
- return opencfw_em9305_compose_pointer_encode_323bac(record,bounded,channel,cursor);
+ return opencfw_em9305_child_323bac(record,bounded,channel,cursor);
 }
 
 /* Native318988..3189c8: clock accuracy class plus configured offset. */
@@ -21442,7 +21356,7 @@ uint32_t opencfw_em9305_init_connection_parameters_32074c(uintptr_t input,uint32
 }
 
 extern uint32_t opencfw_em9305_init_schedule_compare_318b78(uintptr_t,uintptr_t);
-extern uint32_t opencfw_em9305_init_schedule_finish_31ec40(uintptr_t);
+extern uint32_t opencfw_em9305_scan_callback_31ec40(uintptr_t);
 /* Full native320908..320976. Delay320938 saves the input object pointer,
  * not the insertion result; every retry uses that same slot+16 object. */
 uint32_t opencfw_em9305_init_callback_320908(uintptr_t object,uint32_t incoming)
@@ -21470,7 +21384,7 @@ uint32_t opencfw_em9305_init_callback_320908(uintptr_t object,uint32_t incoming)
   }
  }
  *(volatile uint32_t *)(object+36u)=0x803b94u;
- return opencfw_em9305_init_schedule_finish_31ec40(object);
+ return opencfw_em9305_scan_callback_31ec40(object);
 }
 
 /* Complete318b78..318c18: connection arbitration with wrapped MPYWHL,
@@ -21516,62 +21430,6 @@ uint32_t opencfw_em9305_init_channel_next_325720(uint32_t channel,uint32_t mask)
  if(mask==0u)return 37u;
  for(;;){channel+=1u;if((uint8_t)channel>39u)channel=37u;if(((mask>>((channel-37u)&31u))&1u)!=0u)return (uint8_t)channel;}
 }
-/* Complete native31ec40..31ed30, retains three-argument genuine adjust
- * contract, fresh loads and incidental native R0 on each return path. */
-uint32_t opencfw_em9305_init_schedule_finish_31ec40(uintptr_t object)
-{
- uintptr_t record=*(volatile uint32_t *)(object+36u),extra=record+240u;
- uint32_t pending=*(volatile uint8_t *)(record+149u);
- if(pending==0u)pending=*(volatile uint8_t *)(extra-92u);
- if(pending!=0u){
-  uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
-  if(message==0u)return 0u;
-  *(volatile uint8_t *)(message+3u)=3u;
-  uint32_t event=record!=0x804fd8u?3u:2u;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
-  *(volatile uint8_t *)(message+2u)=(uint8_t)event;
-  return opencfw_em9305_wsf_task_message_send(handler,message);
- }
- uint32_t update=*(volatile uint8_t *)(uintptr_t)0x805a80u;
- if(update!=0u){
-  uint32_t flags=*(volatile uint8_t *)(record+65u);
-  if((flags&1u)!=0u){
-   *(volatile uint8_t *)(uintptr_t)0x805a80u=0u;
-   if((flags&2u)==0u){uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805a90u;uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805a8cu;(void)opencfw_em9305_radio_address_write_3045e8(record+2u,low,high);}
-   uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805a90u,low=*(volatile uint32_t *)(uintptr_t)0x805a8cu;
-   *(volatile uint32_t *)(extra+48u)=high;*(volatile uint32_t *)(extra+44u)=low;
-  }
- }
- uint32_t second=*(volatile uint16_t *)(record+62u),first=*(volatile uint16_t *)(record+60u);
- uint32_t time=*(volatile uint32_t *)(record+56u);
- *(volatile uint32_t *)(object+8u)=time;
- if(first!=second){
-  uint32_t prior=*(volatile uint32_t *)(extra+124u),duration=*(volatile uint32_t *)(object+12u);
-  uint32_t period=(uint32_t)(uint16_t)second*625u;
-  if(duration+prior<period&&opencfw_em9305_init_schedule_adjust_312f88(object,prior,period)!=0u){
-   time=*(volatile uint32_t *)(record+56u);
-   uint32_t current=*(volatile uint32_t *)(object+8u);
-   uint32_t result=opencfw_em9305_auxiliary_elapsed_303f8c(current,time);
-   *(volatile uint32_t *)(extra+124u)=result;return result;
-  }
- }
- uint32_t mask=*(volatile uint8_t *)(record+351u),channel=*(volatile uint8_t *)(record+201u);
- *(volatile uint32_t *)(extra+124u)=0u;
- channel=opencfw_em9305_init_channel_next_325720(channel,mask);
- second=*(volatile uint16_t *)(record+62u);first=*(volatile uint16_t *)(record+60u);
- *(volatile uint8_t *)(record+201u)=(uint8_t)channel;
- if(first==second){(void)opencfw_em9305_auxiliary_insert_313220(object);time=*(volatile uint32_t *)(object+8u);*(volatile uint32_t *)(record+56u)=time;return time;}
- first=(uint32_t)(uint16_t)first*625u;second=(uint32_t)(uint16_t)second*625u;
- time=*(volatile uint32_t *)(object+8u);uint32_t maximum=first+second;
- time+=first;*(volatile uint32_t *)(record+56u)=time;
- for(;;){
-  uint32_t success=opencfw_em9305_init_schedule_adjust_312f88(object,first,maximum);
-  time=*(volatile uint32_t *)(record+56u);
-  if(success!=0u){uint32_t current=*(volatile uint32_t *)(object+8u);uint32_t result=opencfw_em9305_auxiliary_elapsed_303f8c(current,time);*(volatile uint32_t *)(extra+124u)=result;return result;}
-  *(volatile uint32_t *)(object+8u)=time;time+=first;*(volatile uint32_t *)(record+56u)=time;
- }
-}
-
 /* Complete native312f88..3130d2. BN/BP test wrapped subtraction N;
  * list links are native previous@0,next@4. No invented iteration cap. */
 uint32_t opencfw_em9305_init_schedule_adjust_312f88(uintptr_t object,uint32_t minimum,uint32_t maximum)
@@ -21756,16 +21614,13 @@ extern uint32_t opencfw_em9305_init_registered_3263ec(uintptr_t);
 extern void opencfw_em9305_init_registered_32ce04(void);
 extern void opencfw_em9305_init_registered_3266f8(void);
 extern uint32_t opencfw_em9305_init_registered_324fb4(uintptr_t);
-/* Native307cb8..307cc2 equality getter, no incoming-argument use. */
-uint32_t opencfw_em9305_init_state_one_307cb8(void)
-{return *(volatile uint8_t *)(uintptr_t)0x8051a4u==1u;}
 /* Native307c18..307c5a. Delayed slot zero occurs on both version branches. */
 uint32_t opencfw_em9305_init_lower_307c18(uint32_t incoming)
 {
  (void)incoming;uintptr_t cfg=*(volatile uint32_t *)(uintptr_t)0x805cacu;
  uint32_t version=*(volatile uint8_t *)(cfg+4u);
  *(volatile uint32_t *)(uintptr_t)0x80297cu=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_31e8fc;
- *(volatile uint32_t *)(uintptr_t)0x80130cu=(uint32_t)(uintptr_t)opencfw_em9305_init_state_one_307cb8;
+ *(volatile uint32_t *)(uintptr_t)0x80130cu=(uint32_t)(uintptr_t)opencfw_em9305_address_busy_307cb8;
  *(volatile uint32_t *)(uintptr_t)0x805228u=0u;
  if(version<9u)return version;
  uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805b30u;

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently verified bounded Apollo main scatter table, callback targets and compressed source spans.",
+  "artifacts": {
+    "table_audit_script": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-scatter-route-review-001/001/review.py", "sha256": "271e5a8e93d92cd85a20ceee393eff4379a764581d69a49a98a3dc4b89b27db3"},
+    "table_audit_report": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-scatter-route-review-001/001/review.json", "sha256": "1176b5c4e44745f2c0b43806c5339fb7304560019f723663477c510951f0b416"},
+    "table_audit_receipt": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-scatter-route-review-001/001/receipt.json", "sha256": "cef0879ab270e67ca9afe80a517e1097399d642d65891a55071cd1a6eaafbb0b"},
+    "separate_independent_review": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-scatter-independent-review-001/001/review.json", "sha256": "b8d8fe72a2e330c5fd3bf46f7b914940f8b59b9676522446276edc44610fb949"}
+  },
+  "result": {
+    "table_full_ota_file_span": [3298280, 3298352],
+    "table_post_preamble_raw_span": [3298248, 3298320],
+    "table_runtime_span": ["0x75d3c8", "0x75d410"],
+    "table_size_bytes": 72,
+    "table_sha256": "6a45275e84e366bafefa0e5375e50e64dfcc12a7c3b1459aec921759599c9b29",
+    "destination_contracts": 5,
+    "callback_entries": 4,
+    "compressed_source_spans": [[3503895, 3512510], [3512510, 3523374], [3523374, 3523396]],
+    "static_dispatcher_reference_verified": true
+  },
+  "provenance_caveat": "The two replay traces mark worker_script_pin_matches_present_copy=false. Fresh enclosing receipts bind successful current replay scripts and matching nested trace records; telemetry is bounded corroboration, not a pristine single-script provenance chain.",
+  "limits": ["Physical execution, RAM writes and runtime branch reachability remain unproven.", "No full main discovery, G1 or P2 claim."],
+  "status": {"canonical_admission": "none", "g1": "not_run"}
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Reviewed bounded linked CPU alias mapping for the case root image",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-root-mapping-contract-001/001/audit.py",
+      "sha256": "fd6dec091e0edb9c4c917d58d1bdc70e448b2c80d27123e4a50792d3ada2c847"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-root-mapping-contract-001/001/report.json",
+      "sha256": "75fcabe03ed52828397dac3fe733f22d029e308d11eaf5cea855504b2d16335d"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-root-mapping-contract-001/001/receipt.json",
+      "sha256": "df95c38a8d96b4ef0d35603479b90f39322b954bcd0f46ceec305670864322d9"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-root-mapping-contract-review-001/001/review.json",
+      "sha256": "87726b68ecfe2af30f9da24008142da4d121195a7644f6b37049cc1ff6b93071"
+    }
+  },
+  "result": {
+    "case_image_size": 55752,
+    "case_image_sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+    "linked_cpu_alias_span": ["0x08000000", "0x0800d9c8"],
+    "reset_vector_thumb_bit_cleared": "0x08000144",
+    "wrapper_encodes_load_base": false
+  },
+  "limits": [
+    "The wrapper carries size and checksum, not a load base; linked CPU alias is inferred from the vector and candidate map.",
+    "Physical bank, option-byte swap state, install target and flash success remain unproved.",
+    "Same-release captured alias is described in provenance, but raw capture and option binaries are absent from this checkout.",
+    "No canonical image admission or G1 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

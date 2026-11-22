@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "attempt_id": "P1-gxnpu-decoder-review-001/001/review-v2",
+  "scope": "Independent structural decoder calibration review. No G1 admission or P2 semantic-completeness claim.",
+  "inputs_sha256": {
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-decoder-calibration-001/001/command-boundaries.json": "fdf5748090fba4c31b13df8ddc23cf77e563f5c3b40b7f253d94dd41a79723fb",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-decoder-calibration-001/001/receipt.json": "4a1bc82aa6ed8c6641e4549e76a154c54d48fef4e0009e9d1a8dcf6e1395cdc8",
+    "g2/tools/gxdnn_command_emitter.py": "67bece9822820e6b4c5d99b890e5f7f8275cba758755c026cb40698eb45f81da",
+    "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-discovery-review-001/001/findings-v3.json": "a57be899b3f33dfb1815d404a4a33772889a6064055f634eaa69438faf64a504"
+  },
+  "checks": [
+    {
+      "check": "locked_codec_payload_identity",
+      "size": 326092,
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "expected_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "pass": true
+    },
+    {
+      "check": "stream_span_and_hash",
+      "codec_span": [
+        101776,
+        110940
+      ],
+      "length": 9164,
+      "sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+      "pass": true
+    },
+    {
+      "check": "212_command_spans_contiguous_and_source_hash_matched",
+      "commands": 212,
+      "first": 0,
+      "last": 9164,
+      "failures": 0,
+      "pass": true
+    },
+    {
+      "check": "local_decode_reencode",
+      "decoded_commands": 212,
+      "raw_command_count": 0,
+      "roundtrip_exact": true,
+      "body_type_matches_ledger": true,
+      "pass": true
+    },
+    {
+      "check": "header_observations",
+      "nonzero_reserved_mask_records": 83,
+      "masks": {
+        "0x100": 54,
+        "0x300": 29
+      },
+      "explicit_relative_links": 1,
+      "completion_interrupts": 0,
+      "absolute_link_flag_records": 0,
+      "semantics_fully_resolved": false
+    }
+  ],
+  "assessment": {
+    "supports_g1_local_structural_decoder_plan": true,
+    "supports_p2_complete_semantics": false,
+    "admit_g1": false
+  },
+  "limitations": [
+    "83 nonzero header bits (0x100 or 0x300) are retained as header_reserved; their meanings are not established by the round trip.",
+    "Typed decoding is evidence of parser/encoder structural coverage and exact serialization, not independent proof of every field interpretation or accelerator execution semantics.",
+    "Control bits and geometry-axis meanings for matrix/convolution operations remain unresolved; mode-4 activation function identity remains unresolved.",
+    "Only one explicit relative link was observed; decoder round trip preserves it but does not validate runtime control flow or target behavior.",
+    "Weight interpretation, accelerator ISA qualification, runtime/external effects, and exhaustive image/command discovery remain open.",
+    "The user-referenced docs/research/gx8002-gxdnn-cmodel.md is absent from this checkout; review relies on source emitter annotations and available codec discovery findings."
+  ],
+  "result": "Pass for a narrowly scoped G1 plan asserting a local structural decoder can account for and round-trip this identified GXNPU command block. Keep G1 as planned/not admitted; explicitly distinguish raw-byte structure and typed field extraction from semantic completeness.",
+  "revision": "review-v2",
+  "missing_references": [
+    "docs/research/gx8002-gxdnn-cmodel.md (not present in this checkout)"
+  ],
+  "supersedes": "P1-gxnpu-decoder-review-001/001/review.json; that prior review listed a missing reference as a non-hash input value and pinned the superseded findings.json revision.",
+  "related_findings_v3_scope": "findings-v3 is used only as bounded codec identity/accounting context; its own scope explicitly does not claim G1 or exhaustive discovery."
+}

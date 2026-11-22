@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed fresh Ghidra 12.1.4 Listing CodeUnit export over all historical Apollo main census ranges.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-main-codeunit-map-investigation-index.json",
+    "sha256": "135732ad3bb7a89a8b695615615911fdace289062b6f4da2cb3e65a5ad07bb8f"
+  },
+  "artifacts": {
+    "ranges_generator": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-export-001/001/make_ranges.py",
+      "sha256": "a35c5d79862b237822ac5d6b323bb75e72a409eea843a684dbdea0fdcd6b4024"
+    },
+    "historical_ranges_tsv": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-export-001/001/historical-ranges.tsv",
+      "sha256": "ff1330f4d7bbbaed17d9815e0dceeb5179d68c8fc2bffb7d216f5df3220d1f8d"
+    },
+    "ghidra_postscript": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-export-001/001/ExportApolloRangeCodeUnits.java",
+      "sha256": "fa0e0292e557aeb4910c0b657f9eccf391b276f0e2ec67150b85d0f45c5e993b"
+    },
+    "codeunits_tsv": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-export-001/001/codeunits.tsv",
+      "sha256": "b122f0933db6ade565971bffd637dceab5046f2ad03f04ad95f52805eb72c323"
+    },
+    "reconciler": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-export-001/001/reconcile.py",
+      "sha256": "cdc0fd305e8378bd930697381f07916e06828443d70ec5a80e7023c27541c407"
+    },
+    "report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-export-001/001/report.json",
+      "sha256": "dd3fdcce11f4debeabdbfc3d4c20c62f7ea95567defa3f2bbb34de3900096428"
+    },
+    "receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-export-001/001/receipt.json",
+      "sha256": "7cc71afacf0fd4f891f3806020802cdede0d39b02741d3499810cd1d7487596e"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-export-review-001/001/review.json",
+      "sha256": "3e36f28f4cdbbed006196c874e6595ab6f168be4653d465e406b7589f2f3fc9b"
+    }
+  },
+  "fresh_toolchain": {
+    "ghidra": "12.1.4",
+    "java": "21.0.12.1",
+    "processor": "ARM:LE:32:Cortex:default",
+    "loader_base": "0x437fe0",
+    "input": "locked full Apollo main OTA"
+  },
+  "counts": {
+    "historical_entries": 7449,
+    "historical_exact_ranges": 7758,
+    "historical_range_bytes": 1394848,
+    "codeunit_segments": 611600,
+    "fresh_instruction_bytes": 1260803,
+    "fresh_undefined_bytes": 134045,
+    "fresh_data_bytes": 0,
+    "current_function_same_entry_bytes": 1251072,
+    "current_function_no_entry_bytes": 143651,
+    "current_function_different_entry_bytes": 125,
+    "fully_same_entry_historical_entries": 6734
+  },
+  "mapping_caveat": "Ghidra getImageBase reports 0x00000000; loader log and each VA/file-offset relation support base 0x437FE0. Do not use the reported image_base as mapping authority.",
+  "limits": [
+    "Fresh 12.1.4 listing is not the missing historical 12.1.2 project state.",
+    "One 4-byte LDR crosses historical range boundaries.",
+    "Instruction labels require selective review before noncanonical code admission; undefined bytes stay unknown.",
+    "No complete discovery, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

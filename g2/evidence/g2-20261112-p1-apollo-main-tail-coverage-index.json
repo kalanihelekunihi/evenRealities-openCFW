@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical P1 coverage draft 011 adding twelve Apollo main literal bytes as data in each view.",
+  "supersedes": {"path": "g2/evidence/g2-20261112-p1-case-literal-coverage-index.json", "sha256": "3b1c274c5192106742aafac61ede3495719670d02ab94a1979ad2ac720e07cfa"},
+  "artifacts": {
+    "producer_script": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-011/001/classify.py", "sha256": "8226573eab4395d71ebd9e3ed7dd53087ce89d448c462161a8a2451537be472a"},
+    "coverage_draft_011": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-011/001/coverage-draft.jsonl", "sha256": "1cfc3594efe5e1ab601c7d18ee9f435779fbfbc779569ec85669887480772534"},
+    "producer_receipt": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-011/001/receipt.json", "sha256": "9717a57d9b1de22dcc9a68bd1e72ae004b117eb6de3a591afb1d55004913a7ff"},
+    "independent_review": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-tail-coverage-review-001/001/review.json", "sha256": "93a4251ffa048f2a4664b9e6f76bd801af1cafe556880129426026467770a3ba"},
+    "main_tail_literal_index": {"path": "g2/evidence/g2-20261112-p1-apollo-main-tail-literals-index.json", "sha256": "6793e45dead182281cc1d72f5d38eb78bcdbfa5d6389b7a8b0e4fd1b9cc86c40"}
+  },
+  "classification": {
+    "full_ota_payload_data_span": [143636, 143648],
+    "post_preamble_flash_data_span": [143604, 143616],
+    "preceding_unknown_full_ota_span": [143634, 143636],
+    "preceding_unknown_raw_span": [143602, 143604]
+  },
+  "counts": {"coverage_rows": 103, "coverage_scopes": 40, "unknown_payload_bytes": 4177041, "unknown_image_bytes": 5671691},
+  "limits": ["The two-byte zero halfword remains unknown.", "No complete main image discovery or G1 claim."],
+  "status": {"canonical_admission": "none", "g1": "not_run"}
+}

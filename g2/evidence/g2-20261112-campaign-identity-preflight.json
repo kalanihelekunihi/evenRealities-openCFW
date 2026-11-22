@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "campaign_id": "20261112T092142Z",
+  "scope": "New G2 pseudocode-first campaign P1 identity and outer-container preflight",
+  "identity": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/identity.json",
+    "sha256": "2dbba3e34ef59158bf05bed2cf24c455b91f3b7119856ed9c8826cc916f121fe",
+    "target_lock_sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+    "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "bundle_bytes": 4301227,
+    "payloads_verified": 6,
+    "manifest_sha256": "1e6f7da11f63cf063098de2213a304e0a15fe99e9a932cdef9fedf32d2856c61"
+  },
+  "outer_container": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/inventory/outer-container.json",
+    "sha256": "511d0729b8f128e68493c6b084fcf53e9b7c40123ad6ac60cc21e9c651cfffc3",
+    "entries": 6,
+    "unaccounted_bytes": 0,
+    "validation": "Current validate_inventory_v2.parse_evenota checked all six TOC entries, component headers, CRCs, extracted payload bytes and exact EOF closure."
+  },
+  "command_receipt": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/receipts/identity-preflight.json",
+    "sha256": "c2cfc3f0daff6f87cf44f9899b8d3236a67fe83e6d5e2b377ff1501051fed71b",
+    "validate_campaign_identity_returncode": 0,
+    "open_cfw_verify_returncode": 0,
+    "deterministic_package_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+  },
+  "provenance_reconciliation": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/receipts/provenance-reconciliation.json",
+    "sha256": "9d98edcd7384afa3baba25b476eb28a1610aa7ac32595269b35a6d6fd170efa1",
+    "target_pinned_provenance_sha256": "53c3819fb9cf9cc819861787a14fa84f6e084cf03396a3a5636718f8539f6809",
+    "current_provenance_sha256": "2656e3c6f89fe0c5a26f216837eb14ea88bf6e03e7db9f6be21e100cdd7f1153",
+    "cause": "Tracked commit b4f8926e7 changed only the provenance document's licensing footer; its bundle and six payload hash entries remained unchanged.",
+    "target_lock_changed": false
+  },
+  "gate_status": {
+    "G1_TARGET_AND_INVENTORY": "not_run",
+    "G2_PSEUDOCODE_COMPLETE": "not_run",
+    "G3_CORPUS_FROZEN": "not_run",
+    "G4_IMPLEMENTATION_READY": "not_run",
+    "G5_SOURCE_COMPLETE": "not_run",
+    "G6_IDENTICAL_SOURCE_BUILD": "not_run"
+  },
+  "next_required_work": "Revalidate all nested images, byte classifications, architecture plans and independent reviews under the new campaign; establish a review registry and pass the full P1 validator before P2 dispatch. Historical assignments remain cleared."
+}

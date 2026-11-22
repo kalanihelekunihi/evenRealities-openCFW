@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Bounded P1 case 48-byte PC-relative literal-pool data classification in payload and flash-image ledgers, noncanonical coverage draft.",
+  "artifacts": {
+    "case_discovery_ledger_index": {
+      "path": "g2/evidence/g2-20261112-p1-case-discovery-ledger-index.json",
+      "sha256": "8163c3edb0d3659ba71d88167826e181e5119e843e2871c96d16d2bda8864dca"
+    },
+    "literal_verification_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-literal-pool-classification-001/001/verify.py",
+      "sha256": "e4c92fdc9a5fdd1d9428b9aff15789cfd9362e72615de751e4e6155b42a2a24f"
+    },
+    "literal_verification_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-literal-pool-classification-001/001/report.json",
+      "sha256": "fa6146299a952bea1420c3820f214cb2debbaf5ed96b9edf5208f8117d087194"
+    },
+    "literal_independent_review": {
+      "path": "g2/evidence/g2-20261112-p1-case-literal-pool-review.json",
+      "sha256": "49deb29ff534e56414a4f18759936595e6387d2835d31a2f8fc3c986d82f7eed"
+    },
+    "coverage_draft_004": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-004/001/coverage-draft.jsonl",
+      "sha256": "5531e02ef21271232792bc8631dfe81954be1eed96d6b785f004fee10d97580b"
+    },
+    "coverage_receipt_004": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-004/001/receipt.json",
+      "sha256": "823d24b41830e3bbf641f892ab9bcce0daf1a5afdaaadd3fd73804d3a2c60f5c"
+    },
+    "coverage_independent_review": {
+      "path": "g2/evidence/g2-20261112-p1-case-coverage-delta-review.json",
+      "sha256": "440bc451e50d2caa927dbcd0b98cdf91659712d494141ea161aeee6a5b3c09a5",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-coverage-delta-review-001/001/review.json"
+    }
+  },
+  "counts": {
+    "literal_words": 12,
+    "verified_thumb_ldr_sites": 22,
+    "classified_data_payload_bytes": 48,
+    "coverage_rows": 79,
+    "coverage_scopes": 40,
+    "unknown_payload_bytes": 4179059
+  },
+  "limits": [
+    "Only the exact case literal pool is classified; neighboring halfwords and whole-image references remain unresolved.",
+    "Draft has no canonical G1 admission, complete pseudocode, source completion or byte identity."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

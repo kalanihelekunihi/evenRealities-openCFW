@@ -5,6 +5,9 @@
 #include "provider.h"
 #define SYSARG (*(volatile uint32_t *)0x40100008u)
 #define SYSREQ (*(volatile uint32_t *)0x40100004u)
+/* Stock SROM clock backup state at 0x20000f04, bounded by the next ILO cell. */
+uint32_t touch_flash_clock_backup_ram[6]
+    __attribute__((section(".touch_bss.flash_clock_backup"), used));
 /* Stock 0x00008BF4 (ProcessStatusCode) */
 uint32_t touch_flash_status(void) {
  uint32_t s=SYSARG,kind=s&0xf0000000u;
@@ -23,13 +26,13 @@ uint32_t touch_flash_status(void) {
 }
 /* Stock 0x00008CC4 (Cy_Flash_ClockBackup) */
 static uint32_t backup(void) {
- uint32_t p[2]={0xe9b6u,0x20000f04u};SYSARG=(uint32_t)p;SYSREQ=0x80000016u;
+ uint32_t p[2]={0xe9b6u,(uint32_t)(uintptr_t)touch_flash_clock_backup_ram};SYSARG=(uint32_t)p;SYSREQ=0x80000016u;
  uint32_t result=touch_flash_status();*(volatile uint32_t *)0x40030030u=0x80000000u;return result;
 }
 /* Stock 0x00008D00 (Cy_Flash_ClockConfig) */
 static uint32_t configure(void) { SYSARG=0xe8b6u;SYSREQ=0x80000015u;return touch_flash_status(); }
 /* Stock 0x00008D20 (Cy_Flash_ClockRestore) */
-static uint32_t restore(void) { uint32_t p[2]={0xeab6u,0x20000f04u};SYSARG=(uint32_t)p;SYSREQ=0x80000017u;return touch_flash_status(); }
+static uint32_t restore(void) { uint32_t p[2]={0xeab6u,(uint32_t)(uintptr_t)touch_flash_clock_backup_ram};SYSARG=(uint32_t)p;SYSREQ=0x80000017u;return touch_flash_status(); }
 /* Stock 0x00008D50 (Cy_Flash_WriteRow) */
 uint32_t touch_flash_write_row(uint32_t address,const uint8_t *data) {
  if(!touch_flash_valid_addr(address) || !data)return 0x00520021u;

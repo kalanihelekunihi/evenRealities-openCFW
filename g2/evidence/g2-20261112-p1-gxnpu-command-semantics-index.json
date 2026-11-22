@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded GXNPU command-record structure and vendor command/weight API context in the locked codec.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-gxnpu-structural-decoder-index.json",
+    "sha256": "e40afe42cf22d786d971edc4440b54b867f8087b0bad8f35423b7321a146823e"
+  },
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-command-semantics-audit-001/001/audit.py",
+      "sha256": "8840f72b7873a3b8d877ca4f776fa55f10e6a591296b63c55e1e66e416d3c7e5"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-command-semantics-audit-001/001/report.json",
+      "sha256": "5062ecec4b9e0d54fada4e3d78f1e27bd601a8278677df3e4804a3a5218caae9"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-command-semantics-audit-001/001/receipt.json",
+      "sha256": "4494106a7c7498922c3dcbd53d94a8574b8c79fbeaac5395eed390b6c3315f37"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-command-semantics-review-001/001/review.json",
+      "sha256": "b7ce6032d09bb6ebdb52be18b41490cf66cacfc4bee89b754faccd6bd4e4efc5"
+    }
+  },
+  "result": {
+    "command_codec_span": [
+      101776,
+      110940
+    ],
+    "command_bytes": 9164,
+    "typed_records": 212,
+    "raw_fallback_records": 0,
+    "reserved_header_nonzero_records": 83,
+    "terminal_relative_link_record": 211,
+    "weights_codec_span": [
+      110940,
+      231740
+    ],
+    "weights_bytes": 120800,
+    "classification": "structured accelerator operation command list with partial semantics"
+  },
+  "limits": [
+    "Vendor CONFIG_ARCH_GRUS command/weight buffers are contextual; comparator model differs from locked artifact.",
+    "Slot6 numeric offsets do not prove weight pointer binding.",
+    "Weight internals, embedded microcode/program boundary and full command control meanings remain unknown.",
+    "No blanket passive-data classification, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

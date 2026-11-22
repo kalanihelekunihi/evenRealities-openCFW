@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "Apollo-main radio and NOR pad-configuration source-cell contract",
+  "sources": [
+    "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+    "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c"
+  ],
+  "change": {
+    "radio_pin_to_cell_mappings_preserved": 48,
+    "nor_clock_to_cell_mappings_preserved": 30,
+    "stock_initialized_words_verified": 87,
+    "stock_init_source": ".waves/init_20000000.bin, bytes 0x6c..0x1c8",
+    "radio_function_setting_parameter": "uint32_t, matching its call-site declaration",
+    "method": "Compared every old stock-address expression from HEAD with the new source-array index and matched the 87 little-endian initializer words to the captured stock RAM init file."
+  },
+  "gates": {
+    "sources_check": "passed: 4884 units, 4545 source files, one not built",
+    "full_source_build": {
+      "report": "build/g2-pad-config-source-20261111/report.json",
+      "manifest_changed_during_build": false,
+      "units_by_payload": {
+        "g2-apollo-bootloader": {
+          "units": 224,
+          "compiled": 224,
+          "failed": 0,
+          "duplicate_strong_symbols": 0
+        },
+        "g2-apollo-main": {
+          "units": 2717,
+          "compiled": 2717,
+          "failed": 0,
+          "duplicate_strong_symbols": 0
+        },
+        "g2-case": {
+          "units": 359,
+          "compiled": 359,
+          "failed": 0,
+          "duplicate_strong_symbols": 0
+        },
+        "g2-codec-a": {
+          "units": 367,
+          "compiled": 367,
+          "failed": 0,
+          "duplicate_strong_symbols": 0
+        },
+        "g2-codec-b": {
+          "units": 332,
+          "compiled": 332,
+          "failed": 0,
+          "duplicate_strong_symbols": 0
+        },
+        "g2-em9305": {
+          "units": 775,
+          "compiled": 775,
+          "failed": 0,
+          "duplicate_strong_symbols": 0
+        },
+        "g2-touch": {
+          "units": 105,
+          "compiled": 105,
+          "failed": 0,
+          "duplicate_strong_symbols": 0
+        }
+      }
+    },
+    "focused_apollo_strict_link": {
+      "report": "build/g2-pad-config-apollo-linked-20261111/link-report.json",
+      "bytes": 3818704,
+      "sha256": "15ec7fa5175391e3985e9e70fc53893ca9e9cefa2877177ba25613fb176c54a2"
+    },
+    "full_strict_bundle_link": {
+      "report": "build/g2-pad-config-bundle-20261111/link-report.json",
+      "payloads_linked": [
+        "g2-apollo-bootloader",
+        "g2-apollo-main",
+        "g2-case",
+        "g2-codec-a",
+        "g2-codec-b",
+        "g2-em9305",
+        "g2-touch"
+      ],
+      "external_binary_archive_used": false,
+      "bundle_bytes": 4642076,
+      "bundle_sha256": "fd52e4a5a711db0144cef23707b78cf1ca2e2eba10c7496a65fa91f2c6d82640",
+      "matches_locked_target": false
+    }
+  },
+  "qualification": {
+    "source_plan_changed": false,
+    "source_completeness_proven": false,
+    "locked_target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "hardware_boot_verified": false,
+    "limitation": "The six zero-initialized radio pad cells have no recovered runtime writer. Matching pad-cell mappings and C compilation do not prove stock code equality or complete firmware behavior."
+  }
+}

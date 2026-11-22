@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Reviewed target PROVENANCE.md pin drift and current G1 validator dependency",
+  "artifacts": {
+    "target": {
+      "path": "g2/workflow/target.json",
+      "sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff"
+    },
+    "identity": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/identity.json",
+      "sha256": "2dbba3e34ef59158bf05bed2cf24c455b91f3b7119856ed9c8826cc916f121fe"
+    },
+    "current_provenance": {
+      "path": "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md",
+      "sha256": "2656e3c6f89fe0c5a26f216837eb14ea88bf6e03e7db9f6be21e100cdd7f1153"
+    },
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-provenance-pin-drift-001/001/audit.py",
+      "sha256": "428ccdb0d854434cb2caf175dc8233b96902abce25dcae11dd11092820ed19cb"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-provenance-pin-drift-001/001/report.json",
+      "sha256": "0afc4e5c456e6e018aa31f91fb41ac1e322eae3ab3dc2e69e1778d85542d2d4d"
+    },
+    "committed_diff": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-provenance-pin-drift-001/001/committed-diff.txt",
+      "sha256": "6ff94bf5de102e2836d4b75026d5630e25f7ca5c6cb3b85d04da5a98b8255bcd"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-provenance-pin-drift-001/001/receipt.json",
+      "sha256": "a3f87b1db974b6efa00d40271a9ef896e967fb9fe58a235a4fb1b66caa0e2789"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-provenance-pin-drift-review-001/001/review.json",
+      "sha256": "ac57d33080f30d4c0d4b51394826f4dc0ebf839c4b0b86c73daf787a32025647"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-provenance-pin-drift-review-001/001/receipt.json",
+      "sha256": "46135823bf5099b58e5f075cef0c9e77d048c71e304f87eb594214d758f296b3"
+    }
+  },
+  "result": {
+    "pinned_document_sha256": "53c3819fb9cf9cc819861787a14fa84f6e084cf03396a3a5636718f8539f6809",
+    "current_document_sha256": "2656e3c6f89fe0c5a26f216837eb14ea88bf6e03e7db9f6be21e100cdd7f1153",
+    "pinned_content_commit": "e38e1e733",
+    "mirror_edit_commit": "b4f8926e7",
+    "firmware_hash_statements_unchanged": 7,
+    "current_validator_explicitly_checks_provenance_pin": false,
+    "verdict": "BOUNDED_PASS_WITH_LIMITS"
+  },
+  "limits": [
+    "The current PROVENANCE.md is a clean later commit, but does not match its target.json pin.",
+    "The validator authenticates the bundle, six payloads, pinned manifest and outer container; it does not hash every identity_sources entry.",
+    "No target re-pin, authenticated-file edit, licensing determination or G1 gate change."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

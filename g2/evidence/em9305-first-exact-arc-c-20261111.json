@@ -1,0 +1,186 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "target": "First exact source-built ARC EM9305 functions in the locked G2 controller image",
+  "stock": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+    "artifact_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "record3_file_offset": "0x424",
+    "record3_virtual_base": "0x302400",
+    "inventory": "g2/symbols/ble_em9305.tsv"
+  },
+  "qualification": {
+    "receipt": "build/g2-em9305-arc-exact-qual-20261111/source-plan.json",
+    "receipt_sha256": "a9226add986435a2857446f8127848a3e44c71d8c382a9bc6c1c135150ea76a7",
+    "candidate_units": 7,
+    "compiled_units": 7,
+    "selected_regions": [
+      {
+        "symbol": "opencfw_em9305_common_radio_mask_312094",
+        "source": "g2/src/em9305/qpc-scheduler/controller_init.c",
+        "stock_offset": [
+          65720,
+          65732
+        ],
+        "bytes": 12,
+        "sha256": "8132559f6f9e6f018e92f065489d72cee0929f2a81af9567b453586833f0ef8c"
+      },
+      {
+        "symbol": "opencfw_em9305_radio_timestamp_310474",
+        "source": "g2/src/em9305/qpc-scheduler/controller_init.c",
+        "stock_offset": [
+          58520,
+          58530
+        ],
+        "bytes": 10,
+        "sha256": "313ad6c92edd398e3f8bcce5ffe16a42bce53c5f2417ad93ae54b7170a4c6578"
+      },
+      {
+        "symbol": "opencfw_em9305_radio_timing_store_311990",
+        "source": "g2/src/em9305/qpc-scheduler/controller_init.c",
+        "stock_offset": [
+          63924,
+          63936
+        ],
+        "bytes": 12,
+        "sha256": "b7563065d9b3351e4c7cd2fe6bb2d9c456d0d6b1a23f1de16e7565e95d6c59e8"
+      },
+      {
+        "symbol": "opencfw_em9305_vendor_command_30db24",
+        "source": "g2/src/em9305/qpc-scheduler/controller_init.c",
+        "stock_offset": [
+          47944,
+          47958
+        ],
+        "bytes": 14,
+        "sha256": "3f4a29a9469e173a438676d9b71e387a65ae9a31f8eed3cbe61a0aa31621f2df"
+      },
+      {
+        "symbol": "opencfw_em9305_child_32608c",
+        "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_32608c.c",
+        "stock_offset": [
+          147632,
+          147634
+        ],
+        "bytes": 2,
+        "sha256": "5c36fa627b751f9f87419f9e6ed40beb9a3bab13ac1b5ec7506a34d0eb630bc4"
+      },
+      {
+        "symbol": "BSP_Init",
+        "source": "g2/src/em9305/application/em9305_link_closure.c",
+        "stock_offset": [
+          3748,
+          3762
+        ],
+        "bytes": 14,
+        "sha256": "603d7625823b10f1135cba6f7340bebea6f41fd66064c8e43da4604843e369b5"
+      },
+      {
+        "symbol": "opencfw_em9305_stock_31114c",
+        "source": "g2/src/em9305/application/stock_residual_code.c",
+        "stock_offset": [
+          61808,
+          61810
+        ],
+        "bytes": 2,
+        "sha256": "5c36fa627b751f9f87419f9e6ed40beb9a3bab13ac1b5ec7506a34d0eb630bc4"
+      },
+      {
+        "symbol": "opencfw_em9305_stock_3111a0",
+        "source": "g2/src/em9305/application/stock_residual_code.c",
+        "stock_offset": [
+          61892,
+          61894
+        ],
+        "bytes": 2,
+        "sha256": "5c36fa627b751f9f87419f9e6ed40beb9a3bab13ac1b5ec7506a34d0eb630bc4"
+      },
+      {
+        "symbol": "opencfw_em9305_stock_31161c",
+        "source": "g2/src/em9305/application/stock_residual_code.c",
+        "stock_offset": [
+          63040,
+          63042
+        ],
+        "bytes": 2,
+        "sha256": "5c36fa627b751f9f87419f9e6ed40beb9a3bab13ac1b5ec7506a34d0eb630bc4"
+      },
+      {
+        "symbol": "opencfw_em9305_stock_311ee0",
+        "source": "g2/src/em9305/application/stock_residual_code.c",
+        "stock_offset": [
+          65284,
+          65300
+        ],
+        "bytes": 16,
+        "sha256": "ae445ac0459f143e4a4de4d4992b5e1c02a8d8c5b383240a7c81244e23b6a6e0"
+      },
+      {
+        "symbol": "opencfw_em9305_stock_311f70",
+        "source": "g2/src/em9305/application/stock_residual_code.c",
+        "stock_offset": [
+          65428,
+          65446
+        ],
+        "bytes": 18,
+        "sha256": "860e1189992c864d58f9f35d0733c5684484bea46fd35ba4d8be4a1acee25d3c"
+      },
+      {
+        "symbol": "opencfw_em9305_emsys_noop_313778",
+        "source": "g2/src/em9305/application/emsys_noop_313778.c",
+        "stock_offset": [
+          71580,
+          71582
+        ],
+        "bytes": 2,
+        "sha256": "5c36fa627b751f9f87419f9e6ed40beb9a3bab13ac1b5ec7506a34d0eb630bc4"
+      },
+      {
+        "symbol": "opencfw_em9305_emsrc_store_aoa_value_311f84",
+        "source": "g2/src/em9305/application/emsrc_store_aoa_value_311f84.c",
+        "stock_offset": [
+          65448,
+          65458
+        ],
+        "bytes": 10,
+        "sha256": "1bd31ce4179adf1311d0bbed749a1ebe349583d5c3f4b741a1f92e4352082a1d"
+      },
+      {
+        "symbol": "opencfw_em9305_emsys_noop_302d80",
+        "source": "g2/src/em9305/application/emsys_noop_302d80.c",
+        "stock_offset": [
+          3492,
+          3494
+        ],
+        "bytes": 2,
+        "sha256": "5c36fa627b751f9f87419f9e6ed40beb9a3bab13ac1b5ec7506a34d0eb630bc4"
+      }
+    ],
+    "selected_bytes": 118,
+    "policy": "only relocation-free ARC ELF32 functions at inventoried stock entries with exact function size and complete byte equality",
+    "compiler_sha256": "2e0d1e21ebb287b06bffb95f8caa9e7b58f5680e8e6b13570c762eee6fb37c62",
+    "integrated_plan": "tools/build/source-plan.json",
+    "integrated_plan_sha256": "5ebd67fd5556b16c4124ecabdd77a541c3e7184fcb1eb54ed698d6a40960ebb6"
+  },
+  "verification": {
+    "hybrid_report": "build/g2-six-payload-exact-hybrid-final-20261111/build-report.json",
+    "hybrid_report_sha256": "e76ddcfeef4eca5ff5ff7df5c40fc96c3031ed0f2f7ade62626c48920f84878f",
+    "hybrid_bundle": {
+      "file": "g2-openCFW-s200_v2.2.6.10.evenota.bin",
+      "size": 4301227,
+      "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+    },
+    "em9305_source_built_bytes": 118,
+    "em9305_pull_through_bytes": 211650,
+    "coverage_report": "build/g2-six-payload-exact-hybrid-final-20261111/coverage.json",
+    "coverage_report_sha256": "4aa54bff9c4363b4eb3dfffea6e18b42440e0ea0292d57dec4c31ff9a1d470f1",
+    "em9305_compiled_unclassified_bytes": 118,
+    "all_six_payloads_have_source_built_bytes": true,
+    "source_completeness_proven": false
+  },
+  "limits": [
+    "ARC ELF sections lack the ARM instruction/data mapping used by strict coverage; the 118 compiled bytes are conservatively unclassified.",
+    "Relocation-bearing ARC functions are not yet qualified.",
+    "The EM9305 image still has 211,650 binary pull-through bytes; all-six-payload participation does not prove complete source ownership or source-only OTA byte equality."
+  ]
+}

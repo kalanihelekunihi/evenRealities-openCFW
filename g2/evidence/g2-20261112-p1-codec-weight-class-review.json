@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "review_id": "P1-codec-kws-class-review-001/001/review-v2",
+  "scope": "Independent review of immutable coverage-classification-002 revision 002, limited to the KWS codec refinement; no G1 admission.",
+  "decision": "pass_with_limits",
+  "inputs_sha256": {
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-002/002/coverage-draft.jsonl": "d28bd7bd1b3ba67bd78d1a0b45b3a04295f01c0ebb057cd366a177c64a6aac0a",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-002/002/receipt.json": "2793bca4e404a217cd651106dd26e8f666bd3a39858f6aa9eb5320d1deb74185",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-002/001/coverage-draft.jsonl": "ffe3b65776c5e69bd594e84a4a6d5cfa87da755d4554da216f8d11c85bec72cc",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-draft-001/001/coverage-draft.jsonl": "8e51dd57245320aef83f8a67ba61e302228b379fc9c76fcfd90362c42d4f8a24",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-kws-class-review-001/001/review.json": "35f819a020f3825348d72ae829e703810133113b90ab239072c8667eec68ba30",
+    "g2/evidence/g2-20261112-p1-all-image-materializations-index.json": "b37f1fed89bb1addee808ab51dbf06455c2a54a2e39fa52a484dfe0aae40e26d",
+    "g2/evidence/g2-20261112-p1-gxnpu-structural-decoder-index.json": "e40afe42cf22d786d971edc4440b54b867f8087b0bad8f35423b7321a146823e",
+    "g2/evidence/g2-20261112-p1-gxnpu-decoder-review.json": "28a449d13167be697ce6c09e5d92b2e9a068b024bdf44564096d2b78b36ff295",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-decoder-calibration-001/001/command-boundaries.json": "fdf5748090fba4c31b13df8ddc23cf77e563f5c3b40b7f253d94dd41a79723fb",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-decoder-calibration-001/001/receipt.json": "4a1bc82aa6ed8c6641e4549e76a154c54d48fef4e0009e9d1a8dcf6e1395cdc8",
+    "g2/tools/gxdnn_command_emitter.py": "67bece9822820e6b4c5d99b890e5f7f8275cba758755c026cb40698eb45f81da",
+    "g2/evidence/codec-kws-weights-compiled-c-20261112.json": "1d131e19530fe04adc5a768331ca0cfcf4257ec4c5642162fdde99574a4836a8",
+    "g2/docs/reference/libraries.md": "535ef9284ab3a57c713b78f1d8206d33a1af8a38a740190a0385082c3009d988",
+    "g2/docs/reference/firmware-formats.md": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83",
+    "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/npu_kws_command.bin": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+    "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/npu_kws_weights.bin": "397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf"
+  },
+  "checks": {
+    "row_scope_partition": {
+      "rows": 72,
+      "scopes": 40,
+      "kind_counts": {"container": 27, "unknown": 43, "data": 2},
+      "result": "pass"
+    },
+    "codec_command": {
+      "payload_span": [101776, 110940],
+      "length": 9164,
+      "payload_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "child_image_sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+      "structural_decoder_commands": 212,
+      "ledger_kind": "unknown",
+      "finding": "Consistent with the bounded decoder review: exact typed structural round-trip is established, while execution semantics and field interpretation remain incomplete. The revised payload and image rows preserve this distinction."
+    },
+    "codec_weights": {
+      "payload_span": [110940, 231740],
+      "length": 120800,
+      "payload_sha256": "397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf",
+      "source_compiled_section_bytes": 120800,
+      "source_compiled_section_sha256": "397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf",
+      "child_image_sha256": "397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf",
+      "ledger_kind": "data",
+      "finding": "Supported as byte-preserved trained model data. The evidence does not establish training provenance or behavior, nor overall source completeness."
+    },
+    "counts_and_unknown_total": {
+      "receipt_rows": 72,
+      "receipt_scopes": 40,
+      "receipt_unknown_payload_bytes": 4179119,
+      "predecessor_receipt_unknown_payload_bytes": 4169955,
+      "expected_after_reclassifying_command_as_unknown": 4179119,
+      "result": "pass"
+    },
+    "predecessor_reduction": {
+      "receipt_claim_bytes": 120800,
+      "expected_removed_unknown_weight_bytes": 120800,
+      "result": "pass"
+    },
+    "evidence_alignment": {
+      "current_image_index_count": 33,
+      "command_rows_reference_structural_decoder_index_and_libraries_reference": true,
+      "weight_rows_reference_compiled_c_weight_evidence_and_libraries_reference": true,
+      "preceding_unknown_codec_row_has_no_kws_specific_evidence": true,
+      "result": "pass"
+    },
+    "admission": "Receipt states admission none and G1 not_run; candidate rows remain pending classification review. No admission or G1 claim is made here."
+  },
+  "result": "Revision 002 addresses the prior overclassification finding: both command rows remain unknown while retaining structural evidence; only the exact 120,800-byte trained-weight payload and image rows are classified data; unrelated preceding unknown bytes no longer carry KWS-specific evidence. Counts, pins, extents, hashes and receipt accounting are consistent. Limits on training provenance, model behavior, command semantics and source completeness remain."
+}

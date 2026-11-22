@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical P1 discovery draft revision 010, incorporating bounded Apollo main, EM9305 and codec residual audits.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v9-index.json",
+    "sha256": "7e34f64e8ca3c4aa73fe42ab211691f4ee0737f18316c2b1003d3bc583e9f897"
+  },
+  "artifacts": {
+    "discovery_draft_010": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/010/discovery-draft.jsonl",
+      "sha256": "da7618c01f752f68e8a9eb052237369a78c37d91cfd306475cf1680f082a4ae8"
+    },
+    "discovery_receipt_010": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/010/receipt.json",
+      "sha256": "111440c739de2702900927b01107596817712603345f38027dcde8e390f1bfe7"
+    },
+    "independent_draft_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-v10-review-001/001/review.json",
+      "sha256": "04e17795bfeb7d4f7ea813ad566123f176496433ca0388a90864a2e2b7b0fe6e"
+    },
+    "apollo_main_residual_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-residual-index.json",
+      "sha256": "3c8564c7ca3d897c7640e6b399b57f32d96d9df65b47d6b6103467cce7833e70"
+    },
+    "em9305_residual_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-residual-index.json",
+      "sha256": "3b3ede1ba4d793b566db8022492ccc844dff299f75a0297987370896b77dfb1c"
+    },
+    "codec_residual_index": {
+      "path": "g2/evidence/g2-20261112-p1-codec-residual-index.json",
+      "sha256": "fecc77995233649a69d50bd83c02d28d882340a5478f0ebff7cdabe17c3b4bf1"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "Apollo main startup-table coordinates and full flash/reference sweep remain unresolved.",
+    "EM9305 external NVM selection and reference sweep remain unresolved.",
+    "Codec conditional runtime routes, opaque regions and GXNPU semantics remain unresolved.",
+    "No canonical G1 admission or source completion claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

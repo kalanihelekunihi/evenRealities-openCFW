@@ -20,7 +20,7 @@ static const char function[] = "tlsf_adapter_init";
 static const char message[] = "tlsf init.";
 static const char short_message[] = "[tlsf]tlsf init.";
 
-uint32_t audio_file_tlsf_pool_init_5eda64(void) {
+int32_t audio_file_tlsf_pool_init_5eda64(void) {
     void *const memory = (void *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_file_tlsf_backing_20208e70);
     audio_uart_buffer_zero(memory, 0x70800u, 0u);
     g2_codec_heap_pool = g2_tlsf_create_with_pool_4d06ec(memory, 0x70800u);

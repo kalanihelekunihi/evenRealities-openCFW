@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "review_id": "P1-em9305-discovery-review-001/001",
+  "campaign_id": "20261112T092142Z",
+  "scope": "Independent bounded audit of EM9305 nested image discovery, descriptor spans, FHDR/entry, child RAM slices, signature scan, stock metadata references, historical discovery row, and current record index.",
+  "admission": "none",
+  "g1_status": "not_run",
+  "inputs": {
+    "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "g2/evidence/g2-20261112-p1-em9305-record-inventory.json": "ae5d8b93df20b8c3fb6974676b002fd4ebecdaccb8d39abef5fab9e6813b35ee",
+    "g2/evidence/g2-20261112-p1-em9305-record-inventory-review.json": "34e30872872e2ef0bffe56ec48fd93458639bf687ad87cd259941540f9350de6",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-image-materialization-001/001/receipt.json": "539f28a68b6aeb1f39be25b58bae808d128a7aa06b69844fabb4cb4d309eb552",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-image-materialization-001/001/images-candidate.jsonl": "af4adb23a557f1cf82447186e333797d31eb69f4fb5d40fe09d6a3703ffaf11a",
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+    "g2/evidence/g2-20261112-p1-em9305-record-index.json": "417806858c143f7952b2c2fad0bc90e6566eaa6edec586188268996f663b01c8",
+    "g2/tools/em9305_source_image/record_package.py": "33c4be40013dfcfcc786dc569e3fd108a1b9845aba211458b252a9d527e85ee4",
+    "g2/docs/reference/firmware-formats.md": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83"
+  },
+  "package": {
+    "size": 211948,
+    "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "magic": "00020404",
+    "record_count": 4,
+    "metadata_size": 124,
+    "payload_length": 211824,
+    "records_close_at_eof": true,
+    "record_descriptors": [
+      {"index": 0, "file_span": [124, 348], "target_span": [3145728, 3145952], "size": 224, "sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee"},
+      {"index": 1, "file_span": [348, 1004], "target_span": [3146752, 3147408], "size": 656, "sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b"},
+      {"index": 2, "file_span": [1004, 1060], "target_span": [3153920, 3153976], "size": 56, "sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f"},
+      {"index": 3, "file_span": [1060, 211948], "target_span": [3154944, 3365832], "size": 210888, "sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03"}
+    ],
+    "assessment": "Descriptor file offsets, sizes and target starts agree with the current direct inventory and all four extracted record hashes. These establish stored record slices and encoded load intervals, not executable-region boundaries or runtime loading behavior."
+  },
+  "fhdr_entry": {
+    "fhdr_file_span": [1004, 1044],
+    "fhdr_parent_record2_relative_span": [0, 40],
+    "fhdr_target_span": [3153920, 3153960],
+    "entry_file_span": [1044, 1054],
+    "entry_parent_record2_relative_span": [40, 50],
+    "entry_target_span": [3153960, 3153970],
+    "entry_bytes_hex": "db44800078f955054006",
+    "entry_decode_status": "not_qualified",
+    "fields": {"firmware_start": 3153960, "firmware_size": 211872, "firmware_crc32": "0xCEB7F4F3", "emcore_crc32": "0xFFFFFFFF", "execution": 3153960, "header_crc32": "0x87303B94"},
+    "crc_checks": {"header_crc_matches": true, "firmware_crc_matches": true, "firmware_crc_span_file": [1044, 212916], "firmware_crc_span_target": [3153960, 3365832]},
+    "erased_regions": {"record2_trailing_file_span": [1054, 1060], "record2_trailing_target_span": [3153970, 3153976], "inter_record_target_gap": [3153976, 3154944], "inter_record_gap_size": 968},
+    "assessment": "The FHDR firmware span starts at the entry bytes and ends at record 3's target end, including erased padding and the gap; CRC reproduction supports this byte-span interpretation. No instruction semantics for the 10-byte entry are established."
+  },
+  "nested_ram_children": [
+    {"id": "ble_em9305:ram-initialized-0", "parent_record": 3, "parent_relative_image_span": [209964, 210033], "parent_relative_target_span": [3364908, 3364977], "package_global_file_span": [211024, 211093], "destination_address_space": "initialized RAM", "destination_target_span": [8393400, 8393469], "size": 69, "sha256": "72c72af0f2727ed0b2188fca6de6668e9c90c27a8eace1126a4307c9a8fb223d"},
+    {"id": "ble_em9305:ram-initialized-1", "parent_record": 3, "parent_relative_image_span": [210044, 210820], "parent_relative_target_span": [3364988, 3365764], "package_global_file_span": [211104, 211880], "destination_address_space": "initialized RAM", "destination_target_span": [8452844, 8453620], "size": 776, "sha256": "b0d0e122e43221e514b847df46b7f18eb08f3f0e94757e574d24486b39c3746b"},
+    {"id": "ble_em9305:ram-initialized-2", "parent_record": 3, "parent_relative_image_span": [210828, 210872], "parent_relative_target_span": [3365772, 3365816], "package_global_file_span": [211888, 211932], "destination_address_space": "initialized RAM", "destination_target_span": [8453620, 8453664], "size": 44, "sha256": "1a2dad76dc9de4334783462ea0b99870ad504ddfe3f7033c2ec2635d0e9a9b9d"}
+  ],
+  "signature_scan": {
+    "whole_payload_bytes_scanned": 211948,
+    "patterns": {"package_magic_00020404": [0], "FHDR": [1004], "EM9305_ascii": [], "R1_ascii": [], "ROM_ascii": [], "RAM_ascii": []},
+    "interpretation": "Only the known package header magic and FHDR marker occur for this small literal signature set. This does not exclude undocumented image/container formats or binary metadata encoded without these strings."
+  },
+  "historical_comparison": {
+    "historical_campaign": "20260930T190500Z",
+    "historical_inventory_row_count_for_em9305": 7,
+    "historical_rows": "Four record images and three record-3 RAM-initialized children are present; byte hashes and sizes equal current materializations. Historical record source spans are package-global [124,348), [348,1004), [1004,1060), [1060,211948); child spans are parent-record-3-relative [209964,210033), [210044,210820), [210828,210872).",
+    "current_record_index": "The current index includes the same four descriptor records and three child candidates with matching hashes/sizes. It imports historical address mappings as candidates; no canonical admission has occurred.",
+    "mapping_caveat": "For the child rows, historical source_span is parent-image-relative, while the package-global source byte offset is record-3 file start 1060 plus each relative endpoint. Parent-relative load/address values are also distinct from each child's initialized-RAM destination interval."
+  },
+  "stock_reset_copy_metadata": {
+    "observed": "The record package contains descriptors (payload file offset, size, target start), erase-sector IDs, FHDR fields, and the 10-byte entry. The child RAM byte slices and their destination spans appear in historical/current candidate rows, with conditional startup/table-gate notes.",
+    "not_established": ["authoritative stock EM9305 reset flow", "complete stock copy/decompression table schema and execution conditions", "whether record-0/1 contain additional executable subregions or vectors", "semantics of entry bytes", "whether any child bytes are code versus data"]
+  },
+  "unresolved_discovery_and_mapping_limits": [
+    "No independent completeness proof that all executable images, embedded containers, or initialization tables inside EM9305 are identified; four descriptor records do not by themselves prove four executable images.",
+    "No qualified ARC decode or control-flow boundary for FHDR entry bytes [1044,1054).",
+    "Child RAM destination addresses and startup eligibility are carried from historical review and candidate metadata; this audit confirms byte lineage and coordinate conversion, not stock execution or copy-table semantics.",
+    "The descriptor target spans, parent-relative image offsets, package-global file offsets, and initialized-RAM destination addresses are separate coordinate spaces; mapping transitions require independently reviewed stock code/table evidence.",
+    "The literal signature scan is intentionally bounded and cannot prove absence of non-literal or undocumented containers.",
+    "No canonical image admission, pseudocode coverage completion, G1 review, or source/build claim."
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "final CASE frontier C change across all G2 source payloads",
+  "source_manifest": "g2/src/sources.json",
+  "source_manifest_sha256": "75661b7a7c10084df83db2a42837635e96572033f31d3ca79dc87fef80e8532d",
+  "source_build": {
+    "receipt": "build/g2-frontier-final-20261111/report.json",
+    "receipt_sha256": "b8fe9127f23c8cc92749ef1d3d5816bdce070c89333d43a4a8d236c8d0f4a546",
+    "enabled_c_units": 4878,
+    "compiled_c_units": 4878,
+    "failures": 0,
+    "duplicate_strong_symbols": 0
+  },
+  "strict_source_link": {
+    "receipt": "build/g2-frontier-final-link-20261111/link-report.json",
+    "receipt_sha256": "c927e6ff9cda4bd0cf75b37e98c810573c0ede536ea036f80eb50746e224af56",
+    "payload_count": 7,
+    "external_binary_archive_used": false,
+    "payloads": {
+      "g2-apollo-bootloader": {
+        "binary_bytes": 154232,
+        "binary_sha256": "90094f1c7b9b1986c9576146f4b2aa866ab668011938a00048c7b031ff5cf5c1"
+      },
+      "g2-apollo-main": {
+        "binary_bytes": 3819048,
+        "binary_sha256": "2b94b1387a08528fdf58c8ba5bf30d04f4da34f9a7043fcd55a72b43de5cbc62"
+      },
+      "g2-case": {
+        "binary_bytes": 60184,
+        "binary_sha256": "8b764c6315d429cf06051f87fa9c010ca3adba4e25c5350ec8904d95fe01846d"
+      },
+      "g2-codec-a": {
+        "binary_bytes": 2145344,
+        "binary_sha256": "bfbecfb7675317dc8d1c4ef191eb8632a8a1d4c07a04dad3dab7c580e267b9d3"
+      },
+      "g2-codec-b": {
+        "binary_bytes": 93888,
+        "binary_sha256": "cae0d1af560d423f382069d99cc68adbd05771fa7d169552b485d3922d40c3ca"
+      },
+      "g2-em9305": {
+        "binary_bytes": 247104,
+        "binary_sha256": "811a8cbcc64958336ed7d6f54b1b643da9741c3955f85e9152608cff320fb4f9"
+      },
+      "g2-touch": {
+        "binary_bytes": 29024,
+        "binary_sha256": "f7142ddae536c52dfc199c6c7aff681f29a19a2b16657bcd1cf8a693df16d956"
+      }
+    }
+  },
+  "source_bundle": {
+    "receipt": "build/g2-frontier-final-bundle-20261111/link-report.json",
+    "receipt_sha256": "00028e59e9abba8d284121fe41577bdd8873b034114faeb781d41364d7649d67",
+    "path": "build/g2-frontier-final-bundle-20261111/g2-source-candidate.evenota.bin",
+    "bytes": 4638060,
+    "sha256": "c9eee6a709de8ca80262347c521e7cc01e9153e2daa575a851acd26361706a30",
+    "locked_target_bytes": 4301227,
+    "locked_target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "matches_locked_target": false
+  },
+  "qualification": "Compilation and strict source linkage pass. This does not prove complete code/data coverage, stock equivalence, byte identity, or physical behavior."
+}

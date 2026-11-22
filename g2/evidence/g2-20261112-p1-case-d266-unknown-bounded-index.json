@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Focused locked-case raw D266 halfword role audit and independent bounded review",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-d266-two-byte-role-001/001/audit.py",
+      "sha256": "048d2cf0ccfeeff976e4b0cf4072814102b731a69237f7007f4cd598ae9201c1"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-d266-two-byte-role-001/001/report.json",
+      "sha256": "92fc72c41faa4ec5adf4d3ce709b5308dfc5af04407338d9341bf8264d166571"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-d266-two-byte-role-001/001/receipt.json",
+      "sha256": "c59519f877b6cc4620a4b90db4e6993ed0ff79f0d561d6701c384e25dd639a8b"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-d266-two-byte-role-independent-review-001/001/review.py",
+      "sha256": "1aadb7fd55d66da1a286a16f371693eb761d15ac8c09a48e1a978b571d7958a7"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-d266-two-byte-role-independent-review-001/001/review.json",
+      "sha256": "43d655eebce33fd92737df8d2c63bac6d9fb9e2c6436abac9260577a6e2509b4"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-d266-two-byte-role-independent-review-001/001/receipt.json",
+      "sha256": "5505e5d51eeac7abe28d62ead4e6b4dc6d6676683dbe20aafdf27a425e0e7d81"
+    }
+  },
+  "result": {
+    "raw_case_span": [53862, 53864],
+    "payload_span": [53894, 53896],
+    "bytes_hex": "0000",
+    "bounded_direct_reference_target_found": false,
+    "independent_decision": "retain_unknown"
+  },
+  "limits": [
+    "The halfword fits alignment before a proven literal, but is also a valid Thumb instruction if entered.",
+    "The direct scan covers recorded function ranges and supported branch/literal patterns only; indirect, computed and unrecorded routes remain open.",
+    "No global reference closure, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

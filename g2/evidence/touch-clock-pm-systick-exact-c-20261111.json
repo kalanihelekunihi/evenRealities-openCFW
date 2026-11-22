@@ -1,0 +1,228 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "target": "Eleven additional exact source-built touch clock, power-management and SysTick functions",
+  "locked_bundle": {
+    "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "bytes": 4301227
+  },
+  "qualification": {
+    "command": "python3 tools/build/qualify_sources.py --out build/g2-touch-active-pdl-qual-20261111 --jobs 3 --match-functions --source vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_sysclk.c --source vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_syspm.c --source vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_systick.c",
+    "source_plan": "build/g2-touch-active-pdl-qual-20261111/source-plan.json",
+    "source_plan_sha256": "16067bf487486e92ce3fd800b80da9f002b8fa2e9e9f0cfddea1d4836f862d2f",
+    "selected_new_regions": [
+      {
+        "symbol": "Cy_SysClk_ExtClkGetFrequency",
+        "source": "vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_sysclk.c",
+        "source_sha256": "fa7d3221a4a52f4cae68d291237c57541448539db05ddf0ba653fd0a04c08594",
+        "stock_offset": [
+          26968,
+          26980
+        ],
+        "bytes": 12,
+        "body_sha256": "491e2ca45c6315a25d55ae3c8b14f2d67fef637e60d669edca9947e912188094",
+        "bindings": {
+          ".bss.extClkFreq": 536874784
+        }
+      },
+      {
+        "symbol": "Cy_SysClk_IloStartMeasurement",
+        "source": "vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_sysclk.c",
+        "source_sha256": "fa7d3221a4a52f4cae68d291237c57541448539db05ddf0ba653fd0a04c08594",
+        "stock_offset": [
+          27312,
+          27388
+        ],
+        "bytes": 76,
+        "body_sha256": "84a9cb3cffd49dcf58d30e07bb7b9b2ac41e891e8abc14596d40ce563f3ed2dd",
+        "bindings": {
+          ".bss.preventIloMeasurment": 536874781,
+          ".bss.iloMeasurment": 536874782
+        }
+      },
+      {
+        "symbol": "Cy_SysClk_IloStopMeasurement",
+        "source": "vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_sysclk.c",
+        "source_sha256": "fa7d3221a4a52f4cae68d291237c57541448539db05ddf0ba653fd0a04c08594",
+        "stock_offset": [
+          27388,
+          27448
+        ],
+        "bytes": 60,
+        "body_sha256": "1add9b352ad36f9ac4ecfb8f24e50b42354d9a5239a9bb3cbbb2837486d0b864",
+        "bindings": {
+          ".bss.preventIloMeasurment": 536874781,
+          ".bss.iloMeasurment": 536874782
+        }
+      },
+      {
+        "symbol": "Cy_SysClk_IloCompensate",
+        "source": "vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_sysclk.c",
+        "source_sha256": "fa7d3221a4a52f4cae68d291237c57541448539db05ddf0ba653fd0a04c08594",
+        "stock_offset": [
+          27448,
+          27732
+        ],
+        "bytes": 284,
+        "body_sha256": "05655988c18684b44cd7a3b0dba039170df1d44c5b0b388180548c29dee5142f",
+        "bindings": {
+          "__aeabi_uidiv": 42689,
+          ".bss.compRunStat.0": 536874780,
+          "SystemCoreClock": 536873080
+        }
+      },
+      {
+        "symbol": "Cy_SysPm_RegisterCallback",
+        "source": "vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_syspm.c",
+        "source_sha256": "be43e5aa704c99acca45850db68094977a274dcb1d4335fafca753269c5a93b8",
+        "stock_offset": [
+          28880,
+          29028
+        ],
+        "bytes": 148,
+        "body_sha256": "83c51e104a2756931d5385fee580191ce580681725b461ecb75950fa7b42c5ab",
+        "bindings": {
+          ".bss.pmCallbackRoot": 536874804
+        }
+      },
+      {
+        "symbol": "Cy_SysPm_ExecuteCallback",
+        "source": "vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_syspm.c",
+        "source_sha256": "be43e5aa704c99acca45850db68094977a274dcb1d4335fafca753269c5a93b8",
+        "stock_offset": [
+          29028,
+          29256
+        ],
+        "bytes": 228,
+        "body_sha256": "1e90e25d81adfccdc366df639064d5e04ff4bf4ab21c4f686f724f1ce10eb02f",
+        "bindings": {
+          ".bss.pmCallbackRoot": 536874804,
+          ".bss.lastExecutedCallback.0": 536874788,
+          ".bss.failedCallback": 536874792
+        }
+      },
+      {
+        "symbol": "Cy_SysPm_CpuEnterSleep",
+        "source": "vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_syspm.c",
+        "source_sha256": "be43e5aa704c99acca45850db68094977a274dcb1d4335fafca753269c5a93b8",
+        "stock_offset": [
+          29256,
+          29356
+        ],
+        "bytes": 100,
+        "body_sha256": "e59f1056b6358733edd691fda02899c0175d3b458161c72bda433d502332606c",
+        "bindings": {
+          "Cy_SysPm_ExecuteCallback": 42053,
+          "Cy_SysLib_EnterCriticalSection": 17555,
+          "Cy_SysPm_CpuEnterSleepNoCallbacks": 41845,
+          "Cy_SysLib_ExitCriticalSection": 17563,
+          ".bss.pmCallbackRoot": 536874804,
+          ".bss.lastExecutedCallback.0": 536874788,
+          ".bss.failedCallback": 536874792
+        }
+      },
+      {
+        "symbol": "Cy_SysPm_CpuEnterDeepSleep",
+        "source": "vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_syspm.c",
+        "source_sha256": "be43e5aa704c99acca45850db68094977a274dcb1d4335fafca753269c5a93b8",
+        "stock_offset": [
+          29356,
+          29460
+        ],
+        "bytes": 104,
+        "body_sha256": "67c1d9529de5d0ac272acc1e120f060e861cee20eb496b19a573231483668c38",
+        "bindings": {
+          "Cy_SysPm_ExecuteCallback": 42053,
+          "Cy_SysLib_EnterCriticalSection": 17555,
+          "Cy_SysPm_CpuEnterDeepSleepNoCallbacks": 41865,
+          "Cy_SysLib_ExitCriticalSection": 17563,
+          ".bss.pmCallbackRoot": 536874804,
+          ".bss.lastExecutedCallback.0": 536874788,
+          ".bss.failedCallback": 536874792
+        }
+      },
+      {
+        "symbol": "Cy_SysTick_ServiceCallbacks",
+        "source": "vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_systick.c",
+        "source_sha256": "e6035ec4478368f73ed89707d185f4eaca085269343cb9ccb5e5b90435c9e8f2",
+        "stock_offset": [
+          29460,
+          29504
+        ],
+        "bytes": 44,
+        "body_sha256": "fc6e6f8ad2c2aeb60287e02863678d6d12deef82490b563b3c4c9076ad9cc9ba",
+        "bindings": {
+          ".bss.Cy_SysTick_Callbacks": 536874816
+        }
+      },
+      {
+        "symbol": "Cy_SysTick_Init",
+        "source": "vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_systick.c",
+        "source_sha256": "e6035ec4478368f73ed89707d185f4eaca085269343cb9ccb5e5b90435c9e8f2",
+        "stock_offset": [
+          29552,
+          29640
+        ],
+        "bytes": 88,
+        "body_sha256": "56e944f45560bb8d97ae1f65723124ec7c212fb7acdacaead07b8fa7ccf33394",
+        "bindings": {
+          "Cy_SysTick_SetClockSource": 42553,
+          "Cy_SysTick_Enable": 42529,
+          ".bss.Cy_SysTick_Callbacks": 536874816,
+          "__RAM_VECTOR_TABLE": 536871936,
+          "Cy_SysTick_ServiceCallbacks": 42485
+        }
+      },
+      {
+        "symbol": "Cy_SysTick_SetCallback",
+        "source": "vendor-cache/g2/touch-gcc-14.2/pdl-input/drivers/source/cy_systick.c",
+        "source_sha256": "e6035ec4478368f73ed89707d185f4eaca085269343cb9ccb5e5b90435c9e8f2",
+        "stock_offset": [
+          29640,
+          29664
+        ],
+        "bytes": 24,
+        "body_sha256": "e4f53a58a1433daddcdc2fd5ebeb28ea67bbdc7680fa221c037e7a69a38856da",
+        "bindings": {
+          ".bss.Cy_SysTick_Callbacks": 536874816
+        }
+      }
+    ],
+    "added_bytes": 1168,
+    "manifest_compiler_sha256": "2e6d1fc0b7709d2fc08278a06bbcbfadb6fafcf5837e13cde01a1fbd07ad6db1",
+    "integrated_plan": "tools/build/source-plan.json",
+    "integrated_plan_sha256": "22af50a96efbfcf18b63a317a9c50312d13c2ec69272c9b11f72735c03ca29eb",
+    "overlap_with_preexisting_selected_regions": false
+  },
+  "verification": {
+    "hybrid_report": "build/g2-touch-clock-pm-systick-hybrid-20261111/build-report.json",
+    "hybrid_report_sha256": "c7b84463c766f03558fcc67ce15d0c6c60f80eee093da95babc7428e95ced9e8",
+    "hybrid_bundle": {
+      "file": "g2-openCFW-s200_v2.2.6.10.evenota.bin",
+      "size": 4301227,
+      "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+    },
+    "hybrid_source_completeness_proven": false,
+    "coverage_report": "build/g2-touch-clock-pm-systick-hybrid-20261111/coverage.json",
+    "g2_c_executable_bytes": 6528,
+    "g2_compiled_nonexecutable_data_bytes": 696,
+    "touch_c_executable_bytes": 6398,
+    "touch_compiled_nonexecutable_data_bytes": 692,
+    "touch_source_built_bytes": 7090,
+    "focused_source_report": "build/g2-touch-clock-pm-systick-focused-20261111/report.json",
+    "focused_source_report_sha256": "c50148cdbdae2c9c390b13238012eeaea3212bb02a6f77932554023b6961a7c9",
+    "focused_touch_units_compiled": 105,
+    "focused_touch_duplicate_strong_symbols": 0,
+    "focused_strict_link_report": "build/g2-touch-clock-pm-systick-link-20261111/link-report.json",
+    "focused_strict_link_report_sha256": "fa069d5e0fcf9b6e118acb4d6962f583ce8aec1aa055533f0c4c9c371e398699",
+    "focused_touch_binary_bytes": 33384,
+    "previous_full_source_report": "build/g2-gauge-tte-helper-all-20261111/report.json",
+    "previous_full_source_report_sha256": "43430a81927f2ce11c91add139e6cd52bc76352142029e6bf86a970f52481e87",
+    "source_manifest_unchanged_since_previous_full_build": true
+  },
+  "limits": [
+    "The hybrid OTA retains pull-through bytes; its locked hash is not a source-completeness proof.",
+    "The source-only OTA candidate remains different from the locked official bundle.",
+    "The previous full source compile covers the unchanged manifest; the interrupted repeat compile in build/g2-touch-clock-pm-systick-all-20261111 is not a passing receipt."
+  ]
+}

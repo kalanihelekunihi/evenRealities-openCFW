@@ -1,0 +1,139 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "G2 touch EEPROM provider and widget runtime RAM source ownership",
+  "stock_image": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "stock_image_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "stock_provider_literal": {
+    "literal_flash_va": "0x00008A74",
+    "value": "0x20000ED4",
+    "source_pseudocode": "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/00008a38.c"
+  },
+  "source_owned_bss": [
+    {
+      "symbol": "touch_eeprom_provider_ram",
+      "address": "0x20000ED4",
+      "bytes": 48
+    },
+    {
+      "symbol": "touch_widget_processing_ram",
+      "address": "0x200009E4",
+      "bytes": 24
+    }
+  ],
+  "widget_config_stock_flash_va": "0x0000B0F8",
+  "widget_config_linked_flash_va": "0x0000AF64",
+  "widget_pointer_cells": [
+    {
+      "field": "widget0.context",
+      "stock_value": "0x20000548",
+      "linked_value": "0x20000548"
+    },
+    {
+      "field": "widget0.sensors",
+      "stock_value": "0x200005FC",
+      "linked_value": "0x200005FC"
+    },
+    {
+      "field": "widget0.debounce",
+      "stock_value": "0x200009F4",
+      "linked_value": "0x200009F4"
+    },
+    {
+      "field": "widget1.context",
+      "stock_value": "0x20000584",
+      "linked_value": "0x20000584"
+    },
+    {
+      "field": "widget1.sensors",
+      "stock_value": "0x20000624",
+      "linked_value": "0x20000624"
+    },
+    {
+      "field": "widget1.debounce",
+      "stock_value": "0x200009F8",
+      "linked_value": "0x200009F8"
+    },
+    {
+      "field": "widget1.position",
+      "stock_value": "0x20000848",
+      "linked_value": "0x20000848"
+    },
+    {
+      "field": "widget2.context",
+      "stock_value": "0x200005C0",
+      "linked_value": "0x200005C0"
+    },
+    {
+      "field": "widget2.sensors",
+      "stock_value": "0x2000064C",
+      "linked_value": "0x2000064C"
+    },
+    {
+      "field": "widget2.raw",
+      "stock_value": "0x200009E8",
+      "linked_value": "0x200009E8"
+    },
+    {
+      "field": "widget2.raw_low",
+      "stock_value": "0x200009E4",
+      "linked_value": "0x200009E4"
+    },
+    {
+      "field": "widget2.debounce",
+      "stock_value": "0x200009F9",
+      "linked_value": "0x200009F9"
+    }
+  ],
+  "source_manifest": "g2/src/sources.json",
+  "source_manifest_sha256": "5ba2d11f24827e392cf149a4e773d0dada89f08b8c8ee129f6a67d7656b486db",
+  "linker_layout": "g2/src/touch/link/g2-touch-stockram.ld.inc",
+  "linker_layout_sha256": "3730920074387a9eb3aee10cac3fd1499ca0c1a42fb546726156dcf1234999af",
+  "focused_build_report": "build/g2-touch-widget-ram-20261111/report.json",
+  "focused_build_report_sha256": "193b5dcb9c800dfa674b10875fb32697c0bf09e2dec103ff528c3b0211c736d6",
+  "focused_link_report": "build/g2-touch-widget-ram-link-20261111/link-report.json",
+  "focused_link_report_sha256": "3aaa2bf6d03dda88ef7921f09f52b94986fa712024e53e946ab17b2388210f93",
+  "previous_touch_image": {
+    "path": "build/g2-touch-app-ram-symbols-link-20261111/g2-touch/g2-touch.bin",
+    "bytes": 33288,
+    "sha256": "a96237f6438247e3167177815a023db06e7ba765de83fdb46bdf606a1a15f467"
+  },
+  "current_focused_touch_image": {
+    "path": "build/g2-touch-widget-ram-link-20261111/g2-touch/g2-touch.bin",
+    "bytes": 33288,
+    "sha256": "a96237f6438247e3167177815a023db06e7ba765de83fdb46bdf606a1a15f467"
+  },
+  "image_bytes_unchanged_from_previous_focused": true,
+  "source_plan_changed": false,
+  "limits": [
+    "The recovered widget pointer values are retained because RAM placement is stock-pinned; their C table initializers now relocate to named source objects.",
+    "The 24-byte scratch block is bounded by the next source-owned LP frame allocation, but the individual filter/debounce suballocations need behavioral validation.",
+    "Whole-artifact source completeness, byte equality to the locked OTA, and hardware behavior remain unverified."
+  ],
+  "full_build_report": "build/g2-touch-widget-ram-all-20261111/report.json",
+  "full_build_report_sha256": "50d54f316d931edd77ffc5811e5ef3e90a1243edbede953a7d4e4e349fa10339",
+  "full_build_compiled_units": 4879,
+  "full_build_failed_units": 0,
+  "full_build_duplicate_strong_symbols": 0,
+  "manifest_changed_during_build": false,
+  "source_bundle_link_report": "build/g2-touch-widget-ram-bundle-20261111/link-report.json",
+  "source_bundle_link_report_sha256": "689eef8e9e96c6f78591f927e5aa790d8ab1b3657a85cecb457b978e66f05305",
+  "strict_linked_payloads": [
+    "g2-apollo-bootloader",
+    "g2-apollo-main",
+    "g2-case",
+    "g2-codec-a",
+    "g2-codec-b",
+    "g2-em9305",
+    "g2-touch"
+  ],
+  "external_binary_archive_used": false,
+  "source_candidate_bundle": {
+    "bytes": 4641980,
+    "sha256": "2b6faec5bd61caaa1bf16437021e2672a400cf94daeadedf17258dd610cdf78b",
+    "locked_target_bytes": 4301227,
+    "locked_target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "matches_locked_target": false,
+    "source_completeness_proven": false
+  }
+}

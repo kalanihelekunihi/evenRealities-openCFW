@@ -1,0 +1,64 @@
+{
+  "artifacts": {
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-header-execution-route-review-001/001/review.json",
+      "sha256": "55ec5028612c048a6cce16d556addb0cc604b7844a7834c3f2644fec0d1a2f20"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-header-execution-route-review-001/001/review.py",
+      "sha256": "55e922ff0409d35547899fabe8403e836c6eddf685299f07809a16414890a80e"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-header-execution-route-001/001/receipt.json",
+      "sha256": "f8f3fd0287b346c03b142f8efbe942a75a69878f3cc30f8d0a8188eff4f541c3"
+    },
+    "producer_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-header-execution-route-001/001/report.json",
+      "sha256": "529afa46aee8d2dc79dfa16e3720c5860aec0e6395b5a341c126f230fddc17a9"
+    },
+    "producer_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-header-execution-route-001/001/audit.py",
+      "sha256": "44db84714e17e14afd72bb8432967aa595f789a19ea9f6db94de48392e378633"
+    },
+    "record2_entry_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-header-execution-route-001/001/record2-entry.objdump.txt",
+      "sha256": "3c8ceb85a9d2644879b543df367f34262fa8b5bfa4e377dab06819511d39904b"
+    },
+    "record3_target_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-header-execution-route-001/001/record3-target.objdump.txt",
+      "sha256": "84dd01ba3a367e4177a7f5488b3fa20f16d149ec2b97e6f4a6c0ece869249e1d"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-header-execution-route-review-001/001/receipt.json",
+      "sha256": "69ec7d2fb7b69d8b2790b8bd0c6a5d9c12ad02de21cc7a63a26e7a4bad250a28"
+    }
+  },
+  "campaign_id": "20261112T092142Z",
+  "limits": [
+    "Static candidate route only: external boot-ROM selection of records 0/1 and actual device-state header choice remain unverified.",
+    "Full loader predicates, external NVM possibilities, record-3 reachability, complete pseudocode and G1 remain open.",
+    "No canonical admission or source completion claim."
+  ],
+  "result": {
+    "execution_address": "0x302028",
+    "execution_field_offset": 30,
+    "fhdr_payload_span": [
+      1004,
+      1044
+    ],
+    "record0_dispatch_candidate": "0x30001e getMainFunction -> 0x300024 jumpToFunction via stack slot",
+    "record2_entry_branch_target": "0x30ed80",
+    "record2_entry_payload_span": [
+      1044,
+      1054
+    ],
+    "target_record3_payload_offset": 52644
+  },
+  "schema_version": 1,
+  "scope": "Independently reviewed static EM9305 record-0/FHDR/record-2 entry route into record-3 code.",
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

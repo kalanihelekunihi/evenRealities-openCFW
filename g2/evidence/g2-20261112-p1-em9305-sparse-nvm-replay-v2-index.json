@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed ARCv2 EM BMSKN alignment for bounded sparse EM9305 package/NVM scan model",
+  "artifacts": {
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-sparse-nvm-replay-001/002/receipt.json",
+      "sha256": "b99821012cbabc12b4e1e4f74e29e7aa2f995c5bdb79e5ee2f35751242075955"
+    },
+    "producer_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-sparse-nvm-replay-001/002/report.json",
+      "sha256": "7d58fb2fe2e489452e307244040cc5b184ca97f7389fe73fa4bb4143ca332f29"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-sparse-nvm-review-001/002/review.json",
+      "sha256": "388d1c64d9cfe2ed24b505fd363ae6ff71dd160c3af2afd9f4c1e75edb164344"
+    },
+    "arcv2_em_isa_pdf": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/arcv2-isa-primary.pdf",
+      "sha256": "b5bd662cc6af5b7ae3d7718e86922a4072eeefde0aa917be32549d9346d027ab"
+    },
+    "previous_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-sparse-nvm-replay-index.json",
+      "sha256": "bfff4c0b965241de353472d3d87a043ac088fe9530ccf7f55fa15547b50ace40"
+    }
+  },
+  "result": {
+    "bmskn_immediate": "0xC",
+    "alignment_mask": "0xFFFFE000",
+    "scan_stride": "0x2000",
+    "modeled_first_scan": "0x302000",
+    "modeled_second_scan_result": null,
+    "review_verdict": "PASS_ISA_BACKED_SYNTHETIC_SCAN_WITH_CRC_AND_PHYSICAL_LIMITS"
+  },
+  "limits": [
+    "Primary ISA resolves the BMSKN alignment operation, but zlib still substitutes for unexecuted stock ARC CRC instructions.",
+    "Synthetic FF fill is not physical NVM evidence; competing headers and boot-ROM selection remain open.",
+    "Whole-EM9305 discovery and G1 remain open."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

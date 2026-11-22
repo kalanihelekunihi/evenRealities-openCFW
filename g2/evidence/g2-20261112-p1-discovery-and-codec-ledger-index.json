@@ -1,0 +1,80 @@
+{
+  "artifacts": {
+    "apollo_zero_ledger": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-zero-init-ledger-001/001/ledger.json",
+      "sha256": "e4a9870e1007f0f9a4dbc5769e9b65fd3ff1d13a13c587399e6df87ef2a7c7ab"
+    },
+    "apollo_zero_review": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-zero-review.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-zero-review-001/001/review.json",
+      "sha256": "2c1bb2f6f851293be6418c4ff1b855a3b564477ca5cd00175ba6bad231a09004"
+    },
+    "codec_weight_class_review": {
+      "path": "g2/evidence/g2-20261112-p1-codec-weight-class-review.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-kws-class-review-001/001/review-v2.json",
+      "sha256": "6a105983d7bcd61c1f4ea0391934480773141bd9ac110af851c55f8b2153f014"
+    },
+    "codec_weight_coverage_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-002/002/coverage-draft.jsonl",
+      "sha256": "d28bd7bd1b3ba67bd78d1a0b45b3a04295f01c0ebb057cd366a177c64a6aac0a"
+    },
+    "codec_weight_coverage_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-002/002/receipt.json",
+      "sha256": "2793bca4e404a217cd651106dd26e8f666bd3a39858f6aa9eb5320d1deb74185"
+    },
+    "discovery_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/002/discovery-draft.jsonl",
+      "sha256": "c58a34582de82fcf4d59c2ee793e663261072907ae27dec2708cef1f3429f198"
+    },
+    "discovery_draft_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/002/receipt.json",
+      "sha256": "a4e03c55a505e39c86152455b8fba0cbbda3cbdb6860ba2476bf66a6958f061f"
+    },
+    "discovery_draft_review": {
+      "path": "g2/evidence/g2-20261112-p1-discovery-draft-review.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-review-001/001/findings-v2.json",
+      "sha256": "be28b97c97f5feb3f64c140e86ce8a4ed7169a189504f498cef145931f5f268f"
+    },
+    "em9305_discovery_review": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-discovery-audit.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-discovery-review-001/001/findings.json",
+      "sha256": "8eda75fd58a3ea1ab009d22f5a6081f42b24c8821934a33e01712cfa6d8ff5ab"
+    },
+    "signature_scan": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-signature-sweep-001/001/scan.json",
+      "sha256": "7263bd5272da1e44d1045fd0f30f1fcb25ec10500eee9408fbdb0280c1508a98"
+    },
+    "touch_apollo_fwpk_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-apollo-fwpk-check-001/002/report.json",
+      "sha256": "acf9aa2563a449167c422c97499662d6f432ad237887f590a811bf6596818815"
+    },
+    "touch_apollo_fwpk_review": {
+      "path": "g2/evidence/g2-20261112-p1-touch-apollo-fwpk-review.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-apollo-fwpk-review-001/001/review-v2.json",
+      "sha256": "4e791defab9569a6d52c5e2c0dcb036d5ef80f18663fbeffe2c961cb35c0f58f"
+    }
+  },
+  "campaign_id": "20261112T092142Z",
+  "counts": {
+    "coverage_rows_after_refinement": 72,
+    "coverage_scopes": 40,
+    "discovery_open_items": 9,
+    "discovery_payload_rows": 6,
+    "listed_image_ids": 33,
+    "newly_classified_weight_data_bytes": 120800,
+    "unknown_payload_bytes_after_weight_classification": 4179119
+  },
+  "limits": [
+    "Signature matches and known-layout rejection do not prove absence of undocumented nested formats.",
+    "Apollo zero-init table bytes and generated values do not prove handler execution or all runtime mapping.",
+    "Codec GXNPU command extent is structurally decoded but remains unknown in byte ledger until execution role/semantics are independently qualified.",
+    "Six discovery records retain nonempty unresolved lists; schema-v2 G1 validator cannot pass them, and no review registry is established."
+  ],
+  "schema_version": 1,
+  "scope": "Bounded current-campaign six-payload discovery draft, signature and wrapper checks, Apollo zero-init data, and codec trained-weight classification. All remain noncanonical; no G1 admission.",
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

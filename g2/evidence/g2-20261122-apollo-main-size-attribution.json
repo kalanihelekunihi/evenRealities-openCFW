@@ -1,0 +1,404 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "time_local": "2026-11-22 08:43 CST",
+  "title": "Attribute apollo-main +296,084 B vs stock 2.2.6.10: no duplicate globals; final link omits --gc-sections; unused function-section leftovers are 147,928 B; remainder still unexplained at -O grain",
+  "scope": "Host analysis of the already-linked opencfw-otap-disarm apollo-main image. A probe link with --gc-sections was written only under /tmp and was not adopted. No rebuild of the official image. No hardware. No flash. No commit. source_completeness_proven stays false.",
+  "images": {
+    "stock_app": "build/em9305-nor-20261122/stock.app.bin",
+    "stock_bytes": 3523364,
+    "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "opencfw_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "opencfw_bytes": 3819448,
+    "opencfw_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "delta_bytes": 296084,
+    "reset_pc_stock": "0x005E4233",
+    "reset_pc_opencfw": "0x0059427D",
+    "load_base": "0x00438000",
+    "initial_sp": "0x2007FB00"
+  },
+  "duplicates": {
+    "duplicate_global_symbol_names_in_final_elf": 0,
+    "compose_ld": "arm-none-eabi-ld -r plus payload defsym aliases; sources.json payloads.g2-apollo-main.compose has no ld_flags",
+    "allow_multiple_definition": false,
+    "note": "Historical compose sometimes used --allow-multiple-definition; the current compose path in tools/build/sources.py does not. Three printf-style names (g2_log_transport_vformat_unbounded, g2_flashdb_vformat, audio_heap_formatter) are aliases of one 3,252-byte body at the same address, not triplicate code. Local OUTLINED_FUNCTION_* collisions are compiler outlining, not duplicated source. 35 unique 3,600-byte pixels_* frames are all present verbatim in stock (no extra copies).",
+    "vformat_aliases_va": "0x004944F0"
+  },
+  "optimization": {
+    "linked_units": 2668,
+    "opt_mix": {
+      "-O2": 2134,
+      "-Oz": 534
+    },
+    "function_sections_mix": {
+      "without": 1960,
+      "with": 708
+    },
+    "default_profile": "g2-apollo-main-1: -O2, no -ffunction-sections, no -fdata-sections (1,791 units)",
+    "size_profile": "g2-apollo-main-2: -Oz -ffunction-sections -fdata-sections (499 units, plus other -Oz profiles to 534)",
+    "other_notes": [
+      "g2-apollo-main-50 (LVGL, 68 units): -O2 -fno-inline -ffunction-sections",
+      "g2-apollo-main-70 (Cordio, 46 units): -O2 -fno-inline, no function-sections",
+      "Target is clang --target=arm-none-eabi -mcpu=cortex-m55+nomve (MVE disabled)",
+      "No full -Oz rebuild was done in this step, so the contribution of -O2 vs stock IAR size codegen is not measured"
+    ]
+  },
+  "link_gc": {
+    "compose": "ld -r only; --gc-sections is used solely for per-unit retain.selected.o, not the payload compose",
+    "final_link": "tools/build/link_g2_sources.py arm_link() sets gc_sections = [] if payload == 'g2-apollo-main' else ['-Wl,--gc-sections']",
+    "reason_not_changed": "Attribution only; official image left as-is. A /tmp probe link with the same script and -Wl,--gc-sections succeeded.",
+    "composed_object_progbits": {
+      "merged_dot_text_bytes": 948952,
+      "function_text_sections": 6850,
+      "function_text_bytes": 985930,
+      "merged_dot_data_bytes": 14096,
+      "data_sections_bytes": 8193,
+      "rodata_star_bytes": 1708968
+    },
+    "official_bin_bytes": 3819448,
+    "gc_probe_bin_bytes": 3671520,
+    "gc_probe_sha256": "dcfd60fe710a98393988c0233f4723a7543fc1636e5720f4daa3af42f7cc49b5",
+    "gc_saved_flash_bytes": 147928,
+    "remaining_vs_stock_after_gc_probe": 148156,
+    "gc_probe_sim_verified": false,
+    "note": "Because compose already merged 1,960 units into a single .text (948,952 B) and a large shared .rodata, --gc-sections on the existing relocatable can only drop leftover .text.*/.rodata.*/.data.* from the 708 units compiled with -ffunction-sections/-fdata-sections. That is a lower bound on unused upstream, not a complete unused-code account."
+  },
+  "unused_upstream_from_gc_probe": {
+    "dropped_symbols": 1868,
+    "dropped_named_flash_bytes": 143897,
+    "dropped_named_bss_bytes": 20883,
+    "flash_bytes_by_family": {
+      "lvgl_ui_assets": 61125,
+      "other": 53476,
+      "ambiq_hal": 13798,
+      "compress": 6098,
+      "lc3": 4382,
+      "freertos": 3592,
+      "app_g2": 1052,
+      "cordio_ble": 374
+    },
+    "flash_symbol_count_by_family": {
+      "ambiq_hal": 114,
+      "compress": 76,
+      "other": 746,
+      "lc3": 35,
+      "lvgl_ui_assets": 796,
+      "app_g2": 32,
+      "freertos": 52,
+      "cordio_ble": 2
+    },
+    "examples": {
+      "am_hal_pin_fn_list": {
+        "size": 7168,
+        "in_stock_verbatim": false,
+        "dropped_by_gc": true,
+        "verdict": "unused Ambiq HAL pin-function table; not present as a byte span in stock.app.bin"
+      },
+      "ft_adobe_glyph_list": {
+        "size": 55997,
+        "in_stock_verbatim": true,
+        "dropped_by_gc": false,
+        "verdict": "kept; referenced by ft_get_adobe_glyph_index and present in stock \u2014 not extra bloat"
+      },
+      "lc3_plc_and_hr": "lc3_plc_* / lc3_hr_setup_decoder / related synthesizers dropped by the probe; sources.json already notes lc3_plc_* are absent from stock and would be dropped by a final --gc-sections link, but apollo-main currently disables that flag",
+      "lvgl_unused_widgets": "probe drops unused LVGL pieces such as lv_dropdown_add_option, lv_table_*, lv_chart_add_series, lv_menu_set_sidebar_page, encoder/keypad indev paths",
+      "lz4_compress": "LZ4_compress_generic_validated (2,248 B) and LZ4_compress_fast_continue dropped; compress-side LZ4 is unused in this image"
+    },
+    "top_dropped_flash_symbols": [
+      {
+        "size": 7168,
+        "kind": "T",
+        "addr": "0x7a5270",
+        "name": "am_hal_pin_fn_list",
+        "family": "ambiq_hal"
+      },
+      {
+        "size": 2248,
+        "kind": "t",
+        "addr": "0x5bbcd4",
+        "name": "LZ4_compress_generic_validated",
+        "family": "compress"
+      },
+      {
+        "size": 1586,
+        "kind": "t",
+        "addr": "0x59b620",
+        "name": "synthesize_template",
+        "family": "other"
+      },
+      {
+        "size": 1068,
+        "kind": "T",
+        "addr": "0x59a944",
+        "name": "lc3_ltpf_synthesize",
+        "family": "lc3"
+      },
+      {
+        "size": 1022,
+        "kind": "T",
+        "addr": "0x5ac188",
+        "name": "elog_find_lvl",
+        "family": "other"
+      },
+      {
+        "size": 962,
+        "kind": "t",
+        "addr": "0x5dd93c",
+        "name": "indev_encoder_proc",
+        "family": "other"
+      },
+      {
+        "size": 934,
+        "kind": "T",
+        "addr": "0x5dc6e4",
+        "name": "lv_screen_load_anim",
+        "family": "lvgl_ui_assets"
+      },
+      {
+        "size": 860,
+        "kind": "t",
+        "addr": "0x5fc398",
+        "name": "new_points_alloc",
+        "family": "other"
+      },
+      {
+        "size": 814,
+        "kind": "t",
+        "addr": "0x59c4a8",
+        "name": "imdct_window",
+        "family": "other"
+      },
+      {
+        "size": 782,
+        "kind": "T",
+        "addr": "0x5def8c",
+        "name": "lv_indev_find_scroll_obj",
+        "family": "lvgl_ui_assets"
+      },
+      {
+        "size": 730,
+        "kind": "T",
+        "addr": "0x5eba00",
+        "name": "lv_dropdown_add_option",
+        "family": "lvgl_ui_assets"
+      },
+      {
+        "size": 714,
+        "kind": "T",
+        "addr": "0x5d4bf0",
+        "name": "lv_lru_remove_lru_item",
+        "family": "lvgl_ui_assets"
+      },
+      {
+        "size": 676,
+        "kind": "T",
+        "addr": "0x532810",
+        "name": "SVC_NvdbparsePsn",
+        "family": "app_g2"
+      },
+      {
+        "size": 668,
+        "kind": "T",
+        "addr": "0x532574",
+        "name": "_nvdbUpdataSysDt",
+        "family": "other"
+      },
+      {
+        "size": 664,
+        "kind": "T",
+        "addr": "0x5a6014",
+        "name": "inv_imu_edmp_set_sif_model",
+        "family": "other"
+      },
+      {
+        "size": 640,
+        "kind": "t",
+        "addr": "0x5de49c",
+        "name": "indev_proc_press",
+        "family": "other"
+      },
+      {
+        "size": 630,
+        "kind": "t",
+        "addr": "0x5de71c",
+        "name": "indev_proc_release",
+        "family": "other"
+      },
+      {
+        "size": 630,
+        "kind": "T",
+        "addr": "0x5dbfd4",
+        "name": "lv_display_set_buffers",
+        "family": "lvgl_ui_assets"
+      },
+      {
+        "size": 628,
+        "kind": "t",
+        "addr": "0x5b96b4",
+        "name": "print_string_ptr",
+        "family": "other"
+      },
+      {
+        "size": 596,
+        "kind": "T",
+        "addr": "0x5a7894",
+        "name": "inv_imu_get_fifo_frame",
+        "family": "other"
+      },
+      {
+        "size": 592,
+        "kind": "t",
+        "addr": "0x5a1534",
+        "name": "fill_noise",
+        "family": "other"
+      },
+      {
+        "size": 550,
+        "kind": "T",
+        "addr": "0x5f44c0",
+        "name": "lv_table_set_column_count",
+        "family": "lvgl_ui_assets"
+      },
+      {
+        "size": 550,
+        "kind": "T",
+        "addr": "0x5abd1c",
+        "name": "elog_set_filter_tag_lvl",
+        "family": "other"
+      },
+      {
+        "size": 546,
+        "kind": "T",
+        "addr": "0x5df500",
+        "name": "lv_indev_scroll_throw_handler",
+        "family": "lvgl_ui_assets"
+      },
+      {
+        "size": 546,
+        "kind": "T",
+        "addr": "0x5ac588",
+        "name": "elog_find_tag",
+        "family": "other"
+      },
+      {
+        "size": 542,
+        "kind": "T",
+        "addr": "0x5b997c",
+        "name": "tlsf_check",
+        "family": "other"
+      },
+      {
+        "size": 540,
+        "kind": "T",
+        "addr": "0x60fd68",
+        "name": "am_hal_mcuctrl_control",
+        "family": "ambiq_hal"
+      },
+      {
+        "size": 504,
+        "kind": "t",
+        "addr": "0x5a1158",
+        "name": "get_quantized",
+        "family": "other"
+      },
+      {
+        "size": 502,
+        "kind": "T",
+        "addr": "0x5fcc24",
+        "name": "lv_chart_add_series",
+        "family": "lvgl_ui_assets"
+      },
+      {
+        "size": 482,
+        "kind": "t",
+        "addr": "0x5dd758",
+        "name": "indev_keypad_proc",
+        "family": "other"
+      },
+      {
+        "size": 482,
+        "kind": "T",
+        "addr": "0x5b8a44",
+        "name": "cJSON_Compare",
+        "family": "other"
+      },
+      {
+        "size": 466,
+        "kind": "T",
+        "addr": "0x5f1910",
+        "name": "lv_scale_set_line_needle_value",
+        "family": "lvgl_ui_assets"
+      },
+      {
+        "size": 460,
+        "kind": "T",
+        "addr": "0x5dc280",
+        "name": "lv_display_set_buffers_with_stride",
+        "family": "lvgl_ui_assets"
+      },
+      {
+        "size": 456,
+        "kind": "t",
+        "addr": "0x5d07a0",
+        "name": "anim_timeline_set_act_time",
+        "family": "other"
+      },
+      {
+        "size": 448,
+        "kind": "t",
+        "addr": "0x5b94f4",
+        "name": "print_object",
+        "family": "other"
+      },
+      {
+        "size": 442,
+        "kind": "T",
+        "addr": "0x5a75e4",
+        "name": "inv_imu_set_fifo_config",
+        "family": "other"
+      },
+      {
+        "size": 432,
+        "kind": "T",
+        "addr": "0x5c0658",
+        "name": "xQueuePeek",
+        "family": "freertos"
+      },
+      {
+        "size": 424,
+        "kind": "T",
+        "addr": "0x5dede4",
+        "name": "lv_indev_scroll_handler",
+        "family": "lvgl_ui_assets"
+      },
+      {
+        "size": 424,
+        "kind": "T",
+        "addr": "0x5a3528",
+        "name": "inv_imu_adv_get_data_from_registers",
+        "family": "other"
+      },
+      {
+        "size": 418,
+        "kind": "t",
+        "addr": "0x5a2b80",
+        "name": "inverse_filtering",
+        "family": "other"
+      }
+    ]
+  },
+  "remainder_after_gc_probe_bytes": 148156,
+  "remainder_hypotheses_unmeasured": [
+    "Unused functions and rodata trapped in the merged .text (948,952 B from 1,960 units without -ffunction-sections) and merged .rodata cannot be discarded without recompiling those units with -ffunction-sections/-fdata-sections and re-linking with --gc-sections",
+    "2134/2668 units are -O2 (clang); stock is IAR. No sample or full rebuild at -Oz was run, so the opt-level share of the remaining 148,156 B is not quantified",
+    "-mcpu=cortex-m55+nomve and -fno-inline on LVGL/Cordio profiles may enlarge code versus stock",
+    "openCFW-only recovery/disarm hooks are small relative to 148 KB"
+  ],
+  "not_done": [
+    "Did not enable --gc-sections on the official apollo-main link or recompile the 1,960 units with -ffunction-sections",
+    "Did not sim-run the /tmp gc-probe image",
+    "Did not rebuild at -Oz to measure the optimization delta",
+    "source_completeness_proven remains false"
+  ]
+}

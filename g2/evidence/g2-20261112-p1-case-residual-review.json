@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "review_id": "P1-case-residual-review-001/001-v2",
+  "supersedes": "review.json",
+  "decision": "pass_with_scope_corrections",
+  "reviewed_attempts": [
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-residual-discovery-001/001",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-residual-discovery-001/002"
+  ],
+  "independent_recomputation": {
+    "inputs": {
+      "wrapped_payload": {"size": 55784, "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374", "matches_discovery": true},
+      "raw_case_image": {"size": 55752, "sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677", "matches_discovery": true},
+      "literal_coverage_evidence": {"path": "g2/evidence/case-pc-literal-coverage-unaligned-20261111.json", "sha256": "8ac8e9e31c38ae2ac9160c76ab81c98bbc3875070a42a35fdf6bbeb3e6a2b5b5", "matches_followup_pin": true}
+    },
+    "wrapper": {
+      "magic": "EVEN",
+      "version_bytes": "01023900",
+      "declared_raw_length": 55752,
+      "raw_body_exactly_equals_extracted_image": true,
+      "stored_big_endian_additive_word_sum": "0x7367642f",
+      "independently_recomputed_big_endian_u32_word_sum_mod_2_32": "0x7367642f",
+      "matches_discovery_claim": true,
+      "coordinate_note": "The 32-byte prefix is the firmware_box.bin wrapper. Its body starts at wrapped offset 32 and equals raw image offset 0; these are case payload coordinates, not outer EVENOTA package coordinates."
+    },
+    "exact_marker_scan": {
+      "markers": ["EVEN", "FWPK", "BINH", "\u007fELF", "MZ", "FWMH"],
+      "marker_hex": ["4556454e", "4657504b", "42494e48", "7f454c46", "4d5a", "46574d48"],
+      "raw_image_hits": {"EVEN": [], "FWPK": [], "BINH": [], "\u007fELF": [], "MZ": [], "FWMH": []},
+      "wrapped_payload_hits": {"EVEN": [0], "FWPK": [], "BINH": [], "\u007fELF": [], "MZ": [], "FWMH": []},
+      "matches_discovery_claim": true,
+      "scope": "Exact byte strings only; this does not test transformed, compressed, encrypted, custom-format, or markerless content."
+    },
+    "aligned_heuristics": {
+      "vector_candidates": [
+        {"raw_image_offset": 0, "runtime_address": "0x08000000", "initial_sp": "0x20002c88", "reset_vector": "0x08000145", "reset_target_raw_offset": 324},
+        {"raw_image_offset": 27160, "runtime_address": "0x08006a18", "initial_sp": "0x200000b8", "reset_vector": "0x0800bb4d", "reset_target_raw_offset": 47948}
+      ],
+      "matches_discovery_candidates": true,
+      "aligned_flash_pointer_word_count": 97,
+      "matches_discovery_count": true,
+      "heuristic_limit": "These are numerical/alignment filters using the supplied SRAM and active-flash ranges; they do not establish semantic pointer use or exhaust other address spaces and encodings."
+    },
+    "secondary_candidate_resolution": {
+      "candidate_raw_span": [27152, 27200],
+      "candidate_runtime_span": ["0x08006a10", "0x08006a40"],
+      "raw_span_sha256": "efec68a4de2cb26c8b203f31767ea9491ac7079778636d40f86477ace1ef538e",
+      "literal_evidence_span_sha256": "efec68a4de2cb26c8b203f31767ea9491ac7079778636d40f86477ace1ef538e",
+      "typed_pc_relative_literal_word_count": 12,
+      "candidate_words": [
+        {"runtime_address": "0x08006a18", "value": "0x200000b8", "load_site": "0x08006976"},
+        {"runtime_address": "0x08006a1c", "value": "0x0800bb4d", "load_site": "0x08006982"}
+      ],
+      "independent_instruction_check": {
+        "0x08006976": {"halfword": "0x4c28", "aligned_pc": "0x08006978", "literal_target": "0x08006a18"},
+        "0x08006982": {"halfword": "0x4826", "aligned_pc": "0x08006984", "literal_target": "0x08006a1c"}
+      },
+      "conclusion": "The pair at raw offset 0x6a18 is a heuristic false positive for a vector-table start. The pinned literal-coverage evidence classifies the full aligned span [0x08006a10, 0x08006a40) as typed PC-relative literal data, and the two raw Thumb LDR-literal halfwords independently compute to the stated words. The odd flash value points to 0x0800bb4c as a code/function-pointer candidate; the RAM value is 0x200000b8. This supports ordinary literal-pool use and no independently evidenced second vector table at this address.",
+      "limits": "The load-site and span classification are local evidence, not a whole-image disassembly or exhaustive proof against all nested executables/vector spaces. The source/symbol label is only corroborative and is not required for this conclusion."
+    }
+  },
+  "factual_errors": [],
+  "scope_and_wording_corrections": [
+    {"item": "Checksum wording", "finding": "The discovery report's field name 'header_additive_checksum' is underspecified but its value and location are correct. The documented EVEN checksum is the big-endian additive sum of raw-image big-endian u32 words modulo 2^32, not a byte sum of the 16-byte header. Independent recomputation matches 0x7367642f."},
+    {"item": "Wrapped offsets", "finding": "The discovery convention that wrapped-payload offsets equal raw-image offsets plus 32 is correct specifically for firmware_box.bin. It should not be read as an outer EVENOTA package offset; that package coordinate was not examined."},
+    {"item": "Vector conclusion", "finding": "The first report correctly labels the offset-0 vector as credible and records the offset-0x6a18 pair as a heuristic candidate needing review. The follow-up resolves that candidate locally as literal-pool data; neither report establishes global absence of nested or transformed code."}
+  ],
+  "review_limits": [
+    "Review independently recomputed wrapper/raw identity, marker hits, aligned vector candidates, aligned active-flash pointer count, checksum, candidate bytes, and the two Thumb PC-relative literal targets.",
+    "The broader typed literal inventory was inspected in its pinned evidence file; no new whole-image disassembly, G1 qualification, or source-completeness check was performed.",
+    "This review is not a gate, corpus-freeze, source-completeness, or byte-identity claim."
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "artifacts": {
+    "coverage_draft_016": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-016/001/coverage-draft.jsonl",
+      "sha256": "70116bffd3bde553a179ccaeb8aa5495a378cde2374df2e5ac462a73834c2f5b"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-exact-code-coverage-review-001/001/review.json",
+      "sha256": "cad3754280d3a2890e7054a13637ef96594357fbe1d8006407a228dfcb792df5"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-exact-code-coverage-review-001/001/review.py",
+      "sha256": "66b6d99832d7e31f29ebfd63145afe7e9faf0aee937803047719ae74bdbca512"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-016/001/receipt.json",
+      "sha256": "8e93bc94fcbf497f33847cb85af62a96e33247924d846a89bebda026519790a4"
+    },
+    "producer_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-016/001/classify.py",
+      "sha256": "e6399217982c952101ecfb3fd7df9e00c10f1a0aaab9c002e31fe1dbcb78a824"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-exact-code-coverage-review-001/001/receipt.json",
+      "sha256": "ef92e1bd9128ba045bcc58f1dca3eada3298ac22ced622f1aca00008fde31ee1"
+    },
+    "vendor_boundary_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-vendor-elf-boundary-index.json",
+      "sha256": "b28dce6a341f2f9cd3483f77923832838d7466b4ca3c98de3cc9bfdadafef9bf"
+    }
+  },
+  "campaign_id": "20261112T092142Z",
+  "counts": {
+    "coverage_rows": 127,
+    "coverage_scopes": 40,
+    "new_code_bytes_per_view": 178,
+    "unknown_image_bytes": 5671365,
+    "unknown_payload_bytes": 4176715
+  },
+  "limits": [
+    "Only five byte-identical vendor function slices and gap-free stock linear disassembly justify the new code rows; other record-1 bytes remain unknown.",
+    "Divergent vendor function bounds are not inherited; external NVM selection, whole-payload discovery, canonical admission and G1 remain open."
+  ],
+  "schema_version": 1,
+  "scope": "Independently reviewed noncanonical coverage draft 016 adding exact vendor-matched EM9305 record-1 function slices as code in payload and image views.",
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-main-next-pointer-coverage-index.json",
+    "sha256": "8280c8ade06914eeac9e5519b40fbd3cf4abb5e640106428121e992189d4135d"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

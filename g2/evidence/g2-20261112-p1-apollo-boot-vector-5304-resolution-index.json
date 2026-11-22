@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded resolution of Apollo boot raw 0x5304 as a false MSP/reset vector start.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-boot-vector-candidates-index.json",
+    "sha256": "f878363aa52680a4d22e6437449776e595c9adc1685d2c65f5bd9c83dd134476"
+  },
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-vector-5304-resolution-002/001/audit.py",
+      "sha256": "d2a9db574d04604a77692e5faa9eda5f0393c05eb7844614a758754c6f8df3f9"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-vector-5304-resolution-002/001/report.json",
+      "sha256": "db0b1f65f98aa9c937607015ed043284662c20ad4fa9c9e1fa9516bffdbbc46e"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-vector-5304-resolution-002/001/receipt.json",
+      "sha256": "7807b0e4b283f3ec7896a24752666d1d9870908ebf036c376469e2ec2e8b1f25"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-vector-5304-resolution-review-002/001/review.json",
+      "sha256": "8a1d223f70cc7a7774688fc30655a5058328f513ffce14c2a9888675016a80e0"
+    },
+    "rejected_wording_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-vector-5304-resolution-review-001/001/review.json",
+      "sha256": "cb4b59373a95bfc65d66ebb98dcb5e63f7363ce9fb8618f85905c2bb94f6f2a0"
+    }
+  },
+  "result": {
+    "raw_candidate_span": [
+      21252,
+      21260
+    ],
+    "runtime_candidate_span": [
+      "0x415304",
+      "0x41530c"
+    ],
+    "bytes_hex": "08fc0f00d9504100",
+    "first_word": "0x000ffc08",
+    "second_word": "0x004150d9",
+    "direct_literal_references": 2,
+    "vector_start_classification": "rejected"
+  },
+  "memory_map_basis": "Official Apollo510 Table 3 places 0x000FFC08 in a Code-group Reserved/X region; it is not documented as writable stack. Boot-specific alias/remap remains open.",
+  "limits": [
+    "This rejects the pair as a vector start; it does not classify all nearby bytes or the uncensused target routine.",
+    "Boot-specific alias/remap and whole boot discovery remain open.",
+    "No canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 025 incorporating bounded Apollo bootloader SpotMgr selector and local dispatch evidence",
+  "artifacts": {
+    "discovery_draft_025": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/025/discovery-draft.jsonl",
+      "sha256": "89df308153fc3f9a4aeb6a02c183b1fddbda67b8200c8231c4dacbe2f8337dd7"
+    },
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/025/reproduce.py",
+      "sha256": "529e9ff473d8acff2b37a210550a1f560de9dcf898dc662dfaaa9f78043ebb2f"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/025/receipt.json",
+      "sha256": "c8ee49b57b6c622235d704cd3a97bb9fa3e71a374fc2e86b5a0f5fdfd29bfd69"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v25-review-001/001/review.py",
+      "sha256": "2f8357fb6037613e5d2d24159c5891b80a79f829c01c754140e4d549229cafdf"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v25-review-001/001/review.json",
+      "sha256": "ef3e3bacdb66c965855f061dc595a51f16c4c3bd1dab67c98bb4bae6f2792a0b"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v25-review-001/001/receipt.json",
+      "sha256": "a054f6c0f79a0c964c81ccb4867eeceabf6cd8f39d71989c78ac0db9ae42f24e"
+    },
+    "dispatch_grid_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-boot-spotmgr-dispatch-grid-index.json",
+      "sha256": "00949b042e8444f460e9f2c1b21247efdda0c5f43eca78ca90cd12f5cc4a2bb3"
+    },
+    "predecessor_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/024/discovery-draft.jsonl",
+      "sha256": "72d97a1bd56c65ecb97ec0ab1804941f60d64926be3b3efae15cf9024ac4ef0b"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "The selector grid covers old/new state values 0..19 and three local callsites only; global state bounds, other DTCM consumers and whole-image discovery remain open.",
+    "No canonical inventory admission, pseudocode completion or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v24-index.json",
+    "sha256": "cd4439eef9418915c6415a7c715c427492058942a8b6842ee6e6f2cbc7fe9f34"
+  }
+}

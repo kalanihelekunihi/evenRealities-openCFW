@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded touch pin-function table source, direct caller and local write consumer",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-pin-function-copy-001/002/audit.py",
+      "sha256": "7f34b767ba1c43792f8f434a8a248158eedc2534ae61e57e7d74a15b5f9413b8"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-pin-function-copy-001/002/report.json",
+      "sha256": "d0a1d0318e1ead29d4b4575b005d4fd3bea5266cf6da2844cff9e2a085d7341a"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-pin-function-copy-001/002/receipt.json",
+      "sha256": "912f6113673e70a03e92422638dc69bd1c8175bd91babbe013360f617bc463e9"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-pin-function-copy-review-002/001/review.json",
+      "sha256": "489ffe678ced053a3b7b2442bda31a5844cf2690d6ccb0d99faea83a3bc2dd82"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-pin-function-copy-review-002/001/receipt.json",
+      "sha256": "d3735974cccd9b0d2797b3a7dc466ccd6dbe0f1154cd609a37235c7facc1ce51"
+    }
+  },
+  "result": {
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS",
+    "direct_caller_of_0x50e4": "0x54fc",
+    "source_runtime_span": ["0xb4c4", "0xb4fc"],
+    "source_bytes_sha256": "889cd07e055b80e2861d9d1d188d35d6b3515180b1ef7d6d7ba5a775d275eb0b",
+    "local_copy": "0x50fa copies 56 bytes to stack as fourteen words",
+    "local_consumer": "A non-0xFF selector read from *(u8 *)(*(u32 *)(context+8) + 99 + slot) directs table[slot] to *(u32 *)(context+36) + 112 + 4*selector",
+    "conditional_local_selector_values": [0, 1, 2]
+  },
+  "limits": [
+    "Selector values 0..2 and destination offsets +112/+116/+120 hold for visible local paths absent alias or asynchronous writes; full destination range remains open.",
+    "Destination RAM status, later execution, indirect callers, other loaders and whole-image CFG are not established.",
+    "No nested-image exclusion or canonical inventory admission."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded comparison of stock decoded SpotMgr transition pointer slots with local Ambiq 5.0 and 5.1 source candidates",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-source-version-001/001/audit.py",
+      "sha256": "9306fbadb0f5d8fcf1dcbfc23f213e67e900cdea0bb1e31bc427c29b62cf1c44"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-source-version-001/001/report.json",
+      "sha256": "47f6f476f70d59e7aa232944906499ab5eb469a4617cb66ebc5285f3341eb521"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-source-version-001/001/receipt.json",
+      "sha256": "20c3147687a471e2786213f95f7934d447b6ecc29d44bed0a421029cef7d9959"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-source-version-review-001/001/review.json",
+      "sha256": "0d410965dcd96dac7c308fab5e0e23e3a16d50b2d4cfb5c957def358625aa116"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-source-version-review-001/001/receipt.json",
+      "sha256": "1188bffa0591c46375774bca7ed46dd05f0bb073c516455266c4b4db7d6e3a78"
+    }
+  },
+  "result": {
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS",
+    "dtcm_table_span": ["0x20000158", "0x200001c4"],
+    "table_slots": 27,
+    "provisional_missing_census_names": {
+      "7": "transition_sequence_7 at 0x428920",
+      "22": "transition_sequence_22 at 0x429e00",
+      "24": "transition_sequence_24 at 0x42a030",
+      "25": "transition_sequence_temp at 0x42a032",
+      "26": "transition_sequence_invalid at 0x42a034"
+    },
+    "stock_leaf_effect": "Slots 24-26 are 0x4770 BX LR and return with incoming r0 unchanged.",
+    "source_candidate_difference": "Local SDK 5.0 declares the corresponding three callbacks void with empty bodies; local SDK 5.1 declares them uint32_t with explicit success or failure returns."
+  },
+  "limits": [
+    "Source table order provides provisional names; neither version is proved to be the exact stock source.",
+    "Incoming runtime r0 values and full indirect caller ABI are outside this audit.",
+    "Slot-7 and slot-22 complete body bounds, DTCM consumer closure and G1 remain open."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

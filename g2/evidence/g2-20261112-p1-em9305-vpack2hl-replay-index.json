@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independent ISA-backed byte replay of EM9305 VPACK2HL entry and stored-header-CRC halfword packing",
+  "artifacts": {
+    "producer_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-vpack2hl-replay-001/001/audit.py",
+      "sha256": "d63e9d11115052ec9132d4524c898a833e3fde33b6024e9cf7b67f76297e7eba"
+    },
+    "producer_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-vpack2hl-replay-001/001/report.json",
+      "sha256": "5a6b2b78fe1289cae00d44daf95447b2f2625724cfe302a2634347ae337f388e"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-vpack2hl-replay-001/001/receipt.json",
+      "sha256": "2442a14233f0041d2806d4cbeace487e9c0f912b86f9d08fb969d774115548ea"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-vpack2hl-review-001/001/review.json",
+      "sha256": "28c1339fb84597a6dd273d1c25fe1812797724fbeeec39ad1a77dce80508719a"
+    },
+    "arcv2_em_isa_pdf": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/arcv2-isa-primary.pdf",
+      "sha256": "b5bd662cc6af5b7ae3d7718e86922a4072eeefde0aa917be32549d9346d027ab"
+    },
+    "prior_loader_predicates_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-loader-predicates-index.json",
+      "sha256": "86a7875ce16b7cba5f8c12ac8e259ed8632a1c880af9580efc9aa17eaba2b3c0"
+    }
+  },
+  "result": {
+    "locked_fhdr_address": "0x302000",
+    "entry_address": "0x302028",
+    "stored_header_crc": "0x87303B94",
+    "review_verdict": "PASS_BOUNDED_ISA_AND_LOCKED_BYTE_REPLAY"
+  },
+  "limits": [
+    "The source-backed lane formula and locked candidate fields do not establish stock APEX CRC execution.",
+    "External NVM contents, competing headers, runtime descriptor state, boot-ROM choice and physical execution remain open.",
+    "No canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

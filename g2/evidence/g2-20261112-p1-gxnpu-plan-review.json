@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "attempt_id": "P1-plan-gxnpu-review-001/001",
+  "review_scope": "Independent review of current six-payload architecture plan candidate 003 against predecessor 002, current target identity, active tool-availability evidence, and GXNPU calibration/review. No firmware reconstruction or gate admission.",
+  "decision": "accept_with_limits",
+  "g1_claim": "none; G1 remains not_run",
+  "input_hashes": {
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-gxnpu-003/001/analysis-plan-candidate-003.json": "b16fee3c62b9874fde3fe6ce86bf95aa23d5370d911f8673eb7ec55c7cbdf9a5",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-rebase-001/001/analysis-plan-candidate-002.json": "802a7b3fbed6a25590160b5116f363967e4a79c48befc071918c769c8c5dfe82",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-decoder-calibration-001/001/receipt.json": "4a1bc82aa6ed8c6641e4549e76a154c54d48fef4e0009e9d1a8dcf6e1395cdc8",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-decoder-review-001/001/review-v2.json": "28a449d13167be697ce6c09e5d92b2e9a068b024bdf44564096d2b78b36ff295",
+    "g2/evidence/g2-20261112-p1-tool-availability.json": "00f720b48f05503372315604705bb40160a6bebc106cfcc8859490679d30c76d",
+    "g2/build/pseudocode-first/20261112T092142Z/identity.json": "2dbba3e34ef59158bf05bed2cf24c455b91f3b7119856ed9c8826cc916f121fe"
+  },
+  "checks": [
+    {
+      "id": "inputs_and_evidence_hashes",
+      "result": "pass",
+      "detail": "All candidate input pins, per-payload evidence hashes, and tool binary pins were rehashed against present files; every evidence input_sha256 matches its corresponding locked payload."
+    },
+    {
+      "id": "target_and_plan_coverage",
+      "result": "pass",
+      "detail": "Candidate target_sha256 matches active identity bundle hash f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa. Exactly six unique payload plans match the six locked components."
+    },
+    {
+      "id": "codec_decoder_support",
+      "result": "pass_with_limits",
+      "detail": "planned_with_local_decoder is justified only as a plan to use two bounded local paths: the custom GXNPU structural decoder for the identified 9164-byte/212-record stream, and C-SKY objdump plus instruction-backed manual recovery for CK804EF code. Calibration is not complete: C-SKY objdump calibration is 40 bytes only, with incomplete DSP/privileged/trap semantic coverage; the GXNPU parser establishes record framing, typed extraction and exact round trip, not operation semantics or runtime behavior. Candidate explicitly calls for full-region decoder calibration and leaves semantics unresolved; the enum is not evidence of qualification."
+    },
+    {
+      "id": "unresolved_items_are_open",
+      "result": "pass",
+      "detail": "Candidate explicitly leaves GXNPU reserved header bits, operation/control and geometry semantics, activation mode identity, link/runtime effects, weights, external execution semantics, exhaustive discovery and missing cmodel source open. It also preserves conditional NOR/XIP routes and coordinate uncertainty."
+    },
+    {
+      "id": "predecessor_delta",
+      "result": "pass",
+      "detail": "Candidate 003 changes codec from unsupported_pending in candidate 002 to a scoped local structural GXNPU decoder plan, with fresh active-campaign calibration and independent review pins; it does not claim semantic completion, G1 admission, or whole-payload decoder qualification."
+    }
+  ],
+  "findings": [],
+  "limits": [
+    "The structural GXNPU checks establish framing/typed parser and serializer consistency for the identified stream only; no accelerator semantic or runtime validation.",
+    "C-SKY objdump calibration remains 40 bytes; full-region instruction and semantic coverage remains pending.",
+    "Tool availability/hash pins and this plan review do not establish decoder completeness, G1 admission, pseudocode coverage, or G1-G6 completion."
+  ],
+  "required_corrections": [],
+  "reviewed_at": "2026-11-12"
+}

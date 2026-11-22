@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded case tail descriptor, lookup-table and startup-transform audit.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-tail-descriptors-001/001/audit.py",
+      "sha256": "df8ba283e4e6854d6e2be75100dcc69c817d043264a0454ce47347c5e9918873"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-tail-descriptors-001/001/report.json",
+      "sha256": "4ba4e25debb3aa9715e5816b383c6d596ed61e55ed12b43abda3d4990d6aea6b"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-tail-descriptors-001/001/receipt.json",
+      "sha256": "184ae157640791004ebba1239a567289011030fb7dd5708a86ee253e3aed4a1f"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-tail-descriptors-review-001/001/review.json",
+      "sha256": "7ddd7d75ed9f414f70c1f44ddc846e4a887eb6ca0df1b2d8934fd2ba930ffbfa"
+    }
+  },
+  "coordinate_rules": {
+    "raw_case_flash": "offset zero in firmware_box.raw.bin",
+    "wrapped_case_payload": "raw case offset + 32",
+    "runtime": "0x08000000 + raw case offset"
+  },
+  "reviewed_raw_data_spans": [
+    {
+      "span": [53868, 54278],
+      "hex_span": ["0xd26c", "0xd406"],
+      "contents": "six RTOS timer records, four task records, event and reset records, and lookup maps with direct historical-code consumers"
+    },
+    {
+      "span": [55612, 55644],
+      "hex_span": ["0xd93c", "0xd95c"],
+      "contents": "two 16-byte startup transform records; first expands 104 source bytes to 420 RAM bytes, second zero-fills 10980 RAM bytes without firmware reads"
+    }
+  ],
+  "limits": [
+    "The six bytes at raw [0xd266,0xd26c) remain unknown.",
+    "The shift map is evidenced only through [0xd3e8,0xd406); its last two zero bytes lie outside this bounded table audit.",
+    "Lookup index bounds and whole case image discovery remain open."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

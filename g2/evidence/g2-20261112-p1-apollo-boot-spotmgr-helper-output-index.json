@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed local stock bootloader SpotMgr helper output-domain and successful caller path; rejected initial false no-store implication retained",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-helper-output-001/002/audit.py",
+      "sha256": "08c9fbe87758a590b3f9f2ac666e14da10a7a264ee07e352381c2bc67f5b4baf"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-helper-output-001/002/report.json",
+      "sha256": "02403c653c11aa8e255b60e2c9f77421c2236b5253c4f6d74b51796fbd59cbb7"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-helper-output-001/002/receipt.json",
+      "sha256": "ed117ead707892053698d213387ddc19041236daba2260ba58fe2c6698edcd18"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-helper-output-review-002/001/review.py",
+      "sha256": "fff2b892f4b6c7f60f73581fa03c7f2e1ed7510f64c91abad14daae637000bb6"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-helper-output-review-002/001/review.json",
+      "sha256": "8ff0cac3286376e59a67bd458b51dbd35f1e4504c7f1b5a9f4eab6822deb800e"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-helper-output-review-002/001/receipt.json",
+      "sha256": "821b1d6fda77e18a8679875431ba49a34b9079c6288870a037b01bc1025fb600"
+    },
+    "rejected_001_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-helper-output-001/001/report.json",
+      "sha256": "d5532b761da24c1e8a7632316d817ff13f15df75b8aff56dac9fdb9af0b832f7"
+    }
+  },
+  "result": {
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS",
+    "helper_body": "0x42A550..0x42A85E, 317 contiguous byte-matched Thumb instructions",
+    "output_stores": "28 stores through r1 each immediately loaded with an integer 0..19; all 20 values occur",
+    "success_path": "Conservative two-way CFG reachability finds every path to zero-return instruction 0x42A734 has a prior r1 state-output store.",
+    "caller_path": "0x42A884/886 initialize the stack state word; 0x42AB26 passes its address to the helper; 0x42AB32 skips the state-cell store on nonzero helper return; 0x42AB58 writes the output word on the zero-return path.",
+    "rejected_initial_attempt": "Revision 001 incorrectly inferred a no-store success path from a basic block without a local store."
+  },
+  "limits": [
+    "The reachability sweep is syntactic and local to one helper and caller; it does not prove hardware predicates or all calling contexts.",
+    "Computed aliases, other writers, external effects, global state-input bounds, DTCM consumer closure and G1 remain open.",
+    "No canonical inventory admission, pseudocode completion or C source-completeness claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

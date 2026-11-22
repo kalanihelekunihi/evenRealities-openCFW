@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Reviewed bounded current-campaign decoded transform and mapping preflight; candidate evidence only, no canonical inventory admission",
+  "artifacts": {
+    "transform_assembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-current-transform-receipts-001/001/assembly-receipt.json",
+      "sha256": "962e970a6632d64dc3f16471ed6ff7e79d9ba60506f5ac04c7aae0f58f6f82d7"
+    },
+    "receipt_verification": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-current-transform-receipts-001/001/verification-v006.json",
+      "sha256": "4dd36e3484ecddf95658a4059834f13c42b3ae9359d11c8f416529132a46e222"
+    },
+    "current_replay_checks": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-current-transform-receipts-001/001/current-replay-checks.json",
+      "sha256": "d7c58b5dfe552b9413a63b4312de080cddb6870f655da4ab94b45f18ec5062b7"
+    },
+    "unit_test_output": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-current-transform-receipts-001/001/unittest.txt",
+      "sha256": "85ab7cca16e4a0fc95158923ff484689b8bd60b079af30774c670a0b7ed97c1d"
+    },
+    "candidate_images_v006": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-all-image-row-draft-006/001/images-draft.jsonl",
+      "sha256": "23416dfd32268f5075be5df5a76c52843ab3c12151341c89a2dc80bd1287cb7b"
+    },
+    "candidate_mapping_preflight": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-all-image-row-draft-006/001/mapping-preflight.json",
+      "sha256": "89444fa6731eac067a13e043e880c1111c1713cb8225752516fc2b60e42c70a4"
+    },
+    "candidate_image_audit": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-canonical-readiness-audit-001/001/report-v006.json",
+      "sha256": "7479193301e39d92562c04e84c96a1183c1d595e1836f749f3fc23dbfdc811cc"
+    },
+    "independent_transform_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-current-transform-review-001/001/review.json",
+      "sha256": "cce9f7b776cc8198250a8d9e873df2b1b12b1a43c5a3f68e69e5dd09cc991b55"
+    },
+    "independent_replay_validator_addendum": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-current-replay-validator-review-002/001/review.json",
+      "sha256": "f0488c2fb37624dd25a786211e4a8bc2b738f5f2e50c5215db99d4bb7d95f0df"
+    },
+    "validator": {
+      "path": "g2/workflow/tools/validate_inventory_v2.py",
+      "sha256": "9c14f0ac1f28d5fc7b591f0c8846ef200e10c3c2e8d87f2c28b57ccd1152f72d"
+    },
+    "validator_tests": {
+      "path": "g2/tests/test_validate_inventory_v2.py",
+      "sha256": "f96d96ffc3e642538f739faf39c65063ebb2a3870ffaedbbf559c7cbc337bc58"
+    }
+  },
+  "result": {
+    "current_transform_receipts": 7,
+    "candidate_images": 33,
+    "mapping_structural_preflight_pass": 33,
+    "current_replay_positive_checks": 7,
+    "current_replay_negative_mutations_rejected": 37,
+    "stale_image_evidence_refs": 0,
+    "missing_image_accounting_reviews": 33,
+    "missing_transform_reviews": 7,
+    "coverage_candidate": "v017 127 rows/40 partitions, still unreviewed",
+    "validator_unit_tests": "40 pass"
+  },
+  "limits": [
+    "The mapping preflight used a no-op coordinator review callback and is not an independent mapping admission.",
+    "The seven bounded reviews do not provide canonical image accounting or transform review IDs in the trusted coordinator registry.",
+    "Discovery reconciliation retains seven unresolved items; G1 and later gates remain not_run."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

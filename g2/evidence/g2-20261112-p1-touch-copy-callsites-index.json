@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reproduced bounded local argument tracing for 13 non-reset touch byte-copy helper callsites.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-callsites-001/003/audit.py",
+      "sha256": "47c234be2c568cc7f2df42e9c49cbfea93818f7faa48679385224cc050f80cae"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-callsites-001/003/report.json",
+      "sha256": "56d8d57f7d17d362f36aff6b03b49f51fc6a8ae63b14ecc417f2033b1f924973"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-callsites-001/003/receipt.json",
+      "sha256": "afb459391cc69aecf843be1c00bcbdeb1b3c36eac9a5d673a6619e1031e4ba46"
+    },
+    "stock_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-callsites-001/003/disassembly.txt",
+      "sha256": "672e00ac29340527e1fb1bdcf086257cd7c34674967c1411040fb6348f4b439a"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-callsites-review-001/002/review.json",
+      "sha256": "3a1847ad09e7ac2472118e9f63d620e996c1157f6b6ab1a8aa25aad5f098cc1a"
+    },
+    "predecessor_touch_residual_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-residual-index.json",
+      "sha256": "f7c47e333b82530e5cb57dfe17344a78b564cbe05103a8b0fa5b20d66f361f6e"
+    }
+  },
+  "result": {
+    "direct_callsites_examined": 13,
+    "reset_callsite_previously_characterized": "0x4686",
+    "fixed_56_byte_copy": {
+      "callsite": "0x50FA",
+      "source_runtime": "0xB4C4",
+      "destination": "SP",
+      "length": 56,
+      "observed_bytes_role": "pin-function configuration data staged for mapping, supported by consolidated stock reference and caller context"
+    },
+    "fixed_128_byte_copy": {
+      "callsite": "0x8D74",
+      "source": "dynamic r5",
+      "destination": "SP+8",
+      "length": 128,
+      "source_region": "unresolved"
+    },
+    "copied_code_execution_established": false
+  },
+  "limits": [
+    "Local instruction windows do not establish inherited caller register values or complete source/destination regions for all 13 calls.",
+    "The consolidated touch reference identifies 0xB4C4 as pin-function register words, but this audit does not independently establish all consumer behavior.",
+    "No indirect-call or whole-image CFG closure; code-copy loaders remain possible elsewhere.",
+    "No G1 admission or source completion claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded byte accounting for five v017 touch and case payload unknown rows",
+  "artifacts": {
+    "review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-013/001/review.py",
+      "sha256": "9851af12bb5936c5b3d82d09d7ce685e89e86467f46058759b0f1bcde7c1f48d"
+    },
+    "review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-013/001/review.json",
+      "sha256": "84010c571f66c561505e764be0e1245722568f6820d6c500fa1657de3d85d9a6"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-013/001/receipt.json",
+      "sha256": "04e6e3938b80752a78c60107816004bc2391bb878469c429e71df21731f934e7"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-013-independent-review-001/001/review.json",
+      "sha256": "e3f0a1bfa85e0071651a79a7474f41b2cb823e79ef7cb24e4b605a20deed98d2"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "touch_unknown_rows": 2,
+    "case_unknown_rows": 3,
+    "bounded_accounted_unknown_rows": 5,
+    "broad_rows_requiring_known_island_subledger": 4,
+    "terminal_case_unknown_span": [55780, 55784],
+    "terminal_case_bytes": "ffffffff",
+    "validator_trusted_review_ids_assigned": 0
+  },
+  "limits": [
+    "Touch vector, copy descriptor and source data islands need explicit row-level support; other vector-like pairs are not proven vectors.",
+    "Case historical function-range census is bounded and not an exhaustive code/CFG map.",
+    "Four FF bytes alone do not prove padding or non-use.",
+    "No authenticated reviewer registry, canonical admission, G1 or G2 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

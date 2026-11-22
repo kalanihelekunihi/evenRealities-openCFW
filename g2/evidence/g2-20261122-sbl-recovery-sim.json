@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "time_local": "2026-11-22 08:30 CST",
+  "title": "Host-side SBL stock recovery tool, sim-verified against HLE wired-load SBL",
+  "scope": "Emulator local changes + OpenCFW host tool. No hardware opened. No flash. No commit.",
+  "physicalDevicesOpened": false,
+  "protectedSblRomExecuted": false,
+  "retailRecoveryVerified": false,
+  "dev_temples_likely_in_sbl_wired_load": {
+    "answer": "probably not",
+    "reason": "Both current dev-pair temples were bricked on pre-arm builds that never ran g2_recovery_arm_early, so a hang does not leave OTAPOINTER=0xAFD1363A. This tool is the recovery path after a later recovery-arm image hangs before disarm (or any temple actually in wired-load)."
+  },
+  "sim_extension": {
+    "peripheral": "renode/peripherals/G2Apollo510_SblWired.cs",
+    "watchdog_hook": "G2Apollo510_Watchdog.HandoffAfterSystemReset reflection-calls EnterWiredLoad when the peripheral is instantiated",
+    "nature": "HLE of AmbiqSuite 5.2.0 uart_wired_update framing already transcribed in SybilSight-webflasher/scripts/g2_sbl_*.py. Not the protected SBL ROM."
+  },
+  "tool": {
+    "path": "g2/tools/sbl-recovery/g2_sbl_recovery.py",
+    "sim_verify": "g2/tools/sbl-recovery/sim_verify.py",
+    "hookup": "g2/tools/sbl-recovery/README.md",
+    "protocol": "HELLO 14559de900000800, 96-byte STATUS, OTADESC 0x7FE000, UPDATE, DATA, RESET POI",
+    "image": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "image_bytes": 3523396,
+    "hardware_default": "refused (fail-closed)"
+  },
+  "sim_result": {
+    "schema_version": 1,
+    "date": "2026-11-22",
+    "timezone": "America/Chicago",
+    "title": "Host SBL recovery tool sim-verified against HLE wired-load SBL",
+    "physicalDevicesOpened": false,
+    "protectedSblRomExecuted": false,
+    "hardwareHookupDocumented": true,
+    "cases": [
+      {
+        "case": "unexpected-reset-enters-hle-wired-load",
+        "otap": "0xAFD1363A",
+        "wiredLoadActive": "True",
+        "cpuHalted": "True",
+        "passed": true
+      },
+      {
+        "case": "hello-returns-status",
+        "statusBytes": 96,
+        "maxStorage": 3964928,
+        "passed": true
+      },
+      {
+        "case": "bad-crc-rejected",
+        "statusName": "crc",
+        "passed": true
+      },
+      {
+        "case": "data-before-update-rejected",
+        "statusName": "sequence",
+        "passed": true
+      },
+      {
+        "case": "full-stock-update-uart-chunks",
+        "dataFramesAcknowledged": 431,
+        "commandsAcknowledged": 435,
+        "otapAfter": "0x00000000",
+        "cpuHalted": "False",
+        "pc": "0x5e4232",
+        "sp": "0x2007fb00",
+        "programmedSha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+        "expectedAppSha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+        "passed": true
+      },
+      {
+        "case": "postflight-short-run",
+        "pc": "0x42",
+        "passed": true
+      }
+    ],
+    "passed": true,
+    "stockImageSha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "stockImageBytes": 3523396,
+    "stockAppSha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "updateAudit": {
+      "operation": "bounded-apollo510-sbl-stock-update",
+      "route": "right",
+      "imageSha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "chunkBytes": 8180,
+      "commandsAttempted": 435,
+      "commandsAcknowledged": 435,
+      "dataFramesAttempted": 431,
+      "dataFramesAcknowledged": 431,
+      "firmwareImageBytesAcknowledged": 3523396,
+      "resetAcknowledged": true,
+      "glassesRecovered": false,
+      "physicalDevicesOpened": false,
+      "transport": "renode-sblwired-hle",
+      "outcome": "reset-acknowledged-postflight-required",
+      "liveStatus": {
+        "offset": 0,
+        "length": 96,
+        "crc32": "7333cbbb",
+        "sblVersionRaw": "ffff0110",
+        "sblVersion": "1.16",
+        "maxStorage": 3964928,
+        "status": 0,
+        "state": 2,
+        "chipId": [
+          "12345678",
+          "abcdef01"
+        ],
+        "chipRevision": 4,
+        "securityDebugCertificate": 3,
+        "socIdHex": "0000000000000000000000000000000000000000000000000000000000000000",
+        "amInfoHex": "000000000000000000000000000000000000000000000000",
+        "frameHex": "bbcb3373010060001001ffff00803c0000000000020000007856341201efcdab03000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "firmwareWriteAuthorized": false
+      },
+      "qualification": {
+        "capacityAccepted": true,
+        "maxStorage": 3964928,
+        "maxUpdateBytes": 3965392,
+        "eligibleForReviewedWriterImplementation": true,
+        "firmwareWriteAuthorized": false
+      }
+    }
+  },
+  "report_sha256": "3394f0ee35ef4766ebaf87968d7aa4943e0e3850f6b781405b76da5003e85b7f",
+  "passed": true,
+  "hardware_hookup_summary": [
+    "USB Smart Case \u2192 YHM2510 pogo UART (not bare UART, not SWD)",
+    "Seat one sacrificial temple; never the primary pair",
+    "YHM route: right reg7=5, left reg7=3; restore baseline after",
+    "Baud 1000000, fallback 115200; case DATA chunks 997 bytes",
+    "Temple must actually be in SBL wired-load; flood HELLO after reset or genuine cold boot",
+    "Require a CRC-valid 96-byte STATUS and qualify_stock_update before UPDATE",
+    "No STATUS: stop. No guessed commands, no SWD, no primary pair",
+    "Hardware CLI also requires both risk tokens; this invocation never opens a device"
+  ]
+}

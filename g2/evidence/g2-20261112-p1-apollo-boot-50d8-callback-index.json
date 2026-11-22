@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded Apollo bootloader 0x4150D8 callback body and literal call path missed by the historical function census",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-50d8-callback-001/001/audit.py",
+      "sha256": "9b131e66572adbe933998105edc4b9f4a68c105d12eb21d642cd6650fc6fcf64"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-50d8-callback-001/001/report.json",
+      "sha256": "dc27a4a4e6a8ba239fd2e6e600e9c7fda61bb03b227ee7fac91e20c13ff5ade3"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-50d8-callback-001/001/receipt.json",
+      "sha256": "3dec8d8f83ab623da5664b47e5514986c3a7a17271aac3f438f02e517c46a92f"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-50d8-callback-review-001/001/review.json",
+      "sha256": "1dd86ab957fe5ba634613c319348df9dcb3e7f8e60ddab9eff0323c688faff47"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-50d8-callback-review-001/001/receipt.json",
+      "sha256": "4541c96f112e49d91e31381126c97e1214b9de0ad26dc7d73b4ad9924cbd415d"
+    }
+  },
+  "result": {
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS",
+    "runtime_span": ["0x4150d8", "0x4150e2"],
+    "raw_span": [20696, 20706],
+    "body_sha256": "478849d5c7e4c0b5aace8a8637f6c447d4fdee82468ae981e45d52efe678cac7",
+    "bounded_semantics": "Given a valid writable 32-bit pointer in r0, increment its word modulo 2^32 and return zero.",
+    "callback_pointer": "The locked literal at 0x415308 holds Thumb pointer 0x4150D9; the 0x4150E2 wrapper passes it with a stack counter pointer to 0x414954.",
+    "historical_census_overlap": false
+  },
+  "limits": [
+    "Callback invocation and the rest of its consumer path remain conditional and are not globally closed.",
+    "The body has no image copy, but other callers, alias effects and bootloader discovery remain open.",
+    "No canonical inventory admission, whole-image census update, pseudocode completion or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

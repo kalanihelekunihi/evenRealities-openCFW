@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked 13 v18 payload container row-level adjudications against locked payloads",
+  "artifacts": {
+    "row_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-container-13-canonical-review-pilot-001/001/review.py",
+      "sha256": "bfacfdde4ac984cdc1155fd802bc7e03b179b1746bf5569beb297d2cbe52d287"
+    },
+    "row_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-container-13-canonical-review-pilot-001/001/report.json",
+      "sha256": "f64c89fdbe4706ffb8bd2c957da70ac9d3c88871cdccc0897716d0051ae49089"
+    },
+    "row_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-container-13-canonical-review-pilot-001/001/receipt.json",
+      "sha256": "7ba448d902144c6649784b80dfd2dce5218fdadc2e48ec251796ac375e17a3ec"
+    },
+    "coordinator_check_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-container-13-coordinator-check-001/001/check.py",
+      "sha256": "213ff35093f0816c3c6c75f9e9a032fd4a1cad0963b9b075e961924a062cf68d"
+    },
+    "coordinator_check": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-container-13-coordinator-check-001/001/review.json",
+      "sha256": "9cec90c068c03940908d5bab9ca21426be9cc952ef4ea522dc949ed2f9574aab"
+    },
+    "candidate_v18": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018/001/coverage-draft.jsonl",
+      "sha256": "e2446cc92c63055a458335d15b2f7ef2018214f31831134436962ec7ea7f384e"
+    }
+  },
+  "result": {
+    "payload_container_rows": 13,
+    "pass_bounded": 13,
+    "revise": 0,
+    "canonical_row_hashes_computed": 13,
+    "validator_review_records_created": 0
+  },
+  "limits": [
+    "EM9305 empty INI-v2 table classification is bounded to metadata bytes; runtime processing remains unproven.",
+    "No authenticated registry, nested-image discovery closure, canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

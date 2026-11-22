@@ -1,0 +1,224 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "target": "Exact relocation-bearing ARC C for G2 EM9305 record 3",
+  "stock": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+    "artifact_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "inventory": "g2/symbols/ble_em9305.tsv",
+    "inventory_sha256": "1b943e63bed7589b618814fd3ce8eaf8cf6f5988255e21ca169d0efdce2a3391",
+    "mapping": "stored offset = 0x424 + (virtual address - 0x302400), bounded by record 3"
+  },
+  "qualification": {
+    "receipt": "build/g2-em9305-arc-reloc-exact-qual-20261112/source-plan.json",
+    "receipt_sha256": "f6ad2f2843d12064b33699a8646a869a6826e922ce56f2f05540155a2dda13a6",
+    "audit": "build/g2-em9305-arc-reloc-exact-qual-20261112/qualification.json",
+    "audit_sha256": "889478083849ad9fcecb09fa621014ed310008e94e78ded7b5883f58b25c1898",
+    "candidate_units": 775,
+    "compiled_units": 775,
+    "selected_regions": [
+      {
+        "symbol": "opencfw_em9305_dispatch_3305ac",
+        "source": "g2/src/em9305/qpc-scheduler/controller_init.c",
+        "stock_offset": [
+          189904,
+          189908
+        ],
+        "bytes": 4,
+        "sha256": "2178b29944488f1862ac4af89110a5817569b1a616649f24a45ba5bf5ab2fb51",
+        "stock_virtual_address": "0x003305ac",
+        "bindings": {
+          "opencfw_em9305_dispatch_332394": "0x00332394"
+        }
+      },
+      {
+        "symbol": "opencfw_em9305_radio_setup_310450",
+        "source": "g2/src/em9305/qpc-scheduler/controller_init.c",
+        "stock_offset": [
+          58484,
+          58488
+        ],
+        "bytes": 4,
+        "sha256": "09138132782d562906966316470e9714ffe90cea8c68dcf184c73388b8d3dce7",
+        "stock_virtual_address": "0x00310450",
+        "bindings": {
+          "opencfw_em9305_radio_setup_31230c": "0x0031230c"
+        }
+      },
+      {
+        "symbol": "opencfw_em9305_receive_finish_324fb0",
+        "source": "g2/src/em9305/qpc-scheduler/controller_init.c",
+        "stock_offset": [
+          143316,
+          143320
+        ],
+        "bytes": 4,
+        "sha256": "b7fbf193eb323d4eb2494aa70949da3d09edfbb4d998c7a600c7616414177487",
+        "stock_virtual_address": "0x00324fb0",
+        "bindings": {
+          "opencfw_em9305_radio_packet_complete_32d790": "0x0032d790"
+        }
+      },
+      {
+        "symbol": "opencfw_em9305_init_entry_30b9f0",
+        "source": "g2/src/em9305/qpc-scheduler/controller_init.c",
+        "stock_offset": [
+          39444,
+          39448
+        ],
+        "bytes": 4,
+        "sha256": "8b5c8cfb5569bb7e780942ac092207429053c9e423dde22438edeef97b6b457b",
+        "stock_virtual_address": "0x0030b9f0",
+        "bindings": {
+          "opencfw_em9305_init_lower_3079c4": "0x003079c4"
+        }
+      },
+      {
+        "symbol": "opencfw_em9305_init_lower_307d64",
+        "source": "g2/src/em9305/qpc-scheduler/controller_init.c",
+        "stock_offset": [
+          23944,
+          23960
+        ],
+        "bytes": 16,
+        "sha256": "38561fc529c82682baff0731b072f5c8ece675e2dbbac44907e0eae4b41e4aee",
+        "stock_virtual_address": "0x00307d64",
+        "bindings": {
+          "opencfw_em9305_init_phy_state_321150": "0x00321150"
+        }
+      },
+      {
+        "symbol": "opencfw_em9305_associated_radio_tail_32b2d0",
+        "source": "g2/src/em9305/qpc-scheduler/controller_init.c",
+        "stock_offset": [
+          168692,
+          168696
+        ],
+        "bytes": 4,
+        "sha256": "d9ed25298e26fd1dbed9355f738a91269e017e5febd0895ffbc074dea889749f",
+        "stock_virtual_address": "0x0032b2d0",
+        "bindings": {
+          "opencfw_em9305_associated_radio_callback_32b538": "0x0032b538"
+        }
+      },
+      {
+        "symbol": "opencfw_em9305_init_entry_30c658",
+        "source": "g2/src/em9305/qpc-scheduler/controller_init.c",
+        "stock_offset": [
+          42620,
+          42624
+        ],
+        "bytes": 4,
+        "sha256": "ce350f7da1fc2a448bf0282ac3afe50e9e5d579639dba7a579c8434a2d5d3a7c",
+        "stock_virtual_address": "0x0030c658",
+        "bindings": {
+          "opencfw_em9305_init_lower_3080f8": "0x003080f8"
+        }
+      },
+      {
+        "symbol": "opencfw_em9305_callback_31d438",
+        "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_callback_aliases.c",
+        "stock_offset": [
+          111708,
+          111712
+        ],
+        "bytes": 4,
+        "sha256": "de56e5e49ce01b721b5c6e68b1f230d44237ada1f61ba5c0b930269a05237f86",
+        "stock_virtual_address": "0x0031d438",
+        "bindings": {
+          "opencfw_em9305_init_child_317498": "0x00317498"
+        }
+      },
+      {
+        "symbol": "opencfw_em9305_callback_320084",
+        "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_callback_aliases.c",
+        "stock_offset": [
+          123048,
+          123052
+        ],
+        "bytes": 4,
+        "sha256": "90611f194bb6b00fe3d30aaaccac3f4b7c3190f6dcb4dd775744d96fc350340f",
+        "stock_virtual_address": "0x00320084",
+        "bindings": {
+          "opencfw_em9305_init_child_307980": "0x00307980"
+        }
+      },
+      {
+        "symbol": "opencfw_em9305_callback_32922c",
+        "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_generic_three_chains.c",
+        "stock_offset": [
+          160336,
+          160340
+        ],
+        "bytes": 4,
+        "sha256": "1a29805aaa61c2cbecd3098c49540bb8da7cfa70483317dacf1fa26b2d0c3272",
+        "stock_virtual_address": "0x0032922c",
+        "bindings": {
+          "opencfw_em9305_init_child_317498": "0x00317498"
+        }
+      },
+      {
+        "symbol": "opencfw_em9305_init_registered_32182c",
+        "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_registered_32182c_3266f8.c",
+        "stock_offset": [
+          129104,
+          129108
+        ],
+        "bytes": 4,
+        "sha256": "a298ce97aea08294349379880180333ba4dceb8c55f4edab6a5c5d0f36c463c2",
+        "stock_virtual_address": "0x0032182c",
+        "bindings": {
+          "opencfw_em9305_common_init_303650": "0x00303650"
+        }
+      },
+      {
+        "symbol": "opencfw_em9305_init_transition_segment_3243dc",
+        "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_transition_records.c",
+        "stock_offset": [
+          140288,
+          140292
+        ],
+        "bytes": 4,
+        "sha256": "322a6ed8338b86fc4deb0d478ac5aa52124ff9ff51d68dc1a866bf2646e50fe2",
+        "stock_virtual_address": "0x003243dc",
+        "bindings": {
+          "opencfw_em9305_init_transition_record_3239b8": "0x003239b8"
+        }
+      },
+      {
+        "symbol": "qf_on_startup_internal_hook",
+        "source": "g2/src/em9305/application/qpc_hooks.c",
+        "stock_offset": [
+          61896,
+          61900
+        ],
+        "bytes": 4,
+        "sha256": "5c2ae05832a4449cd2bb20f41b843eb22dae95f3f95d0d30b0236e77ebcf5f1e",
+        "stock_virtual_address": "0x003111a4",
+        "bindings": {
+          "application_startup_hook_30482c": "0x0030482c"
+        }
+      }
+    ],
+    "selected_bytes": 64,
+    "integrated_plan": "tools/build/source-plan.json",
+    "integrated_plan_sha256": "d66e3ff67c08c59e384e88f6e1121ee7633050df99fd47aaeafabbeb820cff41",
+    "policy": "Recompile with per-function sections. Resolve only ARC relocation types 16, 17, and 27 whose six-digit symbol suffix names an inventoried stock target. Require isolated link at stock address and complete byte equality."
+  },
+  "verification": {
+    "hybrid_report": "build/g2-codec-opt-arc-reloc-exact-hybrid-20261112/build-report.json",
+    "hybrid_report_sha256": "d9a460468f28acccd096ab33722591811d48a0ced7fff6f846e2d0ea11291a87",
+    "coverage_report": "build/g2-codec-opt-arc-reloc-exact-hybrid-20261112/coverage.json",
+    "coverage_report_sha256": "d22bdfd7b26e45a2eef6cc27d0f3cad748fad9e0fe5ed0ca04cae8ddddd876e1",
+    "bundle_size": 4301227,
+    "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "source_completeness_proven": false,
+    "em9305_source_built_bytes": 182,
+    "em9305_pull_through_bytes": 211586
+  },
+  "limits": [
+    "The selected callers and pointers still bind to stock target addresses; full source dependency closure remains incomplete.",
+    "ARC compiled bytes remain unclassified as code/data by strict coverage.",
+    "The hybrid OTA hash still depends on binary pull-through; the G2 pseudocode and source-completeness gates remain unrun, and hardware boot is unverified."
+  ]
+}

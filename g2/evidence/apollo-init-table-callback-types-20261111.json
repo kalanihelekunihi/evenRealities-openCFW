@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "Apollo-main prioritized initialization table callback C types",
+  "change": [
+    "Twenty-three table entries and the runner now use int32_t (*)(void), matching all linked callback providers.",
+    "TLSF pool initializer now returns int32_t; it continues to return zero.",
+    "Three manifest aliases already resolve the RTC, product logger, and onboarding news FIFO callbacks."
+  ],
+  "source_files": [
+    "g2/src/apollo-main/system/S2-system-rtos-runtime-data/init_table_data.c",
+    "g2/src/apollo-main/system/x-03-init/init_table_run.c",
+    "g2/src/apollo-main/storage/file-tlsf/file_tlsf_pool_init_5eda64.c"
+  ],
+  "checks": {
+    "sources_check": "pass: 4883 registered units, 4544 source files, one not built",
+    "full_source_build": "pass: 4878/4878 enabled C units compiled, zero failures and duplicate strong symbols",
+    "full_source_report": "build/g2-init-table-types-20261111/report.json",
+    "strict_source_link": "pass: seven payloads linked, zero final undefined symbols, no external binary archive",
+    "strict_link_report": "build/g2-init-table-types-link-20261111/link-report.json",
+    "diff_check": "pass"
+  },
+  "comparison_to_previous_full_build": {
+    "prior_report": "build/g2-fuel-gauge-ext-state-all-link-20261111/link-report.json",
+    "all_seven_payload_binary_hashes_unchanged": true,
+    "apollo_main_elf_hash_unchanged": true,
+    "codec_b_elf_hash_unchanged": false,
+    "payload_binary_sha256": {
+      "g2-apollo-bootloader": "90094f1c7b9b1986c9576146f4b2aa866ab668011938a00048c7b031ff5cf5c1",
+      "g2-apollo-main": "0c66b1e174fe7a8a0369f52f194df0ace9cd6f52e9784dacfa430472cd682f1f",
+      "g2-case": "8b764c6315d429cf06051f87fa9c010ca3adba4e25c5350ec8904d95fe01846d",
+      "g2-codec-a": "bfbecfb7675317dc8d1c4ef191eb8632a8a1d4c07a04dad3dab7c580e267b9d3",
+      "g2-codec-b": "cae0d1af560d423f382069d99cc68adbd05771fa7d169552b485d3922d40c3ca",
+      "g2-em9305": "811a8cbcc64958336ed7d6f54b1b643da9741c3955f85e9152608cff320fb4f9",
+      "g2-touch": "f7142ddae536c52dfc199c6c7aff681f29a19a2b16657bcd1cf8a693df16d956"
+    }
+  },
+  "limits": [
+    "This is a C type-consistency correction and does not establish firmware completeness or stock byte identity.",
+    "The source-linked Apollo-main binary remains a candidate; hardware boot and Nordic gauge behavior remain unverified."
+  ]
+}

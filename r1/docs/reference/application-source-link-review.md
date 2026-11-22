@@ -3,13 +3,13 @@
 ## Current source-link checkpoint
 
 The latest R1 source receipt is
-`build/sources-r1-eabi-pure-c-20261111/report.json`: 963/963
+`build/sources-r1-eabi-agc-signed-20261111/report.json`: 963/963
 application and 82/82 bootloader units compile, with no failures or duplicate
 strong symbols. The strict application receipt
-`build/r1-link-eabi-pure-c-20261111/report.json` links with zero
+`build/r1-link-eabi-agc-signed-20261111/report.json` links with zero
 undefined references, a complete 512-byte vector at `0x27000`, and 694,200
 of 696,320 flash bytes used. The strict bootloader receipt
-`build/r1-boot-link-eabi-pure-c-20261111/report.json` also links with
+`build/r1-boot-link-eabi-agc-signed-20261111/report.json` also links with
 valid vectors, 16 KiB heap and MSP reservations, and no undefined references.
 The boot RAM layout gate rejects a 4 KiB MSP candidate under ignored
 `build/r1-boot-stack-negative-20261111/`. No retained stock executable
@@ -61,7 +61,10 @@ Nordic's [SoftDevices documentation](https://docs.nordicsemi.com/r/bundle/ug_gsg
 describes SoftDevices as qualified precompiled binaries; the current SDK does
 not supply a C source implementation of S140 to add to this build.
 Thus the checked application and bootloader regions are C compiled, while a
-whole-device image made entirely from C has not been established.
+whole-device image made entirely from C has not been established. The
+[current SVC inventory](s140-source-dependency-inventory.md) finds 54 distinct
+Nordic S140/MBR service numbers in the two linked ELFs; source-built SVC
+wrappers do not replace those vendor service implementations.
 The boot linker now verifies every participating source hash, including its
 generated uECC source; a mutated generated-source hash is rejected before link.
 The application formerly pulled Newlib's `libc_a-strcpy.o` for two Segger RTT
@@ -85,6 +88,15 @@ isolated in its own C unit and passes 492 dispatcher and 432 integrated
 callback cases; its fixed-frame transfer remains assembly. The
 [Goodix root integration gate](goodix-final-root-integration-gate.md)
 documents the native binding and focused checks.
+An ordinary C probe of the live software-TWI delay wrapper under ignored
+`build/r1-delay-pure-c-20261111/wrapper-single.c` emits `CBZ`, `LSLS` and a
+direct tail branch. The current wrapper emits `CMP`, `BEQ`, `LDR`, `LSLS`,
+`BX` and `BX LR`. The probe changes zero-input APSR flags and branch timing;
+it is not admitted as a timing-equivalent replacement. The application also
+has four source-level `__builtin_trap` assertion endpoints. Those compile
+from C, but the stack-fault behavior of the stock assertion paths has not
+been reproduced. Neither a clean link nor a sparse source HEX resolves the
+external Nordic S140/MBR binary or establishes physical boot.
 The [NADT root replay review](goodix-nadt-root-replay-review.md) records
 480 paired early-return cases, 32,000 paired calls across fresh direct
 and calibrated sequences, and 128 varied-initial-state one-call pairs. Longer
@@ -111,6 +123,25 @@ strict image is unchanged by adapter removal because neither section was
 live in the preceding link. A subsequent signed Goodix AGC correction keeps
 the application image at 694,196 bytes, SHA-256
 `6ca24db9ec3209c9abd20858fede662b368f84ea8be5bb0cfb698b6b9f405068`.
+The later [Cordio clock-owner review](cordio-nrf52840-source-candidate.md)
+found that the SDK example's legacy `CLOCK_CONFIG_LF_SRC=1` overrode the
+recovered R1 `NRFX_CLOCK_CONFIG_LF_SRC=0` through `apply_old_config.h`.
+Correcting the alias to RC and adding the opt-in Cordio clock PALs compiles
+all 973 application and 85 bootloader
+units; both strict source links pass. The current application image is
+694,228 bytes, SHA-256
+`653b09e3d0a52402db2fb4cde65320418954d1a569e9bf4908688127840340c6`,
+with 6,800 bytes of RAM headroom. The bootloader remains 23,024 bytes,
+SHA-256 `08e108776638ad4feaf2eada3861ab37d587b44ae3b5b75daacfa386ea67ac67`.
+The current sparse-region verifier accepts 1,036 participating C sources and
+emits only the application, bootloader and two UICR words in
+`build/r1-regions-isolated-stock-20261111/r1-source-regions.hex`. The
+opt-in R1 Cordio linker layout reserves former S140 lower flash and RAM
+for the C controller; the default application image and its SHA-256 are
+unchanged. The
+sparse image explicitly
+excludes S140/MBR, DFU settings, persisted flash and package metadata; this
+is not an installable whole-device source image.
 The `native_double_flags.c` comparison candidate is compiled from C but its
 functions are discarded by the current application link (`application.map`
 lists their sections at address zero). It accounts for assembly tokens in the

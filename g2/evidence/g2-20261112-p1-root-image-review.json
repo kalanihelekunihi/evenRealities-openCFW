@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "review_id": "P1-root-image-review-001/002",
+  "supersedes": "P1-root-image-review-001/001/review.json",
+  "reviewer": "/root/p1_root_image_review",
+  "decision": "revise",
+  "scope": "Corrected independent bounded review of four historical root flash image records. This review supersedes review.json (001), correcting misread touch mapping and Apollo main entry fields. No shared inventory/target/state edits, no admission, no G1 claim.",
+  "input_hashes": [
+    {
+      "path": "g2/workflow/target.json",
+      "role": "locked_target",
+      "sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff"
+    },
+    {
+      "path": "g2/manifests/g2-2.2.6.10.json",
+      "role": "identity_manifest",
+      "sha256": "1e6f7da11f63cf063098de2213a304e0a15fe99e9a932cdef9fedf32d2856c61"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "role": "historical_inventory",
+      "sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "path": "g2/docs/reference/memory-map.md",
+      "role": "current_mapping_evidence",
+      "sha256": "336f076e414de498948a0302ce41e6b39b1138c47a4e560731193eac754db408"
+    },
+    {
+      "path": "g2/docs/reference/firmware-formats.md",
+      "role": "container_and_mapping_evidence",
+      "sha256": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83"
+    },
+    {
+      "path": "g2/docs/reference/findings-apollo-platform.md",
+      "role": "apollo_image_mapping_evidence",
+      "sha256": "a68229ca2a9bae03eb09467403019407eb2e67c93cf34b5ad1fb9c43204c7c79"
+    },
+    {
+      "path": "g2/docs/reference/findings-touch-case.md",
+      "role": "touch_case_image_evidence",
+      "sha256": "8e7acd26c3af37d60658c8125b71a5c1fb384937ef3871b33f2a69f6284ebf3e"
+    },
+    {
+      "path": "g2/docs/reference/findings-cross-cutting.md",
+      "role": "apollo_reset_correction",
+      "sha256": "2f8bd145de47fbbc8ba773efe66e55487350a4469006499aa5bb3d2c98a832d5"
+    },
+    {
+      "path": "g2/blobs/official/case-backup-2026-08-09/PROVENANCE.md",
+      "role": "case_bank_alias_evidence",
+      "sha256": "ac67b22c8479e2b9371d5501ea6c21d24173a3b8a9a22a14f54d1eacaa94e224"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "role": "apollo_main_source",
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+      "role": "apollo_bootloader_source",
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+      "role": "touch_source",
+      "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "role": "case_source",
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin",
+      "role": "apollo_main_content",
+      "sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_bootloader-flash.bin",
+      "role": "apollo_bootloader_content",
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/touch-flash.bin",
+      "role": "touch_content",
+      "sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/case-flash.bin",
+      "role": "case_content",
+      "sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677"
+    }
+  ],
+  "checks": [
+    {
+      "record_id": "apollo_main:flash",
+      "source_span": [
+        32,
+        3523396
+      ],
+      "source_size": 3523396,
+      "record_size": 3523364,
+      "recorded_content_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+      "source_slice_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+      "actual_content_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+      "source_slice_equals_content": true,
+      "target_payload_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "source_payload_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "source_payload_equals_target": true,
+      "loaded_mapping": {
+        "image_end": 3523364,
+        "image_start": 0,
+        "loaded_end": 7947044,
+        "loaded_start": 4423680
+      },
+      "expected_primary_base": 4423680,
+      "primary_mapping_supported": true,
+      "architecture": {
+        "endianness": "little",
+        "isa_mode": "Thumb",
+        "name": "Arm Cortex-M55"
+      },
+      "entry_facts": {
+        "initial_sp": 537393920,
+        "isa_mode": "Thumb",
+        "reset_entry": 6177330,
+        "reset_vector_word": 6177331,
+        "scope": "Encoded vector words only; subsequent startup behavior separately reviewed",
+        "vector_source_image_span": [
+          0,
+          8
+        ]
+      },
+      "vector_words_le_u32": [
+        537393920,
+        6177331
+      ]
+    },
+    {
+      "record_id": "apollo_bootloader:flash",
+      "source_span": [
+        0,
+        148599
+      ],
+      "source_size": 148599,
+      "record_size": 148599,
+      "recorded_content_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "source_slice_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "actual_content_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "source_slice_equals_content": true,
+      "target_payload_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "source_payload_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "source_payload_equals_target": true,
+      "loaded_mapping": {
+        "image_end": 148599,
+        "image_start": 0,
+        "loaded_end": 4408439,
+        "loaded_start": 4259840
+      },
+      "expected_primary_base": 4259840,
+      "primary_mapping_supported": true,
+      "architecture": {
+        "endianness": "little",
+        "isa_mode": "Thumb",
+        "name": "Arm Cortex-M55"
+      },
+      "entry_facts": {
+        "initial_sp": 537393920,
+        "isa_mode": "Thumb",
+        "reset_entry": 4401434,
+        "reset_vector_word": 4401435,
+        "scope": "Encoded vector words only; subsequent startup behavior separately reviewed",
+        "vector_source_image_span": [
+          0,
+          8
+        ]
+      },
+      "vector_words_le_u32": [
+        537393920,
+        4401435
+      ]
+    },
+    {
+      "record_id": "touch:flash",
+      "source_span": [
+        32,
+        34464
+      ],
+      "source_size": 34464,
+      "record_size": 34432,
+      "recorded_content_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+      "source_slice_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+      "actual_content_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+      "source_slice_equals_content": true,
+      "target_payload_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "source_payload_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "source_payload_equals_target": true,
+      "loaded_mapping": {
+        "image_end": 34432,
+        "image_start": 0,
+        "loaded_end": 47488,
+        "loaded_start": 13056
+      },
+      "expected_primary_base": 13056,
+      "primary_mapping_supported": true,
+      "architecture": {
+        "endianness": "little",
+        "isa_mode": "Thumb",
+        "name": "Arm Cortex-M0+ PSoC4000T"
+      },
+      "entry_facts": {
+        "initial_sp": 536879104,
+        "isa_mode": "Thumb",
+        "reset_entry": 18036,
+        "reset_vector_word": 18037,
+        "scope": "Encoded vector words only; subsequent startup behavior separately reviewed",
+        "vector_source_image_span": [
+          0,
+          8
+        ]
+      },
+      "vector_words_le_u32": [
+        536879104,
+        18037
+      ]
+    },
+    {
+      "record_id": "case:flash",
+      "source_span": [
+        32,
+        55784
+      ],
+      "source_size": 55784,
+      "record_size": 55752,
+      "recorded_content_sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+      "source_slice_sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+      "actual_content_sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+      "source_slice_equals_content": true,
+      "target_payload_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "source_payload_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "source_payload_equals_target": true,
+      "loaded_mapping": {
+        "image_end": 55752,
+        "image_start": 0,
+        "loaded_end": 134273480,
+        "loaded_start": 134217728
+      },
+      "expected_primary_base": 134217728,
+      "primary_mapping_supported": true,
+      "architecture": {
+        "endianness": "little",
+        "isa_mode": "Thumb",
+        "name": "Arm Cortex-M0+ STM32G0"
+      },
+      "entry_facts": {
+        "initial_sp": 536882312,
+        "isa_mode": "Thumb",
+        "reset_entry": 134218052,
+        "reset_vector_word": 134218053,
+        "scope": "Encoded vector words only; subsequent startup behavior separately reviewed",
+        "vector_source_image_span": [
+          0,
+          8
+        ]
+      },
+      "vector_words_le_u32": [
+        536882312,
+        134218053
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "severity": "pass",
+      "claim": "The four source spans, extracted bytes, hashes, and component identities remain supported.",
+      "evidence": "All four payload file SHA-256 values match current target component SHA-256 values; each extracted source slice exactly equals the historical content file and content hash. Spans: main [32,3523396), bootloader [0,148599), touch [32,34464), case [32,55784)."
+    },
+    {
+      "severity": "pass",
+      "claim": "Touch primary loaded mapping and vector facts are supported; the prior review incorrectly called the mapping stale.",
+      "evidence": "The historical row maps image [0,34432) to loaded [13056,47488), i.e. [0x3300,0xB980), consistent with current memory-map \u00a76. Vector SP 0x20002000, reset word 0x4675, normalized Thumb entry 0x4674."
+    },
+    {
+      "severity": "pass",
+      "claim": "Apollo main entry facts already separately encode the raw reset vector word and normalized Thumb entry; the prior review incorrectly called them conflated.",
+      "evidence": "Historical row has reset_vector_word 6177331 (0x005E4233) and reset_entry 6177330 (0x005E4232). Current findings-cross-cutting supports reset handler 0x005E4233 and notes 0x005E4294 is downstream runtime entry."
+    },
+    {
+      "severity": "pass",
+      "claim": "Apollo bootloader base mapping and vector facts are supported.",
+      "evidence": "Raw image maps [0,148599) to [0x00410000,0x00434477); bytes encode SP 0x2007FB00 and reset word 0x0043291B / Thumb entry 0x0043291A."
+    },
+    {
+      "severity": "revise",
+      "claim": "Case record has a valid primary mapping but omits a supported alternate flash alias.",
+      "evidence": "Current memory-map \u00a77 and firmware-formats \u00a75 state the application image may alias at 0x08040000 depending on bank mapping. The current backup provenance specifically records 2.2.6.10 exact application match at captured alias 0x08000000 and describes alternate 0x08040000 captured image as older v1.2.56; it does not establish this 2.2.6.10 payload at the alternate alias. Thus the generic mapping evidence supports potential alias concept, but exact same-payload 0x08040000 mapping for this target is not independently demonstrated by the cited backup; keep record at primary base unless current target-specific OTA updater / bank-swap evidence establishes the alias."
+    },
+    {
+      "severity": "note",
+      "claim": "The prior review overstated the alternate alias as a supported same-image mapping for this target.",
+      "evidence": "Backup provenance records the 2.2.6.10 application at 0x08000000 and an older 1.2.56 application at 0x08040000. Current reference labels same image alias generally, but captured target-specific backup does not verify 2.2.6.10 content in alternate bank."
+    },
+    {
+      "severity": "note",
+      "claim": "Memory-map digest drift is not merely cosmetic; one nearby current claim is stale/inconsistent.",
+      "evidence": "Current memory-map \u00a72.1 says main vector table at 0x00438000, but main OTA payload begins at file offset 32 and the historical extracted content vector table is at image offset 0; image mapping is correct after header removal. Apollo-main reset vector/entry distinction is correctly captured in inventory and findings-cross-cutting."
+    }
+  ],
+  "limits": [
+    "Local official blob bytes and target-pinned hashes were verified; no fresh upstream reauthentication.",
+    "Architecture labels agree with current references but were not independently validated with a new decoder run.",
+    "Vector facts cover encoded words and Thumb normalization only, not complete runtime startup.",
+    "Case alternate-alias applicability to this exact release remains unverified by the target-specific backup evidence reviewed; do not claim it as established.",
+    "No code/data classification, complete accounting, pseudocode completeness, inventory admission, or G1 validation."
+  ],
+  "decision_rationale": "Revise only for case alternate-mapping representation/evidence: the primary mapping is valid, while a generic bank alias is described by current references but exact target-specific placement is conditional and not proven by reviewed backup. The former touch and Apollo-main findings were errors and are withdrawn."
+}

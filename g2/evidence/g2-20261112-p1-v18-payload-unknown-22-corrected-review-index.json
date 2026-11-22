@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Corrected coordinate and independently challenged row review for all 22 v18 payload unknown rows, unchanged in v19",
+  "artifacts": {
+    "row_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-unknown-22-canonical-review-pilot-001/002/review.py",
+      "sha256": "5b5873279c57a910b3340e7d8f4d8a9adc90132ea1d994d2842b0dbddd946ec0"
+    },
+    "row_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-unknown-22-canonical-review-pilot-001/002/report.json",
+      "sha256": "e5cff20e49531a83c2bd584454fc834a83cb95ea94d0db55e92e36ca35becc69"
+    },
+    "row_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-unknown-22-canonical-review-pilot-001/002/receipt.json",
+      "sha256": "4b94ad4fe626dd76de75e85d50b5fac2f5d6d000ddf1e2753334fb896e780897"
+    },
+    "coordinator_check_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-unknown-22-coordinator-check-001/001/check.py",
+      "sha256": "5edf0b71b3efe720d287c97030e9b5df0fd5756db26dd45d074c37b1feafdd54"
+    },
+    "coordinator_check": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-unknown-22-coordinator-check-001/001/review.json",
+      "sha256": "8506fa170ad44f58904e10e538dd55fc926a476dc23d0cc9c74877d22384df0d"
+    },
+    "independent_role_challenge_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-unknown-22-correction-independent-review-001/001/review.py",
+      "sha256": "54837f1702e68200ec1e6161580dc45f6a04369619646d56b7f9c48a2854b6a1"
+    },
+    "independent_role_challenge_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-unknown-22-correction-independent-review-001/001/report.json",
+      "sha256": "498f73c65e862b275edeb9a7598658fa8273333b47ee15fe8736ca0545481ca1"
+    },
+    "independent_role_challenge_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-unknown-22-correction-independent-review-001/001/receipt.json",
+      "sha256": "b08dfa22ca4f235bf00374b0f32de5addb99aa26ff2464bb7905a5277a0b59f3"
+    },
+    "candidate_v18": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018/001/coverage-draft.jsonl",
+      "sha256": "e2446cc92c63055a458335d15b2f7ef2018214f31831134436962ec7ea7f384e"
+    }
+  },
+  "result": {
+    "payload_unknown_rows": 22,
+    "pass_explicit_unknown_at_g1": 13,
+    "positive_known_island_split_recommendations": 9,
+    "independent_challenge_accepted": 9,
+    "independent_challenge_rejected": 0,
+    "evidence_pins_verified_by_coordinator": 46,
+    "touch_known_pair_payload_span": [880, 888],
+    "touch_known_pair_raw_image_span": [848, 856],
+    "validator_review_records_created": 0
+  },
+  "limits": [
+    "Split recommendations improve byte-ledger accuracy; this review does not claim every split alone blocks G1.",
+    "Unresolved remainders can remain explicitly unknown at G1 under PROCEDURE.md; P2 must resolve executable and semantic unknowns.",
+    "The initial /001 pilot used ambiguous touch coordinate wording and is superseded by /002.",
+    "No authenticated registry, nested-image discovery closure, canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "reviewer": "independent-review-agent",
+  "decision": "pass_with_correction",
+  "scope": "Corrected independent delta review of KWS command execution report 002; no canonical ledger changes.",
+  "reviewed_input": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-kws-command-execution-chain-001/002/report.json",
+    "sha256": "424220986ce13805f829bd0b36eade8524848e56b9fe0827251221d9d4fbb830"
+  },
+  "verified_coordinates": {
+    "command": {
+      "start_decimal": 63492,
+      "end_decimal": 72656,
+      "start_hex": "0xF804",
+      "end_hex": "0x11BD0",
+      "length": 9164
+    },
+    "weights": {
+      "start_decimal": 72656,
+      "end_decimal": 193456,
+      "start_hex": "0x11BD0",
+      "end_hex": "0x2F3B0",
+      "length": 120800
+    }
+  },
+  "checks": [
+    {
+      "id": "weights_python_assertions",
+      "status": "pass",
+      "finding": "Python assertions independently established end=start+len(weights), 0x11BD0+120800=0x2F3B0, decimal 72656+120800=193456, slice length 120800, and type2[s:e] exactly equals materialized weights with SHA-256 397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf."
+    },
+    {
+      "id": "report_delta",
+      "status": "pass_with_correction",
+      "finding": "Report 002 gives correct weight endpoints [72656,193456). My prior review-v3 incorrectly stated hex endpoint 0x2F410; this v4 corrects it to 0x2F3B0. Other reviewed points stand: command slice coordinates and materialization match; SRAM helper and caller offsets match candidate mapping; full-span code extent is unproven, so unknown classification is appropriate."
+    },
+    {
+      "id": "remaining_limitations",
+      "status": "noted",
+      "finding": "Callback implementation/success, runtime physical flash read, live engine consumption, and candidate loaded mappings are not proven by this bounded report. Its stated limits appropriately preserve these uncertainties."
+    }
+  ],
+  "hash_handling": "No self-hash field is embedded. Review file SHA-256 is reported externally."
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 027 incorporating bounded touch CRT array and two historical function-census omissions",
+  "artifacts": {
+    "discovery_draft_027": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/027/discovery-draft.jsonl",
+      "sha256": "6b4b18dd9b3921e0ffe4cc5e687d253a1e300ac0e364412d8b56b9d3f5a9943b"
+    },
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/027/reproduce.py",
+      "sha256": "f181a3311ed299a5ae4843124c809c9befdb16f2226ca41e5dbc035c2384cb3d"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/027/receipt.json",
+      "sha256": "3171b9d7c3ed881cdf04dabb6e129f0abfaff2c36e134cb4fd9c3e90ba73fbcc"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v27-review-001/001/review.json",
+      "sha256": "20326b9ee39dc021147599e6887f1e7cd3cea7803bfbe36a5f2c713a015e5cfc"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v27-review-001/001/receipt.json",
+      "sha256": "30cd874ab7b9b5ea28fcdf1e5caee2675c704122fee37f2c2cb3ba0538eae9e5"
+    },
+    "touch_crt_array_census_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-crt-array-census-index.json",
+      "sha256": "20a8334f0079dcf27f1d81db8369a4431ce72129fa5da823c00f126c2e309a7d"
+    },
+    "predecessor_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/026/discovery-draft.jsonl",
+      "sha256": "f20d946a79cb86d86d3142b0613a548c0a0b52ab79d8e3bbe9bbd8126cce61c1"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "The local reset/init path calls 0x3434 if reset executes; it does not establish an invocation of adjacent 0x3408.",
+    "Both hashed function extents include literal data and the two audited omissions are not exhaustive.",
+    "Whole-image discovery, canonical inventory admission, pseudocode completion and G1 remain open."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v26-index.json",
+    "sha256": "7b62e965d6478448a6ae905a69ae66836a6ecaf421f510690b80389fb72df598"
+  }
+}

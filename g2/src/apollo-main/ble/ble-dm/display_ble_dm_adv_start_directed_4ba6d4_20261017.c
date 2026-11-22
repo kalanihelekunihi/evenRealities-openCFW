@@ -10,6 +10,7 @@ extern void audio_log_extended(uint8_t, const char *, const char *,
                                const char *, uint32_t, const char *, ...);
 extern void audio_ble_hci_wsf_trace(const char *, const char *, ...);
 extern void HciLeSetAdvEnableCmd(uint8_t);
+extern void g2_recovery_disarm_on_advertising(void);
 extern void audio_ble_copy_address6_4d293c(void *, const void *);
 
 static const char error_tag[] = "ERR";
@@ -52,6 +53,8 @@ void audio_ble_dm_adv_start_directed_4ba6d4(uint8_t adv_type,
 start:;
     if (audio_ble_dm_adv_control[0x1du] == 0u) {
         HciLeSetAdvEnableCmd(1u);
+        /* openCFW: disarm early SBL recovery arm now that advertising is on. */
+        g2_recovery_disarm_on_advertising();
         audio_ble_dm_adv_control[0x1du] = adv_type == 1u ? 2u : 3u;
         audio_ble_dm_adv_control[0x20u] = (uint8_t)duration;
         audio_ble_dm_adv_control[0x21u] = (uint8_t)(duration >> 8);

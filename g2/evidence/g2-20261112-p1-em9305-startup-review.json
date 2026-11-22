@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "review_id": "P1-em9305-startup-review-001-v2",
+  "campaign_id": "20261112T092142Z",
+  "report_path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-startup-table-001/002/report.json",
+  "report_sha256": "17656ab9c2028691ad2ba3d23997a45d8d115bc326d19502e5d5d03d1ba015a6",
+  "revision_of": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-startup-table-001/001/report.json",
+  "decision": "accept",
+  "delta_review": {
+    "previous_review_correction": "My prior review incorrectly removed all correction_required items and described the old [3354652,3365832) loaded_span as a broad code-to-EOF interval. It is specifically the wrong table start: 3354652 is 0x33301c, the zero-fill routine. The old review should have preserved this as a report error. Report 002 correctly changes the loaded table interval to [3364896,3365832) = [0x335820,0x335bc8), exactly 936 bytes. This explicitly corrects my prior erroneous empty correction_required conclusion.",
+    "changes_verified": [
+      "Corrected loaded table span and EOF endpoint.",
+      "Adds the static INI gate result for version byte 2.",
+      "Adds deterministic SHA-256 for the generated all-zero RAM span and labels it generated RAM rather than an encoded child image."
+    ],
+    "other_report_content": "Record hashes, disassembly hashes, table descriptors, children, and NVM decode are unchanged and were reverified."
+  },
+  "verified": [
+    "Pinned ARC objdump hash and all seven disassembly artifact hashes match; record-2, record-3, and all three child hashes and sizes match inputs.",
+    "Record-2 interval [40,50) is the ten bytes db44800078f955054006, decoding under its record target VMA to mov_s sp,0x80F978; b 0x30ED80.",
+    "Record-3 uses target/disassembly base 0x302400. The INI table target address 0x335820 corresponds to record-3 offset 209952. Its record-3 interval [209952,210888), package interval [211012,211948), and loaded target interval [3364896,3365832) are each 936 bytes. Loaded target addresses equal 0x302400 plus record-3 offsets. Package offsets equal record-3 offsets plus 1060.",
+    "Table bytes begin INI followed by version 2. Walker reads descriptors at table+4. The three positive descriptors at record-3 offsets 209956, 210036, and 210820 each give the corresponding child destination/length; payload starts immediately after each 8-byte descriptor. First payload has three zero padding bytes, subsequent payloads need no padding.",
+    "The negative descriptor is at offset 210872, destination 8393472, signed length -19840, yielding zero-fill destination [8393472,8413312). The sentinel is two zero words at offset 210880 and ends exactly at record-3 EOF offset 210888.",
+    "The generated zero span is not encoded as a child payload. SHA-256 of 19840 zero bytes matches generated_zero_sha256.",
+    "The static gate checks INI and version; with version 2 its comparison against 4 returns zero, which allows the walker into parsing. This is a decoded static path result, not a runtime observation."
+  ],
+  "runtime_conditions": {
+    "entry_and_gate": "The disassembly establishes a stock control-flow path from the record-2 entry branch to the application boot loop, which passes table pointer 0x335820 and calls the walker. It does not establish record selection, flash programming, or hardware execution.",
+    "r1": "Runtime-derived r1 is passed into walker state. The range checks make the first positive destination (0x8012b8) and negative destination (0x801300) conditional on nonzero r1; either can be skipped when r1 is zero.",
+    "r2_r3": "Boot loop supplies r2=r3=1. The second and third positive rows lie in ranges gated by these supplied values, so they are eligible on the decoded path independent of r1, conditional on reaching the initializer and passing the table gate.",
+    "scope": "These are stock static branch and eligibility deductions, not a physical execution trace or proof any copy/zero operation happened."
+  },
+  "assessment": {
+    "narrows_remaining_p1_discovery": true,
+    "finding": "The bounded table accounts for exactly three positive source payloads, one conditional generated zero-fill span, and the terminator. Remaining discovery still requires independent sweeps of record 0/1 and remaining application bytes.",
+    "full_nested_image_completeness": false,
+    "g1_or_p2_claimed": false,
+    "limits": [
+      "External boot services and NVM record selection/programming are unobserved.",
+      "Runtime r1 and hardware-specific branches are not fixed.",
+      "Other embedded programs outside this table have not been excluded.",
+      "No canonical G1 admission, full pseudocode, source completeness, or byte identity is established."
+    ]
+  },
+  "numeric_assertions": {
+    "performed": "Python assertions over the binary buffers, descriptor fields, mappings, lengths, and hashes.",
+    "table_loaded_span": [
+      3364896,
+      3365832
+    ],
+    "table_target_span_hex": [
+      "0x335820",
+      "0x335bc8"
+    ],
+    "record3_span": [
+      209952,
+      210888
+    ],
+    "package_span": [
+      211012,
+      211948
+    ],
+    "zero_destination": [
+      8393472,
+      8413312
+    ],
+    "zero_length": 19840,
+    "sentinel_span": [
+      210880,
+      210888
+    ]
+  }
+}

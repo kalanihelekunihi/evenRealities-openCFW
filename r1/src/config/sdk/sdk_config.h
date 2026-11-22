@@ -30,6 +30,11 @@
 /* Remaining missing values are declared SDK example defaults, NOT stock facts.
  * The build generates this unmodified header from the authenticated archive. */
 #include "r1_sdk_example_defaults.h"
+/* nrf_drv_clock's legacy compatibility header aliases this value over
+ * NRFX_CLOCK_CONFIG_LF_SRC. Keep it aligned with the recovered R1 LF RC
+ * source instead of the SDK example's external crystal default. */
+#undef CLOCK_CONFIG_LF_SRC
+#define CLOCK_CONFIG_LF_SRC 0
 /* The SDK example declares disabled legacy drivers; apply_old_config.h would
  * overwrite the recovered nrfx values with those defaults. Remove only these
  * legacy namespaces; nrf_drv_twi/nrf_drv_clock keep their required aliases. */

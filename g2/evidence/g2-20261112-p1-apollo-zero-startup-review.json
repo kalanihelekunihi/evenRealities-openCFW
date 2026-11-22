@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "reviewed_report": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-zero-startup-chain-001/002/report.json",
+  "reviewed_report_sha256": "d1400742f9009a0ae4b3a9a082742558116a7d4822807ff377732a452eef1b4b",
+  "status": "approved_for_stated_p1_subitem",
+  "correction_to_prior_review": "The initial review misread the report as claiming that reset vectors point directly to the guard. The revised report correctly describes an intervening stack-limit setup routine and startup chain; its new reset_target_instruction_path makes that chain explicit.",
+  "checks": [
+    {
+      "claim": "Reset-vector target and control flow reach startup, guard, and table runner.",
+      "result": "verified",
+      "detail": "The report vectors are 0x5e4233 (main) and 0x43291b (bootloader), resolving to Thumb instructions at 0x5e4232 and 0x43291a. The added disassembly at those addresses loads the stack limit, writes MSPLIM and PSPLIM, and BLs to 0x5e4254 / 0x43293c. Those routines configure system state and BL to startup at 0x5e4294 / 0x43297c. Startup calls the guard at 0x5e4228 / 0x432910; each guard writes its literal value and returns 1. The following compare/BEQ skips the conditional callback-runner call only for zero, so the observed return value selects the runner at 0x5e42b4 / 0x43299c. The report's listed reset_target_instruction_path matches these entries, including the guard and runner. This establishes a static instruction path from each reported vector target."
+    },
+    {
+      "claim": "PC-relative runner bounds and self-relative callback targets.",
+      "result": "verified",
+      "detail": "The Thumb high-register ADD uses the instruction address plus four: main literals at 0x5e42d4/0x5e42d8 yield table bounds 0x75d3c8..0x75d410 after the encoded +24/+22 adjustments; boot literals at 0x4329bc/0x4329c0 yield 0x4330d8..0x433120. These match the report. Interpreting each signed dispatch displacement relative to its row yields zero-handler Thumb targets 0x5fa01f (main) and 0x431e39 (bootloader); the three other rows in each table resolve to their image-local decompressor target."
+    },
+    {
+      "claim": "Image identity, zero-handler semantics, and RAM span ledger.",
+      "result": "verified_with_scope_note",
+      "detail": "Materialized image SHA-256 values match the report: main 19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701 and bootloader f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5. The manifest identifies the main image as an identity-transformed materialization whose hash differs from locked source payload hash 36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863; bootloader materialized and locked hashes match. The image-local handlers store zero across word, halfword, and byte tails and terminate on the zero sentinel. Both sets of destination spans, sizes, and deterministic generated-zero hashes match the reviewed ledger. These are generated RAM state, not encoded nested-image bytes."
+    }
+  ],
+  "conclusion": "The revised report closes only the Apollo main/bootloader zero-init selection subitem of current P1 discovery, as a static path from the materialized images' reset vectors through startup to the selected zero handler and as RAM zero-span accounting. Residual-image sweeps remain open. This does not claim observed physical boot, broad runtime-branch coverage, all nested-image discovery, G1 admission, full-function pseudocode review, or C admission."
+}

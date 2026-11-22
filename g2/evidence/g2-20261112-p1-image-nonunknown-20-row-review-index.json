@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded semantic and materialization review of all 20 v017 nonunknown image-scope rows",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-nonunknown-review-workpack-001/001/audit.py",
+      "sha256": "3d8bf7231ea5c10fa2a16fb2c9128b921aa104fb9b623e71676244e7fef7d7c2"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-nonunknown-review-workpack-001/001/report.json",
+      "sha256": "230794dcf4f6e69e2a00ab2f0949d1042456e2bc4a67d965c94d839338ebf6c5"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-nonunknown-review-workpack-001/001/receipt.json",
+      "sha256": "41e59a4dc667bdeec157c2efe8eb5efee8862bb31086e238960b4d257daf806c"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-nonunknown-review-workpack-independent-review-001/001/review.json",
+      "sha256": "73a1bdafa765446bb6ab810f8814729dc1f6e2a1f02e5af12de83b8defd4aba7"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "image_scope_rows": 60,
+    "nonunknown_image_rows": 20,
+    "bounded_reviewed_nonunknown_rows": 20,
+    "remaining_unknown_image_rows": 40,
+    "distribution": {
+      "apollo_main": 5,
+      "touch": 1,
+      "case": 6,
+      "ble_em9305": 5,
+      "apollo_bootloader": 2,
+      "npu_kws_weights": 1
+    },
+    "validator_trusted_review_ids_assigned": 0
+  },
+  "limits": [
+    "Historical ledger references are provenance only; they do not establish current whole-image closure.",
+    "Static code slices, transform outputs, and asset byte identity do not establish complete executable semantics.",
+    "No authenticated reviewer registry, canonical admission, G1 or G2 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

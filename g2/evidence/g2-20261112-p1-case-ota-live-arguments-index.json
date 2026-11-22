@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Reviewed case OTA writer live-register dataflow gap and aligned pointer challenge",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-discovery-challenge-001/001/audit.py",
+      "sha256": "9c4d876c872085fcea439d9c027ab8969e1439988a35ac8fe8ecebcb61942d4d"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-discovery-challenge-001/001/report.json",
+      "sha256": "e95a3e57db48c8a4c865d42c71656200aca3a1b48c4ccbaeebe619ac941c1141"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-discovery-challenge-001/001/receipt.json",
+      "sha256": "4272b4d4654a0e8d1c4fa407b6942cef916c4a32117eb8de6e0fe900066878da"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-discovery-challenge-review-001/001/review.json",
+      "sha256": "e48897249708e8140d06ffa220fef44d11b66d3075fdc49295e66cf59c5cf641"
+    }
+  },
+  "result": {
+    "aligned_flash_pointer_candidates": 97,
+    "historical_census_entry_targets": 54,
+    "d266_classification": "unknown",
+    "ota_callee": "0x08002E04",
+    "review_verdict": "bounded_pass_with_material_interpretation_correction"
+  },
+  "limits": [
+    "Caller sets r0 before BL; callee consumes incoming r1 as source and r2 as length. Reaching definitions and buffer provenance remain unresolved.",
+    "Decompiler call arity discrepancy is not proof of a source-level ABI mismatch.",
+    "Aligned pointer scan does not classify D266 or exclude computed/indirect references; G1 open."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "All 15 package-scope v017 coverage candidate rows have bounded byte-semantic workpacks and independent checks",
+  "artifacts": {
+    "preamble_and_codec_rows_index": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-five-row-review-index.json",
+      "sha256": "4a696234b81d3431cfbea36e4de99c7af31a77368435daf331dfd293525096a6"
+    },
+    "six_child_payload_rows_index": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-six-package-child-row-review-index.json",
+      "sha256": "55c3a0157ca12919d44a1af39e09f425e2e8666f0f5291e8ce6619cc68b5c0ae"
+    },
+    "six_component_header_row_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-003/001/review.py",
+      "sha256": "3bdd7b60374c74a7c7da2459a2a9f72fc73718a4edeeac2aa4dddfe3cdc8665b"
+    },
+    "six_component_header_row_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-003/001/review.json",
+      "sha256": "9f61fe76d6ec0e8254b3cc4402a44e69e8a9f7488665c3248baea0147b32e1c2"
+    },
+    "six_component_header_row_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-003/001/receipt.json",
+      "sha256": "3af0e4eb96c21d5c45ebcda002adeddd750f48d16859795ed613f2bdcecff8a9"
+    },
+    "six_component_header_independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-003-independent-review-001/001/review.json",
+      "sha256": "80d9a8f1450f659777a2d3f2d9b1c11d7905bbdee84f0f4e97be36f84ea67174"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "package_rows": 15,
+    "package_rows_bounded_reviewed": 15,
+    "package_rows_duplicate_review_scope": 0,
+    "package_partition": [0, 4301227],
+    "other_coverage_rows": 112,
+    "validator_trusted_package_review_ids_assigned": 0
+  },
+  "limits": [
+    "These are candidate row-local reviews, not authenticated v2 reviews.jsonl entries.",
+    "The 112 non-package rows remain without canonical review IDs, and exhaustive nested-image discovery remains open.",
+    "No canonical admission, G1, G2, or C implementation authorization follows."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "stock_ram": {
+    "canonical_decoded_image": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-main-canonical-replay-009/001/decoded-20000000.bin",
+    "sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+    "mpu_record_stock_range": "0x20000C20..0x20000C38",
+    "mpu_record_words": [
+      "0x0000000B",
+      "0x2035CE18",
+      "0x00010100",
+      "0x2035EE17",
+      "0x00000000",
+      "0x00000001"
+    ],
+    "duplicated_tail_stock_range": "0x20000C38..0x20000D30",
+    "duplicated_tail_bytes": 248,
+    "duplicated_tail_sha256": "94eb58f39fd850655ab6e99591f3368ba1733f55ea169ecbfb4cf7dc88c26642"
+  },
+  "source": {
+    "edited": "g2/src/apollo-main/system/stock-ram/stock_ram_cells.c",
+    "sha256": "b38184844fed78e6bca9666f950491eaa7673bbeaca8f9ee8ffbf0c0eb641c19",
+    "other_owners": [
+      "g2/src/apollo-main/drivers/S1-drivers-hal-ble-data/peripherals_data.c",
+      "g2/src/apollo-main/hal/S1-drivers-hal-ble-data/board_data.c"
+    ],
+    "use_audit": "Only the base of g2_stock_ram_20000c20 is referenced outside its own definition; display_font_alloc.c passes the six-word MPU record to audio_uart_mpu_region_4d4596."
+  },
+  "linked": {
+    "before_mpu_symbol_address": "0x20000C08",
+    "before_mpu_symbol_bytes": 272,
+    "after_mpu_symbol_address": "0x20000C08",
+    "after_mpu_symbol_bytes": 24,
+    "first_six_words_unchanged": true,
+    "first_six_linked_words": [
+      "0x0000000B",
+      "0x2028C480",
+      "0x00010100",
+      "0x2028E47F",
+      "0x00000000",
+      "0x00000001"
+    ],
+    "buffer_symbol_address": "0x2028C480",
+    "buffer_extent_bytes": 8192,
+    "first_and_last_mpu_buffer_pointers_match_source_symbol": true,
+    "other_owner_symbols": {
+      "g2_i2c_iom_config_1m": {
+        "address": "0x200167D0",
+        "bytes": 20
+      },
+      "g2_i2c_bus_table": {
+        "address": "0x200167E4",
+        "bytes": 128
+      },
+      "g2_uart1_config": {
+        "address": "0x20016974",
+        "bytes": 16
+      },
+      "g2_uart2_config": {
+        "address": "0x20016994",
+        "bytes": 16
+      },
+      "g2_uart3_config": {
+        "address": "0x200169B4",
+        "bytes": 16
+      },
+      "g2_uart1_rx_queue": {
+        "address": "0x20016984",
+        "bytes": 16
+      },
+      "g2_uart2_rx_queue": {
+        "address": "0x200169A4",
+        "bytes": 16
+      },
+      "g2_uart3_rx_queue": {
+        "address": "0x200169C4",
+        "bytes": 16
+      },
+      "g2_uart_channels": {
+        "address": "0x200169D4",
+        "bytes": 112
+      }
+    },
+    "apollo_image_before_bytes": 3819048,
+    "apollo_image_after_bytes": 3818800,
+    "apollo_image_after_sha256": "28f904cb79cd6cd00ce820aeab0f5b0f72f7aef636b475d667aa490ec758b262",
+    "data_section_size_delta": -248
+  },
+  "build": {
+    "source_report": "build/g2-nema-arc-all-20261111/report.json",
+    "source_report_sha256": "ea411fe088f4590b510344cb73a2227e7df304bcd2f497a40118cc30c304a46b",
+    "enabled_c_units": 4878,
+    "compiled_c_units": 4878,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-nema-arc-all-link-20261111/link-report.json",
+    "strict_link_report_sha256": "146be38678777fecb6db81a8a92533ee1ab17888b25f9861a307d247862aeb30",
+    "strict_payload_links": 7,
+    "external_binary_archive_used": false,
+    "bundle_report": "build/g2-nema-arc-all-bundle-20261111/link-report.json",
+    "bundle_report_sha256": "3880aa8fe554dd544737f0bbab52d8e20aad74c59e9fd1151cc7fea1b86ccf0f",
+    "source_bundle_bytes": 4637812,
+    "source_bundle_sha256": "70e4b00b8baa54f5af30e3d47f4a589d489e7f828c594d764ade95fbb4a48de2",
+    "matches_locked_target": false
+  },
+  "limits": [
+    "Presence and sizes of named owner symbols do not establish byte equality of every source-initialized I2C/UART record.",
+    "This removes one duplicate data copy; all G2 code/data coverage, byte identity, and physical behavior remain open."
+  ]
+}

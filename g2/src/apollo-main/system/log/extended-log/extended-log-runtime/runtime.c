@@ -17,13 +17,11 @@ bool g2_log_is_privileged(void) {
     return (control & 1u) == 0u;
 }
 
+extern void g2_recovery_reset_app(void) __attribute__((noreturn));
+
 void g2_log_fatal_idle(void) __attribute__((noreturn));
 void g2_log_fatal_idle(void) {
-    /* Stock 0x44ab24: DSB; AIRCR=(AIRCR&0x700)|0x05fa0004;
-     * DSB; NOP loop. The write requests a system reset. */
-    volatile uint32_t *const aircr = (volatile uint32_t *)(uintptr_t)0xe000ed0cu;
-    __asm__ volatile("dsb sy" ::: "memory");
-    *aircr = (*aircr & 0x700u) | 0x05fa0004u;
-    __asm__ volatile("dsb sy" ::: "memory");
-    for (;;) __asm__ volatile("nop" ::: "memory");
+    /* Stock 0x44ab24 AIRCR reset. Route through g2_recovery_reset_app so the
+     * early-arm OTAP key is cleared before SYSRESETREQ (see self_recovery.c). */
+    g2_recovery_reset_app();
 }

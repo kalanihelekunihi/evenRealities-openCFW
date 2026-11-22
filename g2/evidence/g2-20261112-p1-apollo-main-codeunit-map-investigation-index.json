@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed investigation of missing historical Apollo main Ghidra listing/code-unit map and fresh reanalysis route.",
+  "artifacts": {
+    "findings": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-map-investigation-001/001/findings.json",
+      "sha256": "c62d590ba18850c502c2975311e1dff7da44ed800a342bfe5350b349e88225db"
+    },
+    "receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-map-investigation-001/001/receipt.json",
+      "sha256": "c9d7751218664058d671d41ed43f4e4e8d21b5a2c6c6cd8692bb31eab38659af"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-codeunit-map-investigation-review-001/001/review.json",
+      "sha256": "65e2134dcb709f70008eee3f02aebdf7eee1260708d6ea2a0a796e4e3921ad04"
+    }
+  },
+  "result": {
+    "historical_census_rows": 7449,
+    "historical_exact_ranges": 7758,
+    "original_ghidra_version": "12.1.2",
+    "original_project_present": false,
+    "persisted_codeunit_map_present": false,
+    "local_ghidra_version": "12.1.4",
+    "fresh_export_status": "not_run"
+  },
+  "next_step": "Fresh private Ghidra import of locked full OTA at base 0x437FE0 with ARM:LE:32:Cortex, pin options and export Listing CodeUnits for all historical ranges; compare before code classification.",
+  "limits": [
+    "Fresh 12.1.4 reanalysis is not equivalent to missing original 12.1.2 project by default.",
+    "No code-unit map or code classification was produced by this investigation.",
+    "No canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

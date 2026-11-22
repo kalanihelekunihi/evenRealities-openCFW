@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded byte-semantic reviews of six v017 case payload data rows",
+  "artifacts": {
+    "review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-006/001/review.py",
+      "sha256": "bc04908a6346987be7f23683c7eb197b4227ffa4ef677cc4b75207124a4e4240"
+    },
+    "review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-006/001/review.json",
+      "sha256": "a15800690943590e5ae6de6eaf58ccbe368fe8dcf79fcaf35a3005c67d719550"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-006/001/receipt.json",
+      "sha256": "0d2ec16d8014584c0307b73c4014cb1486a96db9d4d947e3a954015efe293310"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-006-independent-review-001/001/review.json",
+      "sha256": "c1cd7efafe9d24b703aa0224a00e31d4b45c3fe345939d3d6026a56b55f83074"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "case_payload_data_rows": 6,
+    "bounded_reviewed_data_rows": 6,
+    "decisions": "PASS_BOUNDED for six exact data intervals",
+    "validator_trusted_review_ids_assigned": 0
+  },
+  "limits": [
+    "The two bytes after the partial lookup row and other neighboring spans remain unknown.",
+    "Transform source bytes are classified as source data only; expanded RAM output semantics remain open.",
+    "No authenticated reviewer registry, canonical admission, or G1 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

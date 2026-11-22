@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "scope": "Fresh isolated G2 source compile, strict final links and six-component source-bundle diagnostic on current worktree; source completeness, stock byte identity, and hardware behavior unproven",
+  "artifacts": {
+    "report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-source-build-diagnostic-001/001/sources/report.json",
+      "sha256": "13b08ba5dfaa91d4eadebafaa3e25b54439a431d82805052d6a752b50bc7fde3"
+    },
+    "source_manifest": {
+      "path": "g2/src/sources.json",
+      "sha256": "2642826fc64847042e1eb46f4f6c6312e3f8646a3c71db34d466df14a716e37f"
+    },
+    "strict_link_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-source-build-diagnostic-001/001/linked/link-report.json",
+      "sha256": "2918029728a3760303afe941eeea048ebb6c90045c2928498f48050b872c16cd"
+    },
+    "source_bundle_link_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-source-build-diagnostic-001/001/bundle/link-report.json",
+      "sha256": "97ce5e2dc8ea32a006160a4378bfee8f16971be1a60534b3ac85a2127ac146d0"
+    },
+    "component_byte_comparison": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-source-build-diagnostic-001/001/component-byte-comparison.json",
+      "sha256": "980371242ee8f69cd90d88052cb41fc4f4ae0d8e65cf194f4fa13a05643fa5e3"
+    },
+    "source_bundle_candidate": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-source-build-diagnostic-001/001/bundle/g2-source-candidate.evenota.bin",
+      "sha256": "ae32d5125ede926d22f5a221558340d18a236c91220c307bc9064530d8a5e086"
+    },
+    "resident_rom_thumb_set_link_helper": {
+      "path": "g2/src/apollo-bootloader/link/resident_rom_thumb_set.c",
+      "sha256": "9f10c515d67657fd29be60ea631343afede63d5b0709ccaa8161a8f5000a89fc"
+    }
+  },
+  "result": {
+    "group_count": 7,
+    "total_units": 4874,
+    "compiled_units": 4874,
+    "composed_unresolved_total": 53,
+    "groups": [
+      {
+        "group": "g2-apollo-bootloader",
+        "units": 224,
+        "compiled": 224,
+        "known_failures": 0,
+        "duplicate_strong_symbols": 0,
+        "composed_unresolved_symbols": [
+          "__boot_spotmgr_seq_end",
+          "__boot_spotmgr_seq_load",
+          "__boot_spotmgr_seq_start"
+        ],
+        "composed_unresolved_count": 3,
+        "compose_returncode": 0
+      },
+      {
+        "group": "g2-apollo-main",
+        "units": 2718,
+        "compiled": 2718,
+        "known_failures": 0,
+        "duplicate_strong_symbols": 0,
+        "composed_unresolved_symbols": [
+          "__aeabi_ldivmod",
+          "__aeabi_uldivmod",
+          "__bss_end",
+          "__bss_start",
+          "__data_end",
+          "__data_load_start",
+          "__data_start",
+          "__dtcm_bss_end",
+          "__dtcm_bss_start",
+          "__start_kvdb_migration",
+          "__stop_kvdb_migration",
+          "_estack",
+          "_etext",
+          "_sstack",
+          "_stext",
+          "g2_iar_fputc_weak",
+          "g2_iar_putchar_select_a",
+          "g2_iar_putchar_select_b"
+        ],
+        "composed_unresolved_count": 18,
+        "compose_returncode": 0
+      },
+      {
+        "group": "g2-case",
+        "units": 359,
+        "compiled": 359,
+        "known_failures": 0,
+        "duplicate_strong_symbols": 0,
+        "composed_unresolved_symbols": [],
+        "composed_unresolved_count": 0,
+        "compose_returncode": 0
+      },
+      {
+        "group": "g2-codec-a",
+        "units": 368,
+        "compiled": 368,
+        "known_failures": 0,
+        "duplicate_strong_symbols": 0,
+        "composed_unresolved_symbols": [],
+        "composed_unresolved_count": 0,
+        "compose_returncode": 0
+      },
+      {
+        "group": "g2-codec-b",
+        "units": 332,
+        "compiled": 332,
+        "known_failures": 0,
+        "duplicate_strong_symbols": 0,
+        "composed_unresolved_symbols": [],
+        "composed_unresolved_count": 0,
+        "compose_returncode": 0
+      },
+      {
+        "group": "g2-em9305",
+        "units": 768,
+        "compiled": 768,
+        "known_failures": 0,
+        "duplicate_strong_symbols": 0,
+        "composed_unresolved_symbols": [
+          "QF_onCleanup",
+          "QF_onStartup",
+          "QF_tickX_",
+          "QF_timeEvtHead_",
+          "__ashldi3",
+          "__lshrdi3",
+          "memcpy",
+          "opencfw_em9305_image_end",
+          "opencfw_em9305_qp_module_qf_qeq"
+        ],
+        "composed_unresolved_count": 9,
+        "compose_returncode": 0
+      },
+      {
+        "group": "g2-touch",
+        "units": 105,
+        "compiled": 105,
+        "known_failures": 0,
+        "duplicate_strong_symbols": 0,
+        "composed_unresolved_symbols": [
+          "_ITM_deregisterTMCloneTable",
+          "_ITM_registerTMCloneTable",
+          "__RAM_VECTOR_TABLE",
+          "__TMC_END__",
+          "__bss_end",
+          "__bss_start",
+          "__call_exitprocs",
+          "__data_end",
+          "__data_load_start",
+          "__data_start",
+          "__deregister_frame_info",
+          "__init_array_end",
+          "__init_array_start",
+          "__preinit_array_end",
+          "__preinit_array_start",
+          "__register_frame_info",
+          "__stdio_exit_handler",
+          "__touch_copy_table_end",
+          "__touch_copy_table_start",
+          "__touch_flash_vectors",
+          "__touch_ram_vectors",
+          "__touch_zero_table_end",
+          "__touch_zero_table_start"
+        ],
+        "composed_unresolved_count": 23,
+        "compose_returncode": 0
+      }
+    ],
+    "manifest_changed_during_build": false,
+    "source_completeness": "not established by compilation",
+    "strict_linked_groups": 7,
+    "external_binary_archive_used": false,
+    "source_bundle_candidate": {
+      "bytes": 4639776,
+      "sha256": "ae32d5125ede926d22f5a221558340d18a236c91220c307bc9064530d8a5e086",
+      "locked_bytes": 4301227,
+      "locked_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+      "matches_locked_target": false,
+      "equal_components": 0,
+      "component_count": 6
+    },
+    "composed_unresolved_note": "53 unresolved references in relocatable composition were resolved by strict final links using linker scripts and runtime support; they are not final-link failures.",
+    "strict_all_c_claim_proven": false,
+    "assembly_scope_note": "The final bootloader link compiles resident_rom_thumb_set.c containing file-scope .thumb_set assembly for external resident-ROM symbol typing; this emits no shipped firmware body, but the strict all-C exception remains disclosed."
+  },
+  "status": {
+    "g1": "not_run",
+    "g5": "not_run",
+    "g6": "not_run"
+  }
+}

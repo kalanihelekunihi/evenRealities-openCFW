@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "reviewed_draft": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/003/discovery-draft.jsonl",
+    "sha256": "9770691f6032ddac3ae8eadea3607ed30eda30cc9698c976e082fbce9079310e"
+  },
+  "reviewed_receipt": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/003/receipt.json",
+    "sha256": "32d879cc398b2acc74ea923e1f3b44f32287dadaddd6cf03d69c3e10533632c5"
+  },
+  "previous_draft_sha256": "c58a34582de82fcf4d59c2ee793e663261072907ae27dec2708cef1f3429f198",
+  "status": "approved_for_bounded_noncanonical_discovery_draft",
+  "checks": [
+    {
+      "claim": "Revision 003 removes only the two Apollo zero-init unresolved strings and preserves unrelated unresolved strings.",
+      "result": "verified",
+      "detail": "Compared all six payload rows in revisions 002 and 003. The exact 'Reconcile generated zero-fill RAM state with runtime initializer selection and inventory accounting; the four table records themselves passed bounded byte/arithmetic review.' item was removed from Apollo main and Apollo bootloader only. All other unresolved strings are unchanged; totals move from nine to seven."
+    },
+    {
+      "claim": "Evidence pins added for the Apollo zero-init resolution are correct.",
+      "result": "verified",
+      "detail": "Each Apollo row adds exactly two evidence entries: the current stock-chain report at P1-apollo-zero-startup-chain-001/002/report.json (SHA-256 d1400742f9009a0ae4b3a9a082742558116a7d4822807ff377732a452eef1b4b) and independent review-v3.json (SHA-256 e9fad03393b77b36f1a85bfeef0564d60f516c49e897a3a938448c4d90717e8a). Both files exist and match their pins. No existing evidence entries were removed; other payloads have no evidence changes."
+    },
+    {
+      "claim": "All six payload rows and 33 image IDs remain unchanged from revision 002.",
+      "result": "verified",
+      "detail": "Both drafts contain six rows and 33 total image IDs. Per-payload image ID arrays are equal across revisions: apollo_bootloader 4, apollo_main 4, ble_em9305 7, case 2, codec 13, touch 3. The receipt counts match."
+    },
+    {
+      "claim": "No G1 admission or semantic overclaim is introduced.",
+      "result": "verified",
+      "detail": "The receipt states gate_effect 'none; G1 remains not_run'. All rows retain admission_status 'none', candidate status, historical_claims_unreviewed, and the bounded P1 scope. The Apollo notes limit the new resolution to reviewed static reset-to-zero-handler selection and generated RAM zero-span accounting; they explicitly leave residual flash/reference sweeps open. The receipt totals seven unresolved items, and the rows retain those seven items."
+    }
+  ],
+  "conclusion": "Revision 003 correctly updates only the two Apollo zero-init unresolved items, pins the reviewed report and review, and preserves all six payload rows, 33 image IDs, and seven remaining unresolved items. It remains a noncanonical P1 discovery draft with no G1 admission."
+}

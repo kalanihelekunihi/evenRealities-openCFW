@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed read-only G1 admission blocker inventory using current discovery and coverage candidates",
+  "artifacts": {
+    "probe_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-g1-admission-probe-001/003/probe.py",
+      "sha256": "f4bfee85aad52b97d258a73f8596eacbf5d2300f8c9432b083a234632c1d3f8f"
+    },
+    "probe_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-g1-admission-probe-001/003/report.json",
+      "sha256": "3d853ec31aa45cc3c853449ec53b579b0a3d19c128d72281add12a722cd4ddc0"
+    },
+    "probe_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-g1-admission-probe-001/003/receipt.json",
+      "sha256": "abfadbb84d887af6cbe72e01354e39af21f8dc87af29dd063ed3557e99cd496a"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-g1-admission-probe-review-001/003/review.json",
+      "sha256": "2cb283f4fde8819575037457884cffb2a6458d7d467240d7cd2175549983fd7d"
+    },
+    "selected_discovery": {
+      "path": "g2/evidence/g2-20261112-p1-discovery-v33-index.json",
+      "sha256": "455c9f5723fcf9a5fbaa30179cfc95637da5d7b830734371f4b5c0407ad2a7d8"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "discovery_payload_rows": 6,
+    "discovery_image_ids": 33,
+    "discovery_unresolved_items": 7,
+    "coverage_rows": 127,
+    "coverage_exact_scopes": 40,
+    "coverage_unknown_payload_bytes": 4176715,
+    "coverage_rows_without_review_id": 127,
+    "blocker_groups": [
+      "Authenticated review registry and trusted out-of-band pin absent",
+      "Nested-image discovery and transfer/address/mapping closure incomplete",
+      "Canonical v2 record/review admission package and current-campaign transform receipts absent"
+    ]
+  },
+  "limits": [
+    "The blocker order is a work sequence, not an objective severity ranking or exhaustive blocker proof.",
+    "Provenance prose hash drift is disclosed but is not a v2 validator G1 prerequisite.",
+    "No canonical inventory admission, G1 validator result, or gate receipt."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

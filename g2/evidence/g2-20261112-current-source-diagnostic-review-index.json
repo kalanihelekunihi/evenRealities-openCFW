@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-12",
+  "scope": "Independent review binding for current G2 source compile, link and bundle comparison diagnostic.",
+  "diagnostic": {
+    "path": "g2/evidence/g2-20261112-current-source-diagnostic.json",
+    "sha256": "4da3ab3d31071191841e5a59b32c2b6703904f1754831cfcbaee0d86fd36b301"
+  },
+  "independent_review": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/current-source-diagnostic-review-001/001",
+    "sha256": "e6f00f061983d012137dc5603516bed95d986302ef442045fdb2988f672e34e5"
+  },
+  "result": "Supported within diagnostic scope; 4,874 enabled C units compile, seven source groups link, six payload candidates and whole bundle differ from locked official artifact.",
+  "limits": [
+    "C-compiled weight bytes are extracted training data represented in a C unit; training provenance is not reconstructed.",
+    "Architecture inline assembly and incomplete source coverage prevent a strict all-C/source-complete claim.",
+    "G1 through G6 remain not_run."
+  ]
+}

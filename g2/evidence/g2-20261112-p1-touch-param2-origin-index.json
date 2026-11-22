@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded origin/content trace of touch 0x4810 EEPROM-write callback source parameter.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-touch-flash-copy-uptrace-index.json",
+    "sha256": "d29f357cdd58ca4c863000a6cc65fd69ebd4a9794e359f34b06f92c0024bfe2b"
+  },
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-param2-origin-001/001/audit.py",
+      "sha256": "a46cd850dd2a8102b3bb16145d1bb6ec2a28577c75ea3b5a10689759548dabff"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-param2-origin-001/001/report.json",
+      "sha256": "7bd9915014aa409cc93d1354f86ff1a1b3bdca86021209eeae73a70c0a0c4165"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-param2-origin-001/001/receipt.json",
+      "sha256": "ace37bc5a14b051e1660b2d6eb6557774d1a45327b25c3bf396261bee5250ea8"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-param2-origin-review-001/001/review.json",
+      "sha256": "a7b0538adbab55151c7593456f6ac0b986f2b661ee37bf02c8888f5af3aa61c1"
+    }
+  },
+  "result": {
+    "record_ram_address": "0x200009d0",
+    "direct_callers_of_0x3568": 2,
+    "read_adapter": "0x8a78",
+    "write_dispatcher": "0x8aac",
+    "verified_thumb_bl_edges": 22,
+    "verified_function_bodies": 24,
+    "flash_magic_literal": "0x45564e55",
+    "other_record_content": "runtime or EEPROM-derived"
+  },
+  "limits": [
+    "Upstream producer of input buffer 0x200009A1 and indirect event dispatch remain unresolved.",
+    "No fixed firmware flash source interval or nested executable-copy exclusion.",
+    "No whole touch discovery, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

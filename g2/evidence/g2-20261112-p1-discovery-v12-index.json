@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 012 narrowing the case tail open item to two unknown bytes.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v11-index.json",
+    "sha256": "2d38350a58faf5cba6c3283849a377439daf92001d901c364abd9dc161b39b22"
+  },
+  "artifacts": {
+    "producer_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/012/revise.py",
+      "sha256": "11216f2b6e5c71aec595730665b64632188782c99e449d53ef93d89d4dae2622"
+    },
+    "discovery_draft_012": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/012/discovery-draft.jsonl",
+      "sha256": "c5f967589052b420d42c01e537ead0b4062580ec95bb0f70de4051b563e4e08f"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/012/receipt.json",
+      "sha256": "d2da5bce10e6a28751ea366885ee2413afc7434507a20e00306fa28c3eae9dfc"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v12-review-001/001/review.json",
+      "sha256": "01ba1723f71d1cd65de4991589fb6a6fb90918832ea52fb5cfc4653320b161ab"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7,
+    "evidence_references_verified": 96
+  },
+  "limits": ["Case raw [0xD266,0xD268) remains unknown; all payload discovery rows remain open.", "No canonical admission or G1 claim."],
+  "status": {"canonical_admission": "none", "g1": "not_run"}
+}

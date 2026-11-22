@@ -1,6 +1,5 @@
 /* Fix 48: stock flash 0x5232d0..0x523303, two overlapping float tables (+0 and +0x18) read at
  * byte offset iVar13 in {8..0x18} (stock image words). */
-static const unsigned int g2_nema_arc_table_5232d0[13]={0x20074efcu, 0x3f6c835eu, 0x3f7b14beu, 0x3f7dcf55u, 0x3f7ec46du, 0x3f7f35f9u, 0x3f7f73afu, 0x3ec3ef15u, 0x3e47c5c2u, 0x3e05a8a8u, 0x3dc8bd36u, 0x3da0af2au, 0x3d85f213u};
 /* Wave20 evidence (replaces the wave8 audit note): there are no ambient VFP/FPSCR or
  * unaff-register temps left. The .waves/inventory.py nvg_leftover pattern counts 0 here,
  * and every former carrier is a plain compare with a per-site stock vcmp/vmrs citation
@@ -57,6 +56,13 @@ static inline void *g2c_float_as_ptr(float f){return (void *)(uintptr_t)g2c_floa
 #define G2C_FPSCR_RMODE_RN 0
 /* g2c_fpscr_* NZCV stand-ins removed in wave19: all uses replaced by stock-cited compares. */
 extern volatile uint audio_uart_nema_context_cell[];
+/* The first stock table word points to RAM 0x20074efc. Bind it to the same
+ * source object used by the NemaVG code when the image is relocated. */
+static const uint g2_nema_arc_table_5232d0[13]={
+  (uint)(uintptr_t)&audio_uart_nema_context_cell[0],
+  0x3f6c835eu, 0x3f7b14beu, 0x3f7dcf55u, 0x3f7ec46du, 0x3f7f35f9u,
+  0x3f7f73afu, 0x3ec3ef15u, 0x3e47c5c2u, 0x3e05a8a8u, 0x3dc8bd36u,
+  0x3da0af2au, 0x3d85f213u};
 extern volatile uint audio_uart_nema_vg_context_cell;
 extern volatile uint audio_uart_nema_vg_framebuffer_context_cell_20074f08;
 void *memcpy(void *, const void *, uint);
@@ -14665,4 +14671,3 @@ LAB_00567316:
   return 2;
 }
 
-  

@@ -6,6 +6,7 @@
 typedef struct { uint32_t capacity; uint8_t simple,wear,redundant,blocking; uint32_t base; } touch_eeprom_configuration;
 _Static_assert(sizeof(touch_eeprom_configuration)==12,"configuration ABI");
 extern const touch_eeprom_configuration touch_factory_eeprom_configuration;
+extern touch_eeprom_configuration touch_reset_eeprom_configuration;
 uint32_t touch_eeprom_init_bd(const uint8_t *config,uint8_t *context,uint32_t *provider);
 uint32_t touch_eeprom_init(const uint8_t *config,uint8_t *context);
 uint32_t touch_application_eeprom_init(void);

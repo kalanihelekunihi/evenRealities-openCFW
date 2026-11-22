@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Locked GXNPU command/weight source slices and conditional stock software staging route",
+  "artifacts": {
+    "route_audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-runtime-mapping-route-001/001/audit.py",
+      "sha256": "1dd8d3ec657d3b225ddb29823c7cbd4f63c21e9fa57ebff4c400c856e11d1a2d"
+    },
+    "route_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-runtime-mapping-route-001/001/report.json",
+      "sha256": "67c56592532ddd9a2b94519784917e8f6cc56fff4862632639436572404d3bf5"
+    },
+    "route_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-runtime-mapping-route-001/001/receipt.json",
+      "sha256": "0daff23a1ebd766f5bfa729d299b377c9df28ccaefc8c85acff63c7b292457de"
+    },
+    "coordinator_check_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-runtime-mapping-route-coordinator-check-001/001/check.py",
+      "sha256": "f0fbc518eed11599758005424b6ff0ae0f5edca9488910ab86241f3371059217"
+    },
+    "coordinator_check": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-runtime-mapping-route-coordinator-check-001/001/review.json",
+      "sha256": "9b7e68e2e36c4d7d761fff0e4ec4f4a9398367953f9744c81a92266b39ab0719"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-runtime-mapping-route-independent-review-001/001/review.py",
+      "sha256": "dda3d608b151beb1c271f432ed961ad0be8d7e729eeccd2169ef579ed6502564"
+    },
+    "independent_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-runtime-mapping-route-independent-review-001/001/report.json",
+      "sha256": "550ad80e8e0451f0d457cd0c531b947a221a7ecc253c1829a4d55e7988f889ce"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-gxnpu-runtime-mapping-route-independent-review-001/001/receipt.json",
+      "sha256": "80f3baf3443c7d7d44ea3ffeaa35256bb47b31031c3a5a2027a6b6b0da7657ea"
+    }
+  },
+  "result": {
+    "command_codec_span": [101776, 110940],
+    "command_bytes": 9164,
+    "weight_codec_span": [110940, 231740],
+    "weight_bytes": 120800,
+    "decoded_command_records": 212,
+    "slot6_input_operands": 83,
+    "conditional_command_dram_start": "0x20003304",
+    "conditional_weight_dram_start": "0x200056d0",
+    "runtime_slot6_binding_proven": false,
+    "independent_verdict": "PASS_WITH_LIMITS",
+    "g1_mapping_status": "unresolved"
+  },
+  "limits": [
+    "Reader callback and source-origin success are not established; software staging addresses are conditional candidates.",
+    "Slot-6 starting offsets fit within the weight extent if based at 0x200056d0; tensor access footprints are unvalidated and no stock task/driver trace binds that base.",
+    "Accelerator command-start, doorbell and status path remain untraced; P2 operation semantics are separate.",
+    "No canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

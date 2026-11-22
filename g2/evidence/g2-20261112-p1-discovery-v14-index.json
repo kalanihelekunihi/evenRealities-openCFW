@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 014 with corrected Apollo main literals and scatter-route language.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v12-index.json",
+    "sha256": "b90a2876ca7ff354075a8259f78aa764b46bb46c3d4444867714ede05f3da633"
+  },
+  "artifacts": {
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/014/reproduce.py",
+      "sha256": "43cef3522b799295cefa401c6ee177e1aef5f411afda2d9a06eb35330c842c52"
+    },
+    "discovery_draft_014": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/014/discovery-draft.jsonl",
+      "sha256": "21177fb4f98c788b36d81ae94b26e242503fd214c60396b28a308b679a3d4a28"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/014/receipt.json",
+      "sha256": "d8c1e29f21bdd257ad0b566da36879d83faae8d1997fa6d127149a728c96dc16"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v14-review-001/001/review.json",
+      "sha256": "8c70b6bdc14631c6e03bf90b4e8cfa13055ab3090969ea378c0ecb814589d44d"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "The corrected wording narrows two Apollo main statements; all payload discovery rows remain open.",
+    "No canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

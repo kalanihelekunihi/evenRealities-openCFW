@@ -5,6 +5,7 @@
 #include "init.h"
 #include "provider.h"
 #include "history.h"
+#include "../application/ram_state.h"
 /* Source-defined data matches the twelve reset-copied bytes at0xb58c. */
 const touch_eeprom_configuration touch_factory_eeprom_configuration={256,0,2,1,1,0};
 static uint32_t w(const uint8_t *c,unsigned o){return *(const uint32_t *)(c+o);}
@@ -51,12 +52,13 @@ uint32_t touch_eeprom_init_bd(const uint8_t *cfg,uint8_t *c,uint32_t *p){
 }
 /* Stock 0x00008A38 (touch_eeprom_5738_initialize_adapter) */
 uint32_t touch_eeprom_init(const uint8_t *cfg,uint8_t *c){
- uint32_t *p=(uint32_t *)0x20000ed4u;if(touch_provider_init(p))return 0;uint8_t copy[12];
+ uint32_t *p=touch_eeprom_provider_ram;if(touch_provider_init(p))return 0;uint8_t copy[12];
  *(uint32_t *)copy=w(cfg,0);for(uint32_t i=4;i<8;i++)copy[i]=cfg[i];*(uint32_t *)(copy+8)=w(cfg,8);return touch_eeprom_init_bd(copy,c,p);
 }
 /* Stock 0x000034D8 (touch_storage_01d8_initialize) */
 uint32_t touch_application_eeprom_init(void){
- uint8_t *flag=(uint8_t *)0x200008c4u;if(*flag)return 0;
- uint8_t *cfg=(uint8_t *)0x200004c0u;*(uint32_t *)(cfg+8)=0xe400u;uint32_t status=touch_eeprom_init(cfg,(uint8_t *)0x200008c8u);
- if(!status||status==0x093e0004u){*flag=1;return 0;}return 1;
+ if(touch_eeprom_ready_ram)return 0;
+ touch_reset_eeprom_configuration.base=0xe400u;
+ uint32_t status=touch_eeprom_init((const uint8_t *)&touch_reset_eeprom_configuration,touch_eeprom_context_ram);
+ if(!status||status==0x093e0004u){touch_eeprom_ready_ram=1;return 0;}return 1;
 }

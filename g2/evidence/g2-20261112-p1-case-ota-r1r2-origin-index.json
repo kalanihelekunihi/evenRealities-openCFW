@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed locked Thumb reaching definitions of case OTA writer r1/r2 on validated 0x5A chunk path",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-ota-r1r2-origin-001/002/audit.py",
+      "sha256": "753569a53cf0915cfd72f066258ff225b5bc99510b6da3b8f1fb1b516a10d35e"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-ota-r1r2-origin-001/002/report.json",
+      "sha256": "652c0c0ddb38fd0272d08a7eace68fa92f1ecf550c937f2dc6543b7468932583"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-ota-r1r2-origin-001/002/receipt.json",
+      "sha256": "9f8c682e2982ac7997bd682d3d83e265140c7e05c626a99ecccdf14fce48dd5d"
+    },
+    "disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-ota-r1r2-origin-001/002/disassembly.txt",
+      "sha256": "8cfe5b48458f8cb4796dfbf8b1ef19c516180331b6a6fa38f6a50cf95d981311"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-ota-r1r2-origin-review-001/002/review.json",
+      "sha256": "6b34be7f884e7758bff795c7af5ba4a3a25ccc9b2d01336314de641d06a4b946"
+    },
+    "prior_case_live_arguments_index": {
+      "path": "g2/evidence/g2-20261112-p1-case-ota-live-arguments-index.json",
+      "sha256": "66b81b776975eb9d3bd02e89b2e99ff11ff805cdf8e59312b4da7cd7abd5a3a5"
+    }
+  },
+  "result": {
+    "actual_bl_site": "0x080016F8",
+    "source_buffer": "0x2000077C from validated incoming 0x5A UART record",
+    "source_register": "r1",
+    "length_register": "r2",
+    "nonzero_chunk_length_bytes": "8..248 in steps of 8",
+    "review_verdict": "accepted_with_bounded_scope"
+  },
+  "limits": [
+    "The traced source is dynamic OTA data supplied at runtime, not a fixed nested image in the locked case payload.",
+    "Alternate OTA state writers/aliases, outer parser state and physical update execution remain unverified.",
+    "No whole-case image discovery, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -1,14 +1,15 @@
 # G2: whole-firmware pseudocode, then source reconstruction
 
-Status: **Previous P2 campaign interrupted; stale assignments cleared on
-2026-10-22 at the user's request. No work is currently dispatched.** Campaign
-`20260930T190500Z` ended prematurely; its assignment history and evidence are
-preserved. G1 passed; G2–G6 remain unrun. The target-and-inventory gate has primary and independent
-validator receipts in `g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json`.
-All six payloads, 33 images, 70 initial coverage rows and 125 reviews are bound
-to authenticated inputs. Code/data and behavioral completeness remain P2 work.
-The earlier campaign's gates are not inherited. This directory is the active
-G2 procedure as of 2026-09-26;
+Status: **Campaign `20261112T092142Z` is in P1 inventory.** Its locked bundle,
+six payloads and outer container passed a fresh identity preflight. G1–G6
+have not run for this campaign, and no workers are dispatched. Campaign
+`20260930T190500Z` was cleared after its interrupted P2 work; its evidence and
+G1 receipt remain historical and require revalidation before reuse. The
+current provenance document differs from its pinned historical hash because
+a tracked licensing footer changed, while its firmware hashes stayed the same.
+See `g2/build/pseudocode-first/20261112T092142Z/receipts/` for the bounded
+preflight and provenance reconciliation. This directory is the active G2
+procedure as of 2026-09-26;
 it replaces the incremental reconstruction workflow. Existing firmware
 sources and historical evidence are preserved.
 
@@ -24,9 +25,9 @@ The sequence is fixed:
    equality to the original artifact.
 
 The old P1/P2 dispatch records are retained in `state.json` under
-`assignment_history`; the active assignment lists are empty. Do not resume those
-dispatches. A new campaign requires user authorization and validation of any
-reused evidence. No C implementation task may start before G3/G4. The prepared
+`assignment_history`; the new campaign's assignment lists are empty. Do not
+resume those dispatches. Reused evidence needs fresh validation. No C
+implementation task may start before G3/G4. The prepared
 prompt pack is guidance, not a general job launcher.
 
 | Start here | Purpose |
@@ -43,7 +44,8 @@ prompt pack is guidance, not a general job launcher.
 The identified target is the official `s200_v2.2.6.10` EVENOTA bundle,
 4,301,227 bytes, SHA-256
 `f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa`.
-The original manifest and provenance agree on that identity. Historical hybrid
+The original manifest and the provenance record's firmware hashes agree on
+that identity. Historical hybrid
 output hashes, release pins, and the old work queue are different records and
 must not redefine this target. See `target.json` for local verification status.
 

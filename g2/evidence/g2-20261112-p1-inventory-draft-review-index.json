@@ -1,0 +1,64 @@
+{
+  "artifacts": {
+    "codec_discovery_review": {
+      "path": "g2/evidence/g2-20261112-p1-codec-discovery-review.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-discovery-review-001/001/findings-v3.json",
+      "sha256": "a57be899b3f33dfb1815d404a4a33772889a6064055f634eaa69438faf64a504"
+    },
+    "coverage_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-draft-001/001/coverage-draft.jsonl",
+      "sha256": "8e51dd57245320aef83f8a67ba61e302228b379fc9c76fcfd90362c42d4f8a24"
+    },
+    "coverage_draft_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-draft-001/001/receipt.json",
+      "sha256": "80cd0f882c8256606b350da524acdebefe963c2b019294f29895a7f5052e6738"
+    },
+    "coverage_draft_review": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-draft-review.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-draft-review-001/001/findings-v2.json",
+      "sha256": "ad05b972ad8a19442f67f2b3ffd66596337d3dea3cad671eddee3f22716ae582"
+    },
+    "image_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-all-image-row-draft-001/002/images-draft.jsonl",
+      "sha256": "8d61b48d2ec039bdb36463fbd571e89fe88afafb5f47ee52befa9b56e459ccde"
+    },
+    "image_draft_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-all-image-row-draft-001/002/receipt.json",
+      "sha256": "d8edc8592b334da79d2cdc4cc3c8db8cec897c950481c662f4cf110cf94466f4"
+    },
+    "image_draft_review": {
+      "path": "g2/evidence/g2-20261112-p1-image-draft-review.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-all-image-draft-review-001/001/findings-v2.json",
+      "sha256": "2597148cc6adb464a9e352284e2525334404d495eec41e16dab0a201a115cf3c"
+    },
+    "touch_case_discovery_review": {
+      "path": "g2/evidence/g2-20261112-p1-touch-case-discovery-review.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-case-discovery-review-001/001/findings-v2.json",
+      "sha256": "719ba0bef1c308157750fc4a80e09af3c69b3b33cf0e809141d33692a864f25c"
+    },
+    "validator_gap": {
+      "path": "g2/evidence/g2-20261112-p1-validator-gap.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-validator-gap-review-001/001/findings.json",
+      "sha256": "a04cb0f4fa783fc88eae2bf687b786d141eecdc2e40d6e4e5e02d7ed129bf8d4"
+    }
+  },
+  "campaign_id": "20261112T092142Z",
+  "counts": {
+    "coverage_evidence_refs": 140,
+    "coverage_rows": 70,
+    "image_rows": 33,
+    "ledger_scopes": 40,
+    "unknown_payload_bytes": 4299919
+  },
+  "schema_version": 1,
+  "scope": "Current-campaign noncanonical 33 image-row and 70 coverage-row drafts, bounded independent reviews, and validator gap analysis. Discovery, runtime mappings, transform admission, canonical registry and G1 remain open.",
+  "status": {
+    "canonical_admission": "none",
+    "codec_discovery": "bounded_container_and_recursive_byte_review_pass; GXNPU and exhaustive discovery open",
+    "coverage_draft": "bounded_partition_and_input_review_pass; classifications pending",
+    "g1": "not_run",
+    "image_draft": "bounded_byte_review_pass; inherited interpretations unreviewed",
+    "touch_case_discovery": "bounded_wrapper_and_startup_mapping_review; exhaustive discovery open"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

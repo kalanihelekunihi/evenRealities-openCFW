@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "time_local": "2026-11-22 08:15 CST",
+  "title": "(3) case-reply disarm + unexpected pre-ADV reset under openCFW early arm",
+  "scope": "Emulator-only. Same opencfw-otap-disarm image. No rebuild required. No hardware flash. No commit.",
+  "image": {
+    "path": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "reset_vector": "0x0059427d",
+    "from_link": "build/g2-apollo-recovery-20261122-otap-disarm-link"
+  },
+  "case_reply_disarm": {
+    "resc": "build/em9305-nor-20261122/opencfw-case-reply-disarm.resc",
+    "log_sha256": "1753490cc8c5f3c667dcca356589c37825667fc7914adb51549a404ec341e405",
+    "method": "Boot past ADV disarm (OTAP\u21920), re-arm OTAPOINTER=0xAFD1363A via MMIO so case-reply is the disarm under test, inject proven pogo product-test frame on uart2.",
+    "frame_rx": "24 00 01 00 A7",
+    "frame_note": "Prior wrong candidate 01 00 00 00 00 84 did not disarm. boot-trace STATUS 2026-11-02 recipe used.",
+    "uart2_tx_hex": "5aa5ff09240103050202060a034b",
+    "uart2_tx_expected": "5aa5ff09240103050202060a034b",
+    "otap_after_0_01s_armed": "0xAFD1363A",
+    "otap_after_adv_disarm": "0x00000000",
+    "otap_rearmed_for_case_test": "0xAFD1363A",
+    "otap_after_case_frame": "0x00000000",
+    "post_reset": "g2.reset SBL application handoff VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+    "sbl_wired_load": false,
+    "result": "PASS \u2014 DEV_BoxRevcMsgProcess reply path calls g2_recovery_disarm_healthy; OTAP cleared; intentional reset hands off to app."
+  },
+  "unexpected_reset_before_advertising": {
+    "resc": "build/em9305-nor-20261122/opencfw-early-reset-armed.resc",
+    "log_sha256": "cc92f64890103a7d41a06150ebc085adfbc80dc5626b87a553da8cacb9bf0de3",
+    "method": "Arm at 0.01s (OTAP=0xAFD1363A, host packets 0), then machine Reset before ADV.",
+    "otap_after_0_01s_armed": "0xAFD1363A",
+    "host_packets_before_reset": "0x00000000",
+    "post_reset": "g2.reset SBL wired-load (OTAPOINTER=0xAFD1363A); application not entered",
+    "cpu_halted": true,
+    "pc_after_reset": "0x0",
+    "sbl_wired_load": true,
+    "intended_recovery": true,
+    "result": "PASS as designed \u2014 unexpected/watchdog-class reset while still armed lands in SBL wired-load (same signature as app-dead). Recovery requires a host on the pogo/SBL wired-load path."
+  },
+  "remaining_risk": {
+    "pogo_sbl_reachability_on_silicon": "UNPROVEN \u2014 Renode g2.reset models wired-load vs handoff from OTAPOINTER, but real Ambiq SBL UART/pogo programming and probe-bridge HELLO are not exercised here.",
+    "app_dead_without_host": "If the temple hangs after early arm and before ADV/case disarm, next reset correctly enters SBL wired-load; without a wired host the temple still looks brick-dead (no BLE).",
+    "both_dev_temples_already_bricked": "Pre-arm builds; cannot be armed retroactively. Do not flash the primary pair.",
+    "crash_loop_gate_unwired": "Still needs a hardware reset-signature before it can replace unconditional early arm.",
+    "sim_hw_gap": "Hang that bricks hardware still not reproduced in Renode; recovery experiment is the iteration enabler, not a closed root-cause."
+  },
+  "next": {
+    "no_hardware_items_remaining_high_value": true,
+    "rationale": "NVM/FD01/FD07/FC4E, mismatch DFU through INFO commit, intentional-reset disarm, ADV disarm, case-reply disarm, and pre-ADV unexpected-reset\u2192wired-load are all covered in Renode. Further progress needs silicon feedback (does early arm stick? does SBL accept probe-bridge? does Fix 51/ADC move the hang?).",
+    "hardware_test_plan_doc": "g2/docs/hardware-test-plan.md section 2026-11-22 case-reply + early-reset + sacrificial-temple plan"
+  }
+}

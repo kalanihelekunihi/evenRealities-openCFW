@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "review_id": "P1-main-itcm-transform-review-001/001/review-003",
+  "decision": "accept_bounded_replay_evidence",
+  "inputs": [
+    {
+      "path": "g2/workflow/target.json",
+      "sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-itcm-transform-replay-001/001/fresh-replay-receipt.json",
+      "sha256": "7c04690ebed3b249ad4dea9eb76b07817d485468b9a35c87a42cd2057d2994e4"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-itcm-transform-replay-001/001/fresh-replay-receipt-002.json",
+      "sha256": "cc21f1291c9ff0941235b6aa0bf32e6dd09a12452507ea05687735b59ae5b3ec"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-itcm-transform-replay-001/001/replay.py",
+      "sha256": "dac1d91b0f4c5e0c31778d56bb46a7f8c4f295693fd5ee98030ab355a93c1e53"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-itcm-transform-replay-001/001/decoded-00000040.bin",
+      "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-itcm-transform-replay-001/001/trace-results.json",
+      "sha256": "d341d9f5a3eec8d6cea5a5906cb58ece6536b043cf55277289bd635a407042a9"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-itcm-canonical-replay-011/001/execution-receipt.json",
+      "sha256": "a7620cb2b96a8ae51fd05c2234a3f45ed07f2431a4ec34d46227624bdbb71d27"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-itcm-canonical-replay-011/001/replay.py",
+      "sha256": "282fa2c8b5174538ac1de5abff890fe42013a9f6e89bb1bd221ca9f9cac26ef0"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-itcm-canonical-replay-011/001/decoded-00000040.bin",
+      "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-itcm-canonical-replay-011/001/trace-results.json",
+      "sha256": "d341d9f5a3eec8d6cea5a5906cb58ece6536b043cf55277289bd635a407042a9"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-main-transforms-012/001/transform-00000040.json",
+      "sha256": "49b4875f1e0259f855b2b5ba367bfab74db86224171c250f1c7f1d083d668ba6"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin",
+      "sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+    }
+  ],
+  "checks": {
+    "locked_target_payload_hash_matches": true,
+    "payload_is_exact_parent_image_projection_at_plus_32": true,
+    "descriptor_bytes_match_historical_transform": true,
+    "descriptor_decodes_to_signed_offset_0x36f2a_length_0x2c_destination_0x40": true,
+    "correct_payload_source_span_is_3523374_to_3523396": true,
+    "correct_payload_source_hash_matches_historical_source_hash": true,
+    "fresh_script_delta_is_output_path_only": true,
+    "fresh_output_hash_matches_historical_replay": true,
+    "fresh_trace_matches_historical_trace": true,
+    "observed_22_source_loads_cover_exact_source_set": true,
+    "writes_cover_24_byte_output_without_unexpected_writes": true,
+    "all_observed_backreferences_read_prior_written_output": true,
+    "handler_returns_to_sentinel_with_expected_r0": true,
+    "fresh_receipt_hashes_bind_script_trace_output_logs": true,
+    "fresh_python_and_unicorn_binaries_not_independently_receipted": true,
+    "historical_worker_script_mismatch_remains_disclosed": true,
+    "g1_not_run": true,
+    "strengthened_receipt_002_hash_matches_file": true,
+    "receipt_002_pins_current_interpreter_historical_script_and_unicorn_binaries": true,
+    "all_receipt_002_tool_file_hashes_reverified": true,
+    "receipt_002_links_predecessor_hash": true,
+    "target_file_sha256_recomputed_correctly": true,
+    "raw_image_span_correct_in_extracted_image_coordinates": true,
+    "wrapped_payload_span_is_raw_image_span_plus_32_byte_header": true
+  },
+  "address_correction": {
+    "raw_image_span": [
+      3523342,
+      3523364
+    ],
+    "raw_image_coordinate_space": "extracted apollo_main:flash image (the historical parent image begins at wrapped payload offset 32)",
+    "wrapped_payload_span": [
+      3523374,
+      3523396
+    ],
+    "explanation": "The raw_image_span field is correctly expressed in extracted-image coordinates. Since the locked OTA payload contains the extracted main image after a 32-byte wrapper header, the corresponding payload byte offsets add 32. The descriptor source hash matches both coordinate-consistent slices."
+  },
+  "observed_source_access": {
+    "descriptor_runtime": "0x75d3e4",
+    "descriptor_payload_offset": 3298308,
+    "descriptor_words": {
+      "signed_source_offset": "0x36f2a",
+      "encoded_length": "0x2c",
+      "destination": "0x40"
+    },
+    "source_runtime_span": [
+      7947022,
+      7947044
+    ],
+    "source_payload_span": [
+      3523374,
+      3523396
+    ],
+    "source_bytes": 22,
+    "source_load_count": 22,
+    "load_sites": {
+      "0x43a138": 2,
+      "0x43a142": 2,
+      "0x43a156": 16,
+      "0x43a166": 2
+    },
+    "effective_address_set_exact": true
+  },
+  "output": {
+    "runtime_span": [
+      64,
+      88
+    ],
+    "size": 24,
+    "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+    "matches_historical": true
+  },
+  "limits": [
+    "This accepts bounded evidence for one 24-byte initialized ITCM block only.",
+    "The historical worker-script mismatch remains disclosed and is not resolved by this replay.",
+    "No claim is made about other transforms, decoder completeness, pseudocode coverage/freeze gates, C reconstruction, whole-artifact byte identity, or G1.",
+    "Receipt 002 verifies current Python and Unicorn tool-file hashes against historical pins, but does not validate Unicorn semantics or hardware behavior."
+  ],
+  "g1_claim": false,
+  "supersedes": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-itcm-transform-review-001/001/review-002.json",
+    "sha256": "fad9621fe50be36cdc80ffb793d8483ab251119f6ec7e361472544a6f428b72a"
+  }
+}

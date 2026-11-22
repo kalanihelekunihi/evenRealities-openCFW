@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Bounded P1 EM9305 NVM records 0/1 known-format sweep, record-1 empty INI metadata, noncanonical six-payload discovery and coverage refinements.",
+  "artifacts": {
+    "small_record_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-sweep-001/001/report.json",
+      "sha256": "7297f7634a3d38e4f521dfeeaf6df0cab4c8c809f77239b42e09bfe344fece90"
+    },
+    "discovery_draft_005": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/005/discovery-draft.jsonl",
+      "sha256": "bfd23c7aeb4af1181e39db39b03532994fd6ad90c9db5052e317aca0de6091a5"
+    },
+    "discovery_receipt_005": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/005/receipt.json",
+      "sha256": "0737b4b645fb1f4e660dd04fd7b276ae7c0f5f40d8cf94f3ae3ac05a402f4761"
+    },
+    "coverage_draft_003": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-003/001/coverage-draft.jsonl",
+      "sha256": "94f2fbde51cf8d634b48ebec4800261d2f386ce632ad1050741fb428da527d79"
+    },
+    "coverage_receipt_003": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-003/001/receipt.json",
+      "sha256": "3b4f5ed5dfaad1b19e266d583201ab44b4cb0c7b7c694cb8fb8103fba726a055"
+    },
+    "small_record_review": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-small-record-review.json",
+      "sha256": "aeaa6eb5e502259afb3befd821f7e5439cd03b22aa4d3b8bc7cf80c5de838247",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-review-001/001/review.json"
+    },
+    "discovery_review": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-small-record-discovery-review.json",
+      "sha256": "699e07e55eb490e46e4da8bcc6f0b75e70f79324e3dbca721c23d70c2c9b9767",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-review-001/001/discovery-review.json"
+    },
+    "coverage_review": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-small-record-coverage-review.json",
+      "sha256": "ddf2a143bbf6fc4b54fd5bee17d74d584d56d9562f063c17f463043d1884bf39",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-coverage-review-001/001/review-v2.json"
+    }
+  },
+  "confirmed": [
+    "Record 1 ends with a 12-byte INI\\x02 empty metadata table at package [992,1004), loaded [0x300684,0x300690).",
+    "The table has a zero/zero terminator and no encoded RAM child.",
+    "Record 0 directly calls record-1 code in bounded pinned ARC disassembly.",
+    "The noncanonical coverage draft classifies exactly those 12 payload bytes as container; 75 rows, 40 scopes and 4,179,107 unknown payload bytes."
+  ],
+  "counts": {
+    "discovery_payload_rows": 6,
+    "listed_image_ids": 33,
+    "discovery_unresolved_remaining": 7,
+    "coverage_rows": 75,
+    "coverage_scopes": 40,
+    "newly_classified_container_payload_bytes": 12,
+    "unknown_payload_bytes": 4179107
+  },
+  "limits": [
+    "Exact known-format marker scan cannot exclude undocumented or nonliteral structures.",
+    "EM9305 records 0/1 and remaining application code/data/reference sweeps remain open. External NVM selection remains conditional.",
+    "No canonical G1 admission, complete pseudocode, source completion or byte identity."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

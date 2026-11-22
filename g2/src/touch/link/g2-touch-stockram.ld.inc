@@ -41,14 +41,34 @@
     . = 0x4; __touch_crt_object_start = .;
     KEEP(*(.touch_bss.crt_object)) /* 0x200008ac +0x18: crtbegin object.0 */
     __touch_crt_object_end = .;
+    . = 0x1c; KEEP(*(.touch_bss.app_eeprom_ready)) /* 0x200008c4 */
+    . = 0x20; KEEP(*(.touch_bss.app_eeprom_context)) /* 0x200008c8 +0x20 */
+    . = 0x40; KEEP(*(.touch_bss.app_gesture_ticks)) /* 0x200008e8 */
+    . = 0x44; KEEP(*(.touch_bss.app_i2c_context)) /* 0x200008ec +0x54 */
+    . = 0x98; KEEP(*(.touch_bss.app_gesture_state)) /* 0x20000940 +0x50 */
+    . = 0xe8; KEEP(*(.touch_bss.app_report)) /* 0x20000990 +0x10 */
+    . = 0xf8; KEEP(*(.touch_bss.app_i2c_rx)) /* 0x200009a0 +0x10 */
+    . = 0x108; KEEP(*(.touch_bss.app_i2c_tx)) /* 0x200009b0 +0x10 */
     . = 0x118; KEEP(*(.touch_bss.app_pm_params)) /* 0x200009c0 +0x8 stock word 0x200004d8 (.touch_init.app_pm_descriptor+0xc) -> touch_app */
+    . = 0x120; KEEP(*(.touch_bss.app_active_budget)) /* 0x200009c8 */
+    . = 0x124; KEEP(*(.touch_bss.app_state)) /* 0x200009cc */
+    . = 0x125; KEEP(*(.touch_bss.app_persist)) /* 0x200009cd */
+    . = 0x126; KEEP(*(.touch_bss.app_restart)) /* 0x200009ce */
+    . = 0x127; KEEP(*(.touch_bss.app_save_pending)) /* 0x200009cf */
+    . = 0x128; KEEP(*(.touch_bss.app_saved_record)) /* 0x200009d0 +0x8 */
+    . = 0x130; KEEP(*(.touch_bss.app_proximity_prior)) /* 0x200009d8 +0x4 */
     . = 0x134; KEEP(*(.touch_bss.slider_history_position)) /* 0x200009dc +0x8 stock word 0x20000848 (.touch_init.position_history+0x0) -> touch_slid */
+    . = 0x13c; KEEP(*(.touch_bss.app_widget_processing)) /* 0x200009e4 +0x18 */
     . = 0x154; KEEP(*(.bss.touch_lp_sensor_frames)) /* 0x200009fc +0xb0 stock word 0x20000518 (.touch_init.capsense_context+0x2c) -> touch_gen */
     . = 0x204; KEEP(*(.bss.touch_active_sensor_frames)) /* 0x20000aac +0x8c stock word 0x20000514 (.touch_init.capsense_context+0x28) -> touch_gen */
     . = 0x290; KEEP(*(.bss.touch_base_frame_context)) /* 0x20000b38 +0x100 stock word 0x20000510 (.touch_init.capsense_context+0x24) -> touch_gen */
     . = 0x390; KEEP(*(.bss.touch_active_scan_sns)) /* 0x20000c38 +0x18 stock word 0x20000508 (.touch_init.capsense_context+0x1c) -> touch_gen */
     . = 0x3a8; KEEP(*(.touch_bss.internal_context)) /* 0x20000c50 +0x78 stock word 0x200004f4 (.touch_init.capsense_context+0x8) -> touch_gene */
     . = 0x420; KEEP(*(.touch_bss.msclp_context)) /* 0x20000cc8 +0x4 stock word 0x20000830 (.touch_init.pending_channel+0x4) -> touch_msclp */
+    . = 0x424; KEEP(*(.touch_bss.ilo_pm_params)) /* 0x20000ccc +0x8 */
+    . = 0x42c; KEEP(*(.touch_bss.eeprom_scratch)) /* 0x20000cd4 +0x200 */
+    . = 0x62c; KEEP(*(.touch_bss.app_eeprom_provider)) /* 0x20000ed4 +0x30 */
+    . = 0x65c; KEEP(*(.touch_bss.flash_clock_backup)) /* 0x20000f04 +0x18 */
     /* The PDL measurement API and the clock deep-sleep callback share these
        four stock ILO state cells. */
     . = 0x674; __touch_ilo_comp_run = .;
@@ -81,6 +101,26 @@
   ASSERT(SIZEOF(.touchbss) == 0x6b0, "stock zero-table extent 0x1ac words")
   ASSERT(__touch_crt_completed_end - __touch_crt_completed_start == 1, "touch CRT completion byte")
   ASSERT(__touch_crt_object_end - __touch_crt_object_start == 24, "touch CRT frame object")
+  ASSERT(touch_eeprom_ready_ram == 0x200008c4, "touch EEPROM-ready RAM placement")
+  ASSERT(touch_eeprom_context_ram == 0x200008c8, "touch EEPROM context RAM placement")
+  ASSERT(touch_gesture_ticks_ram == 0x200008e8, "touch gesture-ticks RAM placement")
+  ASSERT(touch_i2c_context_ram == 0x200008ec, "touch I2C context RAM placement")
+  ASSERT(touch_gesture_state_ram == 0x20000940, "touch gesture state RAM placement")
+  ASSERT(touch_report_ram == 0x20000990, "touch report RAM placement")
+  ASSERT(touch_i2c_rx_ram == 0x200009a0, "touch I2C RX RAM placement")
+  ASSERT(touch_i2c_tx_ram == 0x200009b0, "touch I2C TX RAM placement")
+  ASSERT(touch_active_budget_ram == 0x200009c8, "touch active budget RAM placement")
+  ASSERT(touch_app_state_ram == 0x200009cc, "touch app state RAM placement")
+  ASSERT(touch_persist_ram == 0x200009cd, "touch persist flag RAM placement")
+  ASSERT(touch_restart_ram == 0x200009ce, "touch restart flag RAM placement")
+  ASSERT(touch_save_pending_ram == 0x200009cf, "touch save flag RAM placement")
+  ASSERT(touch_saved_record_ram == 0x200009d0, "touch saved record RAM placement")
+  ASSERT(touch_proximity_prior_ram == 0x200009d8, "touch proximity prior RAM placement")
+  ASSERT(touch_widget_processing_ram == 0x200009e4, "touch widget processing RAM placement")
+  ASSERT(touch_eeprom_provider_ram == 0x20000ed4, "touch EEPROM provider RAM placement")
+  ASSERT(touch_flash_clock_backup_ram == 0x20000f04, "touch flash clock backup RAM placement")
+  ASSERT(touch_ilo_pm_params == 0x20000ccc, "touch ILO PM parameters RAM placement")
+  ASSERT(touch_eeprom_scratch_ram == 0x20000cd4, "touch EEPROM scratch RAM placement")
   ASSERT(__touch_ilo_comp_run_end - __touch_ilo_comp_run == 1, "touch ILO compensation state size")
   ASSERT(__touch_ilo_prevent_end - __touch_ilo_prevent == 1, "touch ILO prevent state size")
   ASSERT(__touch_ilo_measuring_end - __touch_ilo_measuring == 1, "touch ILO measuring state size")

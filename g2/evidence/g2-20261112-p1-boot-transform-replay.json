@@ -1,0 +1,202 @@
+{
+  "campaign_id": "20261112T092142Z",
+  "execution": {
+    "argv": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-boot-transform-replay-001/001/replay.py"
+    ],
+    "exit_code": 0,
+    "stderr": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-boot-transform-replay-001/001/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-boot-transform-replay-001/001/stdout.txt",
+      "sha256": "a60273e707fe3885f8a06fcb9b8abffc6bc983f7168656c176e2f2987ae4546a"
+    },
+    "working_directory": "/Users/kalani/Repo/evenRealities-openCFW"
+  },
+  "g1_status": "not_run",
+  "historical_parameter_receipt": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-initialization-transforms-002/002/receipt.json",
+    "sha256": "0bbd5728cdbfcf62cd6e4fd19f8e0cce7e5d4861daa30444b7fd90962191fb7c"
+  },
+  "historical_script_sha256": "e92c64ccc7caf727f74188a081b0775e1380ce630d73c29ad6716980b41c6b8c",
+  "images": [
+    {
+      "image_id": "apollo_bootloader:decoded:00000040",
+      "matches_historical_output": true,
+      "old_transform_receipt": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-boot-canonical-replay-015/001/transform-00000040.json",
+        "sha256": "88fcc3dea6c5495a8890269ca1de83c8a70e5a56d4bfe0655005cc13d747c420"
+      },
+      "output_path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-boot-transform-replay-001/001/decoded-00000040.bin",
+      "output_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+      "output_size": 24,
+      "source_span": [
+        148577,
+        148599
+      ],
+      "source_span_sha256": "f7416eabf10e45a1b98a8034c0d649de0c6d680d354b6e6deb57f459f45a820f"
+    },
+    {
+      "image_id": "apollo_bootloader:decoded:20000000",
+      "matches_historical_output": true,
+      "old_transform_receipt": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-boot-canonical-replay-015/001/transform-20000000.json",
+        "sha256": "0049eb54518cbd3fdb29766e173d28b24af1cb7d2364a65c2b1970a013a29e53"
+      },
+      "output_path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-boot-transform-replay-001/001/decoded-20000000.bin",
+      "output_sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+      "output_size": 1371,
+      "source_span": [
+        147904,
+        148529
+      ],
+      "source_span_sha256": "5b8e3a303e0ca03dcf5375491441067823e17d840181ae16898c58b8cafde4f8"
+    },
+    {
+      "image_id": "apollo_bootloader:decoded:20080000",
+      "matches_historical_output": true,
+      "old_transform_receipt": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-boot-canonical-replay-015/001/transform-20080000.json",
+        "sha256": "96ab3979d54fa1cda45dc3feb7fb35e5587d9b5ac9605213a560151ad9569923"
+      },
+      "output_path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-boot-transform-replay-001/001/decoded-20080000.bin",
+      "output_sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "output_size": 4096,
+      "source_span": [
+        148529,
+        148577
+      ],
+      "source_span_sha256": "5a14fdce36feee1baa2671a18a80b296b5fdde8a06709bde95cc0e75e57feb26"
+    }
+  ],
+  "locked_bootloader": {
+    "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+    "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+    "size": 148599
+  },
+  "observations": [
+    {
+      "RAM_fill": 0,
+      "backreference_events": 8,
+      "backreferences_to_unwritten_bytes": [],
+      "id": "decoded-0-itcm",
+      "output_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+      "output_size": 24,
+      "output_span": [
+        64,
+        88
+      ],
+      "return_R0": 4403456
+    },
+    {
+      "RAM_fill": 0,
+      "backreference_events": 1081,
+      "backreferences_to_unwritten_bytes": [],
+      "id": "decoded-1-dtcm",
+      "output_sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+      "output_size": 1371,
+      "output_span": [
+        536870912,
+        536872283
+      ],
+      "return_R0": 4403472
+    },
+    {
+      "RAM_fill": 0,
+      "backreference_events": 4095,
+      "backreferences_to_unwritten_bytes": [],
+      "id": "decoded-2-ssram",
+      "output_sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "output_size": 4096,
+      "output_span": [
+        537395200,
+        537399296
+      ],
+      "return_R0": 4403488
+    },
+    {
+      "RAM_fill": 165,
+      "backreference_events": 8,
+      "backreferences_to_unwritten_bytes": [],
+      "id": "decoded-0-itcm",
+      "output_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+      "output_size": 24,
+      "output_span": [
+        64,
+        88
+      ],
+      "return_R0": 4403456
+    },
+    {
+      "RAM_fill": 165,
+      "backreference_events": 1081,
+      "backreferences_to_unwritten_bytes": [],
+      "id": "decoded-1-dtcm",
+      "output_sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+      "output_size": 1371,
+      "output_span": [
+        536870912,
+        536872283
+      ],
+      "return_R0": 4403472
+    },
+    {
+      "RAM_fill": 165,
+      "backreference_events": 4095,
+      "backreferences_to_unwritten_bytes": [],
+      "id": "decoded-2-ssram",
+      "output_sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+      "output_size": 4096,
+      "output_span": [
+        537395200,
+        537399296
+      ],
+      "return_R0": 4403488
+    }
+  ],
+  "replay_json": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-boot-transform-replay-001/001/replay.json",
+    "sha256": "87ed14a6b71a06c6d91f05256fa240074c411c8d46f20f1812c4539776a9b914"
+  },
+  "schema_version": 1,
+  "scope": "Fresh bounded stock-handler replay of three Apollo bootloader startup transforms. Does not prove independent descriptor discovery, G1 admission, C implementation, or hardware behavior.",
+  "script_delta": "Only output directory and campaign_id string changed; exact text comparison passed.",
+  "script_sha256": "4250ee6d350e71659b69e6635794b24a71c1bab3879bf52c8b10c90bcda802b3",
+  "status": "replayed_pending_independent_review",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "tool_files": [
+    {
+      "current_sha256": "6f9a3b000ebc27d5392ff2bb30c48ed0cde18ef11d9aa48330482b079edf0ff9",
+      "historical_pin_sha256": "6f9a3b000ebc27d5392ff2bb30c48ed0cde18ef11d9aa48330482b079edf0ff9",
+      "matches_historical_pin": true,
+      "path": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+    },
+    {
+      "current_sha256": "e92c64ccc7caf727f74188a081b0775e1380ce630d73c29ad6716980b41c6b8c",
+      "historical_pin_sha256": "e92c64ccc7caf727f74188a081b0775e1380ce630d73c29ad6716980b41c6b8c",
+      "matches_historical_pin": true,
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-boot-canonical-replay-015/001/replay.py"
+    },
+    {
+      "current_sha256": "9ad32123bca674cf205c308fd4d0d2a4db877c9dc2afac4feab7c84c8cf7043b",
+      "historical_pin_sha256": "9ad32123bca674cf205c308fd4d0d2a4db877c9dc2afac4feab7c84c8cf7043b",
+      "matches_historical_pin": true,
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/__init__.py"
+    },
+    {
+      "current_sha256": "62ffe84341f4288e309040e06555b81798031817d32fd19a945e250813f872f0",
+      "historical_pin_sha256": "62ffe84341f4288e309040e06555b81798031817d32fd19a945e250813f872f0",
+      "matches_historical_pin": true,
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/unicorn_py3/unicorn.py"
+    },
+    {
+      "current_sha256": "7207c8e3d7a63118fb0bca73e01816797fd51b1d8a39a4cbc7abfd562ee59c85",
+      "historical_pin_sha256": "7207c8e3d7a63118fb0bca73e01816797fd51b1d8a39a4cbc7abfd562ee59c85",
+      "matches_historical_pin": true,
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/lib/libunicorn.2.dylib"
+    }
+  ]
+}

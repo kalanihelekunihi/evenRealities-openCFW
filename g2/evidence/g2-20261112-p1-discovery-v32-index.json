@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery revision 032 with ISA-backed EM9305 VPACK2HL packing",
+  "artifacts": {
+    "discovery_draft_032": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/032/discovery-draft.jsonl",
+      "sha256": "f048457fca04b4825b1185bb0ce041c84d7616802b5ea340cb86a30a78f858aa"
+    },
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/032/reproduce.py",
+      "sha256": "82f41af968e384f0efb57ca03eb3f8674b06d0bbe10203b8232c6c6d56cfcd95"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/032/receipt.json",
+      "sha256": "1e95019e9770fee1eaa7d4eaf2b3834d216c6d46989429d94f202d325fc1fd9e"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v32-review-001/001/review.json",
+      "sha256": "850bb2d46dcbf7110c9d042571080214df9f0c34796ae4fa5d70bc5c1f5b4d7c"
+    },
+    "vpack2hl_replay_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-vpack2hl-replay-index.json",
+      "sha256": "85f225d5ba939b1f40adb0faab51df586c5b203a9f8741c166a8d0bb60063c13"
+    },
+    "predecessor_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/031/discovery-draft.jsonl",
+      "sha256": "4080d0470cb188a80e473443c1d86558c9daa05a5daf4ab4ec4c9445c3a8a7bb"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "ISA-backed VPACK2HL lane order verifies candidate field packing, not stock APEX CRC execution.",
+    "External NVM contents, competing headers, physical boot selection, and whole-image discovery remain open.",
+    "No canonical inventory admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v31-index.json",
+    "sha256": "7912bd2256fbede4598f5da1f9bba0b66f1ded09d9d7662db9ab1721dd185135"
+  }
+}

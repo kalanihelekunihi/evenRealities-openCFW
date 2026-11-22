@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "All eight codec payload container candidate rows have bounded byte-semantic reviews",
+  "artifacts": {
+    "first_codec_container_row_review_index": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-five-row-review-index.json",
+      "sha256": "4a696234b81d3431cfbea36e4de99c7af31a77368435daf331dfd293525096a6"
+    },
+    "remaining_seven_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-005/001/review.py",
+      "sha256": "868884e26ef88afc020bae8639213fb8c4fcc48f7aef73a19b77f17b3a9b7531"
+    },
+    "remaining_seven_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-005/001/review.json",
+      "sha256": "0d262f31833d59c574e60cbed3d878b846d557a59ec7cf54f9a6b13819de6ff6"
+    },
+    "remaining_seven_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-005/001/receipt.json",
+      "sha256": "3b6197215ca86cfc066b8d7c69d784bc89df00b5d3fc2ec1b901404615c23fec"
+    },
+    "remaining_seven_independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-005-independent-review-001/001/review.json",
+      "sha256": "7ce9ad7dcd660e0d65ce0a15dbacadef6b4338cf4bc08c744fad7ada634d7249"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "codec_payload_container_rows": 8,
+    "bounded_reviewed_container_rows": 8,
+    "codec_payload_data_rows": 1,
+    "bounded_reviewed_data_rows": 1,
+    "codec_payload_unknown_rows": 6,
+    "validator_trusted_review_ids_assigned": 0
+  },
+  "limits": [
+    "The six unknown codec payload spans remain unknown; wrapper and control-field review does not classify their internals.",
+    "The bounded KWS data-row review is included in the first-row index, but accelerator semantics remain open.",
+    "No authenticated campaign reviewer registry, canonical admission, or G1 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

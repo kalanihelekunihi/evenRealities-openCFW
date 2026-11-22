@@ -1,0 +1,204 @@
+{
+  "campaign_id": "20261112T092142Z",
+  "current_replay_script": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-itcm-transform-replay-001/001/replay.py",
+    "sha256": "dac1d91b0f4c5e0c31778d56bb46a7f8c4f295693fd5ee98030ab355a93c1e53"
+  },
+  "execution": {
+    "argv": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-itcm-transform-replay-001/001/replay.py"
+    ],
+    "exit_code": 0,
+    "stderr": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-itcm-transform-replay-001/001/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-itcm-transform-replay-001/001/stdout.txt",
+      "sha256": "67b7cfebb0834e7082f4426378466335303383c42e44935656a27ea9bcc9d3cb"
+    },
+    "working_directory": "/Users/kalani/Repo/evenRealities-openCFW"
+  },
+  "g1_status": "not_run",
+  "historical_script_sha256": "282fa2c8b5174538ac1de5abff890fe42013a9f6e89bb1bd221ca9f9cac26ef0",
+  "historical_transform_receipt": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-main-transforms-012/001/transform-00000040.json",
+    "sha256": "49b4875f1e0259f855b2b5ba367bfab74db86224171c250f1c7f1d083d668ba6"
+  },
+  "locked_main_payload": {
+    "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "size": 3523396
+  },
+  "output": {
+    "matches_historical": true,
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-itcm-transform-replay-001/001/decoded-00000040.bin",
+    "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+    "size": 24
+  },
+  "predecessor": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-itcm-transform-replay-001/001/fresh-replay-receipt.json",
+    "sha256": "7c04690ebed3b249ad4dea9eb76b07817d485468b9a35c87a42cd2057d2994e4"
+  },
+  "schema_version": 1,
+  "scope": "Fresh bounded stock-handler replay of Apollo main 24-byte initialized ITCM image; no G1 admission or decoder completeness claim.",
+  "script_delta": "Only output directory changed; exact text comparison passed. Historical worker/identity/prestate records remain inputs.",
+  "script_sha256": "dac1d91b0f4c5e0c31778d56bb46a7f8c4f295693fd5ee98030ab355a93c1e53",
+  "source": {
+    "parent_content_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "raw_image_span": [
+      3523342,
+      3523364
+    ],
+    "source_sha256": "f7416eabf10e45a1b98a8034c0d649de0c6d680d354b6e6deb57f459f45a820f"
+  },
+  "status": "replayed_pending_independent_review",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "tool_files": [
+    {
+      "current_sha256": "6f9a3b000ebc27d5392ff2bb30c48ed0cde18ef11d9aa48330482b079edf0ff9",
+      "historical_pin_sha256": "6f9a3b000ebc27d5392ff2bb30c48ed0cde18ef11d9aa48330482b079edf0ff9",
+      "historical_version": "3.13.15 (main, Aug  5 2026, 12:25:43) [Clang 21.0.0 (clang-2100.3.34.2)]",
+      "matches_historical_pin": true,
+      "name": "interpreter_or_script",
+      "path": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+    },
+    {
+      "current_sha256": "282fa2c8b5174538ac1de5abff890fe42013a9f6e89bb1bd221ca9f9cac26ef0",
+      "historical_pin_sha256": "282fa2c8b5174538ac1de5abff890fe42013a9f6e89bb1bd221ca9f9cac26ef0",
+      "historical_version": null,
+      "matches_historical_pin": true,
+      "name": "interpreter_or_script",
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-itcm-canonical-replay-011/001/replay.py"
+    },
+    {
+      "current_sha256": "9ad32123bca674cf205c308fd4d0d2a4db877c9dc2afac4feab7c84c8cf7043b",
+      "historical_pin_sha256": "9ad32123bca674cf205c308fd4d0d2a4db877c9dc2afac4feab7c84c8cf7043b",
+      "historical_version": "2.1.4",
+      "matches_historical_pin": true,
+      "name": "unicorn",
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/__init__.py"
+    },
+    {
+      "current_sha256": "62ffe84341f4288e309040e06555b81798031817d32fd19a945e250813f872f0",
+      "historical_pin_sha256": "62ffe84341f4288e309040e06555b81798031817d32fd19a945e250813f872f0",
+      "historical_version": "2.1.4",
+      "matches_historical_pin": true,
+      "name": "unicorn",
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/unicorn_py3/unicorn.py"
+    },
+    {
+      "current_sha256": "7207c8e3d7a63118fb0bca73e01816797fd51b1d8a39a4cbc7abfd562ee59c85",
+      "historical_pin_sha256": "7207c8e3d7a63118fb0bca73e01816797fd51b1d8a39a4cbc7abfd562ee59c85",
+      "historical_version": "2.1.4",
+      "matches_historical_pin": true,
+      "name": "unicorn",
+      "path": "/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/lib/libunicorn.2.dylib"
+    }
+  ],
+  "tool_scope": "Interpreter, old script, and Unicorn library files match pinned historical hashes; new script differs only in output directory. This is tool-file identity, not emulator semantic validation.",
+  "trace": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-itcm-transform-replay-001/001/trace-results.json",
+    "record": {
+      "all_backreferences_in_prior_output": true,
+      "backreference_load_count": 8,
+      "backreferences_to_unwritten_or_future_bytes": 0,
+      "conditional_source_load_site_counts": {
+        "0x43a142": {
+          "callbacks": 2,
+          "executed": 2,
+          "skipped": 0
+        }
+      },
+      "descriptor": "0x75d3e4",
+      "descriptor_words": {
+        "destination": "0x40",
+        "encoded_length": "0x2c",
+        "signed_source_offset": "0x36f2a"
+      },
+      "guarded_source_load_candidates_at_end": [],
+      "instruction_count": 189,
+      "output_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+      "output_size": 24,
+      "output_span": [
+        64,
+        88
+      ],
+      "return_r0": "0x75d3f0",
+      "return_to_sentinel": true,
+      "source_bytes": 22,
+      "source_effective_address_set_exact": true,
+      "source_end_guard_observations": [
+        {
+          "cpsr": "0x200001f3",
+          "memory_load_candidate_executes": null,
+          "pc": "0x43a16e",
+          "r3": 7947044,
+          "r4": 7947044
+        },
+        {
+          "cpsr": "0x800001f3",
+          "memory_load_candidate_executes": null,
+          "pc": "0x43a170",
+          "r3": 7947044,
+          "r4": 7947044
+        },
+        {
+          "cpsr": "0x600001f3",
+          "memory_load_candidate_executes": null,
+          "pc": "0x43a134",
+          "r3": 7947044,
+          "r4": 7947044
+        },
+        {
+          "cpsr": "0x600001f3",
+          "memory_load_candidate_executes": null,
+          "pc": "0x43a136",
+          "r3": 7947044,
+          "r4": 7947044
+        }
+      ],
+      "source_end_it_successors": [
+        {
+          "cpsr_before_it": "0x800001f3",
+          "it_pc": "0x43a170",
+          "next_executed_pc": "0x43a176",
+          "r3": 7947044
+        }
+      ],
+      "source_exit_branch_successors": [
+        {
+          "branch_pc": "0x43a136",
+          "r3": 7947044,
+          "r4": 7947044,
+          "target_next_executed_pc": "0x43a194"
+        }
+      ],
+      "source_load_count": 22,
+      "source_load_sites": {
+        "0x43a138": 2,
+        "0x43a142": 2,
+        "0x43a156": 16,
+        "0x43a166": 2
+      },
+      "source_payload_span": [
+        3523374,
+        3523396
+      ],
+      "source_span": [
+        7947022,
+        7947044
+      ],
+      "stack_pop_post_sp": "0x203ff000",
+      "stack_pop_pre_sp": "0x203feff0",
+      "stack_write_span": [
+        541061104,
+        541061120
+      ],
+      "unexpected_writes": 0,
+      "write_coverage_complete": true
+    },
+    "sha256": "d341d9f5a3eec8d6cea5a5906cb58ece6536b043cf55277289bd635a407042a9"
+  }
+}

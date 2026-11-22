@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical P1 coverage draft 014 adding the 44-byte Apollo main pointer cluster as data in each view.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-main-postpreamble-coverage-index.json",
+    "sha256": "65513f080b9a755b653a59cf743c9a92e55f08ad1162206f9f496c98efb073a3"
+  },
+  "artifacts": {
+    "producer_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-014/001/classify.py",
+      "sha256": "b0a129c15b35fd63aa8251fd4b5f27a11e7c739c1209ef9a016d7649377ca699"
+    },
+    "coverage_draft_014": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-014/001/coverage-draft.jsonl",
+      "sha256": "1114b5ea9ab655ed024d662cc78fc96b7d9fa8a456a1ff39da18948227d15001"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-014/001/receipt.json",
+      "sha256": "b9be35569265eb118bbd7c7bf9edf38cb2a5c351a98475aea1306ada094b0773"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-next-pointer-coverage-review-001/001/review.json",
+      "sha256": "f7bb47b29a3b783c1ef2eea8c8084aa53eaed8515f75a43ef4de9da99456ac01"
+    },
+    "pointer_cluster_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-next-pointer-cluster-index.json",
+      "sha256": "666c6f9583e2d1026238eae618e769b77dcde675d5ff5090c9db37b55b723ffb"
+    }
+  },
+  "classification": {
+    "full_ota_payload_data_span": [
+      143680,
+      143724
+    ],
+    "post_preamble_flash_data_span": [
+      143648,
+      143692
+    ],
+    "bytes_per_view": 44,
+    "adjacent_unknown_full_ota_span": [
+      143634,
+      143636
+    ],
+    "adjacent_unknown_raw_span": [
+      143602,
+      143604
+    ]
+  },
+  "counts": {
+    "coverage_rows": 111,
+    "coverage_scopes": 40,
+    "unknown_payload_bytes": 4176893,
+    "unknown_image_bytes": 5671543
+  },
+  "limits": [
+    "Direct references are bounded to historical census function ranges.",
+    "No complete main discovery, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Nineteen v18 nonunknown image row pilot and independently reviewed one-row v19 correction",
+  "artifacts": {
+    "v18_image_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-image-nonunknown-19-canonical-review-pilot-001/001/review.py",
+      "sha256": "7833656f42a08a3796be94f4f53ff8cec8adae3c597c644b5553dc072079b114"
+    },
+    "v18_image_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-image-nonunknown-19-canonical-review-pilot-001/001/report.json",
+      "sha256": "63f271977f8c4e2ed5495c3262d232bc9de7c9c0ad35706d50a6001490f1a59e"
+    },
+    "v18_image_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-image-nonunknown-19-canonical-review-pilot-001/001/receipt.json",
+      "sha256": "df521671745edce1b6b9eb9659f79f4174c6586d4198e6f1b768b6118f0728b3"
+    },
+    "coordinator_check_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-image-nonunknown-19-coordinator-check-001/001/check.py",
+      "sha256": "2dddaee8dc3fa41c2db9d5e441f257b1affcacae34a5724f99b942acd1c094c9"
+    },
+    "coordinator_check": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-image-nonunknown-19-coordinator-check-001/001/review.json",
+      "sha256": "df5d27ad9d8c18b25b99dfde15dffbc6297ffaa65a574b57915235ca6a423150"
+    },
+    "v19_generator": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-019/001/make.py",
+      "sha256": "a2f0dedfa740aeb0126922d48c1d7cfb13f5f0b5e638a99593c8224773957866"
+    },
+    "v19_candidate": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-019/001/coverage-draft.jsonl",
+      "sha256": "b9b3e334ac76ee110c9ce43f3d6c3af15587f6338cb93c25619e5a2766cc6a4f"
+    },
+    "v19_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-019/001/receipt.json",
+      "sha256": "2d5a442951e9e18e0c2d50e08b31abd286ea7a408bf7d318122a34cf495653b9"
+    },
+    "v19_independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-019-independent-review-001/001/review.py",
+      "sha256": "34dcdc21c1f24e55a8292d116a3b93a8d43bc5f1f00772b39cbfb843e236fb37"
+    },
+    "v19_independent_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-019-independent-review-001/001/report.json",
+      "sha256": "484b17911b21db9f979ddc3104c709cc95683d985b7b265ea65961817d8434b7"
+    },
+    "v19_independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-019-independent-review-001/001/receipt.json",
+      "sha256": "4213249cfe449f7f7e460d8f933b987addee51d9e4e17752604bd6007f3fea49"
+    }
+  },
+  "result": {
+    "v18_image_nonunknown_rows": 19,
+    "v18_pass_bounded": 18,
+    "v18_revise": 1,
+    "v18_evidence_pins_verified": 60,
+    "v19_rows": 127,
+    "v19_changed_rows": 1,
+    "v19_changed_id": "image-coverage:npu_kws_weights",
+    "v19_scope_partitions_unchanged": 40,
+    "v19_independent_verdict": "PASS_BOUNDED_CORRECTION",
+    "validator_review_records_created": 0
+  },
+  "limits": [
+    "The weight region's stock transfer role is supported, but internal tensor layout and embedded program/microcode exclusion remain unresolved.",
+    "Unchanged v18 row hashes apply to the same rows in v19; all remaining unknown rows still need adjudication.",
+    "No authenticated registry, nested-image discovery closure, canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

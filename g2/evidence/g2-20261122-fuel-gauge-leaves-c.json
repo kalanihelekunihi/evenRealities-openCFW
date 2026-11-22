@@ -1,0 +1,110 @@
+{
+  "title": "nrf_fuel_gauge leaf callees: idiomatic C, function-level Renode M55 verified",
+  "status": "VERIFIED",
+  "when": "2026-11-22 10:35 AM CST (America/Chicago)",
+  "approach": "Bottom-up. No machine-level CFG lifter, no fg_cpu register VM, no fg_call trampoline. Leaf callees decompiled from typographic/stock Thumb into scalar-float C (Nordic public structs used only for the 0xE8-byte model-state size on the TTE-params leaf). Each leaf compared to its typographic body on Renode 1.17 Cortex-M55 (native FPU), then the typographic body was removed from production g2c_fuel_gauge_cores.S.",
+  "harness": {
+    "dir": "build/fuel-gauge-recon-20261122/c-leaves/",
+    "platform": "Renode 1.17.0+20261102gite8c7c2d28, CPU.CortexM cpuType cortex-m55, FpuEnabled, CPACR 0x00F00000, SP 0x2007FB00, RESULT 0x20068000, halt 0x30000000",
+    "magic": "0xF6A11E01",
+    "count_words": 68,
+    "mismatch_total": 0,
+    "pc_at_end": "0x30000000",
+    "inputs": "IEEE specials (signed zeros, denorms, inf, qNaN, sNaN, 2^23/2^24, etc.) plus xorshift random bit patterns (seed 0xC0FFEE). Two-arg leaves also ran the full specials x specials grid."
+  },
+  "leaves": [
+    {
+      "symbol": "fg_43a110",
+      "cases": 1060,
+      "fails": 0,
+      "notes": "f32 bits in r0 -> f64 bits in r0:r1. Matches vcvt.f64.f32, including denormal normalize and sNaN quieting (top mantissa bit)."
+    },
+    {
+      "symbol": "fg_43a19c",
+      "cases": 1280,
+      "fails": 0,
+      "notes": "Integer ABI on two doubles' register halves. Returns 1 iff either high word satisfies unsigned HI on CMN #0x100000, hi<<1 (qNaN richer than canonical 0x7FF80000). Not isnan/isfinite."
+    },
+    {
+      "symbol": "fg_43a0f4",
+      "cases": 1060,
+      "fails": 0,
+      "notes": "Hard-float: promote s0 via 43a110, apply 43a19c to that value twice, canonicalize nonzero to 1."
+    },
+    {
+      "symbol": "fg_439efc",
+      "cases": 2320,
+      "fails": 0,
+      "notes": "Min-like. b NaN keeps a; +0 vs +/-0 returns b; ARM vcmp LT is also true when a is unordered (NaN)."
+    },
+    {
+      "symbol": "fg_439f88",
+      "cases": 2320,
+      "fails": 0,
+      "notes": "Max-like. b NaN keeps a; +/-0 vs +/-0: +0 keeps a, -0 takes b; unordered (a NaN) selects b."
+    },
+    {
+      "symbol": "fg_43a5b0",
+      "cases": 2084,
+      "fails": 0,
+      "notes": "Integer-bit floor toward -inf, signed zero preserved. |x|<1: +x and +0 -> +0, -x -> -1.0f, -0 stays -0. Inf/NaN unchanged."
+    },
+    {
+      "symbol": "fg_43a5a0",
+      "cases": 2084,
+      "fails": 0,
+      "notes": "Hard-float wrapper around fg_43a5b0."
+    },
+    {
+      "symbol": "nrf_model_tte_params_58eab0",
+      "cases": 256,
+      "fails": 0,
+      "notes": "Copies params[0], params[1] to model state +0x48 / +0x4c (0xE8-byte state). No other bytes change."
+    }
+  ],
+  "production_replace": {
+    "added": [
+      {
+        "path": "/Users/kalani/Repo/evenRealities-OpenCFW/g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+        "sha256": "c8fea7d87c4d5dde297ad667a055e7809c51a3a6c10dbd1c29a2444ab0c8d252",
+        "bytes": 5476
+      },
+      {
+        "path": "/Users/kalani/Repo/evenRealities-OpenCFW/g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.h",
+        "sha256": "bf3c13153b51e665ffe6b3bb21e0b5aa16c60645d61f640a994561d693a98d8d",
+        "bytes": 532
+      }
+    ],
+    "cores_s": {
+      "path": "/Users/kalani/Repo/evenRealities-OpenCFW/g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_cores.S",
+      "sha256": "e4a8c6ac2756f2b01bbf31b253aed19204e33f1991063386c14dc1c40abef533",
+      "bytes": 60435
+    },
+    "cores_remaining_globals": 23,
+    "sources_json": "added g2c_fuel_gauge_leaves.c unit, profile g2-apollo-main-1 (clang, scalar, no MVE required)"
+  },
+  "artifacts": {
+    "results_bin": {
+      "path": "/Users/kalani/Repo/evenRealities-OpenCFW/build/fuel-gauge-recon-20261122/c-leaves/results.bin",
+      "sha256": "b52c9767b170c83559c2deed912f867c7f2d1b5f71c5ccaacb6cb21f9f0b6114",
+      "bytes": 2048
+    },
+    "test_bin": {
+      "path": "/Users/kalani/Repo/evenRealities-OpenCFW/build/fuel-gauge-recon-20261122/c-leaves/test.bin",
+      "sha256": "13977071882260d2890138e95790e9332bd501afcc8e0de38e41995e272c54df",
+      "bytes": 3768
+    },
+    "test_log": {
+      "path": "/Users/kalani/Repo/evenRealities-OpenCFW/build/fuel-gauge-recon-20261122/c-leaves/test.log",
+      "sha256": "f0c2eb0aa652cac8f4d1f61fa9c3a3e5ee55a5581c30898affef010545731dc9",
+      "bytes": 937
+    }
+  },
+  "not_done": [
+    "Remaining typographic helpers (fg_4397a8, fg_439fb4, fg_43ba6c, mid-level, memcpy/memset, process, init, ttf) are still .S.",
+    "The earlier process CFG lift in c-lift/ stays NOT VERIFIED and is not the path forward.",
+    "Linker-report canned 'source-only uncalibrated' string not edited yet.",
+    "apollo-main was not rebuilt; paired sims were not re-run in this batch.",
+    "Official opencfw-otap-disarm.app.bin was not overwritten. No flash, no git."
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "target": "Exact C-built BINH A stage-1 functions in locked G2 codec FWPK",
+  "stock": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "artifact_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "inventory": "g2/symbols/codec.tsv",
+    "mapping": "stored offset = 0x95A4 + (virtual address - 0x10000000), bounded to [0x95A4,0xC58C); inventory body hashes are rechecked against stock before qualification"
+  },
+  "qualification": {
+    "receipt": "build/g2-codec-a-stage1-exact-qual-20261111/source-plan.json",
+    "receipt_sha256": "4080162543183ec2d916121015138243812d649a511593b52c859036d1358fbd",
+    "candidate_units": 9,
+    "selected_units": 2,
+    "selected_regions": [
+      {
+        "symbol": "__reg_set_val",
+        "source": "g2/src/codec/image-a-stage1/main_stage1_clock_gate.c",
+        "stock_offset": [
+          38620,
+          38638
+        ],
+        "bytes": 18,
+        "sha256": "e2046581f41222befb24ceaa43d1781b3656b996b9ad822fcb8b778994f331a7",
+        "evidence": "g2/symbols/codec.tsv"
+      },
+      {
+        "symbol": "__module_get_div.isra.1",
+        "source": "g2/src/codec/image-a-stage1/main_stage1_clock_gate.c",
+        "stock_offset": [
+          38824,
+          38852
+        ],
+        "bytes": 28,
+        "sha256": "12ef96242448f65f16211ffa85d455f2beba409320f72f8e2f2779d277470c4a",
+        "evidence": "g2/symbols/codec.tsv"
+      },
+      {
+        "symbol": "gx8002_image_a_stage1_wait_bus_10000b4c",
+        "source": "g2/src/codec/image-a-stage1/main_stage1_flash_reader.c",
+        "stock_offset": [
+          41200,
+          41216
+        ],
+        "bytes": 16,
+        "sha256": "4c69925f75f82a665d3f637a6b5e93397488e1ae4279ebb5716c9349bc6c0319",
+        "evidence": "g2/symbols/codec.tsv"
+      }
+    ],
+    "selected_bytes": 62,
+    "policy": "authenticated inventory body hash, exact name or address suffix, exact size, no relocations, and complete compiled byte equality at anchored stock offset",
+    "integrated_plan": "tools/build/source-plan.json",
+    "integrated_plan_sha256": "f82cfb97826bdba245d1d49691b2e583ec470aab3b3568594efbf415c2c8489c"
+  },
+  "verification": {
+    "hybrid_report": "build/g2-codec-a-stage1-exact-hybrid-20261111/build-report.json",
+    "hybrid_report_sha256": "b8a58c6019b6e684604220025d2ad958ba05d471c2bc6aff27c45200de2ef2d7",
+    "coverage_report": "build/g2-codec-a-stage1-exact-hybrid-20261111/coverage.json",
+    "coverage_report_sha256": "34a06817fa192c17db31ba9314f084b4428cf645ed2f930bbc94e8e8b92f5b7e",
+    "bundle_size": 4301227,
+    "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "codec_source_built_bytes": 708,
+    "codec_pull_through_bytes": 202264,
+    "source_completeness_proven": false
+  },
+  "limits": [
+    "Only three relocation-free stage-1 functions qualify here; most stage-1 code and data still require full source ownership and matching.",
+    "C-SKY compiled function bytes remain unclassified as code/data by strict coverage.",
+    "Relocation-bearing functions, model weights, source-only OTA equality and hardware boot remain unproven."
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Bounded case historical function-census byte-identity and listed-range instruction-candidate audit, independently reproduced in the current P1 campaign.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-whole-reference-audit-001/003/audit.py",
+      "sha256": "41dfebe42066e78d9169300ba3e6255f465d800bb9b71ad5979ab37b0935c3b5"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-whole-reference-audit-001/003/report.json",
+      "sha256": "6794a870522b391ddec7bf7c3c7fd828739a9bcaf8d7927b018f3e9b4335673f"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-whole-reference-audit-001/003/receipt.json",
+      "sha256": "69719d4b97974a2be568f94a7b7a3024964f03495d3630c4169c5e81a51fc33d"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-independent-review-001/review.md",
+      "sha256": "2ec8ad11d2a29cc7799d2ed64bdbc9bf9182b0d0dbd171273a8a8d619417ab07"
+    },
+    "independent_rerun_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-independent-review-001/report.json",
+      "sha256": "ba9fbf96cae95f06a2104de280702586ed0c15bd35f2e3104bc195b8f46df042"
+    },
+    "case_transform_replay": {
+      "path": "g2/evidence/g2-20261112-p1-case-transform-replay.json",
+      "sha256": "8b05a0c925b8896772379b83cbd4c8226b0e64bf86a16b20fea455f70e163e93"
+    },
+    "case_transform_review": {
+      "path": "g2/evidence/g2-20261112-p1-case-transform-review.json",
+      "sha256": "7be5112e91c13348911c86e2a9e62a07afd4a76809dff7d7b8be08d487a7ef55"
+    }
+  },
+  "result": {
+    "historical_census_rows": 435,
+    "verified_min_max_hashes": 435,
+    "verified_address_set_range_byte_counts": 435,
+    "candidate_function_rows": 119,
+    "confirmed_initialized_ram_materialization_bytes": 420,
+    "generated_zero_fill_bytes": 10980
+  },
+  "limits": [
+    "The historical function list is not a proof of complete case code or data coverage.",
+    "The candidate scan does not exhaust flash writers, indirect calls, transformed programs, or nested image encodings.",
+    "Materializations are supported by separate current-campaign replay and review artifacts.",
+    "Raw case [0,0x6A10) and [0x6A40,0xD9C8), plus other unclassified spans, remain unresolved for full inventory."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

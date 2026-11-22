@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 017 narrowing Apollo boot vector-like starts while retaining byte-role and routing unknowns.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v16-index.json",
+    "sha256": "81656a17b6f067aa1d5ed93a6eefd85aeb47e4b3fef335b9f2b28030e950137d"
+  },
+  "artifacts": {
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/017/reproduce.py",
+      "sha256": "742b90349840be149c01640569e94a88cb6632938b130c1098c39abfd93705d4"
+    },
+    "discovery_draft_017": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/017/discovery-draft.jsonl",
+      "sha256": "6a09d9764f518535f96daf209d5ec2cc5ce921378759c1611702153dfcbc387a"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/017/receipt.json",
+      "sha256": "4498a09ef2c3326a3f3e48f26376a31fc5f075d55be651b4d2ceabe815059316"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v17-review-001/001/review.json",
+      "sha256": "c5dcb3fcaac741bc4d2a344cfb5c3796908bb81b981b1cf2fca85188eccfd66d"
+    },
+    "boot_vector_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-boot-vector-candidates-index.json",
+      "sha256": "f878363aa52680a4d22e6437449776e595c9adc1685d2c65f5bd9c83dd134476"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "Boot raw 0x5304 remains a vector-like candidate with unverified writable mapping; rejected starts have unclassified byte roles.",
+    "All payloads retain unresolved discovery items; no canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

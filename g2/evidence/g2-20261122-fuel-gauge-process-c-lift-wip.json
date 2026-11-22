@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-22 10:23 AM CST (America/Chicago)",
+  "title": "WIP: first batch toward real C for nrf_model_process_43a698 \u2014 not yet verified; typographic .S still in-tree",
+  "scope": "Host/emulator work under build/fuel-gauge-recon-20261122/c-lift/. Production g2c_fuel_gauge_cores.S and apollo-main were not changed. No .S removal, no linker-report string fix, no apollo-main rebuild, no paired sims, no flash, no commit.",
+  "verdict": "NOT VERIFIED. The process core was not replaced in the shipping image.",
+  "target": {
+    "function": "nrf_model_process_43a698",
+    "reason": "Largest core, 4864 typographic bytes, 1458 reachable instructions. Next largest are nrf_model_init_43a1b0 (968 B) and nrf_model_ttf_58eac4 / fg_439ce0 (408 B).",
+    "method": "Objdump CFG lift to scalar C (4-lane expansion of MVE vldrw/vstrw/vdup/vmul/vadd/vld4/vst4 and DLS/LE as counted loops). Callees remain typographic .S and are invoked through a small AAPCS trampoline fg_call. Not ACLE yet; not a portable algorithm rewrite."
+  },
+  "work_dir": "build/fuel-gauge-recon-20261122/c-lift/",
+  "artifacts": {
+    "lifter": "lift_process.py",
+    "generated_c": "nrf_model_process_43a698.c (137035 B after pool embed)",
+    "trampoline": "fg_call.S",
+    "cores_without_process": "fg_cores_noproc.S (test only)"
+  },
+  "bugs_found_and_fixed_in_the_lifter": [
+    "movs/dls were mis-parsed as condition suffixes (vs/ls)",
+    "sl was parsed as an s-register",
+    "vmov.f32 s10, #0 is actually 2.0 (objdump immediate); now uses the @ 0x40000000 annotation",
+    "PC-relative vldr/adr used cpu.r[15]=0 and dropped @ comments; stock pool bytes from core_proc.bin are now baked as fg_proc_image / fg_stock_ptr",
+    "fg_call saved hw SP in r6, which typographic helpers may clobber; now saved in BSS fg_call_save"
+  ],
+  "renode_status": {
+    "reference": "renode-1.17-cortex-m55-native-mve-lob, same golden2 / EVENBAT fixture as the typographic translation",
+    "result": "Harness MAGIC 0xF6A11E00 is written, but COUNT stays 0 after 2 s guest time (250 MIPS). PC remains around typographic memcpy (latest 0x40b708 = memcpy+4). First helper-call log showed a well-formed memcpy(dst=0x2007f768, src=0x00648194, n=8) as call 9, then no completion. Golden compare was not run.",
+    "log": "build/fuel-gauge-recon-20261122/c-lift/test.log"
+  },
+  "not_done": [
+    "Bit-exact match on EVENBAT, 24 random cases, and param_9 mutant",
+    "Remove nrf_model_process_43a698 from g2c_fuel_gauge_cores.S",
+    "Install process C in the apollo-main sources / sources.json",
+    "Fix the canned linker-report 'source-only uncalibrated' string",
+    "Rebuild apollo-main and re-run paired sims"
+  ]
+}

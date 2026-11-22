@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical P1 coverage draft revision 009 classifying 442 case descriptor and lookup bytes in each view.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-main-code-coverage-index.json",
+    "sha256": "3174e8f5d3767f05ae656af7feb84a22f8eb9b57200dfb1a1aa0fec0d29a072b"
+  },
+  "artifacts": {
+    "producer_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-009/001/classify.py",
+      "sha256": "4a9987dd5acedd42abdf96b1da3d1047c1d5987b29cf5e38abd231a6bdd0e619"
+    },
+    "coverage_draft_009": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-009/001/coverage-draft.jsonl",
+      "sha256": "a9d1fd185b27206eb84712b05feff97c5c5745afac9504c269cd0b09bffde18c"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-009/001/receipt.json",
+      "sha256": "6bebbbc4f45fb9a82dc9720b91c0fe020284fbbf9a4c19c129fa4361740f5fb6"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-descriptor-coverage-review-001/001/review.json",
+      "sha256": "e0435eb4e10cdb74634df721a63e5a1e6528d83fa3a486f128e4c0a4e4855010"
+    },
+    "case_descriptor_tail_index": {
+      "path": "g2/evidence/g2-20261112-p1-case-descriptor-tail-index.json",
+      "sha256": "4fd0dc65951e23d2e6847dfefb81147e44e489a47f417c622f6927e3e000fa20"
+    }
+  },
+  "new_classifications": {
+    "raw_case_spans": [[53868, 54278], [55612, 55644]],
+    "wrapped_payload_spans": [[53900, 54310], [55644, 55676]],
+    "classified_data_bytes_per_view": 442
+  },
+  "counts": {
+    "coverage_rows": 97,
+    "coverage_scopes": 40,
+    "unknown_payload_bytes": 4177057,
+    "unknown_image_bytes": 5671707
+  },
+  "limits": [
+    "The raw six-byte prefix [0xD266,0xD26C) remains unknown in this revision.",
+    "The shift-map audit stops at raw 0xD406; following two zero bytes are outside the table claim.",
+    "No complete case discovery or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

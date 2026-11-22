@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reproduced union of byte-verified historical case function AddressSet ranges; complement remains unclassified.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-range-partition-001/001/audit.py",
+      "sha256": "edf449960b1f92f68812a0c6a56f248f6bc11341ab8efad24c8ed1e97ad4cd1e"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-range-partition-001/001/report.json",
+      "sha256": "582dfbece8ca8bee24123cb8a9a6aa651020befdfb1439b4f620acf339f565b8"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-range-partition-001/001/receipt.json",
+      "sha256": "71416e91456f80cda338a96894f679e82b1cfa8caf1a3ceb764806bbc75f7024"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-range-partition-review-001/001/review.json",
+      "sha256": "327d7c1b4f17676dfa89e4af338e6521c914dcb30fe9836123390b53dc826e2f"
+    },
+    "case_whole_reference_index": {
+      "path": "g2/evidence/g2-20261112-p1-case-whole-reference-index.json",
+      "sha256": "c7db13317ef621d3a1cefff0b33b0e9805c230429417767de30b3a26de817577"
+    }
+  },
+  "result": {
+    "raw_case_bytes": 55752,
+    "verified_historical_function_rows": 435,
+    "listed_range_union_bytes": 43072,
+    "listed_range_merged_intervals": 295,
+    "outside_listed_ranges_bytes": 12680,
+    "outside_listed_ranges_intervals": 296,
+    "known_48_byte_literal_pool_outside_ranges": true
+  },
+  "limits": [
+    "Historical function ranges are not an exhaustive executable census.",
+    "Complement is not code or data classification and includes known vector/literal/data spans.",
+    "Whole-image references, nested images and G1 remain open."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

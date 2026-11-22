@@ -131,8 +131,28 @@ class SourcesTest(unittest.TestCase):
         path.parent.mkdir(parents=True)
         path.write_text(json.dumps(manifest))
         args = SimpleNamespace(devices=['fixture'], out=root / 'out', payload=None,
-                               jobs=1, no_compose=False)
+                               jobs=1, no_compose=False, normal_svc=False, cordio_rtc0=False)
         return path, args
+
+    def test_cordio_variant_requires_opt_in(self):
+        default = {'source': 'ordinary.c', 'payload': 'r1-application'}
+        cordio = {'source': 'cordio.c', 'payload': 'r1-application',
+                  'variant': 'cordio-rtc0'}
+        self.assertTrue(s.selected_for_build(default, False))
+        self.assertTrue(s.selected_for_build(default, True))
+        self.assertFalse(s.selected_for_build(cordio, False))
+        self.assertTrue(s.selected_for_build(cordio, True))
+        with self.assertRaises(ValueError):
+            s.selected_for_build({'source': 'bad.c', 'variant': 'unknown'}, True)
+
+    def test_cordio_clock_driver_uses_direct_nrfx_path(self):
+        manifest = {'profiles': {'clock': ['-DSOFTDEVICE_PRESENT']}}
+        unit = {'source': 'vendor-cache/r1/nRF5_SDK_17.1.0_ddde560/integration/nrfx/legacy/nrf_drv_clock.c',
+                'payload': 'r1-application', 'profile': 'clock'}
+        stock = s.unit_argv(manifest, unit, {}, normal_svc=False, cordio_rtc0=False)
+        cordio = s.unit_argv(manifest, unit, {}, normal_svc=True, cordio_rtc0=True)
+        self.assertNotIn('-USOFTDEVICE_PRESENT', stock)
+        self.assertEqual(cordio[-1], '-USOFTDEVICE_PRESENT')
 
     @unittest.skipUnless(shutil.which('clang') and shutil.which('false'), 'clang/false not available')
     def test_compile_success_does_not_hide_relocatable_link_failure(self):

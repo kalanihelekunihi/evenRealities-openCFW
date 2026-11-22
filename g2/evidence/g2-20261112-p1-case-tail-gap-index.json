@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded case tail gap partition with review-required wording correction applied in this index.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-tail-gap-001/001/audit.py",
+      "sha256": "f7b19d089139b955a0542eb41f807ec6e2f802d2433a8077b26edcc774df440c"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-tail-gap-001/001/report.json",
+      "sha256": "dc00180a194a4ab153dfc4884555da703fe33f355df9e55cc124559ab7dd6db4"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-tail-gap-001/001/receipt.json",
+      "sha256": "c4b2765d2a9c6c1022f746a81f721555f653e03e3232a980af37b3fc8ceeaf82"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-tail-gap-review-001/001/review.json",
+      "sha256": "ce2fc8c7f8ab98b529cf2bfe6f7b2e78ca62ee93a81c8704936faeec9f6eb8d8"
+    },
+    "case_range_partition_index": {
+      "path": "g2/evidence/g2-20261112-p1-case-range-partition-index.json",
+      "sha256": "5af1bc065f943b72dae2928f35f329311887f869c418dde0be65874c960d666f"
+    },
+    "case_transform_review": {
+      "path": "g2/evidence/g2-20261112-p1-case-transform-review.json",
+      "sha256": "7be5112e91c13348911c86e2a9e62a07afd4a76809dff7d7b8be08d487a7ef55"
+    }
+  },
+  "result": {
+    "raw_tail_span": [
+      53862,
+      55752
+    ],
+    "tail_bytes": 1890,
+    "string_bearing_raw_span": [
+      54278,
+      55612
+    ],
+    "string_bearing_bytes_including_nuls_alignment_cr_lf": 1334,
+    "verified_transform_source_raw_span": [
+      55644,
+      55748
+    ],
+    "verified_transform_source_bytes": 104,
+    "unclassified_tail_bytes": 452
+  },
+  "wording_correction": "The span [0xD406,0xD93C) is string-bearing data with NUL terminators/separators, alignment bytes and CR/LF; do not describe every byte as printable string text.",
+  "limits": [
+    "Descriptor/table-shaped spans, partial transform metadata and terminal FF bytes remain unclassified.",
+    "String references and whole-image code/data discovery are not exhaustively resolved.",
+    "No G1 admission or source completion claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

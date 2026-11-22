@@ -1,0 +1,55 @@
+{
+  "artifacts": {
+    "command_image": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-other-identity-materialization-001/001/17-npu_kws_command.bin",
+      "sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9"
+    },
+    "independent_review": {
+      "path": "g2/evidence/g2-20261112-p1-kws-command-execution-review.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-kws-command-execution-review-001/001/review-v4.json",
+      "sha256": "b48310571d0e4f4bd7202485784984863c88378755d5cb5629002dcd698fe9ad"
+    },
+    "revised_stock_chain_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-kws-command-execution-chain-001/002/report.json",
+      "sha256": "424220986ce13805f829bd0b36eade8524848e56b9fe0827251221d9d4fbb830"
+    },
+    "sram_image": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-other-identity-materialization-001/001/14-binh_a_stage2_sram.bin",
+      "sha256": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8"
+    },
+    "xip_image": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-other-identity-materialization-001/001/13-binh_a_stage2_xip.bin",
+      "sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584"
+    }
+  },
+  "campaign_id": "20261112T092142Z",
+  "confirmed": {
+    "command_bytes": 9164,
+    "command_codec_payload": [
+      101776,
+      110940
+    ],
+    "command_type2_local": [
+      63492,
+      72656
+    ],
+    "descriptor_word_offset": 64,
+    "flash_offset_literal_at_type2_local": 28036,
+    "stock_chain": "flash-read callback arguments -> saved task at 0x2002E85C -> SRAM task setup -> SNPU descriptor submission",
+    "task_word_offset": 20
+  },
+  "current_coverage_kind": "unknown",
+  "limits": [
+    "Indirect flash-read callback success and hardware execution unverified.",
+    "The complete 9164-byte accelerator instruction extent and semantics are unproven.",
+    "XIP and SRAM loaded addresses are candidate mappings, not live hardware observations."
+  ],
+  "schema_version": 1,
+  "scope": "Bounded P1 stock KWS command-buffer handoff into SNPU descriptor; no byte-ledger reclassification or G1 admission",
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "independent_review": "pass_with_correction"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical P1 coverage draft revision 010 for the four-byte case RAM-pointer literal.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-case-descriptor-coverage-index.json",
+    "sha256": "127978b362cad76bffe81eb22f5a945f9350e5dbb1c149baa39783d8e7fa6c82"
+  },
+  "artifacts": {
+    "producer_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-010/001/classify.py",
+      "sha256": "e77133c360943a5ea64357028532ea8aaa07c4cfc0239676b7f7f2cc87e05f01"
+    },
+    "coverage_draft_010": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-010/001/coverage-draft.jsonl",
+      "sha256": "40a163c261dc45404dd91fa864b056e471855331e5525b5517e2ab360e4847aa"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-010/001/receipt.json",
+      "sha256": "6c7da94676988e5887c54415efa8ae9015f74d6e1dcdfd64fa0929de1e7ff163"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-literal-coverage-review-001/001/review.json",
+      "sha256": "d0c698c75248cf272a68a040ea7a9c0cbfc21aa3e1ce9ecbd3d30dfa9967b5ff"
+    },
+    "case_literal_index": {
+      "path": "g2/evidence/g2-20261112-p1-case-tail-literal-index.json",
+      "sha256": "f6f2d13b234a0ae8693636d5fb140a200cbcc6818a59bf6f51246c3cd023363a"
+    }
+  },
+  "classification": {
+    "raw_case_data_span": [53864, 53868],
+    "wrapped_payload_data_span": [53896, 53900],
+    "adjacent_unknown_raw_span": [53862, 53864],
+    "adjacent_unknown_payload_span": [53894, 53896]
+  },
+  "counts": {
+    "coverage_rows": 99,
+    "coverage_scopes": 40,
+    "unknown_payload_bytes": 4177053,
+    "unknown_image_bytes": 5671703
+  },
+  "limits": ["No full-case reference closure, canonical admission or G1 claim."],
+  "status": {"canonical_admission": "none", "g1": "not_run"}
+}

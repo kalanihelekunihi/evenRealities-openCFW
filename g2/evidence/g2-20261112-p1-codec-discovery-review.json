@@ -1,0 +1,342 @@
+{
+  "schema_version": 1,
+  "attempt_id": "P1-codec-discovery-review-001/001",
+  "revision": "findings-v3",
+  "campaign_id": "20261112T092142Z",
+  "scope": "Bounded codec payload container/accounting audit; historical candidate lineage only. No G1 or exhaustive-discovery claim.",
+  "inputs_sha256": {
+    "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-other-identity-materialization-001/001/manifest.json": "f6dae8b541c69fa68986666b1f5da05f36ce55c2a52594a5230d3786961c8fcf",
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/codec-nesting.json": "1e86b1b382e1c6e7724d5453d64a513aade02ac70f6d720b5985b77a1b3870df",
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/codec-section-facts-001.json": "e2ec1675f116928c4f43279ef79f864975c5c6587b5f9d535c716131e9e4c271",
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/coverage.jsonl": "db366503c7f5cdb5ab6ee891c0a7ef24a1ea2451f3c5e7f0b2bdb2073a214b0f"
+  },
+  "checks": {
+    "locked_payload": {
+      "size": 326092,
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "pass": true
+    },
+    "fwpk": {
+      "header": {
+        "magic": "FWPK",
+        "version": 515,
+        "record_count": 2,
+        "reserved": 0
+      },
+      "records": [
+        {
+          "type": 1,
+          "span": [
+            48,
+            38284
+          ],
+          "length": 38236,
+          "crc32_declared": "307e8a10",
+          "crc32_actual": "307e8a10",
+          "sha256": "393d2ae1f10ed1382f3eec6e3f9f9ac99d744b7ab41d0c89a003f96588afe391"
+        },
+        {
+          "type": 2,
+          "span": [
+            38284,
+            326092
+          ],
+          "length": 287808,
+          "crc32_declared": "c2da6c45",
+          "crc32_actual": "c2da6c45",
+          "sha256": "60adadb83f3cc544c4f80729b01c20d5f94dc54dcbca254f7e7ca3f45b1b115f"
+        }
+      ],
+      "contiguous_partition": [
+        0,
+        48,
+        38284,
+        326092
+      ],
+      "pass": true
+    },
+    "recursive_materialization": {
+      "codec_row_count": 13,
+      "matched_count": 13,
+      "rows": [
+        {
+          "id": "codec_payload",
+          "parent": null,
+          "parent_span": [
+            0,
+            326092
+          ],
+          "size": 326092,
+          "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+          "materialized_matches": true
+        },
+        {
+          "id": "uart_type1_container",
+          "parent": "codec_payload",
+          "parent_span": [
+            48,
+            38284
+          ],
+          "size": 38236,
+          "sha256": "393d2ae1f10ed1382f3eec6e3f9f9ac99d744b7ab41d0c89a003f96588afe391",
+          "materialized_matches": true
+        },
+        {
+          "id": "uart_stage1",
+          "parent": "uart_type1_container",
+          "parent_span": [
+            32,
+            10272
+          ],
+          "size": 10240,
+          "sha256": "cbbe85a2d60f5bb805dddb45fa2eac1632bdf0ab80665c040c0892c64074133f",
+          "materialized_matches": true
+        },
+        {
+          "id": "uart_stage2",
+          "parent": "uart_type1_container",
+          "parent_span": [
+            10272,
+            38236
+          ],
+          "size": 27964,
+          "sha256": "4aacc9e5bf45001bef99785b62302e88bd0b5e6bf4d6186fd7033b1eaeb05b0d",
+          "materialized_matches": true
+        },
+        {
+          "id": "main_type2_container",
+          "parent": "codec_payload",
+          "parent_span": [
+            38284,
+            326092
+          ],
+          "size": 287808,
+          "sha256": "60adadb83f3cc544c4f80729b01c20d5f94dc54dcbca254f7e7ca3f45b1b115f",
+          "materialized_matches": true
+        },
+        {
+          "id": "binh_a_stage1",
+          "parent": "main_type2_container",
+          "parent_span": [
+            0,
+            12288
+          ],
+          "size": 12288,
+          "sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+          "materialized_matches": true
+        },
+        {
+          "id": "binh_a_stage2_container",
+          "parent": "main_type2_container",
+          "parent_span": [
+            12292,
+            63492
+          ],
+          "size": 51200,
+          "sha256": "2515d7201f82c612cfba7f0c61bb014a0af9fe8b7e9037959f0705b7267850ee",
+          "materialized_matches": true
+        },
+        {
+          "id": "binh_a_stage2_xip",
+          "parent": "binh_a_stage2_container",
+          "parent_span": [
+            0,
+            36484
+          ],
+          "size": 36484,
+          "sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584",
+          "materialized_matches": true
+        },
+        {
+          "id": "binh_a_stage2_sram",
+          "parent": "binh_a_stage2_container",
+          "parent_span": [
+            36484,
+            51200
+          ],
+          "size": 14716,
+          "sha256": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+          "materialized_matches": true
+        },
+        {
+          "id": "binh_b_stage1",
+          "parent": "main_type2_container",
+          "parent_span": [
+            193456,
+            205744
+          ],
+          "size": 12288,
+          "sha256": "a80924ccf78205ef1761c4f568d4ce31f909635bf3ad7eecfaed250ad801626c",
+          "materialized_matches": true
+        },
+        {
+          "id": "binh_b_stage2",
+          "parent": "main_type2_container",
+          "parent_span": [
+            205748,
+            287808
+          ],
+          "size": 82060,
+          "sha256": "d23fb40126b434e3c47a605997d25210a3cb80302bad7d6c302aaf790627a941",
+          "materialized_matches": true
+        },
+        {
+          "id": "npu_kws_command",
+          "parent": "main_type2_container",
+          "parent_span": [
+            63492,
+            72656
+          ],
+          "size": 9164,
+          "sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+          "materialized_matches": true
+        },
+        {
+          "id": "npu_kws_weights",
+          "parent": "main_type2_container",
+          "parent_span": [
+            72656,
+            193456
+          ],
+          "size": 120800,
+          "sha256": "397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf",
+          "materialized_matches": true
+        }
+      ],
+      "pass": true
+    }
+  },
+  "accounting_spans": {
+    "payload": [
+      {
+        "span": [
+          0,
+          48
+        ],
+        "role": "FWPK header and record table"
+      },
+      {
+        "span": [
+          48,
+          38284
+        ],
+        "role": "type-1 UART boot container"
+      },
+      {
+        "span": [
+          38284,
+          326092
+        ],
+        "role": "type-2 main container"
+      }
+    ],
+    "type1_local": [
+      {
+        "span": [
+          0,
+          32
+        ],
+        "role": "UART container header"
+      },
+      {
+        "span": [
+          32,
+          10272
+        ],
+        "role": "stage1"
+      },
+      {
+        "span": [
+          10272,
+          38236
+        ],
+        "role": "stage2"
+      }
+    ],
+    "type2_local": [
+      {
+        "span": [
+          0,
+          12288
+        ],
+        "role": "BINH-A stage1 block"
+      },
+      {
+        "span": [
+          12288,
+          12292
+        ],
+        "role": "BINH-A stage2-size word/header framing"
+      },
+      {
+        "span": [
+          12292,
+          63492
+        ],
+        "role": "BINH-A stage2 container"
+      },
+      {
+        "span": [
+          63492,
+          72656
+        ],
+        "role": "KWS command child interval, historical candidate"
+      },
+      {
+        "span": [
+          72656,
+          193456
+        ],
+        "role": "KWS weights child interval, historical candidate"
+      },
+      {
+        "span": [
+          193456,
+          205744
+        ],
+        "role": "BINH-B stage1 block"
+      },
+      {
+        "span": [
+          205744,
+          205748
+        ],
+        "role": "BINH-B stage2-size word/header framing"
+      },
+      {
+        "span": [
+          205748,
+          287808
+        ],
+        "role": "BINH-B stage2"
+      }
+    ],
+    "coverage_at_binh_a_word": [
+      {
+        "id": "codec:0000c588:0000c58c",
+        "span": [
+          50568,
+          50572
+        ],
+        "kind": "container",
+        "admission_status": "Canonical interval review pending"
+      }
+    ],
+    "note": "Parent and child rows overlap by design. Nested spans are resolved relative to their declared parent; do not sum row sizes."
+  },
+  "findings": [
+    "FWPK record spans are contiguous, CRCs match, and cover the payload after its 48-byte header/table.",
+    "All 13 historical codec rows recursively resolve from parent-relative spans and match their materialized file bytes, sizes, and declared hashes.",
+    "Type-2 local [63492,193456) is represented by separate historical KWS command and weight child intervals; this is accounted byte coverage, while accelerator semantics remain unresolved.",
+    "Type-2 local [12288,12292) is the BINH-A stage2 size word/header framing, not an unexplained gap."
+  ],
+  "remaining_limits": [
+    "Historical rows and coverage are not current G1 admission and do not establish full pseudocode coverage.",
+    "The GXNPU command/weight exact program/data partition, instruction encoding, and instruction-stream boundaries are unresolved; do not call them decoded or non-code.",
+    "This bounded header/span audit cannot exclude additional nested structures or images in opaque regions; exhaustive discovery is unproven.",
+    "Runtime reader origin, transfer behavior, hardware-gated routes, and external firmware/ROM dependencies are outside this audit."
+  ],
+  "result": "bounded_identity_and_accounting_checks_pass; discovery_and_accelerator_semantics_open"
+}

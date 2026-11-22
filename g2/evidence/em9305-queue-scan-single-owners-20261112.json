@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "scope": "Seven additional G2 EM9305 native addresses with single C source ownership",
+  "stock_disassembly": "g2/research/corpus/em9305/objdump/open-2026-09-29/em9305-0x302400-0x335BC8.s",
+  "resolved_addresses": [
+    {
+      "address": "0x307434",
+      "stock_span": "0x307434..0x307480",
+      "owner": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_307434.c:opencfw_em9305_child_307434",
+      "removed_symbol": "opencfw_em9305_ll_slot_pending_307434",
+      "reason": "Stock reads the procedure-slot table at 0x334479; the retained function uses the source-owned table and all controller callers now target it."
+    },
+    {
+      "address": "0x307cb8",
+      "stock_span": "0x307cb8..0x307cc6",
+      "owner": "g2/src/em9305/qpc-scheduler/controller_init.c:opencfw_em9305_address_busy_307cb8",
+      "removed_symbol": "opencfw_em9305_init_state_one_307cb8",
+      "reason": "Both getters tested the same state byte for value 1; the callback pointer at 0x80130c now targets the retained body."
+    },
+    {
+      "address": "0x317320",
+      "stock_span": "0x317320..0x317334",
+      "owner": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_317320.c:opencfw_em9305_child_317320",
+      "removed_symbol": "opencfw_em9305_radio_record_queue_step_317320",
+      "reason": "Both bodies remove a node from record+184 and release a non-null node; the controller caller now uses the retained function."
+    },
+    {
+      "address": "0x317624",
+      "stock_span": "0x317624..0x317652",
+      "owner": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_dispatch_child_317624.c:opencfw_em9305_dispatch_child_317624",
+      "removed_symbol": "opencfw_em9305_ll_stream_take_317624",
+      "reason": "Both bodies permit the queue at record+48 when enabled or in mode 0/1; controller callers now use the retained function."
+    },
+    {
+      "address": "0x31ba54",
+      "stock_span": "0x31ba54..0x31ba78",
+      "owner": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_dispatch_child_31ba54.c:opencfw_em9305_dispatch_child_31ba54",
+      "removed_symbol": "opencfw_em9305_ll_pending_packet_take_31ba54",
+      "reason": "Both bodies conditionally remove an event from queue_record+4 for selector 0/1; the controller caller now uses the retained function."
+    },
+    {
+      "address": "0x322884",
+      "stock_span": "0x322884..0x3228a6",
+      "owner": "g2/src/em9305/qpc-scheduler/controller_init.c:opencfw_em9305_init_state_events_clear_322884",
+      "removed_source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_pawr_release_322884.c",
+      "reason": "The retained body clears each event slot before release and retains the second release result, as in the stock disassembly."
+    },
+    {
+      "address": "0x325740",
+      "stock_span": "0x325740..0x3257a4",
+      "owner": "g2/src/em9305/qpc-scheduler/controller_init.c:opencfw_em9305_init_state_cleanup_325740",
+      "removed_source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_scan_child_325740.c",
+      "reason": "The stock second queue loop advances R13 by 0x30 each iteration at 0x32578e; the retained body does so, while the removed copy repeatedly addressed scan+48. Three scan-action callers now use the retained body."
+    }
+  ],
+  "validation": {
+    "manifest_check": "make -C g2 sources-check: 4883 units, 4544 source files, 1 not built",
+    "em9305_compile_report": "build/g2-em9305-nine-single-owners-20261112/report.json",
+    "compiled_units": 772,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "compose_returncode": 0,
+    "manifest_changed_during_build": false,
+    "source_link_report": "build/g2-em9305-nine-single-owners-link-20261112/link-report.json",
+    "external_binary_archive_used": false,
+    "source_completeness_proven": false,
+    "source_binary_bytes": 246592,
+    "source_binary_sha256": "ecfaafe0c281d92364542622c3668a4e3700cc908e40d9f75a184eea730b35b2",
+    "source_package_bytes": 247924,
+    "source_package_sha256": "2de0f06a4d44fca646692639da04586193bc1de44233a49dfc5348294477287b",
+    "previous_source_package_bytes": 248264,
+    "previous_source_package_sha256": "b9b84007c6a927d8d45be163141b68613a6f683d8de55877980f5fca2d64c36e",
+    "official_image": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+    "official_image_bytes": 211948,
+    "official_image_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "full_g2_source_report": "build/g2-em9305-queue-scan-full-20261112/report.json",
+    "full_g2_compiled_units": 4878,
+    "full_g2_failed_units": 0,
+    "full_g2_duplicate_strong_symbols": 0,
+    "full_g2_composed_payload_groups": 7,
+    "source_bundle_report": "build/g2-em9305-queue-scan-source-bundle-20261112/link-report.json",
+    "source_bundle_bytes": 4641660,
+    "source_bundle_sha256": "97a369da6e4ee510580fd3cf863d97cf5ed66cf1edcf91ff72c1175b888ad216",
+    "locked_bundle_bytes": 4301227,
+    "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "matches_locked_bundle": false
+  },
+  "qualification": "The seven affected addresses have one source-linked C implementation each. The package is not stock-identical; whole-firmware source completeness, hardware behavior, and workflow gates G2-G6 remain unproven."
+}

@@ -1,0 +1,68 @@
+{
+  "campaign_id": "20261112T092142Z",
+  "canonical_admission": "none",
+  "checks": {
+    "IDs_unique": true,
+    "all_content_paths_hashes_sizes_match_current_index": true,
+    "all_decoded_old_transform_review_refs_explicitly_provenance_only": true,
+    "all_interpretive_fields_marked_unreviewed": true,
+    "all_parents_resolve": true,
+    "content_hashes_and_sizes_unchanged": true,
+    "content_paths_unchanged": true,
+    "decoded_rows": 7,
+    "draft_receipt_and_predecessor_hashes_valid": true,
+    "ids_order_match_historical_inventory": true,
+    "ids_order_unchanged_from_revision_001": true,
+    "receipt_admission_none_and_g1_not_run": true,
+    "rows": 33,
+    "source_hashes_match_historical": true,
+    "target_hashes_valid": true
+  },
+  "decision": "pass_as_noncanonical_candidate_for_next_review",
+  "evidence_inputs": [
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-all-image-row-draft-001/002/images-draft.jsonl",
+      "sha256": "8d61b48d2ec039bdb36463fbd571e89fe88afafb5f47ee52befa9b56e459ccde"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-all-image-row-draft-001/002/receipt.json",
+      "sha256": "d8edc8592b334da79d2cdc4cc3c8db8cec897c950481c662f4cf110cf94466f4"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-all-image-row-draft-001/001/images-draft.jsonl",
+      "sha256": "4a884bdd022e9bb6ce2b652e3e16c8ec3dbc324db90e9c4f63140ae97e634191"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    },
+    {
+      "path": "g2/workflow/target.json",
+      "sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff"
+    },
+    {
+      "path": "g2/evidence/g2-20261112-p1-all-image-materializations-index.json",
+      "sha256": "b37f1fed89bb1addee808ab51dbf06455c2a54a2e39fa52a484dfe0aae40e26d"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-all-image-draft-review-001/001/findings.json",
+      "sha256": "b6bb7e4eaa5ba1e73be846efdea474821bc37fbe67de9b0a6d8b1ba4eacc5095"
+    }
+  ],
+  "findings": [
+    {
+      "code": "revision_001_findings_addressed",
+      "detail": "Revision 002 lists each retained interpretation-bearing field, including container_status, in historical_claims_unreviewed and applies inherited_interpretation_status=historical_provenance_only_pending_new_campaign_review. On decoded rows, historical_transform_receipt_status explicitly says provenance_only and that old receipt/review IDs confer no admission.",
+      "severity": "pass"
+    },
+    {
+      "code": "identity_and_bytes_unchanged",
+      "detail": "All 33 IDs and order, output paths, content hashes, and sizes are unchanged from revision 001; they agree with the current materialization index and actual output file bytes. Parent links resolve; source and target hash checks pass.",
+      "severity": "pass"
+    }
+  ],
+  "g1_status": "not_run",
+  "review_id": "P1-all-image-draft-review-001-v2",
+  "review_scope": "Independent follow-up review of revision 002 against first findings, historical inventory, target, current byte index, and revision receipt. No G1 claim.",
+  "schema_version": 1
+}

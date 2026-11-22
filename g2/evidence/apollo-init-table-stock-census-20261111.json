@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "Apollo-main prioritized startup table comparator and runner",
+  "locked_image": {
+    "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "virtual_address_minus_file_offset": "0x437fe0"
+  },
+  "census_correction": {
+    "symbol_table": "g2/symbols/apollo_main.tsv",
+    "rows_after": 8846,
+    "functions": [
+      {
+        "start": "0x005bf0b4",
+        "end_exclusive": "0x005bf0bc",
+        "bytes": 8,
+        "name": "init_table_priority_compare_5bf0b4",
+        "stock_sha256": "c4fc4b65a098dcd475fdd6b5d696b5e7e3957c2af7e722653ea39798d642e3ad"
+      },
+      {
+        "start": "0x005bf0bc",
+        "end_exclusive": "0x005bf104",
+        "bytes": 72,
+        "name": "auto_init_table_run_5bf0bc",
+        "stock_sha256": "8b2250da565da9db59c0d40efc5ac35065e07311d6aac3a93834e64c35877d7c"
+      }
+    ],
+    "boundary_evidence": "Thumb instructions at 0x5bf0b4 start with two field loads and end bx lr at 0x5bf0ba; runner begins push at 0x5bf0bc, ends pop pc at 0x5bf102, and 0x5bf104..0x5bf113 is its PC-relative literal pool."
+  },
+  "source_change": {
+    "path": "g2/src/apollo-main/system/x-03-init/init_table_run.c",
+    "method": "C register variables and empty compiler barriers select r0 then r1 loads under production Clang; no embedded opcode bytes",
+    "source_plan": "tools/build/source-plan.json"
+  },
+  "qualification": {
+    "command": "python3 tools/build/qualify_sources.py --out build/g2-init-table-clang-qualify-barrier-20261111 --profile generic --match-functions --source g2/src/apollo-main/system/x-03-init/init_table_run.c",
+    "receipt": "build/g2-init-table-clang-qualify-barrier-20261111/qualification.json",
+    "receipt_sha256": "39b5aa7dbed2177a21b222e99f2ff66f492f1614357208dfd61d42661013da09",
+    "selected_comparator": true,
+    "runner_rejection": {
+      "anchored_relocation_pattern_not_exact": 1
+    }
+  },
+  "verification": {
+    "sources_check": "pass: 4883 units, 4544 source files, 1 not built",
+    "full_source_report": "build/g2-init-table-exact-all-20261111/report.json",
+    "full_source_report_sha256": "90c12dbb41d93c3abb5911c668f4e3e5307ed2a798b85a5001a30f95337f0da9",
+    "enabled_c_units_compiled": 4878,
+    "compile_failures": 0,
+    "duplicate_strong_symbols": 0,
+    "strict_link_report": "build/g2-init-table-exact-all-link-20261111/link-report.json",
+    "strict_link_report_sha256": "ef902e877660a9313d9b740f2a7fa92f2ed0acc2c42e065f22830866982f4239",
+    "seven_payloads_linked": true,
+    "external_binary_archive_used": false,
+    "apollo_main_binary_bytes": 3818704,
+    "apollo_main_binary_sha256": "ed06d9ac0927b68d4d3ee4d7656bb5ed5e6a02d672f96e83c4d07e6e216535b4",
+    "linked_comparator_va": "0x00593520",
+    "linked_comparator_bytes_hex": "40684968401a7047",
+    "linked_comparator_sha256": "c4fc4b65a098dcd475fdd6b5d696b5e7e3957c2af7e722653ea39798d642e3ad",
+    "prior_main_binary_sha256": "0c66b1e174fe7a8a0369f52f194df0ace9cd6f52e9784dacfa430472cd682f1f",
+    "changed_binary_offsets": [
+      "0x15b520",
+      "0x15b522"
+    ],
+    "other_six_payload_binary_hashes_unchanged": true,
+    "source_bundle": {
+      "builder": "make -C g2 source-bundle SOURCES_OUT=build/g2-init-table-exact-all-20261111 SOURCE_BUNDLE_OUT=build/g2-init-table-exact-bundle-20261111",
+      "link_report": "build/g2-init-table-exact-bundle-20261111/link-report.json",
+      "link_report_sha256": "a522ff1d824514653c6b821a5fa77875f8808ee4df5849a8e6febd21372cc2e6",
+      "bundle_path": "build/g2-init-table-exact-bundle-20261111/g2-source-candidate.evenota.bin",
+      "bytes": 4637716,
+      "sha256": "465eca238c463156aa131a9933d51862f82ee7f88e2c23a4fbc753e646a3f039",
+      "compared_with_prior_bundle": "build/g2-fuel-gauge-ext-state-all-bundle-20261111/g2-source-candidate.evenota.bin",
+      "prior_sha256": "cfb4d1c9b56f464dca01b9280eb5d95474bf1d0bd44e6bf8ec414904612e599c",
+      "changed_byte_count": 14,
+      "changed_offsets": [
+        "0x9c",
+        "0x9d",
+        "0x9e",
+        "0x9f",
+        "0xc7eb0",
+        "0xc7eb1",
+        "0xc7eb2",
+        "0xc7eb3",
+        "0xc7f28",
+        "0xc7f29",
+        "0xc7f2a",
+        "0xc7f2b",
+        "0x223464",
+        "0x223466"
+      ],
+      "locked_bundle_bytes": 4301227,
+      "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+      "matches_locked_bundle": false,
+      "source_completeness_proven": false
+    }
+  },
+  "limits": [
+    "The 72-byte runner does not qualify for exact bytes under production Clang.",
+    "These two rows correct an identified census omission, not a whole-image coverage audit.",
+    "Stock bundle equality, source completeness, and physical boot remain unproven."
+  ]
+}

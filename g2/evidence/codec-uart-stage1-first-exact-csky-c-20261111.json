@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "target": "Exact C-built UART boot-stage functions in locked G2 codec FWPK",
+  "stock": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "artifact_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "stage1_inventory": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage1/functions-000.jsonl",
+    "stage2_inventory": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage2/functions-000.jsonl",
+    "mapping": "stored offset = 0x50 + (virtual address - 0x10000000); stage 1 bounded [0x50,0x2850), stage 2 bounded [0x2850,0x958C)"
+  },
+  "qualification": {
+    "initial_full_uart_audit": "build/g2-codec-uart-stages-exact-qual-20261111/qualification.json",
+    "initial_full_uart_audit_sha256": "e6438f862596f24fe6d0d614b36f95d21bbb864e8b1caebcbef072c92be42b1d",
+    "full_uart_candidate_units": 115,
+    "full_uart_compiled_units": 115,
+    "focused_receipt": "build/g2-codec-uart-stage1-named-exact-20261111/source-plan.json",
+    "focused_receipt_sha256": "c7e95f94aa8f29d39e4f7bd53057597fa9db4ff2f3c3168a390959457c72cee5",
+    "focused_candidate_units": 4,
+    "selected_units": 3,
+    "selected_regions": [
+      {
+        "symbol": "gx8002_uart_stage1_mdelay",
+        "source": "g2/src/codec/app-callback/uart_stage1_delay.c",
+        "stock_offset": [
+          1100,
+          1212
+        ],
+        "bytes": 112,
+        "sha256": "8745b75085460bfc0c40063d66b9a934f24f5e3268c0e57c55ce1b3e29e3cccb",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage1/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_uart_stage1_traps",
+        "source": "g2/src/codec/app-callback/uart_stage1_minimal_stock.c",
+        "stock_offset": [
+          384,
+          386
+        ],
+        "bytes": 2,
+        "sha256": "4f35212d12f9ad2036492c95f1fe79baf4ec7bd9bef3dffa7579f2293ff546a4",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage1/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_uart_stage1_clear_bss",
+        "source": "g2/src/codec/app-callback/uart_stage1_minimal_stock.c",
+        "stock_offset": [
+          392,
+          394
+        ],
+        "bytes": 2,
+        "sha256": "a66cbe65e89770347114954fbe7175e78060be256bea5b7e5c21cae54f56dd9a",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage1/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_uart_stage1_pmu_set_bit0",
+        "source": "g2/src/codec/app-callback/uart_stage1_pmu_bits.c",
+        "stock_offset": [
+          964,
+          986
+        ],
+        "bytes": 22,
+        "sha256": "23aea499c544d0e525dfbaedee39ea45a3200af6a4b0bc431c82d0d0911798d5",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage1/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_uart_stage1_pmu_set_bit1",
+        "source": "g2/src/codec/app-callback/uart_stage1_pmu_bits.c",
+        "stock_offset": [
+          988,
+          1012
+        ],
+        "bytes": 24,
+        "sha256": "353abafc3cd67b1984e221582b56b8be47c1346b6dc32c2e80d815e207fa9e17",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage1/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_uart_stage1_pmu_get_bit0",
+        "source": "g2/src/codec/app-callback/uart_stage1_pmu_bits.c",
+        "stock_offset": [
+          1012,
+          1024
+        ],
+        "bytes": 12,
+        "sha256": "730f5b1f0ddabd5a6ee9d36ada3140d8546e71691ccd55d9676dfab7d9410562",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage1/functions-000.jsonl"
+      },
+      {
+        "symbol": "gx8002_uart_stage1_pmu_get_bit1",
+        "source": "g2/src/codec/app-callback/uart_stage1_pmu_bits.c",
+        "stock_offset": [
+          1024,
+          1036
+        ],
+        "bytes": 12,
+        "sha256": "9c4f7fa5c6d0a4e5436185f33350fc96448713e57ff01548d54107090ca628c3",
+        "evidence": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage1/functions-000.jsonl"
+      }
+    ],
+    "selected_bytes": 186,
+    "policy": "authenticated corpus body hash, exact inventory name or address suffix, exact size, no relocations, and complete compiler byte equality at anchored stock offset",
+    "integrated_plan": "tools/build/source-plan.json",
+    "integrated_plan_sha256": "345881314985d2454dc0078d6fabd232cbb1dd48049d776867afd7c6344f3344"
+  },
+  "verification": {
+    "hybrid_report": "build/g2-codec-uart-stage1-exact-hybrid-20261111/build-report.json",
+    "hybrid_report_sha256": "34a1e4233e3995f20f0ac8df5268c806d77a1fd5bb8d8bddd182b3ec958af575",
+    "coverage_report": "build/g2-codec-uart-stage1-exact-hybrid-20261111/coverage.json",
+    "coverage_report_sha256": "a044b0e83fbe0dd1658a1889a472e50ecc8b8a6d419a95aa10ff18403c22e08d",
+    "bundle_size": 4301227,
+    "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "codec_source_built_bytes": 646,
+    "codec_pull_through_bytes": 202326,
+    "source_completeness_proven": false
+  },
+  "limits": [
+    "All seven selected functions lie in UART boot stage 1; stage 2 has no selected exact C function in this pass.",
+    "C-SKY compiled function bytes are conservatively unclassified as code/data by strict coverage.",
+    "Relocation-bearing functions, whole-codec source ownership, model weights, source-only OTA equality and hardware boot remain unproven."
+  ]
+}

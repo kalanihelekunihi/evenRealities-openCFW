@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded touch I2C hold, EEPROM record and dynamic 128-byte row-copy route reconciliation",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-g1-route-closure-001/001/audit.py",
+      "sha256": "58f09bfc66adca1afb5a800768d5b16ff2c85bde5e30897f3a661b79439b376b"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-g1-route-closure-001/001/report.json",
+      "sha256": "bc8d23b9ed6bcd3c6b9b8ff0361d2eb8399d200e707de0a18382b267f1e34da9"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-g1-route-closure-001/001/receipt.json",
+      "sha256": "eb7ab62fea449f86a25cfe5a7b24c6a9ba4674a1d969c61b12b73378977067dd"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-g1-route-independent-review-001/001/review.py",
+      "sha256": "290f1128a70a1a3313bdf85738e147cd5f266b8fb43c2ec335b453ae17b0b9dc"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-g1-route-independent-review-001/001/review.json",
+      "sha256": "73d383d596e392452817aafee0ff2bcf72c56a32302655ea15fb273ec422ea7a"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-copy-g1-route-independent-review-001/001/receipt.json",
+      "sha256": "b7f16a54f74f1559796a730f0ccb2412a5343d36bb0ce8801547bda7d30e92bf"
+    }
+  },
+  "result": {
+    "i2c_rx_payload": "0x200009A1",
+    "conditional_hold_record": "0x200009D6",
+    "copy_site": "0x8D74",
+    "copy_length": 128,
+    "fixed_image_source_interval_proven": false,
+    "nested_executable_excluded": false
+  },
+  "review_finding": "Two-byte hold update requires RX count >2 and nonzero halfword; closure report omits the count guard in its short setter-effect wording. The 128-byte row source is separate and dynamic.",
+  "limits": [
+    "No indirect/all-writer closure, EEPROM content provenance, or nested-image exclusion.",
+    "No canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

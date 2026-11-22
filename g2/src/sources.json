@@ -1768,7 +1768,6 @@
     "defsym": {
      "opencfw_em9305_child_315da0": "opencfw_em9305_child_315d68",
      "opencfw_em9305_child_31f9ac": "opencfw_em9305_scan_callback_3228e4",
-     "opencfw_em9305_child_32b618": "opencfw_em9305_child_32b9a4",
      "opencfw_em9305_dispatch_child_30fab8": "opencfw_em9305_common_activate_310580",
      "opencfw_em9305_scan_random_30c478": "opencfw_em9305_pal_random_step"
     }
@@ -1824,6 +1823,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-I{root}/g2/src/apollo-main/include",
    "-fshort-enums"
   ],
@@ -1939,6 +1940,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-Wall",
    "-Wextra",
    "-I{root}/g2/src/apollo-main/include",
@@ -2157,6 +2160,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-Wall",
    "-Wextra",
    "-I{root}/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/include",
@@ -2211,6 +2216,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-I{root}/g2/src/apollo-main/include",
    "-I{root}/third-party/upstream/nanopb",
    "-I{root}/g2/src/include/freestanding",
@@ -2242,6 +2249,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-Wall",
    "-Wextra",
    "-I{root}/g2/src/include/freestanding",
@@ -2293,6 +2302,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-I{root}/g2/src/apollo-main/include",
    "-fshort-enums"
   ],
@@ -2308,6 +2319,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-Wall",
    "-Wextra",
    "-I{root}/g2/src/include/freestanding",
@@ -2338,6 +2351,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-Wall",
    "-Wextra",
    "-I{root}/third-party/upstream/nationalchip-lvp-kws/include/utility/libc",
@@ -2488,6 +2503,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-I{root}/g2/src/apollo-main/include",
    "-I{root}/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-host/include",
    "-I{root}/g2/src/include/freestanding",
@@ -2510,6 +2527,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-I{root}/g2/src/apollo-main/include",
    "-I{root}/third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/cordio/ble-profiles/include/app",
    "-I{root}/g2/src/include/freestanding",
@@ -2527,6 +2546,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-I{root}/g2/src/apollo-main/include",
    "-I{root}/third-party/upstream/littlefs",
    "-I{root}/g2/src/include/freestanding",
@@ -2544,6 +2565,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-Wall",
    "-Wextra",
    "-Werror",
@@ -2562,6 +2585,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-Wall",
    "-Wextra",
    "-I{root}",
@@ -2590,6 +2615,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-I{root}/g2/src/apollo-main/include",
    "-I{root}/third-party/upstream/lvgl",
    "-I{root}/g2/src/include/freestanding",
@@ -2607,6 +2634,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-Wall",
    "-Wextra",
    "-DFT2_BUILD_LIBRARY",
@@ -2632,6 +2661,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-Wall",
    "-Wextra",
    "-DFT2_BUILD_LIBRARY",
@@ -3279,6 +3310,8 @@
    "-ffreestanding",
    "-fno-builtin",
    "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
    "-fno-inline",
    "-Wall",
    "-Wextra",
@@ -3372,6 +3405,23 @@
    "-I{root}/third-party/upstream/ambiqhal-apollo510-sdk5.0.0/mcu/apollo510/hal/mcu",
    "-I{root}/third-party/upstream/ambiqhal-apollo510-sdk5.0.0/CMSIS/AmbiqMicro/Include",
    "-I{root}/third-party/upstream/cmsis-5-590/CMSIS/Core/Include",
+   "-fshort-enums"
+  ],
+  "g2-apollo-main-mve-1": [
+   "-DG2_STOCK_PWRCTRL_ORDER",
+   "-DG2_STOCK_TF_TIMEOUT_ARG",
+   "--target=arm-none-eabi",
+   "-mcpu=cortex-m55",
+   "-mthumb",
+   "-mfpu=fpv5-d16",
+   "-mfloat-abi=hard",
+   "-std=c11",
+   "-ffreestanding",
+   "-fno-builtin",
+   "-O2",
+   "-ffunction-sections",
+   "-fdata-sections",
+   "-I{root}/g2/src/apollo-main/include",
    "-fshort-enums"
   ]
  },
@@ -29235,15 +29285,6 @@
    "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_mode_large.c"
   },
   {
-   "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_mode_parent.c",
-   "payload": "g2-em9305",
-   "toolchain": "arc-gcc",
-   "profile": "g2-em9305-1",
-   "role": "candidate",
-   "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_mode_parent.c",
-   "link": false
-  },
-  {
    "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_mode_reject.c",
    "payload": "g2-em9305",
    "toolchain": "arc-gcc",
@@ -29820,14 +29861,6 @@
    "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_child_307434.c"
   },
   {
-   "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_30e858.c",
-   "payload": "g2-em9305",
-   "toolchain": "arc-gcc",
-   "profile": "g2-em9305-1",
-   "role": "candidate",
-   "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_child_30e858.c"
-  },
-  {
    "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_30e8dc.c",
    "payload": "g2-em9305",
    "toolchain": "arc-gcc",
@@ -30146,14 +30179,6 @@
    "profile": "g2-em9305-1",
    "role": "candidate",
    "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_child_316a68.c"
-  },
-  {
-   "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_316c58.c",
-   "payload": "g2-em9305",
-   "toolchain": "arc-gcc",
-   "profile": "g2-em9305-1",
-   "role": "candidate",
-   "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_child_316c58.c"
   },
   {
    "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_317124.c",
@@ -31556,14 +31581,6 @@
    "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_child_32b82c.c"
   },
   {
-   "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_32b9a4.c",
-   "payload": "g2-em9305",
-   "toolchain": "arc-gcc",
-   "profile": "g2-em9305-1",
-   "role": "candidate",
-   "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_child_32b9a4.c"
-  },
-  {
    "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_32bc98.c",
    "payload": "g2-em9305",
    "toolchain": "arc-gcc",
@@ -31938,14 +31955,6 @@
    "profile": "g2-em9305-1",
    "role": "candidate",
    "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_dispatch_child_317418.c"
-  },
-  {
-   "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_dispatch_child_317498.c",
-   "payload": "g2-em9305",
-   "toolchain": "arc-gcc",
-   "profile": "g2-em9305-1",
-   "role": "candidate",
-   "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_dispatch_child_317498.c"
   },
   {
    "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_dispatch_child_3174d8.c",
@@ -32476,14 +32485,6 @@
    "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_pawr_queue_resume_31694c.c"
   },
   {
-   "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_pawr_release_322884.c",
-   "payload": "g2-em9305",
-   "toolchain": "arc-gcc",
-   "profile": "g2-em9305-1",
-   "role": "candidate",
-   "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_pawr_release_322884.c"
-  },
-  {
    "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_pawr_response_dispatch_322834.c",
    "payload": "g2-em9305",
    "toolchain": "arc-gcc",
@@ -32674,14 +32675,6 @@
    "profile": "g2-em9305-1",
    "role": "candidate",
    "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_scan_child_3243c0.c"
-  },
-  {
-   "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_scan_child_325740.c",
-   "payload": "g2-em9305",
-   "toolchain": "arc-gcc",
-   "profile": "g2-em9305-1",
-   "role": "candidate",
-   "origin": "g2/components/em9305/qpc_scheduler_candidate/initializer_lowers/init_native_scan_child_325740.c"
   },
   {
    "source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_scan_dispatch_3228a8.c",
@@ -35286,6 +35279,14 @@
    "profile": "g2-touch-1",
    "role": "candidate",
    "origin": "reconstructed 2026-10-21 from 2.2.6.10 pseudocode + disassembly"
+  },
+  {
+   "source": "g2/src/touch/application/ram_state.c",
+   "payload": "g2-touch",
+   "toolchain": "clang",
+   "profile": "g2-touch-1",
+   "role": "candidate",
+   "origin": "stock touch application BSS ownership from authenticated RAM zero-table layout"
   },
   {
    "source": "g2/src/touch/cycfg/cycfg.c",
@@ -41193,7 +41194,34 @@
    "profile": "g2-apollo-main-1",
    "role": "candidate",
    "origin": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_source.c",
-   "note": "Source-only uncalibrated fuel-gauge candidate; not stock-equivalent or hardware-qualified"
+   "note": "Verified typographic translation of stock nrf_fuel_gauge (c205a2) API wrappers; cores are in g2c_fuel_gauge_cores.S. Bit-exact vs Renode M55 native MVE/LOB golden (EVENBAT, random, param_9 mutant)."
+  },
+  {
+   "source": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+   "payload": "g2-apollo-main",
+   "toolchain": "clang",
+   "profile": "g2-apollo-main-1",
+   "role": "candidate",
+   "origin": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+   "note": "Idiomatic scalar-float C for verified leaf callees (f32<->f64, qNaN predicate, min/max-like, floor-like, TTE params). Bit-exact vs typographic stock on Renode M55."
+  },
+  {
+   "source": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_cores.S",
+   "payload": "g2-apollo-main",
+   "toolchain": "clang",
+   "profile": "g2-apollo-main-mve-1",
+   "role": "candidate",
+   "origin": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_cores.S",
+   "note": "Relocated stock Thumb/MVE bodies for 0x43A1B0, 0x43A698 and callees; MVE enabled. memcpy/memset are local fg_* symbols. expf/logf use the IAR shims."
+  },
+  {
+   "source": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_model_tte.c",
+   "payload": "g2-apollo-main",
+   "toolchain": "clang",
+   "profile": "g2-apollo-main-1",
+   "role": "candidate",
+   "origin": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_model_tte.c",
+   "note": "Authenticated six-byte stock cached TTE accessor; model state remains source-only"
   },
   {
    "source": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_init.c",
@@ -43558,6 +43586,15 @@
    "role": "candidate",
    "origin": "field-level reconstruction of nine locked GXNPU convolution and depthwise-convolution commands",
    "link": false
+  },
+  {
+   "source": "g2/src/codec/npu/kws_weights_source.c",
+   "payload": "g2-codec-a",
+   "toolchain": "csky-gcc",
+   "profile": "g2-codec-a-5",
+   "role": "candidate",
+   "origin": "authenticated locked codec KWS non-executable weight data; g2/evidence/codec-a-kws-trained-weights-20261111.json",
+   "link": false
   }
  ],
  "generated": [
@@ -43636,7 +43673,7 @@
    "from": "third-party/upstream/invensense-icm45608/src/imu/inv_imu_edmp_extended_features.h",
    "replace": [
     [
-     "/** @brief IMU B2S parameters definition\n */\ntypedef struct {\n\t/* B2S */\n\tuint8_t b2s_mounting_matrix; /**< Specifies mounting matrix to be applied to B2S raw data\n                                       Set bit 2 : swap X/Y ; flip Z\n                                       Set bit 1 : flip X ; flip Z\n                                       Set bit 0 : flip Y ; flip Z */\n\tint32_t\n\t         dev_norm_max; /**< Hysteresis added or removed to norm estimate and Y axis constrains value for RevB2S\n\n                                         Unit in LSB, with 1 LBS = 1g / 2^12\n                                         Default value 700 (corresponding to 0.1709g)\n                                         Recommended range value [1 - 2048] */\n\tint32_t  sin_limit; /**< Maximum threshold on absolute value of X axis in b2s position\n                                         link to the sinus value of inclination angle on X axis\n                                         Unit in LSB, with 1 LBS = 1g / 2^12\n                                         Default value 2048 (corresponding to 30deg)\n                                         Recommended range value [300 - 3000] */\n\tint32_t  fast_limit; /**< Threshold of minimal motion to be detected as \"Fast motion\"\n                                         Unit is no unit, filtered data\n                                         Default value 200 */\n\tuint16_t fast_motion_age_limit; /**< Time limit between last \"Fast motion\" and b2s position\n                                         Unit in sample number - ODR dependent\n                                         Default value 20 (corresponding to 400ms at 50Hz) */\n\tuint16_t\n\t         fast_motion_time_limit; /**< Minimum time where the criterion is above the threshold  to be classified as \"Fast motion\"\n\n                                         Unit in sample number - ODR dependent\n                                         Default value 4 (corresponding to 80ms at 50Hz) */\n\tuint16_t age_limit; /**< Minimum time between 2 event b2s\n                                         Unit in sample number - ODR dependent\n                                         Default value 50 (corresponding to 1s at 50Hz) */\n\tuint16_t\n\t    rev_latency_th; /**< Condition of RevB2S should be maintained at least during RevB2sLatencyTh\n\n                                         Unit in sample number - ODR dependent\n                                         Default value 25 (corresponding to 0.5s at 50Hz) */\n\tint32_t\n\t    static_limit; /**< Threshold to determine static phase required after the gesture B2S to validate it\n\n                                         Unit is no unit, filtered data\n                                         Default value 1400 */\n\tint32_t\n\t    thr_cos_ang; /**< RevB2S threshold, condition satisfied when moving away from bring2see orientation position\n\n                                         by more than threshold angle corresponding to the cosine angle\n                                         Unit is cosine value of angle in q30\n                                         Default value 1057429273 corresponding to 10deg */\n\tint32_t\n\t    rev_x_limit; /**< Condition of RevB2S on X axis value to ensure Rev-B2S when arm point down\n\n                                         * Unit in LSB, with 1 LBS = 1g / 2^12\n                                         * Default value 3680 (corresponding to 0.8984g)\n                                         */\n\tuint32_t\n\t    sin_flat_angle; /**< Condition to detect the flat position and reject B2S interrupt at return to rest position\n\n                                         Unit in LSB, with 1 LBS = 1g / 2^12\n                                         Default value 2048 (corresponding to 30°) */\n\tuint32_t\n\t    timer_flat_reject; /**< A timer to disable flat rejection when age of the last no-flat B2S detection is over the timer\n\n                                         Unit in sample number - ODR dependent\n                                         Default value 350 (corresponding to 7s at 50Hz) */\n} inv_imu_edmp_b2s_parameters_t;\n\n/** @brief System usecase definition for IMU EDMP B2S initialization */\ntypedef enum {\n\tINV_IMU_EDMP_B2S_INIT_OVER_SIF,\n\tINV_IMU_EDMP_B2S_INIT_OVER_GAF\n} inv_imu_edmp_b2s_init_t;\n\n/** @brief  Initialize B2S algorithm for usecase where no SIF is needed. \n *  @param[in]  s        Pointer to device.\n *  @param[out] usecase  System usecase for which B2S image was initialized.\n *  @return     0 on success, negative value on error.\n *  @warning inv_imu_edmp_init() must be called beforehand and can not be called anymore unless this API is called afterwards\n */\nint inv_imu_edmp_b2s_init_over_sif(inv_imu_device_t *s, inv_imu_edmp_b2s_init_t *usecase);\n\n/** @brief  Initialize B2S algorithm for usecase where no GAF is needed. \n *  @param[in]  s        Pointer to device.\n *  @param[out] usecase  System usecase for which B2S image was initialized.\n *  @return     0 on success, negative value on error.\n *  @warning inv_imu_edmp_init() must be called beforehand and can not be called anymore unless this API is called afterwards\n */\nint inv_imu_edmp_b2s_init_over_gaf(inv_imu_device_t *s, inv_imu_edmp_b2s_init_t *usecase);\n\n/** @brief  Get current B2S configuration settings. \n *  @param[in]  s           Pointer to device.\n *  @param[out] b2s_params  Pointer to B2S configuration structure, which will hold current B2S configuration.\n *  @param[in]  usecase     System usecase for which B2S image was initialized.\n *  @return                 0 on success, negative value on error.\n */\nint inv_imu_edmp_b2s_get_parameters(inv_imu_device_t *s, inv_imu_edmp_b2s_parameters_t *b2s_params,\n                                    inv_imu_edmp_b2s_init_t usecase);\n\n/** @brief  Set new B2S configuration settings. \n *  @param[in]  s           Pointer to device.\n *  @param[in]  b2s_params  Pointer to B2S configuration structure, which contains new B2S configuration.\n *  @param[in]  usecase     System usecase for which B2S image was initialized.\n *  @return                 0 on success, negative value on error.\n */\nint inv_imu_edmp_b2s_set_parameters(inv_imu_device_t *                   s,\n                                    const inv_imu_edmp_b2s_parameters_t *b2s_params,\n                                    inv_imu_edmp_b2s_init_t              usecase);\n\n",
+     "/** @brief IMU B2S parameters definition\n */\ntypedef struct {\n\t/* B2S */\n\tuint8_t b2s_mounting_matrix; /**< Specifies mounting matrix to be applied to B2S raw data\n                                       Set bit 2 : swap X/Y ; flip Z\n                                       Set bit 1 : flip X ; flip Z\n                                       Set bit 0 : flip Y ; flip Z */\n\tint32_t\n\t         dev_norm_max; /**< Hysteresis added or removed to norm estimate and Y axis constrains value for RevB2S\n\n                                         Unit in LSB, with 1 LBS = 1g / 2^12\n                                         Default value 700 (corresponding to 0.1709g)\n                                         Recommended range value [1 - 2048] */\n\tint32_t  sin_limit; /**< Maximum threshold on absolute value of X axis in b2s position\n                                         link to the sinus value of inclination angle on X axis\n                                         Unit in LSB, with 1 LBS = 1g / 2^12\n                                         Default value 2048 (corresponding to 30deg)\n                                         Recommended range value [300 - 3000] */\n\tint32_t  fast_limit; /**< Threshold of minimal motion to be detected as \"Fast motion\"\n                                         Unit is no unit, filtered data\n                                         Default value 200 */\n\tuint16_t fast_motion_age_limit; /**< Time limit between last \"Fast motion\" and b2s position\n                                         Unit in sample number - ODR dependent\n                                         Default value 20 (corresponding to 400ms at 50Hz) */\n\tuint16_t\n\t         fast_motion_time_limit; /**< Minimum time where the criterion is above the threshold  to be classified as \"Fast motion\"\n\n                                         Unit in sample number - ODR dependent\n                                         Default value 4 (corresponding to 80ms at 50Hz) */\n\tuint16_t age_limit; /**< Minimum time between 2 event b2s\n                                         Unit in sample number - ODR dependent\n                                         Default value 50 (corresponding to 1s at 50Hz) */\n\tuint16_t\n\t    rev_latency_th; /**< Condition of RevB2S should be maintained at least during RevB2sLatencyTh\n\n                                         Unit in sample number - ODR dependent\n                                         Default value 25 (corresponding to 0.5s at 50Hz) */\n\tint32_t\n\t    static_limit; /**< Threshold to determine static phase required after the gesture B2S to validate it\n\n                                         Unit is no unit, filtered data\n                                         Default value 1400 */\n\tint32_t\n\t    thr_cos_ang; /**< RevB2S threshold, condition satisfied when moving away from bring2see orientation position\n\n                                         by more than threshold angle corresponding to the cosine angle\n                                         Unit is cosine value of angle in q30\n                                         Default value 1057429273 corresponding to 10deg */\n\tint32_t\n\t    rev_x_limit; /**< Condition of RevB2S on X axis value to ensure Rev-B2S when arm point down\n\n                                         * Unit in LSB, with 1 LBS = 1g / 2^12\n                                         * Default value 3680 (corresponding to 0.8984g)\n                                         */\n\tuint32_t\n\t    sin_flat_angle; /**< Condition to detect the flat position and reject B2S interrupt at return to rest position\n\n                                         Unit in LSB, with 1 LBS = 1g / 2^12\n                                         Default value 2048 (corresponding to 30\u00b0) */\n\tuint32_t\n\t    timer_flat_reject; /**< A timer to disable flat rejection when age of the last no-flat B2S detection is over the timer\n\n                                         Unit in sample number - ODR dependent\n                                         Default value 350 (corresponding to 7s at 50Hz) */\n} inv_imu_edmp_b2s_parameters_t;\n\n/** @brief System usecase definition for IMU EDMP B2S initialization */\ntypedef enum {\n\tINV_IMU_EDMP_B2S_INIT_OVER_SIF,\n\tINV_IMU_EDMP_B2S_INIT_OVER_GAF\n} inv_imu_edmp_b2s_init_t;\n\n/** @brief  Initialize B2S algorithm for usecase where no SIF is needed. \n *  @param[in]  s        Pointer to device.\n *  @param[out] usecase  System usecase for which B2S image was initialized.\n *  @return     0 on success, negative value on error.\n *  @warning inv_imu_edmp_init() must be called beforehand and can not be called anymore unless this API is called afterwards\n */\nint inv_imu_edmp_b2s_init_over_sif(inv_imu_device_t *s, inv_imu_edmp_b2s_init_t *usecase);\n\n/** @brief  Initialize B2S algorithm for usecase where no GAF is needed. \n *  @param[in]  s        Pointer to device.\n *  @param[out] usecase  System usecase for which B2S image was initialized.\n *  @return     0 on success, negative value on error.\n *  @warning inv_imu_edmp_init() must be called beforehand and can not be called anymore unless this API is called afterwards\n */\nint inv_imu_edmp_b2s_init_over_gaf(inv_imu_device_t *s, inv_imu_edmp_b2s_init_t *usecase);\n\n/** @brief  Get current B2S configuration settings. \n *  @param[in]  s           Pointer to device.\n *  @param[out] b2s_params  Pointer to B2S configuration structure, which will hold current B2S configuration.\n *  @param[in]  usecase     System usecase for which B2S image was initialized.\n *  @return                 0 on success, negative value on error.\n */\nint inv_imu_edmp_b2s_get_parameters(inv_imu_device_t *s, inv_imu_edmp_b2s_parameters_t *b2s_params,\n                                    inv_imu_edmp_b2s_init_t usecase);\n\n/** @brief  Set new B2S configuration settings. \n *  @param[in]  s           Pointer to device.\n *  @param[in]  b2s_params  Pointer to B2S configuration structure, which contains new B2S configuration.\n *  @param[in]  usecase     System usecase for which B2S image was initialized.\n *  @return                 0 on success, negative value on error.\n */\nint inv_imu_edmp_b2s_set_parameters(inv_imu_device_t *                   s,\n                                    const inv_imu_edmp_b2s_parameters_t *b2s_params,\n                                    inv_imu_edmp_b2s_init_t              usecase);\n\n",
      "/* G2 stock variant: B2S API of the TDK drop linked in 2.2.6.10 (not 1.1.2). */\ntypedef struct {\n\tuint32_t thr_cos_q30; /**< EDMP SRAM 0x10ac: cosine of the tilt threshold, Q30 */\n\tuint16_t mode;        /**< EDMP SRAM 0x10aa */\n} inv_imu_edmp_b2s_parameters_t;\n\nint inv_imu_edmp_b2s_init_over_sif(inv_imu_device_t *s);\nint inv_imu_edmp_b2s_get_parameters(inv_imu_device_t *s, inv_imu_edmp_b2s_parameters_t *b2s_params);\nint inv_imu_edmp_b2s_set_parameters(inv_imu_device_t *                   s,\n                                    const inv_imu_edmp_b2s_parameters_t *b2s_params,\n                                    uint16_t                             odr_hz);\n\n"
     ]
    ]
@@ -43997,6 +44034,10 @@
     [
      "    HALSTATE_b.SIGNATURE = SYSCTRL_CLKMUXRST_SIGNATURE;\n}\n",
      "    HALSTATE_b.SIGNATURE = SYSCTRL_CLKMUXRST_SIGNATURE;\n}\n#endif /* G2 stock-variant clkmuxrst_low_power_init */\n"
+    ],
+    [
+     "void\nam_hal_sysctrl_aircr_reset(void)\n{\n    //\n    // Set the system reset bit in the AIRCR register\n    //\n    __NVIC_SystemReset();\n}\n",
+     "#if 0 /* G2: intentional AIRCR reset is g2_recovery_reset_app in g2/src/apollo-main/system/self-recovery/self_recovery.c (disarms OTAP first) */\nvoid\nam_hal_sysctrl_aircr_reset(void)\n{\n    //\n    // Set the system reset bit in the AIRCR register\n    //\n    __NVIC_SystemReset();\n}\n#endif /* G2 recovery AIRCR reset */\n"
     ]
    ]
   },

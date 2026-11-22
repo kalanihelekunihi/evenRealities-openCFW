@@ -38,9 +38,11 @@ uint32_t opencfw_em9305_scan_callback_31ec40(uintptr_t object)
         uint32_t flags=r8(scan+65u);
         if(flags&1u) {
             w8(0x805a80u,0u);
-            if((flags&2u)==0u)
-                (void)opencfw_em9305_radio_address_write_3045e8(scan+2u,r32(0x805a8cu),
-                                                                r32(0x805a90u));
+            if((flags&2u)==0u) {
+                uint32_t high=r32(0x805a90u);
+                uint32_t low=r32(0x805a8cu);
+                (void)opencfw_em9305_radio_address_write_3045e8(scan+2u,low,high);
+            }
             uint32_t high=r32(0x805a90u);
             uint32_t low=r32(0x805a8cu);
             w32(scan+288u,high);

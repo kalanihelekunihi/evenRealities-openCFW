@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical P1 coverage draft revision 007 adding exact case tail string-bearing and transform source data spans.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-touch-coverage-index.json",
+    "sha256": "ce15b6d26bee2c5aca401539aef7b1979a527e00b80e5411cdc77ce4a19b1abf"
+  },
+  "artifacts": {
+    "coverage_draft_007": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-007/001/coverage-draft.jsonl",
+      "sha256": "a95311c2badafc42805dbc75797179ac8d8ff6850b44beacec10de042fb4ac36"
+    },
+    "coverage_receipt_007": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-007/001/receipt.json",
+      "sha256": "3ffbdbc219f66097ab1101a78d0cc1d75758e06cbfc37802eadbaa620901ce23"
+    },
+    "independent_coverage_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-tail-coverage-review-001/001/review.json",
+      "sha256": "30f079dff71e44da371724a793b6dcc8548c9c4e71ef0d63e6f72a3b7ec23ae7"
+    },
+    "case_tail_gap_index": {
+      "path": "g2/evidence/g2-20261112-p1-case-tail-gap-index.json",
+      "sha256": "b5b2294d00c0364ae1f89c04d8ccfce5f7e95b69b19b31b27f1f60b844e07b4f"
+    }
+  },
+  "new_classifications": [
+    {
+      "scope": "case payload",
+      "string_bearing_span": [
+        54310,
+        55644
+      ],
+      "transform_source_span": [
+        55676,
+        55780
+      ],
+      "classified_data_bytes": 1438
+    },
+    {
+      "scope": "case:flash",
+      "string_bearing_span": [
+        54278,
+        55612
+      ],
+      "transform_source_span": [
+        55644,
+        55748
+      ],
+      "classified_data_bytes": 1438
+    }
+  ],
+  "counts": {
+    "coverage_rows": 91,
+    "coverage_scopes": 40,
+    "unknown_payload_bytes": 4177565,
+    "unknown_image_bytes": 5672215
+  },
+  "limits": [
+    "String-bearing span includes NUL terminators/separators, alignment bytes and CR/LF; not all bytes are printable text.",
+    "Case candidate descriptors/tables, partial transform metadata and terminal FF remain unknown.",
+    "Other payload unknowns and full G1 discovery remain open."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

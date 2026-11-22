@@ -1,0 +1,54 @@
+{
+  "G1_TARGET_AND_INVENTORY": "not_run",
+  "G2_to_G6": "not_run",
+  "campaign_id": "20261112T092142Z",
+  "findings": {
+    "architecture_plan": "candidate-002 tool pin correction reviewed; full canonical source-assertion review pending",
+    "case_alternate_bank": "generic alias described but exact target in alternate bank unproven",
+    "coverage_revalidation": "18 stale-input wrapper/container intervals supported in bounded corrected review",
+    "current_objdump_availability": "all three binaries present at historical SHA-256 pins",
+    "historical_review_registry_hashes": "125/125 match",
+    "historical_reviews_with_current_input_pins": 102,
+    "historical_reviews_with_stale_inputs": 23,
+    "outer_parser_core_functions": "selected functions AST-identical; full source changed",
+    "root_image_bytes": "four authenticated source spans and primary mappings match"
+  },
+  "gate_effect": "none",
+  "references": {
+    "architecture_plan_candidate": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-rebase-001/001/analysis-plan-candidate-002.json",
+      "sha256": "802a7b3fbed6a25590160b5116f363967e4a79c48befc071918c769c8c5dfe82"
+    },
+    "architecture_plan_review": {
+      "path": "g2/evidence/g2-20261112-p1-architecture-plan-review.json",
+      "sha256": "9cf81456df89cd6f7ce35e2a2103f9c32dcb925dc584ecd4a8dce7a5e26e80b6"
+    },
+    "coverage_review": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-review.json",
+      "sha256": "da684e20321ad9eec59694f0c491498f70af0d6ab72a47598eafba158881038d"
+    },
+    "historical_g1_review_audit": {
+      "path": "g2/evidence/g2-20261112-historical-g1-review-reuse-audit.json",
+      "sha256": "e999c577815c90c974102087d9cbd9a54e86ce5ee1358c5d1916dae9a7c934e6"
+    },
+    "parser_drift": {
+      "path": "g2/evidence/g2-20261112-p1-parser-drift-audit.json",
+      "sha256": "60dc7bd350629b9f78bea9465349d8d4cecb838fefef3d7a8a28bd5a7dada574"
+    },
+    "reference_delta": {
+      "path": "g2/evidence/g2-20261112-p1-reference-delta.json",
+      "sha256": "e0d9a6428849720899c9a78817153902e11ba0fdeec4c7717cb79613f85d51a9"
+    },
+    "root_image_review": {
+      "path": "g2/evidence/g2-20261112-p1-root-image-review.json",
+      "sha256": "9d8f5dacec3e3205e4944b1f63926c83bf8f68ffd253fe3d524c6491a104237c"
+    },
+    "tool_availability": {
+      "path": "g2/evidence/g2-20261112-p1-tool-availability.json",
+      "sha256": "00f720b48f05503372315604705bb40160a6bebc106cfcc8859490679d30c76d"
+    }
+  },
+  "schema_version": 1,
+  "scope": "Integration of bounded P1 reuse checks; not a G1 gate receipt.",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

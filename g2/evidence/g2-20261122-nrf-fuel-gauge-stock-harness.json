@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-22 09:21 AM CST (America/Chicago)",
+  "title": "Stock nrf_fuel_gauge ARM harness (Unicorn + MVE/DLS hooks) runs with real EVENBAT; C body not yet replaced",
+  "scope": "Host Unicorn only. No hardware flash. No commit. Source-only estimate was not replaced because the reconstructed C body is not yet verified.",
+  "stock_library": {
+    "version_string": "c205a2",
+    "build_date": "2025-04-28",
+    "stock_va_version": "0x007682A8",
+    "stock_va_date": "0x00768290",
+    "note": "Newer than the in-tree Nordic 1.0.1 Cortex-M4 hard-float archive. Stock is IAR Cortex-M55 and uses MVE plus Armv8.1-M low-overhead loops."
+  },
+  "stock_entries": {
+    "nrf_fuel_gauge_init": "0x0043C150",
+    "nrf_fuel_gauge_ext_state_update": "0x0055F74C",
+    "nrf_fuel_gauge_process": "0x0055F848",
+    "nrf_fuel_gauge_tte_get": "0x0055F994",
+    "nrf_model_tte_cached": "0x0058EABC",
+    "nrf_fuel_gauge_ttf_get": "0x0055F9A0",
+    "ttf_model": "0x0058EAC4",
+    "model_init_or_reset": "0x0043A1B0",
+    "process_core": "0x0043A698",
+    "memcpy": "0x00439E90",
+    "memset": "0x0043BB00",
+    "iar_expf": "0x0043BA98",
+    "iar_logf": "0x00598074"
+  },
+  "state": {
+    "model_state": "0x20070CE0",
+    "model_state_size": "0xE8",
+    "model_pointer_at": "+0xE0",
+    "tte_cached_at": "+0x84",
+    "ext_block": "0x20073DD0",
+    "evenbat_va": "0x00646BF8",
+    "evenbat_name_at": "+0x15C0",
+    "default_opt_params_rom": "0x006D8248"
+  },
+  "harness": {
+    "script": "build/fuel-gauge-recon-20261122/stock_unicorn_probe.py",
+    "mve_sites": "build/fuel-gauge-recon-20261122/mve_sites.json",
+    "golden": "build/fuel-gauge-recon-20261122/stock-golden.json",
+    "engine": "Unicorn 2.1.4, UC_MODE_THUMB|MCLASS, CPU model Cortex-M7 (no native MVE/DLS)",
+    "objdump_oracle": "arm-none-eabi-objdump (GNU Binutils 2.47) -m armv8.1-m.main",
+    "python": "g2-firmware-emulator/.venv (capstone 5.0.7, unicorn 2.1.4)",
+    "method": "Map stock.app.bin at 0x00438000 and SRAM at 0x20000000. Patch 155 MVE sites, 16 DLS/LE sites, and the isfinite vcvt.f64.f32/vmov pair to NOP, then hook CODE to emulate them. EVENBAT is the table already in the stock image.",
+    "mve_opcodes_emulated": [
+      "vstrw.32",
+      "vldrw.u32",
+      "vmul.f32 q",
+      "vadd.f32 q",
+      "vsub.f32 q",
+      "vdup.32",
+      "vld40-43.32",
+      "vst40-43.32"
+    ],
+    "other_emulated": [
+      "dls lr,lr",
+      "le lr,label",
+      "vcvt.f64.f32",
+      "vmov r0,r1,d0"
+    ]
+  },
+  "verification": {
+    "init_null_params_or_model": -22,
+    "init_4v10_rc": 0,
+    "init_4v10_adjusted_voltage": 4.099999904632568,
+    "init_ext_block": "00 | 1.0 | 1.0 | NaN | NaN (charge-state, factors, limits)",
+    "init_model_pointer": "0x00646BF8",
+    "process_rest_4v10_1s": {
+      "soc": 70.84683990478516,
+      "yhat": 4.099989414215088,
+      "r0": 2.3588204383850098,
+      "T_truncated": 26.0,
+      "i_corrected": 0.0
+    },
+    "process_rest_4v20_1s": {
+      "soc": 80.03155517578125,
+      "yhat": 4.200005531311035,
+      "r0": 2.3588204383850098
+    },
+    "after_120s_50mA_discharge_from_4v20": {
+      "soc": 78.98108673095703,
+      "tte_seconds": 27427.212890625,
+      "ttf": "nan"
+    },
+    "mutant_evenbat_param9_doubled": {
+      "offset": "EVENBAT+0x1578 (param_9[0], stock 2.3588204383850098)",
+      "stock_r0": 2.3588204383850098,
+      "mutant_r0": 4.7176408767700195,
+      "differs": true,
+      "note": "SOC at this first rest sample was unchanged; r0 in the state info doubled, so the harness is sensitive to the real table."
+    }
+  },
+  "not_done": [
+    "Did not decompile the process core (0x43A698, 0x43A1B0 and callees) into verified C",
+    "Did not replace g2c_fuel_gauge_source.c",
+    "Did not rebuild apollo-main",
+    "Did not re-run paired Renode sims (no image change)",
+    "Did not flash hardware",
+    "TTF-after-charge was still NaN in the short VBUS+CC sample; term-current ext_state was not applied in that probe"
+  ],
+  "next": "Translate the stock bodies to C from the objdump/Ghidra already collected, compile the C as Thumb hard-float, and compare it to this Unicorn stock golden on random inputs, the EVENBAT tables, and planted mutants. Replace the source-only estimate only after that match."
+}

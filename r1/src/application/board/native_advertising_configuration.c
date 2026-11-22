@@ -3,7 +3,9 @@
 #include <stdint.h>
 #include "../../include/r1_product_serial.h"
 #include <string.h>
+#ifndef SVCALL_AS_NORMAL_FUNCTION
 #define SVCALL_AS_NORMAL_FUNCTION
+#endif
 #include "ble_advertising.h"
 extern void *volatile r1_device_info_kv_handle;
 extern uint32_t r1_kv_class_read(void *,void *,uint32_t);

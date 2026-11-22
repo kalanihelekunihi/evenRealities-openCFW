@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded audit of eleven EM9305 image unknown rows",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-em9305-unknown-workpack-001/001/review.py",
+      "sha256": "50a8a9f1c3279ebf1ef3e28b3ecd9f52a1d3b851f269841a5b865f0229cf6e82"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-em9305-unknown-workpack-001/001/report.json",
+      "sha256": "48e056b4d5465b3416ccc7a308cc71f4509cac4248184dbac20d36c83ac727a4"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-em9305-unknown-workpack-001/001/receipt.json",
+      "sha256": "0951eee04eb4a454027b094f4962edc34838517f2f3c867ed38429974d71d052"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-image-coverage-em9305-unknown-independent-review-001/001/review.json",
+      "sha256": "18a01f06bbf25c9f62e3ae74de315419a12de87b10002dcd1b0dfbae217a8d9f"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "selected_unknown_image_rows": 11,
+    "bounded_reviewed_rows": 11,
+    "unknowns_promoted": 0,
+    "canonical_review_ids_assigned": 0,
+    "locked_package_and_record3_child_slices_checked": true
+  },
+  "review_finding": "Record-3 prose mentions independently evidenced code windows without naming exact typed intervals in v017; retain as static observation only.",
+  "limits": [
+    "Unknown code/data spans are allowed at G1 if initial byte ledger and mappings are explicit; no automatic fine subledger prerequisite.",
+    "No external ROM/NVM selection proof, canonical admission, or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

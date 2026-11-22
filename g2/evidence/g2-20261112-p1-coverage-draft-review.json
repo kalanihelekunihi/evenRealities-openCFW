@@ -1,0 +1,67 @@
+{
+  "campaign_id": "20261112T092142Z",
+  "classification_note": "No defect found in the requested bounded checks. BINH A stage1 [0,12288) is one unknown row; no narrower CRC/framing classification is asserted. No correction to draft or receipt is required.",
+  "decision": "bounded_pass",
+  "inputs": [
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-draft-001/001/coverage-draft.jsonl",
+      "role": "draft",
+      "sha256": "8e51dd57245320aef83f8a67ba61e302228b379fc9c76fcfd90362c42d4f8a24"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-draft-001/001/receipt.json",
+      "role": "receipt",
+      "sha256": "80cd0f882c8256606b350da524acdebefe963c2b019294f29895a7f5052e6738"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/identity.json",
+      "role": "campaign_identity",
+      "sha256": "2dbba3e34ef59158bf05bed2cf24c455b91f3b7119856ed9c8826cc916f121fe"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/receipts/identity-preflight.json",
+      "role": "identity_preflight",
+      "sha256": "c2cfc3f0daff6f87cf44f9899b8d3236a67fe83e6d5e2b377ff1501051fed71b"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/inventory/outer-container.json",
+      "role": "outer_container",
+      "sha256": "511d0729b8f128e68493c6b084fcf53e9b7c40123ad6ac60cc21e9c651cfffc3"
+    },
+    {
+      "path": "g2/evidence/g2-20261112-p1-all-image-materializations-index.json",
+      "role": "current_image_index",
+      "sha256": "b37f1fed89bb1addee808ab51dbf06455c2a54a2e39fa52a484dfe0aae40e26d"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/coverage.jsonl",
+      "role": "old_coverage",
+      "sha256": "db366503c7f5cdb5ab6ee891c0a7ef24a1ea2451f3c5e7f0b2bdb2073a214b0f"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "role": "old_images",
+      "sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    }
+  ],
+  "results": {
+    "all_33_materializations_match_indexed_size_and_sha256": true,
+    "all_evidence_files_exist_and_match_sha256": true,
+    "all_review_ids_null": true,
+    "all_rows_candidate_pending": true,
+    "all_scope_partitions_start_at_zero_and_have_no_gap_or_overlap": true,
+    "all_scopes_have_single_input_sha256": true,
+    "canonical_admission": "none",
+    "discovery": "open / unproven",
+    "draft_rows": 70,
+    "evidence_references": 140,
+    "g1": "open / not run",
+    "image_index_entries": 33,
+    "scopes": 40,
+    "unique_ids": 70,
+    "unknown_payload_bytes_receipt_matches_rows": true
+  },
+  "review_id": "P1-coverage-draft-review-001/001-v2",
+  "schema_version": 1,
+  "scope": "Bounded pass for package/payload/image interval partitioning, listed byte identities and evidence pins only. This is not G1, classification approval, discovery completeness, or canonical admission."
+}

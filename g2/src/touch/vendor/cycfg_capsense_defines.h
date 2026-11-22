@@ -1,7 +1,8 @@
 /* SPDX-License-Identifier: MIT
  * CapSense configurator defines for G2 touch (PSoC 4000T / MSCLP LP).
- * Wave 6: values are product defaults aligned with reconstructed
- * reset_generated_* layout; refine when design.cycapsense is generated.
+ * Product cardinalities match the locked reset-copied common configuration,
+ * three widget records, nine sensor contexts, and five active/four LP slots.
+ * Other feature defaults still require generated-design validation.
  * Platform selection comes from CY_IP_M0S8MSCV3LP in the device header.
  */
 #ifndef CYCFG_CAPSENSE_DEFINES_H
@@ -9,12 +10,12 @@
 
 #include <stdint.h>
 
-#define CY_CAPSENSE_TOTAL_WIDGET_COUNT          (5u)
+#define CY_CAPSENSE_TOTAL_WIDGET_COUNT          (3u)
 #define CY_CAPSENSE_WIDGET_COUNT                CY_CAPSENSE_TOTAL_WIDGET_COUNT
-#define CY_CAPSENSE_SENSOR_COUNT                (8u)
-#define CY_CAPSENSE_PIN_COUNT                   (8u)
-#define CY_CAPSENSE_SHIELD_PIN_COUNT            (1u)
-#define CY_CAPSENSE_SLOT_COUNT                  (8u)
+#define CY_CAPSENSE_SENSOR_COUNT                (9u)
+#define CY_CAPSENSE_PIN_COUNT                   (5u)
+#define CY_CAPSENSE_SHIELD_PIN_COUNT            (2u)
+#define CY_CAPSENSE_SLOT_COUNT                  (5u)
 #define CY_CAPSENSE_LP_SLOT_COUNT               (4u)
 #define CY_CAPSENSE_TOUCHPAD_SENSOR_COUNT       (0u)
 #define CY_CAPSENSE_CSD_WIDGET_COUNT            (CY_CAPSENSE_TOTAL_WIDGET_COUNT)
@@ -24,7 +25,7 @@
 #define CY_CAPSENSE_RAW_FILTER_MODES_MASK       (0u)
 #define CY_CAPSENSE_SCAN_MODE                   (0u)
 #define CY_CAPSENSE_TOTAL_WIRE_COUNT            (CY_CAPSENSE_PIN_COUNT)
-#define CY_CAPSENSE_MAX_SENSORS_COUNT           (CY_CAPSENSE_SENSOR_COUNT)
+#define CY_CAPSENSE_MAX_SENSORS_COUNT           (4u)
 #define CY_CAPSENSE_TOTAL_CH_NUMBER             (1u)
 #define CY_CAPSENSE_SENSOR_FRAME_SIZE           (8u)
 #define CY_CAPSENSE_RAW_HISTORY_SIZE            (2u)
@@ -60,6 +61,17 @@
 #define CY_CAPSENSE_CSD_CALIBRATION_EN          (CY_CAPSENSE_ENABLE)
 #define CY_CAPSENSE_CSX_CALIBRATION_EN          (CY_CAPSENSE_DISABLE)
 #define CY_CAPSENSE_ISX_CALIBRATION_EN          (CY_CAPSENSE_DISABLE)
+/* Locked widget CDAC settings 0x1AA/0x1A1 use automatic reference, fine,
+ * compensation and compensation-divider modes. The stock calibration path
+ * contains all four corresponding branches. */
+#define CY_CAPSENSE_CSD_CDAC_COMP_EN            (CY_CAPSENSE_ENABLE)
+#define CY_CAPSENSE_CSD_CDAC_COMP_DIV_AUTO_EN   (CY_CAPSENSE_ENABLE)
+#define CY_CAPSENSE_CSD_CDAC_REF_AUTO_EN        (CY_CAPSENSE_ENABLE)
+#define CY_CAPSENSE_CSD_CDAC_FINE_EN            (CY_CAPSENSE_ENABLE)
+#define CY_CAPSENSE_CDAC_REF_AUTO_EN            (CY_CAPSENSE_ENABLE)
+#define CY_CAPSENSE_CDAC_FINE_AUTO_EN           (CY_CAPSENSE_ENABLE)
+#define CY_CAPSENSE_CDAC_COMP_AUTO_EN           (CY_CAPSENSE_ENABLE)
+#define CY_CAPSENSE_CDAC_COMP_DIV_AUTO_EN       (CY_CAPSENSE_ENABLE)
 #define CY_CAPSENSE_CDAC_AUTO_DITHER_EN         (CY_CAPSENSE_DISABLE)
 #define CY_CAPSENSE_SMARTSENSE_FULL_EN          (CY_CAPSENSE_DISABLE)
 #define CY_CAPSENSE_SMARTSENSE_HW_EN            (CY_CAPSENSE_DISABLE)
@@ -71,7 +83,10 @@
 #define CY_CAPSENSE_CENTROID_5X5_CSD_EN         (CY_CAPSENSE_DISABLE)
 #define CY_CAPSENSE_BALLISTIC_MULTIPLIER_EN     (CY_CAPSENSE_DISABLE)
 #define CY_CAPSENSE_ADVANCED_CENTROID_5X5_EN    (CY_CAPSENSE_DISABLE)
-#define CY_CAPSENSE_CSD_SHIELD_EN               (CY_CAPSENSE_DISABLE)
+/* The locked common config selects active shield mode with two shield pins. */
+#define CY_CAPSENSE_CSD_SHIELD_EN               (CY_CAPSENSE_ENABLE)
+#define CY_CAPSENSE_SHIELD_ACTIVE_EN            (CY_CAPSENSE_ENABLE)
+#define CY_CAPSENSE_SHIELD_PASSIVE_EN           (CY_CAPSENSE_DISABLE)
 #define CY_CAPSENSE_CSD_SHIELD_TANK_EN          (CY_CAPSENSE_DISABLE)
 #define CY_CAPSENSE_TX_VOLTAGE_EN               (CY_CAPSENSE_DISABLE)
 #define CY_CAPSENSE_TUNER_ENABLE                (CY_CAPSENSE_DISABLE)
@@ -84,9 +99,9 @@
 #define CY_CAPSENSE_CSD_AUTODAC_EN              (CY_CAPSENSE_DISABLE)
 #define CY_CAPSENSE_CSX_AUTODAC_EN              (CY_CAPSENSE_DISABLE)
 #define CY_CAPSENSE_ISX_AUTODAC_EN              (CY_CAPSENSE_DISABLE)
-#define CY_CAPSENSE_CDAC_COMP_USAGE_EN          (CY_CAPSENSE_DISABLE)
+#define CY_CAPSENSE_CDAC_COMP_USAGE_EN          (CY_CAPSENSE_ENABLE)
 #define CY_CAPSENSE_CDAC_REF_USAGE_EN           (CY_CAPSENSE_ENABLE)
-#define CY_CAPSENSE_CDAC_FINE_USAGE_EN          (CY_CAPSENSE_DISABLE)
+#define CY_CAPSENSE_CDAC_FINE_USAGE_EN          (CY_CAPSENSE_ENABLE)
 #define CY_CAPSENSE_PERCENTAGE_100              (100u)
 
 
@@ -102,7 +117,7 @@
 #define CY_CAPSENSE_FIFO_SNS_MAX_NUM            (32u)
 #define CY_CAPSENSE_LP_SENSOR_FRAME_SIZE        (CY_CAPSENSE_SENSOR_FRAME_SIZE)
 #define CY_CAPSENSE_MAX_CH_NUM                  (1u)
-#define CY_CAPSENSE_TOTAL_ELTD_COUNT            (CY_CAPSENSE_PIN_COUNT)
+#define CY_CAPSENSE_TOTAL_ELTD_COUNT            (CY_CAPSENSE_SENSOR_COUNT)
 
 
 #define CY_CAPSENSE_NUM_EPI_KREF_DELAY          (0u)

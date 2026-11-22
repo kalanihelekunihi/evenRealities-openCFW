@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Six-payload noncanonical P1 architecture plan v4 and independent bounded review",
+  "artifacts": {
+    "generator": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-gxnpu-004/001/build_v4.py",
+      "sha256": "e200e5649dd34b453e2f3f25fac6a027b3d9339c26a35603d78fdcb06d6039f2"
+    },
+    "candidate": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-gxnpu-004/001/analysis-plan-candidate-004.json",
+      "sha256": "17388c2e802160fe8a1845e97664d85f8dd2d679496043cc4b07d5a5bb1c0200"
+    },
+    "change_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-gxnpu-004/001/change-report.json",
+      "sha256": "21a6aca18e5f741f36fd9f4b7f442c8a9930689edd1fbe54171ae3e2ef5486a4"
+    },
+    "receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-gxnpu-004/001/receipt.json",
+      "sha256": "85dd61af7ab33bc75d24ace0f9857096371b1541069128cd38d0eec3f2216f67"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-gxnpu-004-independent-review-001/001/review.py",
+      "sha256": "da57b4909e813500d98b2f5531a07f26ed6ff6dab5587903bad9072ab0d7fc0d"
+    },
+    "independent_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-gxnpu-004-independent-review-001/001/report.json",
+      "sha256": "d4782bc857ec0b11b222c416ff3d216338a81705f1eb01ebe950926d37b46a1e"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-gxnpu-004-independent-review-001/001/receipt.json",
+      "sha256": "f4f3619508e29898142097674453b63201fa5832e4c8adf658c1a1d5186fc8e5"
+    }
+  },
+  "result": {
+    "payload_plans": 6,
+    "active_materialized_images_verified": 33,
+    "top_level_input_pins_verified": 36,
+    "plan_evidence_pins_verified": 70,
+    "independent_verdict": "PASS_BOUNDED",
+    "validator_review_records_created": 0
+  },
+  "limits": [
+    "EM9305 descriptor[3] conditional FHDR route is bounded; external NVM/ROM selection and physical execution remain unproven.",
+    "GXNPU source spans are bounded, but runtime/base/dispatch mapping remains a G1 inventory blocker and operation semantics remain P2 work.",
+    "Candidate software-address routes are not admitted hardware runtime mappings.",
+    "Ghidra processor-spec hash remains to be pinned before P2 projects.",
+    "No authenticated registry, canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

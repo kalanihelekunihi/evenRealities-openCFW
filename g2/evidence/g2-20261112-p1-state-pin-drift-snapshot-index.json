@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "scope": "Reviewed snapshot of one-level state P1 evidence hash-pin drift before subsequent pointer updates",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-state-index-pin-drift-001/001/audit.py",
+      "sha256": "f2c6af7d0ea9cf76781165fd6e82d122778da89797166b3d9762b9bfae7b270b"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-state-index-pin-drift-001/001/report.json",
+      "sha256": "c7a26d98ff132cf0cdd3cc328567f2091f9f0ab9041ffe66fe0093861fe1084f"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-state-index-pin-drift-001/001/receipt.json",
+      "sha256": "c8b44f076baced841d6f6e0fa8ed56d65f99cf0834e02616bfa64c81aca19a22"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-state-index-pin-drift-independent-review-001/001/review.py",
+      "sha256": "515a60a832ad3b8c078b5100adc5475416682ea4c0fcfaf138b6f3a510ff8645"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-state-index-pin-drift-independent-review-001/001/review.json",
+      "sha256": "9974dc3e379f1ce5fcae3a706dc2f8e7954b130b45418c5eb07708d6ffb277ac"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-state-index-pin-drift-independent-review-001/001/receipt.json",
+      "sha256": "f2bb3908e02b72894dbbbe6ecbbe8e47682ce9a1ce7df3c131aca279d25ad689"
+    }
+  },
+  "result": {
+    "state_sha256_at_audit": "6493f45ff128f22f536185d6fb90d0c7b9519f80d0c638a8876c361bb799a9f5",
+    "p1_indexes_checked": 63,
+    "artifact_refs_checked": 377,
+    "stale_child_pins": 4,
+    "stale_state_index_pins": 0,
+    "stale_keys": [
+      "p1_canonical_readiness",
+      "p1_current_transform_readiness"
+    ]
+  },
+  "limits": [
+    "This is a fixed state snapshot, not an assertion that later state pointers have the same hash.",
+    "Stale historical child pins alone do not change live validator behavior or G1\u2013G6 status."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

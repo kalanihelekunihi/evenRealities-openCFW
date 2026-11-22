@@ -1,0 +1,225 @@
+{
+  "admission": "none",
+  "campaign_id": "20261112T092142Z",
+  "fhdr": {
+    "entry_bytes_hex": "db44800078f955054006",
+    "entry_decode_status": "not_qualified",
+    "entry_file_span": [
+      1044,
+      1054
+    ],
+    "entry_padding_hex": "ffffffffffff",
+    "entry_target_span": [
+      3153960,
+      3153970
+    ],
+    "erased_flash_gap_size": 968,
+    "erased_flash_gap_span": [
+      3153976,
+      3154944
+    ],
+    "fields": {
+      "alignment": 0,
+      "emcore_crc32": 4294967295,
+      "execution": 3153960,
+      "firmware_crc32": 3468162291,
+      "firmware_size": 211872,
+      "firmware_start": 3153960,
+      "firmware_version": 0,
+      "header_crc32": 2268085140,
+      "options": 0
+    },
+    "file_span": [
+      1004,
+      1044
+    ],
+    "firmware_crc32_computed": 3468162291,
+    "firmware_crc32_matches": true,
+    "header_crc32_computed": 2268085140,
+    "header_crc32_matches": true
+  },
+  "g1_status": "not_run",
+  "historical_image_byte_checks": [
+    {
+      "content_sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+      "id": "ble_em9305:record-0",
+      "size": 224,
+      "source_span": [
+        124,
+        348
+      ]
+    },
+    {
+      "content_sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b",
+      "id": "ble_em9305:record-1",
+      "size": 656,
+      "source_span": [
+        348,
+        1004
+      ]
+    },
+    {
+      "content_sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f",
+      "id": "ble_em9305:record-2",
+      "size": 56,
+      "source_span": [
+        1004,
+        1060
+      ]
+    },
+    {
+      "content_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+      "id": "ble_em9305:record-3",
+      "size": 210888,
+      "source_span": [
+        1060,
+        211948
+      ]
+    },
+    {
+      "content_sha256": "72c72af0f2727ed0b2188fca6de6668e9c90c27a8eace1126a4307c9a8fb223d",
+      "id": "ble_em9305:ram-initialized-0",
+      "size": 69,
+      "source_span": [
+        209964,
+        210033
+      ]
+    },
+    {
+      "content_sha256": "b0d0e122e43221e514b847df46b7f18eb08f3f0e94757e574d24486b39c3746b",
+      "id": "ble_em9305:ram-initialized-1",
+      "size": 776,
+      "source_span": [
+        210044,
+        210820
+      ]
+    },
+    {
+      "content_sha256": "1a2dad76dc9de4334783462ea0b99870ad504ddfe3f7033c2ec2635d0e9a9b9d",
+      "id": "ble_em9305:ram-initialized-2",
+      "size": 44,
+      "source_span": [
+        210828,
+        210872
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+      "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9"
+    },
+    {
+      "path": "g2/workflow/target.json",
+      "sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff"
+    },
+    {
+      "path": "g2/tools/em9305_source_image/record_package.py",
+      "sha256": "33c4be40013dfcfcc786dc569e3fd108a1b9845aba211458b252a9d527e85ee4"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl",
+      "sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+    }
+  ],
+  "package": {
+    "current_parser_round_trip_exact": true,
+    "erase_sector_count": 29,
+    "erase_sector_ids": [
+      0,
+      0,
+      1,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "file_records_close_at_eof": true,
+    "magic_hex": "00020404",
+    "metadata_size": 124,
+    "padding_hex": "0000",
+    "payload_length_field": 211824,
+    "record_count": 4,
+    "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "size": 211948
+  },
+  "records": [
+    {
+      "file_span": [
+        124,
+        348
+      ],
+      "index": 0,
+      "sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+      "size": 224,
+      "target_span": [
+        3145728,
+        3145952
+      ]
+    },
+    {
+      "file_span": [
+        348,
+        1004
+      ],
+      "index": 1,
+      "sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b",
+      "size": 656,
+      "target_span": [
+        3146752,
+        3147408
+      ]
+    },
+    {
+      "file_span": [
+        1004,
+        1060
+      ],
+      "index": 2,
+      "sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f",
+      "size": 56,
+      "target_span": [
+        3153920,
+        3153976
+      ]
+    },
+    {
+      "file_span": [
+        1060,
+        211948
+      ],
+      "index": 3,
+      "sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+      "size": 210888,
+      "target_span": [
+        3154944,
+        3365832
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Direct stock EM9305 file-record inventory, FHDR fields/CRCs, and byte lineage. No ARC instruction semantics, independent discovery completeness, canonical review, or G1 claim.",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

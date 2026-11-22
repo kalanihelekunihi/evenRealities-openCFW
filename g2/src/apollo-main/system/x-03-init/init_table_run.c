@@ -13,7 +13,7 @@
 #include <stdint.h>
 
 typedef struct {
-    void (*fn)(void);   /* +0x0 */
+    int32_t (*fn)(void); /* +0x0: status is ignored */
     int32_t priority;   /* +0x4 */
 } g2_init_entry_t;
 _Static_assert(sizeof(g2_init_entry_t) == 8u, "init table record");
@@ -34,7 +34,11 @@ void auto_init_table_run_5bf0bc(void);
 
 int32_t init_table_priority_compare_5bf0b4(const void *a, const void *b)
 {
-    return ((const g2_init_entry_t *)a)->priority - ((const g2_init_entry_t *)b)->priority;
+    register int32_t left __asm__("r0") = ((const g2_init_entry_t *)a)->priority;
+    __asm__ volatile("" : "+r"(left) :: "memory");
+    register int32_t right __asm__("r1") = ((const g2_init_entry_t *)b)->priority;
+    __asm__ volatile("" : "+r"(right));
+    return left - right;
 }
 
 void auto_init_table_run_5bf0bc(void)
@@ -51,6 +55,6 @@ void auto_init_table_run_5bf0bc(void)
                                init_table_priority_compare_5bf0b4);
     for (i = 0u; i < count; i++) {
         if (g2_init_table_sorted_20066a30[i].fn != 0)
-            g2_init_table_sorted_20066a30[i].fn();
+            (void)g2_init_table_sorted_20066a30[i].fn();
     }
 }

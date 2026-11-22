@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independent static recovery and review of the Apollo bootloader startup guard, descriptor dispatcher, four rows, handler parameters and encoded source spans from locked bytes",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-descriptor-origin-001/002/audit.py",
+      "sha256": "24f11456d6648008d43066194a4b0d6f4fccd0b3465ac48328e331b82af3a204"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-descriptor-origin-001/002/report.json",
+      "sha256": "512c8d66a8ba410b438db1d0e9e16051d0130341597d89674e3a0797885edcf8"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-descriptor-origin-001/002/receipt.json",
+      "sha256": "8d845cffb42c64053ca419c48b4731dbc67b6ed329c9e16f8e80b6373e3cbd2b"
+    },
+    "disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-descriptor-origin-001/002/boot-disassembly.txt",
+      "sha256": "397120f417fb142884ddbca40e029710211f1012f03ec9ce31630cb1919e83d8"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-descriptor-origin-review-001/001/review.json",
+      "sha256": "62d4b0b04e77d25f4972ca391cbaeab81c90054210828a074c69857aaecf195d"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-descriptor-origin-review-001/001/receipt.json",
+      "sha256": "3a10f66d81f84c7314ea9e559cecfb8b0bece6a37bd97a43e72c902877f73456"
+    },
+    "bounded_output_replay": {
+      "path": "g2/evidence/g2-20261112-p1-boot-transform-replay.json",
+      "sha256": "4dd1d6e1f146998eada50a5eb88e9f0422d0b02553d07c3e01d17831abcea144"
+    },
+    "bounded_output_replay_review": {
+      "path": "g2/evidence/g2-20261112-p1-boot-transform-review.json",
+      "sha256": "550dd528298f9c6a8ebdf935ecb0e42e564067c2943b07c7b468e02a3664945b"
+    }
+  },
+  "result": {
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS",
+    "startup_guard": "0x432910 writes 0x410000 to VTOR and returns 1; the observed startup call at 0x43297C conditionally reaches descriptor dispatcher 0x43299C barring fault.",
+    "descriptor_table_runtime_span": ["0x4330d8", "0x433120"],
+    "descriptor_table_raw_span": [143576, 143648],
+    "handlers": ["0x431e39 zero", "0x415327 decode", "0x415327 decode", "0x415327 decode"],
+    "zero_destinations": ["0x2000055c..0x200271c8", "0x20081000..0x200f5100"],
+    "encoded_source_raw_spans": [[147904, 148529], [148529, 148577], [148577, 148599]],
+    "source_partition": "The three encoded spans abut and end at the locked bootloader file end; decoded sizes and hashes belong to the separate reviewed replay."
+  },
+  "limits": [
+    "The static dispatcher path is conditional on fault-free startup and does not establish hardware execution.",
+    "Other copy/decode routes, nested images, DTCM consumers and pointer-pattern windows remain unresolved.",
+    "No whole-image inventory closure, canonical admission, pseudocode completion or C source completeness is claimed."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

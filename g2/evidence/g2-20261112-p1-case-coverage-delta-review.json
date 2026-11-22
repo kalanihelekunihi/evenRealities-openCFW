@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "review_id": "P1-case-coverage-delta-review-001/001",
+  "result": "pass_with_scope_limits",
+  "review_scope": "Independent delta review of coverage-classification-004 against -003, literal-pool evidence, locked case bytes, all 40 scope partitions, counts, and gate wording.",
+  "inputs": [
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-003/001/coverage-draft.jsonl",
+      "sha256": "94f2fbde51cf8d634b48ebec4800261d2f386ce632ad1050741fb428da527d79"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-004/001/coverage-draft.jsonl",
+      "sha256": "5531e02ef21271232792bc8631dfe81954be1eed96d6b785f004fee10d97580b"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-004/001/receipt.json",
+      "sha256": "823d24b41830e3bbf641f892ab9bcce0daf1a5afdaaadd3fd73804d3a2c60f5c"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-literal-pool-classification-001/001/report.json",
+      "sha256": "fa6146299a952bea1420c3820f214cb2debbaf5ed96b9edf5208f8117d087194"
+    },
+    {
+      "path": "g2/evidence/g2-20261112-p1-case-literal-pool-review.json",
+      "sha256": "49deb29ff534e56414a4f18759936595e6387d2835d31a2f8fc3c986d82f7eed"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.raw.bin",
+      "sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+    }
+  ],
+  "checks": {
+    "delta": "The two drafts differ by four rows because the old case and case:flash unknown intervals are split around the typed spans. Matched by (scope,start,end) and compared as interval partitions, there is no classification change beyond the requested spans.",
+    "case_payload": "[0x6A30,0x6A60) is exactly 48 bytes and is data in v4; surrounding [0x20,0x6A30) and [0x6A60,0xD9E8) remain unknown.",
+    "case_flash": "[0x6A10,0x6A40) is exactly 48 bytes and is data in v4; surrounding [0,0x6A10) and [0x6A40,0xD9C8) remain unknown.",
+    "literal_evidence": "The classification report and independent review support the wrapped payload span [0x6A30,0x6A60), corresponding raw span [0x6A10,0x6A40), 12 literal words, and 22 checked Thumb PC-relative LDR sites. Support is local only; no reachability or whole-image completeness claim.",
+    "partitions": "V4 has 79 rows across 40 distinct scopes. Every scope is an ordered, gap-free, non-overlapping partition from offset zero to its declared interval end.",
+    "unknown_payload_bytes": "Summing unknown rows only for scope.kind=payload gives 4,179,059 bytes. Child image scopes are excluded, preventing double-counting.",
+    "locked_bytes": "The referenced raw and wrapped case files match the independently reviewed SHA-256 pins.",
+    "gate": "Receipt states gate_effect none; G1 remains not_run. Review makes no G1 admission or coverage-complete claim."
+  },
+  "limits": [
+    "This is a local case literal-pool classification review only.",
+    "The two drafts have different row counts (75 and 79) because of interval splitting; all unchanged classification comparisons are made over matching coordinates and full partition coverage.",
+    "No claim is made about reachability, other code/data regions, whole-image pseudocode coverage, source completeness, or byte-identical rebuild qualification."
+  ],
+  "gate_effect": "none; G1 remains not_run"
+}

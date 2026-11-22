@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded synthesis of five EM9305 selector predicates and sole package FHDR candidate",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-selection-g1-closure-001/001/audit.py",
+      "sha256": "7c0386b44b5026415a7dac350db921a3f79a005c08b044e8d83932d57cd1ed3b"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-selection-g1-closure-001/001/report.json",
+      "sha256": "4058782ed60173914ef87d07e03af8efdd2641e7364a95ef1d71c57e58858c82"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-selection-g1-closure-001/001/receipt.json",
+      "sha256": "61100975bb24dd893ce0b1ec987a916b079615f5e61cf7e47a3d4ec54c7492bf"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-selection-g1-independent-review-001/001/review.py",
+      "sha256": "9b0cea6784a5e0aa4138ae60f40a836d0bcd12950828297c296fe0e5410e3ccb"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-selection-g1-independent-review-001/001/review.json",
+      "sha256": "aaa5a1bfab26a7353058ecc4d0d6a163bee6d6c23d71c1bacdbfe91b5597bbb5"
+    },
+    "selected_discovery_v33": {
+      "path": "g2/evidence/g2-20261112-p1-discovery-v33-index.json",
+      "sha256": "455c9f5723fcf9a5fbaa30179cfc95637da5d7b830734371f4b5c0407ad2a7d8"
+    }
+  },
+  "result": {
+    "selector_helpers": 5,
+    "locked_records": 4,
+    "sparse_package_fhdr_candidates": 1,
+    "fhdr_runtime_address": "0x302000",
+    "conditional_descriptor_slot": 3,
+    "firmware_span_runtime": [
+      "0x302028",
+      "0x335bc8"
+    ],
+    "external_selection_resolved": false
+  },
+  "review_finding": "FHDR firmware span starts within record 2 at 0x302028 and extends through record 3; it is not coterminous with record 3 alone.",
+  "limits": [
+    "Synthetic sparse package model does not prove external NVM contents or physical boot-ROM selection.",
+    "Runtime MMIO and ARC lane semantics remain qualified. No whole-image discovery or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

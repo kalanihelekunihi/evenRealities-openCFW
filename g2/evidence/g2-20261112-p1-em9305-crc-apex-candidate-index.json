@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed candidate operational interpretation of locked EM9305 CRC APEX loop, with primary ISA branch-count correction",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-crc-apex-candidate-001/001/audit.py",
+      "sha256": "7272e16d591b16c34bc1462303d2da90166973d76a7d4acb8aafed87e7b36d92"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-crc-apex-candidate-001/001/report.json",
+      "sha256": "11ce80ae4b97831c130986216fb36d0c96486d8bc3cc376a633785e6d9e21156"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-crc-apex-candidate-001/001/receipt.json",
+      "sha256": "15cebb2a700c6733a3b967c106ce1364bdff7247423a1d760a81d0bec3343450"
+    },
+    "superseding_independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-crc-apex-candidate-review-001/002/review.json",
+      "sha256": "8e6788f95315f00fa29c878be177b10af6d42a3f2825bc17809bb18854117046"
+    },
+    "arcv2_em_isa_pdf": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/arcv2-isa-primary.pdf",
+      "sha256": "b5bd662cc6af5b7ae3d7718e86922a4072eeefde0aa917be32549d9346d027ab"
+    },
+    "vendor_apex_declarations": {
+      "path": "third-party/local-vendor/sources/em9305-v4.6/EM9305_SDK/EM9305_EM_BLEU_SDK_v4.6/common/9305/tool_config/arc.tcf",
+      "sha256": "dcd03f3b754a7be79b031ed6f7a4afc4a6a1230162a0962b918bfdca69299cf6"
+    }
+  },
+  "result": {
+    "header_candidate_crc": "0x87303B94",
+    "firmware_candidate_crc": "0xCEB7F4F3",
+    "aligned_header_word_and_tail_operations": [
+      8,
+      2
+    ],
+    "aligned_firmware_word_and_tail_operations": [
+      52968,
+      0
+    ],
+    "review_verdict": "bounded_candidate_pass_with_apex_semantics_unverified"
+  },
+  "limits": [
+    "BMSK.F and BEQ establish stock loop partition for aligned inputs; vendor APEX CRC32/CRC32B and BSWP32 operational semantics remain hypothesized, not executed or specified by pinned TCF.",
+    "Synthetic FF-filled NVM and four package records do not prove physical NVM contents, competing headers or boot-ROM selection.",
+    "Candidate agreement is not complete pseudocode, discovery closure, canonical admission or G1."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

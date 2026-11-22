@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Current-campaign independently reviewed static EM9305 package, FHDR and CRC replay",
+  "artifacts": {
+    "locked_bundle": {
+      "path": "g2/blobs/official/g2-2.2.6.10/e28738432d7b612d625331b00383149b.bin",
+      "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+    },
+    "identity": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/identity.json",
+      "sha256": "2dbba3e34ef59158bf05bed2cf24c455b91f3b7119856ed9c8826cc916f121fe"
+    },
+    "candidate_images": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-all-image-row-draft-006/001/images-draft.jsonl",
+      "sha256": "23416dfd32268f5075be5df5a76c52843ab3c12151341c89a2dc80bd1287cb7b"
+    },
+    "sdk_header": {
+      "path": "third-party/local-vendor/sources/em9305-v4.6/EM9305_SDK/EM9305_EM_BLEU_SDK_v4.6/libs/firmware_header/includes/firmware_header.h",
+      "sha256": "3e3e3086936577e4f7ec9e990123946af59b08395fbea9c332cfda17789ec068"
+    },
+    "replay_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-fhdr-replay-001/001/audit.py",
+      "sha256": "c5aa34ca52bc86cf9dbe9001a33048bf5b221a67606f473114f6041c6153c6fe"
+    },
+    "replay_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-fhdr-replay-001/001/report.json",
+      "sha256": "3658f2d45f285d49d86e887550fe26e433ec713445e7a47c4daf1dd9830e4a98"
+    },
+    "replay_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-fhdr-replay-001/001/receipt.json",
+      "sha256": "65402629cbf4b287f5003ad1b6f023436e9c717866f961c0a8b92916d781f8e4"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-fhdr-replay-review-001/002/review.json",
+      "sha256": "322250f12ea96eacb17079d1b8dd7033dab356a77fe218d9891d690ac4fb82b1"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-fhdr-replay-review-001/002/receipt.json",
+      "sha256": "ba5bc5cce23d9919721688c52fdcc8222bd7c52ddd42bfb4159ca226a1f5047a"
+    }
+  },
+  "result": {
+    "record_count": 4,
+    "metadata_bytes": 124,
+    "fhdr_address": 3153920,
+    "execution_address": 3153960,
+    "firmware_size": 211872,
+    "firmware_crc32": 3468162291,
+    "header_crc32": 2268085140,
+    "erased_gap_bytes": 968,
+    "bundle_component_slice_matches": true,
+    "verdict": "BOUNDED_PASS_WITH_LIMITS"
+  },
+  "limits": [
+    "Physical boot-ROM/NVM record selection and all runtime predicates are not established by static package replay.",
+    "Record 0/1/3 code/data/reference completeness and exclusion of nested programs remain open.",
+    "Identity receipt records a PROVENANCE.md pin mismatch; this evidence does not resolve it.",
+    "No canonical inventory admission or G1 gate change."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

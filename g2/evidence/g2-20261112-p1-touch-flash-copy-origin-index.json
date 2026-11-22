@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded touch flash-row copy source trace at runtime 0x8D74.",
+  "artifacts": {
+    "audit_script": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-flash-copy-origin-001/001/audit.py", "sha256": "23ad9a87ee4d3e858f826e08b990024cb95311c83f88971c467eff437cf67a2d"},
+    "audit_report": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-flash-copy-origin-001/001/report.json", "sha256": "564758cb834379b94f93e751e0a357ee03e1a44ea268ea26ce8f8962bb1193ea"},
+    "audit_receipt": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-flash-copy-origin-001/001/receipt.json", "sha256": "e8f511892f0a367f8c5e56e808209892f3d48be9e168194527deaa3ae4bac7c1"},
+    "independent_review": {"path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-flash-copy-origin-review-001/001/review.json", "sha256": "fcd8383dd1491dd21cfd0c71612e28e98504cbd7e9a2f47d8e9ccbdf220035d1"}
+  },
+  "result": {
+    "caller_function": "Cy_Flash_WriteRow at 0x8D50",
+    "copy_callsite": "0x8D74",
+    "copy_length_bytes": 128,
+    "copy_source": "entry second argument saved in r5, then passed to memcpy as r1",
+    "copy_destination": "stack + 8",
+    "local_callers": [
+      {"entry": "0x47B0", "source": "local zeroed stack buffer"},
+      {"entry": "0x4810", "source": "caller-supplied param_4 advanced by row size"}
+    ]
+  },
+  "limits": ["The origin of 0x4810 param_4 is unresolved.", "No whole caller/indirect-reference closure or nested-image exclusion."],
+  "status": {"canonical_admission": "none", "g1": "not_run"}
+}

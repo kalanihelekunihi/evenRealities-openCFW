@@ -1,0 +1,1521 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "literal tokens in first-party Apollo-main C and header files, after Nema table relocation and I2C/UART duplicate-tail removal",
+  "method": "C lexical scan skips block and line comments plus character and string literals, then recognizes hexadecimal integer tokens in [0x20000000,0x20400000). This is token triage, not pointer-use proof. The one-off scanner is under build/g2-apollo-ram-literal-audit-20261111/audit.py.",
+  "files_scanned": 2525,
+  "file_content_aggregate_sha256": "2c6de5c33084da1dc03d5dbd53e619483f8c7f438445be6fd1bfbe5c54a82865",
+  "before_changes_address_looking_tokens": 220,
+  "after_changes_address_looking_tokens": 212,
+  "change_accounting": {
+    "nema_table_stock_pointer_replaced": 1,
+    "duplicate_initialized_data_tail_stock_pointers_removed": 7
+  },
+  "remaining_stock_ram_cells_tokens": [
+    {
+      "value": "0x201600FF",
+      "line": 1411,
+      "source_line": "0x001600feu, 0x201600ffu, 0xc416f0f1u, 0x241600feu, 0x441600ffu, 0xc416f0f1u,"
+    },
+    {
+      "value": "0x200B70F1",
+      "line": 1424,
+      "source_line": "0x1e848000u, 0x200b70f1u, 0xdc0900f9u, 0x00f908c2u, 0x3418ec09u, 0x000000f9u,"
+    },
+    {
+      "value": "0x200000F8",
+      "line": 1426,
+      "source_line": "0xf0f110c5u, 0x00f9440au, 0x91c20000u, 0x200000f8u, 0xcac282cau, 0x00f809c5u,"
+    }
+  ],
+  "hits": [
+    {
+      "path": "g2/src/apollo-main/app/C3-terminal-ui/terminal_fsm_prepare_5eae94.c",
+      "line": 39,
+      "value": "0x20000064",
+      "source_line": "#define LV_PCT_100 0x20000064",
+      "source_sha256": "52b89fd57d5adb244d29e7e22bfeeacbbc8f8aa36b6c23afa4dd03091980ad86"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 77,
+      "value": "0x200A220D",
+      "source_line": "0x40001204u, 0x40041208u, 0x200a220du, 0x0001000au,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 78,
+      "value": "0x200A2215",
+      "source_line": "0x40141210u, 0x200a2215u, 0x0001001au, 0x40241218u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 215,
+      "value": "0x20013809",
+      "source_line": "0x10001204u, 0x20013809u, 0x00080004u, 0x2001380du,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 215,
+      "value": "0x2001380D",
+      "source_line": "0x10001204u, 0x20013809u, 0x00080004u, 0x2001380du,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 216,
+      "value": "0x20013811",
+      "source_line": "0x00040004u, 0x20013811u, 0x00040004u, 0x20013815u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 216,
+      "value": "0x20013815",
+      "source_line": "0x00040004u, 0x20013811u, 0x00040004u, 0x20013815u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 217,
+      "value": "0x20013819",
+      "source_line": "0x00040004u, 0x20013819u, 0x003c0004u, 0x2001381du,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 217,
+      "value": "0x2001381D",
+      "source_line": "0x00040004u, 0x20013819u, 0x003c0004u, 0x2001381du,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 222,
+      "value": "0x2001380D",
+      "source_line": "0x40001204u, 0x10041008u, 0x2001380du, 0x00140008u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 223,
+      "value": "0x20013811",
+      "source_line": "0x20013811u, 0x00480008u, 0x20013815u, 0x00400008u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 223,
+      "value": "0x20013815",
+      "source_line": "0x20013811u, 0x00480008u, 0x20013815u, 0x00400008u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 300,
+      "value": "0x20082809",
+      "source_line": "0x10001204u, 0x20082809u, 0x00180004u, 0x10c4120cu,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 309,
+      "value": "0x20032805",
+      "source_line": "0x20032805u, 0x01060002u, 0x00011209u, 0x00010314u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 314,
+      "value": "0x2001380D",
+      "source_line": "0x2001380du, 0x00180004u, 0x20013811u, 0x00c80004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 314,
+      "value": "0x20013811",
+      "source_line": "0x2001380du, 0x00180004u, 0x20013811u, 0x00c80004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 315,
+      "value": "0x20013815",
+      "source_line": "0x20013815u, 0x01060004u, 0x20013819u, 0x03160004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 315,
+      "value": "0x20013819",
+      "source_line": "0x20013815u, 0x01060004u, 0x20013819u, 0x03160004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 327,
+      "value": "0x2001380D",
+      "source_line": "0x10001204u, 0x10011208u, 0x2001380du, 0x00040004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 328,
+      "value": "0x20013811",
+      "source_line": "0x20013811u, 0x00040004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 346,
+      "value": "0x20142805",
+      "source_line": "0x20142805u, 0x00c40002u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 387,
+      "value": "0x2001380D",
+      "source_line": "0x2001380du, 0x00300004u, 0x20013811u, 0x0f520004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 387,
+      "value": "0x20013811",
+      "source_line": "0x2001380du, 0x00300004u, 0x20013811u, 0x0f520004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 388,
+      "value": "0x20013815",
+      "source_line": "0x20013815u, 0x040c0004u, 0x20013819u, 0x000c0004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 388,
+      "value": "0x20013819",
+      "source_line": "0x20013815u, 0x040c0004u, 0x20013819u, 0x000c0004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 389,
+      "value": "0x2001381D",
+      "source_line": "0x2001381du, 0x00020004u, 0x20013821u, 0x00010004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 389,
+      "value": "0x20013821",
+      "source_line": "0x2001381du, 0x00020004u, 0x20013821u, 0x00010004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 390,
+      "value": "0x20013825",
+      "source_line": "0x20013825u, 0x00420004u, 0x20013829u, 0x00040004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 390,
+      "value": "0x20013829",
+      "source_line": "0x20013825u, 0x00420004u, 0x20013829u, 0x00040004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 391,
+      "value": "0x2001382D",
+      "source_line": "0x2001382du, 0x000c0004u, 0x20013831u, 0x00010004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 391,
+      "value": "0x20013831",
+      "source_line": "0x2001382du, 0x000c0004u, 0x20013831u, 0x00010004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 392,
+      "value": "0x20013835",
+      "source_line": "0x20013835u, 0x00100004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 423,
+      "value": "0x2001380D",
+      "source_line": "0x2001380du, 0x00140004u, 0x20013811u, 0x08500004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 423,
+      "value": "0x20013811",
+      "source_line": "0x2001380du, 0x00140004u, 0x20013811u, 0x08500004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 424,
+      "value": "0x20013815",
+      "source_line": "0x20013815u, 0x00020004u, 0x20013819u, 0x00040004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 424,
+      "value": "0x20013819",
+      "source_line": "0x20013815u, 0x00020004u, 0x20013819u, 0x00040004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 425,
+      "value": "0x2001381D",
+      "source_line": "0x2001381du, 0x00010004u, 0x20013821u, 0x00010004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/S3-app-data/pb_descriptors_data.c",
+      "line": 425,
+      "value": "0x20013821",
+      "source_line": "0x2001381du, 0x00010004u, 0x20013821u, 0x00010004u,",
+      "source_sha256": "9d535667e52fceded33d1b94782a372a8825f483f83aa4d4a6d698a95465d2e5"
+    },
+    {
+      "path": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+      "line": 232,
+      "value": "0x20000000",
+      "source_line": "v |= 0x20000000u;",
+      "source_sha256": "b3d4a1a56770790cec114a7cf94045e9ac3c733a7a644ac002d906a4171d6671"
+    },
+    {
+      "path": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+      "line": 245,
+      "value": "0x20000000",
+      "source_line": "if ((v & 0x20000000u) != 0u)",
+      "source_sha256": "b3d4a1a56770790cec114a7cf94045e9ac3c733a7a644ac002d906a4171d6671"
+    },
+    {
+      "path": "g2/src/apollo-main/app/case-descriptor/display_case_descriptor_77793c_20261017.c",
+      "line": 5,
+      "value": "0x2001380D",
+      "source_line": "static const uint32_t case_fields_0[5] = {0x10001204u, 0x10011208u, 0x2001380du, 0x00050004u, 0x00000000u};",
+      "source_sha256": "ced17c6c6d33537bf37990051369c76d20b3c7c386ca6e28b660d6921e8484b2"
+    },
+    {
+      "path": "g2/src/apollo-main/app/conversate-response/conversate_response_descriptor_775b24.c",
+      "line": 39,
+      "value": "0x2001380D",
+      "source_line": "0x2001380du, 0x00940004u, 0x20013811u, 0x00010004u,",
+      "source_sha256": "7b3f7ed3fedce6c4370512d459339d4d3db142b1c3dee723b25d598a7eb3ee5f"
+    },
+    {
+      "path": "g2/src/apollo-main/app/conversate-response/conversate_response_descriptor_775b24.c",
+      "line": 39,
+      "value": "0x20013811",
+      "source_line": "0x2001380du, 0x00940004u, 0x20013811u, 0x00010004u,",
+      "source_sha256": "7b3f7ed3fedce6c4370512d459339d4d3db142b1c3dee723b25d598a7eb3ee5f"
+    },
+    {
+      "path": "g2/src/apollo-main/app/conversate-response/conversate_response_descriptor_775b24.c",
+      "line": 40,
+      "value": "0x20013815",
+      "source_line": "0x20013815u, 0x0aa80004u, 0x20013819u, 0x00080004u,",
+      "source_sha256": "7b3f7ed3fedce6c4370512d459339d4d3db142b1c3dee723b25d598a7eb3ee5f"
+    },
+    {
+      "path": "g2/src/apollo-main/app/conversate-response/conversate_response_descriptor_775b24.c",
+      "line": 40,
+      "value": "0x20013819",
+      "source_line": "0x20013815u, 0x0aa80004u, 0x20013819u, 0x00080004u,",
+      "source_sha256": "7b3f7ed3fedce6c4370512d459339d4d3db142b1c3dee723b25d598a7eb3ee5f"
+    },
+    {
+      "path": "g2/src/apollo-main/app/conversate-response/conversate_response_descriptor_775b24.c",
+      "line": 41,
+      "value": "0x2001381D",
+      "source_line": "0x2001381du, 0x048c0004u, 0x20013821u, 0x04080004u,",
+      "source_sha256": "7b3f7ed3fedce6c4370512d459339d4d3db142b1c3dee723b25d598a7eb3ee5f"
+    },
+    {
+      "path": "g2/src/apollo-main/app/conversate-response/conversate_response_descriptor_775b24.c",
+      "line": 41,
+      "value": "0x20013821",
+      "source_line": "0x2001381du, 0x048c0004u, 0x20013821u, 0x04080004u,",
+      "source_sha256": "7b3f7ed3fedce6c4370512d459339d4d3db142b1c3dee723b25d598a7eb3ee5f"
+    },
+    {
+      "path": "g2/src/apollo-main/app/conversate-response/conversate_response_descriptor_775b24.c",
+      "line": 42,
+      "value": "0x20013825",
+      "source_line": "0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u,",
+      "source_sha256": "7b3f7ed3fedce6c4370512d459339d4d3db142b1c3dee723b25d598a7eb3ee5f"
+    },
+    {
+      "path": "g2/src/apollo-main/app/conversate-response/conversate_response_descriptor_775b24.c",
+      "line": 42,
+      "value": "0x20013829",
+      "source_line": "0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u,",
+      "source_sha256": "7b3f7ed3fedce6c4370512d459339d4d3db142b1c3dee723b25d598a7eb3ee5f"
+    },
+    {
+      "path": "g2/src/apollo-main/app/conversate-response/conversate_response_descriptor_775b24.c",
+      "line": 43,
+      "value": "0x2001382D",
+      "source_line": "0x2001382du, 0x00010004u, 0x20013831u, 0x000c0004u,",
+      "source_sha256": "7b3f7ed3fedce6c4370512d459339d4d3db142b1c3dee723b25d598a7eb3ee5f"
+    },
+    {
+      "path": "g2/src/apollo-main/app/conversate-response/conversate_response_descriptor_775b24.c",
+      "line": 43,
+      "value": "0x20013831",
+      "source_line": "0x2001382du, 0x00010004u, 0x20013831u, 0x000c0004u,",
+      "source_sha256": "7b3f7ed3fedce6c4370512d459339d4d3db142b1c3dee723b25d598a7eb3ee5f"
+    },
+    {
+      "path": "g2/src/apollo-main/app/conversate-response/conversate_response_descriptor_775b24.c",
+      "line": 44,
+      "value": "0x20013835",
+      "source_line": "0x20013835u, 0x0fa80004u,",
+      "source_sha256": "7b3f7ed3fedce6c4370512d459339d4d3db142b1c3dee723b25d598a7eb3ee5f"
+    },
+    {
+      "path": "g2/src/apollo-main/app/even-ai/even_ai_descriptor_777144.c",
+      "line": 8,
+      "value": "0x2001380D",
+      "source_line": "0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u,",
+      "source_sha256": "828e92ea9afbc5cbc3e78c6a82cef76183e8deb4d2f39f3185763d388372411c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/even-ai/even_ai_descriptor_777144.c",
+      "line": 8,
+      "value": "0x20013811",
+      "source_line": "0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u,",
+      "source_sha256": "828e92ea9afbc5cbc3e78c6a82cef76183e8deb4d2f39f3185763d388372411c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/even-ai/even_ai_descriptor_777144.c",
+      "line": 9,
+      "value": "0x20013815",
+      "source_line": "0x20013815u, 0x02080004u, 0x20013819u, 0x00010004u,",
+      "source_sha256": "828e92ea9afbc5cbc3e78c6a82cef76183e8deb4d2f39f3185763d388372411c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/even-ai/even_ai_descriptor_777144.c",
+      "line": 9,
+      "value": "0x20013819",
+      "source_line": "0x20013815u, 0x02080004u, 0x20013819u, 0x00010004u,",
+      "source_sha256": "828e92ea9afbc5cbc3e78c6a82cef76183e8deb4d2f39f3185763d388372411c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/even-ai/even_ai_descriptor_777144.c",
+      "line": 10,
+      "value": "0x2001381D",
+      "source_line": "0x2001381du, 0x02080004u, 0x20013821u, 0x010c0004u,",
+      "source_sha256": "828e92ea9afbc5cbc3e78c6a82cef76183e8deb4d2f39f3185763d388372411c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/even-ai/even_ai_descriptor_777144.c",
+      "line": 10,
+      "value": "0x20013821",
+      "source_line": "0x2001381du, 0x02080004u, 0x20013821u, 0x010c0004u,",
+      "source_sha256": "828e92ea9afbc5cbc3e78c6a82cef76183e8deb4d2f39f3185763d388372411c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/even-ai/even_ai_descriptor_777144.c",
+      "line": 11,
+      "value": "0x20013825",
+      "source_line": "0x20013825u, 0x00020004u, 0x20013829u, 0x00020004u,",
+      "source_sha256": "828e92ea9afbc5cbc3e78c6a82cef76183e8deb4d2f39f3185763d388372411c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/even-ai/even_ai_descriptor_777144.c",
+      "line": 11,
+      "value": "0x20013829",
+      "source_line": "0x20013825u, 0x00020004u, 0x20013829u, 0x00020004u,",
+      "source_sha256": "828e92ea9afbc5cbc3e78c6a82cef76183e8deb4d2f39f3185763d388372411c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/even-ai/even_ai_descriptor_777144.c",
+      "line": 12,
+      "value": "0x2001382D",
+      "source_line": "0x2001382du, 0x00020004u, 0x20013831u, 0x00010004u,",
+      "source_sha256": "828e92ea9afbc5cbc3e78c6a82cef76183e8deb4d2f39f3185763d388372411c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/even-ai/even_ai_descriptor_777144.c",
+      "line": 12,
+      "value": "0x20013831",
+      "source_line": "0x2001382du, 0x00020004u, 0x20013831u, 0x00010004u,",
+      "source_sha256": "828e92ea9afbc5cbc3e78c6a82cef76183e8deb4d2f39f3185763d388372411c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/even-ai/even_ai_descriptor_777144.c",
+      "line": 13,
+      "value": "0x20013835",
+      "source_line": "0x20013835u, 0x00040004u,",
+      "source_sha256": "828e92ea9afbc5cbc3e78c6a82cef76183e8deb4d2f39f3185763d388372411c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/onboarding-event/onboarding_event_pb_descriptor_779c94.c",
+      "line": 20,
+      "value": "0x2001380D",
+      "source_line": "0x10001204u, 0x10011208u, 0x2001380du, 0x00020004u,",
+      "source_sha256": "7778161052b4f238896eae0d7eac1815cafbbd38ca23097b9d99b762557e8a5c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/onboarding-event/onboarding_event_pb_descriptor_779c94.c",
+      "line": 21,
+      "value": "0x20013811",
+      "source_line": "0x20013811u, 0x00010004u, 0x20013815u, 0x000c0004u, 0u",
+      "source_sha256": "7778161052b4f238896eae0d7eac1815cafbbd38ca23097b9d99b762557e8a5c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/onboarding-event/onboarding_event_pb_descriptor_779c94.c",
+      "line": 21,
+      "value": "0x20013815",
+      "source_line": "0x20013811u, 0x00010004u, 0x20013815u, 0x000c0004u, 0u",
+      "source_sha256": "7778161052b4f238896eae0d7eac1815cafbbd38ca23097b9d99b762557e8a5c"
+    },
+    {
+      "path": "g2/src/apollo-main/app/p-13-translate-ui/translate_ui.c",
+      "line": 94,
+      "value": "0x20000064",
+      "source_line": "#define LV_PCT_100 0x20000064",
+      "source_sha256": "5bc2958ec178fb216ce4b12977aefb143911c1fe353d33787988915ff541b7e4"
+    },
+    {
+      "path": "g2/src/apollo-main/app/page-manager/display_page_manager_new.c",
+      "line": 81,
+      "value": "0x20000064",
+      "source_line": "uint32_t dimension=0x20000064u; /* LV_PCT(100) */",
+      "source_sha256": "1edf12cee80215a22e98ca6768f5de7221a559a2a746198fa035043b2deb8653"
+    },
+    {
+      "path": "g2/src/apollo-main/app/sync-info/sync_info_pb_descriptor_77c1cc.c",
+      "line": 20,
+      "value": "0x2001180D",
+      "source_line": "0x10001204u, 0x10011208u, 0x2001180du, 0x00080004u, 0u",
+      "source_sha256": "5ec37964928ae8d10f1c019a623d553e7773ff7e100f88b0991c053cb003e8be"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x2001380D",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013811",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013815",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013819",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x2001381D",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013821",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013825",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013829",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x2001382D",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013831",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013835",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013839",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x2001383D",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013841",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013845",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013849",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x2001384D",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013851",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013855",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013859",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x2001385D",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013861",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 41,
+      "value": "0x20013865",
+      "source_line": "static const uint32_t field_info_6d13ac[]={ 0x00011205u, 0x00010000u, 0x00011209u, 0x00010001u, 0x2001380du, 0x00020004u, 0x20013811u, 0x00020004u, 0x20013815u, 0x02040004u, 0x20013819u, 0x00080004u, 0x2001381du, 0x02140004u, 0x20013821u, 0x084c0004u, 0x20013825u, 0x00020004u, 0x20013829u, 0x00010004u, 0x2001382du, 0x00080004u, 0x20013831u, 0x00010004u, 0x20013835u, 0x00010004u, 0x20013839u, 0x00010004u, 0x2001383du, 0x00010004u, 0x20013841u, 0x055c0004u, 0x20013845u, 0x00010004u, 0x20013849u, 0x00080004u, 0x2001384du, 0x00040004u, 0x20013851u, 0x000c0004u, 0x20013855u, 0x00040004u, 0x20013859u, 0x00010004u, 0x2001385du, 0x00010004u, 0x20013861u, 0x00040004u, 0x20013865u, 0x00080004u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/app/terminal-tx/terminal_tx_pb_descriptor.c",
+      "line": 59,
+      "value": "0x2008280D",
+      "source_line": "static const uint32_t field_info_75b34c[]={ 0x00011205u, 0x00040000u, 0x00011609u, 0x04020004u, 0x2008280du, 0x00880408u, 0x00011211u, 0x00040848u, 0x00000000u };",
+      "source_sha256": "85f35a0e8a5686d8cfa74ee7c622bbc722b1a5d8e212fd88696b549bfc52a38e"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_radio_serial_children.c",
+      "line": 41,
+      "value": "0x20000000",
+      "source_line": "*high=0x20000000u;",
+      "source_sha256": "56c9b4a2082803209df0b6e6b35c1dc9b5fa745ee29132d35e6e01c5d27a3972"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_radio_serial_children.c",
+      "line": 42,
+      "value": "0x20000000",
+      "source_line": "*low=0x20000000u;",
+      "source_sha256": "56c9b4a2082803209df0b6e6b35c1dc9b5fa745ee29132d35e6e01c5d27a3972"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_radio_serial_children.c",
+      "line": 55,
+      "value": "0x20000000",
+      "source_line": "*high=0x20000000u;",
+      "source_sha256": "56c9b4a2082803209df0b6e6b35c1dc9b5fa745ee29132d35e6e01c5d27a3972"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_radio_serial_children.c",
+      "line": 56,
+      "value": "0x20000000",
+      "source_line": "*low=0x20000000u;",
+      "source_sha256": "56c9b4a2082803209df0b6e6b35c1dc9b5fa745ee29132d35e6e01c5d27a3972"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_vendor_stack_config.c",
+      "line": 44,
+      "value": "0x20080000",
+      "source_line": "row[0x8a4u]=(uint8_t)((count+width*4u)<0x20080000u);",
+      "source_sha256": "b8f429ee47144419a6882b005bbd93c6d6b8da40326db7b93f1e7786d5f371d3"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 13,
+      "value": "0x20074204",
+      "source_line": "#define CELL(a) ((a) >= 0x20074204u ? &g2_stock_ram_20074204[((a) - 0x20074204u) / 4u] \\",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 13,
+      "value": "0x20074204",
+      "source_line": "#define CELL(a) ((a) >= 0x20074204u ? &g2_stock_ram_20074204[((a) - 0x20074204u) / 4u] \\",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 14,
+      "value": "0x2000006C",
+      "source_line": ": &g2_stock_ram_2000006c[((a) - 0x2000006cu) / 4u])",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 23,
+      "value": "0x20000078",
+      "source_line": "APPLY(5u,0x20000078u);APPLY(7u,0x20000070u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 23,
+      "value": "0x20000070",
+      "source_line": "APPLY(5u,0x20000078u);APPLY(7u,0x20000070u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 24,
+      "value": "0x20000074",
+      "source_line": "APPLY(6u,0x20000074u);APPLY(50u,0x2000006cu);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 24,
+      "value": "0x2000006C",
+      "source_line": "APPLY(6u,0x20000074u);APPLY(50u,0x2000006cu);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 26,
+      "value": "0x2000007C",
+      "source_line": "APPLY(5u,0x2000007cu);APPLY(6u,0x20000080u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 26,
+      "value": "0x20000080",
+      "source_line": "APPLY(5u,0x2000007cu);APPLY(6u,0x20000080u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 28,
+      "value": "0x20000090",
+      "source_line": "APPLY(8u,0x20000090u);APPLY(10u,0x20000088u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 28,
+      "value": "0x20000088",
+      "source_line": "APPLY(8u,0x20000090u);APPLY(10u,0x20000088u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 29,
+      "value": "0x2000008C",
+      "source_line": "APPLY(9u,0x2000008cu);APPLY(51u,0x20000084u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 29,
+      "value": "0x20000084",
+      "source_line": "APPLY(9u,0x2000008cu);APPLY(51u,0x20000084u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 31,
+      "value": "0x20000094",
+      "source_line": "APPLY(8u,0x20000094u);APPLY(9u,0x20000098u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 31,
+      "value": "0x20000098",
+      "source_line": "APPLY(8u,0x20000094u);APPLY(9u,0x20000098u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 33,
+      "value": "0x200000A4",
+      "source_line": "APPLY(25u,0x200000a4u);APPLY(27u,0x20074204u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 33,
+      "value": "0x20074204",
+      "source_line": "APPLY(25u,0x200000a4u);APPLY(27u,0x20074204u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 34,
+      "value": "0x200000A0",
+      "source_line": "APPLY(26u,0x200000a0u);APPLY(11u,0x2000009cu);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 34,
+      "value": "0x2000009C",
+      "source_line": "APPLY(26u,0x200000a0u);APPLY(11u,0x2000009cu);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 36,
+      "value": "0x200000A8",
+      "source_line": "APPLY(25u,0x200000a8u);APPLY(26u,0x200000acu);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 36,
+      "value": "0x200000AC",
+      "source_line": "APPLY(25u,0x200000a8u);APPLY(26u,0x200000acu);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 38,
+      "value": "0x200000B8",
+      "source_line": "APPLY(31u,0x200000b8u);APPLY(33u,0x20074208u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 38,
+      "value": "0x20074208",
+      "source_line": "APPLY(31u,0x200000b8u);APPLY(33u,0x20074208u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 39,
+      "value": "0x200000B4",
+      "source_line": "APPLY(32u,0x200000b4u);APPLY(13u,0x200000b0u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 39,
+      "value": "0x200000B0",
+      "source_line": "APPLY(32u,0x200000b4u);APPLY(13u,0x200000b0u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 41,
+      "value": "0x200000BC",
+      "source_line": "APPLY(31u,0x200000bcu);APPLY(32u,0x200000c0u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 41,
+      "value": "0x200000C0",
+      "source_line": "APPLY(31u,0x200000bcu);APPLY(32u,0x200000c0u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 43,
+      "value": "0x200000CC",
+      "source_line": "APPLY(34u,0x200000ccu);APPLY(36u,0x2007420cu);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 43,
+      "value": "0x2007420C",
+      "source_line": "APPLY(34u,0x200000ccu);APPLY(36u,0x2007420cu);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 44,
+      "value": "0x200000C8",
+      "source_line": "APPLY(35u,0x200000c8u);APPLY(16u,0x200000c4u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 44,
+      "value": "0x200000C4",
+      "source_line": "APPLY(35u,0x200000c8u);APPLY(16u,0x200000c4u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 46,
+      "value": "0x200000D0",
+      "source_line": "APPLY(34u,0x200000d0u);APPLY(35u,0x200000d4u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 46,
+      "value": "0x200000D4",
+      "source_line": "APPLY(34u,0x200000d0u);APPLY(35u,0x200000d4u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 48,
+      "value": "0x200000E0",
+      "source_line": "APPLY(47u,0x200000e0u);APPLY(49u,0x20074210u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 48,
+      "value": "0x20074210",
+      "source_line": "APPLY(47u,0x200000e0u);APPLY(49u,0x20074210u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 49,
+      "value": "0x200000DC",
+      "source_line": "APPLY(48u,0x200000dcu);APPLY(17u,0x200000d8u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 49,
+      "value": "0x200000D8",
+      "source_line": "APPLY(48u,0x200000dcu);APPLY(17u,0x200000d8u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 51,
+      "value": "0x200000E4",
+      "source_line": "APPLY(47u,0x200000e4u);APPLY(48u,0x200000e8u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 51,
+      "value": "0x200000E8",
+      "source_line": "APPLY(47u,0x200000e4u);APPLY(48u,0x200000e8u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 53,
+      "value": "0x200000F4",
+      "source_line": "APPLY(61u,0x200000f4u);APPLY(63u,0x20074214u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 53,
+      "value": "0x20074214",
+      "source_line": "APPLY(61u,0x200000f4u);APPLY(63u,0x20074214u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 54,
+      "value": "0x200000F0",
+      "source_line": "APPLY(62u,0x200000f0u);APPLY(117u,0x200000ecu);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 54,
+      "value": "0x200000EC",
+      "source_line": "APPLY(62u,0x200000f0u);APPLY(117u,0x200000ecu);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 56,
+      "value": "0x200000F8",
+      "source_line": "APPLY(61u,0x200000f8u);APPLY(62u,0x200000fcu);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 56,
+      "value": "0x200000FC",
+      "source_line": "APPLY(61u,0x200000f8u);APPLY(62u,0x200000fcu);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 58,
+      "value": "0x20000108",
+      "source_line": "APPLY(22u,0x20000108u);APPLY(24u,0x20074218u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 58,
+      "value": "0x20074218",
+      "source_line": "APPLY(22u,0x20000108u);APPLY(24u,0x20074218u);",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 59,
+      "value": "0x20000104",
+      "source_line": "APPLY(23u,0x20000104u);APPLY(19u,0x20000100u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 59,
+      "value": "0x20000100",
+      "source_line": "APPLY(23u,0x20000104u);APPLY(19u,0x20000100u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 61,
+      "value": "0x2000010C",
+      "source_line": "APPLY(22u,0x2000010cu);APPLY(23u,0x20000110u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/ble/ble-radio/display_ble_radio_power_config.c",
+      "line": 61,
+      "value": "0x20000110",
+      "source_line": "APPLY(22u,0x2000010cu);APPLY(23u,0x20000110u);break;",
+      "source_sha256": "640366d6aef99a07f931d8082461cb75e689f2c3683850f482b08bd1917ded0d"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/display/display-uled/display_driver_uled_option_setup_pair.c",
+      "line": 26,
+      "value": "0x20000758",
+      "source_line": "#define DEVCFG(a) ((uint32_t)(uintptr_t)&g2_stock_ram_20000758[((a) - 0x20000758u) / 4u])",
+      "source_sha256": "e001c1288b971a11bba6939b84f3c292390414e71146691f0e540c519afefc63"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/display/display-uled/display_driver_uled_option_setup_pair.c",
+      "line": 38,
+      "value": "0x20000788",
+      "source_line": "(uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_jbd4010_mspi_handle),callback,DEVCFG(0x20000788u),(uint32_t)(uintptr_t)g2_stock_ram_200007a0);",
+      "source_sha256": "e001c1288b971a11bba6939b84f3c292390414e71146691f0e540c519afefc63"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/display/display-uled/display_driver_uled_option_setup_pair.c",
+      "line": 49,
+      "value": "0x20000758",
+      "source_line": "(uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_a6ng_mspi_handle),callback,DEVCFG(0x20000758u),DEVCFG(0x20000770u));",
+      "source_sha256": "e001c1288b971a11bba6939b84f3c292390414e71146691f0e540c519afefc63"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/display/display-uled/display_driver_uled_option_setup_pair.c",
+      "line": 49,
+      "value": "0x20000770",
+      "source_line": "(uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_a6ng_mspi_handle),callback,DEVCFG(0x20000758u),DEVCFG(0x20000770u));",
+      "source_sha256": "e001c1288b971a11bba6939b84f3c292390414e71146691f0e540c519afefc63"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 41,
+      "value": "0x2000006C",
+      "source_line": "#define V(a) (&g2_stock_ram_2000006c[((a) - 0x2000006cu) / 4u])",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 44,
+      "value": "0x20000138",
+      "source_line": "{0xc7u,V(0x20000138u)},{0x40u,V(0x2000013cu)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 44,
+      "value": "0x2000013C",
+      "source_line": "{0xc7u,V(0x20000138u)},{0x40u,V(0x2000013cu)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 45,
+      "value": "0x20000140",
+      "source_line": "{0x41u,V(0x20000140u)},{0x48u,V(0x2000015cu)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 45,
+      "value": "0x2000015C",
+      "source_line": "{0x41u,V(0x20000140u)},{0x48u,V(0x2000015cu)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 48,
+      "value": "0x20000144",
+      "source_line": "{0x42u,V(0x20000144u)},{0x43u,V(0x20000148u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 48,
+      "value": "0x20000148",
+      "source_line": "{0x42u,V(0x20000144u)},{0x43u,V(0x20000148u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 51,
+      "value": "0x2000014C",
+      "source_line": "{0x44u,V(0x2000014cu)},{0x45u,V(0x20000150u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 51,
+      "value": "0x20000150",
+      "source_line": "{0x44u,V(0x2000014cu)},{0x45u,V(0x20000150u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 52,
+      "value": "0x20000154",
+      "source_line": "{0x46u,V(0x20000154u)},{0x47u,V(0x20000158u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 52,
+      "value": "0x20000158",
+      "source_line": "{0x46u,V(0x20000154u)},{0x47u,V(0x20000158u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 55,
+      "value": "0x20000160",
+      "source_line": "{0x25u,V(0x20000160u)},{0x26u,V(0x20000164u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 55,
+      "value": "0x20000164",
+      "source_line": "{0x25u,V(0x20000160u)},{0x26u,V(0x20000164u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 56,
+      "value": "0x20000168",
+      "source_line": "{0x27u,V(0x20000168u)},{0x28u,V(0x2000016cu)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 56,
+      "value": "0x2000016C",
+      "source_line": "{0x27u,V(0x20000168u)},{0x28u,V(0x2000016cu)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 57,
+      "value": "0x20000170",
+      "source_line": "{0x29u,V(0x20000170u)},{0x2au,V(0x20000174u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 57,
+      "value": "0x20000174",
+      "source_line": "{0x29u,V(0x20000170u)},{0x2au,V(0x20000174u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 58,
+      "value": "0x20000178",
+      "source_line": "{0x2bu,V(0x20000178u)},{0x2cu,V(0x2000017cu)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 58,
+      "value": "0x2000017C",
+      "source_line": "{0x2bu,V(0x20000178u)},{0x2cu,V(0x2000017cu)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 59,
+      "value": "0x20000180",
+      "source_line": "{0x2du,V(0x20000180u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 62,
+      "value": "0x20000184",
+      "source_line": "{0x31u,V(0x20000184u)},{0x5fu,V(0x20000188u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 62,
+      "value": "0x20000188",
+      "source_line": "{0x31u,V(0x20000184u)},{0x5fu,V(0x20000188u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 63,
+      "value": "0x2000018C",
+      "source_line": "{0x60u,V(0x2000018cu)},{0x67u,V(0x200001a8u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 63,
+      "value": "0x200001A8",
+      "source_line": "{0x60u,V(0x2000018cu)},{0x67u,V(0x200001a8u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 64,
+      "value": "0x200001AC",
+      "source_line": "{0x68u,V(0x200001acu)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 67,
+      "value": "0x20000190",
+      "source_line": "{0x61u,V(0x20000190u)},{0x62u,V(0x20000194u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 67,
+      "value": "0x20000194",
+      "source_line": "{0x61u,V(0x20000190u)},{0x62u,V(0x20000194u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 70,
+      "value": "0x20000198",
+      "source_line": "{0x63u,V(0x20000198u)},{0x64u,V(0x2000019cu)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 70,
+      "value": "0x2000019C",
+      "source_line": "{0x63u,V(0x20000198u)},{0x64u,V(0x2000019cu)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 71,
+      "value": "0x200001A0",
+      "source_line": "{0x65u,V(0x200001a0u)},{0x66u,V(0x200001a4u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/drivers/flash/nor/nor-clock-select.c",
+      "line": 71,
+      "value": "0x200001A4",
+      "source_line": "{0x65u,V(0x200001a0u)},{0x66u,V(0x200001a4u)},",
+      "source_sha256": "315ed0f18d9a8e9e1b398324d4337442b20e2e7210d59273d2b7b057c94731b4"
+    },
+    {
+      "path": "g2/src/apollo-main/graphics/ambiq-gpu/ambiq-gpu-blit/nema_mode.c",
+      "line": 73,
+      "value": "0x20202020",
+      "source_line": "display_driver_nema_select_522a16(0x20202020u);",
+      "source_sha256": "087a27f16dd6303a977b8426b9816ddbd30a5bb60b0a600b9cca5b1c81645c81"
+    },
+    {
+      "path": "g2/src/apollo-main/hal/clock/clock/clock-reset-active/recovery.c",
+      "line": 27,
+      "value": "0x20000000",
+      "source_line": "W(0x400204d8)|=256;W(0x400204d8)|=0x20000000;",
+      "source_sha256": "24cce0ed9df58b9e14699cbec2e1d4a02d10fdfc6c61a5b7856d6efeb1431253"
+    },
+    {
+      "path": "g2/src/apollo-main/hal/clock/clock/clock-reset-active/recovery.c",
+      "line": 38,
+      "value": "0x20000000",
+      "source_line": "W(0x400204d8)&=~0x20000000u;W(0x400204d8)&=~256u;W(0x400204d8)&=~32u;",
+      "source_sha256": "24cce0ed9df58b9e14699cbec2e1d4a02d10fdfc6c61a5b7856d6efeb1431253"
+    },
+    {
+      "path": "g2/src/apollo-main/system/log/logger-ble/display_logger_ble_pb_descriptor_777da4.c",
+      "line": 23,
+      "value": "0x2001320D",
+      "source_line": "0x2001320du, 0x00040004u, 0x20013811u, 0x00040004u,",
+      "source_sha256": "daeffca24f6ca943016104cf7f30574730757fb162185a1e64388692e6a386c6"
+    },
+    {
+      "path": "g2/src/apollo-main/system/log/logger-ble/display_logger_ble_pb_descriptor_777da4.c",
+      "line": 23,
+      "value": "0x20013811",
+      "source_line": "0x2001320du, 0x00040004u, 0x20013811u, 0x00040004u,",
+      "source_sha256": "daeffca24f6ca943016104cf7f30574730757fb162185a1e64388692e6a386c6"
+    },
+    {
+      "path": "g2/src/apollo-main/system/log/logger-ble/display_logger_ble_pb_descriptor_777da4.c",
+      "line": 24,
+      "value": "0x20013715",
+      "source_line": "0x20013715u, 0x00800004u, 0x20013819u, 0x05020004u,",
+      "source_sha256": "daeffca24f6ca943016104cf7f30574730757fb162185a1e64388692e6a386c6"
+    },
+    {
+      "path": "g2/src/apollo-main/system/log/logger-ble/display_logger_ble_pb_descriptor_777da4.c",
+      "line": 24,
+      "value": "0x20013819",
+      "source_line": "0x20013715u, 0x00800004u, 0x20013819u, 0x05020004u,",
+      "source_sha256": "daeffca24f6ca943016104cf7f30574730757fb162185a1e64388692e6a386c6"
+    },
+    {
+      "path": "g2/src/apollo-main/system/log/logger-ble/display_logger_ble_pb_descriptor_777da4.c",
+      "line": 25,
+      "value": "0x2001381D",
+      "source_line": "0x2001381du, 0x00200004u, 0u",
+      "source_sha256": "daeffca24f6ca943016104cf7f30574730757fb162185a1e64388692e6a386c6"
+    },
+    {
+      "path": "g2/src/apollo-main/system/log/logger-ble/display_logger_ble_pb_descriptor_777da4.c",
+      "line": 34,
+      "value": "0x20282705",
+      "source_line": "static const uint32_t field_info_78abe0[] = { 0x20282705u, 0x00200002u, 0u };",
+      "source_sha256": "daeffca24f6ca943016104cf7f30574730757fb162185a1e64388692e6a386c6"
+    },
+    {
+      "path": "g2/src/apollo-main/system/log/tracepoint-pb/tracepoint_pb_descriptor_77cd84.c",
+      "line": 21,
+      "value": "0x2001380D",
+      "source_line": "0x2001380du, 0x02020004u, 0x20013811u, 0x00200004u,",
+      "source_sha256": "6ffd137c8e53245932b01a0185f16c843b77996a95cd874225dd22a5ba6743b4"
+    },
+    {
+      "path": "g2/src/apollo-main/system/log/tracepoint-pb/tracepoint_pb_descriptor_77cd84.c",
+      "line": 21,
+      "value": "0x20013811",
+      "source_line": "0x2001380du, 0x02020004u, 0x20013811u, 0x00200004u,",
+      "source_sha256": "6ffd137c8e53245932b01a0185f16c843b77996a95cd874225dd22a5ba6743b4"
+    },
+    {
+      "path": "g2/src/apollo-main/system/log/tracepoint-pb/tracepoint_pb_descriptor_77cd84.c",
+      "line": 22,
+      "value": "0x20013815",
+      "source_line": "0x20013815u, 0x00010004u, 0u",
+      "source_sha256": "6ffd137c8e53245932b01a0185f16c843b77996a95cd874225dd22a5ba6743b4"
+    },
+    {
+      "path": "g2/src/apollo-main/system/log/tracepoint-pb/tracepoint_pb_descriptor_77cd84.c",
+      "line": 31,
+      "value": "0x20102705",
+      "source_line": "static const uint32_t fields_78c74c[] = {0x20102705u, 0x00200002u, 0u};",
+      "source_sha256": "6ffd137c8e53245932b01a0185f16c843b77996a95cd874225dd22a5ba6743b4"
+    },
+    {
+      "path": "g2/src/apollo-main/system/stock-ram/stock_ram_cells.c",
+      "line": 1411,
+      "value": "0x201600FF",
+      "source_line": "0x001600feu, 0x201600ffu, 0xc416f0f1u, 0x241600feu, 0x441600ffu, 0xc416f0f1u,",
+      "source_sha256": "b38184844fed78e6bca9666f950491eaa7673bbeaca8f9ee8ffbf0c0eb641c19"
+    },
+    {
+      "path": "g2/src/apollo-main/system/stock-ram/stock_ram_cells.c",
+      "line": 1424,
+      "value": "0x200B70F1",
+      "source_line": "0x1e848000u, 0x200b70f1u, 0xdc0900f9u, 0x00f908c2u, 0x3418ec09u, 0x000000f9u,",
+      "source_sha256": "b38184844fed78e6bca9666f950491eaa7673bbeaca8f9ee8ffbf0c0eb641c19"
+    },
+    {
+      "path": "g2/src/apollo-main/system/stock-ram/stock_ram_cells.c",
+      "line": 1426,
+      "value": "0x200000F8",
+      "source_line": "0xf0f110c5u, 0x00f9440au, 0x91c20000u, 0x200000f8u, 0xcac282cau, 0x00f809c5u,",
+      "source_sha256": "b38184844fed78e6bca9666f950491eaa7673bbeaca8f9ee8ffbf0c0eb641c19"
+    },
+    {
+      "path": "g2/src/apollo-main/ui/S4-ui-a-data/evenhub_data.c",
+      "line": 124,
+      "value": "0x20142711",
+      "source_line": "0x20142711u, 0x0040000eu,",
+      "source_sha256": "990e4abfa07245eb143c5407ab63ba523eb7fe4c6a57ee0c20c763868407a42e"
+    },
+    {
+      "path": "g2/src/apollo-main/ui/S4-ui-a-data/evenhub_data.c",
+      "line": 323,
+      "value": "0x2001180D",
+      "source_line": "0x2001180du, 0x000c0004u,",
+      "source_sha256": "990e4abfa07245eb143c5407ab63ba523eb7fe4c6a57ee0c20c763868407a42e"
+    },
+    {
+      "path": "g2/src/apollo-main/ui/S4-ui-a-data/menu_page_data.c",
+      "line": 58,
+      "value": "0x2001380D",
+      "source_line": "0x2001380du, 0x03780004u,",
+      "source_sha256": "7501cf8a8fbe08caf2c0e3abd9929367114d4f428cb2b9133db0162942d5e0b8"
+    },
+    {
+      "path": "g2/src/apollo-main/ui/S4-ui-a-data/menu_page_data.c",
+      "line": 59,
+      "value": "0x20013811",
+      "source_line": "0x20013811u, 0x00040004u,",
+      "source_sha256": "7501cf8a8fbe08caf2c0e3abd9929367114d4f428cb2b9133db0162942d5e0b8"
+    },
+    {
+      "path": "g2/src/apollo-main/ui/S6-fonts-residual-data/navigation_pb_data.c",
+      "line": 26,
+      "value": "0x20142709",
+      "source_line": "0x00011205u, 0x00040000u, 0x20142709u, 0x00400006u,",
+      "source_sha256": "a1c9d96d0394462c4e168c4fd1e25b983f5458a8b45a3ea932db87b2bd28834e"
+    },
+    {
+      "path": "g2/src/apollo-main/ui/S6-fonts-residual-data/navigation_pb_data.c",
+      "line": 27,
+      "value": "0x2014220D",
+      "source_line": "0x2014220du, 0x00040508u, 0x00011211u, 0x00010558u,",
+      "source_sha256": "a1c9d96d0394462c4e168c4fd1e25b983f5458a8b45a3ea932db87b2bd28834e"
+    },
+    {
+      "path": "g2/src/apollo-main/ui/a-41-onboarding-news/ui_onboarding_news_page.c",
+      "line": 48,
+      "value": "0x20000064",
+      "source_line": "#define LV_PCT_100 0x20000064     /* LV_PCT(100) */",
+      "source_sha256": "0e65c50dddcbeec3e2c90badb50774014cab2e203e7371640924dc842dff53a6"
+    },
+    {
+      "path": "g2/src/apollo-main/ui/a-54-teleprompt-ui/teleprompt_ui_actions.c",
+      "line": 26,
+      "value": "0x20000064",
+      "source_line": "#define LV_PCT_100 0x20000064",
+      "source_sha256": "d4c27d65eeb5215f3ceda81421b4ec4453d515d485dae0935bf2993b5bac9351"
+    },
+    {
+      "path": "g2/src/apollo-main/ui/lvgl/lv-heap/display_lv_heap_pool_20000338.c",
+      "line": 7,
+      "value": "0x20000338",
+      "source_line": "enum { AUDIO_UART_LV_HEAP_POOL_RAM = 0x20000338u };",
+      "source_sha256": "36137c6ead458db26aad76bc33dd883bbdb161b9ea375d2f2c8df50bb8b038fb"
+    },
+    {
+      "path": "g2/src/apollo-main/ui/lvgl/lv-image/display_lv_image_lifecycle_498bd0.c",
+      "line": 36,
+      "value": "0x20000032",
+      "source_line": "store_word(object, 0x50u, 0x20000032u);",
+      "source_sha256": "087bfa9dcbc044bdf77863716b7b26c7afb9da6148efcd453ff74139bfc50b07"
+    },
+    {
+      "path": "g2/src/apollo-main/ui/lvgl/lv-image/display_lv_image_lifecycle_498bd0.c",
+      "line": 37,
+      "value": "0x20000032",
+      "source_line": "store_word(object, 0x54u, 0x20000032u);",
+      "source_sha256": "087bfa9dcbc044bdf77863716b7b26c7afb9da6148efcd453ff74139bfc50b07"
+    },
+    {
+      "path": "g2/src/apollo-main/ui/lvgl/lv-scrollbar/display_lv_scrollbar_transform.c",
+      "line": 16,
+      "value": "0x20000000",
+      "source_line": "if((style&0x60000000u)==0x20000000u && (int32_t)encoded<0x1fffffff) {",
+      "source_sha256": "7864c36e392092a34c9c71fb6205cecae27cd6f309993caf54a3164b4c069b71"
+    }
+  ],
+  "limits": [
+    "Address-looking integers include packed protobuf descriptors, encoded UI values, bit masks, and symbolic stock offsets. The 212 remaining tokens require semantic classification before any is called a dangling pointer.",
+    "This scan covers only first-party g2/src/apollo-main .c and .h files; it does not inspect generated objects, upstream dependencies, computed addresses, or binary data outside C tokens."
+  ]
+}

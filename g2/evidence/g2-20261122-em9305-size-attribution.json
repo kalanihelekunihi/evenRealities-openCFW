@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "time_local": "2026-11-22 08:48 CST",
+  "title": "EM9305 source-candidate size attribution vs official 2.2.6.10 package: +34,092 B packaged, almost all in the application record (+33,820 B); already -Os; four-record stock layout folded into three source records",
+  "scope": "Host analysis of the latest complete source-link image (2026-11-12 diagnostic). No EM9305 rebuild, no official-image change, no hardware, no flash, no commit. The 2026-11-22 recovery NOR still packages the official stock firmware_ble_em9305.bin, not this candidate. source_completeness_proven stays false.",
+  "latest_source_link": {
+    "bundle": "build/g2-current-source-bundle-diagnostic-20261112T1130Z/g2-em9305/",
+    "note": "g2/src/em9305 top-level directories have mtimes on or before 2026-11-10, so this image still represents the current tree. Later 2026-11-22 work did not relink EM9305."
+  },
+  "stock_package": {
+    "path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+    "bytes": 211948,
+    "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "metadata_bytes": 124,
+    "payload_bytes": 211824,
+    "record_count": 4,
+    "records": [
+      {
+        "address": "0x00300000",
+        "bytes": 224,
+        "sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee"
+      },
+      {
+        "address": "0x00300400",
+        "bytes": 656,
+        "sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b"
+      },
+      {
+        "address": "0x00302000",
+        "bytes": 56,
+        "sha256": "fd94baffbf73433a951033ca0c44a5c60c3771af503eeb455a1b4941519d4f6f"
+      },
+      {
+        "address": "0x00302400",
+        "bytes": 210888,
+        "sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+        "role": "application"
+      }
+    ]
+  },
+  "source_package": {
+    "path": "build/g2-current-source-bundle-diagnostic-20261112T1130Z/g2-em9305/g2-em9305-source-candidate-package.bin",
+    "bytes": 246040,
+    "sha256": "7ca232f6197a2ccc0912f7256dfcf94211a5bfe56f7de5669c25e1d8fd92f418",
+    "metadata_bytes": 116,
+    "payload_bytes": 245924,
+    "record_count": 3,
+    "records": [
+      {
+        "address": "0x00300000",
+        "bytes": 1160,
+        "sha256": "56459067ff028a4603e800b89d152388c5cab0e9262732a4b331746aa70dba97",
+        "file": "g2-em9305-bootloader.bin",
+        "note": "C NVM bootloader implements stock records 0 and 1 roles with a different layout; ends at 0x00300488, overlapping the stock 0x00300400 slot"
+      },
+      {
+        "address": "0x00302000",
+        "bytes": 56,
+        "sha256": "0a3bf015305197dfa6a97aa6c0e1e9151048b99bebe05bc654c0ce44b96cf50e",
+        "file": "g2-em9305-record2.bin",
+        "equal_to_stock": false,
+        "note": "Same length; CRC/length fields finalized from the linked application, so they differ because the app record is not stock. tools/build/em9305_record2.py round-trips the stock record when pointed at the stock app."
+      },
+      {
+        "address": "0x00302400",
+        "bytes": 244708,
+        "sha256": "982600f794074a92a4b60e5ad05f607bc830409f6d96c3013e82a450f1478a0b",
+        "file": "g2-em9305.bin",
+        "role": "application"
+      }
+    ]
+  },
+  "deltas": {
+    "nov11_packaged_delta_bytes": 36748,
+    "nov11_implied_package_bytes": 248696,
+    "current_packaged_delta_bytes": 34092,
+    "current_application_delta_bytes": 33820,
+    "boot_region_source_vs_stock_records_0_and_1": 280,
+    "application_delta_percent_of_stock_app": 16.04,
+    "note": "The Nov 11 +36,748 implied a 248,696-byte package. The 12 Nov diagnostic package is 2,656 B smaller than that implied size; the remaining packaged gap is +34,092 B, of which +33,820 B is the application record."
+  },
+  "optimization": {
+    "linked_units": 768,
+    "opt": "-Os -fno-tree-loop-distribute-patterns on both g2-em9305-1 (766) and g2-em9305-2 (2)",
+    "function_sections_in_profiles": false,
+    "compiler": "arc-elf32 GCC 15.2.0 (arc-gnu-2026.03) via docker opencfw/iar-base:10.10.2-local",
+    "note": "Unlike apollo-main, EM9305 is already size-optimized at compile time. The +33,820 B application gap is not an -O2 vs -Os mix. No -Oz rebuild was run. Stock compiler is not GNU ARC 15.2."
+  },
+  "unused_upstream": {
+    "final_link_gc_sections": false,
+    "explicit_ld_discard_of_unused_qpc": {
+      "bytes": 1256,
+      "sections": 25,
+      "why": "g2-em9305.ld /DISCARD/ drops unmodified QP/C 6.5.1 APIs the stock image does not link (QTicker_*, QF_remove_, QK_schedLock, QHsm_isIn, upstream QF_init/QF_run/QF_bzero, QEQueue_*). Already excluded from the 244,708-byte app."
+    },
+    "composed_text": "Application is one merged .text/.rodata output (vectors 1,024 + .text 233,120 + .rodata 4,838 in the map, plus smaller contributions to 244,708). Without -ffunction-sections a further unused-function trim is not measurable on this relocatable.",
+    "am_hal_style_extra_tables": "none identified"
+  },
+  "duplicates": {
+    "note": "No new duplicate-global investigation of the ARC ELF in this step. The QP unused-upstream copies are already /DISCARD/ed rather than left as second copies in the image."
+  },
+  "packaging_layout": {
+    "stock_is_four_records": true,
+    "source_is_three_records": true,
+    "missing_stock_record_0x00300400": "656-byte stock record is not packaged separately; README states the C bootloader covers records 0 and 1 roles with a different byte layout. Source bootloader (1,160 B) is not a verbatim concatenation of stock records 0 and 1 and is not found as a span in the stock package.",
+    "overlap": "source bootloader occupies 0x00300000..0x00300488, which overlaps the stock 0x00300400 record start",
+    "current_nor_recovery_images": "build/em9305-nor-20261122/ble_em9305.bin is byte-identical to official firmware_ble_em9305.bin (SHA-256 91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9); sim and pairing work used stock EM9305, not the source candidate"
+  },
+  "not_done": [
+    "Did not relink EM9305 or enable -ffunction-sections/--gc-sections (historically rejected because gc dropped the image too far and broke freestanding memcpy)",
+    "Did not quantify how much of the +33,820 B is GNU ARC vs stock codegen versus residual unused code in the merged .text",
+    "Bootloader selection/reset equivalence and a physical EM9305 run remain unverified",
+    "source_completeness_proven remains false"
+  ]
+}

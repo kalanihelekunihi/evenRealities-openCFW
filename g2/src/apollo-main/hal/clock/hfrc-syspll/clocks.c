@@ -15,6 +15,7 @@ extern uint32_t stock_ext_request(uint32_t),stock_ext_release(uint32_t);
 extern uint32_t stock_pll_init(uint32_t,void *),stock_pll_config(uint32_t,const void *),stock_pll_enable(uint32_t),stock_pll_deinit(uint32_t),stock_pll_disable(uint32_t),stock_pll_wait(uint32_t);
 static void restore(uint32_t m){__asm volatile("msr primask, %0"::"r"(m):"memory");}
 void audio_hfrc_wait(volatile uint32_t *c){if(B(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f30+0x27u))){audio_clock_counter_wait((volatile uint8_t*)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f30+0x27u),c);uint32_t m=stock_save_irq();B(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f30+0x29u))=1;B(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f30+0x27u))=0;W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074228+0x3cu))=0;restore(m);}}
+/* Stock 0x4C4058: second HFRC wait and counter-pointer release. */
 void audio_hfrc2_wait(volatile uint32_t *c){if(B(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f30+0x28u))){audio_clock_counter_wait((volatile uint8_t*)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f30+0x28u),c);uint32_t m=stock_save_irq();B(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f30+0x28u))=0;W(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074228+0x40u))=0;restore(m);}}
 uint32_t audio_hfrc_request(uint32_t u){
  u=(uint8_t)u;uint32_t s=0;volatile uint32_t c=1000;

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-22 09:51 AM CST (America/Chicago)",
+  "title": "Renode 1.17 cortex-m55 native MVE/LOB golden; typographic C/asm translation of nrf_model 0x43A698/0x43A1B0 matches EVENBAT, 24 random inputs, and param_9 mutant; source-only estimate replaced",
+  "scope": "Host/emulator only. No hardware flash. No commit. Official opencfw-otap-disarm.app.bin was not overwritten. The earlier Unicorn NOP+hook harness is not the official golden.",
+  "correction": "NOP-patching 155 MVE sites would corrupt a golden because those ops compute values. qemu-system-arm -M mps3-an547 has cortex-m55/MVE but its map does not include the stock 0x00438000 window, and this Homebrew macOS install has no qemu-arm user-mode. The accepted reference is Renode 1.17 (vendor/renode-src commit e8c7c2d) with CPU.CortexM cpuType cortex-m55, FPU enabled, MRAM at 0x00400000, DTCM at 0x20000000.",
+  "reference": "renode-1.17-cortex-m55-native-mve-lob",
+  "result_base": "0x20068000",
+  "note_result_base": "RESULT was moved off SP 0x2007FB00 (the first golden at 0x2007F200 was stack-smashed on later random cases). Clean dumps are golden2-results.bin and mutant2-results.bin.",
+  "stock_identity": {
+    "library": "c205a2 / 2025-04-28",
+    "evenbat": "0x00646BF8 (name EVENBAT at +0x15C0)",
+    "init": "0x0043C150",
+    "ext_state": "0x0055F74C",
+    "process": "0x0055F848",
+    "tte": "0x0055F994 / 0x0058EABC",
+    "ttf": "0x0055F9A0 / 0x0058EAC4",
+    "model_init": "0x0043A1B0",
+    "model_process": "0x0043A698",
+    "iar_expf": "0x0043BA98 (in-tree iar_expf.c / shim; left at stock VA in the standalone test)",
+    "iar_logf": "0x00598074"
+  },
+  "golden_cases": {
+    "init_null": -22,
+    "init_null_model": -22,
+    "init_4v10_rc": 0,
+    "init_4v10_v0": 4.099999904632568,
+    "init_4v10_soc": 70.84683990478516,
+    "init_4v10_yhat": 4.099989414215088,
+    "init_4v10_r0": 2.3588204383850098,
+    "T_truncated": 26.0,
+    "tte_at_rest": 0.0,
+    "ttf_not_charging": "NaN",
+    "init_4v20_rest_soc": 80.03155517578125,
+    "after_120s_50mA_from_4v20_soc": 78.98108673095703,
+    "after_120s_50mA_tte": 27427.212890625,
+    "param_9_doubled_r0": 4.7176408767700195,
+    "param_9_doubled_first_rest_soc_unchanged": true,
+    "random_cases": 24,
+    "random_seed": "0xC0FFEE after init 4.05 V"
+  },
+  "translation": {
+    "method": "Typographic relocation of stock Thumb/MVE bodies in GNU as (.byte streams plus size-preserving bl / .word symbol patches). Not a portable scalar C lift of the algorithm. Internal PC-relative pools and short branches stay valid because each function layout is preserved. Cross-function bl rewritten to symbols. MVE and LOB opcodes remain as raw bytes and are executed by the M55.",
+    "wrappers": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_source.c (init/ext/process/tte/ttf C wrappers, version c205a2 / Apr 28 2025, opt buffers 0x70 bytes, no expf/logf definitions)",
+    "cores": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_cores.S (production names fg_memcpy/fg_memset; tte_cached label demoted so it does not clash with g2c_fuel_gauge_model_tte.c)",
+    "build": "Cores assembled with profile g2-apollo-main-mve-1 (-mcpu=cortex-m55, MVE allowed). Apple clang rejected .arch_extension fp/mve, so those directives were stripped; MVE instructions are .byte data and do not need the assembler mnemonic extension. Wrappers stay on g2-apollo-main-1 (cortex-m55+nomve, -std=c11, hard-float).",
+    "standalone_test": "build/fuel-gauge-recon-20261122/c-recon/ linked at 0x00401000, EVENBAT and IAR math mapped at stock VAs, BSS at 0x20060000, RESULT at 0x20068000"
+  },
+  "compare": {
+    "method": "Tag-aligned record compare against clean golden2/mutant2. The stock harness overwrote the 0x1001 tag with the count word at RESULT+4; the C harness reserved that slot, shifting subsequent tags by one word. Raw 2048-byte dumps are therefore not SHA-identical. From the first payload word through end-tag 0xE0D00000 the records are bit-exact.",
+    "evenbat_and_random": "PASS, bit-exact (init, 4.10, 4.20 samples including TTE 27427.212890625, all 24 xorshift cases)",
+    "param_9_mutant": "PASS, bit-exact (r0 doubled to 4.7176408767700195, first rest SOC unchanged)",
+    "golden2_sha256": "52d388c5712019ba102a4ea63b7010ec270aa338b74a7437f9a43a07159d17c4",
+    "c_results_sha256": "24517f5d56adf95809dfb9c2eb62d09d33451c6dff88586cc50b1c8d953ad8cd",
+    "mutant2_sha256": "efc0f07087ed1984cdb8bfdd9b5fe6167a3435d1bfb50f247f7f19189c6ea5a4",
+    "c_mutant_sha256": "47b0f77bc84c6935fd1fe2bfa70cf35949eda9fde0d5135ea99587865f178581",
+    "stock_golden_clean_json": "build/fuel-gauge-recon-20261122/renode-m55/stock-golden-clean.json",
+    "verdict": "PASS. The typographic C/asm translation matches the Renode M55 native-MVE/LOB golden on EVENBAT, random inputs, and the param_9 mutant. The source-only estimate was replaced in-tree."
+  },
+  "in_tree_replacement": {
+    "source_c_sha256": "63542d1eec5b031ec05d4f6a1653fbe2349feb9b4a00c7cd004028859fea9f6d",
+    "cores_S_sha256": "33c4c018365955f67cee19ee936e73090e6e07f0ee442e1203ce16cc4a0b8f00",
+    "sources_json": "Added profile g2-apollo-main-mve-1 and a new unit for g2c_fuel_gauge_cores.S (payload g2-apollo-main, toolchain clang, role candidate). units=4880."
+  }
+}

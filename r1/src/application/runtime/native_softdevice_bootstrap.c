@@ -5,6 +5,14 @@
 #include "ble.h"
 #include "nrf_sdh.h"
 #include "nrf_sdh_ble.h"
+#include "sdk_config.h"
+#if defined(R1_CORDIO_RTC0)
+_Static_assert(NRF_SDH_BLE_PERIPHERAL_LINK_COUNT == 3 &&
+               NRF_SDH_BLE_CENTRAL_LINK_COUNT == 0 &&
+               NRF_SDH_BLE_TOTAL_LINK_COUNT == 3 &&
+               NRF_SDH_BLE_GATT_MAX_MTU_SIZE == 247,
+               "Cordio resource profile must match recovered R1 BLE settings");
+#endif
 extern void r1_adc_error(uint32_t);
 extern uint32_t r1_structured_log_mode_get(void);
 extern uint32_t r1_structured_log_format(uint32_t,const char *,const char *,...);

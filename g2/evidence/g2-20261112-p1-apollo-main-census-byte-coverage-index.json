@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded locked-byte audit of all 7,449 historical Apollo main function census rows and their exact AddressSet ranges.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-census-byte-coverage-001/001/audit.py",
+      "sha256": "395f39a15470d9cf172b3c02cfefd21c33b841aec7b164a20794fbf087eb2546"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-census-byte-coverage-001/001/report.json",
+      "sha256": "b1a542c123ad494291521c64abbce5e6422049e0435a99e34477b68435866197"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-census-byte-coverage-001/001/receipt.json",
+      "sha256": "0137bf906dc773a24a80018efc01b50aa8f31b7011d3fa054e4f984bf1aa0e49"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-census-byte-coverage-review-001/001/review.json",
+      "sha256": "69d973872f1c416efe97b08a5c0c9c7bdef7f7955cbb40a5f4cb33db2f898537"
+    }
+  },
+  "result": {
+    "historical_function_rows": 7449,
+    "matching_contiguous_envelope_hashes": 7448,
+    "null_hash_rows": 1,
+    "null_hash_entry": "0x005FA120",
+    "exact_addressset_union_bytes": 1394848,
+    "exact_addressset_union_intervals": 2546,
+    "full_ota_complement_bytes": 2128548,
+    "full_ota_complement_intervals": 2547,
+    "cross_function_exact_range_overlap_pairs": 0,
+    "envelope_union_bytes": 1840378
+  },
+  "limits": [
+    "Contiguous min/max envelope hashes differ from exact discontiguous AddressSet coverage.",
+    "The null-hash function has only 56 AddressSet bytes but no exporter envelope hash; do not classify it from this audit alone.",
+    "Complement is only outside the historical census, not non-code.",
+    "No complete discovery, canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -11,7 +11,7 @@
  * (PHY 1, 3 or 4 also counts the secondary init state) and return 0;
  * otherwise report the status (native 0x3257a4), post event 2 and return
  * the status. */
-extern uintptr_t opencfw_em9305_child_316c58(void);
+extern uintptr_t opencfw_em9305_init_connection_allocate_316c58(void);
 extern uint32_t opencfw_em9305_associated_slot_allocate_3133b4(uint32_t id, uint32_t direction,
                                                                uint32_t minimum, uint32_t maximum,
                                                                uint32_t extent, uintptr_t output,
@@ -32,7 +32,7 @@ uint32_t opencfw_em9305_child_31a5bc(uintptr_t link, uint32_t peer_type, uint32_
 {
     uint32_t status;
     uint32_t anchor;
-    uintptr_t entry = opencfw_em9305_child_316c58();
+    uintptr_t entry = opencfw_em9305_init_connection_allocate_316c58();
     if (entry == 0u) {
         status = 9u;
     } else {

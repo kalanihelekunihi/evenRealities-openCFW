@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "review_id": "P1-em9305-discovery-review-001",
+  "campaign_id": "20261112T092142Z",
+  "reviewed_artifacts": {
+    "draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/004/discovery-draft.jsonl",
+      "sha256": "1872c533e91e1dac8c4b589271599904fb4739be96fa0b50f74d8a70fa26a7c7"
+    },
+    "receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/004/receipt.json",
+      "sha256": "01e690bce5bef1fada262eaf9673f19c327b868397118b8cc5694dcacb703ece"
+    },
+    "predecessor_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/003/discovery-draft.jsonl",
+      "sha256": "9770691f6032ddac3ae8eadea3607ed30eda30cc9698c976e082fbce9079310e"
+    }
+  },
+  "decision": "accept_bounded_draft",
+  "delta_findings": [
+    "Compared revisions 003 and 004. For all five non-EM payload rows, substantive discovery fields (image IDs, evidence, scope, unresolved items, admission status, and status) are unchanged; only revision/predecessor metadata changes.",
+    "The EM row retains the same seven image IDs and historical evidence, adds exactly two evidence pins, and removes no prior evidence: report 002 and independent review-v2. Both pin hashes match their files and use the EM source hash as input_sha256.",
+    "Only the EM unresolved item is narrowed: it now calls for independent nested-image/reference sweeps of records 0 and 1 and remaining application bytes outside the reviewed INI table, while retaining the conditional external NVM record selection caveat.",
+    "Receipt counts validate: six payload rows, 33 image IDs total, and seven unresolved items. Receipt gate_effect says none; G1 remains not_run. Every row has admission_status none."
+  ],
+  "assessment": {
+    "supports_requested_change": true,
+    "remaining_discovery_open": true,
+    "g1_admission": false,
+    "scope_limit": "This is a noncanonical bounded discovery draft; it does not establish complete nested-image discovery or canonical G1 admission."
+  },
+  "validation": "Python JSON parsing, SHA-256 checks, structural delta comparisons, evidence-pin file hashes, row/image/unresolved counts, and G1/admission assertions passed."
+}

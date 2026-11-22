@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "review_id": "P1-architecture-plan-review-003",
+  "supersedes": "P1-architecture-plan-review-002",
+  "candidate_path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-rebase-001/001/analysis-plan-candidate-002.json",
+  "candidate_sha256": "802a7b3fbed6a25590160b5116f363967e4a79c48befc071918c769c8c5dfe82",
+  "decision": "pass_bounded_correction; canonical_review_still_required",
+  "g1_claim": "none; G1 not claimed",
+  "input_hashes": {
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-rebase-001/001/analysis-plan-candidate-002.json": "802a7b3fbed6a25590160b5116f363967e4a79c48befc071918c769c8c5dfe82",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-analysis-plan-rebase-001/001/analysis-plan-candidate.json": "e453cd5d00d696578348343b423e4369fc160c54085dc084743ec5558c073e68",
+    "g2/evidence/g2-20261112-p1-tool-availability.json": "00f720b48f05503372315604705bb40160a6bebc106cfcc8859490679d30c76d",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-architecture-plan-review-001/001/review-002.json": "4da6bc15d086860db709da5e4578b3f99bd13902aebe2511347d4ccf4c60b7ab",
+    "g2/workflow/target.json": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+    "g2/docs/reference/memory-map.md": "336f076e414de498948a0302ce41e6b39b1138c47a4e560731193eac754db408",
+    "g2/docs/reference/firmware-formats.md": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83",
+    "g2/docs/reference/toolchains.md": "2c89dc48c0939cee787189ad376731f76490f852dd48a1aba3c4bf8fcc837e16",
+    "g2/docs/reference/decompilation-status.md": "047f85abe2dcdfc243705f8d76168d45a383da3143182783966fde1df0b9d0f8",
+    "docs/tooling.md": "debe676f21160ed5c2a58d0078651f69c0d907436de7e20e496ad46d3144138a"
+  },
+  "checks": [
+    {
+      "id": "ghidra_pin_correction",
+      "result": "pass",
+      "detail": "Candidate-002 states ARCv2 EM processor absent, C-SKY module installed, and CK804EF DSP/privileged/trap semantic coverage incomplete and unqualified. This matches receipt arc_processor_present=false and csky_processor_present=true, while preserving the distinction between module presence and qualified target semantics."
+    },
+    {
+      "id": "candidate_chain",
+      "result": "pass",
+      "detail": "Candidate-002 predecessor path and SHA-256 match candidate-001. All 29 candidate input pins resolve to current files with matching SHA-256; target_sha256 matches current locked bundle identity."
+    },
+    {
+      "id": "availability_scope",
+      "result": "pass_with_limits",
+      "detail": "The current tool receipt is availability-only. It establishes installed binaries/processors and hashes, not full decoder recognition, calibration, or semantic completeness. Candidate tool qualifications preserve narrow ARC and C-SKY calibration limits."
+    },
+    {
+      "id": "remaining_canonical_review",
+      "result": "pending",
+      "detail": "Before canonical G1 admission, reviewers still need to audit source assertions and semantic deltas in the repinned consolidated references and historical per-payload evidence, confirm every architecture/address mapping against the locked six-payload target, and ensure unresolved ISA-feature and runtime-route unknowns remain explicitly bounded. No full-image decoder sweep or semantic qualification is provided here."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "resolved",
+      "finding": "Review-002 finding that Ghidra was incorrectly described as having no C-SKY processor is corrected in candidate-002."
+    },
+    {
+      "severity": "remaining_limit",
+      "finding": "A processor module being present does not establish CK804EF feature accuracy; candidate wording appropriately leaves C-SKY semantic coverage unqualified."
+    },
+    {
+      "severity": "remaining_limit",
+      "finding": "Current availability receipt and candidate remain planning evidence only; they do not establish pseudocode completeness or G1."
+    }
+  ],
+  "limits": [
+    "Review is limited to candidate correction, pin integrity, and tool-availability consistency.",
+    "No full-image decoding, semantic analysis, payload re-extraction, or G1 gate was performed.",
+    "The candidate remains noncanonical and is not admitted by this review."
+  ],
+  "reviewed_at": "2026-11-12"
+}

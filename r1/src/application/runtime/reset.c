@@ -9,6 +9,13 @@ extern uint8_t __data_start__[];
 extern uint8_t __r1_data_init_end__[];
 extern uint8_t __bss_start__[];
 extern uint8_t __bss_end__[];
+#if defined(R1_CORDIO_RTC0)
+extern uint8_t __r1_cordio_bss_start[];
+extern uint8_t __r1_cordio_bss_end[];
+extern uint8_t __r1_cordio_data_load[];
+extern uint8_t __r1_cordio_data_start[];
+extern uint8_t __r1_cordio_data_end[];
+#endif
 
 _Noreturn void Reset_Handler(void)
 {
@@ -20,6 +27,17 @@ _Noreturn void Reset_Handler(void)
     for (uint8_t *destination = __bss_start__; destination < __bss_end__;
          ++destination)
         *destination = 0;
+#if defined(R1_CORDIO_RTC0)
+    /* Cordio's NOBITS state lives below the stock application's RAM origin.
+     * Initialize it before any PAL or controller bootstrap can read it. */
+    for (uint8_t *destination = __r1_cordio_bss_start;
+         destination < __r1_cordio_bss_end; ++destination)
+        *destination = 0;
+    const uint8_t *cordio_source = __r1_cordio_data_load;
+    for (uint8_t *destination = __r1_cordio_data_start;
+         destination < __r1_cordio_data_end; ++destination)
+        *destination = *cordio_source++;
+#endif
     r1_native_runtime_entry();
     for (;;) { /* The application entry is expected to remain active. */ }
 }

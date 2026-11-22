@@ -6,18 +6,20 @@
 #define G2_TOUCH_APPLICATION_H
 
 #include <stdint.h>
+#include "ram_state.h"
+#include "../reset-layout/reset_capsense_context.h"
 
 /* RAM objects (reset-copied or BSS), stock addresses. */
-#define G2_TOUCH_CAPSENSE_CONTEXT ((uint8_t *)0x200004ECu)           /* cy_capsense_context */
-#define G2_TOUCH_GESTURE_TICKS    (*(volatile uint32_t *)0x200008E8u) /* SysTick gesture timebase */
-#define G2_TOUCH_I2C_CONTEXT      ((void *)0x200008ECu)              /* cy_stc_scb_i2c_context_t, 84 B */
-#define G2_TOUCH_GESTURE_STATE    ((uint8_t *)0x20000940u)           /* 80-B gesture machine state */
-#define G2_TOUCH_REPORT           ((uint8_t *)0x20000990u)           /* 16-B report scratch */
-#define G2_TOUCH_I2C_RX           ((uint8_t *)0x200009A0u)           /* 16-B host write buffer */
-#define G2_TOUCH_I2C_TX           ((uint8_t *)0x200009B0u)           /* 16-B host read buffer */
-#define G2_TOUCH_ACTIVE_BUDGET    (*(volatile uint32_t *)0x200009C8u)
-#define G2_TOUCH_APP_STATE        (*(volatile uint8_t *)0x200009CCu)  /* 1 ACT, 2 ALR, 3 WOT */
-#define G2_TOUCH_SAVED_HOLD       (*(volatile uint16_t *)0x200009D6u) /* saved record +6 */
+#define G2_TOUCH_CAPSENSE_CONTEXT ((uint8_t *)&touch_reset_capsense_context)
+#define G2_TOUCH_GESTURE_TICKS    touch_gesture_ticks_ram
+#define G2_TOUCH_I2C_CONTEXT      ((void *)touch_i2c_context_ram)
+#define G2_TOUCH_GESTURE_STATE    touch_gesture_state_ram
+#define G2_TOUCH_REPORT           touch_report_ram
+#define G2_TOUCH_I2C_RX           touch_i2c_rx_ram
+#define G2_TOUCH_I2C_TX           touch_i2c_tx_ram
+#define G2_TOUCH_ACTIVE_BUDGET    touch_active_budget_ram
+#define G2_TOUCH_APP_STATE        touch_app_state_ram /* 1 ACT, 2 ALR, 3 WOT */
+#define G2_TOUCH_SAVED_HOLD       touch_saved_record_ram.parameter
 #define G2_TOUCH_DFU_MAILBOX      (*(volatile uint8_t *)0x20000000u)
 
 /* cy_stc_sysint_t layout (PDL 2.21), 8 bytes. */

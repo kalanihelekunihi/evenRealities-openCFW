@@ -25,8 +25,8 @@ extern uint32_t opencfw_em9305_radio_duration_312be4(uint32_t,uint32_t,uint32_t,
 extern uint32_t opencfw_em9305_associated_slot_allocate_3133b4(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uintptr_t,uintptr_t);
 extern uint32_t opencfw_em9305_associated_slot_query_31b2fc(uint32_t,uintptr_t);
 extern uint32_t opencfw_em9305_child_32b82c(uintptr_t,uintptr_t);
-extern uint32_t opencfw_em9305_child_32b618(void);
-extern void opencfw_em9305_child_32b9a4(uintptr_t);
+extern uint32_t opencfw_em9305_associated_cycle_tail_32b618(uintptr_t);
+extern uint32_t opencfw_em9305_associated_cycle_callback_32b9a4(uintptr_t);
 extern uint32_t opencfw_em9305_associated_packet_callback_32c69c(uintptr_t,uint32_t);
 
 #define BIG_U8(a) (*(volatile uint8_t *)(a))
@@ -41,8 +41,8 @@ uint32_t opencfw_em9305_callback_32b61c(uintptr_t set)
     (void)opencfw_em9305_memset((void *)object, 0u, 0x94u);
     BIG_U8(set + 406u) = 1u;
     BIG_U8(set + 404u) = 1u;
-    BIG_U32(set + 412u) = (uint32_t)(uintptr_t)opencfw_em9305_child_32b618;
-    BIG_U32(set + 408u) = (uint32_t)(uintptr_t)opencfw_em9305_child_32b9a4;
+    BIG_U32(set + 412u) = (uint32_t)(uintptr_t)opencfw_em9305_associated_cycle_tail_32b618;
+    BIG_U32(set + 408u) = (uint32_t)(uintptr_t)opencfw_em9305_associated_cycle_callback_32b9a4;
     BIG_U32(set + 416u) = (uint32_t)set;
     BIG_U32(set + 424u) = (uint32_t)event;
     BIG_U32(set + 420u) = (uint32_t)(set + 1144u);

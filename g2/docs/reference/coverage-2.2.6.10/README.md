@@ -4,9 +4,12 @@ Recovered 2026-10-21 during the source-reconstruction waves. Every row of
 `g2/symbols/*.tsv` that is not implemented in `g2/src` (by name, `_<addr>`
 suffix or a `/* Stock 0x... */` anchor) is classified here:
 
-- `upstream-map.tsv` — rows identical to (or an out-of-line inline copy from) a
-  pinned upstream source; the C is compiled from `third-party/upstream`, not
-  rewritten. Several files still need a `sources.json` unit (see follow-ups).
+- `upstream-map.tsv` — stock rows attributed to a pinned upstream or local
+  vendor source by function body, calls, and data use. The C is compiled through
+  `sources.json`; generated units may differ from the source file. Each row's
+  note gives the evidence level. An attribution alone does not establish
+  instruction equality. Several historical rows still need a `sources.json`
+  unit (see follow-ups).
 - `bootloader-ambiq-hal-map.tsv` — Even bootloader functions attributed to the
   AmbiqSuite 5.1.0 HAL pinned for apollo-main, with a confidence per row; the
   SYSPLL rows are differential-verified and now built from upstream (see

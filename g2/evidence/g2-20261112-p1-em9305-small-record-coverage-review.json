@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "review_id": "P1-em9305-small-record-coverage-review-001/001",
+  "campaign_id": "20261112T092142Z",
+  "verdict": "SUPPORTED_WITH_BOUNDED_SCOPE",
+  "admission": "none",
+  "inputs": {
+    "candidate": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-003/001/coverage-draft.jsonl",
+      "sha256": "94f2fbde51cf8d634b48ebec4800261d2f386ce632ad1050741fb428da527d79"
+    },
+    "previous": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-002/002/coverage-draft.jsonl",
+      "sha256": "d28bd7bd1b3ba67bd78d1a0b45b3a04295f01c0ebb057cd366a177c64a6aac0a"
+    },
+    "receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-003/001/receipt.json",
+      "sha256": "3b4f5ed5dfaad1b19e266d583201ab44b4cb0c7b7c694cb8fb8103fba726a055"
+    },
+    "sweep_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-sweep-001/001/report.json",
+      "sha256": "7297f7634a3d38e4f521dfeeaf6df0cab4c8c809f77239b42e09bfe344fece90"
+    },
+    "small_record_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-review-001/001/review.json",
+      "sha256": "aeaa6eb5e502259afb3befd821f7e5439cd03b22aa4d3b8bc7cf80c5de838247"
+    },
+    "package": {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+      "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9"
+    },
+    "current_image_index": {
+      "path": "g2/evidence/g2-20261112-p1-all-image-materializations-index.json",
+      "sha256": "b37f1fed89bb1addee808ab51dbf06455c2a54a2e39fa52a484dfe0aae40e26d"
+    }
+  },
+  "checks": {
+    "record1_empty_ini_table": {
+      "result": "PASS",
+      "package_span": [
+        992,
+        1004
+      ],
+      "record1_span": [
+        644,
+        656
+      ],
+      "length": 12,
+      "bytes_hex": "494e49020000000000000000",
+      "sha256": "25347c0d017d91e70a28f5dbcdbb28140bb291442560877fa228333097d97178",
+      "classification": "container",
+      "basis": "INI2 marker with zero/zero sentinel; empty metadata table and no encoded child image"
+    },
+    "scope_partition_audit": {
+      "result": "PASS",
+      "scope_count": 40,
+      "candidate_rows": 75,
+      "previous_rows": 72,
+      "candidate_partition_gaps_or_overlaps": [],
+      "previous_partition_gaps_or_overlaps": [],
+      "changed_payload_intervals": [
+        {
+          "scope": "ble_em9305",
+          "interval": [
+            992,
+            1004
+          ],
+          "previous": "unknown",
+          "candidate": "container"
+        },
+        {
+          "scope": "ble_em9305:record-1",
+          "interval": [
+            644,
+            656
+          ],
+          "previous": "unknown",
+          "candidate": "container"
+        }
+      ],
+      "all_other_interval_classifications_unchanged": true,
+      "counting_definition": "Rows are partitioned independently within each scope; payload-byte totals below include only rows whose scope.kind is payload, excluding package and child-image ledgers."
+    },
+    "row_and_unknown_byte_counts": {
+      "result": "PASS",
+      "candidate_rows": 75,
+      "candidate_scope_count": 40,
+      "candidate_unknown_payload_bytes": 4179107,
+      "previous_rows": 72,
+      "previous_scope_count": 40,
+      "previous_unknown_payload_bytes": 4179119,
+      "unknown_payload_bytes_removed": 12,
+      "child_image_unknown_bytes_excluded_from_payload_total": null
+    },
+    "receipt_consistency": {
+      "result": "PASS",
+      "receipt_changed_ids_match_two_interval_splits": true,
+      "receipt_counts_match_candidate": true,
+      "gate_effect": "none; G1 remains not_run"
+    }
+  },
+  "issues": [],
+  "limits": [
+    "Review addresses only the exact empty table's container classification and ledger interval/row accounting.",
+    "Does not establish runtime processing, universal absence of embedded programs, canonical G1 admission, complete pseudocode, source completion, or byte identity."
+  ]
+}

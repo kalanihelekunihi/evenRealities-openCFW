@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Bounded inside-touch payload nested-format, vector-like pair, and startup copy audit; independently reviewed.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-residual-audit-001/002/audit.py",
+      "sha256": "f786e0e6d5f82351e4a881a26c1d14b9e5637ba1f163cce689b328fd6a9c6375"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-residual-audit-001/002/report.json",
+      "sha256": "77f32137f04dfe8ab421967a90b6604e912df9ee8406185e87d82a19eb608361"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-residual-audit-001/002/receipt.json",
+      "sha256": "db24b80439d06a79ad7df398b907193e74057da770cea9a2be713fed57d18fd7"
+    },
+    "stock_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-residual-audit-001/002/disassembly.txt",
+      "sha256": "672e00ac29340527e1fb1bdcf086257cd7c34674967c1411040fb6348f4b439a"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-touch-residual-review-001/001/review.md",
+      "sha256": "90ee1a7048d2ff91d429288b9007f3af17081c287871e0e057469f9804b0844b"
+    }
+  },
+  "result": {
+    "payload_bytes": 34432,
+    "known_marker_scan_additional_image_established": false,
+    "aligned_pair_count": 5,
+    "primary_vector_copy_bytes": 192,
+    "initialized_data_copy_bytes": 964,
+    "byte_copy_helper_callsites": 14,
+    "untraced_helper_callsites": 13,
+    "confirmed_vector_table_pair_count": 1
+  },
+  "limits": [
+    "Known-marker and vector-pair scans are bounded heuristics.",
+    "UNVE EEPROM-emulation interpretation depends on consolidated touch reference.",
+    "Only reset copy caller was characterized; 13 other helper callsites and indirect routes remain open.",
+    "No complete nested-image absence or G1 admission claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

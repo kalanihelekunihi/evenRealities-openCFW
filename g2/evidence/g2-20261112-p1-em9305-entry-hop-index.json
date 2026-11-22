@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed static EM9305 NVM entry branch from record 2 into record 3",
+  "artifacts": {
+    "entry_bytes": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-entry-hop-001/001/entry.bin",
+      "sha256": "f0d6ac1b1cebeae743a105d83c753f8f531c32f691db1ab5e461f91f7140b169"
+    },
+    "target_bytes": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-entry-hop-001/001/target.bin",
+      "sha256": "a7e3efade9c7e29188399af2473503b9704ac7279c56f597f2c0eaaa37c3c944"
+    },
+    "entry_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-entry-hop-001/001/entry.objdump.txt",
+      "sha256": "e882b56754fdb2a6456deb6a7d7ff3e3b0df16f98b1d8b76430966e7d4ebca88"
+    },
+    "target_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-entry-hop-001/001/target.objdump.txt",
+      "sha256": "094e55eb3a1c9e3549b4692b5e59fcee381e08fb39a3cc56f5d2121330e35bf5"
+    },
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-entry-hop-001/001/audit.py",
+      "sha256": "260d584b1a7d752ec50d8ae84e519e98d516acfd8a2cc2a31ae74a0fb260aecd"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-entry-hop-001/001/report.json",
+      "sha256": "6800ad2306050d9b0a4045efc0256f1e89e5bb3ab56ad939d5f1acdd4ff9419a"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-entry-hop-001/001/receipt.json",
+      "sha256": "4389f32baf0b09cdca24a536b74a799f9f72fb66ce2efb6851ac41497db83b93"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-entry-hop-review-001/001/review.json",
+      "sha256": "fb47b30eb6ac63d58bf3ae4328baafcceacb57a628350153402082b9343bb943"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-entry-hop-review-001/001/receipt.json",
+      "sha256": "3475c08a7ed92bcc59e92af7db8ba5b2329148fbba81708ee7d0f28c1bfa01dd"
+    },
+    "fhdr_replay_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-fhdr-replay-index.json",
+      "sha256": "4762b30618f8fd483fc6b802daaac7d35110e63c7462299b6bae418d580ea472"
+    },
+    "dispatch_origin_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-dispatch-origin-index.json",
+      "sha256": "0af474d3f11f9e412f280c1621a4cc9284435b4bfb8fe0474c60e83c49ae5d6d"
+    }
+  },
+  "result": {
+    "entry_runtime": "0x00302028",
+    "entry_package_span": [
+      1044,
+      1054
+    ],
+    "decoded_stack_pointer": "0x0080f978",
+    "direct_branch_target": "0x0030ed80",
+    "target_record": 3,
+    "target_package_span": [
+      52644,
+      52650
+    ],
+    "target_first_external_call": "0x00103180",
+    "verdict": "BOUNDED_PASS_WITH_LIMITS"
+  },
+  "limits": [
+    "Physical NVM selection and execution are not observed.",
+    "The target first external call points outside the shipped record and requires a qualified resident interface.",
+    "This two-point decode is not a complete application code/data or reference sweep, and does not close G1."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

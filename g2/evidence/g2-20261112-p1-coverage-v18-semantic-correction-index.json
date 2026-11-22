@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Two separately reviewed candidate v018 correction of one Apollo bootloader decoded image coverage row",
+  "artifacts": {
+    "correction_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018/001/correct.py",
+      "sha256": "1a882ec0e25d4c9023f45da80561de399280ebc0d8f462cac1cb6bd1e89b7fbd"
+    },
+    "candidate_v18": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018/001/coverage-draft.jsonl",
+      "sha256": "e2446cc92c63055a458335d15b2f7ef2018214f31831134436962ec7ea7f384e"
+    },
+    "correction_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018/001/report.json",
+      "sha256": "5df000a57ea767ed8d8005cc635cf7aaba39fa38756057ac861a0a27e2339c94"
+    },
+    "correction_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018/001/receipt.json",
+      "sha256": "d40df7dae106483a73c970c22e119f75d07369560177d0af3a7a99fe11759019"
+    },
+    "first_independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018-first-review-restored-001/001/review.py",
+      "sha256": "310ee23a51caed7a834cc110ca4db342c03c3c9ba3af51ebeb45aaeae57b645e"
+    },
+    "first_independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018-first-review-restored-001/001/review.json",
+      "sha256": "97241d2e97d2a6ba7572d8164dc4550431fa1f851b07f3abe99db15b5bd7da93"
+    },
+    "first_independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018-first-review-restored-001/001/receipt.json",
+      "sha256": "5776592b779e51833c27ae068930708d864a06520908a372ab232855af6309f1"
+    },
+    "second_independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018-second-review-001/001/review.py",
+      "sha256": "0a6894a28eb779c7659f3d8341591dd2f86ad428839f4f1a2063a6a57e6d855f"
+    },
+    "second_independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018-second-review-001/001/review.json",
+      "sha256": "fa47e55a366da5cd3954b8c196b0fe7c4af4788fb71d3a0d37e1541a3b0ccbc1"
+    },
+    "second_independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018-second-review-001/001/receipt.json",
+      "sha256": "10ac6d50f43513aa92f0693c961ba57e72b3392474df170df45143d3dbd7e3e6"
+    },
+    "v17_exact_row_union": {
+      "path": "g2/evidence/g2-20261112-p1-image-coverage-60-row-union-index.json",
+      "sha256": "b399b6359110bae3fe4f2e6a4aa6c3b42a2b62e5592544d481a677347eff50a4"
+    },
+    "boot_parameter_provenance": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-boot-transform-parameter-provenance-index.json",
+      "sha256": "3039854213df0cb1a3107a9a2bd3dc576d2e349abfc438214364bc2a6c412be2"
+    }
+  },
+  "result": {
+    "candidate_rows": 127,
+    "semantic_rows_changed_from_v17": 1,
+    "row_ids_changed": 0,
+    "other_parsed_row_objects_unchanged": 126,
+    "changed_row_id": "image-coverage:apollo_bootloader:decoded:20080000",
+    "old_kind": "data",
+    "new_kind": "unknown",
+    "nonunknown_image_rows": 19,
+    "unknown_image_rows": 41,
+    "canonical_review_ids_assigned": 0
+  },
+  "limits": [
+    "All 127 raw JSONL lines were reserialized; parsed row comparison identifies the single semantic change.",
+    "Prior 60-image-row workpack union is scoped to v017. v018 inherits its 126 unchanged parsed row objects and has two independent checks of the correction; this is not a canonical v2 review ledger.",
+    "No image-discovery closure, physical mapping proof, authenticated reviewer registry, G1/G2 or C implementation claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

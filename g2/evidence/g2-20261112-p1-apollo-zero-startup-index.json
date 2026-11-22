@@ -1,0 +1,50 @@
+{
+  "artifacts": {
+    "discovery_draft_003": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/003/discovery-draft.jsonl",
+      "sha256": "9770691f6032ddac3ae8eadea3607ed30eda30cc9698c976e082fbce9079310e"
+    },
+    "discovery_receipt_003": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/003/receipt.json",
+      "sha256": "32d879cc398b2acc74ea923e1f3b44f32287dadaddd6cf03d69c3e10533632c5"
+    },
+    "discovery_review": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-zero-discovery-review.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-zero-startup-review-001/001/discovery-review.json",
+      "sha256": "830bc6ff6aea4ea5c7c517b9e7f269eb836fef6041043c9f41a542c5ba24b3a2"
+    },
+    "stock_chain_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-zero-startup-chain-001/002/report.json",
+      "sha256": "d1400742f9009a0ae4b3a9a082742558116a7d4822807ff377732a452eef1b4b"
+    },
+    "stock_chain_review": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-zero-startup-review.json",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-zero-startup-review-001/001/review-v3.json",
+      "sha256": "e9fad03393b77b36f1a85bfeef0564d60f516c49e897a3a938448c4d90717e8a"
+    }
+  },
+  "campaign_id": "20261112T092142Z",
+  "confirmed": [
+    "Both reset vectors enter image-local stack-limit setup, startup chain, guard returning 1 and table runner.",
+    "Each first table self-relative callback resolves to the stock zero-fill handler; two records per image match generated RAM zero spans.",
+    "Generated RAM zero bytes are not encoded nested firmware images."
+  ],
+  "counts": {
+    "apollo_zero_items_resolved": 2,
+    "discovery_payload_rows": 6,
+    "discovery_unresolved_remaining": 7,
+    "listed_image_ids": 33
+  },
+  "limits": [
+    "Residual flash/reference sweeps remain open for both Apollo payloads.",
+    "Static instruction path does not prove physical boot or all runtime behaviors.",
+    "No canonical inventory or G1 admission."
+  ],
+  "schema_version": 1,
+  "scope": "Bounded Apollo main/bootloader reset-to-zero-handler selection and generated RAM accounting; current P1 discovery draft remains noncanonical.",
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

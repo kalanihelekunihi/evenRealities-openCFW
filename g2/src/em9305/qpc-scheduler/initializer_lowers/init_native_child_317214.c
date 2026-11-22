@@ -6,7 +6,7 @@
  * radio power level is looked up. A positive step below the maximum
  * saturates at 0x7f. The 310200-normalised level is stored back (and in
  * +66 for the active PHY, +76); returns the change against the level. */
-extern uint32_t opencfw_em9305_command_radio_power_310230(int32_t level, uint32_t mode);
+extern uint32_t opencfw_em9305_ll_signed_clamp_310230(uint32_t level);
 extern int32_t opencfw_em9305_child_310200(int32_t level);
 
 int32_t opencfw_em9305_child_317214(uintptr_t record, uint32_t phy, int32_t delta)
@@ -20,7 +20,7 @@ int32_t opencfw_em9305_child_317214(uintptr_t record, uint32_t phy, int32_t delt
         base=*(volatile uint8_t *)(*(volatile uint32_t *)(uintptr_t)0x805cacu+40u);
         reference=base;
     }else{
-        reference=opencfw_em9305_command_radio_power_310230(current,0u);
+        reference=opencfw_em9305_ll_signed_clamp_310230((uint32_t)current);
         base=*slot;
     }
     int32_t level=(int8_t)(base+(uint32_t)delta);

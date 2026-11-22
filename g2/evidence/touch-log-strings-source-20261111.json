@@ -1,0 +1,150 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "source ownership of nine stock Touch bootstrap and save log strings",
+  "stock_image": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "stock_image_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "stock_fwpk_header_bytes": 32,
+  "source_changes": [
+    {
+      "path": "g2/src/touch/config-bootstrap/bootstrap.c",
+      "sha256": "210124d6219b2c86e9453d18ff9dce3519cd77e4229b85356ec76a01e1052639"
+    },
+    {
+      "path": "g2/src/touch/config-bootstrap/bootstrap.h",
+      "sha256": "403487ccfe6e68b82a49e4b7f7003bf8d0c3cffdd24e884c9d4ef6501cefc903"
+    },
+    {
+      "path": "g2/src/touch/calibration/calibration.c",
+      "sha256": "dcd64e6f4cc55ed045508c039796985fbd45fa3ebc6cca8c840fb9334864e229"
+    },
+    {
+      "path": "g2/src/touch/application/app_main.c",
+      "sha256": "7a34df8acd818625c8248acc818d961bf94205822bcaa38046b9bd0c41d773d5"
+    }
+  ],
+  "string_records": [
+    {
+      "symbol": "touch_log_color_reset",
+      "stock_address": "0x0000AA5C",
+      "linked_address": "0x0000A0FC",
+      "bytes_including_nul": 5,
+      "sha256": "a2c55ff6ccfe82c1267e2398b66c7727bc1b80ba93e2b8e3e3edb4ecfc7bd7b8",
+      "matches_locked_bytes": true
+    },
+    {
+      "symbol": "log_eeprom_init_failed",
+      "stock_address": "0x0000AAB8",
+      "linked_address": "0x0000A157",
+      "bytes_including_nul": 37,
+      "sha256": "f5a40a518aed1caaf2ccbfb860b6c55c6ea900db13cabcce89d4c29a4c909384",
+      "matches_locked_bytes": true
+    },
+    {
+      "symbol": "log_eeprom_first_use",
+      "stock_address": "0x0000AAE0",
+      "linked_address": "0x0000A17C",
+      "bytes_including_nul": 62,
+      "sha256": "a9789b500b4ca7945107cae62bc6fe03d21a5e0a5cf5ea728270edc2a6e34bed",
+      "matches_locked_bytes": true
+    },
+    {
+      "symbol": "log_eeprom_erase_failed",
+      "stock_address": "0x0000AB20",
+      "linked_address": "0x0000A1BA",
+      "bytes_including_nul": 38,
+      "sha256": "0343458118efb99716b71b6cd1b4be1224ef506093aa2694363ca3d0f2010f03",
+      "matches_locked_bytes": true
+    },
+    {
+      "symbol": "log_default_write_failed",
+      "stock_address": "0x0000AB48",
+      "linked_address": "0x0000A1E0",
+      "bytes_including_nul": 46,
+      "sha256": "b5bfd40e5eb2d0ae062acde629b8255920dfda41384a1afa7cb099063044e021",
+      "matches_locked_bytes": true
+    },
+    {
+      "symbol": "log_default_initialized",
+      "stock_address": "0x0000AB78",
+      "linked_address": "0x0000A20E",
+      "bytes_including_nul": 47,
+      "sha256": "7688a0443258825045673af4ac913635943e301b39558cca13eb7de886e96c38",
+      "matches_locked_bytes": true
+    },
+    {
+      "symbol": "log_config_loaded",
+      "stock_address": "0x0000ABA8",
+      "linked_address": "0x0000A23D",
+      "bytes_including_nul": 57,
+      "sha256": "11821454edf25baad6f12adde8a56992fbc6bc27e81054473b3c56f7468ea54b",
+      "matches_locked_bytes": true
+    },
+    {
+      "symbol": "touch_log_save_failed",
+      "stock_address": "0x0000ABE4",
+      "linked_address": "0x0000A101",
+      "bytes_including_nul": 37,
+      "sha256": "5b0f3d1a508e5b2faadd00354f364b67afc8858d5c4f784ed7fdf52f90f03a0b",
+      "matches_locked_bytes": true
+    },
+    {
+      "symbol": "touch_log_saved",
+      "stock_address": "0x0000AC0C",
+      "linked_address": "0x0000A126",
+      "bytes_including_nul": 49,
+      "sha256": "6642e373249fb048407e34ba659d9f97ff8b59c39a7045e26a700d8be389d81b",
+      "matches_locked_bytes": true
+    }
+  ],
+  "focused_build_report": "build/g2-touch-log-final-20261111/report.json",
+  "focused_build_report_sha256": "036224a24ba0287e319e0c710cb6e9d12bb0d20849397001edb084d0952786be",
+  "focused_link_report": "build/g2-touch-log-final-link-20261111/link-report.json",
+  "focused_link_report_sha256": "25689117d5e9e23da7685888a98b14c6444152d3ef4f19cabae5cb9fe0b4cf7b",
+  "previous_touch_image": {
+    "path": "build/g2-touch-electrodes-bundle-20261111/g2-touch/g2-touch.bin",
+    "bytes": 30200,
+    "sha256": "9063301233ada755a46a66c4215d8a32f152e771233e31c8aaa4e4a2340bf8ce"
+  },
+  "current_touch_image": {
+    "path": "build/g2-touch-log-final-link-20261111/g2-touch/g2-touch.bin",
+    "bytes": 30592,
+    "sha256": "65590df0f0c8057cf23ac5908650522f7ecc5721ed9618d45878f182f8c51410"
+  },
+  "aligned_words_pointing_past_image_into_stock_flash": [
+    {
+      "word_at": "0x00009E58",
+      "value": "0x0000AA80"
+    },
+    {
+      "word_at": "0x0000A41C",
+      "value": "0x0000AA80"
+    }
+  ],
+  "limits": [
+    "The stock touch logger is a return-zero leaf, so source ownership of its arguments does not establish working logging.",
+    "The source-linked touch image is not stock byte-identical and the linker reports source_completeness_proven=false.",
+    "This scan covers aligned 32-bit words in the final touch image; it is not a proof that all indirect or unaligned dependencies are absent."
+  ],
+  "full_build": {
+    "report": "build/g2-touch-log-all-20261111/report.json",
+    "report_sha256": "f8a2158a014871c42b91cb9828dd3335e914467d53b50f51cfab158f11e0ffb1",
+    "compiled_units": 4878,
+    "failed_units": 0,
+    "manifest_changed_during_build": false,
+    "current_source_hashes_match_report": true
+  },
+  "full_strict_link": {
+    "report": "build/g2-touch-log-bundle-20261111/link-report.json",
+    "report_sha256": "c7dff2fbe36fe0b23ba55a3d13ccf06ff7d8dbb02ba5f68407fa6895d291d622",
+    "payload_count": 7,
+    "external_binary_archive_used": false,
+    "source_completeness_proven": false
+  },
+  "source_candidate_bundle": {
+    "path": "build/g2-touch-log-bundle-20261111/g2-source-candidate.evenota.bin",
+    "bytes": 4639284,
+    "sha256": "334027612a05760dc400d7c262270f65095f24a0a2d79217815bef7cca909148",
+    "matches_locked_target": false
+  }
+}

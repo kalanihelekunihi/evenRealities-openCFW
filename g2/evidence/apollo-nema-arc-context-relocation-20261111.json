@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "stock": {
+    "artifact": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "artifact_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "table_address": "0x005232D0",
+    "first_word": "0x20074EFC",
+    "table_words": [
+      "0x20074EFC",
+      "0x3F6C835E",
+      "0x3F7B14BE",
+      "0x3F7DCF55",
+      "0x3F7EC46D",
+      "0x3F7F35F9",
+      "0x3F7F73AF",
+      "0x3EC3EF15",
+      "0x3E47C5C2",
+      "0x3E05A8A8",
+      "0x3DC8BD36",
+      "0x3DA0AF2A",
+      "0x3D85F213"
+    ]
+  },
+  "source": {
+    "path": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+    "sha256": "43329cf68613c4bc3ff47a5f40b816c13b5f7fa0ba19d2a7b6867c0b438a2c71",
+    "context_owner": "g2/src/apollo-main/graphics/nema-context/display_nema_context_state.c"
+  },
+  "before": {
+    "elf": "build/g2-frontier-final-link-20261111/g2-apollo-main/g2-apollo-main.elf",
+    "image": "build/g2-frontier-final-link-20261111/g2-apollo-main/g2-apollo-main.bin",
+    "image_bytes": 3819048,
+    "image_sha256": "2b94b1387a08528fdf58c8ba5bf30d04f4da34f9a7043fcd55a72b43de5cbc62",
+    "table_address": "0x00676744",
+    "context_symbol_address": "0x200A25D8",
+    "table_words": [
+      "0x20074EFC",
+      "0x3F6C835E",
+      "0x3F7B14BE",
+      "0x3F7DCF55",
+      "0x3F7EC46D",
+      "0x3F7F35F9",
+      "0x3F7F73AF",
+      "0x3EC3EF15",
+      "0x3E47C5C2",
+      "0x3E05A8A8",
+      "0x3DC8BD36",
+      "0x3DA0AF2A",
+      "0x3D85F213"
+    ]
+  },
+  "after": {
+    "elf": "build/g2-nema-arc-relocation-final-link-20261111/g2-apollo-main/g2-apollo-main.elf",
+    "image": "build/g2-nema-arc-relocation-final-link-20261111/g2-apollo-main/g2-apollo-main.bin",
+    "image_bytes": 3819048,
+    "image_sha256": "17312ddf4a5a66eb1b961933985141d276e70c2a0a8dae7b0961bb798cfc9928",
+    "table_address": "0x00676744",
+    "context_symbol_address": "0x200A25D8",
+    "table_words": [
+      "0x200A25D8",
+      "0x3F6C835E",
+      "0x3F7B14BE",
+      "0x3F7DCF55",
+      "0x3F7EC46D",
+      "0x3F7F35F9",
+      "0x3F7F73AF",
+      "0x3EC3EF15",
+      "0x3E47C5C2",
+      "0x3E05A8A8",
+      "0x3DC8BD36",
+      "0x3DA0AF2A",
+      "0x3D85F213"
+    ]
+  },
+  "verification": {
+    "remaining_twelve_table_words_equal_stock": true,
+    "linked_first_word_equals_context_symbol": true,
+    "image_size_unchanged": true,
+    "different_image_bytes": 3,
+    "focused_apollo_c_units_compiled": 2717,
+    "focused_compile_failures": 0,
+    "focused_duplicate_strong_symbols": 0,
+    "strict_link_passed": true,
+    "focused_source_receipt": "build/g2-nema-arc-relocation-final-20261111/report.json",
+    "focused_source_receipt_sha256": "9ccf70de3cdde4dd43227b89362fb1729d566bd1e11ea0d567a63d481ed64516",
+    "focused_link_receipt": "build/g2-nema-arc-relocation-final-link-20261111/link-report.json",
+    "focused_link_receipt_sha256": "a5b2fffe8c9991700147f2c29c062a2e9283276d4b5a0789f3b3f99b114eebb3"
+  },
+  "limits": [
+    "This verifies the table relocation and focused Apollo source link, not the behavior of the entire NemaVG path.",
+    "Other address-looking literals in Apollo source and initialized data still need semantic review; stock equivalence and physical graphics behavior remain unproven."
+  ],
+  "full_g2_build": {
+    "source_report": "build/g2-nema-arc-all-20261111/report.json",
+    "source_report_sha256": "ea411fe088f4590b510344cb73a2227e7df304bcd2f497a40118cc30c304a46b",
+    "strict_link_report": "build/g2-nema-arc-all-link-20261111/link-report.json",
+    "strict_link_report_sha256": "146be38678777fecb6db81a8a92533ee1ab17888b25f9861a307d247862aeb30",
+    "bundle_report": "build/g2-nema-arc-all-bundle-20261111/link-report.json",
+    "bundle_report_sha256": "3880aa8fe554dd544737f0bbab52d8e20aad74c59e9fd1151cc7fea1b86ccf0f",
+    "compiled_c_units": 4878,
+    "strict_payload_links": 7,
+    "final_apollo_image_sha256": "28f904cb79cd6cd00ce820aeab0f5b0f72f7aef636b475d667aa490ec758b262",
+    "final_apollo_image_bytes": 3818800,
+    "final_source_bundle_bytes": 4637812,
+    "final_source_bundle_sha256": "70e4b00b8baa54f5af30e3d47f4a589d489e7f828c594d764ade95fbb4a48de2",
+    "matches_locked_target": false
+  }
+}

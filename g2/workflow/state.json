@@ -2,7 +2,7 @@
   "schema_version": 1,
   "workflow": "g2-pseudocode-first",
   "prepared_on": "2026-09-26",
-  "phase": "P2_INTERRUPTED",
+  "phase": "P1_INVENTORY",
   "execution_started": true,
   "worker_profile": {
     "model": "gpt-6-luna",
@@ -10,12 +10,11 @@
   },
   "target_path": "g2/workflow/target.json",
   "target_lock_sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
-  "campaign_id": "20260930T190500Z",
+  "campaign_id": "20261112T092142Z",
   "gates": {
     "G1_TARGET_AND_INVENTORY": {
-      "status": "passed",
-      "receipt": "g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json",
-      "receipt_sha256": "fe17aa5a4e7456a81f342c3ca6d67233b065c42dd5c5a09917bb8e603e4d6610"
+      "status": "not_run",
+      "receipt": null
     },
     "G2_PSEUDOCODE_COMPLETE": {
       "status": "not_run",
@@ -41,13 +40,414 @@
   "freeze_receipt": null,
   "analysis_assignments": [],
   "c_implementation_assignments": [],
-  "next_step": "No active assignments. Await a new user-authorized campaign; do not resume the cleared dispatches. Revalidate historical evidence and reconcile current coverage before assigning new work.",
-  "enforcement": "The previous P2 campaign is interrupted and cleared, not executing or complete. Preserve G1 and all evidence; G2-G6 remain not_run. Clearing stale assignments does not pass or waive any gate.",
+  "next_step": "Complete new-campaign P1 image inventory, coverage ledger, registry and independent reviews. Revalidate historical evidence before reuse. Do not dispatch P2 or C work until this campaign passes its required gates.",
+  "enforcement": "The 2026-09 campaign remains cleared. Its G1 receipt is historical, not inherited by the active 2026-11 campaign. Current G1-G6 remain not_run; no P2 or C assignments are authorized by identity preflight alone.",
   "pseudocode_assignments": [],
-  "campaign_status": "cleared",
-  "execution_active": false,
-  "cleared_on": "2026-10-22",
-  "clear_reason": "User confirmed that the previous P2 work died prematurely and requested that it be cleared. No completion or freeze is claimed.",
+  "campaign_status": "active_p1_inventory",
+  "execution_active": true,
+  "identity_preflight": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/receipts/identity-preflight.json",
+    "sha256": "c2cfc3f0daff6f87cf44f9899b8d3236a67fe83e6d5e2b377ff1501051fed71b",
+    "scope": "bundle, six payloads and outer container only; G1 not passed",
+    "provenance_reconciliation": "g2/build/pseudocode-first/20261112T092142Z/receipts/provenance-reconciliation.json"
+  },
+  "inventory_reuse_preflight": {
+    "status": "byte_and_partition_candidates_only",
+    "images": {
+      "path": "g2/evidence/g2-20261112-historical-image-reuse-audit.json",
+      "sha256": "d1234175e59b44a828f0a59b944ff0bca9d8c86a7519ecb596664e9f2fb4e0e8",
+      "candidate_count": 33
+    },
+    "coverage": {
+      "path": "g2/evidence/g2-20261112-historical-coverage-reuse-audit.json",
+      "sha256": "0b65841b1fba9ce9972be37a2aa63afc2610b46435a448e9b81846d4179cc291",
+      "candidate_count": 70
+    },
+    "discovery_and_plan": {
+      "path": "g2/evidence/g2-20261112-historical-plan-reuse-audit.json",
+      "sha256": "f25ef7f1535d104097a600d8bc6c4acb84afdbcd9ce03c41b1a3790dbfb809aa",
+      "discovery_count": 6,
+      "plan_count": 6
+    },
+    "historical_g1_reviews": {
+      "path": "g2/evidence/g2-20261112-historical-g1-review-reuse-audit.json",
+      "sha256": "e999c577815c90c974102087d9cbd9a54e86ce5ee1358c5d1916dae9a7c934e6",
+      "historical_reviews": 125,
+      "reviews_with_stale_inputs": 23
+    },
+    "decoded_image_replays": {
+      "path": "g2/evidence/g2-20261112-p1-decoded-image-replay-index.json",
+      "sha256": "2127742282b8582a9915938773b3faf2bad66c23ec1bb79cdf412b4e3c186229",
+      "image_count": 7,
+      "bounded_review_groups": 4
+    },
+    "gate_effect": "none; G1 remains not_run",
+    "em9305_record_inventory": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-record-index.json",
+      "sha256": "417806858c143f7952b2c2fad0bc90e6566eaa6edec586188268996f663b01c8",
+      "candidate_image_count": 7,
+      "file_record_count": 4,
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "all_current_campaign_image_outputs": {
+      "path": "g2/evidence/g2-20261112-p1-all-image-materializations-index.json",
+      "sha256": "b37f1fed89bb1addee808ab51dbf06455c2a54a2e39fa52a484dfe0aae40e26d",
+      "image_count": 33,
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "reviewed_noncanonical_drafts": {
+      "path": "g2/evidence/g2-20261112-p1-inventory-draft-review-index.json",
+      "sha256": "f9e2d5b5ffb43b81fb39bb1ccd3580b1356b5e9d11ab9a4751ce3d97dcaefc7d",
+      "image_rows": 33,
+      "coverage_rows": 70,
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "gxnpu_decoder_and_plan_candidate": {
+      "path": "g2/evidence/g2-20261112-p1-gxnpu-structural-decoder-index.json",
+      "sha256": "e40afe42cf22d786d971edc4440b54b867f8087b0bad8f35423b7321a146823e",
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "discovery_and_weight_classification_candidates": {
+      "path": "g2/evidence/g2-20261112-p1-discovery-and-codec-ledger-index.json",
+      "sha256": "61842df361af80ba0cbbbe373a5a8e6944e42537fb381c286e2bc6d2bb2ca332",
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "kws_command_execution_role_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-kws-command-execution-index.json",
+      "sha256": "e6e1a52764b835377f9bffd62a56abaca16575bd1c1e580c35ac2837823c7845",
+      "coverage_kind": "unknown",
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "apollo_zero_startup_selection_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-zero-startup-index.json",
+      "sha256": "16d318bdd5ed0b972145b56a4f517cec1ef697d5de56694c66103aa7bd7e6d30",
+      "discovery_unresolved_remaining": 7,
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "em9305_startup_table_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-startup-index.json",
+      "sha256": "df694bba67944ad45fbef0ac10b7cc19977b77c3153a9192ff4c7eb7c76a2c84",
+      "discovery_unresolved_remaining": 7,
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "em9305_small_record_table_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-small-record-index.json",
+      "sha256": "9b613af7c760ab8c48d90ff69742b06406c928c66f0982760bc58d9b3945a45a",
+      "classified_container_payload_bytes": 12,
+      "coverage_unknown_payload_bytes": 4179107,
+      "discovery_unresolved_remaining": 7,
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "em9305_small_record_linear_census_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-small-record-census-index.json",
+      "sha256": "dfe47411e22ccc92d7a6b9854ed3cc38da11cd90125ca692a9f27beec766b89d",
+      "undecoded_word_rows": 4,
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "em9305_small_record_linear_census_reproduced": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-small-record-census-repro-index.json",
+      "sha256": "c297772124a799d35f7dde3d58c461d90dbf3b39443e17bac1c7662197c37d19",
+      "undecoded_word_rows": 4,
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "em9305_small_record_word_flow_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-small-word-flow-index.json",
+      "sha256": "269acbcfac82d99ef185e84e531af3ea76f309303f28a378d90d49a0645a2d6a",
+      "unresolved_executable_candidate_words": 4,
+      "gate_effect": "none; ARC semantics, NVM selection and G1 remain open"
+    },
+    "em9305_arc_extension_word_ids_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-arc-extension-words-index.json",
+      "sha256": "037782c4e565f9404d4f7fa76bb5aea53588468b0b74a0228e9fd0f0ed21b27e",
+      "named_extension_words": 3,
+      "unnamed_extension_words": 1,
+      "gate_effect": "none; exact effects, NVM selection and G1 remain open",
+      "superseded_for_mnemonics_by": "g2/evidence/g2-20261112-p1-em9305-apex-encoding-correction-index.json"
+    },
+    "case_residual_discovery_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-case-discovery-ledger-index.json",
+      "sha256": "8163c3edb0d3659ba71d88167826e181e5119e843e2871c96d16d2bda8864dca",
+      "discovery_unresolved_remaining": 7,
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "case_literal_pool_coverage_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-case-literal-coverage-index.json",
+      "sha256": "f751419466a604a25e9c6e0fbac11fbc129289e9a2969deaddc5fadbee0e64a1",
+      "classified_data_payload_bytes": 48,
+      "coverage_unknown_payload_bytes": 4179059,
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "case_historical_function_census_reproduced": {
+      "path": "g2/evidence/g2-20261112-p1-case-whole-reference-index.json",
+      "sha256": "c7db13317ef621d3a1cefff0b33b0e9805c230429417767de30b3a26de817577",
+      "verified_function_rows": 435,
+      "candidate_function_rows": 119,
+      "gate_effect": "none; whole-image discovery and G1 remain open"
+    },
+    "reviewed_noncanonical_discovery_draft": {
+      "path": "g2/evidence/g2-20261112-p1-discovery-v33-index.json",
+      "sha256": "455c9f5723fcf9a5fbaa30179cfc95637da5d7b830734371f4b5c0407ad2a7d8",
+      "payload_rows": 6,
+      "image_ids": 33,
+      "unresolved_discovery_items": 7,
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "apollo_boot_decoded_interior_triage_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-boot-interior-index.json",
+      "sha256": "91951dd2b14399a2b85114c24b586e2297d35921e33216f99d623fcc02f743f1",
+      "output_count": 3,
+      "gate_effect": "none; decoded interior references and G1 remain open"
+    },
+    "apollo_boot_vector_candidates_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-boot-vector-candidates-index.json",
+      "sha256": "f878363aa52680a4d22e6437449776e595c9adc1685d2c65f5bd9c83dd134476",
+      "unresolved_vector_start_candidates": 1,
+      "gate_effect": "none; other byte roles, decoded interiors and G1 remain open"
+    },
+    "apollo_boot_5304_vector_rejection_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-boot-vector-5304-resolution-index.json",
+      "sha256": "09858926c54bd61ee4d5f3b816e1227ef16d54473110ab55443ded4ad222989f",
+      "remaining_vector_start_candidates_from_bounded_set": 0,
+      "gate_effect": "none; other byte roles, unknown routes and G1 remain open"
+    },
+    "reviewed_noncanonical_coverage_draft": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd",
+      "coverage_rows": 127,
+      "coverage_scopes": 40,
+      "coverage_unknown_payload_bytes": 4176715,
+      "coverage_unknown_image_bytes": 5671365,
+      "gate_effect": "none; scope-input correction reviewed, canonical row reviews and G1 remain open",
+      "unknown_payload_bytes": 4176715
+    },
+    "coverage_path_correction_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-path-correction-index.json",
+      "sha256": "007cfce945cb67b937cbb909d93df72ade93c4594c72602a1feae3fa3484cc02",
+      "independent_review": {
+        "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-path-correction-review-001/001/review.json",
+        "sha256": "bf27b9339da513ea904164a2a245b5995c37568071ffd9bf142019b666d49d8a"
+      },
+      "historical_misreferenced_supersedes_paths": 1,
+      "gate_effect": "none; G1 remains not_run"
+    },
+    "apollo_main_verified_code_overlap_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-offset-code-index.json",
+      "sha256": "b94a4701a04955297fed62959567d983c17d8d8ebe272b57289454bdc35b0250",
+      "full_ota_file_code_bytes": 66,
+      "initially_unresolved_following_bytes": 14,
+      "gate_effect": "none; main discovery and G1 remain open"
+    },
+    "apollo_main_tail_literals_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-tail-literals-index.json",
+      "sha256": "6793e45dead182281cc1d72f5d38eb78bcdbfa5d6389b7a8b0e4fd1b9cc86c40",
+      "reviewed_literal_bytes": 12,
+      "adjacent_unknown_bytes": 2,
+      "gate_effect": "none; whole-main discovery and G1 remain open"
+    },
+    "apollo_main_postpreamble_string_literals_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-postpreamble-refs-index.json",
+      "sha256": "62867cde853a352515253439225d48918bf5b6e1fb3305c80060e0a5440d9813",
+      "reviewed_literal_bytes": 32,
+      "direct_thumb_ldr_references": 34,
+      "gate_effect": "none; whole-main discovery and G1 remain open"
+    },
+    "apollo_main_next_pointer_cluster_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-next-pointer-cluster-index.json",
+      "sha256": "666c6f9583e2d1026238eae618e769b77dcde675d5ff5090c9db37b55b723ffb",
+      "reviewed_pointer_data_bytes": 44,
+      "direct_thumb_ldr_references": 29,
+      "gate_effect": "none; whole-main discovery and G1 remain open"
+    },
+    "apollo_main_historical_census_byte_audit_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-census-byte-coverage-index.json",
+      "sha256": "cc4ca5fbd643f35c267fc448b567e2556d1aad4f9e34aa19bb9330693b256068",
+      "exact_addressset_union_bytes": 1394848,
+      "code_unit_map_available": false,
+      "gate_effect": "none; bulk code classification rejected and G1 remains open"
+    },
+    "apollo_main_bulk_code_classification_rejected": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-census-coverage-rejection-index.json",
+      "sha256": "37abb51fa10fe1cd7338a76b3894c3b0006a6006e1151efafc7bfb5f6d31a25b",
+      "reason": "missing instruction/code-unit map",
+      "gate_effect": "none; reviewed coverage revision 014 remains current"
+    },
+    "apollo_main_codeunit_map_investigation_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-codeunit-map-investigation-index.json",
+      "sha256": "135732ad3bb7a89a8b695615615911fdace289062b6f4da2cb3e65a5ad07bb8f",
+      "historical_project_present": false,
+      "fresh_export_status": "not_run",
+      "gate_effect": "none; instruction map and G1 remain open"
+    },
+    "apollo_main_fresh_codeunit_export_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-fresh-codeunit-export-index.json",
+      "sha256": "b305dc60d833c985f5e2950251740117b09334ad6eb19cdf2518d17634dc21e9",
+      "fresh_instruction_bytes": 1260803,
+      "fresh_undefined_bytes": 134045,
+      "gate_effect": "none; historical reconciliation and G1 remain open"
+    },
+    "apollo_main_nonadmitting_code_candidate_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-code-candidate-index.json",
+      "sha256": "90601d78888da1b7a3a35ef927c3580a55c31a5cf70be350a9b6765f8f3a7d21",
+      "candidate_bytes": 1251072,
+      "admitted_code_bytes": 0,
+      "gate_effect": "none; independent instruction-byte validation and G1 remain open"
+    },
+    "apollo_main_candidate_decoder_agreement_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-code-candidate-objdump-index.json",
+      "sha256": "37fcc1292ea5275c0b43148105f4af19f7782d463c0aef78af5a8f287c5404be",
+      "matching_instruction_units": 473945,
+      "admitted_code_bytes": 0,
+      "gate_effect": "none; semantic code classification and G1 remain open"
+    },
+    "apollo_main_scatter_table_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-scatter-index.json",
+      "sha256": "32113955d219155f37cfb43c066d268ded132797f671a2bb2ae13d2a7143512d",
+      "table_bytes": 72,
+      "gate_effect": "none; runtime reachability, whole-main discovery and G1 remain open"
+    },
+    "codec_residual_structural_audit_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-codec-residual-index.json",
+      "sha256": "fecc77995233649a69d50bd83c02d28d882340a5478f0ebff7cdabe17c3b4bf1",
+      "gxnpu_command_records": 212,
+      "gate_effect": "none; conditional runtime routes and G1 remain open"
+    },
+    "codec_gxnpu_command_semantics_bounded_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-gxnpu-command-semantics-index.json",
+      "sha256": "499a2cb6fc6ff69502b649d23aff86653d43ec1e910971e29e59d6aa22cd21b4",
+      "typed_command_records": 212,
+      "gate_effect": "none; weight internals and G1 remain open"
+    },
+    "case_function_range_partition_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-case-range-partition-index.json",
+      "sha256": "5af1bc065f943b72dae2928f35f329311887f869c418dde0be65874c960d666f",
+      "historical_listed_range_bytes": 43072,
+      "outside_listed_ranges_bytes": 12680,
+      "gate_effect": "none; complement unclassified and G1 remains open"
+    },
+    "em9305_residual_linear_sweep_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-residual-index.json",
+      "sha256": "3b3ede1ba4d793b566db8022492ccc844dff299f75a0297987370896b77dfb1c",
+      "record_count": 4,
+      "gate_effect": "none; external NVM selection and G1 remain open"
+    },
+    "apollo_main_residual_marker_sweep_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-residual-index.json",
+      "sha256": "3c8564c7ca3d897c7640e6b399b57f32d96d9df65b47d6b6103467cce7833e70",
+      "gate_effect": "none; main reference routes and G1 remain open"
+    },
+    "apollo_table_provenance_correction_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-table-provenance-index-v2.json",
+      "sha256": "cf6c72dffb852cb0ce2fbbd94a88293118bf737fb3523bf137d5b713d5bf44fe",
+      "gate_effect": "none; remaining main byte meaning and G1 remain open"
+    },
+    "case_tail_descriptors_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-case-descriptor-tail-index.json",
+      "sha256": "4fd0dc65951e23d2e6847dfefb81147e44e489a47f417c622f6927e3e000fa20",
+      "reviewed_raw_data_bytes": 442,
+      "gate_effect": "none; whole-case discovery and G1 remain open"
+    },
+    "case_tail_literal_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-case-tail-literal-index.json",
+      "sha256": "f6f2d13b234a0ae8693636d5fb140a200cbcc6818a59bf6f51246c3cd023363a",
+      "reviewed_raw_literal_bytes": 4,
+      "adjacent_unknown_bytes": 2,
+      "gate_effect": "none; whole-case discovery and G1 remain open"
+    },
+    "case_d266_halfword_bounded_audit_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-case-d266-halfword-index.json",
+      "sha256": "a94e16bf7554abb2a38f5fac067849612c38639486c801800bf10c3ced6afab4",
+      "classification": "unknown",
+      "gate_effect": "none; whole-case discovery and G1 remain open"
+    },
+    "case_whole_residual_bounded_scan_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-case-whole-residual-index.json",
+      "sha256": "1e0cf58fa096876ed7ab92f1897bda0e5feed7c8b0666d4316ff9bd8b3148ccf",
+      "historical_complement_bytes": 12680,
+      "gate_effect": "none; markerless content, reference closure and G1 remain open"
+    },
+    "touch_flash_row_copy_origin_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-touch-flash-copy-origin-index.json",
+      "sha256": "4d774d682961e24ce3bef0a9ddc59c0c8f321dee88428111397e4d1e6fa3bdc3",
+      "copy_length_bytes": 128,
+      "gate_effect": "none; caller source origins and G1 remain open"
+    },
+    "touch_flash_row_copy_uptrace_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-touch-flash-copy-uptrace-index.json",
+      "sha256": "d29f357cdd58ca4c863000a6cc65fd69ebd4a9794e359f34b06f92c0024bfe2b",
+      "exact_thumb_bl_edges_checked": 15,
+      "gate_effect": "none; caller-supplied source and G1 remain open"
+    },
+    "touch_param2_ram_record_origin_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-touch-param2-origin-index.json",
+      "sha256": "4dc5fc6d88cc5a07c9b442e59fd13d16507669f358ea1faaf7c98b561f3ebd7e",
+      "record_ram_address": "0x200009d0",
+      "gate_effect": "none; indirect input producer and G1 remain open"
+    },
+    "touch_i2c_hold_input_route_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-touch-i2c-input-producer-index.json",
+      "sha256": "70190dcf25e453ebdc4e4fe96cda494626996223d69f484d3df7fa926aa77ca6",
+      "hold_command": 7,
+      "gate_effect": "none; physical sender, other writers and G1 remain open"
+    },
+    "codec_conditional_routes_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-codec-conditional-route-index.json",
+      "sha256": "5da9c766361551fe61ea13664b2fe817147e1fcac135d9360db6b2585b39323a",
+      "gate_effect": "none; device route selection, alias mapping and G1 remain open"
+    },
+    "codec_alternate_destination_alias_audited": {
+      "path": "g2/evidence/g2-20261112-p1-codec-alternate-destination-index.json",
+      "sha256": "eb5a7d54919cd7722c5aa5cd6dbc10c739bbf674f4ddec613f8df258c48ff085",
+      "alias_proven": false,
+      "gate_effect": "none; runtime address alias and G1 remain open"
+    },
+    "em9305_apex_word_encoding_correction_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-apex-encoding-correction-index.json",
+      "sha256": "ba4dd5e2449311eb2e8e71b0720b8bd45d333c21ef0880e545e562590cdcbb03",
+      "exact_mnemonic_register_encodings": 4,
+      "gate_effect": "none; opcode effects, NVM selection and G1 remain open"
+    },
+    "em9305_vendor_elf_boundary_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-vendor-elf-boundary-index.json",
+      "sha256": "b28dce6a341f2f9cd3483f77923832838d7466b4ca3c98de3cc9bfdadafef9bf",
+      "exact_vendor_function_slices": 5,
+      "gate_effect": "none; stock layout divergence, NVM selection and G1 remain open"
+    },
+    "em9305_record1_apex_codeunit_map_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-record1-extmap-index.json",
+      "sha256": "9d8be94185030a5cbf0bf7fddec16be88c2b8b046c0c800bbef258486bd28e8f",
+      "decoded_candidate_bytes": 644,
+      "code_units": 249,
+      "gate_effect": "none; code role, NVM selection and G1 remain open"
+    },
+    "em9305_fhdr_static_execution_route_reviewed": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-header-execution-route-index.json",
+      "sha256": "1d33801eb3c4364d66e9f85af4c8adb603f9e96b534911b6903a9f7766049ef7",
+      "entry_address": "0x302028",
+      "record3_branch_target": "0x30ed80",
+      "gate_effect": "none; external selection and G1 remain open"
+    }
+  },
+  "historical_g1_revalidation": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/receipts/historical-g1-revalidation.json",
+    "sha256": "92c3fdadd3afa8d35593d10edffda0b8909c30561bfa2e95a59ce317132da6bb",
+    "result": "failed_at_historical_outer_parser_hash_pin; no later checks inferred"
+  },
+  "p1_bounded_review_integration": {
+    "path": "g2/evidence/g2-20261112-p1-bounded-review-integration.json",
+    "sha256": "703b613f02b4dfd2488756d1ca2d9b62f2e3bc99f770b75a264d5216b754675f",
+    "gate_effect": "none; G1 remains not_run"
+  },
+  "previous_campaign": {
+    "campaign_id": "20260930T190500Z",
+    "status": "cleared",
+    "cleared_on": "2026-10-22",
+    "clear_reason": "User confirmed that the previous P2 work died prematurely and requested that it be cleared. No completion or freeze is claimed.",
+    "G1_TARGET_AND_INVENTORY": {
+      "status": "passed",
+      "receipt": "g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json",
+      "receipt_sha256": "fe17aa5a4e7456a81f342c3ca6d67233b065c42dd5c5a09917bb8e603e4d6610"
+    }
+  },
   "assignment_history": [
     {
       "campaign_id": "20260930T190500Z",
@@ -263,5 +663,455 @@
         }
       ]
     }
-  ]
+  ],
+  "p1_canonical_readiness": {
+    "path": "g2/evidence/g2-20261112-p1-canonical-readiness-index.json",
+    "sha256": "177a21ec10fb2682159e734789a0311db2ba7fa81c6c771f43a03c9f237cc74b",
+    "gate_effect": "none; G1 remains not_run"
+  },
+  "p1_current_transform_readiness": {
+    "path": "g2/evidence/g2-20261112-p1-current-transform-readiness-index.json",
+    "sha256": "0fad80d682b05b515f193335704ebf1bcaa18b56b695ac77113612e418571339",
+    "gate_effect": "none; G1 remains not_run"
+  },
+  "source_build_diagnostic": {
+    "path": "g2/evidence/g2-20261112-source-build-diagnostic-index.json",
+    "sha256": "d4b68a4cf4aa36cc4340cc0be68211cf8b42e3920dbdce2d0a77c99e7863d9a7",
+    "gate_effect": "none; compilation and final links pass, bundle differs from locked artifact"
+  },
+  "p1_root_image_accounting": {
+    "path": "g2/evidence/g2-20261112-p1-root-image-accounting-index.json",
+    "sha256": "9a8dc563ea577ef56b2a3afd8692308ed76233b7f10d76b258829d099ed720e4",
+    "gate_effect": "none; bounded root preflight and review only, G1 remains not_run"
+  },
+  "p1_resolved_map_validator": {
+    "path": "g2/evidence/g2-20261112-p1-resolved-map-validator-index.json",
+    "sha256": "b15cfa1bfac0311c65d566981c31d0007b84401e6b6aec06c83db0a8d417af89",
+    "gate_effect": "none; validator geometry strengthened, G1 remains not_run"
+  },
+  "p1_em9305_fhdr_replay": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-fhdr-replay-index.json",
+    "sha256": "4762b30618f8fd483fc6b802daaac7d35110e63c7462299b6bae418d580ea472",
+    "gate_effect": "none; static record and CRC replay only, G1 remains not_run"
+  },
+  "p1_em9305_dispatch_origin": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-dispatch-origin-index.json",
+    "sha256": "0af474d3f11f9e412f280c1621a4cc9284435b4bfb8fe0474c60e83c49ae5d6d",
+    "gate_effect": "none; bounded indirect jump origin only, G1 remains not_run"
+  },
+  "p1_em9305_entry_hop": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-entry-hop-index.json",
+    "sha256": "9f1deadb6dae046f1b125cfb8bfb4befb1324f8f08ef1e087d53e709937c6cb4",
+    "gate_effect": "none; static NVM entry branch only, G1 remains not_run"
+  },
+  "p1_em9305_resident_interface": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-resident-interface-index.json",
+    "sha256": "55b89f7d0062eedec4a07e090e67b243149923e5f3686cb8cf321c2f49ebd02f",
+    "gate_effect": "none; vendor-backed external ABI candidates only, G1 remains not_run"
+  },
+  "p1_provenance_pin_drift": {
+    "path": "g2/evidence/g2-20261112-p1-provenance-pin-drift-index.json",
+    "sha256": "33ed9a7698343293990ddfd43076f221cab5daf4199966a8cfb8a0ab7024fa18",
+    "gate_effect": "none; stale target metadata source recorded, G1 remains not_run"
+  },
+  "p1_discovery_phase_boundary": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-phase-boundary-index.json",
+    "sha256": "5640d5c3d8ac7dd8625b742e9633f43e22459883813ec625d7653ce3c104007d",
+    "gate_effect": "none; conditional G1/P2 triage reviewed, seven discovery entries remain unresolved and G1 remains not_run"
+  },
+  "p1_touch_copy_8d74_callers": {
+    "path": "g2/evidence/g2-20261112-p1-touch-copy-8d74-callers-index.json",
+    "sha256": "b7d7dd8c45441e46856da16a7344f6d79a1e612ba53aab084df8824f036ee99a",
+    "gate_effect": "none; bounded direct touch copy callers reviewed, source and nested-image closure remain open and G1 remains not_run"
+  },
+  "p1_touch_pin_function_copy": {
+    "path": "g2/evidence/g2-20261112-p1-touch-pin-function-copy-index.json",
+    "sha256": "39b60f74d586d2c93302b261d461b42ac1f5bc816c0bce05d6c6289eecc6f85b",
+    "gate_effect": "none; bounded image table copy and local selector writes reviewed, global route closure remains open and G1 remains not_run"
+  },
+  "p1_touch_record_copy_49e0": {
+    "path": "g2/evidence/g2-20261112-p1-touch-record-copy-49e0-index.json",
+    "sha256": "4ed915f67c824e8f5e869560824effb50bf7233349751aca45d2b144c1442a12",
+    "gate_effect": "none; conditional stack-record copy route reviewed, global route and nested-image closure remain open and G1 remains not_run"
+  },
+  "p1_codec_sdk_alias_contract": {
+    "path": "g2/evidence/g2-20261112-p1-codec-sdk-alias-contract-index.json",
+    "sha256": "04803c559b3471bdb9523e24c3b77ce98d192db55da656890bed337ddf4660c0",
+    "gate_effect": "none; SDK software mapping and stock pointer evidence reviewed, physical alias and XIP mapping remain unproven and G1 remains not_run"
+  },
+  "p1_apollo_boot_descriptor_origin": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-boot-descriptor-origin-index.json",
+    "sha256": "a2d5dcbb0bbe76f6b00aea30ad552dc27cd40747fba6834d044d8b3c561a5e22",
+    "gate_effect": "none; bounded bootloader descriptor origin reviewed, whole-image discovery remains open and G1 remains not_run"
+  },
+  "p1_apollo_boot_50d8_callback": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-boot-50d8-callback-index.json",
+    "sha256": "f023af8924a42b9c95853304c5727c6195cbeeda6142cf0ccb53ae6e43689e17",
+    "gate_effect": "none; bounded missing callback candidate reviewed, complete code census and G1 remain open"
+  },
+  "p1_apollo_boot_dtcm_code_pointers": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-boot-dtcm-code-pointers-index.json",
+    "sha256": "60d3086470d3f40fd6d798fa7226d8805eb79dc709e478dfdc2761b4908e2bf7",
+    "gate_effect": "none; five uncensused Thumb target leads reviewed, complete DTCM and G1 inventory remain open"
+  },
+  "p1_apollo_boot_spotmgr_source_version": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-boot-spotmgr-source-version-index.json",
+    "sha256": "f6e2cc74f97a27b37067b7f08b5c5d295da5e3743921f1ccb8d4eb5620fcb6b8",
+    "gate_effect": "none; bounded SpotMgr source-candidate version difference reviewed, stock version and G1 remain open"
+  },
+  "p1_apollo_boot_spotmgr_missing_bodies": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-boot-spotmgr-missing-bodies-index.json",
+    "sha256": "17ee9487fe561a294f8cb574631955eea1b7fdc3f32c38a9a2fbea4a1f664ce9",
+    "gate_effect": "none; two bounded bootloader code-span candidates reviewed, full census and G1 remain open"
+  },
+  "p1_apollo_boot_spotmgr_dispatch_grid": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-boot-spotmgr-dispatch-grid-index.json",
+    "sha256": "00949b042e8444f460e9f2c1b21247efdda0c5f43eca78ca90cd12f5cc4a2bb3",
+    "gate_effect": "none; bounded 0..19 state selector and three local indirect callsites reviewed, global input bounds and G1 remain open"
+  },
+  "p1_apollo_boot_spotmgr_state_cell": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-boot-spotmgr-state-cell-index.json",
+    "sha256": "69ba88572bc5ae7b2d8622f76108f4e38a484d6b31b05c3589e0e9ce641d54b2",
+    "gate_effect": "none; bounded current-state cell origin and guarded direct store reviewed, global writers and G1 remain open"
+  },
+  "p1_apollo_boot_spotmgr_helper_output": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-boot-spotmgr-helper-output-index.json",
+    "sha256": "14d22d11a84885ca27320857f837c2d00c5726dd4bf99f2e01e2cefd4dae79ab",
+    "gate_effect": "none; bounded local helper output range and guarded caller path reviewed, global state bounds and G1 remain open"
+  },
+  "p1_touch_crt_array_census": {
+    "path": "g2/evidence/g2-20261112-p1-touch-crt-array-census-index.json",
+    "sha256": "20a8334f0079dcf27f1d81db8369a4431ce72129fa5da823c00f126c2e309a7d",
+    "gate_effect": "none; two touch CRT function entries missing from historical corpus reviewed, complete discovery and G1 remain open"
+  },
+  "p1_touch_symbol_census_reconcile": {
+    "path": "g2/evidence/g2-20261112-p1-touch-symbol-census-reconcile-index.json",
+    "sha256": "dcf6fd0a9bd3ddec43295af3c2a4961bee0606e516e9027b671ae053c9a41230",
+    "gate_effect": "none; three missing touch CRT function candidates and one overlapping symbol row reviewed, whole-image discovery and G1 remain open"
+  },
+  "p1_em9305_loader_predicates": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-loader-predicates-index.json",
+    "sha256": "86a7875ce16b7cba5f8c12ac8e259ed8632a1c880af9580efc9aa17eaba2b3c0",
+    "gate_effect": "none; five static loader checks reviewed with ARC lane semantics and runtime selection still open; G1 remains not_run"
+  },
+  "p1_em9305_section_slot_origin": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-section-slot-origin-index.json",
+    "sha256": "c615fa020f0399a0bdaa186169fbe3a7e088c43142f54a6a6ee942d14067e73c",
+    "gate_effect": "none; locked FHDR section-3 slot origin conditionally reviewed, external NVM selection and G1 remain open"
+  },
+  "p1_em9305_sparse_nvm_replay": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-sparse-nvm-replay-index.json",
+    "sha256": "bfff4c0b965241de353472d3d87a043ac088fe9530ccf7f55fa15547b50ace40",
+    "gate_effect": "none; FF-filled package model and standard CRC relations reviewed, stock ARC CRC execution and physical NVM selection remain open"
+  },
+  "p1_em9305_sparse_nvm_isa_alignment": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-sparse-nvm-replay-v2-index.json",
+    "sha256": "3ece7df03d8a75305c289e422c45649c1713c31cbdffe790385ec5101acb7cfd",
+    "gate_effect": "none; ISA-backed BMSKN mask reviewed, stock ARC CRC execution and physical NVM selection remain open"
+  },
+  "p1_em9305_vpack2hl_replay": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-vpack2hl-replay-index.json",
+    "sha256": "85f225d5ba939b1f40adb0faab51df586c5b203a9f8741c166a8d0bb60063c13",
+    "gate_effect": "none; ISA-backed lane ordering and candidate FHDR entry/CRC fields reviewed, APEX CRC and physical boot open"
+  },
+  "p1_apollo_main_ota_path_challenge": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-main-ota-path-challenge-index.json",
+    "sha256": "16c458063fdea1bb4365b562135bd9efa1d6a61a041b5612c25c6b45cb1003a9",
+    "gate_effect": "none; bounded P1 candidate evidence, discovery and G1 remain open"
+  },
+  "p1_touch_copy_route_challenge": {
+    "path": "g2/evidence/g2-20261112-p1-touch-copy-route-challenge-index.json",
+    "sha256": "91409bf1a4150997efbd346f1cef7bae584b455d46c894bf0491e3945729521b",
+    "gate_effect": "none; bounded P1 candidate evidence, discovery and G1 remain open"
+  },
+  "p1_touch_8d74_upstream_challenge": {
+    "path": "g2/evidence/g2-20261112-p1-touch-8d74-upstream-challenge-index.json",
+    "sha256": "9e8b8d81e64f78a3b8fe3b46af993274fb07d0e81ebc0076f4f999432f01c577",
+    "gate_effect": "none; bounded P1 candidate evidence, discovery and G1 remain open"
+  },
+  "p1_case_ota_live_arguments": {
+    "path": "g2/evidence/g2-20261112-p1-case-ota-live-arguments-index.json",
+    "sha256": "66b81b776975eb9d3bd02e89b2e99ff11ff805cdf8e59312b4da7cd7abd5a3a5",
+    "gate_effect": "none; bounded P1 candidate evidence, discovery and G1 remain open"
+  },
+  "p1_case_ota_r1r2_origin": {
+    "path": "g2/evidence/g2-20261112-p1-case-ota-r1r2-origin-index.json",
+    "sha256": "eda192f4fc379739481e7a2c265829ce2c0a97eef6b67c3d9f6a8b56de1ac906",
+    "gate_effect": "none; bounded P1 candidate evidence, discovery and G1 remain open"
+  },
+  "p1_em9305_crc_apex_candidate": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-crc-apex-candidate-index.json",
+    "sha256": "b0e3a754bf684634ebb11449f3cd157d9c86e6955ad1a877611af4b489625253",
+    "gate_effect": "none; bounded P1 candidate evidence, discovery and G1 remain open"
+  },
+  "p1_apollo_boot_dtcm_consumer_chain": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-boot-dtcm-consumer-chain-index.json",
+    "sha256": "691099dcfeb9de028a925f3798da676f57adc2e22f33d758b839fce70f729d37",
+    "gate_effect": "none; one conditional DTCM callback consumer reviewed, global bootloader discovery and G1 open"
+  },
+  "p1_g1_admission_probe_v3": {
+    "path": "g2/evidence/g2-20261112-p1-g1-admission-probe-v3-index.json",
+    "sha256": "9740f3e54902e8a7922627a3913a5d528c7dcd27c4401664ae59ca825e980d8e",
+    "gate_effect": "none; historical probe superseded by v5 because its image branch used older candidate v002; G1 remains not_run"
+  },
+  "p1_codec_slot6_reachdefs": {
+    "path": "g2/evidence/g2-20261112-p1-codec-slot6-reachdefs-index.json",
+    "sha256": "e69e3c4644a3cfabc8e79c6c60aee091d39d09acabf5660be933ee732611e520",
+    "gate_effect": "none; bounded static task slot flow reviewed, callback and physical mapping remain unproved"
+  },
+  "p1_coverage_five_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-coverage-five-row-review-index.json",
+    "sha256": "4a696234b81d3431cfbea36e4de99c7af31a77368435daf331dfd293525096a6",
+    "gate_effect": "none; five bounded row classifications independently reviewed, all canonical row review IDs still absent"
+  },
+  "p1_coverage_six_package_child_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-coverage-six-package-child-row-review-index.json",
+    "sha256": "55c3a0157ca12919d44a1af39e09f425e2e8666f0f5291e8ce6619cc68b5c0ae",
+    "gate_effect": "none; six outer child-payload rows bounded-reviewed, all canonical row review IDs still absent"
+  },
+  "p1_g1_admission_probe_v5": {
+    "path": "g2/evidence/g2-20261112-p1-g1-admission-probe-v5-index.json",
+    "sha256": "c334b8225a5a48f10ea535d6af20e0e51a3e8e5d77c6f5648d99819a439dfaf1",
+    "gate_effect": "none; current bounded blocker inventory reviewed, G1 remains not_run"
+  },
+  "p1_package_coverage_15_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-package-coverage-15-row-review-index.json",
+    "sha256": "5bbb1d56fad2831dfd209d710e2cd9a44719f19db086d26e67686794b3cbf3ad",
+    "gate_effect": "none; all 15 package candidate rows bounded-reviewed, no canonical row review IDs"
+  },
+  "p1_four_payload_prefix_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-four-payload-prefix-row-review-index.json",
+    "sha256": "a91412eaca0ae634f132aa18e2fdb95806929b4035a6f1933aa9b179e2e39ef3",
+    "gate_effect": "none; four payload prefix candidate rows bounded-reviewed, no canonical row review IDs"
+  },
+  "p1_codec_container_eight_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-codec-container-eight-row-review-index.json",
+    "sha256": "1b91a1168d6e706dbeed82d975120beb4202769f1b73fd2fd3db3306dfa2142a",
+    "gate_effect": "none; all eight codec container candidate rows bounded-reviewed, six codec unknown spans remain"
+  },
+  "p1_apollo_main_root_mapping_contract": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-main-root-mapping-contract-index.json",
+    "sha256": "e5b8044e3680bd7a911bfa948ad8899aafbcdd4eb7dcb5d977e3e5929b7c871b",
+    "gate_effect": "none; logical load base and static boot handoff cross-checked, physical mapping and G1 remain open"
+  },
+  "p1_case_six_data_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-case-six-data-row-review-index.json",
+    "sha256": "0716ccba1995b67397a8090e43c2886d935871b40675c01a36280f5c4869547a",
+    "gate_effect": "none; six case data candidate rows bounded-reviewed, adjacent unknown spans remain"
+  },
+  "p1_case_root_linked_alias": {
+    "path": "g2/evidence/g2-20261112-p1-case-root-linked-alias-index.json",
+    "sha256": "94a3e01d9f7462d5a07a1fed0cbe7e801bb540dbfa2b65166ca0e31b27bed078",
+    "gate_effect": "none; case linked CPU alias cross-checked, physical bank and G1 remain open"
+  },
+  "p1_touch_config_data_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-touch-config-data-row-review-index.json",
+    "sha256": "edbd44a036a7524510f3eee5dfbe2b1c0c0b8d07bb26d6a93a2fcb32e204370d",
+    "gate_effect": "none; one touch config data candidate row bounded-reviewed, no canonical row review ID"
+  },
+  "p1_review_registry_workpack": {
+    "path": "g2/evidence/g2-20261112-p1-review-registry-workpack-index.json",
+    "sha256": "655ff3983c2ca04aaae4f1e86ea33b7545314daee0d1154df7c6be2315817376",
+    "gate_effect": "none; v2 review and registry assembly requirements checked, trust registry not yet created"
+  },
+  "p1_payload_data_12_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-payload-data-12-row-review-index.json",
+    "sha256": "5d719d49baae3a7002b203dc28a0ae732c26329fd5200092811d2ed8e81646c7",
+    "gate_effect": "none; all twelve payload data candidate rows bounded-reviewed, no canonical row review IDs"
+  },
+  "p1_payload_code_five_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-payload-code-five-row-review-index.json",
+    "sha256": "f0bf87b7246dd84f7f8411c88c2e631f66e6c6842dd382a95438acbe413d2718",
+    "gate_effect": "none; five payload code candidate rows bounded-reviewed, no pseudocode or canonical row admission"
+  },
+  "p1_coverage_nonunknown_45_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-coverage-nonunknown-45-row-review-index.json",
+    "sha256": "05c96aae509302f9b2aacd096e736ee43071c85cbb95235374a424405113af6a",
+    "gate_effect": "none; 45 nonunknown package/payload candidate rows bounded-reviewed without canonical review IDs"
+  },
+  "p1_codec_six_unknown_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-codec-six-unknown-row-review-index.json",
+    "sha256": "da10bcf3035b9636d3d86c540b219d2d2ddff9d810c8a26be2b495446c71a55c",
+    "gate_effect": "none; six codec unknown candidate rows byte-accounted, BINH-A mixed subranges need stronger row evidence"
+  },
+  "p1_em9305_six_unknown_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-six-unknown-row-review-index.json",
+    "sha256": "accb681fd46c6d05ffdc90dbeef6f0a8a4b9ab6cb72d9556ed667e30c645ad0d",
+    "gate_effect": "none; six EM9305 unknown candidate rows byte-accounted, three require known-boundary refinement"
+  },
+  "p1_touch_case_five_unknown_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-touch-case-five-unknown-row-review-index.json",
+    "sha256": "4f768e6567537b5907c0667795e8e60d3a7827fd317c0134058f72d8d9ec0797",
+    "gate_effect": "none; five touch/case unknown candidate rows byte-accounted, four broad rows need known-island subledgers"
+  },
+  "p1_payload_unknown_22_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-payload-unknown-22-row-review-index.json",
+    "sha256": "b59c03d02ffecb6c362070280a878f550215cb297193d5c402db2f52faa8df9e",
+    "gate_effect": "none; all 22 payload unknown candidate rows bounded-accounted, many require subrange ledgers"
+  },
+  "p1_package_payload_67_row_union": {
+    "path": "g2/evidence/g2-20261112-p1-package-payload-67-row-union-index.json",
+    "sha256": "5f8b287f5a28751d0524a9e8933099af46290b7de500c81dd438cc707a3864c1",
+    "gate_effect": "none; 67 package/payload candidate row IDs exactly covered by bounded workpacks, no canonical IDs"
+  },
+  "p1_image_nonunknown_20_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-image-nonunknown-20-row-review-index.json",
+    "sha256": "8b1c50bd1c09534028e4bb5f9fd024c67b54e9eba9283031390e05ebee992da4",
+    "gate_effect": "none; 20 nonunknown image candidate rows bounded-reviewed, no canonical row review IDs"
+  },
+  "p1_image_apollo_nine_unknown_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-image-apollo-nine-unknown-row-review-index.json",
+    "sha256": "dd4a88e5ef6b764502f4f29cd7605fa3f002fba38155d291384cd7047295b514",
+    "gate_effect": "none; nine Apollo unknown image rows bounded-reviewed, no canonical review IDs"
+  },
+  "p1_image_codec_twelve_unknown_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-image-codec-twelve-unknown-row-review-index.json",
+    "sha256": "8ffe6c94957898b9546ff03b923f743125a6b113aeb7ed33c4ec2e44c54b81a4",
+    "gate_effect": "none; bounded image unknown-row audit only, no canonical review IDs"
+  },
+  "p1_image_touch_case_eight_unknown_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-image-touch-case-eight-unknown-row-review-index.json",
+    "sha256": "e091de8102843bd07ad8d677b4c881e0eeda0ba2793ce0761b7fd7c64d18c140",
+    "gate_effect": "none; bounded image unknown-row audit only, no canonical review IDs"
+  },
+  "p1_image_em9305_eleven_unknown_row_review": {
+    "path": "g2/evidence/g2-20261112-p1-image-em9305-eleven-unknown-row-review-index.json",
+    "sha256": "bb91a9c55f4e6cabc33aa841bf194a88c0d8be216c65555dc6816c279efaa6dd",
+    "gate_effect": "none; eleven EM9305 unknown image rows bounded-reviewed, no canonical review IDs"
+  },
+  "p1_image_coverage_60_row_union": {
+    "path": "g2/evidence/g2-20261112-p1-image-coverage-60-row-union-index.json",
+    "sha256": "b399b6359110bae3fe4f2e6a4aa6c3b42a2b62e5592544d481a677347eff50a4",
+    "gate_effect": "none; image candidate row-set reviewed exactly, no canonical review IDs or G1 admission"
+  },
+  "p1_apollo_boot_transform_parameter_provenance": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-boot-transform-parameter-provenance-index.json",
+    "sha256": "3039854213df0cb1a3107a9a2bd3dc576d2e349abfc438214364bc2a6c412be2",
+    "gate_effect": "none; three decoder descriptor parameters bounded, v17 zero-fill basis correction needed"
+  },
+  "p1_coverage_v18_semantic_correction": {
+    "path": "g2/evidence/g2-20261112-p1-coverage-v18-semantic-correction-index.json",
+    "sha256": "9b1b880b81ada5bec499689fc765d667b39aa0ab49afe0155d54177fda3a5700",
+    "gate_effect": "none; v18 candidate corrects one zero-output byte role to unknown, canonical review IDs absent"
+  },
+  "p1_apollo_main_residual_route_sweep": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-main-residual-route-sweep-index.json",
+    "sha256": "3bc5a1aee21795fe69aa6995fd39d79671c0e3aae2189c1b4ae8a3fb8bc5fa68",
+    "gate_effect": "none; bounded negative marker/zlib sweep, discovery remains open"
+  },
+  "p1_codec_binh_alias_xip_bounded": {
+    "path": "g2/evidence/g2-20261112-p1-codec-binh-alias-xip-bounded-index.json",
+    "sha256": "d8b907d6ef78acff5e8a94c9ea83f2558c5c987bad45bf120c6cce89ce869ca4",
+    "gate_effect": "none; codec software addresses bounded, physical alias/XIP mapping still open"
+  },
+  "p1_em9305_selector_conditional_route": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-selector-conditional-route-index.json",
+    "sha256": "02cd3146e2cc54e5c86c09b6adb8bbcdd8bfce86eba074a0ceeeb4d72cc0d0f0",
+    "gate_effect": "none; five static selectors bounded, external NVM/ROM selection open"
+  },
+  "p1_touch_i2c_eeprom_row_route": {
+    "path": "g2/evidence/g2-20261112-p1-touch-i2c-eeprom-row-route-index.json",
+    "sha256": "27ad4a47cf36cbc1b812a522a34f2d97499080cba5b11c5ccf7beb9a34a81b7d",
+    "gate_effect": "none; bounded I2C hold-to-EEPROM relation, row source remains dynamic"
+  },
+  "p1_case_writer_lookup_bounded": {
+    "path": "g2/evidence/g2-20261112-p1-case-writer-lookup-bounded-index.json",
+    "sha256": "77f7e4a57708bf58b78b99faf23c7ba16d07f63031df8d5ac75befcfe2b8feb8",
+    "gate_effect": "none; bounded P1 evidence only"
+  },
+  "p1_v18_coverage_readiness_matrix": {
+    "path": "g2/evidence/g2-20261112-p1-v18-coverage-readiness-matrix-index.json",
+    "sha256": "b7ee1c3e43b052f0c3395fe9f02d6234e4790532b57df6ca8e40f3aa27f61bc5",
+    "gate_effect": "none; bounded P1 evidence only"
+  },
+  "p1_codec_weight_substructure_bounded": {
+    "path": "g2/evidence/g2-20261112-p1-codec-weight-substructure-bounded-index.json",
+    "sha256": "012a44e94deed88a56fb3aa4a9fd19a2f522b70231f9e724bd0b6970dc158f82",
+    "gate_effect": "none; weight transfer role byte-pinned, internal microcode boundary unresolved"
+  },
+  "p1_v18_package_15_row_adjudication": {
+    "path": "g2/evidence/g2-20261112-p1-v18-package-15-row-adjudication-index.json",
+    "sha256": "d50bb8179ebc3614cf35c7ef5be5109d9e049ca0e52e1d0e6d450d47e5f51f04",
+    "gate_effect": "none; 15 package rows reviewed, validator records/registry absent"
+  },
+  "p1_v18_payload_container_13_adjudication": {
+    "path": "g2/evidence/g2-20261112-p1-v18-payload-container-13-adjudication-index.json",
+    "sha256": "d179162cf2a08302e4293a1f98be2a1b3b9b14adb603471563e25e15202e527f",
+    "gate_effect": "none; 13 payload container rows reviewed, canonical records/registry absent"
+  },
+  "p1_v18_payload_data_12_adjudication": {
+    "path": "g2/evidence/g2-20261112-p1-v18-payload-data-12-adjudication-index.json",
+    "sha256": "dff876df3d81426a65523bd2ef2f1b68cb8377841cf0f916aba8a122c8b7eb40",
+    "gate_effect": "none; 12 payload data rows reviewed, canonical records/registry absent"
+  },
+  "p1_v18_payload_code_5_adjudication": {
+    "path": "g2/evidence/g2-20261112-p1-v18-payload-code-5-adjudication-index.json",
+    "sha256": "334e3c426879122d4aa722477fc2c3930e6f6963657f3578ee55ba6278a11ec4",
+    "gate_effect": "none; five bounded payload code rows reviewed, canonical records/registry absent"
+  },
+  "p1_v19_image_classification_correction": {
+    "path": "g2/evidence/g2-20261112-p1-v19-image-classification-correction-index.json",
+    "sha256": "f5a1565feaf71579e34316634280e8329bbd7575494f0760ffa26e3c12ed9421",
+    "gate_effect": "none; one weight-image overclaim corrected, v19 remains noncanonical"
+  },
+  "p1_v18_payload_unknown_22_corrected_review": {
+    "path": "g2/evidence/g2-20261112-p1-v18-payload-unknown-22-corrected-review-index.json",
+    "sha256": "6c8f86e60b275dabc629c96502d8b01268ac4461a2b12013d1d38f5ee1794445",
+    "gate_effect": "none; nine known-island split recommendations independently challenged, v19 noncanonical"
+  },
+  "p1_v18_image_unknown_first20_review": {
+    "path": "g2/evidence/g2-20261112-p1-v18-image-unknown-first20-review-index.json",
+    "sha256": "ecb2e49adb8ddd8a5c7c75e2630a47001c6dedc20bc2b360aba76a2914b57d72",
+    "gate_effect": "none; 15 bounded unknown rows pass, five need known-island splits, v19 noncanonical"
+  },
+  "p1_v19_image_unknown_tail22_review": {
+    "path": "g2/evidence/g2-20261112-p1-v19-image-unknown-tail22-review-index.json",
+    "sha256": "1f5240871a32bb0ed61df91f0adea4cc58024553fc24fbc16051f9b9867904d3",
+    "gate_effect": "none; final 22 v19 image unknown rows byte/evidence checked, remain explicit unknown"
+  },
+  "p1_analysis_plan_v4_reviewed": {
+    "path": "g2/evidence/g2-20261112-p1-analysis-plan-v4-reviewed-index.json",
+    "sha256": "0edc4253192cdd6600b0cf163693f4f5a41b4db17ed63278ec62115b1d876825",
+    "gate_effect": "none; six-payload plan v4 bounded review passed, canonical records/registry and G1 absent"
+  },
+  "p1_v20_known_islands_revision_review": {
+    "path": "g2/evidence/g2-20261112-p1-v20-known-islands-revision-review-index.json",
+    "sha256": "fb8427c72d0a0b3ab49f0f0ce922f3abd71426ea381ddf9520a35f598fd65076",
+    "gate_effect": "none; v20 40 partitions and pins verify, semantic REVISE, not canonical"
+  },
+  "p1_v21_coverage_reviewed_candidate": {
+    "path": "g2/evidence/g2-20261112-p1-v21-coverage-reviewed-candidate-index.json",
+    "sha256": "af3c0b2d8902e0527dab424b5a4116bcda3318f4850ab35c6460761a51c4b1aa",
+    "gate_effect": "none; v21 191-row bounded review passes, canonical records/registry and G1 absent"
+  },
+  "p1_gxnpu_runtime_mapping_bounded": {
+    "path": "g2/evidence/g2-20261112-p1-gxnpu-runtime-mapping-bounded-index.json",
+    "sha256": "fdb9b529c2c68b5e2677f00506b10de7fdfd76d440899fdf79832f3560298305",
+    "gate_effect": "none; conditional software staging independently reviewed, slot-6/dispatch mapping unresolved"
+  },
+  "p1_ghidra_processor_spec_preflight": {
+    "path": "g2/evidence/g2-20261112-p1-ghidra-processor-spec-preflight-index.json",
+    "sha256": "fc3e482c6e44cc69f8f4dbcf0db7529383c25602f0e1ac2f0a52df2fd38b966f",
+    "gate_effect": "none; installed ARM/C-SKY candidates unqualified, ARC processor absent, P2 not started"
+  },
+  "p1_case_d266_unknown_bounded": {
+    "path": "g2/evidence/g2-20261112-p1-case-d266-unknown-bounded-index.json",
+    "sha256": "1b5e3bcf54b40f55ed5044039815146d458c0894f9a62ede761b26536bcb5179",
+    "gate_effect": "none; raw D266 halfword remains justified unknown, whole-case discovery open"
+  },
+  "p1_gxnpu_reader_origin_bounded": {
+    "path": "g2/evidence/g2-20261112-p1-gxnpu-reader-origin-bounded-index.json",
+    "sha256": "c8616429a44ff8852332e98bbd9cecd741c0854e7d9428cf628127a3d980ac55",
+    "gate_effect": "none; read offsets match locked child spans conditionally, callback target/source aperture unresolved"
+  },
+  "p1_apollo_boot_pointer_triage_bounded": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-boot-pointer-triage-bounded-index.json",
+    "sha256": "45b1b4867b4ffdbfcb6a75de52287df1611c1d1cf8d5f1f40aac5c22aa88478a",
+    "gate_effect": "none; 731 heuristic windows triaged, no new child mapped, boot discovery remains open"
+  },
+  "p1_em9305_nvm_selection_bounded": {
+    "path": "g2/evidence/g2-20261112-p1-em9305-nvm-selection-bounded-index.json",
+    "sha256": "c6ceaef5c2b7622db5674132b00189df6d43218f3f05b629c5232744245927f3",
+    "gate_effect": "none; package-only slot-3 route bounded, physical NVM/ROM selection unresolved"
+  }
 }

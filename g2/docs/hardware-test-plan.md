@@ -270,3 +270,70 @@ hangs early leaves the temple recoverable. Details in
   point of this build is to test it on the next flash. The full toolchain is
   ready: flash this build → if it hangs, reset → run `build/hw/probe-bridge`
   (case wired HELLO) against the now-armed SBL.
+
+
+### 2026-11-22 — case-reply + early-reset sim closed; sacrificial-temple plan
+
+Renode closed (3) case-reply disarm and the pre-ADV unexpected-reset → SBL
+wired-load path on `opencfw-otap-disarm`. **Nothing further high-value is
+doable without hardware** for this recovery campaign. Both current dev-pair
+temples remain bricked on pre-arm builds. **Do not flash the primary pair.**
+
+#### Image to flash (sacrificial / newly acquired healthy temple only)
+
+- Prefer the latest recovery evenota that carries early arm + ADV disarm +
+  case-reply disarm + intentional-reset disarm + Fix 43/51:
+  rebuild/pack from `opencfw-otap-disarm` link tree when a flashable temple
+  exists (`build/g2-apollo-recovery-20261122-otap-disarm-link`, app SHA-256
+  `7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd`,
+  reset `0x0059427d`), or the last packed recovery container if that link is
+  re-packed into `.evenota` first.
+- One temple only. Leave the primary pair untouched.
+
+#### What to capture
+
+1. **Healthy boot:** BLE advertising within ~1–2 s; optional pogo frame
+   `24 00 01 00 A7` → reply `5A A5 FF 09 24 01 03 05 02 02 06 0A 03 4B`;
+   power-cycle → app returns (OTAP must have been disarmed).
+2. **If hang (app-dead):** no BLE / no case reply. Hard reset or wait for
+   WDT. Expect SBL wired-load (armed OTAP). Log whether anything answers on
+   the pogo/SBL path.
+3. **Probe-bridge:** run `build/hw/probe-bridge` (case wired HELLO) against
+   the temple after the armed reset. Capture success/fail and any UART
+   bytes. This is the critical unproven silicon step.
+4. **Hang locus:** if boot progresses further than pre-Fix-51 (ADC), note
+   whether advertising, storage, or another stage is where it stops — closes
+   sim/hardware-gap leads.
+
+#### Safe recovery path
+
+1. Temple must be the sacrificial unit, already accepted as flash-risk.
+2. Flash recovery image once via Even OTA / WebFlasher while still healthy.
+3. If healthy: done; confirm ADV + optional case frame; power-cycle OK.
+4. If bricked/hung: reset → attempt probe-bridge / SBL wired-load over pogo
+   → reflash **stock 2.2.6.10** (or a known-good build) before any further
+   openCFW experiment.
+5. If SBL/pogo does not answer: stop. No SWD. Do not touch the primary pair.
+   Document failure — that is the remaining risk becoming real.
+
+Evidence (sim): `g2/evidence/g2-20261122-case-reply-and-early-reset.json`.
+
+
+### 2026-11-22 — host SBL recovery tool (sim-verified, not run on hardware)
+
+A host-side stock reflash tool now exists and has been proven end-to-end
+against a Renode HLE of SBL wired-load (`G2Apollo510_SblWired`), not the
+protected ROM. Tool and hookup: `g2/tools/sbl-recovery/README.md`.
+
+- **Current dev pair:** still assumed *not* in SBL (pre-arm bricks). This
+  tool will not talk them out of an app-dead hang with OTAP=0.
+- **When to use on a sacrificial temple:** after a recovery-arm image
+  hangs before ADV/case disarm, reset into wired-load, then run the host
+  tool over USB → Smart Case → YHM pogo (HELLO first; need STATUS before
+  UPDATE). Image:
+  `g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin`
+  (SHA-256 `36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863`).
+- **Do not run on the primary pair. Do not run from this campaign step.**
+  Hardware CLI is fail-closed without `--hardware` and both risk tokens.
+
+Evidence: `g2/evidence/g2-20261122-sbl-recovery-sim.json`.

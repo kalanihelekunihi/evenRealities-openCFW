@@ -17,8 +17,14 @@
  */
 ENTRY(reset_handler_5e4232)
 
+
 MEMORY
 {
+  /* Apollo510 ITCM: 256 KB at 0x00000000 (am_reg_base_addresses.h).
+   * Stock keeps 0x40..0x58 for the IAR LZ77 delay/memcpy overlay
+   * (region table 0x75D3E0). Ambiq .itcm_text / .ramfunc start after
+   * that window so the overlay and HAL ramfuncs do not collide. */
+  ITCM  (rx)  : ORIGIN = 0x00000058, LENGTH = 0x0003FFA8
   MRAM  (rx)  : ORIGIN = 0x00438000, LENGTH = 0x003C8000
   DTCM  (rwx) : ORIGIN = 0x20000000, LENGTH = 0x0007D000
   STACK (rw)  : ORIGIN = 0x2007D000, LENGTH = 0x00002B00
@@ -31,7 +37,11 @@ SECTIONS
   {
     _stext = .;
     KEEP(*(.isr_vector))
-    *(.text .text.* .itcm_text .opencfw.* .g2_rom_* .g2.rom.*)
+    /* .itcm_text / .ramfunc are NOT here: they need an ITCM VMA and an
+     * MRAM LMA, copied by the region table (see .itcm_text below). Putting
+     * them in MRAM .text broke Ambiq's 3-cycle delay loop and any code that
+     * must run while MRAM is busy or powered down. */
+    *(.text .text.* .opencfw.* .g2_rom_* .g2.rom.*)
     *(.rodata .rodata.* .g2_rom* )
     . = ALIGN(4);
     __start_kvdb_migration = .;
@@ -42,6 +52,26 @@ SECTIONS
   } > MRAM
   ASSERT(g2c_itcm_overlay_end - g2c_itcm_overlay_start == 24,
          "Apollo ITCM overlay must contain exactly 24 bytes")
+
+  /* Ambiq HAL ramfuncs (.itcm_text) and any .ramfunc: execute from ITCM,
+   * load from MRAM. Stock IAR used .textrw the same way (VMA ITCM, LMA
+   * MRAM). ORIGIN 0x58 leaves 0x40..0x58 for the stock overlay.
+   * KEEP these under --gc-sections: they are often reached only via the
+   * region-table copy (LOADADDR / VMA symbols), not a live direct call
+   * at link time. Vectors and kvdb_migration already use KEEP above. */
+  .itcm_text : ALIGN(4)
+  {
+    __itcm_text_start = .;
+    KEEP(*(.itcm_text .itcm_text.*))
+    KEEP(*(.ramfunc .ramfunc.*))
+    . = ALIGN(4);
+    __itcm_text_end = .;
+  } > ITCM AT > MRAM
+  __itcm_text_load_start = LOADADDR(.itcm_text);
+  ASSERT(__itcm_text_start >= 0x58,
+         "ITCM ramfuncs must not overlap the stock 0x40 overlay")
+  ASSERT(__itcm_text_end <= 0x00040000,
+         "ITCM ramfuncs exceed the 256 KB ITCM")
 
   .ARM.exidx : { *(.ARM.exidx .ARM.exidx.*) } > MRAM
 

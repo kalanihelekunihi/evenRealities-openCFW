@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 028 incorporating touch symbol-to-census reconciliation",
+  "artifacts": {
+    "discovery_draft_028": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/028/discovery-draft.jsonl",
+      "sha256": "8b151be1b4524bc15dbb4567fa1db4d62422ef5daeb6ac795028951693e6215b"
+    },
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/028/reproduce.py",
+      "sha256": "ff22d06657a1e729ee34933cab28d8b10b715a0968c1ce3e72f5f0b664a4adbd"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/028/receipt.json",
+      "sha256": "a589564d3b00dae50b96fb498741ca885a1fcf9febb563eee18b8199178c0a67"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v28-review-001/001/review.json",
+      "sha256": "1184f89c7fefe76813b8d8ae6ec7636881dd738d45342b50c319361fc7862042"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v28-review-001/001/receipt.json",
+      "sha256": "d5bf87577e7ae2dd5b10443669e41555d486fc93e7688c26eb48a23696ab769c"
+    },
+    "touch_symbol_census_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-symbol-census-reconcile-index.json",
+      "sha256": "dcf6fd0a9bd3ddec43295af3c2a4961bee0606e516e9027b671ae053c9a41230"
+    },
+    "predecessor_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/027/discovery-draft.jsonl",
+      "sha256": "6b4b18dd9b3921e0ffe4cc5e687d253a1e300ac0e364412d8b56b9d3f5a9943b"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "Three CRT function-entry candidates absent from the historical corpus are stock-byte checked; the 0x3960 symbol is an overlapping aggregate row in the local decode.",
+    "Dynamic alternate entry hypotheses at 0x3960 and complete touch function discovery remain open.",
+    "No canonical inventory admission, pseudocode completion or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v27-index.json",
+    "sha256": "8ff94d564e4ebce68068f4e364962403071c9704402909be3f67fc556f7ae472"
+  }
+}

@@ -5,7 +5,7 @@
  * reciprocal form for values of 37 and up); if it is not set in the
  * channel map (+276/+280), remap it through the used-channel table (+284)
  * by its remainder modulo the used-channel count (+272). */
-extern uint64_t opencfw_em9305_radio_shift_3027f4(uint32_t,uint32_t,uint32_t);
+extern uint64_t opencfw_em9305_child_3027f4(uint32_t,uint32_t,uint32_t);
 
 uint32_t opencfw_em9305_callback_325984(uintptr_t record,uint32_t events)
 {
@@ -17,7 +17,7 @@ uint32_t opencfw_em9305_callback_325984(uintptr_t record,uint32_t events)
     }
     *(volatile uint8_t *)(record+270u)=(uint8_t)channel;
     uint32_t unmapped=(uint16_t)channel;
-    uint32_t used=(uint32_t)opencfw_em9305_radio_shift_3027f4(
+    uint32_t used=(uint32_t)opencfw_em9305_child_3027f4(
         *(volatile uint32_t *)(record+276u),*(volatile uint32_t *)(record+280u),unmapped);
     if(used&1u) return (uint8_t)channel;
     uint32_t count=*(volatile uint8_t *)(record+272u);

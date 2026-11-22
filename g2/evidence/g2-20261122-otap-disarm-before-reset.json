@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "title": "Fix openCFW post-DFU OTAP/SBL trap: disarm before intentional software reset",
+  "scope": "openCFW apollo-main local changes + rebuild. Emulator-only verification. No hardware flash. No commit. (3) case-reply disarm not in this step.",
+  "root_cause": {
+    "stock_also_sysresetreq": true,
+    "evidence": "stock-dfu-mismatch.log and prior opencfw-dfu-mismatch.log both show SYSRESETREQ immediately after NVMErasePage INFO @0x402000",
+    "divergence": "stock OTAPOINTER=0 \u2192 g2.reset SBL application handoff; openCFW early-arm left OTAPOINTER=0xAFD1363A \u2192 SBL wired-load, application not entered",
+    "app_dead_hypothesis": "Same trap: early arm in low_level_init, then any intentional or watchdog reset before advertising/case-reply disarm lands in SBL wired-load with no host \u2014 temple looks dead."
+  },
+  "audit_reset_sites": {
+    "am_hal_sysctrl_aircr_reset / audio_ble_radio_ready_44b0ae": "AIRCR SYSRESETREQ; post-DFU reconfigure, pt protocol, CLI, page manager, etc. Now strong-override \u2192 g2_recovery_reset_app (disarm then AIRCR)",
+    "g2_log_fatal_idle": "Stock 0x44ab24 AIRCR path; now calls g2_recovery_reset_app",
+    "audio_ble_ota_reset_event": "RSTGEN SWPOR(0xd4)/SWPOI(0x1b); now disarms before MMIO write",
+    "intentional_SBL_entry": "Leave key armed and do not call g2_recovery_reset_app / these helpers",
+    "out_of_scope_other_MCUs": "touch system_reset.c, case application_init_finishing_candidate.c, apollo-bootloader elog_setters.c are separate binaries"
+  },
+  "fix": {
+    "g2_recovery_reset_app": "disarm_healthy + mark_healthy + AIRCR 0x05fa0004",
+    "overrides": "am_hal_sysctrl_aircr_reset and audio_ble_radio_ready_44b0ae strong defs linked ahead of composed g2-apollo-main.o",
+    "image": "build/g2-apollo-recovery-20261122-otap-disarm-link/g2-apollo-main/g2-apollo-main.bin",
+    "reset_vector": "0x0059427d",
+    "bytes": 3819448,
+    "sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd"
+  },
+  "version_match": {
+    "resc": "build/em9305-nor-20261122/opencfw-otap-disarm-match.resc",
+    "log_sha256": "460f320a79897dccdf02da34d9ac20ad5fca1a3c757ac5472c041a71bb2ea01c",
+    "otap_after_0_01s": "0xAFD1363A",
+    "otap_after_8s": "0x00000000",
+    "advertising": 1,
+    "unsupported": "0x00000000",
+    "end_pc": "0x543528",
+    "sbl_wired_load": false
+  },
+  "mismatch_dfu": {
+    "resc": "build/em9305-nor-20261122/opencfw-otap-disarm-dfu-mismatch.resc",
+    "log_sha256": "2a90b2a5aeb406fc632b35f9d60f981ca8eb37351ba39de5076cd8a131cd77ee",
+    "otap_after_0_01s": "0xAFD1363A",
+    "otap_after_8s": "0x00000000",
+    "fd06": 1,
+    "crc32_count": 4,
+    "fd07_info": 1,
+    "sysresetreq_then": "SBL application handoff VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+    "advertising": 1,
+    "unsupported": "0x00000000",
+    "end_pc": "0x543528",
+    "sbl_wired_load": false,
+    "compare_stock": "Stock DFU likewise SYSRESETREQ after INFO then application handoff; openCFW now matches that post-DFU bring-up (ADV yes, OTAP=0)."
+  },
+  "artifacts": {
+    "self_recovery.c": "1b410c2a329f77fe9895301a66d437efdc8940d8a09b4d3099998870d8f2f379",
+    "runtime.c": "5e570897d6ebd38a819120a4a585d8ebb37499cd6a35fb6311f1d8e879f2d863",
+    "display_ble_profile_event_children.c": "2c5e445213642b2da24b32fa5841060b0f49238d8462e67a808fc33216c6ecb0",
+    "opencfw-otap-disarm.app.bin": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "opencfw-otap-disarm-match.log": "460f320a79897dccdf02da34d9ac20ad5fca1a3c757ac5472c041a71bb2ea01c",
+    "opencfw-otap-disarm-dfu-mismatch.log": "2a90b2a5aeb406fc632b35f9d60f981ca8eb37351ba39de5076cd8a131cd77ee"
+  },
+  "next": "(3) case-reply disarm with pogo product-test frame."
+}

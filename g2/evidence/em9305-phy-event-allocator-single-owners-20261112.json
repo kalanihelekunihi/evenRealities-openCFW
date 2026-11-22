@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "scope": "G2 EM9305 native 0x30e858, 0x316c58, and 0x332f80 source ownership",
+  "stock_disassembly": "g2/research/corpus/em9305/objdump/open-2026-09-29/em9305-0x302400-0x335BC8.s",
+  "resolved_addresses": [
+    {
+      "address": "0x30e858",
+      "stock_span": "0x30e858..0x30e878",
+      "owner": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_associated_cycle_event_30e858.c:opencfw_em9305_associated_cycle_event_30e858",
+      "removed_source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_30e858.c",
+      "reason": "The two bodies emitted the same LL event 0x35 fields. The retained C struct has a 32-bit prefix and volatile byte stores in the stock order; all three source callers use it."
+    },
+    {
+      "address": "0x316c58",
+      "stock_span": "0x316c58..0x316e5a",
+      "owner": "g2/src/em9305/qpc-scheduler/controller_init.c:opencfw_em9305_init_connection_allocate_316c58",
+      "removed_source": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_316c58.c",
+      "reason": "The retained allocator follows the stock MPYWHL 912-byte stride, field initialization and final base reload; the standalone duplicate's caller now uses it."
+    },
+    {
+      "address": "0x332f80",
+      "stock_span": "0x332f80..0x332fa8",
+      "owner": "g2/src/em9305/qpc-scheduler/controller_init.c:opencfw_em9305_config_phy_pair_valid_332f80",
+      "removed_symbol": "opencfw_em9305_command_phy_capable_332f80",
+      "reason": "Both bodies tested the same PHY 2 and PHY 4 feature bits; command callers now use the retained guard."
+    }
+  ],
+  "validation": {
+    "manifest_check": "make -C g2 sources-check: 4881 units, 4542 source files, 1 not built",
+    "em9305_compile_report": "build/g2-em9305-phy-event-allocator-single-owner-20261112/report.json",
+    "compiled_units": 770,
+    "failed_units": 0,
+    "duplicate_strong_symbols": 0,
+    "compose_returncode": 0,
+    "source_link_report": "build/g2-em9305-phy-event-allocator-single-owner-link-20261112/link-report.json",
+    "external_binary_archive_used": false,
+    "source_completeness_proven": false,
+    "source_binary_bytes": 245632,
+    "source_binary_sha256": "8f66a3b3c4839b59ebf107a0527b19d79fee42beac1fac7902f604afbcd0a596",
+    "source_package_bytes": 246964,
+    "source_package_sha256": "8ad2690a0957f079f5e079cd612948c2e4dc8845f20cc39559708b7e56eadf1c",
+    "previous_source_package_bytes": 247924,
+    "previous_source_package_sha256": "2de0f06a4d44fca646692639da04586193bc1de44233a49dfc5348294477287b",
+    "official_image_bytes": 211948,
+    "official_image_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "event_exact_qualification": {
+      "report": "build/g2-em9305-event-30e858-qualify-20261112/qualification.json",
+      "optimizations": ["recorded", "Os", "Og"],
+      "compiled_candidate_units": 3,
+      "selected_regions": 0,
+      "compiled_function_bytes": 34,
+      "stock_function_bytes": 32
+    },
+    "controller_exact_qualification": {
+      "report": "build/g2-em9305-controller-single-owner-qualify-20261112/qualification.json",
+      "selected_regions": 11,
+      "new_regions_beyond_main_source_plan": 0
+    },
+    "full_g2_source_report": "build/g2-phy-event-allocator-full-20261112/report.json",
+    "full_g2_compiled_units": 4876,
+    "full_g2_failed_units": 0,
+    "full_g2_duplicate_strong_symbols": 0,
+    "full_g2_composed_payload_groups": 7,
+    "source_bundle_report": "build/g2-phy-event-allocator-source-bundle-20261112/link-report.json",
+    "source_bundle_bytes": 4640700,
+    "source_bundle_sha256": "c3de8d22e77ea9cca8ab78e192e11ab542ad0f9cb6e34db45b7b8726254c3eef",
+    "locked_bundle_bytes": 4301227,
+    "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "matches_locked_bundle": false
+  },
+  "qualification": "The three addresses have one source-linked C implementation each. The event body is not stock-exact, and whole-firmware source completeness, byte identity, and hardware behavior remain unproven."
+}

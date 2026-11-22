@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "G2 touch source-owned application RAM and symbolic CapSense root context",
+  "stock_image": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "stock_image_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "stock_zero_table": {
+    "start": "0x200008A8",
+    "words": 428,
+    "end_exclusive": "0x20000F58",
+    "source": "g2/src/touch/link/g2-touch.ld"
+  },
+  "changed_sources": [
+    "g2/src/touch/application/ram_state.c",
+    "g2/src/touch/application/ram_state.h",
+    "g2/src/touch/reset-layout/reset_capsense_context.h",
+    "g2/src/touch/reset-layout/reset_capsense_context.c",
+    "g2/src/touch/application/application.h",
+    "g2/src/touch/calibration/calibration.c",
+    "g2/src/touch/config-bootstrap/bootstrap.c",
+    "g2/src/touch/eeprom-init/init.c",
+    "g2/src/touch/eeprom-init/init.h",
+    "g2/src/touch/eeprom/app_event.c",
+    "g2/src/touch/eeprom/deferred.c",
+    "g2/src/touch/scan-isr/isr.c",
+    "g2/src/touch/link/g2-touch-stockram.ld.inc",
+    "g2/src/sources.json"
+  ],
+  "linker_layout_sha256": "61b562a7db2f8bc284ec5e812b38715ad80232417a78a7349cfb5f757ecfc7bd",
+  "source_manifest_sha256": "5ba2d11f24827e392cf149a4e773d0dada89f08b8c8ee129f6a67d7656b486db",
+  "linked_symbols": {
+    "touch_eeprom_ready_ram": {
+      "address": "0x200008C4",
+      "bytes": 1
+    },
+    "touch_eeprom_context_ram": {
+      "address": "0x200008C8",
+      "bytes": 32
+    },
+    "touch_gesture_ticks_ram": {
+      "address": "0x200008E8",
+      "bytes": 4
+    },
+    "touch_i2c_context_ram": {
+      "address": "0x200008EC",
+      "bytes": 84
+    },
+    "touch_gesture_state_ram": {
+      "address": "0x20000940",
+      "bytes": 80
+    },
+    "touch_report_ram": {
+      "address": "0x20000990",
+      "bytes": 16
+    },
+    "touch_i2c_rx_ram": {
+      "address": "0x200009A0",
+      "bytes": 16
+    },
+    "touch_i2c_tx_ram": {
+      "address": "0x200009B0",
+      "bytes": 16
+    },
+    "touch_active_budget_ram": {
+      "address": "0x200009C8",
+      "bytes": 4
+    },
+    "touch_app_state_ram": {
+      "address": "0x200009CC",
+      "bytes": 1
+    },
+    "touch_persist_ram": {
+      "address": "0x200009CD",
+      "bytes": 1
+    },
+    "touch_restart_ram": {
+      "address": "0x200009CE",
+      "bytes": 1
+    },
+    "touch_save_pending_ram": {
+      "address": "0x200009CF",
+      "bytes": 1
+    },
+    "touch_saved_record_ram": {
+      "address": "0x200009D0",
+      "bytes": 8
+    },
+    "touch_proximity_prior_ram": {
+      "address": "0x200009D8",
+      "bytes": 4
+    },
+    "touch_reset_capsense_context": {
+      "address": "0x200004EC",
+      "bytes": 60
+    }
+  },
+  "focused_build_report": "build/g2-touch-app-ram-symbols-20261111/report.json",
+  "focused_build_report_sha256": "8908fa18f2e5ee5e31c8b001fd4e439d83dbd8add680699009ca315ed09fa613",
+  "focused_link_report": "build/g2-touch-app-ram-symbols-link-20261111/link-report.json",
+  "focused_link_report_sha256": "836ec8e1bd53d7caf731feb71a853350f91ac6b984ec5cf2a409aa3986879eab",
+  "previous_touch_image": {
+    "path": "build/g2-touch-shield-bundle-20261111/g2-touch/g2-touch.bin",
+    "bytes": 33148,
+    "sha256": "ace5b386683783b0486bf6fbebefb0eaa2c63d4eb0cacaf9794a19cc61e735c2"
+  },
+  "current_focused_touch_image": {
+    "path": "build/g2-touch-app-ram-symbols-link-20261111/g2-touch/g2-touch.bin",
+    "bytes": 33288,
+    "sha256": "a96237f6438247e3167177815a023db06e7ba765de83fdb46bdf606a1a15f467"
+  },
+  "hybrid_report": "build/g2-touch-app-ram-hybrid-20261111/build-report.json",
+  "hybrid_report_sha256": "edb08ac70c5f3953fa04f138f8c2af4baabb1a1d21c71e3ccdc5016b467d24e8",
+  "hybrid_touch_totals": {
+    "resource-file": 32,
+    "binary-pull-through": 28510,
+    "source-built": 5922
+  },
+  "limits": [
+    "Stock BSS addresses are retained for placement; source references to these cells are symbol relocations.",
+    "The candidate image is not byte-identical and hardware behavior is unverified.",
+    "The hybrid bundle still uses binary pull-through; whole-artifact source completeness remains unproven."
+  ],
+  "full_build_report": "build/g2-touch-app-ram-all-20261111/report.json",
+  "full_build_report_sha256": "9cca1a54ba31f41f1376f7d6f22eb5d70978881957f6536c18e71a5c6f39f244",
+  "full_build_compiled_units": 4879,
+  "full_build_failed_units": 0,
+  "full_build_duplicate_strong_symbols": 0,
+  "manifest_changed_during_build": false,
+  "source_bundle_link_report": "build/g2-touch-app-ram-bundle-20261111/link-report.json",
+  "source_bundle_link_report_sha256": "7e89a344fd9cb36263d04c6279c740901b67a1abaed2e3910c585b9dc3a1889a",
+  "strict_linked_payloads": [
+    "g2-apollo-bootloader",
+    "g2-apollo-main",
+    "g2-case",
+    "g2-codec-a",
+    "g2-codec-b",
+    "g2-em9305",
+    "g2-touch"
+  ],
+  "external_binary_archive_used": false,
+  "source_candidate_bundle": {
+    "bytes": 4641980,
+    "sha256": "2b6faec5bd61caaa1bf16437021e2672a400cf94daeadedf17258dd610cdf78b",
+    "locked_target_bytes": 4301227,
+    "locked_target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "matches_locked_target": false,
+    "source_completeness_proven": false
+  }
+}

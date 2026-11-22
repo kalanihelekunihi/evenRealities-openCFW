@@ -1,0 +1,73 @@
+{
+  "campaign_id": "20261112T092142Z",
+  "confirmed_case_mapping": {
+    "initialized_ram": {
+      "historical_image_relative_source_span": [
+        55644,
+        55748
+      ],
+      "loaded_span": [
+        "0x20000000",
+        "0x200001a4"
+      ],
+      "output_sha256": "d91efcf9f5409364aa0e3791d1084418682e76414c5a7b588c3c484daa0dd89a",
+      "output_size": 420,
+      "package_payload_source_span": [
+        55676,
+        55780
+      ],
+      "source_size": 104
+    },
+    "zero_fill_ram": {
+      "loaded_span": [
+        "0x200001a4",
+        "0x20002c88"
+      ],
+      "sha256": "c32493cf41d8477e6dc14efe4d95d92b9333c52806b5173cc42bcdc9294b1f2a",
+      "size": 10980
+    }
+  },
+  "corrections": [
+    {
+      "detail": "The case:decoded:20000000 row has parent case:flash and source_span [55644,55748) relative to the 55,752-byte raw flash image. The 32-byte EVEN wrapper places the corresponding source in the complete package payload at [55676,55780), matching the independent startup review. No row error.",
+      "id": "case-source-coordinate",
+      "status": "historical row is consistent"
+    },
+    {
+      "detail": {
+        "all_zero": true,
+        "loaded_span": [
+          "0x200001a4",
+          "0x20002c88"
+        ],
+        "materialization_note": "Generated initialized RAM state, not a historical image ID; its exclusion from the 33 historical image ID index is expected. Replay artifact is present in current campaign.",
+        "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/ram-zero-fill-0x200001A4.bin",
+        "sha256": "c32493cf41d8477e6dc14efe4d95d92b9333c52806b5173cc42bcdc9294b1f2a",
+        "size": 10980
+      },
+      "id": "case-zero-fill",
+      "status": "current replay verified"
+    }
+  ],
+  "g1_claim": false,
+  "inputs": {
+    "g2/blobs/official/g2-2.2.6.10/firmware_box.bin": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+    "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+    "g2/build/pseudocode-first/20260930T190500Z/reviews/case-startup-transform-001/review.json": "27acc0f9734a64c992dd484a7178ccb8ce8efecc765fe7a1df711b237f49a85d",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/ram-initialized-0x20000000.bin": "d91efcf9f5409364aa0e3791d1084418682e76414c5a7b588c3c484daa0dd89a",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-transform-replay-001/001/ram-zero-fill-0x200001A4.bin": "c32493cf41d8477e6dc14efe4d95d92b9333c52806b5173cc42bcdc9294b1f2a",
+    "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-other-identity-materialization-001/001/manifest.json": "f6dae8b541c69fa68986666b1f5da05f36ce55c2a52594a5230d3786961c8fcf",
+    "g2/build/pseudocode-first/20261112T092142Z/identity.json": "2dbba3e34ef59158bf05bed2cf24c455b91f3b7119856ed9c8826cc916f121fe",
+    "g2/evidence/g2-20261112-p1-all-image-materializations-index.json": "b37f1fed89bb1addee808ab51dbf06455c2a54a2e39fa52a484dfe0aae40e26d"
+  },
+  "retained_findings": [
+    "Touch wrapper checksum semantics remain unconfirmed.",
+    "Case wrapper length/checksum and vector values verified in v1.",
+    "No extra distinct nested payload established by bounded wrapper/descriptor audit; exhaustive image discovery and G1 remain unproven."
+  ],
+  "review_id": "P1-touch-case-discovery-review-001-v2",
+  "schema_version": 1,
+  "scope": "Correction to the bounded touch/case audit coordinates and current materialization accounting. No G1 claim.",
+  "supersedes": "001/findings.json"
+}

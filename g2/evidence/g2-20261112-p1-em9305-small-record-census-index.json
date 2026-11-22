@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Bounded linear ARC disassembly/direct-control-reference census for EM9305 NVM bootloader records 0/1.",
+  "artifacts": {
+    "report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-census-001/001/report.json",
+      "sha256": "29948ec4c8aca457d2edd126a7577d0e7efec4b80d037253018b8b5c75112e7e"
+    },
+    "review": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-small-record-census-review.json",
+      "sha256": "32763859dd54addf7ccb556730235ca285aa2817e343cf9c3366b7d8f711e027",
+      "private_source": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-census-review-001/001/review.json"
+    },
+    "record0_full_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-census-001/001/record0-full.objdump.txt",
+      "sha256": "7835668b3ab4c2cc97b20f7a6fdfe6b6277fa5b1d6a963f2048a7349320aa6c3"
+    },
+    "record1_full_disassembly": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-small-record-census-001/001/record1-full.objdump.txt",
+      "sha256": "a78e7ad1cc2af2c7093dc04c3cc5ef151f9858adf26ab09af38cc657ff304f4b"
+    }
+  },
+  "counts": {
+    "direct_control_refs": 72,
+    "record0_to_record1": 7,
+    "record1_to_record0": 11,
+    "external_or_other": 1,
+    "undecoded_word_rows": 4
+  },
+  "limits": [
+    "Linear disassembly and text-parsed direct references are not a recursive code/data or embedded-program census.",
+    "Parser source, full-dump command-line receipt and parser hash are not pinned in the report; the independent review verified the counts against the disassembly text.",
+    "Four undecoded ARC words and one register jump require further analysis.",
+    "No canonical G1 admission, complete pseudocode, source completion or byte identity."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

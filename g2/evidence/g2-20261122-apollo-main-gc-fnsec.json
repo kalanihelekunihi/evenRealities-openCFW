@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "time_local": "2026-11-22 09:02 CST",
+  "title": "Adopted -ffunction-sections and --gc-sections for apollo-main; image 3,620,044 B (saved 199,404); both paired sims passed; -Oz not needed",
+  "scope": "Source and link changes plus a new compile/link tree. Official opencfw-otap-disarm.app.bin was not overwritten. No hardware flash. No commit. source_completeness_proven stays false.",
+  "changes": {
+    "profiles": "Added -ffunction-sections -fdata-sections to 17 g2-apollo-main-* profiles that lacked them; 26 already had both. Other payloads untouched.",
+    "final_link": "tools/build/link_g2_sources.py now always passes -Wl,--gc-sections, including g2-apollo-main.",
+    "keep": "g2-apollo-main.ld already KEEP'd .isr_vector and kvdb_migration, plus the OTA flag and bond-record NOLOAD sections. Added KEEP(*(.itcm_text .itcm_text.*)) and KEEP(*(.ramfunc .ramfunc.*)) so the region-table ramfuncs survive gc.",
+    "duplicate_override": "Function-sections made the existing strong pair am_hal_sysctrl_aircr_reset visible to the compose duplicate check (self_recovery.c vs generated HAL). Followed the existing #if 0 pattern in sources.json generated[] for ambiqhal-apollo510/am_hal_sysctrl.c so the intentional g2_recovery_reset_app override is the sole definition."
+  },
+  "build": {
+    "source_out": "build/g2-apollo-recovery-20261122-gc-fnsec-b",
+    "link_out": "build/g2-apollo-recovery-20261122-gc-fnsec-link",
+    "compiled": "2718/2718, 0 failures, 0 duplicate strong symbols, 21 composed unresolved (linker-script symbols)",
+    "binary_bytes": 3620044,
+    "binary_sha256": "1f6078706a075e32a4bc93f51bb49a0745d0e0d867b6c8874697940c77ecebcb",
+    "elf_sha256": "070a000a85581e4d688ffdb0c63f118fc3ff0b97e07f6a95328693998c553f9f",
+    "wrapped_package_bytes": 3620076,
+    "reset_sp": "0x2007FB00",
+    "reset_pc": "0x0052C11D",
+    "image_end": "0x007ABCCC",
+    "headroom_to_ota_flag_bytes": 336692,
+    "saved_vs_otap_disarm_bytes": 199404,
+    "delta_vs_stock_bytes": 96680,
+    "itcm_text": {
+      "vma_start": "0x00000058",
+      "vma_end": "0x00000070",
+      "kept": true
+    },
+    "recovery_reset_kept": true,
+    "minus_Oz_applied": false,
+    "minus_Oz_reason": "The image already ends 336,692 bytes before 0x007FE000, so an -Oz rebuild was not required."
+  },
+  "sim": {
+    "emulator": "g2-firmware-emulator scripts/run-renode.sh (Renode 1.17.0+20261102gite8c7c2d28)",
+    "image": "build/em9305-nor-20261122/opencfw-gc-fnsec.app.bin",
+    "itcm": "existing stock 24-byte overlay itcm.bin at 0x00000040",
+    "nor": "nor-with-em9305.bin (unchanged stock-injected fixture)",
+    "chiprev": "0x22",
+    "version_match": {
+      "resc": "build/em9305-nor-20261122/opencfw-gc-fnsec-match.resc",
+      "log": "build/em9305-nor-20261122/opencfw-gc-fnsec-match.log",
+      "otap_after_0_01s": "0xAFD1363A",
+      "otap_after_8s": "0x00000000",
+      "host_packet_count": "0x3A",
+      "unsupported_count": "0x0",
+      "advertising_enable_010A200101": true,
+      "display_frame_sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "display_frame_matches_prior_otap_disarm_and_stock": true,
+      "nv_program_ota_flag": true,
+      "passed": true
+    },
+    "dfu_mismatch": {
+      "resc": "build/em9305-nor-20261122/opencfw-gc-fnsec-dfu-mismatch.resc",
+      "log": "build/em9305-nor-20261122/opencfw-gc-fnsec-dfu-mismatch.log",
+      "otap_after_0_01s": "0xAFD1363A",
+      "otap_after_8s": "0x00000000",
+      "config_mode_after_8s": false,
+      "nvm_main_erased": false,
+      "host_packet_count": "0x3A",
+      "unsupported_count": "0x0",
+      "sbl_application_handoff": true,
+      "sbl_wired_load": false,
+      "advertising_enable_010A200101": true,
+      "display_frame_sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "matches_prior_otap_disarm_8s_baseline": true,
+      "passed": true,
+      "note": "The established 8s DFU-mismatch fixture checks that a mismatched controller does not trap post-reset in SBL wired-load; it is not an 8-second completed DFU cycle. Same end state as opencfw-otap-disarm-dfu-mismatch."
+    }
+  },
+  "not_done": [
+    "Did not overwrite build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "Did not flash hardware",
+    "Did not apply -Oz",
+    "source_completeness_proven remains false"
+  ]
+}

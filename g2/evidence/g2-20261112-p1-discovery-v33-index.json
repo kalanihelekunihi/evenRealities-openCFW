@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery revision 033 with bounded Apollo main, touch, case and EM9305 route clarifications",
+  "artifacts": {
+    "discovery_draft_033": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/033/discovery-draft.jsonl",
+      "sha256": "78712208d3ff42e6ec85cfb74d98f0a918778059ad60a0f08f6268616f622b15"
+    },
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/033/reproduce.py",
+      "sha256": "6dcc50476ae19266994e81356d39f683b45f4f929290857aaa9ed5c3bf667b69"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/033/receipt.json",
+      "sha256": "372175bcff7b1d9072e8dc52c520e92245ff14cbbdfa5fc84be475fb5847bbc0"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v33-review-001/001/review.json",
+      "sha256": "1430ebd761eb13affae4551bed74cca2e89fd2fca0d121ae5898d274f3694764"
+    },
+    "apollo_main_route_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-ota-path-challenge-index.json",
+      "sha256": "16c458063fdea1bb4365b562135bd9efa1d6a61a041b5612c25c6b45cb1003a9"
+    },
+    "touch_copy_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-copy-route-challenge-index.json",
+      "sha256": "91409bf1a4150997efbd346f1cef7bae584b455d46c894bf0491e3945729521b"
+    },
+    "touch_upstream_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-8d74-upstream-challenge-index.json",
+      "sha256": "9e8b8d81e64f78a3b8fe3b46af993274fb07d0e81ebc0076f4f999432f01c577"
+    },
+    "case_live_arguments_index": {
+      "path": "g2/evidence/g2-20261112-p1-case-ota-live-arguments-index.json",
+      "sha256": "66b81b776975eb9d3bd02e89b2e99ff11ff805cdf8e59312b4da7cd7abd5a3a5"
+    },
+    "case_ota_origin_index": {
+      "path": "g2/evidence/g2-20261112-p1-case-ota-r1r2-origin-index.json",
+      "sha256": "eda192f4fc379739481e7a2c265829ce2c0a97eef6b67c3d9f6a8b56de1ac906"
+    },
+    "em9305_crc_candidate_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-crc-apex-candidate-index.json",
+      "sha256": "b0e3a754bf684634ebb11449f3cd157d9c86e6955ad1a877611af4b489625253"
+    },
+    "predecessor_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/032/discovery-draft.jsonl",
+      "sha256": "f048457fca04b4825b1185bb0ce041c84d7616802b5ea340cb86a30a78f858aa"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7,
+    "row_evidence_pins": 134
+  },
+  "limits": [
+    "Bounded route clarifications do not establish exhaustive nested-image discovery in any payload.",
+    "External runtime OTA/EEPROM inputs, aliases and physical selection remain open; EM9305 APEX CRC semantics are a candidate model only.",
+    "No canonical inventory admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v32-index.json",
+    "sha256": "bbd911000568da3cc8d4372feda6eeb44379a15090aa25da9a821041c152e2c6"
+  }
+}

@@ -7,13 +7,7 @@
  */
 #include <stdint.h>
 #include <stddef.h>
-typedef struct {
- uint16_t raw,bsln,diff;
- uint8_t status,negBslnRstCnt,bslnExt,cdacComp;
-} touch_reset_sensor_context;
-_Static_assert(sizeof(touch_reset_sensor_context)==10u,"native sensor stride");
-_Static_assert(offsetof(touch_reset_sensor_context,status)==6u,"native status byte");
-_Static_assert(offsetof(touch_reset_sensor_context,cdacComp)==9u,"vendor LP CDAC");
+#include "reset_sensor_contexts.h"
 touch_reset_sensor_context touch_reset_sensors[9]
  __attribute__((section(".touch_init.sensor_contexts"),used))={
  {.cdacComp=162u},{.cdacComp=32u},{.cdacComp=32u},{.cdacComp=32u},

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Locked EM9305 FHDR, descriptor slot and conditional selector route with independent bounded review",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-nvm-selection-closure-001/001/audit.py",
+      "sha256": "5f298e51ce8c24c1e381dde4d6c532b5373908f6c6c95914e18c4aa1963d93ce"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-nvm-selection-closure-001/001/report.json",
+      "sha256": "8d4d51208d9b650a37a0a17f8468e26b420f8c4086047ac4b8a6827d2abb6704"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-nvm-selection-closure-001/001/receipt.json",
+      "sha256": "8d385ad907857382e682bdbeac2d77b93c97eaca4ed99585d57f31ee26d12b7b"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-nvm-selection-review-001/001/review.py",
+      "sha256": "e2616726aef272dc59d0db2691ff63601ca7c747a1e998b70e8347939891f437"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-nvm-selection-review-001/001/review.json",
+      "sha256": "c229aa25a4592689b9749a66d04febadf90f5b55d2acb54e11c024c853566857"
+    }
+  },
+  "result": {
+    "verdict": "PASS_WITH_LIMITS",
+    "locked_fhdr_package_offset": 1004,
+    "synthetic_scan_candidate": "descriptor[3] at 0x302000",
+    "locked_header_entry": "0x302028",
+    "record3_static_branch_target": "0x30ed80",
+    "selector_helpers_in_order": ["0x30053c", "0x300620", "0x300570", "0x3005b4", "0x3005f0"],
+    "physical_selection": "unresolved"
+  },
+  "limits": [
+    "The four-record-plus-FF scan input is synthetic and does not establish physical NVM or ROM handoff.",
+    "External accepted FHDRs, runtime MMIO values and VPACK2HL semantics may select a different entry.",
+    "Whole-image code/data/reference discovery and qualified ARC interpretation remain open.",
+    "No canonical admission or G1/G2 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

@@ -36,6 +36,7 @@ extern uint32_t Cy_CapSense_ScanAllSlots(uint8_t *context);                     
 extern uint32_t Cy_CapSense_IsBusy(const uint8_t *context);                                 /* 0x5C8E */
 extern uint32_t Cy_CapSense_ProcessAllWidgets(uint8_t *context);                            /* 0x4C04 */
 extern uint32_t Cy_CapSense_IsAnyLpWidgetActive(const uint8_t *context);                    /* 0x7CF8 */
+extern uint32_t Cy_CapSense_IsWidgetActive(uint32_t widget, const uint8_t *context);          /* 0x7D04 */
 
 #define CTX              G2_TOUCH_CAPSENSE_CONTEXT
 #define GPIO_P4_DR_SET   (*(volatile uint32_t *)0x40040440u)
@@ -46,7 +47,6 @@ enum { STATE_ACT = 1u, STATE_ALR = 2u, STATE_WOT = 3u };
 enum { BUDGET_ACT = 640u, BUDGET_ALR = 160u };
 enum { INTERVAL_ACT_US = 7773u, INTERVAL_ALR_US = 31211u };   /* ROM 0x3EC0 / 0x3ECC */
 
-static const char s_color_reset[] = "\x1b[0m";                         /* ROM 0xAA5C */
 static const char s_version[] = "2.2.0.1";                             /* ROM 0xADA4 */
 static const char s_tp_ver[] = "\x1b[36m[I] TP VER:%s%s\r\n";          /* ROM 0xADAC */
 static const char s_act_alr[] = "\x1b[36m[I] ACT->ALR%s\r\n";          /* ROM 0xADC4 */
@@ -60,7 +60,7 @@ static const g2_touch_sysint_config touch_msclp_irq_config = {8, 3u};
 
 static void log1(const char *format)
 {
-    (void)touch_bootstrap_log((uint32_t)(uintptr_t)format, (uint32_t)(uintptr_t)s_color_reset, 0u, 0u);
+    (void)touch_bootstrap_log((uint32_t)(uintptr_t)format, TOUCH_LOG_ADDR(touch_log_color_reset), 0u, 0u);
 }
 
 /* Stock 0x000038E0 (touch_product_05e0_bringup) - initialize_capsense:
@@ -110,7 +110,7 @@ int touch_product_09b4_run(void)
         __asm volatile ("bkpt #1");   /* CY_ASSERT(0) */
     }
     (void)touch_bootstrap_log((uint32_t)(uintptr_t)s_tp_ver, (uint32_t)(uintptr_t)s_version,
-                              (uint32_t)(uintptr_t)s_color_reset, 0u);
+                              TOUCH_LOG_ADDR(touch_log_color_reset), 0u);
     __asm volatile ("cpsie i" ::: "memory");
     touch_config_bootstrap();
     touch_platform_0358_sample();
@@ -132,7 +132,7 @@ int touch_product_09b4_run(void)
             (void)Cy_CapSense_ScanAllSlots(CTX);
             wait_scan(1);
             (void)Cy_CapSense_ProcessAllWidgets(CTX);
-            if (touch_widget_active(1u, CTX) != 0u) {
+            if (Cy_CapSense_IsWidgetActive(1u, CTX) != 0u) {
                 G2_TOUCH_APP_STATE = STATE_ACT;
                 G2_TOUCH_ACTIVE_BUDGET = BUDGET_ACT;
                 log1(s_alr_act);
@@ -162,7 +162,7 @@ int touch_product_09b4_run(void)
             (void)Cy_CapSense_ScanAllSlots(CTX);
             wait_scan(0);
             (void)Cy_CapSense_ProcessAllWidgets(CTX);
-            if (touch_widget_active(1u, CTX) != 0u) {
+            if (Cy_CapSense_IsWidgetActive(1u, CTX) != 0u) {
                 G2_TOUCH_ACTIVE_BUDGET = BUDGET_ACT;
             } else if (--G2_TOUCH_ACTIVE_BUDGET == 0u) {
                 G2_TOUCH_APP_STATE = STATE_ALR;

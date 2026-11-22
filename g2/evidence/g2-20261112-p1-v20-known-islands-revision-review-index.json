@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Noncanonical 163-row v20 candidate with exact partitions and independent semantic REVISE verdict",
+  "artifacts": {
+    "generator": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-known-islands-020/001/generate.py",
+      "sha256": "2cbeda5bf88fe37447f4d0636b3ac53fa29dfbc5b6ae21f24e1f1ccbba7d8465"
+    },
+    "candidate": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-known-islands-020/001/coverage-v20-candidate.jsonl",
+      "sha256": "8813679c50b3df271bb8af879ede975c67d6fba3c5c2f7c08d3e18d6e93ea4f6"
+    },
+    "producer_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-known-islands-020/001/report.json",
+      "sha256": "4d1a2d5c4b4a21ff1f7234eafa47dd4c8a48a55869163a9d0aaa0b4b05820e01"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-known-islands-020/001/receipt.json",
+      "sha256": "8a1ce1a8653434d7b52df16129f4c327a707908b64ebd7bab1d1be4ddb5a2e06"
+    },
+    "coordinator_check_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-known-islands-020-coordinator-check-001/001/check.py",
+      "sha256": "237ca5970cc8f6a3db9bcf47789366e0f9e725f05b4b17e371f54fb2ca549112"
+    },
+    "coordinator_check": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-known-islands-020-coordinator-check-001/001/review.json",
+      "sha256": "7e7a773c15be5903f1c1670b1771145011cea0ff9a2aaa117c45ed768c245ce8"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-known-islands-020-independent-review-001/001/review.py",
+      "sha256": "01f42cf69e82b2ba81b742cf05f9111499688b7a12ae2103017dd0c405685c65"
+    },
+    "independent_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-known-islands-020-independent-review-001/001/report.json",
+      "sha256": "8e227ac1b8e8c81982fe9d46afd3cc017d4a7b261560af5cb69d0e25c38c3337"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-known-islands-020-independent-review-001/001/receipt.json",
+      "sha256": "61df1803a5c1c05ddb5b0688775b6be63396320f3995d99bd54cf54a630a87ed"
+    }
+  },
+  "result": {
+    "source_rows": 127,
+    "candidate_rows": 163,
+    "exact_scope_partitions": 40,
+    "replacement_interval_hashes_verified": 50,
+    "evidence_pins_verified": 552,
+    "changed_source_rows": 14,
+    "semantic_pass_source_rows": 8,
+    "semantic_revise_source_rows": 6,
+    "independent_verdict": "REVISE",
+    "validator_review_records_created": 0
+  },
+  "limits": [
+    "V20 is rejected for semantic overclassification and must not be selected as canonical coverage.",
+    "Corrections include case vectors/startup, touch copy-source uncertainty, mixed EM9305 INI child bytes, and boot image vector underclassification.",
+    "No authenticated registry, canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

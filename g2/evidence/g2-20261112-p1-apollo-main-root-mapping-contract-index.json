@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Reviewed bounded static cross-check of Apollo main root logical load mapping",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-root-mapping-contract-001/001/audit.py",
+      "sha256": "767067ee284630d146aff8828ee15187898474d40433108f8d1554825b4a4c73"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-root-mapping-contract-001/001/report.json",
+      "sha256": "5325d5ef40c41e4bf779efacbdcd35ac68c1cfe9704edbbdcd7df7db8e77e148"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-root-mapping-contract-001/001/receipt.json",
+      "sha256": "17691e81bbdbe22004cc5cfc8b1f8c9a564e8dc5d86ce58d52678a865b069b39"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-root-mapping-contract-review-001/001/review.json",
+      "sha256": "e07c8569b04a5744e4d1943fc641b4210682db345e6c11617013a4d44b8cb921"
+    }
+  },
+  "result": {
+    "wrapper_encoded_logical_base": "0x438000",
+    "root_payload_size": 3523364,
+    "root_payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "candidate_loaded_span": ["0x438000", "0x794324"],
+    "reset_vector_thumb_bit_cleared": "0x5e4232",
+    "locked_bootloader_static_handoff_support": true
+  },
+  "limits": [
+    "This cross-check strengthens a mapping already represented in prior references; it does not discover a new image.",
+    "Physical MRAM/alias meaning, programming callback resolution, write success, and device runtime behavior remain unproved.",
+    "No canonical image admission or G1 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

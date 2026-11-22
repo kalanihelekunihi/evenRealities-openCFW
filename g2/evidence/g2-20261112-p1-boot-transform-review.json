@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "attempt_id": "P1-boot-transform-review-001/001",
+  "reviewer": "independent",
+  "scope": "Independent review of the fresh bounded Apollo bootloader startup transform replay. No G1 claim.",
+  "decision": "accept_bounded_replay",
+  "inputs": [
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-boot-transform-replay-001/001/replay.py",
+      "sha256": "4250ee6d350e71659b69e6635794b24a71c1bab3879bf52c8b10c90bcda802b3"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-boot-transform-replay-001/001/replay.json",
+      "sha256": "87ed14a6b71a06c6d91f05256fa240074c411c8d46f20f1812c4539776a9b914"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-boot-transform-replay-001/001/fresh-replay-receipt.json",
+      "sha256": "4dd1d6e1f146998eada50a5eb88e9f0422d0b02553d07c3e01d17831abcea144"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-initialization-transforms-002/002/receipt.json",
+      "sha256": "0bbd5728cdbfcf62cd6e4fd19f8e0cce7e5d4861daa30444b7fd90962191fb7c"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-boot-canonical-replay-015/001/replay.py",
+      "sha256": "e92c64ccc7caf727f74188a081b0775e1380ce630d73c29ad6716980b41c6b8c"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-boot-canonical-replay-015/001/execution-receipt.json",
+      "sha256": "6215a6f451aa36131db6eda163e8a6a167e890dad2146a12d7bae94b1229a415"
+    }
+  ],
+  "checks": {
+    "target_locked_bootloader_identity": {
+      "status": "pass",
+      "size": 148599,
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+    },
+    "script_delta": {
+      "status": "pass",
+      "details": "Text diff contains only output directory and campaign_id changes; stock execution logic is identical."
+    },
+    "historical_parameter_receipt": {
+      "status": "pass_with_dependency",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-initialization-transforms-002/002/receipt.json",
+      "sha256": "0bbd5728cdbfcf62cd6e4fd19f8e0cce7e5d4861daa30444b7fd90962191fb7c",
+      "details": "Parameters, descriptor addresses, destination sizes, encoded source raw spans and expected hashes are consumed from this historical receipt; these are not independently rediscovered by the fresh replay."
+    },
+    "tool_hashes": {
+      "status": "pass",
+      "details": "Fresh receipt records Python and Unicorn module/library hashes matching the historical pins."
+    },
+    "coordinate_spaces": {
+      "status": "pass",
+      "details": "Historical receipt source_start/source_end are runtime addresses; subtracting image runtime base 0x410000 gives raw payload offsets. Verified raw spans are [148577,148599), [147904,148529), [148529,148577), with sizes 22, 625, 48 and matching SHA-256 values. Descriptor/table values remain runtime addresses; output spans are destination runtime addresses."
+    },
+    "output_files": [
+      {
+        "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-boot-transform-replay-001/001/decoded-00000040.bin",
+        "size": 24,
+        "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+        "historical_match": true
+      },
+      {
+        "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-boot-transform-replay-001/001/decoded-20000000.bin",
+        "size": 1371,
+        "sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+        "historical_match": true
+      },
+      {
+        "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-boot-transform-replay-001/001/decoded-20080000.bin",
+        "size": 4096,
+        "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+        "historical_match": true
+      }
+    ],
+    "prestate_results": {
+      "status": "pass",
+      "details": "For both RAM fills 0x00 and 0xA5, all three outputs match across prestates; exact destination write extents are asserted by script; all reported backreferences target already written bytes."
+    },
+    "execution_record": {
+      "status": "pass",
+      "details": "Exit code 0, stdout hash matches receipt, stderr empty; receipt records campaign and G1 not_run."
+    }
+  },
+  "limits": [
+    "Parameter/descriptor selection and expected output hashes depend on historical receipt P1-apollo-initialization-transforms-002/002; this review does not independently rediscover the transform descriptors or handler mapping.",
+    "Replay does not prove complete source-load bounds; the script explicitly limits scope to backreference initializedness and exact destination writes.",
+    "A5 and zero prestates are emulator experiments and do not establish hardware behavior.",
+    "The historical replay had partial status; this review validates fresh bounded execution and identity, not canonical inventory admission, source implementation, or G1.",
+    "G1 was not run and is not claimed."
+  ],
+  "basis": {
+    "fresh_replay_receipt_sha256": "4dd1d6e1f146998eada50a5eb88e9f0422d0b02553d07c3e01d17831abcea144",
+    "fresh_replay_json_sha256": "87ed14a6b71a06c6d91f05256fa240074c411c8d46f20f1812c4539776a9b914",
+    "historical_replay_json_sha256": "b074469956f95350815f21145dca8e49dc4876a633530ec7e103cc09c2c6ce2d"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded byte accounting for six v017 codec payload unknown rows",
+  "artifacts": {
+    "review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-011/001/review.py",
+      "sha256": "0388402f32367465d2c7b218602d07b0c91e08d7fe620192293cf794dddac38c"
+    },
+    "review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-011/001/review.json",
+      "sha256": "81774339cf6dc80de49d5ceec0bf2d2025475eecb193053805eab479d7ff6cb0"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-011/001/receipt.json",
+      "sha256": "a56287b7783d8e046a3336d9844a8c7c963f34fa6664952178b4c0950a16a193"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-011-independent-review-001/001/review.json",
+      "sha256": "a3f948e4253abc63a5da16654678bab4c985e03865458d8561c0c6776d8bc36a"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "codec_payload_unknown_rows": 6,
+    "bounded_accounted_unknown_rows": 6,
+    "binh_a_stage2_mixed_row": "codec:0000c590:00018d90",
+    "known_subranges_in_payload_coordinates": [
+      {"role": "materialized XIP section, internal code/data unresolved", "span": [50576, 87060]},
+      {"role": "materialized SRAM text section, internal code/data unresolved", "span": [87060, 99576]},
+      {"role": "FF padding", "span": [99576, 99580]},
+      {"role": "materialized SRAM data section", "span": [99580, 101776]}
+    ],
+    "validator_trusted_review_ids_assigned": 0
+  },
+  "limits": [
+    "A coarse unknown row is permissible in the initial G1 ledger, but known mixed subranges need row-level evidence or a supplemental subrange ledger before admission.",
+    "The 212 GXNPU command records have structural decoding only; executable/data semantics remain unresolved.",
+    "No authenticated reviewer registry, canonical admission, G1 or G2 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

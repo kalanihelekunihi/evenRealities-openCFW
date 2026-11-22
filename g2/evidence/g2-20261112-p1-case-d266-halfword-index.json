@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded case raw [0xD266,0xD268) reference and boundary audit.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-d266-halfword-audit-001/001/audit.py",
+      "sha256": "9d286dede96ce4a6ea7b7ae5247ff266235ab5941d79b28e1cc82eb58e06ac60"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-d266-halfword-audit-001/001/report.json",
+      "sha256": "58e3b44abdd3fa16dba0dfc8949b58a23425b64ab17aaaf120895406a046840d"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-d266-halfword-audit-001/001/receipt.json",
+      "sha256": "864d5467bb3bea0f45711e4f1901be5ea78a527de92a6809404fde08a954d217"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-case-d266-halfword-review-001/001/review.json",
+      "sha256": "bffa9eaeb0a185cdff6dea84b247e1d212249a0b3cfcdbcfa44e195fac1e8e85"
+    }
+  },
+  "result": {
+    "raw_span": [
+      53862,
+      53864
+    ],
+    "bytes_hex": "0000",
+    "classification": "unknown",
+    "preceding_function_ends_at": "0xD266",
+    "next_literal_word_at": "0xD268",
+    "literal_value": "0x20000090",
+    "bounded_direct_branch_targets_found": 0
+  },
+  "limits": [
+    "Two zero bytes fit alignment but are a valid Thumb encoding if entered; no code, data or padding proof.",
+    "The 435 producer census rows were counted from the pinned census, not independently rehashed in this attempt.",
+    "Bounded reference scans do not exhaust computed or unrecorded entry routes.",
+    "No G1 or canonical admission claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

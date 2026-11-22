@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked bounded raw-byte reviews of four v017 payload prefix coverage rows",
+  "artifacts": {
+    "review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-004/001/review.py",
+      "sha256": "34d5b3e64cf471fa784d528f04235bc6fe84ba2bb28139a5d6d7eca45dba8977"
+    },
+    "review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-004/001/review.json",
+      "sha256": "905aeca712670b39589f98e90b484206123cc70b82d9f610c2ae852016215716"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-004/001/receipt.json",
+      "sha256": "ead5f63bc7aa0517f2580f58000873f4273af0ea04e31b2279693c6ac2788f60"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-row-review-workpack-004-independent-review-001/001/review.json",
+      "sha256": "f2d976612fb3e1ddf691af0ff71e8b1f274fd155546229ecff1eb191d1d493e8"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "reviewed_candidate_rows": 4,
+    "row_ids": [
+      "apollo_main:00000000:00000020",
+      "ble_em9305:00000000:0000007c",
+      "touch:00000000:00000020",
+      "case:00000000:00000020"
+    ],
+    "decisions": "PASS_BOUNDED for four wrapper or record-table intervals",
+    "validator_trusted_review_ids_assigned": 0
+  },
+  "limits": [
+    "Checksum methods differ by payload; touch version meaning and trailing image CRC are outside this bounded review.",
+    "Remaining payload and image intervals require their own semantic and canonical reviews.",
+    "No authenticated campaign reviewer registry, canonical admission, or G1 gate claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked byte-exact codec KWS weight transfer role, with internal substructure unresolved",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-weight-substructure-001/001/audit.py",
+      "sha256": "2d090d2a6038f076cdb5f2753a2d06e00811bc6766684999881330b831581595"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-weight-substructure-001/001/report.json",
+      "sha256": "f15947d790fd370d5365baafd92be8dbece41ac8d69568a452459fe123ded0e0"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-weight-substructure-001/001/receipt.json",
+      "sha256": "fbd77f4063a648fbad499106cd7155882f1a47d22eeed9509cc0e8d66b924a6b"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-weight-substructure-independent-review-001/001/review.py",
+      "sha256": "f38af4c0270cca31f907d666cff3e08de39a163560dcc648565b756cc3ceaa3c"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-weight-substructure-independent-review-001/001/review.json",
+      "sha256": "b6dde34e2f0338d68d5e6c1781a2f98caac4f1a41cee4029c08784b6dfed0b14"
+    }
+  },
+  "result": {
+    "codec_weight_span": [
+      110940,
+      231740
+    ],
+    "bytes": 120800,
+    "source_u32_words": 30200,
+    "asset_and_compiled_section_byte_equal": true,
+    "distinct_command_stream_bytes": 9164,
+    "internal_grammar_proven": false,
+    "embedded_microcode_excluded": false
+  },
+  "review_finding": "Trained-model language is a provenance/role label, not independent proof of training history or internal tensor layout.",
+  "limits": [
+    "SDK sample model does not match locked sizes.",
+    "No callback success, physical destination, executable subimage exclusion, canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

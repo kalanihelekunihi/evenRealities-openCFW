@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "attempt_id": "P1-main-ram-transform-review-001/001/review-002.json",
+  "reviewer": "independent",
+  "scope": "Independent review of the fresh bounded Apollo main RAM stock-handler replay. No G1 claim.",
+  "decision": "accept_bounded_replay",
+  "inputs": [
+    {
+      "path": "g2/workflow/target.json",
+      "sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "size": 3523396,
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/replay.py",
+      "sha256": "e7b4c6e89a32d67e307e09392d4b5e13d224bb3cb12f2df822bd791ec20ddb2f"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/fresh-replay-receipt.json",
+      "sha256": "2d033002d02b955078a8ec4c1d2c23cb8fc189ce7077e0f7cab2a17bdb80ecf4"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/fresh-replay-receipt-002.json",
+      "sha256": "8b9d1198c7a8d5cb61dba6363f11879605f9cfd4d91dc59e06b0584511cabcfa"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/trace-results.json",
+      "sha256": "ba7d940cff47fc100a581191f05c0ef0a99023e210bcfd0b3d500b222ebbb799"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/stdout.txt",
+      "sha256": "ddd287da5aaa61828713c3a166ae0d658ec935353f729ef0c8828cc31b6dbd31"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/decoded-20000000.bin",
+      "size": 17752,
+      "sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-main-ram-transform-replay-001/001/decoded-20080000.bin",
+      "size": 769646,
+      "sha256": "a5be949c41cf1e9a7d4a6b4aa6e3a6cb2f9c9bcb3a04a866d15e49e3976a7d0c"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-main-canonical-replay-009/001/replay.py",
+      "sha256": "49adb284e084ec344b149c1b075c99ebe575b4c2509e840782237c5d6df55108"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-main-canonical-replay-009/001/execution-receipt.json",
+      "sha256": "9f8eb058ec093d31690205bb6dfe167ed4d8191ed849c9f75e90ce960e724d5c"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-main-canonical-replay-009/001/trace-results.json",
+      "sha256": "ba7d940cff47fc100a581191f05c0ef0a99023e210bcfd0b3d500b222ebbb799"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-main-transforms-012/001/transform-20000000.json",
+      "sha256": "41b02195d87ccf49d513ecf778ad3f5590ae14fc102952075234774f97b66000"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-main-transforms-012/001/transform-20080000.json",
+      "sha256": "b573799e81c8386060c05138bab333336cf66e405721b154824b2486fb29e8ab"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-main-prestate-check-003/001/receipt.json",
+      "sha256": "c6e756d2ce2f8249b899e4339e9ac8f36c495a79c7173956c9829ca6ff431e48"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/identity.json",
+      "sha256": "80c5a47f0e01b14e654fb54d43b7ad1744e631da3d43b16719ee632fe09235b6"
+    }
+  ],
+  "checks": {
+    "locked_payload_identity": {
+      "status": "pass",
+      "details": "Fresh payload size and SHA-256 match the active target's apollo_main component identity; replay asserts the same locked payload hash. Active target JSON SHA-256 matches its target_sha256/package identity f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa."
+    },
+    "script_delta": {
+      "status": "pass",
+      "details": "Diff against historical cleared replay P1-apollo-main-canonical-replay-009/001/replay.py shows only the OUT assignment changed, selecting the current campaign output directory."
+    },
+    "historical_parameter_identity_prestate_dependencies": {
+      "status": "pass_with_dependency",
+      "details": "Replay imports historical campaign identity.json, the initializer worker receipt and currently present worker script hash, manifest component identity, and prestate-check receipt/script. It verifies payload identity and prestate receipt consistency. Existing worker script pin mismatch is explicitly retained as a trace fact; current worker script hash differs from the worker receipt's recorded script hash. Historical records and mappings are inputs, not independently regenerated by this replay."
+    },
+    "coordinate_spaces_descriptor_bytes": {
+      "status": "pass",
+      "details": "Directly unpacked descriptor bytes from locked wrapped payload using FILE_TO_RUNTIME=0x437fe0, then translated runtime source addresses back to payload offsets by subtracting that base. Descriptor 0x75d3f4 bytes aa440300e054000000000020 hash 8ad0dd55c1985489981dd6e08682b062789eea5e84c9a4d5f74f908aff057dcf; descriptor 0x75d404 bytes f32203004e43000000000820 hash e70ec878c3d4c36a8f2701b97ee6856daefa4cc80da1ce44935b2582aae4569b. Runtime source spans [7936158,7947022) and [7927543,7936158) map to wrapped payload spans [3512510,3523374) and [3503895,3512510), respectively. The historical raw apollo_main image spans are each 32 bytes lower than wrapped payload offsets. Source span hashes match historical transforms."
+    },
+    "outputs": [
+      {
+        "destination": "0x20000000",
+        "size": 17752,
+        "sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+        "historical_match": true
+      },
+      {
+        "destination": "0x20080000",
+        "size": 769646,
+        "sha256": "a5be949c41cf1e9a7d4a6b4aa6e3a6cb2f9c9bcb3a04a866d15e49e3976a7d0c",
+        "historical_match": true
+      }
+    ],
+    "dynamic_source_loads_and_writes": {
+      "status": "pass",
+      "details": "For both descriptors, runtime code hooks observed exact effective-address coverage of every source byte with load count equal to source byte count and all source accesses ending at the declared end. The terminal loop branch reaches the exit path; the second transform's terminal conditional IT successor is recorded. Backreference loads were 12,870 and 769,575; none referenced unwritten/future output bytes. Destination writes had complete coverage and zero unexpected writes, stack frame behavior returned SP to 0x203ff000, R0 advanced by 12, and both runs returned to the sentinel. These are code-hook/emulator observations, not hardware behavior."
+    },
+    "tool_pins": {
+      "status": "pass",
+      "details": "Independently verified fresh-replay-receipt-002.json SHA-256 and every listed current file hash: Python interpreter, historical replay script, Unicorn Python module, Unicorn Python binding, Unicorn native library, and current replay script. All match the recorded historical pins/current replay hash. Output, stdout, and stderr hashes also match. This verifies tool-file identity, not emulator semantic correctness."
+    },
+    "execution_record": {
+      "status": "pass",
+      "details": "Fresh receipt-002 hash and file pins independently verified. Exit code 0; stdout hash matches and stderr is empty. Trace-results hash matches historical trace-results hash. G1 status is explicitly not_run."
+    }
+  },
+  "limits": [
+    "Parameters, descriptor selection, expected image mapping, and portions of the source bounds basis depend on historical receipts/reviews; this replay does not independently rediscover them.",
+    "The replay proves bounded execution observations for two startup RAM transforms only; it does not prove complete Apollo-main startup, all source-handler behavior, C implementation correctness, full source completeness, byte-identical firmware rebuild, or hardware behavior.",
+    "Historical worker script receipt does not match the currently present worker script; the fresh replay records this mismatch and uses current worker outputs only as expected comparison data.",
+    "G1 was not run and is not claimed.",
+    "Matching interpreter and Unicorn file hashes establish file identity only; they do not independently validate emulator semantics or prove hardware behavior."
+  ],
+  "basis": {
+    "historical_replay_trace_sha256": "ba7d940cff47fc100a581191f05c0ef0a99023e210bcfd0b3d500b222ebbb799",
+    "historical_output_hashes_reproduced": true,
+    "fresh_receipt_status": "replayed_pending_independent_review",
+    "receipt_002_sha256": "8b9d1198c7a8d5cb61dba6363f11879605f9cfd4d91dc59e06b0584511cabcfa"
+  },
+  "supersedes": "P1-main-ram-transform-review-001/001/review.json"
+}

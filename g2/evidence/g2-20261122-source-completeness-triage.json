@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "time_local": "2026-11-22 08:35 CST",
+  "title": "Source-completeness triage: biggest remaining gap is apollo-main layout/size, not a missing archive",
+  "scope": "No rebuild. No hardware. No commit. Flag source_completeness_proven remains false.",
+  "source_completeness_proven": false,
+  "why_flag_stays_false": "g2/tools/compare_source_candidate.py reports this as false; no component is byte-identical to the locked official payloads. Compiler/linker success is not coverage or stock identity. G1\u2013G6 remain not_run.",
+  "six_components_biggest_first": [
+    {
+      "name": "apollo_main",
+      "stock_app_bytes": 3523364,
+      "current_opencfw_otap_disarm_bytes": 3819448,
+      "size_delta_bytes": 296084,
+      "nov11_delta": 295664,
+      "source_linked": true,
+      "sim_functional_boot_to_adv": true,
+      "byte_identical": false,
+      "note": "Biggest. Already strict source-linked (no external binary archive). Delta is compiler/placement/data image, not a missing library. Same-offset equal ~4% because the reset vector already differs (stock 0x005E4233 vs openCFW 0x0059427D)."
+    },
+    {
+      "name": "ble_em9305",
+      "nov11_delta": 36748,
+      "byte_identical": false
+    },
+    {
+      "name": "apollo_bootloader",
+      "nov11_delta": 5633,
+      "byte_identical": false
+    },
+    {
+      "name": "touch",
+      "nov11_delta": -5644,
+      "byte_identical": false,
+      "note": "Smaller than stock; may indicate missing content, not just bloat."
+    },
+    {
+      "name": "case",
+      "nov11_delta": 4416,
+      "byte_identical": false
+    },
+    {
+      "name": "codec",
+      "nov11_delta": 0,
+      "kws_commands_exact": true,
+      "byte_identical": false,
+      "note": "Packaged size matched in Nov 11 report; KWS command window exact; weights were synthetic / not a trained model."
+    }
+  ],
+  "current_apollo_main_sections": {
+    "elf": "build/g2-apollo-recovery-20261122-otap-disarm-link/g2-apollo-main/g2-apollo-main.elf",
+    "text_plus_rodata_filesz": 3638133,
+    "data_filesz": 181312,
+    "bss": 3422620,
+    "bin_bytes": 3819448
+  },
+  "next": "Do not flip the flag. Next closeable no-hardware work on the biggest component is a composed-object (pre-g2-apollo-main.o) size/layout attribution of the +296,084 bytes, then EM9305 (+36,748) source/functional gaps. Hardware boot equivalence remains unproven."
+}

@@ -1,0 +1,217 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "stock G2 touch automatic CapDAC feature paths in source C",
+  "stock_image": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "stock_image_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "stock_fwpk_header_bytes": 32,
+  "stock_widget_config_flash_va": "0x0000B0F8",
+  "stock_widget_cdac_modes": [
+    {
+      "widget": 0,
+      "stock_cdac_config": "0x01AA",
+      "reference_mode": 2,
+      "fine_mode": 2,
+      "compensation_mode": 2,
+      "compensation_divider_mode": 2
+    },
+    {
+      "widget": 1,
+      "stock_cdac_config": "0x01A1",
+      "reference_mode": 1,
+      "fine_mode": 0,
+      "compensation_mode": 2,
+      "compensation_divider_mode": 2
+    },
+    {
+      "widget": 2,
+      "stock_cdac_config": "0x0115",
+      "reference_mode": 1,
+      "fine_mode": 1,
+      "compensation_mode": 1,
+      "compensation_divider_mode": 0
+    }
+  ],
+  "changed_header": "g2/src/touch/vendor/cycfg_capsense_defines.h",
+  "changed_header_sha256": "707bc6d0664208de25e74b3abdb63100ae167e5b4ee459629099168f3cb2b5b6",
+  "enabled_macros": [
+    "CY_CAPSENSE_CSD_CDAC_COMP_EN",
+    "CY_CAPSENSE_CSD_CDAC_COMP_DIV_AUTO_EN",
+    "CY_CAPSENSE_CSD_CDAC_REF_AUTO_EN",
+    "CY_CAPSENSE_CSD_CDAC_FINE_EN",
+    "CY_CAPSENSE_CDAC_REF_AUTO_EN",
+    "CY_CAPSENSE_CDAC_FINE_AUTO_EN",
+    "CY_CAPSENSE_CDAC_COMP_AUTO_EN",
+    "CY_CAPSENSE_CDAC_COMP_DIV_AUTO_EN",
+    "CY_CAPSENSE_CDAC_COMP_USAGE_EN",
+    "CY_CAPSENSE_CDAC_FINE_USAGE_EN"
+  ],
+  "source_owner": "third-party/reference/infineon-capsense-v5/cy_capsense_sensing_lp.c",
+  "source_owner_sha256": "17b6468dde45c16c8f63cef048d5d8b240cc4ee5f55b82d37bd8d77ace95c23f",
+  "previous_touch_image": {
+    "path": "build/g2-touch-cardinality-bundle-20261111/g2-touch/g2-touch.bin",
+    "bytes": 30576,
+    "sha256": "d8b3a55151c4bd06549d1ea95f660f99c2b7739263d1d74c384ab01452d1806d"
+  },
+  "current_focused_touch_image": {
+    "path": "build/g2-touch-cdac-link-20261111/g2-touch/g2-touch.bin",
+    "bytes": 32904,
+    "sha256": "ff95a25ef43fb7a3a9c7fec089630a4f3cae91205c7c3d4c593b1f29ea5c9dd1"
+  },
+  "exact_stock_address_selections": [
+    {
+      "symbol": "Cy_CapSense_ScanAllWidgets_V3Lp",
+      "stock_address": "0x00005C7A",
+      "stock_bytes": 20,
+      "sha256": "e8785aa413c206fc4186a681f340067434ee03f7b086015c7478ee3892954952",
+      "qualification_method": "unique unrelocated bytes at inventoried native function entry, followed by full linked equality",
+      "linked_in_source_candidate": false
+    },
+    {
+      "symbol": "Cy_CapSense_CalculateRawTarget",
+      "stock_address": "0x00005F6A",
+      "stock_bytes": 58,
+      "sha256": "d34248b1db522012dc2c8b3ea47f07e6f27ab9d584a7a23868208e43e8d83acf",
+      "qualification_method": "unique unrelocated bytes at inventoried native function entry, followed by full linked equality",
+      "linked_in_source_candidate": true
+    },
+    {
+      "symbol": "Cy_CapSense_InitializeSourceSenseClk",
+      "stock_address": "0x00006384",
+      "stock_bytes": 222,
+      "sha256": "842a52b5ee4eedb78ff593f74a39218de4da67a2909f38d95b94f5aeaf421c87",
+      "qualification_method": "unique unrelocated bytes at inventoried native function entry, followed by full linked equality",
+      "linked_in_source_candidate": true
+    }
+  ],
+  "semantic_provider_rows": [
+    {
+      "stock_address": "0x000073F6",
+      "stock_bytes": 312,
+      "source_symbol": "Cy_CapSense_CalibrateCompDivider",
+      "linked_address": "0x00005ECA",
+      "linked_size": 312,
+      "source_owned": true,
+      "byte_identity_proven": false,
+      "stock_pseudocode": "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/000073f6.c"
+    },
+    {
+      "stock_address": "0x00007580",
+      "stock_bytes": 248,
+      "source_symbol": "Cy_CapSense_CdacSuccessAppr",
+      "linked_address": "0x00006054",
+      "linked_size": 252,
+      "source_owned": true,
+      "byte_identity_proven": false,
+      "stock_pseudocode": "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/00007580.c"
+    },
+    {
+      "stock_address": "0x0000767C",
+      "stock_bytes": 30,
+      "source_symbol": "Cy_CapSense_CalibrateRefCdac",
+      "linked_address": "0x00006150",
+      "linked_size": 30,
+      "source_owned": true,
+      "byte_identity_proven": false,
+      "stock_pseudocode": "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/0000767c.c"
+    },
+    {
+      "stock_address": "0x0000769A",
+      "stock_bytes": 30,
+      "source_symbol": "Cy_CapSense_CalibrateFineCdac",
+      "linked_address": "0x0000616E",
+      "linked_size": 30,
+      "source_owned": true,
+      "byte_identity_proven": false,
+      "stock_pseudocode": "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/0000769a.c"
+    },
+    {
+      "stock_address": "0x000076B8",
+      "stock_bytes": 230,
+      "source_symbol": "Cy_CapSense_CalibrateCompCdac",
+      "linked_address": "0x0000618C",
+      "linked_size": 230,
+      "source_owned": true,
+      "byte_identity_proven": false,
+      "stock_pseudocode": "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/000076b8.c"
+    },
+    {
+      "stock_address": "0x0000779E",
+      "stock_bytes": 154,
+      "source_symbol": "Cy_CapSense_VerifyReferenceCdac",
+      "linked_address": "0x00006272",
+      "linked_size": 154,
+      "source_owned": true,
+      "byte_identity_proven": false,
+      "stock_pseudocode": "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/0000779e.c"
+    },
+    {
+      "stock_address": "0x00007838",
+      "stock_bytes": 332,
+      "source_symbol": "Cy_CapSense_VerifyCalibration",
+      "linked_address": "0x0000630C",
+      "linked_size": 332,
+      "source_owned": true,
+      "byte_identity_proven": false,
+      "stock_pseudocode": "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/00007838.c"
+    },
+    {
+      "stock_address": "0x00007984",
+      "stock_bytes": 394,
+      "source_symbol": "Cy_CapSense_CalibrateWidget_V3Lp",
+      "linked_address": "0x00006458",
+      "linked_size": 400,
+      "source_owned": true,
+      "byte_identity_proven": false,
+      "stock_pseudocode": "g2/research/corpus/touch/ghidra/open-2026-09-29/decomp/00007984.c"
+    }
+  ],
+  "qualifier_report": "build/g2-touch-cdac-lp-qualify-20261111/qualification.json",
+  "qualifier_report_sha256": "6e1d5bc4dfecad6faa11d886865c929a63d83b8d182cb434a95e6942261235af",
+  "source_plan": "tools/build/source-plan.json",
+  "source_plan_sha256": "c4df270f17b4fbeff12d46872051b595795c1241b48a1ee14507250eb71eb309",
+  "source_plan_regions_added": 3,
+  "focused_build_report": "build/g2-touch-cdac-20261111/report.json",
+  "focused_build_report_sha256": "9daff502e8ccc4ce41d48659062a5679797eaacc03cd237d619b20c08d859480",
+  "focused_link_report": "build/g2-touch-cdac-link-20261111/link-report.json",
+  "focused_link_report_sha256": "b6741014046805b3601f37f9646de4f564effd24ec8c1c5110ccff2c0011ec4d",
+  "hybrid_report": "build/g2-touch-cdac-hybrid-20261111/build-report.json",
+  "hybrid_report_sha256": "e7cfe15b14feea9c4f8a027f81b76036e0bb8dfa5daa3b7079af5fe3a70d0dc1",
+  "hybrid_touch_totals": {
+    "resource-file": 32,
+    "binary-pull-through": 28510,
+    "source-built": 5922
+  },
+  "hybrid_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "limits": [
+    "The three exact selections are production-qualifier stock-address links; the functions in the independent source-candidate image may differ at their new addresses because of relocations.",
+    "Semantic provider mappings match stock control flow and call roles but are not proven byte-identical.",
+    "The hybrid bundle retains binary pull-through; whole-artifact source completeness, exact bundle equality without pull-through, and hardware behavior remain unverified."
+  ],
+  "full_build_report": "build/g2-touch-cdac-all-20261111/report.json",
+  "full_build_report_sha256": "e97fd73393445e7473f7c5a0bbe26208a955407aece61e5f331f700a60552206",
+  "full_build_compiled_units": 4878,
+  "full_build_failed_units": 0,
+  "full_build_duplicate_strong_symbols": 0,
+  "manifest_changed_during_build": false,
+  "source_bundle_link_report": "build/g2-touch-cdac-bundle-20261111/link-report.json",
+  "source_bundle_link_report_sha256": "ac55656a224a321a5d2b65e9379ef22801e0e0872a1c6b16e51e9d478a257d62",
+  "strict_linked_payloads": [
+    "g2-apollo-bootloader",
+    "g2-apollo-main",
+    "g2-case",
+    "g2-codec-a",
+    "g2-codec-b",
+    "g2-em9305",
+    "g2-touch"
+  ],
+  "external_binary_archive_used": false,
+  "source_candidate_bundle": {
+    "bytes": 4641596,
+    "sha256": "07d47cec2e89b63a2bf0133fe3a97ca0244832aab512d5332641aff1ba9946e7",
+    "locked_target_bytes": 4301227,
+    "locked_target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "matches_locked_target": false,
+    "source_completeness_proven": false
+  }
+}

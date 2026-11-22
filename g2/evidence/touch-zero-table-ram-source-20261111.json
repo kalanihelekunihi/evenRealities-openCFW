@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "G2 touch remaining stock zero-table RAM source objects and delay-clock references",
+  "stock_image": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "stock_image_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "stock_zero_table": {
+    "start": "0x200008A8",
+    "end_exclusive": "0x20000F58",
+    "words": 428
+  },
+  "locked_flash_clock_buffer_literals": [
+    {
+      "flash_va": "0x00008CF0",
+      "value": "0x20000F04"
+    },
+    {
+      "flash_va": "0x00008D44",
+      "value": "0x20000F04"
+    }
+  ],
+  "locked_pm_descriptor_parameter_pointer": {
+    "reset_copy_rom_va": "0x0000B928",
+    "stock_value": "0x20000CCC",
+    "linked_value": "0x20000CCC"
+  },
+  "source_owned_symbols": {
+    "touch_ilo_pm_params": {
+      "address": "0x20000CCC",
+      "bytes": 8
+    },
+    "touch_eeprom_scratch_ram": {
+      "address": "0x20000CD4",
+      "bytes": 512
+    },
+    "touch_eeprom_provider_ram": {
+      "address": "0x20000ED4",
+      "bytes": 48
+    },
+    "touch_flash_clock_backup_ram": {
+      "address": "0x20000F04",
+      "bytes": 24
+    },
+    "cy_delay32kMs": {
+      "address": "0x2000086C",
+      "bytes": 4
+    },
+    "cy_delayFreqMhz": {
+      "address": "0x20000870",
+      "bytes": 1
+    },
+    "cy_delayFreqKhz": {
+      "address": "0x20000874",
+      "bytes": 4
+    }
+  },
+  "object_relocation_counts": {
+    "g2__src__touch__eeprom__flash.c.o": {
+      "touch_flash_clock_backup_ram": 2
+    },
+    "g2__src__touch__reset-layout__reset_pm_descriptor.c.o": {
+      "touch_ilo_pm_params": 1
+    },
+    "g2__src__touch__eeprom__storage.c.o": {
+      "touch_eeprom_scratch_ram": 1
+    },
+    "g2__src__touch__eeprom__extended.c.o": {
+      "touch_eeprom_scratch_ram": 1
+    },
+    "g2__src__touch__config-bootstrap__erase.c.o": {
+      "touch_eeprom_scratch_ram": 1
+    },
+    "g2__src__touch__config-bootstrap__bootstrap.c.o": {
+      "cy_delay32kMs": 1,
+      "cy_delayFreqKhz": 2
+    },
+    "g2__src__touch__mode__cpu.c.o": {
+      "cy_delayFreqMhz": 2
+    }
+  },
+  "source_manifest": "g2/src/sources.json",
+  "source_manifest_sha256": "5ba2d11f24827e392cf149a4e773d0dada89f08b8c8ee129f6a67d7656b486db",
+  "linker_layout": "g2/src/touch/link/g2-touch-stockram.ld.inc",
+  "linker_layout_sha256": "08a8761bd5c4cb170d76193ec4efd6a10ff25e41f99d9c97eef699ac611f0ee1",
+  "focused_build_report": "build/g2-touch-ram-symbols-20261111/report.json",
+  "focused_build_report_sha256": "25e13672c87aa70482bc784846c386da1b4298445c8343fe64dd43462e936d51",
+  "focused_link_report": "build/g2-touch-ram-symbols-link-20261111/link-report.json",
+  "focused_link_report_sha256": "25eb4962cb194e4f4fc5e969a6640262cd25f6f0a1bdfc2c4276035a22963aa5",
+  "previous_touch_image": {
+    "path": "build/g2-touch-widget-ram-link-20261111/g2-touch/g2-touch.bin",
+    "bytes": 33288,
+    "sha256": "a96237f6438247e3167177815a023db06e7ba765de83fdb46bdf606a1a15f467"
+  },
+  "current_focused_touch_image": {
+    "path": "build/g2-touch-ram-symbols-link-20261111/g2-touch/g2-touch.bin",
+    "bytes": 33384,
+    "sha256": "51126c7c7231b9aa0ddf25241e81fa88db2e31bb2e3278b45efe56a01e71cbec"
+  },
+  "limits": [
+    "The 512-byte scratch extent is bounded by the next source-owned provider object; physical EEPROM/SROM side effects are not validated.",
+    "The reset descriptor parameter pointer matches stock, but its callback pointer differs with the independently linked source address.",
+    "Whole-artifact source completeness, locked bundle equality, and hardware behavior remain unverified."
+  ],
+  "qualifier_no_selection": [
+    {
+      "source": "g2/src/touch/eeprom/flash.c",
+      "report": "build/g2-touch-flash-qualify-20261111/qualification.json",
+      "report_sha256": "3dfbf3c3b1e6a530d9fc4d7ee05454ac651c526ff88d71254ea36d399b57b1b1"
+    },
+    {
+      "source": "g2/src/touch/eeprom/storage.c",
+      "report": "build/g2-touch-eeprom-storage-qualify-20261111/qualification.json",
+      "report_sha256": "02e72282ff608cd9e5e07226104a9ae4877d1813c707d2676a7e6f4dae5f7a5b"
+    },
+    {
+      "source": "g2/src/touch/clock-selection/clock.c",
+      "report": "build/g2-touch-clock-qualify-20261111/qualification.json",
+      "report_sha256": "cbebcf19ef172f4d0cb5ac3e03c3b84bda5ab28ee3f666581336899ab805123f"
+    },
+    {
+      "source": "g2/src/touch/max-raw/max_raw.c",
+      "report": "build/g2-touch-maxraw-qualify-20261111/qualification.json",
+      "report_sha256": "06ffc795106c698e6d09d39890d4c7e56e0d7dd3dc4e562e988ac82df3ddb042"
+    },
+    {
+      "source": "g2/src/touch/active-timer/timer.c",
+      "report": "build/g2-touch-timer-qualify-20261111/qualification.json",
+      "report_sha256": "89453c2de9001a7245db6bbb360e6e26e1f2c09cf09ba6ebe2c09a016d1495bb"
+    },
+    {
+      "source": "g2/src/touch/lp-history/reset.c",
+      "report": "build/g2-touch-history-qualify-20261111/qualification.json",
+      "report_sha256": "34b71c18b6f9b1920bf5bda0fd484421d2f96725ee4130f7bd3a10e6e197c7a1"
+    }
+  ],
+  "source_plan_changed": false,
+  "full_build_report": "build/g2-touch-zero-ram-all-20261111/report.json",
+  "full_build_report_sha256": "d250cf5ad32934238e4a64f953580f1cc79e5419970de0d813407ad5a221d845",
+  "full_build_compiled_units": 4879,
+  "full_build_failed_units": 0,
+  "full_build_duplicate_strong_symbols": 0,
+  "manifest_changed_during_build": false,
+  "source_bundle_link_report": "build/g2-touch-zero-ram-bundle-20261111/link-report.json",
+  "source_bundle_link_report_sha256": "b6170658ac04766a3659314d743587b38f1d999ff10fb4ce35a57e4af0ffca6d",
+  "strict_linked_payloads": [
+    "g2-apollo-bootloader",
+    "g2-apollo-main",
+    "g2-case",
+    "g2-codec-a",
+    "g2-codec-b",
+    "g2-em9305",
+    "g2-touch"
+  ],
+  "external_binary_archive_used": false,
+  "source_candidate_bundle": {
+    "bytes": 4642076,
+    "sha256": "5c44e67944365899484b4f79959f24895f49c59b03360413d2f63bec5cdb4380",
+    "locked_target_bytes": 4301227,
+    "locked_target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "matches_locked_target": false,
+    "source_completeness_proven": false
+  }
+}

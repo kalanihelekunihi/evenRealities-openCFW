@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 021 identifying configured touch I2C RX input path while retaining unobserved sender and other routes.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v20-index.json",
+    "sha256": "e2a5c58c315574680fb93c691c6be7d646c5d4f4a05fd12eaa66e0ff407d01fb"
+  },
+  "artifacts": {
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/021/reproduce.py",
+      "sha256": "67cf5b407379667f8c2bdd43d9860b22446132945b811302d690529ee4cc8e10"
+    },
+    "discovery_draft_021": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/021/discovery-draft.jsonl",
+      "sha256": "fb0834e1173d775a062788b5c1e61c9012f7c7a4c997612591434412ba20841a"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/021/receipt.json",
+      "sha256": "07fa4c86bea569519e8ba9f4499922cceca7d9cefa7d598ee39fc16a7d849af2"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v21-review-001/001/review.json",
+      "sha256": "9eed890d9d4288580c7177677fb7faf6204ee8fad30ec4d376317b822ca0fa20"
+    },
+    "touch_i2c_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-i2c-input-producer-index.json",
+      "sha256": "70190dcf25e453ebdc4e4fe96cda494626996223d69f484d3df7fa926aa77ca6"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "Touch physical sender/transaction, aliases, other writers and unrelated byte-copy routes remain open.",
+    "No canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

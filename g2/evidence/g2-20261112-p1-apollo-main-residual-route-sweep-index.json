@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded whole-byte marker/zlib and known-route sweep of locked Apollo main OTA payload",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-residual-route-audit-001/001/audit.py",
+      "sha256": "a3ba217e72f75a3747eceff5d5cdb581b3b8f1d9e6f70d3594d3e6d18d0128a2"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-residual-route-audit-001/001/report.json",
+      "sha256": "4f69abdd5ebbd35740d96dcc0abaef45052346c13b18e561dd46f80ac628ee7b"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-residual-route-audit-001/001/receipt.json",
+      "sha256": "d1ed7d2a8bcf252943afbabecdf24fb88ea8191ca588ebcb86d3a47a00a60783"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-residual-route-audit-independent-review-001/001/review.py",
+      "sha256": "452746e5e99fef48cbefb8ee607e3c4f73b66aa80b38db780131f87c3ed721d4"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-residual-route-audit-independent-review-001/001/review.json",
+      "sha256": "e1c4c6c9d320499e96a454266e84309c4745ff9d989e4a04c1444bc09e691b25"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-residual-route-audit-independent-review-001/001/receipt.json",
+      "sha256": "db677366f35f9078c1ffcc03045e9d951dcf3a617f119427667bb3b824a15bcc"
+    },
+    "discovery_v33": {
+      "path": "g2/evidence/g2-20261112-p1-discovery-v33-index.json",
+      "sha256": "455c9f5723fcf9a5fbaa30179cfc95637da5d7b830734371f4b5c0407ad2a7d8"
+    }
+  },
+  "result": {
+    "locked_ota_bytes_scanned": 3523396,
+    "common_zlib_prefixes": 375,
+    "complete_zlib_streams": 0,
+    "fwpk_candidates": 2,
+    "fwpk_candidates_matching_known_layout": 0,
+    "known_scatter_decoded_outputs_rebound": 3,
+    "additional_nested_executable_established": false
+  },
+  "limits": [
+    "Negative marker/zlib scans do not rule out markerless, proprietary or encrypted transforms, indirect writers or runtime-loaded external content.",
+    "No whole-image discovery closure, canonical admission, or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

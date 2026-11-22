@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Current-campaign root image candidate byte and mapping-shape preflight, independently bounded reviewed",
+  "artifacts": {
+    "candidate_images": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-all-image-row-draft-006/001/images-draft.jsonl",
+      "sha256": "23416dfd32268f5075be5df5a76c52843ab3c12151341c89a2dc80bd1287cb7b"
+    },
+    "candidate_coverage": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-scope-binding-017/001/coverage-draft.jsonl",
+      "sha256": "7c382fa747be54caa9121ab6212e3585cbc77184dc9c7b26d258e3b1b896b84b"
+    },
+    "root_preflight_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-root-image-accounting-001/001/check_roots.py",
+      "sha256": "7e9fb3b13f7b238bf25c67d8e966814f99551be05e29923ca1393d42185b510a"
+    },
+    "root_preflight_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-root-image-accounting-001/001/report.json",
+      "sha256": "7dbc85ed0128be1fec9337a66a6faf5ba10cefcc0d4359e6b1c180e42f0d23dd"
+    },
+    "independent_bounded_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-root-image-accounting-review-001/002/review.json",
+      "sha256": "a80484ce091229b7f5105948e1a765e50c3bb30421f2c2ba163b637fdd7de410"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-root-image-accounting-review-001/002/receipt.json",
+      "sha256": "527fc8b2f62f9bf9b5a9a2a9e5df5796fc41e148cdd3ddbb83260d22980916ec"
+    }
+  },
+  "result": {
+    "root_candidates": 9,
+    "preflight_checks": 154,
+    "failed_preflight_checks": 0,
+    "root_accounting_review_ids_missing": 9,
+    "root_mapping_review_ids_missing": 9,
+    "root_gaps_with_unreviewed_container_coverage": 4,
+    "verdict": "BOUNDED_PASS_WITH_LIMITS"
+  },
+  "limits": [
+    "Numeric map shape and BLE record-table descriptor consistency do not establish semantic loaded-address truth.",
+    "All nine root image rows still lack accounting and mapping review IDs.",
+    "Four root gaps are matched to candidate container coverage rows with null review IDs.",
+    "No canonical inventory admission or G1 gate change is supported."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

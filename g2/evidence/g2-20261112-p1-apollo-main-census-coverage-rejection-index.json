@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independent rejection of proposed noncanonical bulk Apollo main code classification despite correct mechanical interval accounting.",
+  "artifacts": {
+    "candidate_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-015/001/classify.py",
+      "sha256": "b8a67db8d724ec36fc245da20ecd712761961fb1ae27286730bdbb95faa6901d"
+    },
+    "candidate_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-015/001/coverage-draft.jsonl",
+      "sha256": "3264ee7466f6d47f3e3606c1149a008ffb0b4096a5ebe13a207d2f674043b4f9"
+    },
+    "candidate_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-015/001/receipt.json",
+      "sha256": "b0e6f7d48f97b5385cc6ece512be7154bb4142ba1a99cb12afd664142924c5f6"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-census-coverage-review-001/001/review.json",
+      "sha256": "4cdb84d3b27809be0081b922d5017372af8b4c95e79fd46fa17521c7020da400"
+    },
+    "census_byte_audit": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-census-byte-coverage-index.json",
+      "sha256": "cc4ca5fbd643f35c267fc448b567e2556d1aad4f9e34aa19bb9330693b256068"
+    }
+  },
+  "decision": "rejected_for_code_semantics",
+  "reason": "Exact function AddressSet range membership and matching contiguous envelope hashes do not prove every range byte is an executable instruction; the corpus lacks an instruction/code-unit boundary map.",
+  "mechanical_counts": {
+    "candidate_rows": 10293,
+    "candidate_new_code_bytes_per_view": 1394726,
+    "candidate_unknown_payload_bytes": 2782167,
+    "candidate_unknown_image_bytes": 4276817
+  },
+  "effect": "No candidate rows admitted; reviewed noncanonical coverage revision 014 remains current; G1 remains not_run.",
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

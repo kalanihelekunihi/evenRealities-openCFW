@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Reviewed read-only G1 blocker inventory using state-selected discovery v33/coverage v17 and latest sidecar-pinned image candidate v006",
+  "artifacts": {
+    "probe_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-g1-admission-probe-001/005/probe.py",
+      "sha256": "ec82d6ef3290d647965ac4daca09829581761ee794c5cfc2ac5bf46cefd5621c"
+    },
+    "probe_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-g1-admission-probe-001/005/report.json",
+      "sha256": "7d7d989f93eeb5e74a26c7ceb02fc3bfb4fbd4160cb1d37d303c9eebf7095625"
+    },
+    "probe_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-g1-admission-probe-001/005/receipt.json",
+      "sha256": "e1fb14ce69fa78756ee4eacfeb2b9ddb9d39ed4cfcc8f4585a49642ece2ebd64"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-g1-admission-probe-review-001/005/review.json",
+      "sha256": "5b6ecf821bb2ffe7f00479fca9c121e2fc7bb6f4d09ea68b630a62b3a8bbe7f3"
+    },
+    "selected_discovery": {
+      "path": "g2/evidence/g2-20261112-p1-discovery-v33-index.json",
+      "sha256": "455c9f5723fcf9a5fbaa30179cfc95637da5d7b830734371f4b5c0407ad2a7d8"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    },
+    "latest_bounded_image_sidecar": {
+      "path": "g2/evidence/g2-20261112-p1-current-transform-readiness-index.json",
+      "sha256": "0fad80d682b05b515f193335704ebf1bcaa18b56b695ac77113612e418571339"
+    }
+  },
+  "result": {
+    "discovery_payload_rows": 6,
+    "discovery_image_ids": 33,
+    "discovery_unresolved_items": 7,
+    "coverage_rows": 127,
+    "coverage_exact_scopes": 40,
+    "coverage_unknown_payload_bytes": 4176715,
+    "coverage_rows_without_review_id": 127,
+    "image_candidate_rows": 33,
+    "image_candidate_v006_stale_evidence_refs": 0,
+    "current_campaign_transform_receipts": 7,
+    "transform_review_ids_missing": 7,
+    "image_accounting_review_ids_missing": 33,
+    "blocker_groups": [
+      "Authenticated review registry and trusted out-of-band pin absent",
+      "Nested-image discovery and transfer/address/mapping closure incomplete",
+      "Canonical v2 record/review admission package absent"
+    ]
+  },
+  "limits": [
+    "Image draft v006 is sidecar-pinned but not state-selected as canonical.",
+    "Old readiness ledger counts are explicitly segregated as historical in the probe report.",
+    "The blocker order is a work sequence and not an exhaustive severity ranking.",
+    "No canonical inventory admission, G1 validator result, or gate receipt."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

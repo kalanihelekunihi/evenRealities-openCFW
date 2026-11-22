@@ -8,13 +8,17 @@
 #include <stdint.h>
 _Static_assert(sizeof(touch_pm_callback)==28,"PM descriptor ABI");
 _Static_assert(offsetof(touch_pm_callback,order)==24,"PM order field");
+_Static_assert(sizeof(touch_pm_params)==8,"PM parameters ABI");
+
+touch_pm_params touch_ilo_pm_params
+    __attribute__((section(".touch_bss.ilo_pm_params"),used));
 
 touch_pm_callback touch_reset_ilo_pm_descriptor
     __attribute__((section(".touch_init.pm_descriptor"),used)) = {
     .callback=(uint32_t (*)(touch_pm_params *,uint32_t))Cy_SysClk_DeepSleepCallback,
     .type=1u,
     .skip=0u,
-    .params=(touch_pm_params *)(uintptr_t)0x20000cccu,
+    .params=&touch_ilo_pm_params,
     .prev=NULL,
     .next=NULL,
     .order=0xffu,

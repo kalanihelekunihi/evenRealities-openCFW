@@ -46,6 +46,10 @@ void g2_self_recovery_boot_check(bool wdt_reset, bool clean_reset);
 void g2_self_recovery_mark_healthy(void);
 void g2_recovery_arm_early(void);
 void g2_recovery_disarm_healthy(void);
+void g2_recovery_disarm_on_advertising(void);
+void g2_recovery_reset_app(void) __attribute__((noreturn));
+void am_hal_sysctrl_aircr_reset(void);
+void audio_ble_radio_ready_44b0ae(void);
 
 #define MCUCTRL_CHIPREV    (*(volatile const uint32_t *)0x4002000cu)
 #define MCUCTRL_OTAPOINTER (*(volatile uint32_t *)0x40020264u)
@@ -126,18 +130,32 @@ void g2_self_recovery_mark_healthy(void)
  * persistent .noinit cell. The key write is pure MMIO and needs no initialised
  * RAM, so recovery is armed even if everything else is still uninitialised.
  *
- * g2_recovery_disarm_healthy() is called from DEV_BoxRevcMsgProcess_53a0b6()
- * after the temple has answered a charging-case product-test frame -- i.e. the
- * scheduler, device-manager thread and pogo UART are all alive and the temple
- * is talking to the case. It restores the saved OTAPOINTER so the NEXT reset
- * boots the app normally instead of entering SBL wired-load.
+ * g2_recovery_disarm_healthy() restores the saved OTAPOINTER so the NEXT
+ * reset boots the app normally instead of entering SBL wired-load. It is
+ * called from DEV_BoxRevcMsgProcess_53a0b6() after a charging-case
+ * product-test reply, from g2_recovery_disarm_on_advertising() when
+ * legacy advertising is enabled (HciLeSetAdvEnableCmd(1) in
+ * audio_ble_dm_adv_start_4b9e88 and audio_ble_dm_adv_start_directed), and
+ * from every intentional app software-reset path (g2_recovery_reset_app /
+ * am_hal_sysctrl_aircr_reset / audio_ble_radio_ready_44b0ae, plus
+ * g2_log_fatal_idle and audio_ble_ota_reset_event) so a post-DFU SYSRESETREQ
+ * or CLI/OTA SWPOR cannot strand an armed temple in SBL wired-load before
+ * advertising runs. Evidence 2026-11-22: stock and openCFW both issue
+ * SYSRESETREQ after the INFO commit; stock OTAP=0 handoffs to the app,
+ * openCFW OTAP=0xAFD1363A stayed in wired-load (app-dead signature).
  *
- * Net effect: a flash that still hangs early never reaches the disarm, so the
+ * Net effect: a flash that still hangs early never reaches a disarm, so the
  * temple comes up in SBL wired-load on the next reset and is recoverable over
- * the case pogo link (the one untested recovery route); a flash that boots and
- * talks to the case disarms itself and reboots normally. Only a temple used
- * entirely out of the case would not disarm (add a BLE-advertising disarm for
- * that case). Not stock firmware. See g2/docs/reference/self-recovery-arming.md.
+ * the case pogo link (that recovery route is still unproven on hardware). A
+ * flash that boots far enough to enable BLE advertising, answers a
+ * charging-case product-test frame, or takes an intentional software reset,
+ * disarms itself so the next reset boots the app normally. Not stock
+ * firmware. See g2/docs/reference/self-recovery-arming.md.
+ *
+ * The crash-loop gate (g2_self_recovery_boot_check) stays unwired: the
+ * bricked temples' reset signature was never captured, and the hang may be
+ * earlier than a watchdog. Replacing the early arm with that gate would drop
+ * recovery for a hang that never increments the watchdog streak.
  * ------------------------------------------------------------------------- */
 
 #define G2_RECOVERY_SAVE_MAGIC 0x4f544150u /* "OTAP" */
@@ -170,3 +188,48 @@ void g2_recovery_disarm_healthy(void)
     if (MCUCTRL_OTAPOINTER == G2_MRAM_RECOVERY_KEY)
         MCUCTRL_OTAPOINTER = g2_recovery_save.orig_otap; /* restore -> disarm */
 }
+
+/* Disarm the early-arm key once BLE advertising is enabled, and clear the
+ * (still unwired) crash-loop streak. Issuing HciLeSetAdvEnableCmd(1) is the
+ * same moment the stock-vs-openCFW Renode runs emit HCI 010A200101; a temple
+ * that reaches this point has the scheduler and BLE stack running, so it
+ * should not stay in SBL wired-load on the next reset. Idempotent if already
+ * disarmed or never armed. */
+void g2_recovery_disarm_on_advertising(void)
+{
+    g2_recovery_disarm_healthy();
+    g2_self_recovery_mark_healthy();
+}
+
+
+/* Intentional application software reset. Disarm the early-arm OTAP key
+ * first, then request SYSRESETREQ. Stock post-DFU reconfigure ends in
+ * audio_ble_radio_ready_44b0ae -> am_hal_sysctrl_aircr_reset; without a
+ * prior disarm the sticky 0xAFD1363A key makes g2.reset keep the CPU in
+ * SBL wired-load (no host) — the app-dead signature. Do NOT use this for
+ * a reset that is meant to enter SBL recovery; leave the key armed and
+ * reset through a path that skips this helper. */
+void g2_recovery_reset_app(void)
+{
+    g2_recovery_disarm_healthy();
+    g2_self_recovery_mark_healthy();
+    volatile uint32_t *const aircr = (volatile uint32_t *)(uintptr_t)0xe000ed0cu;
+    __asm__ volatile("dsb sy" ::: "memory");
+    *aircr = (*aircr & 0x700u) | 0x05fa0004u;
+    __asm__ volatile("dsb sy" ::: "memory");
+    for (;;)
+        __asm__ volatile("nop" ::: "memory");
+}
+
+/* Strong overrides of the Ambiq / stock aliases. Linked ahead of the
+ * composed g2-apollo-main.o so every intentional AIRCR reset disarms. */
+void am_hal_sysctrl_aircr_reset(void)
+{
+    g2_recovery_reset_app();
+}
+
+void audio_ble_radio_ready_44b0ae(void)
+{
+    g2_recovery_reset_app();
+}
+

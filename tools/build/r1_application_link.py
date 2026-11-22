@@ -118,7 +118,12 @@ def main():
     if out.exists() and any(out.iterdir()):
         parser.error('output directory must be empty')
     out.mkdir(parents=True, exist_ok=True)
-    layout = ROOT / 'r1/config-recovered/openr1_sdk.ld'
+    cordio_layout = any(unit['source'] == 'r1/src/application/ble/cordio_cfg_r1.c'
+                        for unit in device['units'] if unit['payload'] == 'r1-application')
+    layout = ROOT / ('r1/config-recovered/openr1_cordio.ld' if cordio_layout
+                     else 'r1/config-recovered/openr1_sdk.ld')
+    layout_sources = ([layout, ROOT / 'r1/config-recovered/openr1_sdk.ld']
+                      if cordio_layout else [layout])
     registry_sources = [ROOT / 'r1/src/config/runtime' / name for name in
                         ('native_log_registry.ld', 'native_sdk_observers.ld',
                          'native_ble_observers.ld')]
@@ -138,7 +143,8 @@ def main():
     log = result.stdout + result.stderr
     (out / 'link.log').write_text(log)
     undefined = sorted(set(re.findall(r"undefined reference to [`']([^'`]+)'", log)))
-    overflow = re.search(r"region [`']FLASH' overflowed by (\d+) bytes", log)
+    region_overflows = {name: int(count) for name, count in re.findall(
+        r"region [`']([^`']+)' overflowed by (\d+) bytes", log)}
     map_text = (out / 'application.map').read_text() if (out / 'application.map').is_file() else ''
     archive_members = sorted(set(re.findall(r'(?m)^(\S+\.a\([^)]+\))', map_text)))
     flash_region = re.search(r'^FLASH\s+0x([0-9a-fA-F]+)\s+0x([0-9a-fA-F]+)',
@@ -151,6 +157,37 @@ def main():
                             if flash_capacity is not None and total_flash_used is not None else None)
     ram_region = re.search(r'^RAM\s+0x([0-9a-fA-F]+)\s+0x([0-9a-fA-F]+)',
                            map_text, re.MULTILINE)
+    ble_flash_region = re.search(r'^BLE_FLASH\s+0x([0-9a-fA-F]+)\s+0x([0-9a-fA-F]+)',
+                                 map_text, re.MULTILINE)
+    ble_ram_region = re.search(r'^BLE_RAM\s+0x([0-9a-fA-F]+)\s+0x([0-9a-fA-F]+)',
+                               map_text, re.MULTILINE)
+    def map_section(name):
+        match = re.search(r'^' + re.escape(name) +
+                          r'\s+0x([0-9a-fA-F]+)\s+0x([0-9a-fA-F]+)',
+                          map_text, re.MULTILINE)
+        return (int(match.group(1), 16), int(match.group(2), 16)) if match else None
+    ble_code = map_section('.r1_cordio_code')
+    ble_heap = map_section('.r1_cordio_heap')
+    ble_bss = map_section('.r1_cordio_bss')
+    ble_data = map_section('.r1_cordio_data')
+    ble_data_load_match = re.search(r'^\.r1_cordio_data\s+0x[0-9a-fA-F]+\s+0x[0-9a-fA-F]+\s+load address 0x([0-9a-fA-F]+)',
+                                    map_text, re.MULTILINE)
+    ble_data_load = int(ble_data_load_match.group(1), 16) if ble_data_load_match else None
+    ble_flash_capacity = int(ble_flash_region.group(2), 16) if ble_flash_region else None
+    ble_flash_origin = int(ble_flash_region.group(1), 16) if ble_flash_region else None
+    ble_ram_origin = int(ble_ram_region.group(1), 16) if ble_ram_region else None
+    ble_ram_capacity = int(ble_ram_region.group(2), 16) if ble_ram_region else None
+    ble_payload_end = (max(ble_code[0] + ble_code[1], ble_data_load + ble_data[1])
+                       if ble_code and ble_data and ble_data_load is not None else None)
+    ble_flash_used = (ble_payload_end - ble_flash_origin
+                      if ble_payload_end is not None and ble_flash_origin is not None else None)
+    ble_flash_headroom = (ble_flash_capacity - ble_flash_used
+                          if ble_flash_capacity is not None and ble_flash_used is not None else None)
+    ble_ram_used = (max((section[0] + section[1] for section in (ble_heap, ble_bss, ble_data)
+                         if section), default=ble_ram_origin) - ble_ram_origin
+                    if ble_ram_origin is not None else None)
+    ble_ram_headroom = (ble_ram_capacity - ble_ram_used
+                        if ble_ram_capacity is not None and ble_ram_used is not None else None)
     ram_origin = int(ram_region.group(1), 16) if ram_region else None
     ram_capacity = int(ram_region.group(2), 16) if ram_region else None
     def map_symbol(name):
@@ -175,19 +212,81 @@ def main():
                   vector_at_origin and total_flash_overflow == 0 and
                   ram_layout_valid)
     image = out / 'application.bin'
+    ble_image = out / 'cordio.bin' if cordio_layout else None
     image_bytes = None
     image_sha256 = None
+    ble_image_bytes = None
+    ble_image_sha256 = None
+    ble_data_valid = False
+    ble_data_sha256 = None
+    ble_descriptor_valid = False
+    ble_descriptor_sha256 = None
+    ble_descriptor_candidates = []
     initial_sp = None
     reset_vector = None
     reset_address = None
+    descriptor_address = None
+    descriptor_size = None
+    descriptor_length = 0
+    lower_entries = {}
     image_valid = False
     if link_valid:
-        for line in subprocess.check_output([nm, '--defined-only', str(elf)], text=True).splitlines():
+        for line in subprocess.check_output([nm, '-S', '--defined-only', str(elf)], text=True).splitlines():
             fields = line.split()
             if len(fields) >= 3 and fields[-1] == 'Reset_Handler':
                 reset_address = int(fields[0], 16)
-        image_result = subprocess.run([objcopy, '-O', 'binary', str(elf), str(image)],
+            if len(fields) >= 4 and fields[-1] == 'r1_cordio_region_descriptor':
+                descriptor_address = int(fields[0], 16)
+                descriptor_size = int(fields[1], 16)
+            if len(fields) >= 4 and fields[-1] in (
+                    'r1_cordio_controller_bootstrap',
+                    'WsfTimerSleepUpdate', 'wsfOsDispatcher',
+                    'LlSetBdAddr',
+                    'POWER_CLOCK_IRQHandler', 'RADIO_IRQHandler',
+                    'TIMER0_IRQHandler', 'TIMER1_IRQHandler',
+                    'CCM_AAR_IRQHandler', 'RTC1_IRQHandler',
+                    'r1_cordio_dfu_cfg_set', 'r1_cordio_dfu_cfg_ready',
+                    'r1_cordio_dfu_manager_enable',
+                    'sd_ble_gap_device_name_set', 'sd_ble_gap_device_name_get',
+                    'sd_ble_gap_ppcp_set', 'sd_ble_gap_adv_set_configure',
+                    'sd_ble_gap_adv_start', 'sd_ble_gap_adv_stop',
+                    'sd_evt_get',
+                    'r1_cordio_dfu_flash_register',
+                    'r1_cordio_dfu_flash_service',
+                    'r1_cordio_dfu_flash_erase',
+                    'r1_cordio_dfu_flash_write',
+                    'r1_cordio_dfu_host_start',
+                    'r1_cordio_dfu_host_ready',
+                    'r1_cordio_dfu_host_request_shutdown',
+                    'r1_cordio_dfu_ble_enable',
+                    'r1_cordio_dfu_gap_disconnect',
+                    'r1_cordio_dfu_gap_conn_param_update',
+                    'r1_cordio_dfu_gap_data_length_update',
+                    'r1_cordio_dfu_gap_phy_update',
+                    'r1_cordio_dfu_gatts_exchange_mtu_reply',
+                    'sd_ble_gatts_service_add',
+                    'sd_ble_gatts_characteristic_add',
+                    'sd_ble_gatts_hvx',
+                    'sd_ble_gatts_sys_attr_set',
+                    'sd_ble_gatts_rw_authorize_reply',
+                    'r1_cordio_dfu_gatts_value_get',
+                    'r1_cordio_dfu_sec_params_reply',
+                    'r1_cordio_dfu_sec_info_reply',
+                    'r1_cordio_dfu_manager_disable'):
+                lower_entries[fields[-1]] = int(fields[0], 16) | 1
+        image_command = [objcopy, '-O', 'binary']
+        if cordio_layout:
+            image_command += ['--remove-section=.r1_cordio_code',
+                              '--remove-section=.r1_cordio_data']
+        image_result = subprocess.run(image_command + [str(elf), str(image)],
                                       capture_output=True, text=True)
+        ble_result = None
+        if cordio_layout:
+            ble_result = subprocess.run(
+                [objcopy, '-O', 'binary', '--gap-fill=0xff',
+                 '--only-section=.r1_cordio_code',
+                 '--only-section=.r1_cordio_data',
+                 str(elf), str(ble_image)], capture_output=True, text=True)
         if image_result.returncode == 0 and image.is_file():
             image_bytes = image.stat().st_size
             if image_bytes >= 512:
@@ -197,11 +296,119 @@ def main():
                            image_bytes <= total_flash_used and
                            initial_sp == stack_top and reset_address is not None and
                            reset_vector == (reset_address | 1))
-            if image_valid:
-                image_sha256 = digest(image)
+        if cordio_layout:
+            if ble_result.returncode == 0 and ble_image.is_file():
+                ble_image_bytes = ble_image.stat().st_size
+                data_dump = out / 'cordio.data.bin'
+                data_result = subprocess.run(
+                    [objcopy, '--dump-section', '.r1_cordio_data=' + str(data_dump),
+                     str(elf)], capture_output=True, text=True)
+                if data_result.returncode == 0 and data_dump.is_file() and ble_data is not None:
+                    data_bytes = data_dump.read_bytes()
+                    offset = ble_data_load - ble_flash_origin if ble_data_load is not None else -1
+                    image_data = ble_image.read_bytes()
+                    ble_data_valid = (len(data_bytes) == ble_data[1] and offset >= 0 and
+                                      image_data[offset:offset + len(data_bytes)] == data_bytes)
+                    if ble_data_valid:
+                        ble_data_sha256 = digest(data_dump)
+                if descriptor_address is not None and ble_code and ble_data and ble_bss:
+                    descriptor_offset = descriptor_address - ble_flash_origin
+                    lower_image = ble_image.read_bytes()
+                    expected = (0x52314344, 22, 220, 0x1000, 0x27000,
+                                0x20000000, 0x200064a8,
+                                ble_bss[0], ble_bss[0] + ble_bss[1],
+                                ble_data_load, ble_data[0], ble_data[0] + ble_data[1],
+                                ble_code[0] + ble_code[1],
+                                lower_entries.get('r1_cordio_controller_bootstrap'),
+                                lower_entries.get('WsfTimerSleepUpdate'),
+                                lower_entries.get('wsfOsDispatcher'),
+                                lower_entries.get('LlSetBdAddr'),
+                                lower_entries.get('POWER_CLOCK_IRQHandler'),
+                                lower_entries.get('RADIO_IRQHandler'),
+                                lower_entries.get('TIMER0_IRQHandler'),
+                                lower_entries.get('TIMER1_IRQHandler'),
+                                lower_entries.get('CCM_AAR_IRQHandler'),
+                                lower_entries.get('RTC1_IRQHandler'),
+                                lower_entries.get('r1_cordio_dfu_cfg_set'),
+                                lower_entries.get('r1_cordio_dfu_cfg_ready'),
+                                lower_entries.get('r1_cordio_dfu_manager_enable'),
+                                lower_entries.get('sd_ble_gap_device_name_set'),
+                                lower_entries.get('sd_ble_gap_device_name_get'),
+                                lower_entries.get('sd_ble_gap_ppcp_set'),
+                                lower_entries.get('sd_ble_gap_adv_set_configure'),
+                                lower_entries.get('sd_ble_gap_adv_start'),
+                                lower_entries.get('sd_ble_gap_adv_stop'),
+                                lower_entries.get('sd_evt_get'),
+                                lower_entries.get('r1_cordio_dfu_flash_register'),
+                                lower_entries.get('r1_cordio_dfu_flash_service'),
+                                lower_entries.get('r1_cordio_dfu_flash_erase'),
+                                lower_entries.get('r1_cordio_dfu_flash_write'),
+                                lower_entries.get('r1_cordio_dfu_host_start'),
+                                lower_entries.get('r1_cordio_dfu_host_ready'),
+                                lower_entries.get('r1_cordio_dfu_host_request_shutdown'),
+                                lower_entries.get('r1_cordio_dfu_ble_enable'),
+                                lower_entries.get('r1_cordio_dfu_gap_disconnect'),
+                                lower_entries.get('r1_cordio_dfu_gap_conn_param_update'),
+                                lower_entries.get('r1_cordio_dfu_gap_data_length_update'),
+                                lower_entries.get('r1_cordio_dfu_gap_phy_update'),
+                                lower_entries.get('r1_cordio_dfu_gatts_exchange_mtu_reply'),
+                                lower_entries.get('sd_ble_gatts_service_add'),
+                                lower_entries.get('sd_ble_gatts_characteristic_add'),
+                                lower_entries.get('sd_ble_gatts_hvx'),
+                                lower_entries.get('sd_ble_gatts_sys_attr_set'),
+                                lower_entries.get('sd_ble_gatts_rw_authorize_reply'),
+                                lower_entries.get('r1_cordio_dfu_gatts_value_get'),
+                                lower_entries.get('r1_cordio_dfu_sec_params_reply'),
+                                lower_entries.get('r1_cordio_dfu_sec_info_reply'),
+                                lower_entries.get('r1_cordio_dfu_manager_disable'))
+                    descriptor_format = f'<{len(expected)}I'
+                    descriptor_length = struct.calcsize(descriptor_format)
+                    descriptor_bytes = lower_image[
+                        descriptor_offset:descriptor_offset + descriptor_length]
+                    for offset in range(0, len(lower_image) - descriptor_length + 1, 4):
+                        if struct.unpack_from('<I', lower_image, offset)[0] != expected[0]:
+                            continue
+                        candidate = struct.unpack_from(descriptor_format, lower_image, offset)
+                        if candidate[:7] == expected[:7]:
+                            ble_descriptor_candidates.append(ble_flash_origin + offset)
+                    ble_descriptor_valid = (
+                        descriptor_size == descriptor_length == expected[2] and
+                        descriptor_address == ble_flash_origin and
+                        descriptor_address + descriptor_length <= ble_code[0] + ble_code[1] and
+                        len(descriptor_bytes) == descriptor_length and
+                        None not in expected and
+                        all(descriptor_address + descriptor_length <= (entry & ~1) < expected[12]
+                            for entry in expected[13:]) and
+                        struct.unpack(descriptor_format, descriptor_bytes) == expected and
+                        ble_descriptor_candidates == [descriptor_address])
+                    if ble_descriptor_valid:
+                        descriptor_dump = out / 'cordio.descriptor.bin'
+                        descriptor_dump.write_bytes(descriptor_bytes)
+                        ble_descriptor_sha256 = digest(descriptor_dump)
+            image_valid = (image_valid and ble_image_bytes is not None and
+                           ble_image_bytes > 0 and
+                           ble_image_bytes <= ble_flash_capacity and
+                           ble_code is not None and ble_bss is not None and ble_data is not None and
+                           ble_flash_used is not None and
+                           ble_image_bytes == ble_flash_used and
+                           ble_data_valid and ble_descriptor_valid and
+                           ble_code[0] == ble_flash_origin and
+                           ble_data_load >= ble_code[0] + ble_code[1] and
+                           descriptor_address + descriptor_length <= ble_data_load and
+                           ble_flash_headroom is not None and ble_flash_headroom >= 0 and
+                           ble_data[0] >= ble_bss[0] + ble_bss[1] and
+                           ble_ram_headroom is not None and ble_ram_headroom >= 0)
+        if image_valid:
+            image_sha256 = digest(image)
+            if cordio_layout:
+                ble_image_sha256 = digest(ble_image)
         if not image_valid:
-            (out / 'image.log').write_text(image_result.stdout + image_result.stderr)
+            (out / 'image.log').write_text(
+                image_result.stdout + image_result.stderr +
+                (ble_result.stdout + ble_result.stderr if ble_result else ''))
             image.unlink(missing_ok=True)
+            if ble_image is not None:
+                ble_image.unlink(missing_ok=True)
     linked = link_valid and image_valid
     if not linked:
         elf.unlink(missing_ok=True)
@@ -213,6 +420,12 @@ def main():
         'reset_handler_address': reset_address, 'image_valid': image_valid,
         'image_path': str(image) if image_valid else None,
         'image_bytes': image_bytes, 'image_sha256': image_sha256,
+        'ble_image_path': str(ble_image) if image_valid and cordio_layout else None,
+        'ble_image_bytes': ble_image_bytes, 'ble_image_sha256': ble_image_sha256,
+        'ble_data_valid': ble_data_valid, 'ble_data_sha256': ble_data_sha256,
+        'ble_descriptor_valid': ble_descriptor_valid,
+        'ble_descriptor_sha256': ble_descriptor_sha256,
+        'ble_descriptor_candidates': ble_descriptor_candidates,
         'returncode': result.returncode, 'report': str(report),
         'report_sha256': digest(report), 'manifest_sha256': device['manifest_sha256'],
         'composed_object_sha256': compose['sha256'],
@@ -220,14 +433,27 @@ def main():
         'participating_c_source_units': c_source_units,
         'compiler_version': subprocess.check_output([compiler, '--version'], text=True).splitlines()[0],
         'inputs_sha256': {str(p): digest(p) for p in
-                          (layout, mdk / 'nrf_common.ld', *registry_sources,
+                          (*layout_sources, mdk / 'nrf_common.ld', *registry_sources,
                            *registry_scripts, *objects)},
-        'argv': command, 'undefined_references': undefined,
+        'argv': command, 'cordio_layout': cordio_layout,
+        'undefined_references': undefined,
         'archive_members': archive_members,
-        'ld_region_overflow_bytes': int(overflow.group(1)) if overflow else None,
+        'ld_region_overflow_bytes': region_overflows.get('FLASH'),
+        'ld_region_overflows': region_overflows,
         'flash_capacity_bytes': flash_capacity,
         'total_flash_used_bytes': total_flash_used,
         'flash_overflow_bytes': total_flash_overflow,
+        'ble_flash_capacity_bytes': ble_flash_capacity,
+        'ble_flash_code_bytes': ble_code[1] if ble_code else None,
+        'ble_flash_data_bytes': ble_data[1] if ble_data else None,
+        'ble_flash_data_load_address': ble_data_load,
+        'ble_flash_descriptor_address': descriptor_address,
+        'ble_flash_descriptor_bytes': descriptor_size,
+        'ble_flash_used_bytes': ble_flash_used,
+        'ble_flash_headroom_bytes': ble_flash_headroom,
+        'ble_ram_capacity_bytes': ble_ram_capacity,
+        'ble_ram_used_bytes': ble_ram_used,
+        'ble_ram_headroom_bytes': ble_ram_headroom,
         'ram_origin': ram_origin, 'ram_capacity_bytes': ram_capacity,
         'bss_end': bss_end, 'heap_limit': heap_limit,
         'stack_limit': stack_limit, 'stack_top': stack_top,
@@ -236,7 +462,11 @@ def main():
         'ram_headroom_bytes': (stack_limit - heap_limit
                                if stack_limit is not None and heap_limit is not None else None),
         'ram_layout_valid': ram_layout_valid,
-        'limits': 'The raw application region excludes SoftDevice, bootloader, settings and package metadata; source linkage does not establish stock byte identity or hardware boot.'
+        'limits': ('The two-region Cordio image requires the separately verified C MBR and '
+                   'bootloader images plus hardware validation; a clean link is not stock byte identity.' if cordio_layout else
+                   'The raw application region excludes SoftDevice, bootloader, settings and '
+                   'package metadata; source linkage does not establish stock byte identity '
+                   'or hardware boot.')
     }
     (out / 'report.json').write_text(json.dumps(receipt, indent=2) + '\n')
     print(json.dumps({'linked': receipt['linked'], 'undefined_references': len(undefined),

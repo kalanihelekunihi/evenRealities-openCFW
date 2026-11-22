@@ -17,6 +17,7 @@ extern void stock_delay(uint32_t);
 static void restore(uint32_t mask){__asm volatile("msr primask, %0"::"r"(mask):"memory");}
 /* Stock 0x4C45E2 (am_hal_clkmgr_board_info_set) */
 uint32_t audio_clock_board_set(const void *info){if(!info)return 6;for(unsigned i=0;i<20;i++)B(((uint32_t)(uintptr_t)g2ref_g2_stock_ram_200001c8+0x4u)+i)=((const uint8_t*)info)[i];return 0;}
+/* Stock 0x4C387E: shared oscillator wait loop. */
 void audio_clock_counter_wait(volatile uint8_t *flag,volatile uint32_t *counter){while(*counter){if(!*flag)break;stock_delay(10);--*counter;}}
 void audio_xtal_wait(volatile uint32_t *counter){if(STABILIZING){audio_clock_counter_wait((volatile uint8_t*)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f30+0x26u),counter);uint32_t mask=stock_save_irq();STABILIZING=0;COUNTER_PTR=0;restore(mask);}}
 uint32_t audio_xtal_request(uint32_t user){

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Bounded Apollo bootloader signature, vector heuristic and pointer-window discovery sweep; independently reproduced.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-reference-audit-001/001/audit.py",
+      "sha256": "d9940d9847afd139e12b2b6121c88593180296353ad4a69761f945b5358d3327"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-reference-audit-001/001/report.json",
+      "sha256": "bc7d86a13f68faf51b5da9b51d858200411219a57ed991080a86632db71723fd"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-reference-audit-001/001/receipt.json",
+      "sha256": "53656c1c43007a2e2844624c618e54ace5604bc4b3b8e2337a03a39e068cf5c5"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-reference-review-001/001/review.md",
+      "sha256": "8d03252092abb4990d30e00e9ce23e209b0245e8a04725637c6bdbd7113a6c4a"
+    }
+  },
+  "result": {
+    "payload_bytes": 148599,
+    "pointer_pattern_windows": 731,
+    "vector_heuristic_candidates": 15,
+    "additional_nested_image_established": false,
+    "decoded_image_replay_is_separate_pending_review": true
+  },
+  "limits": [
+    "Pointer windows and vector heuristics are leads, not a code-reference census.",
+    "The three startup output replay claim is sourced from separate campaign evidence pending independent review.",
+    "No code/data closure, transformed-image absence or G1 admission claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

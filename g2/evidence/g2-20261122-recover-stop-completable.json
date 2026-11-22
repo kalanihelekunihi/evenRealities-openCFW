@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "title": "EM9305 recover_stop completable: GPIO15 configuration clock and vendor event 04 FF 01 03",
+  "scope": "Emulator-only changes in ~/Repo/g2-firmware-emulator (no commit). No hardware flash. NVM program/erase is not in this step.",
+  "gpio_status_bit": {
+    "address": "0x40010410",
+    "mask": "0x00200000",
+    "decode": "GPIO InputRead3 (bank 3, pins 96-127), bit 21 = GPIO117, the EM9305 Ready line. Already modeled in G2Apollo510_GPIO.cs InputRead; no GPIO peripheral change was required.",
+    "used_by": [
+      "context_check: timed wait Ready low then high, then event 04 FF 01 01",
+      "recover_stop: untimed wait Ready high, then event 04 FF 01 03"
+    ]
+  },
+  "events": {
+    "context_check": "04 FF 01 01 (word 0x0101ff04), already emitted on RESET deassert after a 1 ms functional startup delay",
+    "recover_stop": "04 FF 01 03, emitted only after the GPIO15 configuration clock reaches a functional enter-CM threshold"
+  },
+  "gpio15": {
+    "role": "EM9305 configuration clock",
+    "evidence": [
+      "audio_ble_radio_wait_pulse_52e854 in display_ble_hci_radio_recover_pulse.c: g2_codec_pin_function(15, 0x183), then (duration*1000)/33 high/low pairs with audio_ble_hci_boot_delay_491102(16) (microsecond wrapper)",
+      "audio_ble_radio_recover_stop_52e8be: radio reset, then wait_pulse(40), then require event {4, 0xFF, 1, 3}",
+      "g2/docs/reference/findings-cross-cutting.md: 'configuration clock GPIO15 (40 pulses)'"
+    ],
+    "pulse_count_note": "wait_pulse(40) issues (40*1000)/33 = 1212 high/low pairs. The '40 pulses' shorthand in that finding is the duration argument, not the edge count.",
+    "wiring": "15 -> em9305@2 in controller-peripherals.resc and the mismatch copy. Inferred from the recover_stop protocol and the finding above; not a measured schematic net name.",
+    "enter_cm_threshold_edges": 8,
+    "threshold_note": "Functional model, not a measured silicon edge count. 8 rising edges after RESET release enter configuration mode. Fewer than 8 keep the normal 04 FF 01 01 startup event."
+  },
+  "model_behavior": {
+    "reset_without_clock": "Enqueue 04 FF 01 01 (context_check path unchanged)",
+    "clock_during_startup_delay": "Startup callback enqueues 04 FF 01 03 instead of 01",
+    "clock_after_unconsumed_01": "Replace the queued 04 FF 01 01 with 04 FF 01 03 so recover_stop does not first memcmp-fail the startup event",
+    "hardware_reset": "Clears configurationMode and the edge count"
+  },
+  "unit_tests": {
+    "runner": "~/Repo/g2-firmware-emulator/.venv/bin/pytest",
+    "result": "6 passed in 29.79s",
+    "names": [
+      "test_reset_ready_pulse_and_active_event_survive_split_iom_transactions",
+      "test_reset_cancels_pending_startup_event",
+      "test_reset_without_config_clock_emits_normal_startup_event",
+      "test_config_clock_during_startup_emits_configuration_mode_event",
+      "test_config_clock_after_startup_replaces_unconsumed_normal_event",
+      "test_seven_config_clock_edges_do_not_enter_configuration_mode"
+    ]
+  },
+  "firmware_verification": {
+    "script": "build/em9305-nor-20261122/stock-recover-stop.resc",
+    "log": "build/em9305-nor-20261122/stock-recover-stop.log",
+    "image": "stock 2.2.6.10 stock.app.bin, PC 0x005E4233, NOR 69efc6d023779beec9dada757ec9fe852f9454b4b84bae6fe8421c703f35c9d1, controller word forced 00010304 (4.3.1.0 mismatch)",
+    "virtual_seconds": 8,
+    "configuration_mode": {
+      "before": false,
+      "after_8s": true
+    },
+    "pc": {
+      "after_0s": "0x5e4232",
+      "after_8s": "0x44adfa"
+    },
+    "host_packet_count": 61,
+    "unsupported_command_count": 3,
+    "wdt_or_sbl_handoff": "none",
+    "entered_configuration_mode_log": 2,
+    "first_new_hci_after_previous_hang": "0106FD00",
+    "fd06": {
+      "hci": "0106FD00",
+      "opcode": "0xFD06",
+      "source": "audio_ble_radio_update_erase_52e9b4 in display_ble_hci_radio_update_erase.c",
+      "em9305_table": "opencfw_em9305_EMSMM_NVMEraseMain in g2/src/em9305/application/em9305_hci_cmd_tables.c",
+      "status": "unmodeled; two attempts. Next gap is NVM program/erase, not recover_stop."
+    },
+    "also_unmodeled_or_missing": [
+      "Missing EM9305 memory fixture at 0x00F0040C, length 4 (update_prepare read)"
+    ],
+    "advertising": "010A200101 was issued. End PC 0x44adfa matches the earlier version-match stock 8s end PC. This is not a completed DFU: erase failed, and the stack still brought up the already-installed (mismatched) controller firmware."
+  },
+  "app_dead_hypothesis": {
+    "claim": "The untimed recover_stop wait could explain openCFW-only app-dead temples, but only on paths that enter recover_stop, and only as a hypothesis until silicon evidence exists.",
+    "facts": [
+      "recover_stop has no timeout: it pulses GPIO15 until GPIO 0x40010410 bit 21 is high and the event is exactly 04 FF 01 03.",
+      "Official 2.2.6.10 came up on the later-bricked pair, so on that silicon recover_stop either was not entered or it completed under official timing.",
+      "On the version-match sim path (synthetic-rf-trim-7 and a successful context_check), acquire skips recover_stop. The realistic post-official MAIN-only path is version-match. That path still does not reproduce app-dead in sim.",
+      "recover_stop is entered when context_check returns 5 (skip_read), when context_check returns 0 but factory trim bits [12:7] != 7, or later from audio_ble_radio_attempt_52edf0 (version-mismatch DFU)."
+    ],
+    "hypothesis": "If factory trim is not 7, or context_check returns 5 on the real board, every boot including official would enter recover_stop. Official came up, so the EM9305 did emit 04 FF 01 03 for stock's GPIO15 pulse train. OpenCFW uses the same wait_pulse source, but delays run from MRAM (am_hal_delay_us / g2_norflash_delay_us_491102) rather than stock's ITCM-resident delay. If that changes pulse width or period enough that the EM9305 never enters CM, recover_stop never sees 04 FF 01 03 and hangs until the watchdog \u2014 no advertising, no case frame, matching the brick. This is residual (iii).",
+    "not_proven": "No factory trim dump and no GPIO15 traces. The sim trim-7 fixture hides the trim-mismatch acquire path. Do not treat this as the established brick cause."
+  },
+  "artifacts": {
+    "G2EM9305.cs": "5788cd509e67353c903ffd48747e0518f607503bbae529c2c3b5ca939ded6214",
+    "controller-peripherals.resc": "bf38a0779227a5bb38c621834abc5d295031248b2486f7a7341e46a26070c30d",
+    "test_em9305_transport.py": "1ed6d4952aa2d0cd22e9ca557b8bacae62fe65043605b7b1aa32ab7c177099eb",
+    "controller-mismatch.resc": "330ba31e25895c77c901abc916d46153e030b5a6dac961b68797089426dbc86d",
+    "stock-recover-stop.resc": "3555ab94d9a47734879db272e5e9495d91a6586139e9b779610b7fbe24c6bd84",
+    "stock-recover-stop.log": "6352e81b39762d7cfcf9b9fcd22794e179b1e89bed574ef27c98dcad81a21984"
+  },
+  "next": "Implement EM9305 NVM program/erase (HCI 0xFD06 EMSMM_NVMEraseMain first), then the remaining recover/reconfigure/finalize commands, include g2.reset in the mismatch pair, and re-run through a completed DFU. Then (3) case-reply disarm with a pogo product-test frame."
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded codec marker and GXNPU structural partition audit; conditional runtime routes remain open.",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-routes-residual-001/001/audit.py",
+      "sha256": "42d3c8cfe39cdeda42babfee08e60038962f6d2e58cd412577d15a5d4a6c2b26"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-routes-residual-001/001/report.json",
+      "sha256": "2ee98eb56e3689f301d08addbcfdcbc940fd44ac9d0c1e9850efa3cccbaacec1"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-routes-residual-001/001/receipt.json",
+      "sha256": "708efb967ba4745d11f49edaf7ecefd13da944b6dc5365f4b82944c097e48643"
+    },
+    "corrected_independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-codec-routes-residual-review-001/002/review.json",
+      "sha256": "e4b8a28b3d1b09345641fee79aaf0f457282474881e71e3f3d059c4ac6695ea8"
+    },
+    "structural_decoder_index": {
+      "path": "g2/evidence/g2-20261112-p1-gxnpu-structural-decoder-index.json",
+      "sha256": "e40afe42cf22d786d971edc4440b54b867f8087b0bad8f35423b7321a146823e"
+    }
+  },
+  "result": {
+    "locked_codec_bytes": 326092,
+    "gxnpu_command_span": [
+      101776,
+      110940
+    ],
+    "gxnpu_command_bytes": 9164,
+    "structural_command_records": 212,
+    "weights_span": [
+      110940,
+      231740
+    ],
+    "weights_bytes": 120800,
+    "additional_nested_image_established": false
+  },
+  "limits": [
+    "Exact marker scan does not exclude alternate encodings or transformed programs.",
+    "GXNPU record boundaries are structural; executable/data semantics and reserved header fields are unresolved.",
+    "BINH A/B selection, runtime base/length/entry and opaque-region contents remain conditional or unresolved.",
+    "Independent rerun differed from candidate report only in a recorded file path; no byte-for-byte report equality is claimed.",
+    "No G1 admission or C source completeness claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently checked five v18 payload code row adjudications against locked payloads",
+  "artifacts": {
+    "row_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-code-5-canonical-review-pilot-001/001/review.py",
+      "sha256": "cb9356bcdd018697e92f9f44c4abda8d461a3ccc983a21c22a77278866f0baf5"
+    },
+    "row_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-code-5-canonical-review-pilot-001/001/report.json",
+      "sha256": "47008e7f9e773a7f0e6f61a3bf17f7a0f683cd4e576d2387e3eb8494c557a8e5"
+    },
+    "row_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-code-5-canonical-review-pilot-001/001/receipt.json",
+      "sha256": "542c41974ea3495f19c9cc0c87af717e13c80bf278f340502b448577fcd026d6"
+    },
+    "coordinator_check_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-code-5-coordinator-check-001/001/check.py",
+      "sha256": "d339be7eaf8623bb6c205102d6364d4ef771f510426dc8ce522314cf722650be"
+    },
+    "coordinator_check": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-payload-code-5-coordinator-check-001/001/review.json",
+      "sha256": "77454e9e71a5806d9f5c9b0e5117cd59d56ff77cbdaca2ce03f8512314e52a73"
+    },
+    "candidate_v18": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018/001/coverage-draft.jsonl",
+      "sha256": "e2446cc92c63055a458335d15b2f7ef2018214f31831134436962ec7ea7f384e"
+    }
+  },
+  "result": {
+    "payload_code_rows": 5,
+    "pass_bounded": 5,
+    "revise": 0,
+    "evidence_pins_verified": 15,
+    "canonical_row_hashes_computed": 5,
+    "validator_review_records_created": 0
+  },
+  "limits": [
+    "Apollo row is a 66-byte terminal overlap of a longer function; following bytes remain unresolved.",
+    "Four EM9305 vendor ELF slice identities do not establish whole-image source or complete pseudocode.",
+    "No authenticated registry, nested-image discovery closure, canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

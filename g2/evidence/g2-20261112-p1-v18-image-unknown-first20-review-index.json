@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Exact-byte and row-hash pilot for first 20 v18 image unknown rows, unchanged in v19",
+  "artifacts": {
+    "row_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-image-unknown-first20-canonical-review-pilot-001/001/review.py",
+      "sha256": "f80336b7e56f5c5e9f700c5bcd8f5378a60b82473aa4e02e871c22be2b72cb8a"
+    },
+    "row_review_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-image-unknown-first20-canonical-review-pilot-001/001/report.json",
+      "sha256": "069b3c332c8b00057d32dec53574f97bc40230d8839079eca3bbb3455d7ed269"
+    },
+    "row_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-image-unknown-first20-canonical-review-pilot-001/001/receipt.json",
+      "sha256": "5eb7e800663b5ba68b9372f6b298a1a9619ea217a4717e8a081d5a31a67c383b"
+    },
+    "coordinator_check_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-image-unknown-first20-coordinator-check-001/001/check.py",
+      "sha256": "91906ee1c1aeae10a94360351dfc6cb10cacd04efa938592c47b7f1dd151daaf"
+    },
+    "coordinator_check": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-v18-image-unknown-first20-coordinator-check-001/001/review.json",
+      "sha256": "9bfaba5e08bf53d4eece45246e87b535678262c193d7d262b5eaab8c812bd1ef"
+    },
+    "candidate_v18": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-semantic-correction-018/001/coverage-draft.jsonl",
+      "sha256": "e2446cc92c63055a458335d15b2f7ef2018214f31831134436962ec7ea7f384e"
+    }
+  },
+  "result": {
+    "image_unknown_rows": 20,
+    "pass_explicit_unknown_at_g1": 15,
+    "positive_known_island_or_kind_revisions": 5,
+    "apollo_main_verified_code_overlap_bytes": 700,
+    "evidence_pins_verified_by_coordinator": 40,
+    "validator_review_records_created": 0
+  },
+  "limits": [
+    "Only the first 20 v18 image unknown rows were reviewed; v19 additionally marks the weight image unknown.",
+    "Linear disassembly alone is not proof that all EM9305 record bytes are code.",
+    "No authenticated registry, nested-image discovery closure, canonical admission or G1/G2 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run",
+    "g2": "not_run"
+  }
+}

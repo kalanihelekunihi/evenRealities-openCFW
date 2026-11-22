@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Exact independently checked row-ID union of 14 reviewed v017 package and payload workpacks",
+  "artifacts": {
+    "union_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-package-payload-coverage-union-001/001/audit.py",
+      "sha256": "431e772edac2fcb25c97a3bbacc45c9f0e7c84ca466ebee8a687bea0a3e3af3d"
+    },
+    "union_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-package-payload-coverage-union-001/001/report.json",
+      "sha256": "5e8afb400aa4ad0f468f6d0e5704b76f34a2bd8cb376d83de9689ad2f883997e"
+    },
+    "union_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-package-payload-coverage-union-001/001/receipt.json",
+      "sha256": "4da9567bc962e63729b80a6bacd20af3cbb16931b01ffdd65bfdaac8fd6f2724"
+    },
+    "independent_union_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-package-payload-coverage-union-independent-review-001/001/review.json",
+      "sha256": "eca2ea5340f664199fa7a16b014ce9b7410955cd26f1ef87fe76a277f6210a8d"
+    },
+    "nonunknown_row_index": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-nonunknown-45-row-review-index.json",
+      "sha256": "05c96aae509302f9b2aacd096e736ee43071c85cbb95235374a424405113af6a"
+    },
+    "unknown_row_index": {
+      "path": "g2/evidence/g2-20261112-p1-payload-unknown-22-row-review-index.json",
+      "sha256": "b59c03d02ffecb6c362070280a878f550215cb297193d5c402db2f52faa8df9e"
+    },
+    "selected_coverage": {
+      "path": "g2/evidence/g2-20261112-p1-coverage-scope-binding-v17-index.json",
+      "sha256": "65f69de9563368eb5aad3a51567b9e27c22f1b2590555780b9539c9c9267e6bd"
+    }
+  },
+  "result": {
+    "unique_package_payload_candidate_rows": 67,
+    "selected_workpacks": 14,
+    "selected_workpacks_with_independent_review": 14,
+    "duplicate_row_ids": 0,
+    "missing_row_ids": 0,
+    "extra_row_ids": 0,
+    "nonunknown_rows": 45,
+    "unknown_rows": 22,
+    "validator_trusted_review_ids_assigned": 0
+  },
+  "limits": [
+    "This is an exact-set and hash-link audit; it does not independently re-adjudicate every row's semantics.",
+    "Workpack 001/001 is superseded by independently reviewed 001/002 and excluded from the selected union.",
+    "Image-scope rows, canonical review records, discovery closure, and G1 remain open."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

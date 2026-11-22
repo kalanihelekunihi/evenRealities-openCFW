@@ -1,0 +1,66 @@
+{
+  "artifacts": {
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-vendor-elf-boundary-review-001/001/review.json",
+      "sha256": "1fdd647dc33efe06f6e5907ce45c5ed1137a2aa0ec8627b6be42e1ffbfbeefbc"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-vendor-elf-boundary-review-001/001/review.py",
+      "sha256": "a39f1089cd86f7d3746bd0fc0f735b678dd2284579d3a69a51ba09b2ce464b5e"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-vendor-elf-boundary-001/001/receipt.json",
+      "sha256": "f13ec1fc1b405a50a29a2d502bf4eae46aab6cf2fe36efa73ce11bf94d5d4c4d"
+    },
+    "producer_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-vendor-elf-boundary-001/001/report.json",
+      "sha256": "2b1c2e910e80623297a3f8c7af731524e4e9948d2f3de2e27ea64a5fea7f0cbf"
+    },
+    "producer_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-vendor-elf-boundary-001/001/audit.py",
+      "sha256": "9d43da0f907f16ac93a04542c770e2a3aaa28fa87053b8d63a825222e8155483"
+    },
+    "review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-vendor-elf-boundary-review-001/001/receipt.json",
+      "sha256": "7c4967672e2cd6940f47c7b7cd3ad7d6310a4f7a61cc218c16a04451b76f2d1f"
+    }
+  },
+  "campaign_id": "20261112T092142Z",
+  "limits": [
+    "Five byte-identical vendor function slices are bounded code-identity leads; nonidentical vendor function boundaries are not inherited as stock facts.",
+    "The stock instruction span is supported by pinned linear disassembly, not complete recursive control-flow proof.",
+    "External NVM selection, full record classification, canonical admission and G1 remain open."
+  ],
+  "result": {
+    "byte_identical_function_rows": 5,
+    "stock_ini_metadata_span": [
+      "0x300684",
+      "0x300690"
+    ],
+    "stock_linear_instruction_span_past_vendor_text": [
+      "0x30066c",
+      "0x300684"
+    ],
+    "stock_record1_package_span": [
+      348,
+      1004
+    ],
+    "vendor_function_rows": 14,
+    "vendor_initdat_runtime_span": [
+      "0x30066c",
+      "0x300678"
+    ],
+    "vendor_text_different_bytes": 250,
+    "vendor_text_runtime_span": [
+      "0x300400",
+      "0x30066c"
+    ]
+  },
+  "schema_version": 1,
+  "scope": "Independently reviewed bounded comparison of locked EM9305 record 1 with vendor DI04 ELF sections and function symbols.",
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+}

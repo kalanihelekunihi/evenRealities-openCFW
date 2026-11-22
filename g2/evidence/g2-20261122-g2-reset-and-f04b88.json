@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "title": "g2.reset SBL-style handoff, sticky MCUCTRL, and the 0xF04B88 recover-read loop",
+  "scope": "Emulator-only changes in ~/Repo/g2-firmware-emulator (no commit). No hardware flash. No NVM program/erase model yet.",
+  "f04b88": {
+    "hci": "0101FD05884BF00008",
+    "command": "HCI 0xFD01 read of 0x00F04B88, 8 bytes",
+    "issuer": "audio_ble_radio_recover_read_52f094 in display_ble_hci_radio_recover_commands.c, from audio_ble_radio_context_recover_52f0f8",
+    "boot_call": "HciDrvRadioBoot -> audio_ble_hci_radio_acquire_52dd94 calls context_recover(state, requested=7, skip_read=(check==5)), then audio_ble_radio_read_revision_52eeea (0x00402000 length 4)",
+    "decode": "From the first little-endian word R: old = ((R>>8)&0x1F)<<1 | ((R>>7)&1), which is REG_RF_XO_SEQ_DIG bits[12:7]. Stock compares old to requested 7.",
+    "fixture": {
+      "name": "synthetic-rf-trim-7",
+      "bytes": "8003000000000000",
+      "word0": "0x00000380",
+      "bits_12_7": 7,
+      "matches_requested": true
+    },
+    "loop_cause": "The 0xF04B88 read does not fail-compare and does not retry by itself. With the current trim-7 fixture, old==7, context_recover returns early and skips recover_stop. The next HCI packet is the version read at 0x00402000. On the mismatch path, later audio_ble_radio_attempt_52edf0 calls audio_ble_radio_recover_stop_52e8be, which resets the radio (GPIO 0x5D), pulses GPIO15, and waits forever for GPIO 0x40010410 bit 0x00200000 and vendor event 04 FF 01 03. That wait runs until the watchdog fires. The incomplete previous reset then restarted the app, so acquire issued the same two FD01 reads again. The repeat is a WDT restart, not a bad trim value.",
+    "next_model_gap": "EM9305 should emit vendor event 04 FF 01 03 after coming out of reset, and GPIO 0x40010410 bit 0x00200000 must become visible, so recover_stop can exit and the NVM erase/write path can run."
+  },
+  "emulator_changes": {
+    "mcuctrl": "G2Apollo510_AudioMcuControl.Reset() now preserves CHIPREV (0x00C) and OTAPOINTER (0x264). CHIPREV is a silicon identity; OTAPOINTER is the SBL recovery latch.",
+    "reset_macro": "renode/g2-reset.resc registers the current machine's reset macro and calls wdt HandoffAfterSystemReset. Included from renode/boot.resc and from both temples in renode/paired.resc.",
+    "handoff": "Unarmed: VTOR/SP/PC from the application vector at 0x00438000, CPU not halted. Armed (OTAPOINTER==0xAFD1363A): CPU halted, application not entered. Does not reload MRAM.",
+    "tests_updated": [
+      "tests/test_renode_boot_health.py",
+      "tests/test_firmware_ble_reconnect.py",
+      "tests/test_paired_scenarios.py"
+    ]
+  },
+  "verification": {
+    "resc": "build/em9305-nor-20261122/g2-reset-handoff.resc",
+    "log": "build/em9305-nor-20261122/g2-reset-handoff.log",
+    "unarmed": {
+      "chiprev_before_after": "0x00000022",
+      "otapointer": "0x11111111",
+      "pc": "0x5e4232",
+      "sp": "0x2007fb00",
+      "halted": false,
+      "log": "g2.reset: SBL application handoff VTOR=0x00438000 SP=0x2007FB00 PC=0x005E4233"
+    },
+    "armed": {
+      "chiprev": "0x00000022",
+      "otapointer": "0xAFD1363A",
+      "pc": "0x0",
+      "halted": true,
+      "log": "g2.reset: SBL wired-load (OTAPOINTER=0xAFD1363A); application not entered"
+    },
+    "missing_macro_warning": false
+  }
+}

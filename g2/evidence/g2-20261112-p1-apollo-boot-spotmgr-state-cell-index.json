@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed bounded stock bootloader SpotMgr current-state-cell startup value, literal references and guarded direct store route",
+  "artifacts": {
+    "audit_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-state-cell-001/001/audit.py",
+      "sha256": "e2a832fe5d804289cdaa8a268547bb97432214069b40efe20cf3c0028e3a5891"
+    },
+    "audit_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-state-cell-001/001/report.json",
+      "sha256": "a6711f8a51b11996b1b9224a685c2487f3ff526b5b000a3a8cb88d353378dede"
+    },
+    "audit_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-state-cell-001/001/receipt.json",
+      "sha256": "c64ef9ed7e69d97f4cef394d40471f0bb6a6c81208a5a4ff32a7888cb7952b0f"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-state-cell-review-001/001/review.py",
+      "sha256": "8f360da38fdc665c435a706a3700e2fa1e7a826790010308879e2788e63287c5"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-state-cell-review-001/001/review.json",
+      "sha256": "ae39dc8ad4faa4cf2598eab61c6295813848f3c43200a204e48d919c4bf7a422"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-boot-spotmgr-state-cell-review-001/001/receipt.json",
+      "sha256": "33cb8784cdd6ae444c68c3ef08b735de0f3ea78017d39927b66abccce96ec4df"
+    }
+  },
+  "result": {
+    "review_verdict": "BOUNDED_PASS_WITH_LIMITS",
+    "state_cell": "0x20000150",
+    "decoded_startup_word": 7,
+    "adjacent_cell": "0x200001C4",
+    "adjacent_startup_word": 6,
+    "exact_aligned_literal_addresses": [
+      "0x42A868",
+      "0x42AD20"
+    ],
+    "local_store": "0x42AB58 writes the stack state word after 0x42A550 returns zero; 0x42A4BC is conditionally called first on a compared state or adjacent-cell change."
+  },
+  "limits": [
+    "Aligned literal enumeration and local instruction review do not prove unique writer, computed aliases, indirect writers or hardware effects.",
+    "The state helper output range, global state invariant, other consumers, nested-image exclusion and G1 remain open.",
+    "No canonical inventory admission, pseudocode completion or C source-completeness claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

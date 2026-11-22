@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Reviewed Apollo boot descriptor provenance and main code overlap with explicit file and image coordinates.",
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-apollo-table-provenance-index.json",
+    "sha256": "70941e1c4595da076fe3234da191f4be169c0266db9eb13c687f551acb62c11d",
+    "reason": "The predecessor ambiguously mapped equal numeric offsets in main and left verified function code unclassified."
+  },
+  "artifacts": {
+    "reconciliation_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-table-reconcile-001/005/reconcile.py",
+      "sha256": "d5bed06aca2720df3901a8e887c3cc77fb47e209dd96a5a3c3081307863936cf"
+    },
+    "reconciliation_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-table-reconcile-001/005/report.json",
+      "sha256": "d5fcc1c7e29d268e10b712a9a84cb76393e9267e74a2b7a281c80973958a667b"
+    },
+    "reconciliation_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-table-reconcile-001/005/receipt.json",
+      "sha256": "be6488b1e38fd990b55aa19e15e41b11ecca7216fdb88632bccbc5e50371209d"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-table-reconcile-review-003/001/review.json",
+      "sha256": "b79ff4baf34982fc78d9592096165f02b17db6d108037f040376561a226865d4"
+    },
+    "main_offset_code_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-offset-code-index.json",
+      "sha256": "b94a4701a04955297fed62959567d983c17d8d8ebe272b57289454bdc35b0250"
+    },
+    "historical_boot_transform_receipt": {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-initialization-transforms-002/002/receipt.json",
+      "sha256": "0bbd5728cdbfcf62cd6e4fd19f8e0cce7e5d4861daa30444b7fd90962191fb7c"
+    }
+  },
+  "coordinate_rules": {
+    "bootloader": "runtime = 0x410000 + raw/file offset",
+    "main_full_ota_file": "runtime = 0x437FE0 + full OTA file offset",
+    "main_post_preamble_image": "runtime = 0x438000 + raw image offset; full OTA file offset = raw image offset + 32"
+  },
+  "result": {
+    "boot_zero_descriptor_raw_span": [143580, 143600],
+    "boot_zero_descriptor_runtime_span": ["0x4330dc", "0x4330f0"],
+    "boot_decode_descriptors_raw_span": [143600, 143648],
+    "boot_decode_descriptors_runtime_span": ["0x4330f0", "0x433120"],
+    "boot_cursor_return": "0x4330f0; also the decode-descriptor start",
+    "main_same_numeric_post_preamble_raw_code_span": [143580, 143602],
+    "main_same_numeric_post_preamble_raw_unresolved_span": [143602, 143648],
+    "main_verified_full_ota_code_span": [143568, 143634],
+    "main_full_ota_unresolved_following_span": [143634, 143648],
+    "main_scatter_table_runtime_span": ["0x75d3c8", "0x75d410"]
+  },
+  "limits": [
+    "The Apollo main raw bytes after 143602 remain unresolved in this bounded audit.",
+    "The earlier Apollo main residual index's table interpretation is stale and cannot be reused as table evidence.",
+    "No complete main discovery or canonical G1 admission."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

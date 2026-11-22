@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed conditional route from locked FHDR section code to EM9305 descriptor slot 3",
+  "artifacts": {
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-section-slot-origin-001/001/receipt.json",
+      "sha256": "ee1967ad704edea181695b00632cb545e31f4d3561fd59bb2ab6a5d9908f3839"
+    },
+    "producer_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-section-slot-origin-001/001/report.json",
+      "sha256": "70c980e944f95d0a1ff3f7650c1fe043c221267660b2d0f7671e74c96a61f3f7"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-em9305-section-slot-review-001/001/review.json",
+      "sha256": "e8105922c20be1d214bf97303fc54073a1adc8097598e66fc93887ffe322e7c2"
+    },
+    "loader_predicates_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-loader-predicates-index.json",
+      "sha256": "86a7875ce16b7cba5f8c12ac8e259ed8632a1c880af9580efc9aa17eaba2b3c0"
+    }
+  },
+  "result": {
+    "locked_fhdr_address": "0x302000",
+    "section_code": 3,
+    "slot_index": 3,
+    "slot_store": "0x300680",
+    "selector_slot3_load": "0x300578",
+    "review_verdict": "pass_with_caveats"
+  },
+  "limits": [
+    "Slot 3 population is conditional on scanner acceptance and runtime visibility of the locked FHDR.",
+    "External NVM candidates and physical boot-ROM record selection remain unresolved.",
+    "Complete scanner semantics, whole-EM9305 discovery and G1 remain open."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -8,7 +8,7 @@
  * remap set its position in the used-channel list (+8) is stored at +52;
  * an unused channel is remapped to list entry (prn_e * count(+45)) >> 16,
  * whose index is stored at +52 with remap set. Returns the channel. */
-extern uint64_t opencfw_em9305_radio_shift_3027f4(uint32_t,uint32_t,uint32_t);
+extern uint64_t opencfw_em9305_child_3027f4(uint32_t,uint32_t,uint32_t);
 
 static uint32_t csa2_permute(uint32_t value)
 {
@@ -30,7 +30,7 @@ uint32_t opencfw_em9305_dispatch_child_30e5a4(uintptr_t context, uint32_t counte
     *(volatile uint16_t *)(context + 0x32u) = (uint16_t)prn;
     uint32_t quotient = ((prn_e & 0xffffu) * 0xdd68u) >> 21;
     uint32_t channel = (uint16_t)(prn_e + (uint32_t)((int32_t)quotient * -37));
-    uint64_t map = opencfw_em9305_radio_shift_3027f4(*(volatile uint32_t *)context,
+    uint64_t map = opencfw_em9305_child_3027f4(*(volatile uint32_t *)context,
                                                      *(volatile uint32_t *)(context + 4u), channel);
     if (((uint32_t)map & 1u) != 0u) {
         if (remap != 0u) {

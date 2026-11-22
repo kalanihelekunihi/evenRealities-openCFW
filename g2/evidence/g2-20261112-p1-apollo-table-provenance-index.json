@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed correction of bootloader startup-table evidence misattributed to Apollo main.",
+  "artifacts": {
+    "reconciliation_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-table-reconcile-001/002/reconcile.py",
+      "sha256": "325e7a67a8428caa93616d62d4f8ce04387aa21838cc381e804b5ab2dc0e8081"
+    },
+    "reconciliation_report": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-table-reconcile-001/002/report.json",
+      "sha256": "b3374e0eec9278b6c243322e073933b330be67d58831e50bd49b30cd374adf83"
+    },
+    "reconciliation_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-table-reconcile-001/002/receipt.json",
+      "sha256": "428a84f5880ffb13ef192a7909f50b8fd137651fa676cd7f4c15dc6e8fc83d7b"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-apollo-main-table-reconcile-review-001/001/review.json",
+      "sha256": "748a0e82db1c3c9b2ca5c03a837b29da4ba512903be6b414fcc2e9be9087ec88"
+    },
+    "historical_boot_transform_receipt": {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-initialization-transforms-002/002/receipt.json",
+      "sha256": "0bbd5728cdbfcf62cd6e4fd19f8e0cce7e5d4861daa30444b7fd90962191fb7c"
+    },
+    "apollo_main_residual_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-main-residual-index.json",
+      "sha256": "3c8564c7ca3d897c7640e6b399b57f32d96d9df65b47d6b6103467cce7833e70"
+    }
+  },
+  "result": {
+    "historical_raw_descriptor_span": [
+      143600,
+      143648
+    ],
+    "historical_table_owner": "apollo_bootloader",
+    "bootloader_runtime_span": [
+      "0x4330f0",
+      "0x433120"
+    ],
+    "bootloader_base": "0x410000",
+    "same_raw_offsets_under_main_base_runtime_span": [
+      "0x45b0f0",
+      "0x45b120"
+    ],
+    "main_base": "0x438000",
+    "distinct_documented_main_scatter_runtime_span": [
+      "0x75d3c8",
+      "0x75d410"
+    ]
+  },
+  "limits": [
+    "The meaning of main bytes at raw offsets around 143580 remains unresolved; equal offsets in separate payloads do not imply equal content or function.",
+    "The documented main scatter table is distinct; full startup ordering and residual discovery remain open.",
+    "No canonical G1 admission or source completeness claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical discovery draft revision 026 incorporating bounded Apollo bootloader SpotMgr state-cell and helper-output evidence",
+  "artifacts": {
+    "discovery_draft_026": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/026/discovery-draft.jsonl",
+      "sha256": "f20d946a79cb86d86d3142b0613a548c0a0b52ab79d8e3bbe9bbd8126cce61c1"
+    },
+    "reproducer": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/026/reproduce.py",
+      "sha256": "a1c4c0cc2a01251bff8419a0f9950fd1660904f780460420d69fd7a7ceab56a5"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/026/receipt.json",
+      "sha256": "e66a56d458006e2699f653d739819c13738f06ea37cf23116e1d2ad489a30be6"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v26-review-001/001/review.py",
+      "sha256": "991174a93c3e8b5975b9cce42fee40447c6e23dd65f3186401b7724ca8c8f96d"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v26-review-001/001/review.json",
+      "sha256": "f9ae0e02f0e649e5285962173330888feb95552b6f6d063e5805d22c6c110e66"
+    },
+    "independent_review_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-v26-review-001/001/receipt.json",
+      "sha256": "d14339aaf8cfbf69cc63644c61378e1e37372ce23b74738a391eb445f5358314"
+    },
+    "state_cell_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-boot-spotmgr-state-cell-index.json",
+      "sha256": "69ba88572bc5ae7b2d8622f76108f4e38a484d6b31b05c3589e0e9ce641d54b2"
+    },
+    "helper_output_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-boot-spotmgr-helper-output-index.json",
+      "sha256": "14d22d11a84885ca27320857f837c2d00c5726dd4bf99f2e01e2cefd4dae79ab"
+    },
+    "predecessor_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/025/discovery-draft.jsonl",
+      "sha256": "89df308153fc3f9a4aeb6a02c183b1fddbda67b8200c8231c4dacbe2f8337dd7"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "The helper success-path range 0..19 is local to the checked helper/caller and does not prove global state bounds, other writers or other DTCM consumers.",
+    "Whole-image discovery, canonical inventory admission, pseudocode completion and G1 remain open."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  },
+  "supersedes": {
+    "path": "g2/evidence/g2-20261112-p1-discovery-v25-index.json",
+    "sha256": "9431d1480517653ba0afeda5dc2f882a4e108355d2893fedc5cc29d2ad115eda"
+  }
+}

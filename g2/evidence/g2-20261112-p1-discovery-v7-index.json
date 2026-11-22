@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical P1 six-payload discovery draft revision 007, incorporating bounded touch and Apollo bootloader audits.",
+  "artifacts": {
+    "discovery_draft_007": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/007/discovery-draft.jsonl",
+      "sha256": "3bb3d55879589d167d78fef9b6b40a64f957ff42c0fe14e5e2b52db775c12761"
+    },
+    "discovery_receipt_007": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-001/007/receipt.json",
+      "sha256": "dd6d8ce6632e8b07a39bfa4ecdf720276bf14787071cd49ba77de7763667cfe3"
+    },
+    "independent_draft_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-discovery-draft-v7-review-001/001/review.md",
+      "sha256": "468174292e0db76f9cb580494c624d97c32aacaa0291cf2270b33383145b65a1"
+    },
+    "touch_residual_index": {
+      "path": "g2/evidence/g2-20261112-p1-touch-residual-index.json",
+      "sha256": "f7c47e333b82530e5cb57dfe17344a78b564cbe05103a8b0fa5b20d66f361f6e"
+    },
+    "apollo_boot_reference_index": {
+      "path": "g2/evidence/g2-20261112-p1-apollo-boot-reference-index.json",
+      "sha256": "a6de02f716d31910db27459ae9a03fd2e2828711e53a2482cf8be189155e1618"
+    }
+  },
+  "counts": {
+    "payload_rows": 6,
+    "image_ids": 33,
+    "unresolved_discovery_items": 7
+  },
+  "limits": [
+    "No complete whole-image discovery or source reconstruction claim.",
+    "Touch copy-helper caller dataflows and Apollo bootloader pointer/vector leads remain unresolved.",
+    "Historical decoded-image outputs require separate independent review."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

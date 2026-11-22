@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "scope": "Independently reviewed noncanonical coverage revision 017 input-hash scope correction",
+  "artifacts": {
+    "producer_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-scope-binding-017/001/rebind.py",
+      "sha256": "8778da8e756769f896719a986e71e40141141628d68c7cb2c24f1e53577a71b3"
+    },
+    "corrected_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-scope-binding-017/001/coverage-draft.jsonl",
+      "sha256": "7c382fa747be54caa9121ab6212e3585cbc77184dc9c7b26d258e3b1b896b84b"
+    },
+    "producer_receipt": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-scope-binding-017/001/receipt.json",
+      "sha256": "2beecd23df2125ae20c3af653be87903549c4ea44bd283681d0c45be174fb126"
+    },
+    "independent_review_script": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-scope-binding-review-001/001/review.py",
+      "sha256": "8c1989a8afe6dbdfbfd8e742e9075d09511e99015bd3d85d581f2c6ad244316e"
+    },
+    "independent_review": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-scope-binding-review-001/001/review.json",
+      "sha256": "c4dc5019698ec66978d6b44e4cd131cc49a9a0cc60fc8487051d3383b2374a32"
+    },
+    "predecessor_draft": {
+      "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-classification-016/001/coverage-draft.jsonl",
+      "sha256": "70116bffd3bde553a179ccaeb8aa5495a378cde2374df2e5ac462a73834c2f5b"
+    },
+    "predecessor_index": {
+      "path": "g2/evidence/g2-20261112-p1-em9305-exact-code-coverage-index.json",
+      "sha256": "986ec4c05389054e4bc56b4eefd85eacff3cc7e6204fdb9f19c1d0b0962b73ae"
+    }
+  },
+  "result": {
+    "coverage_rows": 127,
+    "coverage_scopes": 40,
+    "input_hash_corrections": 16,
+    "unknown_payload_bytes": 4176715,
+    "review_verdict": "BOUNDED_PASS_SCOPE_BINDING_ONLY"
+  },
+  "limits": [
+    "All 127 rows still lack canonical row review IDs.",
+    "No classification or nested-image closure is established by input-hash correction.",
+    "No canonical admission or G1 claim."
+  ],
+  "status": {
+    "canonical_admission": "none",
+    "g1": "not_run"
+  }
+}

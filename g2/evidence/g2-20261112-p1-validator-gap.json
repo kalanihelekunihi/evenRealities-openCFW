@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "task": "P1-validator-gap-review-001",
+  "scope": "read-only requirements, current-artifact, validator-gap analysis; no gate determination",
+  "validator_runs": [
+    {
+      "argv": ["python3", "g2/workflow/tools/validate_campaign.py", "inventory", "g2/build/pseudocode-first/20261112T092142Z"],
+      "result": "FAIL",
+      "reason": "missing inventory/secondary-payloads.json"
+    },
+    {
+      "argv": ["python3", "g2/workflow/tools/validate_inventory_v2.py", "g2/build/pseudocode-first/20261112T092142Z", "--trusted-review-registry-sha256", "<required-out-of-band-pin>"],
+      "result": "NOT_RUN",
+      "reason": "no campaign review registry exists and no trusted out-of-band registry hash is established; required v2 inventory records are also absent"
+    }
+  ],
+  "requirements": {
+    "procedure": "P1 requires an isolated unique campaign; authenticate the original bundle and bind local bundle path/hash; parse and recursively enumerate six payloads and nested executable images; validate spans/checksums; preserve reversible package->payload->loaded-address maps per address space; reconcile reuse by exact input hashes/tools/ranges/file presence; initial byte ledger and architecture analysis plan. G1 requires whole bundle and payload hashes, all container spans accounted, every nested image explicitly mapped, initial byte ledger and architecture-specific plan. Unknown code/data may remain if explicitly classified. No C task decomposition.",
+    "v2_files": {
+      "identity.json": "campaign/target/target-lock identity, bundle and exactly six payload identities, outer-container validation receipt, and authenticated review-registry reference",
+      "inventory/images.jsonl": "schema 2 rows with campaign/id; parent-first image hierarchy; source span and full parent hash; decoded size/hash/path; transform; resolved mapping or reviewed mapping_model; architecture, address spaces, accounting review",
+      "inventory/coverage.jsonl": "package and each payload complete interval partitions plus per-image shadow partitions; evidence path/hash/input hash and review ID",
+      "inventory/reviews.jsonl": "canonical record hashes, distinct author/reviewer, decision, actual-file-checked input hashes, registry-authenticated review receipt",
+      "inventory/analysis-plan.json": "one architecture/endianness/mode/address-space/decoder-support plan per payload, hash-bound evidence and independent review",
+      "inventory/discovery-reconciliation.jsonl": "exactly six payload records, enumerating all image IDs with evidence bound to payload hashes and independent review",
+      "receipts/": "actual command/tool/config/script/input/output hashes, exit status, time and scope; transform receipts additionally bind exact source slice, output, toolchain and review basis"
+    },
+    "v2_gate_limits": "Validator checks internal consistency and reviewed/hash-bound records, not whether discovery is truly exhaustive, decompiler is correct, or the G2 corpus is complete. A registry hash supplied on CLI is an out-of-band trust input. Passing v2 alone is not an independent G1 gate decision."
+  },
+  "current_state": {
+    "identity": "Existing identity-preflight receipt reports legacy identity validator PASS and bundle verifier PASS for official bundle SHA-256 f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa (4,301,227 bytes) plus six pinned payloads. It explicitly scopes itself to identity and outer-container preflight; G1 not run.",
+    "campaign_status": "status.json records G1_TARGET_AND_INVENTORY=not_run; historical evidence reuse admission none; stale historical evidence remains unreconciled.",
+    "present_inventory_files": ["identity.json", "inventory/outer-container.json", "inventory/images-reuse-candidates.jsonl", "inventory/coverage-reuse-candidates.jsonl", "inventory/plan-reuse-candidates.json", "inventory/tool-availability.json", "inventory/em9305-nvm-entry.bin"],
+    "missing_v2_files": ["inventory/images.jsonl", "inventory/coverage.jsonl", "inventory/reviews.jsonl", "inventory/analysis-plan.json", "inventory/discovery-reconciliation.jsonl", "campaign-scoped authenticated review registry and its out-of-band pin", "per-image transform receipts/review admissions where decoded transforms are used"],
+    "missing_legacy_files": ["inventory/secondary-payloads.json", "inventory/analysis-plan.json", "inventory/reuse-audit.json", "inventory/component-audits.json", "inventory/blockers.json", "attempts/P1-apollo_main-inventory-001/coverage.json", "attempts/P1-codec-inventory-002/coverage.json"],
+    "reuse_audit_snapshot": "status says 33/33 image candidates byte-valid but four evidence references stale; 70/70 historical intervals cover 40 scopes but 4,299,919 payload bytes remain unknown; six discovery records cover 33 images but six plan records carry 18 stale source-document evidence refs; historical G1 reviews have 23 records with 40 stale input refs; decoded image replay and bounded reviews are pending canonical admission. These are candidates, not admitted current-campaign evidence.",
+    "provenance_drift": "identity records current PROVENANCE.md hash 2656e3c6f89fe0c5a26f216837eb14ea88bf6e03e7db9f6be21e100cdd7f1153 vs target-pinned 53c3819fb9cf9cc819861787a14fa84f6e084cf03396a3a5636718f8539f6809; reconciliation says firmware bundle and payload identities unchanged, prose changed, and G1 admission pending. Preserve this disclosed mismatch; do not edit target pin or re-pin.",
+    "validator_divergence": "validate_campaign.py is legacy schema/path-bound v1 logic and fails immediately on absent secondary-payloads.json; it does not implement the v2 nested-image/review/discovery schema. Its hard-coded campaign structure makes it unsuitable as the sole current G1 validator."
+  },
+  "safe_inventory_construction": [
+    "Create fresh canonical inventory outputs only under this campaign's inventory/ and private attempt directories; use temporary files plus atomic rename, preserving every existing candidate, receipt, authenticated evidence file, and working-tree change.",
+    "Treat *-reuse-candidates as leads. For each proposed reuse, compare exact payload/image input hashes, ranges, parser/tool/script/config hashes, review inputs and current file presence; regenerate/review when any dependency is stale. Do not copy a historical pass label or silently fill missing coverage with unknown intervals without evidence and independent review.",
+    "Derive package/payload/image bytes and maps from the already authenticated read-only bundle/payloads; verify container checksum/bounds facts and each child span. Keep package offsets distinct from payload offsets and loaded addresses. Preserve the existing identity and outer-container receipt byte-for-byte unless they are proven inaccurate; record a new corrected parser receipt as a separate attempt if required.",
+    "Use new campaign-specific review records and coordinator-authenticated registry. Obtain the registry hash through the trusted/out-of-band process and pass it to v2; do not self-authenticate by merely hashing an untrusted registry. Leave old evidence in place and record stale refs as excluded or superseded.",
+    "Run schema-v2 validator after all required records and reviews exist; separately inspect validator weaknesses and independently reconcile completeness/byte denominators before any G1 claim. Keep status.json at not_run until evidence-based gate review is actually completed."
+  ],
+  "validator_weak_checks": [
+    "validate_campaign.py validates minimal identity fields and then relies on a hard-coded subset of legacy files; it lacks v2 image hierarchy, mappings, input-bound reviews, discovery, checksums and nested-image accounting checks.",
+    "validate_inventory_v2.py explicitly cannot prove exhaustive discovery or decoder correctness; review IDs and registry authenticity depend on an external trusted hash/registry process.",
+    "Inventory consistency is not sufficient to prove all physical bytes were found: discovery reconciliation is a reviewed assertion. Independently inspect container parsing, checksums, mapping arithmetic, interval denominators, and provenance for each executable span."
+  ],
+  "file_sha256": {
+    "AGENTS.md": "45cb02aee511b3aa55bd90c8a6ff84ab24a1d898a851c2eac8b51385e5a5c7a5",
+    "g2/workflow/PROCEDURE.md": "ba0784bd154ffee1edc4be97ade6d05bf4b725092a5f938c4181c97e57ed1631",
+    "g2/workflow/CONTRACTS.md": "7d49db8323bace121bb8153e5e73cd3e7577ad45cfdb8857e265f683c2bee275",
+    "g2/workflow/tools/validate_campaign.py": "fb012418df7a0dbc3402570c38ba0dc3fa9709e9cf92d4d037047cfba98740a2",
+    "g2/workflow/tools/validate_inventory_v2.py": "d705884e055250268427fb654f21225dbe25b8f0a1705cb28e10679f155259ae",
+    "campaign/identity.json": "2dbba3e34ef59158bf05bed2cf24c455b91f3b7119856ed9c8826cc916f121fe",
+    "campaign/inventory/outer-container.json": "511d0729b8f128e68493c6b084fcf53e9b7c40123ad6ac60cc21e9c651cfffc3",
+    "campaign/receipts/identity-preflight.json": "c2cfc3f0daff6f87cf44f9899b8d3236a67fe83e6d5e2b377ff1501051fed71b",
+    "campaign/receipts/provenance-reconciliation.json": "9d98edcd7384afa3baba25b476eb28a1610aa7ac32595269b35a6d6fd170efa1",
+    "campaign/inventory/images-reuse-candidates.jsonl": "eb95078be719b978aafc90aee19d948df3a8fc2021d21532ce718fcd51cd2cdb",
+    "campaign/inventory/coverage-reuse-candidates.jsonl": "1f055ae239cc45d1f10b2a94a7e5fca323800d16e77f61fd9ac332eb53f07fe5",
+    "campaign/inventory/plan-reuse-candidates.json": "51b3483a7b9b0a81471744b0c0ce4f574adbbfcadd1e60cded7767254ca5fda4",
+    "campaign/status.json": "6e29d1ed295d80e03a32ad3bbfb359711b963c9e491467dc1e431cbb10a10369"
+  }
+}

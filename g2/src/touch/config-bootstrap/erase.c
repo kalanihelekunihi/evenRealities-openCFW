@@ -9,7 +9,7 @@ static uint32_t next(uint32_t a,const uint8_t *c){uint32_t row=*(const uint16_t 
 /* Stock 0x00008AE0 (touch_eeprom_57e0_erase_adapter) */
 uint32_t touch_eeprom_erase(uint8_t *c) {
  uint32_t rows=(*(uint16_t *)c)*c[12],physical=*(uint16_t *)(c+2),status=0;
- uint8_t *scratch=(uint8_t *)0x20000cd4u;
+ uint8_t *scratch=touch_eeprom_scratch_ram;
  for(uint32_t i=0;i<physical;i++)scratch[i]=0;
  if(c[13]) {
   uint32_t sectors=div32(rows*physical-1u,*(uint32_t *)(c+4))+1u,cursor=*(uint32_t *)(c+16);

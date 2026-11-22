@@ -1,0 +1,434 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20261112T092142Z",
+  "attempt_id": "P1-coverage-review-001/001",
+  "review_scope": "18 historical P1 coverage review records flagged stale by reuse audit",
+  "decision": "pass",
+  "inputs": [
+    {
+      "path": "g2/evidence/g2-20261112-historical-g1-review-reuse-audit.json",
+      "sha256": "e999c577815c90c974102087d9cbd9a54e86ce5ee1358c5d1916dae9a7c934e6"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/reviews.jsonl",
+      "sha256": "56b87254c329e7daab6e4800b91307194953936bb51af479d896a1b8313a90c2"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/inventory/coverage.jsonl",
+      "sha256": "db366503c7f5cdb5ab6ee891c0a7ef24a1ea2451f3c5e7f0b2bdb2073a214b0f"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/e28738432d7b612d625331b00383149b.bin",
+      "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa"
+    },
+    {
+      "path": "g2/tools/open_cfw.py",
+      "sha256": "e3ace482eb5d7e112e246c3a940649db8ac63139c0d66f43f4780d4d79734860"
+    },
+    {
+      "path": "g2/docs/reference/firmware-formats.md",
+      "sha256": "6f860376101cd8185c3bf1085c86f8761c1550b4d4a99762f8745f7a5dc42b83"
+    },
+    {
+      "path": "g2/manifests/g2-2.2.6.10.json",
+      "sha256": "1e6f7da11f63cf063098de2213a304e0a15fe99e9a932cdef9fedf32d2856c61"
+    }
+  ],
+  "checks": [
+    {
+      "check": "stale record cross-reference",
+      "result": "18 IDs matched audit stale coverage rows and their coverage records"
+    },
+    {
+      "check": "locked bundle",
+      "result": "length 4301227; SHA-256 f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa; EVENOTA magic and six-entry TOC parsed"
+    },
+    {
+      "check": "payload slice equality",
+      "result": [
+        {
+          "payload": "codec",
+          "bundle_interval": [
+            304,
+            326396
+          ],
+          "bundle_slice_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+          "reference_path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+          "reference_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+          "byte_equal": true
+        },
+        {
+          "payload": "ble_em9305",
+          "bundle_interval": [
+            326524,
+            538472
+          ],
+          "bundle_slice_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+          "reference_path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+          "reference_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+          "byte_equal": true
+        },
+        {
+          "payload": "touch",
+          "bundle_interval": [
+            538600,
+            573064
+          ],
+          "bundle_slice_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+          "reference_path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+          "reference_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+          "byte_equal": true
+        },
+        {
+          "payload": "case",
+          "bundle_interval": [
+            573192,
+            628976
+          ],
+          "bundle_slice_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+          "reference_path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+          "reference_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+          "byte_equal": true
+        },
+        {
+          "payload": "apollo_bootloader",
+          "bundle_interval": [
+            629104,
+            777703
+          ],
+          "bundle_slice_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+          "reference_path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+          "reference_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+          "byte_equal": true
+        },
+        {
+          "payload": "apollo_main",
+          "bundle_interval": [
+            777831,
+            4301227
+          ],
+          "bundle_slice_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+          "reference_path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+          "reference_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+          "byte_equal": true
+        }
+      ]
+    },
+    {
+      "check": "current parser changes",
+      "result": "Current parser validates EVENOTA entry contiguity, header reserved words, payload length/CRC and payload wrappers. Touch validator verifies the FWPK span/CRCs/vector base; case and Apollo main checks remain wrapper-specific. Parser SHA differs from historical pinned SHA."
+    },
+    {
+      "check": "current reference changes",
+      "result": "Current firmware-formats.md documents the touch FWPK and CRC facts, case EVEN wrapper and checksum, and Apollo main OTA preamble. Its hash differs from historical pin. Changes are semantically consistent with locked bytes and current validators."
+    },
+    {
+      "check": "per-record byte_check audit and correction",
+      "result": "All 18 findings rechecked. Three outer-container intervals describe their exact fields; six component-header intervals decode their own header fields; six payload slices compare byte-for-byte to their child references; touch, case, and Apollo main wrapper intervals describe their actual prefixes. No templating placeholder remains."
+    }
+  ],
+  "per_record_findings": [
+    {
+      "review_record_id": "coverage-record-review-035-001",
+      "coverage_record_id": "package:00000000:00000040",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 0,
+        "end": 64,
+        "unit": "bytes",
+        "length": 64
+      },
+      "historical_basis": "authenticated EVENOTA header",
+      "revalidation": "supported",
+      "byte_check": "Bytes [0,0x40): magic b'EVENOTA\\x00'; count=6, reserved u32=0; date/time/version fields occupy [0x10,0x40).",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-002",
+      "coverage_record_id": "package:00000040:000000a0",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 64,
+        "end": 160,
+        "unit": "bytes",
+        "length": 96
+      },
+      "historical_basis": "six authenticated16-byte TOC records",
+      "revalidation": "supported",
+      "byte_check": "Bytes [0x40,0xa0): six little-endian 16-byte TOC records; first=(1, 176, 326220, 3184520876), last=(6, 777703, 3523524, 2970599105).",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-003",
+      "coverage_record_id": "package:000000a0:000000b0",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 160,
+        "end": 176,
+        "unit": "bytes",
+        "length": 16
+      },
+      "historical_basis": "authenticated fixed trailer",
+      "revalidation": "supported",
+      "byte_check": "Bytes [0xa0,0xb0): trailer bytes 6576656e6f7461000000000000000000 = b\"evenota\\0\" plus eight zero bytes.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-004",
+      "coverage_record_id": "package:000000b0:00000130",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 176,
+        "end": 304,
+        "unit": "bytes",
+        "length": 128
+      },
+      "historical_basis": "authenticated codec component header",
+      "revalidation": "supported",
+      "byte_check": "128-byte component header [0xb0,0x130): payload size=326092, CRC-32C field=0xbdcfeeac, magic bytes=4556454e, type_id=4, storage_type=3, filename='firmware/codec.bin'; TOC entry 1 points to this header and declares body end 0x4fafc.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-005",
+      "coverage_record_id": "package:00000130:0004fafc",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 304,
+        "end": 326396,
+        "unit": "bytes",
+        "length": 326092
+      },
+      "historical_basis": "child payload reference codec, exact byte equality to b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "revalidation": "supported",
+      "byte_check": "Payload slice [0x130,0x4fafc) length 326092; byte-equal to firmware_codec.bin (b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0), whose SHA-256 is b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-019",
+      "coverage_record_id": "package:0004fafc:0004fb7c",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 326396,
+        "end": 326524,
+        "unit": "bytes",
+        "length": 128
+      },
+      "historical_basis": "authenticated ble_em9305 component header",
+      "revalidation": "supported",
+      "byte_check": "128-byte component header [0x4fafc,0x4fb7c): payload size=211948, CRC-32C field=0xc074baf7, magic bytes=4556454e, type_id=5, storage_type=3, filename='firmware/ble_em9305.bin'; TOC entry 2 points to this header and declares body end 0x83768.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-020",
+      "coverage_record_id": "package:0004fb7c:00083768",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 326524,
+        "end": 538472,
+        "unit": "bytes",
+        "length": 211948
+      },
+      "historical_basis": "child payload reference ble_em9305, exact byte equality to 91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "revalidation": "supported",
+      "byte_check": "Payload slice [0x4fb7c,0x83768) length 211948; byte-equal to firmware_ble_em9305.bin (91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9), whose SHA-256 is 91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-023",
+      "coverage_record_id": "package:00083768:000837e8",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 538472,
+        "end": 538600,
+        "unit": "bytes",
+        "length": 128
+      },
+      "historical_basis": "authenticated touch component header",
+      "revalidation": "supported",
+      "byte_check": "128-byte component header [0x83768,0x837e8): payload size=34464, CRC-32C field=0xba63bc61, magic bytes=4556454e, type_id=3, storage_type=3, filename='firmware/touch.bin'; TOC entry 3 points to this header and declares body end 0x8be88.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-024",
+      "coverage_record_id": "package:000837e8:0008be88",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 538600,
+        "end": 573064,
+        "unit": "bytes",
+        "length": 34464
+      },
+      "historical_basis": "child payload reference touch, exact byte equality to 0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "revalidation": "supported",
+      "byte_check": "Payload slice [0x837e8,0x8be88) length 34464; byte-equal to firmware_touch.bin (0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d), whose SHA-256 is 0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-025",
+      "coverage_record_id": "touch:00000000:00000020",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 0,
+        "end": 32,
+        "unit": "bytes",
+        "length": 32
+      },
+      "historical_basis": "authenticated payload wrapper",
+      "revalidation": "supported",
+      "byte_check": "Touch payload bytes [0,0x20) are 4657504b010002020100000000000000030000008086000020000000c74b6748: FWPK magic, version/record-count/reserved fields, one type-3 record of size 0x8680 at offset 0x20, and CRC field 0x48674bc7. Current validator checks record span, reflected CRC-32C, payload footer CRC, and vector plausibility at 0x3300.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-027",
+      "coverage_record_id": "package:0008be88:0008bf08",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 573064,
+        "end": 573192,
+        "unit": "bytes",
+        "length": 128
+      },
+      "historical_basis": "authenticated case component header",
+      "revalidation": "supported",
+      "byte_check": "128-byte component header [0x8be88,0x8bf08): payload size=55784, CRC-32C field=0x7d443be0, magic bytes=4556454e, type_id=6, storage_type=3, filename='firmware/box.bin'; TOC entry 4 points to this header and declares body end 0x998f0.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-028",
+      "coverage_record_id": "package:0008bf08:000998f0",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 573192,
+        "end": 628976,
+        "unit": "bytes",
+        "length": 55784
+      },
+      "historical_basis": "child payload reference case, exact byte equality to 36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "revalidation": "supported",
+      "byte_check": "Payload slice [0x8bf08,0x998f0) length 55784; byte-equal to firmware_box.bin (36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374), whose SHA-256 is 36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-029",
+      "coverage_record_id": "case:00000000:00000020",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 0,
+        "end": 32,
+        "unit": "bytes",
+        "length": 32
+      },
+      "historical_basis": "authenticated payload wrapper",
+      "revalidation": "supported",
+      "byte_check": "Case payload bytes [0,0x20) are 4556454e010239000000d9c87367642f00000000000000000000000000000000: EVEN magic, version 1.2.57, big-endian raw size 0x0000d9c8, big-endian additive checksum 0x7367642f, then zero reserved bytes. Current validator checks the raw span/checksum and vector plausibility at 0x08000000.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-031",
+      "coverage_record_id": "package:000998f0:00099970",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 628976,
+        "end": 629104,
+        "unit": "bytes",
+        "length": 128
+      },
+      "historical_basis": "authenticated apollo_bootloader component header",
+      "revalidation": "supported",
+      "byte_check": "128-byte component header [0x998f0,0x99970): payload size=148599, CRC-32C field=0x27d2eb10, magic bytes=4556454e, type_id=1, storage_type=3, filename='ota/s200_bootloader.bin'; TOC entry 5 points to this header and declares body end 0xbdde7.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-032",
+      "coverage_record_id": "package:00099970:000bdde7",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 629104,
+        "end": 777703,
+        "unit": "bytes",
+        "length": 148599
+      },
+      "historical_basis": "child payload reference apollo_bootloader, exact byte equality to f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "revalidation": "supported",
+      "byte_check": "Payload slice [0x99970,0xbdde7) length 148599; byte-equal to ota_s200_bootloader.bin (f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5), whose SHA-256 is f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-034",
+      "coverage_record_id": "package:000bdde7:000bde67",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 777703,
+        "end": 777831,
+        "unit": "bytes",
+        "length": 128
+      },
+      "historical_basis": "authenticated apollo_main component header",
+      "revalidation": "supported",
+      "byte_check": "128-byte component header [0xbdde7,0xbde67): payload size=3523396, CRC-32C field=0xb10fbec1, magic bytes=4556454e, type_id=0, storage_type=3, filename='ota/s200_firmware_ota.bin'; TOC entry 6 points to this header and declares body end 0x41a1ab.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-035",
+      "coverage_record_id": "package:000bde67:0041a1ab",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 777831,
+        "end": 4301227,
+        "unit": "bytes",
+        "length": 3523396
+      },
+      "historical_basis": "child payload reference apollo_main, exact byte equality to 36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "revalidation": "supported",
+      "byte_check": "Payload slice [0xbde67,0x41a1ab) length 3523396; byte-equal to ota_s200_firmware_ota.bin (36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863), whose SHA-256 is 36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    },
+    {
+      "review_record_id": "coverage-record-review-035-036",
+      "coverage_record_id": "apollo_main:00000000:00000020",
+      "historical_decision": "pass",
+      "historical_kind": "container",
+      "interval": {
+        "start": 0,
+        "end": 32,
+        "unit": "bytes",
+        "length": 32
+      },
+      "historical_basis": "authenticated payload wrapper",
+      "revalidation": "supported",
+      "byte_check": "Apollo main payload bytes [0,0x20) are 44c33504df8110c90000000000000000cb000000008043000000000000000000: declared total size/flags word 0x0435c344, nested CRC word 0xc91081df, zero reserved words, type 0xcb, run address 0x00438000, and remaining reserved words. Current validator checks these fields, nested CRC, and vector plausibility.",
+      "limitation": "Interval and wrapper classification only; no inference of code/data or pseudocode coverage from unknown payload bytes."
+    }
+  ],
+  "limits": [
+    "Bounded revalidation only; G1 status remains not_run and no G1 admission is asserted.",
+    "Unknown full-payload classifications remain unknown, not asserted non-code or data.",
+    "No source, target, state, or canonical inventory was edited."
+  ],
+  "supersedes": {
+    "path": "g2/build/pseudocode-first/20261112T092142Z/attempts/P1-coverage-review-001/001/review.json",
+    "sha256": "c8d35231d785b946c470f7331791b312996a8e657052df0971e3912fcbce32ca",
+    "reason": "Audit found templating errors in package component-header findings: they were described as payload slices and reported no child reference. This corrected artifact replaces all 18 per-record byte_check strings with interval-appropriate byte facts."
+  },
+  "prior_artifact_assessment": {
+    "decision": "revise",
+    "reason": "The prior artifact contained materially incorrect byte_check descriptions for all six package component headers, including a fabricated None child match, despite the correct interval coordinates. Those statements are withdrawn."
+  }
+}
