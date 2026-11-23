@@ -1,0 +1,50 @@
+{
+ "id": "g2-20261122-ws-blestore-paired-boot-smp",
+ "time": "2026-11-22 19:40 America/Chicago",
+ "stream": "ws-blestore",
+ "purpose": "Private full C rebuild after the SMP C changes (smp_main per-site #line, SC act SMP_TRACE_128 -> smpLogByteArray_56d478, smpr_act ERR0 trace) and paired boot sims, before the ATT differential and HCI peer sim.",
+ "sources_json_sha256": "d694e3a0aacce757d47df38928eeb21a7157d0ee264f56bfabd429c515b566be",
+ "build": {
+  "compile": "python3 tools/build/sources.py build --device g2 --payload g2-apollo-main --out build/ws-blestore-20261122/full-1926 --jobs 4",
+  "compile_result": "g2-apollo-main: 2719/2719 compiled (0 known failures), 0 duplicate strong symbols, 21 unresolved: ok (composed; 1292 before aliases)",
+  "link": "python3 tools/build/link_g2_sources.py --source-out build/ws-blestore-20261122/full-1926 --out build/ws-blestore-20261122/full-1926-link --payload g2-apollo-main",
+  "link_result": "linked 3628548 bytes",
+  "image": "build/ws-blestore-20261122/full-1926-link/g2-apollo-main/g2-apollo-main.bin",
+  "image_sha256": "8bf7d0db87a28568b6384094e1f462aaf31ef7581aab7f8c50f846afaa7e55b5",
+  "elf_sha256": "00b31478a79051e742bf071f958c5fdb27ea58d75df34ecc9193886c2acc64d9",
+  "smp_changes_present": {
+   "smp_sc_act/smpi_sc_act/smpr_sc_act .o": "reference smpLogByteArray_56d478",
+   "smpr_act.o": "references WsfTrace + gate audio_ble_hci_vendor_log_enabled_4c9c50 (G2_WSF_TRACE)",
+   "smp_main.o": "8 G2 trace call relocations"
+  }
+ },
+ "sims": {
+  "script": "build/ws-blestore-20261122/paired.sh blestore-1926 <image>",
+  "openCFW": {
+   "match": "RC=0",
+   "dfu_mismatch": "RC=0, DFU_SAME vs em9305-nor-20261122 reference",
+   "hci_packets_dfu": 922,
+   "OTAPOINTER_AFTER_0.01S": "0xAFD1363A",
+   "OTAPOINTER_AFTER_8S": "0x0",
+   "CHIPREV_AFTER_8S": "0x22",
+   "HOST_PACKET_COUNT": "0x3A",
+   "UNSUPPORTED_COUNT": "0x0",
+   "adv": 1,
+   "display_frames": 2,
+   "faults": 0
+  },
+  "vs_previous_full_1541": "identical summary values (g2-20261122-ws-blestore-paired-boot.json)",
+  "vs_stock": "identical except OTAPOINTER_AFTER_0.01S (by design, otap-disarm path)"
+ },
+ "nor_after_8s_match": {
+  "file": "build/ws-blestore-20261122/renode/blestore-1926-match.nor.bin",
+  "sha256": "4049ca4e899c7d069573bc4ca86e57c8b00f4b6564de5f2f8e9c9f983610758e",
+  "cmp_stock_match": "bit-identical",
+  "cmp_full_1541_match": "bit-identical"
+ },
+ "verdict": "BOOT_UNCHANGED",
+ "notes": [
+  "opencfw-otap-disarm.app.bin not touched",
+  "own Renode runs only, sequential (match then dfu-mismatch)"
+ ]
+}

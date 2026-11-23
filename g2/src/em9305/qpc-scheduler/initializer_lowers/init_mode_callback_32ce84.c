@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32ce84..0x32cf4e. BC aliases unsigned LO on this ARC target:
  * global+6 below 328 returns before global+2 is read; global+2 below 328
@@ -9,13 +10,13 @@ uint32_t opencfw_em9305_mode_callback_32ce84(uintptr_t context,
                                                uintptr_t callback_identity)
 {
     (void)callback_identity;
-    uint32_t remote_four=*(volatile uint16_t *)(uintptr_t)0x802820u;
+    uint32_t remote_four=em9305_ram_8027e0.u16_802820;
     if (remote_four<27u) return (uint32_t)context;
-    uint32_t remote_zero=*(volatile uint16_t *)(uintptr_t)0x80281cu;
+    uint32_t remote_zero=em9305_ram_8027e0.u16_80281c;
     if (remote_zero<27u) return (uint32_t)context;
-    uint32_t remote_six=*(volatile uint16_t *)(uintptr_t)0x802822u;
+    uint32_t remote_six=em9305_ram_8027e0.u16_802822;
     if (remote_six<328u) return remote_six;
-    uint32_t remote_two=*(volatile uint16_t *)(uintptr_t)0x80281eu;
+    uint32_t remote_two=em9305_ram_8027e0.u16_80281e;
     if (remote_two<328u) return remote_six;
 
     uint8_t enabled=*(volatile uint8_t *)(context+534u);

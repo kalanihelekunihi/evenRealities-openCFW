@@ -1,0 +1,36 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "source": "g2/src/apollo-main/app/p-14-translate/pb_service_translate.c",
+ "source_sha256": "9e8e2de499ea8c5b6bf584630ec3e05882c21c2a3775a00e8dabe13276809c0d",
+ "spec": "build/ws-app-20261122/specs/tr-a",
+ "verified_at": "2026-11-22 20:59 CST",
+ "result": {
+  "tests": 600,
+  "equal": 600,
+  "differ": 0,
+  "done": true,
+  "overflow": false,
+  "mutants": 9,
+  "killed": 9,
+  "surviving_mutants": [],
+  "verdict": "EQUIVALENT",
+  "harness_sha256": "dada321e986d4cab1383b668dcd857826dda6a1333ea86d566e69c965576cdd3",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "stock_entries": {
+  "APP_PbTranslateRxFrameDataProcess": "0x59f53c",
+  "APP_PbTranslateTxEncodeNotify": "0x59f71a",
+  "APP_PbTranslateTxEncodeCommResp": "0x59f842",
+  "APP_PbTranslateTxEncodeModeSwitch": "0x59f960"
+ },
+ "method": "black-box sequences of 1-3 random ops over 4 entry points; nanopb stubs (decode/encode 1/0/0x100/0x201/0x301, errmsg, bytes_written incl. >0xffff), hex dump, tick (last+2999/3000/3001, in-window, random), device role, BLE tx/notify; magic equal to last magic half the time, NULL data/msg/args; 600 tests + 60 per mutant (200 for the decode-cast mutant)",
+ "observed": "all callee args and return values, logs, hex dump content, encoded message hash; tx message (0x854), tx buffer, last magic, last rx tick, rx message after every op",
+ "source_changes": "none needed (decode and encode results already narrowed to uint8 as in stock 0x59f5d4)",
+ "cast_proof": "mutants 0 (decode cast removed) and 5 (encode cast removed) killed; debug spec tr-dbg with decode forced to 0x100: 20/20 equal and mutant 0 killed",
+ "history": [
+  "20:51 CST: 600/600, 8/9 (decode-cast mutant not reached)",
+  "21:00 CST: 600/600, 9/9 after raising the 0x100 decode share"
+ ]
+}

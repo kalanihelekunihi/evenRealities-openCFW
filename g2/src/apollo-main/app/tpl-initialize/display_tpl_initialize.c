@@ -19,13 +19,18 @@ static const char failure_short[] = "[prot.tran]Failed to create _g_SendBufferMu
 static const char success[] = "Static send buffer mutex initialized";
 static const char success_short[] = "[prot.tran]Static send buffer mutex initialized";
 
+/* Callback slot type for the service row. The only caller (stock 0x4c94c8)
+ * passes code addresses 0x464d1d, 0x48f12d, 0x4bdff5 and 0x4be14f (Thumb bit
+ * set), so the four words are function pointers; their individual signatures
+ * differ, so they are stored here as a generic code pointer. */
+typedef void (*tpl_callback_fn)(void);
+
 /* Stock 0x4B892C (TPL_Init). The fifth argument is the caller's first stack
- * word. The callers declare TPL_Init(uint8_t, ...); with integer and pointer
- * arguments that is the same AAPCS call as these named parameters. The stock
+ * word (sp[0] = APP_BleEusDirectSendDataMsg at stock 0x4c94c8). The stock
  * IAR epilogue popped two spilled argument words into R0:R1; the only caller
  * (thread_manager_resource_init_4c94c8) discards the result, so this returns 0. */
-uint64_t TPL_Init(uint8_t service, uint32_t send_status, uint32_t rx_from_ble,
-                  uint32_t send_data, uint32_t direct_send)
+uint64_t TPL_Init(uint8_t service, tpl_callback_fn send_status, tpl_callback_fn rx_from_ble,
+                  tpl_callback_fn send_data, tpl_callback_fn direct_send)
 {
     uint8_t *row = audio_tpl_service_table + ((uint32_t)service * 20u);
     row[0] = service;

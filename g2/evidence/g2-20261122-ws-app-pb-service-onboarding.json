@@ -1,0 +1,50 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "source": "g2/src/apollo-main/app/a-17-pb-onboarding/pb_service_onboarding.c",
+ "source_sha256": "4729dd503d97d4a471b620bfbdfca531e74b4d402006059cbb5a9429c0b53df2",
+ "spec": "build/ws-app-20261122/specs/ob-a",
+ "verified_at": "2026-11-22 20:34 CST",
+ "result": {
+  "tests": 600,
+  "equal": 600,
+  "differ": 0,
+  "done": true,
+  "overflow": false,
+  "mutants": 9,
+  "killed": 9,
+  "surviving_mutants": [],
+  "verdict": "EQUIVALENT",
+  "harness_sha256": "8eaa7a1060865f281ee7ca0bed63303399cf8b664128a9f9326c9b80627c2cea",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "stock_entries": {
+  "APP_PbRxOnboardingFrameDataProcess": "0x4a78d0",
+  "PB_RxOnboardingConfig": "0x4a7b00",
+  "APP_PbTxEncodeOnboardingConfig": "0x4a7bc4",
+  "APP_PbNotifyEncodeOnboardingConfig": "0x4a7d4e",
+  "PB_RxOnboardingHeartbeat": "0x4a7eda",
+  "APP_PbTxEncodeOnboardingHeartbeat": "0x4a7f4c",
+  "PB_RxOnboardingEvent": "0x4a80e2",
+  "APP_PbTxEncodeOnboardingEvent": "0x4a81b4"
+ },
+ "method": "black-box sequences of 1-4 random ops over 8 entry points; nanopb stream/decode/encode stubbed (decode/encode return 1/0/0x100 for uint8 truncation, random errmsg, bytes_written incl. > max), BLE tx/notify, common handler 0x47e2d0 and helpers 0x443484/0x4434d0/0x49eb8e with randomized returns; random command ids incl. out-of-range, NULL frame/arg; rx message compared per side (stock 0x200f622c vs C-defined g2_onboarding_rx_msg); 600 tests + 60 per mutant (bias toward mutated entry)",
+ "observed": "all callee args (payloads by content, pointers relative to rx message), return values, logs, encoded message hashes; packet buffer (0x100), state (16 B), sequence byte, rx message after every op",
+ "source_changes": "REAL C FIX: frame decode result is truncated to uint8 before the failure test, as stock does (0x4a79a2 uxtb r0 after bl 0x490120). The C compared the full 32-bit return, so a decode return of 0x100 took the success path (log 4/line 0x40) where stock logs 'Decoding failed' (1/line 0x3c) and returns 0x2b.",
+ "history": [
+  "20:27 CST: 576/600 DIFFERENT, 9/9 (decode uint8 truncation)",
+  "20:34 CST after fix: 600/600, 9/9",
+  "21:13 CST: rerun with weak-data mutant harness: 600/600, 9/9 (mutant 0 replaced: the old one was dead code, PB_RxOnboardingConfig always returns 0; it had only been 'killed' because mutants used to get private copies of the C globals)"
+ ],
+ "rebuild_with_fix": {
+  "at": "2026-11-22 20:36 CST",
+  "includes": [
+   "pb_service_onboarding decode uint8 fix",
+   "same-class fixes (not yet differentially verified): terminal_encode_send_5ce7c4.c encode result (stock 0x5ce848 uxtb), sync_info_common_data_handler_472102.c decode result (stock 0x47213a uxtb)"
+  ],
+  "build": "2719/2719 compiled (208 recompiled), 0 duplicate strong symbols, 21 unresolved",
+  "link": "build/ws-app-20261122/b1-link/g2-apollo-main/g2-apollo-main.bin 3,628,564 B sha256 5f9f758c5561382fa4f33ce3a12c6b0f958a32920e2c5958daa96615f1b4dbb4",
+  "paired_sims": "ws-app5 (20:37 CST): DFU_SAME, 922 HCI packets, OTAPOINTER 0xAFD1363A/0x0, CHIPREV 0x22, HOST_PACKET 0x3A, UNSUPPORTED 0, adv 1, display 2, faults 0 (identical to reference)"
+ }
+}

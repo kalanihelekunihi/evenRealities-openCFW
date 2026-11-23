@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern uint32_t opencfw_em9305_auxiliary_signal_304394(void);
 
@@ -8,13 +9,13 @@ uintptr_t opencfw_em9305_init_transition_flag_318b38(
     uintptr_t incoming,uint32_t selector,uintptr_t source)
 {
     if(selector!=0x22u)return incoming;
-    uint32_t ready=*(volatile uint32_t *)(uintptr_t)0x802954u;
+    uint32_t ready=em9305_ram_802950.u32_802954;
     if(ready==0u)return ready;
-    uintptr_t root=0x8052d4u;
+    uintptr_t root=(uintptr_t)&em9305_ram_8052d4;
     *(volatile uint8_t *)(root+40u)=1u; /* BL delay slot. */
     (void)opencfw_em9305_auxiliary_signal_304394();
     uint8_t flags=*(volatile uint8_t *)root;
-    uintptr_t target=0x8052feu;
+    uintptr_t target=((uintptr_t)&em9305_ram_8052f8 + 0x6u);
     if((flags&(1u<<5u))!=0u) {
         uint8_t source_flags=*(volatile uint8_t *)source;
         if((source_flags&(1u<<5u))!=0u) {
@@ -38,7 +39,7 @@ uint32_t opencfw_em9305_init_transition_callback_328018(
         (void)opencfw_em9305_init_transition_flag_318b38(
             kind,selector,source);
         uintptr_t row=*(volatile uint32_t *)(record+128u);
-        *(volatile uint32_t *)(uintptr_t)0x8053ccu=(uint32_t)(row+352u);
+        em9305_ram_8053cc.u32_8053cc=(uint32_t)(row+352u);
         return 0u;
     }
     if(kind==3u) {

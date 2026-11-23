@@ -52,6 +52,23 @@ extern g2_kvdb_word_record_t g2_kvdb_als_scale_record;                /* RAM 0x2
 extern const g2_kvdb_migration_fn __start_kvdb_migration[];           /* ROM 0x746d20 */
 extern const g2_kvdb_migration_fn __stop_kvdb_migration[];            /* ROM 0x746d4c */
 
+/* Migration callbacks in stock ROM order (0x746d20..0x746d4b, eleven slots).
+ * One table in one unit so the order does not depend on link order. */
+static const g2_kvdb_migration_fn g2_kvdb_migration_table[11]
+    __attribute__((used, section("kvdb_migration"))) = {
+    _kvdbUpdataAlsScale,                 /* 0x4aecb8 */
+    SVC_KvdbReadMenuConfigureValue,      /* 0x492508 */
+    SVC_KvdbReadDashboardAutoCloseValue, /* 0x492422 */
+    SVC_KvdbReadLanguage,                /* 0x4922f8 */
+    _kvdbUpdataRing,                     /* 0x5d9b82 */
+    _kvdbUpdataSetting,                  /* 0x4aeb34 */
+    _kvdbUpdataTemperatureUnit,          /* 0x49b028 */
+    _kvdbUpdataTerminalMode,             /* 0x4b03f4 */
+    _kvdbUpdataTime,                     /* 0x58562c */
+    _kvdbUpdataTimeFormat,               /* 0x49aea4 */
+    _kvdbUpdataUniversalSetting,         /* 0x49ad20 */
+};
+
 uint32_t g2_kvdb_boot_count;                                          /* RAM 0x20074988 */
 g2_kvdb_default_node_t *g2_kvdb_default_nodes;                        /* RAM 0x2007498c */
 g2_kvdb_migration_fn g2_kvdb_migration_list[KVDB_MIGRATION_MAX];      /* RAM 0x2006fabc */

@@ -1,14 +1,15 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32bc98..0x32bdfc: handle a received periodic-advertising
- * response PDU (LLID 5, opcode 0x22) while the auxiliary hook (0x802954)
+ * response PDU (LLID 5, opcode 0x22) while the auxiliary hook (((uintptr_t)&em9305_ram_802950 + 0x4u))
  * is armed. The payload is copied and checked, then offered to 30301c as
  * the request {16 payload bytes, LLID, 3, header} with the context's +76
  * and the link's +2700. If accepted and the link expects it (+2720), the
  * link records the advertiser address (+1021), its options (+2791), the
  * peer address from the PDU (resolved through 303cc0 for a resolvable
  * private address when bit 1 of +57 is set, else cleared at
- * 0x805be4/0x805be8) at +1015, the encoded header (+1011/+2788, opcode at
+ * ((uintptr_t)&em9305_ram_805be0 + 0x4u)/((uintptr_t)&em9305_ram_805be0 + 0x8u)) at +1015, the encoded header (+1011/+2788, opcode at
  * +2790) and the response timing (+2252..+2260). Returns 1 on success. */
 extern uint32_t opencfw_em9305_child_32db0c(uintptr_t out, uintptr_t in);
 extern uint32_t opencfw_em9305_init_transition_packet_copy_32dd54(uintptr_t out, uintptr_t in);
@@ -35,17 +36,17 @@ uint32_t opencfw_em9305_child_32bc98(uintptr_t owner, uintptr_t pdu)
     uint32_t payload[4];
     uint32_t peer[2];
     uintptr_t link=*(volatile uint32_t *)(owner+36u);
-    uint32_t used=opencfw_em9305_child_32db0c(0x8019fcu,pdu);
+    uint32_t used=opencfw_em9305_child_32db0c(((uintptr_t)&em9305_ram_8019e8 + 0x14u),pdu);
     (void)opencfw_em9305_init_transition_packet_copy_32dd54((uintptr_t)payload,pdu+used);
-    if(*(volatile uint8_t *)(uintptr_t)0x801a00u!=0x22u)return 0u;
-    if(*(volatile uint8_t *)(uintptr_t)0x8019fcu!=5u)return 0u;
-    if(*(volatile uint32_t *)(uintptr_t)0x802954u==0u)return 0u;
+    if(em9305_ram_8019e8.u8_801a00!=0x22u)return 0u;
+    if(em9305_ram_8019e8.u8_8019fc!=5u)return 0u;
+    if(em9305_ram_802950.u32_802954==0u)return 0u;
     if(opencfw_em9305_init_transition_packet_check_32e278((uintptr_t)payload)==0u)return 0u;
     uintptr_t context=*(volatile uint32_t *)(owner+44u);
     request.words[3]=((volatile uint32_t *)payload)[3];
     request.words[2]=((volatile uint32_t *)payload)[2];
-    request.llid=*(volatile uint8_t *)(uintptr_t)0x8019fcu;
-    request.header=*(volatile uint16_t *)(uintptr_t)0x8019feu;
+    request.llid=em9305_ram_8019e8.u8_8019fc;
+    request.header=em9305_ram_8019e8.u16_8019fe;
     request.kind=3u;
     request.words[1]=((volatile uint32_t *)payload)[1];
     request.words[0]=((volatile uint32_t *)payload)[0];
@@ -54,11 +55,11 @@ uint32_t opencfw_em9305_child_32bc98(uintptr_t owner, uintptr_t pdu)
     if(*(volatile uint8_t *)(link+2720u)==0u)return 0u;
     (void)opencfw_em9305_radio_address_write_3045e8(link+1021u,*(volatile uint32_t *)target,
                                                      *(volatile uint32_t *)(target+4u));
-    uint32_t opcode=*(volatile uint8_t *)(uintptr_t)0x8019ffu;
+    uint32_t opcode=em9305_ram_8019e8.u8_8019ff;
     *(volatile uint8_t *)(link+2791u)=*(volatile uint8_t *)(link+2718u);
     uint64_t address=opencfw_em9305_controller_pack_address(pdu+8u);
     uint32_t low=(uint32_t)address,high=(uint32_t)(address>>32);
-    volatile uint32_t *resolved=(volatile uint32_t *)(uintptr_t)0x805be4u;
+    volatile uint32_t *resolved=&em9305_ram_805be0.u32_805be4;
     peer[1]=high;
     peer[0]=low;
     if((*(volatile uint8_t *)(link+57u)&2u)==0u){

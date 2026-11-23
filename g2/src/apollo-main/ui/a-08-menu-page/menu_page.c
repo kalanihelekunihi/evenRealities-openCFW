@@ -165,7 +165,7 @@ extern int32_t osMutexRelease(void *mutex);                       /* 0x44981c */
 extern uint32_t osEventFlagsSet(void *ef_id, uint32_t flags);     /* 0x4495e4 */
 extern void menu_page_mutex_init_460178(void);
 extern uint32_t audio_uart_page_460084(const char *key);          /* i18n index of key */
-extern uint32_t audio_uart_page_45fffe(const char *key, uint32_t index); /* localized text */
+extern const char *audio_uart_page_45fffe(const char *key, uint32_t index); /* localized text */
 extern void *audio_uart_display_audio_find_45f840(void *state, uint32_t id);
 extern void audio_uart_pb_stream_init(g2_pb_istream_t *out, const void *buf, uint32_t len); /* pb_istream_from_buffer 0x48f49c */
 extern uint32_t audio_uart_pb_decode(void *stream, const void *fields, void *dst); /* pb_decode 0x490120 */
@@ -223,7 +223,7 @@ static const char str_none[] = "(none)";                                /* ROM 0
 } while (0)
 
 #define ITEM_TEXT(item) \
-    ((const char *)(uintptr_t)audio_uart_page_45fffe((item)->text, audio_uart_page_460084((item)->text)))
+    (audio_uart_page_45fffe((item)->text, audio_uart_page_460084((item)->text)))
 
 /* LVGL lv_obj_set_style_transform_scale (static inline, emitted out of line here). */
 void menu_obj_set_style_transform_scale_46015a(void *obj, int32_t value, uint32_t selector)

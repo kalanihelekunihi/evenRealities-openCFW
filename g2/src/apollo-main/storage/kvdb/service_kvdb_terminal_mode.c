@@ -43,4 +43,4 @@ int32_t _kvdbUpdataTerminalMode(void) {
     (void)audio_settings_persist_record(TERMINAL_RECORD);
     return 0;
 }
-G2_KVDB_MIGRATION_EXPORT(_kvdbUpdataTerminalMode);
+/* _kvdbUpdataTerminalMode: migration slot 7 of the stock-ordered table in service_kvdb.c (ROM 0x746d20). */

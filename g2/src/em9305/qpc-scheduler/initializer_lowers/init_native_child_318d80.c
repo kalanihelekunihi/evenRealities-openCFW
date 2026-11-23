@@ -1,8 +1,9 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x318d80..0x318eda: path-loss / power-control monitor for the
  * connection record. Runs only when monitoring is enabled for the link
- * (bit 1 of +548) and globally (bit 7 of 0x805a85); otherwise the zone
+ * (bit 1 of +548) and globally (bit 7 of ((uintptr_t)&em9305_ram_805a6c + 0x19u)); otherwise the zone
  * byte +770 is cleared. Pending averages (+780 samples summing to +784)
  * are flushed into the sample filter (325284 on +788). After at least
  * four samples (+793) the filtered RSSI (3252a0) is checked against the
@@ -27,7 +28,7 @@ static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;
 void opencfw_em9305_child_318d80(uintptr_t record)
 {
     uintptr_t filter=record+788u;
-    if((r8(record+548u)&2u)==0u||(r8(0x805a85u)&0x80u)==0u){
+    if((r8(record+548u)&2u)==0u||(r8(((uintptr_t)&em9305_ram_805a6c + 0x19u))&0x80u)==0u){
         w8(record+770u,0u);
         return;
     }
@@ -71,11 +72,11 @@ void opencfw_em9305_child_318d80(uintptr_t record)
     uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
     if(message!=0u){
         *(volatile uint16_t *)(message+2u)=0x2801u;
-        uintptr_t base=*(volatile uint32_t *)0x805c70u;
+        uintptr_t base=*(volatile uint32_t *)((uintptr_t)&em9305_ram_805c5c + 0x14u);
         w8(message+5u,entry_index);
         w8(message+4u,(uint32_t)step);
         int32_t handle=(int32_t)(record-base)/912;
-        uint32_t task=r8(0x805b18u);
+        uint32_t task=r8(((uintptr_t)&em9305_ram_805af0 + 0x28u));
         *(volatile uint16_t *)message=(uint8_t)handle;
         (void)opencfw_em9305_wsf_task_message_send(task,message);
     }

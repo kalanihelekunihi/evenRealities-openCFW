@@ -1,16 +1,17 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x319ee8..0x31a1b0: build an advertising report record (36 bytes
  * at report) for a received PDU unless the link is busy (+56). The record
  * gets the event type (mode, bit 4 legacy plus the PDU-type bits), the
  * advertiser address type/address (+6/+7), the RSSI 0x7f (+16), TX power
  * 0xff (+15), primary PHY (+13: 1, or 3/4 for coded with the LE coded
- * option bit 9 of 0x805a98 and link +445), the signed power (+17) and the
+ * option bit 9 of ((uintptr_t)&em9305_ram_805a6c + 0x2cu) and link +445), the signed power (+17) and the
  * data pointer/length (+32/+28). Legacy PDUs (header type 0..6, length
  * 6..37) set the type bits through a jump table (ADV_IND 0x13,
  * ADV_DIRECT_IND 0x15 with the resolved target address at +20/+21 via
  * 3039a0, ADV_NONCONN_IND 0x10, SCAN_RSP 0x1a plus bit 0 when not
- * scanning actively (0x803b68), ADV_SCAN_IND 0x12); extended PDUs (7, 8)
+ * scanning actively ((uintptr_t)&em9305_ram_803b68), ADV_SCAN_IND 0x12); extended PDUs (7, 8)
  * use the cached extended header at link +148.. (flags +154/+153, SID,
  * TX power, periodic interval, secondary PHY from +204) and, when TargetA
  * is present or link +701 is set, the target address (+20/+21), clearing
@@ -45,20 +46,20 @@ static void report_target(uintptr_t link,uintptr_t report,uint32_t low,
             kind=0xfeu;
         }else if((r8(link+13u)|2u)==3u){
             kind=3u;
-            high=r32(0x805a90u);
-            low=r32(0x805a8cu);
+            high=r32(((uintptr_t)&em9305_ram_805a6c + 0x24u));
+            low=r32(((uintptr_t)&em9305_ram_805a6c + 0x20u));
         }else{
-            high=r32(0x805b44u);
-            low=r32(0x805b40u);
+            high=r32(((uintptr_t)&em9305_ram_805af0 + 0x54u));
+            low=r32(((uintptr_t)&em9305_ram_805af0 + 0x50u));
             kind=2u;
         }
     }else if(r8(link+13u)==1u){
         kind=1u;
-        high=r32(0x805a90u);
-        low=r32(0x805a8cu);
+        high=r32(((uintptr_t)&em9305_ram_805a6c + 0x24u));
+        low=r32(((uintptr_t)&em9305_ram_805a6c + 0x20u));
     }else{
-        high=r32(0x805b44u);
-        low=r32(0x805b40u);
+        high=r32(((uintptr_t)&em9305_ram_805af0 + 0x54u));
+        low=r32(((uintptr_t)&em9305_ram_805af0 + 0x50u));
         kind=0u;
     }
     (void)opencfw_em9305_radio_address_write_3045e8(report+21u,low,high);
@@ -72,7 +73,7 @@ uint32_t opencfw_em9305_child_319ee8(uintptr_t link,uint32_t mode,
     if(r8(link+56u)!=0u)return 0u;
     (void)opencfw_em9305_memset((void *)report,0,0x24u);
     uint32_t primary=r8(link+16u);
-    uint32_t options=r32(0x805a98u);
+    uint32_t options=r32(((uintptr_t)&em9305_ram_805a6c + 0x2cu));
     w8(report+17u,(uint32_t)power);
     w8(report+15u,0xffu);
     w16(report+4u,mode);
@@ -138,7 +139,7 @@ uint32_t opencfw_em9305_child_319ee8(uintptr_t link,uint32_t mode,
     case 2u:
         break;
     case 4u:
-        w16(report+4u,mode|(r8(0x803b68u)==0u)|0x1au);
+        w16(report+4u,mode|(r8((uintptr_t)&em9305_ram_803b68)==0u)|0x1au);
         break;
     case 6u:
         w16(report+4u,mode|0x12u);

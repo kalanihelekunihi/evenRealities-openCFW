@@ -1,0 +1,50 @@
+{
+ "id": "g2-20261122-ws-blestore-sources-json-writer",
+ "authorised": "parent agent 17:33 and 18:15 CST (single sources.json writer session)",
+ "edits": [
+  {
+   "time": "2026-11-22 17:34 America/Chicago",
+   "change": "gates.apollo_main[1] FAL/NOR/FlashDB gate (pending/01 patch)",
+   "sha256_before": "42af25378f200e97e618b88737070169f34723c61dbeaaaafa622a49c5f784ab",
+   "sha256_after": "7e90785ee4759e18eef87828ebbdfa770fbddae5b4f480c5d85d77b3fed78127"
+  },
+  {
+   "time": "2026-11-22 18:16 America/Chicago",
+   "change": "not_built += g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_cores.S: \"comment-only stub; fuel gauge cores replaced by verified C in g2c_fuel_gauge_leaves.c (g2-20261122-fuel-gauge-*-c.json)\"",
+   "sha256_before": "7e90785ee4759e18eef87828ebbdfa770fbddae5b4f480c5d85d77b3fed78127",
+   "sha256_after": "5c14de582d6b480e961bcbc1259055a8fc0315b6e4dc1b88ae5e827d6369bd3c",
+   "check": "sources.py check --device g2: \"4880 units, 4542 source files, 2 not built\", no problems"
+  },
+  {
+   "time": "2026-11-22 18:17 America/Chicago",
+   "change": "generated[cordio/ble-host/sources/stack/smp/smp_main.c] replacement #1 (include block, +3 lines at upstream line 37) now ends with \"#line 39\" so later __LINE__ values match upstream/stock (smpCcbByConnId SMP_TRACE_WARN1 line 307: stock 0x133, C was 0x136)",
+   "sha256_before": "5c14de582d6b480e961bcbc1259055a8fc0315b6e4dc1b88ae5e827d6369bd3c",
+   "sha256_after": "f17d44c2a911e03cc5ff65e030df1e198999144d3f92780ee1abd41727e04a23",
+   "check": "JSON parses; sources.py check clean; private regeneration (build/ws-blestore-20261122/gen-smp) identical to the full-1541 generated file except the #line line",
+   "verification": "pending SMP harness rerun (g2-20261122-ws-blestore-smp.json)",
+   "superseded_by": "next edit (per-site #line)"
+  },
+  {
+   "time": "2026-11-22 18:42 America/Chicago",
+   "change": "generated[cordio/ble-host/sources/stack/smp/smp_main.c]: removed the single \"#line 39\" (stock offsets vary per site: +2 at 119, 0 at 307, +1 at 597, -5 at 885) and appended 4 replacements that put \"#line N\" before each SMP trace so __LINE__ equals the stock elog line constant: 119 (stock sites 0x53733a..0x53740a), 307 (0x537646..0x5376fe), 597 (0x537ab0..0x537b6e), 885 (0x537da2..0x537e54). Before: C 120/310/599/890 (no #line).",
+   "sha256_before": "f17d44c2a911e03cc5ff65e030df1e198999144d3f92780ee1abd41727e04a23",
+   "sha256_after": "d694e3a0aacce757d47df38928eeb21a7157d0ee264f56bfabd429c515b566be",
+   "check": "JSON parses; every replacement matches exactly once (sources.py rule); sources.py check --device g2 clean (4880 units, 2 not built); regenerated privately to build/ws-blestore-20261122/gen-smp, effective __LINE__ 119/307/597/885"
+  }
+ ],
+ "verified_after_interruption": {
+  "time": "2026-11-22 19:05 America/Chicago",
+  "sha256": "d694e3a0aacce757d47df38928eeb21a7157d0ee264f56bfabd429c515b566be",
+  "json_parses": true,
+  "not_built_cores_S_present": true,
+  "smp_main_replacements": 12,
+  "line_directives": [
+   119,
+   307,
+   597,
+   885
+  ],
+  "single_line39_removed": true,
+  "sources_py_check": "g2: 4880 units, 4542 source files, 2 not built; rc 0"
+ }
+}

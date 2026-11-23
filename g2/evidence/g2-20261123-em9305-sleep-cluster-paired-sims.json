@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 03:08:33 AM CST (America/Chicago)",
+  "title": "Private p-sleep build and paired Renode sims PASS for sleep-cluster typo-RAM including the 80faec 17-word merge",
+  "source_completeness_proven": false,
+  "predecessor": [
+    "g2/evidence/g2-20261123-em9305-sleep-cluster-typoram.json",
+    "g2/evidence/g2-20261123-em9305-ram-80faec-17word-merge.json"
+  ],
+  "scope": "Emulator only. No hardware flash. No git commit/push/stash/reset. Official opencfw-otap-disarm.app.bin was not overwritten (mtime still 2026-11-22 07:55:05 AM CST, sha256 7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd). Official app was not used as a splice target. Host image remains build/ws-em9305-20261122/sim/opencfw-em9305-typed-ram.app.bin.",
+  "object_count": {
+    "before_merge": 146,
+    "after_merge": 145,
+    "recorded_in": "g2/evidence/g2-20261123-em9305-ram-80faec-17word-merge.json"
+  },
+  "tree_build": {
+    "command": "python3 -u build/ws-em9305-20261122/pbuild.py build/ws-em9305-20261122/p-sleep -j 3",
+    "started": "2026-11-23 02:58:52 AM CST (America/Chicago)",
+    "finished": "2026-11-23 03:03:47 AM CST (America/Chicago)",
+    "rc": 0,
+    "units": 768,
+    "compiled_this_run": 768,
+    "link_log_empty": true,
+    "text_bytes": 239256,
+    "text_delta_vs_p_left33": -120,
+    "text_delta_vs_p_wsfboot": -60,
+    "app_sha256": "3b87506abc9c473c8627aa65779c052b97ef2597c818f2f9550f0371ba6a691f",
+    "elf_sha256": "83818ad275caa8dbdbd2944f73989c71c890f8f8c138c0b44711a1748b5a29b0",
+    "note": ".text shrank 120 B vs p-left33 (239376->239256) after typo-RAM of the sleep cluster (and the 80faec merge) replaced packed typo immediates with existing BSS field accesses. Still fits NVM."
+  },
+  "package": {
+    "path": "build/ws-em9305-20261122/p-sleep/g2-em9305-source-candidate-package.bin",
+    "bytes": 240588,
+    "sha256": "65f168b82779cc555faf4bafd68e0116d2197a71d4afa9a34eccd565fa1df305",
+    "records": 3,
+    "crcs": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0x1FB84479",
+      "[0x00302400,0x0033ca98)": "0xC8E15403"
+    }
+  },
+  "slot_fit": {
+    "application_end": "0x0033CA98",
+    "application_bytes": 239256,
+    "headroom_bytes": 275816,
+    "fits_nvm_slot": true
+  },
+  "splice": {
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-sleep.bin",
+    "nor_sha256": "aa25af03c4d99877d260b2bc9ecedb9e75b34e44642431324f38ef428d85656f",
+    "nor_source": "copy of build/em9305-nor-20261122/nor-stock-formatted.bin, then lfs_inject at 0x1400000 path /firmware/ble_em9305.bin",
+    "lfs_inject_wrote_bytes": 240588
+  },
+  "sims": {
+    "renode": "g2-firmware-emulator scripts/run-renode.sh, Renode 1.17.0 (1.17.0+20261102gite8c7c2d28), one instance at a time for this stream, 8 s virtual runs, 1200 s wall cap",
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/sleep-match.resc",
+      "log": "build/ws-em9305-20261122/sim/sleep-match.log",
+      "started": "2026-11-23 03:05:19 AM CST (America/Chicago)",
+      "finished": "2026-11-23 03:06:06 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "chiprev_fixture": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "display_hash_source": "Latched real display-bus frame (not the OTP fixture sha 9a9a2d9a\u2026)",
+      "advertising": "010A200101",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/sleep-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/sleep-dfu-mismatch.log",
+      "started": "2026-11-23 03:06:26 AM CST (America/Chicago)",
+      "finished": "2026-11-23 03:07:35 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq": true,
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0x1FB84479",
+        "[0x00302400,0x0033CA98)": "0xC8E15403"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 1037,
+      "hci_host_packets_note": "One fewer than p-left33 (1038) because the application image is 120 B smaller, so one fewer DFU data packet.",
+      "sysresetreq_at": "2026-11-23 03:07:22.784 AM CST (America/Chicago)"
+    }
+  },
+  "nvm_initcopy_classification": {
+    "source": "g2/src/em9305/application/NVM_InitCopy.c",
+    "symbols": [
+      "opencfw_em9305_stock_30ef44 (NVM_InitCopy)",
+      "opencfw_em9305_stock_333c24 (validate)",
+      "opencfw_em9305_stock_31435c (_initdatCopy)"
+    ],
+    "verdict": "window checks, not typo-RAM object accesses; left as literals; not typo'd this turn",
+    "window_checks": {
+      "0x801000..0x80e978": "skip the INI entry when ram_flag==0 and the entry destination address lies in this typo-RAM window",
+      "0x1ff000..0x200000": "skip when high_flag==0 and the destination lies in this high-RAM window",
+      "limit = em9305_rom_1030dc() + 0x801000": "additional lower-bound window used only when full==0 (stock caller passes full==1, so this path is not reached)"
+    },
+    "object_accesses": "none. Stores go through copy(data, size, (void*)address, &out) or memset((void*)address, 0, -size) using the record's destination address, which is not a fixed typo-RAM object.",
+    "action": "no typo-RAM rewrite of NVM_InitCopy.c"
+  },
+  "irqhandler_rccalib": {
+    "status": "proved in workspace only; not installed (handler still uncut: EM_IRQ_HANDLER frame around the body)",
+    "source": "g2/src/em9305/application/IRQHandler_RcCalib.c",
+    "typo_sites_already_have_fields": {
+      "0x805c30": "em9305_ram_805be0.u32_805c30 (offset 0x50)",
+      "0x805c2c": "em9305_ram_805be0.u32_805c2c (offset 0x4c)",
+      "0x8019b8": "em9305_ram_801994.u32_8019b8 (offset 0x24)",
+      "0x8019bc": "em9305_ram_801994.u32_8019bc (offset 0x28)",
+      "0x805cf0": "em9305_ram_805c5c.u32_805cf0 (offset 0x94); no new object required"
+    },
+    "mmio_left_as_literals": [
+      "0xf0095c",
+      "0xf00964",
+      "0xf00404",
+      "0xf01c14",
+      "0xf01c18"
+    ],
+    "proved_at": "2026-11-23 03:11:35 AM CST (America/Chicago)",
+    "workspace": "build/ws-em9305-20261122/u-suffix/rccalib/",
+    "symbol": "opencfw_em9305_IRQHandler_RcCalib_body",
+    "result": "EQUIVALENT 100 classes=42 calls=49 nor0",
+    "note": "nor0 is correct: the body is void (nor0 skips the return-value compare). Workspace copies omit EM_IRQ_HANDLER so the prove covers the body only. Candidate uses named typo-RAM fields, not (uintptr_t)&obj + offset. Tree IRQHandler_RcCalib.c was not modified.",
+    "tree_sha256": "23d53bafe7d14a3e20c0740dc952e5df5d595dcf22218fefa12e76d48a9299e0",
+    "tree_still_literals": true,
+    "mutants": [
+      {
+        "tag": "805c30",
+        "edit": "u32_805c30 -> u32_805c34",
+        "status": "KILLED",
+        "detail": "MISMATCH callhash:25 classes=42 calls=49"
+      },
+      {
+        "tag": "8019b8",
+        "edit": "u32_8019b8 -> u32_8019b4",
+        "status": "KILLED",
+        "detail": "MISMATCH memhash:25 classes=42 calls=49"
+      },
+      {
+        "tag": "8019bc",
+        "edit": "u32_8019bc -> u32_8019b8",
+        "status": "KILLED",
+        "detail": "MISMATCH memhash:25 classes=42 calls=49"
+      },
+      {
+        "tag": "805cf0",
+        "edit": "u32_805cf0 -> u32_805cec",
+        "status": "KILLED",
+        "detail": "MISMATCH ncalls:12 callhash:18 classes=42 calls=49"
+      },
+      {
+        "tag": "805c2c",
+        "edit": "u32_805c2c -> u32_805c28",
+        "status": "KILLED",
+        "detail": "MISMATCH ncalls:13 callhash:17 classes=42 calls=49"
+      }
+    ],
+    "mutants_killed_count": 5,
+    "installed": false
+  },
+  "rules": "No git writes. No backups or /tmp copies. Never touched opencfw-otap-disarm.app.bin. Did not edit sources.json, tools/build/*.py, docs, or files outside g2/src/em9305 and evidence/NOTE. source_completeness_proven remains false. IRQHandler_RcCalib was not installed.",
+  "official_app_reconfirm": {
+    "sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "untouched": true,
+    "reconfirmed_at": "2026-11-23 03:11:35 AM CST (America/Chicago)"
+  }
+}

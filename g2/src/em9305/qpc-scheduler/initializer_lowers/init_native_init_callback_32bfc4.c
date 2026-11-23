@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32bfc4..0x32c148: build the periodic-advertising report for
  * subevent data slot `index` of the owner's context (+44, data pointer at
@@ -7,7 +8,7 @@
  * prepared (TX power/RSSI 0x7f, status 2) with the event counter derived
  * from the elapsed time. With data and no pending report, a report is
  * prepared unless the slot is late (+236 - +240 >= link +700): handle,
- * subevent, optional TX power (+29) and CTE (+25) per 0x8056cc, RSSI
+ * subevent, optional TX power (+29) and CTE (+25) per ((uintptr_t)&em9305_ram_805688 + 0x44u), RSSI
  * (+227), the rounded event counter, and either the payload (when the
  * counter falls in the response window of the channel map at +1160) or
  * status 0xff. A role-1 link (+368) marks the report pending. Both
@@ -52,7 +53,7 @@ void opencfw_em9305_init_callback_32bfc4(uintptr_t owner, uint32_t index)
         (void)opencfw_em9305_dispatch_child_3247d4(link);
         return;
     }
-    uint32_t options=*(volatile uint8_t *)(uintptr_t)0x8056ccu;
+    uint32_t options=em9305_ram_805688.u8_8056cc;
     (void)opencfw_em9305_memset((void *)(report+44u),0u,20u);
     if(*(volatile uint32_t *)(context+236u)-*(volatile uint32_t *)(context+240u)>=
        *(volatile uint32_t *)(link+700u)){
@@ -88,9 +89,9 @@ void opencfw_em9305_init_callback_32bfc4(uintptr_t owner, uint32_t index)
         uintptr_t source=*(volatile uint32_t *)(context+208u+index*4u)
                          +*(volatile uint8_t *)(current+4u)+3u;
         (void)opencfw_em9305_memcpy((void *)*(volatile uint32_t *)current,(const void *)source,
-                                    *(volatile uint8_t *)(uintptr_t)0x8056d4u);
+                                    em9305_ram_805688.u8_8056d4);
         current=*slot;
-        uint32_t length=*(volatile uint8_t *)(uintptr_t)0x8056d4u;
+        uint32_t length=em9305_ram_805688.u8_8056d4;
         r[56]=0u;
         uint32_t buffer=*(volatile uint32_t *)current;
         r[57]=(uint8_t)length;

@@ -1,0 +1,32 @@
+{
+  "stream": "ws-hwdrivers",
+  "when_cst": "2026-11-23 ~01:50",
+  "milestone": "semantic mutants per unit + cheapa paired mutex override + path counters",
+  "mutants_caught": {
+    "codecirq": {"change": "bpl->bmi (branch flip)", "addr": "prior", "result": "caught"},
+    "gluefg":   {"change": "cbz->cbnz (branch flip)", "addr": "prior", "result": "caught"},
+    "cgpio":    {"change": "mov r4,r3 -> mov r4,r2 (wrong source reg on default-return path)", "addr": "0x13e0 461c->4614", "result": "caught 12/12"},
+    "cenable":  {"change": "cmp r0,#1 -> cmp r0,#0 (group-valid boundary)", "addr": "0x13c0 2801->2800", "result": "caught (test10/group1 diverges)"},
+    "imufp":    {"change": "vldr s4,[r0,#40] -> [r0,#44] (wrong field offset)", "addr": "0x1416 2a0a->2a0b", "result": "caught (semantic_filter_update 0/12)"},
+    "npmxfg":   {"change": "bne -> beq on ADC-success check (branch flip)", "addr": "0x2122 d16b->d06b", "result": "caught (process_fuel_gauge 0/12; check_fuel_gauge_init unaffected)"},
+    "cheapa_err": {"change": "cbz r0 -> cbnz r0 (mutex-result branch, error path)", "addr": "0x13d0 b150->b950", "result": "caught 0/12 under mutex-fail override"}
+  },
+  "mutant_mechanism": "in-Renode-memory sysbus WriteWord (16-bit halfword) patch of the v=1 C body after LoadELF; no modified/copied image on disk",
+  "cgpio_coverage_gap": "switch-case pin constants (e.g. ch2->pin9 at 0x1416) are DEAD on the only exercised inputs: ch2/value=100 and most channels fall to the default-return path, so a wrong-pin constant mutant (0x1416 9->0xa) survived. Caught mutant uses the default-return source-register instead. Needs added inputs (ch2/6/9 with value 0/1) to make pin constants observable.",
+  "cheapa_paired_override": {
+    "mechanism": "force the SHARED audio_file_mutex_acquire stub (K_RET) to fixed_ret=1 (fail) for both v=0 and v=1, so both take the error branch (paired, not a one-sided mutant)",
+    "normal_config": "12/12 PASS, path counts: 12 non-error / 0 error",
+    "error_config":  "12/12 PASS, path counts: 0 non-error / 12 error -> error branch validated equivalent to stock",
+    "path_counter": "build/ws-hwdrivers-20261122/harness/path_count.py: classifies each test by the set of stub callees in v=0 (stock); flags error paths by callee name"
+  },
+  "autogen_bug_found_and_fixed": {
+    "symbol": "g2_file_close_error",
+    "wrong": "0x474e40 (a STRING literal address, the first arg of the close_error call)",
+    "correct": "0x4d09b4 (stock bl at 0x474d0a, confirmed by disasm of stock codec_allocate 0x474cd2)",
+    "root_cause": "autogen global_index() mapped g2_file_close_error to 0x474e40; the extern prototype spans two lines so comment_addrs (single-line) missed the /* 0x4d09b4 */ continuation comment, and resolve() fell through to the bad global_index entry",
+    "surfaced_by": "the cheapa paired override forcing the error branch (dormant in the normal-path-only config, so normal cheapa 12/12 was always legit)",
+    "fix": "pinned 'g2_file_close_error':(0x4D09B4,'K_SEEDRET') in autogen KNOWN (outranks global_index); surgical, affects only this symbol",
+    "rejected_fix": "a general multi-line comment_addrs pass was tried but REGRESSED cgpio (g2_gpio_hal_write 0x480fd6 -> wrong 0x53a5be) by perturbing resolve() ordering above global_index; removed it"
+  },
+  "remaining": ["step3: codec-i2s-float-convert (i2sfloat) and codec-deadline (deadline)", "re-scan: dormant global_index misresolutions on UNEXERCISED error branches of other verified units are only discoverable by branch-forcing; only cheapa has been branch-forced so far"]
+}

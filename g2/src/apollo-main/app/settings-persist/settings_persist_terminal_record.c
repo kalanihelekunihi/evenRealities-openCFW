@@ -1,7 +1,8 @@
 /* Native SVC_KvdbWriteTerminalMode 0x4b04c4. */
 #include <stdint.h>
 
-uint8_t audio_settings_terminal_record[4]; /* native RAM 0x20003808 */
+/* Stock .data default 01 00 00 00 (record version 1; CRC sealed at KVDB init). */
+uint8_t audio_settings_terminal_record[4] = {1u, 0u, 0u, 0u}; /* native RAM 0x20003808 */
 extern uint16_t audio_uart_hand_checksum_49acd4(const void *,uint32_t,const uint16_t *);
 extern int32_t audio_settings_kvdb_blob_write(const char *,const void *,uint32_t); /* 0x4d957e */
 extern uint32_t audio_log_flags(void);

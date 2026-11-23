@@ -15,7 +15,7 @@ static void receive(uint32_t channel,uint32_t amount,uint32_t deliver){
 }
 /* Stock 0x0055E2CE (UART channel IRQ body) */
 uint32_t codec_uart_irq(uint32_t input){
- uint32_t channel=(uint8_t)input;if(channel>=4)return 0;
+ uint32_t channel=(uint8_t)input; /* stock 0x55e2ce has NO channel bound check; it indexes channels[(uint8_t)input] unconditionally */
  uint32_t d=(uint32_t)(uintptr_t)g2ref_g2_uart_channels+channel*28u,status=0,handle=W(d+4);
  codec_irq_status((void *)(uintptr_t)handle,&status,1);
  codec_irq_clear((void *)(uintptr_t)handle,status);

@@ -1,11 +1,12 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x320e00..0x320f2e: handle a received periodic-sync PDU for the
  * owner's link (+36) and context (+44). LLID 9 goes to the registered
- * hook (0x80516c), LLID 7 is parsed as an extended header (into link
+ * hook (((uintptr_t)&em9305_ram_805160 + 0xcu)), LLID 7 is parsed as an extended header (into link
  * +152, flags local) and needs SyncInfo. The SyncInfo (32db74, from the
  * pointer at link+184) is accepted unless its PHY is unsupported (1M
- * needs bit 8, 2M bit 11 of 0x805a94); then the LLID is latched at
+ * needs bit 8, 2M bit 11 of ((uintptr_t)&em9305_ram_805a6c + 0x28u)); then the LLID is latched at
  * link+240, owner+12 cleared, the packet duration computed (312b88) and
  * the receive armed (31c7c4) at the context anchor (+160); a link that
  * became scheduled (+241) signals the auxiliary hook. */
@@ -18,7 +19,7 @@ extern uint32_t opencfw_em9305_auxiliary_signal_304394(void);
 
 static uint32_t opencfw_em9305_sync_phy_ok_320e00(uint32_t phy)
 {
-    uint32_t features=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+    uint32_t features=em9305_ram_805a6c.u32_805a94;
     if(phy==1u)return (features&0x100u)!=0u;
     if(phy==2u)return (features&0x800u)!=0u;
     return 1u;
@@ -34,7 +35,7 @@ void opencfw_em9305_child_320e00(uintptr_t owner, uintptr_t pdu)
     (void)opencfw_em9305_dispatch_child_32db0c((uintptr_t)header,pdu);
     uint32_t llid=*(volatile uint8_t *)&header[0];
     if(llid==9u){
-        uintptr_t hook=*(volatile uint32_t *)(uintptr_t)0x80516cu;
+        uintptr_t hook=em9305_ram_805160.u32_80516c;
         uint32_t accepted=0u;
         if(hook!=0u)
             accepted=((uint32_t (*)(uintptr_t,uintptr_t,uintptr_t,uintptr_t))hook)

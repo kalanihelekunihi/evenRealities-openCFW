@@ -1,7 +1,8 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x315aec..0x315bc6: start a connection subrate request. Without
- * local support (bit 5 of +548) or the host feature (bit 6 of 0x805a98)
+ * local support (bit 5 of +548) or the host feature (bit 6 of ((uintptr_t)&em9305_ram_805a6c + 0x2cu))
  * report status 0xc; without the peer feature (bit 6 of +548) report
  * 0x1a. Otherwise mark +888, latch the requested parameters (+856..+864
  * and the handle +262, with the continuation number clamped below the
@@ -15,14 +16,14 @@ extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t record, uint32
 
 static uint32_t opencfw_em9305_subrate_index_315aec(uintptr_t record)
 {
-    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uintptr_t base=em9305_ram_805c5c.u32_805c70;
     return (uint8_t)((int32_t)(record-base)/912);
 }
 
 void opencfw_em9305_subrate_action_315aec(uintptr_t record)
 {
     uint32_t features=*(volatile uint32_t *)(record+548u);
-    if((features&0x20u)==0u||(*(volatile uint8_t *)(uintptr_t)0x805a98u&0x40u)==0u){
+    if((features&0x20u)==0u||(em9305_ram_805a6c.u8_805a98&0x40u)==0u){
         (void)opencfw_em9305_dispatch_child_323498(opencfw_em9305_subrate_index_315aec(record),0xcu);
         return;
     }

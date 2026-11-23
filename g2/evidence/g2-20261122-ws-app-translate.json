@@ -1,0 +1,91 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "sources": {
+  "g2/src/apollo-main/app/p-14-translate/translate.c": "9529e004421bb34747e1cf01f9ce673298b5de6c68064d2e235d7b7531bdf5df"
+ },
+ "spec": "build/ws-app-20261122/specs/trc-a",
+ "verified_at": "2026-11-22 21:09 CST",
+ "result": {
+  "tests": 600,
+  "equal": 600,
+  "differ": 0,
+  "done": true,
+  "overflow": false,
+  "mutants": 10,
+  "killed": 10,
+  "surviving_mutants": [],
+  "verdict": "EQUIVALENT",
+  "harness_sha256": "24567896e82c59d23e2d3123fc182fb0e9bd3bb3ca08f00c89ce90bb1d831f4e",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "stock_entries": {
+  "buffers_reset": "0x59e9e2",
+  "mutex_init": "0x59ea64",
+  "lock": "0x59eb0e",
+  "unlock": "0x59ebc8",
+  "request_display": "0x59ec28",
+  "hb_refresh": "0x59ed06",
+  "hb_check": "0x59ed1c",
+  "data_recv": "0x59edba",
+  "page_event": "0x59efe0",
+  "common_data_cb": "0x59f0ea",
+  "ui_event_cb": "0x59f236"
+ },
+ "method": "random 1-3 op sequences over 11 entries; mutex present/absent and create/acquire/release failures; tick at heartbeat+19998..20002 and far; rx command 1/2/0xff/random with ctrl 0..5; frame-process status 0/13/0x10d/0x100/random; page events 0x0a/0x42-0x45/0x48/0x4f/random with foreground 0/0x21/random and NULL param/root; UI events 0..6 with session 0/1/2; 600 tests + 80 per mutant",
+ "observed": "callee args/returns, mutex attr content, display request content, report payloads, close notify value, logs; mutex, ticks, root, session, ui_context+4, pb status, rx msg head, text/source/target buffer ends after every op",
+ "mutants": [
+  {
+   "sym": "translate_heartbeat_check_59ed1c",
+   "from": "if (diff <= TRANSLATE_HEARTBEAT_TIMEOUT_MS)",
+   "to": "if (diff < TRANSLATE_HEARTBEAT_TIMEOUT_MS)"
+  },
+  {
+   "sym": "translate_data_recv_handler_59edba",
+   "from": "translate_machine_handler_596b0c(2u, msg->payload, 0x14u)",
+   "to": "translate_machine_handler_596b0c(3u, msg->payload, 0x14u)"
+  },
+  {
+   "sym": "translate_page_event_handler_59efe0",
+   "from": "foreground != 0x21u",
+   "to": "foreground != 0x22u"
+  },
+  {
+   "sym": "translate_page_event_handler_59efe0",
+   "from": "if (event == 0x44u)\n        event = 0x45u;",
+   "to": "if (event == 0x44u)\n        event = 0x44u;"
+  },
+  {
+   "sym": "audio_uart_registry_callback_59f0ea",
+   "from": "if (g2_translate_pb_status == 13u) {",
+   "to": "if (g2_translate_pb_status == 12u) {"
+  },
+  {
+   "sym": "audio_uart_registry_callback_59f0ea",
+   "from": "g2_translate_pb_status = 7u;",
+   "to": "g2_translate_pb_status = 6u;"
+  },
+  {
+   "sym": "audio_uart_registry_callback_59f236",
+   "from": "? 3u : 4u;",
+   "to": "? 4u : 3u;"
+  },
+  {
+   "sym": "audio_uart_registry_callback_59f236",
+   "from": "if (g2_translate_session[0] == 1u) {",
+   "to": "if (g2_translate_session[0] != 0u) {"
+  },
+  {
+   "sym": "translate_request_display_59ec28",
+   "from": "if (audio_quicklist_refresh_enabled_4434d0(TRANSLATE_APP_ID) != 1u) {",
+   "to": "if (audio_quicklist_refresh_enabled_4434d0(TRANSLATE_APP_ID) == 0u) {"
+  },
+  {
+   "sym": "translate_action_lock_59eb0e",
+   "from": "if (status == 0)\n        return 1u;",
+   "to": "if (status <= 0)\n        return 1u;"
+  }
+ ],
+ "source_changes": "none needed"
+}

@@ -1,10 +1,11 @@
 /* Native 0x30f57c..0x30f60c: earliest armed timer (XBFU mask bits 16..19,
  * CMP/MOV.C unsigned minimum) against the requested sleep time. */
 #include <stdint.h>
+#include "em9305_ram.h"
 extern uint64_t opencfw_em9305_sleep_sync_convert(uint32_t,uint32_t);
 uint32_t opencfw_em9305_sleep_mode_ready(uint32_t low,uint32_t high)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x80fbbcu!=0) return 0;
+ if(em9305_ram_80fb8c.u8_80fbbc!=0) return 0;
  volatile uint8_t *status=(volatile uint8_t *)(uintptr_t)0xf0383au;
  uint32_t first=(*status>>1u)&1u,second=(*status>>1u)&1u;
  if(first!=second) first=(*status>>1u)&1u;

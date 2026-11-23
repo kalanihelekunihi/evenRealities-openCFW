@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31db9c..0x31dc68: receive-test statistics for each stream of
  * the BIG/CIG (table +56, count +52). A stream with test mode on (+108)
@@ -8,7 +9,7 @@
  * payload's first word when +110 requests a resync) and advances by one;
  * otherwise it is the event counter times the burst number (+24) plus the
  * low byte of +112. The PDU is released and the receive-buffer count at
- * 0x805add is raised under a critical section. */
+ * ((uintptr_t)&em9305_ram_805a6c + 0x71u) is raised under a critical section. */
 extern uintptr_t opencfw_em9305_dispatch_child_317624(uintptr_t record);
 extern uint32_t opencfw_em9305_ll_received_decode_31bc7c(uintptr_t output,
                                                          uintptr_t input);
@@ -54,8 +55,8 @@ void opencfw_em9305_dispatch_child_31db9c(uintptr_t group,uint32_t event_counter
             r8(stream+116u),*(volatile uint16_t *)(group+6u),expected);
         opencfw_em9305_wsf_event_release(pdu);
         (void)opencfw_em9305_wsf_critical_enter();
-        uint32_t buffers=r8(0x805addu);
-        *(volatile uint8_t *)0x805addu=(uint8_t)(buffers+1u);
+        uint32_t buffers=r8(((uintptr_t)&em9305_ram_805a6c + 0x71u));
+        *(volatile uint8_t *)((uintptr_t)&em9305_ram_805a6c + 0x71u)=(uint8_t)(buffers+1u);
         (void)opencfw_em9305_wsf_critical_exit();
     }
 }

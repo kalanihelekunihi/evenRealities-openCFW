@@ -1,0 +1,38 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "source": "g2/src/apollo-main/app/p-03-general-configure/general_configure.c",
+ "source_sha256": "bb3dcf63062f57260c6ebdaea6c9771bef6805de978543b05cf8c59a361543f9",
+ "spec": "build/ws-app-20261122/specs/gc-a",
+ "verified_at": "2026-11-22 20:25 CST",
+ "result": {
+  "verdict": "EQUIVALENT",
+  "tests": 600,
+  "equal": 600,
+  "differ": 0,
+  "mutants": 9,
+  "killed": 9,
+  "surviving_mutants": [],
+  "done": true,
+  "overflow": false,
+  "harness_sha256": "f68e943b32bc36bed2965ca6f3a8c21787a54c43796f5f00de619f3e9f44f958",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "stock_entries": {
+  "set_general_configure_language_4711b2": "0x4711b2",
+  "get_dashboard_auto_close_value_47121c": "0x47121c",
+  "module_configure_response_inquiry_cmd_471224": "0x471224",
+  "module_dashboard_auto_close_response_inquiry_cmd_47132c": "0x47132c",
+  "module_dashboard_auto_close_response_set_cmd_47142a": "0x47142a",
+  "system_language_save_to_flash_471554": "0x471554",
+  "dashboard_auto_close_value_save_to_flash_471608": "0x471608",
+  "module_configure_common_data_handler_4716ba": "0x4716ba"
+ },
+ "method": "black-box sequences of 1-4 random ops over 8 entry points; nanopb decode/encode stubbed (returns 1/0/0x100 for uint8 truncation, random errmsg, bytes_written incl. > max), kvdb language/auto-close set returning 0/-1, BLE tx and handshake returns randomized, osEventFlagsSet observed; random locale/auto-close globals, dirty flags, rx/tx messages; 600 tests + 60 per mutant (mutant runs bias toward the mutated entry)",
+ "observed": "all callee args and return values, logs, encoded message hashes, BLE payload by content, event-flag sets; locale/auto-close globals, dirty flags, rx/tx messages and tx buffer after every op",
+ "source_changes": "none needed",
+ "history": [
+  "20:25 CST: 600/600, 9/9"
+ ]
+}

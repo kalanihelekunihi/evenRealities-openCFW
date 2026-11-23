@@ -1,0 +1,44 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "sources": {
+  "g2/src/apollo-main/app/x-03-pb-health/pb_service_health_frame.c": "034df3f0bab13cf00784597f144c1532dc425424a8aae57ba4414e47d16e6791",
+  "g2/src/apollo-main/app/a-55-pb-health/pb_service_health.c": "ce62b0aee1173c2fb7b6895b9822080f615957b20c9c1080572eddb6e8cc2627"
+ },
+ "spec": "build/ws-app-20261122/specs/hl-a",
+ "verified_at": "2026-11-22 20:54 CST",
+ "result": {
+  "tests": 600,
+  "equal": 600,
+  "differ": 0,
+  "done": true,
+  "overflow": false,
+  "mutants": 9,
+  "killed": 9,
+  "surviving_mutants": [],
+  "verdict": "EQUIVALENT",
+  "harness_sha256": "e9b9f2940387110199e057bacc023232d7bfe50eaf314e8b3e33b1c7f34f7a58",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "stock_entries": {
+  "APP_PbRxHealthFrameDataProcess": "0x55a350",
+  "PB_RxHealthSingleData": "0x55a558",
+  "APP_PbTxEncodeHealthSingleData": "0x55a702",
+  "PB_RxHealthMultData": "0x55a8a2",
+  "APP_PbTxEncodeHealthMultData": "0x55aa14",
+  "PB_RxHealthSingleHighlight": "0x55abe0",
+  "APP_PbTxEncodeHealthSingleHighlight": "0x55ad78",
+  "PB_RxHealthMultHighlight": "0x55af14",
+  "APP_PbTxEncodeHealthMultHighlight": "0x55b06c"
+ },
+ "entry_mapping_check": "each handler entry loads its own NULL fault template, 0x781e80 + 0x14*i in source order",
+ "method": "black-box sequences of 1-3 random ops over 9 entry points; nanopb stream/ostream/decode/encode stubbed (decode/encode return 1/0/0x100/0x201/0x301, random errmsg, bytes_written incl. >0xffff), health data manager save stubs (uint8 results 0/1/0xff/random byte), BLE tx, fault handler; command ids 0-5 and random, NULL frame/args, highlight counts 0-3; float logs walked as doubles; 600 tests + 60 per mutant (bias toward mutated entry)",
+ "observed": "all callee args and return values, logs incl. %f args, fault records, encoded message hash; rx message (0x31c), tx message (0x31c) and tx packet (0x100) after every op",
+ "source_changes": "none needed",
+ "test_notes": "first run 482/600: all diffs came from save stubs returning values >0xff from functions declared uint8_t. clang trusts the AAPCS callee extension of a uint8 result, stock IAR re-narrows; real callees are C uint8_t functions, so stubs now return uint8-range values",
+ "history": [
+  "20:50 CST: 482/600 (stub ABI artifact)",
+  "20:54 CST: 600/600, 9/9"
+ ]
+}

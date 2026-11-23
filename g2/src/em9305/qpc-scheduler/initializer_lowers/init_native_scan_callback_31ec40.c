@@ -1,10 +1,11 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31ec40..0x31ed32: scan window scheduling callback for the scan
  * context at object+0x24. A pending stop (+149/+148) posts a 4-byte event
- * (kind 2 for the primary context 0x804fd8, else 3) to the task at
- * 0x805b18. Otherwise refresh the local address after a resolvable
- * address rotation (0x805a80), then either extend the current window
+ * (kind 2 for the primary context ((uintptr_t)&em9305_ram_803d58 + 0x1280u), else 3) to the task at
+ * ((uintptr_t)&em9305_ram_805af0 + 0x28u). Otherwise refresh the local address after a resolvable
+ * address rotation (((uintptr_t)&em9305_ram_805a6c + 0x14u)), then either extend the current window
  * (+0x3c/+0x3e, 625 us units) when time remains, or move to the next
  * channel and reschedule window by window until the scheduler accepts;
  * the elapsed time is kept at +364. */
@@ -29,22 +30,22 @@ uint32_t opencfw_em9305_scan_callback_31ec40(uintptr_t object)
         uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
         if(message==0u) return 0u;
         w8(message+3u,3u);
-        uint32_t kind=(scan!=(uintptr_t)0x804fd8u)+2u;
-        uint32_t task=r8(0x805b18u);
+        uint32_t kind=(scan!=(uintptr_t)((uintptr_t)&em9305_ram_803d58 + 0x1280u))+2u;
+        uint32_t task=r8(((uintptr_t)&em9305_ram_805af0 + 0x28u));
         w8(message+2u,kind);
         return opencfw_em9305_wsf_task_message_send(task,message);
     }
-    if(r8(0x805a80u)!=0u) {
+    if(r8(((uintptr_t)&em9305_ram_805a6c + 0x14u))!=0u) {
         uint32_t flags=r8(scan+65u);
         if(flags&1u) {
-            w8(0x805a80u,0u);
+            w8(((uintptr_t)&em9305_ram_805a6c + 0x14u),0u);
             if((flags&2u)==0u) {
-                uint32_t high=r32(0x805a90u);
-                uint32_t low=r32(0x805a8cu);
+                uint32_t high=r32(((uintptr_t)&em9305_ram_805a6c + 0x24u));
+                uint32_t low=r32(((uintptr_t)&em9305_ram_805a6c + 0x20u));
                 (void)opencfw_em9305_radio_address_write_3045e8(scan+2u,low,high);
             }
-            uint32_t high=r32(0x805a90u);
-            uint32_t low=r32(0x805a8cu);
+            uint32_t high=r32(((uintptr_t)&em9305_ram_805a6c + 0x24u));
+            uint32_t low=r32(((uintptr_t)&em9305_ram_805a6c + 0x20u));
             w32(scan+288u,high);
             w32(scan+284u,low);
         }

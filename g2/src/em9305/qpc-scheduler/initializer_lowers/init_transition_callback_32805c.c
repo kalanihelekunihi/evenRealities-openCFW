@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
 extern uint32_t opencfw_em9305_ll_event_enqueue(
@@ -19,7 +20,7 @@ uint32_t opencfw_em9305_init_transition_callback_32805c(uintptr_t owner)
     if(state!=12u)return state;
     state=*(volatile uint32_t *)(record+108u);
     if(state==0u)return state;
-    state=*(volatile uint8_t *)(uintptr_t)0x805becu;
+    state=em9305_ram_805be0.u8_805bec;
     if(state==0u)return state;
     uintptr_t event=opencfw_em9305_wsf_event_allocate(24u);
     if(event==0u)return 0u;
@@ -35,7 +36,7 @@ uint32_t opencfw_em9305_init_transition_callback_32805c(uintptr_t owner)
     *(volatile uint32_t *)(event+16u)=third;
     *(volatile uint32_t *)(event+8u)=next;
     *(volatile uint32_t *)(event+4u)=head; /* BL delay slot. */
-    (void)opencfw_em9305_ll_event_enqueue(0x8053f8u,0u,event);
-    uint8_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+    (void)opencfw_em9305_ll_event_enqueue(((uintptr_t)&em9305_ram_8052d4 + 0x124u),0u,event);
+    uint8_t handler=em9305_ram_805af0.u8_805b18;
     return opencfw_em9305_wsf_event_post(handler,1024u);
 }

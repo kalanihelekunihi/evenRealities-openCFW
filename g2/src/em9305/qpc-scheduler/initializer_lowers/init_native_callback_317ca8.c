@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x317ca8..0x317ea4: connection subrating bookkeeping, returns the
  * number of connection events that may be skipped. The subrate block lives
@@ -48,7 +49,7 @@ uint32_t opencfw_em9305_callback_317ca8(uintptr_t record, uint32_t continuing, u
     if (skip_from_update != 0u) {
         uint32_t flags = SR_U32(record + 636u);
         if ((flags & (1u << 29)) != 0u && active != 0u) {
-            uintptr_t table = SR_U32(0x805c70u);
+            uintptr_t table = SR_U32(((uintptr_t)&em9305_ram_805c5c + 0x14u));
             uint32_t timeout = SR_U16(block + 6u);
             uint32_t latency = SR_U16(block + 4u);
             int32_t index = (int32_t)(record - table) / 912;

@@ -375,8 +375,9 @@ bool common_text_try_extend_animation_4dfff8(common_text_t *text, uint8_t event,
         return false;
     }
     int32_t original_target = anim->end_value;
-    int32_t max_scroll = audio_uart_lv_scroll_bottom_44e4bc(text->anim_target) +
-                         audio_uart_lv_scroll_top_44e4aa(text->anim_target);
+    /* Stock 0x4e00bc/0x4e00c4: scroll_top is called before scroll_bottom (separate statements keep that order). */
+    int32_t scroll_top = audio_uart_lv_scroll_top_44e4aa(text->anim_target);
+    int32_t max_scroll = audio_uart_lv_scroll_bottom_44e4bc(text->anim_target) + scroll_top;
     int32_t dist_to_bottom = max_scroll - original_target;
     int32_t dist_to_top = original_target;
     TC_LOG(4u, fn_extend, 0x282u, 0x11400000u, te_state, te_state_s, event, original_target,

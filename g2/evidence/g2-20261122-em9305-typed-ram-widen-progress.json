@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-22 6:04 PM CST (America/Chicago)",
+  "title": "Widen typo-RAM objects from observed base+offset spans; address-as-value rewrite compiles; prove in progress, not installed",
+  "scope": "Emulator only. No hardware flash. No git commit. Official opencfw-otap-disarm.app.bin not touched. Tree controller_init.c, em9305_ram.h, and g2-em9305.ld were left at the proven pre-widen state (ld writer approval unused this turn because nothing was installed). Other streams' Renode runs were left alone.",
+  "source_completeness_proven": false,
+  "tree_untouched": {
+    "controller_init.c_sha256": "0cfaf51e12bcf041496440fda306d55371ff1b6c3fd0539e52b01ef6064e5639",
+    "matches_proven_pre": true,
+    "em9305_ram.h_sha256": "00d825b117bdb99af92dff9c7f4fc3ce40fee4320bb67a11a76b9f230b26d083",
+    "g2-em9305.ld_sha256": "e29674b60306aeef77c874dbb0f68dc5869ddbc5abc363ffb6abad3d6955df8b",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_expected": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd"
+  },
+  "method": {
+    "script": "build/ws-em9305-20261122/widen/widen.py",
+    "sources_harvested": "all g2/src/em9305/**/*.c for spans; rewrite applied only to controller_init.c",
+    "span_sources": "*(T*)(var+N) and *(T*)var when var is assigned a 0x80 address; 0xADDR+index*STRIDE with index<N from the same function or file-wide fallback; memset/memcpy numeric sizes; read_config destination lengths",
+    "naming": "evidence-only: em9305_ram_<base>, field <type>_<addr>",
+    "pinned": "objects are not grown into the stock .bss.stock_* / QP / myapp / 0x80fe20..0x810000 ranges",
+    "alignment": "typed fields only when addr is naturally aligned for the type (structs are not packed). Unaligned observed accesses still widen the object span but stay as raw casts.",
+    "rewrite_rule": "address-as-value and table bases become (uintptr_t)&object or (uintptr_t)&object + off, so later root+N is bounds-checked against the whole widened object, not a 1-byte field"
+  },
+  "plan": {
+    "path": "build/ws-em9305-20261122/widen/plan.json",
+    "old_objects": 77,
+    "new_objects": 147,
+    "grown": 39,
+    "added": 70,
+    "examples": {
+      "em9305_ram_8015c4": "size 1 -> 32; covers the >=24-byte record at 0x8015c4 (uint16 at +0, uint32 at +8/12/16/20) that failed the previous &field pass",
+      "em9305_ram_801864": "size 28 -> 112; covers memset(..., 112)",
+      "em9305_ram_803d58": "new, size 5448; covers 0x803d58 context table plus 6 * 784-byte records starting at 0x803d78 (index<6) and adjacent fields"
+    }
+  },
+  "private_artifacts": {
+    "header": "build/ws-em9305-20261122/widen/em9305_ram.h",
+    "ld_block": "build/ws-em9305-20261122/widen/ld.block",
+    "controller_init.c": "build/ws-em9305-20261122/widen/controller_init.c",
+    "rewrite_counts": {
+      "ptr_cast": 13,
+      "void_cast": 48,
+      "indexed": 28,
+      "bare": 332,
+      "total": 421
+    },
+    "remaining_0x80_literals": {
+      "sites": 33,
+      "unique": 10,
+      "note": "All remaining are pinned stock cells (0x801398, 0x802d20/0x802fe0/0x8032a0, 0x802a60/0x8035dc/0x80389c), the 0x80000000 sign bit, 0x80200005 encoding, or a CRC table constant 0x806567cb \u2014 not untyped application RAM."
+    }
+  },
+  "compile": {
+    "flags": "production ARC flags, -Wall -Wextra -Werror (includes array-bounds)",
+    "hdrcheck_rc": 0,
+    "controller_init_rc": 0,
+    "object": "build/ws-em9305-20261122/widen/controller_init.o",
+    "compiled_at": "2026-11-22 5:31:28 PM CST (America/Chicago)"
+  },
+  "qemu_arc_prove": {
+    "changed_functions": 310,
+    "known_unrunnable_in_changed": [
+      "opencfw_em9305_controller_startup"
+    ],
+    "batch_aa": {
+      "started": "2026-11-22 5:32:11 PM CST (America/Chicago)",
+      "finished": "2026-11-22 5:45:56 PM CST (America/Chicago)",
+      "symbols": 50,
+      "EQUIVALENT_100": 41,
+      "RUN_FAILED_both_sides_short_or_timeout": 8,
+      "MISMATCH": 1,
+      "log": "build/ws-em9305-20261122/widen/prove/summary.txt and prove/batch_aa.log"
+    },
+    "mismatch": {
+      "symbol": "opencfw_em9305_command_apply_3093a0",
+      "result": "callhash:1(t=[77]) classes=89 calls=325",
+      "t2_prior": "EQUIVALENT 100 (after the nrm/mnorm window fix earlier today)",
+      "body_delta": "single line: uintptr_t row=0x80517cu+index*12u; became uintptr_t row=((uintptr_t)&em9305_ram_80517c + index*12u); same address if the new object is placed at 0x80517c",
+      "note": "Likely the same 1-in-100 callhash harness flake previously seen on this symbol. Not treated as a proven C-body bug. Needs a retry before install."
+    },
+    "run_failed_note": "Eight symbols produced short or empty QEMU output on both orig and cand (several 0/0 timeouts on infinite-loop handlers without a spec; others same short length on both sides, e.g. channel_continue_314f54 result hash identical, orig also appended a timeout line). Not semantic diffs.",
+    "batch_ab": {
+      "started": "2026-11-22 5:45:57 PM CST (America/Chicago)",
+      "status": "in flight at log time; includes opencfw_em9305_common_callback_3152fc (the 0x8015c4 record). The batch loop was stopped so later batches (ac..ag, 210 symbols) will not start. qm.py for batch_ab was left running to finish.",
+      "tag": "widen_batch_ab"
+    },
+    "mutants": "not started this turn (docker was in use for prove; time limit reached)",
+    "installed": false
+  },
+  "not_done_this_turn": [
+    "Retry 3093a0 and finish proving the remaining changed functions (batch_ab in flight; 210 not started)",
+    "Mutants on EQUIVALENT functions",
+    "Install widened em9305_ram.h, g2-em9305.ld, and rewritten controller_init.c",
+    "Rebuild the EM9305 package, private NOR splice, and re-run both paired sims",
+    "initializer_lowers / residual C"
+  ],
+  "next": "Retry the 3093a0 1-in-100 callhash and collect batch_ab (especially 3152fc). If those are clean, run mutants on a handful of EQUIVALENT functions, then install header+ld+body (ld single-writer already approved for that update), rebuild, and re-run the paired sims. Then initializer_lowers."
+}

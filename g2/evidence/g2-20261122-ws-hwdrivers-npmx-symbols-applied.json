@@ -1,0 +1,318 @@
+{
+  "title": "npmx library symbol recovery applied to shared symbol DB (g2/symbols/apollo_main.tsv)",
+  "when": "2026-11-22 19:58 America/Chicago",
+  "pending_items_resolved": [
+    "build/ws-hwdrivers-20261122/pending/npmx-symbol-additions.note.md",
+    "build/ws-hwdrivers-20261122/pending/npmx_addr_map.json (SUPERSEDED: it held stale/swapped early values; not applied)"
+  ],
+  "shared_file": "g2/symbols/apollo_main.tsv",
+  "authority": "single-writer approval granted for these two npmx items only; file is not g2-em9305.ld (em9305-owned), so in scope",
+  "recheck_result": "Authoritative address set = npmx_library_addresses_BL_authoritative (41 syms) from the maindriver-COMPLETE evidence; it supersedes npmx_addr_map.json which had gpio_get/gpio_mode_set swapped, vbusin_get/vbusin_task_trigger swapped, and charger_status_get at the ambiguous 0x55f544 (correct 0x55f294). Still applies.",
+  "method": {
+    "boundaries": "Per-function extent by Thumb return analysis (first settled return >= max forward branch target, plus own trailing literal pool), capped at the next function start (named or in-region BL/B target) to prevent over-claim into data pools or neighbors. Independently AGREES with the census placeholder extents on 25/27 start-matching functions.",
+    "stock_image": "build/em9305-nor-20261122/stock.app.bin, VA->offset = VA-0x438000 (calibrated to reproduce an existing DB row's stock_sha256)."
+  },
+  "applied": {
+    "updated_existing_census_rows": 27,
+    "added_new_rows": 14,
+    "note": "27 rows matched an existing census placeholder start -> filled name/module(g2-npmx)/confidence(Inferred)/evidence, KEEPING the census end/size/stock_sha256. 14 rows are census-gap-resident unnamed helpers -> added as new precise rows (overlap only the giant rejected-oversized-envelope analyzer rows, not any precise row)."
+  },
+  "validation": {
+    "columns": "all 8; 0 malformed rows; address-sorted nondecreasing preserved",
+    "sha_selfcheck": "all 41 g2-npmx rows: sha256(stock[addr:addr+size]) == stock_sha256 (0 mismatches)",
+    "sources_py_check": "g2: 4880 units, 4542 source files, 2 not built; r1: 1449 units, 875 source files, 0 not built (no errors; '2 not built' pre-existing, unrelated)"
+  },
+  "file_sha256": {
+    "before": "2c41248dcfdb6d8748fd5861d11643c58d75bc49852f7b8b622103ff3bdcad60",
+    "after": "e1d2204f9a733302bd03b7842de034e11875455944d23da2e1fab58e93dd275d"
+  },
+  "symbols": [
+    {
+      "name": "npmx_core_init",
+      "address": "0x55eb3e",
+      "end": "0x55ed9a",
+      "size": 604,
+      "stock_sha256": "6d5a2e906217ce582287eb1d8c0ba38edf9baab69c007051bd5cbf594c5e1da5"
+    },
+    {
+      "name": "npmx_core_register_cb",
+      "address": "0x55ed9a",
+      "end": "0x55eda4",
+      "size": 10,
+      "stock_sha256": "47b495585efc006db8591401799c3fff046958bd5becfa645e8f4bac0d102bad"
+    },
+    {
+      "name": "npmx_core_event_interrupt_enable",
+      "address": "0x55edca",
+      "end": "0x55ee04",
+      "size": 58,
+      "stock_sha256": "85cd32be2172026fa1141cca57ce9691d06daa88ecc0279af86471fdefedc47c"
+    },
+    {
+      "name": "npmx_core_event_interrupt_disable",
+      "address": "0x55ee04",
+      "end": "0x55ee54",
+      "size": 80,
+      "stock_sha256": "f43a0e230d372461ab115adba97c2caf194561e1a73e30eeb9bb1a072698cf46"
+    },
+    {
+      "name": "npmx_gpio_get",
+      "address": "0x55ee74",
+      "end": "0x55ee7e",
+      "size": 10,
+      "stock_sha256": "f8c3bba83938c6d2f78ca5f57f9ab56ea55d9f025d5207e54dc36b4013df50db"
+    },
+    {
+      "name": "npmx_gpio_mode_set",
+      "address": "0x55ee7e",
+      "end": "0x55ee86",
+      "size": 8,
+      "stock_sha256": "c2b6bb4d56a396e2d9e9b746aa772c94ae10c5cfeccea69fd072dc109599e702"
+    },
+    {
+      "name": "npmx_vbusin_get",
+      "address": "0x55ee8c",
+      "end": "0x55ee96",
+      "size": 10,
+      "stock_sha256": "f6013e35da3d2b1c3f86871851d3406e1953c88d0c63bd959ed13d29e3b00d7e"
+    },
+    {
+      "name": "npmx_vbusin_current_convert",
+      "address": "0x55ee96",
+      "end": "0x55ef02",
+      "size": 108,
+      "stock_sha256": "029a8fe063a711aac4064da3599b5384144566de5dc2bbe4f400f79fd341c507"
+    },
+    {
+      "name": "npmx_vbusin_task_trigger",
+      "address": "0x55ef02",
+      "end": "0x55ef1e",
+      "size": 28,
+      "stock_sha256": "d3748ac169757c6197d971063fbda2eb9cad71e2cfa8a1de9be6586486295640"
+    },
+    {
+      "name": "npmx_vbusin_current_limit_set",
+      "address": "0x55ef1e",
+      "end": "0x55ef38",
+      "size": 26,
+      "stock_sha256": "f0f568b6f60c4989bddd8fdf0d2cf322bf241367ad18ed2cbca2ab366ffabbbe"
+    },
+    {
+      "name": "npmx_vbusin_vbus_status_get",
+      "address": "0x55ef3c",
+      "end": "0x55ef4e",
+      "size": 18,
+      "stock_sha256": "4347194bd543ffd864e84d296c80594006f9096f88f561aeba27ff77d6d10e28"
+    },
+    {
+      "name": "npmx_timer_get",
+      "address": "0x55ef6c",
+      "end": "0x55ef76",
+      "size": 10,
+      "stock_sha256": "70b8f662a0df10d32c81760890e77351a021f49c38d26c1590b8e2a13ceb22c3"
+    },
+    {
+      "name": "npmx_timer_task_trigger",
+      "address": "0x55ef76",
+      "end": "0x55ef80",
+      "size": 10,
+      "stock_sha256": "cfedacaa59226f0f2bb77b1eb75f96f8e461dbccb5748d7122cee69d8640dd54"
+    },
+    {
+      "name": "npmx_timer_config_set",
+      "address": "0x55ef80",
+      "end": "0x55eff0",
+      "size": 112,
+      "stock_sha256": "0c7bdb6772f69ad9cb09e91ba90890783654fe098911ffe0c94e73d4c9de9cb6"
+    },
+    {
+      "name": "npmx_charger_get",
+      "address": "0x55eff0",
+      "end": "0x55effa",
+      "size": 10,
+      "stock_sha256": "251bf24e86ee2771fa14b6b3828f9333b8635bf4d390443ca2865d1abe03e58a"
+    },
+    {
+      "name": "npmx_charger_voltage_convert",
+      "address": "0x55effa",
+      "end": "0x55f07a",
+      "size": 128,
+      "stock_sha256": "1ddd2bce344e4dac88a9cf1a949d3c9a484326d4e7f0195ca2a3f119a8f936db"
+    },
+    {
+      "name": "npmx_charger_module_enable_set",
+      "address": "0x55f07a",
+      "end": "0x55f0d6",
+      "size": 92,
+      "stock_sha256": "607b5b355eb154d99d2994b62b384299a2d8ce13203a0b32712f445c804a3933"
+    },
+    {
+      "name": "npmx_charger_module_disable_set",
+      "address": "0x55f0d8",
+      "end": "0x55f134",
+      "size": 92,
+      "stock_sha256": "639de0723b52a7ce0ee3fdfd4426c399fc6bfb37d2d928c3a6519da9846ca376"
+    },
+    {
+      "name": "npmx_charger_charging_current_set",
+      "address": "0x55f134",
+      "end": "0x55f180",
+      "size": 76,
+      "stock_sha256": "1d01963b7d52306fa491e4abae1c3cfc379b073952880d0077829e32ef8e1aab"
+    },
+    {
+      "name": "npmx_charger_discharging_current_set",
+      "address": "0x55f1b8",
+      "end": "0x55f218",
+      "size": 96,
+      "stock_sha256": "e6587af3457b6cf9cfb6b0f177775aa426bdf6a90c389e0b7e002eac598a91c2"
+    },
+    {
+      "name": "npmx_charger_termination_normal_voltage_set",
+      "address": "0x55f25c",
+      "end": "0x55f278",
+      "size": 28,
+      "stock_sha256": "24eb71cb5c8b754b5ea0933e0bbb742db708679d0398d111649e252bb407ab99"
+    },
+    {
+      "name": "npmx_charger_termination_warm_voltage_set",
+      "address": "0x55f278",
+      "end": "0x55f294",
+      "size": 28,
+      "stock_sha256": "dd4d7c35e2c5f96b46b9dd1d49490452a1aba807f44523c616add468fcc67132"
+    },
+    {
+      "name": "npmx_charger_status_get",
+      "address": "0x55f294",
+      "end": "0x55f2a8",
+      "size": 20,
+      "stock_sha256": "8828f751e19feded40d288cc8df7bb869e91a7b5fabaf685aa6c4c1ff428c442"
+    },
+    {
+      "name": "npmx_adc_get",
+      "address": "0x55f4f2",
+      "end": "0x55f4fe",
+      "size": 12,
+      "stock_sha256": "f0f8d935d79e00dcf89bb945249bbf531d0b86f2724e630d367b181497f7d570"
+    },
+    {
+      "name": "npmx_adc_ntc_type_convert",
+      "address": "0x55f4fe",
+      "end": "0x55f532",
+      "size": 52,
+      "stock_sha256": "c00e56b46226e5509aa7bf4954dc00f2d46f765f53493eb34e7e05708e4e97b2"
+    },
+    {
+      "name": "npmx_adc_task_trigger",
+      "address": "0x55f544",
+      "end": "0x55f54e",
+      "size": 10,
+      "stock_sha256": "10718e280fccf00148ff2af337c19c18604caffd2488f18b7b36d1bc913068bb"
+    },
+    {
+      "name": "npmx_adc_ntc_config_set",
+      "address": "0x55f58a",
+      "end": "0x55f5fe",
+      "size": 116,
+      "stock_sha256": "7db61e76e4bdaa0563558aee94c3a83ddcb296b9144aba8a22369753a83d1414"
+    },
+    {
+      "name": "npmx_adc_meas_all_get",
+      "address": "0x55f654",
+      "end": "0x55f6f0",
+      "size": 156,
+      "stock_sha256": "8848f2f4cd360a170d7b13ca9443ff0ec66f02050086a6b8251f0ea59be90cc2"
+    },
+    {
+      "name": "npmx_adc_ibat_meas_enable_set",
+      "address": "0x55f6f0",
+      "end": "0x55f718",
+      "size": 40,
+      "stock_sha256": "5209b264077e98285cf48fb0085a156d4105f37bc450df5ec2c31ac9b51da287"
+    },
+    {
+      "name": "npmx_buck_get",
+      "address": "0x55fa0e",
+      "end": "0x55fa18",
+      "size": 10,
+      "stock_sha256": "d8f4ebcea5d9c3f6948309d160cd642ae07916f5abe205b9c3306e6867ba081a"
+    },
+    {
+      "name": "npmx_buck_task_trigger",
+      "address": "0x55fa18",
+      "end": "0x55fa22",
+      "size": 10,
+      "stock_sha256": "d8cda78de4fe81a98307a25968fb734eab01bf250e90bae71edaca5d68a28698"
+    },
+    {
+      "name": "npmx_buck_normal_voltage_set",
+      "address": "0x55fa22",
+      "end": "0x55fa40",
+      "size": 30,
+      "stock_sha256": "27c65eb8f947866cc33b5e04798270456997663dd9c5e115dc314bcb757258ed"
+    },
+    {
+      "name": "npmx_buck_vout_select_set",
+      "address": "0x55fa40",
+      "end": "0x55faa8",
+      "size": 104,
+      "stock_sha256": "f31651c857269b8de79d99c05825d929b4a196b568f02cb407b9b6a13cf6dec4"
+    },
+    {
+      "name": "npmx_ldsw_get",
+      "address": "0x55face",
+      "end": "0x55fad8",
+      "size": 10,
+      "stock_sha256": "44aadbfdef013cdee4de5b0806c30bc79f21b2274780de8b238c059fb4f5cddd"
+    },
+    {
+      "name": "npmx_ldsw_task_trigger",
+      "address": "0x55fad8",
+      "end": "0x55fae2",
+      "size": 10,
+      "stock_sha256": "d8cda78de4fe81a98307a25968fb734eab01bf250e90bae71edaca5d68a28698"
+    },
+    {
+      "name": "npmx_ldsw_mode_set",
+      "address": "0x55fb7c",
+      "end": "0x55fbe4",
+      "size": 104,
+      "stock_sha256": "6db92db48b239c45d78cd1802a2bfbc0d8a18f6a72fff66851cb55e17dc2e2fa"
+    },
+    {
+      "name": "npmx_ldsw_ldo_voltage_set",
+      "address": "0x55fbe4",
+      "end": "0x55fc2c",
+      "size": 72,
+      "stock_sha256": "0f944f00a694cf4d0b208c9ca5010be726373a6c4f7e33bbcd1ae9f4aa9d194d"
+    },
+    {
+      "name": "npmx_backend_register_write",
+      "address": "0x55fc2c",
+      "end": "0x55fc38",
+      "size": 12,
+      "stock_sha256": "e426f9f63495d7cbdc0183997353f6a12957cdef9e9521866a7b7e349028b7ff"
+    },
+    {
+      "name": "npmx_backend_register_read",
+      "address": "0x55fc38",
+      "end": "0x55fc44",
+      "size": 12,
+      "stock_sha256": "f22261a9c23d23e6e452370454aaaa892d6439be7f11b382245b05496072a1ce"
+    },
+    {
+      "name": "npmx_ship_get",
+      "address": "0x55fc60",
+      "end": "0x55fc6a",
+      "size": 10,
+      "stock_sha256": "e935cc72bbf11cf39e2754e4f976dbd4b6c7af32843eebeaaf70d3bd01d2720b"
+    },
+    {
+      "name": "npmx_ship_task_trigger",
+      "address": "0x55fc6a",
+      "end": "0x55fc74",
+      "size": 10,
+      "stock_sha256": "cfedacaa59226f0f2bb77b1eb75f96f8e461dbccb5748d7122cee69d8640dd54"
+    }
+  ]
+}

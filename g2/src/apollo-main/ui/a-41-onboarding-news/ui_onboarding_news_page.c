@@ -453,7 +453,9 @@ static void news_destroy_ext_page(void)
     (void)onboarding_news_page_refresh_50a094();
 }
 
-static void *news_label(void *parent, int32_t w, int32_t h, int32_t x, int32_t y, const char *text)
+/* text is an i18n key when localize != 0: stock resolves it (0x460084 then 0x45fffe) after the label's
+ * long-mode call and immediately before 0x49942e set_text, not before 0x499416 label_create. */
+static void *news_label(void *parent, int32_t w, int32_t h, int32_t x, int32_t y, const char *text, int localize)
 {
     void *label = audio_lv_label_create_499416(parent);
     audio_uart_page_43f506(label, w);
@@ -461,7 +463,7 @@ static void *news_label(void *parent, int32_t w, int32_t h, int32_t x, int32_t y
     audio_uart_page_43f0e0(label, x);
     audio_uart_page_43f142(label, y);
     audio_lv_label_mode_499678(label, LV_LABEL_LONG_DOT);
-    audio_lv_label_text_49942e(label, text);
+    audio_lv_label_text_49942e(label, localize ? localized(text) : text);
     audio_lv_style_color_44140e(label, audio_uart_page_44104c(COLOR_WHITE), LV_PART_MAIN);
     audio_lv_style_font_44143e(label, FONT(), LV_PART_MAIN);
     return label;
@@ -525,10 +527,10 @@ int32_t onboarding_news_page_refresh_50a094(void)
     audio_uart_page_43ded4(icon, LV_OBJ_FLAG_ADV_HITTEST);
     audio_uart_page_43dfa4(icon, LV_OBJ_FLAG_SCROLLABLE);
 
-    g2_onboarding_news_title_20074da0 = news_label(card, 0xda, 0x1c, 0x20, 0, localized(id_title));
-    g2_onboarding_news_time_20074dac = news_label(card, 0x3c, 0x1c, 0xfa, 0, sample_time);
+    g2_onboarding_news_title_20074da0 = news_label(card, 0xda, 0x1c, 0x20, 0, id_title, 1);
+    g2_onboarding_news_time_20074dac = news_label(card, 0x3c, 0x1c, 0xfa, 0, sample_time, 0);
     g2_onboarding_news_content1_20074da4 =
-        news_label(card, 0x13b, LV_SIZE_CONTENT, 0, 0x38, localized(id_content_1));
+        news_label(card, 0x13b, LV_SIZE_CONTENT, 0, 0x38, id_content_1, 1);
 
     void *content2 = audio_lv_label_create_499416(card);
     g2_onboarding_news_content2_20074da8 = content2;
@@ -959,7 +961,10 @@ void onboarding_news_scroll_update_content_state_50b5f4(g2_onboarding_news_conta
     int32_t top = audio_uart_lv_scroll_top_44e4aa(c->content_scroll);
     int32_t bottom = audio_uart_lv_scroll_bottom_44e4bc(c->content_scroll);
     int32_t height = audio_uart_lv_obj_height_43fdda(c->content_scroll);
-    c->scrollable = height < bottom + top + height;
+    /* Stock 0x50b6c4..0x50b6ca: adds r6,r6,r0; adds r6,r5,r6; cmp r0,r6 -- a wrapping 32-bit sum, then a
+     * signed compare. Written in unsigned arithmetic so the compiler cannot fold it to 0 < top + bottom
+     * (signed overflow is UB); ag15 harness caught the fold on large stub returns. */
+    c->scrollable = height < (int32_t)((uint32_t)bottom + (uint32_t)top + (uint32_t)height);
     if (c->scrollable == 0u) {
         audio_uart_page_44e368(c->content_scroll, LV_SCROLLBAR_MODE_OFF);
         c->at_top = 1u;

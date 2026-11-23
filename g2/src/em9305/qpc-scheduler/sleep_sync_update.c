@@ -1,9 +1,10 @@
 /* Native 0x310a4c..0x310aa8. Explicit R0/R1 wide-return facade for
  * 0x30f2d8 and compiler runtime facade 0x302748 remain unresolved. */
 #include <stdint.h>
+#include "em9305_ram.h"
 extern uint64_t opencfw_em9305_sleep_sync_convert(uint32_t,uint32_t); /* 0x30f2d8 */
 extern uint64_t opencfw_em9305_sleep_sync_divide(uint32_t,uint32_t,uint32_t,uint32_t); /* 0x302748 */
-static uintptr_t context(void) { return *(volatile uint32_t *)(uintptr_t)0x80fd2cu; }
+static uintptr_t context(void) { return em9305_ram_80fd2c.u32_80fd2c; }
 uint32_t opencfw_em9305_sleep_sync_update(uint32_t incoming)
 {
  (void)incoming;

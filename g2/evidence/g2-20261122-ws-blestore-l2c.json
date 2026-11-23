@@ -1,0 +1,94 @@
+{
+  "id": "g2-20261122-ws-blestore-l2c",
+  "time": "2026-11-22 21:20 America/Chicago",
+  "stream": "ws-blestore",
+  "status": "VERIFIED",
+  "scope": "L2CAP: 11 G2 L2C units (ble-l2c, l2c-default, l2c-dm, l2c-hci, l2c-rx, l2c-signaling, l2c-slave) plus L2cDataReq (ble-smp/display_ble_smp_packet_send.c) and L2cSlaveHandlerInit (ble-stack/display_ble_stack_handler_init.c). l2c-log helpers run as stock callees (0x4c9c50 / 0x44b610) rather than as targets.",
+  "harness": "per-function stub-patch differential (Renode 1.17 Cortex-M55). l2cCb placed at stock 0x200737d8 (0x30), l2cSlaveCb at 0x20073bd8 (0x18). Each side's L2cInit/L2cSlaveInit/L2cMasterInit/L2cSlaveHandlerInit is snapshotted (PREINIT); tests restore that side's snapshot, then randomise identifier/slave rows, packets and ACL headers identically. Stub call arguments compared (arity table, including varargs logs). Function pointers canonicalised (target index or 0xF00F00). WsfMsgDataAlloc returns a scripted pool; DmConnIdByHandle/DmConnRole are scripted 0..3. clang cflags -fno-common -mllvm -arm-global-merge=false on top of sources.json profiles.",
+  "verdict": "EQUIVALENT",
+  "final_run": {
+    "label": "run0",
+    "started": "2026-11-22 21:19 America/Chicago",
+    "finished": "2026-11-22 21:20 America/Chicago",
+    "command": "python3 harness/difft.py specs/l2c  (cwd build/ws-blestore-20261122); stdout specs/l2c/run0.out",
+    "tests": 1001,
+    "equal": 1001,
+    "differ": 0,
+    "done": true,
+    "overflow": false,
+    "targets": 23,
+    "target_names": [
+      "L2cInit",
+      "L2cRegister",
+      "L2cSlaveInit",
+      "L2cMasterInit",
+      "L2cSlaveHandlerInit",
+      "L2cDataReq",
+      "audio_ble_l2c_conn_update_request_536ea4",
+      "audio_ble_l2c_default_data_530538",
+      "audio_ble_l2c_default_cid_530640",
+      "audio_ble_l2c_default_control_53076c",
+      "audio_ble_l2c_msg_alloc_530b28",
+      "audio_ble_l2c_send_cmd_reject_530ae0",
+      "audio_ble_l2c_dm_conn_update_rsp_537230",
+      "audio_ble_l2c_hci_acl_5308e6",
+      "audio_ble_l2c_hci_flow_impl",
+      "audio_ble_l2c_rx_signaling_53076e",
+      "audio_ble_l2c_master_rx_536fbc",
+      "audio_ble_l2c_slave_rx_536c5c",
+      "audio_ble_l2c_slave_req_timeout_536b40",
+      "audio_ble_handler_536fa4",
+      "audio_ble_dm_l2c_conn_update_ind_impl",
+      "audio_ble_dm_l2c_conn_update_cnf_impl",
+      "audio_ble_dm_l2c_cmd_rej_ind_56e5a4"
+    ],
+    "mutants": 5,
+    "killed": 5,
+    "surviving_mutants": [],
+    "last_test": "0x7f040031",
+    "last_test_meaning": "mutant 4 (L2cInit identifier-byte 0 vs 1), case 0x31",
+    "run_seconds": 49,
+    "harness_sha256": "8306650e98b3f3226ce60dc9889c28f96ddf2ddcbe34da41cc7084383693e4ee",
+    "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "report": "build/ws-blestore-20261122/specs/l2c/report-verdict.json"
+  },
+  "mutants": [
+    {
+      "src": 11,
+      "sym": "L2cDataReq",
+      "from": "packet[2]=(uint8_t)(length+4u);packet[3]=(uint8_t)((length+4u)>>8);",
+      "to": "packet[2]=(uint8_t)(length+0u);packet[3]=(uint8_t)((length+0u)>>8);"
+    },
+    {
+      "src": 0,
+      "sym": "L2cRegister",
+      "from": "if(cid==4u) {put(0u,data);put(12u,control);}",
+      "to": "if(cid==5u) {put(0u,data);put(12u,control);}"
+    },
+    {
+      "src": 7,
+      "sym": "audio_ble_l2c_rx_signaling_53076e",
+      "from": "if(role==0u) {",
+      "to": "if(role==2u) {"
+    },
+    {
+      "src": 1,
+      "sym": "audio_ble_l2c_conn_update_request_536ea4",
+      "from": "audio_ble_l2c_state[0x24u] = identifier == 0xffu ? 1u :\n                                  (uint8_t)(identifier + 1u);",
+      "to": "audio_ble_l2c_state[0x24u] = identifier == 0xffu ? 0u :\n                                  (uint8_t)(identifier + 1u);"
+    },
+    {
+      "src": 0,
+      "sym": "L2cInit",
+      "from": "audio_ble_l2c_state[36u]=1u;",
+      "to": "audio_ble_l2c_state[36u]=0u;"
+    }
+  ],
+  "c_fixes": [],
+  "product_c": "no edits; first run was EQUIVALENT with all five mutants killed",
+  "shared_files": "not edited",
+  "notes": [
+    "audio_ble_dm_l2c_conn_update_ind_impl is GC'd in full-2055; the live symbol audio_ble_dm_l2c_conn_update_ind_55bc96 is an alias of generated Cordio DmL2cConnUpdateInd. The harness defsym'd the 55bc96 name to the handwritten impl so that path was still compared against stock 0x55bc96, and it matched. No product C change in this slice.",
+    "l2c-log (audio_ble_hci_vendor_log_enabled_4c9c50 / audio_l2c_strncmp) was left as a stock callee, same pattern as SMP."
+  ]
+}

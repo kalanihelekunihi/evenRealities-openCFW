@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_pal_random_step(void);
@@ -32,7 +33,7 @@ static void store32(uint8_t *p,uint32_t v)
  * Child 3239b8's input R3 is captured before its call. */
 uint32_t opencfw_em9305_init_transition_start_327b60_body(uint8_t *frame)
 {
-    uintptr_t flags=0x805a85u, config=0x805b84u;
+    uintptr_t flags=((uintptr_t)&em9305_ram_805a6c + 0x19u), config=((uintptr_t)&em9305_ram_805b80 + 0x4u);
     uint32_t feature=*(volatile uint8_t *)(flags+16u);
     uint32_t mode=*(volatile uint8_t *)(config+12u);
     frame[4]=0u;
@@ -40,7 +41,7 @@ uint32_t opencfw_em9305_init_transition_start_327b60_body(uint8_t *frame)
     if((feature&(1u<<6u))!=0u && mode<5u &&
        ((0x13u>>mode)&1u)!=0u) frame[1]=1u;
 
-    uintptr_t root=0x8052d4u;
+    uintptr_t root=(uintptr_t)&em9305_ram_8052d4;
     uintptr_t active=root+44u;
     (void)opencfw_em9305_memset((void *)active,0u,204u);
     uintptr_t packet=root+92u;
@@ -61,21 +62,21 @@ uint32_t opencfw_em9305_init_transition_start_327b60_body(uint8_t *frame)
         uint32_t select=*(volatile uint8_t *)(config+25u);
         if((select&3u)!=0u) {
             uint32_t mask=(select&2u)==0u?8u:((select&1u)!=0u?40u:32u);
-            *(volatile uint16_t *)(uintptr_t)0x80537eu=(uint16_t)mask;
+            em9305_ram_80537c.u16_80537e=(uint16_t)mask;
         }
     }
     uint32_t feature2=*(volatile uint8_t *)flags;
     uint8_t chooser=*(volatile uint8_t *)(config+24u);
-    *(volatile uint8_t *)(uintptr_t)0x8053afu=chooser;
+    em9305_ram_805398.u8_8053af=chooser;
     uint32_t choice=0u;
     if((feature2&(1u<<6u))!=0u) {
         choice=opencfw_em9305_pal_random_step()%3u;
         mode=*(volatile uint8_t *)(config+12u);
     }
-    *(volatile uint8_t *)(uintptr_t)0x8053aeu=(uint8_t)choice;
+    em9305_ram_805398.u8_8053ae=(uint8_t)choice;
     if(mode>4u)return choice;
 
-    uintptr_t half=0x80537cu;
+    uintptr_t half=(uintptr_t)&em9305_ram_80537c;
     switch(mode) {
     case 0u:
         frame[0]=0u;
@@ -83,7 +84,7 @@ uint32_t opencfw_em9305_init_transition_start_327b60_body(uint8_t *frame)
         break;
     case 1u:
         *(volatile uint32_t *)(config+4u)=0u;
-        *(volatile uint8_t *)(uintptr_t)0x8053aeu=0u;
+        em9305_ram_805398.u8_8053ae=0u;
         *(volatile uint32_t *)(config+8u)=0xea6u;
         *(volatile uint32_t *)config=0x138800u;
         frame[0]=1u;
@@ -154,7 +155,7 @@ uint32_t opencfw_em9305_init_transition_start_327b60_body(uint8_t *frame)
             (uint32_t)(uintptr_t)opencfw_em9305_init_transition_callback_32805c;
         *(volatile uint32_t *)(half+40u)=
             (uint32_t)(uintptr_t)opencfw_em9305_init_transition_callback_328018;
-        *(volatile uint32_t *)(half+28u)=0x805408u;
+        *(volatile uint32_t *)(half+28u)=(uintptr_t)&em9305_ram_805408;
     } else {
         *(volatile uint32_t *)(half+28u)=0u;
     }
@@ -164,12 +165,12 @@ uint32_t opencfw_em9305_init_transition_start_327b60_body(uint8_t *frame)
         frame[0]=4u;
         frame[4]=(uint8_t)(count+6u);
         uint32_t encoded=opencfw_em9305_radio_encode_3239d4(
-            0x8053d0u,(uintptr_t)frame);
+            ((uintptr_t)&em9305_ram_8052d4 + 0xfcu),(uintptr_t)frame);
         uint32_t processed=opencfw_em9305_init_transition_segment_3243dc(
             encoded*2u,value16,value20,row);
         *(volatile uint8_t *)(row+32u)=0u;
-        *(volatile uint32_t *)(uintptr_t)0x80539cu=encoded;
-        *(volatile uint8_t *)(uintptr_t)0x8053adu=(uint8_t)(processed+encoded);
+        em9305_ram_805398.u32_80539c=encoded;
+        em9305_ram_805398.u8_8053ad=(uint8_t)(processed+encoded);
     } else {
         *(volatile uint32_t *)(half+32u)=0u;
     }

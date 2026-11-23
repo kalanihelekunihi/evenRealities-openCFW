@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x319714..0x3197c6. R0=context, R1=packet, R2=mode.
  * The BIH table at 0x319736 has 17 rows for opcodes 3..19. Its targets
@@ -54,7 +55,7 @@ uint32_t opencfw_em9305_child_319714(uint32_t context_word,
         if(mode==0u) return 25u;
         return read8(context+5u)==1u?0u:25u;
     case 18u: case 19u:
-        if((read8(0x805a94u)&16u)==0u) return 25u;
+        if((read8(((uintptr_t)&em9305_ram_805a6c + 0x28u))&16u)==0u) return 25u;
         return read8(context+5u)==1u?0u:25u;
     default:
         return 25u; /* table rows 7..9 and 12..17 */

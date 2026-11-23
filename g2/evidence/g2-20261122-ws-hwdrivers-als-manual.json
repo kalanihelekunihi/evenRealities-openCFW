@@ -1,0 +1,30 @@
+{
+ "title": "ws-hwdrivers stream 3: als-manual (audio_als_manual_set_brightness_4ae81c, audio_als_manual_recalculate_4adcd8) verified vs stock",
+ "when": "2026-11-22 7:06 PM CST (America/Chicago)",
+ "module": "g2-als-manual",
+ "source": "g2/src/apollo-main/drivers/peripherals/als-manual/als_manual_brightness_4ae81c.c, als_manual_recalculate_4adcd8.c",
+ "method": {
+  "emulator": "Renode 1.17.0, CPU CortexM cortex-m55, FPU on",
+  "harness": "build/ws-hwdrivers-20261122/harness (hw.repl/harness.c/rt.S/tramp.S + per-unit gen_<unit>.c), final arg-comparing + VFP-aware harness",
+  "compare": "per test: return value, stub-call arg lists (0xB7), i2c transaction + 128x256 register-image diff, caller/global dump images, register diffs. Stack-local and elog string-literal pointers canonicalized.",
+  "build_flags": "clang -Oz -mcpu=cortex-m55+nomve -mthumb -mfpu=fpv5-d16 -mfloat-abi=hard -ffp-contract=off -ffunction-sections -fdata-sections -fno-common -mllvm -arm-global-merge=false"
+ },
+ "result": {
+  "functions": 2,
+  "cases": 24,
+  "exact_matches": 24,
+  "mismatches": 0,
+  "verified_functions": [
+   "audio_als_manual_set_brightness_4ae81c",
+   "audio_als_manual_recalculate_4adcd8"
+  ],
+  "units": {
+   "alsmanb": "12/12",
+   "alsmanr": "12/12"
+  }
+ },
+ "harness_fidelity_fixes": [
+  "ROOT CAUSE of initial 0/12: at -Oz clang coalesces the unit's small .bss globals into one section .bss..L_MergedGlobals with no per-name symbols, so the placement linker script KEEP(*(.bss.<name>)) matched nothing and the C globals (audio_als_manual_ready @0x200741c0, audio_als_manual_window @0x20073c98) stayed in default .bss (zeroed) while setup_data seeded the stock addresses. C read 0/garbage -> diverged from stock which reads the seeded stock RAM.",
+  "FIX: build2.sh CFLAGS += -fno-common -mllvm -arm-global-merge=false. Each global now gets its own .bss.<name> section and places at its stock address. Confirmed stock reads audio_als_manual_ready from 0x200741c0 (literal @0x4ae984) = same address the C declares, so the C reconstruction was already faithful; the fix was purely a harness placement/codegen-fidelity issue."
+ ]
+}

@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern uint32_t opencfw_em9305_radio_peer_pair_303a40(
     uint32_t,uint32_t,uint32_t,uintptr_t);
@@ -37,10 +38,10 @@ static uint32_t mpywhl_327de8(uint32_t a,uint32_t b)
  * retained as loops; scheduler children may mutate the observed fields. */
 uint32_t opencfw_em9305_init_transition_process_327de8(uintptr_t owner)
 {
-    uint8_t flag0=rb(0x8052fcu),flag1=rb(0x8052fdu);
+    uint8_t flag0=rb(((uintptr_t)&em9305_ram_8052f8 + 0x4u)),flag1=rb(((uintptr_t)&em9305_ram_8052f8 + 0x5u));
     if((flag0|flag1)!=0u)goto command_event;
 
-    uintptr_t mode_state=0x805a70u,extended=0x805be1u;
+    uintptr_t mode_state=((uintptr_t)&em9305_ram_805a6c + 0x4u),extended=((uintptr_t)&em9305_ram_805be0 + 0x1u);
     uint8_t pending=rb(mode_state+15u);
     uintptr_t object=rd(owner+44u);
     uint8_t current=rb(extended+1u);
@@ -53,15 +54,15 @@ uint32_t opencfw_em9305_init_transition_process_327de8(uintptr_t owner)
         wb(mode_state+15u,0u);
         found=1u;
     } else if((current&2u)!=0u) {
-        uint32_t upper_arg=rd(0x805b98u);
-        uint32_t lower_arg=rd(0x805b94u);
-        uint32_t kind=rb(0x805b92u);
+        uint32_t upper_arg=rd(((uintptr_t)&em9305_ram_805b80 + 0x18u));
+        uint32_t lower_arg=rd(((uintptr_t)&em9305_ram_805b80 + 0x14u));
+        uint32_t kind=rb(((uintptr_t)&em9305_ram_805b80 + 0x12u));
         found=opencfw_em9305_radio_peer_pair_303a40(
             kind,lower_arg,upper_arg,(uintptr_t)pair);
         if(found!=0u){upper=pair[1];lower=pair[0];}
     }
     if(found!=0u) {
-        uintptr_t address=0x8052d6u;
+        uintptr_t address=((uintptr_t)&em9305_ram_8052d4 + 0x2u);
         (void)opencfw_em9305_radio_address_write_3045e8(
             address,lower,upper);
         uint16_t first=rh(address),second=rh(address+2u),third=rh(address+4u);
@@ -72,7 +73,7 @@ uint32_t opencfw_em9305_init_transition_process_327de8(uintptr_t owner)
         wr(object+84u,lower);
     }
 
-    uintptr_t config=0x805b84u;
+    uintptr_t config=((uintptr_t)&em9305_ram_805b80 + 0x4u);
     uint8_t mode=rb(config+12u);
     if(mode==1u || mode==4u) {
         uint32_t flags=rd(object+80u)&68u;
@@ -83,26 +84,26 @@ uint32_t opencfw_em9305_init_transition_process_327de8(uintptr_t owner)
             if(opencfw_em9305_radio_identity_pair_303a60(
                 kind,low,high,(uintptr_t)pair)!=0u)
                 (void)opencfw_em9305_radio_address_write_3045e8(
-                    0x8052dcu,pair[0],pair[1]);
+                    ((uintptr_t)&em9305_ram_8052d4 + 0x8u),pair[0],pair[1]);
             mode=rb(config+12u); /* Only path through native 327eae. */
         }
     }
-    if(mode!=1u && mode!=4u && rb(0x805bc0u)!=0u) {
+    if(mode!=1u && mode!=4u && rb(((uintptr_t)&em9305_ram_805bbc + 0x4u))!=0u) {
         uintptr_t source=config+28u;
         uint8_t count=rb(source+31u);
         wb(source+32u,0u);
         wb(object+124u,(uint8_t)(count+8u));
-        wb(0x8052d5u,(uint8_t)(count+6u)); /* BL delay slot. */
-        (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x8052dcu,
+        wb(((uintptr_t)&em9305_ram_8052d4 + 0x1u),(uint8_t)(count+6u)); /* BL delay slot. */
+        (void)opencfw_em9305_memcpy((void *)((uintptr_t)&em9305_ram_8052d4 + 0x8u),
             (const void *)source,count);
     }
     if(rb(extended)!=0u) {
-        uintptr_t source=0x805bc1u;
+        uintptr_t source=(uintptr_t)&em9305_ram_805bc1;
         uint8_t count=rb(source+31u);
         wb(source+32u,0u);
         wb(object+125u,(uint8_t)(count+8u));
-        wb(0x8053d1u,(uint8_t)(count+6u)); /* STB.AB old base. */
-        (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x8053d8u,
+        wb(((uintptr_t)&em9305_ram_8052d4 + 0xfdu),(uint8_t)(count+6u)); /* STB.AB old base. */
+        (void)opencfw_em9305_memcpy((void *)((uintptr_t)&em9305_ram_8052d4 + 0x104u),
             (const void *)source,count);
     }
     (void)opencfw_em9305_associated_object_init_312918(owner,0u);
@@ -130,7 +131,7 @@ uint32_t opencfw_em9305_init_transition_process_327de8(uintptr_t owner)
             }
         }
         if(rb(extended+14u)!=0u) {
-            uint32_t handler=rb(0x805b18u);
+            uint32_t handler=rb(((uintptr_t)&em9305_ram_805af0 + 0x28u));
             return opencfw_em9305_wsf_event_post(handler,1u<<14u);
         }
         return 0u;
@@ -166,7 +167,7 @@ command_event:
         uintptr_t event=opencfw_em9305_wsf_event_allocate(4u);
         if(event==0u)return 0u;
         wh(event+2u,1028u);
-        uint32_t handler=rb(0x805b18u);
+        uint32_t handler=rb(((uintptr_t)&em9305_ram_805af0 + 0x28u));
         return opencfw_em9305_wsf_task_message_send(handler,event);
     }
 }

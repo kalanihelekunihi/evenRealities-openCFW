@@ -160,7 +160,7 @@ uint32_t APP_PbRxOnboardingFrameDataProcess(const uint8_t *data, uint16_t length
     g2_pb_istream_t initial, stream;
     audio_uart_pb_stream_init(&initial, data, length);
     (void)audio_uart_display_area_copy_439c04(&stream, &initial, sizeof stream);
-    if (audio_uart_pb_decode(&stream, audio_onboarding_event_descriptor_779c94, msg) == 0u) {
+    if ((uint8_t)audio_uart_pb_decode(&stream, audio_onboarding_event_descriptor_779c94, msg) == 0u) {
         ONB_LOG(1u, fn_frame, 0x3cu, 0x04400000u, "Decoding failed: %s",
                 stream.errmsg != NULL ? stream.errmsg : none_text);
         return 0x2bu;

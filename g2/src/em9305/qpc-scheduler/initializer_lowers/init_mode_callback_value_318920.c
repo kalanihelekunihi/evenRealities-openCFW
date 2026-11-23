@@ -1,11 +1,12 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Complete native 0x318920..0x31895e. The 0x303f5c child reads a live
- * configuration halfword through 0x805c18. All native BRLO delay-slot
+ * configuration halfword through ((uintptr_t)&em9305_ram_805be0 + 0x38u). All native BRLO delay-slot
  * assignments are represented in their actual threshold order. */
 uint32_t opencfw_em9305_mode_callback_value_318920(uintptr_t context)
 {
-    uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805c18u;
+    uintptr_t configuration=em9305_ram_805be0.u32_805c18;
     uint32_t value=*(volatile uint16_t *)configuration;
     uint32_t rank;
     if (value<21u) rank=7u;

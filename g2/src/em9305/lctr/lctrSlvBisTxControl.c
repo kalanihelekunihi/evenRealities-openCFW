@@ -4,11 +4,12 @@
  * product; settled wave 28, see docs/em9305-arc-harness.md), so {lo,hi} is the 64-bit value (+0x24:+0x20) * byte +0x18; the 64-bit value handed to the 0x8052d0 callback is {lo, hi} as in lctrSlvBigBeginOp.
  */
 #include <stdint.h>
+#include "em9305_ram.h"
 #define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
 #define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
 #define LCTR_SLV_BIG_RX_CB  0x8051e0u
 #define LCTR_SLV_BIG_BUF    0x802858u
-#define LCTR_SLV_BIG_TXCTL_HDR 0x805444u
+#define LCTR_SLV_BIG_TXCTL_HDR ((uintptr_t)&em9305_ram_80542c.u32_805444)
 #define LCTR_SLV_BIG_TIME_CB 0x8052d0u
 extern uint32_t opencfw_em9305_BbBleBisTxData(uint32_t hdr, uint32_t a, uint32_t b, uint32_t c);
 

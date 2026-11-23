@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 12:38:28 AM CST (America/Chicago)",
+  "title": "Replace harvested typo-RAM objects 80542c/805434/805438 with one 28-byte object; prove users; install the two Bis completion units; private p-80542c rebuild; paired Renode sims both PASS (run_renode_rc=0)",
+  "scope": "Stock-check every user of 0x80542c..0x805447, merge three 1-byte harvested objects into one 28-byte typo-RAM struct, retarget users, QEMU-ARC 100-case prove plus killed mutants, install, private p-lowers, NVM slot-fit, private NOR splice, both paired sims.",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-usuffix-typoram-29-paired-sims.json",
+  "prior_p_usuf29_dfu_confirmation": {
+    "evidence": "g2/evidence/g2-20261123-em9305-usuffix-typoram-29-paired-sims.json",
+    "forced_mismatch_dfu_result": "PASS",
+    "forced_mismatch_dfu_run_renode_rc": 0,
+    "started": "2026-11-23 12:18:19 AM CST (America/Chicago)",
+    "finished": "2026-11-23 12:20:00 AM CST (America/Chicago)",
+    "note": "The p-usuf29 DFU log and shell run were rechecked this turn. The evidence file was updated so sims.forced_mismatch_dfu.result is PASS, sims.forced_mismatch_dfu.run_renode_rc is 0, compare.forced_mismatch_dfu_baseline is PASS, and compare.forced_mismatch_dfu_run_renode_rc is 0."
+  },
+  "stock_check": {
+    "range": [
+      "0x80542c",
+      "0x805447"
+    ],
+    "length_bytes": 28,
+    "result": "Stock uses one 28-byte scratch at 0x80542c that spans the harvested 1-byte objects at 0x805434 and 0x805438. The next typo-RAM table is BIS_TXENT_TAB at 0x805448, so the 28-byte block fits exactly. Previous object is 805408 (1 byte). Next typo-RAM object after the table is 805688.",
+    "users": {
+      "init_native_callback_3286f8.c": "memset 0x1c bytes at 0x80542c, already typo-RAM retargeted to &em9305_ram_80542c",
+      "lctrSlvBigBeginOp.c": "comment 0x1c-byte scratch cleared on entry; memset(0x80542cu, 0, 0x1c); writes +0x10, +0x14, +0x18, and a header at +6. Still literals; not installed this pass (prior u-suffix prove RUN FAILED).",
+      "lctrSlvBisTxCompletionInterleaved.c": "TX cursor at 0x80542c: W32(+0) key, B8(+4) idx, W32(+0x10) ts, W32(+0x14) ptr, W32(+0x18) flag; also passes the base pointer to dispatch_child_3173ac",
+      "lctrSlvBisTxCompletionSequential.c": "same cursor fields; B8(+0) compared to big+0x34; dispatch_child_317418",
+      "lctrSlvBisTxData.c": "B8(+0/+1/+3) row/col/col2, W32(+0x10) and W32(+0x14). Still literals; not installed this pass (prior RUN FAILED).",
+      "lctrSlvBisTxControl.c": "W32(0x805444u) is the +0x18 flag/header pointer, last word of the 28-byte block. Still literals; not installed this pass (prior RUN FAILED).",
+      "lctrSlvBisSetupTxData.c": "per-stream counters at 0x805434 and 0x805438 (+index a); W32(805438+0x0c) is the +0x18 flag; BIS_CNT_B-6 is the address 0x805432 (g+6 header). Indexed by stream id from BeginOp loop i < B8(big+0x34) and 328dd4 loop i < U8(link+52). The 28-byte layout only has 4 bytes for each counter bank before ts/ptr/flag; a stock index >=4 would already overlap those words and the 0x805448 table. Counters are modeled as u8[4] fields at +8 and +0xc.",
+      "init_native_callback_328dd4.c": "U8(0x805434+i) and U8(0x805438+i) for i in [0, U8(link+52))"
+    },
+    "layout": {
+      "+0x00 / 0x80542c": "u32 key / bytes row,col,?,col2",
+      "+0x04 / 0x805430": "u8 idx",
+      "+0x08 / 0x805434": "CNT_A u8[4]",
+      "+0x0c / 0x805438": "CNT_B u8[4]",
+      "+0x10 / 0x80543c": "u32 ts",
+      "+0x14 / 0x805440": "u32 ptr",
+      "+0x18 / 0x805444": "u32 flag / TXCTL_HDR",
+      "+0x1c / 0x805448": "end; BIS_TXENT_TAB starts"
+    },
+    "not_pinned": true
+  },
+  "source_fix": {
+    "header": "g2/src/em9305/qpc-scheduler/em9305_ram.h",
+    "header_sha256_before": "faab333ec042cd4e1ae6a9b2936261b193443808e39b4bbfac42ac2a1af15c1d",
+    "header_sha256_after": "935b126cfa017e3d215a251128fcbf1b7f19b49cea9d44cff16eb12c86203a89",
+    "header_bytes": 212068,
+    "object_count_before": 147,
+    "object_count_after": 145,
+    "em9305_ram_80542c": "seven 4-byte anonymous unions (u32 plus u8[4]) covering +0..+0x18, offsetof asserts, _Static_assert(sizeof==28). Removed struct em9305_ram_805434 and struct em9305_ram_805438.",
+    "ld": "g2/src/em9305/link/g2-em9305.ld",
+    "ld_sha256_after": "70da36434f937d8f5ee74a9d040386ba05376d3669daf4e3d15e1308fbb5b951",
+    "ld_change": "Kept em9305_ram_80542c = 0x0080542c. Removed em9305_ram_805434 and em9305_ram_805438 assignments because those C objects no longer exist. The 28-byte object stays at the same absolute base; no new ld address was required.",
+    "sources_json_rewritten": false,
+    "ld_sha256_before": "6f89db8801e136608cb98afbdeee3b9860d6f2ccbbeef1ff3148b4f51f1d4ccb"
+  },
+  "prove": {
+    "n": 100,
+    "flags": "-mdiv-rem -mbarrel-shifter -mswap -mnorm -mmpy-option=wlh1 --dztrap",
+    "results": "build/ws-em9305-20261122/u-suffix/ram80542c/prove/results.jsonl",
+    "units": {
+      "opencfw_em9305_lctrSlvBisTxCompletionInterleaved": "EQUIVALENT 100  classes=60 calls=110  mutant u8_805430[0]->[1] KILLED",
+      "opencfw_em9305_lctrSlvBisTxCompletionSequential": "EQUIVALENT 100  classes=61 calls=107  mutant u8_80542c[0]->[1] KILLED",
+      "opencfw_em9305_lctrSlvBisSetupTxData": "EQUIVALENT 100  classes=99 calls=206  mutant u8_805434[0]->u8_805430[0] KILLED",
+      "opencfw_em9305_callback_3286f8": "EQUIVALENT 100  classes=96 calls=200  mutant sizeof->24u KILLED",
+      "opencfw_em9305_callback_328dd4": "EQUIVALENT 100  classes=79 calls=910  mutant u8_805434[0]->u8_805430[0] KILLED"
+    },
+    "first_flag_mutants_not_used": "An earlier u32_805444->u32_805440 mutant on the two completion units SURVIVED (unobserved first site). Retried on the early idx/row byte compares, which were killed.",
+    "not_proven_this_pass": [
+      "lctrSlvBigBeginOp.c",
+      "lctrSlvBisTxData.c",
+      "lctrSlvBisTxControl.c"
+    ]
+  },
+  "install": {
+    "files": [
+      "g2/src/em9305/qpc-scheduler/em9305_ram.h",
+      "g2/src/em9305/link/g2-em9305.ld",
+      "g2/src/em9305/lctr/lctrSlvBisTxCompletionInterleaved.c",
+      "g2/src/em9305/lctr/lctrSlvBisTxCompletionSequential.c",
+      "g2/src/em9305/lctr/lctrSlvBisSetupTxData.c",
+      "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_callback_328dd4.c",
+      "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_callback_3286f8.c"
+    ],
+    "shas": "build/ws-em9305-20261122/u-suffix/ram80542c/install_shas.json",
+    "two_bis_units_installed": true
+  },
+  "tree_build": {
+    "command": "python3 -u build/ws-em9305-20261122/pbuild.py build/ws-em9305-20261122/p-80542c -j 3",
+    "log": "build/ws-em9305-20261122/p-80542c-build.log",
+    "started": "2026-11-23 12:29:47 AM CST (America/Chicago)",
+    "finished": "2026-11-23 12:35:07 AM CST (America/Chicago)",
+    "rc": 0,
+    "units": 768,
+    "compiled_this_run": 768,
+    "link_log_empty": true,
+    "text_bytes": 239412,
+    "text_delta_vs_p_usuf29": -80,
+    "app_sha256": "16ff667dc6134f9b786b256cb1533f6b112282f93104db66e1874616e0c4cb32"
+  },
+  "package": {
+    "method": "em9305_record2.split_bootloader_image + record_package.build_package with last_page=(APP_BASE+len(app)-NVM_BASE+0x1FFF)//0x2000",
+    "path": "build/ws-em9305-20261122/p-80542c/g2-em9305-source-candidate-package.bin",
+    "bytes": 240744,
+    "sha256": "264b627afc749250645d21f5451352433b4478c1f47ccf4bebedaa634b9d7e85",
+    "magic": "00020404",
+    "records": 3,
+    "erase_sector_count": 31
+  },
+  "slot_fit": {
+    "nvm_window": [
+      "0x00300000",
+      "0x00380000"
+    ],
+    "bootloader_end": "0x00300488",
+    "application_end": "0x0033CB34",
+    "application_bytes": 239412,
+    "headroom_bytes": 275660,
+    "fits_nvm_slot": true,
+    "precomputed_programmed_nvm_crcs": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0xD924544A",
+      "[0x00302400,0x0033CB34)": "0xB97FF014"
+    },
+    "record2_crc32_note": "zlib-crc32 of the 56-byte record2 happens to equal the p-usuf29 record2 zlib-crc32 (0xD924544A) even though the bytes differ (fw_size 0x3ab0c vs 0x3ab5c). Observed sim CRC of [0x00302000,0x00302038) matches this image's record2 zlib-crc32."
+  },
+  "splice": {
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-80542c.bin",
+    "nor_sha256": "fd97b39f0b54170f22072642945e2ae6aadb0d69839a8339b08fdd32a15e6b9e",
+    "nor_source": "copy of build/em9305-nor-20261122/nor-stock-formatted.bin, then lfs_inject at 0x1400000 path /firmware/ble_em9305.bin",
+    "lfs_inject_wrote_bytes": 240744
+  },
+  "sims": {
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/80542c-match.resc",
+      "log": "build/ws-em9305-20261122/sim/80542c-match.log",
+      "started": "2026-11-23 12:35:58 AM CST (America/Chicago)",
+      "finished": "2026-11-23 12:37:02 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "chiprev": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_frames": 2,
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/80542c-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/80542c-dfu-mismatch.log",
+      "started": "2026-11-23 12:37:02 AM CST (America/Chicago)",
+      "finished": "2026-11-23 12:38:28 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq_at": "2026-11-23 12:38:06.860 AM CST (America/Chicago)",
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0xD924544A",
+        "[0x00302400,0x0033CB34)": "0xB97FF014"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 1038
+    }
+  },
+  "compare": {
+    "version_match_baseline": "PASS",
+    "version_match_run_renode_rc": 0,
+    "forced_mismatch_dfu_baseline": "PASS",
+    "forced_mismatch_dfu_run_renode_rc": 0,
+    "version_match_vs": "p-usuf29 and official-rootI match (same CHIPREV 0x22, OTAP 0xAFD1363A then 0, HOST 0x3A, END_PC 0x543528, 2 display frames, display hash 0c5cc90b\u2026, advertising 010A200101, 56 HCI)",
+    "dfu_protocol_completed": true,
+    "commit_00020404": true,
+    "sysresetreq": true,
+    "sbl_handoff": true,
+    "post_dfu_display_hash": "matches baseline 0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+    "observed_crcs_identical_to_precomputed_our_records": true,
+    "hci_packet_count_identical_to_previous_lowers_dfu": true,
+    "verdict": "Version-match is a full baseline PASS (run_renode_rc=0). Forced-mismatch DFU is a PASS (run_renode_rc=0): protocol completed (commit 00020404, SYSRESETREQ, SBL handoff) with observed programmed-NVM CRCs identical to the precomputed p-80542c record extents and the same post-handoff display hash and HOST 0x3A."
+  },
+  "rules": {
+    "no_commit": true,
+    "no_push": true,
+    "no_flash": true,
+    "no_backups": true,
+    "official_app_not_overwritten": true,
+    "sources_json_approval_closed": true,
+    "other_streams_left_alone": true,
+    "this_stream_one_renode_at_a_time": true
+  }
+}

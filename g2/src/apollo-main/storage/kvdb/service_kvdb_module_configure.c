@@ -44,7 +44,7 @@ extern void *audio_queue_copy_bytes(void *, const void *, uint32_t);    /* memcp
 extern uint32_t g2_log_module_length(const char *);                     /* strlen 0x44a43c */
 extern int32_t audio_uart_font_path_compare(const char *, const char *); /* strcmp 0x46cacc */
 extern uint32_t audio_uart_page_460084(const char *);                   /* i18n index of text */
-extern uint32_t audio_uart_page_45fffe(const char *, uint32_t);         /* localized text */
+extern const char *audio_uart_page_45fffe(const char *, uint32_t);         /* localized text */
 extern int32_t menu_builtin_app_info_get_460450(int32_t app_id, const void **icon, char *text,
                                                 uint32_t *text_res, uint8_t *app_type);
 extern void menu_page_mutex_lock_46018e(void);
@@ -138,7 +138,7 @@ int32_t SVC_KvdbReadLanguage(void) {
               language_default_msg_short, 0x0c400000u, audio_uart_display_locale_index);
     return 0;
 }
-G2_KVDB_MIGRATION_EXPORT(SVC_KvdbReadLanguage);
+/* SVC_KvdbReadLanguage: migration slot 3 of the stock-ordered table in service_kvdb.c (ROM 0x746d20). */
 
 int32_t SVC_KvdbWriteLanguage(uint8_t language) {
     return audio_settings_kvdb_blob_write(key_language, &language, 1u);
@@ -161,7 +161,7 @@ int32_t SVC_KvdbReadDashboardAutoCloseValue(void) {
               dashboard_default_msg_short, 0x0c400000u, g2_kvdb_dashboard_auto_close_value);
     return 0;
 }
-G2_KVDB_MIGRATION_EXPORT(SVC_KvdbReadDashboardAutoCloseValue);
+/* SVC_KvdbReadDashboardAutoCloseValue: migration slot 2 of the stock-ordered table in service_kvdb.c (ROM 0x746d20). */
 
 int32_t SVC_KvdbWriteDashboardAutoCloseValue(uint32_t value) {
     return audio_settings_kvdb_blob_write(key_dashboard, &value, 4u);
@@ -216,7 +216,7 @@ int32_t SVC_KvdbReadMenuConfigureValue(void) {
     g2_menu_ext_item_count = (int32_t)record->total_count;
     return 0;
 }
-G2_KVDB_MIGRATION_EXPORT(SVC_KvdbReadMenuConfigureValue);
+/* SVC_KvdbReadMenuConfigureValue: migration slot 1 of the stock-ordered table in service_kvdb.c (ROM 0x746d20). */
 
 /* Persist the menu page layout unless the stored copy already matches it. */
 int32_t SVC_KvdbWriteMenuConfigureValue(void) {

@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Complete native 0x31affc..0x31b21a. Three compact inline branch tables
  * are expressed as event classifications; no executable bytes are copied. */
@@ -48,7 +49,7 @@ static uint32_t event_112(uintptr_t context)
 
 static uint32_t event_twelve_secondary(void)
 {
-    uint32_t code=b(0x80281cu);
+    uint32_t code=b(((uintptr_t)&em9305_ram_8027e0 + 0x3cu));
     if(code>=20u && code<42u) {
         switch(code) {
         case 20u:case 21u:return 4u;
@@ -101,7 +102,7 @@ uint32_t opencfw_em9305_mode_selector_31affc(uintptr_t context,
         }
     }
     if(event!=12u) return 255u;
-    uint32_t code=b(0x802818u)-1u;
+    uint32_t code=b(((uintptr_t)&em9305_ram_8027e0 + 0x38u))-1u;
     if(code>=42u) return 255u;
     switch(code) {
     case 0u:return 1u;

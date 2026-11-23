@@ -1,0 +1,111 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "sources": {
+  "g2/src/apollo-main/app/a-57-pt-protocol/pt_procsr_cmds.c": "eb04405862b3e2b71359dfbd521aed9db8dfc6ecf7c80e5180ac8f92b9c9fcc2"
+ },
+ "spec": "build/ws-app-20261122/specs/pt-a",
+ "verified_at": "2026-11-22 21:31 CST",
+ "result": {
+  "tests": 600,
+  "equal": 600,
+  "differ": 0,
+  "done": true,
+  "overflow": false,
+  "mutants": 11,
+  "killed": 11,
+  "surviving_mutants": [],
+  "verdict": "EQUIVALENT",
+  "harness_sha256": "b21f590319b64c48fc272235f2fe4de85cc3ed049784f8dbb3df87f69faa655d",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "stock_entries": {
+  "pt_cmd_2A_handler (0x35 get_flash_burn_info)": "0x572c64",
+  "pt_cmd_31_handler (0x43 get_sync_status)": "0x57303c",
+  "pt_cmd_35_handler (0x06 ship mode)": "0x57320c",
+  "pt_cmd_38_handler (0x1C set PSN)": "0x573310",
+  "pt_cmd_39_handler (0x22 get PSN)": "0x5734cc",
+  "pt_cmd_3E_handler (aging set)": "0x573c58",
+  "pt_cmd_42_handler (0x44 buzzer)": "0x573f88",
+  "pt_cmd_44_handler (0x46 aging mode)": "0x574464",
+  "pt_cmd_46_handler (0x3D aging result)": "0x574580",
+  "pt_cmd_47_handler (device id)": "0x574808",
+  "pt_cmd_48_handler (fw version)": "0x574f60",
+  "pt_cmd_49_handler (peer sync)": "0x57522c",
+  "pt_cmd_57_handler (mic delay)": "0x57536c",
+  "pt_handler_result": "0x575428",
+  "pt_cmd_52_handler (OTA start)": "0x575470",
+  "pt_cmd_53_handler (OTA info)": "0x575548",
+  "pt_cmd_54_handler (OTA file)": "0x575708",
+  "pt_cmd_55_handler (OTA result)": "0x5759fc"
+ },
+ "method": "random 1-3 op sequences over all 18 entries (the IMU/lux calibration handlers are in pt_procsr_calib.c, not covered here); NULL payload/rsp/rsp_len and short lengths; product mode 1/0/2; file open/read/write failures and short transfers; sync-UART echo arriving on a random poll (exact, last byte wrong, junk); PSN lengths 0..20 and read-back match/mismatch; aging start/stop with bypass 0/1/random; device-id selectors 0..8+random with driver errors; peer role 0/1/2/0x101; OTA header length 0x80/other and heap failure; OTA packets of 1000/short/0/1-2 bytes, last flag, sequence equal/-1/+1/wrap 0xff, CRC match/mismatch, fill 0/4998/4999/5000/random; 600 tests + 80 per mutant",
+ "observed": "all callee args/returns incl. file paths and modes by content, sync token, peer request bytes, OTA frame content; response buffer, rsp_len, nvSysDt (0xac), uart_command, flags 0x20075003..1a, OTA fill/length, full OTA rx and frame buffers after OTA-file ops",
+ "mutants": [
+  {
+   "sym": "pt_cmd_2A_handler",
+   "from": "if (got != size || read_back != pattern)",
+   "to": "if (got != size)"
+  },
+  {
+   "sym": "pt_cmd_31_handler",
+   "from": "sync_token, 7u) == 0",
+   "to": "sync_token, 6u) == 0"
+  },
+  {
+   "sym": "pt_cmd_39_handler",
+   "from": "(uint8_t)g2_log_module_length(psn) : 14u;",
+   "to": "(uint8_t)g2_log_module_length(psn) : 13u;"
+  },
+  {
+   "sym": "pt_cmd_3E_handler",
+   "from": "display_driver_case4_apply(100u, 0x1bbcu, 0x3fu)",
+   "to": "display_driver_case4_apply(100u, 0x1bbcu, 0x3eu)"
+  },
+  {
+   "sym": "pt_cmd_46_handler",
+   "from": "calculate_rtc_time_diff_seconds_56f178(&sys->aging_soc_to_10, &sys->aging_start)",
+   "to": "calculate_rtc_time_diff_seconds_56f178(&sys->aging_end, &sys->aging_start)"
+  },
+  {
+   "sym": "pt_cmd_47_handler",
+   "from": "PT_HEADER(rsp, idx, 0x47u, 3u, 4u);",
+   "to": "PT_HEADER(rsp, idx, 0x47u, 3u, 5u);"
+  },
+  {
+   "sym": "pt_cmd_49_handler",
+   "from": "bytes[5] = display_driver_uled_mode_45a568() == 1u ? 2u : 1u;",
+   "to": "bytes[5] = display_driver_uled_mode_45a568() == 1u ? 1u : 2u;"
+  },
+  {
+   "sym": "pt_cmd_54_handler",
+   "from": "if (g2_pt_ota_rx_fill_200748dc > PT_OTA_FLUSH_THRESHOLD || is_last) {",
+   "to": "if (g2_pt_ota_rx_fill_200748dc >= PT_OTA_FLUSH_THRESHOLD || is_last) {"
+  },
+  {
+   "sym": "pt_cmd_54_handler",
+   "from": "(uint32_t)((seq + 1) % 0x100)",
+   "to": "(uint32_t)((seq + 2) % 0x100)"
+  },
+  {
+   "sym": "pt_cmd_53_handler",
+   "from": "if (data_len != PT_OTA_HEADER_SIZE) {",
+   "to": "if (data_len < PT_OTA_HEADER_SIZE) {"
+  },
+  {
+   "sym": "pt_cmd_42_handler",
+   "from": "DRV_BuzzerStart(4000u, 30u);",
+   "to": "DRV_BuzzerStart(4000u, 31u);"
+  }
+ ],
+ "source_changes": "none needed",
+ "notes": [
+  "stock get_flash_burn_info read-failure log (line 0x86d) has three conversions and two arguments; the third value is uninitialised stack in both builds, so that path is driven with the extended log off (first run 599/600 differed only there)",
+  "mutant 2 replaced: '<15u' to '<14u' is equivalent (both yield 14 at length 14)"
+ ],
+ "history": [
+  "21:26 CST: 599/600, 10/11 (vararg garbage; equivalent mutant)",
+  "21:31 CST: 600/600, 11/11"
+ ]
+}

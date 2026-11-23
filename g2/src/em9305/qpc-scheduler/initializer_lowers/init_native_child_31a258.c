@@ -1,12 +1,13 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31a258..0x31a328: post the 88-byte connection-established message
- * (code 0x3f01) for a link to the handler at 0x805b18: handle (+88, also
+ * (code 0x3f01) for a link to the handler at ((uintptr_t)&em9305_ram_805af0 + 0x28u): handle (+88, also
  * clearing byte 2 of its 912-byte connection entry), the 44 connection bytes
  * from +0x24, the peer address (+460 block when +96 is set, else +676) with
  * its type (bit 1 set and the resolved address kept when it differs from the
  * identity), the local words +0x50/+0x54, role +97 and accuracy +100. Then
- * run native 0x31ff2c and select the link's PHY bit (1 << +16) at 0x802a5d,
+ * run native 0x31ff2c and select the link's PHY bit (1 << +16) at ((uintptr_t)&em9305_ram_802a2c + 0x31u),
  * which is returned. */
 extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
 extern void *opencfw_em9305_memcpy(void *destination, const void *source, uint32_t bytes);
@@ -19,7 +20,7 @@ uint32_t opencfw_em9305_child_31a258(uintptr_t link)
     if (message != 0u) {
         uint32_t handle = *(volatile uint16_t *)(link + 88u);
         *(volatile uint16_t *)(message + 2u) = 0x3f01u;
-        uintptr_t entry = handle * 912u + *(volatile uint32_t *)(uintptr_t)0x805c70u;
+        uintptr_t entry = handle * 912u + em9305_ram_805c5c.u32_805c70;
         *(volatile uint16_t *)message = (uint8_t)handle;
         *(volatile uint8_t *)(entry + 2u) = 0u;
         (void)opencfw_em9305_memcpy((void *)(message + 4u), (const void *)(link + 0x24u), 0x2cu);
@@ -55,7 +56,7 @@ uint32_t opencfw_em9305_child_31a258(uintptr_t link)
         *(volatile uint32_t *)(message + 0x4cu) = local_low;
         *(volatile uint8_t *)(message + 53u) = *(volatile uint8_t *)(link + 97u);
         uint32_t accuracy = *(volatile uint8_t *)(link + 100u);
-        uint32_t handler = *(volatile uint8_t *)(uintptr_t)0x805b18u;
+        uint32_t handler = em9305_ram_805af0.u8_805b18;
         *(volatile uint16_t *)(message + 86u) = 0xffffu;
         *(volatile uint8_t *)(message + 54u) = (uint8_t)accuracy;
         *(volatile uint8_t *)(message + 84u) = 0xffu;
@@ -63,6 +64,6 @@ uint32_t opencfw_em9305_child_31a258(uintptr_t link)
     }
     (void)opencfw_em9305_child_31ff2c(link);
     uint32_t phy = 1u << (*(volatile uint8_t *)(link + 16u) & 31u);
-    *(volatile uint8_t *)(uintptr_t)0x802a5du = (uint8_t)phy;
+    em9305_ram_802a2c.u8_802a5d = (uint8_t)phy;
     return phy;
 }

@@ -1,8 +1,9 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32874c..0x3287b8: build a type-7 stream PDU for the record:
  * write the fixed stream header (0x33446c) and the 8-byte record built
- * from the global words 0x805aa0/0x805aa4 with length +32 plus 6, queue
+ * from the global words ((uintptr_t)&em9305_ram_805a6c + 0x34u)/((uintptr_t)&em9305_ram_805a6c + 0x38u) with length +32 plus 6, queue
  * it, mirror the two words and the length into the record's stream block
  * (+180: +100/+104 and +96), set bit 0 of flags byte +272 and clear the
  * pending byte +176 of the attached object. */
@@ -26,16 +27,16 @@ void opencfw_em9305_child_32874c(uintptr_t record)
     (void)opencfw_em9305_memcpy(fields,opencfw_em9305_stream_header_33446c,4u);
     uintptr_t block=record+180u;
     uint32_t used=opencfw_em9305_ll_stream_header_3175d0(buffer,(uintptr_t)fields);
-    uint32_t second=*(volatile uint32_t *)0x805aa4u;
-    uint32_t first=*(volatile uint32_t *)0x805aa0u;
+    uint32_t second=*(volatile uint32_t *)((uintptr_t)&em9305_ram_805a6c + 0x38u);
+    uint32_t first=*(volatile uint32_t *)((uintptr_t)&em9305_ram_805a6c + 0x34u);
     length+=6u;
     (void)opencfw_em9305_child_317594(used+buffer,first,second,(uint16_t)length);
     (void)opencfw_em9305_child_3172dc(record,buffer,6u);
-    second=*(volatile uint32_t *)0x805aa4u;
+    second=*(volatile uint32_t *)((uintptr_t)&em9305_ram_805a6c + 0x38u);
     uintptr_t object=*(volatile uint32_t *)block;
     *(volatile uint32_t *)(block+104u)=second;
     uint32_t flags=*(volatile uint8_t *)(record+272u);
-    first=*(volatile uint32_t *)0x805aa0u;
+    first=*(volatile uint32_t *)((uintptr_t)&em9305_ram_805a6c + 0x34u);
     *(volatile uint16_t *)(block+96u)=(uint16_t)length;
     *(volatile uint32_t *)(block+100u)=first;
     *(volatile uint8_t *)(record+272u)=(uint8_t)(flags|1u);

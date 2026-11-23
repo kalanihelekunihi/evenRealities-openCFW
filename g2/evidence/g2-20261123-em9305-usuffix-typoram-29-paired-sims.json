@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 12:20:00 AM CST (America/Chicago)",
+  "title": "Install 29 typo-RAM u-suffix units that were QEMU-ARC EQUIVALENT 100 with killed mutants; private p-usuf29 rebuild; paired Renode sims PASS. Two 80542c units held back for array-bounds / overlapping objects.",
+  "scope": "Workspace rewrite of leftover 0x80xxxxu / UINT32_C typo-RAM literals onto existing em9305_ram.h objects (no new header or ld objects). Prove vs current tree C, mutant-kill check, install only non-vacuous EQUIVALENT units whose mutants were caught, private p-lowers rebuild, NVM slot-fit, private NOR splice, both paired sims.",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261122-em9305-official-rootI-paired-sims.json",
+  "rewrite": {
+    "workspace": "build/ws-em9305-20261122/u-suffix/rewritten",
+    "manifest": "build/ws-em9305-20261122/u-suffix/rewrite_manifest.json",
+    "files_rewritten": 96,
+    "sites": 301,
+    "header_grown": false,
+    "ld_rewritten": false,
+    "note": "Address-as-value or field access onto existing typo-RAM objects. Pinned ranges and some leftover literals left alone."
+  },
+  "prove": {
+    "runner": "build/ws-em9305-20261122/u-suffix/run_prove.py",
+    "results": "build/ws-em9305-20261122/u-suffix/prove/results.jsonl",
+    "n": 100,
+    "flags": "-mdiv-rem -mbarrel-shifter -mswap -mnorm -mmpy-option=wlh1 --dztrap",
+    "extra": "build/em-ctl/extra_cb1.c",
+    "recorded": 54,
+    "equivalent_calls_gt_0": 31,
+    "vacuous_equivalent_calls_0": 18,
+    "run_failed_not_c_mismatch": 5,
+    "run_failed_units": [
+      "g2/src/em9305/qpc-scheduler/idle.c",
+      "g2/src/em9305/qpc-scheduler/assert.c",
+      "g2/src/em9305/lctr/lctrSlvBisTxControl.c",
+      "g2/src/em9305/lctr/lctrSlvBisTxData.c",
+      "g2/src/em9305/lctr/lctrSlvBigBeginOp.c"
+    ],
+    "not_yet_proven_rewritten_files": 42,
+    "not_yet_proven_note": "Held as hook/IRQ/boot/sleep/helper units or not yet run. Largest remaining include controller_timer_helpers.c (17 sites), wsf_os_ao.c (19), application_boot.c (20), AOAD_Init.c (12), IRQ handlers, and sleep_*."
+  },
+  "mutants": {
+    "runner": "build/ws-em9305-20261122/u-suffix/run_mutants.py",
+    "first_pass": "build/ws-em9305-20261122/u-suffix/prove/mutant_results.jsonl",
+    "retry": "build/ws-em9305-20261122/u-suffix/prove/mutant_results_retry.jsonl",
+    "units": 31,
+    "killed": 31,
+    "first_pass_killed": 18,
+    "first_pass_compile_fail_then_killed_with_plus4u": 7,
+    "first_pass_survived_then_killed_with_typoram_seed": 6,
+    "compile_fail_cause": "First mutate() renamed &em9305_ram_X to a missing &em9305_ram_X+4 object. Patched to a compile-safe ((uintptr_t)&em9305_ram_X + 4u).",
+    "survived_cause": "Mutating ((uintptr_t)&em9305_ram_801090 + 0x8u) to +0xcu was not observable when both typo-RAM pointer words were unusable; test-only pre_seed_801090.h (not in the tree) plants distinct objects and magics at 0x801098 vs 0x80109c. Shared lowers/chunks/spec.json was not written; a private spec_mutants.json was used.",
+    "vacuous_not_mutated": 18
+  },
+  "install": {
+    "installed": 29,
+    "held_back": 2,
+    "held_back_files": [
+      "g2/src/em9305/lctr/lctrSlvBisTxCompletionInterleaved.c",
+      "g2/src/em9305/lctr/lctrSlvBisTxCompletionSequential.c"
+    ],
+    "held_back_reason": "Installed rewrite used W32((uintptr_t)&em9305_ram_80542c) and W32(base+0x10/0x14/0x18). gcc -Werror=array-bounds: em9305_ram_80542c is a 1-byte harvested object. Stock uses a 28-byte (0x1c) scratch at 0x80542c (init_native_callback_3286f8 memset 0x1c; lctrSlvBigBeginOp comment; completion files access +0..+0x18). Growing to 0x1c would overlap existing typo-RAM objects em9305_ram_805434 (at +8) and em9305_ram_805438 (at +0xc), which already have users (lctrSlvBisSetupTxData, init_native_callback_328dd4). Header and ld were not grown or merged this pass. Those two units were written back to their pre-install literal C (HEAD sha256 matches install sha256_before). The other 29 units stayed installed.",
+    "shas": "build/ws-em9305-20261122/u-suffix/prove/install_shas.json",
+    "header_rewritten": false,
+    "ld_rewritten": false,
+    "sources_json_rewritten": false
+  },
+  "tree_build": {
+    "command": "python3 -u build/ws-em9305-20261122/pbuild.py build/ws-em9305-20261122/p-usuf29 -j 3",
+    "log": "build/ws-em9305-20261122/p-usuf29-build.log",
+    "started": "2026-11-23 12:16:42 AM CST (America/Chicago)",
+    "finished": "2026-11-23 12:16:45 AM CST (America/Chicago)",
+    "rc": 0,
+    "units": 768,
+    "compiled_this_run": 2,
+    "cache_note": "objcache is keyed by sha256(source+headers+flags). The earlier failed p-usuf build had already compiled the 29 new units; this run recompiled only the two reverted literal units and final-linked.",
+    "link_log_empty": true,
+    "text_bytes": 239492,
+    "text_delta_vs_p_lowers_801a04_grow": -16,
+    "app_sha256": "9fffab1ac34934ec2c8ec8b680d0671ad82f3d32a747144a89a8874a90cf82e3"
+  },
+  "package": {
+    "method": "em9305_record2.split_bootloader_image + record_package.build_package with last_page=(APP_BASE+len(app)-NVM_BASE+0x1FFF)//0x2000",
+    "path": "build/ws-em9305-20261122/p-usuf29/g2-em9305-source-candidate-package.bin",
+    "bytes": 240824,
+    "sha256": "c235c9c57b9136f3639a4d5d039b9d389af80be09947176d7d686a508b5e2b18",
+    "magic": "00020404",
+    "records": 3,
+    "erase_sector_count": 31
+  },
+  "slot_fit": {
+    "nvm_window": [
+      "0x00300000",
+      "0x00380000"
+    ],
+    "nvm_capacity_bytes": 524288,
+    "bootloader_end": "0x00300488",
+    "boot_fits_before_record2_0x00302000": true,
+    "record2_bytes": 56,
+    "application_end": "0x0033CB84",
+    "application_bytes": 239492,
+    "app_fits_before_nvm_end": true,
+    "headroom_bytes": 275580,
+    "fits_nvm_slot": true,
+    "precomputed_programmed_nvm_crcs": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0xD924544A",
+      "[0x00302400,0x0033CB84)": "0xC90C61AA"
+    }
+  },
+  "splice": {
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "private_g2_app": "build/ws-em9305-20261122/sim/opencfw-em9305-typed-ram.app.bin",
+    "private_g2_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-usuf29.bin",
+    "nor_sha256": "4fc3360ee3d75bdbda4c5beae44f4ca631f4a02648fbcf1a939eab56f8c61077",
+    "nor_source": "copy of build/em9305-nor-20261122/nor-stock-formatted.bin, then lfs_inject at 0x1400000 path /firmware/ble_em9305.bin",
+    "lfs_inject_wrote_bytes": 240824,
+    "prior_nors_not_overwritten": true
+  },
+  "sims": {
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/usuf29-match.resc",
+      "log": "build/ws-em9305-20261122/sim/usuf29-match.log",
+      "started": "2026-11-23 12:17:28 AM CST (America/Chicago)",
+      "finished": "2026-11-23 12:18:19 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "chiprev": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_frames": 2,
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/usuf29-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/usuf29-dfu-mismatch.log",
+      "started": "2026-11-23 12:18:19 AM CST (America/Chicago)",
+      "finished": "2026-11-23 12:20:00 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq_at": "2026-11-23 12:19:27.985 AM CST (America/Chicago)",
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0xD924544A",
+        "[0x00302400,0x0033CB84)": "0xC90C61AA"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 1038,
+      "result": "PASS"
+    }
+  },
+  "compare": {
+    "version_match_baseline": "PASS",
+    "version_match_vs": "official-rootI and p-lowers 801a04-grow match (same CHIPREV 0x22, OTAP 0xAFD1363A then 0, HOST 0x3A, END_PC 0x543528, 2 display frames, display hash 0c5cc90b\u2026, advertising 010A200101, 56 HCI)",
+    "dfu_protocol_completed": true,
+    "commit_00020404": true,
+    "sysresetreq": true,
+    "sbl_handoff": true,
+    "post_dfu_display_hash": "matches baseline 0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+    "observed_crcs_identical_to_precomputed_our_records": true,
+    "crc_results_identical_to_official_rootI": false,
+    "crc_note": "Boot CRC 0x1D6121C4 is unchanged. Record2 and application CRCs changed because .text is 239492 B (\u221216 vs 239508), app end 0x0033CB84.",
+    "hci_packet_count_identical_to_previous_lowers_dfu": true,
+    "verdict": "Version-match is a full baseline PASS (run_renode_rc=0). Forced-mismatch DFU is a PASS (run_renode_rc=0): protocol completed (commit 00020404, SYSRESETREQ, SBL handoff) with observed programmed-NVM CRCs identical to the precomputed p-usuf29 record extents and the same post-handoff display hash and HOST 0x3A.",
+    "forced_mismatch_dfu_baseline": "PASS",
+    "forced_mismatch_dfu_run_renode_rc": 0
+  },
+  "rules": {
+    "no_commit": true,
+    "no_push": true,
+    "no_flash": true,
+    "no_backups": true,
+    "official_app_not_overwritten": true,
+    "sources_json_approval_closed": true,
+    "other_streams_left_alone": true,
+    "this_stream_one_renode_at_a_time": true
+  }
+}

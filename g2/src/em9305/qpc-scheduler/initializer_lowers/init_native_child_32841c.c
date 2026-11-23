@@ -1,11 +1,12 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32841c..0x3284ea: initialise the record's 312-byte connection
  * setup block (+2468) for an initiator start: owner, request (+2516) and
  * parameter (+2250) pointers, both completion callbacks (3280e8), flags
  * and the PHY byte (+2784); then the connection request block (+2524):
  * access address 0x8e89bed6, CRC init 0x555555, the clock-accuracy byte
- * (+60, or 0x805a9c when it is 0x7f), the channel-map byte (+63, twice),
+ * (+60, or ((uintptr_t)&em9305_ram_805a6c + 0x30u) when it is 0x7f), the channel-map byte (+63, twice),
  * the PHY code for the PHY index (+69: 1,2,1,2 for 1..4, else 0, twice),
  * the 945 data pointers at +96/+132 and the 32c4fc callback at +2676; clear
  * +1430 and hand the block to 328270. */
@@ -36,7 +37,7 @@ uint32_t opencfw_em9305_child_32841c(uintptr_t record)
     w32(setup+28u,done);
     w8(setup+49u,phy);
     uint32_t sca=(uint32_t)accuracy;
-    if(accuracy==0x7f)sca=*(volatile uint8_t *)0x805a9cu;
+    if(accuracy==0x7f)sca=*(volatile uint8_t *)((uintptr_t)&em9305_ram_805a6c + 0x30u);
     uint32_t index=*(volatile uint8_t *)(record+69u)-1u;
     uintptr_t connect=record+0x9dcu;
     w32(connect+132u,record+945u);

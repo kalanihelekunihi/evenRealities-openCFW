@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 03:49:06 AM CST (America/Chicago)",
+  "title": "IRQHandler_RcCalib whole-handler qemu-arc proof (frame+body+rtie) and typo-RAM install",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-ram-80fde0-hook-slots-paired-sims.json",
+  "reason": "User accepted composed EM_IRQ_HANDLER frames (not byte-identical) and required a whole-handler semantic proof vs stock in QEMU-ARC, then typo-install RcCalib first.",
+  "harness": {
+    "owned": [
+      "build/em-ctl/qm.py",
+      "build/em-ctl/h/driver.c",
+      "build/em-ctl/h/call.S"
+    ],
+    "sha256": {
+      "qm.py": "52a1bc74d5e768d3e41a59f3c7858016da04090a8272d661f3010cdc37157a8c",
+      "driver.c": "15f79aec9397db11c690580ea2225896157f5a2240c0968d52326f4a5f220230",
+      "call.S": "6f8040cb3c3db7bd21022679b71a9e7c32ab4ed5b7c4ec396dbad79e6dba905f"
+    },
+    "irq_mode": "spec irq=1 seeds and hashes r0-r12, r30, r58, r59, lp_count, lp_start, lp_end, and aux 1409/1411 after return; memhash and callhash unchanged",
+    "osub": "lr/sr of aux 1409/1411 (also 0x581/0x583) rewritten to ld/st of 0xfff010/0xfff014 (same 8-byte limm width). rtie rewritten to j [blink] after the frame restores blink. Matches unindented inline-asm lines from __asm__. All-exception-path irq runs are RUN FAILED.",
+    "first_vacuous_attempt": "osub required leading whitespace so 1409/rtie were not rewritten; every test took ret=0xdd000002 (instruction error). Fixed; a classes=1 calls=0 irq result is not a proof."
+  },
+  "qemu_prove": {
+    "workspace": "build/ws-em9305-20261122/u-suffix/irq-whole/",
+    "orig": "lowered stock 0x3064fc-0x30660c via .waves/lower.py, symbol renamed to opencfw_em9305_IRQHandler_RcCalib (frame kept)",
+    "as_built": {
+      "cand": "tree IRQHandler_RcCalib.c with EM_IRQ_SAVE, bl body, restore, rtie and typo literals",
+      "result": "EQUIVALENT 100  classes=91 calls=49",
+      "tag": "rccalib_whole",
+      "started": "2026-11-23 03:40:01 AM CST (America/Chicago)",
+      "elapsed_s": 8.7
+    },
+    "frame_mutant": {
+      "change": "drop r0 restore: ld.ab r0,[sp,88] -> add sp,sp,88 (stack still unwound)",
+      "result": "KILLED MISMATCH ret:99(t=[0, 1, 2]) reghash:99(t=[0, 1, 2])  classes=91 calls=49",
+      "tag": "rccalib_mut_drop_r0"
+    },
+    "typo_whole": {
+      "cand": "named typo-RAM fields, not (uintptr_t)&obj + offset; MMIO 0xf0095c/0xf00964/0xf00404/0xf01c14/0xf01c18 left as literals",
+      "fields": [
+        "em9305_ram_805be0.u32_805c30",
+        "em9305_ram_801994.u32_8019b8",
+        "em9305_ram_801994.u32_8019bc",
+        "em9305_ram_805c5c.u32_805cf0",
+        "em9305_ram_805be0.u32_805c2c"
+      ],
+      "result": "EQUIVALENT 100  classes=91 calls=49",
+      "tag": "rccalib_typo_whole",
+      "started": "2026-11-23 03:41:21 AM CST (America/Chicago)",
+      "elapsed_s": 9.1
+    },
+    "typo_mutants_vs_stock": [
+      {
+        "site": "805c30",
+        "old": "em9305_ram_805be0.u32_805c30",
+        "new": "em9305_ram_805be0.u32_805c34",
+        "status": "KILLED",
+        "line": "MISMATCH callhash:25(t=[3, 7, 11])  classes=91 calls=49"
+      },
+      {
+        "site": "8019b8",
+        "old": "em9305_ram_801994.u32_8019b8",
+        "new": "em9305_ram_801994.u32_8019b4",
+        "status": "KILLED",
+        "line": "MISMATCH memhash:25(t=[1, 5, 9])  classes=91 calls=49"
+      },
+      {
+        "site": "8019bc",
+        "old": "em9305_ram_801994.u32_8019bc",
+        "new": "em9305_ram_801994.u32_8019b8",
+        "status": "KILLED",
+        "line": "MISMATCH memhash:25(t=[1, 5, 9])  classes=91 calls=49"
+      },
+      {
+        "site": "805cf0",
+        "old": "em9305_ram_805c5c.u32_805cf0",
+        "new": "em9305_ram_805c5c.u32_805cec",
+        "status": "KILLED",
+        "line": "MISMATCH ncalls:12(t=[5, 13, 17]) callhash:18(t=[5, 13, 17])  classes=91 calls=49"
+      },
+      {
+        "site": "805c2c",
+        "old": "em9305_ram_805be0.u32_805c2c",
+        "new": "em9305_ram_805be0.u32_805c28",
+        "status": "KILLED",
+        "line": "MISMATCH ncalls:13(t=[9, 13, 25]) callhash:17(t=[9, 13, 25])  classes=91 calls=49"
+      }
+    ],
+    "typo_vs_typo_note": "Comparing typo cand to typo mutant as orig/cand stubs IRQHandler_RcCalib_body (same-TU callee). That is vacuous (classes=100 calls=100, typo sites never run). Mutants were therefore compared to stock."
+  },
+  "install": {
+    "file": "g2/src/em9305/application/IRQHandler_RcCalib.c",
+    "pre_sha256": "23d53bafe7d14a3e20c0740dc952e5df5d595dcf22218fefa12e76d48a9299e0",
+    "post_sha256": "9275dbfdbd3f18a39bbb50ed308b1f86b96490c4fc1369f9e5852cd6a32537ea",
+    "installed_at": "2026-11-23 03:44:00 AM CST (America/Chicago) approximately, after typo-vs-stock EQUIVALENT and mutants KILLED",
+    "object_count_unchanged": 140
+  },
+  "tree_build": {
+    "command": "python3 -u build/ws-em9305-20261122/pbuild.py build/ws-em9305-20261122/p-rccalib -j 3",
+    "started": "2026-11-23 03:44:37 AM CST (America/Chicago)",
+    "finished": "2026-11-23 03:44:53 AM CST (America/Chicago)",
+    "rc": 0,
+    "units": 768,
+    "compiled_this_run": 1,
+    "link_log_empty": true,
+    "text_bytes": 239220,
+    "text_delta_vs_p_hookmerge": -20,
+    "app_sha256": "ff4e252adfbff9974c2e19a4da846624a41cb9c65b9e75939ee54819d7d01c55",
+    "note": ".text shrank 20 B vs p-hookmerge (239240->239220) after typo-RAM of IRQHandler_RcCalib. Still fits NVM."
+  },
+  "package": {
+    "path": "build/ws-em9305-20261122/p-rccalib/g2-em9305-source-candidate-package.bin",
+    "bytes": 240552,
+    "sha256": "47880bffd9ac111d3e29dd3eabbf636f052156a37d924a345383928b7fb58727",
+    "records": 3,
+    "crcs_from_dfu_log": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0x3816C591",
+      "[0x00302400,0x0033CA74)": "0x9FE4D81B"
+    },
+    "record2_bytes_differ_from_p_hookmerge": true,
+    "record2_range_crc_same_as_p_hookmerge_note": "Record 2 content differs (size and firmware CRC fields) from p-hookmerge, but the logged NVM CRC32 of [0x00302000,0x00302038) was also 0x3816C591. Reported as observed."
+  },
+  "slot_fit": {
+    "application_end": "0x0033CA74",
+    "application_bytes": 239220,
+    "headroom_bytes": 275852,
+    "fits_nvm_slot": true
+  },
+  "splice": {
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-rccalib.bin",
+    "nor_sha256": "680ee8bbdb8f748208b2eb9cbbd8c634ffa45db9a206978c557f5d0828793503",
+    "nor_source": "copy of build/em9305-nor-20261122/nor-stock-formatted.bin, then lfs_inject at 0x1400000 path /firmware/ble_em9305.bin",
+    "lfs_inject_wrote_bytes": 240552
+  },
+  "sims": {
+    "renode": "g2-firmware-emulator scripts/run-renode.sh, Renode 1.17.0, 8 s virtual runs, 1200 s wall cap",
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/rccalib-match.resc",
+      "log": "build/ws-em9305-20261122/sim/rccalib-match.log",
+      "started": "2026-11-23 03:46:40 AM CST (America/Chicago)",
+      "finished": "2026-11-23 03:47:11 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "chiprev_fixture": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "display_hash_source": "Latched real display-bus frame (not the OTP fixture sha 9a9a2d9a\u2026)",
+      "advertising": "010A200101",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/rccalib-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/rccalib-dfu-mismatch.log",
+      "started": "2026-11-23 03:47:17 AM CST (America/Chicago)",
+      "finished": "2026-11-23 03:48:23 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq": true,
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0x3816C591",
+        "[0x00302400,0x0033CA74)": "0x9FE4D81B"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 1037,
+      "sysresetreq_at": "2026-11-23 03:48:05.372 AM CST (America/Chicago)"
+    }
+  },
+  "remaining": {
+    "irq_handlers_whole_proof": "RcCalib done. The other 15 handlers were not proved this turn. The irq=1 harness is in place. RadioRx 0x306384-0x306440 and RadioTx 0x306440-0x3064fc were not in the wave-28 israll list but are among the 16.",
+    "stock_residual_data_ini_record": "Not started.",
+    "remaining_typo_shims": "Not started."
+  },
+  "rules": "No git writes. No backups or /tmp copies. Official opencfw-otap-disarm.app.bin was not overwritten and was not a splice target. source_completeness_proven remains false."
+}

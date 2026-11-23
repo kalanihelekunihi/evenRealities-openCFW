@@ -1,6 +1,7 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
-/* Native 0x32c254..0x32c2ae: drain the event queue at 0x8053f8. For each
+/* Native 0x32c254..0x32c2ae: drain the event queue at ((uintptr_t)&em9305_ram_8052d4 + 0x124u). For each
  * event build a 28-byte report (code 0x15 at +2, event byte +12 at +4,
  * event words +16/+20 at +8/+12 and +4/+8 at +16/+20); when the two word
  * pairs differ or the event bytes +0/+12 differ, bit 1 of the report byte
@@ -16,7 +17,7 @@ uint32_t opencfw_em9305_init_callback_32c254(void)
 {
     _Alignas(4) uint8_t report[28];
     for(;;){
-        uintptr_t event=opencfw_em9305_wsf_event_remove(0x8053f8u,
+        uintptr_t event=opencfw_em9305_wsf_event_remove(((uintptr_t)&em9305_ram_8052d4 + 0x124u),
                                                         (uintptr_t)&report[27]);
         if(event==0u)return 0u;
         *(uint32_t *)(void *)(report+20)=0u;

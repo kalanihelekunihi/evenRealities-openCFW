@@ -1,0 +1,40 @@
+{
+ "title": "ws-hwdrivers stream 3: charger_common battery-sync glue verified function-level vs stock (Renode 1.17 cortex-m55)",
+ "when": "2026-11-22 01:13 PM CST (America/Chicago)",
+ "module": "g2-charger-common",
+ "source": "g2/src/apollo-main/drivers/power/charger-common/charger_common.c",
+ "method": {
+  "emulator": "Renode 1.17.0 (vendor/renode-src e8c7c2d), cortex-m55, bundled dotnet 8.0.425",
+  "harness": "build/ws-hwdrivers-20261122/harness (shared harness + gen_charger_common.c)",
+  "design": "stock bodies run in place (0x4ACE10..0x4AD7xx); reconstructed C linked into ITCM. Intra-module calls resolve within each variant (stock-for-stock, C-for-C), so each test exercises the function plus its in-module callees. Cross-module callees patched to stubs at their stock addresses for both variants: audio_uart_device_role_get (seeded return), audio_uart_request_send (logs app/len/payload), audio_queue_copy_bytes (memcpy), audio_uart_buffer_zero, osMutexAcquire/Release/Delete (osOK), CB_CHG_NotifyBatInfo (logs event+value), CB_CHG_DeinitBatInfoCallbacks, elog. The charge-sync RAM globals (STATE 0x20073b30, LOCAL 0x20074104, mutex handle 0x20074370, flags 0x20074f97/98/99, poll counters 0x20074f1a/1c) and g2_charger_telemetry (0x20073b18) are seeded identically before each test and diffed after.",
+  "compare": "per test: CB_CHG_NotifyBatInfo and audio_uart_request_send call traces (event/value and the built sync-message payload), all seeded RAM globals, caller output struct, and return value (void ignored).",
+  "inputs": "25 randomized cases per function x 11 functions = 275, run stock vs C, with audio_log_flags()=0 and =7."
+ },
+ "result": {
+  "functions": 11,
+  "cases": 275,
+  "exact_matches": 275,
+  "mismatches": 0,
+  "verified_functions": [
+   "charger_soc_is_valid",
+   "charger_aggregate_soc_is_valid",
+   "charger_get_local_battery_info",
+   "_CHG_HandleInitSync",
+   "CHG_DeinitBatterySync",
+   "CHG_CompareAndUpdateSoc",
+   "CHG_CompareAndUpdateIsCharging",
+   "CHG_OnBatteryLevelChanged",
+   "CHG_SendBatteryInfoToPeer",
+   "CHG_ReceiveBatteryInfoFromPeer",
+   "CHG_RequestNotifyBatteryInfoFromPeer"
+  ],
+  "note": "10 phantom parser segments (indices >=275, from logged content words matching the 0xA5 marker) ignored; all 275 real cases present with both variants and equal."
+ },
+ "g2ref_uses": "none in this module",
+ "notes": "Function-level equivalence only. No sources.json/linker/build changes; no git; no flash.",
+ "reverified_final_harness": true,
+ "reverified_when": "2026-11-22 7:14 PM CST (America/Chicago)",
+ "reverification_notes": [
+  "Re-verified under the final arg-comparing + VFP-aware harness and the global-merge-off build (-fno-common -mllvm -arm-global-merge=false); 0 mismatches in the 2026-11-22 19:12 CST full batch re-run."
+ ]
+}

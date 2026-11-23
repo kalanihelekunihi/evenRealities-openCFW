@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x320088..0x320274: initialise the advertising set record for a
  * connectable start: clear the 240-byte block at +244, install the
@@ -7,9 +8,9 @@
  * 0x555555, 0x83 / 512 / 0x02830283 windows by PHY mode +98, header flags
  * +372 with the coded bit), allocate the 66-byte PDU buffer (+392; 0x1f when
  * none), take a random access address, CRC seed, the connection timing
- * (0x805aa0/0x805aa4, +90, params +4/+6), random hop and clock accuracy,
- * the own address (static 0x805b40 or public 0x805a8c by bit 0 of +99,
- * with resolution flags 0x51 when 0x805a9d is set) and, for PHY mode 0,
+ * (((uintptr_t)&em9305_ram_805a6c + 0x34u)/((uintptr_t)&em9305_ram_805a6c + 0x38u), +90, params +4/+6), random hop and clock accuracy,
+ * the own address (static ((uintptr_t)&em9305_ram_805af0 + 0x50u) or public ((uintptr_t)&em9305_ram_805a6c + 0x20u) by bit 0 of +99,
+ * with resolution flags 0x51 when ((uintptr_t)&em9305_ram_805a6c + 0x31u) is set) and, for PHY mode 0,
  * the peer address and type; then encode the advertising header (+112
  * from +192) and payload. Returns 0. */
 extern void *opencfw_em9305_memset(void *dst,uint32_t value,uint32_t count);
@@ -42,7 +43,7 @@ uint32_t opencfw_em9305_child_320088(uintptr_t set,uintptr_t params,
 {
     (void)opencfw_em9305_memset((void *)(set+244u),0u,240u);
     w32(set+288u,set+292u);
-    uint32_t channels=r8(0x805b00u);
+    uint32_t channels=r8(((uintptr_t)&em9305_ram_805af0 + 0x10u));
     w8(set+270u,1u);
     w8(set+268u,3u);
     w8(set+292u,2u);
@@ -55,7 +56,7 @@ uint32_t opencfw_em9305_child_320088(uintptr_t set,uintptr_t params,
     w8(set+293u,first);
     w32(set+300u,0x555555u);
     w32(set+296u,0x8e89bed6u);
-    uint32_t accuracy=r8(0x805a9cu);
+    uint32_t accuracy=r8(((uintptr_t)&em9305_ram_805a6c + 0x30u));
     uint32_t kind=((role==2u)?2u:0u)+1u;
     w16(set+368u,0x83u);
     w8(set+294u,accuracy);
@@ -65,7 +66,7 @@ uint32_t opencfw_em9305_child_320088(uintptr_t set,uintptr_t params,
     else if(mode==2u)w16(set+368u,512u);
     else if(mode==3u)w32(set+368u,0x02830283u);
     uint32_t flags=(r32(set+372u)&~0x80u)|((mode==4u?1u:0u)<<7);
-    channels=r8(0x805b00u);
+    channels=r8(((uintptr_t)&em9305_ram_805af0 + 0x10u));
     w32(set+372u,flags);
     w32(set+412u,CODE(opencfw_em9305_child_320e00));
     w32(set+408u,CODE(opencfw_em9305_child_320dd8));
@@ -78,7 +79,7 @@ uint32_t opencfw_em9305_child_320088(uintptr_t set,uintptr_t params,
     uint32_t access=opencfw_em9305_radio_access_raw_318878();
     w32(set+52u,access);
     uint32_t crc=opencfw_em9305_radio_crc_seed_318960();
-    uint32_t timing_high=r32(0x805aa4u),timing_low=r32(0x805aa0u);
+    uint32_t timing_high=r32(((uintptr_t)&em9305_ram_805a6c + 0x38u)),timing_low=r32(((uintptr_t)&em9305_ram_805a6c + 0x34u));
     uint32_t interval=r16(set+90u);
     uint32_t latency=r16(params+4u),timeout=r16(params+6u);
     w8(set+74u,1u);
@@ -98,14 +99,14 @@ uint32_t opencfw_em9305_child_320088(uintptr_t set,uintptr_t params,
     w8(set+79u,sca);
     uint32_t own_low,own_high;
     if((options&1u)!=0u){
-        own_high=r32(0x805a90u);
-        own_low=r32(0x805a8cu);
+        own_high=r32(((uintptr_t)&em9305_ram_805a6c + 0x24u));
+        own_low=r32(((uintptr_t)&em9305_ram_805a6c + 0x20u));
         header|=2u;
     }else{
-        own_high=r32(0x805b44u);
-        own_low=r32(0x805b40u);
+        own_high=r32(((uintptr_t)&em9305_ram_805af0 + 0x54u));
+        own_low=r32(((uintptr_t)&em9305_ram_805af0 + 0x50u));
     }
-    uint32_t resolve=r8(0x805a9du);
+    uint32_t resolve=r8(((uintptr_t)&em9305_ram_805a6c + 0x31u));
     uint32_t value=header|1u;
     w32(set+376u,own_low);
     w32(set+380u,own_high);

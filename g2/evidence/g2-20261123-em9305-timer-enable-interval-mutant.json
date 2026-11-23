@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 01:26:00 AM CST (America/Chicago)",
+  "title": "Close the surviving timer_enable interval-word typo-RAM mutant by biasing update=0",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-controller-timer-helpers-gates-mutants.json",
+  "tree_unchanged": true,
+  "file": "g2/src/em9305/qpc-scheduler/controller_timer_helpers.c",
+  "file_sha256": "eaeef70014c2ec9f601cf37470e168f521a721532052cb5a4ec6ca150ed6162f",
+  "pre": "build/ws-em9305-20261122/u-suffix/timer-gates/pre_enable_update0.h",
+  "spec": "build/ws-em9305-20261122/u-suffix/timer-gates/spec_enable_update0.json",
+  "bias": "Even t: cx.a[0]=0 (enable==0), interval u32_80fde8=0x1000, last=now=0x1000 so bound>=now-last, update=0. Odd t: enable==1, update=1 (already-proven path). Neighbor u32_80fdf4 planted 0 so the interval mutant takes update=1 on even t.",
+  "prove": {
+    "orig": "HEAD literals sha 2f7db1e1\u2026",
+    "cand": "installed typo-RAM",
+    "log": "build/ws-em9305-20261122/u-suffix/timer-gates/enable_update0_eq.log",
+    "rc": 0,
+    "elapsed_s": 9.4,
+    "line": "opencfw_em9305_timer_enable EQUIVALENT 100 classes=36 calls=200"
+  },
+  "mutant": {
+    "old": "em9305_ram_80fde0.u32_80fde8",
+    "new": "em9305_ram_80fde0.u32_80fdf4",
+    "sites": 1,
+    "status": "KILLED",
+    "log": "build/ws-em9305-20261122/u-suffix/timer-gates/enable_update0_mut.log",
+    "rc": 1,
+    "elapsed_s": 10.0,
+    "line": "MISMATCH ret:45 ncalls:50 callhash:50 memhash:45 t=[0, 2, 4] (even/update=0 cases)"
+  }
+}

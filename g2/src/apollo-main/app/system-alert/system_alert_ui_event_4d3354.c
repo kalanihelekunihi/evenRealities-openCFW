@@ -2,7 +2,7 @@
 #include <stdint.h>
 extern uint8_t audio_uart_registry_context_20003bd0[]; /* native RAM 0x20003bd0 */
 uint32_t audio_system_alert_page_id_20003bcc
-    __attribute__((section(".g2.ram.system_alert_page_id"),used,aligned(4)));
+    __attribute__((section(".g2.ram.system_alert_page_id"),used,aligned(4))) = 0xb4u; /* stock .data init 0x20003bcc = 0xb4 */
 uint8_t audio_system_alert_active_20075025
     __attribute__((section(".g2.ram.system_alert_active"),used));
 uint32_t audio_system_alert_parent_200749ec

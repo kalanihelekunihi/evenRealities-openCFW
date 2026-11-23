@@ -1,0 +1,86 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "sources": {
+  "g2/src/apollo-main/app/a-62-teleprompt/teleprompt_fsm.c": "ca64a3e3b20ecd182d3365c761d7f3808bbb6c5cb21dbf0649cd2c1d4c192af7",
+  "g2/src/apollo-main/app/p-09-teleprompt/teleprompt_fsm_actions.c": "0efe460437cdaa4b7fb9e77438f28d7ccf277211096106475ccbaab17f4995d6"
+ },
+ "spec": "build/ws-app-20261122/specs/tf-a",
+ "verified_at": "2026-11-22 21:08 CST",
+ "result": {
+  "tests": 600,
+  "equal": 600,
+  "differ": 0,
+  "done": true,
+  "overflow": false,
+  "mutants": 9,
+  "killed": 9,
+  "surviving_mutants": [],
+  "verdict": "EQUIVALENT",
+  "harness_sha256": "cf7f02f8d89301a5dcfc2803a8f60a8f29d57e1f399c90483fc4ac8bd0e7eda0",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "stock_entries": {
+  "jump_set": "0x58c874",
+  "jump_clear": "0x58c882",
+  "event_name": "0x58c892",
+  "machine_handler": "0x58c89e",
+  "app_start": "0x58ca2a",
+  "app_pause": "0x58ceb4",
+  "app_resume": "0x58cec2",
+  "app_exit": "0x58cf12",
+  "file_list": "0x58cf50"
+ },
+ "method": "random 1-3 op sequences; handler events 0..11 + random bytes dispatching to the real C/stock actions (incl. p-09 actions); app_start configs straddling every sanitiser bound (mode, start_page vs total_pages incl. 0, start_line 28..32, width 0, interval 798..801, display_lines 3..11, scroll_mode); UI state, device role 0/1/2/0x101, AUDM result; stock event-name table seeded from the .data init image; each side uses its own ctrl (stock 0x20109390 / C g2_teleprompt_fsm_ctrl); 600 tests + 80 per mutant",
+ "observed": "callee args/returns, report payload content, logs (string args by content), event-name string content, ctrl (0x44) and UI window hashes after every op",
+ "mutants": [
+  {
+   "sym": "teleprompt_machine_handler_58c89e",
+   "from": "    if (ret != 0)\n        TP_LOG(2u",
+   "to": "    if (ret > 0)\n        TP_LOG(2u"
+  },
+  {
+   "sym": "teleprompt_action_app_start_58ca2a",
+   "from": "if (cfg->start_page > cfg->total_pages - 1u)",
+   "to": "if (cfg->start_page >= cfg->total_pages - 1u)"
+  },
+  {
+   "sym": "teleprompt_action_app_start_58ca2a",
+   "from": "if (cfg->display_lines - 5u > 4u)",
+   "to": "if (cfg->display_lines - 5u > 5u)"
+  },
+  {
+   "sym": "teleprompt_action_app_start_58ca2a",
+   "from": "if (cfg->scroll_interval_ms < 800u)",
+   "to": "if (cfg->scroll_interval_ms < 801u)"
+  },
+  {
+   "sym": "teleprompt_action_app_start_58ca2a",
+   "from": "(void)AUDM_appAcquire(AUDIO_USER_TELEPROMPT);",
+   "to": "(void)AUDM_appAcquire(3u);"
+  },
+  {
+   "sym": "teleprompt_action_app_start_58ca2a",
+   "from": "} else if (state == TELEPROMPT_UI_MENU) {",
+   "to": "} else if (state == 4u) {"
+  },
+  {
+   "sym": "teleprompt_action_app_exit_58cf12",
+   "from": "sizeof g2_teleprompt_fsm_ctrl, 0)",
+   "to": "0x40u, 0)"
+  },
+  {
+   "sym": "teleprompt_action_file_list_58cf50",
+   "from": "uint32_t count = *(const uint16_t *)data;",
+   "to": "uint32_t count = *(const uint8_t *)data;"
+  },
+  {
+   "sym": "teleprompt_fsm_jump_set_58c874",
+   "from": "g2_teleprompt_fsm_ctrl.jump_pending = 1u;",
+   "to": "g2_teleprompt_fsm_ctrl.jump_pending = 2u;"
+  }
+ ],
+ "source_changes": "none needed",
+ "harness_note": "mutant objects now weaken (instead of rename) their global data definitions so a mutated function shares the unmutated object's state (difft.py)"
+}

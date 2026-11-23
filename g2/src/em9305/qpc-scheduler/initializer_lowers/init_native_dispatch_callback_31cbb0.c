@@ -1,7 +1,8 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31cbb0..0x31ccf2: prepare the BIG transmit descriptor at
- * 0x8029ac for the group (object +36) in state 2, else signal the
+ * (uintptr_t)&em9305_ram_8029ac for the group (object +36) in state 2, else signal the
  * auxiliary task. The descriptor (136 bytes, cleared) takes the BIG handle
  * (+268), the first PDU source (+16: the second (+260) or first (+256)
  * stream's +176 block, else the group's own +408 block) and the event
@@ -25,7 +26,7 @@ static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
 static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
 static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
 
-#define TX 0x8029acu
+#define TX (uintptr_t)&em9305_ram_8029ac
 
 void opencfw_em9305_dispatch_callback_31cbb0(uintptr_t object)
 {

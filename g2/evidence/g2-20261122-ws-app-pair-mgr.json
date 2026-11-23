@@ -1,0 +1,40 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "source": "g2/src/apollo-main/app/a-20-pb-pair-mgr/pb_service_pair_mgr.c",
+ "source_sha256": "933b240ecefe43aa1afb213d575b69eb21ba0b9cb1eaf8eb26d72b7ccc941163",
+ "spec": "build/ws-app-20261122/specs/pair-a",
+ "stock_range": "0x4bb3dc..0x4bcf9c",
+ "functions": [
+  "PB_RxSecAuth",
+  "PB_TxEncodeSecAuth",
+  "PB_RxPipeRoleChange",
+  "PB_TxEncodePipeRoleChange",
+  "_PB_RxRingConnectInfoOwnerExecute",
+  "_PB_RxRingConnectInfoCommon",
+  "PB_RxRingConnectInfo",
+  "PB_TxEncodeRingConnectInfo",
+  "PB_RxBleConnectParams",
+  "PB_TxEncodeBleConnectParams",
+  "PB_RxDisconnectInfo",
+  "PB_TxEncodeDisconnectInfo",
+  "PB_RxUnpairInfo",
+  "PB_TxEncodeUnpairInfo"
+ ],
+ "result": {
+  "verdict": "EQUIVALENT",
+  "tests": 840,
+  "equal": 840,
+  "differ": 0,
+  "mutants": 10,
+  "killed": 10,
+  "surviving_mutants": [],
+  "harness_sha256": "bc728340680d0f65ac426fc1ba4671a263300d0f7a8a3bc7986c13c13db79fa4",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "coverage": "60 random tests per function (NULL args, sec_auth/phone_type/dev/mac_size/name_size/set_speed variants, auth flag, role, ring-owner, policy-block, encode success/failure); observed: all callee args, fault records, logs (formatted content hashes), nanopb stream and message bytes, send args, return value, input/buffer/message memory",
+ "source_changes": "none needed",
+ "normalization": "RING_ConnectPolicy{ShouldBlock,MarkProcessed}RingConnectInfo compared by truthiness: stock passes the raw connectRing byte to these bool parameters, C passes the converted bool; both callees only test nonzero",
+ "run_completed": "17:10 CST"
+}

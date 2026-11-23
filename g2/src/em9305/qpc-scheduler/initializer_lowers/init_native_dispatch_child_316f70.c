@@ -1,11 +1,12 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x316f70..0x317110: reassemble ISO SDUs from a received BIS/CIS
  * payload (data + 2, length bytes) into the context's SDU buffer (+0, write
  * offset +4, sequence +8, time stamp +16, state +7, flush flag +6). Each
  * segment header (native 0x31bd18: start/continuation +0, complete +1,
  * length +2, time offset +4; start segments carry 3 header bytes) either
- * starts a new SDU (buffer from native 0x32543c, counted at 0x805add),
+ * starts a new SDU (buffer from native 0x32543c, counted at ((uintptr_t)&em9305_ram_805a6c + 0x71u)),
  * continues the current one, or drops it. A completed SDU gets a 20-byte
  * ISO header (native 0x31b9ac: handle, 0x102, SDU length, time stamp,
  * sequence, status 1 when longer than max) and is queued for the handler
@@ -111,7 +112,7 @@ uint32_t opencfw_em9305_dispatch_child_316f70(uintptr_t context, uintptr_t queue
             ISO_U32(context) = (uint32_t)sdu;
             if (sdu == 0u) continue;
             (void)opencfw_em9305_wsf_critical_enter();
-            volatile uint8_t *buffers = (volatile uint8_t *)(uintptr_t)0x805addu;
+            volatile uint8_t *buffers = &em9305_ram_805a6c.u8_805add;
             *buffers = (uint8_t)(*buffers - 1u);
             (void)opencfw_em9305_wsf_critical_exit();
             sdu = ISO_U32(context);

@@ -1,0 +1,57 @@
+{
+  "title": "nrf_fuel_gauge process: nrf_model_process_43a698 verified and installed in production sources",
+  "status": "VERIFIED (sources installed; apollo-main not rebuilt)",
+  "when": "2026-11-22 12:18 PM CST (America/Chicago)",
+  "magic": "0xF6A11E07",
+  "result": {
+    "one_case": "init then process v=3.2 i=0.05 T=0 dt=1 count=1: state[0x00..0xDF], SoC, scratch, and opt[16] all bit-exact vs typographic stock. C 0xEB2 vs stock 0xEDC also 0 diffs after moving the C snap past the tail stores.",
+    "suite": "1232 cases, 0 typographic mismatches (soc, state[0xE0], scratch 8B, opt 16B). Structured counts {1,2,3,4,5,8} x v/i/T/dt plus 80 specials/random. The 43bb14 count=4..8 property subtest still reports 5 fails and does not increment mismatch_total (not a typographic golden).",
+    "tail_fix": "The 0x88/0x8C/0x90 snap diffs were a timing artifact (C snapped at 0xEB2 before the typographic stores; stock hook at 0xEDC is after them). Final state already matched. The remaining opt[2] mismatch was typographic r5: 0xF50 loads r5 from [sp,#0x194] (the last 0xB16 vdiv, qNaN 0x7FC00000 on the one-case); 0xBB6 sets r5=0. C now keeps r5f and writes it as opt pack[2]."
+  },
+  "installed": {
+    "leaves": "Appended process C (no fg_snap) to production g2c_fuel_gauge_leaves.c and declared it in g2c_fuel_gauge_leaves.h.",
+    "cores": "Typographic nrf_model_process_43a698 was removed. g2c_fuel_gauge_cores.S is an empty comment stub so sources.json still resolves. sources.json was not edited.",
+    "not_done": "apollo-main was not rebuilt; version-match and DFU paired sims were not run; linker-report string unchanged; official opencfw-otap-disarm.app.bin not overwritten. No flash, no git."
+  },
+  "sequencing_needed": [
+    "Do not rebuild apollo-main until sources.json is updated: drop g2c_fuel_gauge_cores.S, and compile g2c_fuel_gauge_leaves.c with the MVE profile (cores.S used g2-apollo-main-mve-1; leaves currently uses g2-apollo-main-1). Process C uses arm_mve.h vmulq_f32/vaddq_f32/vsubq_f32.",
+    "Then fix the linker-report string, rebuild apollo-main into a new output, and run both paired sims."
+  ],
+  "artifacts": {
+    "mid6_process_c": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_process.c",
+      "sha256": "a5a65050507d1a9d43071d54327297327d894bdfd59e9371043dab70a2e61317",
+      "bytes": 36790
+    },
+    "mid6_results": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_results.bin",
+      "sha256": "9c33d5f1628ee4d2f55d160614d5ba936209c5b86bbee9ea55335c685fd6e0a8",
+      "bytes": 2048
+    },
+    "mid6_test_elf": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_test.elf",
+      "sha256": "ad4dcfee32787422063b15a4ac7ca7893b5ca823022699f54a5d8355831932f7",
+      "bytes": 36988
+    },
+    "mid6_region_results": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_region_results.bin",
+      "sha256": "c7a6adaa385727a2c481a2a4d4f1983a42a25b1cbe97b41930dd02d316cdea03",
+      "bytes": 2048
+    },
+    "prod_leaves": {
+      "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+      "sha256": "b41c4c886b24120b3daf7b4509a94fd591b56ccb60f6766ef006cf84c68bb611",
+      "bytes": 73294
+    },
+    "prod_header": {
+      "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.h",
+      "sha256": "a6c9926b10ca31a157e29bf2900d9e3f0d725c7aff2499c4852b5223ae3a6d72",
+      "bytes": 2142
+    },
+    "prod_cores": {
+      "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_cores.S",
+      "sha256": "424767c0405406cee5e8a0c5830ddeba3a0505abc53400b5843d075b0b82413c",
+      "bytes": 284
+    }
+  }
+}

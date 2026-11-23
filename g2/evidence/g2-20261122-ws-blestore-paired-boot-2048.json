@@ -1,0 +1,48 @@
+{
+  "id": "g2-20261122-ws-blestore-paired-boot-2048",
+  "time": "2026-11-22 20:50:49 America/Chicago",
+  "stream": "ws-blestore",
+  "purpose": "Private full C rebuild after discovery-mode bytes fix (display_ble_profile_handler_init.c) and sources.json pending/03 alias drop, then both paired boot sims.",
+  "sources_json_sha256": "a795d6f95d54796927f488ca09da8692e7ebfe893f9a2ff6589bfe23511eaec5",
+  "build": {
+    "compile": "python3 tools/build/sources.py build --device g2 --payload g2-apollo-main --out build/ws-blestore-20261122/full-2048 --jobs 4",
+    "compile_result": "g2-apollo-main: 2719/2719 compiled (0 known failures), 0 duplicate strong symbols, 21 unresolved: ok (composed; 1291 before aliases)",
+    "link": "python3 tools/build/link_g2_sources.py --source-out build/ws-blestore-20261122/full-2048 --out build/ws-blestore-20261122/full-2048-link --payload g2-apollo-main",
+    "link_result": "linked 3628564 bytes",
+    "image": "build/ws-blestore-20261122/full-2048-link/g2-apollo-main/g2-apollo-main.bin",
+    "image_sha256": "3026294abb582af186eca2aaf0464ed9d6d95a793dd43aa4246aeae6535a6d1d",
+    "elf_sha256": "f52d5addb32056eaec68dd05ca4d8eaf20fc27508be694c6e5037c5196ee080c",
+    "pc": "0x0052c235",
+    "discovery_mode_fix": "display_ble_profile_handler_init.c points dispatch_slot at {0x01,0x00}; sources.json alias 5fa056->vRestoreContextOfFirstTask removed (1291 aliases before vs 1292 in full-1926)"
+  },
+  "sims": {
+    "script": "build/ws-blestore-20261122/paired.sh blestore-2048 <image>",
+    "openCFW": {
+      "match": "RC=0",
+      "dfu_mismatch": "RC=0, DFU_SAME vs em9305-nor-20261122 reference",
+      "hci_packets_dfu": 922,
+      "OTAPOINTER_AFTER_0.01S": "0xAFD1363A",
+      "OTAPOINTER_AFTER_8S": "0x0",
+      "CHIPREV_AFTER_8S": "0x22",
+      "HOST_PACKET_COUNT": "0x3A",
+      "UNSUPPORTED_COUNT": "0x0",
+      "adv": 1,
+      "display_frames": 2,
+      "faults": 0
+    },
+    "vs_previous_full_1926": "identical summary values",
+    "vs_stock": "identical except OTAPOINTER_AFTER_0.01S (by design, otap-disarm path)"
+  },
+  "nor_after_8s_match": {
+    "file": "build/ws-blestore-20261122/renode/blestore-2048-match.nor.bin",
+    "sha256": "4049ca4e899c7d069573bc4ca86e57c8b00f4b6564de5f2f8e9c9f983610758e",
+    "cmp_stock_match": "bit-identical",
+    "cmp_full_1926_match": "bit-identical"
+  },
+  "verdict": "BOOT_UNCHANGED",
+  "notes": [
+    "opencfw-otap-disarm.app.bin not touched",
+    "own Renode runs only, sequential (match then dfu-mismatch)",
+    "Writer approval for sources.json is CLOSED"
+  ]
+}

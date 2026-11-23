@@ -1,0 +1,40 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "sources": {
+  "g2/src/apollo-main/app/terminal-encode/terminal_encode_send_5ce7c4.c": "03ddb190d2cfc805bdf2bfdfcfb250c28e367c19cf9ff6bb83d82dc019245ffa",
+  "g2/src/apollo-main/app/sync-info/sync_info_common_data_handler_472102.c": "98466b75e595fef9a5bee07fe123f3a87ff424fb80b061e8d072eb942c98b3de"
+ },
+ "spec": "build/ws-app-20261122/specs/ce-a",
+ "verified_at": "2026-11-22 20:46 CST",
+ "result": {
+  "verdict": "EQUIVALENT",
+  "tests": 500,
+  "equal": 500,
+  "differ": 0,
+  "mutants": 9,
+  "killed": 9,
+  "surviving_mutants": [],
+  "done": true,
+  "overflow": false,
+  "harness_sha256": "c0c73706722b7c4455845af165359928a064d42edc4fcf558e51784a94225600",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "stock_entries": {
+  "audio_terminal_send_message_5ce7c4 (terminal_encode_and_send)": "0x5ce7c4",
+  "audio_uart_registry_callback_472102 (SyncInfoService_common_data_handler)": "0x472102"
+ },
+ "source_changes": [
+  "terminal_encode_send_5ce7c4.c: encode result narrowed with (uint8_t) before the failure test, as stock does (0x5ce848 uxtb r0 after bl 0x490c32)",
+  "sync_info_common_data_handler_472102.c: decode result narrowed with (uint8_t) before the failure test (stock 0x47213a uxtb r0 after bl 0x490120)"
+ ],
+ "cast_proof": "mutants 0 and 6 remove exactly these casts; both are killed (stub returns 0x100/0x201/0x301 take the failure path in stock and in the fixed C, the success path in the uncast C)",
+ "method": "black-box sequences of 1-3 random ops over both entries; nanopb stream/ostream/decode/encode stubbed (returns 1/0/0x100/0x201/0x301, random errmsg, bytes_written incl. >0xffff for uint16 truncation), device role 0/1/2, BLE tx/notify, sync-info command handler 0x471ee8 observed; tags across all supported/unsupported values incl. high bits above 16 and 8 bits; commands/sequences >0xff; notify flag 0/1/random; sync event 0/1/random, decoded command 0/1/random; staging and encoded buffers compared per side (stock 0x200f9694/0x20374378 vs C-defined arrays); 500 tests + 60 per mutant (bias toward the mutated entry)",
+ "observed": "all callee args (buffer pointers relative to each side's arrays, staging content hash at encode, BLE payload by content), return values, logs; staging buffer (0x850) and sync-info state (12 B) after every op",
+ "harness_change": "harness.ld now also collects *(.g2.ram*) sections into harness .bss (needed for C arrays placed in named RAM sections)",
+ "history": [
+  "20:44 CST: 500/500, 7/9 (generator never produced decoded command 1 or event 1)",
+  "20:46 CST: 500/500, 9/9"
+ ]
+}

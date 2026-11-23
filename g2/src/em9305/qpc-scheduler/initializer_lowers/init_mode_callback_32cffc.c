@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Complete native 0x32cffc..0x32d0f2. The native callback's R1 is its code
  * identity, but this body replaces R1 before either child call. Reads and
@@ -20,10 +21,10 @@ uint32_t opencfw_em9305_mode_callback_32cffc(uintptr_t context,
 {
     (void)callback_identity;
     uint32_t mode=*(volatile uint8_t *)(context+2u);
-    uint32_t word_four=*(volatile uint32_t *)(uintptr_t)0x802820u;
-    uint32_t r0=*(volatile uint32_t *)(uintptr_t)0x80281cu;
-    uint32_t mask_four=*(volatile uint32_t *)(uintptr_t)0x805a98u;
-    uint32_t mask_zero=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+    uint32_t word_four=em9305_ram_8027e0.u32_802820;
+    uint32_t r0=em9305_ram_8027e0.u32_80281c;
+    uint32_t mask_four=em9305_ram_805a6c.u32_805a98;
+    uint32_t mask_zero=em9305_ram_805a6c.u32_805a94;
     uint32_t part_four=word_four&0x1befu;
     uint32_t tested_four=word_four&mask_four;
     uint32_t tested_zero=mask_zero&r0;
@@ -48,13 +49,13 @@ uint32_t opencfw_em9305_mode_callback_32cffc(uintptr_t context,
                 r0=(uint32_t)event;
                 if (event!=0u) {
                     *(volatile uint16_t *)(event+2u)=0x6c01u;
-                    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
-                    uintptr_t root=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+                    uintptr_t base=em9305_ram_805c5c.u32_805c70;
+                    uintptr_t root=em9305_ram_805c5c.u32_805cac;
                     int32_t index=(int32_t)(uint32_t)(context-base)/912;
                     uint32_t record=*(volatile uint8_t *)(root+68u);
                     *(volatile uint8_t *)(event+4u)=1u;
                     uint32_t incremented=(uint8_t)(record+0x69u);
-                    r0=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+                    r0=em9305_ram_805af0.u8_805b18;
                     uint32_t selected=(incremented>=0x6eu)?record:0x96u;
                     *(volatile uint8_t *)(event+5u)=(uint8_t)selected;
                     *(volatile uint16_t *)event=(uint8_t)index;
@@ -70,7 +71,7 @@ uint32_t opencfw_em9305_mode_callback_32cffc(uintptr_t context,
     if (r0!=1u) return r0;
     r0=*(volatile uint8_t *)(context+769u);
     if (r0!=0u) return r0;
-    uint32_t enable=*(volatile uint8_t *)(uintptr_t)0x805a85u;
+    uint32_t enable=em9305_ram_805a6c.u8_805a85;
     if ((enable&0x80u)==0u) return 800u;
     uint32_t unit=*(volatile uint16_t *)(context+532u);
     r0=opencfw_em9305_radio_record_timing_30c40c(800u,unit);

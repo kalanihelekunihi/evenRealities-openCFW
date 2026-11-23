@@ -1,0 +1,66 @@
+{
+  "title": "nrf_fuel_gauge process region-split: entry through 43bc84 residual (0x9A8) on the one-case input",
+  "status": "REGION MILESTONE \u2014 NOT A FULL PROCESS VERIFICATION",
+  "when": "2026-11-22 12:02 PM CST (America/Chicago)",
+  "approach": "Stop treating process as one unit. Hook typographic stock in Renode 1.17 M55 at basic-block boundaries (cpu AddHook at stock_base+offset; hook body execs mid6_region_hooks.py and dumps GP, s0-s31, FPSCR, VPR, and state[0x00..0xDF]). C dumps state at matching labels via fg_snap. One-case input: init then process, v=3.2, i=0.05, T=0, dt=1, count=1. Fix earliest divergent region first.",
+  "result": {
+    "one_case": "v=3.2 i=0.05 T=0 dt=1 count=1 after the same init as mid6_debug",
+    "regions_matched_state": [
+      "0x003C",
+      "0x0470",
+      "0x05B6",
+      "0x07E4",
+      "0x0926",
+      "0x09A8"
+    ],
+    "first_remaining_divergence": "0x09A8-0x0D4E (before SoC tail). At 0xD4E stock has smeared qNaN 0x7FC00000 across state[0x08..0x44] and state[0xC0/C4], and state[0xCC]=0; C still holds the 0x926/0x9A8 values (finites, signed Inf, and qNaN already present at 0x926).",
+    "soc_still_wrong": "stock=0, C=-0.05 (0xBD4CCCCD) on this case \u2014 expected until the 0x9A8-0xD4E region is fixed",
+    "fixes_in_this_milestone": [
+      "0x718-0x7E0 loop was incomplete in the draft (only wrote state+0xC0 sums; did not column-store the two 4-wide mixes to sp+0x280 and sp+0x240). That left sp+0x240 stale, so the 0x8D4-0x926 add into state+8 produced -Inf/finite instead of stock's values.",
+      "After the loop transliteration, 0x7E4 and 0x926 still differed only in NaN sign (C 0xFFC00000 vs stock 0x7FC00000). Switching q_mul/q_add/q_sub from 4x scalar vmul/vadd to MVE ACLE vmulq_f32/vaddq_f32/vsubq_f32 made 0x7E4, 0x926, and 0x9A8 bit-exact on this case."
+    ]
+  },
+  "notes": {
+    "hooks": "Renode hook Python is a per-hook engine; the monitor python namespace is not visible. Each AddHook execs mid6_region_hooks.py then calls fg_region_snap(self, tag). Hook at 0x718 (loop body) fired 4 times; hook at 0x8D4 (dls, not the le target 0x912) fired once. VPR was 0 at every boundary hook. State pointer after prologue is [sp,#0x58]. [sp,#0x5c]=state+8, [sp,#0x70]=sp+0x240, [sp,#0x48]=state+0xC0, fp=sp+0x200.",
+    "0x718_semantics": "4 iters: s11=load(sp+0x188)+load(sp+0x178) walking into state+0xC0; vld4 from state+8 (same base every iter) mixed with columns of the 0x200/210/220/230 tiles; first mix column-stored at sp+0x280, second mix at sp+0x240. Does not write state+8. 0x8D4-0x926 vst4 of k*f168 into fp=sp+0x200 once, then 4x vadd of [sp+0x70]=sp+0x240 with that tile into state+8.",
+    "vpr": "0 at all hooked boundaries on this case"
+  },
+  "artifacts": {
+    "mid6_process_c": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_process.c",
+      "sha256": "9d8f22131ba4ebc850efa09485d4b922afa9b9eb854ec225a2554cdb1489781c",
+      "bytes": 34670
+    },
+    "mid6_region_compare": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_region_compare.txt",
+      "sha256": "4b8fb0d3e37ee2b169a2a94c192559b05f91386245d01508ce69809cde0ceb81",
+      "bytes": 4174
+    },
+    "mid6_region_ssnap": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_region_ssnap.bin",
+      "sha256": "cf446a3ea69e01b3db9bd7dd25d5b79564d1482740df85d61b0991f55943610d",
+      "bytes": 12288
+    },
+    "mid6_region_csnap": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_region_csnap.bin",
+      "sha256": "da5f3542844b014eb1008d51663f13105a5e1c38f7dcd9c2ef7d0c7c4b4ceed1",
+      "bytes": 4096
+    },
+    "mid6_region_results": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_region_results.bin",
+      "sha256": "beca506be8270cf151dbe52cd2bf5a4698a9d88c96ea0e8df40d7472cff57fcc",
+      "bytes": 2048
+    },
+    "mid6_region_hooks": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_region_hooks.py",
+      "sha256": "87f48e52ff079c956ba1438651821c6eb1cdf0ac3aa01eade77aa1842b09535d",
+      "bytes": 1808
+    }
+  },
+  "not_done": [
+    "Only the one-case input is region-compared so far; the 1232-case mid6 suite has not been re-run and is still not 0 mismatches.",
+    "Region 0x09A8-0x0D4E (and the SoC/output tail through 0xEDC) still diverge. Not installed.",
+    "C process remains WIP in the test tree only. Production leaves/header/cores.S were not changed.",
+    "apollo-main was not rebuilt; version-match and DFU paired sims were not run. Linker-report string unchanged. Official opencfw-otap-disarm.app.bin not overwritten. No flash, no git."
+  ]
+}

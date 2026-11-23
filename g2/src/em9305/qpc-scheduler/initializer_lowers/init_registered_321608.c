@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x321608..0x321644 and its connected 0x3217f0..0x32181e
  * transition child. 0x335398 has four states x five selectors of callback
@@ -24,8 +25,8 @@ static uint32_t opencfw_em9305_init_transition_3217f0(uintptr_t row,
 
 uint32_t opencfw_em9305_init_registered_321608(uintptr_t event)
 {
-    *(volatile uint32_t *)(uintptr_t)0x805c80u=(uint32_t)event;
-    uintptr_t row=0x803d78u;
+    em9305_ram_805c5c.u32_805c80=(uint32_t)event;
+    uintptr_t row=((uintptr_t)&em9305_ram_803d58 + 0x20u);
     uint32_t kind=*(volatile uint8_t *)(event+2u);
     if(kind!=255u) {
         uint32_t index=*(volatile uint16_t *)event;

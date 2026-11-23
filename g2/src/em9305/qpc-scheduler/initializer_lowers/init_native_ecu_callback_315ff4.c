@@ -1,19 +1,20 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x315ff4..0x3160d2: validate a connection update request held in
- * the shared report (0x802810: interval +0xc, instant +0xe, latency +0x10,
+ * the shared report (((uintptr_t)&em9305_ram_8027e0 + 0x30u): interval +0xc, instant +0xe, latency +0x10,
  * window +0x12, timeout +0x14). The interval must be 1..500 with latency
  * below 500 and window below the interval, (latency+1)*interval must stay
  * at or below 500, the timeout must be 10..3200 and at least twice the
  * span scaled by the current interval (+266) * 1.25. Invalid requests end
- * the link with reason 0x73 when bit 5 of 0x805a86 is set. Valid ones are
+ * the link with reason 0x73 when bit 5 of ((uintptr_t)&em9305_ram_805a6c + 0x1au) is set. Valid ones are
  * stored (+846..+852, +260, +382) and flag bit 29 of +636 is set unless
  * nothing changed. */
 extern uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t,uint32_t);
 
 void opencfw_em9305_ecu_callback_315ff4(uintptr_t record)
 {
-    volatile uint16_t *report=(volatile uint16_t *)(uintptr_t)0x802810u;
+    volatile uint16_t *report=&em9305_ram_8027e0.u16_802810;
     uint32_t window=report[9];
     uint32_t latency=report[8];
     uint32_t interval=report[6];
@@ -28,7 +29,7 @@ void opencfw_em9305_ecu_callback_315ff4(uintptr_t record)
     uint32_t current=*(volatile uint16_t *)(record+266u);
     uint32_t scaled=current+(current>>2)+((current&3u)!=0u);
     if(timeout_us<((span*scaled)<<1)||valid==0u) {
-        if(*(volatile uint8_t *)(uintptr_t)0x805a86u&0x20u)
+        if(em9305_ram_805a6c.u8_805a86&0x20u)
             (void)opencfw_em9305_receive_terminate_325c08(record,0x73u);
         return;
     }

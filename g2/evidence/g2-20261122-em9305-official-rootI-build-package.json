@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-22 11:51:00 PM CST (America/Chicago)",
+  "title": "Official sources.py g2 build after approved {root} include-path fix: all 768 em9305 units and 2719/2719 apollo-main compile, official composed image final-linked and packaged, private NOR spliced; paired sims prepared but not started because other Renode jobs were running",
+  "scope": "Close the official-build half of the {root} include approval. sources.json was already edited (two tokens only) and the approval is closed. This pass ran python3 tools/build/sources.py build --device g2 --out build/ws-em9305-20261122/full-rootI-232930, final-linked the official composed g2-em9305.o with tree g2/src/em9305/link/g2-em9305.ld, packaged with split_bootloader_image + build_package, and spliced a private NOR. Paired Renode sims were not started.",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261122-em9305-typed-ram-lowers-801a04-grow-paired-sims.json",
+  "sources_json": {
+    "approval": "single writer for exactly this: in profiles g2-em9305-1 and g2-em9305-2 only, targeted text replace of -Ig2/src/em9305/qpc-scheduler with -I{root}/g2/src/em9305/qpc-scheduler; no re-serialize; leave whitespace alone",
+    "sha256_before": "a6bd0a517d4eda297ed71cb68cff95f009fa149fa31443a77341bb4a73433266",
+    "sha256_after": "0271ee7ac3fe15f019cb97b06559c3222bc808983509331bcdd0bab2b29c3f40",
+    "bytes_delta": 14,
+    "edit": "exactly two tokens, lines for profiles g2-em9305-1 and g2-em9305-2",
+    "sources_py_check": "rc=0, g2: 4880 units, 4542 source files, 2 not built (reconfirmed after the official build at 11:50 PM CST)",
+    "pending_note_deleted": "build/ws-em9305-20261122/pending/sources-json-em9305-ram-include-root.NOTE.md",
+    "approval_closed": true,
+    "further_writes": false
+  },
+  "pbuild": {
+    "path": "build/ws-em9305-20261122/pbuild.py",
+    "change": "profile and unit flags now expand {root} -> /w (sources.py Docker uses /repo; this private build mounts the repo at /w)"
+  },
+  "official_build": {
+    "command": "python3 -u tools/build/sources.py build --device g2 --out build/ws-em9305-20261122/full-rootI-232930",
+    "log": "build/ws-em9305-20261122/full-rootI-232930.log",
+    "started": "2026-11-22 11:29:38 PM CST (America/Chicago)",
+    "finished": "2026-11-22 11:48 PM CST (America/Chicago)",
+    "report": "build/ws-em9305-20261122/full-rootI-232930/report.json",
+    "manifest_sha256": "0271ee7ac3fe15f019cb97b06559c3222bc808983509331bcdd0bab2b29c3f40",
+    "manifest_changed_during_build": false,
+    "units_total": 4875,
+    "nonzero_returncodes": 0,
+    "payloads": {
+      "g2-em9305": {
+        "units": 768,
+        "compiled": 768,
+        "failed": 0,
+        "composed_unresolved_symbols": 142,
+        "composed": "build/ws-em9305-20261122/full-rootI-232930/g2/g2-em9305/g2-em9305.o",
+        "composed_bytes": 542992
+      },
+      "g2-apollo-main": {
+        "units": 2719,
+        "compiled": 2719,
+        "failed": 0,
+        "composed_unresolved_symbols": 21,
+        "composed": "build/ws-em9305-20261122/full-rootI-232930/g2/g2-apollo-main/g2-apollo-main.o",
+        "composed_bytes": 12058148
+      },
+      "g2-apollo-bootloader": {
+        "units": 224,
+        "compiled": 224,
+        "failed": 0
+      },
+      "g2-case": {
+        "units": 359,
+        "compiled": 359,
+        "failed": 0
+      },
+      "g2-codec-a": {
+        "units": 368,
+        "compiled": 368,
+        "failed": 0
+      },
+      "g2-codec-b": {
+        "units": 332,
+        "compiled": 332,
+        "failed": 0
+      },
+      "g2-touch": {
+        "units": 105,
+        "compiled": 105,
+        "failed": 0
+      }
+    },
+    "note": "This is the official sources.py path. Compose produces a relocatable g2-em9305.o, not a final ELF or package. The earlier hwdrivers full-2246 build against sha a6bd0a51 failed 312 typo-RAM units (missing em9305_ram.h) because the relative -I was resolved against Docker workdir /work."
+  },
+  "final_link": {
+    "method": "docker arc-elf32-gcc -nostartfiles -nostdlib -T g2/src/em9305/link/g2-em9305.ld -Wl,--unresolved-symbols=report-all -lgcc, same second-stage flags as workspace pbuild",
+    "input": "build/ws-em9305-20261122/full-rootI-232930/g2/g2-em9305/g2-em9305.o",
+    "outdir": "build/ws-em9305-20261122/full-rootI-232930/link",
+    "started": "2026-11-22 11:49:56 PM CST (America/Chicago)",
+    "finished": "2026-11-22 11:49:57 PM CST (America/Chicago)",
+    "link_log": "build/ws-em9305-20261122/full-rootI-232930/link/link.log",
+    "link_log_empty": true,
+    "elf": "build/ws-em9305-20261122/full-rootI-232930/link/g2-em9305.elf",
+    "elf_sha256": "8da9e0188b06ff3328af4f7aae1ec7778b7174c6b6f167af072379ea4bfc36c7",
+    "elf_bytes": 428368,
+    "text_bytes": 239508,
+    "nvm_bootloader_bytes": 1160,
+    "programHeader_bytes": 40,
+    "nvm_entry_bytes": 16,
+    "app_bin_sha256": "a05770aa225719f6890877d56cde90f709f3aaa0fce9cd30efa516a93be738a8"
+  },
+  "package": {
+    "method": "em9305_record2.split_bootloader_image + record_package.build_package with last_page=(APP_BASE+len(app)-NVM_BASE+0x1FFF)//0x2000",
+    "path": "build/ws-em9305-20261122/full-rootI-232930/link/g2-em9305-source-candidate-package.bin",
+    "bytes": 240840,
+    "sha256": "82c73dca290763ad04ea2b4c069e17187a50e86a164070b228bf6e3ccb6e0c5c",
+    "magic": "00020404",
+    "records": 3,
+    "erase_sector_count": 31,
+    "byte_identical_to_p_lowers_801a04_grow": true,
+    "p_lowers_package": "build/ws-em9305-20261122/p-lowers/g2-em9305-source-candidate-package.bin"
+  },
+  "slot_fit": {
+    "nvm_window": [
+      "0x00300000",
+      "0x00380000"
+    ],
+    "nvm_capacity_bytes": 524288,
+    "bootloader_end": "0x00300488",
+    "boot_fits_before_record2_0x00302000": true,
+    "record2_bytes": 56,
+    "application_end": "0x0033CB94",
+    "application_bytes": 239508,
+    "app_fits_before_nvm_end": true,
+    "headroom_bytes": 275564,
+    "fits_nvm_slot": true,
+    "precomputed_programmed_nvm_crcs": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0xD0CFF430",
+      "[0x00302400,0x0033CB94)": "0xDEEF4351"
+    }
+  },
+  "splice": {
+    "private_g2_app": "build/ws-em9305-20261122/sim/opencfw-em9305-typed-ram.app.bin",
+    "private_g2_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "private_g2_app_note": "Existing byte-identical private copy of official opencfw-otap-disarm.app.bin. Official file was not opened for write.",
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-official-rootI.bin",
+    "nor_sha256": "313d7250dd4ec71a57920ff68d59933165ce1d649b707b2c1756abf1734e0bc1",
+    "nor_source": "copy of build/em9305-nor-20261122/nor-stock-formatted.bin, then lfs_inject at 0x1400000 path /firmware/ble_em9305.bin",
+    "lfs_inject_wrote_bytes": 240840,
+    "nor_byte_identical_to_lowers_801a04_grow": true,
+    "lowers_nor": "build/ws-em9305-20261122/sim/nor-with-em9305-lowers.bin",
+    "lowers_resc_not_overwritten": true
+  },
+  "sims": {
+    "status": "prepared_not_started",
+    "reason": "Standing rule is one emulator job at a time and do not interfere with other streams' Renode. At 11:50:37 PM CST (America/Chicago) four other Renode.dll processes were still running: build/ws-ramlayout-20261122-1230/fnh/mut_audio_clock_set_1-ours.resc (elapsed 16:31), build/ws-app-20261122/specs/tp-dbg/out/run.resc (elapsed 25:14), build/ws-blestore-20261122/specs/dm/out/run.resc (elapsed 1:37), build/ws-app-20261122/specs/ofl-a/out/run.resc (elapsed 0:40). This stream did not start a fifth Renode.",
+    "resc_written": {
+      "match": "build/ws-em9305-20261122/sim/official-rootI-match.resc",
+      "forced_mismatch_dfu": "build/ws-em9305-20261122/sim/official-rootI-dfu-mismatch.resc"
+    },
+    "identity_note": "The official final-linked application (sha a05770aa\u2026, 239508 B), source-candidate package (sha 82c73dca\u2026, 240840 B), and private NOR (sha 313d7250\u2026) are byte-identical to the p-lowers 801a04-grow image that already passed both paired sims at 10:51:50\u201310:55:00 PM CST (America/Chicago): version-match CHIPREV 0x22, OTAP 0xAFD1363A then 0, HOST 0x3A, display hash 0c5cc90b\u2026; forced-mismatch DFU commit 00020404, SYSRESETREQ, SBL handoff VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D, observed CRCs 0x1D6121C4 / 0xD0CFF430 / 0xDEEF4351. That is identity of the image, not a new official-resc sim run. Official-rootI resc files are ready for when Renode is free.",
+    "prior_passing_evidence": "g2/evidence/g2-20261122-em9305-typed-ram-lowers-801a04-grow-paired-sims.json"
+  },
+  "rules": {
+    "no_commit": true,
+    "no_push": true,
+    "no_flash": true,
+    "no_backups": true,
+    "official_app_not_overwritten": true,
+    "sources_json_approval_closed": true,
+    "other_streams_left_alone": true,
+    "other_renode_not_stopped": true
+  }
+}

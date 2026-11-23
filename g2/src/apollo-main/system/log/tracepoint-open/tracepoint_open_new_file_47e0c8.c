@@ -1,8 +1,9 @@
 /* Stock Main 0x47e0c8: allocate and initialize a new tracepoint file. */
 #include <stdint.h>
 
+/* stock .data init: 0x20004188 = 1 (first tracepoint file sequence before any state is read) */
 volatile uint32_t audio_tracepoint_next_sequence_20004188
-    __attribute__((section(".bss.opencfw.tracepoint.next_sequence"),aligned(4),used));
+    __attribute__((section(".data.opencfw.tracepoint.next_sequence"),aligned(4),used)) = 1u;
 volatile uint32_t audio_tracepoint_session_generation_20074ad4
     __attribute__((section(".bss.opencfw.tracepoint.session_generation"),aligned(4),used));
 

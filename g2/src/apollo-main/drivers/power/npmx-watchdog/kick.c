@@ -12,8 +12,8 @@ extern void g2_flashdb_candidate_log(uint32_t,const char *,const char *,
                                       const char *,uint32_t,const char *,...);
 extern uint32_t audio_log_simple(uint32_t,const char *,const char *,...);
 
-typedef uint32_t (*npmx_write_fn)(uint32_t, uint32_t, const uint8_t *,
-                                   uint32_t);
+extern void *npmx_timer_get(struct npmx_instance *p_pm, uint8_t idx);     /* stock 0x55ef6c */
+extern uint32_t npmx_timer_task_trigger(void *p_timer, uint32_t task);    /* stock 0x55ef76 */
 
 static const char npmx_module[] = "npmx_driver";
 static const char npmx_source_path[] =
@@ -30,15 +30,11 @@ uint32_t audio_ble_npmx_kick_watchdog_5118e8(uint32_t arg0,
                                                uint32_t arg3) {
     (void)arg2;
     (void)arg3;
-    /* The device base is 0x20070f78; slot zero begins at +0x84. */
-    const uint32_t slot = ((uint32_t)(uintptr_t)&g2_npmx_instance) + 0x84u;
-    const uint32_t driver = *(volatile const uint32_t *)(uintptr_t)slot;
-    const uint32_t entry = *(volatile const uint32_t *)(uintptr_t)driver;
-    const uint32_t context =
-        *(volatile const uint32_t *)(uintptr_t)(driver + 8u);
-    const uint8_t command = 1u;
-    const uint32_t result = ((npmx_write_fn)(uintptr_t)entry)(
-        context,0x704u,&command,1u);
+    /* Stock 0x5118e8 makes two direct calls (not an indirect fn-ptr write):
+     *   timer  = npmx_timer_get(&g2_npmx_instance, 0);   (r1=#0 then bl 0x55ef6c)
+     *   result = npmx_timer_task_trigger(timer, 3);       (r1=#3 then bl 0x55ef76) */
+    void *timer = npmx_timer_get(&g2_npmx_instance, 0u);
+    const uint32_t result = npmx_timer_task_trigger(timer, 3u);
     if (result == 0x2bad0000u) return arg0;
     if (g2_flashdb_candidate_flags() & 2u) {
         g2_flashdb_candidate_log(1u,

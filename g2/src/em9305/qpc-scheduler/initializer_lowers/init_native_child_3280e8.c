@@ -1,11 +1,12 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x3280e8..0x328270: periodic advertising event end for the set at
  * object+0x24. Count the event (+825); a stopping set (+0x8d6, +0x8d4) or
  * one whose event limit (+824) is reached (status 0x43 at +826) is ended:
  * clear +0xae1, mark +0x8d6, notify the scheduler (+0x8d8) and run 325a40
  * with 4. Otherwise refresh the PDU's TX power (+0xe from +0xf or the
- * default 0x805bed), commit pending advertising data (+1440: copy into the
+ * default ((uintptr_t)&em9305_ram_805be0 + 0xdu)), commit pending advertising data (+1440: copy into the
  * buffer at +1424, update lengths +1420/+0x8ca/+1432 and DID +64, rebuild
  * via 32387c; without a periodic train +828 just clear +0xae1) and pending
  * scan-response data (+1716), apply a pending DID update (+0xae2), and
@@ -49,7 +50,7 @@ void opencfw_em9305_child_3280e8(uintptr_t object)
         return;
     }
     uint32_t power=r8(pdu+0xfu);
-    if(power==0u) power=r8(0x805bedu);
+    if(power==0u) power=r8(((uintptr_t)&em9305_ram_805be0 + 0xdu));
     w8(pdu+0xeu,power);
     if(r8(set+1440u)!=0u) {
         uintptr_t buffer=r32(set+1424u);

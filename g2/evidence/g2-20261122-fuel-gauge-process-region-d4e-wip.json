@@ -1,0 +1,65 @@
+{
+  "title": "nrf_fuel_gauge process region-split: 0x09A8-0x0D4E qNaN smear path on the one-case input",
+  "status": "REGION MILESTONE \u2014 NOT A FULL PROCESS VERIFICATION",
+  "when": "2026-11-22 12:11 PM CST (America/Chicago)",
+  "approach": "Added Renode hooks inside typographic 0x09A8-0x0D4E (0x09DE, 0x0A34, 0x0B16, 0x0B5A, 0x0BB0, 0x0BB6, 0x0F50, 0x0BC6, 0x0BE0, 0x0C16, 0x0C9E, 0x0D18). Compared state at each point against C on the one-case input (init then process v=3.2, i=0.05, T=0, dt=1, count=1).",
+  "result": {
+    "one_case": "v=3.2 i=0.05 T=0 dt=1 count=1",
+    "path": "43bfac returned 0 (r0=r7=0 at 0xBB0). Stock took 0xF50 (reload q5 from the 0xB16 vdiv outputs at sp+0x188, r5 from [sp,#0x194]) and fell into 0xBC6; it did not take the 0xBB6 zero-q5 path. C had already branched on r0i==0 but then skipped 0xBC6-0xD18 with goto L0d4e.",
+    "what_writes_the_smear": [
+      "0xB16-0xB5A does not write state; it accumulates s18 to qNaN (horizontal reduction of vld4(state+8)*f168) and stores 4 vdiv results at sp+0x188.",
+      "0xBC6-0xBE0: state+0xC0 += vdup(*[sp,#0x68]) * q5. On this path q5 is those vdiv qNaNs and *yp is +Inf, so C0/C4/C8/CC all become 0x7FC00000.",
+      "0xBE2-0xC9E 439f88/439efc clamps write state[0xC8]=-1 and state[0xCC]=0 (second store is at state + (int)state[0xBC]*4 + 0xBC).",
+      "0xC56-0xD14: vst4 of (vld4(state+8) - (q5*s18)*load(sp+0x188)) back to state+8 smears qNaN 0x7FC00000 across state[0x08..0x44].",
+      "0xD18 cbz r7 skips 0xD38 because 43bfac was 0. State at 0xD4E is unchanged from 0xD18."
+    ],
+    "regions_matched_state": [
+      "0x003C",
+      "0x0470",
+      "0x05B6",
+      "0x07E4",
+      "0x0926",
+      "0x09A8",
+      "0x0BB0",
+      "0x0BC6",
+      "0x0D18",
+      "0x0D4E"
+    ],
+    "soc": "stock=0 and C=0 (now match on this case)",
+    "scratch": "match",
+    "fixes": [
+      "Implemented L0f50 and the 0xBC6-0xD18 body (C0 add, clamps, vst4 smear) and the r0i!=0 0xD38 tail store. Also fixed typographic 0xB2E operand order (w1*b / vfma w3,d, not w1*d / w3*b), 0xB7C dest (store v-g into the p9 buffer first, then mul by the reloaded p9[0]), and s18 live from the 0xB16 reduction.",
+      "C never stored typographic pointer slots at 0x5BC-0x5E4; [sp,#0x80] must be state+0xC0 for the 0xBC6 add. After writing those slots, 0xD18/0xD4E became bit-exact."
+    ]
+  },
+  "still_open": {
+    "tail_0xD4E_0xEDC": "On this case state is bit-exact at 0xD4E, but at epilogue 0xEDC / C 0xEB2 three words still differ: state[0x88] stock=0.05 vs C=0.25, state[0x8C] and [0x90] stock=0 vs C=0.25. opt[2] stock=qNaN 0x7FC00000 vs C=0. SoC and scratch already match.",
+    "suite": "The 1232-case mid6 suite has not been re-run."
+  },
+  "artifacts": {
+    "mid6_process_c": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_process.c",
+      "sha256": "bb65c7a556b2a8706680bb079bca097a83f1911d6c93753f6d6d9a78dabce07a",
+      "bytes": 36654
+    },
+    "mid6_region_ssnap": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_region_ssnap.bin",
+      "sha256": "41980bf31a74c2e11b7ba7a69f49dc868d477d74a4e8b60aa1d3ca74a99745e9",
+      "bytes": 16384
+    },
+    "mid6_region_csnap": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_region_csnap.bin",
+      "sha256": "33156787c289d9b27a16d372a726505e98ab893b5058dd6a75a8c948cabacd1b",
+      "bytes": 4096
+    },
+    "mid6_region_results": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_region_results.bin",
+      "sha256": "9f133a194cc41899cf091f2eee22a5b94479ea6b3290e78185a6fcec78f72e19",
+      "bytes": 2048
+    }
+  },
+  "not_done": [
+    "C process remains WIP in the test tree only. Production leaves/header/cores.S were not changed.",
+    "apollo-main was not rebuilt; version-match and DFU paired sims were not run. Linker-report string unchanged. Official opencfw-otap-disarm.app.bin not overwritten. No flash, no git."
+  ]
+}

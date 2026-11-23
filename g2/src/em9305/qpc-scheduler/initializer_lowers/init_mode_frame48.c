@@ -1,10 +1,11 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x323028..0x3230de: report the LL connection-complete event (code
  * 5) with status, role, peer address type and addresses (peer a4/a5, local
  * RPA s0/s1, peer RPA a6/a7) and, for a known record, its connection
  * parameters (+0x20, +0x24, +43). After a successful completion (status 0)
- * with feature bit 6 of 0x805a95 set, LL event 33 follows with byte s3.
+ * with feature bit 6 of ((uintptr_t)&em9305_ram_805a6c + 0x29u) set, LL event 33 follows with byte s3.
  * Returns the last event result, or 33 when no follow-up is sent. */
 extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
 extern uintptr_t opencfw_em9305_radio_address_write_3045e8(uintptr_t,uint32_t,uint32_t);
@@ -64,7 +65,7 @@ uint32_t opencfw_em9305_mode_event_323028(uint32_t handle, uint32_t role, uintpt
     (void)opencfw_em9305_radio_address_write_3045e8((uintptr_t)event.local_rpa, local_rpa_low, local_rpa_high);
     uint32_t result = opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
     if (status != 0u) return result;
-    if ((*(volatile uint8_t *)(uintptr_t)0x805a95u & 0x40u) == 0u) return 33u;
+    if ((em9305_ram_805a6c.u8_805a95 & 0x40u) == 0u) return 33u;
     struct ll_event_33 follow;
     follow.code = 33u;
     follow.handle_again = (uint16_t)handle;

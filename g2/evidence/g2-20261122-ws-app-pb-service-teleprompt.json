@@ -1,0 +1,82 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "sources": {
+  "g2/src/apollo-main/app/a-61-pb-teleprompt/pb_service_teleprompt.c": "5f8c2952fdb3d531ab9c36309ce3120e898ec224d374d1435dd20ea92b9f9520"
+ },
+ "spec": "build/ws-app-20261122/specs/tpb-a",
+ "verified_at": "2026-11-22 21:02 CST",
+ "result": {
+  "tests": 600,
+  "equal": 600,
+  "differ": 0,
+  "done": true,
+  "overflow": false,
+  "mutants": 9,
+  "killed": 9,
+  "surviving_mutants": [],
+  "verdict": "EQUIVALENT",
+  "harness_sha256": "7bead2ef526f98e31963e30195711333e9c05e17e6245af7772904e352eb1fec",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "stock_entries": {
+  "rx": "0x5885b4",
+  "resp": "0x588792",
+  "status": "0x58887a",
+  "filelist": "0x588968",
+  "fileselect": "0x588a56",
+  "page": "0x588b40",
+  "scroll": "0x588c16"
+ },
+ "method": "random 1-3 op sequences over 7 entries; nanopb stubs (decode/encode results incl. wide values), BLE tx/notify, tick, device role; magic repeat/new; NULL args; 600 tests + 80 per mutant",
+ "observed": "callee args/returns, logs, hex dump content, tx message (0xf58) and packet hashes, last magic, last tick after every op",
+ "mutants": [
+  {
+   "sym": "APP_PbRxTelepromptFrameDataProcess",
+   "from": "if ((uint8_t)audio_uart_pb_decode(",
+   "to": "if (audio_uart_pb_decode("
+  },
+  {
+   "sym": "APP_PbRxTelepromptFrameDataProcess",
+   "from": "elapsed < TP_DUP_WINDOW_MS",
+   "to": "elapsed <= TP_DUP_WINDOW_MS"
+  },
+  {
+   "sym": "APP_PbRxTelepromptFrameDataProcess",
+   "from": "(uint16_t)(len > 0x20u ? 0x20u : len)",
+   "to": "(uint16_t)(len > 0x1fu ? 0x1fu : len)"
+  },
+  {
+   "sym": "APP_PbRxTelepromptFrameDataProcess",
+   "from": "        return TP_RX_DUPLICATE;",
+   "to": "        return TP_RX_OK;"
+  },
+  {
+   "sym": "APP_PbTelepromptTxEncodeCommResp",
+   "from": "return tx_finish(fn_comm_resp, 0x6au, dump_resp, 0u);",
+   "to": "return tx_finish(fn_comm_resp, 0x6au, dump_resp, 1u);"
+  },
+  {
+   "sym": "APP_PbTxEncodeStatusNotify",
+   "from": "(uint8_t)(g2_teleprompt_pb_last_magic_20074ffe + 1u), 7u);",
+   "to": "(uint8_t)(g2_teleprompt_pb_last_magic_20074ffe + 2u), 7u);"
+  },
+  {
+   "sym": "APP_PbTxEncodeFileSelect",
+   "from": "sizeof msg->u.file_select);",
+   "to": "0x40u);"
+  },
+  {
+   "sym": "APP_PbTxEncodeScrollSync",
+   "from": "msg->u.scroll_sync[2] = sync[2];",
+   "to": "msg->u.scroll_sync[2] = sync[1];"
+  },
+  {
+   "sym": "APP_PbTxEncodePageDataRequest",
+   "from": "if ((uint8_t)audio_pb_encode(",
+   "to": "if (audio_pb_encode("
+  }
+ ],
+ "source_changes": "none needed"
+}

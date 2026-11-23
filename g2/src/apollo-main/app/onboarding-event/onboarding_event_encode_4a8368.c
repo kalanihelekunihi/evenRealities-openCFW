@@ -20,7 +20,14 @@ extern void audio_uart_checksum_copy(void *, const void *, uint32_t);
 extern void audio_uart_buffer_zero(void *, uint32_t, uint32_t);
 extern uint32_t audio_pb_encode(void *, const void *, const void *);
 extern void audio_ring_pb_tx_ble_475c1a(uint32_t, uint32_t, const void *, uint32_t);
-extern void audio_ring_pb_assert_509b48(void *);
+/* APP_errorFaultHandler record (app/fault-handler/fault_handler_509b48.c). */
+struct audio_fault_record {
+    uint32_t type, detail;
+    const char *path, *function;
+    uint32_t line;
+};
+_Static_assert(sizeof(struct audio_fault_record) == 20u, "fault record ABI");
+extern void audio_ring_pb_assert_509b48(const struct audio_fault_record *);
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t, const char *, const char *, const char *,
                                uint32_t, const char *, ...);
@@ -30,19 +37,14 @@ static const char module[] = "pb.onboarding";
 static const char path[] = "D:\\01_workspace\\s200_ap510b_iar_git\\platform\\protocols\\pb_service_onboarding\\pb_service_onboarding.c";
 static const char function[] = "APP_PbNotifyEncodeOnboardingEvent";
 static const char none[] = "(none)";
-static const uint8_t fault_literal[20] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0xcc, 0x95, 0x6d, 0,
-    0x9c, 0x7b, 0x75, 0, 0x26, 0x01, 0, 0
-};
 
 uint32_t audio_onboarding_event_encode_4a8368(uint32_t unused, const void *message)
 {
     (void)unused;
     if (message == 0) {
-        uint8_t fault[20];
-        audio_uart_checksum_copy(fault, fault_literal, sizeof fault);
-        *(uint16_t *)(void *)(fault + 4u) = 1u;
-        audio_ring_pb_assert_509b48(fault);
+        /* Own path/function strings (stock pointed at 0x6d95cc / 0x757b9c). */
+        const struct audio_fault_record fault = { 0u, 1u, path, function, 294u };
+        audio_ring_pb_assert_509b48(&fault);
         if ((audio_log_flags() & 2u) != 0u)
             audio_log_extended(1u, module, path, function, 0x128u, "POINTER NULL");
         if ((audio_log_flags() & 1u) != 0u || (audio_log_flags() & 4u) != 0u)
@@ -75,11 +77,11 @@ uint32_t audio_onboarding_event_encode_4a8368(uint32_t unused, const void *messa
         const char *error = stream.errmsg ? stream.errmsg : none;
         if ((audio_log_flags() & 2u) != 0u)
             audio_log_extended(1u, module, path, function, 0x140u,
-                               "Encoding failed: %s.", error);
+                               "Encoding failed: %s\n", error);
         if ((audio_log_flags() & 1u) != 0u || (audio_log_flags() & 4u) != 0u)
             (void)compressed_log_output(0x04400000u,
-                                        "[pb.onboarding]Encoding failed: %s.",
-                                        "[pb.onboarding]Encoding failed: %s.", error);
+                                        "[pb.onboarding]Encoding failed: %s\n",
+                                        "[pb.onboarding]Encoding failed: %s\n", error);
         return 0x2bu;
     }
     audio_ring_pb_tx_ble_475c1a(1u, 0x10u, audio_onboarding_event_packet_200f612c,

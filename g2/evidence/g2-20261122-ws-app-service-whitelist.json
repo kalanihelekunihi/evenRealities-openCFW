@@ -1,0 +1,37 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "source": "g2/src/apollo-main/app/a-24-service-whitelist/service_whitelist.c",
+ "source_sha256": "2a558eeb7861a4c0774fbca9c593535f1e2fd8ccfe2e08b92f9c024e71e3b954",
+ "spec": "build/ws-app-20261122/specs/wl-a",
+ "verified_at": "2026-11-22 20:05 CST",
+ "result": {
+  "verdict": "EQUIVALENT",
+  "tests": 500,
+  "equal": 500,
+  "differ": 0,
+  "mutants": 9,
+  "killed": 9,
+  "surviving_mutants": [],
+  "done": true,
+  "overflow": false,
+  "harness_sha256": "092439345b2a8e554d309ad9a9a803a1a1ca6f567027b7ee46e6c158b57582cd",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "stock_entries": {
+  "whitelist_open_mode_4d58d8": "0x4d58d8",
+  "semantic_whitelist_file_size_preserving_position": "0x4d5930",
+  "_parseJsonWhitelistToStruct": "0x4d597a",
+  "_printAppWhiteListInfo": "0x4d5f38",
+  "_parseWhiteListFromFS": "0x4d6360",
+  "SVC_WhitelistManagerInit": "0x4d6a5c"
+ },
+ "method": "black-box sequences of 1-4 random ops over 6 entry points; cJSON replaced by a test-built node tree (GetObjectItem/IsArray/GetArraySize/GetArrayItem/Delete answered from it; keys randomly missing, bool/non-bool types, list as array or string, 0-6 / exactly 100 / 97-104 rows, reported sizes incl. >255 for uint8 truncation, rows missing id/name, over-long strings); scripted file open/tell/seek/read/close, heap alloc and shared buffer, sizes incl. -1, 0, 0x2136-0x2138, 0x23ff, 1 MiB; 500 tests + 60 per mutant (mutant runs bias toward the mutated entry)",
+ "observed": "all callee args (paths/modes and JSON text by content), read sizes, CRC input hash, cJSON query sequence, logs, return values; whitelist record (0x1f42 B), CRC valid flag, cached CRC, shared and heap buffers after every op",
+ "source_changes": "none needed",
+ "history": [
+  "19:58 CST: 500/500, 8/9 (count==100 boundary rarely generated)",
+  "20:05 CST: 500/500, 9/9"
+ ]
+}

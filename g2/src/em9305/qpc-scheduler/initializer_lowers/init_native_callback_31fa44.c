@@ -1,13 +1,14 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31fa44..0x31fb98: LL control hook for the data-length/PHY
  * procedure on a connection. While a request is outstanding (+403),
  * opcodes 13/14 and unknown/reject responses for opcodes outside the
  * 0x228f4 set finish it through 31b714. An LL 0x18 (or a pending
- * response, +620) may start 31af38. With the feature bit 0 of 0x805a94
+ * response, +620) may start 31af38. With the feature bit 0 of ((uintptr_t)&em9305_ram_805a6c + 0x28u)
  * the opcode selects a mode (0x70 consumes deferred bit 19 of +644,
  * 0x18 -> 0, 0x3e -> 5, and an unknown response 0x0c maps the rejected
- * opcode at 0x802818 to 1..6), which then starts (+620 = 0) or finishes
+ * opcode at ((uintptr_t)&em9305_ram_8027e0 + 0x38u) to 1..6), which then starts (+620 = 0) or finishes
  * (+620 = 1, timer code 0x13 at +635) the procedure through 31fa10;
  * otherwise the request is deferred in bit 19. Returns 1 when the
  * procedure was driven. */
@@ -18,7 +19,7 @@ extern uint32_t opencfw_em9305_phy_finish_32c810(uintptr_t record);
 
 static uint32_t opencfw_em9305_reject_mode_31fa44(uintptr_t record, uint32_t *mode)
 {
-    uint32_t rejected=*(volatile uint8_t *)(uintptr_t)0x802818u;
+    uint32_t rejected=em9305_ram_8027e0.u8_802818;
     switch(rejected){
     case 4u: *mode=1u; return 1u;
     case 5u: *mode=2u; return 1u;
@@ -26,7 +27,7 @@ static uint32_t opencfw_em9305_reject_mode_31fa44(uintptr_t record, uint32_t *mo
     case 11u: *mode=4u; return 1u;
     case 7u: case 17u:
         *mode=6u;
-        return *(volatile uint8_t *)(uintptr_t)0x80281cu==3u;
+        return em9305_ram_8027e0.u8_80281c==3u;
     case 13u:
         *mode=6u;
         return *(volatile uint8_t *)(record+635u)==0x13u;
@@ -47,7 +48,7 @@ uint32_t opencfw_em9305_callback_31fa44(uintptr_t record, uint32_t opcode)
             return 1u;
         }
         if(opcode==12u){
-            uint32_t rejected=*(volatile uint8_t *)(uintptr_t)0x802818u;
+            uint32_t rejected=em9305_ram_8027e0.u8_802818;
             if(rejected>=0x12u||((0x228f4u>>rejected)&1u)==0u){
                 (void)opencfw_em9305_child_31b714(record);
                 return 0u;
@@ -57,7 +58,7 @@ uint32_t opencfw_em9305_callback_31fa44(uintptr_t record, uint32_t opcode)
     uint32_t current=*state;
     if(opcode==0x18u&&(current==0u||(current==1u&&*code!=0x13u)))
         (void)opencfw_em9305_child_31af38(record);
-    if((*(volatile uint8_t *)(uintptr_t)0x805a94u&1u)==0u)return 0u;
+    if((em9305_ram_805a6c.u8_805a94&1u)==0u)return 0u;
     if(opcode==0x70u){
         uint32_t word=*deferred;
         if((word&(1u<<19))==0u)return 0u;

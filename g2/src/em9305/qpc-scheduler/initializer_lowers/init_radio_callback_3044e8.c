@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x3044e8..0x30455c. R4 is the fifth incoming callback word. */
 extern uint32_t opencfw_em9305_auxiliary_ready_303f68(void);
@@ -20,7 +21,7 @@ uint32_t opencfw_em9305_init_callback_3044e8(
     uint32_t fourth, uintptr_t callback)
 {
     uint32_t current=load32(context);
-    const uintptr_t radio=0x8015c4u;
+    const uintptr_t radio=(uintptr_t)&em9305_ram_8015c4;
     /* Native STB.AB writes at old R13, then advances R13 by eight. */
     store8(radio,1u);
     if (current==0u) {

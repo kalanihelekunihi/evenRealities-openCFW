@@ -1,6 +1,7 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
-/* Native 0x3227e0..0x322832: drain the PAwR response queue at 0x805008.
+/* Native 0x3227e0..0x322832: drain the PAwR response queue at ((uintptr_t)&em9305_ram_803d58 + 0x12b0u).
  * Each event is decoded; a decoded response gets its 6-byte address (event
  * +8) and a status of 1, or -1 when the decoder flagged it, and is
  * dispatched. Every event is released and the queue resumed. */
@@ -24,7 +25,7 @@ void opencfw_em9305_callback_3227e0(void)
 {
     struct pawr_response response;
     for (;;) {
-        uintptr_t event = opencfw_em9305_wsf_event_remove(0x805008u, (uintptr_t)&response.handler);
+        uintptr_t event = opencfw_em9305_wsf_event_remove(((uintptr_t)&em9305_ram_803d58 + 0x12b0u), (uintptr_t)&response.handler);
         if (event == 0u) return;
         if (opencfw_em9305_pawr_decode_31e84c(event, (uintptr_t)&response,
                                               (uintptr_t)&response.flagged) != 0u) {

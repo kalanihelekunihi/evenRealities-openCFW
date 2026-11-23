@@ -1,3 +1,7 @@
+/* Nordic nrf_fuel_gauge (GCC-built in stock, 0x439fe4..0x43bfa8) uses fused VFMA, so this unit
+ * keeps clang's default in-expression contraction; the g2-apollo-main profiles set -ffp-contract=off
+ * because the IAR-built remainder of the image never emits VFMA. */
+#pragma clang fp contract(on)
 /* Address-named entry points used by npmx_main_driver.c. The public Nordic API
  * symbols are supplied by g2c_fuel_gauge_source.c for the source-only build.
  * Stock addresses identify the original IAR link, not byte-identical bodies. */

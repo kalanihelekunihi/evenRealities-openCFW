@@ -1,7 +1,8 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x322dac..0x322dd6: report LL event 17 for a 912-byte connection
- * entry, identified by its index in the table at *0x805c70. */
+ * entry, identified by its index in the table at *((uintptr_t)&em9305_ram_805c5c + 0x14u). */
 extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
 
 struct ll_event_17 {
@@ -12,7 +13,7 @@ struct ll_event_17 {
 
 uint32_t opencfw_em9305_child_322dac(uintptr_t entry)
 {
-    uintptr_t base = *(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uintptr_t base = em9305_ram_805c5c.u32_805c70;
     uint8_t index = (uint8_t)((int32_t)(entry - base) / 912);
     struct ll_event_17 event;
     event.code = 17u;

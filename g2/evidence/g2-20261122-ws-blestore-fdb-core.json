@@ -1,0 +1,123 @@
+{
+ "id": "g2-20261122-ws-blestore-fdb-core",
+ "time": "2026-11-22 17:32 America/Chicago",
+ "status": "VERIFIED",
+ "scope": "FlashDB KVDB core: upstream FlashDB 2.1.1 (third-party/upstream/flashdb/src/fdb.c, fdb_kvdb.c, fdb_utils.c; profile g2-apollo-main-81, g2 fdb_cfg.h) vs stock 0x543c48..0x545528 + 0x585800..0x585ce0",
+ "api": {
+  "fdb_kvdb_init": "0x5453fe",
+  "fdb_kv_get_blob": "0x54454a",
+  "fdb_kv_set_blob": "0x54503a",
+  "fdb_kv_set_default": "0x5450a4",
+  "fdb_kvdb_control": "0x545320"
+ },
+ "method": "Renode 1.17 M55 stub-patch harness; FAL find/read/write/erase/device-find/fal_init (0x597cde/0x597d34/0x597d72/0x597db0/0x597e54/0x597dec) and printf 0x4733ee stubbed onto a RAM NOR model (NOR AND-write, 4 KiB erase) of the kvdb partition seeded from build/em9305-nor-20261122/nor-stock-formatted.bin @0x1FC0000 (0x38000, 56 used sectors). Each test: random control (lock/unlock/sec size/not-format), init, 1..70 random get/set/delete/set_default ops, injected read/write/erase failures; records every stub call with args, written-data hash, all returns/out blobs, final 56 sector hashes and the 0x8ac db object (struct padding bytes and code pointers masked).",
+ "fixture_sha256": "867c47e5dad0dfe9e3043f21da69a4893aa3e9b28f0f9a6c231809d5035d9225",
+ "struct_check": "_Static_assert sizeof(struct fdb_kvdb)==0x8ac (stock object size) passes",
+ "runs": [
+  {
+   "run": "r1",
+   "tests": 160,
+   "equal": 68,
+   "note": "harness artifact: 1-char printf(\" \") strings not normalised (hrt_norm required len>=2); fixed (len>=1)"
+  },
+  {
+   "run": "r2",
+   "tests": 160,
+   "equal": 74,
+   "note": "harness artifact: struct padding byte (cur_kv+3, cur_sector+3, sector_cache[i]+3) copied from uninitialised stack; masked"
+  },
+  {
+   "run": "r3",
+   "tests": 160,
+   "equal": 160,
+   "differ": 0,
+   "mutants_killed": "3/5",
+   "survivors": "GC threshold (scenario gap) and _fdb_write_status sync flag (equivalent in FAL mode, retired)"
+  },
+  {
+   "run": "r4",
+   "tests": 160,
+   "equal": 157,
+   "differ": 3,
+   "differing_ids": [
+    "0x68",
+    "0x69",
+    "0x86"
+   ],
+   "mutants_killed": "2/5",
+   "note": "added flash mode with exactly 2-3 empty sectors + long op sequences (GC path); 3 long GC tests differ by one recorded word beyond the 2048-word capture; windowed probe running",
+   "probe": "windowed probe (ids 0x68/0x69/0x86): divergence is the value read in get_kv after a KV-cache hit whose read_kv failed CRC: stock fal_partition_read(addr=0x544fed) vs C (addr=0xf). Shared upstream FlashDB 2.1.1 UB (find_kv cache path returns true after failed read_kv; kv.addr.value/value_len uninitialised) present in stock too; not a C reconstruction error."
+  },
+  {
+   "run": "r5",
+   "tests": 160,
+   "equal": 160,
+   "differ": 0,
+   "mutants_killed": "5/5",
+   "mutant_tests_each": 80,
+   "done": true,
+   "overflow": false,
+   "max_stub_calls_per_test": 9282
+  }
+ ],
+ "harness_stub_args": "hrt_stub_dispatch records the callee address and every argument (arity table; printf arity from the format) normalised (strings by content, stack pointers to a constant) and both sides are compared word-for-word; transparent libc calls are not recorded.",
+ "verdict": "EQUIVALENT",
+ "mutants": [
+  {
+   "src": 1,
+   "from": "#define FDB_GC_EMPTY_SEC_THRESHOLD                1",
+   "to": "#define FDB_GC_EMPTY_SEC_THRESHOLD                2",
+   "sym": "fdb_kv_set_blob"
+  },
+  {
+   "src": 1,
+   "from": "kv->len < KV_HDR_DATA_SIZE) {",
+   "to": "kv->len <= KV_HDR_DATA_SIZE) {",
+   "sym": "fdb_kvdb_init"
+  },
+  {
+   "src": 1,
+   "from": "!strncmp(kv->name, key, key_len)",
+   "to": "!strncmp(kv->name, key, key_len - 1)",
+   "sym": "fdb_kv_get_blob"
+  },
+  {
+   "src": 1,
+   "from": "sector->remain = db_sec_size(db) - SECTOR_HDR_DATA_SIZE;",
+   "to": "sector->remain = db_sec_size(db) - SECTOR_HDR_DATA_SIZE - 4;",
+   "sym": "fdb_kv_set_blob"
+  },
+  {
+   "src": 1,
+   "from": "            read_len = buf_len;",
+   "to": "            read_len = buf_len - (buf_len > 8u);",
+   "sym": "fdb_kv_get_blob"
+  }
+ ],
+ "equivalent_mutants_retired": [
+  {
+   "from": "FDB_KV_STATUS_NUM, FDB_KV_WRITE, true);",
+   "to": "... false);",
+   "reason": "sync flag is only consumed by _fdb_file_write (file mode); FAL mode ignores it -> semantically equivalent, survived 40/40"
+  }
+ ],
+ "harness_sha256": "956b8a8038c1cebc288fdaa7c765f62f2249823f48f2c2d7cfc19252fbb1088b",
+ "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+ "known_stock_shared_bug": {
+  "what": "FlashDB 2.1.1 find_kv(): with FDB_KV_USING_CACHE a cache hit returns true even if read_kv() then fails (CRC32 mismatch / bad length header); get_kv() then reads kv.addr.value for kv.value_len (both uninitialised) and fdb_kv_get_blob reports a garbage length / blob.saved fields.",
+  "stock": "present in stock 2.2.6.10 (stock 0x54454a path read flash address 0x544fed = stack garbage in probe test 0x68)",
+  "decision": "kept as-is in C for fidelity to stock (parent instruction 17:10 CST); documented in g2/src/apollo-main/storage/flashdb/flashdb/blob_read.c",
+  "trigger": "only after flash corruption of a KV that is in the KV cache",
+  "harness_handling": "for a get op in which FlashDB itself reported a CRC/length error, the value-read address/size, value bytes and returned len/saved fields (uninitialised-derived on both sides) are masked; all other recorded words unchanged"
+ },
+ "gate_patch": "build/ws-blestore-20261122/pending/01-sources-json-apollo-main-fal-flashdb-gate.patch",
+ "gate_patch_applied": {
+  "time": "2026-11-22 17:34 America/Chicago",
+  "file": "g2/src/sources.json",
+  "authorised": "parent agent 17:33 CST (single writer for pending/01 only)",
+  "sha256_before": "42af25378f200e97e618b88737070169f34723c61dbeaaaafa622a49c5f784ab",
+  "sha256_after": "7e90785ee4759e18eef87828ebbdfa770fbddae5b4f480c5d85d77b3fed78127",
+  "json_parses": true,
+  "change": "gates.apollo_main[1] FAL/NOR/FlashDB line only"
+ }
+}

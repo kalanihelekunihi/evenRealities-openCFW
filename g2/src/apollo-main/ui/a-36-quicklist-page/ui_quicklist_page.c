@@ -1172,15 +1172,17 @@ int32_t QuicklistWidget_MainPage_init_4f891c(int32_t tile_index)
         (void)quicklist_text_line_count_4f50d6(item->title, audio_uart_ring_primary_head_cell, 0x11b, 0, 0,
                                                2, &title_h);
         audio_quicklist_refresh_unlock_4ffb26();
+        /* stock 0x4f8e76..0x4f8f40 does these adds/subs as plain 32-bit wrapping arithmetic; written
+         * unsigned so the second fit test is not folded away as signed-overflow UB. */
         needed = title_h;
         if (item->time_text[0] != '\0')
-            needed += 28;
-        needed += 20;
-        if (avail < needed + y) {
-            if (avail - y < 28)
+            needed = (int32_t)((uint32_t)needed + 28u);
+        needed = (int32_t)((uint32_t)needed + 20u);
+        if (avail < (int32_t)((uint32_t)needed + (uint32_t)y)) {
+            if ((int32_t)((uint32_t)avail - (uint32_t)y) < 28)
                 break;
             quicklist_preview_icon(box, item, y);
-            if (avail - y < needed) {
+            if ((int32_t)((uint32_t)avail - (uint32_t)y) < needed) {
                 label = audio_uart_page_499416(box);
                 audio_uart_page_43f506(label, 0x11b);
                 audio_uart_page_43f568(label, 28);

@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32b9a4..0x32bb3c. Prepared whole-body candidate; product callback
  * and table/loop paths require independent native review before selection. */
@@ -34,9 +35,9 @@ uint32_t opencfw_em9305_associated_cycle_callback_32b9a4(uintptr_t object)
     if(r8(record+698u)!=0u)return opencfw_em9305_associated_cleanup_3266d0(record,3u);
     (void)opencfw_em9305_init_callback_child_3246c0(packet);
     uint32_t power=r8(packet+15u);
-    if(power==0u)power=r8(0x805bedu);
+    if(power==0u)power=r8(((uintptr_t)&em9305_ram_805be0 + 0xdu));
     w8(packet+14u,power);
-    if(r8(0x805beeu)!=0u){
+    if(r8(((uintptr_t)&em9305_ram_805be0 + 0xeu))!=0u){
         uint32_t stamp=r32(object+8u),interval_for_report=r32(record+700u);
         uint32_t count_for_report=r16(record+376u),id=r8(record+1u);
         (void)opencfw_em9305_associated_report_30e89c(id,count_for_report,0u,interval_for_report,stamp);

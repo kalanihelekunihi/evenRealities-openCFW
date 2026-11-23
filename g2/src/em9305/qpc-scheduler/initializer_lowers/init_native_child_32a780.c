@@ -1,13 +1,14 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32a780..0x32aa48: start an advertising set (record at adv)
  * with an optional duration timeout (ms). Clears and seeds the event
  * object at +2264 (callbacks 32a770/32aa9c, channel map +2312), selects
- * the TX power (+60, or the default at 0x805a9c when 0x7f, capped by
- * 0x805bf0), the access address/CRC init, the PHY code and the packet
+ * the TX power (+60, or the default at ((uintptr_t)&em9305_ram_805a6c + 0x30u) when 0x7f, capped by
+ * ((uintptr_t)&em9305_ram_805be0 + 0x10u)), the access address/CRC init, the PHY code and the packet
  * length fields from the event properties (+32) and options (+59), the
- * channel selection (+2439/+2438, random when bit 6 of 0x805a85), builds
- * the advertising PDU (324278, 32387c or the hook at 0x805174) and, for
+ * channel selection (+2439/+2438, random when bit 6 of ((uintptr_t)&em9305_ram_805a6c + 0x19u)), builds
+ * the advertising PDU (324278, 32387c or the hook at ((uintptr_t)&em9305_ram_805160 + 0x14u)) and, for
  * connectable/scannable legacy sets, the response handlers and scan
  * response (324354). It then schedules the event (timeout via 312f88,
  * else 313220) and arms the high-duty/directed/extended follow-up
@@ -49,9 +50,9 @@ uint32_t opencfw_em9305_child_32a780(uintptr_t adv, uint32_t timeout)
     *(volatile uint32_t *)(adv+2296u)=(uint32_t)(uintptr_t)opencfw_em9305_child_32a770;
     *(volatile uint32_t *)(adv+2292u)=(uint32_t)(uintptr_t)opencfw_em9305_child_32aa9c;
     *(volatile uint32_t *)(adv+2308u)=(uint32_t)(adv+2312u);
-    if(power==0x7f)power=*(volatile int8_t *)(uintptr_t)0x805a9cu;
+    if(power==0x7f)power=em9305_ram_805a6c.s8_805a9c;
     uint32_t phy_index=a[68]-1u;
-    int32_t limit=*(volatile int8_t *)(uintptr_t)0x805bf0u;
+    int32_t limit=em9305_ram_805be0.s8_805bf0;
     uint32_t channels=a[61];
     *(volatile uint32_t *)(adv+2320u)=0x555555u;
     uint32_t properties=*(volatile uint16_t *)(adv+32u);
@@ -75,7 +76,7 @@ uint32_t opencfw_em9305_child_32a780(uintptr_t adv, uint32_t timeout)
         if((properties&1u)!=0u&&(a[59]&2u)!=0u)
             *(volatile uint16_t *)(adv+2390u)=(uint16_t)length;
     }
-    uint32_t options=*(volatile uint8_t *)(uintptr_t)0x805a85u;
+    uint32_t options=em9305_ram_805a6c.u8_805a85;
     uint32_t channel=a[56];
     *(volatile uint32_t *)(adv+2424u)=(uint32_t)(uintptr_t)opencfw_em9305_child_32c650;
     a[2439]=(uint8_t)channel;
@@ -89,7 +90,7 @@ uint32_t opencfw_em9305_child_32a780(uintptr_t adv, uint32_t timeout)
     uint32_t built;
     if((properties&0x10u)!=0u){
         if((properties&0x1du)==0x1du){
-            uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cbcu;
+            uintptr_t config=em9305_ram_805c5c.u32_805cbc;
             *(volatile uint32_t *)(adv+36u)=0u;
             a[2438]=0u;
             *(volatile uint32_t *)(adv+40u)=0xea6u;
@@ -98,7 +99,7 @@ uint32_t opencfw_em9305_child_32a780(uintptr_t adv, uint32_t timeout)
         built=opencfw_em9305_child_324278(adv,adv+840u);
         a[2436]=(uint8_t)built;
     }else if((properties&0x80u)!=0u){
-        uintptr_t hook=*(volatile uint32_t *)(uintptr_t)0x805174u;
+        uintptr_t hook=em9305_ram_805160.u32_805174;
         if(hook!=0u){
             built=((uint32_t (*)(uintptr_t,uintptr_t,uintptr_t,uint32_t))hook)
                 (adv,adv+840u,adv+1972u,0u);
@@ -127,7 +128,7 @@ uint32_t opencfw_em9305_child_32a780(uintptr_t adv, uint32_t timeout)
     uintptr_t periodic=*(volatile uint32_t *)(adv+828u);
     if(periodic!=0u)(void)opencfw_em9305_child_323bac(adv,0u,a[2784],periodic);
     (void)opencfw_em9305_associated_object_init_312918(event,0u);
-    if(*(volatile uint32_t *)(*(volatile uint32_t *)(uintptr_t)0x805cbcu+4u)!=0u){
+    if(*(volatile uint32_t *)(*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_805c5c + 0x60u)+4u)!=0u){
         uint32_t offset=opencfw_em9305_associated_time_alias_30fd34();
         uint32_t now=opencfw_em9305_scan_current_303f80();
         uint32_t step=timeout*1000u;
@@ -140,7 +141,7 @@ uint32_t opencfw_em9305_child_32a780(uintptr_t adv, uint32_t timeout)
     uint32_t mode=*(volatile uint16_t *)(adv+32u)&3u;
     if(mode==3u)return 0x12u;
     if(mode==1u){
-        if(*(volatile uint8_t *)(*(volatile uint32_t *)(uintptr_t)0x805cacu+34u)==0u)return 0x12u;
+        if(*(volatile uint8_t *)(*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_805c5c + 0x50u)+34u)==0u)return 0x12u;
         (void)opencfw_em9305_child_3282c4(adv);
     }else if(mode==2u){
         (void)opencfw_em9305_child_328594(adv);

@@ -1,3 +1,7 @@
+/* Nordic nrf_fuel_gauge (GCC-built in stock, 0x439fe4..0x43bfa8) uses fused VFMA, so this unit
+ * keeps clang's default in-expression contraction; the g2-apollo-main profiles set -ffp-contract=off
+ * because the IAR-built remainder of the image never emits VFMA. */
+#pragma clang fp contract(on)
 /* Reconstructed nrf_fuel_gauge API (init, ext-state, process, TTE, TTF)
  * plus relocated typographic translations of stock 0x43A1B0, 0x43A698 and
  * callees (fg_cores.S). The public wrappers follow the stock Thumb at
@@ -12,7 +16,16 @@ const enum nrf_fuel_gauge_variant_type nrf_fuel_gauge_variant =
     NRF_FUEL_GAUGE_VARIANT_SECONDARY;
 
 /* Scratch the stock cores originally addressed at 0x20004510. */
-uint32_t fg_aux[16];
+/* stock RAM 0x20004510 (.data), 16 words, verified against .waves/init_20000000.bin.
+ * [0..4] = fg_aux float constants (NaN, 0.3f, 0.003f, 1e-6f, 1e-3f) read by the
+ * fuel-gauge leaves; no runtime code ever writes fg_aux, so these are power-on
+ * defaults. [5..15] are the exact stock bytes for 0x20004524..0x2000454f to keep
+ * the image bit-exact (may be an adjacent object our [16] span over-covers). */
+uint32_t fg_aux[16] = {
+    0x7fc00000u, 0x3e99999au, 0x3b449ba6u, 0x358637bdu, 0x3a83126fu,
+    0x00030a00u, 0x00040013u, 0x0008000eu, 0x001b0008u, 0x010101c0u,
+    0x0d0d0101u, 0x19120b0bu, 0x01a4a41au, 0xff010103u, 0x010101ffu, 0x01010101u,
+};
 uint32_t fg_iar_err[8];
 
 /* Model state: 0xE8 bytes, TTE at +0x84, model pointer at +0xE0, magic at +0xE4. */
@@ -40,7 +53,7 @@ void nrf_model_init_43a1b0(float v, float i, float T, const void *opt,
 void nrf_model_process_43a698(float v, float i, float T, float dt, void *state,
                               const void *model, float *soc, void *scratch, void *opt);
 void nrf_model_tte_params_58eab0(void *state, const float pair[2]);
-float nrf_model_ttf_58eac4(void *state, int mode, const void *model);
+float nrf_model_ttf_58eac4(void *state, int mode, const void *model, float term);
 
 static uint32_t float_bits(float value)
 {
@@ -286,12 +299,12 @@ float nrf_fuel_gauge_ttf_get(void)
     if (cs == 4u) {
         void *modelptr;
         __builtin_memcpy(&modelptr, model_state + 0xE0, 4);
-        return nrf_model_ttf_58eac4(model_state, 0, modelptr);
+        return nrf_model_ttf_58eac4(model_state, 0, modelptr, term);
     }
     if (cs == 2u || cs == 3u) {
         void *modelptr;
         __builtin_memcpy(&modelptr, model_state + 0xE0, 4);
-        return nrf_model_ttf_58eac4(model_state, 1, modelptr);
+        return nrf_model_ttf_58eac4(model_state, 1, modelptr, term);
     }
     return __builtin_nanf("");
 }

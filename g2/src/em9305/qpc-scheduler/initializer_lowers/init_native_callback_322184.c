@@ -1,14 +1,15 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x322184..0x32233c: start PAwR sync (subevent-aware variant of
- * 321490) on the sync context (*0x8051b8) from a SyncInfo: load and
+ * 321490) on the sync context (*(uintptr_t)&em9305_ram_8051b8) from a SyncInfo: load and
  * transform the channel map (+644), CRC seed (+692), first channel seeded
  * by event counter (+248) xor the subevent counter of the PAwR block
  * (+780 -> byte +18), PHY, anchor and receive window (+168 from +508).
  * When the anchor is at least 300 us away, schedule it, stepping one
  * subevent at a time (wrapping to the next event after +512 subevents;
  * offset = interval +252 * event + subevent * spacing +513 * 1.25 ms)
- * until the scheduler accepts, and mark the sync pending (0x8051a5). */
+ * until the scheduler accepts, and mark the sync pending (((uintptr_t)&em9305_ram_805194 + 0x11u)). */
 extern uint32_t opencfw_em9305_radio_channel_transform_30e3fc(uintptr_t);
 extern uint32_t opencfw_em9305_associated_channel_seed_324c98(uintptr_t,uint32_t);
 extern uint32_t opencfw_em9305_mode_callback_child_317ea4(uint32_t);
@@ -28,7 +29,7 @@ static void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
 void opencfw_em9305_callback_322184(uintptr_t receiver,uintptr_t request,uintptr_t info,
                                     uint32_t reference)
 {
-    uintptr_t sync=r32(0x8051b8u);
+    uintptr_t sync=r32((uintptr_t)&em9305_ram_8051b8);
     w32(sync+644u,r32(info+8u));
     w32(sync+648u,r32(info+0xcu));
     w8(sync+690u,1u);
@@ -103,5 +104,5 @@ void opencfw_em9305_callback_322184(uintptr_t receiver,uintptr_t request,uintptr
         w32(sync+0x3cu,duration);
         w32(sync+204u,window);
     }
-    w8(0x8051a5u,1u);
+    w8(((uintptr_t)&em9305_ram_805194 + 0x11u),1u);
 }

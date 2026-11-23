@@ -1,0 +1,23 @@
+{
+ "id": "g2-20261123-ws-single-nvg-submit-node-4b14ca",
+ "date": "2026-11-23",
+ "workstream": "ws-single",
+ "unit": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+ "function": "g2c_nema_cl_submit_node_4b14ca",
+ "stock_extent": "0x4b14ca..0x4b14fe (52 B)",
+ "bug": "Ghidra lift merged a private copy of tail-callee 0x514846 into the body; C did not emit the second register write (0x15c = pkhbt(a+c,(b+d)<<16)) via 0x514846 the way stock does, and origin clipping differed.",
+ "fix": "Body rewritten from stock disassembly: reg 0x158 = clipped (a,b) origin via 0x514846, then 0x514846(0x15c, ((c+a)&0xffff)|((d+b)<<16)); return 0 (callers ignore it).",
+ "verification": {
+  "nvg-a run2 (pre-fix)": "submit_node op tests 0x0,0x3 DIFFERENT",
+  "nvg-a run4 (post-fix, 08:21-08:38 CST)": "99/110 equal; all 11 remaining diffs are index 6 of 0x4b06a8 stub records (garbage r2: color_resolve takes 2 args) -> harness false-diff, arity 0x4b06a8=2 applied; submit_node tests equal",
+  "mutant": "spec nvg-a mutant 3 targets the origin clip (0<b -> 0<=b / else 0x10000)",
+  "s4 rebuild + paired s4": "PASS: DFU_SAME, 924 HCI, OTAP 0xAFD1363A->0, CHIPREV 0x22, HOST 0x3A, unsupported 0, adv 1, display 2, faults 0"
+ },
+ "open": "nvg-a stops at 110 tests: test 0x6e = op 7 (path_cmd 0x5156b9, cmd 0xa) does not return on one side; hang probes nvg-hs/nvg-hc queued to tell which.",
+ "artifacts": [
+  "build/ws-single-20261123/specs/nvg-a/",
+  "build/ws-single-20261123/specs/nvg-a-run1-report.json",
+  "build/ws-single-20261123/paired-s4.log",
+  "build/ws-single-20261123/nvgop.py"
+ ]
+}

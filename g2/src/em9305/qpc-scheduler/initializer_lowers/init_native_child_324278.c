@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x324278..0x324352: build an advertising PDU header for the set
  * at record. Runs the 318440/3184f4 option steps on an 8-byte header
@@ -6,7 +7,7 @@
  * 5 -> 1, 3 -> 0, else 2), writes AdvA (+16) at buf+2 and, for type 1,
  * TargetA (+24) at buf+8 (marking bit 2 of +2392). Types 0, 2 and 6 then
  * append up to 31 bytes of advertising data (+1441 length, +1442 data).
- * Bit 6 of 0x805a95 marks ChSel for types 0/1. The payload length is
+ * Bit 6 of ((uintptr_t)&em9305_ram_805a6c + 0x29u) marks ChSel for types 0/1. The payload length is
  * encoded with 3239d4; returns length + 2. */
 extern uint32_t opencfw_em9305_child_318440(uintptr_t,uintptr_t,uintptr_t);
 extern uint32_t opencfw_em9305_child_3184f4(uintptr_t,uintptr_t,uintptr_t);
@@ -48,7 +49,7 @@ uint32_t opencfw_em9305_child_324278(uintptr_t record, uintptr_t buffer)
             data_length=length;
         }
     }
-    if((*(volatile uint8_t *)(uintptr_t)0x805a95u&0x40u)!=0u&&type<2u)header[1]=1u;
+    if((em9305_ram_805a6c.u8_805a95&0x40u)!=0u&&type<2u)header[1]=1u;
     header[4]=(uint8_t)(end-start+data_length);
     (void)opencfw_em9305_radio_encode_3239d4(buffer,(uintptr_t)header);
     return (uint8_t)(*(volatile uint8_t *)&header[4]+2u);

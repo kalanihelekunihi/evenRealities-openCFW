@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Three complete native table callbacks, 0x31635c, 0x3163ac, 0x316594.
  * Each loads an externally initialized live function pointer and either
@@ -14,10 +15,10 @@ static uint32_t dispatch(uintptr_t context,uintptr_t slot)
 }
 uint32_t opencfw_em9305_mode_callback_31635c(uintptr_t context,
                                                uintptr_t callback_code)
-{(void)callback_code;return dispatch(context,0x8051f4u);}
+{(void)callback_code;return dispatch(context,((uintptr_t)&em9305_ram_8051b8 + 0x3cu));}
 uint32_t opencfw_em9305_mode_callback_3163ac(uintptr_t context,
                                                uintptr_t callback_code)
-{(void)callback_code;return dispatch(context,0x8052c4u);}
+{(void)callback_code;return dispatch(context,((uintptr_t)&em9305_ram_8052bc + 0x8u));}
 uint32_t opencfw_em9305_mode_callback_316594(uintptr_t context,
                                                uintptr_t callback_code)
-{(void)callback_code;return dispatch(context,0x8056d8u);}
+{(void)callback_code;return dispatch(context,((uintptr_t)&em9305_ram_805688 + 0x50u));}

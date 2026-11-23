@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32387c..0x3239b6: compose the advertising PDU for the record's
  * event type (+32, low three bits). Connectable/scannable legacy types
@@ -7,7 +8,7 @@
  * data length (+2250), own address type and directed mode (+369 with
  * +2786), forcing the extended header when the payload is empty or
  * directed, otherwise limiting it to the plain (|1) or extended (|3)
- * forms; with privacy (bit 5 of 0x805a85) the address flags are masked.
+ * forms; with privacy (bit 5 of ((uintptr_t)&em9305_ram_805a6c + 0x19u)) the address flags are masked.
  * A 5-byte header (7, then zeros) is filled by children 318440 and
  * 3184f4 from the request block (+2312), the reject byte +827 is cleared
  * and the PDU is composed into output with count. */
@@ -46,7 +47,7 @@ uint32_t opencfw_em9305_child_32387c(uintptr_t record,uintptr_t output,
         else allowed=random|(empty<<6)|(random<<1)|(random<<6);
         if(directed!=0u&&r8(record+2786u)==0u)forced=0x18u;
         if((forced&0x10u)!=0u){
-            if((r8(0x805a85u)&0x20u)!=0u)
+            if((r8(((uintptr_t)&em9305_ram_805a6c + 0x19u))&0x20u)!=0u)
                 allowed&=kind==0u?~0x3fu:~0x3du;
         }else{
             forced|=kind==0u?1u:3u;

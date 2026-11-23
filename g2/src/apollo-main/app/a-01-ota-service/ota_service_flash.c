@@ -422,11 +422,16 @@ void _evenOtaReplyToAPP(uint8_t cmd, uint8_t subcommand, uint8_t status)
 uint32_t semantic_OtaParseHexAddress(const char *text)
 {
     uint32_t value = 0u;
+    uint32_t found;
 
-    if (g2_log_candidate_find_token((const uint8_t *)text, (const uint8_t *)s_hex_lower) == 0u &&
-        g2_log_candidate_find_token((const uint8_t *)text, (const uint8_t *)s_hex_upper) == 0u)
+    /* Stock (0x444f4a) scans from the first "0x"/"0X" match, not from the
+     * start of the text: r0 still holds the strstr result at the sscanf call. */
+    found = g2_log_candidate_find_token((const uint8_t *)text, (const uint8_t *)s_hex_lower);
+    if (found == 0u)
+        found = g2_log_candidate_find_token((const uint8_t *)text, (const uint8_t *)s_hex_upper);
+    if (found == 0u)
         return 0u;
-    if (audio_ble_parse_version(text, s_hex_format, &value) == 1)
+    if (audio_ble_parse_version((const char *)found, s_hex_format, &value) == 1)
         return value;
     return 0u;
 }

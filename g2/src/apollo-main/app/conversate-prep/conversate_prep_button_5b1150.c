@@ -22,7 +22,7 @@ extern void audio_lv_image_source_498680(uint32_t, uint32_t);
 extern void audio_uart_page_44127e(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_4413ce(uint32_t, uint32_t, uint32_t);
 extern uint32_t audio_lv_label_create_499416(uint32_t);
-extern void audio_lv_label_text_49942e(uint32_t, uint32_t);
+extern void audio_lv_label_text_49942e(uint32_t, const char *);
 extern void audio_uart_page_44143e(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_441180(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_4411aa(uint32_t, uint32_t, uint32_t);
@@ -43,7 +43,7 @@ static const char compact[] = "[conversate.ui]Button(%s) create completed";
 
 uint32_t audio_conversate_prep_button_create_5b1150(uint32_t parent,
                                                      uint32_t image,
-                                                     uint32_t label_text,
+                                                     const char *label_text,
                                                      uint32_t ignored) {
     (void)ignored;
     const uint32_t button = audio_uart_page_43de82(parent);

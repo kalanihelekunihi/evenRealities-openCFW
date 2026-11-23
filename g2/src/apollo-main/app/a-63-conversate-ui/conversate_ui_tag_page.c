@@ -77,7 +77,7 @@ extern void conversate_ui_menu_apply_base_style(void *obj, int32_t value, uint32
 extern uint32_t APP_PbConversateTxEncodeTagTrackingData(const g2_conversate_tag_tracking_t *tracking);
 extern void audio_conversate_expand_animation_5b7704(void *object, const g2_expand_anim_cfg_t *cfg,
                                                      g2_anim_done_cb_t complete);
-extern void audio_uart_page_58c238(void *object, uint32_t duration, uint32_t completed_cb); /* common_fade_in_animation */
+extern void audio_uart_page_58c238(void *object, uint32_t duration, void (*completed_cb)(void)); /* common_fade_in_animation */
 extern void audio_terminal_fade_out_58c426(void *object, uint32_t duration, g2_anim_done_cb_t complete);
 extern void common_fade_in_animation_with_delay_58c328(void *object, uint32_t duration, uint32_t delay,
                                                        g2_anim_done_cb_t complete);
@@ -121,7 +121,7 @@ extern void audio_uart_page_44130c(void *obj, uint32_t v, uint32_t sel);    /* s
 extern void lv_obj_set_style_border_width(void *obj, uint32_t v, uint32_t sel);    /* style border_width */
 extern void audio_uart_page_4413ce(void *obj, uint32_t v, uint32_t sel);    /* style image_opa */
 extern void audio_uart_page_44140e(void *obj, uint32_t color, uint32_t sel); /* style text_color */
-extern void audio_uart_page_44143e(void *obj, uint32_t font, uint32_t sel); /* style text_font */
+extern void audio_uart_page_44143e(void *obj, const void *font, uint32_t sel); /* style text_font */
 extern void audio_uart_page_44144c(void *obj, int32_t v, uint32_t sel);     /* style text_line_space */
 extern void audio_uart_page_44145a(void *obj, uint32_t v, uint32_t sel);    /* style text_align */
 extern void lv_obj_set_style_radius(void *obj, int32_t v, uint32_t sel);     /* style radius */
@@ -308,7 +308,7 @@ uint32_t audio_conversate_ui_route_5b5f44(uint32_t action, uint32_t auto_pop)
 
     void *const title = audio_uart_page_499416(header);
     audio_uart_page_49942e(title, tag->title);
-    audio_uart_page_44143e(title, (uint32_t)(uintptr_t)font(), 0u);
+    audio_uart_page_44143e(title, font(), 0u);
     audio_uart_page_441180(title, 0x1feu, 0u);
     audio_uart_page_4411aa(title, LINE_HEIGHT, 0u);
     audio_uart_page_layout_499678(title, 1u);
@@ -337,7 +337,7 @@ uint32_t audio_conversate_ui_route_5b5f44(uint32_t action, uint32_t auto_pop)
     audio_uart_page_43f6b8(text, LV_ALIGN_TOP_MID, 0, 0);
     audio_uart_page_layout_499678(text, 0u);
     audio_uart_page_44140e(text, audio_uart_page_44104c(0xffffffu), 0u);
-    audio_uart_page_44143e(text, (uint32_t)(uintptr_t)font(), 0u);
+    audio_uart_page_44143e(text, font(), 0u);
     audio_uart_page_44145a(text, 1u, 0u);
     audio_uart_page_49942e(text, tag->body);
     ui->animating = 1u;
@@ -349,7 +349,7 @@ uint32_t audio_conversate_ui_route_5b5f44(uint32_t action, uint32_t auto_pop)
         void *const hint = audio_uart_page_499416(header);
         audio_lv_label_set_text_fmt_49954c(hint, audio_uart_page_45fffe(close_key, audio_uart_page_460084(close_key)),
                                            ui->auto_close_seconds);
-        audio_uart_page_44143e(hint, (uint32_t)(uintptr_t)font(), 0u);
+        audio_uart_page_44143e(hint, font(), 0u);
         audio_uart_page_43f4c0(hint, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
         audio_uart_page_44140e(hint, audio_uart_page_44104c(0xffffffu), 0u);
         audio_uart_page_44145a(hint, 1u, 0u);
@@ -433,7 +433,7 @@ uint32_t audio_conversate_ui_route_5b6688(uint32_t action, uint32_t close_route)
     if (ui->tracking.open_type == 1u) {
         audio_terminal_fade_out_58c426(ui->overlay_root, 300u, NULL);
         audio_uart_page_58c238(ui->main_root, 300u,
-                               (uint32_t)(uintptr_t)conversate_tag_shrink_complete_cb_5b660e);
+                               conversate_tag_shrink_complete_cb_5b660e);
         return 0u;
     }
 

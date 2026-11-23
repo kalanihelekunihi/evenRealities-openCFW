@@ -1,0 +1,29 @@
+{
+  "stream": "ws-hwdrivers",
+  "date_cst": "2026-11-22 23:57 America/Chicago",
+  "unit": "gluefg",
+  "subject": "npmx_interrupt_handler_510fe2 crash root-caused and fixed (no fault masked)",
+  "root_cause": "harness npmx_runstock.json defsym'd npmx_core_interrupt AND npmx_core_proc both to 0x511002 (an unrelated g2-npmx-main-driver function). The C body's byte==0 core path then called garbage -> hard fault (0xeffffffe).",
+  "fix": "corrected defsyms to stock addresses npmx_core_interrupt=0x55eda4, npmx_core_proc=0x55edac (proven by BL targets at 0x510ff6/0x510ffc in npmx_interrupt_handler @0x510fe2).",
+  "disasm_evidence": {
+    "handler_0x510fe2": "ldrb [r4,#0xcc]; cmp #0; beq 0x510ff4; (ne) ldr [0x511948]=0x2bad0001 return; (eq) bl 0x55eda4; bl 0x55edac; pop",
+    "npmx_core_interrupt_0x55eda4": "movs r1,#1; strb.w r1,[r0,#0xcc]; bx lr",
+    "npmx_core_proc_0x55edac": "ldrb [r0,#0xcc]; cmp #0; beq ret; movs #0; strb [r0,#0xcc]; bl 0x55eaae; ...",
+    "invalid_param_literal": "0x2bad0001 at 0x511948 == C NPMX_ERROR_INVALID_PARAM (correct, not changed)"
+  },
+  "branch_proof": {
+    "method": "seed instance interrupt-pending byte p_pm+0xcc = 0x20071044 via PRELOAD_WORDS (shared by both variants), not guessed",
+    "byte_0_core_path": "12/12 PASS (magic HWDD) - exercises corrected npmx_core_interrupt/npmx_core_proc as real stock on both variants",
+    "byte_nonzero_invalid_param": "12/12 PASS (magic HWDD) - both return 0x2bad0001",
+    "note_real_init_attempt": "running stock npmx_backend_init_511108 as a gluefg PREINIT aborted the unit (magic HWD1, ndone=0) - that init needs backend/transport preconditions the other npmx units stage differently; controlled byte seed used instead and both branches proven"
+  },
+  "result": {
+    "unit": "gluefg",
+    "magic": "0x48574844 (HWDD complete)",
+    "charge_status_inform_fuel_gauge_511b74": "12/12",
+    "npmx_fuel_gauge_poll_5128a0": "12/12",
+    "npmx_interrupt_handler_510fe2": "12/12"
+  },
+  "pending_shared": "pending/npmx-core-symbol-names.note.md proposes tsv names 0x55eda4=npmx_core_interrupt, 0x55edac=npmx_core_proc",
+  "seed_restored": "0x20071044=0 (stock idle instance)"
+}

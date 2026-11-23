@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32cde0..0x32ce02. BRNE.D at 0x32cdf4 stores ctx+552 on
  * both branches. 0x317ea4 remains a genuine child until independently
@@ -9,7 +10,7 @@ uint32_t opencfw_em9305_mode_callback_32cde0(uintptr_t context,
 {
     (void)callback_code;
     uint8_t mode=*(volatile uint8_t *)(context+2u);
-    uint8_t value=*(volatile uint8_t *)(uintptr_t)0x80281cu;
+    uint8_t value=em9305_ram_8027e0.u8_80281c;
     *(volatile uint8_t *)(context+552u)=value;
     if (mode!=1u)
         return value;

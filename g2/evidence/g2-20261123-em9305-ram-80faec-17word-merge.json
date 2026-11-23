@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 03:03:36 AM CST (America/Chicago)",
+  "title": "Merge typo-RAM 0x80faec..0x80fb30 into one 17-word object (retire em9305_ram_80fb08); object_count 146\u2192145; affected symbols re-proved, mutants killed",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-sleep-cluster-typoram.json",
+  "model": "g2/evidence/g2-20261123-em9305-ram-80542c-28byte-paired-sims.json (grow one properly sized object; retire overlapping harvested objects; record object_count_before/after)",
+  "reason": "Indexing past the 1-byte em9305_ram_80faec into em9305_ram_80fb08 as ((volatile uint32_t *)&em9305_ram_80faec)[index] is undefined behavior: it depends on link layout and the compiler is allowed to break it.",
+  "stock_user_pass": {
+    "range": "0x80faec..0x80fb30",
+    "lock_table": "stock 0x302d20 opencfw_em9305_sleep_lock_update uses 17 word slots index 0..16; slot 16 ends at 0x80fb2c; 0x80fb30 is the first word after the table, not a lock-table entry.",
+    "aliased_objects": {
+      "em9305_ram_80fb08": "8-byte object at 0x80fb08 covering lock slots 7 and 8 (0x80fb08/0x80fb0c). Also the SPIM/boot record used by opencfw_em9305_stock_311ee0 (stores descriptor &em9305_ram_80fd2c+0xc at +4 / u32_80fb0c) and opencfw_em9305_stock_30ecf8 (writes +0=0x80ffa8, +40=0x10c3a8, passes &80fb08 to rom_boot_status). All observed accesses are 32-bit. Nothing uses these addresses at another width.",
+      "em9305_ram_80fb30": "Kept as its own typo-RAM object. It is boot record +40 and the controller timer word in controller_init.c (opencfw_em9305_controller_register_timer(em9305_ram_80fb30.u32_80fb30)). Not a lock-table entry."
+    },
+    "other_widths": "none observed; all accesses 32-bit"
+  },
+  "object_count_before": 146,
+  "object_count_after": 145,
+  "object_count_note": "Count is the number of header externs matching ld symbols. Retired em9305_ram_80fb08 from em9305_ram.h and g2-em9305.ld. Kept em9305_ram_80faec=0x0080faec and em9305_ram_80fb30=0x0080fb30. Header and ld symbol sets match at 145.",
+  "em9305_ram_80faec": "68-byte 17-word object: union of uint32_t u32[17] and named fields u32_80faec..u32_80fb2c, with u8 aliases on 80faec/80fb08/80fb0c. _Static_assert(sizeof==68); offsetof(u32_80fb08)==0x1c, offsetof(u32_80fb0c)==0x20, offsetof(u32_80fb2c)==0x40. Removed struct em9305_ram_80fb08.",
+  "source_fix": {
+    "sleep_enter_mode.c": "lock load is now uintptr_t object=em9305_ram_80faec.u32[index]; (no 1-byte object indexing)",
+    "application_boot.c": "opencfw_em9305_stock_30ecf8 writes em9305_ram_80faec.u32_80fb08=0x80ffa8u and em9305_ram_80fb30.u32_80fb30=0x10c3a8u; passes (uintptr_t)&em9305_ram_80faec.u32_80fb08 to rom_boot_status. Boot +40 is in-bounds of the 80fb30 object.",
+    "stock_residual_code.c": "opencfw_em9305_stock_311ee0 stores em9305_ram_80faec.u32_80fb0c=((uintptr_t)&em9305_ram_80fd2c + 0xcu);"
+  },
+  "install": {
+    "when": "2026-11-23 02:55:01 AM CST (America/Chicago)",
+    "files": {
+      "g2/src/em9305/qpc-scheduler/em9305_ram.h": {
+        "before": "820f9f0297a2e564a14dfd2fdc95781687b162ea70bff3ce00362e307e9cc048",
+        "after": "5f6bf02f69b076460d53dd2fa2524b5b1daff6e35ab2efb1182c4128e9b47b81"
+      },
+      "g2/src/em9305/link/g2-em9305.ld": {
+        "before": "4205528e4d363de32243c11c90f69ca0151c0b82c7253aeb201ce55c60650e70",
+        "after": "b9cf0658b0c2b05ad938579ab5717e2ecc81a2394b479c18098f77e9085eb1ff"
+      },
+      "g2/src/em9305/qpc-scheduler/sleep_enter_mode.c": {
+        "before": "af7ed3684024db2c6fc35e9e59f265e421c5c5455bee6dd79fcfbdadfedde1b8",
+        "after": "20d12bb553ff321f500b2ded46eca9b19d463f5fd8fc1278fa6ba37a5f178f47"
+      },
+      "g2/src/em9305/application/application_boot.c": {
+        "before": "b49fdd7a7591c8fdbdc23e451282cb7ce2a84b62b6c3af166d5e1a48b21f22a2",
+        "after": "7f32deb95d3f3f1ce2bfcc8e0977935f4e07fdaaf00577792a5db82bf98920f9"
+      },
+      "g2/src/em9305/application/stock_residual_code.c": {
+        "before": "876f962f7f9f83853522ff22036dd0f56d588d134d07c9bca0486d04be8246b4",
+        "after": "006aedceb4cdb34b9d2dbe477093b1c55fc9042266da597af55b4b21cf0ab03b"
+      }
+    }
+  },
+  "qemu_prove": {
+    "workspace": "build/ws-em9305-20261122/u-suffix/sleep-merge/",
+    "harness": "build/em-ctl/qm.py, 100 cases, --hdir /w/build/em-ctl/h, workspace orig_*/cand_* include copies so one -I serves both headers",
+    "started": "2026-11-23 02:56:16 AM CST (America/Chicago)",
+    "finished": "2026-11-23 02:57:34 AM CST (America/Chicago)",
+    "symbols": {
+      "opencfw_em9305_sleep_lock_update": "EQUIVALENT 100 classes=8 calls=53 (clamp 0=0x7)",
+      "opencfw_em9305_sleep_aggregate_locks": "EQUIVALENT 100 classes=93 calls=100",
+      "opencfw_em9305_sleep_enter_mode": "EQUIVALENT 100 classes=3 calls=104",
+      "opencfw_em9305_stock_30ecf8": "EQUIVALENT 100 classes=76 calls=530 nor0",
+      "opencfw_em9305_stock_311ee0": "EQUIVALENT 100 classes=1 calls=0 nor0"
+    }
+  },
+  "mutants": [
+    {
+      "tag": "lock_u32_0",
+      "sym": "opencfw_em9305_sleep_lock_update",
+      "edit": ".u32[index] -> .u32[0]",
+      "sites": 1,
+      "status": "KILLED",
+      "detail": "MISMATCH ret:4 ncalls:8 callhash:8 classes=8 calls=53"
+    },
+    {
+      "tag": "boot_80fb08",
+      "sym": "opencfw_em9305_stock_30ecf8",
+      "edit": "u32_80fb08 -> u32_80faec",
+      "sites": 2,
+      "status": "KILLED",
+      "detail": "MISMATCH callhash:100 memhash:100 classes=76 calls=530"
+    },
+    {
+      "tag": "boot_80fb30",
+      "sym": "opencfw_em9305_stock_30ecf8",
+      "edit": "em9305_ram_80fb30.u32_80fb30 -> em9305_ram_80faec.u32_80fb2c",
+      "sites": 1,
+      "status": "KILLED",
+      "detail": "MISMATCH memhash:100 classes=76 calls=530"
+    },
+    {
+      "tag": "spim_80fb0c",
+      "sym": "opencfw_em9305_stock_311ee0",
+      "edit": "u32_80fb0c -> u32_80fb08",
+      "sites": 1,
+      "status": "KILLED",
+      "detail": "MISMATCH memhash:100 classes=1 calls=0"
+    }
+  ],
+  "mutants_killed_count": 4,
+  "official_app": {
+    "path": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "untouched": true,
+    "reconfirmed_at": "2026-11-23 03:11:35 AM CST (America/Chicago)"
+  },
+  "not_started": [],
+  "rules": "No git writes. No backups or /tmp copies. Official opencfw-otap-disarm.app.bin was not overwritten. Did not edit sources.json, tools/build/*.py, docs, or files outside g2/src/em9305 and g2-em9305.ld except this evidence file and the workspace NOTE. source_completeness_proven remains false.",
+  "paired_sims_evidence": "g2/evidence/g2-20261123-em9305-sleep-cluster-paired-sims.json",
+  "follow_on": "g2/evidence/g2-20261123-em9305-sleep-cluster-paired-sims.json (p-sleep paired sims PASS; NVM_InitCopy classified as window checks; IRQHandler_RcCalib body proved EQUIVALENT 100, 5 mutants KILLED, not installed)"
+}

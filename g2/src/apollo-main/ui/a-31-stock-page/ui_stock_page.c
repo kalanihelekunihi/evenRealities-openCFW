@@ -383,6 +383,24 @@ static void log4(uint8_t level, const char *fn, uint32_t line, const char *msg, 
         (void)compress_log_output(LOG_FLAGS(level, 4), msg_short, msg_short, a, b, c, d);
 }
 
+/* Stock re-evaluates a getter argument inside each enabled log branch (e.g. 0x4eb834..0x4eb8a2:
+ * bl 0x43d0ce; bl 0x4ebf20; bl 0x43d574 ... bl 0x43d0ce; bl 0x4ebf20; bl 0x43ce9e), not once before
+ * the flag test. These keep that call order. */
+#define LOG1_LAZY(level, fn, line, msg, msg_short, expr)                                                 \
+    do {                                                                                                \
+        if (audio_log_flags() & 2u)                                                                     \
+            audio_log_extended(level, module_tag, source_file, fn, line, msg, (uint32_t)(expr));         \
+        if ((audio_log_flags() & 1u) || (audio_log_flags() & 4u))                                       \
+            (void)compress_log_output(LOG_FLAGS(level, 1), msg_short, msg_short, (uint32_t)(expr));     \
+    } while (0)
+#define LOG4_LAZY(level, fn, line, msg, msg_short, expr, b, c, d)                                       \
+    do {                                                                                                \
+        if (audio_log_flags() & 2u)                                                                     \
+            audio_log_extended(level, module_tag, source_file, fn, line, msg, (uint32_t)(expr), b, c, d); \
+        if ((audio_log_flags() & 1u) || (audio_log_flags() & 4u))                                       \
+            (void)compress_log_output(LOG_FLAGS(level, 4), msg_short, msg_short, (uint32_t)(expr), b, c, d); \
+    } while (0)
+
 /* lv_obj_set_style_pad_all, instantiated in this TU. */
 void stock_obj_set_style_pad_all_4e9dd4(void *obj, int32_t v, uint32_t sel)
 {
@@ -871,7 +889,7 @@ int32_t stock_ext_event_handler_4eb4a4(const uint8_t *data, uint32_t len)
         break;
     case STOCK_EVT_CLICK:
     case STOCK_EVT_DOUBLE_CLICK:
-        log1(3u, ext_fn, 0x3cfu, ext_click, ext_click_short, stock_get_container_index_4ebf20());
+        LOG1_LAZY(3u, ext_fn, 0x3cfu, ext_click, ext_click_short, stock_get_container_index_4ebf20());
         close_expanded_page(false);
         break;
     default:
@@ -898,14 +916,14 @@ int32_t stock_ext_WidgetPage_Create_4eb7b8(void *parent)
     count = stock_page_get_count_4e9fd6();
     if (count == 0u) {
         if (stock_get_container_index_4ebf20() != 0u) {
-            log1(4u, page_fn, 0x420u, page_reset, page_reset_short, stock_get_container_index_4ebf20());
+            LOG1_LAZY(4u, page_fn, 0x420u, page_reset, page_reset_short, stock_get_container_index_4ebf20());
             g2_stock_container_index = 0;
         }
     } else {
         uint16_t max_index = (uint16_t)(((int32_t)count - 1) / 3);
 
         if ((int32_t)max_index < (int32_t)stock_get_container_index_4ebf20()) {
-            log4(2u, page_fn, 0x41au, page_clamp, page_clamp_short, stock_get_container_index_4ebf20(), max_index,
+            LOG4_LAZY(2u, page_fn, 0x41au, page_clamp, page_clamp_short, stock_get_container_index_4ebf20(), max_index,
                  count, max_index);
             g2_stock_container_index = max_index;
         }
@@ -996,7 +1014,7 @@ int32_t stock_ext_WidgetPage_Create_4eb7b8(void *parent)
         log0(4u, page_fn, 0x460u, page_loaded, page_loaded_short);
     }
     stock_switch_to_expanded_container_4ed52e();
-    log1(3u, page_fn, 0x4b8u, page_created, page_created_short, stock_page_get_count_4e9fd6());
+    LOG1_LAZY(3u, page_fn, 0x4b8u, page_created, page_created_short, stock_page_get_count_4e9fd6());
     return 0;
 }
 

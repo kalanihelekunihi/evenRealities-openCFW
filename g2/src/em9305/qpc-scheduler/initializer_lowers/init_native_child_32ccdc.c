@@ -1,7 +1,8 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32ccdc..0x32cd8c: apply a power-control sample (bytes 0..3 at
- * 0x80281c) to the record's current PHY slot (+766). When reporting is on
+ * ((uintptr_t)&em9305_ram_8027e0 + 0x3cu)) to the record's current PHY slot (+766). When reporting is on
  * (+768) and the level changed, report LL event 0x2f (native 0x323620) with
  * the new level and the delta. Store level/limit/flags in the slot tables
  * (+553/+557/+561); unless the level is a sentinel (0x7e/0x7f), clear the
@@ -14,7 +15,7 @@ extern uint32_t opencfw_em9305_command_refresh_323268(uintptr_t);
 
 void opencfw_em9305_child_32ccdc(uintptr_t record)
 {
-    const volatile uint8_t *sample = (const volatile uint8_t *)(uintptr_t)0x80281cu;
+    const volatile uint8_t *sample = (const volatile uint8_t *)(uintptr_t)((uintptr_t)&em9305_ram_8027e0 + 0x3cu);
     volatile uint8_t *control = (volatile uint8_t *)(record + 768u);
     uint32_t flags = sample[3];
     uint32_t level = sample[2];

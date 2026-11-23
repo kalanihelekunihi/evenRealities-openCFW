@@ -1,0 +1,26 @@
+{
+  "stream":"ws-hwdrivers","when_cst":"2026-11-23 ~02:00",
+  "milestone":"static BL/BLX call-target cross-check (dormant-misresolution scan) + cgpio inputs + compareg integer-arg masking fix",
+  "static_xcheck":{
+    "method":"for each of 94 units, disassemble its tested fns' stock bodies, collect real BL/BLX/B.W targets; every resolved code-range callee (meta defsyms) must appear as a call target, else flag. Triage by: is it a TSV fn-start (indirect/inlined -> trust), does its name encode its own addr via _XXXXXX suffix (self-consistent -> trust), else HIGH/MED.",
+    "script":"build/ws-hwdrivers-20261122/harness/xcheck2.py",
+    "result":"0 HIGH, 0 MED across all 94 units -> no remaining close_error-class misresolutions; no units needed rerun",
+    "sensitivity_validated":"re-checking codec_allocate: old close_error=0x474e40 -> FLAGGED(HIGH) (not a bl target, not a fn-start); fixed 0x4d09b4 -> ok (real bl target at 0x474d0a)"
+  },
+  "cgpio_inputs":{
+    "added":"ARG_DOMAIN g2_codec_gpio_write arg0(channel)=[0,1,2,3,6,7,8,9,11,100,255], arg1(value)=[0,1,100,255]; nper 30",
+    "coverage":"ch2/6/9 with value 0/1 now exercised (ch2 pin_write(9) reached via value==1)",
+    "baseline":"30/30 PASS under fixed compareg (correct C unaffected)"
+  },
+  "compareg_masking_bug":{
+    "found":"while killing the cgpio pin-constant mutant: compareg _argcanon collapsed ANY stub-arg value in [0x8, C-text-max] to pointer sentinel 0xFDA00000. Small INTEGER args (pin 9, 0xa, 0x80...) fall in that range -> collapsed -> never compared. This masked a real divergence (v0 hal_write(pin=9) vs mutant v1 hal_write(pin=0xa)) -> false EQUAL.",
+    "impact":"integer stub-arg divergences were invisible across ALL units -> a false-equals source (not just cgpio)",
+    "fix":"autogen emits g_stub_argptr[] (per-stub pointer-arg bitmask from callee prototypes; unknown proto -> 0x3f = legacy collapse-all, safe). compareg norm() tracks the current stub id from 0xB0 tokens and applies the text/rodata collapse ONLY to pointer args; integer args are compared verbatim.",
+    "validated":"cgpio g_stub_argptr={0x0,0x0} (critical_save=void, hal_write=2 ints); baseline still 30/30 (no false mismatch); pin-constant mutant 0x1416 (movs r0,#9->#0xa) now CAUGHT 27/30 (test18 v0 pin=0x9 vs v1 pin=0xa)",
+    "files":"stream-private harness: autogen.py (stub_argptr + emit), compareg.py (STUBPTR parse + norm pointer-mask)"
+  },
+  "remaining":[
+    "re-verify every passed unit under the fixed compareg (stricter integer-arg comparison may surface previously-masked integer-arg bugs; correct units still pass as cgpio shows). NOT run this cycle: box load avg 512 (other streams' Renodes + Xcode) made runs crawl; my re-verify job was killed to avoid a multi-hour stall. Other streams' Renodes left untouched.",
+    "step3: codec-i2s-float-convert (i2sfloat) and codec-deadline (deadline) not started"
+  ]
+}

@@ -1,11 +1,12 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31d150..0x31d2ba: advance the periodic-advertising train
- * cursor (state block at 0x8029ac: +0 subevent index, +1 slot, +4 count,
+ * cursor (state block at (uintptr_t)&em9305_ram_8029ac: +0 subevent index, +1 slot, +4 count,
  * +7/+8 response filter, +12 time, +16 channel pointer, slot table at
  * +24) for the advertising set `set`. Each pass finds the next populated
  * subevent with 3173ac, records the 64-bit event position (interval +32
- * x factor +24, plus the slot when a channel is selected) at 0x802a2c,
+ * x factor +24, plus the slot when a channel is selected) at (uintptr_t)&em9305_ram_802a2c,
  * steps the time by +12 per skipped event, selects the next channel
  * (+56 entries, +176) and refreshes the subevent's TX power (30e6b0)
  * until a stop condition. When a channel was selected after at least one
@@ -24,7 +25,7 @@ struct opencfw_em9305_train_cursor {
 
 uint32_t opencfw_em9305_dispatch_child_31d150(uintptr_t set, uintptr_t done)
 {
-    const uintptr_t state=0x8029acu;
+    const uintptr_t state=(uintptr_t)&em9305_ram_8029ac;
     volatile uint8_t *s8=(volatile uint8_t *)state;
     volatile uint32_t *s32=(volatile uint32_t *)state;
     volatile uint8_t *a=(volatile uint8_t *)set;
@@ -51,8 +52,8 @@ uint32_t opencfw_em9305_dispatch_child_31d150(uintptr_t set, uintptr_t done)
         selected=s32[4];
         product+=(uint64_t)high<<32;
         if(selected!=no_channel)product+=s8[1];
-        *(volatile uint32_t *)(uintptr_t)0x802a2cu=(uint32_t)product;
-        *(volatile uint32_t *)(uintptr_t)0x802a30u=(uint32_t)(product>>32);
+        em9305_ram_802a2c.u32_802a2c=(uint32_t)product;
+        em9305_ram_802a2c.u32_802a30=(uint32_t)(product>>32);
         if(active==0u){
             selected=previous;
             break;
@@ -78,7 +79,7 @@ uint32_t opencfw_em9305_dispatch_child_31d150(uintptr_t set, uintptr_t done)
         }
         uint32_t interval=*(volatile uint32_t *)(set+12u);
         base_time=s32[3];
-        uint32_t options=*(volatile uint8_t *)(uintptr_t)0x805a86u;
+        uint32_t options=em9305_ram_805a6c.u8_805a86;
         s32[3]=interval*(uint8_t)steps+base_time;
         if((options&1u)!=0u)break;
         uint32_t index=s8[0];

@@ -1,0 +1,58 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "source": "g2/src/apollo-main/app/a-06-logger-setting/logger_setting_handler.c",
+ "source_sha256": "aa5da3e28dd31bd4987a7a2239f6687e790954b5b7d5d3496a00096009a41ee0",
+ "spec": "build/ws-app-20261122/specs/lg-a",
+ "verified_at": "2026-11-22 20:21 CST",
+ "result": {
+  "verdict": "EQUIVALENT",
+  "tests": 700,
+  "equal": 700,
+  "differ": 0,
+  "mutants": 10,
+  "killed": 10,
+  "surviving_mutants": [],
+  "done": true,
+  "overflow": false,
+  "harness_sha256": "35272d30c33358f5022eef5ba2962433d4344ff992e4841d10c7f53112f6a19a",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "stock_entries": {
+  "loggerSetting_common_data_handler": "0x4592dc",
+  "simplify_log_filename": "0x45a3b4"
+ },
+ "method": "700 random calls (3/4 handler with sources 0/0x0b/0x0c/1/0x0a, decoded request templates incl. file lists, file names L:/R: prefixed and malformed, peer lists; 1/4 simplify_log_filename) + 200 per mutant; scripted decode/encode, role, BLE TX, handshake, file remove, scan_log_files (copies a template list), delete_all; stock sscanf/snprintf/strncmp/strcmp/strncpy/memset/memcpy run for real",
+ "observed": "all callee args (stack buffers: %s by content, other stack values collapsed), file names by content, encoded/BLE/handshake payload hashes, logs, return values; rx/tx/encoded records, stored-list flag, file list and output buffer after every call",
+ "source_changes": [
+  {
+   "function": "peer_file_list / loggerSetting_common_data_handler (source 0x0b)",
+   "change": "peer_file_list now returns the Thread_MsgPbTxByBle error when the reply to the app fails (else 0) and the source-0x0b branch returns it; previously C always returned 0",
+   "stock_evidence": "0x45a176 bl Thread_MsgPbTxByBle; r4=result; 0x45a1c4 movs r0,r4; b 0x45a380 (function epilogue) after the 0x1f4 'to master failed' log",
+   "found_by": "tests 0x11f (BLE ret 1: stock 1, C 0) and 0x1f1 (BLE ret 2: stock 2, C 0); 0x1f1's difference sat at record 283661 of 283668, located with a debug run capturing full streams (HRT_BIGCAP) and a 170/40 dump window"
+  }
+ ],
+ "test_fixes": [
+  "IAR C-locale objects (.data 0x20004488..0x20004520, decoded from stock init row) written before tests; stock sscanf faulted without them",
+  "encode hook capped to the stream size",
+  "peer-list count kept within 40 rows",
+  "extra file names and biased templates so the 7-char prefix and hardfault mutants are reachable",
+  "added mutant 9 for the new return path"
+ ],
+ "harness_changes": [
+  "stack buffers passed as printf %s compared by content",
+  "HRT_WBACK/HRT_WFWD dump window and HRT_BIGCAP full-stream capture options (debug only)"
+ ],
+ "history": [
+  "19:20 CST: 699/700, 6/9",
+  "20:03: 698/700, 9/9 (0x11f, 0x1f1)",
+  "20:21 after C fix: 700/700, 10/10"
+ ],
+ "rebuild_with_fix": {
+  "at": "2026-11-22 20:23 CST",
+  "build": "build/ws-app-20261122/b1: 2719/2719 compiled (207 recompiled), 0 duplicate strong symbols, 21 unresolved",
+  "link": "build/ws-app-20261122/b1-link/g2-apollo-main/g2-apollo-main.bin 3,628,564 B sha256 99083948e3cf378a8bea85bf3e88d8484ab86aedef9866701c43ba1182262301",
+  "paired_sims": "ws-app4 (20:32 CST): DFU_SAME vs reference, 922 HCI packets, OTAPOINTER 0xAFD1363A/0x0, CHIPREV 0x22, HOST_PACKET 0x3A, UNSUPPORTED 0, adv 1, display 2, faults 0 (identical to ws-app3 and reference)"
+ }
+}

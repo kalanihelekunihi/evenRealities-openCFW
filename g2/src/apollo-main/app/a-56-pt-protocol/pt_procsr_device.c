@@ -137,7 +137,11 @@ uint32_t pt_cmd_11_handler(const uint8_t *payload, uint8_t length, uint8_t *rsp,
             box_detect_set_lid_open_4ac744(payload[5] == 2u ? 1u : 0u);
     }
     uint8_t idx = 0;
-    PT_HEADER(rsp, idx, 0x13u, 6u);
+    /* Stock 0x56fe7e: this reply carries 2 in header byte 2, not the usual 3. */
+    rsp[idx++] = 0x13u;
+    rsp[idx++] = 1u;
+    rsp[idx++] = 2u;
+    rsp[idx++] = 6u;
     rsp[idx++] = bat->soc_band_flag != 0u ? 1u : 0u;
     rsp[idx++] = (uint8_t)((uint32_t)bat->voltage_mv >> 8);
     rsp[idx++] = (uint8_t)bat->voltage_mv;

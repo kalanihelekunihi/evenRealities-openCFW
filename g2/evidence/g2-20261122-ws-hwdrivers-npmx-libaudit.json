@@ -1,0 +1,105 @@
+{
+ "stream": "ws-hwdrivers",
+ "stamp": "20261122",
+ "unit": "npmx library address audit + config wrappers",
+ "method": "Built the vendored upstream npmx v1.0.1 (third-party/upstream/npmx/drivers/src + backends, -DNPM1300, cortex-m55 hard-float -O2) to labeled objects, then matched the IAR-built stock library (carved 0x55d000-0x561000) function-by-function by structural evidence: getters by (element-shift, post-shift offset) e.g. return p_pm+offset+idx*2^shift; setters/readers by npm1300 register-address constants and backend call direction (register_write @0x55fc2c vs register_read @0x55fc38). Stock is IAR so not byte-identical to the gcc upstream; matching is on structure + register constants + call graph, cross-checked against the sources.json rename map.",
+ "evidence_based_addresses": {
+  "npmx_gpio_get": "0x55ee74",
+  "npmx_gpio_mode_set": "0x55ee7e",
+  "npmx_vbusin_get": "0x55ee8c",
+  "npmx_vbusin_current_limit_set": "0x55ef1e",
+  "npmx_vbusin_vbus_status_get": "0x55ef3c",
+  "npmx_timer_get": "0x55ef6c",
+  "npmx_timer_task_trigger": "0x55ef76",
+  "npmx_timer_config_set": "0x55ef80",
+  "npmx_charger_get": "0x55eff0",
+  "npmx_charger_status_get": "0x55f294",
+  "npmx_charger_termination_normal_voltage_set": "0x55f25c",
+  "npmx_charger_termination_warm_voltage_set": "0x55f278",
+  "npmx_buck_get": "0x55fa0e",
+  "npmx_buck_task_trigger": "0x55fa18",
+  "npmx_buck_normal_voltage_set": "0x55fa22",
+  "npmx_buck_vout_select_set": "0x55fa40",
+  "npmx_ldsw_get": "0x55face",
+  "npmx_ldsw_task_trigger": "0x55fad8",
+  "npmx_ldsw_mode_set": "0x55fb7c",
+  "npmx_ship_get": "0x55fc60",
+  "npmx_ship_task_trigger": "0x55fc6a",
+  "npmx_backend_register_read": "0x55fc38",
+  "npmx_backend_register_write": "0x55fc2c",
+  "npmx_core_init": "0x55eb3e",
+  "npmx_charger_module_enable_set": "0x55f07a",
+  "npmx_charger_module_disable_set": "0x55f0d8",
+  "npmx_adc_get": "0x55f4f2",
+  "npmx_adc_task_trigger": "0x55f544",
+  "npmx_adc_meas_all_get": "0x55f654",
+  "npmx_adc_ntc_config_set": "0x55f58a",
+  "npmx_adc_ntc_type_convert": "0x55f4fe",
+  "npmx_charger_charging_current_set": "0x55f134",
+  "npmx_charger_discharging_current_set": "0x55f1b8",
+  "npmx_charger_voltage_convert": "0x55effa",
+  "npmx_vbusin_current_convert": "0x55e7fa",
+  "npmx_core_register_cb": "0x55ed9a",
+  "npmx_core_event_interrupt_enable": "0x55edac",
+  "npmx_vbusin_task_trigger": "0x55ef02"
+ },
+ "corrections_vs_zip_map": [
+  "npmx_gpio_get/gpio_mode_set were swapped",
+  "0x55ee8c is npmx_vbusin_get (zip map wrongly labeled it vbusin_task_trigger)"
+ ],
+ "functions_verified_this_pass": [
+  {
+   "name": "configure_buck2_voltage_51238c",
+   "cases": 15,
+   "diffs": 0,
+   "note": "buck_get/vout_select_set/normal_voltage_set/task_trigger"
+  },
+  {
+   "name": "npmx_watchdog_enable_511882",
+   "cases": 15,
+   "diffs": 0,
+   "note": "timer_get + timer_task_trigger"
+  },
+  {
+   "name": "npmx_get_adc_measurements_511990",
+   "cases": 15,
+   "diffs": 0,
+   "note": "adc_get=0x55f4f2, adc_meas_all_get=0x55f654, charger_status_get=0x55f294, adc_task_trigger=0x55f544, charger_get; 4 float* out-args via autogen per-pointer scratch"
+  },
+  {
+   "name": "fuel_gauge_ref_time_update_512892",
+   "cases": 12,
+   "diffs": 0,
+   "note": "fuel-gauge wrapper; nrf_fuel_gauge_* run-stock via address suffix; battery-model/ read-only"
+  },
+  {
+   "name": "check_fuel_gauge_init_51283c",
+   "cases": 12,
+   "diffs": 0,
+   "note": "fuel-gauge wrapper; nrf_fuel_gauge_* run-stock via address suffix; battery-model/ read-only"
+  },
+  {
+   "name": "initialize_fuel_gauge_511c24",
+   "cases": 12,
+   "diffs": 0,
+   "note": "fuel-gauge wrapper; nrf_fuel_gauge_* run-stock via address suffix; battery-model/ read-only"
+  },
+  {
+   "name": "process_fuel_gauge_51201c",
+   "cases": 12,
+   "diffs": 0,
+   "note": "fuel-gauge wrapper; nrf_fuel_gauge_* run-stock via address suffix; battery-model/ read-only"
+  }
+ ],
+ "still_needed": [
+  "npmx_adc_ibat_meas_enable_set (writes a reg not present as 0x524 in the carved region; blocks application_configure)",
+  "npmx_ldsw_ldo_voltage_set (blocks configure_lsdw1)",
+  "npmx_main_driver_init gated on application_configure + configure_lsdw1",
+  "watchdog_timer_callback + vbusin_voltage_callback: all callees now known (vbusin_task_trigger=0x55ef02), ready to verify next"
+ ],
+ "reverified_final_harness": true,
+ "reverified_when": "2026-11-22 7:14 PM CST (America/Chicago)",
+ "reverification_notes": [
+  "Re-verified under the final arg-comparing + VFP-aware harness and the global-merge-off build (-fno-common -mllvm -arm-global-merge=false); 0 mismatches in the 2026-11-22 19:12 CST full batch re-run."
+ ]
+}

@@ -8,6 +8,7 @@
  * overwritten by the next call's argument); the argument of controller_timer_changed is taken from r0 as left by timer_apply (guess).
  */
 #include "em_irq_frame_e.h"
+#include "em9305_ram.h"
 
 extern uint32_t opencfw_em9305_timer_irq_enable(uint32_t);
 extern uint32_t opencfw_em9305_timer_threshold_flags(int32_t);
@@ -24,7 +25,7 @@ __attribute__((used)) void opencfw_em9305_IRQHandler_PmlSvld_body(void)
   (void)opencfw_em9305_timer_irq_enable(0u);
   uintptr_t context = EM_R32(0x80fde0u);
   uint32_t flags = *(volatile uint8_t *)(context + 14u);
-  volatile int8_t *selected = (volatile int8_t *)(uintptr_t)0x8019a0u;
+  volatile int8_t *selected = &em9305_ram_801994.s8_8019a0;
   if (*selected >= 0) *selected = (int8_t)(*selected - 1);
   (void)opencfw_em9305_timer_threshold_flags(*selected);
   if (flags & 64u) (void)EM_R32(0x80fde0u);

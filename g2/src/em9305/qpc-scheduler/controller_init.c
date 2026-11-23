@@ -2,6 +2,7 @@
  * 0x30f4b0 lives in application/PML_Init.c. Preserve distinct context reloads
  * and native major-6/minor-0x1e operations in the other routines here. */
 #include <stdint.h>
+#include "em9305_ram.h"
 extern const char opencfw_em9305_qp_module_qf_dyn[];
 extern const char opencfw_em9305_qp_module_qf_mem[];
 extern uint32_t opencfw_em9305_native_config_product(uint32_t,uint32_t);
@@ -10,7 +11,7 @@ extern uint32_t opencfw_em9305_controller_prepare_timer(void); /* 0x30f288 */
 extern uint32_t opencfw_em9305_controller_timer_reset(uint32_t); /* 0x30fa40 */
 extern uint32_t opencfw_em9305_controller_finish_init(uint32_t); /* 0x30f668 */
 extern uint32_t opencfw_em9305_controller_rom_init(uint32_t); /* 0x103c40 */
-static uintptr_t context(void) { return *(volatile uint32_t *)(uintptr_t)0x80fb8cu; }
+static uintptr_t context(void) { return em9305_ram_80fb8c.u32_80fb8c; }
 extern uint32_t opencfw_em9305_controller_apply_level(uint32_t,uint32_t); /* 0x30f864 */
 extern uint32_t opencfw_em9305_controller_rom_mode_action(uint32_t); /* 0x103cf0 */
 extern uint32_t opencfw_em9305_controller_rom_level_prepare(uint32_t); /* 0x103b9c */
@@ -41,10 +42,10 @@ extern uint32_t opencfw_em9305_sleep_metadata_sync(uint32_t); /* 0x310990 */
 /* Native BOOT_IRQHandlerPMLHFColdStart 0x302d40..0x302d80. */
 void opencfw_em9305_controller_cold_irq(void)
 {
- volatile uint32_t *pending=(volatile uint32_t *)(uintptr_t)0x8018e4u;
+ volatile uint32_t *pending=&em9305_ram_8018bc.u32_8018e4;
  uint32_t mask=*pending;
  if (mask==0u) return;
- uint32_t locks=*(volatile uint32_t *)(uintptr_t)0x8018f0u;
+ uint32_t locks=em9305_ram_8018bc.u32_8018f0;
  if ((locks & mask)!=0u) {
   uint32_t mode=*(volatile uint8_t *)(uintptr_t)0xf0383bu & 3u;
   if (mode==3u) (void)opencfw_em9305_sleep_metadata_sync(mode);
@@ -58,20 +59,20 @@ void opencfw_em9305_controller_cold_irq(void)
  * receives the action mask, rather than callback-self R0. */
 void opencfw_em9305_controller_irq_action(uint32_t mask)
 {
- uint32_t low=*(volatile uint32_t *)(uintptr_t)0x8018ecu;
+ uint32_t low=em9305_ram_8018bc.u32_8018ec;
  int enabled=(low & mask)!=0u;
- if (!enabled) enabled=(*(volatile uint32_t *)(uintptr_t)0x8018f0u & mask)!=0u;
+ if (!enabled) enabled=(em9305_ram_8018bc.u32_8018f0 & mask)!=0u;
  if (enabled) {
   uint32_t irq;
   irq = (uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
-  volatile uint32_t *pending=(volatile uint32_t *)(uintptr_t)0x8018e4u;
+  volatile uint32_t *pending=&em9305_ram_8018bc.u32_8018e4;
   *pending=*pending | mask;
   __builtin_arc_seti((int)irq);
   uint32_t status=*(volatile uint32_t *)(uintptr_t)0xf03838u & 0x03000000u;
   if (status==0x03000000u) *(volatile uint32_t *)(uintptr_t)0xf009a8u=2;
   else (void)opencfw_em9305_sleep_rom_start(3);
  }
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805bf8u;
+ uintptr_t callback=em9305_ram_805be0.u32_805bf8;
  if (callback!=0u) ((void (*)(uint32_t))callback)(mask);
 }
 /* Native 0x3068c8..0x30690c: seventeen normal entries and one final
@@ -95,7 +96,7 @@ uint32_t opencfw_em9305_controller_warm_arch_lower(uint32_t a,uint32_t b,
                                                 uint32_t c,uint32_t d)
 {
  (void)a;(void)b;(void)c;(void)d;
- uintptr_t object=*(volatile uint32_t *)(uintptr_t)0x80fb70u;
+ uintptr_t object=em9305_ram_80fb48.u32_80fb70;
  uint32_t value=(*(volatile uint8_t *)(object+186u)&15u)|16u;
  __builtin_arc_seti((int)value);
  return value;
@@ -117,8 +118,8 @@ uint32_t opencfw_em9305_controller_warm_lower(uint32_t incoming)
  volatile uint32_t *clock=(volatile uint32_t *)(uintptr_t)0xf0045cu;
  uint32_t first,second;
  do { first=*clock;second=*clock; } while (first!=second);
- *(volatile uint32_t *)(uintptr_t)0x80fdf8u=first;
- uintptr_t object=*(volatile uint32_t *)(uintptr_t)0x801090u;
+ em9305_ram_80fde0.u32_80fdf8=first;
+ uintptr_t object=em9305_ram_801090.u32_801090;
  uint32_t selected=255;
  if (object!=0u) {
   uintptr_t callback=*(volatile uint32_t *)(object+16u);
@@ -138,7 +139,7 @@ uint32_t opencfw_em9305_controller_warm_lower(uint32_t incoming)
  (void)opencfw_em9305_controller_warm_arch_lower(value,0xf008d0u,extract,low);
  for (;;) {
   irq = (uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
-  if (*(volatile uint32_t *)(uintptr_t)0x8018e4u==0u) break;
+  if (em9305_ram_8018bc.u32_8018e4==0u) break;
   uint32_t masked=irq&31u;
   __builtin_arc_sleep((int)masked);
  }
@@ -148,21 +149,21 @@ uint32_t opencfw_em9305_controller_warm_lower(uint32_t incoming)
   __builtin_arc_sync();
  }
  do { first=*clock;second=*clock; } while (first!=second);
- uint32_t result=first-*(volatile uint32_t *)(uintptr_t)0x80fdf8u;
- *(volatile uint32_t *)(uintptr_t)0x80fdf8u=result;
+ uint32_t result=first-em9305_ram_80fde0.u32_80fdf8;
+ em9305_ram_80fde0.u32_80fdf8=result;
  return result;
 }
 /* Native registration 0x313904..0x313960: the two indirect calls have
  * different observed R0 values, object first and callback address second. */
 void opencfw_em9305_controller_register_timer(uintptr_t object)
 {
- *(volatile uint32_t *)(uintptr_t)0x801090u=(uint32_t)object;
+ em9305_ram_801090.u32_801090=(uint32_t)object;
  if (object==0u) return;
  uintptr_t callback=*(volatile uint32_t *)(object+20u);
  uint32_t priority=0;
  if (callback!=0u) {
   priority=((uint32_t (*)(uintptr_t))callback)(object);
-  object=*(volatile uint32_t *)(uintptr_t)0x801090u;
+  object=em9305_ram_801090.u32_801090;
   if (object==0u) return;
  }
  callback=*(volatile uint32_t *)(object+16u);
@@ -183,7 +184,7 @@ uint32_t opencfw_em9305_controller_cold_lower(uint32_t incoming)
 {
  (void)incoming;
  (void)opencfw_em9305_sleep_lock_update(0);
- opencfw_em9305_controller_register_timer(*(volatile uint32_t *)(uintptr_t)0x80fb30u);
+ opencfw_em9305_controller_register_timer(em9305_ram_80fb30.u32_80fb30);
  volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0xf00405u;
  uint32_t irq,value;
  irq = (uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
@@ -254,7 +255,7 @@ extern uint32_t opencfw_em9305_controller_install_callbacks(uintptr_t); /* 0x30a
 /* Native 0x30aeb8..0x30aec4: install the callback pointer, retain R0. */
 uint32_t opencfw_em9305_controller_install_callbacks(uintptr_t callback)
 {
- *(volatile uint32_t *)(uintptr_t)0x805790u=(uint32_t)callback;
+ em9305_ram_80578c.u32_805790=(uint32_t)callback;
  return (uint32_t)callback;
 }
 extern uint32_t opencfw_em9305_controller_wsf_os_init(uint32_t,uintptr_t); /* 0x313dfc */
@@ -329,41 +330,41 @@ extern uint32_t opencfw_em9305_pal_address_lower(uintptr_t); /* 0x310894 */
 uint32_t opencfw_em9305_pal_baseband_lower(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x805ef0u=0x075bcd15u;
- *(volatile uint32_t *)(uintptr_t)0x805eecu=0x05491333u;
- *(volatile uint32_t *)(uintptr_t)0x805ef4u=0x159a55e5u;
- *(volatile uint32_t *)(uintptr_t)0x805ef8u=0x1f123bb5u;
- return 0x805ef8u;
+ em9305_ram_805eec.u32_805ef0=0x075bcd15u;
+ em9305_ram_805eec.u32_805eec=0x05491333u;
+ em9305_ram_805eec.u32_805ef4=0x159a55e5u;
+ em9305_ram_805eec.u32_805ef8=0x1f123bb5u;
+ return ((uintptr_t)&em9305_ram_805eec + 0xcu);
 }
 /* Native 0x310850..0x310894: preserve volatile state access ordering. */
 uint32_t opencfw_em9305_pal_random_step(void)
 {
- uint32_t a=*(volatile uint32_t *)(uintptr_t)0x805eecu;
- uint32_t b=*(volatile uint32_t *)(uintptr_t)0x805ef0u;
- uint32_t d=*(volatile uint32_t *)(uintptr_t)0x805ef8u;
- *(volatile uint32_t *)(uintptr_t)0x805ef8u=a;
+ uint32_t a=em9305_ram_805eec.u32_805eec;
+ uint32_t b=em9305_ram_805eec.u32_805ef0;
+ uint32_t d=em9305_ram_805eec.u32_805ef8;
+ em9305_ram_805eec.u32_805ef8=a;
  uint32_t mixed=(b<<11)^b;
- uint32_t c=*(volatile uint32_t *)(uintptr_t)0x805ef4u;
- *(volatile uint32_t *)(uintptr_t)0x805ef4u=d;
+ uint32_t c=em9305_ram_805eec.u32_805ef4;
+ em9305_ram_805eec.u32_805ef4=d;
  mixed^=mixed>>8;
- *(volatile uint32_t *)(uintptr_t)0x805ef0u=c;
+ em9305_ram_805eec.u32_805ef0=c;
  uint32_t next=(a>>19)^mixed^a;
- *(volatile uint32_t *)(uintptr_t)0x805eecu=next;
+ em9305_ram_805eec.u32_805eec=next;
  return next;
 }
 /* Native 0x310894..0x3108d0: mix one caller-owned word into all lanes. */
 uint32_t opencfw_em9305_pal_address_lower(uintptr_t address)
 {
  uint32_t value=*(volatile uint32_t *)address;
- uint32_t a=*(volatile uint32_t *)(uintptr_t)0x805eecu;
- uint32_t b=*(volatile uint32_t *)(uintptr_t)0x805ef0u;
- uint32_t c=*(volatile uint32_t *)(uintptr_t)0x805ef4u;
- uint32_t d=*(volatile uint32_t *)(uintptr_t)0x805ef8u;
- *(volatile uint32_t *)(uintptr_t)0x805eecu=a^value;
- *(volatile uint32_t *)(uintptr_t)0x805ef0u=b^value;
- *(volatile uint32_t *)(uintptr_t)0x805ef4u=c^value;
+ uint32_t a=em9305_ram_805eec.u32_805eec;
+ uint32_t b=em9305_ram_805eec.u32_805ef0;
+ uint32_t c=em9305_ram_805eec.u32_805ef4;
+ uint32_t d=em9305_ram_805eec.u32_805ef8;
+ em9305_ram_805eec.u32_805eec=a^value;
+ em9305_ram_805eec.u32_805ef0=b^value;
+ em9305_ram_805eec.u32_805ef4=c^value;
  value^=d;
- *(volatile uint32_t *)(uintptr_t)0x805ef8u=value;
+ em9305_ram_805eec.u32_805ef8=value;
  return value;
 }
 /* Native 0x310088..0x3100c8. Unassigned configuration bytes remain
@@ -371,12 +372,12 @@ uint32_t opencfw_em9305_pal_address_lower(uintptr_t address)
 uint32_t opencfw_em9305_pal_baseband_initialize(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x805e44u=320;
- *(volatile uint16_t *)(uintptr_t)0x805e40u=512;
- *(volatile uint8_t *)(uintptr_t)0x805e42u=1;
+ em9305_ram_805e40.u32_805e44=320;
+ em9305_ram_805e40.u16_805e40=512;
+ em9305_ram_805e40.u8_805e42=1;
  uint8_t address[6];
  (void)opencfw_em9305_controller_read_config(0,(uintptr_t)address,6);
- uint32_t result=opencfw_em9305_pal_rom_baseband_init(0x805e40u,(uintptr_t)address);
+ uint32_t result=opencfw_em9305_pal_rom_baseband_init((uintptr_t)&em9305_ram_805e40,(uintptr_t)address);
  if (result!=0u) __builtin_arc_trap_s(0);
  (void)opencfw_em9305_pal_baseband_lower(result);
  return opencfw_em9305_pal_address_lower((uintptr_t)address);
@@ -385,9 +386,9 @@ uint32_t opencfw_em9305_pal_baseband_initialize(uint32_t incoming)
 uint32_t opencfw_em9305_controller_pal_sys_init(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint8_t *)(uintptr_t)0x801318u=1;
- *(volatile uint32_t *)(uintptr_t)0x805eccu=0;
- (void)opencfw_em9305_pal_hook_one(0x805eccu);
+ em9305_ram_8012c0.u8_801318=1;
+ em9305_ram_805e6c.u32_805ecc=0;
+ (void)opencfw_em9305_pal_hook_one(((uintptr_t)&em9305_ram_805e6c + 0x60u));
  (void)opencfw_em9305_pal_hook_two(17);
  (void)opencfw_em9305_pal_hook_three(16);
  uint32_t value=opencfw_em9305_pal_baseband_initialize(16);
@@ -400,10 +401,10 @@ uint32_t opencfw_em9305_pal_current_time(void)
 uint32_t opencfw_em9305_controller_wsf_timer_init(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x80607cu=0;
- *(volatile uint32_t *)(uintptr_t)0x806078u=0;
+ em9305_ram_80605c.u32_80607c=0;
+ em9305_ram_80605c.u32_806078=0;
  uint32_t now=opencfw_em9305_pal_current_time();
- *(volatile uint32_t *)(uintptr_t)0x8019f4u=now;
+ em9305_ram_8019e8.u32_8019f4=now;
  return now;
 }
 /* Native BstreamToBda64 0x304624..0x304648. */
@@ -419,14 +420,14 @@ uint64_t opencfw_em9305_controller_pack_address(uintptr_t address)
 uint32_t opencfw_em9305_controller_set_address(uintptr_t address)
 {
  uint64_t value=opencfw_em9305_controller_pack_address(address);
- *(volatile uint32_t *)(uintptr_t)0x805b44u=(uint32_t)(value>>32);
- *(volatile uint32_t *)(uintptr_t)0x805b40u=(uint32_t)value;
+ em9305_ram_805af0.u32_805b44=(uint32_t)(value>>32);
+ em9305_ram_805af0.u32_805b40=(uint32_t)value;
  return (uint32_t)value;
 }
 /* Native PalBbLoadCfg 0x30fd3c..0x30fd6c: exact widths/store order. */
 uint32_t opencfw_em9305_controller_pal_load_config(uintptr_t destination)
 {
- uint32_t value=*(volatile uint16_t *)(uintptr_t)0x80fb9cu;
+ uint32_t value=em9305_ram_80fb8c.u16_80fb9c;
  *(volatile uint16_t *)destination=(uint16_t)value;
  *(volatile uint8_t *)(destination+12u)=7;
  *(volatile uint16_t *)(destination+6u)=500;
@@ -439,9 +440,9 @@ uint32_t opencfw_em9305_controller_pal_load_config(uintptr_t destination)
 /* Native WsfOsSetNextHandler 0x3140b4..0x3140d0. */
 uint32_t opencfw_em9305_controller_wsf_register(uintptr_t callback)
 {
- uint32_t index=*(volatile uint8_t *)(uintptr_t)0x80605du;
- *(volatile uint8_t *)(uintptr_t)0x80605du=(uint8_t)(index+1u);
- *(volatile uint32_t *)(uintptr_t)(0x805ff4u+index*4u)=(uint32_t)callback;
+ uint32_t index=em9305_ram_80605c.u8_80605d;
+ em9305_ram_80605c.u8_80605d=(uint8_t)(index+1u);
+ *(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_805ff4 + index*4u)=(uint32_t)callback;
  return index;
 }
 struct controller_init_record {
@@ -466,25 +467,25 @@ extern uint32_t opencfw_em9305_pal_critical_exit(uint32_t); /* 0x31069c */
 uint32_t opencfw_em9305_pal_critical_enter(uint32_t incoming)
 {
  (void)incoming;
- uint32_t depth=*(volatile uint8_t *)(uintptr_t)0x805ed4u;
+ uint32_t depth=em9305_ram_805e6c.u8_805ed4;
  if (depth==0u) {
   uint32_t irq;
   irq = (uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
-  depth=*(volatile uint8_t *)(uintptr_t)0x805ed4u;
-  *(volatile uint32_t *)(uintptr_t)0x805ed0u=irq;
+  depth=em9305_ram_805e6c.u8_805ed4;
+  em9305_ram_805e6c.u32_805ed0=irq;
  }
  depth+=1u;
- *(volatile uint8_t *)(uintptr_t)0x805ed4u=(uint8_t)depth;
+ em9305_ram_805e6c.u8_805ed4=(uint8_t)depth;
  return depth;
 }
 uint32_t opencfw_em9305_pal_critical_exit(uint32_t incoming)
 {
  (void)incoming;
- uint32_t depth=*(volatile uint8_t *)(uintptr_t)0x805ed4u;
+ uint32_t depth=em9305_ram_805e6c.u8_805ed4;
  depth-=1u;
- *(volatile uint8_t *)(uintptr_t)0x805ed4u=(uint8_t)depth;
- if ((uint8_t)depth!=0u) return 0x805ed4u;
- uint32_t irq=*(volatile uint32_t *)(uintptr_t)0x805ed0u;
+ em9305_ram_805e6c.u8_805ed4=(uint8_t)depth;
+ if ((uint8_t)depth!=0u) return ((uintptr_t)&em9305_ram_805e6c + 0x68u);
+ uint32_t irq=em9305_ram_805e6c.u32_805ed0;
  __builtin_arc_seti((int)irq);
  return irq;
 }
@@ -492,9 +493,9 @@ uint32_t opencfw_em9305_pal_critical_exit(uint32_t incoming)
 uint32_t opencfw_em9305_pal_pending_consume(uint32_t incoming)
 {
  (void)opencfw_em9305_pal_critical_enter(incoming);
- uint32_t pending=*(volatile uint32_t *)(uintptr_t)0x805eccu;
- if (incoming!=0u) *(volatile uint32_t *)(uintptr_t)0x805eccu=0u;
- (void)opencfw_em9305_pal_critical_exit(0x805eccu);
+ uint32_t pending=em9305_ram_805e6c.u32_805ecc;
+ if (incoming!=0u) em9305_ram_805e6c.u32_805ecc=0u;
+ (void)opencfw_em9305_pal_critical_exit(((uintptr_t)&em9305_ram_805e6c + 0x60u));
  return pending;
 }
 /* Native 0x3106dc/0x3106e0 both return literal zero, not absent providers. */
@@ -503,23 +504,23 @@ uint32_t opencfw_em9305_pal_status_secondary(void) { return 0u; }
 /* Native 0x313f54..0x313f6c: enter the outermost WSF critical region. */
 uint32_t opencfw_em9305_wsf_critical_enter(void)
 {
- uint32_t depth=*(volatile uint8_t *)(uintptr_t)0x805ff1u;
+ uint32_t depth=em9305_ram_805fdc.u8_805ff1;
  if (depth==0u) {
   (void)opencfw_em9305_pal_critical_enter(depth);
-  depth=*(volatile uint8_t *)(uintptr_t)0x805ff1u;
+  depth=em9305_ram_805fdc.u8_805ff1;
  }
  depth+=1u;
- *(volatile uint8_t *)(uintptr_t)0x805ff1u=(uint8_t)depth;
+ em9305_ram_805fdc.u8_805ff1=(uint8_t)depth;
  return depth;
 }
 /* Native 0x313f6c..0x313f84: restore only at byte-depth zero. */
 uint32_t opencfw_em9305_wsf_critical_exit(void)
 {
- uint32_t depth=*(volatile uint8_t *)(uintptr_t)0x805ff1u;
+ uint32_t depth=em9305_ram_805fdc.u8_805ff1;
  depth-=1u;
- *(volatile uint8_t *)(uintptr_t)0x805ff1u=(uint8_t)depth;
- if ((uint8_t)depth!=0u) return 0x805ff1u;
- return opencfw_em9305_pal_critical_exit(0x805ff1u);
+ em9305_ram_805fdc.u8_805ff1=(uint8_t)depth;
+ if ((uint8_t)depth!=0u) return ((uintptr_t)&em9305_ram_805fdc + 0x15u);
+ return opencfw_em9305_pal_critical_exit(((uintptr_t)&em9305_ram_805fdc + 0x15u));
 }
 extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
 /* Native 0x313dfc..0x313f54: WSF pool metadata and free-list construction.
@@ -528,24 +529,24 @@ uint32_t opencfw_em9305_controller_wsf_os_init(uint32_t pools,uintptr_t descript
 {
  uint32_t cursor=opencfw_em9305_controller_allocator_zero();
  uint32_t base=cursor;
- uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- *(volatile uint32_t *)(uintptr_t)0x805fe8u=cursor;
+ uintptr_t product=em9305_ram_805c5c.u32_805cac;
+ em9305_ram_805fdc.u32_805fe8=cursor;
  if (*(volatile uint8_t *)(product+75u)!=0u) {
   cursor=opencfw_em9305_controller_align_pointer(cursor);
-  *(volatile uint32_t *)(uintptr_t)0x805fe4u=cursor;
+  em9305_ram_805fdc.u32_805fe4=cursor;
   (void)opencfw_em9305_memset((void *)(uintptr_t)cursor,0u,128u);
   cursor+=1024u;
-  *(volatile uint32_t *)(uintptr_t)0x805fe8u=cursor;
+  em9305_ram_805fdc.u32_805fe8=cursor;
   cursor=opencfw_em9305_controller_align_pointer(cursor);
-  *(volatile uint32_t *)(uintptr_t)0x806074u=cursor;
+  em9305_ram_80605c.u32_806074=cursor;
   (void)opencfw_em9305_memset((void *)(uintptr_t)cursor,0u,32u);
   /* Stock ADD3 at 0x313e5c adds 0x20 << 3: reserve 256 bytes here. */
   base=cursor+256u;
-  *(volatile uint32_t *)(uintptr_t)0x805fe8u=base;
+  em9305_ram_805fdc.u32_805fe8=base;
  }
  uint32_t metadata=base,free_head=base+(pools<<4);
- uint32_t failed=0u,result=0u,status=1u,r0=0x805ff0u;
- *(volatile uint8_t *)(uintptr_t)0x805ff0u=(uint8_t)pools;
+ uint32_t failed=0u,result=0u,status=1u,r0=((uintptr_t)&em9305_ram_805fdc + 0x14u);
+ em9305_ram_805fdc.u8_805ff0=(uint8_t)pools;
  for (;;) {
   r0=opencfw_em9305_controller_allocator_query(r0);
   r0=(r0&~7u)+base;
@@ -567,7 +568,7 @@ uint32_t opencfw_em9305_controller_wsf_os_init(uint32_t pools,uintptr_t descript
    r0=count-2u;
    do {
     r0=opencfw_em9305_controller_allocator_query(r0);
-    base=*(volatile uint32_t *)(uintptr_t)0x805fe8u;
+    base=em9305_ram_805fdc.u32_805fe8;
     uint32_t limit=(r0&~7u)+base;
     r0=stride&~7u;
     if (limit<free_head) { failed=1u;break; }
@@ -578,24 +579,24 @@ uint32_t opencfw_em9305_controller_wsf_os_init(uint32_t pools,uintptr_t descript
   }
   if (failed!=0u) { status=failed;break; }
   r0=opencfw_em9305_controller_allocator_query(r0);
-  base=*(volatile uint32_t *)(uintptr_t)0x805fe8u;
+  base=em9305_ram_805fdc.u32_805fe8;
   uint32_t limit=(r0&~7u)+base;
   r0=stride&~7u;
   if (limit<free_head) break;
   *(volatile uint32_t *)(uintptr_t)free_head=0u;
-  base=*(volatile uint32_t *)(uintptr_t)0x805fe8u;
+  base=em9305_ram_805fdc.u32_805fe8;
   pools-=1u;descriptors+=4u;metadata+=16u;
   free_head+=r0;r0=free_head;
  }
  if (status==0u) {
-  product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-  uint32_t current=*(volatile uint32_t *)(uintptr_t)0x805fe8u;
+  product=em9305_ram_805c5c.u32_805cac;
+  uint32_t current=em9305_ram_805fdc.u32_805fe8;
   uint32_t enabled=*(volatile uint8_t *)(product+75u);
   result=free_head-current;
-  *(volatile uint32_t *)(uintptr_t)0x805fecu=result;
+  em9305_ram_805fdc.u32_805fec=result;
   if (enabled!=0u) {
    result+=160u;
-   *(volatile uint32_t *)(uintptr_t)0x805fecu=result;
+   em9305_ram_805fdc.u32_805fec=result;
   }
  }
  return result;
@@ -664,21 +665,21 @@ void opencfw_em9305_controller_empty_handler(void) { }
 uint32_t opencfw_em9305_controller_initialize_stack(uint32_t incoming)
 {
  (void)opencfw_em9305_controller_pal_sys_init(incoming);
- (void)opencfw_em9305_controller_pal_load_config(0x8018f4u);
- (void)opencfw_em9305_controller_ll_config_seed(0x801924u);
- (void)opencfw_em9305_controller_read_config(2,0x801930u,64);
- (void)opencfw_em9305_controller_read_config(1,0x801962u,14);
- (void)opencfw_em9305_controller_read_config(6,0x801969u,7);
- *(volatile uint8_t *)(uintptr_t)0x801948u=4;
- *(volatile uint8_t *)(uintptr_t)0x80196eu=0;
- *(volatile uint8_t *)(uintptr_t)0x801932u=3;
+ (void)opencfw_em9305_controller_pal_load_config((uintptr_t)&em9305_ram_8018f4);
+ (void)opencfw_em9305_controller_ll_config_seed(((uintptr_t)&em9305_ram_80190c + 0x18u));
+ (void)opencfw_em9305_controller_read_config(2,((uintptr_t)&em9305_ram_80190c + 0x24u),64);
+ (void)opencfw_em9305_controller_read_config(1,((uintptr_t)&em9305_ram_80190c + 0x56u),14);
+ (void)opencfw_em9305_controller_read_config(6,((uintptr_t)&em9305_ram_80190c + 0x5du),7);
+ em9305_ram_801944.u8_801948=4;
+ em9305_ram_80196c.u8_80196e=0;
+ em9305_ram_80190c.u8_801932=3;
  struct controller_init_record record;
- record.baseband=0x8018f4u;
+ record.baseband=(uintptr_t)&em9305_ram_8018f4;
  record.capabilities=0x0b04u;
  record.mode=4;
- record.link_layer=0x801924u;
- *(volatile uint16_t *)(uintptr_t)0x80194au=251;
- *(volatile uint16_t *)(uintptr_t)0x801946u=1028;
+ record.link_layer=((uintptr_t)&em9305_ram_80190c + 0x18u);
+ em9305_ram_801944.u16_80194a=251;
+ em9305_ram_801944.u16_801946=1028;
  record.allocator_first=opencfw_em9305_controller_allocator_zero();
  record.allocator_second=opencfw_em9305_controller_allocator_query(record.allocator_first);
  uint32_t result=opencfw_em9305_controller_ll_init((uintptr_t)&record);
@@ -691,7 +692,7 @@ uint32_t opencfw_em9305_controller_initialize_stack(uint32_t incoming)
  result=opencfw_em9305_controller_allocator_align(result);
  (void)opencfw_em9305_controller_wsf_timer_init(result);
  result=opencfw_em9305_controller_wsf_register((uintptr_t)opencfw_em9305_controller_empty_handler);
- *(volatile uint8_t *)(uintptr_t)0x8018e8u=(uint8_t)result;
+ em9305_ram_8018bc.u8_8018e8=(uint8_t)result;
  return result;
 }
 /* Native startup 0x302ae8..0x302be4. Architectural configuration is
@@ -702,7 +703,7 @@ uint32_t opencfw_em9305_controller_startup(void)
  __builtin_arc_kflag(0);
  value=__builtin_arc_lr(197); /* aux 0xc5 */
  if ((value & 255u)==2u) {
-  uint32_t upper=0x80f978u,lower=0x80e978u;
+  uint32_t upper=(uintptr_t)&em9305_ram_80f978,lower=(uintptr_t)&em9305_ram_80e978;
   __builtin_arc_sr(upper,613); /* KSTACK_TOP */
   __builtin_arc_sr(lower,612); /* KSTACK_BASE */
   value=__builtin_arc_lr(0xa); /* STATUS32 */
@@ -715,7 +716,7 @@ uint32_t opencfw_em9305_controller_startup(void)
  (void)opencfw_em9305_controller_early_lower(value);
  uint32_t count;
  count=__builtin_arc_lr(0x21); /* COUNT0 */
- *(volatile uint32_t *)(uintptr_t)0x801108u=count;
+ em9305_ram_801104.u32_801108=count;
  value=0;
  __builtin_arc_sr(value,0x21); /* COUNT0 */
  value=opencfw_em9305_controller_rom_boot_status(value);
@@ -734,13 +735,13 @@ uint32_t opencfw_em9305_controller_startup(void)
   }
   (void)opencfw_em9305_controller_seed_timer_mode();
   (void)opencfw_em9305_controller_seed_tables();
-  value=opencfw_em9305_controller_rom_construct(0x801040u,0,2,320,1);
+  value=opencfw_em9305_controller_rom_construct((uintptr_t)&em9305_ram_801040,0,2,320,1);
   value=opencfw_em9305_controller_cold_lower(value);
   (void)opencfw_em9305_controller_lock_lower(value);
   count=__builtin_arc_lr(0x21); /* COUNT0 */
-  value=*(volatile uint32_t *)(uintptr_t)0x801108u+count;
-  *(volatile uint32_t *)(uintptr_t)0x80fdf4u=value;
-  value=*(volatile uint32_t *)(uintptr_t)0x80fdf4u;
+  value=*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_801104 + 0x4u)+count;
+  em9305_ram_80fde0.u32_80fdf4=value;
+  value=em9305_ram_80fde0.u32_80fdf4;
   return opencfw_em9305_controller_set_period(value+0x9ab0u,0);
  }
  (void)opencfw_em9305_controller_warm_lower(value);
@@ -748,8 +749,8 @@ uint32_t opencfw_em9305_controller_startup(void)
  if (value!=3u) return value;
  (void)opencfw_em9305_controller_lock_lower(value);
  count=__builtin_arc_lr(0x21); /* COUNT0 */
- value=*(volatile uint32_t *)(uintptr_t)0x801108u+count;
- uint32_t delta=*(volatile uint32_t *)(uintptr_t)0x80fdf8u;
+ value=*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_801104 + 0x4u)+count;
+ uint32_t delta=em9305_ram_80fde0.u32_80fdf8;
  return opencfw_em9305_controller_set_period(value,delta);
 }
 /* Native inverse conversion 0x30f2b8..0x30f2d8: unsigned full-width
@@ -776,40 +777,40 @@ uint32_t opencfw_em9305_controller_numeric_level(int32_t value) /* 0x30f2f0 */
 /* Native mode seed 0x30fa78..0x30fa9c. */
 uint32_t opencfw_em9305_controller_seed_timer_mode(void)
 {
- uintptr_t c=*(volatile uint32_t *)(uintptr_t)0x80fde0u;
+ uintptr_t c=em9305_ram_80fde0.u32_80fde0;
  *(volatile uint32_t *)c=0;
  uint32_t mode=*(volatile uint8_t *)(uintptr_t)0xf0383bu;
  mode=((uint32_t)mode>>2u)&0x3u;
- *(volatile uint32_t *)(uintptr_t)0x80199cu=mode;
- return 0x80199cu;
+ em9305_ram_801994.u32_80199c=mode;
+ return ((uintptr_t)&em9305_ram_801994 + 0x8u);
 }
 /* Native product table root selection 0x30f67c..0x30f6c8. No table
  * contents are synthesized; the authenticated addresses stay explicit. */
 uint32_t opencfw_em9305_controller_seed_tables(void)
 {
- volatile uint32_t *mode=(volatile uint32_t *)(uintptr_t)0x80199cu;
+ volatile uint32_t *mode=&em9305_ram_801994.u32_80199c;
  if (*mode==0u) {
-  uint32_t configuration=*(volatile uint32_t *)(uintptr_t)0x8012d0u;
-  *(volatile uint32_t *)(uintptr_t)0x8012c0u=0x80fbd8u;
-  uintptr_t first=configuration!=0u ? 0x80fbe0u : 0x80fc60u;
-  uintptr_t second=configuration!=0u ? 0x80fc00u : 0x80fc80u;
-  *(volatile uint32_t *)(uintptr_t)0x8012c8u=(uint32_t)second;
-  *(volatile uint32_t *)(uintptr_t)0x8012c4u=(uint32_t)first;
+  uint32_t configuration=em9305_ram_8012c0.u32_8012d0;
+  em9305_ram_8012c0.u32_8012c0=(uintptr_t)&em9305_ram_80fbd8;
+  uintptr_t first=configuration!=0u ? (uintptr_t)&em9305_ram_80fbe0 : (uintptr_t)&em9305_ram_80fc60;
+  uintptr_t second=configuration!=0u ? (uintptr_t)&em9305_ram_80fc00 : (uintptr_t)&em9305_ram_80fc80;
+  em9305_ram_8012c0.u32_8012c8=(uint32_t)second;
+  em9305_ram_8012c0.u32_8012c4=(uint32_t)first;
  }
  uint32_t current=*mode;
  if (current!=2u) return current;
- uint32_t configuration=*(volatile uint32_t *)(uintptr_t)0x8012d0u;
- uint32_t selected=configuration!=0u ? 0x80fd00u : 0x80fce0u;
- *(volatile uint32_t *)(uintptr_t)0x8012c8u=selected;
- *(volatile uint32_t *)(uintptr_t)0x8012c4u=selected;
+ uint32_t configuration=em9305_ram_8012c0.u32_8012d0;
+ uint32_t selected=configuration!=0u ? (uintptr_t)&em9305_ram_80fd00 : (uintptr_t)&em9305_ram_80fce0;
+ em9305_ram_8012c0.u32_8012c8=selected;
+ em9305_ram_8012c0.u32_8012c4=selected;
  return selected;
 }
 /* Native period setter 0x30f998..0x30f9bc. */
 uint32_t opencfw_em9305_controller_set_period(uint32_t extra,uint32_t delta)
 {
  uint32_t converted=(uint32_t)opencfw_em9305_sleep_sync_convert(delta,delta);
- uint32_t count=*(volatile uint32_t *)(uintptr_t)0x80fbb0u;
- uint32_t factor=*(volatile uint16_t *)(uintptr_t)0x80fbaeu;
+ uint32_t count=em9305_ram_80fb8c.u32_80fbb0;
+ uint32_t factor=em9305_ram_80fb8c.u16_80fbae;
  uint32_t value=converted+extra+opencfw_em9305_native_config_product(count,factor);
  *(volatile uint32_t *)context()=value;
  return value;
@@ -824,7 +825,7 @@ static uint32_t level_class(uint32_t level)
  * delay instruction and changes the later comparison operand. */
 uint32_t opencfw_em9305_controller_apply_level(uint32_t level,uint32_t alternate)
 {
- volatile uint32_t *mode=(volatile uint32_t *)(uintptr_t)0x80199cu;
+ volatile uint32_t *mode=&em9305_ram_801994.u32_80199c;
  if (*mode!=0u) {
   if (*mode!=1u) return level;
   uint32_t category=level_class(level);
@@ -832,7 +833,7 @@ uint32_t opencfw_em9305_controller_apply_level(uint32_t level,uint32_t alternate
   (void)opencfw_em9305_controller_rom_level_set(category);
   return opencfw_em9305_controller_rom_level_finish(1);
  }
- uintptr_t table=*(volatile uint32_t *)(uintptr_t)0x8012c0u;
+ uintptr_t table=em9305_ram_8012c0.u32_8012c0;
  int32_t first=*(volatile int8_t *)table;
  int32_t second;
  uint32_t category;
@@ -840,19 +841,19 @@ uint32_t opencfw_em9305_controller_apply_level(uint32_t level,uint32_t alternate
   category=level_class(level);
   second=first;
  } else {
-  uint32_t configuration=*(volatile uint32_t *)(uintptr_t)0x8012d0u;
+  uint32_t configuration=em9305_ram_8012c0.u32_8012d0;
   second=*(volatile int8_t *)(table+level);
-  uintptr_t selected=configuration!=0u ? 0x80fc00u : 0x80fc80u;
+  uintptr_t selected=configuration!=0u ? (uintptr_t)&em9305_ram_80fc00 : (uintptr_t)&em9305_ram_80fc80;
   if (level==2u) selected+=32u;
   else if (level!=1u && level-3u<3u) selected+=64u;
-  *(volatile uint32_t *)(uintptr_t)0x8012c8u=(uint32_t)selected;
+  em9305_ram_8012c0.u32_8012c8=(uint32_t)selected;
   opencfw_em9305_controller_timer_changed((uint32_t)selected);
   category=0;
  }
  (void)opencfw_em9305_controller_rom_level_prepare(0);
  (void)opencfw_em9305_controller_rom_level_set(category);
  (void)opencfw_em9305_controller_rom_level_finish(alternate);
- if (*(volatile uint32_t *)(uintptr_t)0x8012d0u==0u)
+ if (em9305_ram_8012c0.u32_8012d0==0u)
   opencfw_em9305_sleep_rom_restore(alternate);
  (void)opencfw_em9305_timer_rom_set_b((uint32_t)first);
  return opencfw_em9305_controller_rom_second_value((uint32_t)second);
@@ -860,18 +861,18 @@ uint32_t opencfw_em9305_controller_apply_level(uint32_t level,uint32_t alternate
 /* Native 0x30f9bc..0x30f9d0. */
 uint32_t opencfw_em9305_controller_mode_action(void)
 {
- uint32_t mode=*(volatile uint32_t *)(uintptr_t)0x80199cu;
+ uint32_t mode=em9305_ram_801994.u32_80199c;
  return mode==3u ? opencfw_em9305_controller_rom_mode_action(2) : mode;
 }
 static uint32_t timer_flag(uint32_t bit)
 {
- uintptr_t c=*(volatile uint32_t *)(uintptr_t)0x80fde0u;
+ uintptr_t c=em9305_ram_80fde0.u32_80fde0;
  return (*(volatile uint8_t *)(c+14u)>>bit)&1u;
 }
 /* Native 0x30f31c..0x30f368: each flag query reloads its product root. */
 uint32_t opencfw_em9305_controller_available_level(void)
 {
- volatile uint32_t *mode=(volatile uint32_t *)(uintptr_t)0x80199cu;
+ volatile uint32_t *mode=&em9305_ram_801994.u32_80199c;
  if (*mode==0u || *mode==1u) return timer_flag(0)!=0u ? 7u : 5u;
  if (timer_flag(1)!=0u) return 5;
  if (timer_flag(2)!=0u) return 4;
@@ -880,7 +881,7 @@ uint32_t opencfw_em9305_controller_available_level(void)
 }
 uint32_t opencfw_em9305_controller_product_halfword(void) /* 0x30f368 */
 {
- return *(volatile uint16_t *)(uintptr_t)0x80fb9cu;
+ return em9305_ram_80fb8c.u16_80fb9c;
 }
 /* Native 0x30f794..0x30f864. Labels preserve the native fallthrough
  * decisions after each query returns in R0. */
@@ -926,25 +927,25 @@ two:
  selected=value!=0u ? 1u : 0u;
 apply:
  result=0;
- if (*(volatile uint32_t *)(uintptr_t)0x80199cu==0u) {
-  uint32_t mode=*(volatile uint32_t *)(uintptr_t)0x8012d0u;
+ if (em9305_ram_801994.u32_80199c==0u) {
+  uint32_t mode=em9305_ram_8012c0.u32_8012d0;
   if (mode!=0u) {
    result=flag_three;
    if (mode==1u) {
     if (flag_two!=0u) {
-     int32_t v=*(volatile int8_t *)(uintptr_t)0x8019a0u;
+     int32_t v=em9305_ram_801994.s8_8019a0;
      if (v<6) result=1;
     }
-    if (*(volatile int8_t *)(uintptr_t)0x8019a0u<1) result=1;
+    if (em9305_ram_801994.s8_8019a0<1) result=1;
    }
   } else {
-   int32_t v=*(volatile int8_t *)(uintptr_t)0x8019a0u;
+   int32_t v=em9305_ram_801994.s8_8019a0;
    result=flag_three;
    if (v<1) result=1;
   }
  }
  (void)opencfw_em9305_controller_apply_level(selected,result);
- *(volatile uint32_t *)(uintptr_t)0x8012ccu=selected;
+ em9305_ram_8012c0.u32_8012cc=selected;
  (void)opencfw_em9305_controller_mode_action();
  return selected;
 }
@@ -952,7 +953,7 @@ uint32_t opencfw_em9305_controller_finish_init(uint32_t incoming)
 {
  (void)incoming;
  uint32_t result=opencfw_em9305_controller_select_level(1);
- *(volatile uint32_t *)(uintptr_t)0x8012ccu=result;
+ em9305_ram_8012c0.u32_8012cc=result;
  return result;
 }
 /* Native 0x30f768..0x30f794: low two mode bits under IRQ protection. */
@@ -986,50 +987,50 @@ extern uint32_t opencfw_em9305_dispatch_332200(uintptr_t); /* native packet ABI 
 /* Native 0x30a70c. */
 uint32_t opencfw_em9305_ll_seed_30a70c(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057d8u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331ec0;
- *(volatile uint32_t *)(uintptr_t)0x805748u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331dc0;
- return 0x805748u;
+ em9305_ram_8057a8.u32_8057d8=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331ec0;
+ em9305_ram_805688.u32_805748=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331dc0;
+ return ((uintptr_t)&em9305_ram_805688 + 0xc0u);
 }
 /* Native 0x30a72c. */
 uint32_t opencfw_em9305_ll_seed_30a72c(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057fcu=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32ff20;
- *(volatile uint32_t *)(uintptr_t)0x80576cu=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32fea4;
- return 0x80576cu;
+ em9305_ram_8057a8.u32_8057fc=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32ff20;
+ em9305_ram_805688.u32_80576c=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32fea4;
+ return ((uintptr_t)&em9305_ram_805688 + 0xe4u);
 }
 /* Native 0x30a74c. */
 uint32_t opencfw_em9305_ll_seed_30a74c(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x805800u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331f5c;
- *(volatile uint32_t *)(uintptr_t)0x805770u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_332038;
- return 0x805770u;
+ em9305_ram_8057a8.u32_805800=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331f5c;
+ em9305_ram_805688.u32_805770=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_332038;
+ return ((uintptr_t)&em9305_ram_805688 + 0xe8u);
 }
 /* Native 0x30a77c. */
 uint32_t opencfw_em9305_ll_seed_30a77c(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057f4u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330400;
- *(volatile uint32_t *)(uintptr_t)0x805764u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3300c8;
- return 0x805764u;
+ em9305_ram_8057a8.u32_8057f4=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330400;
+ em9305_ram_805688.u32_805764=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3300c8;
+ return ((uintptr_t)&em9305_ram_805688 + 0xdcu);
 }
 /* Native 0x30a79c. */
 uint32_t opencfw_em9305_ll_seed_30a79c(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057f8u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_332200;
- *(volatile uint32_t *)(uintptr_t)0x805768u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_332194;
- return 0x805768u;
+ em9305_ram_8057a8.u32_8057f8=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_332200;
+ em9305_ram_805688.u32_805768=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_332194;
+ return ((uintptr_t)&em9305_ram_805688 + 0xe0u);
 }
 /* Native 0x30a840. */
 uint32_t opencfw_em9305_ll_seed_30a840(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057c8u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3305ac;
- *(volatile uint32_t *)(uintptr_t)0x805738u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330568;
- return 0x805738u;
+ em9305_ram_8057a8.u32_8057c8=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3305ac;
+ em9305_ram_805688.u32_805738=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330568;
+ return ((uintptr_t)&em9305_ram_805688 + 0xb0u);
 }
 /* Native 0x30a76c..0x30a77c. */
 uint32_t opencfw_em9305_ll_seed_30a76c(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057c4u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32eec8;
- return 0x8057c4u;
+ em9305_ram_8057a8.u32_8057c4=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32eec8;
+ return ((uintptr_t)&em9305_ram_8057a8 + 0x1cu);
 }
 
 extern uintptr_t opencfw_em9305_ll_event_allocate(uint32_t,uint32_t); /*0x32e454*/
@@ -1076,8 +1077,8 @@ uint32_t opencfw_em9305_ll_event_enqueue(uintptr_t queue,uint32_t handler,uintpt
 extern uint32_t opencfw_em9305_ll_event_kick(uint32_t); /*0x3047c0*/
 uint32_t opencfw_em9305_ll_event_send(uintptr_t event)
 {
- if (event!=0u) (void)opencfw_em9305_ll_event_enqueue(0x805870u,0u,event);
- uint32_t flag=*(volatile uint8_t *)(uintptr_t)0x805884u;
+ if (event!=0u) (void)opencfw_em9305_ll_event_enqueue((uintptr_t)&em9305_ram_805870,0u,event);
+ uint32_t flag=em9305_ram_805880.u8_805884;
  if (flag==0u) return opencfw_em9305_ll_event_kick(0u);
  return flag;
 }
@@ -1085,8 +1086,8 @@ uint32_t opencfw_em9305_ll_event_send(uintptr_t event)
 uint32_t opencfw_em9305_dispatch_32eec8(uintptr_t event)
 {
  if (*(volatile uint8_t *)(event+2u)!=0x21u) return 0u;
- if ((*(volatile uint8_t *)(uintptr_t)0x8056fau&8u)==0u) return 0u;
- if ((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u) return 0u;
+ if ((em9305_ram_805688.u8_8056fa&8u)==0u) return 0u;
+ if ((em9305_ram_805688.u8_8056ef&32u)==0u) return 0u;
  uintptr_t payload=opencfw_em9305_ll_event_allocate(0x3eu,4u);
  if (payload==0u) return 0u;
  *(volatile uint8_t *)payload=20u;payload+=1u;
@@ -1100,24 +1101,24 @@ uint32_t opencfw_em9305_dispatch_32eec8(uintptr_t event)
 /* Native0x313ce0..0x313d98: first fitting pool, exact optional statistics. */
 uintptr_t opencfw_em9305_wsf_pool_allocate(uint32_t requested)
 {
- uint32_t remaining=*(volatile uint8_t *)(uintptr_t)0x805ff0u;
- uintptr_t pool=*(volatile uint32_t *)(uintptr_t)0x805fe8u;
+ uint32_t remaining=em9305_ram_805fdc.u8_805ff0;
+ uintptr_t pool=em9305_ram_805fdc.u32_805fe8;
  while (remaining!=0u) {
   uint32_t capacity=*(volatile uint16_t *)pool;
   if (capacity>=requested) {
    (void)opencfw_em9305_wsf_critical_enter();
    uintptr_t node=*(volatile uint32_t *)(pool+8u);
-   uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   uintptr_t product=em9305_ram_805c5c.u32_805cac;
    uint32_t stats;
    if (node!=0u) {
-    uint32_t allocations=*(volatile uint32_t *)(uintptr_t)0x806070u;
+    uint32_t allocations=em9305_ram_80605c.u32_806070;
     uint32_t next=*(volatile uint32_t *)node;
     stats=*(volatile uint8_t *)(product+75u);
     *(volatile uint32_t *)(node+4u)=0u;
     *(volatile uint32_t *)(pool+8u)=next;
-    *(volatile uint32_t *)(uintptr_t)0x806070u=allocations+1u;
+    em9305_ram_80605c.u32_806070=allocations+1u;
     if (stats!=0u) {
-     uintptr_t histogram=*(volatile uint32_t *)(uintptr_t)0x805fe4u;
+     uintptr_t histogram=em9305_ram_805fdc.u32_805fe4;
      if (histogram!=0u) {
       uintptr_t entry=histogram+(requested<=127u ? requested : 0u);
       uint32_t count=*(volatile uint8_t *)entry;
@@ -1137,9 +1138,9 @@ uintptr_t opencfw_em9305_wsf_pool_allocate(uint32_t requested)
    }
    stats=*(volatile uint8_t *)(product+75u);
    if (stats!=0u) {
-    uintptr_t misses=*(volatile uint32_t *)(uintptr_t)0x806074u;
+    uintptr_t misses=em9305_ram_80605c.u32_806074;
     if (misses!=0u) {
-     uint32_t total=*(volatile uint8_t *)(uintptr_t)0x805ff0u;
+     uint32_t total=em9305_ram_805fdc.u8_805ff0;
      uintptr_t entry=misses+total-remaining;
      uint32_t count=*(volatile uint8_t *)entry;
      *(volatile uint8_t *)entry=(uint8_t)(count+1u);
@@ -1156,9 +1157,9 @@ uintptr_t opencfw_em9305_wsf_pool_allocate(uint32_t requested)
 /* Native0x313d98..0x313dfc: reverse pool search and free-list prepend. */
 uint32_t opencfw_em9305_wsf_pool_release(uintptr_t node)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805ff0u;
+ uint32_t count=em9305_ram_805fdc.u8_805ff0;
  if (count==0u) return (uint32_t)node;
- uint32_t base=*(volatile uint32_t *)(uintptr_t)0x805fe8u;
+ uint32_t base=em9305_ram_805fdc.u32_805fe8;
  uint32_t pool=base+(count<<4)-16u;
  uint32_t boundary;
  for (;;) {
@@ -1168,18 +1169,18 @@ uint32_t opencfw_em9305_wsf_pool_release(uintptr_t node)
   if (pool<base) return boundary;
  }
  (void)opencfw_em9305_wsf_critical_enter();
- uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t product=em9305_ram_805c5c.u32_805cac;
  *(volatile uint32_t *)(node+4u)=0xfaabd00du;
  uint32_t stats=*(volatile uint8_t *)(product+75u);
  if (stats!=0u) {
   uint32_t used=*(volatile uint8_t *)(uintptr_t)(pool+12u);
   *(volatile uint8_t *)(uintptr_t)(pool+12u)=(uint8_t)(used-1u);
  }
- uint32_t outstanding=*(volatile uint32_t *)(uintptr_t)0x806070u;
+ uint32_t outstanding=em9305_ram_80605c.u32_806070;
  uint32_t next=*(volatile uint32_t *)(uintptr_t)(pool+8u);
  *(volatile uint32_t *)(uintptr_t)(pool+8u)=(uint32_t)node;
  *(volatile uint32_t *)node=next;
- *(volatile uint32_t *)(uintptr_t)0x806070u=outstanding-1u;
+ em9305_ram_80605c.u32_806070=outstanding-1u;
  return opencfw_em9305_wsf_critical_exit();
 }
 /* Native0x314014..0x31401c: remove the eight-byte allocation header. */
@@ -1292,20 +1293,20 @@ uint32_t opencfw_em9305_wsf_wake_lower(uint32_t incoming)
  (void)incoming;
  uint32_t irq;
  irq = (uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
- uint32_t depth=*(volatile uint8_t *)(uintptr_t)0x801398u;
- *(volatile uint8_t *)(uintptr_t)0x801398u=(uint8_t)(depth+1u);
+ uint32_t depth=em9305_ram_801398.u8_801398;
+ em9305_ram_801398.u8_801398=(uint8_t)(depth+1u);
  __builtin_arc_seti((int)irq);
  uintptr_t event=QF_newX_(8u,0xffffu,8u);
- uintptr_t dispatch_table=*(volatile uint32_t *)(uintptr_t)0x80139cu;
+ uintptr_t dispatch_table=em9305_ram_80139c.u32_80139c;
  *(volatile uint32_t *)(event+4u)=0u;
  uintptr_t callback=*(volatile uint32_t *)(dispatch_table+12u);
- (void)((uint32_t (*)(uintptr_t,uintptr_t,uint32_t))callback)(0x80139cu,event,0xffffu);
+ (void)((uint32_t (*)(uintptr_t,uintptr_t,uint32_t))callback)((uintptr_t)&em9305_ram_80139c,event,0xffffu);
  irq = (uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
- depth=*(volatile uint8_t *)(uintptr_t)0x801398u;
+ depth=em9305_ram_801398.u8_801398;
  if (depth!=0u) {
-  depth=*(volatile uint8_t *)(uintptr_t)0x801398u;
+  depth=em9305_ram_801398.u8_801398;
   depth-=1u;
-  *(volatile uint8_t *)(uintptr_t)0x801398u=(uint8_t)depth;
+  em9305_ram_801398.u8_801398=(uint8_t)depth;
  }
  *(volatile uint32_t *)(uintptr_t)0xf00a80u=1u;
  __builtin_arc_seti((int)irq);
@@ -1316,12 +1317,12 @@ uint32_t opencfw_em9305_wsf_event_post(uint32_t handler,uint32_t events)
 {
  (void)opencfw_em9305_wsf_critical_enter();
  uint32_t index=handler&15u;
- uintptr_t cell=0x806034u+index*2u;
+ uintptr_t cell=((uintptr_t)&em9305_ram_806034 + index*2u);
  uint32_t bits=*(volatile uint16_t *)cell;
- uint32_t previous=*(volatile uint8_t *)(uintptr_t)0x80605cu;
+ uint32_t previous=em9305_ram_80605c.u8_80605c;
  bits|=events;
  *(volatile uint16_t *)cell=(uint16_t)bits;
- *(volatile uint8_t *)(uintptr_t)0x80605cu=(uint8_t)(previous|4u);
+ em9305_ram_80605c.u8_80605c=(uint8_t)(previous|4u);
  uint32_t result=opencfw_em9305_wsf_critical_exit();
  if (previous==0u) return opencfw_em9305_wsf_wake_lower(result);
  return result;
@@ -1331,14 +1332,14 @@ extern void opencfw_em9305_assert(uint32_t,uint32_t);
 /* wave27: QF_newX_ (0x311060), QMPool_get (0x31166c) and QMPool_init (0x3116f4) are the unmodified QP/C 6.5.1
  * qf_dyn.c / qf_mem.c compiled in qpc-port/ (verified equivalent to stock on the QEMU harness). */
 /* Native0x314250..0x314258: task-handler SRAM table address. */
-uintptr_t opencfw_em9305_wsf_task_handlers(void) { return 0x806054u; }
+uintptr_t opencfw_em9305_wsf_task_handlers(void) { return (uintptr_t)&em9305_ram_806054; }
 /* Native0x314258..0x31427c: events are incoming R1, not incoming R0. */
 uint32_t opencfw_em9305_wsf_task_event_post(uint32_t incoming,uint32_t events)
 {
  (void)incoming;
  (void)opencfw_em9305_wsf_critical_enter();
- uint32_t previous=*(volatile uint8_t *)(uintptr_t)0x80605cu;
- *(volatile uint8_t *)(uintptr_t)0x80605cu=(uint8_t)(events|previous);
+ uint32_t previous=em9305_ram_80605c.u8_80605c;
+ em9305_ram_80605c.u8_80605c=(uint8_t)(events|previous);
  uint32_t result=opencfw_em9305_wsf_critical_exit();
  if (previous==0u) return opencfw_em9305_wsf_wake_lower(result);
  return result;
@@ -1348,7 +1349,7 @@ uint32_t opencfw_em9305_wsf_task_event_post(uint32_t incoming,uint32_t events)
 uint32_t opencfw_em9305_wsf_timer_next(uintptr_t present)
 {
  (void)opencfw_em9305_wsf_critical_enter();
- uintptr_t timer=*(volatile uint32_t *)(uintptr_t)0x806078u;
+ uintptr_t timer=em9305_ram_80605c.u32_806078;
  uint32_t delta=0u;
  if (timer!=0u) {
   delta=*(volatile uint32_t *)(timer+8u);
@@ -1361,12 +1362,12 @@ uint32_t opencfw_em9305_wsf_timer_next(uintptr_t present)
 uintptr_t opencfw_em9305_wsf_timer_expired(void)
 {
  (void)opencfw_em9305_wsf_critical_enter();
- uintptr_t timer=*(volatile uint32_t *)(uintptr_t)0x806078u;
+ uintptr_t timer=em9305_ram_80605c.u32_806078;
  if (timer==0u || *(volatile uint32_t *)(timer+8u)!=0u) {
   (void)opencfw_em9305_wsf_critical_exit();
   return 0u;
  }
- (void)opencfw_em9305_wsf_queue_unlink(0x806078u,timer,0u);
+ (void)opencfw_em9305_wsf_queue_unlink(((uintptr_t)&em9305_ram_80605c + 0x1cu),timer,0u);
  *(volatile uint8_t *)(timer+13u)=0u;
  (void)opencfw_em9305_wsf_critical_exit();
  return timer;
@@ -1389,17 +1390,17 @@ uint32_t opencfw_em9305_wsf_scheduler_unlock(void)
 /* Native0x333e24..0x333e4c: pointer search, unlink and running-byte clear. */
 uint32_t opencfw_em9305_wsf_timer_stop_lower(uintptr_t timer)
 {
- uintptr_t previous=0u,current=*(volatile uint32_t *)(uintptr_t)0x806078u;
+ uintptr_t previous=0u,current=em9305_ram_80605c.u32_806078;
  while (current!=0u) {
   if (current==timer) {
-   uint32_t result=opencfw_em9305_wsf_queue_unlink(0x806078u,timer,previous);
+   uint32_t result=opencfw_em9305_wsf_queue_unlink(((uintptr_t)&em9305_ram_80605c + 0x1cu),timer,previous);
    *(volatile uint8_t *)(timer+13u)=0u;
    return result;
   }
   previous=current;
   current=*(volatile uint32_t *)current;
  }
- return 0x806078u;
+ return ((uintptr_t)&em9305_ram_80605c + 0x1cu);
 }
 
 /* Native0x333dcc..0x333e24: sorted timer insertion, equal deltas remain ordered. */
@@ -1408,7 +1409,7 @@ uint32_t opencfw_em9305_wsf_timer_start_ticks(uintptr_t timer,uint32_t ticks)
  (void)opencfw_em9305_wsf_critical_enter();
  if (*(volatile uint8_t *)(timer+13u)!=0u)
   (void)opencfw_em9305_wsf_timer_stop_lower(timer);
- uintptr_t current=*(volatile uint32_t *)(uintptr_t)0x806078u;
+ uintptr_t current=em9305_ram_80605c.u32_806078;
  *(volatile uint32_t *)(timer+8u)=ticks;
  *(volatile uint8_t *)(timer+13u)=1u;
  uintptr_t previous=0u;
@@ -1421,9 +1422,9 @@ uint32_t opencfw_em9305_wsf_timer_start_ticks(uintptr_t timer,uint32_t ticks)
   }
  } else {
   uint32_t now=opencfw_em9305_pal_current_time();
-  *(volatile uint32_t *)(uintptr_t)0x8019f4u=now;
+  em9305_ram_8019e8.u32_8019f4=now;
  }
- (void)opencfw_em9305_wsf_queue_insert(0x806078u,timer,previous);
+ (void)opencfw_em9305_wsf_queue_insert(((uintptr_t)&em9305_ram_80605c + 0x1cu),timer,previous);
  return opencfw_em9305_wsf_critical_exit();
 }
 /* Native0x3142f8..0x314304: wrapping rounding to ten-unit ticks. */
@@ -1436,7 +1437,7 @@ uint32_t opencfw_em9305_wsf_timer_start_ms(uintptr_t timer,uint32_t time)
 uint32_t opencfw_em9305_wsf_timer_update(uint32_t elapsed)
 {
  (void)opencfw_em9305_wsf_critical_enter();
- uintptr_t timer=*(volatile uint32_t *)(uintptr_t)0x806078u;
+ uintptr_t timer=em9305_ram_80605c.u32_806078;
  while (timer!=0u) {
   uint32_t pending=*(volatile uint32_t *)(timer+8u);
   if (elapsed<pending) *(volatile uint32_t *)(timer+8u)=pending-elapsed;
@@ -1463,21 +1464,21 @@ uint32_t opencfw_em9305_pal_alarm(uint32_t offset,uintptr_t callback)
  uint32_t now=*(volatile uint32_t *)(uintptr_t)0xf01808u;
  *(volatile uint32_t *)(uintptr_t)0xf01828u=offset+now;
  (void)opencfw_em9305_pal_timer_channel(3u,1u);
- *(volatile uint32_t *)(uintptr_t)0x805e74u=(uint32_t)callback;
- return 0x805e74u;
+ em9305_ram_805e6c.u32_805e74=(uint32_t)callback;
+ return (uintptr_t)&em9305_ram_805e6c.u32_805e74;
 }
 /* Native0x333e4c..0x333e9c: coarse elapsed update then next alarm.
  * Custom major6/minor1c products retain native opcode, native multiply retained. */
 uint32_t opencfw_em9305_wsf_timer_periodic(void)
 {
  uint32_t now=opencfw_em9305_pal_current_time();
- uint32_t previous=*(volatile uint32_t *)(uintptr_t)0x8019f4u;
+ uint32_t previous=em9305_ram_8019e8.u32_8019f4;
  uint32_t elapsed=opencfw_em9305_pal_elapsed(now,previous);
  if (elapsed>=11u) {
   uint32_t ticks=elapsed/10u;
   uint32_t step=opencfw_em9305_native_clock_product(ticks*10u,1000u);
-  previous=*(volatile uint32_t *)(uintptr_t)0x8019f4u;
-  *(volatile uint32_t *)(uintptr_t)0x8019f4u=step+previous;
+  previous=em9305_ram_8019e8.u32_8019f4;
+  em9305_ram_8019e8.u32_8019f4=step+previous;
   (void)opencfw_em9305_wsf_timer_update(ticks);
  }
  uint8_t present;
@@ -1518,16 +1519,16 @@ uint32_t opencfw_em9305_pal_timer_divisor(void)
 { return *(volatile uint8_t *)(uintptr_t)0xf01804u+1u; }
 /* Native0x3108f4..0x310900: product config read remains real SRAM. */
 uint32_t opencfw_em9305_pal_timer_configuration(void)
-{ return *(volatile uint32_t *)(uintptr_t)0x801998u; }
+{ return em9305_ram_801994.u32_801998; }
 
 /* Native0x310914..0x310944: repeated pointer reads and old-base byte stores. */
 uint32_t opencfw_em9305_pal_metadata_reset(void)
 {
- uintptr_t object=*(volatile uint32_t *)(uintptr_t)0x80fd2cu;
+ uintptr_t object=em9305_ram_80fd2c.u32_80fd2c;
  *(volatile uint32_t *)(object+76u)=2u;
- object=*(volatile uint32_t *)(uintptr_t)0x80fd2cu;
+ object=em9305_ram_80fd2c.u32_80fd2c;
  *(volatile uint32_t *)(object+4u)=0u;
- object=*(volatile uint32_t *)(uintptr_t)0x80fd2cu;
+ object=em9305_ram_80fd2c.u32_80fd2c;
  *(volatile uint32_t *)(object+68u)=0u;
  *(volatile uint8_t *)(uintptr_t)0xf01804u=0u;
  *(volatile uint8_t *)(uintptr_t)0xf01805u=1u;
@@ -1541,10 +1542,10 @@ uint32_t opencfw_em9305_pal_metadata_register(uintptr_t node)
  if (node==0u) return 0u;
  uint32_t irq;
  irq = (uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
- uintptr_t current=*(volatile uint32_t *)(uintptr_t)0x801998u;
+ uintptr_t current=em9305_ram_801994.u32_801998;
  if (current==0u) {
   *(volatile uint32_t *)(node+4u)=0u;
-  *(volatile uint32_t *)(uintptr_t)0x801998u=(uint32_t)node;
+  em9305_ram_801994.u32_801998=(uint32_t)node;
  } else {
   for (;;) {
    if (current==node) {
@@ -1570,10 +1571,10 @@ extern uint32_t opencfw_em9305_dispatch_331cdc(uintptr_t,uintptr_t,uintptr_t); /
 /* Native0x310798..0x3107dc: guarded transport restore and callback reinstall. */
 uint32_t opencfw_em9305_pal_resume_dispatch(void)
 {
- uint32_t state=*(volatile uint8_t *)(uintptr_t)0x805ed8u;
+ uint32_t state=em9305_ram_805e6c.u8_805ed8;
  if (state!=1u) return state;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- uint32_t mode=*(volatile uint8_t *)(uintptr_t)0x801864u;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
+ uint32_t mode=em9305_ram_801864.u8_801864;
  uint32_t second=*(volatile uint16_t *)(config+44u);
  uint32_t first=*(volatile uint16_t *)(config+38u);
  (void)opencfw_em9305_controller_transport_configure(mode,first,second);
@@ -1587,7 +1588,7 @@ uint32_t opencfw_em9305_pal_resume_dispatch(void)
 uint32_t opencfw_em9305_controller_transport_callbacks(uint32_t index,uintptr_t first,uintptr_t second,uintptr_t third)
 {
  if (index>4u) return index;
- uintptr_t row=0x801880u+index*12u;
+ uintptr_t row=((uintptr_t)&em9305_ram_801880 + index*12u);
  *(volatile uint32_t *)(row+8u)=(uint32_t)third;
  *(volatile uint32_t *)(row+4u)=(uint32_t)second;
  *(volatile uint32_t *)row=(uint32_t)first;
@@ -1596,7 +1597,7 @@ uint32_t opencfw_em9305_controller_transport_callbacks(uint32_t index,uintptr_t 
 /* Native0x3047f0..0x3047fc. */
 uint32_t opencfw_em9305_controller_transport_hook(uintptr_t callback)
 {
- *(volatile uint32_t *)(uintptr_t)0x80187cu=(uint32_t)callback;
+ em9305_ram_801864.u32_80187c=(uint32_t)callback;
  return (uint32_t)callback;
 }
 
@@ -1604,22 +1605,22 @@ uint32_t opencfw_em9305_controller_transport_hook(uintptr_t callback)
 uint32_t opencfw_em9305_controller_timer_irq(void)
 {
  *(volatile uint32_t *)(uintptr_t)0xf00a74u=3u;
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x80fe08u;
+ uintptr_t callback=em9305_ram_80fde0.u32_80fe08;
  if (callback!=0u) (void)((uint32_t (*)(uintptr_t))callback)(callback);
- callback=*(volatile uint32_t *)(uintptr_t)0x80fe04u;
+ callback=em9305_ram_80fde0.u32_80fe04;
  if (callback!=0u) (void)((uint32_t (*)(uintptr_t))callback)(callback);
- uintptr_t object=*(volatile uint32_t *)(uintptr_t)0x801090u;
+ uintptr_t object=em9305_ram_801090.u32_801090;
  if (object!=0u) {
   callback=*(volatile uint32_t *)(object+12u);
   if (callback!=0u) (void)((uint32_t (*)(uint32_t))callback)(0u);
  }
  uint32_t irq;
  irq = (uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
- uint32_t depth=*(volatile uint8_t *)(uintptr_t)0x801398u;
+ uint32_t depth=em9305_ram_801398.u8_801398;
  if (depth!=0u) {
-  depth=*(volatile uint8_t *)(uintptr_t)0x801398u;
+  depth=em9305_ram_801398.u8_801398;
   depth-=1u;
-  *(volatile uint8_t *)(uintptr_t)0x801398u=(uint8_t)depth;
+  em9305_ram_801398.u8_801398=(uint8_t)depth;
  }
  *(volatile uint32_t *)(uintptr_t)0xf00a80u=1u;
  __builtin_arc_seti((int)irq);
@@ -1661,13 +1662,13 @@ extern void opencfw_em9305_dispatch_3158e4(void); /*source callback ABI unqualif
  * Compilation does not qualify stack residue or indirect callback ABI. */
 uint32_t opencfw_em9305_controller_transport_configure(uint32_t handler,uint32_t first,uint32_t second)
 {
- (void)opencfw_em9305_memset((void *)(uintptr_t)0x801864u,0u,112u);
+ (void)opencfw_em9305_memset((void *)(uintptr_t)&em9305_ram_801864,0u,112u);
  volatile uint8_t record[16] __attribute__((aligned(4)));
  *(volatile uint32_t *)(record+8u)=1000000u;
  *(volatile uint32_t *)record=(uint32_t)(uintptr_t)&opencfw_em9305_controller_transport_state;
- *(volatile uint16_t *)(uintptr_t)0x801872u=(uint16_t)second;
- *(volatile uint16_t *)(uintptr_t)0x801870u=(uint16_t)first;
- *(volatile uint8_t *)(uintptr_t)0x801864u=(uint8_t)handler;
+ em9305_ram_801864.u16_801872=(uint16_t)second;
+ em9305_ram_801864.u16_801870=(uint16_t)first;
+ em9305_ram_801864.u8_801864=(uint8_t)handler;
  *(volatile uint32_t *)(record+4u)=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3158e4;
  record[12]=1u;
  uint32_t result=opencfw_em9305_pal_transport_initialize(1u,(uintptr_t)record);
@@ -1681,17 +1682,17 @@ uint32_t opencfw_em9305_controller_transport_configure(uint32_t handler,uint32_t
 uint32_t opencfw_em9305_pal_transport_initialize(uint32_t selector,uintptr_t record)
 {
  uint32_t index=selector-1u;
- uintptr_t destination=index<2u?0x805edcu:4u;
+ uintptr_t destination=index<2u?(uintptr_t)&em9305_ram_805edc:4u;
  (void)opencfw_em9305_memcpy((void *)destination,(const void *)record,16u);
- uintptr_t state=(uint8_t)index<2u?0x805ed8u:0u;
+ uintptr_t state=(uint8_t)index<2u?((uintptr_t)&em9305_ram_805e6c + 0x6cu):0u;
  *(volatile uint8_t *)state=1u;
- return opencfw_em9305_pal_metadata_register(0x8012f0u);
+ return opencfw_em9305_pal_metadata_register(((uintptr_t)&em9305_ram_8012c0 + 0x30u));
 }
 
 /* Native0x31585c..0x31586c: optional transport error hook. */
 uint32_t opencfw_em9305_controller_transport_error(uint32_t error)
 {
- uintptr_t hook=*(volatile uint32_t *)(uintptr_t)0x80187cu;
+ uintptr_t hook=em9305_ram_801864.u32_80187c;
  if (hook==0u) return error;
  return ((uint32_t (*)(uint32_t))hook)(error);
 }
@@ -1699,8 +1700,8 @@ uint32_t opencfw_em9305_controller_transport_error(uint32_t error)
 uint32_t opencfw_em9305_controller_transport_count(uint32_t type)
 {
  uintptr_t address;
- if (type==0u) address=0x801874u;
- else if (type==2u) address=0x801878u;
+ if (type==0u) address=((uintptr_t)&em9305_ram_801864 + 0x10u);
+ else if (type==2u) address=((uintptr_t)&em9305_ram_801864 + 0x14u);
  else return type;
  uint32_t count=*(volatile uint32_t *)address+1u;
  *(volatile uint32_t *)address=count;
@@ -1713,7 +1714,7 @@ uint32_t opencfw_em9305_controller_transport_deliver(uint32_t index,uint32_t typ
 {
  (void)opencfw_em9305_controller_transport_count(type);
  uintptr_t callback=0u;
- if (index<5u) callback=*(volatile uint32_t *)(uintptr_t)(0x801880u+index*12u);
+ if (index<5u) callback=*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_801880 + index*12u);
  if (callback!=0u) return ((uint32_t (*)(uint32_t,uintptr_t))callback)(type,packet);
  return opencfw_em9305_wsf_event_release(packet);
 }
@@ -1721,7 +1722,7 @@ uint32_t opencfw_em9305_controller_transport_deliver(uint32_t index,uint32_t typ
 /* Native0x3158bc..0x3158e4: completed transmit callback then task event. */
 uint32_t opencfw_em9305_controller_transport_complete(void)
 {
- uintptr_t object=0x801864u;
+ uintptr_t object=(uintptr_t)&em9305_ram_801864;
  uint32_t slot=*(volatile uint8_t *)(object+9u);
  uintptr_t packet=*(volatile uint32_t *)(object+4u);
  *(volatile uint32_t *)(object+4u)=0u;
@@ -1736,7 +1737,7 @@ extern uint32_t opencfw_em9305_pal_transport_write(uint32_t,uintptr_t,uint32_t);
  * Signed MIN precedes low-halfword extraction even for malformed offsets. */
 void opencfw_em9305_dispatch_3158e4(void)
 {
- uintptr_t object=0x8018ccu;
+ uintptr_t object=((uintptr_t)&em9305_ram_8018bc + 0x10u);
  uint32_t offset=*(volatile uint16_t *)object;
  uint32_t total=*(volatile uint16_t *)(object+2u);
  int32_t difference=(int32_t)total-(int32_t)offset;
@@ -1771,8 +1772,8 @@ uint32_t opencfw_em9305_pal_transport_completion(uint32_t event,uintptr_t record
 uint32_t opencfw_em9305_pal_transport_write(uint32_t selector,uintptr_t data,uint32_t bytes)
 {
  uint32_t index=selector-1u;
- uintptr_t record=index<2u?0x805ed8u:0u;
- uintptr_t object=*(volatile uint32_t *)(uintptr_t)0x801090u;
+ uintptr_t record=index<2u?((uintptr_t)&em9305_ram_805e6c + 0x6cu):0u;
+ uintptr_t object=em9305_ram_801090.u32_801090;
  *(volatile uint8_t *)record=2u;
  if (object==0u) return index;
  uintptr_t callback=*(volatile uint32_t *)(object+4u);
@@ -1788,7 +1789,7 @@ extern uint32_t opencfw_em9305_pal_transport_read(uint32_t,uintptr_t,uint32_t); 
 uint32_t opencfw_em9305_controller_transport_state(uint32_t incoming)
 {
  (void)incoming;
- uintptr_t object=0x8018bcu,buffer=0u;
+ uintptr_t object=(uintptr_t)&em9305_ram_8018bc,buffer=0u;
  uint32_t amount=0u,state=*(volatile uint8_t *)object;
  uint32_t header=0u,length=0u,type=0u;
  if (state==1u) {
@@ -1808,14 +1809,14 @@ uint32_t opencfw_em9305_controller_transport_state(uint32_t incoming)
   } else if (type==1u) {
    length=*(volatile uint8_t *)(object+4u);buffer=length;
   } else if (type==2u) {
-   length=((uint32_t)*(volatile uint8_t *)(uintptr_t)0x8018c1u<<8u)+*(volatile uint8_t *)(uintptr_t)0x8018c0u;
-   uint32_t limit=*(volatile uint16_t *)(uintptr_t)0x801870u;
+   length=((uint32_t)em9305_ram_8018bc.u8_8018c1<<8u)+em9305_ram_8018bc.u8_8018c0;
+   uint32_t limit=em9305_ram_801864.u16_801870;
    buffer=limit+4u;
    if (limit<(uint16_t)length) goto limit_error;
    header=4u;
   } else if (type==5u) {
-   length=(((uint32_t)*(volatile uint8_t *)(uintptr_t)0x8018c1u<<8u)+*(volatile uint8_t *)(uintptr_t)0x8018c0u)&0x3fffu;
-   uint32_t limit=*(volatile uint16_t *)(uintptr_t)0x801872u;
+   length=(((uint32_t)em9305_ram_8018bc.u8_8018c1<<8u)+em9305_ram_8018bc.u8_8018c0)&0x3fffu;
+   uint32_t limit=em9305_ram_801864.u16_801872;
    buffer=limit+12u;
    if (limit+8u<length) goto limit_error;
    header=4u;
@@ -1876,8 +1877,8 @@ limit_error:;
 uint32_t opencfw_em9305_pal_transport_read(uint32_t selector,uintptr_t data,uint32_t bytes)
 {
  uint32_t index=selector-1u;
- uintptr_t record=index<2u?0x805ed8u:0u;
- uintptr_t object=*(volatile uint32_t *)(uintptr_t)0x801090u;
+ uintptr_t record=index<2u?((uintptr_t)&em9305_ram_805e6c + 0x6cu):0u;
+ uintptr_t object=em9305_ram_801090.u32_801090;
  if (object==0u) return index;
  uintptr_t callback=*(volatile uint32_t *)(object+8u);
  if (callback==0u) return index;
@@ -1890,7 +1891,7 @@ uint32_t opencfw_em9305_pal_transport_read(uint32_t selector,uintptr_t data,uint
 uint32_t opencfw_em9305_controller_transport_poll(uint32_t incoming)
 {
  (void)incoming;
- uintptr_t object=0x801864u;
+ uintptr_t object=(uintptr_t)&em9305_ram_801864;
  uint32_t busy=*(volatile uint32_t *)(object+4u);
  if (busy!=0u) return busy;
  uint32_t slot=*(volatile uint8_t *)(object+9u);
@@ -1920,10 +1921,10 @@ uint32_t opencfw_em9305_controller_transport_poll(uint32_t incoming)
   else if (classification==1u) indicator=2u;
   else indicator=5u;
   *(volatile uint8_t *)(data-1u)=indicator;
-  uint32_t bytes=*(volatile uint16_t *)(uintptr_t)0x8018ceu;
-  *(volatile uint32_t *)(uintptr_t)0x8018d0u=(uint32_t)(data-1u);
+  uint32_t bytes=em9305_ram_8018bc.u16_8018ce;
+  em9305_ram_8018bc.u32_8018d0=(uint32_t)(data-1u);
   if (bytes>255u) bytes=255u;
-  *(volatile uint16_t *)(uintptr_t)0x8018ccu=(uint16_t)bytes;
+  em9305_ram_8018bc.u16_8018cc=(uint16_t)bytes;
   (void)opencfw_em9305_pal_transport_write(1u,data-1u,bytes);
   return 0u;
  }
@@ -1932,13 +1933,13 @@ uint32_t opencfw_em9305_controller_transport_poll(uint32_t incoming)
 /* Native0x3047b0..0x3047c0: receive idle-state query. */
 uint32_t opencfw_em9305_controller_transport_idle(void)
 {
- return *(volatile uint8_t *)(uintptr_t)0x8018bcu==1u;
+ return em9305_ram_8018bc.u8_8018bc==1u;
 }
 /* Native0x3047c0..0x3047d4: LL event producer kick. */
 uint32_t opencfw_em9305_ll_event_kick(uint32_t incoming)
 {
  (void)incoming;
- uint32_t busy=*(volatile uint32_t *)(uintptr_t)0x801868u;
+ uint32_t busy=em9305_ram_801864.u32_801868;
  if (busy!=0u) return busy;
  return opencfw_em9305_controller_transport_poll(0u);
 }
@@ -1963,74 +1964,74 @@ extern uint32_t opencfw_em9305_dispatch_3324e0(uintptr_t,uintptr_t); /*0x3324e0*
 extern uint32_t opencfw_em9305_dispatch_3327f4(uintptr_t); /* native packet ABI */
 uint32_t opencfw_em9305_ll_callback_pair(uintptr_t first,uintptr_t second)
 {
- *(volatile uint32_t *)(uintptr_t)0x805b14u=(uint32_t)second;
- *(volatile uint32_t *)(uintptr_t)0x805b10u=(uint32_t)first;
+ em9305_ram_805af0.u32_805b14=(uint32_t)second;
+ em9305_ram_805af0.u32_805b10=(uint32_t)first;
  return (uint32_t)first;
 }
 /* Native0x30a7bc. */
 uint32_t opencfw_em9305_ll_seed_30a7bc(void)
 {
  (void)opencfw_em9305_ll_callback_pair((uintptr_t)&opencfw_em9305_dispatch_32e3e0,(uintptr_t)&opencfw_em9305_dispatch_32e3bc);
- if (*(volatile uint32_t *)(uintptr_t)0x805730u==0u) {
-  *(volatile uint32_t *)(uintptr_t)0x805730u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32ef10;
-  *(volatile uint32_t *)(uintptr_t)0x8057c0u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32f0a0;
+ if (em9305_ram_805688.u32_805730==0u) {
+  em9305_ram_805688.u32_805730=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32ef10;
+  em9305_ram_8057a8.u32_8057c0=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32f0a0;
  }
- *(volatile uint32_t *)(uintptr_t)0x8058d0u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331a8c;
- return 0x8058d0u;
+ em9305_ram_8058c8.u32_8058d0=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331a8c;
+ return ((uintptr_t)&em9305_ram_8058c8 + 0x8u);
 }
 /* Native0x30a800. */
 uint32_t opencfw_em9305_ll_seed_30a800(void)
 {
  (void)opencfw_em9305_ll_callback_pair((uintptr_t)&opencfw_em9305_dispatch_32e3e0,(uintptr_t)&opencfw_em9305_dispatch_32e3bc);
- *(volatile uint32_t *)(uintptr_t)0x8057c0u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3304f0;
- *(volatile uint32_t *)(uintptr_t)0x805730u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330440;
- *(volatile uint32_t *)(uintptr_t)0x8058d0u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331a8c;
- return 0x8058d0u;
+ em9305_ram_8057a8.u32_8057c0=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3304f0;
+ em9305_ram_805688.u32_805730=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330440;
+ em9305_ram_8058c8.u32_8058d0=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331a8c;
+ return ((uintptr_t)&em9305_ram_8058c8 + 0x8u);
 }
 /* Native0x30a860. */
 uint32_t opencfw_em9305_ll_seed_30a860(void)
 {
- if (*(volatile uint32_t *)(uintptr_t)0x805738u==0u) {
-  *(volatile uint32_t *)(uintptr_t)0x805738u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_332278;
-  *(volatile uint32_t *)(uintptr_t)0x8057c8u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_332394;
+ if (em9305_ram_805688.u32_805738==0u) {
+  em9305_ram_805688.u32_805738=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_332278;
+  em9305_ram_8057a8.u32_8057c8=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_332394;
  }
- return 0x805738u;
+ return ((uintptr_t)&em9305_ram_805688 + 0xb0u);
 }
 /* Native0x30a884. */
 uint32_t opencfw_em9305_ll_seed_30a884(void)
 {
- if (*(volatile uint32_t *)(uintptr_t)0x80572cu==0u) {
-  *(volatile uint32_t *)(uintptr_t)0x80572cu=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32f64c;
-  *(volatile uint32_t *)(uintptr_t)0x8057bcu=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32f70c;
+ if (em9305_ram_805688.u32_80572c==0u) {
+  em9305_ram_805688.u32_80572c=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32f64c;
+  em9305_ram_8057a8.u32_8057bc=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32f70c;
  }
- return 0x80572cu;
+ return ((uintptr_t)&em9305_ram_805688 + 0xa4u);
 }
 /* Native0x30a8a8. */
 uint32_t opencfw_em9305_ll_seed_30a8a8(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057dcu=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3327f4;
- *(volatile uint32_t *)(uintptr_t)0x80574cu=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3324e0;
- *(volatile uint32_t *)(uintptr_t)0x805750u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3324e0;
- *(volatile uint32_t *)(uintptr_t)0x8057e0u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3327f4;
- return 0x80574cu;
+ em9305_ram_8057a8.u32_8057dc=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3327f4;
+ em9305_ram_805688.u32_80574c=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3324e0;
+ em9305_ram_805688.u32_805750=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3324e0;
+ em9305_ram_8057a8.u32_8057e0=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3327f4;
+ return ((uintptr_t)&em9305_ram_805688 + 0xc4u);
 }
 /* Native0x30a8cc. */
 uint32_t opencfw_em9305_ll_seed_30a8cc(void)
 {
  (void)opencfw_em9305_ll_callback_pair((uintptr_t)&opencfw_em9305_dispatch_32e3e0,(uintptr_t)&opencfw_em9305_dispatch_32e3bc);
- *(volatile uint32_t *)(uintptr_t)0x8057c0u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3304f0;
- *(volatile uint32_t *)(uintptr_t)0x805730u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3305b0;
- *(volatile uint32_t *)(uintptr_t)0x8058d0u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331a8c;
- return 0x8058d0u;
+ em9305_ram_8057a8.u32_8057c0=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3304f0;
+ em9305_ram_805688.u32_805730=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3305b0;
+ em9305_ram_8058c8.u32_8058d0=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331a8c;
+ return ((uintptr_t)&em9305_ram_8058c8 + 0x8u);
 }
 /* Native0x30a90c. */
 uint32_t opencfw_em9305_ll_seed_30a90c(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057d0u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330848;
- *(volatile uint32_t *)(uintptr_t)0x805740u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330664;
- *(volatile uint32_t *)(uintptr_t)0x805744u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330664;
- *(volatile uint32_t *)(uintptr_t)0x8057d4u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330848;
- return 0x805740u;
+ em9305_ram_8057a8.u32_8057d0=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330848;
+ em9305_ram_805688.u32_805740=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330664;
+ em9305_ram_805688.u32_805744=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330664;
+ em9305_ram_8057a8.u32_8057d4=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330848;
+ return ((uintptr_t)&em9305_ram_805688 + 0xb8u);
 }
 
 /* Native0x30c078..0x30c094: register the LL poll handler and configure transport. */
@@ -2065,78 +2066,78 @@ extern uint32_t opencfw_em9305_dispatch_331b3c(uintptr_t); /*0x331b3c*/
 /* Native0x30ad80. */
 uint32_t opencfw_em9305_ll_seed_30ad80(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057b0u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331334;
- *(volatile uint32_t *)(uintptr_t)0x80571cu=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32e4c4;
- return 0x80571cu;
+ em9305_ram_8057a8.u32_8057b0=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331334;
+ em9305_ram_805688.u32_80571c=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32e4c4;
+ return ((uintptr_t)&em9305_ram_805688 + 0x94u);
 }
 /* Native0x30ada0. */
 uint32_t opencfw_em9305_ll_seed_30ada0(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057b0u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331334;
- *(volatile uint32_t *)(uintptr_t)0x805720u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331204;
- return 0x805720u;
+ em9305_ram_8057a8.u32_8057b0=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331334;
+ em9305_ram_805688.u32_805720=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331204;
+ return ((uintptr_t)&em9305_ram_805688 + 0x98u);
 }
 /* Native0x30adc0. */
 uint32_t opencfw_em9305_ll_seed_30adc0(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057e8u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331814;
- *(volatile uint32_t *)(uintptr_t)0x805758u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3316e0;
- return 0x805758u;
+ em9305_ram_8057a8.u32_8057e8=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331814;
+ em9305_ram_805688.u32_805758=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3316e0;
+ return ((uintptr_t)&em9305_ram_805688 + 0xd0u);
 }
 /* Native0x30ae24. */
 uint32_t opencfw_em9305_ll_seed_30ae24(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057b4u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3319bc;
- *(volatile uint32_t *)(uintptr_t)0x805724u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_33194c;
- return 0x805724u;
+ em9305_ram_8057a8.u32_8057b4=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_3319bc;
+ em9305_ram_805688.u32_805724=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_33194c;
+ return ((uintptr_t)&em9305_ram_805688 + 0x9cu);
 }
 /* Native0x30ae50. */
 uint32_t opencfw_em9305_ll_seed_30ae50(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057e4u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331b3c;
- *(volatile uint32_t *)(uintptr_t)0x805754u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331aec;
- return 0x805754u;
+ em9305_ram_8057a8.u32_8057e4=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331b3c;
+ em9305_ram_805688.u32_805754=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331aec;
+ return ((uintptr_t)&em9305_ram_805688 + 0xccu);
 }
 /* Native0x30ae70. */
 uint32_t opencfw_em9305_ll_seed_30ae70(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x8057ccu=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330ce0;
- *(volatile uint32_t *)(uintptr_t)0x80573cu=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330c60;
- return 0x80573cu;
+ em9305_ram_8057a8.u32_8057cc=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330ce0;
+ em9305_ram_805688.u32_80573c=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330c60;
+ return ((uintptr_t)&em9305_ram_805688 + 0xb4u);
 }
 /* Native0x30ad58..0x30ad80: capability gate before callback installation. */
 uint32_t opencfw_em9305_ll_seed_30ad58(void)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t capability=*(volatile uint8_t *)(config+4u);
  if (capability<10u) return capability;
- *(volatile uint32_t *)(uintptr_t)0x8057f0u=0u;
- *(volatile uint32_t *)(uintptr_t)0x805760u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330fa0;
- return 0x805760u;
+ em9305_ram_8057a8.u32_8057f0=0u;
+ em9305_ram_805688.u32_805760=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_330fa0;
+ return ((uintptr_t)&em9305_ram_805688 + 0xd8u);
 }
 /* Native0x30ade0..0x30ae04: preserve installed provider. */
 uint32_t opencfw_em9305_ll_seed_30ade0(void)
 {
- if (*(volatile uint32_t *)(uintptr_t)0x80578cu==0u) {
-  *(volatile uint32_t *)(uintptr_t)0x80578cu=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331074;
-  *(volatile uint32_t *)(uintptr_t)0x80581cu=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331100;
+ if (em9305_ram_80578c.u32_80578c==0u) {
+  em9305_ram_80578c.u32_80578c=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331074;
+  em9305_ram_80581c.u32_80581c=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331100;
  }
- return 0x80578cu;
+ return (uintptr_t)&em9305_ram_80578c;
 }
 /* Native0x30ae04..0x30ae24: R0 returns the original provider value. */
 uint32_t opencfw_em9305_ll_seed_30ae04(void)
 {
- uint32_t installed=*(volatile uint32_t *)(uintptr_t)0x805724u;
+ uint32_t installed=em9305_ram_805688.u32_805724;
  if (installed==0u) {
-  *(volatile uint32_t *)(uintptr_t)0x8057b4u=0u;
-  *(volatile uint32_t *)(uintptr_t)0x805724u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331868;
+  em9305_ram_8057a8.u32_8057b4=0u;
+  em9305_ram_805688.u32_805724=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331868;
  }
  return installed;
 }
 /* Native0x30ae44..0x30ae50. */
 uint32_t opencfw_em9305_ll_event_callback_set(uintptr_t callback)
 {
- *(volatile uint32_t *)(uintptr_t)0x805880u=(uint32_t)callback;
+ em9305_ram_805880.u32_805880=(uint32_t)callback;
  return (uint32_t)callback;
 }
 
@@ -2146,7 +2147,7 @@ extern uint32_t opencfw_em9305_ll_dispatch_initialize(uint32_t); /*0x331ac0*/
 /* Native0x30b6c0..0x30b6cc. */
 uint32_t opencfw_em9305_ll_dispatch_callback_set(uintptr_t callback)
 {
- *(volatile uint32_t *)(uintptr_t)0x805b0cu=(uint32_t)callback;
+ em9305_ram_805af0.u32_805b0c=(uint32_t)callback;
  return (uint32_t)callback;
 }
 /* Native0x30ac6c..0x30acc4: initialize dispatch records and transport hooks. */
@@ -2157,9 +2158,9 @@ uint32_t opencfw_em9305_ll_dispatch_records_initialize(uint32_t handler)
   (uintptr_t)&opencfw_em9305_dispatch_331c20,
   (uintptr_t)&opencfw_em9305_dispatch_331cdc);
  (void)opencfw_em9305_controller_transport_hook((uintptr_t)&opencfw_em9305_dispatch_331cbc);
- (void)opencfw_em9305_memset((void *)(uintptr_t)0x80585cu,0u,108u);
- *(volatile uint8_t *)(uintptr_t)0x80585cu=(uint8_t)handler;
- (void)opencfw_em9305_memset((void *)(uintptr_t)0x8056e8u,0u,52u);
+ (void)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_805838 + 0x24u),0u,108u);
+ em9305_ram_805838.u8_80585c=(uint8_t)handler;
+ (void)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_805688 + 0x60u),0u,52u);
  uint32_t result=opencfw_em9305_ll_dispatch_callback_set((uintptr_t)&opencfw_em9305_dispatch_32fe3c);
  return opencfw_em9305_ll_dispatch_initialize(result);
 }
@@ -2173,26 +2174,26 @@ extern uint32_t opencfw_em9305_dispatch_32fc88(void); /*0x32fc88*/
 uint32_t opencfw_em9305_ll_dispatch_active(uint32_t active)
 {
  uint32_t selected=active!=0u;
- *(volatile uint8_t *)(uintptr_t)0x805aafu=(uint8_t)selected;
+ em9305_ram_805a6c.u8_805aaf=(uint8_t)selected;
  return selected;
 }
 /* Native0x30c2c8..0x30c2d4. */
 uint32_t opencfw_em9305_ll_auxiliary_pair(uintptr_t first,uintptr_t second)
 {
- *(volatile uint32_t *)(uintptr_t)0x805b3cu=(uint32_t)second;
- *(volatile uint32_t *)(uintptr_t)0x805b38u=(uint32_t)first;
+ em9305_ram_805af0.u32_805b3c=(uint32_t)second;
+ em9305_ram_805af0.u32_805b38=(uint32_t)first;
  return (uint32_t)first;
 }
 /* Native0x30acc4..0x30ad20. */
 uint32_t opencfw_em9305_ll_seed_30acc4(void)
 {
  (void)opencfw_em9305_ll_auxiliary_pair((uintptr_t)&opencfw_em9305_dispatch_32fccc,(uintptr_t)&opencfw_em9305_dispatch_32fc8c);
- *(volatile uint32_t *)(uintptr_t)0x8058c8u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331abc;
- *(volatile uint32_t *)(uintptr_t)0x8058d4u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331aa4;
- *(volatile uint32_t *)(uintptr_t)0x805858u=(uint32_t)(uintptr_t)&opencfw_em9305_ll_dispatch_active;
- *(volatile uint32_t *)(uintptr_t)0x805728u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32f85c;
- *(volatile uint32_t *)(uintptr_t)0x8057b8u=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32fc88;
- return 0x8057b8u;
+ em9305_ram_8058c8.u32_8058c8=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331abc;
+ em9305_ram_8058c8.u32_8058d4=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_331aa4;
+ em9305_ram_805838.u32_805858=(uint32_t)(uintptr_t)&opencfw_em9305_ll_dispatch_active;
+ em9305_ram_805688.u32_805728=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32f85c;
+ em9305_ram_8057a8.u32_8057b8=(uint32_t)(uintptr_t)&opencfw_em9305_dispatch_32fc88;
+ return ((uintptr_t)&em9305_ram_8057a8 + 0x10u);
 }
 /* Native0x30ad20..0x30ad30. */
 uint32_t opencfw_em9305_ll_pack_typed_halfword(uintptr_t destination,uint32_t value)
@@ -2225,7 +2226,7 @@ uint32_t opencfw_em9305_ll_pack_halfword_secondary(uintptr_t destination,uint32_
  * This is a typed native field projection, not an embedded executable/data blob. */
 uint32_t opencfw_em9305_ll_features_initialize(void)
 {
- uintptr_t out=0x805885u,providers=0x80571cu,feature=0x8058a7u;
+ uintptr_t out=((uintptr_t)&em9305_ram_805838 + 0x4du),providers=((uintptr_t)&em9305_ram_805688 + 0x94u),feature=((uintptr_t)&em9305_ram_805838 + 0x6fu);
  (void)opencfw_em9305_memset((void *)out,0u,64u);
  *(volatile uint16_t *)(out+27u)=0x7883u;
  uint32_t primary=*(volatile uint32_t *)(providers+20u);
@@ -2397,7 +2398,7 @@ uint32_t opencfw_em9305_ll_handler(uint32_t events,uint32_t handler)
  if ((events&16u)!=0u) {
   volatile uint8_t queued_handler;
   for (;;) {
-   uintptr_t message=opencfw_em9305_wsf_event_remove(0x805878u,(uintptr_t)&queued_handler);
+   uintptr_t message=opencfw_em9305_wsf_event_remove(((uintptr_t)&em9305_ram_805838 + 0x40u),(uintptr_t)&queued_handler);
    if (message==0u) break;
    (void)opencfw_em9305_ll_received_event(message);
   }
@@ -2415,7 +2416,7 @@ extern uint32_t opencfw_em9305_ll_received_event_active(uintptr_t); /*0x30a564*/
 /* Native0x30cd80..0x30cd94: ownership-aware received-message routing. */
 uint32_t opencfw_em9305_ll_received_event(uintptr_t message)
 {
- if (*(volatile uint8_t *)(uintptr_t)0x805adcu!=0u)
+ if (em9305_ram_805a6c.u8_805adc!=0u)
   return opencfw_em9305_ll_received_event_active(message);
  return opencfw_em9305_wsf_event_release(message);
 }
@@ -2432,7 +2433,7 @@ uint32_t opencfw_em9305_ll_handler_lower(uint32_t events,uint32_t handler)
  if ((events&1u)!=0u) {
   volatile uint8_t queued_handler;
   for (;;) {
-   uintptr_t message=opencfw_em9305_wsf_event_remove(0x805860u,(uintptr_t)&queued_handler);
+   uintptr_t message=opencfw_em9305_wsf_event_remove(((uintptr_t)&em9305_ram_805838 + 0x28u),(uintptr_t)&queued_handler);
    result=(uint32_t)message;
    if (message==0u) break;
    result=opencfw_em9305_ll_queued_event(message);
@@ -2441,7 +2442,7 @@ uint32_t opencfw_em9305_ll_handler_lower(uint32_t events,uint32_t handler)
  if ((events&2u)!=0u) {
   volatile uint8_t queued_handler;
   for (;;) {
-   uintptr_t message=opencfw_em9305_wsf_event_remove(0x805868u,(uintptr_t)&queued_handler);
+   uintptr_t message=opencfw_em9305_wsf_event_remove(((uintptr_t)&em9305_ram_805838 + 0x30u),(uintptr_t)&queued_handler);
    result=(uint32_t)message;
    if (message==0u) break;
    uint32_t high=*(volatile uint8_t *)(message+1u);
@@ -2455,7 +2456,7 @@ uint32_t opencfw_em9305_ll_handler_lower(uint32_t events,uint32_t handler)
    uint32_t accepted=opencfw_em9305_ll_command_primary((uintptr_t)command,parameters);
    if (accepted==0u) {
     for (uint32_t index=0u;index<35u;index++) {
-     uintptr_t callback=*(volatile uint32_t *)(uintptr_t)(0x80571cu+index*4u);
+     uintptr_t callback=*(volatile uint32_t *)(uintptr_t)(((uintptr_t)&em9305_ram_805688 + 0x94u) + index*4u);
      if (callback!=0u) {
       accepted=((uint32_t (*)(uintptr_t,uintptr_t))callback)((uintptr_t)command,parameters);
       if (accepted!=0u) break;
@@ -2479,9 +2480,9 @@ uint32_t opencfw_em9305_ll_handler_lower(uint32_t events,uint32_t handler)
  }
  result=0u; /* Native delay slot even when event bit2 is clear. */
  if ((events&4u)!=0u) {
-  *(volatile uint8_t *)(uintptr_t)0x805884u=0u;
+  em9305_ram_805880.u8_805884=0u;
   result=opencfw_em9305_ll_event_kick(0u);
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805880u;
+  uintptr_t callback=em9305_ram_805880.u32_805880;
   result=(uint32_t)callback;
   if (callback!=0u) result=((uint32_t (*)(uintptr_t))callback)(callback);
  }
@@ -2490,7 +2491,7 @@ uint32_t opencfw_em9305_ll_handler_lower(uint32_t events,uint32_t handler)
   uintptr_t payload=opencfw_em9305_ll_event_allocate(16u,1u);
   result=(uint32_t)payload;
   if (payload!=0u) {
-   uint32_t value=*(volatile uint8_t *)(uintptr_t)0x805701u;
+   uint32_t value=em9305_ram_805688.u8_805701;
    *(volatile uint8_t *)payload=(uint8_t)value;
    result=opencfw_em9305_ll_event_send(payload-2u);
   }
@@ -2500,8 +2501,8 @@ uint32_t opencfw_em9305_ll_handler_lower(uint32_t events,uint32_t handler)
   if (result!=0u) {
    uint32_t now=opencfw_em9305_pal_current_time();
    result=opencfw_em9305_pal_elapsed_raw(now,previous);
-   uint32_t maximum=*(volatile uint16_t *)(uintptr_t)0x805838u;
-   if (maximum<result) *(volatile uint16_t *)(uintptr_t)0x805838u=(uint16_t)result;
+   uint32_t maximum=em9305_ram_805838.u16_805838;
+   if (maximum<result) em9305_ram_805838.u16_805838=(uint16_t)result;
   }
  }
  return result;
@@ -2511,7 +2512,7 @@ extern uint32_t opencfw_em9305_ll_queued_event_active(uintptr_t); /*0x30a484*/
 /* Native0x30cd6c..0x30cd80: queue message release or active processing. */
 uint32_t opencfw_em9305_ll_queued_event(uintptr_t message)
 {
- if (*(volatile uint8_t *)(uintptr_t)0x805ab4u!=0u)
+ if (em9305_ram_805a6c.u8_805ab4!=0u)
   return opencfw_em9305_ll_queued_event_active(message);
  return opencfw_em9305_wsf_event_release(message);
 }
@@ -2519,7 +2520,7 @@ uint32_t opencfw_em9305_ll_queued_event(uintptr_t message)
 /* Native0x303fac..0x303fb8: retain the base configuration pointer. */
 uint32_t opencfw_em9305_ll_memory_configuration_set(uintptr_t configuration)
 {
- *(volatile uint32_t *)(uintptr_t)0x805c18u=(uint32_t)configuration;
+ em9305_ram_805be0.u32_805c18=(uint32_t)configuration;
  return (uint32_t)configuration;
 }
 extern uint32_t opencfw_em9305_ll_memory_3033c0(uint32_t,uintptr_t,uint32_t);
@@ -2539,7 +2540,7 @@ uint32_t opencfw_em9305_ll_base_memory_initialize(uintptr_t configuration,uint32
 /* Native0x30c1c8..0x30c1d4: install the LL capability/configuration object. */
 uint32_t opencfw_em9305_ll_configuration_set(uintptr_t configuration)
 {
- *(volatile uint32_t *)(uintptr_t)0x805cacu=(uint32_t)configuration;
+ em9305_ram_805c5c.u32_805cac=(uint32_t)configuration;
  return (uint32_t)configuration;
 }
 extern uint32_t opencfw_em9305_ll_memory_307158(uintptr_t,uint32_t);
@@ -2627,38 +2628,38 @@ uint32_t opencfw_em9305_controller_ll_init(uintptr_t descriptor)
 /* Native0x303340. */
 uint32_t opencfw_em9305_ll_memory_303340(uint32_t count,uintptr_t base,uint32_t available)
 {
- *(volatile uint8_t *)(uintptr_t)0x80160au=0u;
- *(volatile uint8_t *)(uintptr_t)0x80160bu=0u;
+ em9305_ram_801608.u8_80160a=0u;
+ em9305_ram_801608.u8_80160b=0u;
  uint32_t aligned=opencfw_em9305_controller_align_pointer((uint32_t)base);
  uint32_t required=aligned+count*12u-(uint32_t)base;
- *(volatile uint32_t *)(uintptr_t)0x805bfcu=aligned;
+ em9305_ram_805be0.u32_805bfc=aligned;
  if (available<required) return 0u;
- *(volatile uint8_t *)(uintptr_t)0x80160bu=(uint8_t)count;
+ em9305_ram_801608.u8_80160b=(uint8_t)count;
  return (uint16_t)required;
 }
 /* Native0x303380. */
 uint32_t opencfw_em9305_ll_memory_303380(uint32_t count,uintptr_t base,uint32_t available)
 {
- *(volatile uint8_t *)(uintptr_t)0x801610u=0u;
- *(volatile uint8_t *)(uintptr_t)0x801611u=0u;
+ em9305_ram_801608.u8_801610=0u;
+ em9305_ram_801608.u8_801611=0u;
  uint32_t aligned=opencfw_em9305_controller_align_pointer((uint32_t)base);
  uint32_t required=aligned+count*72u-(uint32_t)base;
- *(volatile uint32_t *)(uintptr_t)0x805c00u=aligned;
+ em9305_ram_805be0.u32_805c00=aligned;
  if (available<required) return 0u;
- *(volatile uint8_t *)(uintptr_t)0x801611u=(uint8_t)count;
+ em9305_ram_801608.u8_801611=(uint8_t)count;
  return (uint16_t)required;
 }
 /* Native0x3033c0. */
 uint32_t opencfw_em9305_ll_memory_3033c0(uint32_t count,uintptr_t base,uint32_t available)
 {
- *(volatile uint8_t *)(uintptr_t)0x801639u=0u;
- *(volatile uint8_t *)(uintptr_t)0x80163bu=0u;
- *(volatile uint8_t *)(uintptr_t)0x80163au=0u;
+ em9305_ram_801638.u8_801639=0u;
+ em9305_ram_801638.u8_80163b=0u;
+ em9305_ram_801638.u8_80163a=0u;
  uint32_t aligned=opencfw_em9305_controller_align_pointer((uint32_t)base);
  uint32_t required=aligned+count*8u-(uint32_t)base;
- *(volatile uint32_t *)(uintptr_t)0x805c04u=aligned;
+ em9305_ram_805be0.u32_805c04=aligned;
  if (available<required) return 0u;
- *(volatile uint8_t *)(uintptr_t)0x80163bu=(uint8_t)count;
+ em9305_ram_801638.u8_80163b=(uint8_t)count;
  return (uint16_t)required;
 }
 
@@ -2667,16 +2668,16 @@ extern uint32_t opencfw_em9305_ll_memory_32d524(uintptr_t,uint32_t);
 uint32_t opencfw_em9305_ll_memory_307158(uintptr_t base,uint32_t available)
 {
  uint32_t aligned=opencfw_em9305_controller_align_pointer((uint32_t)base);
- uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(configuration+34u);
  uint32_t end=aligned+count*912u;
  uint32_t required=end-(uint32_t)base;
- *(volatile uint32_t *)(uintptr_t)0x805c70u=aligned;
+ em9305_ram_805c5c.u32_805c70=aligned;
  if (available<required) return 0u;
  uint32_t additional=opencfw_em9305_ll_memory_32d524(end,available-required);
  if (additional==0u) return 0u;
  uint32_t consumed=end+additional-(uint32_t)base;
- *(volatile uint16_t *)(uintptr_t)0x805b1au=912u;
+ em9305_ram_805af0.u16_805b1a=912u;
  return consumed;
 }
 /* Native0x3071a4..0x3071f0: nine independently aligned capability buffers.
@@ -2687,8 +2688,8 @@ uint32_t opencfw_em9305_ll_memory_3071a4(uintptr_t base,uint32_t available)
  uint32_t cursor=(uint32_t)base;
  for (uint32_t index=0u;index<9u;index++) {
   cursor=opencfw_em9305_controller_align_pointer(cursor);
-  uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-  uintptr_t cell=index<3u?0x803b5cu+index*4u:0x803d58u+(index-3u)*4u;
+  uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
+  uintptr_t cell=index<3u?((uintptr_t)&em9305_ram_803b5c + index*4u):((uintptr_t)&em9305_ram_803d58 + (index-3u)*4u);
   *(volatile uint32_t *)cell=cursor;
   uint32_t stride=*(volatile uint16_t *)(configuration+32u);
   cursor+=stride;
@@ -2712,16 +2713,16 @@ uint32_t opencfw_em9305_ll_memory_3071f0(uintptr_t base,uint32_t available)
 uint32_t opencfw_em9305_ll_memory_30705c(uintptr_t base,uint32_t available)
 {
  uint32_t cursor=opencfw_em9305_controller_align_pointer((uint32_t)base);
- uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(configuration+12u);
- *(volatile uint32_t *)(uintptr_t)0x805c38u=cursor;
+ em9305_ram_805be0.u32_805c38=cursor;
  cursor+=count*2824u;
  if (count!=0u) {
   uint32_t index=0u;
   do {
    cursor=opencfw_em9305_controller_align_pointer(cursor);
-   configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-   *(volatile uint32_t *)(uintptr_t)(0x8028b4u+index*4u)=cursor;
+   configuration=em9305_ram_805c5c.u32_805cac;
+   *(volatile uint32_t *)(uintptr_t)(((uintptr_t)&em9305_ram_802878 + 0x3cu) + index*4u)=cursor;
    index+=1u;
    count=*(volatile uint8_t *)(configuration+12u);
    uint32_t stride=*(volatile uint16_t *)(configuration+16u);
@@ -2731,8 +2732,8 @@ uint32_t opencfw_em9305_ll_memory_30705c(uintptr_t base,uint32_t available)
    index=0u;
    do {
     cursor=opencfw_em9305_controller_align_pointer(cursor);
-    configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-    *(volatile uint32_t *)(uintptr_t)(0x80519cu+index*4u)=cursor;
+    configuration=em9305_ram_805c5c.u32_805cac;
+    *(volatile uint32_t *)(uintptr_t)(((uintptr_t)&em9305_ram_805194 + 0x8u) + index*4u)=cursor;
     index+=1u;
     count=*(volatile uint8_t *)(configuration+12u);
     uint32_t stride=*(volatile uint16_t *)(configuration+16u);
@@ -2742,8 +2743,8 @@ uint32_t opencfw_em9305_ll_memory_30705c(uintptr_t base,uint32_t available)
     index=0u;
     do {
      cursor=opencfw_em9305_controller_align_pointer(cursor);
-     configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-     *(volatile uint32_t *)(uintptr_t)(0x802850u+index*4u)=cursor;
+     configuration=em9305_ram_805c5c.u32_805cac;
+     *(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_802850 + index*4u)=cursor;
      index+=1u;
      count=*(volatile uint8_t *)(configuration+12u);
      cursor+=8u;
@@ -2753,23 +2754,23 @@ uint32_t opencfw_em9305_ll_memory_30705c(uintptr_t base,uint32_t available)
  }
  uint32_t consumed=cursor-(uint32_t)base;
  if (available<consumed) return 0u;
- *(volatile uint16_t *)(uintptr_t)0x805b1cu=2824u;
+ em9305_ram_805af0.u16_805b1c=2824u;
  return consumed;
 }
 /* Native0x3070fc..0x307158:256-byte and512-byte capability regions. */
 uint32_t opencfw_em9305_ll_memory_3070fc(uintptr_t base,uint32_t available)
 {
  uint32_t aligned=opencfw_em9305_controller_align_pointer((uint32_t)base);
- uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- *(volatile uint32_t *)(uintptr_t)0x805c40u=aligned;
+ uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
+ em9305_ram_805be0.u32_805c40=aligned;
  uint32_t first_count=*(volatile uint8_t *)(configuration+58u);
  uint32_t second_base=opencfw_em9305_controller_align_pointer(aligned+(first_count<<8u));
- configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ configuration=em9305_ram_805c5c.u32_805cac;
  uint32_t second_count=*(volatile uint8_t *)(configuration+57u);
  uint32_t required=second_base+(second_count<<9u)-(uint32_t)base;
- *(volatile uint32_t *)(uintptr_t)0x805c3cu=second_base;
+ em9305_ram_805be0.u32_805c3c=second_base;
  if (available<required) return 0u;
- *(volatile uint32_t *)(uintptr_t)0x805b28u=0x02000100u;
+ em9305_ram_805af0.u32_805b28=0x02000100u;
  return required;
 }
 
@@ -2777,8 +2778,8 @@ uint32_t opencfw_em9305_ll_memory_3070fc(uintptr_t base,uint32_t available)
 uint32_t opencfw_em9305_ll_memory_307210(uintptr_t base,uint32_t available)
 {
  uint32_t aligned=opencfw_em9305_controller_align_pointer((uint32_t)base);
- uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- *(volatile uint32_t *)(uintptr_t)0x805cecu=aligned;
+ uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
+ em9305_ram_805c5c.u32_805cec=aligned;
  uint32_t size=*(volatile uint16_t *)(configuration+26u);
  uint32_t consumed=aligned+size-(uint32_t)base;
  return consumed>available?0u:consumed;
@@ -2788,9 +2789,9 @@ uint32_t opencfw_em9305_ll_memory_307210(uintptr_t base,uint32_t available)
 uint32_t opencfw_em9305_ll_memory_30723c(uintptr_t base,uint32_t available)
 {
  uint32_t cursor=(uint32_t)base,index=0u;
- uintptr_t row=0x80517cu;
+ uintptr_t row=(uintptr_t)&em9305_ram_80517c;
  for (;;) {
-  uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
   uint32_t count=*(volatile uint8_t *)(configuration+13u);
   uint32_t first=opencfw_em9305_controller_align_pointer(cursor);
   cursor=first;
@@ -2800,22 +2801,22 @@ uint32_t opencfw_em9305_ll_memory_30723c(uintptr_t base,uint32_t available)
   *(volatile uint32_t *)row=second;
   row+=12u;cursor=second+3868u;index+=1u;
  }
- uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- *(volatile uint32_t *)(uintptr_t)0x805ce4u=cursor;
- *(volatile uint32_t *)(uintptr_t)0x805198u=0u;
+ uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
+ em9305_ram_805c5c.u32_805ce4=cursor;
+ em9305_ram_805194.u32_805198=0u;
  uint32_t count=*(volatile uint8_t *)(configuration+30u);
  uint32_t stride=*(volatile uint16_t *)(configuration+26u);
- *(volatile uint32_t *)(uintptr_t)0x805194u=0u;
+ em9305_ram_805194.u32_805194=0u;
  cursor+=stride;
  if (count!=0u) {
   index=0u;
   do {
    uint32_t aligned=opencfw_em9305_controller_align_pointer(cursor);
-   configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-   *(volatile uint32_t *)(uintptr_t)0x805ce8u=aligned;
+   configuration=em9305_ram_805c5c.u32_805cac;
+   em9305_ram_805c5c.u32_805ce8=aligned;
    stride=*(volatile uint16_t *)(configuration+26u);
-   (void)opencfw_em9305_wsf_queue_append(0x805194u,aligned);
-   configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   (void)opencfw_em9305_wsf_queue_append((uintptr_t)&em9305_ram_805194,aligned);
+   configuration=em9305_ram_805c5c.u32_805cac;
    index+=1u;
    count=*(volatile uint8_t *)(configuration+30u);
    cursor=aligned+stride;
@@ -2829,17 +2830,17 @@ uint32_t opencfw_em9305_ll_memory_30723c(uintptr_t base,uint32_t available)
 uint32_t opencfw_em9305_ll_memory_31bc28(uintptr_t base,uint32_t available)
 {
  uint32_t cursor=(uint32_t)base,index=0u;
- *(volatile uint32_t *)(uintptr_t)0x8028ccu=0u;
- *(volatile uint32_t *)(uintptr_t)0x8028c8u=0u;
- *(volatile uint32_t *)(uintptr_t)0x805cd0u=0u;
+ em9305_ram_802878.u32_8028cc=0u;
+ em9305_ram_802878.u32_8028c8=0u;
+ em9305_ram_805c5c.u32_805cd0=0u;
  for (;;) {
-  uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
   uint32_t count=*(volatile uint8_t *)(configuration+42u);
   if (index>=count) return cursor-(uint32_t)base;
   uint32_t aligned=opencfw_em9305_controller_align_pointer(cursor);
   cursor=aligned+132u;
   if (available<cursor-(uint32_t)base) return 0u;
-  (void)opencfw_em9305_wsf_queue_append(0x8028c8u,aligned);
+  (void)opencfw_em9305_wsf_queue_append(((uintptr_t)&em9305_ram_802878 + 0x50u),aligned);
   index+=1u;
  }
 }
@@ -2848,13 +2849,13 @@ uint32_t opencfw_em9305_ll_memory_31bc28(uintptr_t base,uint32_t available)
  * makes no unqualified multiplication/high-word arithmetic substitution. */
 uint32_t opencfw_em9305_ll_memory_32d524(uintptr_t base,uint32_t available)
 {
- uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
  uint32_t length=*(volatile uint16_t *)(configuration+38u);
  uint32_t product=opencfw_em9305_native_config_product(0x12f69u,length);
- *(volatile uint32_t *)(uintptr_t)0x805cd4u=0u;
+ em9305_ram_805c5c.u32_805cd4=0u;
  uint32_t bytes=(((product+0x1ed0aau)>>18u)&~7u)+16u;
- *(volatile uint32_t *)(uintptr_t)0x8056e0u=0u;
- *(volatile uint32_t *)(uintptr_t)0x8056dcu=0u;
+ em9305_ram_805688.u32_8056e0=0u;
+ em9305_ram_805688.u32_8056dc=0u;
  uint32_t cursor=(uint32_t)base,index=0u;
  for (;;) {
   uint32_t count=*(volatile uint8_t *)(configuration+35u);
@@ -2862,8 +2863,8 @@ uint32_t opencfw_em9305_ll_memory_32d524(uintptr_t base,uint32_t available)
   uint32_t aligned=opencfw_em9305_controller_align_pointer(cursor);
   cursor=aligned+bytes;
   if (available<cursor-(uint32_t)base) return 0u;
-  (void)opencfw_em9305_wsf_queue_append(0x8056dcu,aligned);
-  configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  (void)opencfw_em9305_wsf_queue_append(((uintptr_t)&em9305_ram_805688 + 0x54u),aligned);
+  configuration=em9305_ram_805c5c.u32_805cac;
   index+=1u;
  }
 }
@@ -2871,7 +2872,7 @@ uint32_t opencfw_em9305_ll_memory_32d524(uintptr_t base,uint32_t available)
 /* Native0x304360..0x30436a: install the auxiliary callback, retaining R0. */
 uint32_t opencfw_em9305_auxiliary_callback_install(uintptr_t callback)
 {
- *(volatile uint32_t *)(uintptr_t)0x801640u=(uint32_t)callback;
+ em9305_ram_801638.u32_801640=(uint32_t)callback;
  return (uint32_t)callback;
 }
 /* These callback bodies remain explicit source contracts. */
@@ -2881,8 +2882,8 @@ extern void opencfw_em9305_auxiliary_handler_312ca0(void);
  * The handler byte store occupies the call delay slot and precedes install. */
 uint32_t opencfw_em9305_auxiliary_record_initialize(uint32_t handler)
 {
- (void)opencfw_em9305_memset((void *)(uintptr_t)0x805f04u,0u,36u);
- *(volatile uint8_t *)(uintptr_t)0x805f05u=(uint8_t)handler;
+ (void)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_805eec + 0x18u),0u,36u);
+ em9305_ram_805eec.u8_805f05=(uint8_t)handler;
  return opencfw_em9305_auxiliary_callback_install(
   (uintptr_t)&opencfw_em9305_auxiliary_callback_333a00);
 }
@@ -2900,7 +2901,7 @@ uint32_t opencfw_em9305_ll_auxiliary_initialize(uint32_t unused)
  * BMSK bit 1 retains two bits; the four-entry ring is not a two-entry ring. */
 void opencfw_em9305_auxiliary_callback_333a00(void)
 {
- uintptr_t root=0x805f04u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x18u);
  if (*(volatile uint8_t *)root==2u) {
   uint32_t index=*(volatile uint32_t *)(root+4u);
   *(volatile uint8_t *)(root+12u+index)=1u;
@@ -2911,7 +2912,7 @@ void opencfw_em9305_auxiliary_callback_333a00(void)
 /* Native0x333a30..0x333a60: enqueue idle only in state 1. */
 void opencfw_em9305_auxiliary_callback_333a30(void)
 {
- uintptr_t root=0x805f04u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x18u);
  if (*(volatile uint8_t *)root==1u) {
   uint32_t index=*(volatile uint32_t *)(root+4u);
   *(volatile uint8_t *)(root+12u+index)=0u;
@@ -2934,7 +2935,7 @@ void opencfw_em9305_auxiliary_callback_333a30(void);
  * Child contracts with ambient native argument registers retain ABI gates. */
 void opencfw_em9305_auxiliary_handler_312ca0(void)
 {
- uintptr_t root=0x805f04u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x18u);
  uint32_t started=opencfw_em9305_pal_current_time();
  for (;;) {
   uint32_t read=*(volatile uint32_t *)(root+8u);
@@ -3020,24 +3021,24 @@ uint32_t opencfw_em9305_auxiliary_elapsed_303f8c(uint32_t current,uint32_t previ
 uint32_t opencfw_em9305_auxiliary_start_303f50(uintptr_t unused)
 {
  (void)unused;
- return *(volatile uint8_t *)(uintptr_t)0x8016beu;
+ return em9305_ram_8016bc.u8_8016be;
 }
 /* Native0x303f68..0x303f74: current auxiliary object, not a boolean cell. */
 uint32_t opencfw_em9305_auxiliary_ready_303f68(void)
-{ return *(volatile uint32_t *)(uintptr_t)0x80163cu; }
+{ return em9305_ram_801638.u32_80163c; }
 /* Native0x304394..0x3043ac: return zero when no object, otherwise flag address. */
 uint32_t opencfw_em9305_auxiliary_signal_304394(void)
 {
- if (*(volatile uint32_t *)(uintptr_t)0x80163cu==0u) return 0u;
- *(volatile uint8_t *)(uintptr_t)0x8016beu=1u;
- return 0x8016beu;
+ if (em9305_ram_801638.u32_80163c==0u) return 0u;
+ em9305_ram_8016bc.u8_8016be=1u;
+ return ((uintptr_t)&em9305_ram_8016bc + 0x2u);
 }
 
 /* Native0x3339cc..0x333a00: expire events only for states 1 and 2.
  * The unsigned state-minus-one gate also excludes state zero. */
 uint32_t opencfw_em9305_auxiliary_expire_3339cc(void)
 {
- uintptr_t root=0x805f04u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x18u);
  uint32_t adjusted=(uint32_t)*(volatile uint8_t *)root-1u;
  if (adjusted>=2u) return adjusted;
  (void)opencfw_em9305_pal_timer_disarm();
@@ -3052,7 +3053,7 @@ extern uint32_t opencfw_em9305_auxiliary_select_314d94(uint32_t);
  * 0x30fd2c is an authenticated J [blink] no-op; no invented hardware action. */
 uint32_t opencfw_em9305_auxiliary_prepare_303ef0(uintptr_t object)
 {
- uintptr_t root=0x80163cu;
+ uintptr_t root=((uintptr_t)&em9305_ram_801638 + 0x4u);
  uint32_t active=*(volatile uint8_t *)(root+129u);
  *(volatile uint8_t *)(root+130u)=0u;
  *(volatile uint32_t *)root=(uint32_t)object;
@@ -3083,17 +3084,17 @@ uint32_t opencfw_em9305_auxiliary_prepare_303ef0(uintptr_t object)
  * 0x30fd6c is authenticated J[blink], so the final return is the index. */
 uint32_t opencfw_em9305_auxiliary_select_314d94(uint32_t index)
 {
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)(0x80164cu+index*24u);
+ uintptr_t callback=*(volatile uint32_t *)(uintptr_t)(((uintptr_t)&em9305_ram_801638 + 0x14u) + index*24u);
  (void)((uint32_t (*)(uintptr_t))callback)(callback);
- *(volatile uint8_t *)(uintptr_t)0x8016bcu=(uint8_t)index;
- *(volatile uint8_t *)(uintptr_t)0x8016bdu=1u;
+ em9305_ram_8016bc.u8_8016bc=(uint8_t)index;
+ em9305_ram_8016bc.u8_8016bd=1u;
  return index;
 }
 
 /* Native0x333a60..0x333a94: request transition from idle or waiting states. */
 uint32_t opencfw_em9305_auxiliary_transition_333a60(void)
 {
- uintptr_t root=0x805f04u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x18u);
  uint32_t state=*(volatile uint8_t *)root;
  if (state!=0u && state!=1u) return state;
  if (state==1u) (void)opencfw_em9305_pal_timer_disarm();
@@ -3113,7 +3114,7 @@ extern uint32_t opencfw_em9305_associated_object_init_312918(uintptr_t,uint32_t)
  * BN tests subtraction sign bit. */
 uint32_t opencfw_em9305_auxiliary_stop_333780(void)
 {
- uintptr_t root=0x805f04u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x18u);
  uintptr_t current=*(volatile uint32_t *)(root+16u);
  uintptr_t next=*(volatile uint32_t *)(current+4u);
  *(volatile uint32_t *)(root+16u)=(uint32_t)next;
@@ -3164,14 +3165,14 @@ uint32_t opencfw_em9305_auxiliary_stop_333780(void)
 uint32_t opencfw_em9305_auxiliary_timer_schedule(uint32_t deadline,uintptr_t callback)
 {
  *(volatile uint32_t *)(uintptr_t)0xf0181cu=deadline;
- *(volatile uint32_t *)(uintptr_t)0x805e6cu=(uint32_t)callback;
+ em9305_ram_805e6c.u32_805e6c=(uint32_t)callback;
  return opencfw_em9305_pal_timer_channel(0u,1u);
 }
 /* Native0x333690..0x3336d8: sample head before critical-entry delay slot,
  * test signed-clamped delay against guard+25, then schedule and exit. */
 uint32_t opencfw_em9305_auxiliary_arm_333690(void)
 {
- uintptr_t object=*(volatile uint32_t *)(uintptr_t)0x805f14u;
+ uintptr_t object=em9305_ram_805eec.u32_805f14;
  (void)opencfw_em9305_wsf_critical_enter();
  uint32_t now=opencfw_em9305_pal_current_time();
  uint32_t guard=opencfw_em9305_auxiliary_guard_interval();
@@ -3191,7 +3192,7 @@ uint32_t opencfw_em9305_auxiliary_arm_333690(void)
 /* Native0x314538..0x314548: source callback registry, secondary before primary. */
 uint32_t opencfw_em9305_common_callback_register(uint32_t index,uintptr_t primary,uintptr_t secondary)
 {
- uintptr_t slot=0x801534u+index*8u;
+ uintptr_t slot=((uintptr_t)&em9305_ram_801534 + index*8u);
  *(volatile uint32_t *)(slot+4u)=(uint32_t)secondary;
  *(volatile uint32_t *)slot=(uint32_t)primary;
  return index;
@@ -3226,7 +3227,7 @@ uintptr_t opencfw_em9305_common_init_302ed8(void)
  (void)opencfw_em9305_common_callback_register(12u,
   (uintptr_t)&opencfw_em9305_common_callback_314888,
   (uintptr_t)&opencfw_em9305_common_callback_314728);
- return (uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)0x801518u,0u,28u);
+ return (uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)&em9305_ram_801518,0u,28u);
 }
 
 extern uint32_t opencfw_em9305_common_init_303f94(uint32_t);
@@ -3307,7 +3308,7 @@ uint32_t opencfw_em9305_common_init_303f94(uint32_t unused)
 {
  (void)unused;
  return (uint32_t)(uintptr_t)opencfw_em9305_memset(
-  (void *)(uintptr_t)0x80163cu,0u,132u);
+  (void *)((uintptr_t)&em9305_ram_801638 + 0x4u),0u,132u);
 }
 
 void opencfw_em9305_common_callback_31537c(uintptr_t,uintptr_t);
@@ -3320,7 +3321,7 @@ uint32_t opencfw_em9305_common_init_302f80(uint32_t unused)
   (uintptr_t)&opencfw_em9305_common_callback_31537c,
   (uintptr_t)&opencfw_em9305_common_callback_3151d0);
  return (uint32_t)(uintptr_t)opencfw_em9305_memset(
-  (void *)(uintptr_t)0x801518u,0u,28u);
+  (void *)(uintptr_t)&em9305_ram_801518,0u,28u);
 }
 
 extern uint32_t opencfw_em9305_common_callback_314908(uintptr_t,uintptr_t);
@@ -3339,14 +3340,14 @@ uint32_t opencfw_em9305_common_init_303650(uint32_t unused)
 uint32_t opencfw_em9305_common_init_3102fc(uint32_t unused)
 {
  (void)unused;
- *(volatile uint16_t *)(uintptr_t)0x8012ecu=15u;
- *(volatile uint16_t *)(uintptr_t)0x8012eeu=15u;
- return 0x8012eeu;
+ em9305_ram_8012c0.u16_8012ec=15u;
+ em9305_ram_8012c0.u16_8012ee=15u;
+ return ((uintptr_t)&em9305_ram_8012c0 + 0x2eu);
 }
 /* Native0x30436c..0x304384: four callbacks in native reverse store order. */
 uintptr_t opencfw_em9305_common_provider_register(uint32_t index,uintptr_t a,uintptr_t b,uintptr_t c,uintptr_t d)
 {
- uintptr_t slot=0x801644u+index*24u;
+ uintptr_t slot=(((uintptr_t)&em9305_ram_801638 + 0xcu) + index*24u);
  *(volatile uint32_t *)(slot+12u)=(uint32_t)d;
  *(volatile uint32_t *)(slot+8u)=(uint32_t)c;
  *(volatile uint32_t *)(slot+4u)=(uint32_t)b;
@@ -3356,7 +3357,7 @@ uintptr_t opencfw_em9305_common_provider_register(uint32_t index,uintptr_t a,uin
 /* Native0x304384..0x304394: fifth provider callback. */
 uintptr_t opencfw_em9305_common_provider_extra(uint32_t index,uintptr_t callback)
 {
- uintptr_t slot=0x801654u+index*24u;
+ uintptr_t slot=(((uintptr_t)&em9305_ram_801638 + 0x1cu) + index*24u);
  *(volatile uint32_t *)slot=(uint32_t)callback;
  return slot;
 }
@@ -3392,7 +3393,7 @@ uint32_t opencfw_em9305_common_init_3032cc(uint32_t incoming)
  (void)opencfw_em9305_common_provider_extra(1u,
   (uintptr_t)&opencfw_em9305_common_callback_31446c);
  return (uint32_t)(uintptr_t)opencfw_em9305_memset(
-  (void *)(uintptr_t)0x801534u,0u,176u);
+  (void *)(uintptr_t)&em9305_ram_801534,0u,176u);
 }
 
 extern uint32_t opencfw_em9305_common_radio_mask_312094(uint32_t);
@@ -3405,7 +3406,7 @@ extern uint32_t opencfw_em9305_common_limit_310314(uint32_t);
 uint32_t opencfw_em9305_common_hardware_31028c(uint32_t unused)
 {
  (void)unused;
- (void)opencfw_em9305_memset((void *)(uintptr_t)0x805e78u,0u,80u);
+ (void)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_805e6c + 0xcu),0u,80u);
  (void)((uint32_t (*)(uint32_t))(uintptr_t)0x103b0cu)(3u);
  (void)opencfw_em9305_common_radio_mask_312094(255u);
  *(volatile uint32_t *)(uintptr_t)0xf04044u=72u;
@@ -3417,7 +3418,7 @@ uint32_t opencfw_em9305_common_hardware_31028c(uint32_t unused)
  (void)opencfw_em9305_common_irq_mask_310ba4(3u,1u);
  (void)opencfw_em9305_common_timer_mask_310bd0(1u,1u);
  uint32_t result=opencfw_em9305_common_calibrate_311ffc(600u,1u);
- *(volatile uint8_t *)(uintptr_t)0x805e78u=1u;
+ em9305_ram_805e6c.u8_805e78=1u;
  return opencfw_em9305_common_limit_310314(result);
 }
 
@@ -3465,7 +3466,7 @@ extern uint32_t opencfw_em9305_common_packet_limit_3047fc(uint32_t);
 uint32_t opencfw_em9305_common_limit_310314(uint32_t incoming)
 {
  uint32_t result=opencfw_em9305_common_packet_limit_3047fc(incoming);
- *(volatile uint8_t *)(uintptr_t)0x8012b8u=(uint8_t)result;
+ em9305_ram_8012b8.u8_8012b8=(uint8_t)result;
  return result;
 }
 
@@ -3546,7 +3547,7 @@ uint32_t opencfw_em9305_packet_revision_3119b0(uintptr_t output)
  * and packing instructions. MMIO sampling and wrapping arithmetic preserved. */
 uint32_t opencfw_em9305_common_calibrate_311ffc(uint32_t first,uint32_t second)
 {
- uintptr_t table=*(volatile uint32_t *)(uintptr_t)0x80fd54u;
+ uintptr_t table=em9305_ram_80fd2c.u32_80fd54;
  uint32_t control=*(volatile uint32_t *)(uintptr_t)0xf04004u;
  uint32_t flags=*(volatile uint32_t *)(uintptr_t)0xf0440cu;
  uint32_t channel=control&3u,field=control;
@@ -3585,12 +3586,12 @@ extern uint32_t opencfw_em9305_common_radio_control_311f90(uint32_t,uint32_t);
 uint32_t opencfw_em9305_common_activate_310580(uint32_t unused)
 {
  (void)unused;
- uintptr_t root=0x805e78u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805e6c + 0xcu);
  if (*(volatile uint8_t *)root==1u) return 1u;
  uint32_t masked=opencfw_em9305_common_timer_mask_310bd0(1u,0u);
  (void)opencfw_em9305_common_radio_restore_312410(masked);
- uint32_t first=*(volatile uint8_t *)(uintptr_t)0x805ea4u;
- uint32_t second=*(volatile uint8_t *)(uintptr_t)0x805ea5u;
+ uint32_t first=em9305_ram_805e6c.u8_805ea4;
+ uint32_t second=em9305_ram_805e6c.u8_805ea5;
  uint32_t result=second;
  if ((first|second)!=0u)
   result=opencfw_em9305_common_radio_control_311f90(0u,0u);
@@ -3615,7 +3616,7 @@ uint32_t opencfw_em9305_common_radio_restore_312410(uint32_t unused)
  *(volatile uint8_t *)(uintptr_t)0xf04400u=4u;
  __builtin_arc_sr(first,1666);
  __builtin_arc_sr(second,1666);
- *(volatile uint8_t *)(uintptr_t)0x805fb8u=1u;
+ em9305_ram_805fb8.u8_805fb8=1u;
  return first;
 }
 
@@ -3627,10 +3628,10 @@ uint32_t opencfw_em9305_common_callback_314754(uint32_t value)
 uint32_t opencfw_em9305_common_callback_31472c(uint32_t value,uintptr_t object)
 {
  (void)opencfw_em9305_common_activate_310580(value);
- uintptr_t pending=*(volatile uint32_t *)(uintptr_t)0x8015e0u;
+ uintptr_t pending=em9305_ram_8015dc.u32_8015e0;
  if (pending!=0u) {
   uintptr_t callback=*(volatile uint32_t *)(object+112u);
-  *(volatile uint32_t *)(uintptr_t)0x8015e0u=0u;
+  em9305_ram_8015dc.u32_8015e0=0u;
   (void)((uint32_t (*)(uint32_t,uintptr_t,uint32_t))callback)(value,pending,2u);
  }
  uintptr_t callback=*(volatile uint32_t *)(object+104u);
@@ -3640,10 +3641,10 @@ uint32_t opencfw_em9305_common_callback_31472c(uint32_t value,uintptr_t object)
 uint32_t opencfw_em9305_common_callback_3151d4(uint32_t value,uintptr_t object)
 {
  (void)opencfw_em9305_common_activate_310580(value);
- uintptr_t pending=*(volatile uint32_t *)(uintptr_t)0x8015e0u;
+ uintptr_t pending=em9305_ram_8015dc.u32_8015e0;
  if (pending!=0u) {
   uintptr_t callback=*(volatile uint32_t *)(object+116u);
-  *(volatile uint32_t *)(uintptr_t)0x8015e0u=0u;
+  em9305_ram_8015dc.u32_8015e0=0u;
   (void)((uint32_t (*)(uint32_t,uintptr_t,uint32_t))callback)(value,pending,2u);
  }
  uintptr_t callback=*(volatile uint32_t *)(object+108u);
@@ -3659,7 +3660,7 @@ uint32_t opencfw_em9305_common_callback_3143f4(uintptr_t object)
 {
  uintptr_t record=*(volatile uint32_t *)(object+44u);
  uint32_t index=*(volatile uint8_t *)record;
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)(0x801538u+index*8u);
+ uintptr_t callback=*(volatile uint32_t *)(uintptr_t)(((uintptr_t)&em9305_ram_801534 + 0x4u) + index*8u);
  if (callback==0u) return (uint32_t)object;
  return ((uint32_t (*)(uintptr_t,uintptr_t,uintptr_t))callback)(object,record,callback);
 }
@@ -3685,7 +3686,7 @@ extern uint32_t opencfw_em9305_common_channel_start_314db8(uintptr_t,uintptr_t,u
 /* Native0x3152bc..0x3152fc: configure scan channel then start/signalling. */
 uint32_t opencfw_em9305_common_callback_3152bc(uintptr_t object)
 {
- uintptr_t record=*(volatile uint32_t *)(object+44u),root=0x8015c4u;
+ uintptr_t record=*(volatile uint32_t *)(object+44u),root=(uintptr_t)&em9305_ram_8015c4;
  *(volatile uint32_t *)(root+20u)=4u;
  *(volatile uint32_t *)(root+12u)=(uint32_t)(uintptr_t)&opencfw_em9305_common_channel_callback_314ea4;
  uint32_t channel=*(volatile uint8_t *)(record+126u);
@@ -3706,7 +3707,7 @@ extern uint32_t opencfw_em9305_common_radio_finish_3045c0(uint32_t);
  * Native return is path-dependent; current callback consumer discards it. */
 void opencfw_em9305_common_callback_31537c(uintptr_t object,uintptr_t input)
 {
- uintptr_t record=*(volatile uint32_t *)(object+44u),root=0x8015c4u;
+ uintptr_t record=*(volatile uint32_t *)(object+44u),root=(uintptr_t)&em9305_ram_8015c4;
  (void)opencfw_em9305_common_radio_prepare_30fb4c(input);
  uint32_t timestamp=*(volatile uint32_t *)(object+8u);
  *(volatile uint32_t *)(root+8u)=(uint32_t)(uintptr_t)&opencfw_em9305_common_channel_callback_3151a0;
@@ -3725,7 +3726,7 @@ void opencfw_em9305_common_callback_31537c(uintptr_t object,uintptr_t input)
 uint32_t opencfw_em9305_common_radio_bind_30fc10(uintptr_t source)
 {
  return (uint32_t)(uintptr_t)opencfw_em9305_memcpy(
-  (void *)(uintptr_t)0x805cf4u,(const void *)source,16u);
+  (void *)((uintptr_t)&em9305_ram_805c5c + 0x98u),(const void *)source,16u);
 }
 
 extern uint32_t opencfw_em9305_radio_setup_31230c(uint32_t);
@@ -3742,7 +3743,7 @@ uint32_t opencfw_em9305_radio_timestamp_310474(uint32_t value)
 /* Native0x310570..0x310580: exact product flag gate for radio mode tail. */
 uint32_t opencfw_em9305_radio_mode_310570(uint32_t value)
 {
- if (*(volatile uint8_t *)(uintptr_t)0x805ec5u!=1u) return value;
+ if (em9305_ram_805e6c.u8_805ec5!=1u) return value;
  return opencfw_em9305_radio_mode_312290(value);
 }
 
@@ -3758,7 +3759,7 @@ uint32_t opencfw_em9305_common_radio_prepare_30fb4c(uintptr_t record)
  (void)opencfw_em9305_radio_timestamp_310474(*(volatile uint32_t *)(record+8u));
  uint32_t byte=*(volatile uint8_t *)(record+2u);
  (void)opencfw_em9305_radio_mode_310570((byte&128u)!=0u?byte|0xffffff00u:byte);
- uintptr_t root=0x805d1cu;
+ uintptr_t root=((uintptr_t)&em9305_ram_805c5c + 0xc0u);
  uint32_t mode=*(volatile uint8_t *)(record+12u),first;
  if (mode==2u) {
   *(volatile uint16_t *)(root+10u)=257u;
@@ -3812,7 +3813,7 @@ uint32_t opencfw_em9305_radio_status_311a00(uint32_t query)
  uint32_t value;
  if (query!=0u) value=opencfw_em9305_radio_default_3119f0();
  else {
-  uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x80fd44u;
+  uintptr_t record=em9305_ram_80fd2c.u32_80fd44;
   value=*(volatile uint8_t *)(record+1u);
  }
  value&=255u;
@@ -3836,7 +3837,7 @@ uint32_t opencfw_em9305_radio_mode_index_311a20(uint32_t first,uint32_t second)
 uint32_t opencfw_em9305_radio_mode_312290(uint32_t mode)
 {
  uint32_t limit=opencfw_em9305_radio_default_3119f0();
- uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x80fd44u;
+ uintptr_t record=em9305_ram_80fd2c.u32_80fd44;
  *(volatile uint8_t *)(record+2u)=(uint8_t)limit;
  *(volatile uint8_t *)record=(uint8_t)mode;
  uint32_t index=opencfw_em9305_radio_mode_index_311a20(mode,limit);
@@ -3871,7 +3872,7 @@ extern uint32_t opencfw_em9305_radio_apply_3120a0(uint32_t,uint32_t);
  * then tail-call apply with mapped second in R0 and mapped first in R1. */
 uint32_t opencfw_em9305_radio_configure_3104d8(uint32_t first,uint32_t second)
 {
- uintptr_t root=0x805e98u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805e6c + 0x2cu);
  *(volatile uint8_t *)(root+1u)=(uint8_t)second;
  *(volatile uint8_t *)root=(uint8_t)first;
  uint32_t mapped_first=first==1u?1u:(first==3u?3u:(first==4u?2u:0u));
@@ -3896,7 +3897,7 @@ uint32_t opencfw_em9305_radio_finish_310454(uint32_t selector)
 {
  uint32_t result=opencfw_em9305_radio_finish_probe_311958(selector);
  (void)opencfw_em9305_radio_finish_apply_3122c0(result);
- uint32_t enabled=*(volatile uint8_t *)(uintptr_t)0x805ea0u!=0u;
+ uint32_t enabled=em9305_ram_805e6c.u8_805ea0!=0u;
  return opencfw_em9305_radio_finish_mode_312344(selector,enabled);
 }
 
@@ -3914,7 +3915,7 @@ uint32_t opencfw_em9305_radio_finish_probe_311958(uint32_t value)
 /* Native0x3122c0..0x3122f0: signed MIN39 product lookup and MMIO apply. */
 uint32_t opencfw_em9305_radio_finish_apply_3122c0(uint32_t selector)
 {
- uintptr_t table=*(volatile uint32_t *)(uintptr_t)0x80fd4cu;
+ uintptr_t table=em9305_ram_80fd2c.u32_80fd4c;
  uint32_t index=(int32_t)selector>39?39u:selector;
  uintptr_t address=(uint32_t)table+index+80u;
  uint32_t nibble=*(volatile uint8_t *)address&15u;
@@ -3929,13 +3930,13 @@ uint32_t opencfw_em9305_radio_finish_apply_3122c0(uint32_t selector)
 /* Native0x310498..0x3104b0: product flags then swapped truth-value controls. */
 uint32_t opencfw_em9305_radio_flags_310498(uint32_t first,uint32_t second)
 {
- *(volatile uint8_t *)(uintptr_t)0x805ea5u=(uint8_t)second;
- *(volatile uint8_t *)(uintptr_t)0x805ea4u=(uint8_t)first;
+ em9305_ram_805e6c.u8_805ea5=(uint8_t)second;
+ em9305_ram_805e6c.u8_805ea4=(uint8_t)first;
  return opencfw_em9305_common_radio_control_311f90(second!=0u,first!=0u);
 }
 /* Native0x310560..0x310570:16-byte source-owned copy. */
 uint32_t opencfw_em9305_radio_copy_310560(uintptr_t source)
-{ return (uint32_t)(uintptr_t)opencfw_em9305_memcpy((void *)(uintptr_t)0x805ea8u,(const void *)source,16u); }
+{ return (uint32_t)(uintptr_t)opencfw_em9305_memcpy((void *)em9305_ram_805e6c.blk_805ea8,(const void *)source,16u); }
 extern uint32_t opencfw_em9305_radio_data_3104bc(uintptr_t);
 extern uint32_t opencfw_em9305_radio_byte_31048c(uint32_t);
 extern uint32_t opencfw_em9305_radio_byte_3104b0(uint32_t);
@@ -3944,7 +3945,7 @@ uint32_t opencfw_em9305_radio_transform_33322c(uintptr_t record)
 {
  uint32_t second=*(volatile uint8_t *)(record+25u);
  uint32_t first=*(volatile uint8_t *)(record+24u);
- *(volatile uint8_t *)(uintptr_t)0x805d3au=(uint8_t)second;
+ em9305_ram_805d34.u8_805d3a=(uint8_t)second;
  (void)opencfw_em9305_radio_flags_310498(first,second);
  uint32_t result=*(volatile uint8_t *)(record+24u);
  if (result==0u) {
@@ -3959,15 +3960,15 @@ uint32_t opencfw_em9305_radio_transform_33322c(uintptr_t record)
 
 /* Native0x31048c..0x310498: byte store with untruncated return. */
 uint32_t opencfw_em9305_radio_byte_31048c(uint32_t value)
-{ *(volatile uint8_t *)(uintptr_t)0x805ea6u=(uint8_t)value;return value; }
+{ em9305_ram_805e6c.u8_805ea6=(uint8_t)value;return value; }
 /* Native0x3104b0..0x3104bc: second byte store with untruncated return. */
 uint32_t opencfw_em9305_radio_byte_3104b0(uint32_t value)
-{ *(volatile uint8_t *)(uintptr_t)0x805ea7u=(uint8_t)value;return value; }
+{ em9305_ram_805e6c.u8_805ea7=(uint8_t)value;return value; }
 /* Native0x3104bc..0x3104cc: exact8-byte data copy. */
 uint32_t opencfw_em9305_radio_data_3104bc(uintptr_t source)
 {
  return (uint32_t)(uintptr_t)opencfw_em9305_memcpy(
-  (void *)(uintptr_t)0x805ebdu,(const void *)source,8u);
+  (void *)((uintptr_t)&em9305_ram_805e6c + 0x51u),(const void *)source,8u);
 }
 
 extern uint32_t opencfw_em9305_common_channel_callback_3151fc(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t);
@@ -3976,7 +3977,7 @@ extern void opencfw_em9305_common_channel_callback_315260(void);
  * Native indirect callback retains its own address as R1. */
 uint32_t opencfw_em9305_common_callback_3153bc(uintptr_t object,uintptr_t input)
 {
- uintptr_t record=*(volatile uint32_t *)(object+44u),root=0x8015c4u;
+ uintptr_t record=*(volatile uint32_t *)(object+44u),root=(uintptr_t)&em9305_ram_8015c4;
  (void)opencfw_em9305_common_radio_prepare_30fb4c(input);
  uint32_t timestamp=*(volatile uint32_t *)(object+8u);
  uint32_t context=*(volatile uint32_t *)(record+100u);
@@ -3995,9 +3996,9 @@ uint32_t opencfw_em9305_common_callback_3153bc(uintptr_t object,uintptr_t input)
 extern uint32_t opencfw_em9305_radio_callback_333268(uint32_t);
 extern uint32_t opencfw_em9305_radio_callback_3330d8(uint32_t,uint32_t,uint32_t,uint32_t);
 uintptr_t opencfw_em9305_radio_callback_store_310340(uintptr_t callback)
-{ *(volatile uint32_t *)(uintptr_t)0x805e7cu=(uint32_t)callback;return callback; }
+{ em9305_ram_805e6c.u32_805e7c=(uint32_t)callback;return callback; }
 uintptr_t opencfw_em9305_radio_callback_store_31034c(uintptr_t callback)
-{ *(volatile uint32_t *)(uintptr_t)0x805e80u=(uint32_t)callback;return callback; }
+{ em9305_ram_805e6c.u32_805e80=(uint32_t)callback;return callback; }
 /* Native 0x30fac0..0x30fadc: ordered callback registration. */
 uintptr_t opencfw_em9305_radio_callback_setup_30fac0(void)
 {
@@ -4006,7 +4007,7 @@ uintptr_t opencfw_em9305_radio_callback_setup_30fac0(void)
 }
 /* Native 0x310480..0x31048c: enable byte with full-width return. */
 uint32_t opencfw_em9305_radio_enable_310480(uint32_t value)
-{ *(volatile uint8_t *)(uintptr_t)0x805ea0u=(uint8_t)value;return value; }
+{ em9305_ram_805e6c.u8_805ea0=(uint8_t)value;return value; }
 /* Native 0x314548/0x314558/0x314568: registry callbacks.
  * Last 0x30fae0 tail targets native 0x31055c, an authenticated j_s blink.
  * Registry uses void callbacks; native incidental R0 values are not exposed. */
@@ -4027,7 +4028,7 @@ extern uint32_t opencfw_em9305_radio_request_30faec(uintptr_t,uint32_t);
  * Delay slots preserve timestamp-before-copy and request selector 257. */
 uint32_t opencfw_em9305_common_callback_31481c(uintptr_t object,uintptr_t input)
 {
- uintptr_t record=*(volatile uint32_t *)(object+44u),root=0x8015c4u;
+ uintptr_t record=*(volatile uint32_t *)(object+44u),root=(uintptr_t)&em9305_ram_8015c4;
  uint8_t descriptor[20];
  (void)opencfw_em9305_common_radio_prepare_30fb4c(input);
  *(volatile uint32_t *)(root+12u)=(uint32_t)(uintptr_t)&opencfw_em9305_common_channel_callback_3146a4;
@@ -4040,14 +4041,14 @@ uint32_t opencfw_em9305_common_callback_31481c(uintptr_t object,uintptr_t input)
   (void)opencfw_em9305_memcpy(descriptor,opencfw_em9305_radio_template_3343f8,20u);
  else (void)opencfw_em9305_memset(descriptor,0,20u);
  (void)opencfw_em9305_radio_record_30fc28((uintptr_t)descriptor);
- return opencfw_em9305_radio_request_30faec(0x8013f0u,257u);
+ return opencfw_em9305_radio_request_30faec((uintptr_t)&em9305_ram_8013f0,257u);
 }
 
 /* Native 0x30fc28..0x30fc68: exact descriptor copy followed by mode MMIO.
  * Native R0 remains 0xf0440d on every return; byte writes retain order. */
 uint32_t opencfw_em9305_radio_record_30fc28(uintptr_t source)
 {
- (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x805d04u,(const void *)source,20u);
+ (void)opencfw_em9305_memcpy((void *)((uintptr_t)&em9305_ram_805c5c + 0xa8u),(const void *)source,20u);
  uint8_t mode=*(volatile uint8_t *)source;
  volatile uint8_t *control=(volatile uint8_t *)(uintptr_t)0xf0440du;
  if (mode==2u) { *control=0u;control[-1]=0u; }
@@ -4062,7 +4063,7 @@ extern uint32_t opencfw_em9305_common_channel_callback_3146d4(uint32_t,uint32_t,
  * Native return register is path dependent; registry consumer discards it. */
 void opencfw_em9305_common_callback_314888(uintptr_t object,uintptr_t input)
 {
- uintptr_t record=*(volatile uint32_t *)(object+44u),root=0x8015c4u;
+ uintptr_t record=*(volatile uint32_t *)(object+44u),root=(uintptr_t)&em9305_ram_8015c4;
  (void)opencfw_em9305_common_radio_prepare_30fb4c(input);
  uint32_t timestamp=*(volatile uint32_t *)(object+8u);
  uint32_t context=*(volatile uint32_t *)(record+100u);
@@ -4086,7 +4087,7 @@ uint32_t opencfw_em9305_common_channel_callback_3146d4(
  uint32_t first,uint32_t second,uint32_t unused,uint32_t fourth)
 {
  (void)unused;
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uint8_t count=*(volatile uint8_t *)root;
  *(volatile uint8_t *)root=(uint8_t)(count+1u);
  uint32_t current=opencfw_em9305_auxiliary_ready_303f68();
@@ -4117,7 +4118,7 @@ extern void opencfw_em9305_common_channel_callback_3147b4(void);
 uint32_t opencfw_em9305_common_callback_3148cc(uintptr_t object,uintptr_t input)
 {
  (void)opencfw_em9305_common_radio_prepare_30fb4c(input);
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uint32_t timestamp=*(volatile uint32_t *)(object+8u);
  *(volatile uint32_t *)(root+12u)=(uint32_t)(uintptr_t)&opencfw_em9305_common_channel_callback_314758;
  *(volatile uint32_t *)(root+8u)=(uint32_t)(uintptr_t)&opencfw_em9305_common_channel_callback_3147b4;
@@ -4137,7 +4138,7 @@ uint32_t opencfw_em9305_common_channel_callback_314758(
 {
  (void)unused2;(void)unused3;
  uint32_t current=opencfw_em9305_auxiliary_ready_303f68();
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uint8_t count=*(volatile uint8_t *)root;
  uintptr_t record=*(volatile uint32_t *)((uintptr_t)current+44u);
  *(volatile uint8_t *)(record+125u)=(uint8_t)fifth;
@@ -4165,22 +4166,22 @@ extern uint32_t opencfw_em9305_common_channel_callback_314a88(uint32_t,uint32_t,
  * distinct context offset and request object from 0x31481c. */
 uint32_t opencfw_em9305_common_callback_314908(uintptr_t object,uintptr_t input)
 {
- uintptr_t record=*(volatile uint32_t *)(object+44u),root=0x8015c4u;
+ uintptr_t record=*(volatile uint32_t *)(object+44u),root=(uintptr_t)&em9305_ram_8015c4;
  uint8_t descriptor[20];
  (void)opencfw_em9305_common_radio_prepare_30fb4c(input);
- uint32_t primary=*(volatile uint32_t *)(uintptr_t)0x805c14u;
+ uint32_t primary=em9305_ram_805be0.u32_805c14;
  *(volatile uint32_t *)(root+12u)=(uint32_t)(uintptr_t)&opencfw_em9305_common_channel_callback_314a88;
  *(volatile uint32_t *)(root+8u)=primary;
  *(volatile uint32_t *)(root+20u)=*(volatile uint32_t *)(record+108u);
  *(volatile uint32_t *)(root+16u)=*(volatile uint32_t *)(object+8u);
  (void)opencfw_em9305_common_radio_bind_30fc10(root+8u);
- primary=*(volatile uint32_t *)(uintptr_t)0x805c14u;
+ primary=em9305_ram_805be0.u32_805c14;
  *(volatile uint8_t *)root=0u;
  if (primary!=0u)
   (void)opencfw_em9305_memcpy(descriptor,opencfw_em9305_radio_template_3343f8,20u);
  else (void)opencfw_em9305_memset(descriptor,0u,20u);
  (void)opencfw_em9305_radio_record_30fc28((uintptr_t)descriptor);
- return opencfw_em9305_radio_request_30faec(0x8016f8u,257u);
+ return opencfw_em9305_radio_request_30faec((uintptr_t)&em9305_ram_8016f8,257u);
 }
 
 extern uint32_t opencfw_em9305_radio_record_request_30fc68(uintptr_t,uint32_t);
@@ -4189,7 +4190,7 @@ extern uint32_t opencfw_em9305_radio_record_request_30fc68(uintptr_t,uint32_t);
  * ADD1 shifts its second operand: record + (0x3c << 1). */
 uint32_t opencfw_em9305_common_callback_31497c(uintptr_t object)
 {
- uintptr_t original=*(volatile uint32_t *)(object+44u),root=0x8015c4u;
+ uintptr_t original=*(volatile uint32_t *)(object+44u),root=(uintptr_t)&em9305_ram_8015c4;
  uint8_t descriptor[20];
  *(volatile uint8_t *)root=1u;
  uintptr_t record=*(volatile uint32_t *)(object+44u);
@@ -4199,7 +4200,7 @@ uint32_t opencfw_em9305_common_callback_31497c(uintptr_t object)
  record=*(volatile uint32_t *)(object+44u);
  (void)opencfw_em9305_common_radio_prepare_30fb4c(record);
  record=*(volatile uint32_t *)(object+44u);
- uint32_t primary=*(volatile uint32_t *)(uintptr_t)0x805c14u;
+ uint32_t primary=em9305_ram_805be0.u32_805c14;
  *(volatile uint32_t *)(record+4u)=saved;
  *(volatile uint32_t *)(root+8u)=primary;
  *(volatile uint32_t *)(root+16u)=*(volatile uint32_t *)(object+8u);
@@ -4217,7 +4218,7 @@ extern const uint8_t opencfw_em9305_radio_template_3343a8[20];
  * Second input survives helper calls. Optional callback keeps its address R1. */
 uint32_t opencfw_em9305_common_callback_3149d4(uintptr_t object,uintptr_t input)
 {
- uintptr_t record=*(volatile uint32_t *)(object+44u),root=0x8015c4u;
+ uintptr_t record=*(volatile uint32_t *)(object+44u),root=(uintptr_t)&em9305_ram_8015c4;
  uint8_t descriptor[20];
  uint32_t now=*(volatile uint32_t *)(uintptr_t)0xf01808u;
  uint32_t timestamp=*(volatile uint32_t *)(object+8u);
@@ -4256,7 +4257,7 @@ extern const uint8_t opencfw_em9305_radio_template_33440c[20];
  * STH.AB writes old root then advances eight; ADD1 yields record+100. */
 uint32_t opencfw_em9305_common_callback_3152fc(uintptr_t object,uintptr_t input)
 {
- uintptr_t record=*(volatile uint32_t *)(object+44u),root=0x8015c4u;
+ uintptr_t record=*(volatile uint32_t *)(object+44u),root=(uintptr_t)&em9305_ram_8015c4;
  uint8_t descriptor[20];
  *(volatile uint32_t *)(root+20u)=4u;
  *(volatile uint32_t *)(root+12u)=(uint32_t)(uintptr_t)&opencfw_em9305_common_channel_callback_315000;
@@ -4281,7 +4282,7 @@ uint32_t opencfw_em9305_common_callback_3152fc(uintptr_t object,uintptr_t input)
  * ADD2 forms record+160; additional timestamp fields are at +236/+240. */
 uint32_t opencfw_em9305_common_callback_3153fc(uintptr_t object,uintptr_t input)
 {
- uintptr_t record=*(volatile uint32_t *)(object+44u),root=0x8015c4u;
+ uintptr_t record=*(volatile uint32_t *)(object+44u),root=(uintptr_t)&em9305_ram_8015c4;
  uint8_t descriptor[20];
  *(volatile uint32_t *)(root+20u)=4u;
  *(volatile uint32_t *)(root+12u)=(uint32_t)(uintptr_t)&opencfw_em9305_common_channel_callback_315000;
@@ -4315,7 +4316,7 @@ extern const uint8_t opencfw_em9305_radio_template_334434[20];
  * and input descriptor request. No root byte clear appears in this body. */
 uint32_t opencfw_em9305_common_callback_315490(uintptr_t object,uintptr_t input)
 {
- uintptr_t root=0x8015ccu;
+ uintptr_t root=((uintptr_t)&em9305_ram_8015c4 + 0x8u);
  uint8_t descriptor[20];
  *(volatile uint32_t *)(root+4u)=(uint32_t)(uintptr_t)&opencfw_em9305_common_channel_callback_315544;
  *(volatile uint32_t *)root=(uint32_t)(uintptr_t)&opencfw_em9305_common_channel_callback_3155c4;
@@ -4332,7 +4333,7 @@ uint32_t opencfw_em9305_common_callback_315490(uintptr_t object,uintptr_t input)
  * for a halfword/word request. Root context at +12 is preserved. */
 uint32_t opencfw_em9305_common_callback_3154e0(uintptr_t object,uintptr_t input)
 {
- uintptr_t root=0x8015ccu;
+ uintptr_t root=((uintptr_t)&em9305_ram_8015c4 + 0x8u);
  uint32_t descriptor[5];
  *(volatile uint32_t *)(root+4u)=(uint32_t)(uintptr_t)&opencfw_em9305_common_channel_callback_315544;
  *(volatile uint32_t *)root=(uint32_t)(uintptr_t)&opencfw_em9305_common_channel_callback_3155c4;
@@ -4355,7 +4356,7 @@ uint32_t opencfw_em9305_common_callback_314408(uintptr_t object)
 {
  uintptr_t record=*(volatile uint32_t *)(object+44u);
  uint32_t index=*(volatile uint8_t *)record;
- uintptr_t callback=*(volatile uint32_t *)(0x801534u+index*8u);
+ uintptr_t callback=*(volatile uint32_t *)((uintptr_t)&em9305_ram_801534 + index*8u);
  if (callback==0u) return (uint32_t)object;
  return ((uint32_t (*)(uintptr_t,uintptr_t,uintptr_t))callback)(object,record,callback);
 }
@@ -4397,7 +4398,7 @@ const uint8_t opencfw_em9305_radio_template_334434[20]={0x03u,0x00u,0x00u,0x00u,
  * activation/finish. Descriptor callback retains its own address in R2. */
 uint32_t opencfw_em9305_common_channel_callback_3151a0(uint32_t first)
 {
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uint8_t count=*(volatile uint8_t *)root;
  *(volatile uint8_t *)root=(uint8_t)(count+1u);
  uint32_t current=opencfw_em9305_auxiliary_ready_303f68();
@@ -4432,7 +4433,7 @@ uint32_t opencfw_em9305_common_channel_callback_315544(uint32_t first,uint32_t s
   result=opencfw_em9305_common_activate_310580(result);
   (void)opencfw_em9305_common_radio_finish_3045c0(result);
  }
- uintptr_t counters=0x801848u;
+ uintptr_t counters=(uintptr_t)&em9305_ram_801848;
  uint32_t offset=first==4u?4u:first==3u?8u:first==0u?0u:16u;
  volatile uint32_t *counter=(volatile uint32_t *)(counters+offset);
  *counter=*counter+1u;
@@ -4450,7 +4451,7 @@ uint32_t opencfw_em9305_radio_followup_driver_310374(uint32_t first,uint32_t sec
 {
  uint32_t adjusted=first;uint16_t selector=(uint16_t)second;
  (void)opencfw_em9305_radio_adjust_3101f4(first);
- uintptr_t root=0x805e94u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805e6c + 0x28u);
  uint8_t enabled=*(volatile uint8_t *)(root+17u);
  uint32_t mode=selector,parameter=adjusted;
  if (enabled!=0u) {
@@ -4471,8 +4472,8 @@ uint32_t opencfw_em9305_radio_followup_driver_310374(uint32_t first,uint32_t sec
 /* Native 0x30fb3c..0x30fb4c: wrapping increment and selector store before tail. */
 uint32_t opencfw_em9305_radio_followup_30fb3c(uint32_t first,uint32_t second)
 {
- *(volatile uint16_t *)(uintptr_t)0x805d38u=(uint16_t)second;
- *(volatile uint32_t *)(uintptr_t)0x805d34u=first+1u;
+ em9305_ram_805d34.u16_805d38=(uint16_t)second;
+ em9305_ram_805d34.u32_805d34=first+1u;
  return opencfw_em9305_radio_followup_driver_310374(first,second);
 }
 
@@ -4504,7 +4505,7 @@ uint32_t opencfw_em9305_radio_bits_311fcc(uintptr_t first,uintptr_t second)
 /* Native 0x3101f4..0x310200: stores original first parameter only.
  * R2/R3 supplied by 0x310374 are dead; stack outputs are never modified. */
 uint32_t opencfw_em9305_radio_adjust_3101f4(uint32_t first)
-{ *(volatile uint32_t *)(uintptr_t)0x805ec8u=first;return first; }
+{ em9305_ram_805e6c.u32_805ec8=first;return first; }
 
 /* Native 0x3155c4..0x315640: activate, descriptor callback, optional
  * follow-up request and counters. Native current-object dereference is
@@ -4518,7 +4519,7 @@ uint32_t opencfw_em9305_common_channel_callback_3155c4(uint32_t first)
  uintptr_t callback=*(volatile uint32_t *)(record+100u);
  uint32_t result=((uint32_t (*)(uint32_t,uint32_t,uintptr_t))callback)(activated,first,callback);
  if (first==0u && result!=0u) {
-  uintptr_t root=0x8015ccu;
+  uintptr_t root=((uintptr_t)&em9305_ram_8015c4 + 0x8u);
   uint32_t timestamp=*(volatile uint32_t *)(root+8u);
   timestamp+=*(volatile uint16_t *)(record+110u);
   *(volatile uint32_t *)(root+8u)=timestamp;
@@ -4530,7 +4531,7 @@ uint32_t opencfw_em9305_common_channel_callback_3155c4(uint32_t first)
   descriptor[1]=*(volatile uint32_t *)(record+104u);
   (void)opencfw_em9305_radio_record_request_30fc68((uintptr_t)descriptor,1u);
  } else (void)opencfw_em9305_common_radio_finish_3045c0(result);
- uintptr_t counters=0x801848u;
+ uintptr_t counters=(uintptr_t)&em9305_ram_801848;
  volatile uint32_t *counter=(volatile uint32_t *)(counters+(first==0u?12u:16u));
  *counter=*counter+1u;
  return (uint32_t)counters;
@@ -4541,7 +4542,7 @@ uint32_t opencfw_em9305_common_channel_callback_3155c4(uint32_t first)
 uint32_t opencfw_em9305_radio_completion_304140(uint32_t unused,uint32_t second)
 {
  (void)unused;
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uint8_t count=*(volatile uint8_t *)root;
  uint32_t increment=(uint32_t)count+1u;
  *(volatile uint8_t *)root=(uint8_t)increment;
@@ -4553,7 +4554,7 @@ uint32_t opencfw_em9305_radio_completion_304140(uint32_t unused,uint32_t second)
  uint8_t descriptor[20];
  (void)opencfw_em9305_memset(descriptor,0u,20u);
  (void)opencfw_em9305_radio_record_30fc28((uintptr_t)descriptor);
- (void)opencfw_em9305_radio_followup_30fb3c(0x8013f0u,257u);
+ (void)opencfw_em9305_radio_followup_30fb3c((uintptr_t)&em9305_ram_8013f0,257u);
  return 0u;
 }
 
@@ -4565,7 +4566,7 @@ uint32_t opencfw_em9305_common_channel_callback_3151fc(
 {
  (void)unused;
  uint32_t current=opencfw_em9305_auxiliary_ready_303f68();
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uint8_t count=*(volatile uint8_t *)root;
  uintptr_t record=*(volatile uint32_t *)((uintptr_t)current+44u);
  *(volatile uint8_t *)(record+133u)=(uint8_t)fifth;
@@ -4601,7 +4602,7 @@ uint32_t opencfw_em9305_common_channel_callback_314fa4(void)
 {
  uint32_t current=opencfw_em9305_auxiliary_ready_303f68();
  if (current!=0u) return opencfw_em9305_common_radio_finish_3045c0(current);
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uint8_t count=*(volatile uint8_t *)root;
  uintptr_t record;
  record=opencfw_em9305_low_word_2c();
@@ -4629,7 +4630,7 @@ uint32_t opencfw_em9305_common_channel_callback_315108(void)
 {
  uint32_t current=opencfw_em9305_auxiliary_ready_303f68();
  if (current!=0u) return opencfw_em9305_common_radio_finish_3045c0(current);
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uint32_t count=*(volatile uint8_t *)root;
  uintptr_t record;
  record=opencfw_em9305_low_word_2c();
@@ -4653,7 +4654,7 @@ uint32_t opencfw_em9305_common_channel_callback_315108(void)
   }
   uint32_t flag=*(volatile uint8_t *)(record+228u);
   if (flag!=0u) {
-   uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805c24u;
+   uintptr_t callback=em9305_ram_805be0.u32_805c24;
    if (callback==0u) return flag;
    result=((uint32_t (*)(uint32_t,uintptr_t,uintptr_t))callback)(current,record,callback);
    if (result==0u) return result;
@@ -4676,7 +4677,7 @@ uint32_t opencfw_em9305_channel_continue_314f54(uintptr_t object,uintptr_t recor
  if (adjustment==0u) return 1u;
  uintptr_t input=*(volatile uint32_t *)(object+44u);
  (void)opencfw_em9305_common_radio_prepare_30fb4c(input);
- uintptr_t root=0x8015ccu;
+ uintptr_t root=((uintptr_t)&em9305_ram_8015c4 + 0x8u);
  uint32_t timestamp=*(volatile uint32_t *)(root+8u);
  *(volatile uint32_t *)(root+8u)=timestamp+adjustment;
  (void)opencfw_em9305_common_radio_bind_30fc10(root);
@@ -4706,7 +4707,7 @@ uint32_t opencfw_em9305_common_channel_callback_314d18(uint32_t first)
    return result;
   }
  }
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uint32_t count=*(volatile uint8_t *)root;
  *(volatile uint8_t *)root=(uint8_t)(count+1u);
  if (count!=1u) return count;
@@ -4737,7 +4738,7 @@ extern uint32_t opencfw_em9305_rom_radio_101054(uint32_t,uint32_t);
  * ST.AB writes F04080 before advancing to F04068 for stack descriptor. */
 uint32_t opencfw_em9305_radio_schedule_311e60(uint32_t first,uint32_t second,uintptr_t callback)
 {
- uintptr_t root=0x8019c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8019c4;
  *(volatile uint32_t *)root=first;
  *(volatile uint32_t *)(root+4u)=(uint32_t)callback;
  *(volatile uint16_t *)(root+12u)=(uint16_t)second;
@@ -4761,7 +4762,7 @@ uint32_t opencfw_em9305_channel_retry_314594(uintptr_t object,uintptr_t record)
 {
  if (opencfw_em9305_auxiliary_start_303f50(object)!=0u) return 1u;
  uint32_t now=opencfw_em9305_pal_current_time();
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uint32_t previous=*(volatile uint32_t *)(root+4u);
  uint32_t elapsed=opencfw_em9305_auxiliary_elapsed_303f8c(now,previous);
  uint32_t accumulated=*(volatile uint32_t *)(record+164u);
@@ -4796,7 +4797,7 @@ uint32_t opencfw_em9305_channel_retry_314594(uintptr_t object,uintptr_t record)
 
 uint32_t opencfw_em9305_auxiliary_config_delay_303f74(void)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805c18u;
+ uintptr_t config=em9305_ram_805be0.u32_805c18;
  return *(volatile uint8_t *)(config+2u);
 }
 extern uint32_t opencfw_em9305_channel_timing_adjust_312c5c(uint32_t);
@@ -4806,7 +4807,7 @@ uint32_t opencfw_em9305_common_channel_start_314db8(
  uintptr_t object,uintptr_t record,uint32_t third,uint32_t fourth)
 {
  if (opencfw_em9305_auxiliary_start_303f50(object)!=0u) return 1u;
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uintptr_t actual=*(volatile uint32_t *)(object+44u);
  uint32_t channel=*(volatile uint8_t *)(root+1u);
  uint32_t attempts=*(volatile uint8_t *)(root+2u);
@@ -4863,13 +4864,13 @@ uint32_t opencfw_em9305_common_channel_start_314db8(
  * full-width increment return. Re-read depth after CLRI/SYNC as native. */
 uint32_t opencfw_em9305_radio_request_enter_310678(void)
 {
- volatile uint8_t *depth=(volatile uint8_t *)(uintptr_t)0x805ed4u;
+ volatile uint8_t *depth=&em9305_ram_805e6c.u8_805ed4;
  uint32_t value=*depth;
  if (value==0u) {
   uint32_t irq;
   irq = (uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
   value=*depth;
-  *(volatile uint32_t *)(uintptr_t)0x805ed0u=irq;
+  em9305_ram_805e6c.u32_805ed0=irq;
  }
  ++value;*depth=(uint8_t)value;return value;
 }
@@ -4877,11 +4878,11 @@ uint32_t opencfw_em9305_radio_request_enter_310678(void)
  * Return is depth-address when nonzero, saved IRQ when restored. */
 uint32_t opencfw_em9305_radio_request_exit_31069c(void)
 {
- volatile uint8_t *depth=(volatile uint8_t *)(uintptr_t)0x805ed4u;
+ volatile uint8_t *depth=&em9305_ram_805e6c.u8_805ed4;
  uint8_t value=(uint8_t)(*depth-1u);
  *depth=value;
- if (value!=0u) return 0x805ed4u;
- uint32_t irq=*(volatile uint32_t *)(uintptr_t)0x805ed0u;
+ if (value!=0u) return ((uintptr_t)&em9305_ram_805e6c + 0x68u);
+ uint32_t irq=em9305_ram_805e6c.u32_805ed0;
  __builtin_arc_seti((int)irq);
  return irq;
 }
@@ -4904,13 +4905,13 @@ uint32_t opencfw_em9305_radio_deadline_333450(uint32_t deadline)
  * byte trigger. Incoming R0 dead; return path retains native control R0. */
 uint32_t opencfw_em9305_radio_trigger_3123d0(void)
 {
- uint32_t value=*(volatile uint8_t *)(uintptr_t)0x8018dcu;
+ uint32_t value=em9305_ram_8018bc.u8_8018dc;
  if (value!=0u) {
-  value=*(volatile uint32_t *)(uintptr_t)0x8012e0u;
-  uint32_t control=*(volatile uint32_t *)(uintptr_t)0x8012f8u;
+  value=em9305_ram_8012c0.u32_8012e0;
+  uint32_t control=em9305_ram_8012c0.u32_8012f8;
   value=(value<<2u)&0x3cu;
   control=((control&0xffffbfc3u)|value)|0x4000u;
-  *(volatile uint32_t *)(uintptr_t)0x8012f8u=control;
+  em9305_ram_8012c0.u32_8012f8=control;
   *(volatile uint32_t *)(uintptr_t)0xf0484cu=control;
  }
  *(volatile uint8_t *)(uintptr_t)0xf04401u=3u;
@@ -4919,7 +4920,7 @@ uint32_t opencfw_em9305_radio_trigger_3123d0(void)
 /* Native 0x310600..0x310634: deadline state and callback on failure. */
 uint32_t opencfw_em9305_radio_request_state_310600(uint32_t offset)
 {
- uintptr_t root=0x805e78u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805e6c + 0xcu);
  uint32_t base=*(volatile uint32_t *)(root+12u);
  uint32_t lead=*(volatile uint16_t *)(root+34u);
  uint32_t deadline=offset+base-lead-113u;
@@ -4937,8 +4938,8 @@ uint32_t opencfw_em9305_radio_request_state_310600(uint32_t offset)
 /* Native 0x310640..0x310654: state2 store before zero-offset tail. */
 uint32_t opencfw_em9305_radio_request_base_310640(uint32_t base)
 {
- *(volatile uint32_t *)(uintptr_t)0x805e84u=base;
- *(volatile uint8_t *)(uintptr_t)0x805e78u=2u;
+ em9305_ram_805e6c.u32_805e84=base;
+ em9305_ram_805e6c.u8_805e78=2u;
  return opencfw_em9305_radio_request_state_310600(0u);
 }
 
@@ -4946,7 +4947,7 @@ uint32_t opencfw_em9305_radio_request_base_310640(uint32_t base)
  * F04080 then advances to F04058; stack word order differs from channel3. */
 uint32_t opencfw_em9305_radio_schedule_311ef0(uint32_t first,uint32_t second,uintptr_t callback)
 {
- uintptr_t root=0x8019d4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8019d4;
  *(volatile uint32_t *)root=first;
  *(volatile uint32_t *)(root+4u)=(uint32_t)callback;
  *(volatile uint16_t *)(root+12u)=(uint16_t)second;
@@ -4968,7 +4969,7 @@ extern uint32_t opencfw_em9305_radio_callback_33354c(uint32_t);
 /* Native 0x3105b8..0x310600: optional record bits before channel2 setup. */
 uint32_t opencfw_em9305_radio_request_3105b8(uintptr_t first,uint32_t second)
 {
- uintptr_t root=0x805ea4u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805e6c + 0x38u);
  if (*(volatile uint8_t *)root!=0u && *(volatile uint8_t *)(first+1u)!=0u) {
   uint32_t mode=*(volatile uint8_t *)(root+2u);
   uint32_t bits=*(volatile uint8_t *)(root+24u);
@@ -4984,7 +4985,7 @@ uint32_t opencfw_em9305_radio_request_3105b8(uintptr_t first,uint32_t second)
 uint32_t opencfw_em9305_radio_callback_33354c(uint32_t status)
 {
  (void)opencfw_em9305_pal_hook_three(16u);
- uintptr_t root=0x805e78u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805e6c + 0xcu);
  if (status!=0u) {
   (void)opencfw_em9305_common_activate_310580(16u);
   uintptr_t callback=*(volatile uint32_t *)(root+8u);
@@ -5010,7 +5011,7 @@ void opencfw_em9305_common_channel_callback_3147b4(void)
  uintptr_t record=*(volatile uint32_t *)((uintptr_t)current+44u);
  uintptr_t callback=*(volatile uint32_t *)(record+108u);
  uint32_t result=((uint32_t (*)(uint32_t,uint32_t,uintptr_t))callback)(current,current,callback);
- uintptr_t root=0x8015dcu;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015dc;
  uint32_t pending=*(volatile uint32_t *)(root+4u);
  if (current!=0u) {
   if (pending!=0u) {
@@ -5038,8 +5039,8 @@ extern uint32_t opencfw_em9305_radio_adjust_31199c(uint32_t);
 uint32_t opencfw_em9305_radio_adjust_31199c(uint32_t unused)
 {
  (void)unused;
- *(volatile uint8_t *)(uintptr_t)0x8019c0u=1u;
- return 0x8019c0u;
+ em9305_ram_801994.u8_8019c0=1u;
+ return ((uintptr_t)&em9305_ram_801994 + 0x2cu);
 }
 /* Native314a88..314c02: five-register completion state machine. LDB.AB
  * reads root's original byte before advancing eight bytes. */
@@ -5047,7 +5048,7 @@ uint32_t opencfw_em9305_common_channel_callback_314a88(
  uint32_t first,uint32_t second,uint32_t third,uint32_t fourth,uint32_t fifth)
 {
  uint32_t current=opencfw_em9305_auxiliary_ready_303f68();
- uintptr_t root=0x8015ccu;
+ uintptr_t root=((uintptr_t)&em9305_ram_8015c4 + 0x8u);
  uint32_t state=*(volatile uint8_t *)(root-8u);
  uint32_t result=current,phase=first,buffer=fifth;
  uintptr_t record,callback;
@@ -5065,7 +5066,7 @@ uint32_t opencfw_em9305_common_channel_callback_314a88(
   *(volatile uint8_t *)(record+148u)=1u;
   *(volatile uint8_t *)(record+139u)=(uint8_t)fifth;
   callback=*(volatile uint32_t *)(record+100u);
-  buffer=0x8016f8u;
+  buffer=(uintptr_t)&em9305_ram_8016f8;
   result=((uint32_t (*)(uint32_t,uint32_t,uint32_t,uintptr_t))callback)(current,buffer,0u,callback);
   phase=result;
   if (result==0u) goto special;
@@ -5085,7 +5086,7 @@ uint32_t opencfw_em9305_common_channel_callback_314a88(
  *(volatile uint8_t *)(record+138u)=(uint8_t)second;
  *(volatile uint8_t *)(record+148u)=0u;
  callback=*(volatile uint32_t *)(record+100u);
- buffer=0x8016f8u;
+ buffer=(uintptr_t)&em9305_ram_8016f8;
  result=((uint32_t (*)(uint32_t,uint32_t,uint32_t,uintptr_t))callback)(current,buffer,0u,callback);
  phase=result;
  if (result==0u) goto callback_buffer;
@@ -5115,13 +5116,13 @@ callback_zero:
 special:
  result=*(volatile uint8_t *)(record+136u);
  if (result!=0u) {
-  callback=*(volatile uint32_t *)(uintptr_t)0x805c08u;
+  callback=em9305_ram_805be0.u32_805c08;
   if (callback==0u) goto activate;
   result=((uint32_t (*)(uintptr_t,uint32_t,uintptr_t))callback)(record,1u,callback);
  } else {
   result=*(volatile uint8_t *)(record+150u);
   if (result==0u) goto callback_buffer;
-  callback=*(volatile uint32_t *)(uintptr_t)0x805c0cu;
+  callback=em9305_ram_805be0.u32_805c0c;
   if (callback==0u) goto activate;
   result=((uint32_t (*)(uint32_t,uintptr_t,uint32_t,uint32_t,uint32_t))callback)(current,record,buffer,1u,fourth);
  }
@@ -5151,7 +5152,7 @@ uint32_t opencfw_em9305_common_channel_callback_314c04(
   }
   return result;
  }
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uint32_t count=*(volatile uint8_t *)root;
  *(volatile uint8_t *)root=(uint8_t)(count+1u);
  result=count;
@@ -5211,7 +5212,7 @@ uint32_t opencfw_em9305_common_channel_callback_314ea4(
 {
  (void)unused1;(void)unused2;
  uint32_t current=opencfw_em9305_auxiliary_ready_303f68();
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uint32_t count=*(volatile uint8_t *)root;
  uintptr_t record=*(volatile uint32_t *)((uintptr_t)current+44u);
  uint32_t result=count+1u;
@@ -5264,7 +5265,7 @@ uint32_t opencfw_em9305_common_channel_callback_315000(
 {
  (void)unused2;
  uint32_t current=opencfw_em9305_auxiliary_ready_303f68();
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  uint32_t count=*(volatile uint8_t *)root;
  uintptr_t record=*(volatile uint32_t *)((uintptr_t)current+44u);
  uint32_t result=count+1u;
@@ -5280,7 +5281,7 @@ uint32_t opencfw_em9305_common_channel_callback_315000(
    result=((uint32_t (*)(uint32_t,uint32_t,uintptr_t))callback)(current,0u,callback);
    goto clear_finish;
   }
-  uintptr_t hook=*(volatile uint32_t *)(uintptr_t)0x805c1cu;
+  uintptr_t hook=em9305_ram_805be0.u32_805c1c;
   if (hook==0u) goto clear_finish;
   saved_hook=hook;
   goto call_hook;
@@ -5300,7 +5301,7 @@ uint32_t opencfw_em9305_common_channel_callback_315000(
  if (entry!=0u) {
   result=((uint32_t (*)(uint32_t,uint32_t,uintptr_t))callback)(current,entry,callback);
   if (result!=0u) {
-   uintptr_t hook=*(volatile uint32_t *)(uintptr_t)0x805c20u;
+   uintptr_t hook=em9305_ram_805be0.u32_805c20;
    if (hook!=0u) {
     result=((uint32_t (*)(uint32_t,uintptr_t,uint32_t,uintptr_t))hook)(current,record,0u,hook);
     *(volatile uint8_t *)flag=0u;
@@ -5352,7 +5353,7 @@ void opencfw_em9305_common_channel_callback_315260(void)
  uintptr_t record=*(volatile uint32_t *)((uintptr_t)current+44u);
  uintptr_t callback=*(volatile uint32_t *)(record+112u);
  uint32_t result=((uint32_t (*)(uint32_t,uint32_t,uintptr_t))callback)(current,current,callback);
- uintptr_t root=0x8015dcu;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015dc;
  uint32_t pending=*(volatile uint32_t *)(root+4u);
  if (current!=0u) {
   if (pending!=0u) {
@@ -5392,7 +5393,7 @@ uintptr_t opencfw_em9305_radio_flatten_333064(uintptr_t descriptor,uint32_t sele
    uint32_t body_length=*(volatile uint16_t *)(descriptor+8u);
    uintptr_t tail=*(volatile uint32_t *)(descriptor+12u)+body_length;
    uint32_t tail_length=*(volatile uint16_t *)(descriptor+16u);
-   uintptr_t scratch=0x805d28u;
+   uintptr_t scratch=((uintptr_t)&em9305_ram_805c5c + 0xccu);
    (void)opencfw_em9305_memcpy((void *)scratch,(const void *)tail,(uint8_t)tail_length);
    uintptr_t source=*(volatile uint32_t *)(descriptor+20u);
    *(volatile uint8_t *)(scratch+8u)=(uint8_t)tail_length;
@@ -5401,7 +5402,7 @@ uintptr_t opencfw_em9305_radio_flatten_333064(uintptr_t descriptor,uint32_t sele
   }
   return header;
  }
- uintptr_t scratch=0x805d3cu;
+ uintptr_t scratch=(uintptr_t)&em9305_ram_805d3c;
  (void)opencfw_em9305_memcpy((void *)scratch,(const void *)first,length);
  length=*(volatile uint16_t *)descriptor;
  uintptr_t source=*(volatile uint32_t *)(descriptor+12u);
@@ -5413,9 +5414,9 @@ uintptr_t opencfw_em9305_radio_flatten_333064(uintptr_t descriptor,uint32_t sele
  * The high kind bit is ORed with the full incoming third word. */
 uint32_t opencfw_em9305_radio_address_match_303df8(uint32_t kind,uint32_t low,uint32_t high)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x80163au;
+ uint32_t count=em9305_ram_801638.u8_80163a;
  if (count==0u) return 0u;
- uintptr_t row=*(volatile uint32_t *)(uintptr_t)0x805c04u;
+ uintptr_t row=em9305_ram_805be0.u32_805c04;
  uint32_t packed=((kind!=0u)?0x10000u:0u)|high;
  for (uint32_t index=1u;;++index) {
   uint32_t actual_high=*(volatile uint32_t *)(row+4u);
@@ -5429,24 +5430,24 @@ uint32_t opencfw_em9305_radio_address_match_303df8(uint32_t kind,uint32_t low,ui
 /* Native303e38..303e50: clear both bytes, return second address. */
 uint32_t opencfw_em9305_radio_address_reset_303e38(void)
 {
- *(volatile uint8_t *)(uintptr_t)0x801639u=0u;
- *(volatile uint8_t *)(uintptr_t)0x80163au=0u;
- return 0x80163au;
+ em9305_ram_801638.u8_801639=0u;
+ em9305_ram_801638.u8_80163a=0u;
+ return ((uintptr_t)&em9305_ram_801638 + 0x2u);
 }
 uint32_t opencfw_em9305_radio_address_status_303e50(void)
-{ return *(volatile uint8_t *)(uintptr_t)0x80163bu; }
+{ return em9305_ram_801638.u8_80163b; }
 /* Native303e5c..303e68: delayed byte load. */
 uint32_t opencfw_em9305_radio_address_mode_303e5c(void)
-{ return *(volatile uint8_t *)(uintptr_t)0x801639u; }
+{ return em9305_ram_801638.u8_801639; }
 /* Native303e68..303ec0: remove matched row by copying the final row;
  * preserves high-word-first load/store order and byte count decrement. */
 uint32_t opencfw_em9305_radio_address_remove_303e68(uint32_t kind,uint32_t low,uint32_t high)
 {
- volatile uint8_t *count_cell=(volatile uint8_t *)(uintptr_t)0x80163au;
+ volatile uint8_t *count_cell=&em9305_ram_801638.u8_80163a;
  uint32_t count=*count_cell;
  if (count==0u) return 0u;
  uint32_t packed=((kind!=0u)?0x10000u:0u)|high;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c04u;
+ uintptr_t base=em9305_ram_805be0.u32_805c04;
  uintptr_t row=base;
  for (uint32_t index=0u;index<count;++index,row+=8u) {
   uint32_t actual_high=*(volatile uint32_t *)(row+4u);
@@ -5467,14 +5468,14 @@ uint32_t opencfw_em9305_radio_address_remove_303e68(uint32_t kind,uint32_t low,u
 /* Native303ec0..303ecc: disable mode, return byte address. */
 uint32_t opencfw_em9305_radio_address_disable_303ec0(void)
 {
- *(volatile uint8_t *)(uintptr_t)0x801639u=0u;
- return 0x801639u;
+ em9305_ram_801638.u8_801639=0u;
+ return ((uintptr_t)&em9305_ram_801638 + 0x1u);
 }
 /* Native303ecc..303ef0: clear current object before optional provider
  * callback; index uses24-byte provider rows and callback address in R1. */
 uint32_t opencfw_em9305_auxiliary_release_303ecc(void)
 {
- uintptr_t root=0x80163cu;
+ uintptr_t root=((uintptr_t)&em9305_ram_801638 + 0x4u);
  uint32_t object=*(volatile uint32_t *)root;
  if (object==0u) return object;
  uint32_t index=*(volatile uint8_t *)((uintptr_t)object+26u);
@@ -5520,9 +5521,9 @@ uint32_t opencfw_em9305_radio_classify_314470(uint32_t mode,uint32_t resolve,uin
  * (unlike the boolean-normalizing address filter lookup). */
 uintptr_t opencfw_em9305_radio_identity_find_31441c(uint32_t kind,uint32_t low,uint32_t high)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x801610u;
+ uint32_t count=em9305_ram_801608.u8_801610;
  if (count==0u) return 0u;
- uintptr_t row=*(volatile uint32_t *)(uintptr_t)0x805c00u;
+ uintptr_t row=em9305_ram_805be0.u32_805c00;
  uint32_t packed=(kind<<16u)|high;
  for (uint32_t index=0u;index<count;++index,row+=72u) {
   uint32_t actual_high=*(volatile uint32_t *)(row+36u);
@@ -5541,11 +5542,11 @@ uint32_t opencfw_em9305_radio_identity_303954(uint32_t kind,uint32_t low,uint32_
  return row!=0u;
 }
 uint32_t opencfw_em9305_radio_identity_status_30396c(void)
-{ return *(volatile uint8_t *)(uintptr_t)0x801611u; }
+{ return em9305_ram_801608.u8_801611; }
 /* Native303978..3039a0: four-row exclusion lookup, returns0 on match. */
 uint32_t opencfw_em9305_radio_known_303978(uint32_t low,uint32_t high)
 {
- uintptr_t row=0x801618u;
+ uintptr_t row=(uintptr_t)&em9305_ram_801618;
  for (uint32_t index=1u;;++index,row+=8u) {
   uint32_t actual_high=*(volatile uint32_t *)(row+4u);
   uint32_t actual_low=*(volatile uint32_t *)row;
@@ -5620,7 +5621,7 @@ uint32_t opencfw_em9305_radio_identity_compare_3039a0(
 /* Native303c9c..303ca8: delayed store leaves original input in R0. */
 uint32_t opencfw_em9305_radio_identity_control_303c9c(uint32_t value)
 {
- *(volatile uint32_t *)(uintptr_t)0x80160cu=value;
+ em9305_ram_801608.u32_80160c=value;
  return value;
 }
 /* Native303ca8..303cc0: matching identity byte67 setter. */
@@ -5649,7 +5650,7 @@ const uint8_t opencfw_em9305_radio_template_334420[20]={1u};
  * query, submit only descriptor type5 with zero phase byte. */
 uint32_t opencfw_em9305_radio_request_start_303cd8(uint32_t first,uint32_t second)
 {
- uintptr_t root=0x8015c4u;
+ uintptr_t root=(uintptr_t)&em9305_ram_8015c4;
  *(volatile uint16_t *)(root+24u)=(uint16_t)second;
  *(volatile uint32_t *)(root+28u)=first;
  uintptr_t current=opencfw_em9305_auxiliary_ready_303f68();
@@ -5670,7 +5671,7 @@ uint32_t opencfw_em9305_radio_request_current_303d58(uint32_t unused,uint32_t se
  (void)unused;
  uintptr_t current=opencfw_em9305_auxiliary_ready_303f68();
  uintptr_t record=*(volatile uint32_t *)(current+44u);
- uint32_t phase=*(volatile uint8_t *)(uintptr_t)0x8015c4u;
+ uint32_t phase=em9305_ram_8015c4.u8_8015c4;
  uint32_t type=*(volatile uint8_t *)record;
  uint32_t descriptor[5];
  (void)opencfw_em9305_memcpy(descriptor,opencfw_em9305_radio_template_334420,20u);
@@ -5683,11 +5684,11 @@ uint32_t opencfw_em9305_radio_request_current_303d58(uint32_t unused,uint32_t se
 uint32_t opencfw_em9305_radio_address_add_303da4(uint32_t kind,uint32_t low,uint32_t high)
 {
  if (opencfw_em9305_radio_address_match_303df8(kind,low,high)!=0u) return 1u;
- volatile uint8_t *count_cell=(volatile uint8_t *)(uintptr_t)0x80163au;
+ volatile uint8_t *count_cell=&em9305_ram_801638.u8_80163a;
  uint32_t count=*count_cell;
- uint32_t limit=*(volatile uint8_t *)(uintptr_t)0x80163bu;
+ uint32_t limit=em9305_ram_801638.u8_80163b;
  if (count>=limit) return 0u;
- uintptr_t row=*(volatile uint32_t *)(uintptr_t)0x805c04u+count*8u;
+ uintptr_t row=*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_805be0 + 0x24u)+count*8u;
  uint32_t packed=high|((kind!=0u)?0x10000u:0u);
  *count_cell=(uint8_t)(count+1u);
  *(volatile uint32_t *)(row+4u)=packed;
@@ -5696,8 +5697,8 @@ uint32_t opencfw_em9305_radio_address_add_303da4(uint32_t kind,uint32_t low,uint
 }
 uint32_t opencfw_em9305_radio_address_enable_303dec(void)
 {
- *(volatile uint8_t *)(uintptr_t)0x801639u=1u;
- return 0x801639u;
+ em9305_ram_801638.u8_801639=1u;
+ return ((uintptr_t)&em9305_ram_801638 + 0x1u);
 }
 extern uint32_t opencfw_em9305_radio_random_bytes_310038(uintptr_t,uint32_t);
 extern uint32_t opencfw_em9305_radio_hash24_314640(uintptr_t,uint32_t);
@@ -5722,7 +5723,7 @@ uint32_t opencfw_em9305_radio_random_bytes_310038(uintptr_t output,uint32_t leng
  uint32_t remaining=length,done=0u,result;
  do {
   uint8_t scratch[8];
-  uint32_t status=opencfw_em9305_rom_random_10a7f8(0x805e40u,2u,(uintptr_t)scratch);
+  uint32_t status=opencfw_em9305_rom_random_10a7f8((uintptr_t)&em9305_ram_805e40,2u,(uintptr_t)scratch);
   if (status!=0u) __builtin_arc_trap_s(0);
   uint32_t chunk=(uint8_t)remaining;
   if (chunk>8u) chunk=8u;
@@ -5760,7 +5761,7 @@ uint32_t opencfw_em9305_radio_cipher_30ff0c(uintptr_t key,uintptr_t output,uintp
 uint32_t opencfw_em9305_common_radio_finish_3045c0(uint32_t unused)
 {
  (void)unused;
- uintptr_t root=0x80163cu;
+ uintptr_t root=((uintptr_t)&em9305_ram_801638 + 0x4u);
  uintptr_t object=*(volatile uint32_t *)root;
  if (object!=0u) {
   uint32_t index=*(volatile uint8_t *)(object+26u);
@@ -5790,9 +5791,9 @@ uintptr_t opencfw_em9305_radio_address_copy_304604(uintptr_t output,uintptr_t in
  * return is either zero or native RAM control-word address. */
 uint32_t opencfw_em9305_radio_receive_trigger_312360(void)
 {
- uint32_t result=*(volatile uint8_t *)(uintptr_t)0x8018dcu;
+ uint32_t result=em9305_ram_8018bc.u8_8018dc;
  if (result!=0u) {
-  uintptr_t control=0x8012f8u;
+  uintptr_t control=((uintptr_t)&em9305_ram_8012c0 + 0x38u);
   uint32_t value=*(volatile uint32_t *)control;
   value=(value&0xffffbfc3u)|4u;
   *(volatile uint32_t *)control=value;
@@ -5805,13 +5806,13 @@ uint32_t opencfw_em9305_radio_receive_trigger_312360(void)
 /* Native312390..3123d0: optional mode control then TX trigger. */
 uint32_t opencfw_em9305_radio_transmit_trigger_312390(void)
 {
- uint32_t result=*(volatile uint8_t *)(uintptr_t)0x8018dcu;
+ uint32_t result=em9305_ram_8018bc.u8_8018dc;
  if (result!=0u) {
-  result=*(volatile uint32_t *)(uintptr_t)0x8012e0u;
-  uint32_t control=*(volatile uint32_t *)(uintptr_t)0x8012f8u;
+  result=em9305_ram_8012c0.u32_8012e0;
+  uint32_t control=em9305_ram_8012c0.u32_8012f8;
   result=(result<<2u)&0x3cu;
   control=((control&0xffffbfc3u)|result)|0x4000u;
-  *(volatile uint32_t *)(uintptr_t)0x8012f8u=control;
+  em9305_ram_8012c0.u32_8012f8=control;
   *(volatile uint32_t *)(uintptr_t)0xf0484cu=control;
  }
  *(volatile uint8_t *)(uintptr_t)0xf04400u=1u;
@@ -5840,16 +5841,16 @@ extern uint32_t opencfw_em9305_radio_channel_convert_311878(uint32_t);
 uint32_t opencfw_em9305_radio_apply_3120a0(uint32_t first,uint32_t second)
 {
  uint32_t encoded=((first<<8u)&0x700u)|(second&7u);
- *(volatile uint32_t *)(uintptr_t)0x805fe0u=3u;
+ em9305_ram_805fdc.u32_805fe0=3u;
  *(volatile uint32_t *)(uintptr_t)0xf04404u=0u;
- uintptr_t root=0x80fd38u;
+ uintptr_t root=((uintptr_t)&em9305_ram_80fd2c.u8_80fd38);
  uintptr_t table=*(volatile uint32_t *)(root+20u);
  *(volatile uint32_t *)(uintptr_t)0xf04004u=encoded;
  *(volatile uint32_t *)(uintptr_t)0xf04000u=1u;
  *(volatile uint32_t *)(uintptr_t)0xf0402cu=0x10003u;
- uint32_t selected=*(volatile uint8_t *)(uintptr_t)0x8018ddu;
- if (selected!=0u) selected=*(volatile uint32_t *)(uintptr_t)0x8018e0u;
- else selected=0x80032du;
+ uint32_t selected=em9305_ram_8018bc.u8_8018dd;
+ if (selected!=0u) selected=em9305_ram_8018bc.u32_8018e0;
+ else selected=(uintptr_t)&em9305_ram_80032d;
  *(volatile uint32_t *)(uintptr_t)0xf04030u=selected;
  *(volatile uint32_t *)(uintptr_t)0xf0403cu=2u;
  *(volatile uint32_t *)(uintptr_t)0xf04040u=72u;
@@ -5873,8 +5874,8 @@ uint32_t opencfw_em9305_radio_apply_3120a0(uint32_t first,uint32_t second)
   }
   if (first<2u) {
    uintptr_t timing=*(volatile uint32_t *)(root+32u);
-   uint32_t low_offset=*(volatile uint16_t *)(uintptr_t)0x805efeu;
-   uint32_t high_offset=*(volatile uint16_t *)(uintptr_t)0x805efcu;
+   uint32_t low_offset=em9305_ram_805eec.u16_805efe;
+   uint32_t high_offset=em9305_ram_805eec.u16_805efc;
    uint32_t pair_offset=first*6u;
    uint32_t low=*(volatile uint16_t *)(timing+pair_offset+2u);
    uint32_t high=*(volatile uint16_t *)(timing+pair_offset+4u);
@@ -5882,7 +5883,7 @@ uint32_t opencfw_em9305_radio_apply_3120a0(uint32_t first,uint32_t second)
    high=(uint32_t)(int32_t)(int16_t)(high+high_offset);
    (void)opencfw_em9305_radio_timing_pair_31197c(low,high);
    uint32_t value=*(volatile uint16_t *)(timing+pair_offset);
-   uint32_t offset=*(volatile uint16_t *)(uintptr_t)0x805fdcu;
+   uint32_t offset=em9305_ram_805fdc.u16_805fdc;
    (void)opencfw_em9305_radio_timing_store_311990((uint32_t)(int32_t)(int16_t)(offset+value));
   }
  }
@@ -5893,7 +5894,7 @@ uint32_t opencfw_em9305_radio_apply_3120a0(uint32_t first,uint32_t second)
   if (second<2u) *(volatile uint8_t *)(uintptr_t)0xf04009u=(uint8_t)second;
   else *(volatile uint32_t *)(uintptr_t)0xf04008u=0x93cu;
  }
- uintptr_t flag=0x8019c0u;
+ uintptr_t flag=((uintptr_t)&em9305_ram_801994 + 0x2cu);
  if (*(volatile uint8_t *)flag!=0u) {
   *(volatile uint8_t *)flag=0u;
   return (uint32_t)flag;
@@ -5914,20 +5915,20 @@ uint32_t opencfw_em9305_radio_channel_convert_311878(uint32_t channel)
  level=opencfw_em9305_controller_select_level(level);
  level=opencfw_em9305_packet_default_30f65c(level);
  uint32_t index=opencfw_em9305_radio_mode_index_311a20(channel,level);
- uintptr_t descriptor=*(volatile uint32_t *)(uintptr_t)0x80fd44u;
+ uintptr_t descriptor=em9305_ram_80fd2c.u32_80fd44;
  *(volatile uint8_t *)(descriptor+4u)=(uint8_t)index;
  (void)opencfw_em9305_radio_channel_prepare_3124e4(index);
  uint32_t control=*(volatile uint32_t *)(uintptr_t)0xf0484cu;
  uint32_t second=opencfw_em9305_revision_table[index*3u+1u];
  control&=0xffffb003u;
- uint32_t enabled=*(volatile uint8_t *)(uintptr_t)0x8018dcu;
+ uint32_t enabled=em9305_ram_8018bc.u8_8018dc;
  uint32_t third=opencfw_em9305_revision_table[index*3u+2u];
  uint32_t mode=(second<<2u)&0x3cu;
  control=(mode|control)+((third&63u)<<6u);
- *(volatile uint32_t *)(uintptr_t)0x8012f8u=control;
+ em9305_ram_8012c0.u32_8012f8=control;
  if (enabled!=0u) {
   control|=0x4000u;
-  *(volatile uint32_t *)(uintptr_t)0x8012f8u=control;
+  em9305_ram_8012c0.u32_8012f8=control;
  }
  *(volatile uint32_t *)(uintptr_t)0xf0484cu=control;
  uint32_t drive=*(volatile uint32_t *)(uintptr_t)0xf04b88u;
@@ -5955,38 +5956,38 @@ uint32_t opencfw_em9305_radio_channel_prepare_3124e4(uint32_t index)
  int32_t level=(int8_t)opencfw_em9305_revision_table[offset];
  uint32_t enabled=1u;
  if (level<7) {
-  uint32_t prior=*(volatile uint8_t *)(uintptr_t)0x8018dcu;
+  uint32_t prior=em9305_ram_8018bc.u8_8018dc;
   enabled=0u;
   if (prior!=0u) {
-   uint32_t control=*(volatile uint32_t *)(uintptr_t)0x8012f8u;
+   uint32_t control=em9305_ram_8012c0.u32_8012f8;
    control&=~0x4000u;
-   *(volatile uint32_t *)(uintptr_t)0x8012f8u=control;
+   em9305_ram_8012c0.u32_8012f8=control;
    *(volatile uint32_t *)(uintptr_t)0xf0484cu=control;
   }
  }
  uint32_t value=(uint32_t)(int32_t)(int8_t)opencfw_em9305_revision_table[offset+1u];
- *(volatile uint8_t *)(uintptr_t)0x8018dcu=(uint8_t)enabled;
- *(volatile uint32_t *)(uintptr_t)0x8012e0u=value;
+ em9305_ram_8018bc.u8_8018dc=(uint8_t)enabled;
+ em9305_ram_8012c0.u32_8012e0=value;
  return value;
 }
 /* Native31252c..312598: gated control refresh. Read status twice when
  * gate qualifies, and retain native R0 on each early/late path. */
 uint32_t opencfw_em9305_radio_control_refresh_31252c(uint32_t selector)
 {
- if (*(volatile uint8_t *)(uintptr_t)0x8018dcu==0u) return selector;
+ if (em9305_ram_8018bc.u8_8018dc==0u) return selector;
  uint32_t status=*(volatile uint32_t *)(uintptr_t)0xf0440cu;
  uint32_t gate=(selector!=0u)?2u:1u;
  if ((status&gate)==0u) return selector;
  status=*(volatile uint32_t *)(uintptr_t)0xf0440cu;
- uint32_t result=*(volatile uint32_t *)(uintptr_t)0x8012f8u;
+ uint32_t result=em9305_ram_8012c0.u32_8012f8;
  uint32_t control=result&0xffffbfc3u;
  uint32_t use_mode=(selector!=0u)?((status&512u)==0u):((status&256u)!=0u);
  if (use_mode!=0u) {
-  result=*(volatile uint32_t *)(uintptr_t)0x8012e0u;
+  result=em9305_ram_8012c0.u32_8012e0;
   result=(result<<2u)&0x3cu;
   control=(control|result)|0x4000u;
  } else control|=4u;
- *(volatile uint32_t *)(uintptr_t)0x8012f8u=control;
+ em9305_ram_8012c0.u32_8012f8=control;
  *(volatile uint32_t *)(uintptr_t)0xf0484cu=control;
  return result;
 }
@@ -6029,7 +6030,7 @@ uint32_t opencfw_em9305_ll_special_mode_initialize(uint32_t incoming)
  uintptr_t event=opencfw_em9305_wsf_event_allocate(4u);
  if (event==0u) return 0u;
  *(volatile uint16_t *)(event+2u)=0xffu;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint16_t *)event=0xffu;
  return opencfw_em9305_wsf_task_message_send(handler,event);
 }
@@ -6081,22 +6082,22 @@ uint32_t opencfw_em9305_ll_queued_event_active(uintptr_t message)
 {
  _Alignas(4) uint8_t decoded[8];
  (void)opencfw_em9305_ll_event_decode_32dae4((uintptr_t)decoded,message);
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t link=*(volatile uint16_t *)(void *)decoded;
  if(link<*(volatile uint8_t *)(config+34u)) {
-  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+  uintptr_t base=em9305_ram_805c5c.u32_805c70;
   uintptr_t record=base+link*912u;
   if(*(volatile uint8_t *)record==0u)
    return opencfw_em9305_wsf_event_release(message);
   if(*(volatile uint8_t *)(record+1u)!=3u) {
    uint32_t kind=*(volatile uint8_t *)(decoded+2u);
-   if(*(volatile uint32_t *)(uintptr_t)0x805cd8u!=0u || kind!=3u) {
+   if(em9305_ram_805c5c.u32_805cd8!=0u || kind!=3u) {
     uint32_t length=*(volatile uint16_t *)(void *)(decoded+4u);
     if((kind==3u || length!=0u) &&
        *(volatile uint16_t *)(config+38u)>=length) {
      (void)opencfw_em9305_wsf_critical_enter();
-     uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805ab4u;
-     *(volatile uint8_t *)(uintptr_t)0x805ab4u=(uint8_t)(count-1u);
+     uint32_t count=em9305_ram_805a6c.u8_805ab4;
+     em9305_ram_805a6c.u8_805ab4=(uint8_t)(count-1u);
      (void)opencfw_em9305_wsf_critical_exit();
      if(*(volatile uint8_t *)(record+404u)!=0u)
       return opencfw_em9305_ll_event_enqueue(record+352u,
@@ -6104,7 +6105,7 @@ uint32_t opencfw_em9305_ll_queued_event_active(uintptr_t message)
      uint32_t mode=opencfw_em9305_ll_event_mode_32d4b0(record);
      (void)opencfw_em9305_ll_event_process_32d380(record,mode,
                                                (uintptr_t)decoded,message);
-     uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+     uint32_t handler=em9305_ram_805af0.u8_805b18;
      return opencfw_em9305_wsf_event_post(handler,4u);
     }
     if(kind==0u && length==0u)
@@ -6113,7 +6114,7 @@ uint32_t opencfw_em9305_ll_queued_event_active(uintptr_t message)
   }
  }
  (void)opencfw_em9305_wsf_event_release(message);
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805b10u;
+ uintptr_t callback=em9305_ram_805af0.u32_805b10;
  return ((uint32_t (*)(uint32_t,uint32_t))callback)(
    *(volatile uint16_t *)(void *)decoded,1u);
 }
@@ -6123,7 +6124,7 @@ extern uint32_t opencfw_em9305_ll_schedule_notify_313354(uintptr_t);
 /* Native333804..33382c: remove a non-head scheduler object, no null guards. */
 uintptr_t opencfw_em9305_auxiliary_unlink_333804(uintptr_t object)
 {
- uintptr_t root=0x805f04u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x18u);
  uintptr_t tail=*(volatile uint32_t *)(root+20u);
  uintptr_t previous=*(volatile uint32_t *)object;
  if(tail!=object) {
@@ -6141,7 +6142,7 @@ uintptr_t opencfw_em9305_auxiliary_unlink_333804(uintptr_t object)
 /* Native313354..3133a0: cancel listed scheduler object, then optional callback. */
 uint32_t opencfw_em9305_ll_schedule_notify_313354(uintptr_t object)
 {
- uintptr_t root=0x805f04u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x18u);
  uintptr_t cursor=root+16u;
  for(;;) {
   uintptr_t entry=*(volatile uint32_t *)cursor;
@@ -6167,7 +6168,7 @@ extern uintptr_t opencfw_em9305_ll_received_resize_3048b0(uintptr_t,uintptr_t);
 /* Native304a98..304ac4: release retained fragments, then clear count. */
 uint32_t opencfw_em9305_ll_fragment_clear_304a98(void)
 {
- uintptr_t cell=0x8019f0u,row=0x8019e8u;
+ uintptr_t cell=((uintptr_t)&em9305_ram_8019e8 + 0x8u),row=(uintptr_t)&em9305_ram_8019e8;
  uint32_t count=*(volatile uint8_t *)cell;
  if(count!=0u) {
   uint32_t done=0u;
@@ -6184,12 +6185,12 @@ uint32_t opencfw_em9305_ll_fragment_clear_304a98(void)
 /* Native3048b0..304994: retained-fragment assembly and original ownership. */
 uintptr_t opencfw_em9305_ll_received_resize_3048b0(uintptr_t message,uintptr_t decoded)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x8019f0u;
+ uint32_t count=em9305_ram_8019e8.u8_8019f0;
  uint32_t kind=*(volatile uint8_t *)(decoded+2u);
  if(kind!=3u) {
   if((count==0u && kind<2u) || (count!=0u && kind==1u && count<2u)) {
-   *(volatile uint8_t *)(uintptr_t)0x8019f0u=(uint8_t)(count+1u);
-   *(volatile uint32_t *)(uintptr_t)(0x8019e8u+count*4u)=(uint32_t)message;
+   em9305_ram_8019e8.u8_8019f0=(uint8_t)(count+1u);
+   *(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_8019e8+count*4u)=(uint32_t)message;
    return 0u;
   }
   (void)opencfw_em9305_wsf_event_release(message);
@@ -6198,13 +6199,13 @@ uintptr_t opencfw_em9305_ll_received_resize_3048b0(uintptr_t message,uintptr_t d
  }
  _Alignas(4) uint8_t first[24],second[24];
  uint32_t total=*(volatile uint16_t *)(decoded+4u)+4u;
- uintptr_t row=0x8019e8u;
+ uintptr_t row=(uintptr_t)&em9305_ram_8019e8;
  if(count!=0u) {
   uint32_t done=0u;
   do {
    uintptr_t fragment=*(volatile uint32_t *)row;row+=4u;
    (void)opencfw_em9305_ll_received_decode_31bc7c((uintptr_t)first,fragment);
-   count=*(volatile uint8_t *)(uintptr_t)0x8019f0u;
+   count=em9305_ram_8019e8.u8_8019f0;
    uint32_t bytes=*(volatile uint16_t *)(void *)(first+4u);
    ++done;total+=bytes;
    if(done>=count) break;
@@ -6216,17 +6217,17 @@ uintptr_t opencfw_em9305_ll_received_resize_3048b0(uintptr_t message,uintptr_t d
   (void)opencfw_em9305_ll_fragment_clear_304a98();
   return 0u;
  }
- uintptr_t fragment=*(volatile uint32_t *)(uintptr_t)0x8019e8u;
+ uintptr_t fragment=em9305_ram_8019e8.u32_8019e8;
  (void)opencfw_em9305_ll_received_decode_31bc7c((uintptr_t)first,fragment);
  uint32_t offset=*(volatile uint16_t *)(void *)(first+4u)+4u;
- fragment=*(volatile uint32_t *)(uintptr_t)0x8019e8u;
+ fragment=em9305_ram_8019e8.u32_8019e8;
  (void)opencfw_em9305_memcpy((void *)output,(const void *)fragment,offset);
- count=*(volatile uint8_t *)(uintptr_t)0x8019f0u;
+ count=em9305_ram_8019e8.u8_8019f0;
  offset=*(volatile uint16_t *)(void *)(first+4u)+4u;
  if(count>=2u) {
-  fragment=*(volatile uint32_t *)(uintptr_t)0x8019ecu;
+  fragment=em9305_ram_8019e8.u32_8019ec;
   (void)opencfw_em9305_ll_received_decode_31bc7c((uintptr_t)second,fragment);
-  fragment=*(volatile uint32_t *)(uintptr_t)0x8019ecu;
+  fragment=em9305_ram_8019e8.u32_8019ec;
   uint32_t bytes=*(volatile uint16_t *)(void *)(second+4u);
   (void)opencfw_em9305_memcpy((void *)(output+(uint16_t)offset),
                            (const void *)(fragment+4u),bytes);
@@ -6241,7 +6242,7 @@ uintptr_t opencfw_em9305_ll_received_resize_3048b0(uintptr_t message,uintptr_t d
 /* Native316e5c..316e74: receive packet pool queue, skip eight-byte header. */
 uintptr_t opencfw_em9305_ll_stream_packet_take_316e5c(void)
 {
- uintptr_t node=opencfw_em9305_wsf_queue_remove(0x8028c8u);
+ uintptr_t node=opencfw_em9305_wsf_queue_remove(((uintptr_t)&em9305_ram_802878 + 0x50u));
  return node!=0u?node+8u:0u;
 }
 /* Native3175d0..3175f0: two-byte stream header, native sparse fields. */
@@ -6268,8 +6269,8 @@ uint32_t opencfw_em9305_ll_stream_segment_header_316f50(uintptr_t output,uint32_
 /* Native3175f0..31761c: gated receive buffer with ten-byte private prefix. */
 uintptr_t opencfw_em9305_ll_receive_buffer_allocate_3175f0(void)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805addu==0u) return 0u;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ if(em9305_ram_805a6c.u8_805add==0u) return 0u;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t capacity=*(volatile uint16_t *)(config+44u);
  uintptr_t allocation=opencfw_em9305_wsf_event_allocate((uint16_t)(capacity+12u));
  return allocation!=0u?allocation+10u:0u;
@@ -6300,7 +6301,7 @@ uint32_t opencfw_em9305_ll_link_process_318740(uintptr_t record,uintptr_t decode
  uintptr_t packet=opencfw_em9305_ll_stream_packet_take_316e5c();
  if(packet==0u) {
   (void)opencfw_em9305_wsf_event_release(message);
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805b38u;
+  uintptr_t callback=em9305_ram_805af0.u32_805b38;
   if(callback!=0u && *(volatile uint8_t *)(record+548u)==0u) {
    _Alignas(2) uint16_t id=(uint16_t)*(volatile uint16_t *)decoded;
    _Alignas(2) uint16_t reason=1u;
@@ -6308,8 +6309,8 @@ uint32_t opencfw_em9305_ll_link_process_318740(uintptr_t record,uintptr_t decode
      1u,(uintptr_t)&id,(uintptr_t)&reason,callback);
   }
   (void)opencfw_em9305_wsf_critical_enter();
-  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805adcu;
-  *(volatile uint8_t *)(uintptr_t)0x805adcu=(uint8_t)(count+1u);
+  uint32_t count=em9305_ram_805a6c.u8_805adc;
+  em9305_ram_805a6c.u8_805adc=(uint8_t)(count+1u);
   (void)opencfw_em9305_wsf_critical_exit();
   return opencfw_em9305_ll_segment_error_32322c(7u);
  }
@@ -6337,7 +6338,7 @@ uint32_t opencfw_em9305_ll_link_process_318740(uintptr_t record,uintptr_t decode
   *(volatile uint16_t *)(decoded+14u)=(uint16_t)chunk;
   *(volatile uint8_t *)(fields+5u)=(uint8_t)chunk;
   uint32_t header=opencfw_em9305_ll_link_segment_header_318708(segment+22u,(uintptr_t)fields);
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8051e0u;
+  uintptr_t callback=em9305_ram_8051b8.u32_8051e0;
   *(volatile uint8_t *)(segment+20u)=2u;
   uint32_t result=0u;
   if(callback!=0u) result=((uint32_t (*)(uintptr_t,uint32_t,uintptr_t,uintptr_t))callback)(
@@ -6359,13 +6360,13 @@ extern uint32_t opencfw_em9305_ll_link_dispatch_331d94(uintptr_t);
 /* Native331d94..331dc0: optional packet accounting, release and restart. */
 uint32_t opencfw_em9305_ll_link_dispatch_331d94(uintptr_t message)
 {
- uint32_t enabled=*(volatile uint8_t *)(uintptr_t)0x80583cu;
+ uint32_t enabled=em9305_ram_805838.u8_80583c;
  if(enabled!=0u) {
   uint32_t bytes=*(volatile uint8_t *)(message+2u);
-  uint32_t packets=*(volatile uint32_t *)(uintptr_t)0x805840u;
-  uint32_t total=*(volatile uint32_t *)(uintptr_t)0x805844u;
-  *(volatile uint32_t *)(uintptr_t)0x805840u=packets+1u;
-  *(volatile uint32_t *)(uintptr_t)0x805844u=total+bytes;
+  uint32_t packets=em9305_ram_805838.u32_805840;
+  uint32_t total=em9305_ram_805838.u32_805844;
+  em9305_ram_805838.u32_805840=packets+1u;
+  em9305_ram_805838.u32_805844=total+bytes;
   (void)opencfw_em9305_wsf_event_release(message);
   (void)opencfw_em9305_ll_link_restart_308614(1u);
  }
@@ -6375,21 +6376,21 @@ uint32_t opencfw_em9305_ll_link_dispatch_331d94(uintptr_t message)
 uint32_t opencfw_em9305_ll_link_restart_308614(uint32_t increment)
 {
  (void)opencfw_em9305_wsf_critical_enter();
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805addu;
- *(volatile uint8_t *)(uintptr_t)0x805addu=(uint8_t)(count+increment);
+ uint32_t count=em9305_ram_805a6c.u8_805add;
+ em9305_ram_805a6c.u8_805add=(uint8_t)(count+increment);
  return opencfw_em9305_wsf_critical_exit();
 }
 /* Native32fc8c..32fccc: pending-link release/restart, dispatch or event kick. */
 uint32_t opencfw_em9305_dispatch_32fc8c(void)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805854u!=0u) {
+ if(em9305_ram_805838.u8_805854!=0u) {
   uintptr_t pending=opencfw_em9305_ll_link_pending_30858c();
   if(pending!=0u) {
    (void)opencfw_em9305_wsf_event_release(pending);
    return opencfw_em9305_ll_link_restart_308614(1u);
   }
  }
- if(*(volatile uint8_t *)(uintptr_t)0x80583cu!=0u) {
+ if(em9305_ram_805838.u8_80583c!=0u) {
   uintptr_t pending=opencfw_em9305_ll_link_pending_30858c();
   if(pending!=0u) return opencfw_em9305_ll_link_dispatch_331d94(pending);
  }
@@ -6400,8 +6401,8 @@ extern uint32_t opencfw_em9305_ll_primary_send_32f794(uint32_t,uint32_t,uint32_t
 /* Native32f794..32f7f8: fixed259-byte generated packet burst and busy flag. */
 uint32_t opencfw_em9305_ll_primary_send_32f794(uint32_t id,uint32_t length,uint32_t count)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x80570cu!=0u) return id;
- *(volatile uint8_t *)(uintptr_t)0x80570cu=1u;
+ if(em9305_ram_805688.u8_80570c!=0u) return id;
+ em9305_ram_805688.u8_80570c=1u;
  uint32_t result=id;
  if(count!=0u) {
   uint32_t remaining=(uint8_t)(count-1u)+1u;
@@ -6415,22 +6416,22 @@ uint32_t opencfw_em9305_ll_primary_send_32f794(uint32_t id,uint32_t length,uint3
    *(volatile uint8_t *)(packet+2u)=(uint8_t)length;
    *(volatile uint8_t *)(packet+1u)=(uint8_t)upper;
    *(volatile uint8_t *)packet=(uint8_t)id;
-   uint32_t value=*(volatile uint8_t *)(uintptr_t)0x80570du;
-   *(volatile uint8_t *)(uintptr_t)0x80570du=(uint8_t)(value+1u);
+   uint32_t value=em9305_ram_805688.u8_80570d;
+   em9305_ram_805688.u8_80570d=(uint8_t)(value+1u);
    (void)opencfw_em9305_memset((void *)(packet+4u),value,length);
    result=opencfw_em9305_ll_queued_event(packet);
    --remaining;
    if(remaining==0u) break;
   } while(1);
  }
- *(volatile uint8_t *)(uintptr_t)0x80570cu=0u;
+ em9305_ram_805688.u8_80570c=0u;
  return result;
 }
 /* Native32f7f8..32f85c: fixed259-byte generated packet burst and busy flag. */
 uint32_t opencfw_em9305_ll_link_send_32f7f8(uint32_t id,uint32_t length,uint32_t count)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805848u!=0u) return id;
- *(volatile uint8_t *)(uintptr_t)0x805848u=1u;
+ if(em9305_ram_805838.u8_805848!=0u) return id;
+ em9305_ram_805838.u8_805848=1u;
  uint32_t result=id;
  if(count!=0u) {
   uint32_t remaining=(uint8_t)(count-1u)+1u;
@@ -6444,36 +6445,36 @@ uint32_t opencfw_em9305_ll_link_send_32f7f8(uint32_t id,uint32_t length,uint32_t
    *(volatile uint8_t *)(packet+2u)=(uint8_t)length;
    *(volatile uint8_t *)(packet+1u)=(uint8_t)upper;
    *(volatile uint8_t *)packet=(uint8_t)id;
-   uint32_t value=*(volatile uint8_t *)(uintptr_t)0x805849u;
-   *(volatile uint8_t *)(uintptr_t)0x805849u=(uint8_t)(value+1u);
+   uint32_t value=em9305_ram_805838.u8_805849;
+   em9305_ram_805838.u8_805849=(uint8_t)(value+1u);
    (void)opencfw_em9305_memset((void *)(packet+4u),value,length);
    result=opencfw_em9305_ll_received_event(packet);
    --remaining;
    if(remaining==0u) break;
   } while(1);
  }
- *(volatile uint8_t *)(uintptr_t)0x805848u=0u;
+ em9305_ram_805838.u8_805848=0u;
  return result;
 }
 /* Native308570..30858c: primary packet credit, critical-exit R0. */
 uint32_t opencfw_em9305_ll_primary_credit_308570(uint32_t increment)
 {
  (void)opencfw_em9305_wsf_critical_enter();
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805ab5u;
- *(volatile uint8_t *)(uintptr_t)0x805ab5u=(uint8_t)(count+increment);
+ uint32_t count=em9305_ram_805a6c.u8_805ab5;
+ em9305_ram_805a6c.u8_805ab5=(uint8_t)(count+increment);
  return opencfw_em9305_wsf_critical_exit();
 }
 /* Native331d60..331d94: primary packet16-bit byte count and ownership. */
 uint32_t opencfw_em9305_ll_primary_account_331d60(uintptr_t message)
 {
- uint32_t enabled=*(volatile uint8_t *)(uintptr_t)0x805702u;
+ uint32_t enabled=em9305_ram_805688.u8_805702;
  if(enabled!=0u) {
   uint32_t high=*(volatile uint8_t *)(message+3u);
   uint32_t low=*(volatile uint8_t *)(message+2u);
-  uint32_t count=*(volatile uint32_t *)(uintptr_t)0x805704u;
-  uint32_t total=*(volatile uint32_t *)(uintptr_t)0x805708u;
-  *(volatile uint32_t *)(uintptr_t)0x805704u=count+1u;
-  *(volatile uint32_t *)(uintptr_t)0x805708u=total+(uint16_t)((high<<8u)+low);
+  uint32_t count=em9305_ram_805688.u32_805704;
+  uint32_t total=em9305_ram_805688.u32_805708;
+  em9305_ram_805688.u32_805704=count+1u;
+  em9305_ram_805688.u32_805708=total+(uint16_t)((high<<8u)+low);
   (void)opencfw_em9305_wsf_event_release(message);
   (void)opencfw_em9305_ll_primary_credit_308570(1u);
  }
@@ -6482,7 +6483,7 @@ uint32_t opencfw_em9305_ll_primary_account_331d60(uintptr_t message)
 /* Native32e3bc..32e3e0: primary accounting or shared controller event kick. */
 uint32_t opencfw_em9305_dispatch_32e3bc(void)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805702u!=0u) {
+ if(em9305_ram_805688.u8_805702!=0u) {
   uintptr_t pending=opencfw_em9305_ll_primary_pending_30853c();
   if(pending!=0u) return opencfw_em9305_ll_primary_account_331d60(pending);
  }
@@ -6491,12 +6492,12 @@ uint32_t opencfw_em9305_dispatch_32e3bc(void)
 /* Native32e3e0..32e428: primary send or five-byte fallback event. */
 uint32_t opencfw_em9305_dispatch_32e3e0(uint32_t first,uint32_t second)
 {
- uint32_t length=*(volatile uint16_t *)(uintptr_t)0x80570eu;
+ uint32_t length=em9305_ram_805688.u16_80570e;
  if(length!=0u) {
-  uint32_t packets=*(volatile uint32_t *)(uintptr_t)0x805710u;
-  uint32_t bytes=*(volatile uint32_t *)(uintptr_t)0x805714u;
-  *(volatile uint32_t *)(uintptr_t)0x805710u=packets+1u;
-  *(volatile uint32_t *)(uintptr_t)0x805714u=bytes+length;
+  uint32_t packets=em9305_ram_805688.u32_805710;
+  uint32_t bytes=em9305_ram_805688.u32_805714;
+  em9305_ram_805688.u32_805710=packets+1u;
+  em9305_ram_805688.u32_805714=bytes+length;
   return opencfw_em9305_ll_primary_send_32f794(first,length,second);
  }
  uintptr_t event=opencfw_em9305_ll_event_allocate(19u,5u);
@@ -6571,9 +6572,9 @@ uint32_t opencfw_em9305_ll_received_decode_31bc7c(uintptr_t output,uintptr_t inp
 /* Native31ab14..31ab50: active stream records, 256-byte stride. */
 uintptr_t opencfw_em9305_ll_stream_find_31ab14(uint32_t id)
 {
- uintptr_t row=*(volatile uint32_t *)(uintptr_t)0x805c40u;
+ uintptr_t row=em9305_ram_805be0.u32_805c40;
  if(row==0u) return 0u;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+58u);
  for(uint32_t i=0u;i<count;++i,row+=256u)
   if(*(volatile uint8_t *)row!=0u && *(volatile uint16_t *)(row+2u)==id) return row;
@@ -6582,10 +6583,10 @@ uintptr_t opencfw_em9305_ll_stream_find_31ab14(uint32_t id)
 /* Native31ab88..31abc0: identifier then active flag, 656-byte link records. */
 uintptr_t opencfw_em9305_ll_link_find_31ab88(uint32_t id)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+53u);
  if(count==0u) return 0u;
- uintptr_t row=*(volatile uint32_t *)(uintptr_t)0x805c68u;
+ uintptr_t row=em9305_ram_805c5c.u32_805c68;
  for(uint32_t i=0u;i<count;++i,row+=656u)
   if(*(volatile uint16_t *)(row+8u)==id && *(volatile uint8_t *)row!=0u) return row;
  return 0u;
@@ -6595,10 +6596,10 @@ uint32_t opencfw_em9305_ll_received_event_active(uintptr_t message)
 {
  _Alignas(4) uint8_t decoded[24];
  (void)opencfw_em9305_ll_received_decode_31bc7c((uintptr_t)decoded,message);
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t length=*(volatile uint16_t *)(void *)(decoded+14u);
  if(*(volatile uint16_t *)(config+44u)<length ||
-    *(volatile uint8_t *)(uintptr_t)0x805adcu==0u) goto reject;
+    em9305_ram_805a6c.u8_805adc==0u) goto reject;
  uint32_t extra=*(volatile uint8_t *)(decoded+3u);
  uint32_t encoded=*(volatile uint16_t *)(void *)(decoded+4u);
  uint32_t actual=(uint16_t)(encoded-(extra!=0u?8u:4u));
@@ -6628,8 +6629,8 @@ uint32_t opencfw_em9305_ll_received_event_active(uintptr_t message)
    return count;
   }
   (void)opencfw_em9305_wsf_critical_enter();
-  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805adcu;
-  *(volatile uint8_t *)(uintptr_t)0x805adcu=(uint8_t)(count-1u);
+  uint32_t count=em9305_ram_805a6c.u8_805adc;
+  em9305_ram_805a6c.u8_805adc=(uint8_t)(count-1u);
   (void)opencfw_em9305_wsf_critical_exit();
   return opencfw_em9305_ll_link_process_318740(link,(uintptr_t)decoded,message);
  }
@@ -6639,8 +6640,8 @@ uint32_t opencfw_em9305_ll_received_event_active(uintptr_t message)
  if(*(volatile uint16_t *)(descriptor+6u)<
     *(volatile uint16_t *)(void *)(decoded+14u)) goto reject;
  (void)opencfw_em9305_wsf_critical_enter();
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805adcu;
- *(volatile uint8_t *)(uintptr_t)0x805adcu=(uint8_t)(count-1u);
+ uint32_t count=em9305_ram_805a6c.u8_805adc;
+ em9305_ram_805a6c.u8_805adc=(uint8_t)(count-1u);
  (void)opencfw_em9305_wsf_critical_exit();
  descriptor=*(volatile uint32_t *)(stream+4u);
  if(*(volatile uint8_t *)(descriptor+30u)!=0u) {
@@ -6652,7 +6653,7 @@ uint32_t opencfw_em9305_ll_received_event_active(uintptr_t message)
  return opencfw_em9305_ll_stream_process_317680(stream,(uintptr_t)decoded,message);
 reject:;
  uint32_t result=opencfw_em9305_wsf_event_release(message);
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805b10u;
+ uintptr_t callback=em9305_ram_805af0.u32_805b10;
  if(callback!=0u) return ((uint32_t (*)(uint32_t,uint32_t))callback)(
    *(volatile uint16_t *)(void *)decoded,1u);
  return result;
@@ -6683,7 +6684,7 @@ extern uint32_t opencfw_em9305_ll_segment_error_32322c(uint32_t);
 /* Native30e79c..30e7ac: optional controller callback, own address in R1. */
 uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t event)
 {
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805b0cu;
+ uintptr_t callback=em9305_ram_805af0.u32_805b0c;
  if(callback==0u) return 0u;
  return ((uint32_t (*)(uintptr_t,uintptr_t))callback)(event,callback);
 }
@@ -6720,15 +6721,15 @@ uint32_t opencfw_em9305_ll_event_process_32d380(uintptr_t record,uint32_t capaci
                                              uintptr_t decoded,uintptr_t message)
 {
  uint32_t total=*(volatile uint16_t *)(decoded+4u);
- uintptr_t node=opencfw_em9305_wsf_queue_remove(0x8056dcu);
+ uintptr_t node=opencfw_em9305_wsf_queue_remove(((uintptr_t)&em9305_ram_805688 + 0x54u));
  if(node==0u) {
   (void)opencfw_em9305_wsf_event_release(message);
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805b10u;
+  uintptr_t callback=em9305_ram_805af0.u32_805b10;
   (void)((uint32_t (*)(uint32_t,uint32_t))callback)(
     *(volatile uint16_t *)decoded,1u);
   (void)opencfw_em9305_wsf_critical_enter();
-  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805ab4u;
-  *(volatile uint8_t *)(uintptr_t)0x805ab4u=(uint8_t)(count+1u);
+  uint32_t count=em9305_ram_805a6c.u8_805ab4;
+  em9305_ram_805a6c.u8_805ab4=(uint8_t)(count+1u);
   (void)opencfw_em9305_wsf_critical_exit();
   return opencfw_em9305_ll_segment_error_32322c(7u);
  }
@@ -6758,7 +6759,7 @@ uint32_t opencfw_em9305_ll_event_process_32d380(uintptr_t record,uint32_t capaci
    uintptr_t segment=packet+(uint8_t)index*8u;
    header[5]=(uint8_t)chunk;
    uintptr_t output=opencfw_em9305_ll_segment_header_323d70(segment+10u,(uintptr_t)header);
-   uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8051e0u;
+   uintptr_t callback=em9305_ram_8051b8.u32_8051e0;
    *(volatile uint8_t *)(segment+8u)=2u;
    uint32_t result=0u;
    if(callback!=0u) result=((uint32_t (*)(uintptr_t,uintptr_t,uintptr_t,uintptr_t))callback)(
@@ -6826,12 +6827,12 @@ uint32_t opencfw_em9305_dispatch_32fd18(uintptr_t request,uintptr_t input)
   command=*(volatile uint16_t *)request; length=1u;
  } else if(command==0xffd6u) length=17u;
  else if(command==0xffd7u) {
-  *(volatile uint8_t *)(uintptr_t)0x80583cu=*(volatile uint8_t *)input!=0u;
+  em9305_ram_805838.u8_80583c=*(volatile uint8_t *)input!=0u;
   length=1u;
  } else if(command==0xffd8u) {
   uint32_t low=*(volatile uint8_t *)input;
   uint32_t high=*(volatile uint8_t *)(input+1u);
-  *(volatile uint16_t *)(uintptr_t)0x80584au=(uint16_t)(low+(high<<8u));
+  em9305_ram_805838.u16_80584a=(uint16_t)(low+(high<<8u));
   length=1u;
  } else if(command==0xffd9u || command==0xffc1u) length=29u;
  else return 0u;
@@ -6843,7 +6844,7 @@ uint32_t opencfw_em9305_dispatch_32fd18(uintptr_t request,uintptr_t input)
  if(command==0xffd6u) {
   static const uint8_t offsets[4]={0u,4u,12u,16u};
   for(uint32_t i=0u;i<4u;++i) {
-   uintptr_t src=(uintptr_t)0x805840u+offsets[i];
+   uintptr_t src=(uintptr_t)((uintptr_t)&em9305_ram_805838 + 0x8u)+offsets[i];
    *(volatile uint8_t *)(payload+4u*i)=(uint8_t)*(volatile uint32_t *)src;
    *(volatile uint8_t *)(payload+4u*i+1u)=(uint8_t)(*(volatile uint32_t *)src>>8u);
    *(volatile uint8_t *)(payload+4u*i+2u)=(uint8_t)*(volatile uint16_t *)(src+2u);
@@ -6862,17 +6863,17 @@ uint32_t opencfw_em9305_dispatch_32fd18(uintptr_t request,uintptr_t input)
 /* Native303278/303284: exact 28-byte live controller information copies. */
 uintptr_t opencfw_em9305_ll_information_303278(uintptr_t output)
 {
- return (uintptr_t)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)0x801518u,28u);
+ return (uintptr_t)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)&em9305_ram_801518,28u);
 }
 uintptr_t opencfw_em9305_ll_information_303284(uintptr_t output)
 {
- return (uintptr_t)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)0x8016c0u,28u);
+ return (uintptr_t)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)&em9305_ram_8016c0,28u);
 }
 
 /* Native32fe3c..32fea4: 35 dynamic handlers and fallback controller event. */
 uint32_t opencfw_em9305_dispatch_32fe3c(uintptr_t message)
 {
- uintptr_t cursor=(uintptr_t)0x8057acu;
+ uintptr_t cursor=(uintptr_t)((uintptr_t)&em9305_ram_8057a8 + 0x4u);
  uint32_t remaining=35u;
  do {
   uintptr_t callback=*(volatile uint32_t *)cursor;
@@ -6905,10 +6906,10 @@ uint32_t opencfw_em9305_dispatch_32fe3c(uintptr_t message)
 /* Native31b71c..31b750: any active 512-byte record in pending state1. */
 uint32_t opencfw_em9305_ll_record_pending_31b71c(void)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+57u);
  if(count==0u) return 0u;
- uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c3cu;
+ uintptr_t record=em9305_ram_805be0.u32_805c3c;
  for(uint32_t i=0u;i<count;++i,record+=512u)
   if(*(volatile uint8_t *)record!=0u && *(volatile uint8_t *)(record+1u)==1u) return 1u;
  return 0u;
@@ -6916,10 +6917,10 @@ uint32_t opencfw_em9305_ll_record_pending_31b71c(void)
 /* Native31aa98..31aad0: active512-byte record id lookup. */
 uintptr_t opencfw_em9305_ll_record_find_31aa98(uint32_t id)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+57u);
  if(count==0u) return 0u;
- uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c3cu;
+ uintptr_t record=em9305_ram_805be0.u32_805c3c;
  for(uint32_t i=0u;i<count;++i,record+=512u)
   if(*(volatile uint8_t *)record!=0u && *(volatile uint8_t *)(record+2u)==id) return record;
  return 0u;
@@ -6927,11 +6928,11 @@ uintptr_t opencfw_em9305_ll_record_find_31aa98(uint32_t id)
 /* Native31aad0..31ab14: active record association to784-byte controller state. */
 uintptr_t opencfw_em9305_ll_record_associated_31aad0(uint32_t index)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+57u);
  if(count==0u) return 0u;
- uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c3cu;
- uintptr_t state=(uintptr_t)0x803d78u+index*784u;
+ uintptr_t record=em9305_ram_805be0.u32_805c3c;
+ uintptr_t state=(uintptr_t)(((uintptr_t)&em9305_ram_803d58 + 0x20u) + index*784u);
  for(uint32_t i=0u;i<count;++i,record+=512u)
   if(*(volatile uint8_t *)record!=0u && *(volatile uint32_t *)(record+196u)==state) return record;
  return 0u;
@@ -6939,10 +6940,10 @@ uintptr_t opencfw_em9305_ll_record_associated_31aad0(uint32_t index)
 /* Native31b248..31b278: count inactive256-byte stream records, byte return. */
 uint32_t opencfw_em9305_ll_stream_free_count_31b248(void)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+58u),free_count=0u;
  if(count!=0u) {
-  uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c40u;
+  uintptr_t record=em9305_ram_805be0.u32_805c40;
   for(uint32_t i=0u;i<count;++i,record+=256u)
    if(*(volatile uint8_t *)record==0u) ++free_count;
  }
@@ -6951,10 +6952,10 @@ uint32_t opencfw_em9305_ll_stream_free_count_31b248(void)
 /* Native316a8c..316ad4: clear first inactive512-byte record and publish id/active. */
 uintptr_t opencfw_em9305_ll_record_allocate_316a8c(uint32_t id)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+57u);
  if(count==0u) return 0u;
- uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c3cu;
+ uintptr_t record=em9305_ram_805be0.u32_805c3c;
  for(uint32_t i=0u;i<count;++i,record+=512u) {
   if(*(volatile uint8_t *)record==0u) {
    (void)opencfw_em9305_memset((void *)record,0u,512u);
@@ -6988,7 +6989,7 @@ uint32_t opencfw_em9305_ll_record_configure_307664(uintptr_t command)
  if(opencfw_em9305_ll_record_find_31aa98(id)!=0u) return 12u;
  uint32_t index=*(volatile uint16_t *)(command+2u);
  if(index>=7u) return 66u;
- uintptr_t state=(uintptr_t)0x803d78u+index*784u;
+ uintptr_t state=(uintptr_t)(((uintptr_t)&em9305_ram_803d58 + 0x20u) + index*784u);
  if(*(volatile uint8_t *)state==0u) return 66u;
  if(opencfw_em9305_ll_record_associated_31aad0(index)!=0u) return 17u;
  if(*(volatile uint8_t *)(state+410u)==0u) return 12u;
@@ -7023,7 +7024,7 @@ uint32_t opencfw_em9305_ll_record_configure_307664(uintptr_t command)
  mode=*(volatile uint8_t *)(command+4u);
  *(volatile uint8_t *)(record+484u)=mode!=0u;
  (void)opencfw_em9305_memcpy((void *)(record+228u),(const void *)(command+5u),16u);
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint16_t *)(record+212u)=(uint16_t)id;
  *(volatile uint8_t *)(record+220u)=(uint8_t)handler;
  *(volatile uint16_t *)(record+214u)=1297u;
@@ -7031,7 +7032,7 @@ uint32_t opencfw_em9305_ll_record_configure_307664(uintptr_t command)
  if(event!=0u) {
   *(volatile uint16_t *)(event+2u)=273u;
   id=*(volatile uint8_t *)command;
-  handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  handler=em9305_ram_805af0.u8_805b18;
   *(volatile uint16_t *)event=(uint16_t)id;
   (void)opencfw_em9305_wsf_task_message_send(handler,event);
  }
@@ -7069,7 +7070,7 @@ uint32_t opencfw_em9305_ll_record_release_request_3077b8(uint32_t id)
  uintptr_t event=opencfw_em9305_wsf_event_allocate(4u);
  if(event==0u) return 0u;
  *(volatile uint16_t *)(event+2u)=529u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint16_t *)event=(uint16_t)record;
  return opencfw_em9305_wsf_task_message_send(handler,event);
 }
@@ -7107,7 +7108,7 @@ uint32_t opencfw_em9305_dispatch_32fea4(uintptr_t request,uintptr_t input)
 uint32_t opencfw_em9305_dispatch_32ff20(uintptr_t message)
 {
  uint32_t kind=*(volatile uint8_t *)(message+2u);
- uintptr_t features=(uintptr_t)0x8056e8u;
+ uintptr_t features=(uintptr_t)((uintptr_t)&em9305_ram_805688 + 0x60u);
  uintptr_t packet;
  if(kind==43u) {
   packet=opencfw_em9305_ll_event_allocate(14u,5u);
@@ -7118,8 +7119,8 @@ uint32_t opencfw_em9305_dispatch_32ff20(uintptr_t message)
  } else if(kind==50u) {
   if((*(volatile uint8_t *)(features+20u)&2u)==0u) return 1u;
   if((*(volatile uint8_t *)(features+7u)&32u)==0u) return 1u;
-  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-  uint32_t outstanding=*(volatile uint8_t *)(uintptr_t)0x805718u;
+  uintptr_t config=em9305_ram_805c5c.u32_805cac;
+  uint32_t outstanding=em9305_ram_805688.u8_805718;
   if(outstanding>=*(volatile uint8_t *)(config+14u)) return 1u;
   packet=opencfw_em9305_ll_event_allocate(62u,20u);
   if(packet==0u) return 1u;
@@ -7133,8 +7134,8 @@ uint32_t opencfw_em9305_dispatch_32ff20(uintptr_t message)
   *(volatile uint8_t *)(packet+14u)=(uint8_t)*(volatile uint16_t *)(message+18u);
   for(uint32_t i=0u;i<5u;++i)
    *(volatile uint8_t *)(packet+15u+i)=*(volatile uint8_t *)(message+20u+i);
-  outstanding=*(volatile uint8_t *)(uintptr_t)0x805718u;
-  *(volatile uint8_t *)(uintptr_t)0x805718u=(uint8_t)(outstanding+1u);
+  outstanding=em9305_ram_805688.u8_805718;
+  em9305_ram_805688.u8_805718=(uint8_t)(outstanding+1u);
  } else if(kind==44u) {
   if((*(volatile uint8_t *)(features+19u)&16u)==0u) return 0u;
   if((*(volatile uint8_t *)(features+7u)&32u)==0u) return 0u;
@@ -7210,7 +7211,7 @@ extern uint32_t opencfw_em9305_ll_event_fallback_30c2e0(uint32_t id);
 uint32_t opencfw_em9305_dispatch_332394(uintptr_t request,uintptr_t input)
 {
  (void)input;
- volatile uint8_t *mask=(volatile uint8_t *)(uintptr_t)0x8056e8u;
+ volatile uint8_t *mask=&em9305_ram_805688.u8_8056e8;
  volatile uint8_t *message=(volatile uint8_t *)request;
  uint32_t kind=message[2];
  uintptr_t packet;
@@ -7265,7 +7266,7 @@ extern uint32_t opencfw_em9305_ll_slot_state_306fdc(uint32_t id);
 extern uint32_t opencfw_em9305_ll_slot_flag_307480(uint32_t id,uint32_t mask);
 uint32_t opencfw_em9305_ll_event_fallback_30c2e0(uint32_t id)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  if(opencfw_em9305_ll_slot_state_306fdc(id)!=1u) return 12u;
@@ -7273,7 +7274,7 @@ uint32_t opencfw_em9305_ll_event_fallback_30c2e0(uint32_t id)
  uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
  if(message!=0u) {
   *(volatile uint16_t *)(message+2u)=0x1a01u;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   *(volatile uint16_t *)message=(uint16_t)id;
   (void)opencfw_em9305_wsf_task_message_send(handler,message);
  }
@@ -7291,7 +7292,7 @@ static uint32_t opencfw_em9305_slot_offset(uint32_t id)
 /* Native30731c..30732e: return slot byte0 after pointer reload. */
 uint32_t opencfw_em9305_ll_slot_active_30731c(uint32_t id)
 {
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  uint32_t offset=opencfw_em9305_slot_offset(id);
  return *(volatile uint8_t *)(slots+offset);
 }
@@ -7299,14 +7300,14 @@ uint32_t opencfw_em9305_ll_slot_active_30731c(uint32_t id)
 uint32_t opencfw_em9305_ll_slot_state_306fdc(uint32_t id)
 {
  uint32_t offset=opencfw_em9305_slot_offset(id);
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  return *(volatile uint8_t *)(slots+offset+2u);
 }
 /* Native307480..307498: boolean slot byte13 masked by incoming R1. */
 uint32_t opencfw_em9305_ll_slot_flag_307480(uint32_t id,uint32_t mask)
 {
  uint32_t offset=opencfw_em9305_slot_offset(id);
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  return ((uint32_t)*(volatile uint8_t *)(slots+offset+13u)&mask)!=0u;
 }
 
@@ -7319,7 +7320,7 @@ uint32_t opencfw_em9305_ll_command_30e054(uint32_t id,uintptr_t first,
 {
  if(opencfw_em9305_child_307434(id,24u)!=0u) return 12u;
  if(opencfw_em9305_ll_slot_callback_3072f0(id)!=0u) return 12u;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  if(opencfw_em9305_ll_slot_state_306fdc(id)!=0u) return 12u;
@@ -7330,7 +7331,7 @@ uint32_t opencfw_em9305_ll_command_30e054(uint32_t id,uintptr_t first,
   (void)opencfw_em9305_memcpy((void *)(message+4u),(const void *)first,8u);
   *(volatile uint16_t *)(message+12u)=(uint16_t)value;
   (void)opencfw_em9305_memcpy((void *)(message+14u),(const void *)second,16u);
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   (void)opencfw_em9305_wsf_task_message_send(handler,message);
  }
  return 0u;
@@ -7341,7 +7342,7 @@ uint32_t opencfw_em9305_ll_command_30e054(uint32_t id,uintptr_t first,
 uint32_t opencfw_em9305_ll_slot_callback_3072f0(uint32_t id)
 {
  uint32_t offset=opencfw_em9305_slot_offset(id);
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  uintptr_t callback=*(volatile uint32_t *)(slots+offset+816u);
  if(callback==0u) return 0u;
  return ((uint32_t (*)(uint32_t))callback)(id);
@@ -7419,7 +7420,7 @@ uint32_t opencfw_em9305_dispatch_332278(uintptr_t request,uintptr_t input)
 /* Native30c33c..30c3a4: state1 flag2 gate and twenty-byte task command. */
 uint32_t opencfw_em9305_ll_payload_command_30c33c(uint32_t id,uintptr_t input)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  if(opencfw_em9305_ll_slot_state_306fdc(id)!=1u) return 12u;
@@ -7429,7 +7430,7 @@ uint32_t opencfw_em9305_ll_payload_command_30c33c(uint32_t id,uintptr_t input)
   *(volatile uint16_t *)(message+2u)=0x1901u;
   *(volatile uint16_t *)message=(uint16_t)id;
   (void)opencfw_em9305_memcpy((void *)(message+4u),(const void *)input,16u);
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   (void)opencfw_em9305_wsf_task_message_send(handler,message);
  }
  return 0u;
@@ -7438,7 +7439,7 @@ extern uint32_t opencfw_em9305_ll_slot_apply_308708(uint32_t id,uint32_t value);
 /* Native30e350..30e38c: zero-value rejection, named MPYUW10 and child result. */
 uint32_t opencfw_em9305_ll_pair_command_30e350(uint32_t id,uint32_t value)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  if(value==0u) return 18u;
@@ -7450,14 +7451,14 @@ uint32_t opencfw_em9305_ll_pair_command_30e350(uint32_t id,uint32_t value)
 uint32_t opencfw_em9305_ll_slot_time_306ea8(uint32_t id)
 {
  uint32_t offset=opencfw_em9305_slot_offset(id);
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  return *(volatile uint32_t *)(slots+offset+492u);
 }
 /* Native30c6d4..30c714: MPYDU 64-bit product, low>>22 | high<<10 into a
  * sixteen-bit destination. */
 uint32_t opencfw_em9305_ll_query_command_30c6d4(uint32_t id,uintptr_t output)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  uint32_t time=opencfw_em9305_ll_slot_time_306ea8(id);
@@ -7476,7 +7477,7 @@ extern uint32_t opencfw_em9305_ll_slot_flags_apply_308b74(uint32_t id,uintptr_t 
 /* Native30d54c..30d580: max/active validation and boolean child status map. */
 uint32_t opencfw_em9305_ll_flags_command_30d54c(uint32_t id,uintptr_t flags)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  return opencfw_em9305_ll_slot_flags_apply_308b74(id,flags)!=0u?0u:12u;
@@ -7485,7 +7486,7 @@ uint32_t opencfw_em9305_ll_flags_command_30d54c(uint32_t id,uintptr_t flags)
 uint32_t opencfw_em9305_ll_slot_flags_apply_308b74(uint32_t id,uintptr_t flags)
 {
  uint32_t offset=opencfw_em9305_slot_offset(id);
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  uintptr_t slot=slots+offset;
  uint32_t busy=*(volatile uint8_t *)(slot+514u);
  if(busy==0u) {
@@ -7518,7 +7519,7 @@ uint32_t opencfw_em9305_ll_slot_adjust_317c10(uintptr_t slot,uint32_t value)
 uint32_t opencfw_em9305_ll_slot_apply_308708(uint32_t id,uint32_t value)
 {
  uint32_t offset=opencfw_em9305_slot_offset(id);
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  uintptr_t slot=slots+offset;
  uint32_t adjusted=opencfw_em9305_ll_slot_adjust_317c10(slot,value);
  if(adjusted==value) return 0u;
@@ -7555,20 +7556,20 @@ extern uint32_t opencfw_em9305_ll_mask_count_30c414(uint32_t low,uint32_t high);
 uint32_t opencfw_em9305_ll_mask_command_30cf88(uint32_t id,uintptr_t input)
 {
  if(opencfw_em9305_child_307434(id,22u)!=0u) return 12u;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  if(opencfw_em9305_ll_slot_state_306fdc(id)!=0u) return 12u;
  uint64_t bits=opencfw_em9305_ll_pack64_304648(input);
- uint32_t allowed_low=*(volatile uint32_t *)(uintptr_t)0x805aa0u;
- uint32_t allowed_high=*(volatile uint32_t *)(uintptr_t)0x805aa4u;
+ uint32_t allowed_low=em9305_ram_805a6c.u32_805aa0;
+ uint32_t allowed_high=em9305_ram_805a6c.u32_805aa4;
  uint32_t low=(uint32_t)bits&allowed_low;
  uint32_t high=(uint32_t)(bits>>32u)&allowed_high;
  if(opencfw_em9305_ll_mask_count_30c414(low,high)<2u) return 18u;
  uintptr_t message=opencfw_em9305_wsf_event_allocate(12u);
  if(message!=0u) {
   *(volatile uint16_t *)(message+2u)=0x1601u;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   *(volatile uint32_t *)(message+4u)=low;
   *(volatile uint16_t *)message=(uint16_t)id;
   *(volatile uint32_t *)(message+8u)=high;
@@ -7646,19 +7647,19 @@ uint32_t opencfw_em9305_ll_stream_control_decode_332a78(uintptr_t output,uintptr
 /* Native30e510..30e524: latch companion only when the first byte is clear. */
 uint32_t opencfw_em9305_ll_stream_gate_30e510(void)
 {
- uint32_t busy=*(volatile uint8_t *)(uintptr_t)0x805a9eu;
- if(busy==0u) *(volatile uint8_t *)(uintptr_t)0x805a9fu=1u;
+ uint32_t busy=em9305_ram_805a6c.u8_805a9e;
+ if(busy==0u) em9305_ram_805a6c.u8_805a9f=1u;
  return busy==0u;
 }
 /* Native318200..31825c: negative controller word enables active slot scan. */
 uint32_t opencfw_em9305_ll_stream_address_busy_318200(uint32_t kind,uint32_t low,uint32_t high)
 {
- uint32_t enabled=*(volatile uint32_t *)(uintptr_t)0x805a88u;
+ uint32_t enabled=em9305_ram_805a6c.u32_805a88;
  if((enabled&0x80000000u)==0u) return 0u;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+34u);
  if(count==0u) return 0u;
- uintptr_t slot=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slot=em9305_ram_805c5c.u32_805c70;
  for(uint32_t i=0u;i<count;++i,slot+=912u) {
   if(*(volatile uint8_t *)slot==0u) continue;
   uint32_t shigh=*(volatile uint32_t *)(slot+520u);
@@ -7679,7 +7680,7 @@ extern uint32_t opencfw_em9305_ll_stream_configure_307a28(uint32_t,uintptr_t,uin
  * count bytes are reloaded at the native call/store boundaries. */
 uint32_t opencfw_em9305_ll_stream_command_30b7ec(uintptr_t header,uintptr_t pairs,uintptr_t controls)
 {
- uintptr_t state=0x805a70u;
+ uintptr_t state=((uintptr_t)&em9305_ram_805a6c + 0x4u);
  uint32_t feature_high=*(volatile uint32_t *)(state+40u);
  uint32_t feature_low=*(volatile uint32_t *)(state+36u);
  uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();
@@ -7689,7 +7690,7 @@ uint32_t opencfw_em9305_ll_stream_command_30b7ec(uintptr_t header,uintptr_t pair
  if((allowed&mask)!=mask) return 17u;
  if(mask-1u>=7u) return 18u;
  if(opencfw_em9305_ll_stream_header_valid_332f04(header)==0u) return 18u;
- uint32_t flags=*(volatile uint8_t *)(uintptr_t)0x805a99u;
+ uint32_t flags=em9305_ram_805a6c.u8_805a99;
  uint32_t kind=*(volatile uint8_t *)header;
  if((flags&4u)==0u && kind>=2u) return 17u;
  uint32_t maxkind=(feature_high&(1u<<10u))!=0u?4u:1u;
@@ -7750,7 +7751,7 @@ uint32_t opencfw_em9305_ll_stream_command_30b7ec(uintptr_t header,uintptr_t pair
  *(volatile uint16_t *)(message+4u)=*(volatile uint16_t *)header;
  uint32_t value=*(volatile uint8_t *)(header+2u);
  mask=*(volatile uint8_t *)(header+8u);
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint8_t *)(message+6u)=(uint8_t)value;
  *(volatile uint8_t *)(message+16u)=(uint8_t)mask;
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
@@ -7762,13 +7763,13 @@ uint32_t opencfw_em9305_ll_stream_kind_valid_30e4dc(uint32_t kind)
 {
  if(kind==0u || kind==2u || kind==255u) return 1u;
  if(kind==1u || kind==3u)
-  return *(volatile uint8_t *)(uintptr_t)0x805a81u!=0u;
+  return em9305_ram_805a6c.u8_805a81!=0u;
  return 0u;
 }
 /* Native332f04..332f3c: capability width and header kind gate. */
 uint32_t opencfw_em9305_ll_stream_header_valid_332f04(uintptr_t header)
 {
- uint32_t flags=*(volatile uint8_t *)(uintptr_t)0x805a94u;
+ uint32_t flags=em9305_ram_805a6c.u8_805a94;
  uint32_t first=*(volatile uint8_t *)(header+1u);
  uint32_t maximum=(flags&64u)!=0u?3u:1u;
  if(maximum<first) return 0u;
@@ -7796,20 +7797,24 @@ uint32_t opencfw_em9305_ll_stream_control_valid_332f00(uintptr_t control)
 }
 /* Native3357a8..3357b4: three nonexecutecutable runtime record pointers.
  * Their 704-byte RAM records remain runtime/data ownership frontiers. */
-static const uint32_t opencfw_em9305_stream_record_addresses[3]={0x802d20u,0x802fe0u,0x8032a0u};
+extern uint8_t opencfw_em9305_ext_init_records_802d20[3][704];
+static const uint32_t opencfw_em9305_stream_record_addresses[3]={
+ (uint32_t)(uintptr_t)opencfw_em9305_ext_init_records_802d20[0],
+ (uint32_t)(uintptr_t)opencfw_em9305_ext_init_records_802d20[1],
+ (uint32_t)(uintptr_t)opencfw_em9305_ext_init_records_802d20[2]};
 /* Native307970..307980 and307a48..307a58: latch bit clear/set. */
 uint32_t opencfw_em9305_ll_stream_disable_307970(uint32_t bit)
 {
- uint32_t value=*(volatile uint8_t *)(uintptr_t)0x802a5eu;
+ uint32_t value=em9305_ram_802a2c.u8_802a5e;
  value&=~(1u<<(bit&31u));
- *(volatile uint8_t *)(uintptr_t)0x802a5eu=(uint8_t)value;
+ em9305_ram_802a2c.u8_802a5e=(uint8_t)value;
  return value;
 }
 uint32_t opencfw_em9305_ll_stream_enable_307a48(uint32_t bit)
 {
- uint32_t value=*(volatile uint8_t *)(uintptr_t)0x802a5eu;
+ uint32_t value=em9305_ram_802a2c.u8_802a5e;
  value|=1u<<(bit&31u);
- *(volatile uint8_t *)(uintptr_t)0x802a5eu=(uint8_t)value;
+ em9305_ram_802a2c.u8_802a5e=(uint8_t)value;
  return value;
 }
 /* Native307a28..307a48: optional pair copy then exact twelve-byte memcpy. */
@@ -7873,14 +7878,14 @@ uint32_t opencfw_em9305_dispatch_330440(uintptr_t request,uintptr_t input)
 /* Native30e524..30e538: inverse companion latch to30e510. */
 uint32_t opencfw_em9305_ll_connection_gate_30e524(void)
 {
- uint32_t busy=*(volatile uint8_t *)(uintptr_t)0x805a9fu;
- if(busy==0u) *(volatile uint8_t *)(uintptr_t)0x805a9eu=1u;
+ uint32_t busy=em9305_ram_805a6c.u8_805a9f;
+ if(busy==0u) em9305_ram_805a6c.u8_805a9e=1u;
  return busy==0u;
 }
 /* Native30b480..30b53c: validated legacy request, exact sparse message259. */
 uint32_t opencfw_em9305_ll_connection_begin_30b480(uintptr_t header,uintptr_t control)
 {
- uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t flags=em9305_ram_805a6c.u32_805a94;
  uintptr_t address_pointer=*(volatile uint32_t *)(header+8u);
  uint32_t maximum=(flags&64u)!=0u?3u:1u;
  uint64_t address=opencfw_em9305_controller_pack_address(address_pointer);
@@ -7904,7 +7909,7 @@ uint32_t opencfw_em9305_ll_connection_begin_30b480(uintptr_t header,uintptr_t co
  *(volatile uint32_t *)(message+28u)=(uint32_t)(address>>32u);
  *(volatile uint32_t *)(message+24u)=(uint32_t)address;
  uint32_t pair=*(volatile uint32_t *)header;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint32_t *)(message+16u)=pair;
  uint32_t address_kind=*(volatile uint8_t *)(header+6u);
  uint32_t local_kind=*(volatile uint8_t *)(header+5u);
@@ -7921,8 +7926,8 @@ void opencfw_em9305_ll_connection_cancel_30b53c(uintptr_t input)
  (void)input;
  uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
  if(message==0u) return;
- uint32_t pending=*(volatile uint8_t *)(uintptr_t)0x805a9fu;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t pending=em9305_ram_805a6c.u8_805a9f;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint8_t *)(message+3u)=2u;
  *(volatile uint8_t *)(message+2u)=(uint8_t)(pending!=0u?9u:3u);
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
@@ -7931,17 +7936,17 @@ void opencfw_em9305_ll_connection_cancel_30b53c(uintptr_t input)
  * retaining the first result with a nonzero low byte; count is reloaded. */
 uint32_t opencfw_em9305_ll_connection_mask_apply_3087a0(uint32_t low,uint32_t high)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x8027ccu;
- *(volatile uint32_t *)(uintptr_t)0x805aa4u=high;
- *(volatile uint32_t *)(uintptr_t)0x805aa0u=low;
+ uint32_t count=em9305_ram_8027cc.u8_8027cc;
+ em9305_ram_805a6c.u32_805aa4=high;
+ em9305_ram_805a6c.u32_805aa0=low;
  if(count==0u) return 0u;
- uintptr_t cursor=0x8027d0u;
+ uintptr_t cursor=(uintptr_t)&em9305_ram_8027d0;
  uint32_t first=0u,index=0u;
  do {
   uintptr_t callback=*(volatile uint32_t *)cursor;
   cursor+=4u;
   uint32_t result=((uint32_t (*)(uint32_t,uint32_t))callback)(low,high);
-  count=*(volatile uint8_t *)(uintptr_t)0x8027ccu;
+  count=em9305_ram_8027cc.u8_8027cc;
   ++index;
   if((first&255u)==0u) first=result;
  } while(index<count);
@@ -8111,9 +8116,9 @@ uint32_t opencfw_em9305_ll_connection_response_32f34c(uintptr_t request,uint32_t
 /* Native30c714..30c724: two ordered halfword copies, second in return slot. */
 uint32_t opencfw_em9305_ll_connection_limits_30c714(uintptr_t info,uintptr_t limit)
 {
- uint32_t first=*(volatile uint16_t *)(uintptr_t)0x805ab6u;
+ uint32_t first=em9305_ram_805a6c.u16_805ab6;
  *(volatile uint16_t *)info=(uint16_t)first;
- uint32_t second=*(volatile uint16_t *)(uintptr_t)0x805ab8u;
+ uint32_t second=em9305_ram_805a6c.u16_805ab8;
  *(volatile uint16_t *)limit=(uint16_t)second;
  return second;
 }
@@ -8121,7 +8126,7 @@ uint32_t opencfw_em9305_ll_connection_limits_30c714(uintptr_t info,uintptr_t lim
  * The output reloads are intentional and preserve aliased destinations. */
 uint32_t opencfw_em9305_ll_connection_capabilities_30c78c(uintptr_t info,uintptr_t first,uintptr_t second,uintptr_t third)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t size=*(volatile uint16_t *)(config+38u);
  if(size>251u) size=251u;
  *(volatile uint16_t *)info=(uint16_t)size;
@@ -8137,7 +8142,7 @@ uint32_t opencfw_em9305_ll_connection_quality_byte_306ff0(uint32_t id)
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  uint32_t value=*(volatile uint8_t *)(slots+offset+268u);
  return (value&128u)!=0u?value|0xffffff00u:value;
 }
@@ -8145,7 +8150,7 @@ uint32_t opencfw_em9305_ll_connection_version_byte_307030(uint32_t id)
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  uint32_t value=*(volatile uint8_t *)(slots+offset+66u);
  return (value&128u)!=0u?value|0xffffff00u:value;
 }
@@ -8153,7 +8158,7 @@ uint32_t opencfw_em9305_ll_connection_version_byte_307030(uint32_t id)
 uint32_t opencfw_em9305_ll_connection_quality_30be68(uint32_t id,uintptr_t output)
 {
  (void)opencfw_em9305_wsf_critical_enter();
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t status=2u,value=127u;
  if(id<*(volatile uint8_t *)(config+34u) && opencfw_em9305_ll_slot_active_30731c(id)!=0u) {
   value=opencfw_em9305_ll_connection_quality_byte_306ff0(id);
@@ -8168,7 +8173,7 @@ uint32_t opencfw_em9305_ll_connection_quality_30be68(uint32_t id,uintptr_t outpu
 uint32_t opencfw_em9305_ll_connection_version_30beb4(uint32_t id,uint32_t selector,uintptr_t output)
 {
  (void)opencfw_em9305_wsf_critical_enter();
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t status=2u,value=0xe2u;
  if(id<*(volatile uint8_t *)(config+34u) && opencfw_em9305_ll_slot_active_30731c(id)!=0u) {
   if(selector>=2u) status=18u;
@@ -8186,7 +8191,7 @@ uint64_t opencfw_em9305_ll_connection_feature_words_306ebc(uint32_t id)
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  uint32_t low=*(volatile uint32_t *)(slots+offset+276u);
  uint32_t high=*(volatile uint32_t *)(slots+offset+280u);
  return ((uint64_t)high<<32u)|low;
@@ -8195,7 +8200,7 @@ uint64_t opencfw_em9305_ll_connection_feature_words_306ebc(uint32_t id)
 uint32_t opencfw_em9305_ll_connection_remote_features_30bbbc(uint32_t id,uintptr_t output)
 {
  (void)opencfw_em9305_wsf_critical_enter();
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t status=2u;
  if(id<*(volatile uint8_t *)(config+34u) && opencfw_em9305_ll_slot_active_30731c(id)!=0u) {
   uint64_t words=opencfw_em9305_ll_connection_feature_words_306ebc(id);
@@ -8225,7 +8230,7 @@ uint32_t opencfw_em9305_dispatch_32f494(uintptr_t request,uintptr_t input)
  uint32_t status=0u,length=1u;
  if(command==0xffe3u) {
   uint32_t value=*(volatile uint8_t *)input;
-  *(volatile uint8_t *)(uintptr_t)0x805702u=(uint8_t)(value!=0u);
+  em9305_ram_805688.u8_805702=(uint8_t)(value!=0u);
  } else if(command==0xffe4u) {
   uint32_t b1=*(volatile uint8_t *)(input+1u),b3=*(volatile uint8_t *)(input+3u);
   uint32_t b0=*(volatile uint8_t *)input,b2=*(volatile uint8_t *)(input+2u);
@@ -8233,7 +8238,7 @@ uint32_t opencfw_em9305_dispatch_32f494(uintptr_t request,uintptr_t input)
   status=opencfw_em9305_ll_primary_send_32f794((uint16_t)(b0+(b1<<8u)),(uint16_t)(b2+(b3<<8u)),count);
  } else if(command==0xffe5u) {
   uint32_t high=*(volatile uint8_t *)(input+1u),low=*(volatile uint8_t *)input;
-  *(volatile uint16_t *)(uintptr_t)0x80570eu=(uint16_t)(low+(high<<8u));
+  em9305_ram_805688.u16_80570e=(uint16_t)(low+(high<<8u));
  } else if(command==0xffe7u) {
   uint32_t high=*(volatile uint8_t *)(input+1u),low=*(volatile uint8_t *)input;
   uint32_t id=(uint16_t)(low+(high<<8u));
@@ -8271,7 +8276,7 @@ uint32_t opencfw_em9305_dispatch_32f494(uintptr_t request,uintptr_t input)
  if(command==0xffe9u) {
   const uint32_t offsets[4]={0u,4u,12u,16u};
   for(uint32_t i=0u;i<4u;++i) {
-   uintptr_t source=0x805704u+offsets[i];
+   uintptr_t source=((uintptr_t)&em9305_ram_805688 + 0x7cu)+offsets[i];
    *(volatile uint8_t *)(suffix+4u*i)=(uint8_t)*(volatile uint32_t *)source;
    *(volatile uint8_t *)(suffix+4u*i+1u)=(uint8_t)(*(volatile uint32_t *)source>>8u);
    *(volatile uint8_t *)(suffix+4u*i+2u)=(uint8_t)*(volatile uint16_t *)(source+2u);
@@ -8294,7 +8299,7 @@ uint32_t opencfw_em9305_dispatch_32f494(uintptr_t request,uintptr_t input)
 uint32_t opencfw_em9305_ll_private_descriptor_303290(uintptr_t output)
 {
  return (uint32_t)(uintptr_t)opencfw_em9305_memcpy((void *)output,
-               (const void *)(uintptr_t)0x8016dcu,28u);
+               (const void *)(uintptr_t)&em9305_ram_8016dc,28u);
 }
 
 extern void opencfw_em9305_ll_signed_apply_309aa4(uint32_t,uint32_t);
@@ -8303,7 +8308,7 @@ extern void opencfw_em9305_ll_signed_apply_309aa4(uint32_t,uint32_t);
 uint32_t opencfw_em9305_ll_private_signed_30cef0(uint32_t id,uint32_t value)
 {
  (void)opencfw_em9305_wsf_critical_enter();
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t status=2u;
  if(id<*(volatile uint8_t *)(config+34u) &&
     opencfw_em9305_ll_slot_active_30731c(id)!=0u) {
@@ -8320,7 +8325,7 @@ uint32_t opencfw_em9305_ll_private_query_bytes_306f44(uint32_t id,uintptr_t outp
  for(uint32_t index=0u;index<3u;++index) {
   uint32_t offset;
   offset=(uint32_t)(uint16_t)id*912u;
-  uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+  uintptr_t slots=em9305_ram_805c5c.u32_805c70;
   uint8_t value=*(volatile uint8_t *)(slots+offset+index+598u);
   *(volatile uint8_t *)(output+index)=value;
  }
@@ -8330,11 +8335,11 @@ uint32_t opencfw_em9305_ll_private_query_bytes_306f44(uint32_t id,uintptr_t outp
 uint32_t opencfw_em9305_ll_private_query_30bde0(uint32_t id,uintptr_t output)
 {
  (void)opencfw_em9305_wsf_critical_enter();
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t status=2u;
  if(id<*(volatile uint8_t *)(config+34u) &&
     opencfw_em9305_ll_slot_active_30731c(id)!=0u) {
-  uint32_t flags=*(volatile uint8_t *)(uintptr_t)0x805a96u;
+  uint32_t flags=em9305_ram_805a6c.u8_805a96;
   status=12u;
   if((flags&1u)!=0u && opencfw_em9305_ll_slot_state_306fdc(id)==0u) {
    (void)opencfw_em9305_ll_private_query_bytes_306f44(id,output);
@@ -8350,7 +8355,7 @@ extern void opencfw_em9305_ll_signed_pair_apply_309910(uint32_t,uint32_t,uint32_
 uint32_t opencfw_em9305_ll_private_signed_pair_30dd94(uint32_t id,uint32_t value,uint32_t selector)
 {
  (void)opencfw_em9305_wsf_critical_enter();
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t status=2u;
  if(id<*(volatile uint8_t *)(config+34u) &&
     opencfw_em9305_ll_slot_active_30731c(id)!=0u) {
@@ -8369,7 +8374,7 @@ extern uint32_t opencfw_em9305_ll_private_mask_apply_308b20(uint32_t,uint32_t,ui
  * the low27 bits of the high word. There is no critical-section wrapper. */
 uint32_t opencfw_em9305_ll_private_mask_30d378(uint32_t id,uint32_t low,uint32_t high,uint32_t enabled)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  if(((low&0xfff7fb41u)|(high&0x07ffffffu))!=0u) return 18u;
@@ -8383,7 +8388,7 @@ uint32_t opencfw_em9305_ll_private_mask_apply_308b20(uint32_t id,uint32_t low,ui
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  uintptr_t record=slots+offset;
  uint32_t current_low=*(volatile uint32_t *)(record+4u);
  uint32_t current_high=*(volatile uint32_t *)(record+8u);
@@ -8398,18 +8403,18 @@ uint32_t opencfw_em9305_ll_private_mask_apply_308b20(uint32_t id,uint32_t low,ui
 uint32_t opencfw_em9305_ll_signed_clamp_310230(uint32_t value)
 {
  int32_t query=(int32_t)opencfw_em9305_radio_status_311a00(1u);
- int32_t upper=(int32_t)*(volatile int8_t *)(uintptr_t)0x8012b8u;
+ int32_t upper=(int32_t)em9305_ram_8012b8.s8_8012b8;
  int32_t ceiling=upper<query?upper:query;
  if(ceiling<(int32_t)value) return (uint32_t)ceiling;
- int32_t lower=(int32_t)*(volatile int8_t *)(uintptr_t)0x8012b9u;
+ int32_t lower=(int32_t)em9305_ram_8012b8.s8_8012b9;
  return (uint32_t)(lower>(int32_t)value?lower:(int32_t)value);
 }
 
 /* Native31026c..310280: lower/upper byte outputs, both read before writes. */
 uint32_t opencfw_em9305_ll_signed_bounds_31026c(uintptr_t lower,uintptr_t upper)
 {
- uint32_t low=*(volatile uint8_t *)(uintptr_t)0x8012b9u;
- uint32_t high=*(volatile uint8_t *)(uintptr_t)0x8012b8u;
+ uint32_t low=em9305_ram_8012b8.u8_8012b9;
+ uint32_t high=em9305_ram_8012b8.u8_8012b8;
  *(volatile uint8_t *)lower=(uint8_t)low;
  *(volatile uint8_t *)upper=(uint8_t)high;
  return (uint32_t)lower;
@@ -8430,7 +8435,7 @@ void opencfw_em9305_ll_signed_pair_apply_309910(uint32_t id,uint32_t value,uint3
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  uintptr_t record=slots+offset;
  uint32_t old=*(volatile uint8_t *)(record+66u);
  if(selector==0u) selector=*(volatile uint8_t *)(record+76u);
@@ -8442,7 +8447,7 @@ void opencfw_em9305_ll_signed_pair_apply_309910(uint32_t id,uint32_t value,uint3
   *(volatile uint8_t *)(record+66u)=(uint8_t)updated;
   if(mode==2u && (updated&255u)!=old &&
      (*(volatile uint8_t *)(record+548u)&4u)!=0u) {
-   uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8052c8u;
+   uintptr_t callback=em9305_ram_8052bc.u32_8052c8;
    if(callback!=0u) {
     uint32_t signed_delta=(difference&128u)!=0u?(difference&255u)|0xffffff00u:difference&255u;
     (void)((uint32_t (*)(uintptr_t,uint32_t,uint32_t,uint32_t,uint32_t))callback)(record,selector,signed_delta,updated,0u);
@@ -8452,7 +8457,7 @@ void opencfw_em9305_ll_signed_pair_apply_309910(uint32_t id,uint32_t value,uint3
  uint32_t notify=*(volatile uint8_t *)(record+767u);
  *(volatile uint8_t *)(record+selector+331u)=(uint8_t)updated;
  if(notify!=0u) {
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805170u;
+  uintptr_t callback=em9305_ram_805160.u32_805170;
   if(callback!=0u) {
    uint32_t current=*(volatile uint8_t *)(record+66u);
    uint32_t signed_current=(current&128u)!=0u?current|0xffffff00u:current;
@@ -8471,7 +8476,7 @@ void opencfw_em9305_ll_signed_apply_309aa4(uint32_t id,uint32_t value)
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  uintptr_t record=slots+offset;
  uint32_t old=*(volatile uint8_t *)(record+66u);
  uint8_t saved[4];
@@ -8484,7 +8489,7 @@ void opencfw_em9305_ll_signed_apply_309aa4(uint32_t id,uint32_t value)
  *(volatile uint32_t *)(record+332u)=replicated;
  if(mode==2u && byte!=old &&
     (*(volatile uint8_t *)(record+548u)&4u)!=0u) {
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8052c8u;
+  uintptr_t callback=em9305_ram_8052bc.u32_8052c8;
   if(callback!=0u) {
    uint32_t selector=*(volatile uint8_t *)(record+76u);
    uint32_t difference=updated-old;
@@ -8493,14 +8498,14 @@ void opencfw_em9305_ll_signed_apply_309aa4(uint32_t id,uint32_t value)
   }
  }
  if(*(volatile uint8_t *)(record+767u)!=0u) {
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805170u;
+  uintptr_t callback=em9305_ram_805160.u32_805170;
   for(uint32_t index=0u;index<4u;++index) {
    if(byte!=saved[index] && callback!=0u) {
     uint32_t difference=updated-saved[index];
     uint32_t classification=opencfw_em9305_ll_signed_classify_31b374(updated);
     uint32_t delta=(difference&128u)!=0u?(difference&255u)|0xffffff00u:difference&255u;
     (void)((uint32_t (*)(uintptr_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t))callback)(record,0u,0u,index,updated,classification,delta);
-    callback=*(volatile uint32_t *)(uintptr_t)0x805170u;
+    callback=em9305_ram_805160.u32_805170;
    }
   }
  }
@@ -8511,16 +8516,16 @@ void opencfw_em9305_ll_signed_apply_309aa4(uint32_t id,uint32_t value)
  * Configuration slot count is reloaded on every loop iteration. */
 uint32_t opencfw_em9305_ll_private_radio_30d8fc(uint32_t mask,uint32_t gain,uint32_t channel)
 {
- if((*(volatile uint8_t *)(uintptr_t)0x805a96u&1u)==0u) return 12u;
+ if((em9305_ram_805a6c.u8_805a96&1u)==0u) return 12u;
  if(mask-1u>=7u || ((channel-38u)&255u)<220u) return 18u;
  for(uint32_t index=0u;index<3u;++index) {
   if((mask&(1u<<index))!=0u) {
-   *(volatile uint8_t *)(uintptr_t)(0x805aa9u+index)=(uint8_t)gain;
-   *(volatile uint8_t *)(uintptr_t)(0x805aacu+index)=(uint8_t)channel;
+   *(volatile uint8_t *)(uintptr_t)(((uintptr_t)&em9305_ram_805a6c + 0x3du)+index)=(uint8_t)gain;
+   *(volatile uint8_t *)(uintptr_t)(((uintptr_t)&em9305_ram_805a6c + 0x40u)+index)=(uint8_t)channel;
   }
  }
  for(uint32_t index=0u;;++index) {
-  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uintptr_t config=em9305_ram_805c5c.u32_805cac;
   uint32_t id=(uint16_t)index;
   if(id>=*(volatile uint8_t *)(config+34u)) return 0u;
   if(opencfw_em9305_ll_slot_active_30731c(id)==0u) continue;
@@ -8529,7 +8534,7 @@ uint32_t opencfw_em9305_ll_private_radio_30d8fc(uint32_t mask,uint32_t gain,uint
   uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
   if(message==0u) continue;
   *(volatile uint16_t *)(message+2u)=0x2101u;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   *(volatile uint8_t *)(message+5u)=(uint8_t)channel;
   *(volatile uint8_t *)(message+4u)=(uint8_t)mask;
   *(volatile uint16_t *)message=(uint16_t)index;
@@ -8542,15 +8547,15 @@ uint32_t opencfw_em9305_ll_private_radio_30d8fc(uint32_t mask,uint32_t gain,uint
 uint32_t opencfw_em9305_ll_connection_value_30e38c(uint32_t size,uint32_t timing)
 {
  if(((size-252u)&65535u)<0xff1fu || timing<328u) return 48u;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t version=*(volatile uint8_t *)(config+4u);
  if(timing>=2121u && version<9u) return 48u;
  if(timing>=17041u && version>=9u) return 48u;
  uint32_t limit=*(volatile uint16_t *)(config+38u);
  if(limit>251u) limit=251u;
  if(limit<size) return 17u;
- *(volatile uint16_t *)(uintptr_t)0x805ab8u=(uint16_t)timing;
- *(volatile uint16_t *)(uintptr_t)0x805ab6u=(uint16_t)size;
+ em9305_ram_805a6c.u16_805ab8=(uint16_t)timing;
+ em9305_ram_805a6c.u16_805ab6=(uint16_t)size;
  return 0u;
 }
 
@@ -8559,7 +8564,7 @@ uint64_t opencfw_em9305_ll_connection_query_words_307044(uint32_t id)
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  uint32_t low=*(volatile uint32_t *)(slots+offset+544u);
  uint32_t high=*(volatile uint32_t *)(slots+offset+548u);
  return (uint64_t)low|((uint64_t)high<<32u);
@@ -8567,7 +8572,7 @@ uint64_t opencfw_em9305_ll_connection_query_words_307044(uint32_t id)
 /* Native30cb28..30cb7a: operation query gated by slot word bit26. */
 uint32_t opencfw_em9305_ll_connection_query_30cb28(uint32_t id)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  uint64_t words=opencfw_em9305_ll_connection_query_words_307044(id);
@@ -8575,7 +8580,7 @@ uint32_t opencfw_em9305_ll_connection_query_30cb28(uint32_t id)
  uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
  if(message==0u) return 0u;
  *(volatile uint16_t *)(message+2u)=0x2301u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint16_t *)message=(uint16_t)id;
  *(volatile uint8_t *)(message+4u)=2u;
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
@@ -8585,14 +8590,14 @@ uint32_t opencfw_em9305_ll_connection_query_30cb28(uint32_t id)
 /* Native30c944..30c996: six-byte connection mode command, no critical wrap. */
 uint32_t opencfw_em9305_ll_connection_mode_30c944(uint32_t id,uint32_t mode)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  if(opencfw_em9305_ll_slot_flag_307480(id,1u)==0u) return 12u;
  uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
  if(message==0u) return 0u;
  *(volatile uint16_t *)(message+2u)=0x1e01u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint8_t *)(message+4u)=(uint8_t)mode;
  *(volatile uint16_t *)message=(uint16_t)id;
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
@@ -8602,7 +8607,7 @@ extern uint32_t opencfw_em9305_ll_connection_parameters_validate_30a6b4(uintptr_
 /* Native30c998..30c9fe: validated 12-byte controls copied into16-byte message. */
 uint32_t opencfw_em9305_ll_connection_modify_30c998(uint32_t id,uintptr_t controls)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  if(opencfw_em9305_ll_slot_flag_307480(id,1u)==0u) return 12u;
@@ -8613,7 +8618,7 @@ uint32_t opencfw_em9305_ll_connection_modify_30c998(uint32_t id,uintptr_t contro
  *(volatile uint16_t *)(message+2u)=0x1d01u;
  *(volatile uint16_t *)message=(uint16_t)id;
  (void)opencfw_em9305_memcpy((void *)(message+4u),(const void *)controls,12u);
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
  return 0u;
 }
@@ -8644,7 +8649,7 @@ uint32_t opencfw_em9305_ll_connection_read_ready_3073ec(uint32_t id)
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  uintptr_t record=slots+offset;
  if(*(volatile uint8_t *)record==0u) return 0u;
  return (*(volatile uint8_t *)(record+636u)&4u)>>2u;
@@ -8654,7 +8659,7 @@ uint32_t opencfw_em9305_ll_connection_read_mark_309030(uint32_t id)
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  uintptr_t record=slots+offset;
  uint32_t word=*(volatile uint32_t *)(record+636u);
  *(volatile uint32_t *)(record+636u)=word|4u;
@@ -8669,13 +8674,13 @@ uint32_t opencfw_em9305_ll_connection_read_30c860(uint32_t id)
   (void)opencfw_em9305_ll_connection_read_mark_309030(id);
   return 0u;
  }
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
  if(message==0u) return 0u;
  *(volatile uint16_t *)(message+2u)=0x1b01u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint16_t *)message=(uint16_t)id;
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
  return 0u;
@@ -8683,14 +8688,14 @@ uint32_t opencfw_em9305_ll_connection_read_30c860(uint32_t id)
 /* Native30c8c8..30c916: max/active then pending-operation28 gate. */
 uint32_t opencfw_em9305_ll_connection_action_30c8c8(uint32_t id)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  if(opencfw_em9305_child_307434(id,28u)!=0u) return 12u;
  uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
  if(message==0u) return 0u;
  *(volatile uint16_t *)(message+2u)=0x1c01u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint16_t *)message=(uint16_t)id;
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
  return 0u;
@@ -8699,25 +8704,25 @@ uint32_t opencfw_em9305_ll_connection_action_30c8c8(uint32_t id)
 /* Native3072e0..3072ee and30730c..30731a: optional live callback queries. */
 uint32_t opencfw_em9305_ll_disconnect_extra_active_3072e0(uint32_t id)
 {
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8027e8u;
+ uintptr_t callback=em9305_ram_8027e0.u32_8027e8;
  return callback!=0u?((uint32_t (*)(uint32_t))callback)(id):0u;
 }
 uint32_t opencfw_em9305_ll_disconnect_extra_pending_30730c(uint32_t id)
 {
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8027ecu;
+ uintptr_t callback=em9305_ram_8027e0.u32_8027ec;
  return callback!=0u?((uint32_t (*)(uint32_t))callback)(id):0u;
 }
 /* Native306e54..306e66: lookup callback, authentic missing-provider sentinel. */
 uint32_t opencfw_em9305_ll_disconnect_extra_lookup_306e54(uint32_t id)
 {
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8028bcu;
+ uintptr_t callback=em9305_ram_802878.u32_8028bc;
  return callback!=0u?((uint32_t (*)(uint32_t))callback)(id):0xffffu;
 }
 /* Native30b570..30b620: primary/extra disconnect commands with runtime
  * callback queries and configuration reload before allocation size choice. */
 uint32_t opencfw_em9305_ll_connection_disconnect_30b570(uint32_t id,uint32_t reason)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t primary=*(volatile uint8_t *)(config+34u);
  uint32_t extra=*(volatile uint8_t *)(config+53u);
  if(id>=primary+extra) return 2u;
@@ -8733,13 +8738,13 @@ uint32_t opencfw_em9305_ll_connection_disconnect_30b570(uint32_t id,uint32_t rea
   uint32_t lookup=opencfw_em9305_ll_disconnect_extra_lookup_306e54(id);
   *(volatile uint16_t *)(message+2u)=0x2701u;
   *(volatile uint16_t *)message=(uint16_t)lookup;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   *(volatile uint8_t *)(message+4u)=(uint8_t)reason;
   *(volatile uint16_t *)(message+6u)=(uint16_t)id;
   (void)opencfw_em9305_wsf_task_message_send(handler,message);
   return 0u;
  }
- config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ config=em9305_ram_805c5c.u32_805cac;
  primary=*(volatile uint8_t *)(config+34u);
  uintptr_t message=opencfw_em9305_wsf_event_allocate(id<primary?8u:6u);
  if(message==0u) return 0u;
@@ -8749,7 +8754,7 @@ uint32_t opencfw_em9305_ll_connection_disconnect_30b570(uint32_t id,uint32_t rea
   type=0x1701u;
  }
  *(volatile uint16_t *)(message+2u)=(uint16_t)type;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint8_t *)(message+4u)=(uint8_t)reason;
  *(volatile uint16_t *)message=(uint16_t)id;
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
@@ -8760,19 +8765,19 @@ uint32_t opencfw_em9305_ll_connection_disconnect_30b570(uint32_t id,uint32_t rea
  * Product version pointer is freshly reloaded after the pending query. */
 uint32_t opencfw_em9305_ll_connection_times_30d3c4(uint32_t id,uint32_t size,uint32_t timing)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  if(opencfw_em9305_child_307434(id,31u)!=0u) return 12u;
  if(((size-252u)&65535u)<0xff1fu || timing<328u) return 18u;
- config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ config=em9305_ram_805c5c.u32_805cac;
  uint32_t version=*(volatile uint8_t *)(config+4u);
  if(timing>=2121u && version<9u) return 18u;
  if(timing>=17041u && version>=9u) return 18u;
  uintptr_t message=opencfw_em9305_wsf_event_allocate(8u);
  if(message==0u) return 0u;
  *(volatile uint16_t *)(message+2u)=0x1f01u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  uint32_t clamped=(int32_t)size<251?size:251u;
  *(volatile uint16_t *)(message+6u)=(uint16_t)timing;
  *(volatile uint16_t *)message=(uint16_t)id;
@@ -8784,12 +8789,12 @@ uint32_t opencfw_em9305_ll_connection_times_30d3c4(uint32_t id,uint32_t size,uin
 /* Native30b1b0..30b22c: legacy controls request; state1 needs feature bit1. */
 uint32_t opencfw_em9305_ll_connection_parameters_30b1b0(uint32_t id,uintptr_t controls)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  if(opencfw_em9305_child_307434(id,21u)!=0u) return 12u;
  if(opencfw_em9305_ll_slot_state_306fdc(id)==1u &&
-    (*(volatile uint8_t *)(uintptr_t)0x805a94u&2u)==0u) return 12u;
+    (em9305_ram_805a6c.u8_805a94&2u)==0u) return 12u;
  uint32_t status=opencfw_em9305_ll_connection_parameters_validate_30a6b4(controls);
  if(status!=0u) return status;
  uintptr_t message=opencfw_em9305_wsf_event_allocate(16u);
@@ -8797,7 +8802,7 @@ uint32_t opencfw_em9305_ll_connection_parameters_30b1b0(uint32_t id,uintptr_t co
  *(volatile uint16_t *)(message+2u)=0x1501u;
  *(volatile uint16_t *)message=(uint16_t)id;
  (void)opencfw_em9305_memcpy((void *)(message+4u),(const void *)controls,12u);
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
  return 0u;
 }
@@ -8806,8 +8811,8 @@ uint32_t opencfw_em9305_ll_connection_parameters_30b1b0(uint32_t id,uintptr_t co
 uint32_t opencfw_em9305_dispatch_32f70c(uintptr_t input)
 {
  if(*(volatile uint8_t *)(input+2u)!=0x33u) return 0u;
- if((*(volatile uint8_t *)(uintptr_t)0x8056fcu&4u)==0u) return 0u;
- if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u) return 0u;
+ if((em9305_ram_805688.u8_8056fc&4u)==0u) return 0u;
+ if((em9305_ram_805688.u8_8056ef&32u)==0u) return 0u;
  uintptr_t output=opencfw_em9305_ll_event_allocate(0x3eu,12u);
  if(output==0u) return 0u;
  output-=2u;
@@ -8864,7 +8869,7 @@ uint32_t opencfw_em9305_ll_controls_apply_30d524(uintptr_t controls)
  if(status!=0u) return status;
  uint16_t values[5];
  for(uint32_t i=0u;i<5u;++i) values[i]=*(volatile uint16_t *)(controls+2u*i);
- for(uint32_t i=0u;i<5u;++i) *(volatile uint16_t *)(uintptr_t)(0x805ad0u+2u*i)=values[i];
+ for(uint32_t i=0u;i<5u;++i) *(volatile uint16_t *)(uintptr_t)(((uintptr_t)&em9305_ram_805a6c + 0x64u)+2u*i)=values[i];
  return status;
 }
 
@@ -8887,14 +8892,14 @@ uint32_t opencfw_em9305_ll_controls_validate_32e378(uintptr_t controls)
  * All multiplication instructions retain named authenticated ISA semantics. */
 uint32_t opencfw_em9305_ll_slot_controls_apply_30e0e0(uint32_t id,uintptr_t controls)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u)) return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u) return 2u;
  uint32_t status=opencfw_em9305_ll_controls_validate_32e378(controls);
  if(status!=0u) return status;
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uintptr_t slot=base+offset;
  uint32_t latency=*(volatile uint16_t *)(controls+4u);
  uint32_t maximum=*(volatile uint16_t *)(controls+2u);
@@ -8908,17 +8913,17 @@ uint32_t opencfw_em9305_ll_slot_controls_apply_30e0e0(uint32_t id,uintptr_t cont
  required=(uint32_t)rounded*(uint32_t)span;
  required<<=1u;
  if(available<required) return 18u;
- if((*(volatile uint8_t *)(uintptr_t)0x805a98u&64u)==0u) return 26u;
+ if((em9305_ram_805a6c.u8_805a98&64u)==0u) return 26u;
  if((*(volatile uint8_t *)(slot+548u)&64u)==0u) return 26u;
  if(*(volatile uint8_t *)(slot+888u)!=0u) return 12u;
  if(*(volatile uint8_t *)(slot+2u)==0u) {
   uint16_t first=*(volatile uint16_t *)controls;
   uint16_t fourth=*(volatile uint16_t *)(controls+6u);
-  *(volatile uint16_t *)(uintptr_t)0x805ad4u=(uint16_t)latency;
-  *(volatile uint16_t *)(uintptr_t)0x805ad2u=(uint16_t)maximum;
-  *(volatile uint16_t *)(uintptr_t)0x805ad8u=(uint16_t)timeout;
-  *(volatile uint16_t *)(uintptr_t)0x805ad0u=first;
-  *(volatile uint16_t *)(uintptr_t)0x805ad6u=fourth;
+  em9305_ram_805a6c.u16_805ad4=(uint16_t)latency;
+  em9305_ram_805a6c.u16_805ad2=(uint16_t)maximum;
+  em9305_ram_805a6c.u16_805ad8=(uint16_t)timeout;
+  em9305_ram_805a6c.u16_805ad0=first;
+  em9305_ram_805a6c.u16_805ad6=fourth;
  }
  uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
  if(message==0u) return 0u;
@@ -8926,7 +8931,7 @@ uint32_t opencfw_em9305_ll_slot_controls_apply_30e0e0(uint32_t id,uintptr_t cont
  offset=(uint32_t)(uint16_t)id*912u;
  *(volatile uint16_t *)(message+2u)=0x2901u;
  (void)opencfw_em9305_memcpy((void *)(base+offset+856u),(const void *)controls,10u);
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
  return 0u;
 }
@@ -8982,7 +8987,7 @@ uint32_t opencfw_em9305_dispatch_32f85c(uintptr_t request,uintptr_t input)
   id=low+(high<<8u);
   if(command==0x206fu) status=opencfw_em9305_ll_test_30cb24((uint16_t)id,arg);
   else if(command==0x2070u) status=opencfw_em9305_ll_test_30c2dc((uint16_t)id,arg);
-  else {status=opencfw_em9305_ll_test_30c2d4((uint16_t)id,arg);if(status==0u) *(volatile uint8_t *)(uintptr_t)0x805854u=1u;}
+  else {status=opencfw_em9305_ll_test_30c2d4((uint16_t)id,arg);if(status==0u) em9305_ram_805838.u8_805854=1u;}
   length=3u;
  } else if(command==0x2061u || command==0x2072u || command==0x2073u || command==0x2075u || command==0x1405u) {
   uint32_t high=*(volatile uint8_t *)(input+1u),low=*(volatile uint8_t *)input;
@@ -9029,7 +9034,7 @@ uint32_t opencfw_em9305_dispatch_32f85c(uintptr_t request,uintptr_t input)
   *(volatile uint8_t *)(packet+2u)=(uint8_t)(id>>8u);*(volatile uint8_t *)(packet+3u)=(uint8_t)value;
  } else if(command==0x2072u || command==0x2073u) {
   uint32_t result=command==0x2072u?opencfw_em9305_ll_test_30c2bc((uint16_t)id,(uintptr_t)scratch):opencfw_em9305_ll_test_30c2d8((uint16_t)id,(uintptr_t)scratch);
-  if(command==0x2073u && result==0u) *(volatile uint8_t *)(uintptr_t)0x805854u=0u;
+  if(command==0x2073u && result==0u) em9305_ram_805838.u8_805854=0u;
   (void)opencfw_em9305_ll_test_response_330f08(packet,result,(uint16_t)id,(uintptr_t)scratch);
  } else if(command==0x2075u) {
   uint32_t result=opencfw_em9305_ll_test_30c724((uint16_t)id,(uintptr_t)scratch),words[7];
@@ -9051,28 +9056,28 @@ uint32_t opencfw_em9305_dispatch_32f85c(uintptr_t request,uintptr_t input)
  * 30bdd0..30bdda: independent fresh live product pointer getters. */
 uint32_t opencfw_em9305_ll_test_30bb14(void)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  return *(volatile uint16_t *)(config+38u);
 }
 uint32_t opencfw_em9305_ll_test_30bb20(void)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  return *(volatile uint8_t *)(config+35u);
 }
 uint32_t opencfw_em9305_ll_test_30bdc4(void)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  return *(volatile uint16_t *)(config+44u);
 }
 uint32_t opencfw_em9305_ll_test_30bdd0(void)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  return *(volatile uint8_t *)(config+42u);
 }
 /* Native308b14..308b1e: halfword test interval write. */
 uint32_t opencfw_em9305_ll_test_interval_308b14(uint32_t value)
 {
- *(volatile uint16_t *)(uintptr_t)0x805af4u=(uint16_t)value;
+ em9305_ram_805af0.u16_805af4=(uint16_t)value;
  return 0u;
 }
 /* Native30d35c..30d376: modulo-halfword interval gate. */
@@ -9126,9 +9131,9 @@ uint32_t opencfw_em9305_ll_test_response_330f08(uintptr_t packet,uint32_t status
 /* Native30bc3c tail branch to Native306ed4..306ee6: ordered byte copies. */
 uint32_t opencfw_em9305_ll_test_30bc3c(uintptr_t output)
 {
- uint32_t low=*(volatile uint8_t *)(uintptr_t)0x805af4u;
+ uint32_t low=em9305_ram_805af0.u8_805af4;
  *(volatile uint8_t *)output=(uint8_t)low;
- uint32_t high=*(volatile uint8_t *)(uintptr_t)0x805af5u;
+ uint32_t high=em9305_ram_805af0.u8_805af5;
  *(volatile uint8_t *)(output+1u)=(uint8_t)high;
  return 2u;
 }
@@ -9235,10 +9240,10 @@ uint32_t opencfw_em9305_ll_test_30c2d8(uint32_t id,uintptr_t output)
 /* Native31ab50..31ab86: active channel match; ADD2 stride35*4=140. */
 uintptr_t opencfw_em9305_ll_test_channel_find_31ab50(uint32_t id)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+52u);
  if(count==0u) return 0u;
- uintptr_t row=*(volatile uint32_t *)(uintptr_t)0x805c64u;
+ uintptr_t row=em9305_ram_805c5c.u32_805c64;
  for(uint32_t i=0u;i<count;++i,row+=140u)
   if(*(volatile uint8_t *)row!=0u && *(volatile uint8_t *)(row+6u)==id) return row;
  return 0u;
@@ -9248,7 +9253,7 @@ uint32_t opencfw_em9305_ll_test_stream_mode_317a10(uintptr_t record,uint32_t val
 {
  if(*(volatile uint8_t *)(record+108u)!=0u) return 12u;
  if(*(volatile uint8_t *)(record+109u)!=0u) return 12u;
- if(*(volatile uint8_t *)(uintptr_t)0x805adcu==0u) return 7u;
+ if(em9305_ram_805a6c.u8_805adc==0u) return 7u;
  *(volatile uint8_t *)(record+116u)=(uint8_t)value;
  *(volatile uint32_t *)(record+112u)=0u;
  *(volatile uint16_t *)(record+108u)=1u;
@@ -9360,11 +9365,11 @@ uint32_t opencfw_em9305_ll_test_30cb24(uint32_t id,uint32_t mask)
   if((mask&2u)!=0u && *(volatile uint8_t *)(record+532u)==255u) return 12u;
   if((mask&1u)!=0u) {
    *(uint32_t *)(scratch+16u)=(uint32_t)(record+528u);
-   *(volatile uint32_t *)(uintptr_t)0x805cb0u=(uint32_t)(record+528u);
+   em9305_ram_805c5c.u32_805cb0=(uint32_t)(record+528u);
    *(uint16_t *)scratch=*(volatile uint16_t *)(record+8u);
    (void)opencfw_em9305_ll_test_action_31b7e4((uintptr_t)scratch);
    *(volatile uint8_t *)(record+528u)=255u;
-   *(volatile uint32_t *)(uintptr_t)0x805cb0u=0u;
+   em9305_ram_805c5c.u32_805cb0=0u;
   }
   if((mask&2u)!=0u) {
    *(uint32_t *)(scratch+16u)=(uint32_t)(record+532u);
@@ -9382,11 +9387,11 @@ uint32_t opencfw_em9305_ll_test_30cb24(uint32_t id,uint32_t mask)
  *(uint16_t *)scratch=*(volatile uint16_t *)(record+2u);
  if(*(volatile uint8_t *)(state+3u)!=0u) {
   if(*(volatile uint8_t *)(record+36u)==255u) return 12u;
-  *(volatile uint32_t *)(uintptr_t)0x805cb0u=(uint32_t)(record+36u);
+  em9305_ram_805c5c.u32_805cb0=(uint32_t)(record+36u);
   *(uint32_t *)(scratch+16u)=(uint32_t)(record+36u);
   (void)opencfw_em9305_ll_test_action_31b7e4((uintptr_t)scratch);
   *(volatile uint8_t *)(record+36u)=255u;
-  *(volatile uint32_t *)(uintptr_t)0x805cb0u=0u;
+  em9305_ram_805c5c.u32_805cb0=0u;
  } else {
   if(*(volatile uint8_t *)(record+44u)==255u) return 12u;
   *(uint32_t *)(scratch+16u)=(uint32_t)(record+44u);
@@ -9403,7 +9408,7 @@ uint32_t opencfw_em9305_ll_test_action_31b7e4(uintptr_t request)
  uint32_t marker=*(volatile uint8_t *)slot;
  if(marker!=1u) return marker;
  uint32_t id=*(volatile uint16_t *)(slot+2u);
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8027fcu;
+ uintptr_t callback=em9305_ram_8027e0.u32_8027fc;
  return ((uint32_t (*)(uint32_t,uint32_t))callback)(id,0u);
 }
 /* Native31b8a8..31b914: second action uses slot+4 marker/queue. Drain each
@@ -9416,7 +9421,7 @@ uint32_t opencfw_em9305_ll_test_action_31b8a8(uintptr_t request)
  uint8_t handler;
  if(marker==1u) {
   uint32_t id=*(volatile uint16_t *)(queue+10u);
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8027fcu;
+  uintptr_t callback=em9305_ram_8027e0.u32_8027fc;
   (void)((uint32_t (*)(uint32_t,uint32_t))callback)(id,1u);
  }
  for(;;) {
@@ -9424,8 +9429,8 @@ uint32_t opencfw_em9305_ll_test_action_31b8a8(uintptr_t request)
   if(event==0u) return 0u;
   (void)opencfw_em9305_wsf_event_release(event);
   (void)opencfw_em9305_wsf_critical_enter();
-  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805addu;
-  *(volatile uint8_t *)(uintptr_t)0x805addu=(uint8_t)(count+1u);
+  uint32_t count=em9305_ram_805a6c.u8_805add;
+  em9305_ram_805a6c.u8_805add=(uint8_t)(count+1u);
   (void)opencfw_em9305_wsf_critical_exit();
  }
 }
@@ -9466,8 +9471,8 @@ uintptr_t opencfw_em9305_ll_primary_take_3252dc(uintptr_t record)
  * underflows natively; no invented empty-count guard is added here. */
 uintptr_t opencfw_em9305_ll_primary_pending_30853c(void)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uint32_t index=*(volatile uint8_t *)(config+34u);
  do {
   --index;
@@ -9478,7 +9483,7 @@ uintptr_t opencfw_em9305_ll_primary_pending_30853c(void)
   if(*(volatile uint8_t *)record!=0u) {
    uintptr_t packet=opencfw_em9305_ll_primary_take_3252dc(record);
    if(packet!=0u) return packet;
-   base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+   base=em9305_ram_805c5c.u32_805c70;
   }
  } while(index!=0u);
  return 0u;
@@ -9490,31 +9495,31 @@ extern uintptr_t opencfw_em9305_dispatch_child_317624(uintptr_t record);
  * child returns zero, while the record base reloads every iteration. */
 uintptr_t opencfw_em9305_ll_link_pending_30858c(void)
 {
- if(*(volatile uint32_t *)(uintptr_t)0x805c68u!=0u) {
-  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ if(em9305_ram_805c5c.u32_805c68!=0u) {
+  uintptr_t config=em9305_ram_805c5c.u32_805cac;
   for(uint32_t index=0u;index<*(volatile uint8_t *)(config+53u);++index) {
-   uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c68u;
+   uintptr_t base=em9305_ram_805c5c.u32_805c68;
    uint32_t offset,stride=656u;
    offset=(uint32_t)index*(uint32_t)(int32_t)(int16_t)stride;
    uintptr_t record=base+offset;
    if(*(volatile uint8_t *)record!=0u && *(volatile uint8_t *)(record+532u)==0u) {
     uintptr_t packet=opencfw_em9305_dispatch_child_31ba54(record+532u);
     if(packet!=0u) return packet;
-    config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+    config=em9305_ram_805c5c.u32_805cac;
    }
   }
  }
- if(*(volatile uint32_t *)(uintptr_t)0x805c40u==0u) return 0u;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ if(em9305_ram_805be0.u32_805c40==0u) return 0u;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  for(uint32_t index=0u;index<*(volatile uint8_t *)(config+58u);++index) {
-  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c40u;
+  uintptr_t base=em9305_ram_805be0.u32_805c40;
   uintptr_t record=base+(index<<8u);
   if(*(volatile uint8_t *)record!=0u) {
    uintptr_t state=*(volatile uint32_t *)(record+4u);
    if(*(volatile uint8_t *)(state+3u)==0u && *(volatile uint8_t *)(record+44u)==0u) {
     uintptr_t packet=opencfw_em9305_dispatch_child_317624(record);
     if(packet!=0u) return packet;
-    config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+    config=em9305_ram_805c5c.u32_805cac;
    }
   }
  }
@@ -9556,12 +9561,12 @@ uint32_t opencfw_em9305_ll_test_30e050(uintptr_t request)
   *(uint32_t *)(descriptor+12u)=anchor;
   *(uint32_t *)(descriptor+8u)=counter+1u;
   *(uint32_t *)(descriptor+4u)=timing;
-  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+  uintptr_t base=em9305_ram_805c5c.u32_805c70;
   submit_context=*(volatile uint32_t *)(channel+36u);
   uint32_t index=*(volatile uint16_t *)(record+6u);
   if(role!=0u && role!=1u) return 12u;
-  uint32_t timer_high=*(volatile uint32_t *)(uintptr_t)0x805b44u;
-  uint32_t timer_low=*(volatile uint32_t *)(uintptr_t)0x805b40u;
+  uint32_t timer_high=em9305_ram_805af0.u32_805b44;
+  uint32_t timer_low=em9305_ram_805af0.u32_805b40;
   uint32_t offset;
   offset=(uint32_t)(uint16_t)index*912u;
   *(uint32_t *)(descriptor+16u)=(uint32_t)(record+(role==0u?528u:532u));
@@ -9625,11 +9630,11 @@ uint32_t opencfw_em9305_ll_test_submit_31bb20(uintptr_t descriptor,uintptr_t req
   if(*(volatile uint8_t *)(request+3u)==255u) return 0u;
   return opencfw_em9305_ll_test_schedule_second_31b918(descriptor,request);
  }
- *(volatile uint32_t *)(uintptr_t)0x805cb0u=(uint32_t)slot;
+ em9305_ram_805c5c.u32_805cb0=(uint32_t)slot;
  (void)opencfw_em9305_ll_test_action_31b7e4(descriptor);
  uint32_t marker=*(volatile uint8_t *)(request+3u);
  slot=*(volatile uint32_t *)(descriptor+16u);
- *(volatile uint32_t *)(uintptr_t)0x805cb0u=0u;
+ em9305_ram_805c5c.u32_805cb0=0u;
  *(volatile uint8_t *)slot=(uint8_t)marker;
  if(*(volatile uint8_t *)(request+3u)==255u) return 0u;
  return opencfw_em9305_ll_test_schedule_first_31b7fc(descriptor,request,context);
@@ -9649,7 +9654,7 @@ uint32_t opencfw_em9305_ll_test_schedule_second_31b918(uintptr_t descriptor,uint
  }
  if(marker==255u) return 0u;
  if(marker!=1u) return 18u;
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8027f8u;
+ uintptr_t callback=em9305_ram_8027e0.u32_8027f8;
  uint32_t id=*(volatile uint16_t *)descriptor;
  *(volatile uint32_t *)(slot+8u)=0u;
  *(volatile uint32_t *)(slot+4u)=0u;
@@ -9700,7 +9705,7 @@ uint32_t opencfw_em9305_ll_test_schedule_first_31b7fc(uintptr_t descriptor,uintp
  if(marker!=1u) return 18u;
  uint32_t id=*(volatile uint16_t *)descriptor;
  *(volatile uint16_t *)(slot+2u)=(uint16_t)id;
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8027f8u;
+ uintptr_t callback=em9305_ram_8027e0.u32_8027f8;
  if(callback==0u) return 18u;
  uint32_t high=*(volatile uint32_t *)(descriptor+24u);
  uint32_t low=*(volatile uint32_t *)(descriptor+20u);
@@ -9744,12 +9749,12 @@ uint32_t opencfw_em9305_ll_test_schedule_first_31b7fc(uintptr_t descriptor,uintp
  * Native overlapping 20-byte stride / +24 halfword layout is preserved. */
 uint32_t opencfw_em9305_ll_test_complete_31bad0(uint32_t id,uint32_t first,uint32_t second,uintptr_t packet,uint32_t length)
 {
- uintptr_t active=*(volatile uint32_t *)(uintptr_t)0x805cb0u;
+ uintptr_t active=em9305_ram_805c5c.u32_805cb0;
  if(active!=0u && *(volatile uint16_t *)(active+2u)==id)
   return opencfw_em9305_wsf_event_release(packet);
- uintptr_t ring=(uintptr_t)0x8028d0u;
+ uintptr_t ring=(uintptr_t)(uintptr_t)&em9305_ram_8028d0;
  uint32_t index=*(volatile uint32_t *)ring;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  uintptr_t row=ring+index*20u;
  uint32_t next=(index+1u)%6u;
  *(volatile uint32_t *)(row+12u)=first;
@@ -9766,7 +9771,7 @@ uint32_t opencfw_em9305_ll_test_complete_31bad0(uint32_t id,uint32_t first,uint3
  * callback length. Callback is native-required, without an invented guard. */
 uint32_t opencfw_em9305_ll_test_timer_31c490(uint32_t id,uint32_t context)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t length=*(volatile uint16_t *)(config+44u);
  uintptr_t record=opencfw_em9305_ll_link_find_31ab88(id);
  uintptr_t slot;
@@ -9786,11 +9791,11 @@ uint32_t opencfw_em9305_ll_test_timer_31c490(uint32_t id,uint32_t context)
  }
  uint32_t marker=*(volatile uint8_t *)slot;
  if(marker!=1u) return marker;
- config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ config=em9305_ram_805c5c.u32_805cac;
  uint32_t bytes=(uint16_t)(*(volatile uint16_t *)(config+44u)+8u);
  uintptr_t allocation=opencfw_em9305_wsf_event_allocate(bytes);
  if(allocation==0u) return 0u;
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x802800u;
+ uintptr_t callback=em9305_ram_8027e0.u32_802800;
  return ((uint32_t (*)(uint32_t,uintptr_t,uint32_t,uint32_t))callback)(id,allocation+12u,length,timer);
 }
 
@@ -9815,9 +9820,9 @@ uint32_t opencfw_em9305_dispatch_331abc(uint32_t credit)
  * otherwise store its low byte and post event8 to the current handler. */
 uint32_t opencfw_em9305_dispatch_331cbc(uint32_t incoming)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805701u!=0u) return incoming;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x80585cu;
- *(volatile uint8_t *)(uintptr_t)0x805701u=(uint8_t)incoming;
+ if(em9305_ram_805688.u8_805701!=0u) return incoming;
+ uint32_t handler=em9305_ram_805838.u8_80585c;
+ em9305_ram_805688.u8_805701=(uint8_t)incoming;
  return opencfw_em9305_wsf_event_post(handler,8u);
 }
 
@@ -9825,7 +9830,7 @@ uint32_t opencfw_em9305_dispatch_331cbc(uint32_t incoming)
  * Handler is loaded after enqueue, preserving queue-child side effects. */
 uint32_t opencfw_em9305_dispatch_331a40(uint32_t type,uintptr_t event)
 {
- uintptr_t base=(uintptr_t)0x80585cu;
+ uintptr_t base=(uintptr_t)((uintptr_t)&em9305_ram_805838 + 0x24u);
  uintptr_t queue;
  uint32_t bits;
  if(type==0u) { queue=base+12u;bits=2u; }
@@ -9844,8 +9849,8 @@ uint32_t opencfw_em9305_dispatch_331b3c(uintptr_t message)
  uint32_t type=*(volatile uint8_t *)(message+2u);
  uintptr_t packet;
  if(type==19u) {
-  if((*(volatile uint8_t *)(uintptr_t)0x8056f8u&128u)==0u) return 0u;
-  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u) return 0u;
+  if((em9305_ram_805688.u8_8056f8&128u)==0u) return 0u;
+  if((em9305_ram_805688.u8_8056ef&32u)==0u) return 0u;
   packet=opencfw_em9305_ll_event_allocate(62u,66u);
   if(packet==0u) return 0u;
   *(volatile uint8_t *)(packet+1u)=0u;
@@ -9853,8 +9858,8 @@ uint32_t opencfw_em9305_dispatch_331b3c(uintptr_t message)
   *(volatile uint8_t *)packet=8u;
   (void)opencfw_em9305_memcpy((void *)(packet+34u),(const void *)(message+37u),32u);
  } else if(type==20u) {
-  if((*(volatile uint8_t *)(uintptr_t)0x8056f9u&1u)==0u) return 0u;
-  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u) return 0u;
+  if((em9305_ram_805688.u8_8056f9&1u)==0u) return 0u;
+  if((em9305_ram_805688.u8_8056ef&32u)==0u) return 0u;
   packet=opencfw_em9305_ll_event_allocate(62u,34u);
   if(packet==0u) return 0u;
   *(volatile uint8_t *)packet=9u;
@@ -9873,10 +9878,10 @@ uint32_t opencfw_em9305_dispatch_331c20(uint32_t type,uintptr_t event)
   (void)opencfw_em9305_wsf_event_release(event);
   (void)opencfw_em9305_ll_primary_credit_308570(1u);
  } else if(type==3u) {
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8058c8u;
+  uintptr_t callback=em9305_ram_8058c8.u32_8058c8;
   if(callback!=0u) {
    (void)opencfw_em9305_wsf_event_release(event);
-   callback=*(volatile uint32_t *)(uintptr_t)0x8058c8u;
+   callback=em9305_ram_8058c8.u32_8058c8;
    (void)((uint32_t (*)(uint32_t))callback)(1u);
   }
  } else if(type==2u) {
@@ -9885,11 +9890,11 @@ uint32_t opencfw_em9305_dispatch_331c20(uint32_t type,uintptr_t event)
    uint32_t index=subtype-11u;
    uintptr_t counter=0u;
    if(index<30u) {
-    if(((0x24800015u>>index)&1u)!=0u) counter=0x805718u;
-    else if(((0xc00u>>index)&1u)!=0u) counter=0x805719u;
-    else if(index==8u) counter=0x805700u;
+    if(((0x24800015u>>index)&1u)!=0u) counter=((uintptr_t)&em9305_ram_805688 + 0x90u);
+    else if(((0xc00u>>index)&1u)!=0u) counter=((uintptr_t)&em9305_ram_805688 + 0x91u);
+    else if(index==8u) counter=((uintptr_t)&em9305_ram_805688 + 0x78u);
    }
-   if(counter==0u && subtype==2u) counter=0x805718u;
+   if(counter==0u && subtype==2u) counter=((uintptr_t)&em9305_ram_805688 + 0x90u);
    if(counter!=0u) {
     uint32_t value=*(volatile uint8_t *)counter;
     *(volatile uint8_t *)counter=(uint8_t)(value-1u);
@@ -9897,7 +9902,7 @@ uint32_t opencfw_em9305_dispatch_331c20(uint32_t type,uintptr_t event)
   }
   (void)opencfw_em9305_wsf_event_release(event);
  }
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x80585cu;
+ uint32_t handler=em9305_ram_805838.u8_80585c;
  return opencfw_em9305_wsf_event_post(handler,4u);
 }
 
@@ -9905,22 +9910,22 @@ uint32_t opencfw_em9305_dispatch_331c20(uint32_t type,uintptr_t event)
  * Busy flag tested once; header bytes captured before aliased output stores. */
 uint32_t opencfw_em9305_dispatch_331cdc(uintptr_t type_out,uintptr_t length_out,uintptr_t packet_out)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805884u!=0u) return 0u;
+ if(em9305_ram_805880.u8_805884!=0u) return 0u;
  uint8_t handler;
- uintptr_t packet=opencfw_em9305_wsf_event_remove(0x805870u,(uintptr_t)&handler);
+ uintptr_t packet=opencfw_em9305_wsf_event_remove((uintptr_t)&em9305_ram_805870,(uintptr_t)&handler);
  if(packet!=0u) {
   uint32_t length=*(volatile uint8_t *)(packet+1u);
-  *(volatile uint8_t *)(uintptr_t)0x805884u=1u;
+  em9305_ram_805880.u8_805884=1u;
   *(volatile uint8_t *)type_out=2u;
   *(volatile uint32_t *)packet_out=(uint32_t)packet;
   *(volatile uint16_t *)length_out=(uint16_t)(length+2u);
   return 1u;
  }
  uint32_t type=3u;
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8058d4u;
+ uintptr_t callback=em9305_ram_8058c8.u32_8058d4;
  if(callback!=0u) packet=((uintptr_t (*)(void))callback)();
  if(packet==0u) {
-  callback=*(volatile uint32_t *)(uintptr_t)0x8058d0u;
+  callback=em9305_ram_8058c8.u32_8058d0;
   if(callback==0u) return 0u;
   packet=((uintptr_t (*)(void))callback)();
   if(packet==0u) return 0u;
@@ -9928,7 +9933,7 @@ uint32_t opencfw_em9305_dispatch_331cdc(uintptr_t type_out,uintptr_t length_out,
  }
  uint32_t low=*(volatile uint8_t *)(packet+2u);
  uint32_t high=*(volatile uint8_t *)(packet+3u);
- *(volatile uint8_t *)(uintptr_t)0x805884u=1u;
+ em9305_ram_805880.u8_805884=1u;
  *(volatile uint8_t *)type_out=(uint8_t)type;
  *(volatile uint32_t *)packet_out=(uint32_t)packet;
  *(volatile uint16_t *)length_out=(uint16_t)(low+(high<<8u)+4u);
@@ -9941,19 +9946,19 @@ uint32_t opencfw_em9305_ll_vendor_key_30d9f4(uintptr_t input)
  uint32_t active=0u;
  for(uint32_t i=0u;i<32u;++i) {
   if(*(volatile uint8_t *)(input+i)!=0u) {
-   (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x805b60u,(const void *)input,32u);
+   (void)opencfw_em9305_memcpy((void *)(uintptr_t)&em9305_ram_805b60,(const void *)input,32u);
    active=1u;
    break;
   }
  }
- *(volatile uint8_t *)(uintptr_t)0x805b81u=(uint8_t)active;
+ em9305_ram_805b80.u8_805b81=(uint8_t)active;
  return 0u;
 }
 /* Native30e040..30e04e tail309b78: fullword mode validation before byte store. */
 uint32_t opencfw_em9305_ll_vendor_mode_30e040(uint32_t mode)
 {
  if(mode>1u) return 18u;
- *(volatile uint8_t *)(uintptr_t)0x805b83u=(uint8_t)mode;
+ em9305_ram_805b80.u8_805b83=(uint8_t)mode;
  return 0u;
 }
 /* Native331bb8..331bf6: two vendor configuration commands, reload command
@@ -9997,8 +10002,8 @@ uint32_t opencfw_em9305_dispatch_331aec(uintptr_t request,uintptr_t input)
 uintptr_t opencfw_em9305_wsf_wake_cell_313fc0(uintptr_t incoming)
 {
  (void)incoming;
- *(volatile uint8_t *)(uintptr_t)0x80606du=1u;
- return 0x80606du;
+ em9305_ram_80605c.u8_80606d=1u;
+ return ((uintptr_t)&em9305_ram_80605c + 0x11u);
 }
 extern uint32_t opencfw_em9305_ll_vendor_validate_32e328(uintptr_t,uint32_t);
 extern uint32_t opencfw_em9305_ll_vendor_defaults_306d7c(void);
@@ -10006,15 +10011,15 @@ extern uint32_t opencfw_em9305_ll_vendor_defaults_306d7c(void);
  * native full validation word controls branching, low byte is recorded. */
 uint32_t opencfw_em9305_ll_vendor_start_306dcc(uintptr_t data,uintptr_t key)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805b80u!=0u) return 12u;
- uint32_t mode=*(volatile uint8_t *)(uintptr_t)0x805b83u;
+ if(em9305_ram_805b80.u8_805b80!=0u) return 12u;
+ uint32_t mode=em9305_ram_805b80.u8_805b83;
  uint32_t valid=opencfw_em9305_ll_vendor_validate_32e328(data,mode==0u);
- *(volatile uint8_t *)(uintptr_t)0x805b82u=(uint8_t)valid;
+ em9305_ram_805b80.u8_805b82=(uint8_t)valid;
  if(valid==0u) return mode==0u?0u:18u;
- *(volatile uint8_t *)(uintptr_t)0x805b80u=1u;
- (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x80527cu,(const void *)data,64u);
- (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x80525cu,(const void *)key,32u);
- uintptr_t wake=opencfw_em9305_wsf_wake_cell_313fc0(0x805258u);
+ em9305_ram_805b80.u8_805b80=1u;
+ (void)opencfw_em9305_memcpy((void *)(uintptr_t)&em9305_ram_80527c,(const void *)data,64u);
+ (void)opencfw_em9305_memcpy((void *)(uintptr_t)&em9305_ram_80525c,(const void *)key,32u);
+ uintptr_t wake=opencfw_em9305_wsf_wake_cell_313fc0(((uintptr_t)&em9305_ram_8051b8 + 0xa0u));
  *(volatile uint8_t *)wake=2u;
  return 0u;
 }
@@ -10024,7 +10029,7 @@ uint32_t opencfw_em9305_ll_vendor_apply_30baa0(uintptr_t first,uintptr_t second)
  _Alignas(4) uint8_t scratch[96];
  (void)opencfw_em9305_memcpy(scratch+32u,(const void *)first,32u);
  (void)opencfw_em9305_memcpy(scratch+64u,(const void *)second,32u);
- (void)opencfw_em9305_memcpy(scratch,(const void *)(uintptr_t)0x805b60u,32u);
+ (void)opencfw_em9305_memcpy(scratch,(const void *)(uintptr_t)&em9305_ram_805b60,32u);
  return opencfw_em9305_ll_vendor_start_306dcc((uintptr_t)(scratch+32u),(uintptr_t)scratch);
 }
 /* Native30bad4..30bb0e: count1 selects actual defaults lower, all other
@@ -10035,15 +10040,15 @@ uint32_t opencfw_em9305_ll_vendor_apply_30bad4(uintptr_t first,uintptr_t second,
  _Alignas(4) uint8_t scratch[96];
  (void)opencfw_em9305_memcpy(scratch+32u,(const void *)first,32u);
  (void)opencfw_em9305_memcpy(scratch+64u,(const void *)second,32u);
- (void)opencfw_em9305_memcpy(scratch,(const void *)(uintptr_t)0x805b60u,32u);
+ (void)opencfw_em9305_memcpy(scratch,(const void *)(uintptr_t)&em9305_ram_805b60,32u);
  return opencfw_em9305_ll_vendor_start_306dcc((uintptr_t)(scratch+32u),(uintptr_t)scratch);
 }
 /* Native30bb10 tail306e2c..306e50: busy gate, mark and wake command1. */
 uint32_t opencfw_em9305_ll_vendor_query_30bb10(void)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805b80u!=0u) return 12u;
- *(volatile uint8_t *)(uintptr_t)0x805b80u=1u;
- uintptr_t wake=opencfw_em9305_wsf_wake_cell_313fc0(0x805258u);
+ if(em9305_ram_805b80.u8_805b80!=0u) return 12u;
+ em9305_ram_805b80.u8_805b80=1u;
+ uintptr_t wake=opencfw_em9305_wsf_wake_cell_313fc0(((uintptr_t)&em9305_ram_8051b8 + 0xa0u));
  *(volatile uint8_t *)wake=1u;
  return 0u;
 }
@@ -10056,12 +10061,12 @@ static const uint8_t opencfw_em9305_vendor_default_point_334368[64]={0xe6u,0x9du
 /* Native306d7c..306dca: default copy path with native busy flag ordering. */
 uint32_t opencfw_em9305_ll_vendor_defaults_306d7c(void)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805b80u!=0u) return 12u;
- *(volatile uint8_t *)(uintptr_t)0x805b80u=1u;
- *(volatile uint8_t *)(uintptr_t)0x805b82u=1u;
- (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x80527cu,opencfw_em9305_vendor_default_point_334368,64u);
- (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x80525cu,opencfw_em9305_vendor_default_key_334348,32u);
- uintptr_t wake=opencfw_em9305_wsf_wake_cell_313fc0(0x805258u);
+ if(em9305_ram_805b80.u8_805b80!=0u) return 12u;
+ em9305_ram_805b80.u8_805b80=1u;
+ em9305_ram_805b80.u8_805b82=1u;
+ (void)opencfw_em9305_memcpy((void *)(uintptr_t)&em9305_ram_80527c,opencfw_em9305_vendor_default_point_334368,64u);
+ (void)opencfw_em9305_memcpy((void *)(uintptr_t)&em9305_ram_80525c,opencfw_em9305_vendor_default_key_334348,32u);
+ uintptr_t wake=opencfw_em9305_wsf_wake_cell_313fc0(((uintptr_t)&em9305_ram_8051b8 + 0xa0u));
  *(volatile uint8_t *)wake=2u;
  return 0u;
 }
@@ -10099,7 +10104,7 @@ uint32_t opencfw_em9305_ll_vendor_validate_32e328(uintptr_t data,uint32_t notify
  for(uint32_t i=0u;i<32u;++i) scratch[32u+i]=*(volatile uint8_t *)(data+63u-i);
  uint32_t result=opencfw_em9305_vendor_point_validate_3100c8(data);
  if(result==0u && notify!=0u) {
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   (void)opencfw_em9305_wsf_event_post(handler,4096u);
  }
  return result;
@@ -10185,8 +10190,8 @@ uint32_t opencfw_em9305_dispatch_332200(uintptr_t packet)
  uint32_t type=*(volatile uint8_t *)(packet+2u);
  if(type!=39u && type!=40u) return 0u;
  uint32_t required=type==39u?1u:2u;
- if((*(volatile uint8_t *)(uintptr_t)0x8056fbu&required)==0u) return 0u;
- if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u) return 0u;
+ if((em9305_ram_805688.u8_8056fb&required)==0u) return 0u;
+ if((em9305_ram_805688.u8_8056ef&32u)==0u) return 0u;
  uintptr_t event=opencfw_em9305_ll_event_allocate(62u,type==39u?29u:7u);
  if(event==0u) return 0u;
  if(type==39u) (void)opencfw_em9305_packet_event_fill_330e78(event,packet);
@@ -10255,7 +10260,7 @@ static uint32_t opencfw_em9305_link_command_native(uint32_t handle,uint32_t mode
  if(link==0u) return 2u;
  if(*(volatile uint8_t *)(link+2u)!=0u) return 12u;
  if(*(volatile uint8_t *)(link+3u)==2u) return 12u;
- uintptr_t records=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t records=em9305_ram_805c5c.u32_805c70;
  if(records==0u) return 2u;
  uint32_t id=*(volatile uint16_t *)(link+6u),offset;
  offset=(uint32_t)(uint16_t)id*912u;
@@ -10264,7 +10269,7 @@ static uint32_t opencfw_em9305_link_command_native(uint32_t handle,uint32_t mode
  if(event!=0u){
   *(volatile uint16_t *)(event+2u)=set?0x2601u:0x2501u;
   uint32_t fresh_id=*(volatile uint16_t *)(link+6u);
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   if(set) *(volatile uint8_t *)(event+4u)=(uint8_t)mode;
   *(volatile uint16_t *)event=(uint16_t)fresh_id;
   (void)opencfw_em9305_wsf_task_message_send(handler,event);
@@ -10281,8 +10286,8 @@ uint32_t opencfw_em9305_link_mode_30c940(uint32_t handle,uint32_t mode)
 uint32_t opencfw_em9305_dispatch_3319bc(uintptr_t packet)
 {
  if(*(volatile uint8_t *)(packet+2u)!=5u) return 0u;
- if((*(volatile uint8_t *)(uintptr_t)0x8056f9u&2u)==0u) return 0u;
- if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u) return 0u;
+ if((em9305_ram_805688.u8_8056f9&2u)==0u) return 0u;
+ if((em9305_ram_805688.u8_8056ef&32u)==0u) return 0u;
  uintptr_t event=opencfw_em9305_ll_event_allocate(62u,31u);
  if(event==0u) return 0u;
  *(volatile uint8_t *)event=10u;
@@ -10302,8 +10307,8 @@ uint32_t opencfw_em9305_dispatch_3319bc(uintptr_t packet)
 uint32_t opencfw_em9305_dispatch_331814(uintptr_t packet)
 {
  if(*(volatile uint8_t *)(packet+2u)!=22u) return 0u;
- if((*(volatile uint8_t *)(uintptr_t)0x8056f9u&8u)==0u) return 0u;
- if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u) return 0u;
+ if((em9305_ram_805688.u8_8056f9&8u)==0u) return 0u;
+ if((em9305_ram_805688.u8_8056ef&32u)==0u) return 0u;
  uintptr_t event=opencfw_em9305_ll_event_allocate(62u,6u);
  if(event==0u) return 0u;
  *(volatile uint8_t *)event=12u;
@@ -10397,25 +10402,25 @@ uint32_t opencfw_em9305_dispatch_331868(uintptr_t request,uintptr_t input)
 /* Native30cd94/30b150: four ordered busy flags and installed gate. */
 static uint32_t opencfw_em9305_command_busy_native(void)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805a74u!=0u) return 1u;
- if(*(volatile uint8_t *)(uintptr_t)0x805a73u!=0u) return 1u;
- if(*(volatile uint8_t *)(uintptr_t)0x805a71u!=0u) return 1u;
- if(*(volatile uint8_t *)(uintptr_t)0x805a72u!=0u) return 1u;
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x80130cu;
+ if(em9305_ram_805a6c.u8_805a74!=0u) return 1u;
+ if(em9305_ram_805a6c.u8_805a73!=0u) return 1u;
+ if(em9305_ram_805a6c.u8_805a71!=0u) return 1u;
+ if(em9305_ram_805a6c.u8_805a72!=0u) return 1u;
+ uintptr_t callback=em9305_ram_8012c0.u32_80130c;
  return callback!=0u?((uint32_t (*)(uintptr_t))callback)(callback):0u;
 }
 uint32_t opencfw_em9305_command_30cd94(uint32_t mode)
 {
  if(mode>=2u) return 18u;
  if(opencfw_em9305_command_busy_native()!=0u) return 12u;
- *(volatile uint8_t *)(uintptr_t)0x805a9du=(uint8_t)(mode!=0u);
+ em9305_ram_805a6c.u8_805a9d=(uint8_t)(mode!=0u);
  return 0u;
 }
 extern uintptr_t opencfw_em9305_radio_reset_30390c(void);
 uint32_t opencfw_em9305_command_30b150(void)
 {
  if(opencfw_em9305_command_busy_native()!=0u &&
-    *(volatile uint8_t *)(uintptr_t)0x805a9du!=0u) return 12u;
+    em9305_ram_805a6c.u8_805a9d!=0u) return 12u;
  (void)opencfw_em9305_radio_reset_30390c();
  return 0u;
 }
@@ -10423,8 +10428,8 @@ uint32_t opencfw_em9305_command_30b150(void)
 /* Native30390c..303918: byte reset with retained address in R0. */
 uintptr_t opencfw_em9305_radio_reset_30390c(void)
 {
- *(volatile uint8_t *)(uintptr_t)0x801610u=0u;
- return 0x801610u;
+ em9305_ram_801608.u8_801610=0u;
+ return ((uintptr_t)&em9305_ram_801608 + 0x8u);
 }
 /* Native30c918..30c928: preserve original output from BL delay slot. */
 uint32_t opencfw_em9305_command_30c918(uintptr_t output)
@@ -10436,15 +10441,15 @@ uint32_t opencfw_em9305_command_30c918(uintptr_t output)
 /* Native325268..325284: fresh handler/time then seconds timer tail. */
 uint32_t opencfw_em9305_command_timer_325268(void)
 {
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
- uint32_t time=*(volatile uint32_t *)(uintptr_t)0x805b58u;
- *(volatile uint8_t *)(uintptr_t)0x8051f0u=(uint8_t)handler;
- return opencfw_em9305_wsf_timer_start_seconds(0x8051e4u,time);
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
+ uint32_t time=em9305_ram_805af0.u32_805b58;
+ em9305_ram_8051b8.u8_8051f0=(uint8_t)handler;
+ return opencfw_em9305_wsf_timer_start_seconds(((uintptr_t)&em9305_ram_8051b8 + 0x2cu),time);
 }
 /* Native308198..3081a4: store full incoming word before timer tail. */
 uint32_t opencfw_em9305_command_time_set_308198(uint32_t value)
 {
- *(volatile uint32_t *)(uintptr_t)0x805b58u=value;
+ em9305_ram_805af0.u32_805b58=value;
  return opencfw_em9305_command_timer_325268();
 }
 /* Native30deec..30df08: wrapping halfword validation, ignore lower result. */
@@ -10457,7 +10462,7 @@ uint32_t opencfw_em9305_command_30deec(uint32_t value)
 /* Native306a90..306a9c: mode-byte store, return0. */
 uint32_t opencfw_em9305_link_mode_store_306a90(uint32_t mode)
 {
- *(volatile uint8_t *)(uintptr_t)0x805400u=(uint8_t)mode;
+ em9305_ram_805400.u8_805400=(uint8_t)mode;
  return 0u;
 }
 /* Native30d45c..30d48c: local gate or installed two-argument provider. */
@@ -10466,7 +10471,7 @@ uint32_t opencfw_em9305_command_30d45c(uint32_t selector,uint32_t mode)
  if(mode>=4u) return 18u;
  if(opencfw_em9305_ll_connection_gate_30e524()!=0u)
   return opencfw_em9305_link_mode_store_306a90(mode);
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801300u;
+ uintptr_t callback=em9305_ram_8012c0.u32_801300;
  if(callback==0u) return 18u;
  return ((uint32_t (*)(uint32_t,uint32_t))callback)(selector,mode);
 }
@@ -10475,7 +10480,7 @@ uint32_t opencfw_em9305_command_30ddd4(uint32_t kind,uintptr_t input,uint32_t va
 {
  if((kind|value)>1u) return 18u;
  if(opencfw_em9305_command_busy_native()!=0u &&
-    *(volatile uint8_t *)(uintptr_t)0x805a9du!=0u) return 12u;
+    em9305_ram_805a6c.u8_805a9d!=0u) return 12u;
  uint64_t address=opencfw_em9305_controller_pack_address(input);
  uint32_t found=opencfw_em9305_radio_identity_set_303ca8(kind,(uint32_t)address,(uint32_t)(address>>32u),value);
  return found==0u?2u:0u;
@@ -10486,7 +10491,7 @@ uint32_t opencfw_em9305_command_30ca68(uint32_t kind,uintptr_t input)
 {
  if(kind>1u) return 18u;
  if(opencfw_em9305_command_busy_native()!=0u &&
-    *(volatile uint8_t *)(uintptr_t)0x805a9du!=0u) return 12u;
+    em9305_ram_805a6c.u8_805a9d!=0u) return 12u;
  uint64_t address=opencfw_em9305_controller_pack_address(input);
  uint32_t changed=opencfw_em9305_radio_address_update_303b40(kind,(uint32_t)address,(uint32_t)(address>>32u));
  return changed==0u?18u:0u;
@@ -10496,14 +10501,14 @@ uint32_t opencfw_em9305_radio_address_update_303b40(uint32_t kind,uint32_t low,u
 {
  uintptr_t row=opencfw_em9305_radio_identity_find_31441c(kind,low,high);
  if(row!=0u){
-  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x801610u;
+  uint32_t count=em9305_ram_801608.u8_801610;
   if(count>=2u){
    uint32_t offset;
    offset=(uint32_t)(uint16_t)count*72u;
-   uintptr_t records=*(volatile uint32_t *)(uintptr_t)0x805c00u;
+   uintptr_t records=em9305_ram_805be0.u32_805c00;
    (void)opencfw_em9305_memcpy((void *)row,(const void *)(records+offset-72u),72u);
   }
-  *(volatile uint8_t *)(uintptr_t)0x801610u=(uint8_t)(count-1u);
+  em9305_ram_801608.u8_801610=(uint8_t)(count-1u);
  }
  return row!=0u;
 }
@@ -10513,7 +10518,7 @@ uint32_t opencfw_em9305_command_30af30(uint32_t kind,uintptr_t input,uintptr_t f
 {
  if(kind>1u) return 18u;
  if(opencfw_em9305_command_busy_native()!=0u &&
-    *(volatile uint8_t *)(uintptr_t)0x805a9du!=0u) return 12u;
+    em9305_ram_805a6c.u8_805a9d!=0u) return 12u;
  uint64_t address=opencfw_em9305_controller_pack_address(input);
  uint32_t inserted=opencfw_em9305_radio_identity_add_303788(kind,(uint32_t)address,(uint32_t)(address>>32u),first,second);
  return inserted==0u?7u:0u;
@@ -10523,11 +10528,11 @@ uint32_t opencfw_em9305_radio_identity_add_303788(uint32_t kind,uint32_t low,uin
 {
  uintptr_t row=opencfw_em9305_radio_identity_find_31441c(kind,low,high);
  if(row==0u){
-  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x801610u;
-  uint32_t capacity=*(volatile uint8_t *)(uintptr_t)0x801611u;
+  uint32_t count=em9305_ram_801608.u8_801610;
+  uint32_t capacity=em9305_ram_801608.u8_801611;
   if(count>=capacity) return 0u;
-  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c00u;
-  *(volatile uint8_t *)(uintptr_t)0x801610u=(uint8_t)(count+1u);
+  uintptr_t base=em9305_ram_805be0.u32_805c00;
+  em9305_ram_801608.u8_801610=(uint8_t)(count+1u);
   if(base==0u) return 0u;
   uint32_t offset;
   offset=(uint32_t)(uint16_t)count*72u;
@@ -10561,8 +10566,8 @@ uint32_t opencfw_em9305_dispatch_331f5c(uintptr_t packet)
 {
  uint32_t type=*(volatile uint8_t *)(packet+2u);
  if(type!=41u && type!=42u) return 0u;
- if((*(volatile uint8_t *)(uintptr_t)0x8056fbu&(type==41u?4u:8u))==0u) return 0u;
- if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u) return 0u;
+ if((em9305_ram_805688.u8_8056fb&(type==41u?4u:8u))==0u) return 0u;
+ if((em9305_ram_805688.u8_8056ef&32u)==0u) return 0u;
  uint32_t length=type==41u?(uint8_t)(19u+2u**(volatile uint8_t *)(packet+26u)):3u;
  uintptr_t event=opencfw_em9305_ll_event_allocate(62u,length);
  if(event==0u) return 0u;
@@ -10606,14 +10611,14 @@ uint32_t opencfw_em9305_dispatch_3327f4(uintptr_t packet)
   *(volatile uint8_t *)(event+3u)=*(volatile uint8_t *)(packet+4u);
  }else if(type==26u || type==28u){
   if(type==26u){
-   uintptr_t state=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-   uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805700u;
+   uintptr_t state=em9305_ram_805c5c.u32_805cac;
+   uint32_t count=em9305_ram_805688.u8_805700;
    uint32_t limit=*(volatile uint8_t *)(state+31u);
    if(count>=limit) return 0u;
   }
-  uint32_t mask=*(volatile uint8_t *)(uintptr_t)0x8056fau;
+  uint32_t mask=em9305_ram_805688.u8_8056fa;
   if((mask&(type==26u?4u:2u))==0u) return 0u;
-  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u) return 0u;
+  if((em9305_ram_805688.u8_8056ef&32u)==0u) return 0u;
   event=opencfw_em9305_ll_event_allocate(62u,type==26u?9u:6u);
   if(event==0u) return 0u;
   *(volatile uint8_t *)event=type==26u?19u:18u;
@@ -10621,8 +10626,8 @@ uint32_t opencfw_em9305_dispatch_3327f4(uintptr_t packet)
   *(volatile uint8_t *)(event+2u)=*(volatile uint8_t *)(packet+5u);
   if(type==26u){
    (void)opencfw_em9305_radio_address_copy_304604(event+3u,packet+6u);
-   uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805700u;
-   *(volatile uint8_t *)(uintptr_t)0x805700u=(uint8_t)(count+1u);
+   uint32_t count=em9305_ram_805688.u8_805700;
+   em9305_ram_805688.u8_805700=(uint8_t)(count+1u);
   }else for(uint32_t i=0u;i<3u;++i)
    *(volatile uint8_t *)(event+3u+i)=*(volatile uint8_t *)(packet+6u+i);
  }else return 0u;
@@ -10690,7 +10695,7 @@ extern uint32_t opencfw_em9305_radio_record_exists_3072d0(uint32_t);
 extern uint32_t opencfw_em9305_radio_record_apply_309cfc(uintptr_t);
 uint32_t opencfw_em9305_command_30b230(uintptr_t input)
 {
- uintptr_t state=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t state=em9305_ram_805c5c.u32_805cac;
  uint32_t first=*(volatile uint8_t *)input;
  uint32_t capability=*(volatile uint8_t *)(state+62u);
  if(first>239u) return 18u;
@@ -10717,10 +10722,10 @@ uint32_t opencfw_em9305_command_30b230(uintptr_t input)
 /* Native31aa64..31aa98: active2824-byte record lookup, id first. */
 uintptr_t opencfw_em9305_radio_record_find_31aa64(uint32_t id)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+12u);
  if(count==0u) return 0u;
- uintptr_t row=*(volatile uint32_t *)(uintptr_t)0x805c38u;
+ uintptr_t row=em9305_ram_805be0.u32_805c38;
  for(uint32_t i=0u;i<count;++i,row+=2824u)
   if(*(volatile uint8_t *)(row+1u)==id && *(volatile uint8_t *)row!=0u) return row;
  return 0u;
@@ -10735,8 +10740,8 @@ extern uint32_t opencfw_em9305_radio_record_available_307410(uint32_t);
 extern uint32_t opencfw_em9305_radio_record_extended_apply_309e60(uintptr_t);
 uint32_t opencfw_em9305_command_30b2d8(uintptr_t input)
 {
- uintptr_t state=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- uint32_t mode=*(volatile uint8_t *)(uintptr_t)0x805a86u;
+ uintptr_t state=em9305_ram_805c5c.u32_805cac;
+ uint32_t mode=em9305_ram_805a6c.u8_805a86;
  uint32_t first=*(volatile uint8_t *)input;
  uint32_t capability=*(volatile uint8_t *)(state+62u);
  if(first>239u) return 48u;
@@ -10788,10 +10793,10 @@ uint32_t opencfw_em9305_radio_record_available_307410(uint32_t id)
 /* Native317280..3172c8: active association scan with full-width id. */
 uint32_t opencfw_em9305_radio_association_exists_317280(uint32_t id)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+57u);
  if(count==0u) return 0u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c3cu;
+ uintptr_t base=em9305_ram_805be0.u32_805c3c;
  for(uint32_t i=0u;i<count;++i){
   uintptr_t row=base+i*512u;
   if(*(volatile uint8_t *)row==0u) continue;
@@ -10813,7 +10818,7 @@ extern void opencfw_em9305_radio_association_callback_3291d0(uint32_t);
 extern void opencfw_em9305_radio_association_callback_3290c4(uint32_t);
 uint32_t opencfw_em9305_radio_record_apply_309cfc(uintptr_t input)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t required=*(volatile uint8_t *)(input+2u);
  if(*(volatile uint8_t *)(config+58u)<required) return 13u;
  if(opencfw_em9305_ll_stream_free_count_31b248()<required) return 13u;
@@ -10821,7 +10826,7 @@ uint32_t opencfw_em9305_radio_record_apply_309cfc(uintptr_t input)
  if(opencfw_em9305_radio_association_exists_317280(*(volatile uint8_t *)(input+1u))==1u) return 66u;
  uintptr_t record=opencfw_em9305_ll_record_allocate_316a8c(*(volatile uint8_t *)input);
  if(record==0u) return 13u;
- config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ config=em9305_ram_805c5c.u32_805cac;
  uint32_t requested=*(volatile uint8_t *)(input+12u);
  uint32_t maximum=*(volatile uint8_t *)(config+48u);
  uint32_t id=*(volatile uint8_t *)(input+1u);
@@ -10833,7 +10838,7 @@ uint32_t opencfw_em9305_radio_record_apply_309cfc(uintptr_t input)
  scaled=(uint32_t)(uint16_t)duration*1000u;
  if(scaled<target){(void)opencfw_em9305_radio_record_release_31ac84(record);return 17u;}
  (void)opencfw_em9305_radio_record_finish_32c2b0(record);
- if(associated!=0u && (*(volatile uint8_t *)(uintptr_t)0x805a86u&64u)==0u)
+ if(associated!=0u && (em9305_ram_805a6c.u8_805a86&64u)==0u)
   *(volatile uint8_t *)(record+410u)=*(volatile uint8_t *)(associated+2518u);
  uint32_t size=*(volatile uint16_t *)(record+4u);
  uint32_t interval=*(volatile uint16_t *)(record+6u);
@@ -10842,13 +10847,13 @@ uint32_t opencfw_em9305_radio_record_apply_309cfc(uintptr_t input)
  for(uint32_t i=0u;i<*(volatile uint8_t *)(input+2u);++i){
   uintptr_t stream=opencfw_em9305_radio_stream_allocate_316ad4(record);
   if(stream==0u){(void)opencfw_em9305_radio_record_release_31ac84(record);return 13u;}
-  uint32_t fourth=*(volatile uint32_t *)(uintptr_t)0x805aa4u;
-  uint32_t third=*(volatile uint32_t *)(uintptr_t)0x805aa0u;
+  uint32_t fourth=em9305_ram_805a6c.u32_805aa4;
+  uint32_t third=em9305_ram_805a6c.u32_805aa0;
   uint32_t fifth=*(volatile uint8_t *)(record+292u);
   uint32_t second=*(volatile uint16_t *)(record+348u);
   uint32_t first=*(volatile uint32_t *)(record+344u);
   (void)opencfw_em9305_radio_stream_setup_327718(stream,first,second,third,fourth,fifth);
-  if(associated!=0u && (*(volatile uint8_t *)(uintptr_t)0x805a86u&64u)!=0u)
+  if(associated!=0u && (em9305_ram_805a6c.u8_805a86&64u)!=0u)
    *(volatile uint8_t *)(record+410u)=*(volatile uint8_t *)(associated+2518u);
  }
  if(associated!=0u){
@@ -10861,7 +10866,7 @@ uint32_t opencfw_em9305_radio_record_apply_309cfc(uintptr_t input)
  if(message!=0u){
   *(volatile uint16_t *)(message+2u)=272u;
   uint32_t id_byte=*(volatile uint8_t *)input;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   *(volatile uint16_t *)message=(uint16_t)id_byte;
   (void)opencfw_em9305_wsf_task_message_send(handler,message);
  }
@@ -10870,10 +10875,10 @@ uint32_t opencfw_em9305_radio_record_apply_309cfc(uintptr_t input)
 /* Native316ad4..316b5c: first free256B stream, publish record slot. */
 uintptr_t opencfw_em9305_radio_stream_allocate_316ad4(uintptr_t record)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+58u);
  if(count==0u) return 0u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c40u,row=0u;
+ uintptr_t base=em9305_ram_805be0.u32_805c40,row=0u;
  uint32_t index;
  for(index=0u;index<count;++index){
   uintptr_t candidate=base+index*256u;
@@ -10881,7 +10886,7 @@ uintptr_t opencfw_em9305_radio_stream_allocate_316ad4(uintptr_t record)
  }
  if(index==count) return 0u;
  (void)opencfw_em9305_memset((void *)row,0u,256u);
- config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ config=em9305_ram_805c5c.u32_805cac;
  uint32_t slot=*(volatile uint8_t *)(record+52u);
  *(volatile uint8_t *)row=1u;
  *(volatile uint32_t *)(row+4u)=(uint32_t)record;
@@ -10940,8 +10945,8 @@ void opencfw_em9305_radio_stream_release_31ace0(uintptr_t stream)
   while((event=opencfw_em9305_dispatch_child_317624(stream))!=0u){
    (void)opencfw_em9305_wsf_event_release(event);
    (void)opencfw_em9305_wsf_critical_enter();
-   uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805addu;
-   *(volatile uint8_t *)(uintptr_t)0x805addu=(uint8_t)(count+1u);
+   uint32_t count=em9305_ram_805a6c.u8_805add;
+   em9305_ram_805a6c.u8_805add=(uint8_t)(count+1u);
    (void)opencfw_em9305_wsf_critical_exit();
   }
   parent=*(volatile uint32_t *)(stream+4u);
@@ -11000,8 +11005,8 @@ void opencfw_em9305_radio_stream_queue_step_317980(uintptr_t stream,uint32_t bud
   (void)opencfw_em9305_wsf_event_release(packet);
   opencfw_em9305_radio_packet_complete_31ae74(packet);
   (void)opencfw_em9305_wsf_critical_enter();
-  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805adcu;
-  *(volatile uint8_t *)(uintptr_t)0x805adcu=(uint8_t)(count+1u);
+  uint32_t count=em9305_ram_805a6c.u8_805adc;
+  em9305_ram_805a6c.u8_805adc=(uint8_t)(count+1u);
   (void)opencfw_em9305_wsf_critical_exit();
   if(*(volatile uint8_t *)(stream+36u)!=0u) continue;
   if(*(volatile uint8_t *)(stream+108u)!=0u) continue;
@@ -11012,7 +11017,7 @@ void opencfw_em9305_radio_stream_queue_step_317980(uintptr_t stream,uint32_t bud
 /* Native31ae74..31ae84: recycle packet's eight-byte allocation node. */
 void opencfw_em9305_radio_packet_complete_31ae74(uintptr_t packet)
 {
- (void)opencfw_em9305_wsf_queue_append((uintptr_t)0x8028c8u,packet-8u);
+ (void)opencfw_em9305_wsf_queue_append((uintptr_t)((uintptr_t)&em9305_ram_802878 + 0x50u),packet-8u);
 }
 /* Native3183d4..3183ec: priority bit1,bit0, then bit2. */
 uint32_t opencfw_em9305_radio_phy_project_3183d4(uint32_t value)
@@ -11207,8 +11212,8 @@ uint32_t opencfw_em9305_radio_record_finish_32c2b0(uintptr_t record)
  *(volatile uint8_t *)(record+408u)=13u;
  access=opencfw_em9305_radio_access_mix_3188b8(access,0u);
  *(volatile uint32_t *)(record+412u)=access;
- uint32_t upper=*(volatile uint32_t *)(uintptr_t)0x805aa4u;
- uint32_t lower=*(volatile uint32_t *)(uintptr_t)0x805aa0u;
+ uint32_t upper=em9305_ram_805a6c.u32_805aa4;
+ uint32_t lower=em9305_ram_805a6c.u32_805aa0;
  *(volatile uint16_t *)(record+400u)=(uint16_t)(access^(access>>16));
  *(volatile uint8_t *)(record+398u)=1u;
  *(volatile uint32_t *)(record+356u)=upper;
@@ -11216,7 +11221,7 @@ uint32_t opencfw_em9305_radio_record_finish_32c2b0(uintptr_t record)
  (void)opencfw_em9305_radio_channel_transform_30e3fc(record+352u);
  uint32_t shifted=(uint32_t)*(volatile uint16_t *)(record+348u)<<8;
  uint32_t secure=*(volatile uint8_t *)(record+484u);
- uint32_t mode=*(volatile uint8_t *)(uintptr_t)0x805a9cu;
+ uint32_t mode=em9305_ram_805a6c.u8_805a9c;
  uint32_t phy=*(volatile uint8_t *)(record+292u);
  *(volatile uint16_t *)(record+422u)=0u;
  *(volatile uint8_t *)(record+410u)=(uint8_t)mode;
@@ -11236,10 +11241,10 @@ uint32_t opencfw_em9305_radio_record_finish_32c2b0(uintptr_t record)
  *(volatile uint8_t *)(record+446u)=(uint8_t)(c^(access>>16));
  *(volatile uint8_t *)(record+447u)=(uint8_t)(d^(access>>24));
  (void)opencfw_em9305_memcpy((void *)(record+428u),(const void *)(record+92u),16u);
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8028c0u;
+ uintptr_t callback=em9305_ram_802878.u32_8028c0;
  *(volatile uint16_t *)(record+468u)=513u;
  if (callback!=0u) {
-  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c3cu;
+  uintptr_t base=em9305_ram_805be0.u32_805c3c;
   uint32_t index=(uint32_t)(record-base)>>9;
   return ((uint32_t (*)(uintptr_t,uint32_t,uint32_t))callback)(record+428u,(uint8_t)(index+6u),1u);
  }
@@ -11317,7 +11322,7 @@ uintptr_t opencfw_em9305_radio_stream_setup_327718(uintptr_t stream,uint32_t acc
  *(volatile uint16_t *)(stream+190u)=0u;
  id=*(volatile uint8_t *)(stream+1u);
  uint32_t secure=*(volatile uint8_t *)(parent+484u);
- uint32_t global_mode=*(volatile uint8_t *)(uintptr_t)0x805a9cu;
+ uint32_t global_mode=em9305_ram_805a6c.u8_805a9c;
  uint32_t packed=(crc<<8)+id;
  *(volatile uint32_t *)(stream+180u)=access;
  *(volatile uint8_t *)(stream+189u)=(uint8_t)phy;
@@ -11336,7 +11341,7 @@ uintptr_t opencfw_em9305_radio_stream_setup_327718(uintptr_t stream,uint32_t acc
  *(volatile uint8_t *)(stream+214u)=(uint8_t)(c^(access>>16));
  *(volatile uint8_t *)(stream+215u)=(uint8_t)(d^(access>>24));
  (void)opencfw_em9305_memcpy((void *)(stream+196u),(const void *)(parent+92u),16u);
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8028c0u;
+ uintptr_t callback=em9305_ram_802878.u32_8028c0;
  *(volatile uint16_t *)(stream+236u)=513u;
  if (callback!=0u) {
   uint32_t callback_id=*(volatile uint8_t *)(stream+2u);
@@ -11478,8 +11483,8 @@ uint32_t opencfw_em9305_radio_record_extended_apply_309e60(uintptr_t input)
    phy=*(volatile uint8_t *)(record+292u);
    uint32_t crc=*(volatile uint16_t *)(record+348u);
    uint32_t access=*(volatile uint32_t *)(record+344u);
-   uint32_t lower=*(volatile uint32_t *)(uintptr_t)0x805aa0u;
-   uint32_t upper=*(volatile uint32_t *)(uintptr_t)0x805aa4u;
+   uint32_t lower=em9305_ram_805a6c.u32_805aa0;
+   uint32_t upper=em9305_ram_805a6c.u32_805aa4;
    (void)opencfw_em9305_radio_stream_setup_327718(stream,access,crc,lower,upper,phy);
    uint32_t fresh=*(volatile uint8_t *)(input+2u);
    ++index;
@@ -11497,7 +11502,7 @@ uint32_t opencfw_em9305_radio_record_extended_apply_309e60(uintptr_t input)
  if(message!=0u){
   *(volatile uint16_t *)(message+2u)=272u;
   uint32_t id=*(volatile uint8_t *)input;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   *(volatile uint16_t *)message=(uint16_t)id;
   opencfw_em9305_wsf_task_message_send(handler,message);
  }
@@ -11520,10 +11525,10 @@ void opencfw_em9305_radio_association_callback_3291d0(uint32_t id)
 void opencfw_em9305_radio_association_callback_3291e4(uint32_t id)
 {
  uintptr_t associated=opencfw_em9305_radio_record_find_31aa64(id);
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+57u);
  if(count==0u) return;
- uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c3cu;
+ uintptr_t record=em9305_ram_805be0.u32_805c3c;
  uintptr_t field=record+180u;
  for(uint32_t i=0u;i<count;++i){
   uint32_t mode=*(volatile uint8_t *)(record+3u);
@@ -11547,7 +11552,7 @@ static struct opencfw_em9305_native_product_pair opencfw_em9305_native_mpydu_329
 void opencfw_em9305_radio_association_callback_3290c4(uint32_t id)
 {
  uintptr_t associated=opencfw_em9305_radio_record_find_31aa64(id);
- uintptr_t command=*(volatile uint32_t *)(uintptr_t)0x805c34u;
+ uintptr_t command=em9305_ram_805be0.u32_805c34;
  uint32_t record_id=*(volatile uint8_t *)(command+4u);
  uintptr_t record=opencfw_em9305_ll_record_find_31aa98(record_id);
  uint32_t secure=*(volatile uint8_t *)(record+484u);
@@ -11611,14 +11616,14 @@ uint32_t opencfw_em9305_ll_stream_process_317680(uintptr_t stream,uintptr_t deco
  uintptr_t packet=opencfw_em9305_ll_stream_packet_take_316e5c();
  if(packet==0u){
   (void)opencfw_em9305_wsf_event_release(message);
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805b38u;
+  uintptr_t callback=em9305_ram_805af0.u32_805b38;
   if(callback!=0u && *(volatile uint8_t *)(stream+108u)==0u){
    uint16_t id=*(volatile uint16_t *)decoded,one=1u;
    (void)((uint32_t (*)(uint32_t,uintptr_t,uintptr_t))callback)(1u,(uintptr_t)&id,(uintptr_t)&one);
   }
   (void)opencfw_em9305_wsf_critical_enter();
-  uint32_t counter=*(volatile uint8_t *)(uintptr_t)0x805adcu;
-  *(volatile uint8_t *)(uintptr_t)0x805adcu=(uint8_t)(counter+1u);
+  uint32_t counter=em9305_ram_805a6c.u8_805adc;
+  em9305_ram_805a6c.u8_805adc=(uint8_t)(counter+1u);
   (void)opencfw_em9305_wsf_critical_exit();
   return opencfw_em9305_ll_segment_error_32322c(7u);
  }
@@ -11666,7 +11671,7 @@ uint32_t opencfw_em9305_ll_stream_process_317680(uintptr_t stream,uintptr_t deco
    offset=(uint32_t)(uint16_t)current*13u;
    uint32_t high=opencfw_em9305_native_mpywhl(high_word,groups);
    struct opencfw_em9305_native_product_pair product=opencfw_em9305_native_mpydu_329154(low_word,groups);
-   uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8051e0u;
+   uintptr_t callback=em9305_ram_8051b8.u32_8051e0;
    *(volatile uint8_t *)(packet+offset+20u)=(uint8_t)result;
    high+=product.high;
    uint32_t low=product.low+current;
@@ -11706,8 +11711,8 @@ uint32_t opencfw_em9305_dispatch_331100(uintptr_t input)
  uint32_t type=*(volatile uint8_t *)(input+2u);
  uintptr_t event;
  if(type==47u){
-  if((*(volatile uint8_t *)(uintptr_t)0x8056fcu&1u)==0u) return 0u;
-  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u) return 0u;
+  if((em9305_ram_805688.u8_8056fc&1u)==0u) return 0u;
+  if((em9305_ram_805688.u8_8056ef&32u)==0u) return 0u;
   event=opencfw_em9305_ll_event_allocate(62u,9u);
   if(event==0u) return 0u;
   *(volatile uint8_t *)event=33u;
@@ -11715,8 +11720,8 @@ uint32_t opencfw_em9305_dispatch_331100(uintptr_t input)
   for(uint32_t i=2u;i<9u;++i)
    *(volatile uint8_t *)(event+i)=*(volatile uint8_t *)(input+i+4u);
  }else if(type==48u){
-  if((*(volatile uint8_t *)(uintptr_t)0x8056fbu&128u)==0u) return 0u;
-  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u) return 0u;
+  if((em9305_ram_805688.u8_8056fb&128u)==0u) return 0u;
+  if((em9305_ram_805688.u8_8056ef&32u)==0u) return 0u;
   event=opencfw_em9305_ll_event_allocate(62u,5u);
   if(event==0u) return 0u;
   *(volatile uint8_t *)event=32u;
@@ -11822,10 +11827,10 @@ uint32_t opencfw_em9305_command_apply_3098ac(uint32_t id,uint32_t flags,uint32_t
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*784u;
- uintptr_t record=*(volatile uint32_t *)(uintptr_t)(0x804084u+offset);
+ uintptr_t record=*(volatile uint32_t *)(uintptr_t)(((uintptr_t)&em9305_ram_803d58 + 0x32cu)+offset);
  *(volatile uint16_t *)(record+366u)=(uint16_t)flags;
  if(count-1u>=15u) return 18u;
- uintptr_t capacity=(uintptr_t)(0x803f78u+offset);
+ uintptr_t capacity=(uintptr_t)(((uintptr_t)&em9305_ram_803d58 + 0x220u)+offset);
  if(*(volatile uint8_t *)capacity<count) return 18u;
  uint32_t high=0u,low=0u;
  *(volatile uint32_t *)(record+12u)=0u;
@@ -11852,10 +11857,10 @@ uint32_t opencfw_em9305_command_apply_3093a0(uint32_t id,uintptr_t input)
  uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);
  if(record==0u) return 66u;
  if(opencfw_em9305_radio_record_ready_31ac08(id)==0u){
-  uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
   uint32_t count=*(volatile uint8_t *)(configuration+13u),index;
   for(index=0u;index<count;++index){
-   uintptr_t row=0x80517cu+index*12u;
+   uintptr_t row=((uintptr_t)&em9305_ram_80517c + index*12u);
    if(*(volatile uint8_t *)(row+8u)!=0u) continue;
    uintptr_t control=*(volatile uint32_t *)(row+4u);
    *(volatile uint8_t *)(row+8u)=1u;
@@ -11865,7 +11870,7 @@ uint32_t opencfw_em9305_command_apply_3093a0(uint32_t id,uintptr_t input)
    (void)opencfw_em9305_memset((void *)control,0u,144u);
    uintptr_t buffer=*(volatile uint32_t *)row;
    control=*(volatile uint32_t *)(record+2812u);
-   uint32_t spare=*(volatile uint32_t *)(uintptr_t)0x805ce4u;
+   uint32_t spare=em9305_ram_805c5c.u32_805ce4;
    *(volatile uint32_t *)(record+1160u)=(uint32_t)buffer;
    *(volatile uint32_t *)control=spare;
    break;
@@ -11877,14 +11882,14 @@ uint32_t opencfw_em9305_command_apply_3093a0(uint32_t id,uintptr_t input)
  *(volatile uint32_t *)(buffer+3848u)=0u;
  (void)opencfw_em9305_memset((void *)(buffer+3852u),255u,64u);
  if(*(volatile uint8_t *)(record+369u)!=0u) return 12u;
- uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
  uint32_t maximum=*(volatile uint32_t *)(record+72u);
  uint32_t limit=*(volatile uint16_t *)(configuration+20u);
  uint32_t enabled=*(volatile uint8_t *)(record+804u);
  if(maximum>limit) limit=maximum;
  uint32_t timing=0u;
  if(enabled!=0u){
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801a14u;
+  uintptr_t callback=em9305_ram_801a14.u32_801a14;
   if(callback!=0u) timing=((uint32_t (*)(void))callback)();
  }
  uint32_t value=*(volatile uint16_t *)(record+1144u);
@@ -11923,9 +11928,9 @@ uint32_t opencfw_em9305_command_apply_3093a0(uint32_t id,uintptr_t input)
  * occupied matching pool row returned, without narrowing the input ID. */
 uint32_t opencfw_em9305_radio_record_ready_31ac08(uint32_t id)
 {
- uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(configuration+13u);
- uintptr_t row=0x805184u;
+ uintptr_t row=((uintptr_t)&em9305_ram_80517c + 0x8u);
  for(uint32_t i=0u;i<count;++i,row+=12u){
   if(*(volatile uint8_t *)(row+1u)!=id) continue;
   if(*(volatile uint8_t *)row!=0u) return (uint32_t)(row-8u);
@@ -11955,7 +11960,7 @@ uint32_t opencfw_em9305_radio_callback_32d7f4(uintptr_t record)
   control=*(volatile uint32_t *)(record+2812u);
   uint32_t second=opencfw_em9305_radio_encode_323c94(record+1079u,control+100u);
   control=*(volatile uint32_t *)(record+2812u);
-  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+  uintptr_t base=em9305_ram_805c5c.u32_805c70;
   uint32_t id=*(volatile uint16_t *)(control+94u),offset;
   *(volatile uint16_t *)(context+100u)=(uint16_t)(first+second);
   offset=(uint32_t)(uint16_t)id*912u;
@@ -12058,7 +12063,7 @@ extern uint32_t opencfw_em9305_radio_compose_323dc0(uintptr_t,uint32_t,uint32_t,
  * placed on caller stack; complete child semantics remain genuine import. */
 uint32_t opencfw_em9305_radio_encode_324594(uintptr_t record,uintptr_t output,uintptr_t length,uint32_t count)
 {
- uint32_t global=*(volatile uint32_t *)(uintptr_t)0x805a98u;
+ uint32_t global=em9305_ram_805a6c.u32_805a98;
  uint32_t field=*(volatile uint8_t *)(record+716u);
  uint32_t active=*(volatile uint8_t *)(record+804u);
  uint32_t flags=((global>>1)&8u)|(field&64u)|(active<<2);
@@ -12107,7 +12112,7 @@ uint32_t opencfw_em9305_radio_transfer_31dd88(uintptr_t slot,uintptr_t input,uin
  *(volatile uint32_t *)(slot+328u)=low;
  (void)opencfw_em9305_radio_channels_317ac0(slot);
  *(volatile uint16_t *)(slot+76u)=257u;
- uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
  low=*(volatile uint32_t *)(input+16u);
  high=*(volatile uint32_t *)(input+20u);
  *(volatile uint8_t *)(slot+64u)=4u;
@@ -12125,8 +12130,8 @@ uint32_t opencfw_em9305_radio_transfer_31dd88(uintptr_t slot,uintptr_t input,uin
  uint32_t second=opencfw_em9305_radio_limit_317b10(slot,slot+566u);
  period=*(volatile uint16_t *)(slot+266u);
  uint32_t captured=*(volatile uint16_t *)(slot+592u);
- uint32_t upper=*(volatile uint32_t *)(uintptr_t)0x805cb4u;
- uint32_t lower=*(volatile uint32_t *)(uintptr_t)0x805cb8u,scaled;
+ uint32_t upper=em9305_ram_805c5c.u32_805cb4;
+ uint32_t lower=em9305_ram_805c5c.u32_805cb8,scaled;
  scaled=(uint32_t)(uint16_t)period*1250u;
  *(volatile uint16_t *)(slot+590u)=(uint16_t)second;
  *(volatile uint8_t *)(slot+42u)=1u;
@@ -12154,7 +12159,7 @@ uint32_t opencfw_em9305_radio_transfer_31dd88(uintptr_t slot,uintptr_t input,uin
  duration+=source_time;
  uint32_t second_duration=opencfw_em9305_radio_duration_piece_312b88(second_phy,2u,16u);
  second_phy=*(volatile uint8_t *)(slot+77u);
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  period=*(volatile uint16_t *)(slot+266u);
  uint32_t delta=(uint32_t)slot-(uint32_t)base,index;
  index=(uint32_t)((int32_t)delta/912);
@@ -12187,7 +12192,7 @@ uint32_t opencfw_em9305_radio_channels_317ac0(uintptr_t slot)
  * entries, native postincrement means second row starts at332. */
 uint32_t opencfw_em9305_radio_phy_tables_31b6cc(uintptr_t slot)
 {
- uint32_t global=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t global=em9305_ram_805a6c.u32_805a94;
  uint32_t base=(global&256u)!=0u?3u:1u;
  uint32_t extra=(global>>9)&4u,mask=base+3u*extra;
  for(uint32_t i=0u;i<4u;++i){
@@ -12241,8 +12246,8 @@ uint32_t opencfw_em9305_radio_cb_31dc68(uintptr_t event)
  if(*(volatile uint8_t *)pending!=0u&&*(volatile uint8_t *)(source+380u)!=0u)
   *(volatile uint8_t *)pending=0u;
  if(*(volatile uint8_t *)(source+1u)==0u) return (uint32_t)event;
- *(volatile uint8_t *)(uintptr_t)0x802a38u=0u;
- *(volatile uint8_t *)(uintptr_t)0x802a34u=0u;
+ em9305_ram_802a2c.u8_802a38=0u;
+ em9305_ram_802a2c.u8_802a34=0u;
  return opencfw_em9305_radio_cb_31dfd0(event);
 }
 /* Native31e7c8..31e7fc: status gate before event dereference; counter
@@ -12257,9 +12262,9 @@ uint32_t opencfw_em9305_radio_cb_31e7c8(uintptr_t event,uint32_t status)
  uint32_t next=count+1u;
  *(volatile uint16_t *)(source+904u)=(uint16_t)next;
  if(mode==0u) return next;
- count=*(volatile uint16_t *)(uintptr_t)0x802a40u;
- *(volatile uint16_t *)(uintptr_t)0x802a40u=(uint16_t)(count+1u);
- return 0x802a40u;
+ count=em9305_ram_802a2c.u16_802a40;
+ em9305_ram_802a2c.u16_802a40=(uint16_t)(count+1u);
+ return ((uintptr_t)&em9305_ram_802a2c + 0x14u);
 }
 
 extern uint32_t opencfw_em9305_radio_prepare_32780c(uintptr_t,uint32_t,uint32_t);
@@ -12277,21 +12282,21 @@ uint32_t opencfw_em9305_radio_cb_31dca0(uintptr_t event)
   }else if(*(volatile uint8_t *)(source+620u)==0u||*(volatile uint32_t *)(source+360u)==0u)
    return opencfw_em9305_auxiliary_signal_304394();
  }
- uintptr_t owner=*(volatile uint32_t *)(uintptr_t)0x805cd8u;
+ uintptr_t owner=em9305_ram_805c5c.u32_805cd8;
  if(owner!=0u){
   uintptr_t callback=*(volatile uint32_t *)(owner+24u);
   if(callback!=0u){
-   uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+   uintptr_t base=em9305_ram_805c5c.u32_805c70;
    uint32_t delta=(uint32_t)source-(uint32_t)base,index;
    index=(uint32_t)((int32_t)delta/912);
    (void)((uint32_t (*)(uint32_t))callback)((uint8_t)index);
   }
  }
- *(volatile uint8_t *)(uintptr_t)0x802a38u=0u;
- *(volatile uint8_t *)(uintptr_t)0x802a34u=0u;
- *(volatile uint16_t *)(uintptr_t)0x802a3cu=0u;
- *(volatile uint16_t *)(uintptr_t)0x802a40u=0u;
- *(volatile uint16_t *)(uintptr_t)0x802a44u=0u;
+ em9305_ram_802a2c.u8_802a38=0u;
+ em9305_ram_802a2c.u8_802a34=0u;
+ em9305_ram_802a2c.u16_802a3c=0u;
+ em9305_ram_802a2c.u16_802a40=0u;
+ em9305_ram_802a2c.u16_802a44=0u;
  *(volatile uint8_t *)(source+349u)=0u;
  *(volatile uint8_t *)(source+347u)=0u;
  *(volatile uint8_t *)(source+344u)=1u;
@@ -12301,7 +12306,7 @@ uint32_t opencfw_em9305_radio_cb_31dca0(uintptr_t event)
  uint32_t value=*(volatile uint16_t *)pending;
  uint32_t saved=opencfw_em9305_radio_query_3253a4(value);
  if(saved==0u) return opencfw_em9305_auxiliary_signal_304394();
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8052ccu;
+ uintptr_t callback=em9305_ram_8052bc.u32_8052cc;
  if(callback!=0u&&*(volatile uint8_t *)(source+109u)!=0u){
   uint32_t mode=*(volatile uint8_t *)(source+111u);
   if(mode==1u){
@@ -12339,11 +12344,11 @@ uint32_t opencfw_em9305_radio_prepare_32780c(uintptr_t source,uint32_t force,uin
  uint32_t count=opencfw_em9305_radio_prepare_state_32d694(source,(uintptr_t)(scratch+8u),(uintptr_t)(scratch+35u));
  if(*(volatile uint8_t *)(source+379u)!=0u||count==0u){
   if(force==0u&&*(volatile uint8_t *)(source+344u)==0u){
-   uintptr_t owner=*(volatile uint32_t *)(uintptr_t)0x805cd8u;
+   uintptr_t owner=em9305_ram_805c5c.u32_805cd8;
    if(owner!=0u){
     uintptr_t callback=*(volatile uint32_t *)(owner+12u);
     if(callback!=0u){
-     uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+     uintptr_t base=em9305_ram_805c5c.u32_805c70;
      uint32_t delta=(uint32_t)source-(uint32_t)base,index;
      index=(uint32_t)((int32_t)delta/912);
      if(((uint32_t (*)(uint32_t))callback)((uint8_t)index)==0u) return 0u;
@@ -12353,7 +12358,7 @@ uint32_t opencfw_em9305_radio_prepare_32780c(uintptr_t source,uint32_t force,uin
   *(volatile uint8_t *)(source+339u)=(uint8_t)(count!=0u);
   *(volatile uint8_t *)(source+336u)=1u;
   *(volatile uint8_t *)(source+341u)=0u;
-  (void)opencfw_em9305_ll_segment_header_323d70(0x802808u,source+336u);
+  (void)opencfw_em9305_ll_segment_header_323d70(((uintptr_t)&em9305_ram_8027e0 + 0x28u),source+336u);
   uint32_t high=*(const uint32_t *)(const void *)(opencfw_em9305_prepare_template_334464+4u);
   uint32_t low=*(const uint32_t *)(const void *)opencfw_em9305_prepare_template_334464;
   *(volatile uint32_t *)(scratch+4u)=high;
@@ -12380,11 +12385,11 @@ uint32_t opencfw_em9305_radio_prepare_32780c(uintptr_t source,uint32_t force,uin
  *(volatile uint8_t *)(source+336u)=(uint8_t)type;
  uint32_t bypass=0u;
  if(type==0u){
-  uintptr_t owner=*(volatile uint32_t *)(uintptr_t)0x805cd8u;
+  uintptr_t owner=em9305_ram_805c5c.u32_805cd8;
   if(owner!=0u){
    uintptr_t callback=*(volatile uint32_t *)(owner+8u);
    if(callback!=0u){
-    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uintptr_t base=em9305_ram_805c5c.u32_805c70;
     uint32_t delta=(uint32_t)source-(uint32_t)base,index;
     index=(uint32_t)((int32_t)delta/912);
     (void)((uint32_t (*)(uint32_t))callback)((uint8_t)index);
@@ -12406,7 +12411,7 @@ uint32_t opencfw_em9305_radio_prepare_32780c(uintptr_t source,uint32_t force,uin
   *(volatile uint8_t *)payload=(uint8_t)flags;
  }
  payload=*(volatile uint32_t *)(scratch+12u);
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8052d0u;
+ uintptr_t callback=em9305_ram_8052bc.u32_8052d0;
  uint32_t captured=*(volatile uint8_t *)payload;
  if(callback!=0u&&*(volatile uint8_t *)(source+108u)!=0u){
   uint32_t mode=*(volatile uint8_t *)(source+111u);
@@ -12523,9 +12528,9 @@ uint32_t opencfw_em9305_radio_packet_advance_32d738(uintptr_t source)
    *(volatile uint8_t *)(packet+7u)=(uint8_t)index;
    return 1u;
   }
-  *(volatile uint8_t *)(uintptr_t)0x8056e4u=handler;
- }else *(volatile uint8_t *)(uintptr_t)0x8056e4u=255u;
- *(volatile uint32_t *)(uintptr_t)0x805cd4u=(uint32_t)packet;
+  em9305_ram_805688.u8_8056e4=handler;
+ }else em9305_ram_805688.u8_8056e4=255u;
+ em9305_ram_805c5c.u32_805cd4=(uint32_t)packet;
  (void)opencfw_em9305_wsf_event_remove(queue,(uintptr_t)&handler);
  return 1u;
 }
@@ -12534,22 +12539,22 @@ uint32_t opencfw_em9305_radio_packet_advance_32d738(uintptr_t source)
  * delay slot clears the saved packet before the child executes. */
 uint32_t opencfw_em9305_radio_packet_complete_32d790(uintptr_t source)
 {
- uintptr_t packet=*(volatile uint32_t *)(uintptr_t)0x805cd4u;
+ uintptr_t packet=em9305_ram_805c5c.u32_805cd4;
  if(packet==0u)return (uint32_t)source;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x8056e4u;
+ uint32_t handler=em9305_ram_805688.u8_8056e4;
  if(handler!=255u){
   uintptr_t payload=*(volatile uint32_t *)packet;
   (void)opencfw_em9305_wsf_event_release(payload);
-  (void)opencfw_em9305_wsf_queue_append(0x8056dcu,packet-12u);
+  (void)opencfw_em9305_wsf_queue_append(((uintptr_t)&em9305_ram_805688 + 0x54u),packet-12u);
   (void)opencfw_em9305_wsf_critical_enter();
-  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805ab4u;
-  *(volatile uint8_t *)(uintptr_t)0x805ab4u=(uint8_t)(count+1u);
+  uint32_t count=em9305_ram_805a6c.u8_805ab4;
+  em9305_ram_805a6c.u8_805ab4=(uint8_t)(count+1u);
   (void)opencfw_em9305_wsf_critical_exit();
   count=*(volatile uint8_t *)(source+376u);
   *(volatile uint8_t *)(source+376u)=(uint8_t)(count+1u);
  }else (void)opencfw_em9305_wsf_event_release(packet);
- handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
- *(volatile uint32_t *)(uintptr_t)0x805cd4u=0u;
+ handler=em9305_ram_805af0.u8_805b18;
+ em9305_ram_805c5c.u32_805cd4=0u;
  return opencfw_em9305_wsf_event_post(handler,1u);
 }
 
@@ -12564,7 +12569,7 @@ uint32_t opencfw_em9305_command_apply_309514(uint32_t id,uint32_t interval,uint3
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*784u;
- uintptr_t slot=0x804080u+offset;
+ uintptr_t slot=((uintptr_t)&em9305_ram_803d58 + 0x328u)+offset;
  uintptr_t record=*(volatile uint32_t *)(slot+4u);
  uint32_t active=*(volatile uint16_t *)(record+16u);
  if((int32_t)(active-interval)>1)return 70u;
@@ -12572,20 +12577,20 @@ uint32_t opencfw_em9305_command_apply_309514(uint32_t id,uint32_t interval,uint3
   if(interval+1u==active)return 70u;
   if(active==interval&&*(volatile uint8_t *)(record+19u)>second)return 70u;
  }
- uintptr_t table=0x803f7au+offset;
+ uintptr_t table=((uintptr_t)&em9305_ram_803d58 + 0x222u)+offset;
  uint32_t periods=*(volatile uint8_t *)(table+1u),budget;
  budget=(uint32_t)(uint16_t)periods*125u;
  budget-=150u;
  uint32_t timing=0u;
  if(*(volatile uint8_t *)(table+86u)!=0u){
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801a14u;
+  uintptr_t callback=em9305_ram_801a14.u32_801a14;
   if(callback!=0u){
    timing=((uint32_t (*)(void))callback)();
    record=*(volatile uint32_t *)(slot+4u);
   }
  }
  uint32_t flags=*(volatile uint16_t *)(record+366u);
- uint32_t phy=*(volatile uint8_t *)(uintptr_t)(0x804080u+offset);
+ uint32_t phy=*(volatile uint8_t *)(uintptr_t)(((uintptr_t)&em9305_ram_803d58 + 0x328u)+offset);
  uint32_t duration=opencfw_em9305_radio_duration_312be4(phy,0u,timing,0u,size,0u,2u,(flags&64u)!=0u?5u:3u);
  if(budget<duration)return 69u;
  record=*(volatile uint32_t *)(slot+4u);
@@ -12596,15 +12601,15 @@ uint32_t opencfw_em9305_command_apply_309514(uint32_t id,uint32_t interval,uint3
  uint32_t position=*(volatile uint8_t *)(record+19u);
  if(position==second&&*(volatile uint16_t *)(record+16u)==interval){
   uint32_t length=*(volatile uint8_t *)(record+109u);
-  uintptr_t owner=*(volatile uint32_t *)(uintptr_t)(0x803d78u+offset+92u);
+  uintptr_t owner=*(volatile uint32_t *)(uintptr_t)(((uintptr_t)&em9305_ram_803d58 + 0x20u)+offset+92u);
   uintptr_t destination=*(volatile uint32_t *)(record+92u);
   *(volatile uint16_t *)(record+98u)=0u;
   *(volatile uint16_t *)(record+88u)=(uint16_t)length;
   uint32_t rate=*(volatile uint8_t *)table;
-  uint32_t multiplier=*(volatile uint8_t *)(uintptr_t)(0x803d78u+offset+515u);
+  uint32_t multiplier=*(volatile uint8_t *)(uintptr_t)(((uintptr_t)&em9305_ram_803d58 + 0x20u)+offset+515u);
   (void)opencfw_em9305_memcpy((void *)destination,(const void *)(record+112u),length);
   record=*(volatile uint32_t *)(slot+4u);
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805c9cu;
+  uintptr_t callback=em9305_ram_805c5c.u32_805c9c;
   flags=*(volatile uint16_t *)(record+366u);
   *(volatile uint32_t *)(owner+124u)=(uint32_t)(record+22u);
   uint32_t prepared=((uint32_t (*)(uint32_t,uintptr_t,uintptr_t,uint32_t))callback)(flags,record+22u,record+88u,0u);
@@ -12622,8 +12627,8 @@ uint32_t opencfw_em9305_command_apply_309514(uint32_t id,uint32_t interval,uint3
   uint32_t now=opencfw_em9305_pal_current_time();
   uint32_t previous=*(volatile uint32_t *)(owner+144u);
   if((int32_t)(scheduled-now+previous)<0)return 70u;
-  callback=*(volatile uint32_t *)(uintptr_t)0x805c94u;
-  if(callback!=0u)(void)((uint32_t (*)(uintptr_t,uint32_t))callback)(0x803d78u+offset,duration);
+  callback=em9305_ram_805c5c.u32_805c94;
+  if(callback!=0u)(void)((uint32_t (*)(uintptr_t,uint32_t))callback)(((uintptr_t)&em9305_ram_803d58 + 0x20u)+offset,duration);
   return 0u;
  }
  *(volatile uint8_t *)(record+100u)=1u;
@@ -12658,9 +12663,9 @@ uint32_t opencfw_em9305_radio_cb_31e620(uintptr_t event,uintptr_t input,uint32_t
   uint32_t mode=*(volatile uint8_t *)(source+635u);
   *(volatile uint8_t *)(source+628u)=0u;
   if(mode==1u){
-   uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801314u;
+   uintptr_t callback=em9305_ram_8012c0.u32_801314;
    if(callback!=0u){
-    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uintptr_t base=em9305_ram_805c5c.u32_805c70;
     uint32_t delta=(uint32_t)(source-base),index;
     index=(uint32_t)((int32_t)delta/912);
     (void)((uint32_t (*)(uint32_t))callback)((uint8_t)index);
@@ -12677,16 +12682,16 @@ uint32_t opencfw_em9305_radio_cb_31e620(uintptr_t event,uintptr_t input,uint32_t
  uint32_t data=0u,gate,success;
  if(status==1u||status==3u)goto discard;
  if(status==4u){
-  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x802a34u;
+  uint32_t count=em9305_ram_802a2c.u8_802a34;
   count+=1u;
-  *(volatile uint8_t *)(uintptr_t)0x802a34u=(uint8_t)count;
+  em9305_ram_802a2c.u8_802a34=(uint8_t)count;
   if((uint8_t)count>=2u)goto discard;
   gate=(*(volatile uint8_t *)(source+4u)&8u)==0u;
   goto prepare;
  }
  if(status==0u){
-  *(volatile uint8_t *)(uintptr_t)0x802a34u=0u;
-  *(volatile uint8_t *)(uintptr_t)0x802a38u=1u;
+  em9305_ram_802a2c.u8_802a34=0u;
+  em9305_ram_802a2c.u8_802a38=1u;
  }
  uintptr_t decoded=source+344u;
  uint32_t header=opencfw_em9305_short_header_decode_32dedc(decoded,input);
@@ -12700,8 +12705,8 @@ uint32_t opencfw_em9305_radio_cb_31e620(uintptr_t event,uintptr_t input,uint32_t
   }
  }
  if(*(volatile uint8_t *)(source+349u)!=0u){
-  uint32_t count=*(volatile uint16_t *)(uintptr_t)0x802a44u;
-  *(volatile uint16_t *)(uintptr_t)0x802a44u=(uint16_t)(count+1u);
+  uint32_t count=em9305_ram_802a2c.u16_802a44;
+  em9305_ram_802a2c.u16_802a44=(uint16_t)(count+1u);
  }
  data=opencfw_em9305_receive_state_324ea4(source);
  gate=opencfw_em9305_receive_gate_324f68(source);
@@ -12726,8 +12731,8 @@ failed:
  success=0u;
 finish:
  {
-  uint32_t count=*(volatile uint16_t *)(uintptr_t)0x802a3cu;
-  *(volatile uint16_t *)(uintptr_t)0x802a3cu=(uint16_t)(count+(gate&1u));
+  uint32_t count=em9305_ram_802a2c.u16_802a3c;
+  em9305_ram_802a2c.u16_802a3c=(uint16_t)(count+(gate&1u));
  }
  (void)opencfw_em9305_receive_finish_324fb0(source);
  if(*(volatile uint8_t *)(source+344u)==3u)*(volatile uint8_t *)(source+630u)=0u;
@@ -12745,7 +12750,7 @@ uint32_t opencfw_em9305_receive_advance_32d5ac(uintptr_t source)
  *(volatile uint8_t *)(source+341u)=0u;
  uint32_t result=opencfw_em9305_radio_packet_advance_32d738(source);
  if(result==0u)return result;
- result=*(volatile uint32_t *)(uintptr_t)0x8052d0u;
+ result=em9305_ram_8052bc.u32_8052d0;
  if(result==0u)return result;
  result=*(volatile uint8_t *)(source+108u);
  if(result==0u)return result;
@@ -12789,11 +12794,11 @@ uint32_t opencfw_em9305_receive_state_324ea4(uintptr_t source)
 {
  uint32_t kind=*(volatile uint8_t *)(source+344u);
  if(kind==0u){
-  uintptr_t owner=*(volatile uint32_t *)(uintptr_t)0x805cd8u;
+  uintptr_t owner=em9305_ram_805c5c.u32_805cd8;
   if(owner!=0u){
    uintptr_t callback=*(volatile uint32_t *)(owner+16u);
    if(callback!=0u){
-    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uintptr_t base=em9305_ram_805c5c.u32_805c70;
     uint32_t delta=(uint32_t)(source-base),index;
     index=(uint32_t)((int32_t)delta/912);
     uint32_t response=((uint32_t (*)(uint32_t))callback)((uint8_t)index);
@@ -12812,13 +12817,13 @@ uint32_t opencfw_em9305_receive_state_324ea4(uintptr_t source)
   *(volatile uint8_t *)(source+337u)=(uint8_t)(previous+1u);
   return 0u;
  }
- uint32_t credits=*(volatile uint8_t *)(uintptr_t)0x805ab5u;
+ uint32_t credits=em9305_ram_805a6c.u8_805ab5;
  if(credits==0u)return 0xffffffffu;
  uint32_t allocation=opencfw_em9305_radio_query_3253a4(size);
  if(allocation==0u)return 0xffffffffu;
- credits=*(volatile uint8_t *)(uintptr_t)0x805ab5u;
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8052ccu;
- *(volatile uint8_t *)(uintptr_t)0x805ab5u=(uint8_t)(credits-1u);
+ credits=em9305_ram_805a6c.u8_805ab5;
+ uintptr_t callback=em9305_ram_8052bc.u32_8052cc;
+ em9305_ram_805a6c.u8_805ab5=(uint8_t)(credits-1u);
  if(callback!=0u&&*(volatile uint8_t *)(source+109u)!=0u&&*(volatile uint8_t *)(source+111u)==0u){
   uint32_t low=*(volatile uint32_t *)(source+464u);
   uint32_t high=*(volatile uint32_t *)(source+468u);
@@ -12835,15 +12840,15 @@ uint32_t opencfw_em9305_receive_packet_publish_325374(uintptr_t packet,uint32_t 
  packet-=2u;
  *(volatile uint8_t *)packet=(uint8_t)value;
  *(volatile uint8_t *)(packet+1u)=(uint8_t)(value>>8);
- (void)opencfw_em9305_ll_event_enqueue(0x805abcu,(uint8_t)id,packet);
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ (void)opencfw_em9305_ll_event_enqueue(((uintptr_t)&em9305_ram_805a6c + 0x50u),(uint8_t)id,packet);
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  return opencfw_em9305_wsf_event_post(handler,2u);
 }
 uint32_t opencfw_em9305_receive_packet_finish_3253c4(uintptr_t source,uintptr_t packet,uint32_t data,uint32_t success)
 {
  uintptr_t chosen=data!=0u?data:packet;
  if(data!=0u){
-  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+  uintptr_t base=em9305_ram_805c5c.u32_805c70;
   uint32_t value=*(volatile uint16_t *)(source+262u);
   uint32_t delta=(uint32_t)(source-base),index;
   index=(uint32_t)((int32_t)delta/912);
@@ -12853,7 +12858,7 @@ uint32_t opencfw_em9305_receive_packet_finish_3253c4(uintptr_t source,uintptr_t 
   if(chosen!=0u)return opencfw_em9305_receive_packet_release_3253bc(chosen);
   return (uint32_t)source;
  }
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8052ccu;
+ uintptr_t callback=em9305_ram_8052bc.u32_8052cc;
  if(callback!=0u&&*(volatile uint8_t *)(source+109u)!=0u){
   uint32_t mode=*(volatile uint8_t *)(source+111u);
   if(mode==1u){
@@ -12896,12 +12901,12 @@ uint32_t opencfw_em9305_receive_terminate_325c08(uintptr_t source,uint32_t reaso
 {
  uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
  if(message==0u)return 0u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  *(volatile uint8_t *)(message+3u)=(uint8_t)reason;
  uint32_t delta=(uint32_t)(source-base),index;
  index=(uint32_t)((int32_t)delta/912);
  *(volatile uint8_t *)(message+2u)=1u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint16_t *)message=(uint8_t)index;
  return opencfw_em9305_wsf_task_message_send(handler,message);
 }
@@ -12918,43 +12923,43 @@ uint32_t opencfw_em9305_radio_window_3122fc(uint32_t value,uint32_t mode)
 }
 uint32_t opencfw_em9305_radio_window_start_3103e0(uint32_t offset,uint32_t size)
 {
- uint32_t base=*(volatile uint32_t *)(uintptr_t)0x805e84u;
+ uint32_t base=em9305_ram_805e6c.u32_805e84;
  uint32_t deadline=offset+base-85u;
- *(volatile uint32_t *)(uintptr_t)0x805e88u=deadline;
+ em9305_ram_805e6c.u32_805e88=deadline;
  uint32_t result=opencfw_em9305_radio_deadline_333450(deadline);
  uint32_t state=1u;
  if(result!=0u){
-  uint32_t extra=*(volatile uint16_t *)(uintptr_t)0x805e9cu;
+  uint32_t extra=em9305_ram_805e6c.u16_805e9c;
   (void)opencfw_em9305_radio_window_3122fc(20u+((size+extra)<<2),1u);
   (void)opencfw_em9305_radio_receive_trigger_312360();
   state=3u;
  }
- *(volatile uint8_t *)(uintptr_t)0x805e78u=(uint8_t)state;
+ em9305_ram_805e6c.u8_805e78=(uint8_t)state;
  return result;
 }
 uint32_t opencfw_em9305_radio_window_resume_310430(uint32_t unused,uint32_t size)
 {
  (void)unused;
- uint32_t extra=*(volatile uint16_t *)(uintptr_t)0x805e9cu;
- uint32_t base=*(volatile uint32_t *)(uintptr_t)0x805e8cu;
- *(volatile uint32_t *)(uintptr_t)0x805e84u=base;
+ uint32_t extra=em9305_ram_805e6c.u16_805e9c;
+ uint32_t base=em9305_ram_805e6c.u32_805e8c;
+ em9305_ram_805e6c.u32_805e84=base;
  uint32_t result=opencfw_em9305_radio_window_3122fc(20u+((size+extra)<<2),1u);
- *(volatile uint8_t *)(uintptr_t)0x805e78u=3u;
+ em9305_ram_805e6c.u8_805e78=3u;
  return result;
 }
 uint32_t opencfw_em9305_radio_window_base_310654(uint32_t unused)
 {
  (void)unused;
- uint32_t base=*(volatile uint32_t *)(uintptr_t)0x805e8cu;
- *(volatile uint8_t *)(uintptr_t)0x805e78u=2u;
- *(volatile uint32_t *)(uintptr_t)0x805e84u=base;
+ uint32_t base=em9305_ram_805e6c.u32_805e8c;
+ em9305_ram_805e6c.u8_805e78=2u;
+ em9305_ram_805e6c.u32_805e84=base;
  return base;
 }
 /* Exact five non-executable status bytes at native3344c0..3344c5. */
 const uint8_t opencfw_em9305_radio_status_3344c0[5]={0u,1u,3u,4u,6u};
 uint32_t opencfw_em9305_radio_callback_3330d8(uint32_t status,uint32_t timestamp,uint32_t selector,uint32_t context)
 {
- uintptr_t source=0x805d18u,root=0x805cf4u;
+ uintptr_t source=((uintptr_t)&em9305_ram_805c5c + 0xbcu),root=((uintptr_t)&em9305_ram_805c5c + 0x98u);
  uint32_t count=*(volatile uint16_t *)(source+12u);
  *(volatile uint16_t *)(source+12u)=(uint16_t)(count+1u);
  uint32_t active=1u,code=1u;
@@ -12963,7 +12968,7 @@ uint32_t opencfw_em9305_radio_callback_3330d8(uint32_t status,uint32_t timestamp
   uint32_t length=*(volatile uint8_t *)packet;
   uint32_t limit=*(volatile uint16_t *)(source+32u);
   uint32_t span=length+2u>limit?limit+6u:length+9u;
-  if(*(volatile uint8_t *)(uintptr_t)0x805d3au!=0u)span+=4u;
+  if(em9305_ram_805d34.u8_805d3a!=0u)span+=4u;
   if(selector==1u)span=8u+(span<<2);
   else if(selector==3u)span=(span<<4)+80u;
   else if(selector==4u)span=(span<<6)+80u;
@@ -13019,10 +13024,10 @@ uint32_t opencfw_em9305_radio_callback_3330d8(uint32_t status,uint32_t timestamp
  }
  uint32_t encoded=selector==3u?1u:selector==4u?2u:0u;
  if(status<5u)code=opencfw_em9305_radio_status_3344c0[status];
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805cf8u;
+ uintptr_t callback=em9305_ram_805c5c.u32_805cf8;
  uint32_t result=((uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t))callback)(code,context,0u,timestamp,encoded);
  if(active==0u){
-  callback=*(volatile uint32_t *)(uintptr_t)0x805cf8u;
+  callback=em9305_ram_805c5c.u32_805cf8;
   result=((uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t))callback)(1u,context,0u,timestamp,encoded);
  }
  return result;
@@ -13033,7 +13038,7 @@ uint32_t opencfw_em9305_radio_callback_3330d8(uint32_t status,uint32_t timestamp
  * the owner-present path reloads root48 after the transform child. */
 uint32_t opencfw_em9305_radio_callback_333268(uint32_t status)
 {
- uintptr_t source=0x805d18u,root=0x805cf4u;
+ uintptr_t source=((uintptr_t)&em9305_ram_805c5c + 0xbcu),root=((uintptr_t)&em9305_ram_805c5c + 0x98u);
  uint32_t count=*(volatile uint16_t *)(source+12u);
  uint32_t increment=count+1u;
  *(volatile uint16_t *)(source+12u)=(uint16_t)increment;
@@ -13107,7 +13112,7 @@ uint32_t opencfw_em9305_radio_status_valid_311df0(void)
 uint32_t opencfw_em9305_radio_callback_333480(uint32_t event)
 {
  (void)opencfw_em9305_pal_hook_three(16u);
- uintptr_t root=0x805e78u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805e6c + 0xcu);
  uint32_t state=*(volatile uint8_t *)root;
  uint32_t adjusted=event-8u;
  if(state==1u)return adjusted;
@@ -13143,7 +13148,7 @@ uint32_t opencfw_em9305_radio_callback_333480(uint32_t event)
   fourth=(uint32_t)(int32_t)(int8_t)quotient;
   code=3u;
   if(ready!=0u){
-   uint32_t check=*(volatile uint8_t *)(uintptr_t)0x805ea5u;
+   uint32_t check=em9305_ram_805e6c.u8_805ea5;
    code=0u;
    if(check!=0u&&enabled!=0u&&opencfw_em9305_radio_status_valid_311df0()==0u)code=4u;
   }
@@ -13175,15 +13180,15 @@ extern uint32_t opencfw_em9305_command_30ccf8(uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_command_30df08(uintptr_t);
 uint32_t opencfw_em9305_command_30dfd8(uint32_t value)
 {
- uint32_t second=*(volatile uint8_t *)(uintptr_t)0x805a74u;
- uint32_t first=*(volatile uint8_t *)(uintptr_t)0x805a73u;
+ uint32_t second=em9305_ram_805a6c.u8_805a74;
+ uint32_t first=em9305_ram_805a6c.u8_805a73;
  if((first|second)!=0u)return 12u;
  if(value-1u>=7u)return 18u;
- *(volatile uint8_t *)(uintptr_t)0x805b00u=(uint8_t)value;
+ em9305_ram_805af0.u8_805b00=(uint8_t)value;
  return 0u;
 }
 uintptr_t opencfw_em9305_ll_information_3032b4(uintptr_t output)
-{ return (uintptr_t)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)0x801820u,40u); }
+{ return (uintptr_t)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)&em9305_ram_801820,40u); }
 uint32_t opencfw_em9305_dispatch_shared_330e10(uintptr_t request,uintptr_t input)
 {
  uint32_t command=*(volatile uint16_t *)request;
@@ -13250,11 +13255,11 @@ uint32_t opencfw_em9305_command_30ccf8(uint32_t selector,uint32_t enable)
  if(opencfw_em9305_ll_connection_gate_30e524()==0u)
   return opencfw_em9305_command_status_30e8c0(12u);
  if(selector==1u&&opencfw_em9305_ll_stream_kind_valid_30e4dc(
-       *(volatile uint8_t *)(uintptr_t)0x805afdu)==0u)
+       em9305_ram_805af0.u8_805afd)==0u)
   return opencfw_em9305_command_status_30e8c0(18u);
  uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
  if(message==0u)return 0u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint8_t *)(message+4u)=(uint8_t)(enable!=0u);
  *(volatile uint8_t *)(message+3u)=(uint8_t)((selector==0u)+1u);
  *(volatile uint8_t *)(message+2u)=2u;
@@ -13262,11 +13267,11 @@ uint32_t opencfw_em9305_command_30ccf8(uint32_t selector,uint32_t enable)
 }
 uint32_t opencfw_em9305_command_30df08(uintptr_t record)
 {
- uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t flags=em9305_ram_805a6c.u32_805a94;
  uint32_t limit=(flags&128u)!=0u?3u:1u;
  if(opencfw_em9305_ll_connection_gate_30e524()==0u)return 12u;
- uint32_t secondguard=*(volatile uint8_t *)(uintptr_t)0x805a74u;
- uint32_t firstguard=*(volatile uint8_t *)(uintptr_t)0x805a73u;
+ uint32_t secondguard=em9305_ram_805a6c.u8_805a74;
+ uint32_t firstguard=em9305_ram_805a6c.u8_805a73;
  if((firstguard|secondguard)!=0u)return 12u;
  uint32_t first=*(volatile uint16_t *)record;
  if(first>=0x4001u)return 18u;
@@ -13289,7 +13294,7 @@ uint32_t opencfw_em9305_command_30df08(uintptr_t record)
  uint32_t modes=*(volatile uint16_t *)(record+4u);
  *(volatile uint16_t *)(message+8u)=(uint16_t)modes;
  secondary=*(volatile uint8_t *)(record+6u);
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint8_t *)(message+10u)=(uint8_t)secondary;
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
  return 0u;
@@ -13298,11 +13303,11 @@ uint32_t opencfw_em9305_command_30df08(uintptr_t record)
 /* Authenticated record requests30fc68/30fcd8. Flattened buffer remains
  * native R0 through halfword length reads and is passed to3105b8. */
 uint32_t opencfw_em9305_radio_state_310260(void)
-{ return *(volatile uint8_t *)(uintptr_t)0x805e78u; }
+{ return em9305_ram_805e6c.u8_805e78; }
 uint32_t opencfw_em9305_radio_record_request_30fc68(uintptr_t descriptor,uint32_t selector)
 {
  (void)opencfw_em9305_radio_request_enter_310678();
- uintptr_t root=0x805cfcu;
+ uintptr_t root=((uintptr_t)&em9305_ram_805c5c + 0xa0u);
  uint32_t base=*(volatile uint32_t *)root;
  *(volatile uint16_t *)(root+40u)=0u;
  (void)opencfw_em9305_radio_request_base_310640(base);
@@ -13348,7 +13353,7 @@ uint32_t opencfw_em9305_radio_request_30fcd8(uintptr_t descriptor,uint32_t selec
  }
  size=(uint16_t)size;
  (void)opencfw_em9305_radio_request_3105b8(buffer,size);
- uintptr_t root=0x805d18u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805c5c + 0xbcu);
  uint32_t unit=*(volatile uint8_t *)(root+7u);
  uint32_t extra=*(volatile uint8_t *)(root+9u);
  uint32_t time=*(volatile uint32_t *)root,product;
@@ -13361,20 +13366,20 @@ uint32_t opencfw_em9305_radio_request_30fcd8(uintptr_t descriptor,uint32_t selec
 /* Authenticated packet request30faec and native window/callback tails. */
 uint32_t opencfw_em9305_radio_window_request_31041c(uint32_t base,uint32_t size)
 {
- *(volatile uint32_t *)(uintptr_t)0x805e84u=base;
- *(volatile uint8_t *)(uintptr_t)0x805e78u=3u;
+ em9305_ram_805e6c.u32_805e84=base;
+ em9305_ram_805e6c.u8_805e78=3u;
  return opencfw_em9305_radio_window_start_3103e0(0u,size);
 }
 uint32_t opencfw_em9305_radio_failure_callback_310360(void)
 {
- uint32_t kind=*(volatile uint8_t *)(uintptr_t)0x805e99u;
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805e7cu;
+ uint32_t kind=em9305_ram_805e6c.u8_805e99;
+ uintptr_t callback=em9305_ram_805e6c.u32_805e7c;
  return ((uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t))callback)(1u,0u,kind,0u);
 }
 uint32_t opencfw_em9305_radio_request_30faec(uintptr_t packet,uint32_t length)
 {
  (void)opencfw_em9305_radio_request_enter_310678();
- uintptr_t root=0x805cfcu;
+ uintptr_t root=((uintptr_t)&em9305_ram_805c5c + 0xa0u);
  uint32_t extra=*(volatile uint16_t *)(root+32u);
  uint32_t lead=*(volatile uint32_t *)(root+4u);
  *(volatile uint32_t *)(root+56u)=(uint32_t)(packet+1u);
@@ -13398,10 +13403,10 @@ uint32_t opencfw_em9305_radio_request_30faec(uintptr_t packet,uint32_t length)
  * optional after an eligible nonmatching row, and its return is ignored. */
 uint32_t opencfw_em9305_radio_resolve_303890(uint32_t low,uint32_t high,uintptr_t kind_cell,uintptr_t output)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x801610u;
+ uint32_t count=em9305_ram_801608.u8_801610;
  uint32_t eligible=0u;
  if(count!=0u){
-  uintptr_t table=*(volatile uint32_t *)(uintptr_t)0x805c00u;
+  uintptr_t table=em9305_ram_805be0.u32_805c00;
   for(uint32_t index=0u;index<count;index++){
    uintptr_t row=table+index*72u;
    uint32_t disabled=*(volatile uint8_t *)(row+64u);
@@ -13422,7 +13427,7 @@ uint32_t opencfw_em9305_radio_resolve_303890(uint32_t low,uint32_t high,uintptr_
   }
  }
  if(eligible!=0u){
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x80160cu;
+  uintptr_t callback=em9305_ram_801608.u32_80160c;
   if(callback!=0u){
    uint32_t translated_high=*(volatile uint32_t *)(output+4u);
    uint32_t translated_low=*(volatile uint32_t *)output;
@@ -13440,9 +13445,9 @@ uint32_t opencfw_em9305_radio_resolve_303890(uint32_t low,uint32_t high,uintptr_
 extern uint32_t opencfw_em9305_radio_key_match_315640(uintptr_t,uint32_t,uint32_t);
 uint32_t opencfw_em9305_radio_resolve_303bdc(uint32_t low,uint32_t high,uintptr_t kind_cell,uintptr_t output)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x801610u;
+ uint32_t count=em9305_ram_801608.u8_801610;
  for(uint32_t index=0u;index<count;index++){
-  uintptr_t table=*(volatile uint32_t *)(uintptr_t)0x805c00u;
+  uintptr_t table=em9305_ram_805be0.u32_805c00;
   uintptr_t row=table+index*72u;
   uint32_t disabled=*(volatile uint8_t *)(row+64u);
   if(disabled!=0u)continue;
@@ -13451,7 +13456,7 @@ uint32_t opencfw_em9305_radio_resolve_303bdc(uint32_t low,uint32_t high,uintptr_
   uint32_t matched=((stored_high^high)|(stored_low^low))==0u;
   if(matched==0u){
    matched=opencfw_em9305_radio_key_match_315640(row,low,high)!=0u;
-   count=*(volatile uint8_t *)(uintptr_t)0x801610u;
+   count=em9305_ram_801608.u8_801610;
    if(matched!=0u){
     *(volatile uint32_t *)(row+40u)=low;
     *(volatile uint32_t *)(row+44u)=high;
@@ -13468,12 +13473,12 @@ uint32_t opencfw_em9305_radio_resolve_303bdc(uint32_t low,uint32_t high,uintptr_
    return 1u;
   }
  }
- uint32_t slot=*(volatile uint8_t *)(uintptr_t)0x801638u;
- uintptr_t record=0x801618u+slot*8u;
+ uint32_t slot=em9305_ram_801638.u8_801638;
+ uintptr_t record=(uintptr_t)&em9305_ram_801618+slot*8u;
  uint32_t next=(slot+1u)&3u;
  *(volatile uint32_t *)(record+4u)=high;
  *(volatile uint32_t *)record=low;
- *(volatile uint8_t *)(uintptr_t)0x801638u=(uint8_t)next;
+ em9305_ram_801638.u8_801638=(uint8_t)next;
  return 0u;
 }
 
@@ -13621,12 +13626,12 @@ uint32_t opencfw_em9305_radio_address_project_303b7c(uint32_t low,uint32_t high,
    return 1u;
   }
  }
- uint32_t slot=*(volatile uint8_t *)(uintptr_t)0x801638u;
- uintptr_t record=0x801618u+slot*8u;
+ uint32_t slot=em9305_ram_801638.u8_801638;
+ uintptr_t record=(uintptr_t)&em9305_ram_801618+slot*8u;
  uint32_t next=(slot+1u)&3u;
  *(volatile uint32_t *)(record+4u)=high;
  *(volatile uint32_t *)record=low;
- *(volatile uint8_t *)(uintptr_t)0x801638u=(uint8_t)next;
+ em9305_ram_801638.u8_801638=(uint8_t)next;
  return 0u;
 }
 uint32_t opencfw_em9305_radio_address_associate_303844(uint32_t low,uint32_t high,uint32_t kind,uint32_t identity_low,uint32_t identity_high)
@@ -13636,7 +13641,7 @@ uint32_t opencfw_em9305_radio_address_associate_303844(uint32_t low,uint32_t hig
  uint32_t stored_high=*(volatile uint32_t *)(row+60u);
  uint32_t stored_low=*(volatile uint32_t *)(row+56u);
  if(((stored_high^high)|(stored_low^low))==0u)return 1u;
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x80160cu;
+ uintptr_t callback=em9305_ram_801608.u32_80160c;
  if(callback==0u)return 0u;
  (void)((uint32_t (*)(uint32_t,uint32_t,uint32_t,uint32_t,uint32_t,uint32_t))callback)
    (low,high,0u,kind,identity_low,identity_high);
@@ -13722,7 +13727,7 @@ uint32_t opencfw_em9305_command_30dbd4(uint32_t id,uint32_t mode)
  if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
  if(id>=0xf00u)return 18u;
  if(opencfw_em9305_command_ready_3213d0(id)==0u)return 66u;
- if((mode&3u)==3u&&(*(volatile uint32_t *)(uintptr_t)0x805b34u&16u)==0u)return 17u;
+ if((mode&3u)==3u&&(em9305_ram_805af0.u32_805b34&16u)==0u)return 17u;
  (void)opencfw_em9305_command_apply_307d0c(id,mode);
  return 0u;
 }
@@ -13730,7 +13735,7 @@ uint32_t opencfw_em9305_command_30dc70(uint32_t id,uint32_t mode,uint32_t first,
 {
  if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
  if(mode>3u)return 18u;
- if(mode==3u&&(*(volatile uint32_t *)(uintptr_t)0x805b34u&16u)==0u)return 17u;
+ if(mode==3u&&(em9305_ram_805af0.u32_805b34&16u)==0u)return 17u;
  if(first>499u)return 18u;
  if((uint16_t)(second-0x4001u)<0xc009u)return 18u;
  return opencfw_em9305_command_apply_309874(id,mode,first,second,last);
@@ -13740,12 +13745,12 @@ uint32_t opencfw_em9305_command_30d48c(uint32_t id,uint32_t first,uint32_t secon
  (void)unused;
  if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;
  if(id>3u)return 18u;
- if(id==3u&&(*(volatile uint32_t *)(uintptr_t)0x805b34u&16u)==0u)return 17u;
+ if(id==3u&&(em9305_ram_805af0.u32_805b34&16u)==0u)return 17u;
  if(first>499u)return 18u;
  if((uint16_t)(second-0x4001u)<0xc009u)return 18u;
- *(volatile uint16_t *)(uintptr_t)0x805aceu=(uint16_t)second;
- *(volatile uint16_t *)(uintptr_t)0x805accu=(uint16_t)first;
- *(volatile uint8_t *)(uintptr_t)0x805acbu=(uint8_t)id;
+ em9305_ram_805a6c.u16_805ace=(uint16_t)second;
+ em9305_ram_805a6c.u16_805acc=(uint16_t)first;
+ em9305_ram_805a6c.u8_805acb=(uint8_t)id;
  return 0u;
 }
 
@@ -13755,7 +13760,7 @@ uint32_t opencfw_em9305_command_apply_307d0c(uint32_t id,uint32_t mode)
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*784u;
- uintptr_t row=0x803d7eu+offset;
+ uintptr_t row=((uintptr_t)&em9305_ram_803d58 + 0x26u)+offset;
  uint32_t enabled=mode&1u;
  *(volatile uint8_t *)row=(uint8_t)(enabled^1u);
  if(enabled!=0u)*(volatile uint8_t *)(row+1u)=(uint8_t)((mode>>1u)&1u);
@@ -13766,17 +13771,17 @@ uint32_t opencfw_em9305_command_ready_3213d0(uint32_t id)
  if(id>5u)return 0u;
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*784u;
- return *(volatile uint8_t *)(uintptr_t)(0x803d78u+offset)!=0u;
+ return *(volatile uint8_t *)(uintptr_t)(((uintptr_t)&em9305_ram_803d58 + 0x20u)+offset)!=0u;
 }
 uint32_t opencfw_em9305_command_apply_309874(uint32_t id,uint32_t mode,uint32_t first,uint32_t second,uint32_t unused)
 {
  (void)unused;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+34u);
  if(id>=count)return 2u;
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uintptr_t row=base+offset;
  if(*(volatile uint8_t *)row==0u)return 2u;
  *(volatile uint16_t *)(row+618u)=(uint16_t)second;
@@ -13789,7 +13794,7 @@ uint32_t opencfw_em9305_command_apply_309874(uint32_t id,uint32_t mode,uint32_t 
  * message opcode has distinct half4 policies (one vs zero). */
 uint32_t opencfw_em9305_command_apply_307fcc(uint32_t id,uint32_t value,uint32_t peer)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+34u);
  if(id>=count)return 2u;
  uintptr_t associated=opencfw_em9305_radio_record_find_31aa64(peer);
@@ -13797,7 +13802,7 @@ uint32_t opencfw_em9305_command_apply_307fcc(uint32_t id,uint32_t value,uint32_t
  if(*(volatile uint8_t *)(associated+369u)!=1u)return 12u;
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uintptr_t row=base+offset;
  if(*(volatile uint8_t *)row==0u)return 2u;
  if((*(volatile uint8_t *)(row+547u)&2u)==0u)return 26u;
@@ -13805,7 +13810,7 @@ uint32_t opencfw_em9305_command_apply_307fcc(uint32_t id,uint32_t value,uint32_t
  uintptr_t message=opencfw_em9305_wsf_event_allocate(10u);
  if(message==0u)return 0u;
  *(volatile uint16_t *)(message+2u)=0x2201u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint16_t *)(message+8u)=(uint16_t)value;
  *(volatile uint16_t *)(message+6u)=(uint16_t)peer;
  *(volatile uint16_t *)message=(uint16_t)id;
@@ -13819,15 +13824,15 @@ uint32_t opencfw_em9305_command_apply_30805c(uint32_t id,uint32_t value,uint32_t
  if(peer>=6u)return 66u;
  uint32_t peer_offset;
  peer_offset=(uint32_t)(uint16_t)peer*784u;
- uintptr_t peer_row=0x803d78u+peer_offset;
+ uintptr_t peer_row=((uintptr_t)&em9305_ram_803d58 + 0x20u)+peer_offset;
  if(*(volatile uint8_t *)peer_row==0u)return 66u;
  if(*(volatile uint8_t *)(peer_row+1u)!=1u)return 66u;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+34u);
  if(id>=count)return 2u;
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uintptr_t row=base+offset;
  if(*(volatile uint8_t *)row==0u)return 2u;
  if((*(volatile uint8_t *)(row+547u)&2u)==0u)return 26u;
@@ -13835,7 +13840,7 @@ uint32_t opencfw_em9305_command_apply_30805c(uint32_t id,uint32_t value,uint32_t
  uintptr_t message=opencfw_em9305_wsf_event_allocate(10u);
  if(message==0u)return 0u;
  *(volatile uint16_t *)(message+2u)=0x2201u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint16_t *)(message+8u)=(uint16_t)value;
  *(volatile uint16_t *)(message+6u)=(uint16_t)peer;
  *(volatile uint16_t *)message=(uint16_t)id;
@@ -13919,9 +13924,9 @@ extern uint32_t opencfw_em9305_command_apply_327630(uint32_t,uint32_t,uint32_t,u
 extern uint32_t opencfw_em9305_command_apply_327694(uint32_t,uint32_t,uint32_t);
 uint32_t opencfw_em9305_command_kind_valid_31b768(uint32_t kind)
 {
- if(kind-3u<2u)return (*(volatile uint8_t *)(uintptr_t)0x805a95u>>3u)&1u;
+ if(kind-3u<2u)return (em9305_ram_805a6c.u8_805a95>>3u)&1u;
  if(kind==1u)return 1u;
- if(kind==2u)return *(volatile uint8_t *)(uintptr_t)0x805a95u&1u;
+ if(kind==2u)return em9305_ram_805a6c.u8_805a95&1u;
  return 0u;
 }
 uint32_t opencfw_em9305_command_signed_query_306fa8(uint32_t id,uint32_t kind)
@@ -13929,7 +13934,7 @@ uint32_t opencfw_em9305_command_signed_query_306fa8(uint32_t id,uint32_t kind)
  uint32_t original_not_four=kind!=4u,offset;
  offset=(uint32_t)(uint16_t)id*912u;
  if(kind==4u)kind=3u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uint32_t subtract=(kind!=3u)|original_not_four;
  uintptr_t address=base+offset+(uint32_t)(kind-subtract)+332u;
  uint32_t result=*(volatile uint8_t *)address;
@@ -13938,7 +13943,7 @@ uint32_t opencfw_em9305_command_signed_query_306fa8(uint32_t id,uint32_t kind)
 }
 uint32_t opencfw_em9305_command_30c65c(uint32_t id,uint32_t value,uint32_t kind)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u))return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u)return 2u;
  if(opencfw_em9305_command_kind_valid_31b768(kind)==0u)return 17u;
@@ -13947,7 +13952,7 @@ uint32_t opencfw_em9305_command_30c65c(uint32_t id,uint32_t value,uint32_t kind)
  uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
  if(message==0u)return 7u;
  *(volatile uint16_t *)(message+2u)=0x2801u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint8_t *)(message+5u)=(uint8_t)kind;
  *(volatile uint8_t *)(message+4u)=(uint8_t)value;
  *(volatile uint16_t *)message=(uint16_t)id;
@@ -13956,14 +13961,14 @@ uint32_t opencfw_em9305_command_30c65c(uint32_t id,uint32_t value,uint32_t kind)
 }
 uint32_t opencfw_em9305_command_30da2c(uint32_t id,uint32_t value)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u))return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u)return 2u;
  return opencfw_em9305_command_apply_32754c(id,value);
 }
 uint32_t opencfw_em9305_command_30da5c(uint32_t id,uint32_t first,uint32_t second,uint32_t third,uint32_t fourth,uint32_t last)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u))return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u)return 2u;
  if(first==255u)second=0u;
@@ -13974,7 +13979,7 @@ uint32_t opencfw_em9305_command_30da5c(uint32_t id,uint32_t first,uint32_t secon
 }
 uint32_t opencfw_em9305_command_30e000(uint32_t id,uint32_t first,uint32_t second)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u))return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u)return 2u;
  return opencfw_em9305_command_apply_327694(id,first,second);
@@ -13983,7 +13988,7 @@ uint32_t opencfw_em9305_command_query_30bd34(uint32_t id,uint32_t kind,uintptr_t
 {
  (void)opencfw_em9305_wsf_critical_enter();
  uint32_t status=2u;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id<*(volatile uint8_t *)(config+34u)&&opencfw_em9305_ll_slot_active_30731c(id)!=0u){
   status=17u;
   if(opencfw_em9305_command_kind_valid_31b768(kind)!=0u){
@@ -14007,7 +14012,7 @@ uint32_t opencfw_em9305_command_apply_327630(uint32_t id,uint32_t first,uint32_t
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uintptr_t row=base+offset;
  uint32_t state=*(volatile uint8_t *)(row+769u);
  *(volatile uint32_t *)(row+776u)=0u;
@@ -14033,7 +14038,7 @@ uint32_t opencfw_em9305_command_apply_327694(uint32_t id,uint32_t first,uint32_t
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uintptr_t row=base+offset;
  *(volatile uint8_t *)(row+768u)=(uint8_t)(second!=0u);
  *(volatile uint8_t *)(row+767u)=(uint8_t)(first!=0u);
@@ -14042,7 +14047,7 @@ uint32_t opencfw_em9305_command_apply_327694(uint32_t id,uint32_t first,uint32_t
   uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
   if(message!=0u){
    *(volatile uint16_t *)(message+2u)=0x2801u;
-   uintptr_t fresh_base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+   uintptr_t fresh_base=em9305_ram_805c5c.u32_805c70;
    uint32_t fresh_offset;
    fresh_offset=(uint32_t)(uint16_t)id*912u;
    *(volatile uint8_t *)(message+4u)=0u;
@@ -14053,7 +14058,7 @@ uint32_t opencfw_em9305_command_apply_327694(uint32_t id,uint32_t first,uint32_t
    uint32_t mode=*(volatile uint8_t *)(captured_row+77u);
    uint32_t extra=0u;
    if(mode==3u)extra=*(volatile uint8_t *)(captured_row+78u)==1u;
-   uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+   uint32_t handler=em9305_ram_805af0.u8_805b18;
    *(volatile uint8_t *)(message+5u)=(uint8_t)(mode+extra);
    (void)opencfw_em9305_wsf_task_message_send(handler,message);
   }
@@ -14095,7 +14100,7 @@ uint32_t opencfw_em9305_command_derive_317ba8(uintptr_t row)
 }
 uint32_t opencfw_em9305_command_refresh_323268(uintptr_t row)
 {
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uint32_t delta=opencfw_em9305_command_delta_317b80(row);
  uint32_t difference=(uint32_t)(row-base),quotient;
  quotient=(uint32_t)((int32_t)difference/912);
@@ -14113,7 +14118,7 @@ uint32_t opencfw_em9305_command_apply_32754c(uint32_t id,uint32_t unused)
  (void)unused;
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uintptr_t row=base+offset;
  uintptr_t selector=row+(*(volatile uint8_t *)(row+2u)!=0u?197u:189u);
  if(*(volatile uint8_t *)(row+770u)!=2u)return 12u;
@@ -14132,20 +14137,20 @@ uint32_t opencfw_em9305_command_apply_32754c(uint32_t id,uint32_t unused)
   uint32_t reduced=mode-(1u&~extra);
   uint32_t query=*(volatile uint8_t *)(captured_row+reduced+332u);
   if(query==0x7eu){
-   uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   uintptr_t config=em9305_ram_805c5c.u32_805cac;
    uint32_t fallback=*(volatile uint8_t *)(config+40u);
    *(volatile uint8_t *)(captured_row+low_effective+331u)=(uint8_t)fallback;
   }
   uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
   if(message==0u)return 7u;
   *(volatile uint16_t *)(message+2u)=0x2801u;
-  uintptr_t fresh_base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+  uintptr_t fresh_base=em9305_ram_805c5c.u32_805c70;
   *(volatile uint8_t *)(message+5u)=(uint8_t)effective;
   uint32_t difference=(uint32_t)(row-fresh_base),quotient;
   quotient=(uint32_t)((int32_t)difference/912);
   *(volatile uint8_t *)(message+4u)=0u;
   uint32_t short_id=(uint8_t)quotient;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   *(volatile uint16_t *)message=(uint16_t)short_id;
   (void)opencfw_em9305_wsf_task_message_send(handler,message);
  }else{
@@ -14172,13 +14177,13 @@ uint32_t opencfw_em9305_dispatch_330ce0(uintptr_t input)
   *(volatile uint8_t *)(event+3u)=*(volatile uint8_t *)(input+3u);
  }else if(type==2u){
   uint32_t kind=*(volatile uint8_t *)(input+18u);
-  uint32_t mask=*(volatile uint32_t *)(uintptr_t)0x8056f8u;
+  uint32_t mask=em9305_ram_805688.u32_8056f8;
   uint32_t extended=kind!=255u;
   uint32_t rejected=extended;
   if((mask&(extended?1024u:2u))==0u)return rejected;
-  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return rejected;
-  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+  if((em9305_ram_805688.u8_8056ef&32u)==0u)return rejected;
+  uintptr_t config=em9305_ram_805c5c.u32_805cac;
+  uint32_t count=em9305_ram_805688.u8_805718;
   if(count>=*(volatile uint8_t *)(config+14u))return rejected;
   uint32_t length=18u;
   if(!extended)length=(uint8_t)(*(volatile uint8_t *)(input+8u)+12u);
@@ -14202,8 +14207,8 @@ uint32_t opencfw_em9305_dispatch_330ce0(uintptr_t input)
    uint32_t tail=*(volatile uint8_t *)(input+9u);
    *(volatile uint8_t *)(event+fresh_bytes+11u)=(uint8_t)tail;
   }
-  count=*(volatile uint8_t *)(uintptr_t)0x805718u;
-  *(volatile uint8_t *)(uintptr_t)0x805718u=(uint8_t)(count+1u);
+  count=em9305_ram_805688.u8_805718;
+  em9305_ram_805688.u8_805718=(uint8_t)(count+1u);
  }else return 0u;
  (void)opencfw_em9305_ll_event_send(event-2u);
  return 1u;
@@ -14213,7 +14218,7 @@ uint32_t opencfw_em9305_dispatch_330ce0(uintptr_t input)
  * callback address low byte and changed R17 argument are intentional. */
 uint32_t opencfw_em9305_radio_completion_303fb8(uint32_t current,uint32_t first,uint32_t second,uint32_t third,uint32_t fourth,uint32_t fifth)
 {
- uintptr_t root=0x8015ccu,row=0u,callback=0u;
+ uintptr_t root=((uintptr_t)&em9305_ram_8015c4 + 0x8u),row=0u,callback=0u;
  uint32_t state=*(volatile uint8_t *)(root-8u),argument=first,result=current,amount=0u;
  _Alignas(4) uint8_t scratch[20];
  _Alignas(4) uint8_t descriptor[8];
@@ -14234,7 +14239,7 @@ uint32_t opencfw_em9305_radio_completion_303fb8(uint32_t current,uint32_t first,
    if(callback!=0u)result=((completion_fn)callback)(current,0u);
    goto finish;
   }
-  argument=0x8013f0u;
+  argument=(uintptr_t)&em9305_ram_8013f0;
   amount=((completion_fn)callback)(current,argument);
   result=amount;
   if(amount!=0u)goto start;
@@ -14254,7 +14259,7 @@ uint32_t opencfw_em9305_radio_completion_303fb8(uint32_t current,uint32_t first,
   *(volatile uint32_t *)(row+136u)=third;
   *(volatile uint8_t *)(row+133u)=(uint8_t)callback;
   *(volatile uint8_t *)(row+134u)=(uint8_t)fifth;
-  argument=0x8013f0u;
+  argument=(uintptr_t)&em9305_ram_8013f0;
   result=((completion_fn)callback)(current,argument);
   callback=*(volatile uint32_t *)(row+116u);
   if(callback==0u)goto fallback;
@@ -14273,7 +14278,7 @@ uint32_t opencfw_em9305_radio_completion_303fb8(uint32_t current,uint32_t first,
  *(volatile uint32_t *)(row+140u)=fourth;
  *(volatile uint8_t *)(row+133u)=(uint8_t)second;
  *(volatile uint8_t *)(row+134u)=(uint8_t)fifth;
- argument=0x8013f0u;
+ argument=(uintptr_t)&em9305_ram_8013f0;
  amount=((completion_fn)callback)(current,argument);
  result=amount;
  if(amount!=0u){
@@ -14375,16 +14380,16 @@ uint32_t opencfw_em9305_dispatch_331334(uintptr_t input)
  uint32_t type=*(volatile uint8_t *)(input+2u);
  uintptr_t event;
  if(type==32u||type==52u){
-  uint32_t flags=*(volatile uint8_t *)(uintptr_t)0x8056fcu;
+  uint32_t flags=em9305_ram_805688.u8_8056fc;
   if((flags&(type==32u?16u:128u))==0u)return 0u;
-  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return 0u;
+  if((em9305_ram_805688.u8_8056ef&32u)==0u)return 0u;
   uint32_t remaining,needed;
   uintptr_t config;
   uintptr_t cursor;
   if(type==32u){
    if(*(volatile uint8_t *)(input+18u)==255u)return 0u;
    remaining=*(volatile uint16_t *)(input+10u);
-   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   config=em9305_ram_805c5c.u32_805cac;
    uint32_t quotient,negative_product;
    quotient=(uint32_t)remaining/247u;
    negative_product=(uint32_t)((int32_t)(int16_t)quotient*-247);
@@ -14394,24 +14399,24 @@ uint32_t opencfw_em9305_dispatch_331334(uintptr_t input)
    /* Native SETLO/ADD.NC/EXTB.F: fragments of 244 bytes, rounded up. */
    uint32_t tail=remaining>=244u?remaining+12u:remaining;
    needed=(uint8_t)((remaining>243u)+((uint8_t)tail!=0u));
-   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   config=em9305_ram_805c5c.u32_805cac;
   }
-  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+  uint32_t count=em9305_ram_805688.u8_805718;
   if(needed+count>*(volatile uint8_t *)(config+14u))return 0u;
   cursor=*(volatile uint32_t *)(input+(type==32u?12u:16u));
   uint32_t capped=0u;
   do{
-   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-   count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+   config=em9305_ram_805c5c.u32_805cac;
+   count=em9305_ram_805688.u8_805718;
    uint32_t chunk=remaining<244u?remaining:244u;
    if(count>=*(volatile uint8_t *)(config+14u))return 0u;
    event=type==32u?opencfw_em9305_ll_fragment_allocate_32e48c(62u,(uint8_t)(chunk+11u)):opencfw_em9305_ll_fragment_allocate_32e4a8(62u,(uint8_t)(chunk+11u));
    if(event==0u)return 0u;
-   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-   count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+   config=em9305_ram_805c5c.u32_805cac;
+   count=em9305_ram_805688.u8_805718;
    remaining-=chunk;
    capped=((uint8_t)(count+1u)==*(volatile uint8_t *)(config+14u))&&(remaining!=0u);
-   *(volatile uint8_t *)(uintptr_t)0x805718u=(uint8_t)(count+1u);
+   em9305_ram_805688.u8_805718=(uint8_t)(count+1u);
    if(capped){remaining=0u;*(volatile uint8_t *)(input+(type==32u?9u:12u))=2u;}
    uintptr_t end=cursor+chunk;
    if(type==32u){
@@ -14446,11 +14451,11 @@ uint32_t opencfw_em9305_dispatch_331334(uintptr_t input)
  else if(type==38u){bit=32u;length=24u;opcode=38u;}
  else if(type==53u){bit=64u;length=4u;opcode=39u;}
  else return 0u;
- uintptr_t flag_address=type==5u?0x8056fdu:0x8056fcu;
+ uintptr_t flag_address=type==5u?((uintptr_t)&em9305_ram_805688 + 0x75u):((uintptr_t)&em9305_ram_805688 + 0x74u);
  if((*(volatile uint8_t *)flag_address&bit)==0u)return 0u;
- if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return 0u;
+ if((em9305_ram_805688.u8_8056ef&32u)==0u)return 0u;
  if(type==5u){
-  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uintptr_t config=em9305_ram_805c5c.u32_805cac;
   if(*(volatile uint8_t *)(config+4u)<13u)return 0u;
  }else if(type==30u&&*(volatile uint8_t *)(input+21u)==0u)return 0u;
  else if(type==38u&&*(volatile uint8_t *)(input+25u)==0u)return 0u;
@@ -14612,7 +14617,7 @@ extern uint32_t opencfw_em9305_config_phy_pair_valid_332f80(uint32_t first,
 uint32_t opencfw_em9305_command_phy_validate_332f3c(uint32_t mode,uint32_t first,uint32_t second,uint32_t kind)
 {
  if(kind>2u||(mode&~3u)!=0u||(first|second)>7u)return 17u;
- if(first!=second&&mode==0u&&(*(volatile uint32_t *)(uintptr_t)0x805a84u&128u)!=0u)return 17u;
+ if(first!=second&&mode==0u&&(em9305_ram_805a6c.u32_805a84&128u)!=0u)return 17u;
  if(first==0u&&(mode&1u)==0u)return 18u;
  if((mode&2u)==0u&&second==0u)return 18u;
  return 0u;
@@ -14624,14 +14629,14 @@ uint32_t opencfw_em9305_command_30d4e4(uint32_t mode,uint32_t first,uint32_t sec
  if(status!=0u)return status;
  if((mode&2u)!=0u)second=0u;
  if((mode&1u)!=0u)first=0u;
- *(volatile uint8_t *)(uintptr_t)0x805ac8u=(uint8_t)mode;
- *(volatile uint8_t *)(uintptr_t)0x805acau=(uint8_t)second;
- *(volatile uint8_t *)(uintptr_t)0x805ac9u=(uint8_t)first;
+ em9305_ram_805a6c.u8_805ac8=(uint8_t)mode;
+ em9305_ram_805a6c.u8_805aca=(uint8_t)second;
+ em9305_ram_805a6c.u8_805ac9=(uint8_t)first;
  return 0u;
 }
 uint32_t opencfw_em9305_command_30dd04(uint32_t id,uint32_t mode,uint32_t first,uint32_t second,uint32_t kind)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u))return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u)return 2u;
  if(opencfw_em9305_child_307434(id,32u)!=0u)return 12u;
@@ -14641,7 +14646,7 @@ uint32_t opencfw_em9305_command_30dd04(uint32_t id,uint32_t mode,uint32_t first,
  uintptr_t message=opencfw_em9305_wsf_event_allocate(10u);
  if(message==0u)return 0u;
  *(volatile uint16_t *)(message+2u)=0x2001u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  if((mode&2u)!=0u)second=0u;
  if((mode&1u)!=0u)first=0u;
  *(volatile uint16_t *)message=(uint16_t)id;
@@ -14659,19 +14664,19 @@ uint32_t opencfw_em9305_ll_rx_phy_307008(uint32_t id)
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  return *(volatile uint8_t *)(slots+offset+77u);
 }
 uint32_t opencfw_em9305_ll_tx_phy_30701c(uint32_t id)
 {
  uint32_t offset;
  offset=(uint32_t)(uint16_t)id*912u;
- uintptr_t slots=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t slots=em9305_ram_805c5c.u32_805c70;
  return *(volatile uint8_t *)(slots+offset+76u);
 }
 uint32_t opencfw_em9305_command_query_30c824(uint32_t id,uintptr_t first,uintptr_t second)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(id>=*(volatile uint8_t *)(config+34u))return 2u;
  if(opencfw_em9305_ll_slot_active_30731c(id)==0u)return 2u;
  *(volatile uint8_t *)first=(uint8_t)opencfw_em9305_ll_tx_phy_30701c(id);
@@ -14680,8 +14685,8 @@ uint32_t opencfw_em9305_command_query_30c824(uint32_t id,uintptr_t first,uintptr
 }
 uint32_t opencfw_em9305_ll_command_pending_310634(void)
 {
- *(volatile uint8_t *)(uintptr_t)0x805ec5u=1u;
- return 0x805ec5u;
+ em9305_ram_805e6c.u8_805ec5=1u;
+ return ((uintptr_t)&em9305_ram_805e6c + 0x59u);
 }
 
 /* Native command30cba0..30cce8 and channel mapping332c30..332c50.
@@ -14702,13 +14707,13 @@ uint32_t opencfw_em9305_command_channel_332c30(uint32_t channel)
 }
 uint32_t opencfw_em9305_command_count_30e4bc(void)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805a79u;
- *(volatile uint8_t *)(uintptr_t)0x805a79u=(uint8_t)(count+1u);
- return 0x805a79u;
+ uint32_t count=em9305_ram_805a6c.u8_805a79;
+ em9305_ram_805a6c.u8_805a79=(uint8_t)(count+1u);
+ return ((uintptr_t)&em9305_ram_805a6c + 0xdu);
 }
 uint32_t opencfw_em9305_command_30cba0(uintptr_t input)
 {
- uintptr_t flags=0x805a70u,state=0x8058dcu,record=0x8059f8u;
+ uintptr_t flags=((uintptr_t)&em9305_ram_805a6c + 0x4u),state=((uintptr_t)&em9305_ram_8058c8 + 0x14u),record=((uintptr_t)&em9305_ram_8058c8 + 0x130u);
  if(*(volatile uint8_t *)(flags+4u)!=0u)return 12u;
  if(*(volatile uint8_t *)(flags+3u)!=0u)return 12u;
  if(*(volatile uint8_t *)(flags+2u)!=0u)return 12u;
@@ -14719,8 +14724,8 @@ uint32_t opencfw_em9305_command_30cba0(uintptr_t input)
  uint32_t kind=*(volatile uint8_t *)(input+9u);
  if(kind-1u>2u)return 48u;
  if(*(volatile uint8_t *)(input+10u)>1u)return 48u;
- if(kind==3u){if((*(volatile uint8_t *)(uintptr_t)0x805a95u&8u)==0u)return 17u;}
- else if(kind==2u){if((*(volatile uint8_t *)(uintptr_t)0x805a95u&1u)==0u)return 17u;}
+ if(kind==3u){if((em9305_ram_805a6c.u8_805a95&8u)==0u)return 17u;}
+ else if(kind==2u){if((em9305_ram_805a6c.u8_805a95&1u)==0u)return 17u;}
  if(*(volatile uint8_t *)(input+11u)!=0u)return 17u;
  (void)opencfw_em9305_ll_command_pending_310634();
  (void)opencfw_em9305_memset((void *)(state+24u),0u,44u);
@@ -14742,7 +14747,7 @@ uint32_t opencfw_em9305_command_30cba0(uintptr_t input)
  if(kind==3u){mode=3u;*(volatile uint8_t *)(record+13u)=3u;}
  else if(kind==2u){mode=2u;*(volatile uint8_t *)(record+13u)=2u;}
  else if(kind==1u){mode=1u;*(volatile uint8_t *)(record+13u)=1u;}
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  *(volatile uint8_t *)(record+12u)=(uint8_t)mode;
  uint32_t duration=*(volatile uint16_t *)(config+60u);
  *(volatile uint16_t *)(record+112u)=257u;
@@ -14771,7 +14776,7 @@ extern uint32_t opencfw_em9305_command_callback_332e2c(uintptr_t);
 extern uint32_t opencfw_em9305_command_callback_332db4(uintptr_t,uint32_t);
 uint32_t opencfw_em9305_command_30e120(uintptr_t input)
 {
- uintptr_t state=0x8058dcu,flags=0x805a70u,policy=0x805994u;
+ uintptr_t state=((uintptr_t)&em9305_ram_8058c8 + 0x14u),flags=((uintptr_t)&em9305_ram_805a6c + 0x4u),policy=((uintptr_t)&em9305_ram_8058c8 + 0xccu);
  uint32_t original=*(volatile uint8_t *)state;
  if(original>=2u)return 12u;
  if(*(volatile uint8_t *)(flags+4u)!=0u)return 12u;
@@ -14788,8 +14793,8 @@ uint32_t opencfw_em9305_command_30e120(uintptr_t input)
  if(*(volatile uint8_t *)(input+4u)>=8u)return 48u;
  uint32_t mode=*(volatile uint8_t *)(input+5u);
  if(mode-1u>=4u)return 48u;
- if(mode-3u<2u){if((*(volatile uint8_t *)(uintptr_t)0x805a95u&8u)==0u)return 17u;}
- else if(mode==2u){if((*(volatile uint8_t *)(uintptr_t)0x805a95u&1u)==0u)return 17u;}
+ if(mode-3u<2u){if((em9305_ram_805a6c.u8_805a95&8u)==0u)return 17u;}
+ else if(mode==2u){if((em9305_ram_805a6c.u8_805a95&1u)==0u)return 17u;}
  if(*(volatile uint8_t *)(input+6u)!=0u)return 17u;
  (void)opencfw_em9305_ll_command_pending_310634();
  uint8_t lower,upper;
@@ -14915,7 +14920,7 @@ uint32_t opencfw_em9305_command_pattern_332b94(uint32_t length,uint32_t selector
 uint32_t opencfw_em9305_command_callback_332cd0(uintptr_t unused,uint32_t event,uint32_t delta)
 {
  (void)unused;
- uintptr_t state=0x8058dcu;
+ uintptr_t state=((uintptr_t)&em9305_ram_8058c8 + 0x14u);
  if(event==0u){
   uint32_t low=*(volatile uint32_t *)(state+12u);
   uint32_t high=*(volatile uint32_t *)(state+16u);
@@ -14950,13 +14955,13 @@ extern uint32_t opencfw_em9305_command_stop_30b654(uintptr_t);
 extern uint32_t opencfw_em9305_common_release_304588(uint32_t);
 uint32_t opencfw_em9305_command_count_down_30e48c(void)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805a79u;
- *(volatile uint8_t *)(uintptr_t)0x805a79u=(uint8_t)(count-1u);
- return 0x805a79u;
+ uint32_t count=em9305_ram_805a6c.u8_805a79;
+ em9305_ram_805a6c.u8_805a79=(uint8_t)(count-1u);
+ return ((uintptr_t)&em9305_ram_805a6c + 0xdu);
 }
 uint32_t opencfw_em9305_command_callback_332d2c(uintptr_t object)
 {
- uintptr_t state=0x8058dcu;
+ uintptr_t state=((uintptr_t)&em9305_ram_8058c8 + 0x14u);
  uint32_t limit=*(volatile uint16_t *)(state+2u);
  uintptr_t record=*(volatile uint32_t *)(object+44u);
  if(limit!=0u){
@@ -14967,28 +14972,28 @@ uint32_t opencfw_em9305_command_callback_332d2c(uintptr_t object)
  }
  if(*(volatile uint8_t *)state==2u)return opencfw_em9305_auxiliary_insert_313220(object);
  (void)opencfw_em9305_wsf_pool_release(*(volatile uint32_t *)(record+108u));
- uintptr_t message=*(volatile uint32_t *)(uintptr_t)0x805a6cu;
+ uintptr_t message=em9305_ram_805a6c.u32_805a6c;
  if(message!=0u){
   (void)opencfw_em9305_wsf_event_release(message);
-  *(volatile uint32_t *)(uintptr_t)0x805a6cu=0u;
+  em9305_ram_805a6c.u32_805a6c=0u;
  }
  (void)opencfw_em9305_common_release_304588(2u);
  if(*(volatile uint8_t *)state==4u){
   uintptr_t response=opencfw_em9305_wsf_event_allocate(4u);
   if(response==0u)return 0u;
   *(volatile uint16_t *)(response+2u)=261u;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   return opencfw_em9305_wsf_task_message_send(handler,response);
  }
  *(volatile uint8_t *)state=0u;
- *(volatile uint8_t *)(uintptr_t)0x805a78u=0u;
+ em9305_ram_805a6c.u8_805a78=0u;
  return opencfw_em9305_command_count_down_30e48c();
 }
 
 /* Native policy callback332db4..332e2c, complete selected body. */
 uint32_t opencfw_em9305_command_callback_332db4(uintptr_t object,uint32_t event)
 {
- uintptr_t state=0x8058dcu;
+ uintptr_t state=((uintptr_t)&em9305_ram_8058c8 + 0x14u);
  uint32_t count=*(volatile uint16_t *)(state+4u);
  uint32_t captured=*(volatile uint8_t *)state;
  uint32_t next=count+1u;
@@ -14996,7 +15001,7 @@ uint32_t opencfw_em9305_command_callback_332db4(uintptr_t object,uint32_t event)
  if(captured!=1u||event==1u)return 0u;
  uint32_t limit=*(volatile uint16_t *)(state+2u);
  if(limit!=0u&&(uint16_t)next>=limit)return 0u;
- uintptr_t record=*(volatile uint32_t *)(object+44u),policy=0x805994u;
+ uintptr_t record=*(volatile uint32_t *)(object+44u),policy=((uintptr_t)&em9305_ram_8058c8 + 0xccu);
  uint32_t channel=*(volatile uint8_t *)(policy+2u);
  uint32_t recorded_channel=*(volatile uint8_t *)(record+1u);
  if(channel!=recorded_channel)return 0u;
@@ -15022,7 +15027,7 @@ uint32_t opencfw_em9305_command_callback_332db4(uintptr_t object,uint32_t event)
  * Packet pointer and policy kind survive duration332be4's exact register set. */
 uint32_t opencfw_em9305_command_callback_332e2c(uintptr_t object)
 {
- uintptr_t state=0x8058dcu;
+ uintptr_t state=((uintptr_t)&em9305_ram_8058c8 + 0x14u);
  uint32_t count=*(volatile uint16_t *)(state+4u);
  uint32_t limit=*(volatile uint16_t *)(state+2u);
  uintptr_t record=*(volatile uint32_t *)(object+44u);
@@ -15032,7 +15037,7 @@ uint32_t opencfw_em9305_command_callback_332e2c(uintptr_t object)
  uint32_t fresh=*(volatile uint8_t *)state;
  uintptr_t packet=*(volatile uint32_t *)(record+104u);
  if(fresh==1u){
-  uintptr_t policy=0x805994u;
+  uintptr_t policy=((uintptr_t)&em9305_ram_8058c8 + 0xccu);
   uint32_t recorded_channel=*(volatile uint8_t *)(record+1u);
   uint32_t channel=*(volatile uint8_t *)(policy+2u);
   uint32_t kind=*(volatile uint8_t *)(policy+1u);
@@ -15072,11 +15077,11 @@ uint32_t opencfw_em9305_command_callback_332e2c(uintptr_t object)
   uintptr_t response=opencfw_em9305_wsf_event_allocate(4u);
   if(response==0u)return 0u;
   *(volatile uint16_t *)(response+2u)=261u;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   return opencfw_em9305_wsf_task_message_send(handler,response);
  }
  *(volatile uint8_t *)state=0u;
- *(volatile uint8_t *)(uintptr_t)0x805a78u=0u;
+ em9305_ram_805a6c.u8_805a78=0u;
  return opencfw_em9305_command_count_down_30e48c();
 }
 
@@ -15084,13 +15089,13 @@ uint32_t opencfw_em9305_command_callback_332e2c(uintptr_t object)
  * state1/2 transition3, optional report copy, then exact20-byte clear. */
 uint32_t opencfw_em9305_command_stop_30b654(uintptr_t output)
 {
- uintptr_t state=0x8058dcu;
+ uintptr_t state=((uintptr_t)&em9305_ram_8058c8 + 0x14u);
  uint32_t captured=*(volatile uint8_t *)state;
  if(captured==1u){
   uint32_t kind=*(volatile uint8_t *)(state+185u);
   if(kind==3u){
    (void)opencfw_em9305_common_release_304588(3u);
-   *(volatile uint8_t *)(uintptr_t)0x805a78u=0u;
+   em9305_ram_805a6c.u8_805a78=0u;
    *(volatile uint8_t *)state=0u;
    (void)opencfw_em9305_command_count_down_30e48c();
    return 0u;
@@ -15117,7 +15122,7 @@ uint32_t opencfw_em9305_command_stop_30b654(uintptr_t output)
 uint32_t opencfw_em9305_pal_release_noop_30fd28(uint32_t incoming){return incoming;}
 uint32_t opencfw_em9305_common_release_304588(uint32_t index)
 {
- uintptr_t root=0x801650u;
+ uintptr_t root=((uintptr_t)&em9305_ram_801638 + 0x18u);
  uint32_t offset=(uint32_t)(uint16_t)index*24u;
  uintptr_t slot=root+offset;
  uint32_t count=*(volatile uint32_t *)(slot+8u)-1u;
@@ -15137,14 +15142,14 @@ uint32_t opencfw_em9305_pal_request_noop_30fd2c(uint32_t incoming)
 {return incoming;}
 uint32_t opencfw_em9305_common_request_30455c(uint32_t index)
 {
- uint32_t selected=*(volatile uint8_t *)(uintptr_t)0x8016bdu;
+ uint32_t selected=em9305_ram_8016bc.u8_8016bd;
  if(selected==0u){
   (void)opencfw_em9305_pal_request_noop_30fd2c(index);
   (void)opencfw_em9305_auxiliary_select_314d94(index);
  }
  uint32_t offset;
  offset=(uint32_t)(uint16_t)index*24u;
- uintptr_t slot=0x801658u+offset;
+ uintptr_t slot=((uintptr_t)&em9305_ram_801638 + 0x20u)+offset;
  uint32_t count=*(volatile uint32_t *)slot;
  *(volatile uint32_t *)slot=count+1u;
  return (uint32_t)slot;
@@ -15154,7 +15159,7 @@ uint32_t opencfw_em9305_common_request_30455c(uint32_t index)
  * Signed native CMP.N is the sign bit of wrapping32-bit subtraction. */
 uint32_t opencfw_em9305_auxiliary_insert_313220(uintptr_t object)
 {
- uintptr_t root=0x805f04u,queue=root+16u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x18u),queue=root+16u;
  uint32_t now=opencfw_em9305_pal_current_time();
  uint32_t guard=opencfw_em9305_auxiliary_guard_interval();
  uintptr_t head=*(volatile uint32_t *)queue;
@@ -15249,8 +15254,8 @@ uint32_t opencfw_em9305_command_duration_332be4(uint32_t length,uint32_t phy,uin
 uint32_t opencfw_em9305_dispatch_330400(uintptr_t packet)
 {
  if(*(volatile uint8_t *)(packet+2u)!=39u)return 0u;
- if((*(volatile uint8_t *)(uintptr_t)0x8056fbu&1u)==0u)return 0u;
- if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return 0u;
+ if((em9305_ram_805688.u8_8056fb&1u)==0u)return 0u;
+ if((em9305_ram_805688.u8_8056ef&32u)==0u)return 0u;
  uintptr_t event=opencfw_em9305_ll_event_allocate(62u,29u);
  if(event==0u)return 0u;
  (void)opencfw_em9305_packet_event_fill_330e78(event,packet);
@@ -15280,7 +15285,7 @@ uint32_t opencfw_em9305_dispatch_3304f0(uintptr_t packet)
 uint32_t opencfw_em9305_dispatch_32f0a0(uintptr_t packet)
 {
  uint32_t type=*(volatile uint8_t *)(packet+2u);
- uintptr_t base=0x8056e8u;
+ uintptr_t base=((uintptr_t)&em9305_ram_805688 + 0x60u);
  uint32_t gate,mask,event_type=62u,size,subtype=0u,le=0u;
  switch(type){
  case 5u:gate=16u;mask=1u;size=19u;subtype=1u;le=1u;break;
@@ -15400,8 +15405,8 @@ uint32_t opencfw_em9305_dispatch_330664(uintptr_t request,uintptr_t input)
   *(uint32_t *)(scratch+4u)=(uint32_t)(input+3u);
   scratch[12]=(uint8_t)last;
   *(uint16_t *)(scratch+8u)=(uint16_t)(al+(ah<<8u));*(uint16_t *)(scratch+10u)=(uint16_t)(bl+(bh<<8u));
-  if((flags&2u)!=0u&&(*(volatile uint8_t *)(uintptr_t)0x8058adu&32u)==0u)status=62u;
-  else if((flags&4u)!=0u&&(*(volatile uint8_t *)(uintptr_t)0x805b34u&16u)==0u)status=17u;
+  if((flags&2u)!=0u&&(em9305_ram_8058ac.u8_8058ad&32u)==0u)status=62u;
+  else if((flags&4u)!=0u&&(em9305_ram_805af0.u8_805b34&16u)==0u)status=17u;
   else status=opencfw_em9305_command_create_30c488((uintptr_t)scratch);
   (void)opencfw_em9305_ll_status_event_331bf8(request,status);return 1u;
  }
@@ -15430,18 +15435,18 @@ uint32_t opencfw_em9305_dispatch_330664(uintptr_t request,uintptr_t input)
 
 /* Native303700..30370a: address-list count clear. */
 uint32_t opencfw_em9305_address_count_clear_303700(void)
-{*(volatile uint8_t *)(uintptr_t)0x80160au=0u;return 0x80160au;}
+{em9305_ram_801608.u8_80160a=0u;return ((uintptr_t)&em9305_ram_801608 + 0x2u);}
 /* Native30370c..303716: address-list capacity byte query. */
 uint32_t opencfw_em9305_address_capacity_30370c(void)
-{return *(volatile uint8_t *)(uintptr_t)0x80160bu;}
+{return em9305_ram_801608.u8_80160b;}
 /* Native307cb8..307cc6: product state equals1. */
 uint32_t opencfw_em9305_address_busy_307cb8(void)
-{return *(volatile uint8_t *)(uintptr_t)0x8051a4u==1u;}
+{return em9305_ram_805194.u8_8051a4==1u;}
 /* Native30b12c..30b150: read flag even if gate is closed. */
 uint32_t opencfw_em9305_command_address_clear_30b12c(void)
 {
  uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();
- uint32_t flag=*(volatile uint8_t *)(uintptr_t)0x805a77u;
+ uint32_t flag=em9305_ram_805a6c.u8_805a77;
  if(flag!=0u||gate==0u)return 12u;
  if(opencfw_em9305_address_busy_307cb8()!=0u)return 12u;
  (void)opencfw_em9305_address_count_clear_303700();return 0u;
@@ -15461,7 +15466,7 @@ uint32_t opencfw_em9305_command_disable_30c54c(void)
  uintptr_t message=opencfw_em9305_wsf_event_allocate(56u);
  if(message!=0u){
   *(volatile uint16_t *)(message+2u)=523u;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   (void)opencfw_em9305_wsf_task_message_send(handler,message);
  }
  return 0u;
@@ -15477,7 +15482,7 @@ uint32_t opencfw_em9305_command_timeout_30c600(uint32_t timeout)
  if(message!=0u){
   *(volatile uint16_t *)message=(uint16_t)timeout;
   *(volatile uint16_t *)(message+2u)=525u;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   (void)opencfw_em9305_wsf_task_message_send(handler,message);
  }
  return 0u;
@@ -15486,11 +15491,11 @@ uint32_t opencfw_em9305_command_timeout_30c600(uint32_t timeout)
 /* Native303674..3036b2: bounded byte index makes MPYUW stride12 exact in C. */
 uint32_t opencfw_em9305_address_append_303674(uint32_t kind,uint32_t low,uint32_t high,uint32_t selector)
 {
- uint32_t capacity=*(volatile uint8_t *)(uintptr_t)0x80160bu;
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x80160au;
+ uint32_t capacity=em9305_ram_801608.u8_80160b;
+ uint32_t count=em9305_ram_801608.u8_80160a;
  if(count>=capacity)return 0u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805bfcu;
- *(volatile uint8_t *)(uintptr_t)0x80160au=(uint8_t)(count+1u);
+ uintptr_t base=em9305_ram_805be0.u32_805bfc;
+ em9305_ram_801608.u8_80160a=(uint8_t)(count+1u);
  uintptr_t row=base+count*12u;
  *(volatile uint32_t *)(row+4u)=high;
  *(volatile uint32_t *)row=low;
@@ -15501,9 +15506,9 @@ uint32_t opencfw_em9305_address_append_303674(uint32_t kind,uint32_t low,uint32_
 /* Native3036b4..3036fe: captured count, full-word address comparisons. */
 uint32_t opencfw_em9305_address_contains_3036b4(uint32_t kind,uint32_t low,uint32_t high,uint32_t selector)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x80160au;
+ uint32_t count=em9305_ram_801608.u8_80160a;
  if(count==0u)return 0u;
- uintptr_t row=*(volatile uint32_t *)(uintptr_t)0x805bfcu;
+ uintptr_t row=em9305_ram_805be0.u32_805bfc;
  for(uint32_t i=0u;i<count;++i,row+=12u){
   if(*(volatile uint8_t *)(row+8u)!=kind)continue;
   uint32_t upper=*(volatile uint32_t *)(row+4u),lower=*(volatile uint32_t *)row;
@@ -15516,7 +15521,7 @@ uint32_t opencfw_em9305_address_contains_3036b4(uint32_t kind,uint32_t low,uint3
 uint32_t opencfw_em9305_command_address_add_30aed4(uintptr_t input)
 {
  uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();
- uint32_t flag=*(volatile uint8_t *)(uintptr_t)0x805a77u;
+ uint32_t flag=em9305_ram_805a6c.u8_805a77;
  if(flag!=0u||gate==0u)return 12u;
  if(*(volatile uint8_t *)input>=2u)return 18u;
  if(*(volatile uint8_t *)(input+8u)>=16u)return 18u;
@@ -15533,8 +15538,8 @@ uint32_t opencfw_em9305_command_address_add_30aed4(uintptr_t input)
 /* Native303718..303788: swap last row into match, preserving trailing2 bytes. */
 uint32_t opencfw_em9305_address_remove_303718(uint32_t kind,uint32_t low,uint32_t high,uint32_t selector)
 {
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805bfcu;
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x80160au;
+ uintptr_t base=em9305_ram_805be0.u32_805bfc;
+ uint32_t count=em9305_ram_801608.u8_80160a;
  uintptr_t row=base;
  for(uint32_t index=0u;index<count;++index,row+=12u){
   if(*(volatile uint8_t *)(row+8u)!=kind)continue;
@@ -15551,7 +15556,7 @@ uint32_t opencfw_em9305_address_remove_303718(uint32_t kind,uint32_t low,uint32_
    *(volatile uint32_t *)row=lower;
    *(volatile uint32_t *)(row+4u)=upper;
   }
-  *(volatile uint8_t *)(uintptr_t)0x80160au=(uint8_t)last;
+  em9305_ram_801608.u8_80160a=(uint8_t)last;
   return 1u;
  }
  return 0u;
@@ -15560,7 +15565,7 @@ uint32_t opencfw_em9305_address_remove_303718(uint32_t kind,uint32_t low,uint32_
 uint32_t opencfw_em9305_command_address_remove_30ca1c(uintptr_t input)
 {
  uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();
- uint32_t flag=*(volatile uint8_t *)(uintptr_t)0x805a77u;
+ uint32_t flag=em9305_ram_805a6c.u8_805a77;
  if(flag!=0u||gate==0u)return 12u;
  if(*(volatile uint8_t *)input>1u)return 18u;
  if(*(volatile uint8_t *)(input+8u)>=16u)return 18u;
@@ -15576,7 +15581,7 @@ uintptr_t opencfw_em9305_command_info_zero_303270(uintptr_t output)
 {return (uintptr_t)opencfw_em9305_memset((void *)output,0u,52u);}
 /* Native3032a8..3032b4: forward36-byte resident information copy. */
 uintptr_t opencfw_em9305_command_info_copy_3032a8(uintptr_t output)
-{return (uintptr_t)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)0x8017fcu,36u);}
+{return (uintptr_t)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)&em9305_ram_8017fc,36u);}
 extern uint32_t opencfw_em9305_command_pair_apply_307fa0(uint32_t,uint32_t);
 /* Native30c580..30c5c0: full-width id check, readiness, busy and apply result. */
 uint32_t opencfw_em9305_command_pair_set_30c580(uint32_t id,uint32_t value)
@@ -15618,9 +15623,9 @@ uint32_t opencfw_em9305_command_pair_apply_307fa0(uint32_t id,uint32_t value)
 {
  if(id>=6u)return 0u;
  uint32_t offset=id*784u; /* bounded id makes native MPYUW stride exact */
- uintptr_t row=0x803e74u+offset;
+ uintptr_t row=((uintptr_t)&em9305_ram_803d58 + 0x11cu)+offset;
  uint32_t factor=*(volatile uint32_t *)row;
- *(volatile uint16_t *)(uintptr_t)(0x803fe0u+offset)=(uint16_t)value;
+ *(volatile uint16_t *)(uintptr_t)(((uintptr_t)&em9305_ram_803d58 + 0x288u)+offset)=(uint16_t)value;
  uint32_t product;
  product=(uint32_t)factor*(uint16_t)value;
  *(volatile uint32_t *)(row+8u)=product;
@@ -15632,7 +15637,7 @@ extern uint32_t opencfw_em9305_scan_error_30e7f8(uint32_t);
 /* Native30b9f4..30ba84: product mirror before gate, genuine16x16 DSP products. */
 uint32_t opencfw_em9305_command_scan_params_30b9f4(uint32_t first,uint32_t second,uint32_t interval,uint32_t duration)
 {
- uintptr_t root=0x805a70u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805a6c + 0x4u);
  uint32_t prior=*(volatile uint8_t *)(root+12u);
  *(volatile uint8_t *)(root+14u)=0u;
  *(volatile uint8_t *)(root+13u)=(uint8_t)prior;
@@ -15648,7 +15653,7 @@ uint32_t opencfw_em9305_command_scan_params_30b9f4(uint32_t first,uint32_t secon
  if(opencfw_em9305_scan_available_307b9c()==0u)goto argument_error;
  uintptr_t message=opencfw_em9305_wsf_event_allocate(16u);
  if(message==0u)return 0u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint32_t *)(message+12u)=duration_ticks;
  *(volatile uint32_t *)(message+8u)=interval_ticks;
  *(volatile uint8_t *)(message+4u)=(uint8_t)second;
@@ -15664,14 +15669,17 @@ uint32_t opencfw_em9305_command_scan_params_30b9f4(uint32_t first,uint32_t secon
 /* Native307b9c..307bdc: authenticated table3357b4 words8035dc/802a60/80389c. */
 uint32_t opencfw_em9305_scan_available_307b9c(void)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805a81u!=0u)return 1u;
- static const uintptr_t states[3]={0x8035dcu,0x802a60u,0x80389cu};
- uint32_t mask=*(volatile uint8_t *)(uintptr_t)0x803560u;
+ if(em9305_ram_805a6c.u8_805a81!=0u)return 1u;
+ extern uint8_t opencfw_em9305_scan_context_8035dc[704];
+ extern uint8_t opencfw_em9305_scan_context_802a60[704];
+ extern uint8_t opencfw_em9305_scan_context_80389c[704];
+ static const uintptr_t states[3]={(uintptr_t)opencfw_em9305_scan_context_8035dc,(uintptr_t)opencfw_em9305_scan_context_802a60,(uintptr_t)opencfw_em9305_scan_context_80389c};
+ uint32_t mask=em9305_ram_803560.u8_803560;
  for(uint32_t bit=0u;bit<3u;++bit){
   if((mask&(1u<<bit))!=0u){
    uint32_t kind=*(volatile uint8_t *)(states[bit]+13u);
    if(opencfw_em9305_ll_stream_kind_valid_30e4dc(kind)==0u)return 0u;
-   mask=*(volatile uint8_t *)(uintptr_t)0x803560u;
+   mask=em9305_ram_803560.u8_803560;
   }
  }
  return 1u;
@@ -15679,7 +15687,7 @@ uint32_t opencfw_em9305_scan_available_307b9c(void)
 /* Native30e7f8..30e834: first nonzero error latch, byte countdown, event24. */
 uint32_t opencfw_em9305_scan_error_30e7f8(uint32_t status)
 {
- uintptr_t root=0x805a70u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805a6c + 0x4u);
  uint32_t latched=*(volatile uint8_t *)(root+14u);
  if(status!=0u&&latched==0u){latched=status;*(volatile uint8_t *)(root+14u)=(uint8_t)status;}
  uint32_t count=*(volatile uint8_t *)(root+13u);
@@ -15697,12 +15705,12 @@ uint32_t opencfw_em9305_scan_error_30e7f8(uint32_t status)
 
 /* Native307ca8..307cb8: product state equals0. */
 uint32_t opencfw_em9305_command_idle_307ca8(void)
-{return *(volatile uint8_t *)(uintptr_t)0x8051a4u==0u;}
+{return em9305_ram_805194.u8_8051a4==0u;}
 /* Native3213b0..3213d0: six byte rows summed, low8 return. */
 uint32_t opencfw_em9305_command_count_3213b0(void)
 {
  uint32_t sum=0u;
- for(uint32_t i=0u;i<6u;++i)sum+=*(volatile uint8_t *)(uintptr_t)(0x803d78u+i*784u);
+ for(uint32_t i=0u;i<6u;++i)sum+=*(volatile uint8_t *)(uintptr_t)(((uintptr_t)&em9305_ram_803d58 + 0x20u)+i*784u);
  return sum&255u;
 }
 extern uint32_t opencfw_em9305_command_duplicate_307c5c(uint32_t,uint32_t,uint32_t,uint32_t);
@@ -15738,7 +15746,7 @@ uint32_t opencfw_em9305_command_create_30c488(uintptr_t input)
  *(volatile uint8_t *)(message+21u)=(uint8_t)last;
  uint32_t bit1=(flags>>1u)&1u;
  *(volatile uint8_t *)(message+5u)=(uint8_t)bit1;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint8_t *)(message+20u)=(uint8_t)(bit1?0u:(flags>>2u)&1u);
  *(volatile uint8_t *)(message+4u)=(uint8_t)(flags&1u);
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
@@ -15750,8 +15758,8 @@ uint32_t opencfw_em9305_command_duplicate_307c5c(uint32_t role,uint32_t kind,uin
 {
  for(uint32_t i=0u;i<6u;++i){
   uintptr_t offset=i*784u;
-  if(*(volatile uint8_t *)(uintptr_t)(0x803d78u+offset)==0u)continue;
-  uintptr_t row=0x804044u+offset;
+  if(*(volatile uint8_t *)(uintptr_t)(((uintptr_t)&em9305_ram_803d58 + 0x20u)+offset)==0u)continue;
+  uintptr_t row=((uintptr_t)&em9305_ram_803d58 + 0x2ecu)+offset;
   if(*(volatile uint8_t *)row!=role)continue;
   if(*(volatile uint8_t *)(row+1u)!=kind)continue;
   uint32_t stored_high=*(volatile uint32_t *)(row+8u);
@@ -15763,13 +15771,16 @@ uint32_t opencfw_em9305_command_duplicate_307c5c(uint32_t role,uint32_t kind,uin
 
 /* Native307a58/307b8c: ARC dynamic bit index uses low five bits. */
 void opencfw_em9305_scan_mask_clear_307a58(uint32_t bit)
-{volatile uint8_t *p=(volatile uint8_t *)(uintptr_t)0x803560u;uint32_t v=*p;*p=(uint8_t)(v&~(1u<<(bit&31u)));}
+{volatile uint8_t *p=&em9305_ram_803560.u8_803560;uint32_t v=*p;*p=(uint8_t)(v&~(1u<<(bit&31u)));}
 void opencfw_em9305_scan_mask_set_307b8c(uint32_t bit)
-{volatile uint8_t *p=(volatile uint8_t *)(uintptr_t)0x803560u;uint32_t v=*p;*p=(uint8_t)(v|(1u<<(bit&31u)));}
+{volatile uint8_t *p=&em9305_ram_803560.u8_803560;uint32_t v=*p;*p=(uint8_t)(v|(1u<<(bit&31u)));}
 /* Native307b70..307b8c: authenticated table, callers supply index0 or2. */
 void opencfw_em9305_scan_config_307b70(uint32_t index,uint32_t first,uint32_t second,uintptr_t input)
 {
- static const uintptr_t states[3]={0x8035dcu,0x802a60u,0x80389cu};
+ extern uint8_t opencfw_em9305_scan_context_8035dc[704];
+ extern uint8_t opencfw_em9305_scan_context_802a60[704];
+ extern uint8_t opencfw_em9305_scan_context_80389c[704];
+ static const uintptr_t states[3]={(uintptr_t)opencfw_em9305_scan_context_8035dc,(uintptr_t)opencfw_em9305_scan_context_802a60,(uintptr_t)opencfw_em9305_scan_context_80389c};
  uintptr_t row=states[index];
  uint32_t duration=*(volatile uint16_t *)(input+2u),interval=*(volatile uint16_t *)input;
  *(volatile uint8_t *)(row+14u)=(uint8_t)second;
@@ -15795,7 +15806,7 @@ static inline uint32_t opencfw_em9305_scan_stride6(uint32_t value)
 /* Native30d774..30d854: full extended scan guard and compact row graph. */
 uint32_t opencfw_em9305_command_scan_extended_30d774(uint32_t first,uint32_t second,uint32_t mask,uintptr_t input)
 {
- uintptr_t root=0x805a70u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805a6c + 0x4u);
  uint32_t cap=*(volatile uint32_t *)(root+36u),cap2=*(volatile uint32_t *)(root+40u);
  uint32_t allowed=(cap&128u)?3u:1u;
  if((cap2&1024u)==0u){if(second&12u)return 17u;}else allowed|=12u;
@@ -15840,35 +15851,35 @@ uint32_t opencfw_em9305_dispatch_330848(uintptr_t packet)
  uintptr_t event;
  if(type==23u||type==32u){
   uint32_t bit=type==23u?4u:6u;
-  if((*(volatile uint8_t *)(uintptr_t)0x8056f9u&(1u<<bit))==0u)return 0u;
-  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return 0u;
+  if((em9305_ram_805688.u8_8056f9&(1u<<bit))==0u)return 0u;
+  if((em9305_ram_805688.u8_8056ef&32u)==0u)return 0u;
   uint32_t divisor=type==23u?229u:247u;
   uint32_t length=*(volatile uint16_t *)(packet+(type==23u?28u:10u));
-  uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uintptr_t product=em9305_ram_805c5c.u32_805cac;
   uint32_t quotient=length/divisor;
   uint32_t negative=opencfw_em9305_event_mpyw_negative(quotient,divisor);
   uint32_t needed=(uint8_t)(quotient+((uint16_t)negative!=(uint16_t)(0u-length)));
-  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+  uint32_t count=em9305_ram_805688.u8_805718;
   uint32_t capacity=*(volatile uint8_t *)(product+14u);
   if(needed+count>capacity)return 0u;
   uintptr_t data=*(volatile uint32_t *)(packet+(type==23u?32u:12u));
   uint32_t remaining=length,stopped;
   do{
-   product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-   count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+   product=em9305_ram_805c5c.u32_805cac;
+   count=em9305_ram_805688.u8_805718;
    uint32_t chunk=remaining<divisor?remaining:divisor;
    capacity=*(volatile uint8_t *)(product+14u);
    if(count>=capacity)return 0u;
    event=type==23u?opencfw_em9305_wsf_event_allocate(231u):opencfw_em9305_event_allocate_large_32e470(62u,(uint8_t)(chunk+8u));
    if(!event)return 0u;
    if(type==23u){*(volatile uint8_t *)event=62u;*(volatile uint8_t *)(event+1u)=(uint8_t)(chunk+26u);}
-   product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-   count=*(volatile uint8_t *)(uintptr_t)0x805718u;
+   product=em9305_ram_805c5c.u32_805cac;
+   count=em9305_ram_805688.u8_805718;
    remaining-=chunk;
    capacity=*(volatile uint8_t *)(product+14u);
    uint32_t next=count+1u;
    if(type==23u){
-    *(volatile uint8_t *)(uintptr_t)0x805718u=(uint8_t)next;
+    em9305_ram_805688.u8_805718=(uint8_t)next;
     stopped=(remaining!=0u)&&((uint8_t)next==capacity);
     uint32_t flags=*(volatile uint16_t *)(packet+4u);
     if(stopped){flags|=64u;remaining=0u;*(volatile uint16_t *)(packet+4u)=(uint16_t)flags;}
@@ -15889,7 +15900,7 @@ uint32_t opencfw_em9305_dispatch_330848(uintptr_t packet)
     (void)opencfw_em9305_ll_event_send(event);data=end;
    }else{
     stopped=(remaining!=0u)&&((uint8_t)next==capacity);
-    *(volatile uint8_t *)(uintptr_t)0x805718u=(uint8_t)next;
+    em9305_ram_805688.u8_805718=(uint8_t)next;
     if(stopped){remaining=0u;*(volatile uint8_t *)(packet+9u)=2u;}
     uintptr_t initial=*(volatile uint32_t *)(packet+12u);
     uint32_t total=*(volatile uint16_t *)(packet+10u);
@@ -15915,16 +15926,16 @@ uint32_t opencfw_em9305_dispatch_330848(uintptr_t packet)
   (void)opencfw_em9305_ll_event_send(event-2u);return 1u;
  }
  if(type==25u){
-  if((*(volatile uint8_t *)(uintptr_t)0x8056fau&1u)==0u)return 0u;
-  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return 0u;
+  if((em9305_ram_805688.u8_8056fa&1u)==0u)return 0u;
+  if((em9305_ram_805688.u8_8056ef&32u)==0u)return 0u;
   event=opencfw_em9305_ll_event_allocate(62u,1u);if(!event)return 0u;
   *(volatile uint8_t *)event=17u;(void)opencfw_em9305_ll_event_send(event-2u);return 1u;
  }
  if(type==30u||type==31u||type==38u){
-  uintptr_t feature=type==38u?0x8056fau:0x8056f9u;
+  uintptr_t feature=type==38u?((uintptr_t)&em9305_ram_805688 + 0x72u):((uintptr_t)&em9305_ram_805688 + 0x71u);
   uint32_t bit=type==30u?5u:7u;
   if((*(volatile uint8_t *)feature&(1u<<bit))==0u)return 0u;
-  if((*(volatile uint8_t *)(uintptr_t)0x8056efu&32u)==0u)return 0u;
+  if((em9305_ram_805688.u8_8056ef&32u)==0u)return 0u;
   uint32_t bytes=type==30u?16u:(type==31u?3u:20u);
   event=opencfw_em9305_ll_event_allocate(62u,bytes);if(!event)return 0u;
   if(type==31u){
@@ -15969,8 +15980,8 @@ uint32_t opencfw_em9305_dispatch_3300c8(uintptr_t request,uintptr_t input)
   const uint8_t *order=command==0x2062u?basic_order:extended_order;
   for(uint32_t i=0u;i<15u;++i)fields[order[i]]=*(volatile uint8_t *)(input+order[i]);
   uint32_t count=fields[14],limit=count<2u?count:2u;
-  *(volatile uint8_t *)(uintptr_t)0x8018d4u=fields[0];
-  *(volatile uint8_t *)(uintptr_t)0x805bf4u=(uint8_t)count;
+  em9305_ram_8018bc.u8_8018d4=fields[0];
+  em9305_ram_805be0.u8_805bf4=(uint8_t)count;
   uintptr_t rows=(uintptr_t)scratch+(command==0x2062u?28u:0u);
   uint32_t width=command==0x2062u?10u:14u;
   uint32_t in_width=command==0x2062u?9u:14u;
@@ -16003,18 +16014,18 @@ uint32_t opencfw_em9305_dispatch_3300c8(uintptr_t request,uintptr_t input)
   *(volatile uint32_t *)(config+8u)=fields[4]|((uint32_t)fields[5]<<8u)|((uint32_t)fields[6]<<16u);
   *(volatile uint32_t *)(config+4u)=fields[1]|((uint32_t)fields[2]<<8u)|((uint32_t)fields[3]<<16u);
   *(volatile uint8_t *)config=fields[0];
-  status=command==0x2062u?opencfw_em9305_command_config_basic_30d00c(config,0x8018d8u):opencfw_em9305_command_config_extended_30d204(config,0x8018d8u);
-  uint32_t live_count=*(volatile uint8_t *)(uintptr_t)0x805bf4u;
+  status=command==0x2062u?opencfw_em9305_command_config_basic_30d00c(config,((uintptr_t)&em9305_ram_8018bc + 0x1cu)):opencfw_em9305_command_config_extended_30d204(config,((uintptr_t)&em9305_ram_8018bc + 0x1cu));
+  uint32_t live_count=em9305_ram_805be0.u8_805bf4;
   uint32_t doubled=live_count*2u;
   if((uint8_t)doubled==252u){(void)opencfw_em9305_ll_status_event_331bf8(request,status);return 1u;}
   length=(uint8_t)(doubled+3u);
  }else if(command==0x2065u){
   uint32_t first=*(volatile uint8_t *)input;
-  *(volatile uint8_t *)(uintptr_t)0x8018d4u=(uint8_t)first;
+  em9305_ram_8018bc.u8_8018d4=(uint8_t)first;
   status=opencfw_em9305_command_config_clear_30ca18(first);length=2u;
  }else if(command==0x2064u){
   uint32_t count=*(volatile uint8_t *)input,limit=count<2u?count:2u;
-  *(volatile uint8_t *)(uintptr_t)0x805bf4u=(uint8_t)count;
+  em9305_ram_805be0.u8_805bf4=(uint8_t)count;
   for(uint32_t i=0u;i<limit;++i){uintptr_t src=input+1u+i*4u;
    uint32_t a=*(volatile uint8_t *)src,b=*(volatile uint8_t *)(src+1u),c=*(volatile uint8_t *)(src+2u),d=*(volatile uint8_t *)(src+3u);
    *(volatile uint16_t *)(scratch+56u+i*2u)=(uint16_t)(a|(b<<8u));
@@ -16029,15 +16040,15 @@ uint32_t opencfw_em9305_dispatch_3300c8(uintptr_t request,uintptr_t input)
  if(!response)return 1u;
  command=*(volatile uint16_t *)request;
  if(command-0x2062u<2u){
-  uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805bf4u;
+  uint32_t count=em9305_ram_805be0.u8_805bf4;
   *(volatile uint8_t *)response=(uint8_t)status;
-  uint32_t first=*(volatile uint8_t *)(uintptr_t)0x8018d4u;
+  uint32_t first=em9305_ram_8018bc.u8_8018d4;
   if(status!=0u)count=0u;
   *(volatile uint8_t *)(response+2u)=(uint8_t)count;
   *(volatile uint8_t *)(response+1u)=(uint8_t)first;
-  for(uint32_t i=0u;i<count;++i){uint32_t value=*(volatile uint16_t *)(uintptr_t)(0x8018d8u+i*2u);
+  for(uint32_t i=0u;i<count;++i){uint32_t value=*(volatile uint16_t *)(uintptr_t)(((uintptr_t)&em9305_ram_8018bc + 0x1cu)+i*2u);
    *(volatile uint8_t *)(response+3u+i*2u)=(uint8_t)value;*(volatile uint8_t *)(response+4u+i*2u)=(uint8_t)(value>>8u);}
- }else if(command==0x2065u){*(volatile uint8_t *)response=(uint8_t)status;*(volatile uint8_t *)(response+1u)=*(volatile uint8_t *)(uintptr_t)0x8018d4u;}
+ }else if(command==0x2065u){*(volatile uint8_t *)response=(uint8_t)status;*(volatile uint8_t *)(response+1u)=em9305_ram_8018bc.u8_8018d4;}
  (void)opencfw_em9305_ll_event_send(response-5u);return 1u;
 }
 
@@ -16045,7 +16056,7 @@ extern uint32_t opencfw_em9305_config_pairs_apply_306b80(uint32_t,uintptr_t);
 /* Native30b3f8..30b480: capability, duplicate first-array ids, second-array slot state. */
 uint32_t opencfw_em9305_command_config_pairs_30b3f8(uint32_t count,uintptr_t arrays)
 {
- if((*(volatile uint8_t *)(uintptr_t)0x805a98u&1u)==0u)return 12u;
+ if((em9305_ram_805a6c.u8_805a98&1u)==0u)return 12u;
  uint32_t status=0u;
  for(uint32_t row=0u;status==0u&&row<count;++row){
   for(uint32_t previous=0u;status==0u&&previous<row;++previous){
@@ -16056,7 +16067,7 @@ uint32_t opencfw_em9305_command_config_pairs_30b3f8(uint32_t count,uintptr_t arr
   }
   if(status!=0u)continue;
   uintptr_t second=*(volatile uint32_t *)(arrays+4u);
-  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uintptr_t config=em9305_ram_805c5c.u32_805cac;
   uint32_t id=*(volatile uint16_t *)(second+row*2u);
   uint32_t capacity=*(volatile uint8_t *)(config+34u);
   status=2u;
@@ -16073,7 +16084,7 @@ uint32_t opencfw_em9305_command_config_pairs_30b3f8(uint32_t count,uintptr_t arr
 /* Native306b80..306c44: clipped two-row link/channel mutation, latch and six-byte message. */
 uint32_t opencfw_em9305_config_pairs_apply_306b80(uint32_t count,uintptr_t arrays)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805ab1u!=0u)return 12u;
+ if(em9305_ram_805a6c.u8_805ab1!=0u)return 12u;
  uint32_t limit=count<2u?count:2u;
  for(uint32_t i=0u;i<limit;++i){
   uintptr_t first=*(volatile uint32_t *)arrays;
@@ -16085,23 +16096,23 @@ uint32_t opencfw_em9305_config_pairs_apply_306b80(uint32_t count,uintptr_t array
   *(volatile uint8_t *)(channel+1u)=1u;
   *(volatile uint8_t *)(link+25u)=0u;
  }
- *(volatile uint8_t *)(uintptr_t)0x802a48u=(uint8_t)limit;
- *(volatile uint8_t *)(uintptr_t)0x805ab1u=1u;
+ em9305_ram_802a2c.u8_802a48=(uint8_t)limit;
+ em9305_ram_805a6c.u8_805ab1=1u;
  for(uint32_t i=0u;i<limit;++i){
   uintptr_t first=*(volatile uint32_t *)arrays,second=*(volatile uint32_t *)(arrays+4u);
   uint32_t a=*(volatile uint16_t *)(first+i*2u);
-  *(volatile uint16_t *)(uintptr_t)(0x802a4au+i*2u)=(uint16_t)a;
+  *(volatile uint16_t *)(uintptr_t)(((uintptr_t)&em9305_ram_802a2c + 0x1eu)+i*2u)=(uint16_t)a;
   uint32_t b=*(volatile uint16_t *)(second+i*2u);
-  *(volatile uint16_t *)(uintptr_t)(0x802a4eu+i*2u)=(uint16_t)b;
-  *(volatile uint8_t *)(uintptr_t)(0x802a52u+i)=0u;
+  *(volatile uint16_t *)(uintptr_t)(((uintptr_t)&em9305_ram_802a2c + 0x22u)+i*2u)=(uint16_t)b;
+  *(volatile uint8_t *)(uintptr_t)(((uintptr_t)&em9305_ram_802a2c + 0x26u)+i)=0u;
  }
  uintptr_t message=opencfw_em9305_wsf_event_allocate(6u);
  if(message==0u)return 0u;
- uint32_t second=*(volatile uint16_t *)(uintptr_t)0x802a4eu;
+ uint32_t second=em9305_ram_802a2c.u16_802a4e;
  *(volatile uint16_t *)(message+2u)=0x2401u;
  *(volatile uint16_t *)message=(uint16_t)second;
- uint32_t first=*(volatile uint16_t *)(uintptr_t)0x802a4au;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t first=em9305_ram_802a2c.u16_802a4a;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint16_t *)(message+4u)=(uint16_t)first;
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
  return 0u;
@@ -16117,9 +16128,9 @@ uint32_t opencfw_em9305_command_config_clear_30ca18(uint32_t id)
 {
  uintptr_t channel=opencfw_em9305_ll_test_channel_find_31ab50(id);
  if(!channel)return 2u;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+53u);
- if(count){uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c68u;
+ if(count){uintptr_t base=em9305_ram_805c5c.u32_805c68;
   for(uint32_t i=0u;i<count;++i){uintptr_t row=base+opencfw_em9305_config_clear_stride(i);
    if(*(volatile uint8_t *)row==0u)continue;
    if(*(volatile uint8_t *)(row+11u)!=id)continue;
@@ -16128,14 +16139,14 @@ uint32_t opencfw_em9305_command_config_clear_30ca18(uint32_t id)
   }
  }
  if(opencfw_em9305_config_channel_busy_31b2f8(channel)!=0u)return 12u;
- config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ config=em9305_ram_805c5c.u32_805cac;
  uint32_t i=0u;
  while(i<*(volatile uint8_t *)(config+53u)){
-  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c68u;
+  uintptr_t base=em9305_ram_805c5c.u32_805c68;
   uintptr_t row=base+opencfw_em9305_config_clear_stride(i);
   if(*(volatile uint8_t *)row!=0u&&*(volatile uint8_t *)(row+11u)==id&&*(volatile uint8_t *)(row+10u)==0u){
    (void)opencfw_em9305_config_link_clear_31ad88(row);
-   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   config=em9305_ram_805c5c.u32_805cac;
   }++i;
  }
  (void)opencfw_em9305_config_channel_clear_31ad64(channel);
@@ -16164,7 +16175,7 @@ uint32_t opencfw_em9305_config_channel_clear_31ad64(uintptr_t channel)
 /* Native332f80..332fa8: combined PHY2/PHY4 capability guard; full-width args retained. */
 uint32_t opencfw_em9305_config_phy_pair_valid_332f80(uint32_t first,uint32_t second)
 {
- uint32_t capability=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t capability=em9305_ram_805a6c.u32_805a94;
  uint32_t combined=first|second;
  if((capability&256u)==0u&&(combined&2u)!=0u)return 0u;
  if((capability&2048u)==0u&&(combined&4u)!=0u)return 0u;
@@ -16187,7 +16198,7 @@ uint32_t opencfw_em9305_command_config_basic_30d00c(uintptr_t input,uintptr_t ou
 {
  uint32_t count=*(volatile uint8_t *)(input+20u);
  if(count-1u>=16u)return 18u;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  if(*(volatile uint8_t *)(config+53u)<count)return 9u;
  uintptr_t rows=*(volatile uint32_t *)(input+24u);
  uint32_t first_length=0u,second_length=0u;
@@ -16256,13 +16267,13 @@ uint32_t opencfw_em9305_config_basic_apply_3087ec(uintptr_t input,uintptr_t outp
 {
  uintptr_t channel=opencfw_em9305_ll_test_channel_find_31ab50(*(volatile uint8_t *)input);
  if(!channel){channel=opencfw_em9305_config_channel_allocate_316b5c(*(volatile uint8_t *)input);if(!channel)return 7u;}
- uint32_t latch=*(volatile uint8_t *)(uintptr_t)0x805ab1u;
+ uint32_t latch=em9305_ram_805a6c.u8_805ab1;
  uint32_t busy=*(volatile uint8_t *)(channel+23u);
  if((busy|latch)!=0u)return 12u;
  if(*(volatile uint8_t *)(channel+1u)!=0u)return 12u;
  uint32_t existing=opencfw_em9305_config_existing_count_31b2a8(input);
  uint32_t count=*(volatile uint8_t *)(input+20u);
- if(count){uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ if(count){uintptr_t config=em9305_ram_805c5c.u32_805cac;
   uintptr_t rows=*(volatile uint32_t *)(input+24u);
   uint32_t max=*(volatile uint8_t *)(config+48u);
   for(uint32_t i=0u;i<count;++i){uintptr_t p=rows+8u+i*10u;
@@ -16333,10 +16344,10 @@ uint32_t opencfw_em9305_config_basic_apply_3087ec(uintptr_t input,uintptr_t outp
 /* Native31abc0..31ac08: active channel/slot match over656-byte rows. */
 uintptr_t opencfw_em9305_config_link_find_31abc0(uint32_t channel,uint32_t slot)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+53u);
  if(!count)return 0u;
- uintptr_t row=*(volatile uint32_t *)(uintptr_t)0x805c68u;
+ uintptr_t row=em9305_ram_805c5c.u32_805c68;
  for(uint32_t i=0u;i<count;++i,row+=656u){
   if(*(volatile uint8_t *)row==0u)continue;
   if(*(volatile uint8_t *)(row+11u)!=channel)continue;
@@ -16347,9 +16358,9 @@ uintptr_t opencfw_em9305_config_link_find_31abc0(uint32_t channel,uint32_t slot)
 /* Native31b278..31b2a8: byte-sized inactive link count. */
 uint32_t opencfw_em9305_config_free_links_31b278(void)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+53u),free=0u;
- if(count){uintptr_t row=*(volatile uint32_t *)(uintptr_t)0x805c68u;
+ if(count){uintptr_t row=em9305_ram_805c5c.u32_805c68;
   for(uint32_t i=0u;i<count;++i,row+=656u)if(*(volatile uint8_t *)row==0u)++free;
  }
  return free&255u;
@@ -16376,10 +16387,10 @@ static inline uint32_t opencfw_em9305_config_allocator_stride(uint32_t i,uint32_
 /* Native316b5c..316bbc: first inactive140B channel, typed initialization and shared request. */
 uintptr_t opencfw_em9305_config_channel_allocate_316b5c(uint32_t id)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+52u);
  if(!count)return 0u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c64u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c64;
  for(uint32_t i=0u;i<count;++i){uintptr_t row=base+opencfw_em9305_config_allocator_stride(i,140u);
   if(*(volatile uint8_t *)row!=0u)continue;
   (void)opencfw_em9305_memset((void *)row,0u,140u);
@@ -16396,17 +16407,17 @@ uintptr_t opencfw_em9305_config_channel_allocate_316b5c(uint32_t id)
 /* Native316bbc..316c56: first inactive656B link and product-derived live fields. */
 uintptr_t opencfw_em9305_config_link_allocate_316bbc(uintptr_t channel)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+53u);
  if(!count)return 0u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c68u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c68;
  for(uint32_t i=0u;i<count;++i){uintptr_t row=base+opencfw_em9305_config_allocator_stride(i,656u);
   if(*(volatile uint8_t *)row!=0u)continue;
   (void)opencfw_em9305_memset((void *)row,0u,656u);
   uint32_t seed=*(volatile uint16_t *)(row+6u);
-  config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  config=em9305_ram_805c5c.u32_805cac;
   *(volatile uint16_t *)(row+80u)=(uint16_t)seed;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   uint32_t capacity=*(volatile uint8_t *)(config+34u);
   *(volatile uint8_t *)(row+528u)=255u;*(volatile uint8_t *)(row+532u)=255u;
   *(volatile uint16_t *)(row+82u)=0x5201u;
@@ -16432,7 +16443,7 @@ uint32_t opencfw_em9305_command_config_extended_30d204(uintptr_t input,uintptr_t
 {
  uint32_t count=*(volatile uint8_t *)(input+19u);
  (void)opencfw_em9305_memset((void *)output,0u,count*2u);
- uint32_t minimum=(*(volatile uint8_t *)(uintptr_t)0x805a86u&128u)?4u:2u;
+ uint32_t minimum=(em9305_ram_805a6c.u8_805a86&128u)?4u:2u;
  if(*(volatile uint8_t *)input>239u)return 48u;
  if((uint32_t)(*(volatile uint32_t *)(input+4u)+0xfff00000u)<0xfff000ffu)return 48u;
  if((uint32_t)(*(volatile uint32_t *)(input+8u)+0xfff00000u)<0xfff000ffu)return 48u;
@@ -16524,15 +16535,15 @@ uint32_t opencfw_em9305_config_link_time_3185e8(uint32_t first_phy,uint32_t seco
  if(first_phy==1u)sum=(first_length<<3u)+112u;
  else if(first_phy==2u)sum=60u+(first_length<<2u);
  else if(first_phy==3u){uint32_t n=first_length+4u;
-  sum=(*(volatile uint8_t *)(uintptr_t)0x805a86u&16u)?(n<<4u)+462u:(n<<6u)+720u;
+  sum=(em9305_ram_805a6c.u8_805a86&16u)?(n<<4u)+462u:(n<<6u)+720u;
  }
  sum+=150u;
  if(second_phy==1u)sum+=(second_length<<3u)+112u;
  else if(second_phy==2u)sum+=(second_length<<2u)+60u;
  else if(second_phy==3u){uint32_t n=second_length+4u;
-  sum+=(*(volatile uint8_t *)(uintptr_t)0x805a86u&16u)?(n<<4u)+462u:(n<<6u)+720u;
+  sum+=(em9305_ram_805a6c.u8_805a86&16u)?(n<<4u)+462u:(n<<6u)+720u;
  }
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  return sum+*(volatile uint16_t *)(config+54u)+150u;
 }
 /* Native318670..31869e: early second-slot gate, equality and first empty attachment. R1 preserved by native routine. */
@@ -16655,10 +16666,10 @@ static inline uint32_t opencfw_em9305_config_ready_mpyuw(uint32_t a)
 /* Native3186a0..318708: captured policy overhead, preceding active channels and unsigned readiness. */
 uint32_t opencfw_em9305_config_channel_ready_3186a0(uintptr_t channel)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t overhead=*(volatile uint16_t *)(config+50u);
  overhead+=opencfw_em9305_auxiliary_guard_interval();
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c64u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c64;
  int32_t difference=(int32_t)((uint32_t)channel-(uint32_t)base);
  uint32_t index=(uint8_t)(difference/140);
  for(uint32_t i=0u;i<index;++i){
@@ -16666,7 +16677,7 @@ uint32_t opencfw_em9305_config_channel_ready_3186a0(uintptr_t channel)
    uint32_t unused=*(volatile uint32_t *)(base+52u+i*140u);(void)unused;
    uint32_t guard=opencfw_em9305_auxiliary_guard_interval();
    overhead+=guard;
-   base=*(volatile uint32_t *)(uintptr_t)0x805c64u;
+   base=em9305_ram_805c5c.u32_805c64;
    overhead+=guard;
   }
  }
@@ -16846,7 +16857,7 @@ void opencfw_em9305_config_extended_link_update_3272d8(uintptr_t link,uintptr_t 
  *(volatile uint16_t *)(link+512u)=(uint16_t)retries;
  uint32_t seed=opencfw_em9305_radio_access_raw_318878();
  uint32_t slot=*(volatile uint16_t *)(link+6u);
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uint32_t offset=opencfw_em9305_config_extended_slot_stride(slot);
  *(volatile uint32_t *)(link+372u)=seed;
  uint32_t a=*(volatile uint16_t *)(row+6u),b=*(volatile uint16_t *)(row+8u);
@@ -16879,9 +16890,9 @@ static inline uint32_t opencfw_em9305_config_link_has_remainder(uint32_t a,uint3
 static uint32_t opencfw_em9305_config_link_policy_quotient(uintptr_t input,uintptr_t link,uint32_t off)
 {return opencfw_em9305_radio_unsigned_divide_30c3a4(opencfw_em9305_config_limit_mpyuw(*(volatile uint16_t *)(input+off),1000u),opencfw_em9305_config_limit_mpyuw(*(volatile uint16_t *)(link+500u),1250u));}
 static uint32_t opencfw_em9305_config_link_cap46(void)
-{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;return *(volatile uint16_t *)(config+46u);}
+{uintptr_t config=em9305_ram_805c5c.u32_805cac;return *(volatile uint16_t *)(config+46u);}
 static uint32_t opencfw_em9305_config_link_cap56(void)
-{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;return *(volatile uint8_t *)(config+56u);}
+{uintptr_t config=em9305_ram_805c5c.u32_805cac;return *(volatile uint8_t *)(config+56u);}
 static uint32_t opencfw_em9305_config_link_phy(uint32_t value)
 {uint32_t i=opencfw_em9305_radio_phy_project_3183d4(value)-2u;return (uint8_t)i<7u?opencfw_em9305_config_phy_values_33449d[(int8_t)i]:1u;}
 /* Native 30c40c tail enters 30c3a4. Capture authentic R3 for the
@@ -16935,7 +16946,7 @@ void opencfw_em9305_config_link_update_326ed8(uintptr_t link,uintptr_t input,uin
   uint32_t first_phy=opencfw_em9305_config_link_phy(phy),second_phy=*(volatile uint8_t *)(row+7u);
   *(volatile uint8_t *)(link+480u)=(uint8_t)first_phy;
   *(volatile uint8_t *)(link+481u)=(uint8_t)opencfw_em9305_config_link_phy(second_phy);
- }else{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ }else{uintptr_t config=em9305_ram_805c5c.u32_805cac;
   uint32_t second_length=*(volatile uint16_t *)(row+4u);
   *(volatile uint16_t *)(link+486u)=(uint16_t)first_length;
   uint32_t cap=*(volatile uint16_t *)(config+46u),phy=*(volatile uint8_t *)(row+6u);
@@ -17009,13 +17020,13 @@ void opencfw_em9305_config_link_update_326ed8(uintptr_t link,uintptr_t input,uin
 }
 
 /* Native stack check 302820: halt (BRK) when the stack pointer is outside
- * the 4 KiB kernel stack 0x80e978..0x80f978. Reading sp is architectural;
+ * the 4 KiB kernel stack (uintptr_t)&em9305_ram_80e978..(uintptr_t)&em9305_ram_80f978. Reading sp is architectural;
  * __builtin_stack_address() is the stack pointer at entry of this frameless
  * function, and stock compared it after its push_s r12, hence the -4. */
 void opencfw_em9305_native_stack_check_302820(void)
 {
  uintptr_t sp=(uintptr_t)__builtin_stack_address()-4u;
- if(sp<0x80e978u||sp>0x80f978u)__builtin_arc_brk();
+ if(sp<(uintptr_t)&em9305_ram_80e978||sp>(uintptr_t)&em9305_ram_80f978)__builtin_arc_brk();
 }
 extern uint32_t opencfw_em9305_command_records_apply_30dc48(uint32_t,uint32_t,uintptr_t);
 extern uint32_t opencfw_em9305_command_struct_decode_332abc(uintptr_t,uintptr_t,uintptr_t,uintptr_t);
@@ -17108,7 +17119,7 @@ uint32_t opencfw_em9305_command_struct_apply_30b974(uintptr_t header,uintptr_t p
  if(id>239u)return 66u;
  if(stream>=16u)return 18u;
  uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();
- uint32_t busy=*(volatile uint8_t *)(uintptr_t)0x805a74u;
+ uint32_t busy=em9305_ram_805a6c.u8_805a74;
  if(busy!=0u||gate==0u)return 12u;
  if(opencfw_em9305_ll_stream_header_valid_332f04(header)==0u)return 18u;
  if(opencfw_em9305_ll_stream_control_valid_332f00(controls)!=0u)return 18u;
@@ -17149,7 +17160,7 @@ uint32_t opencfw_em9305_command_struct_commit_306cec(uintptr_t header,uintptr_t 
  *(volatile uint8_t *)(message+6u)=(uint8_t)address_kind;
  packed=opencfw_em9305_controller_pack_address(address);
  *(volatile uint32_t *)(message+8u)=(uint32_t)packed;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint32_t *)(message+12u)=(uint32_t)(packed>>32u);
  (void)opencfw_em9305_wsf_task_message_send(handler,message);
  return 0u;
@@ -17221,14 +17232,14 @@ uint32_t opencfw_em9305_command_records_commit_3096a8(uint32_t id,uint32_t count
   if(index==current&&*(volatile uint8_t *)(row_state-107u)!=0u)return 70u;
  }
  for(uint32_t i=0u;i<count;++i){
-  uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
   uint32_t spacing=*(volatile uint16_t *)(configuration+20u),live_spacing=*(volatile uint32_t *)(record+72u);
   if(live_spacing>spacing)spacing=live_spacing;
   uint32_t budget;
   if(*(volatile uint8_t *)(row_state+2u)!=0u)budget=opencfw_em9305_config_limit_mpyuw(*(volatile uint8_t *)row_state,1250u);
   else budget=*(volatile uint32_t *)(record+792u);
   uint32_t timing=0u;
-  if(*(volatile uint8_t *)(row_state+8u)!=0u){uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801a14u;if(callback)timing=((uint32_t(*)(uint32_t))callback)(*(volatile uint8_t *)(row_state+8u));}
+  if(*(volatile uint8_t *)(row_state+8u)!=0u){uintptr_t callback=em9305_ram_801a14.u32_801a14;if(callback)timing=((uint32_t(*)(uint32_t))callback)(*(volatile uint8_t *)(row_state+8u));}
   uint32_t size=*(volatile uint8_t *)(rows+i*8u+3u),phy=*(volatile uint8_t *)(record+63u);
   uint32_t needed=opencfw_em9305_radio_duration_312be4(phy,0u,timing,(uint16_t)spacing,size,0u,2u,5u);
   if(budget-150u<needed)return 69u;
@@ -17320,19 +17331,19 @@ uint32_t opencfw_em9305_dispatch_331dc0(uintptr_t request,uintptr_t input)
 extern uint32_t opencfw_em9305_command_advertising_data_notify_306a7c(uint32_t);
 /* Native30cee4..30ceee: caller input R0 survives the byte store. */
 uint32_t opencfw_em9305_command_vendor_byte_30cee4(int32_t value)
-{*(volatile uint8_t *)(uintptr_t)0x805a9cu=(uint8_t)value;return (uint32_t)value;}
+{em9305_ram_805a6c.u8_805a9c=(uint8_t)value;return (uint32_t)value;}
 /* Native303258..303264: live 32-byte product version, same copy provider. */
 void opencfw_em9305_command_product_version_303258(uintptr_t output)
-{(void)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)0x8013d0u,32u);}
+{(void)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)&em9305_ram_8013d0,32u);}
 /* Native30cdd8..30ce18: captured length survives gate and critical calls. */
 uint32_t opencfw_em9305_command_advertising_data_30cdd8(uint32_t length,uintptr_t input)
 {
  if(opencfw_em9305_ll_connection_gate_30e524()==0u)return 12u;
  if(length>=32u)return 18u;
  (void)opencfw_em9305_wsf_critical_enter();
- (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x805ba0u,(const void *)input,length);
- *(volatile uint8_t *)(uintptr_t)0x805bc0u=1u;
- *(volatile uint8_t *)(uintptr_t)0x805bbfu=(uint8_t)length;
+ (void)opencfw_em9305_memcpy((void *)(uintptr_t)&em9305_ram_805ba0,(const void *)input,length);
+ em9305_ram_805bbc.u8_805bc0=1u;
+ em9305_ram_805bbc.u8_805bbf=(uint8_t)length;
  (void)opencfw_em9305_wsf_critical_exit();
  (void)opencfw_em9305_command_advertising_data_notify_306a7c(1u);
  return 0u;
@@ -17343,9 +17354,9 @@ uint32_t opencfw_em9305_command_scan_response_30df98(uint32_t length,uintptr_t i
  if(opencfw_em9305_ll_connection_gate_30e524()==0u)return 12u;
  if(length>=32u)return 18u;
  (void)opencfw_em9305_wsf_critical_enter();
- (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x805bc1u,(const void *)input,length);
- *(volatile uint8_t *)(uintptr_t)0x805be1u=1u;
- *(volatile uint8_t *)(uintptr_t)0x805be0u=(uint8_t)length;
+ (void)opencfw_em9305_memcpy((void *)(uintptr_t)&em9305_ram_805bc1,(const void *)input,length);
+ em9305_ram_805be0.u8_805be1=1u;
+ em9305_ram_805be0.u8_805be0=(uint8_t)length;
  (void)opencfw_em9305_wsf_critical_exit();
  (void)opencfw_em9305_command_advertising_data_notify_306a7c(2u);
  return 0u;
@@ -17354,7 +17365,7 @@ uint32_t opencfw_em9305_command_scan_response_30df98(uint32_t length,uintptr_t i
 uint32_t opencfw_em9305_command_advertising_power_30bb50(uintptr_t output)
 {
  if(opencfw_em9305_ll_connection_gate_30e524()==0u)return 12u;
- int32_t requested=(int8_t)*(volatile uint8_t *)(uintptr_t)0x805a9cu;
+ int32_t requested=(int8_t)em9305_ram_805a6c.u8_805a9c;
  uint32_t actual=opencfw_em9305_ll_signed_clamp_310230((uint32_t)requested);
  *(volatile uint8_t *)output=(uint8_t)actual;
  return 0u;
@@ -17364,9 +17375,9 @@ uint32_t opencfw_em9305_command_advertising_power_30bb50(uintptr_t output)
  * validation and sparse live advertising-state projection. */
 uint32_t opencfw_em9305_command_advertising_parameters_30ce18(uint32_t minimum,uint32_t maximum,uint32_t type,uint32_t own,uint32_t peer,uintptr_t address,uint32_t channels,uint32_t filter)
 {
- uint32_t capabilities=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t capabilities=em9305_ram_805a6c.u32_805a94;
  uint32_t gate=opencfw_em9305_ll_connection_gate_30e524();
- if(*(volatile uint8_t *)(uintptr_t)0x805a71u!=0u||gate==0u)return 12u;
+ if(em9305_ram_805a6c.u8_805a71!=0u||gate==0u)return 12u;
  if(type!=1u){if(type>=5u||maximum>=0x4001u||minimum<32u||maximum<minimum)return 17u;}
  uint32_t maximum_own=(capabilities&64u)?3u:1u;
  if(own>maximum_own)return 17u;
@@ -17374,7 +17385,7 @@ uint32_t opencfw_em9305_command_advertising_parameters_30ce18(uint32_t minimum,u
  if(channels-1u>=7u)return 17u;
  if(filter>=4u&&type!=4u&&type!=1u)return 17u;
  uint32_t upper=opencfw_em9305_config_limit_mpyuw(maximum,625u),lower=opencfw_em9305_config_limit_mpyuw(minimum,625u);
- uintptr_t state=0x805b88u;
+ uintptr_t state=((uintptr_t)&em9305_ram_805b80 + 0x8u);
  *(volatile uint8_t *)(state+21u)=(uint8_t)filter;
  *(volatile uint8_t *)(state+20u)=(uint8_t)channels;
  *(volatile uint8_t *)(state+10u)=(uint8_t)peer;
@@ -17395,7 +17406,7 @@ uint32_t opencfw_em9305_command_advertising_notify_3082dc(void)
  uintptr_t message=opencfw_em9305_wsf_event_allocate(24u);
  if(message==0u)return 0u;
  *(volatile uint16_t *)(message+2u)=774u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint8_t *)(message+5u)=0u;
  *(volatile uint32_t *)(message+12u)=0u;
  *(volatile uint32_t *)(message+8u)=0u;
@@ -17404,7 +17415,7 @@ uint32_t opencfw_em9305_command_advertising_notify_3082dc(void)
 /* Native306a7c..306a90: mask mismatch preserves incoming full R0. */
 uint32_t opencfw_em9305_command_advertising_data_notify_306a7c(uint32_t mask)
 {
- uint32_t configured=*(volatile uint8_t *)(uintptr_t)0x805400u;
+ uint32_t configured=em9305_ram_805400.u8_805400;
  if((configured&mask)!=mask)return mask;
  return opencfw_em9305_command_advertising_notify_3082dc();
 }
@@ -17418,17 +17429,17 @@ uint32_t opencfw_em9305_command_advertising_error_30e758(uint32_t status)
 void opencfw_em9305_command_advertising_enable_30aff8(uint32_t enable)
 {
  uint32_t gate=opencfw_em9305_ll_connection_gate_30e524();
- uintptr_t state=0x805b84u;
+ uintptr_t state=((uintptr_t)&em9305_ram_805b80 + 0x4u);
  if(gate==0u){(void)opencfw_em9305_command_advertising_error_30e758(12u);return;}
  uint32_t mode=*(volatile uint8_t *)(state+12u);
  if(mode<5u&&(0x13u&(1u<<mode))!=0u){
-  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-  uint32_t active=*(volatile uint8_t *)(uintptr_t)0x805a70u,capacity=*(volatile uint8_t *)(config+34u);
+  uintptr_t config=em9305_ram_805c5c.u32_805cac;
+  uint32_t active=em9305_ram_805a6c.u8_805a70,capacity=*(volatile uint8_t *)(config+34u);
   if(active==capacity){(void)opencfw_em9305_command_advertising_error_30e758(12u);return;}
  }
  if(enable!=1u||opencfw_em9305_ll_stream_kind_valid_30e4dc(*(volatile uint8_t *)(state+13u))!=0u){
   uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);if(message==0u)return;
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   *(volatile uint8_t *)(message+3u)=(uint8_t)(1u+(enable==0u));
   *(volatile uint8_t *)(message+2u)=4u;
   (void)opencfw_em9305_wsf_task_message_send(handler,message);return;
@@ -17438,7 +17449,7 @@ void opencfw_em9305_command_advertising_enable_30aff8(uint32_t enable)
   uint32_t high=*(volatile uint32_t *)(state+20u),low=*(volatile uint32_t *)(state+16u),kind=*(volatile uint8_t *)(state+14u);
   if(opencfw_em9305_radio_identity_exists_31445c(kind,low,high)!=0u){
    uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
-   if(message!=0u){*(volatile uint16_t *)(message+2u)=260u;uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;(void)opencfw_em9305_wsf_task_message_send(handler,message);return;}
+   if(message!=0u){*(volatile uint16_t *)(message+2u)=260u;uint32_t handler=em9305_ram_805af0.u8_805b18;(void)opencfw_em9305_wsf_task_message_send(handler,message);return;}
   }
  }
  (void)opencfw_em9305_command_advertising_error_30e758(18u);
@@ -17466,7 +17477,7 @@ uint32_t opencfw_em9305_radio_schedule_314370(uintptr_t object,uintptr_t record,
   if(elapsed<overhead){*(volatile uint32_t *)accumulator=*(volatile uint32_t *)accumulator+elapsed;return 0u;}
   remaining=elapsed;
  }
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805c18u;
+ uintptr_t config=em9305_ram_805be0.u32_805c18;
  uint32_t cap=opencfw_em9305_config_limit_mpyuw(*(volatile uint16_t *)(config+4u),1000u);
  uint32_t room=remaining-overhead;
  return room<cap?room:cap;
@@ -17541,12 +17552,12 @@ uint64_t opencfw_em9305_command_vendor_statistics_30be3c(uint32_t id,uint32_t as
 {
  uint32_t high=0u,low=0u;
  if(associated!=0u){uintptr_t record=opencfw_em9305_radio_record_find_31aa64((uint8_t)id);if(record!=0u){high=*(volatile uint32_t *)(record+724u);low=*(volatile uint32_t *)(record+720u);}}
- else if(id<6u){uint32_t offset=opencfw_em9305_config_limit_mpyuw(id,784u);uintptr_t row=0x803ffcu+offset;low=*(volatile uint32_t *)row;high=*(volatile uint32_t *)(row+4u);}
+ else if(id<6u){uint32_t offset=opencfw_em9305_config_limit_mpyuw(id,784u);uintptr_t row=((uintptr_t)&em9305_ram_803d58 + 0x2a4u)+offset;low=*(volatile uint32_t *)row;high=*(volatile uint32_t *)(row+4u);}
  return ((uint64_t)high<<32)|low;
 }
 /* Native303264..303270: live product36-byte snapshot, actual forward copy. */
 void opencfw_em9305_command_vendor_snapshot_303264(uintptr_t output)
-{(void)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)0x8014f4u,36u);}
+{(void)opencfw_em9305_memcpy((void *)output,(const void *)(uintptr_t)&em9305_ram_8014f4,36u);}
 /* Native3328c8..3329b0: five vendor commands and fresh response opcode. */
 uint32_t opencfw_em9305_dispatch_3328c8(uintptr_t request,uintptr_t input)
 {
@@ -17579,23 +17590,23 @@ uint32_t opencfw_em9305_command_vendor_option_30d75c(uint32_t id,uint32_t first,
 
 /* Native30c768..30c788: post-gate live config, signed min on positive halfword. */
 uint32_t opencfw_em9305_command_packet_size_30c768(uintptr_t output)
-{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t size=*(volatile uint16_t *)(config+16u);if(size>1650u)size=1650u;*(volatile uint16_t *)output=(uint16_t)size;return 0u;}
+{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t config=em9305_ram_805c5c.u32_805cac;uint32_t size=*(volatile uint16_t *)(config+16u);if(size>1650u)size=1650u;*(volatile uint16_t *)output=(uint16_t)size;return 0u;}
 /* Native30c7b0..30c7cc: failure preserves caller output. */
 uint32_t opencfw_em9305_command_packet_count_30c7b0(uintptr_t output)
-{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t count=*(volatile uint8_t *)(config+12u);*(volatile uint8_t *)output=(uint8_t)count;return 0u;}
+{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t config=em9305_ram_805c5c.u32_805cac;uint32_t count=*(volatile uint8_t *)(config+12u);*(volatile uint8_t *)output=(uint8_t)count;return 0u;}
 /* Native30bd8c tail306ee8..306f08: initial output sentinel before lookup. */
 uint32_t opencfw_em9305_command_packet_power_30bd8c(uint32_t id,uintptr_t output)
 {*(volatile uint8_t *)output=129u;uintptr_t record=opencfw_em9305_radio_record_find_31aa64((uint8_t)id);if(record==0u)return 66u;int32_t requested=*(volatile int8_t *)(record+60u);uint32_t power=opencfw_em9305_ll_signed_clamp_310230((uint32_t)requested);*(volatile uint8_t *)output=(uint8_t)power;return 0u;}
 
 /* Native31ac54..31ac82: capture notification flag before clearing active byte. */
 void opencfw_em9305_command_record_clear_31ac54(uintptr_t record)
-{uint32_t notify=*(volatile uint8_t *)(record+2809u);*(volatile uint8_t *)record=0u;if(notify!=0u){uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805c74u;if(callback!=0u)((void (*)(uintptr_t))callback)(record);}(void)opencfw_em9305_wsf_timer_stop(record+808u);(void)opencfw_em9305_command_count_down_30e48c();}
+{uint32_t notify=*(volatile uint8_t *)(record+2809u);*(volatile uint8_t *)record=0u;if(notify!=0u){uintptr_t callback=em9305_ram_805c5c.u32_805c74;if(callback!=0u)((void (*)(uintptr_t))callback)(record);}(void)opencfw_em9305_wsf_timer_stop(record+808u);(void)opencfw_em9305_command_count_down_30e48c();}
 /* Native30ca00 tail308368..3083a0: gate, saved record, two busy flags and callback. */
 uint32_t opencfw_em9305_command_clear_30ca00(uint32_t id)
 {if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;if(*(volatile uint8_t *)(record+2u)!=0u||*(volatile uint8_t *)(record+369u)!=0u)return 12u;uintptr_t callback=*(volatile uint32_t *)(record+2804u);if(callback!=0u)((void (*)(uintptr_t))callback)(record);opencfw_em9305_command_record_clear_31ac54(record);return 0u;}
 /* Native30b118 tail306b14..306b6e: preflight fixed count, then reload after active clears. */
 uint32_t opencfw_em9305_command_clear_all_30b118(void)
-{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t count=*(volatile uint8_t *)(config+12u);if(count!=0u){uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c38u;for(uint32_t i=0;i<count;i++){if(*(volatile uint8_t *)(record+2u)!=0u||*(volatile uint8_t *)(record+369u)!=0u)return 12u;record+=2824u;}}uint32_t index=0u,offset=0u;while(index<count){uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c38u+offset;if(*(volatile uint8_t *)record!=0u){opencfw_em9305_command_record_clear_31ac54(record);config=*(volatile uint32_t *)(uintptr_t)0x805cacu;count=*(volatile uint8_t *)(config+12u);}offset+=2824u;index++;}return 0u;}
+{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;uintptr_t config=em9305_ram_805c5c.u32_805cac;uint32_t count=*(volatile uint8_t *)(config+12u);if(count!=0u){uintptr_t record=em9305_ram_805be0.u32_805c38;for(uint32_t i=0;i<count;i++){if(*(volatile uint8_t *)(record+2u)!=0u||*(volatile uint8_t *)(record+369u)!=0u)return 12u;record+=2824u;}}uint32_t index=0u,offset=0u;while(index<count){uintptr_t record=*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_805be0 + 0x58u)+offset;if(*(volatile uint8_t *)record!=0u){opencfw_em9305_command_record_clear_31ac54(record);config=em9305_ram_805c5c.u32_805cac;count=*(volatile uint8_t *)(config+12u);}offset+=2824u;index++;}return 0u;}
 
 /* Native30cee0 tail308ecc..308f24: captured record, live six-byte address and native high-word mask. */
 uint32_t opencfw_em9305_command_field_30cee0(uint32_t id,uintptr_t address)
@@ -17603,7 +17614,7 @@ uint32_t opencfw_em9305_command_field_30cee0(uint32_t id,uintptr_t address)
 
 /* Native3092f8..30939c: actual duration contract, post-call halfword reload and fresh flags. */
 uint32_t opencfw_em9305_command_intervals_lower_3092f8(uint32_t id,uintptr_t input)
-{uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;if(*(volatile uint8_t *)(record+369u)!=0u)return 12u;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t limit=*(volatile uint32_t *)(record+72u),spacing=*(volatile uint16_t *)(config+20u);if(limit>spacing)spacing=limit;uint32_t timing=0u;if(*(volatile uint8_t *)(record+804u)!=0u){uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801a14u;if(callback!=0u)timing=((uint32_t (*)(void))callback)();}uint32_t size=*(volatile uint16_t *)(record+1144u),phy=*(volatile uint8_t *)(record+63u);uint32_t duration=opencfw_em9305_radio_duration_312be4(phy,0u,timing,(uint16_t)spacing,size,1u,2u,0u);uint32_t maximum=opencfw_em9305_config_limit_mpyuw(*(volatile uint16_t *)(input+2u),1250u);if(duration>maximum)return 69u;if((*(volatile uint8_t *)(record+32u)&0x3bu)!=0u)return 18u;uint32_t minimum=*(volatile uint16_t *)input,third=*(volatile uint16_t *)(input+4u);*(volatile uint32_t *)(record+712u)=maximum;minimum=opencfw_em9305_config_limit_mpyuw(minimum,1250u);*(volatile uint8_t *)(record+718u)=1u;*(volatile uint32_t *)(record+2816u)=0u;*(volatile uint8_t *)(record+2809u)=0u;*(volatile uint16_t *)(record+716u)=(uint16_t)third;*(volatile uint32_t *)(record+708u)=minimum;return 0u;}
+{uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;if(*(volatile uint8_t *)(record+369u)!=0u)return 12u;uintptr_t config=em9305_ram_805c5c.u32_805cac;uint32_t limit=*(volatile uint32_t *)(record+72u),spacing=*(volatile uint16_t *)(config+20u);if(limit>spacing)spacing=limit;uint32_t timing=0u;if(*(volatile uint8_t *)(record+804u)!=0u){uintptr_t callback=em9305_ram_801a14.u32_801a14;if(callback!=0u)timing=((uint32_t (*)(void))callback)();}uint32_t size=*(volatile uint16_t *)(record+1144u),phy=*(volatile uint8_t *)(record+63u);uint32_t duration=opencfw_em9305_radio_duration_312be4(phy,0u,timing,(uint16_t)spacing,size,1u,2u,0u);uint32_t maximum=opencfw_em9305_config_limit_mpyuw(*(volatile uint16_t *)(input+2u),1250u);if(duration>maximum)return 69u;if((*(volatile uint8_t *)(record+32u)&0x3bu)!=0u)return 18u;uint32_t minimum=*(volatile uint16_t *)input,third=*(volatile uint16_t *)(input+4u);*(volatile uint32_t *)(record+712u)=maximum;minimum=opencfw_em9305_config_limit_mpyuw(minimum,1250u);*(volatile uint8_t *)(record+718u)=1u;*(volatile uint32_t *)(record+2816u)=0u;*(volatile uint8_t *)(record+2809u)=0u;*(volatile uint16_t *)(record+716u)=(uint16_t)third;*(volatile uint32_t *)(record+708u)=minimum;return 0u;}
 /* Native30db34..30db62: save input/id before latch call, native validation order. */
 uint32_t opencfw_em9305_command_intervals_30db34(uint32_t id,uintptr_t input)
 {if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;if(id>239u)return 48u;uint32_t minimum=*(volatile uint16_t *)input,maximum=*(volatile uint16_t *)(input+2u);if(maximum<minimum||minimum<6u)return 18u;return opencfw_em9305_command_intervals_lower_3092f8(id,input);}
@@ -17613,7 +17624,7 @@ uint32_t opencfw_em9305_command_periodic_status_30e878(uint32_t id,uint32_t stat
 {uint8_t event[6] __attribute__((aligned(4)));event[5]=(uint8_t)id;*(uint16_t *)(void *)event=(uint16_t)id;event[4]=(uint8_t)status;event[3]=(uint8_t)status;event[2]=29u;return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);}
 /* Native309244..3092f4: saved flag bits, fresh notification flag after first send. */
 void opencfw_em9305_command_periodic_enable_lower_309244(uint32_t id,uint32_t flags)
-{uint32_t second=flags&2u;if(second!=0u&&(*(volatile uint8_t *)(uintptr_t)0x805a98u&16u)==0u){opencfw_em9305_command_periodic_status_30e878(id,17u);return;}uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u){opencfw_em9305_command_periodic_status_30e878(id,66u);return;}uint32_t enabled=flags&1u;if(*(volatile uint8_t *)(record+718u)==0u||(enabled!=0u&&*(volatile uint8_t *)(record+1152u)==0u)||(*(volatile uint8_t *)(record+32u)&0x3bu)!=0u){opencfw_em9305_command_periodic_status_30e878(id,12u);return;}*(volatile uint8_t *)(record+704u)=(uint8_t)(second>>1u);uintptr_t event=opencfw_em9305_wsf_event_allocate(4u);if(event!=0u){uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;*(volatile uint8_t *)(event+3u)=(uint8_t)(enabled==0u?2u:1u);*(volatile uint8_t *)(event+2u)=10u;*(volatile uint16_t *)event=(uint16_t)id;(void)opencfw_em9305_wsf_task_message_send(handler,event);}if(*(volatile uint8_t *)(record+2809u)==0u)return;event=opencfw_em9305_wsf_event_allocate(4u);if(event==0u)return;uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;*(volatile uint8_t *)(event+3u)=(uint8_t)(enabled^5u);*(volatile uint8_t *)(event+2u)=14u;*(volatile uint16_t *)event=(uint16_t)id;(void)opencfw_em9305_wsf_task_message_send(handler,event);}
+{uint32_t second=flags&2u;if(second!=0u&&(em9305_ram_805a6c.u8_805a98&16u)==0u){opencfw_em9305_command_periodic_status_30e878(id,17u);return;}uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u){opencfw_em9305_command_periodic_status_30e878(id,66u);return;}uint32_t enabled=flags&1u;if(*(volatile uint8_t *)(record+718u)==0u||(enabled!=0u&&*(volatile uint8_t *)(record+1152u)==0u)||(*(volatile uint8_t *)(record+32u)&0x3bu)!=0u){opencfw_em9305_command_periodic_status_30e878(id,12u);return;}*(volatile uint8_t *)(record+704u)=(uint8_t)(second>>1u);uintptr_t event=opencfw_em9305_wsf_event_allocate(4u);if(event!=0u){uint32_t handler=em9305_ram_805af0.u8_805b18;*(volatile uint8_t *)(event+3u)=(uint8_t)(enabled==0u?2u:1u);*(volatile uint8_t *)(event+2u)=10u;*(volatile uint16_t *)event=(uint16_t)id;(void)opencfw_em9305_wsf_task_message_send(handler,event);}if(*(volatile uint8_t *)(record+2809u)==0u)return;event=opencfw_em9305_wsf_event_allocate(4u);if(event==0u)return;uint32_t handler=em9305_ram_805af0.u8_805b18;*(volatile uint8_t *)(event+3u)=(uint8_t)(enabled^5u);*(volatile uint8_t *)(event+2u)=14u;*(volatile uint16_t *)event=(uint16_t)id;(void)opencfw_em9305_wsf_task_message_send(handler,event);}
 /* Native30daf8..30db20: second argument is id, first argument is enable flags. */
 void opencfw_em9305_command_periodic_enable_30daf8(uint32_t flags,uint32_t id)
 {uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();if(gate==0u){opencfw_em9305_command_periodic_status_30e878(id,12u);return;}if(id>=240u){opencfw_em9305_command_periodic_status_30e878(id,48u);return;}opencfw_em9305_command_periodic_enable_lower_309244(id,flags);}
@@ -17623,9 +17634,9 @@ uint32_t opencfw_em9305_command_periodic_data_lower_30904c(uint32_t id,uint32_t 
 {
  uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;if(*(volatile uint8_t *)(record+718u)==0u)return 12u;
  uint32_t busy=*(volatile uint8_t *)(record+369u);if((uint32_t)(operation-3u)>=2u){if(length==0u)return 18u;if(busy!=0u)return 12u;}
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t limit=*(volatile uint32_t *)(record+72u),spacing=*(volatile uint16_t *)(config+20u);uint32_t budget=*(volatile uint32_t *)(record+(busy==0u?712u:700u));if(limit>spacing)spacing=limit;uint32_t timing=0u;if(*(volatile uint8_t *)(record+804u)!=0u){uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801a14u;if(callback!=0u)timing=((uint32_t (*)(void))callback)();}
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;uint32_t limit=*(volatile uint32_t *)(record+72u),spacing=*(volatile uint16_t *)(config+20u);uint32_t budget=*(volatile uint32_t *)(record+(busy==0u?712u:700u));if(limit>spacing)spacing=limit;uint32_t timing=0u;if(*(volatile uint8_t *)(record+804u)!=0u){uintptr_t callback=em9305_ram_801a14.u32_801a14;if(callback!=0u)timing=((uint32_t (*)(void))callback)();}
  uintptr_t packet=record+1152u;uint32_t size=length;if((operation|2u)==2u)size=(uint16_t)(*(volatile uint16_t *)(packet-8u)+length);uint32_t phy=*(volatile uint8_t *)(record+63u);uint32_t duration=opencfw_em9305_radio_duration_312be4(phy,0u,timing,(uint16_t)spacing,size,1u,2u,0u);if(budget<duration)return 69u;if(operation>=5u)return 18u;
- if(operation==0u||operation==2u){if(*(volatile uint8_t *)packet!=0u)return 18u;config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t old=*(volatile uint16_t *)(packet-8u),capacity=*(volatile uint16_t *)(config+16u);if(capacity<old+length){*(volatile uint8_t *)packet=0u;*(volatile uint16_t *)(packet-8u)=0u;return 69u;}}
+ if(operation==0u||operation==2u){if(*(volatile uint8_t *)packet!=0u)return 18u;config=em9305_ram_805c5c.u32_805cac;uint32_t old=*(volatile uint16_t *)(packet-8u),capacity=*(volatile uint16_t *)(config+16u);if(capacity<old+length){*(volatile uint8_t *)packet=0u;*(volatile uint16_t *)(packet-8u)=0u;return 69u;}}
  if(operation==3u){if(*(volatile uint8_t *)(record+368u)==1u){*(volatile uint8_t *)(packet+13u)=(uint8_t)length;(void)opencfw_em9305_memcpy((void *)(packet+16u),(const void *)data,length);uint32_t seed=opencfw_em9305_pal_random_step();uint32_t crc=opencfw_em9305_crc_update_304678(seed,length,data);*(volatile uint16_t *)(packet+14u)=(uint16_t)crc;*(volatile uint8_t *)(packet+12u)=1u;}else{uintptr_t destination=*(volatile uint32_t *)(packet-4u);(void)opencfw_em9305_memcpy((void *)destination,(const void *)data,length);*(volatile uint16_t *)(packet-8u)=(uint16_t)length;uint32_t seed=opencfw_em9305_pal_random_step();uint32_t crc=opencfw_em9305_crc_update_304678(seed,length,data);*(volatile uint8_t *)packet=1u;*(volatile uint16_t *)(packet-446u)=(uint16_t)crc;}}
  else if(operation==4u){if(length!=0u||*(volatile uint8_t *)(record+368u)==0u||*(volatile uint16_t *)(packet-8u)==0u)return 18u;if(*(volatile uint8_t *)(packet+12u)!=0u&&*(volatile uint8_t *)(packet+13u)==0u)return 18u;uint32_t seed=opencfw_em9305_pal_random_step();uint32_t crc=opencfw_em9305_crc_update_304678(seed,0u,data);*(volatile uint8_t *)packet=1u;*(volatile uint16_t *)(packet-446u)=(uint16_t)crc;}
  else {if(*(volatile uint8_t *)(record+368u)!=0u)return 12u;if(length==0u)return 18u;uintptr_t destination=*(volatile uint32_t *)(packet-4u);if(operation==0u||operation==2u){destination+=*(volatile uint16_t *)(packet-8u);(void)opencfw_em9305_memcpy((void *)destination,(const void *)data,length);uint32_t total=*(volatile uint16_t *)(packet-8u)+length;if(operation==0u)*(volatile uint8_t *)packet=0u;*(volatile uint16_t *)(packet-8u)=(uint16_t)total;if(operation!=0u){uint32_t seed=opencfw_em9305_pal_random_step();uint32_t crc=opencfw_em9305_crc_update_304678(seed,length,data);*(volatile uint8_t *)packet=1u;*(volatile uint16_t *)(packet-446u)=(uint16_t)crc;}}else{(void)opencfw_em9305_memcpy((void *)destination,(const void *)data,length);*(volatile uint16_t *)(packet-8u)=(uint16_t)length;*(volatile uint8_t *)packet=0u;}}
@@ -17640,7 +17651,7 @@ uint32_t opencfw_em9305_command_periodic_data_30dac8(uint32_t id,uint32_t operat
 uint32_t opencfw_em9305_command_packet_lower_308c70(uint32_t id,uintptr_t input)
 {
  uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);uint32_t existing=record!=0u;
- if(record==0u){uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t count=*(volatile uint8_t *)(config+12u),index=0u;uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c38u;for(;index<count;index++){record=base+opencfw_em9305_config_update_mpywhl(index,2824u);if(*(volatile uint8_t *)record==0u)break;}if(index==count)return 7u;(void)opencfw_em9305_memset((void *)record,0u,2824u);uintptr_t packet=record+1152u;uint32_t shared=*(volatile uint32_t *)(uintptr_t)(0x8028b4u+index*4u);config=*(volatile uint32_t *)(uintptr_t)0x805cacu;*(volatile uint32_t *)(packet+548u)=shared;*(volatile uint32_t *)(packet+272u)=shared;*(volatile uint8_t *)(record+1428u)=1u;*(volatile uint8_t *)record=1u;uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;uint32_t tertiary=*(volatile uint32_t *)(uintptr_t)(0x802850u+index*4u);*(volatile uint8_t *)packet=1u;*(volatile uint8_t *)(record+1704u)=1u;*(volatile uint8_t *)(record+1980u)=1u;uint32_t requested=*(volatile uint8_t *)(config+18u);*(volatile uint32_t *)(packet+824u)=tertiary;*(volatile uint8_t *)(record+820u)=(uint8_t)handler;uint32_t buffer=*(volatile uint32_t *)(uintptr_t)(0x80519cu+index*4u);*(volatile uint8_t *)(record+1u)=(uint8_t)id;*(volatile uint16_t *)(packet-340u)=(uint16_t)id;*(volatile uint8_t *)(record+76u)=(uint8_t)(requested>1u?requested:1u);*(volatile uint16_t *)(packet-338u)=1288u;*(volatile uint32_t *)(packet-4u)=buffer;(void)opencfw_em9305_command_count_30e4bc();}
+ if(record==0u){uintptr_t config=em9305_ram_805c5c.u32_805cac;uint32_t count=*(volatile uint8_t *)(config+12u),index=0u;uintptr_t base=em9305_ram_805be0.u32_805c38;for(;index<count;index++){record=base+opencfw_em9305_config_update_mpywhl(index,2824u);if(*(volatile uint8_t *)record==0u)break;}if(index==count)return 7u;(void)opencfw_em9305_memset((void *)record,0u,2824u);uintptr_t packet=record+1152u;uint32_t shared=*(volatile uint32_t *)(uintptr_t)(((uintptr_t)&em9305_ram_802878 + 0x3cu) + index*4u);config=em9305_ram_805c5c.u32_805cac;*(volatile uint32_t *)(packet+548u)=shared;*(volatile uint32_t *)(packet+272u)=shared;*(volatile uint8_t *)(record+1428u)=1u;*(volatile uint8_t *)record=1u;uint32_t handler=em9305_ram_805af0.u8_805b18;uint32_t tertiary=*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_802850 + index*4u);*(volatile uint8_t *)packet=1u;*(volatile uint8_t *)(record+1704u)=1u;*(volatile uint8_t *)(record+1980u)=1u;uint32_t requested=*(volatile uint8_t *)(config+18u);*(volatile uint32_t *)(packet+824u)=tertiary;*(volatile uint8_t *)(record+820u)=(uint8_t)handler;uint32_t buffer=*(volatile uint32_t *)(uintptr_t)(((uintptr_t)&em9305_ram_805194 + 0x8u) + index*4u);*(volatile uint8_t *)(record+1u)=(uint8_t)id;*(volatile uint16_t *)(packet-340u)=(uint16_t)id;*(volatile uint8_t *)(record+76u)=(uint8_t)(requested>1u?requested:1u);*(volatile uint16_t *)(packet-338u)=1288u;*(volatile uint32_t *)(packet-4u)=buffer;(void)opencfw_em9305_command_count_30e4bc();}
  if(*(volatile uint8_t *)(record+2u)!=0u)return 12u;
  uintptr_t projection=record+1424u;
  if(existing!=0u&&(*(volatile uint8_t *)(record+32u)&16u)!=0u){uint32_t count=*(volatile uint8_t *)(projection+17u);uintptr_t destination=*(volatile uint32_t *)projection;*(volatile uint16_t *)(record+2250u)=(uint16_t)count;(void)opencfw_em9305_memcpy((void *)destination,(const void *)(record+1442u),count);count=*(volatile uint8_t *)(record+1717u);destination=*(volatile uint32_t *)(projection+276u);(void)opencfw_em9305_memcpy((void *)destination,(const void *)(record+1718u),count);*(volatile uint16_t *)(record+2248u)=(uint16_t)count;}
@@ -17651,16 +17662,16 @@ uint32_t opencfw_em9305_command_packet_lower_308c70(uint32_t id,uintptr_t input)
 }
 /* Native30d5ac/30d678: shared ordered validation, distinct live PHY capabilities. */
 static uint32_t opencfw_em9305_command_packet_validate(uint32_t id,uintptr_t input,uint32_t extended)
-{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;if(id>239u)return 48u;uint32_t minimum=*(volatile uint32_t *)(input+4u),maximum=*(volatile uint32_t *)(input+8u);if(maximum<minimum)return 18u;uint32_t flags=*(volatile uint16_t *)input;if(flags!=29u&&minimum<32u)return 18u;if(flags!=29u&&maximum>=0x346dc7u)return 17u;if(maximum>=0x4001u&&(flags&16u)!=0u)return 17u;if((flags&0xfc00u)!=0u||(flags&0x13u)==3u||((flags&16u)!=0u&&(flags&96u)!=0u)||((flags&32u)!=0u&&(flags&3u)!=0u))return 18u;uint32_t tx=*(volatile uint8_t *)(input+22u),rx;if((flags&16u)==0u){if((tx|2u)!=3u)return 18u;rx=*(volatile uint8_t *)(input+24u);if((uint32_t)(rx-1u)>=3u)return 18u;}else{if(tx!=1u)return 18u;rx=*(volatile uint8_t *)(input+24u);}if(extended!=0u){uint32_t first=*(volatile uint32_t *)(uintptr_t)0x805a94u,second=*(volatile uint32_t *)(uintptr_t)0x805a98u;if(rx==2u&&(first&256u)==0u)return 17u;if((first&2048u)==0u&&(tx==3u||rx==3u))return 17u;if((second&256u)==0u&&(*(volatile uint8_t *)(input+27u)!=0u||*(volatile uint8_t *)(input+28u)!=0u))return 17u;}else{if(rx==2u&&(*(volatile uint8_t *)(uintptr_t)0x805a95u&1u)==0u)return 17u;if((tx==3u||rx==3u)&&(*(volatile uint8_t *)(uintptr_t)0x805a95u&8u)==0u)return 17u;}if((flags&128u)==0u){if((flags&768u)!=0u)return 18u;}else if((flags&28u)!=0u)return 18u;return opencfw_em9305_command_packet_lower_308c70(id,input);}
+{if(opencfw_em9305_ll_stream_gate_30e510()==0u)return 12u;if(id>239u)return 48u;uint32_t minimum=*(volatile uint32_t *)(input+4u),maximum=*(volatile uint32_t *)(input+8u);if(maximum<minimum)return 18u;uint32_t flags=*(volatile uint16_t *)input;if(flags!=29u&&minimum<32u)return 18u;if(flags!=29u&&maximum>=0x346dc7u)return 17u;if(maximum>=0x4001u&&(flags&16u)!=0u)return 17u;if((flags&0xfc00u)!=0u||(flags&0x13u)==3u||((flags&16u)!=0u&&(flags&96u)!=0u)||((flags&32u)!=0u&&(flags&3u)!=0u))return 18u;uint32_t tx=*(volatile uint8_t *)(input+22u),rx;if((flags&16u)==0u){if((tx|2u)!=3u)return 18u;rx=*(volatile uint8_t *)(input+24u);if((uint32_t)(rx-1u)>=3u)return 18u;}else{if(tx!=1u)return 18u;rx=*(volatile uint8_t *)(input+24u);}if(extended!=0u){uint32_t first=em9305_ram_805a6c.u32_805a94,second=em9305_ram_805a6c.u32_805a98;if(rx==2u&&(first&256u)==0u)return 17u;if((first&2048u)==0u&&(tx==3u||rx==3u))return 17u;if((second&256u)==0u&&(*(volatile uint8_t *)(input+27u)!=0u||*(volatile uint8_t *)(input+28u)!=0u))return 17u;}else{if(rx==2u&&(em9305_ram_805a6c.u8_805a95&1u)==0u)return 17u;if((tx==3u||rx==3u)&&(em9305_ram_805a6c.u8_805a95&8u)==0u)return 17u;}if((flags&128u)==0u){if((flags&768u)!=0u)return 18u;}else if((flags&28u)!=0u)return 18u;return opencfw_em9305_command_packet_lower_308c70(id,input);}
 uint32_t opencfw_em9305_command_packet_30d5ac(uint32_t id,uintptr_t input){return opencfw_em9305_command_packet_validate(id,input,0u);}
 uint32_t opencfw_em9305_command_extended_packet_30d678(uint32_t id,uintptr_t input){return opencfw_em9305_command_packet_validate(id,input,1u);}
 
 /* Native3132f8..31330c: exact head/state predicate, no invented scheduler status. */
 uint32_t opencfw_em9305_command_schedule_idle_3132f8(uintptr_t object)
-{uint32_t head=*(volatile uint32_t *)(uintptr_t)0x805f14u;uint32_t state=*(volatile uint8_t *)(uintptr_t)0x805f04u;return (head!=(uint32_t)object)|(state!=2u);}
+{uint32_t head=em9305_ram_805eec.u32_805f14;uint32_t state=em9305_ram_805eec.u8_805f04;return (head!=(uint32_t)object)|(state!=2u);}
 /* Native3082b0..3082da: sparse24B notification with caller-provided address. */
 void opencfw_em9305_command_data_notify_3082b0(uint32_t type,uint32_t low,uint32_t high)
-{uintptr_t event=opencfw_em9305_wsf_event_allocate(24u);if(event==0u)return;*(volatile uint16_t *)(event+2u)=774u;uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;*(volatile uint32_t *)(event+8u)=low;*(volatile uint8_t *)(event+5u)=(uint8_t)type;*(volatile uint32_t *)(event+12u)=high;(void)opencfw_em9305_wsf_task_message_send(handler,event);}
+{uintptr_t event=opencfw_em9305_wsf_event_allocate(24u);if(event==0u)return;*(volatile uint16_t *)(event+2u)=774u;uint32_t handler=em9305_ram_805af0.u8_805b18;*(volatile uint32_t *)(event+8u)=low;*(volatile uint8_t *)(event+5u)=(uint8_t)type;*(volatile uint32_t *)(event+12u)=high;(void)opencfw_em9305_wsf_task_message_send(handler,event);}
 /* Native306c8c..306cba: original fullword input saved through record lookup. */
 void opencfw_em9305_command_data_notify_mask_306c8c(uint32_t id,uint32_t mask)
 {uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return;uint32_t flags=*(volatile uint8_t *)(record+2808u);if((flags&mask)!=mask)return;if(*(volatile uint8_t *)(record+1u)!=id)return;uint32_t high=*(volatile uint32_t *)(record+52u),low=*(volatile uint32_t *)(record+48u),type=*(volatile uint8_t *)(record+58u);opencfw_em9305_command_data_notify_3082b0(type,low,high);}
@@ -17671,7 +17682,7 @@ uint32_t opencfw_em9305_command_payload_legacy_327510(uintptr_t record,uintptr_t
 uint32_t opencfw_em9305_command_payload_32739c(uintptr_t record,uintptr_t packet,uint32_t operation,uint32_t auxiliary,uint32_t length,uintptr_t data)
 {
  if(operation>=5u)return 18u;
- if(operation==0u||operation==2u){if(*(volatile uint8_t *)(packet+8u)!=0u)return 18u;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t old=*(volatile uint16_t *)packet,capacity=*(volatile uint16_t *)(config+16u);if(capacity>1650u)capacity=1650u;if(capacity<old+length){*(volatile uint8_t *)(packet+8u)=0u;*(volatile uint16_t *)packet=0u;return 7u;}}
+ if(operation==0u||operation==2u){if(*(volatile uint8_t *)(packet+8u)!=0u)return 18u;uintptr_t config=em9305_ram_805c5c.u32_805cac;uint32_t old=*(volatile uint16_t *)packet,capacity=*(volatile uint16_t *)(config+16u);if(capacity>1650u)capacity=1650u;if(capacity<old+length){*(volatile uint8_t *)(packet+8u)=0u;*(volatile uint16_t *)packet=0u;return 7u;}}
  if(operation==0u||operation==1u||operation==2u){if(*(volatile uint8_t *)(record+2u)!=0u)return 12u;if(length==0u)return 18u;uintptr_t destination=*(volatile uint32_t *)(packet+4u);if(operation==0u||operation==2u)destination+=*(volatile uint16_t *)packet;if(data!=0u)(void)opencfw_em9305_memcpy((void *)destination,(const void *)data,length);if(operation==1u){*(volatile uint8_t *)(packet+8u)=0u;*(volatile uint16_t *)packet=(uint16_t)length;return 0u;}uint32_t total=*(volatile uint16_t *)packet+length;if(operation==0u){*(volatile uint8_t *)(packet+8u)=0u;*(volatile uint16_t *)packet=(uint16_t)total;return 0u;}*(volatile uint16_t *)packet=(uint16_t)total;}
  else if(operation==3u){if(*(volatile uint8_t *)(record+2u)==1u){*(volatile uint8_t *)(packet+21u)=(uint8_t)length;if(data!=0u)(void)opencfw_em9305_memcpy((void *)(packet+24u),(const void *)data,length);uint32_t seed=opencfw_em9305_pal_random_step();uint32_t crc=opencfw_em9305_crc_update_304678(seed,length,data);*(volatile uint16_t *)(packet+22u)=(uint16_t)crc;*(volatile uint8_t *)(packet+20u)=1u;*(volatile uint8_t *)(packet+275u)=(uint8_t)auxiliary;uintptr_t first=record+2264u;if(opencfw_em9305_command_schedule_idle_3132f8(first)==0u)return 0u;if(*(volatile uint8_t *)(record+2785u)!=0u){uintptr_t second=record+2468u;if(opencfw_em9305_command_schedule_idle_3132f8(second)==0u)return 0u;if(*(volatile uint8_t *)(record+2785u)!=0u)(void)opencfw_em9305_ll_schedule_notify_313354(second);}(void)opencfw_em9305_ll_schedule_notify_313354(first);return 0u;}uintptr_t destination=*(volatile uint32_t *)(packet+4u);if(data!=0u)(void)opencfw_em9305_memcpy((void *)destination,(const void *)data,length);*(volatile uint16_t *)packet=(uint16_t)length;}
  else {if(length!=0u||*(volatile uint8_t *)(record+2u)==0u||*(volatile uint16_t *)packet==0u)return 18u;}
@@ -17686,7 +17697,7 @@ uint32_t opencfw_em9305_command_response_30d854(uint32_t id,uint32_t operation,u
 
 /* Native30e7ac..30e7e8: first-error latch, wrapped pending decrement, six exact status bytes. */
 void opencfw_em9305_command_rows_status_30e7ac(uint32_t id,uint32_t status)
-{uint32_t latched=*(volatile uint8_t *)(uintptr_t)0x805a7bu;if(status!=0u&&latched==0u){latched=status;*(volatile uint8_t *)(uintptr_t)0x805a7bu=(uint8_t)status;}uint32_t pending=*(volatile uint8_t *)(uintptr_t)0x805a7au;pending-=1u;*(volatile uint8_t *)(uintptr_t)0x805a7au=(uint8_t)pending;if((uint8_t)pending!=0u)return;uint8_t event[6] __attribute__((aligned(4)));event[5]=(uint8_t)id;*(uint16_t *)(void *)event=(uint16_t)id;event[4]=(uint8_t)latched;event[3]=(uint8_t)latched;event[2]=27u;(void)opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);}
+{uint32_t latched=em9305_ram_805a6c.u8_805a7b;if(status!=0u&&latched==0u){latched=status;em9305_ram_805a6c.u8_805a7b=(uint8_t)status;}uint32_t pending=em9305_ram_805a6c.u8_805a7a;pending-=1u;em9305_ram_805a6c.u8_805a7a=(uint8_t)pending;if((uint8_t)pending!=0u)return;uint8_t event[6] __attribute__((aligned(4)));event[5]=(uint8_t)id;*(uint16_t *)(void *)event=(uint16_t)id;event[4]=(uint8_t)latched;event[3]=(uint8_t)latched;event[2]=27u;(void)opencfw_em9305_ll_event_callback_30e79c((uintptr_t)event);}
 /* Native307330..307358: enable-only legacy interval validation with fullword subtraction. */
 uint32_t opencfw_em9305_command_row_interval_307330(uint32_t enable,uintptr_t row)
 {if(enable==0u)return 0u;uint32_t id=*(volatile uint8_t *)row;uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;uint32_t flags=*(volatile uint16_t *)(record+32u);if((flags&29u)==29u){uint32_t interval=*(volatile uint16_t *)(row+2u);if(interval-1u>127u)return 18u;}return 0u;}
@@ -17695,14 +17706,14 @@ uint32_t opencfw_em9305_command_row_ready_30735c(uint32_t id)
 {uintptr_t record=opencfw_em9305_radio_record_find_31aa64(id);if(record==0u)return 66u;if(*(volatile uint8_t *)(record+1428u)==0u||*(volatile uint8_t *)(record+1704u)==0u)return 12u;uint32_t flags=*(volatile uint16_t *)(record+32u);if((flags&18u)==2u&&*(volatile uint16_t *)(record+2248u)==0u)return 12u;uint32_t mode=*(volatile uint8_t *)(record+57u);if((mode|2u)==3u&&*(volatile uint8_t *)(record+4u)==0u)return 18u;if((flags&17u)==17u&&*(volatile uint16_t *)(record+2250u)>=32u)return 18u;uint32_t kind=flags&5u;if(kind==1u){if(*(volatile uint16_t *)(record+2250u)>245u)return 18u;}else if(kind==5u){if(*(volatile uint16_t *)(record+2250u)>239u)return 18u;}return 0u;}
 /* Native306e68..306ea4: dynamic config/base reload, active record ID collection. */
 uint32_t opencfw_em9305_command_rows_collect_306e68(uintptr_t output)
-{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t index=0u,count=0u;while(index<*(volatile uint8_t *)(config+12u)){uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c38u;uintptr_t record=base+opencfw_em9305_config_update_mpywhl(index,2824u);if(*(volatile uint8_t *)record!=0u){uint32_t id=*(volatile uint8_t *)(record+1u);*(volatile uint8_t *)(output+count)=(uint8_t)id;count+=1u;config=*(volatile uint32_t *)(uintptr_t)0x805cacu;}index+=1u;}return (uint8_t)count;}
+{uintptr_t config=em9305_ram_805c5c.u32_805cac;uint32_t index=0u,count=0u;while(index<*(volatile uint8_t *)(config+12u)){uintptr_t base=em9305_ram_805be0.u32_805c38;uintptr_t record=base+opencfw_em9305_config_update_mpywhl(index,2824u);if(*(volatile uint8_t *)record!=0u){uint32_t id=*(volatile uint8_t *)(record+1u);*(volatile uint8_t *)(output+count)=(uint8_t)id;count+=1u;config=em9305_ram_805c5c.u32_805cac;}index+=1u;}return (uint8_t)count;}
 /* Native30b6cc..30b7d4: complete command, preflight both rows before allocation.
  * Stock collect-all caller reserves two ID bytes. Product active-count contract remains unowned. */
 void opencfw_em9305_command_enable_rows_30b6cc(uint32_t enable,uint32_t count,uintptr_t rows)
-{if(*(volatile uint8_t *)(uintptr_t)0x805a7au!=0u)opencfw_em9305_command_rows_status_30e7ac(0u,12u);*(volatile uint8_t *)(uintptr_t)0x805a7bu=0u;uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();uint32_t error=0u;if(gate==0u)error=12u;else if(count>=3u)error=18u;else if(enable!=0u&&count==0u)error=18u;if(error!=0u){*(volatile uint8_t *)(uintptr_t)0x805a7au=1u;opencfw_em9305_command_rows_status_30e7ac(0u,error);return;}
- if(enable==0u&&count==0u){uint8_t ids[2] __attribute__((aligned(4)));*(uint16_t *)(void *)ids=0u;uint32_t found=opencfw_em9305_command_rows_collect_306e68((uintptr_t)ids);for(uint32_t index=0u;index<found;index++){uintptr_t event=opencfw_em9305_wsf_event_allocate(12u);if(event==0u)continue;uint32_t id=*(volatile uint8_t *)(ids+index);*(volatile uint16_t *)(event+2u)=520u;uint32_t pending=*(volatile uint8_t *)(uintptr_t)0x805a7au;*(volatile uint16_t *)event=(uint16_t)id;*(volatile uint32_t *)(event+4u)=0u;*(volatile uint8_t *)(uintptr_t)0x805a7au=(uint8_t)(pending+1u);uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;*(volatile uint8_t *)(event+8u)=0u;(void)opencfw_em9305_wsf_task_message_send(handler,event);}return;}
- uint32_t total=count>1u?count:1u;for(uint32_t i=0u;i<total;i++){uintptr_t row=rows+i*6u;uint32_t id=*(volatile uint8_t *)row;error=opencfw_em9305_command_row_ready_30735c(id);if(error==0u)error=opencfw_em9305_command_row_interval_307330(enable,row);if(error!=0u){id=*(volatile uint8_t *)row;*(volatile uint8_t *)(uintptr_t)0x805a7au=1u;opencfw_em9305_command_rows_status_30e7ac(id,error);return;}}
- uint32_t type=enable==0u?2u:1u;for(uint32_t i=0u;i<total;i++){uintptr_t event=opencfw_em9305_wsf_event_allocate(12u);if(event==0u)continue;uintptr_t row=rows+i*6u;uint32_t option=*(volatile uint8_t *)(row+4u),interval=*(volatile uint16_t *)(row+2u),pending=*(volatile uint8_t *)(uintptr_t)0x805a7au,id=*(volatile uint8_t *)row;uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;*(volatile uint8_t *)(event+8u)=(uint8_t)option;uint32_t scaled=opencfw_em9305_config_limit_mpyuw(interval,10u);*(volatile uint16_t *)event=(uint16_t)id;*(volatile uint8_t *)(uintptr_t)0x805a7au=(uint8_t)(pending+1u);*(volatile uint32_t *)(event+4u)=scaled;*(volatile uint8_t *)(event+3u)=(uint8_t)type;*(volatile uint8_t *)(event+2u)=8u;(void)opencfw_em9305_wsf_task_message_send(handler,event);}
+{if(em9305_ram_805a6c.u8_805a7a!=0u)opencfw_em9305_command_rows_status_30e7ac(0u,12u);em9305_ram_805a6c.u8_805a7b=0u;uint32_t gate=opencfw_em9305_ll_stream_gate_30e510();uint32_t error=0u;if(gate==0u)error=12u;else if(count>=3u)error=18u;else if(enable!=0u&&count==0u)error=18u;if(error!=0u){em9305_ram_805a6c.u8_805a7a=1u;opencfw_em9305_command_rows_status_30e7ac(0u,error);return;}
+ if(enable==0u&&count==0u){uint8_t ids[2] __attribute__((aligned(4)));*(uint16_t *)(void *)ids=0u;uint32_t found=opencfw_em9305_command_rows_collect_306e68((uintptr_t)ids);for(uint32_t index=0u;index<found;index++){uintptr_t event=opencfw_em9305_wsf_event_allocate(12u);if(event==0u)continue;uint32_t id=*(volatile uint8_t *)(ids+index);*(volatile uint16_t *)(event+2u)=520u;uint32_t pending=em9305_ram_805a6c.u8_805a7a;*(volatile uint16_t *)event=(uint16_t)id;*(volatile uint32_t *)(event+4u)=0u;em9305_ram_805a6c.u8_805a7a=(uint8_t)(pending+1u);uint32_t handler=em9305_ram_805af0.u8_805b18;*(volatile uint8_t *)(event+8u)=0u;(void)opencfw_em9305_wsf_task_message_send(handler,event);}return;}
+ uint32_t total=count>1u?count:1u;for(uint32_t i=0u;i<total;i++){uintptr_t row=rows+i*6u;uint32_t id=*(volatile uint8_t *)row;error=opencfw_em9305_command_row_ready_30735c(id);if(error==0u)error=opencfw_em9305_command_row_interval_307330(enable,row);if(error!=0u){id=*(volatile uint8_t *)row;em9305_ram_805a6c.u8_805a7a=1u;opencfw_em9305_command_rows_status_30e7ac(id,error);return;}}
+ uint32_t type=enable==0u?2u:1u;for(uint32_t i=0u;i<total;i++){uintptr_t event=opencfw_em9305_wsf_event_allocate(12u);if(event==0u)continue;uintptr_t row=rows+i*6u;uint32_t option=*(volatile uint8_t *)(row+4u),interval=*(volatile uint16_t *)(row+2u),pending=em9305_ram_805a6c.u8_805a7a,id=*(volatile uint8_t *)row;uint32_t handler=em9305_ram_805af0.u8_805b18;*(volatile uint8_t *)(event+8u)=(uint8_t)option;uint32_t scaled=opencfw_em9305_config_limit_mpyuw(interval,10u);*(volatile uint16_t *)event=(uint16_t)id;em9305_ram_805a6c.u8_805a7a=(uint8_t)(pending+1u);*(volatile uint32_t *)(event+4u)=scaled;*(volatile uint8_t *)(event+3u)=(uint8_t)type;*(volatile uint8_t *)(event+2u)=8u;(void)opencfw_em9305_wsf_task_message_send(handler,event);}
 }
 
 /* Native331ac0..331aea: argument ignored, 28-byte tail clear and ordered masks.
@@ -17710,13 +17721,13 @@ void opencfw_em9305_command_enable_rows_30b6cc(uint32_t enable,uint32_t count,ui
 uint32_t opencfw_em9305_ll_dispatch_initialize(uint32_t ignored)
 {
  (void)ignored;
- (void)opencfw_em9305_memset((void *)(uintptr_t)0x805700u,0u,28u);
- *(volatile uint32_t *)(uintptr_t)0x8056f8u=31u;
- *(volatile uint32_t *)(uintptr_t)0x8056e8u=UINT32_MAX;
- *(volatile uint32_t *)(uintptr_t)0x8056fcu=0u;
- *(volatile uint32_t *)(uintptr_t)0x8056f4u=0u;
- *(volatile uint32_t *)(uintptr_t)0x8056f0u=0u;
- *(volatile uint32_t *)(uintptr_t)0x8056ecu=0x1fffu;
+ (void)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_805688 + 0x78u),0u,28u);
+ em9305_ram_805688.u32_8056f8=31u;
+ em9305_ram_805688.u32_8056e8=UINT32_MAX;
+ em9305_ram_805688.u32_8056fc=0u;
+ em9305_ram_805688.u32_8056f4=0u;
+ em9305_ram_805688.u32_8056f0=0u;
+ em9305_ram_805688.u32_8056ec=0x1fffu;
  return 0x1fffu;
 }
 
@@ -17742,12 +17753,12 @@ uint32_t opencfw_em9305_ll_command_primary(uintptr_t request,uintptr_t input)
  uint32_t command=*(volatile uint16_t *)request,status=0u,length=9u;
  _Alignas(4) uint8_t scratch[20];
  switch(command){
- case 0x0c03u:{uint32_t value=opencfw_em9305_primary_reset_mode_310718(2u);uintptr_t result=opencfw_em9305_ll_special_mode_initialize(value);(void)result;(void)opencfw_em9305_memset((void *)(uintptr_t)0x8056e8u,0u,24u);return 1u;}
- case 0x0c01u:(void)opencfw_em9305_primary_masks_332b60(0x8056e8u,input);length=1u;break;
- case 0x0c63u:(void)opencfw_em9305_primary_masks_332b60(0x8056f0u,input);length=1u;break;
- case 0x2001u:(void)opencfw_em9305_primary_masks_332b60(0x8056f8u,input);length=1u;break;
+ case 0x0c03u:{uint32_t value=opencfw_em9305_primary_reset_mode_310718(2u);uintptr_t result=opencfw_em9305_ll_special_mode_initialize(value);(void)result;(void)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_805688 + 0x60u),0u,24u);return 1u;}
+ case 0x0c01u:(void)opencfw_em9305_primary_masks_332b60(((uintptr_t)&em9305_ram_805688 + 0x60u),input);length=1u;break;
+ case 0x0c63u:(void)opencfw_em9305_primary_masks_332b60(((uintptr_t)&em9305_ram_805688 + 0x68u),input);length=1u;break;
+ case 0x2001u:(void)opencfw_em9305_primary_masks_332b60(((uintptr_t)&em9305_ram_805688 + 0x70u),input);length=1u;break;
  case 0x0c48u:case 0x200fu:length=2u;break;
- case 0x0c49u:*(volatile uint8_t *)(uintptr_t)0x80571au=*(volatile uint8_t *)input;length=1u;break;
+ case 0x0c49u:em9305_ram_805688.u8_80571a=*(volatile uint8_t *)input;length=1u;break;
  case 0x2002u:length=4u;break;
  case 0x2005u:status=opencfw_em9305_command_primary_30de38(input);length=1u;break;
  case 0x2010u:status=opencfw_em9305_command_primary_30b190(command);length=1u;break;
@@ -17787,7 +17798,7 @@ uint32_t opencfw_em9305_primary_masks_332b60(uintptr_t destination,uintptr_t inp
 uint32_t opencfw_em9305_command_primary_30b190(uint32_t ignored)
 {
  (void)ignored;
- if(*(volatile uint8_t *)(uintptr_t)0x805a76u!=0u)return 12u;
+ if(em9305_ram_805a6c.u8_805a76!=0u)return 12u;
  (void)opencfw_em9305_radio_address_reset_303e38();
  return 0u;
 }
@@ -17795,11 +17806,11 @@ uint32_t opencfw_em9305_command_primary_30b190(uint32_t ignored)
  * wrapped-byte second check and exact special 255 mode branch. */
 static uint32_t opencfw_em9305_primary_address_gate(uint32_t kind)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t version=*(volatile uint8_t *)(config+4u);
  if(kind>=2u&&version<9u)return 18u;
  if((uint8_t)(kind+1u)>=3u&&version>=9u)return 18u;
- if(*(volatile uint8_t *)(uintptr_t)0x805a76u!=0u)return 12u;
+ if(em9305_ram_805a6c.u8_805a76!=0u)return 12u;
  return 0u;
 }
 uint32_t opencfw_em9305_command_primary_30af98(uint32_t kind,uintptr_t input)
@@ -17842,25 +17853,25 @@ uint32_t opencfw_em9305_command_primary_30d8a0(uint32_t index,uint32_t enable)
  uint32_t shift=index&63u;
  uint64_t bit=UINT64_C(1)<<shift;
  uint32_t low=(uint32_t)bit,high=(uint32_t)(bit>>32u);
- uint32_t supported_high=*(volatile uint32_t *)(uintptr_t)0x805b54u;
- uint32_t supported_low=*(volatile uint32_t *)(uintptr_t)0x805b50u;
+ uint32_t supported_high=em9305_ram_805af0.u32_805b54;
+ uint32_t supported_low=em9305_ram_805af0.u32_805b50;
  if(((high&supported_high)|(low&supported_low))==0u)return 17u;
- if(*(volatile uint8_t *)(uintptr_t)0x805a70u!=0u)return 12u;
+ if(em9305_ram_805a6c.u8_805a70!=0u)return 12u;
  uint64_t value=(uint64_t)enable<<shift;
- uint32_t old_low=*(volatile uint32_t *)(uintptr_t)0x805a94u;
- uint32_t old_high=*(volatile uint32_t *)(uintptr_t)0x805a98u;
+ uint32_t old_low=em9305_ram_805a6c.u32_805a94;
+ uint32_t old_high=em9305_ram_805a6c.u32_805a98;
  low=(old_low&~low)|(uint32_t)value;
  high=(old_high&~high)|(uint32_t)(value>>32u);
- *(volatile uint32_t *)(uintptr_t)0x805a94u=low;
- *(volatile uint32_t *)(uintptr_t)0x805a98u=high;
+ em9305_ram_805a6c.u32_805a94=low;
+ em9305_ram_805a6c.u32_805a98=high;
  return 0u;
 }
 
 /* Native310664..310676: two halfword controls, first/second addresses reversed. */
 uint32_t opencfw_em9305_radio_primary_pair_310664(int32_t first,int32_t second)
 {
- *(volatile uint16_t *)(uintptr_t)0x8012eeu=(uint16_t)first;
- *(volatile uint16_t *)(uintptr_t)0x8012ecu=(uint16_t)second;
+ em9305_ram_8012c0.u16_8012ee=(uint16_t)first;
+ em9305_ram_8012c0.u16_8012ec=(uint16_t)second;
  return 1u;
 }
 
@@ -17871,12 +17882,12 @@ static const uint32_t opencfw_em9305_primary_timer_quanta[8]={1000000u,100000u,5
 /* Native333bec..333c20: strict unsigned threshold, first hit, no-hit R0 unchanged. */
 uint32_t opencfw_em9305_radio_primary_timer_333bec(uint32_t value)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805f34u!=0u)return value;
- *(volatile uint32_t *)(uintptr_t)0x805f30u=value;
+ if(em9305_ram_805eec.u8_805f34!=0u)return value;
+ em9305_ram_805eec.u32_805f30=value;
  for(uint32_t i=0u;i<8u;i++){
   if(opencfw_em9305_primary_timer_thresholds[i]<value){
    uint32_t quantum=opencfw_em9305_primary_timer_quanta[i];
-   *(volatile uint32_t *)(uintptr_t)0x805f2cu=quantum;
+   em9305_ram_805eec.u32_805f2c=quantum;
    return quantum;
   }
  }
@@ -17887,9 +17898,9 @@ uint32_t opencfw_em9305_radio_primary_timer_333bec(uint32_t value)
 uint32_t opencfw_em9305_radio_primary_value_313744(uint32_t value)
 {
  uint32_t scaled=opencfw_em9305_config_limit_mpyuw(value,1250u);
- *(volatile uint8_t *)(uintptr_t)0x805f34u=0u;
+ em9305_ram_805eec.u8_805f34=0u;
  uint32_t result=opencfw_em9305_radio_primary_timer_333bec(scaled);
- *(volatile uint8_t *)(uintptr_t)0x805f34u=1u;
+ em9305_ram_805eec.u8_805f34=1u;
  return result;
 }
 
@@ -17976,11 +17987,11 @@ uint32_t opencfw_em9305_primary_response_32e918(uintptr_t request,uint32_t statu
  }
  case 0x0c48u:
   *(volatile uint8_t *)packet=(uint8_t)status;
-  *(volatile uint8_t *)(packet+1u)=*(volatile uint8_t *)(uintptr_t)0x80571au;break;
+  *(volatile uint8_t *)(packet+1u)=em9305_ram_805688.u8_80571a;break;
  case 0x1002u:
   (void)opencfw_em9305_memset((void *)(packet+1u),0u,64u);
   *(volatile uint8_t *)packet=(uint8_t)status;
-  (void)opencfw_em9305_memcpy((void *)(packet+1u),(void *)(uintptr_t)0x805885u,64u);break;
+  (void)opencfw_em9305_memcpy((void *)(packet+1u),(void *)((uintptr_t)&em9305_ram_805838 + 0x4du),64u);break;
  case 0x1003u:
   *(volatile uint8_t *)packet=(uint8_t)status;
   (void)opencfw_em9305_primary_query_313960(packet+1u,0u,96u);break;
@@ -18010,12 +18021,12 @@ uint32_t opencfw_em9305_primary_query_313960(uintptr_t output,uint32_t low,uint3
 /* Native30bf04..30bf1c: fields captured before output; second config pointer fresh. */
 uint32_t opencfw_em9305_primary_query_30bf04(uintptr_t first,uintptr_t version,uintptr_t second)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t first_value=*(volatile uint16_t *)config;
  uint32_t version_value=*(volatile uint8_t *)(config+4u);
  *(volatile uint16_t *)first=(uint16_t)first_value;
  *(volatile uint8_t *)version=(uint8_t)version_value;
- config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ config=em9305_ram_805c5c.u32_805cac;
  uint32_t second_value=*(volatile uint16_t *)(config+2u);
  *(volatile uint16_t *)second=(uint16_t)second_value;
  return second_value;
@@ -18026,15 +18037,15 @@ uint32_t opencfw_em9305_primary_query_30c92c(uintptr_t lower,uintptr_t upper)
 /* Native30bb74..30bb80: high-word before low-word, selected six-byte serializer. */
 uint32_t opencfw_em9305_primary_query_30bb74(uintptr_t output)
 {
- uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805b44u;
- uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805b40u;
+ uint32_t high=em9305_ram_805af0.u32_805b44;
+ uint32_t low=em9305_ram_805af0.u32_805b40;
  return (uint32_t)opencfw_em9305_radio_address_write_3045e8(output,low,high);
 }
 /* Native30bdb4..30bdc0: high-word before low-word, full serializer tail. */
 uint32_t opencfw_em9305_primary_query_30bdb4(uintptr_t output)
 {
- uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805a98u;
- uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t high=em9305_ram_805a6c.u32_805a98;
+ uint32_t low=em9305_ram_805a6c.u32_805a94;
  return opencfw_em9305_primary_query_313960(output,low,high);
 }
 /* Native30bf20 tail303e50; incoming R0 unused by actual child. */
@@ -18043,16 +18054,16 @@ uint32_t opencfw_em9305_primary_query_30bf20(uint32_t ignored)
 /* Native30bea4..30beb0: high-word first, full serializer tail. */
 uint32_t opencfw_em9305_primary_query_30bea4(uintptr_t output)
 {
- uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805b4cu;
- uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805b48u;
+ uint32_t high=em9305_ram_805af0.u32_805b4c;
+ uint32_t low=em9305_ram_805af0.u32_805b48;
  return opencfw_em9305_primary_query_313960(output,low,high);
 }
 /* Native310328..31033c: first halfword written before second read. */
 uint32_t opencfw_em9305_primary_controls_310328(uintptr_t first,uintptr_t second)
 {
- uint32_t first_value=*(volatile uint16_t *)(uintptr_t)0x8012eeu;
+ uint32_t first_value=em9305_ram_8012c0.u16_8012ee;
  *(volatile uint16_t *)first=(uint16_t)first_value;
- uint32_t second_value=*(volatile uint16_t *)(uintptr_t)0x8012ecu;
+ uint32_t second_value=em9305_ram_8012c0.u16_8012ec;
  *(volatile uint16_t *)second=(uint16_t)second_value;
  return second_value;
 }
@@ -18064,7 +18075,7 @@ uint32_t opencfw_em9305_primary_query_30c928(uintptr_t first,uintptr_t second)
 static uint32_t opencfw_em9305_private_counter_field(uint32_t index,uint32_t field)
 {
  uint32_t offset=opencfw_em9305_config_limit_mpyuw(index,912u);
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  return *(volatile uint16_t *)(base+offset+field);
 }
 uint32_t opencfw_em9305_private_counter_304838(uint32_t index){return opencfw_em9305_private_counter_field(index,908u);}
@@ -18075,7 +18086,7 @@ uint32_t opencfw_em9305_private_counter_304898(uint32_t index){return opencfw_em
 uint32_t opencfw_em9305_private_counter_reset_304994(uint32_t index)
 {
  uint32_t offset=opencfw_em9305_config_limit_mpyuw(index,912u);
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uintptr_t record=base+offset;
  *(volatile uint32_t *)(record+908u)=0u;
  *(volatile uint32_t *)(record+904u)=0u;
@@ -18085,19 +18096,19 @@ uint32_t opencfw_em9305_private_counter_reset_304994(uint32_t index)
 uint32_t opencfw_em9305_private_mode_3049ac(uint32_t count,uint32_t enable)
 {
  if(count>7u)return 18u;
- *(volatile uint8_t *)(uintptr_t)0x805f00u=(uint8_t)enable;
- *(volatile uint8_t *)(uintptr_t)0x8012fcu=(uint8_t)count;
+ em9305_ram_805eec.u8_805f00=(uint8_t)enable;
+ em9305_ram_8012c0.u8_8012fc=(uint8_t)count;
  return 0u;
 }
 /* Native3049cc..3049fc: mark busy before64-byte copy; store operation3
  * before the existing wake provider, then return zero. */
 uint32_t opencfw_em9305_private_data_3049cc(uintptr_t input)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805b80u!=0u)return 12u;
- *(volatile uint8_t *)(uintptr_t)0x805b80u=1u;
- (void)opencfw_em9305_memcpy((void *)(uintptr_t)0x80527cu,(const void *)input,64u);
- *(volatile uint8_t *)(uintptr_t)0x805258u=3u;
- (void)opencfw_em9305_wsf_wake_cell_313fc0(0x805258u);
+ if(em9305_ram_805b80.u8_805b80!=0u)return 12u;
+ em9305_ram_805b80.u8_805b80=1u;
+ (void)opencfw_em9305_memcpy((void *)(uintptr_t)&em9305_ram_80527c,(const void *)input,64u);
+ em9305_ram_8051b8.u8_805258=3u;
+ (void)opencfw_em9305_wsf_wake_cell_313fc0(((uintptr_t)&em9305_ram_8051b8 + 0xa0u));
  return 0u;
 }
 /* Native304a00..304a60: critical capture and fourth output before exit.
@@ -18105,7 +18116,7 @@ uint32_t opencfw_em9305_private_data_3049cc(uintptr_t input)
 uint32_t opencfw_em9305_private_stats_304a00(uint32_t index,uintptr_t first,uintptr_t second,uintptr_t third,uintptr_t fourth)
 {
  (void)opencfw_em9305_wsf_critical_enter();
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+34u),status=2u,value=0u;
  if(index<count&&opencfw_em9305_ll_slot_active_30731c(index)!=0u){
   *(volatile uint16_t *)first=(uint16_t)opencfw_em9305_private_counter_304898(index);
@@ -18126,7 +18137,7 @@ uint32_t opencfw_em9305_private_stats_304a00(uint32_t index,uintptr_t first,uint
 uint32_t opencfw_em9305_private_reset_304a64(uint32_t index)
 {
  (void)opencfw_em9305_wsf_critical_enter();
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t status=2u;
  if(index<*(volatile uint8_t *)(config+34u)&&opencfw_em9305_ll_slot_active_30731c(index)!=0u){
   (void)opencfw_em9305_private_counter_reset_304994(index);status=0u;
@@ -18178,29 +18189,29 @@ uint32_t opencfw_em9305_primary_private_304afc(uintptr_t request,uintptr_t input
 uint32_t opencfw_em9305_vendor_control_3101f0(uint32_t a,uint32_t b,uint32_t c){(void)a;(void)b;(void)c;return 0u;}
 uint32_t opencfw_em9305_vendor_control_31035c(uint32_t a){(void)a;return 1u;}
 uint32_t opencfw_em9305_vendor_control_310358(uint32_t a){(void)a;return 1u;}
-uint32_t opencfw_em9305_vendor_command_31071c(uint32_t a){*(volatile uint8_t *)(uintptr_t)0x801318u=(uint8_t)a;return a;}
-uint32_t opencfw_em9305_vendor_query_30e0d4(uint32_t incoming){(void)incoming;return *(volatile uint16_t *)(uintptr_t)0x8058d8u;}
-uint32_t opencfw_em9305_vendor_query_313760(void){return *(volatile uint16_t *)(uintptr_t)0x805f1cu;}
-uint32_t opencfw_em9305_vendor_snapshot_30329c(uintptr_t out){return (uint32_t)(uintptr_t)opencfw_em9305_memcpy((void *)out,(const void *)(uintptr_t)0x8015e4u,38u);}
-uint32_t opencfw_em9305_vendor_snapshot_3032c0(uintptr_t out){return (uint32_t)(uintptr_t)opencfw_em9305_memcpy((void *)out,(const void *)(uintptr_t)0x801848u,28u);}
+uint32_t opencfw_em9305_vendor_command_31071c(uint32_t a){em9305_ram_8012c0.u8_801318=(uint8_t)a;return a;}
+uint32_t opencfw_em9305_vendor_query_30e0d4(uint32_t incoming){(void)incoming;return em9305_ram_8058c8.u16_8058d8;}
+uint32_t opencfw_em9305_vendor_query_313760(void){return em9305_ram_805eec.u16_805f1c;}
+uint32_t opencfw_em9305_vendor_snapshot_30329c(uintptr_t out){return (uint32_t)(uintptr_t)opencfw_em9305_memcpy((void *)out,(const void *)(uintptr_t)&em9305_ram_8015e4,38u);}
+uint32_t opencfw_em9305_vendor_snapshot_3032c0(uintptr_t out){return (uint32_t)(uintptr_t)opencfw_em9305_memcpy((void *)out,(const void *)(uintptr_t)&em9305_ram_801848,28u);}
 uint32_t opencfw_em9305_vendor_query_30bb30(uintptr_t first,uintptr_t second)
-{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t value=config!=0u?*(volatile uint8_t *)(config+12u):0u;*(volatile uint8_t *)first=(uint8_t)value;value=*(volatile uint16_t *)(uintptr_t)0x805b1cu;*(volatile uint16_t *)second=(uint16_t)value;return value;}
+{uintptr_t config=em9305_ram_805c5c.u32_805cac;uint32_t value=config!=0u?*(volatile uint8_t *)(config+12u):0u;*(volatile uint8_t *)first=(uint8_t)value;value=em9305_ram_805af0.u16_805b1c;*(volatile uint16_t *)second=(uint16_t)value;return value;}
 uint32_t opencfw_em9305_vendor_query_30bc40(uintptr_t first,uintptr_t second)
-{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t value=config!=0u?*(volatile uint8_t *)(config+34u):0u;*(volatile uint8_t *)first=(uint8_t)value;value=*(volatile uint16_t *)(uintptr_t)0x805b1au;*(volatile uint16_t *)second=(uint16_t)value;return value;}
+{uintptr_t config=em9305_ram_805c5c.u32_805cac;uint32_t value=config!=0u?*(volatile uint8_t *)(config+34u):0u;*(volatile uint8_t *)first=(uint8_t)value;value=em9305_ram_805af0.u16_805b1a;*(volatile uint16_t *)second=(uint16_t)value;return value;}
 uint32_t opencfw_em9305_vendor_query_30bd94(uintptr_t first,uintptr_t second)
-{*(volatile uint8_t *)first=3u;uint32_t value=*(volatile uint16_t *)(uintptr_t)0x805b20u;*(volatile uint16_t *)second=(uint16_t)value;return value;}
+{*(volatile uint8_t *)first=3u;uint32_t value=em9305_ram_805af0.u16_805b20;*(volatile uint16_t *)second=(uint16_t)value;return value;}
 uint32_t opencfw_em9305_vendor_query_30bda4(uintptr_t first,uintptr_t second)
-{*(volatile uint8_t *)first=3u;uint32_t value=*(volatile uint16_t *)(uintptr_t)0x805b1eu;*(volatile uint16_t *)second=(uint16_t)value;return value;}
+{*(volatile uint8_t *)first=3u;uint32_t value=em9305_ram_805af0.u16_805b1e;*(volatile uint16_t *)second=(uint16_t)value;return value;}
 uint32_t opencfw_em9305_vendor_query_30be2c(uintptr_t first,uintptr_t second)
-{*(volatile uint8_t *)first=6u;uint32_t value=*(volatile uint16_t *)(uintptr_t)0x805b22u;*(volatile uint16_t *)second=(uint16_t)value;return value;}
+{*(volatile uint8_t *)first=6u;uint32_t value=em9305_ram_805af0.u16_805b22;*(volatile uint16_t *)second=(uint16_t)value;return value;}
 uint32_t opencfw_em9305_vendor_query_30bb84(uintptr_t first,uintptr_t second,uintptr_t third,uintptr_t fourth)
-{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t value=0u;
- if(config!=0u){value=*(volatile uint8_t *)(config+57u);*(volatile uint8_t *)first=(uint8_t)value;config=*(volatile uint32_t *)(uintptr_t)0x805cacu;value=*(volatile uint8_t *)(config+58u);}else{*(volatile uint8_t *)first=0u;}
- *(volatile uint8_t *)third=(uint8_t)value;value=*(volatile uint16_t *)(uintptr_t)0x805b2au;*(volatile uint16_t *)second=(uint16_t)value;value=*(volatile uint16_t *)(uintptr_t)0x805b28u;*(volatile uint16_t *)fourth=(uint16_t)value;return value;}
+{uintptr_t config=em9305_ram_805c5c.u32_805cac;uint32_t value=0u;
+ if(config!=0u){value=*(volatile uint8_t *)(config+57u);*(volatile uint8_t *)first=(uint8_t)value;config=em9305_ram_805c5c.u32_805cac;value=*(volatile uint8_t *)(config+58u);}else{*(volatile uint8_t *)first=0u;}
+ *(volatile uint8_t *)third=(uint8_t)value;value=em9305_ram_805af0.u16_805b2a;*(volatile uint16_t *)second=(uint16_t)value;value=em9305_ram_805af0.u16_805b28;*(volatile uint16_t *)fourth=(uint16_t)value;return value;}
 uint32_t opencfw_em9305_vendor_query_30bc04(uintptr_t first,uintptr_t second,uintptr_t third,uintptr_t fourth)
-{uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;uint32_t value=0u;
- if(config!=0u){value=*(volatile uint8_t *)(config+52u);*(volatile uint8_t *)first=(uint8_t)value;config=*(volatile uint32_t *)(uintptr_t)0x805cacu;value=*(volatile uint8_t *)(config+53u);}else{*(volatile uint8_t *)first=0u;}
- *(volatile uint8_t *)third=(uint8_t)value;value=*(volatile uint16_t *)(uintptr_t)0x805b26u;*(volatile uint16_t *)second=(uint16_t)value;value=*(volatile uint16_t *)(uintptr_t)0x805b24u;*(volatile uint16_t *)fourth=(uint16_t)value;return value;}
+{uintptr_t config=em9305_ram_805c5c.u32_805cac;uint32_t value=0u;
+ if(config!=0u){value=*(volatile uint8_t *)(config+52u);*(volatile uint8_t *)first=(uint8_t)value;config=em9305_ram_805c5c.u32_805cac;value=*(volatile uint8_t *)(config+53u);}else{*(volatile uint8_t *)first=0u;}
+ *(volatile uint8_t *)third=(uint8_t)value;value=em9305_ram_805af0.u16_805b26;*(volatile uint16_t *)second=(uint16_t)value;value=em9305_ram_805af0.u16_805b24;*(volatile uint16_t *)fourth=(uint16_t)value;return value;}
 
 /* Native32eb34..32eec6: full vendor router. Sparse packet tails and scratch
  * outputs follow genuine provider writes; no invented response defaults. */
@@ -18232,8 +18243,8 @@ uint32_t opencfw_em9305_primary_vendor_32eb34(uintptr_t request,uintptr_t input)
  _Alignas(4) uint8_t scratch[64];
  switch(command){
  case 0xfff0u:(void)opencfw_em9305_controller_set_address(input);break;
- case 0xffa0u:*(volatile uint8_t *)(uintptr_t)0x8058ccu=1u;break;
- case 0xffa1u:*(volatile uint8_t *)(uintptr_t)0x8057a8u=1u;break;
+ case 0xffa0u:em9305_ram_8058c8.u8_8058cc=1u;break;
+ case 0xffa1u:em9305_ram_8057a8.u8_8057a8=1u;break;
  case 0xffa2u:{uint32_t b3=*(volatile uint8_t *)(input+3u),b2=*(volatile uint8_t *)(input+2u),b1=*(volatile uint8_t *)(input+1u),b0=*(volatile uint8_t *)input;uint32_t result=opencfw_em9305_vendor_control_3101f0(b0,b1,(uint16_t)(b2+(b3<<8u)));status=result!=0u?0u:18u;break;}
  case 0xffa3u:{uint32_t result=opencfw_em9305_vendor_control_31035c(*(volatile uint8_t *)input);if(result!=0u)result=opencfw_em9305_vendor_control_310358(*(volatile uint8_t *)(input+1u));status=result!=0u?0u:18u;break;}
  case 0xffc0u:length=57u;break;
@@ -18252,7 +18263,7 @@ uint32_t opencfw_em9305_primary_vendor_32eb34(uintptr_t request,uintptr_t input)
  case 0xffe1u:{uint64_t bits=opencfw_em9305_ll_pack64_304648(input);uint32_t flags=(uint32_t)bits,enabled=*(volatile uint8_t *)(input+8u)!=0u;
   if((flags&1u)!=0u)(void)opencfw_em9305_vendor_command_30cd5c(enabled);
   if((flags&8u)!=0u)(void)opencfw_em9305_vendor_command_30db24(enabled);
-  if((flags&4u)!=0u){uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x805858u;if(callback!=0u)(void)((uint32_t (*)(uint32_t))callback)(enabled);}break;}
+  if((flags&4u)!=0u){uintptr_t callback=em9305_ram_805838.u32_805858;if(callback!=0u)(void)((uint32_t (*)(uint32_t))callback)(enabled);}break;}
  case 0xffe6u:{uint32_t b1=*(volatile uint8_t *)(input+1u),b0=*(volatile uint8_t *)input,b2=*(volatile uint8_t *)(input+2u),b3=*(volatile uint8_t *)(input+3u);status=opencfw_em9305_vendor_command_30e034(b0+(b1<<8u)+(b2<<16u)+(b3<<24u));break;}
  default:return 0u;
  }
@@ -18294,7 +18305,7 @@ uint32_t opencfw_em9305_primary_vendor_32eb34(uintptr_t request,uintptr_t input)
   *(volatile uint8_t *)(payload+18u)=(uint8_t)value;
   *(volatile uint8_t *)(payload+19u)=(uint8_t)(value>>8u);
   value=opencfw_em9305_vendor_query_313760();
-  uint32_t last=*(volatile uint16_t *)(uintptr_t)0x805838u;
+  uint32_t last=em9305_ram_805838.u16_805838;
   *(volatile uint8_t *)(payload+20u)=(uint8_t)value;
   *(volatile uint8_t *)(payload+22u)=(uint8_t)last;
   *(volatile uint8_t *)(payload+21u)=(uint8_t)(value>>8u);
@@ -18362,9 +18373,9 @@ uint32_t opencfw_em9305_primary_vendor_32eb34(uintptr_t request,uintptr_t input)
 /* Native30be48..30be64: six bytes go to input, not response payload. */
 uint32_t opencfw_em9305_vendor_command_30be48(uintptr_t input)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805a81u==0u)return 18u;
- uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805a90u;
- uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805a8cu;
+ if(em9305_ram_805a6c.u8_805a81==0u)return 18u;
+ uint32_t high=em9305_ram_805a6c.u32_805a90;
+ uint32_t low=em9305_ram_805a6c.u32_805a8c;
  (void)opencfw_em9305_radio_address_write_3045e8(input,low,high);
  return 0u;
 }
@@ -18374,8 +18385,8 @@ uint32_t opencfw_em9305_vendor_command_30d87c(uintptr_t input)
  uint64_t bits=opencfw_em9305_ll_pack64_304648(input);
  uint32_t low=(uint32_t)bits,high=(uint32_t)(bits>>32u);
  if(high>=0x2000u)return 18u;
- *(volatile uint32_t *)(uintptr_t)0x805a94u=low;
- *(volatile uint32_t *)(uintptr_t)0x805a98u=high;
+ em9305_ram_805a6c.u32_805a94=low;
+ em9305_ram_805a6c.u32_805a98=high;
  return 0u;
 }
 /* Native30d9b4..30d9f0: BMSK24 includes bits0..24. High then low
@@ -18383,21 +18394,21 @@ uint32_t opencfw_em9305_vendor_command_30d87c(uintptr_t input)
 uint32_t opencfw_em9305_vendor_command_30d9b4(uint32_t low,uint32_t high,uint32_t enable)
 {
  if(((low&0xc0010000u)|(high&0x01ffffffu))!=0u)return 18u;
- uint32_t old_high=*(volatile uint32_t *)(uintptr_t)0x805a88u;
- uint32_t old_low=*(volatile uint32_t *)(uintptr_t)0x805a84u;
+ uint32_t old_high=em9305_ram_805a6c.u32_805a88;
+ uint32_t old_low=em9305_ram_805a6c.u32_805a84;
  if(enable!=0u){old_high|=high;old_low|=low;}else{old_high&=~high;old_low&=~low;}
- *(volatile uint32_t *)(uintptr_t)0x805a84u=old_low;
- *(volatile uint32_t *)(uintptr_t)0x805a88u=old_high;
+ em9305_ram_805a6c.u32_805a84=old_low;
+ em9305_ram_805a6c.u32_805a88=old_high;
  return 0u;
 }
 /* Native30cd5c..30cd68: native R0 returns the byte-cell address. */
 uint32_t opencfw_em9305_vendor_command_30cd5c(uint32_t enabled)
-{*(volatile uint8_t *)(uintptr_t)0x805becu=(uint8_t)(enabled!=0u);return 0x805becu;}
+{em9305_ram_805be0.u8_805bec=(uint8_t)(enabled!=0u);return ((uintptr_t)&em9305_ram_805be0 + 0xcu);}
 /* Native30db24..30db30: native R0 returns the normalized flag. */
 uint32_t opencfw_em9305_vendor_command_30db24(uint32_t enabled)
-{uint32_t flag=enabled!=0u;*(volatile uint8_t *)(uintptr_t)0x805beeu=(uint8_t)flag;return flag;}
+{uint32_t flag=enabled!=0u;em9305_ram_805be0.u8_805bee=(uint8_t)flag;return flag;}
 uint32_t opencfw_em9305_vendor_command_30e034(uint32_t value)
-{*(volatile uint32_t *)(uintptr_t)0x8059a0u=value;return 0u;}
+{em9305_ram_8059a0.u32_8059a0=value;return 0u;}
 /* Native313fa8..313fb6: genuine ROM capacity/query contracts remain imports. */
 extern uint32_t opencfw_em9305_rom_allocator_capacity_1030e8(uint32_t);
 uint32_t opencfw_em9305_vendor_allocator_second_313fa8(uint32_t incoming)
@@ -18409,27 +18420,27 @@ uint32_t opencfw_em9305_vendor_allocator_second_313fa8(uint32_t incoming)
 
 /* Native310718: no instruction modifies incoming R0. */
 uint32_t opencfw_em9305_primary_reset_mode_310718(uint32_t incoming){return incoming;}
-uint32_t opencfw_em9305_primary_busy_307dd8(void){return *(volatile uint8_t *)(uintptr_t)0x804ffcu!=0u;}
-uint32_t opencfw_em9305_primary_busy_307c08(void){return *(volatile uint8_t *)(uintptr_t)0x803bb8u!=0u;}
+uint32_t opencfw_em9305_primary_busy_307dd8(void){return em9305_ram_804ffc.u8_804ffc!=0u;}
+uint32_t opencfw_em9305_primary_busy_307c08(void){return em9305_ram_803bb8.u8_803bb8!=0u;}
 /* Native30de38..30dee8: callback address is reloaded on every one of
  * three calls; input packing occurs only after all busy/callback gates. */
 uint32_t opencfw_em9305_command_primary_30de38(uintptr_t input)
 {
- if(*(volatile uint8_t *)(uintptr_t)0x805a71u!=0u&&(*(volatile uint8_t *)(uintptr_t)0x805b91u&1u)!=0u)return 12u;
- if(*(volatile uint8_t *)(uintptr_t)0x805a73u!=0u){
+ if(em9305_ram_805a6c.u8_805a71!=0u&&(em9305_ram_805b80.u8_805b91&1u)!=0u)return 12u;
+ if(em9305_ram_805a6c.u8_805a73!=0u){
   if(opencfw_em9305_primary_busy_307dd8()!=0u)return 12u;
-  if(*(volatile uint32_t *)(uintptr_t)0x801308u!=0u){
+  if(em9305_ram_8012c0.u32_801308!=0u){
    for(uint32_t i=0u;i<3u;i++){
-    uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801308u;
+    uintptr_t callback=em9305_ram_8012c0.u32_801308;
     if(((uint32_t (*)(uint32_t))callback)((uint8_t)i)!=0u)return 12u;
    }
   }
  }
- if(*(volatile uint8_t *)(uintptr_t)0x805a74u!=0u){
+ if(em9305_ram_805a6c.u8_805a74!=0u){
   if(opencfw_em9305_primary_busy_307c08()!=0u)return 12u;
-  if(*(volatile uint32_t *)(uintptr_t)0x801304u!=0u){
+  if(em9305_ram_8012c0.u32_801304!=0u){
    for(uint32_t i=0u;i<3u;i++){
-    uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801304u;
+    uintptr_t callback=em9305_ram_8012c0.u32_801304;
     if(((uint32_t (*)(uint32_t))callback)((uint8_t)i)!=0u)return 12u;
    }
   }
@@ -18438,10 +18449,10 @@ uint32_t opencfw_em9305_command_primary_30de38(uintptr_t input)
  uint32_t low=(uint32_t)packed,high=(uint32_t)(packed>>32u),kind=high&0xc000u;
  if(kind!=0xc000u&&kind!=0x4000u&&kind!=0u)return 18u;
  (void)opencfw_em9305_wsf_critical_enter();
- *(volatile uint32_t *)(uintptr_t)0x805a90u=high;
- *(volatile uint32_t *)(uintptr_t)0x805a8cu=low;
- *(volatile uint8_t *)(uintptr_t)0x805a7fu=1u;
- *(volatile uint16_t *)(uintptr_t)0x805a80u=257u;
+ em9305_ram_805a6c.u32_805a90=high;
+ em9305_ram_805a6c.u32_805a8c=low;
+ em9305_ram_805a6c.u8_805a7f=1u;
+ em9305_ram_805a6c.u16_805a80=257u;
  (void)opencfw_em9305_wsf_critical_exit();
  return 0u;
 }
@@ -18550,45 +18561,45 @@ uint32_t opencfw_em9305_ll_radio_initialize(uintptr_t config)
 uint32_t opencfw_em9305_init_lower_30e564(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x805b00u=0u;
- *(volatile uint32_t *)(uintptr_t)0x805afcu=0u;
- *(volatile uint32_t *)(uintptr_t)0x805af8u=0x00100010u;
- *(volatile uint32_t *)(uintptr_t)0x805b08u=0u;
- *(volatile uint32_t *)(uintptr_t)0x805b04u=0u;
- *(volatile uint8_t *)(uintptr_t)0x805b00u=7u;
- return 0x805af8u;
+ em9305_ram_805af0.u32_805b00=0u;
+ em9305_ram_805af0.u32_805afc=0u;
+ em9305_ram_805af0.u32_805af8=0x00100010u;
+ em9305_ram_805af0.u32_805b08=0u;
+ em9305_ram_805af0.u32_805b04=0u;
+ em9305_ram_805af0.u8_805b00=7u;
+ return ((uintptr_t)&em9305_ram_805af0 + 0x8u);
 }
 uint32_t opencfw_em9305_init_lower_30e580(uint32_t incoming)
-{(void)incoming;*(volatile uint8_t *)(uintptr_t)0x805b5cu=0u;*(volatile uint32_t *)(uintptr_t)0x805b58u=900u;return 0x805b58u;}
+{(void)incoming;em9305_ram_805af0.u8_805b5c=0u;em9305_ram_805af0.u32_805b58=900u;return ((uintptr_t)&em9305_ram_805af0 + 0x68u);}
 uint32_t opencfw_em9305_init_lower_30e594(uint32_t incoming)
-{(void)incoming;*(volatile uint8_t *)(uintptr_t)0x805b82u=0u;*(volatile uint16_t *)(uintptr_t)0x805b80u=0u;return 0x805b80u;}
+{(void)incoming;em9305_ram_805b80.u8_805b82=0u;em9305_ram_805b80.u16_805b80=0u;return (uintptr_t)&em9305_ram_805b80;}
 /* Native30e538..30e560: live config reload occurs after the clear. */
 uint32_t opencfw_em9305_init_lower_30e538(uint32_t incoming)
 {
- (void)incoming;(void)opencfw_em9305_memset((void *)(uintptr_t)0x805adcu,0u,28u);
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- *(volatile uint8_t *)(uintptr_t)0x805af0u=3u;
+ (void)incoming;(void)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_805a6c + 0x70u),0u,28u);
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
+ em9305_ram_805af0.u8_805af0=3u;
  uint32_t value=*(volatile uint16_t *)(config+42u);
- *(volatile uint16_t *)(uintptr_t)0x805af4u=8096u;
- *(volatile uint16_t *)(uintptr_t)0x805adcu=(uint16_t)value;
+ em9305_ram_805af0.u16_805af4=8096u;
+ em9305_ram_805a6c.u16_805adc=(uint16_t)value;
  return value;
 }
 /* Native30e42c..30e47a: preserve the second clear and its delay-slot
  * halfword27 write; final native R0 is VREP2HL1 =00010001. */
 uint32_t opencfw_em9305_init_lower_30e42c(uint32_t incoming)
 {
- (void)incoming;(void)opencfw_em9305_memset((void *)(uintptr_t)0x805ab4u,0u,40u);
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- *(volatile uint16_t *)(uintptr_t)0x805ab8u=328u;
+ (void)incoming;(void)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_805a6c + 0x48u),0u,40u);
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
+ em9305_ram_805a6c.u16_805ab8=328u;
  uint32_t first=*(volatile uint8_t *)(config+35u),second=*(volatile uint8_t *)(config+36u);
- *(volatile uint8_t *)(uintptr_t)0x805ac8u=3u;
- *(volatile uint8_t *)(uintptr_t)0x805ab4u=(uint8_t)first;
- *(volatile uint8_t *)(uintptr_t)0x805ab5u=(uint8_t)second;
- *(volatile uint16_t *)(uintptr_t)0x805ab6u=27u;
- (void)opencfw_em9305_memset((void *)(uintptr_t)0x805ac9u,0u,5u);
- *(volatile uint16_t *)(uintptr_t)0x805aceu=10u;
- *(volatile uint16_t *)(uintptr_t)0x805ad8u=3200u;
- *(volatile uint32_t *)(uintptr_t)0x805ad0u=0x00010001u;
+ em9305_ram_805a6c.u8_805ac8=3u;
+ em9305_ram_805a6c.u8_805ab4=(uint8_t)first;
+ em9305_ram_805a6c.u8_805ab5=(uint8_t)second;
+ em9305_ram_805a6c.u16_805ab6=27u;
+ (void)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_805a6c + 0x5du),0u,5u);
+ em9305_ram_805a6c.u16_805ace=10u;
+ em9305_ram_805a6c.u16_805ad8=3200u;
+ em9305_ram_805a6c.u32_805ad0=0x00010001u;
  return 0x00010001u;
 }
 
@@ -18603,23 +18614,23 @@ uint32_t opencfw_em9305_init_callback_30bf24(uint32_t events,uintptr_t message)
  if(message!=0u)(void)opencfw_em9305_init_message_3075cc(message);
  uint32_t now=opencfw_em9305_pal_current_time();
  uint32_t elapsed=opencfw_em9305_pal_elapsed_raw(now,start);
- uint32_t maximum=*(volatile uint16_t *)(uintptr_t)0x8058d8u;
- if(maximum<elapsed)*(volatile uint16_t *)(uintptr_t)0x8058d8u=(uint16_t)elapsed;
+ uint32_t maximum=em9305_ram_8058c8.u16_8058d8;
+ if(maximum<elapsed)em9305_ram_8058c8.u16_8058d8=(uint16_t)elapsed;
  return elapsed;
 }
 /* Native30e9a4..30e9dc: capture high before low featuremask, complete
  * 64-byte clear; exact defaults/feature words and native lowword return. */
 uint32_t opencfw_em9305_init_state_30e9a4(uint32_t incoming)
 {
- (void)incoming;(void)opencfw_em9305_memset((void *)(uintptr_t)0x805a70u,0u,64u);
- *(volatile uint32_t *)(uintptr_t)0x805a88u=0xfe000000u;
- uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805b34u;
- uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805b30u;
- *(volatile uint32_t *)(uintptr_t)0x805aa4u=31u;
- *(volatile uint32_t *)(uintptr_t)0x805aa0u=0xffffffffu;
- *(volatile uint32_t *)(uintptr_t)0x805a84u=0x0046dc40u;
- *(volatile uint32_t *)(uintptr_t)0x805a98u=high;
- *(volatile uint32_t *)(uintptr_t)0x805a94u=low;
+ (void)incoming;(void)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_805a6c + 0x4u),0u,64u);
+ em9305_ram_805a6c.u32_805a88=0xfe000000u;
+ uint32_t high=em9305_ram_805af0.u32_805b34;
+ uint32_t low=em9305_ram_805af0.u32_805b30;
+ em9305_ram_805a6c.u32_805aa4=31u;
+ em9305_ram_805a6c.u32_805aa0=0xffffffffu;
+ em9305_ram_805a6c.u32_805a84=0x0046dc40u;
+ em9305_ram_805a6c.u32_805a98=high;
+ em9305_ram_805a6c.u32_805a94=low;
  return low;
 }
 
@@ -18630,29 +18641,29 @@ extern uint32_t opencfw_em9305_init_event_state_30e0e8(uint32_t);
  * state provider, including pending capabilities later overwritten by reset. */
 uint32_t opencfw_em9305_init_final_30bf6c(uint32_t incoming)
 {
- *(volatile uint8_t *)(uintptr_t)0x805b18u=(uint8_t)incoming;
+ em9305_ram_805af0.u8_805b18=(uint8_t)incoming;
  uint32_t value=opencfw_em9305_init_features_3099cc(incoming);
  value=opencfw_em9305_init_features_308ff8(value);
  (void)value;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- uint32_t previous=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
+ uint32_t previous=em9305_ram_805af0.u32_805b30;
  uint32_t a=*(volatile uint8_t *)(config+62u),b=*(volatile uint8_t *)(config+63u),c=*(volatile uint8_t *)(config+64u);
- *(volatile uint8_t *)(uintptr_t)0x805aa8u=0u;
- *(volatile uint8_t *)(uintptr_t)0x805a78u=0u;
- *(volatile uint8_t *)(uintptr_t)0x805a76u=0u;
- *(volatile uint32_t *)(uintptr_t)0x805a70u=0u;
- *(volatile uint8_t *)(uintptr_t)0x805a74u=0u;
+ em9305_ram_805a6c.u8_805aa8=0u;
+ em9305_ram_805a6c.u8_805a78=0u;
+ em9305_ram_805a6c.u8_805a76=0u;
+ em9305_ram_805a6c.u32_805a70=0u;
+ em9305_ram_805a6c.u8_805a74=0u;
  uint32_t d=*(volatile uint8_t *)(config+65u);
- *(volatile uint32_t *)(uintptr_t)0x805b44u=0u;
- *(volatile uint32_t *)(uintptr_t)0x805b40u=0u;
+ em9305_ram_805af0.u32_805b44=0u;
+ em9305_ram_805af0.u32_805b40=0u;
  uint32_t bits=previous|(a<<8u)|(b<<11u)|(c<<9u)|(d<<10u);
- *(volatile uint32_t *)(uintptr_t)0x805b30u=bits;
+ em9305_ram_805af0.u32_805b30=bits;
  uint8_t lower,upper;
  (void)opencfw_em9305_ll_signed_bounds_31026c((uintptr_t)&lower,(uintptr_t)&upper);
  int32_t bound=(int8_t)upper;
- bits=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ bits=em9305_ram_805af0.u32_805b30;
  if(bound>19)bits|=1u<<15u;
- *(volatile uint32_t *)(uintptr_t)0x805b30u=bits;
+ em9305_ram_805af0.u32_805b30=bits;
  value=opencfw_em9305_init_state_30e9a4((uint32_t)bound);
  return opencfw_em9305_init_event_state_30e0e8(value);
 }
@@ -18662,58 +18673,58 @@ uint32_t opencfw_em9305_init_final_30bf6c(uint32_t incoming)
 uint32_t opencfw_em9305_init_features_3099cc(uint32_t incoming)
 {
  (void)incoming;
- uint32_t r0=*(volatile uint32_t *)(uintptr_t)0x802960u;
- uint32_t second=*(volatile uint32_t *)(uintptr_t)0x802958u;
+ uint32_t r0=em9305_ram_802950.u32_802960;
+ uint32_t second=em9305_ram_802950.u32_802958;
  uint32_t flags=3u,missing=(r0==0u)||(second==0u);
- uint32_t first=*(volatile uint32_t *)(uintptr_t)0x802954u;
- uint32_t third=*(volatile uint32_t *)(uintptr_t)0x80295cu;
+ uint32_t first=em9305_ram_802950.u32_802954;
+ uint32_t third=em9305_ram_802950.u32_80295c;
  uint32_t high=0u;
  if(r0==0u)flags=0u;
  if(!missing)flags|=0xc0003300u;
- *(volatile uint32_t *)(uintptr_t)0x805b48u=flags;
- *(volatile uint32_t *)(uintptr_t)0x805b4cu=high;
+ em9305_ram_805af0.u32_805b48=flags;
+ em9305_ram_805af0.u32_805b4c=high;
  if(r0!=0u&&first!=0u){
-  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uintptr_t config=em9305_ram_805c5c.u32_805cac;
   flags|=0x2000008cu;
-  *(volatile uint32_t *)(uintptr_t)0x805b4cu=high;
+  em9305_ram_805af0.u32_805b4c=high;
   r0=*(volatile uint8_t *)(config+34u);
-  *(volatile uint32_t *)(uintptr_t)0x805b48u=flags;
-  if(r0>=2u){high|=448u;*(volatile uint32_t *)(uintptr_t)0x805b48u=flags;*(volatile uint32_t *)(uintptr_t)0x805b4cu=high;}
+  em9305_ram_805af0.u32_805b48=flags;
+  if(r0>=2u){high|=448u;em9305_ram_805af0.u32_805b48=flags;em9305_ram_805af0.u32_805b4c=high;}
  }
  if(second!=0u){
   r0=flags|0x30u;
-  *(volatile uint32_t *)(uintptr_t)0x805b4cu=high;
-  *(volatile uint32_t *)(uintptr_t)0x805b48u=r0;
+  em9305_ram_805af0.u32_805b4c=high;
+  em9305_ram_805af0.u32_805b48=r0;
   if(first==0u)return r0;
-  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
-  *(volatile uint32_t *)(uintptr_t)0x805b4cu=high;
+  uintptr_t config=em9305_ram_805c5c.u32_805cac;
+  em9305_ram_805af0.u32_805b4c=high;
   uint32_t count=*(volatile uint8_t *)(config+34u);
   r0=flags|0x0f000070u;
-  *(volatile uint32_t *)(uintptr_t)0x805b48u=r0;
-  if(count>=2u){r0=flags|0x1f000070u;*(volatile uint32_t *)(uintptr_t)0x805b4cu=high;*(volatile uint32_t *)(uintptr_t)0x805b48u=r0;}
+  em9305_ram_805af0.u32_805b48=r0;
+  if(count>=2u){r0=flags|0x1f000070u;em9305_ram_805af0.u32_805b4c=high;em9305_ram_805af0.u32_805b48=r0;}
   flags=r0;
-  if(third!=0u){flags=r0|0x00c00000u;*(volatile uint32_t *)(uintptr_t)0x805b4cu=high;*(volatile uint32_t *)(uintptr_t)0x805b48u=flags;}
+  if(third!=0u){flags=r0|0x00c00000u;em9305_ram_805af0.u32_805b4c=high;em9305_ram_805af0.u32_805b48=flags;}
  }
  r0=first==0u;
  if(missing||r0!=0u)return r0;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- *(volatile uint32_t *)(uintptr_t)0x805b4cu=high;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
+ em9305_ram_805af0.u32_805b4c=high;
  uint32_t count=*(volatile uint8_t *)(config+34u);
  r0=flags|0x003fcc00u;
- *(volatile uint32_t *)(uintptr_t)0x805b48u=r0;
- if(count>=2u){high|=575u;*(volatile uint32_t *)(uintptr_t)0x805b48u=r0;*(volatile uint32_t *)(uintptr_t)0x805b4cu=high;}
+ em9305_ram_805af0.u32_805b48=r0;
+ if(count>=2u){high|=575u;em9305_ram_805af0.u32_805b48=r0;em9305_ram_805af0.u32_805b4c=high;}
  return r0;
 }
 /* Native308ff8..30902c: independent fresh publication reads, BMSKN27
  * tests bits28..31; preserve incoming R0 when no branch rewrites it. */
 uint32_t opencfw_em9305_init_features_308ff8(uint32_t incoming)
 {
- uint32_t r0=incoming,flags=*(volatile uint32_t *)(uintptr_t)0x805b34u;
- if((flags&(1u<<8u))!=0u){r0=*(volatile uint32_t *)(uintptr_t)0x805b54u;r0|=1u<<9u;*(volatile uint32_t *)(uintptr_t)0x805b54u=r0;}
- if((flags&(1u<<14u))!=0u){r0=*(volatile uint32_t *)(uintptr_t)0x805b54u;r0|=1u<<15u;*(volatile uint32_t *)(uintptr_t)0x805b54u=r0;}
- uint32_t first=*(volatile uint32_t *)(uintptr_t)0x805b30u;
- if((flags&(1u<<5u))!=0u){r0=*(volatile uint32_t *)(uintptr_t)0x805b54u;r0|=1u<<6u;*(volatile uint32_t *)(uintptr_t)0x805b54u=r0;}
- if((first&0xf0000000u)!=0u){r0=*(volatile uint32_t *)(uintptr_t)0x805b54u;r0|=1u;*(volatile uint32_t *)(uintptr_t)0x805b54u=r0;}
+ uint32_t r0=incoming,flags=em9305_ram_805af0.u32_805b34;
+ if((flags&(1u<<8u))!=0u){r0=em9305_ram_805af0.u32_805b54;r0|=1u<<9u;em9305_ram_805af0.u32_805b54=r0;}
+ if((flags&(1u<<14u))!=0u){r0=em9305_ram_805af0.u32_805b54;r0|=1u<<15u;em9305_ram_805af0.u32_805b54=r0;}
+ uint32_t first=em9305_ram_805af0.u32_805b30;
+ if((flags&(1u<<5u))!=0u){r0=em9305_ram_805af0.u32_805b54;r0|=1u<<6u;em9305_ram_805af0.u32_805b54=r0;}
+ if((first&0xf0000000u)!=0u){r0=em9305_ram_805af0.u32_805b54;r0|=1u;em9305_ram_805af0.u32_805b54=r0;}
  return r0;
 }
 
@@ -18724,19 +18735,19 @@ static const uint32_t opencfw_em9305_init_defaults_3344c8[6]={0x00138800u,0x0013
  * then24byte typed record; native R0 is destination+4. */
 uint32_t opencfw_em9305_init_lower_30e9e0(uint32_t incoming)
 {
- (void)incoming;(void)opencfw_em9305_memset((void *)(uintptr_t)0x805b84u,0u,112u);
- *(volatile uint8_t *)(uintptr_t)0x805bf0u=127u;
- return (uint32_t)(uintptr_t)opencfw_em9305_memcpy((void *)(uintptr_t)0x805b88u,opencfw_em9305_init_defaults_3344c8,24u);
+ (void)incoming;(void)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_805b80 + 0x4u),0u,112u);
+ em9305_ram_805be0.u8_805bf0=127u;
+ return (uint32_t)(uintptr_t)opencfw_em9305_memcpy((void *)((uintptr_t)&em9305_ram_805b80 + 0x8u),opencfw_em9305_init_defaults_3344c8,24u);
 }
 
 /* Native3133a0..3133b0: exact scheduler root clear and retained R0. */
 uint32_t opencfw_em9305_init_scheduler_clear_3133a0(void)
 {
- *(volatile uint16_t *)(uintptr_t)0x805f1cu=0u;
- *(volatile uint32_t *)(uintptr_t)0x805f18u=0u;
- *(volatile uint32_t *)(uintptr_t)0x805f14u=0u;
- *(volatile uint8_t *)(uintptr_t)0x805f04u=0u;
- return 0x805f04u;
+ em9305_ram_805eec.u16_805f1c=0u;
+ em9305_ram_805eec.u32_805f18=0u;
+ em9305_ram_805eec.u32_805f14=0u;
+ em9305_ram_805eec.u8_805f04=0u;
+ return ((uintptr_t)&em9305_ram_805eec + 0x18u);
 }
 /* Native3075cc..307660: direct versus22-entry broadcast dispatch, captured
  * message published before callbacks; reset runs22 registered initializers,
@@ -18744,20 +18755,20 @@ uint32_t opencfw_em9305_init_scheduler_clear_3133a0(void)
 uint32_t opencfw_em9305_init_message_3075cc(uintptr_t message)
 {
  uint32_t type=*(volatile uint8_t *)(message+2u);
- *(volatile uint32_t *)(uintptr_t)0x805c78u=(uint32_t)message;
+ em9305_ram_805c5c.u32_805c78=(uint32_t)message;
  if(type!=255u){
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)(0x802950u+type*4u);
+  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_802950+type*4u);
   if(callback!=0u)(void)((uint32_t (*)(uintptr_t,uintptr_t))callback)(message,callback);
  }else{
-  if(*(volatile uint8_t *)(message+3u)==0u)*(volatile uint8_t *)(uintptr_t)0x8051f8u=1u;
+  if(*(volatile uint8_t *)(message+3u)==0u)em9305_ram_8051b8.u8_8051f8=1u;
   for(uint32_t i=1u;i<=22u;i++){
-   uintptr_t callback=*(volatile uint32_t *)(uintptr_t)(0x802950u+i*4u);
+   uintptr_t callback=*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_802950+i*4u);
    if(callback!=0u)(void)((uint32_t (*)(uintptr_t,uintptr_t))callback)(message,callback);
   }
  }
- uint32_t pending=*(volatile uint8_t *)(uintptr_t)0x8051f8u;
+ uint32_t pending=em9305_ram_8051b8.u8_8051f8;
  if(pending==0u)return 0u;
- uint32_t busy=*(volatile uint8_t *)(uintptr_t)0x805a79u;
+ uint32_t busy=em9305_ram_805a6c.u8_805a79;
  if(busy!=0u)return busy;
  (void)opencfw_em9305_radio_address_reset_303e38();
  (void)opencfw_em9305_radio_reset_30390c();
@@ -18765,11 +18776,11 @@ uint32_t opencfw_em9305_init_message_3075cc(uintptr_t message)
  uint32_t value=opencfw_em9305_init_scheduler_clear_3133a0();
  (void)opencfw_em9305_init_state_30e9a4(value);
  for(uint32_t i=1u;i<=22u;i++){
-  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)(0x805200u+i*4u);
+  uintptr_t callback=*(volatile uint32_t *)(uintptr_t)(((uintptr_t)&em9305_ram_8051b8 + 0x48u)+i*4u);
   if(callback!=0u)(void)((uint32_t (*)(uintptr_t))callback)(callback);
  }
  _Alignas(4) uint32_t event=1u<<16u;
- *(volatile uint8_t *)(uintptr_t)0x8051f8u=0u;
+ em9305_ram_8051b8.u8_8051f8=0u;
  return opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
 }
 
@@ -18788,15 +18799,15 @@ uint32_t opencfw_em9305_init_slave_phy_predicate_329534(uintptr_t record)
 }
 uint32_t opencfw_em9305_init_lower_307d64(uint32_t incoming)
 {
- (void)incoming;*(volatile uint32_t *)(uintptr_t)0x803d38u=(uint32_t)(uintptr_t)&opencfw_em9305_init_phy_state_321150;
- return 0x803d38u;
+ (void)incoming;em9305_ram_803d20.u32_803d38=(uint32_t)(uintptr_t)&opencfw_em9305_init_phy_state_321150;
+ return ((uintptr_t)&em9305_ram_803d20 + 0x18u);
 }
 uint32_t opencfw_em9305_init_lower_30a37c(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x805688u=(uint32_t)(uintptr_t)&opencfw_em9305_init_slave_phy_predicate_329534;
- *(volatile uint32_t *)(uintptr_t)0x8056acu=(uint32_t)(uintptr_t)&opencfw_em9305_init_slave_phy_state_32b04c;
- return 0x8056acu;
+ em9305_ram_805688.u32_805688=(uint32_t)(uintptr_t)&opencfw_em9305_init_slave_phy_predicate_329534;
+ em9305_ram_805688.u32_8056ac=(uint32_t)(uintptr_t)&opencfw_em9305_init_slave_phy_state_32b04c;
+ return ((uintptr_t)&em9305_ram_805688 + 0x24u);
 }
 
 /* Genuine native action/transition tables33522c/3352cc and state children
@@ -18825,8 +18836,8 @@ uint32_t opencfw_em9305_init_phy_state_321150(uintptr_t record,uint32_t event)
    *(volatile uint32_t *)(record+644u)=bits;
   }else return 0u;
  }else if(event==12u){
-  uint32_t operation=*(volatile uint8_t *)(uintptr_t)0x802818u;
-  if(operation==7u||operation==17u){action=3u;if(*(volatile uint8_t *)(uintptr_t)0x80281cu!=22u)return 0u;}
+  uint32_t operation=em9305_ram_8027e0.u8_802818;
+  if(operation==7u||operation==17u){action=3u;if(em9305_ram_8027e0.u8_80281c!=22u)return 0u;}
   else if(operation==13u){action=3u;if(*(volatile uint8_t *)(record+635u)!=21u)return 0u;}
   else if(operation==22u){action=2u;force=1u;}
   else if(operation==23u)action=1u;
@@ -18896,7 +18907,7 @@ uint32_t opencfw_em9305_phy_complete_32c818(uintptr_t record)
 /* Native32caa0..32cabe: copy four fields from captured runtime message. */
 uint32_t opencfw_em9305_phy_defer_32caa0(uintptr_t record)
 {
- uintptr_t message=*(volatile uint32_t *)(uintptr_t)0x805c6cu;
+ uintptr_t message=em9305_ram_805c5c.u32_805c6c;
  *(volatile uint8_t *)(record+594u)=*(volatile uint8_t *)(message+4u);
  *(volatile uint8_t *)(record+595u)=*(volatile uint8_t *)(message+5u);
  *(volatile uint8_t *)(record+596u)=*(volatile uint8_t *)(message+6u);
@@ -18906,7 +18917,7 @@ uint32_t opencfw_em9305_phy_defer_32caa0(uintptr_t record)
 /* Native32cb48..32cb56 retains adjusted R0 return after halfword store. */
 uint32_t opencfw_em9305_phy_defer_32cb48(uintptr_t record)
 {
- uint32_t value=*(volatile uint16_t *)(uintptr_t)0x80281cu;
+ uint32_t value=em9305_ram_8027e0.u16_80281c;
  *(volatile uint16_t *)(record+720u)=(uint16_t)value;
  return (uint32_t)(record+720u);
 }
@@ -18928,7 +18939,7 @@ uint32_t opencfw_em9305_phy_reject_32698c(uintptr_t record,uint32_t reason,uint3
  if(packet==0u)return 0u;
  if(use_extended!=0u){
   *(volatile uint8_t *)packet=17u;
-  uint32_t operation=*(volatile uint8_t *)(uintptr_t)0x802818u;
+  uint32_t operation=em9305_ram_8027e0.u8_802818;
   *(volatile uint8_t *)(packet+2u)=(uint8_t)reason;
   *(volatile uint8_t *)(packet+1u)=(uint8_t)operation;
  }else{
@@ -18957,7 +18968,7 @@ uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t record,uintptr_t payloa
 {
  uint32_t previous=*(volatile uint8_t *)(record+378u);
  *(volatile uint8_t *)(record+378u)=(uint8_t)(previous+1u);
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8051e0u;
+ uintptr_t callback=em9305_ram_8051b8.u32_8051e0;
  uint32_t opcode=*(volatile uint8_t *)payload;
  uintptr_t header=payload-(opcode==27u?3u:2u);
  if(callback!=0u){
@@ -18965,7 +18976,7 @@ uint32_t opencfw_em9305_phy_packet_send_32d32c(uintptr_t record,uintptr_t payloa
   (void)((uint32_t (*)(uintptr_t,uintptr_t,uintptr_t,uintptr_t))callback)(record+84u,header,payload,payload+length);
  }
  (void)opencfw_em9305_ll_event_enqueue(record+360u,255u,header);
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  (void)opencfw_em9305_wsf_event_post(handler,4u);
  return opencfw_em9305_ll_segment_notify_3181b4(record);
 }
@@ -19025,8 +19036,8 @@ uint32_t opencfw_em9305_phy_action_315e60(uintptr_t record)
 uint32_t opencfw_em9305_phy_action_315e84(uintptr_t record)
 {
  uint32_t one=*(volatile uint8_t *)(record+720u);
- uint32_t four=*(volatile uint8_t *)(uintptr_t)0x80281du;
- uint32_t three=*(volatile uint8_t *)(uintptr_t)0x80281cu;
+ uint32_t four=em9305_ram_8027e0.u8_80281d;
+ uint32_t three=em9305_ram_8027e0.u8_80281c;
  uint32_t two=*(volatile uint8_t *)(record+721u);
  (void)opencfw_em9305_phy_update_packet_326764(record,one,two,three,four);
  return opencfw_em9305_phy_complete_32c818(record);
@@ -19038,12 +19049,12 @@ uint32_t opencfw_em9305_phy_action_315f0c(uintptr_t record)
  uint32_t bits=*(volatile uint32_t *)(record+636u);
  if((bits&(1u<<21u))==0u)return bits;
  bits&=~(1u<<21u);
- uint32_t operation=*(volatile uint8_t *)(uintptr_t)0x802818u;
+ uint32_t operation=em9305_ram_8027e0.u8_802818;
  *(volatile uint32_t *)(record+640u)=0u;
  *(volatile uint32_t *)(record+636u)=bits;
  uint32_t reason;
  if(operation==7u)reason=26u;
- else if(operation==17u||operation==13u)reason=*(volatile uint8_t *)(uintptr_t)0x80281du;
+ else if(operation==17u||operation==13u)reason=em9305_ram_8027e0.u8_80281d;
  else return bits;
  return opencfw_em9305_phy_response_3232dc(record,reason);
 }
@@ -19051,7 +19062,7 @@ uint32_t opencfw_em9305_phy_action_315f0c(uintptr_t record)
 /* Native31b39c..31b3b4: supported PHY mask from stored feature word. */
 uint32_t opencfw_em9305_phy_supported_31b39c(void)
 {
- uint32_t bits=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t bits=em9305_ram_805a6c.u32_805a94;
  return ((bits&256u)==0u?1u:3u)|((bits>>9u)&4u);
 }
 /* Native316550..316590 full peer PHY start, preserving fresh flags reload. */
@@ -19133,7 +19144,7 @@ uint32_t opencfw_em9305_phy_action_315c64(uintptr_t input)
  *(volatile uint16_t *)(record+576u)=(uint16_t)time_second;
  if(mode_first==3u){*(volatile uint16_t *)(record+588u)=(uint16_t)old_first;if(time_first<2704u)time_first=2704u;}
  else if(time_first<328u)time_first=328u;
- uint32_t feature=*(volatile uint8_t *)(uintptr_t)0x805a94u;
+ uint32_t feature=em9305_ram_805a6c.u8_805a94;
  *(volatile uint16_t *)(record+580u)=(uint16_t)time_first;
  if((feature&32u)!=0u&&(old_first!=time_first||old_second!=time_second))
   return opencfw_em9305_phy_length_notify_32317c(record,0u);
@@ -19209,7 +19220,7 @@ uint32_t opencfw_em9305_phy_update_complete_32e220(uintptr_t record)
   (void)opencfw_em9305_ll_event_decode_32dae4((uintptr_t)decoded,message);
   (void)opencfw_em9305_ll_event_process_32d380(record,capacity,(uintptr_t)decoded,message);
  }
- uint32_t event_handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t event_handler=em9305_ram_805af0.u8_805b18;
  return opencfw_em9305_wsf_event_post(event_handler,4u);
 }
 
@@ -19275,7 +19286,7 @@ uint32_t opencfw_em9305_phy_update_message_326814(uintptr_t record,uint32_t firs
  *(volatile uint8_t *)(record+723u)=(uint8_t)second;
  *(volatile uint8_t *)(record+722u)=(uint8_t)first;
  uint32_t count=opencfw_em9305_phy_queue_count_314114(queue);
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t unit=*(volatile uint16_t *)(config+76u);
  uint32_t scaled=opencfw_em9305_config_link_mpywhul(count,unit);
  uint32_t capacity=opencfw_em9305_ll_event_mode_32d4b0(record);
@@ -19283,7 +19294,7 @@ uint32_t opencfw_em9305_phy_update_message_326814(uintptr_t record,uint32_t firs
  if(timing<6u)timing=6u;
  else{
   count=opencfw_em9305_phy_queue_count_314114(queue);
-  config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  config=em9305_ram_805c5c.u32_805cac;
   unit=*(volatile uint16_t *)(config+76u);
   scaled=opencfw_em9305_config_link_mpywhul(count,unit);
   capacity=opencfw_em9305_ll_event_mode_32d4b0(record);
@@ -19323,8 +19334,8 @@ uint32_t opencfw_em9305_init_slave_phy_state_32b04c(uintptr_t record,uint32_t ev
    action=5u;*(volatile uint32_t *)(record+648u)=0u;*(volatile uint32_t *)(record+644u)=0u;
   }else return 0u;
  }else if(event==12u){
-  uint32_t operation=*(volatile uint8_t *)(uintptr_t)0x802818u;
-  if(operation==7u||operation==17u){action=3u;if(*(volatile uint8_t *)(uintptr_t)0x80281cu!=22u)return 0u;}
+  uint32_t operation=em9305_ram_8027e0.u8_802818;
+  if(operation==7u||operation==17u){action=3u;if(em9305_ram_8027e0.u8_80281c!=22u)return 0u;}
   else if(operation==13u){action=3u;if(*(volatile uint8_t *)(record+635u)!=21u)return 0u;}
   else if(operation==22u){action=2u;force=1u;}
   else if(operation==24u)action=1u;
@@ -19372,7 +19383,7 @@ uint32_t opencfw_em9305_init_slave_phy_state_32b04c(uintptr_t record,uint32_t ev
   uint32_t bits=*(volatile uint32_t *)(record+644u),state=*(volatile uint8_t *)(record+625u);
   *(volatile uint32_t *)(record+648u)=0u;*(volatile uint32_t *)(record+644u)=bits&~(1u<<21u);
   if(state!=0u)*(volatile uint8_t *)(record+625u)=0u;
-  uint32_t reason=*(volatile uint8_t *)(uintptr_t)0x80281du;
+  uint32_t reason=em9305_ram_8027e0.u8_80281d;
   (void)opencfw_em9305_phy_response_3232dc(record,reason);
  }
  return 1u;
@@ -19444,8 +19455,8 @@ uint32_t opencfw_em9305_phy_action_315e80(uintptr_t record)
 uint32_t opencfw_em9305_phy_action_315eac(uintptr_t record)
 {
  (void)opencfw_em9305_phy_complete_32c818(record);
- uint32_t second=*(volatile uint8_t *)(uintptr_t)0x80281du;
- uint32_t first=*(volatile uint8_t *)(uintptr_t)0x80281cu;
+ uint32_t second=em9305_ram_8027e0.u8_80281d;
+ uint32_t first=em9305_ram_8027e0.u8_80281c;
  if((first|second)==0u)return opencfw_em9305_receive_terminate_325c08(record,110u);
  return opencfw_em9305_slave_phy_apply_32cb58(record);
 }
@@ -19471,32 +19482,32 @@ uint32_t opencfw_em9305_phy_action_31644c(uintptr_t record)
 /* Native32cb58..32cbec full slave update validation and instant publish. */
 uint32_t opencfw_em9305_slave_phy_apply_32cb58(uintptr_t record)
 {
- int32_t first=(int8_t)*(volatile uint8_t *)(uintptr_t)0x80281cu;
+ int32_t first=(int8_t)em9305_ram_8027e0.u8_80281c;
  if(first<0)return opencfw_em9305_receive_terminate_325c08(record,74u);
- int32_t second=(int8_t)*(volatile uint8_t *)(uintptr_t)0x80281du;
+ int32_t second=(int8_t)em9305_ram_8027e0.u8_80281d;
  if(second<0)return opencfw_em9305_receive_terminate_325c08(record,74u);
  if((first|second)==0)return opencfw_em9305_receive_terminate_325c08(record,110u);
  uint32_t anchor=*(volatile uint16_t *)(record+262u);
- uint32_t instant=*(volatile uint16_t *)(uintptr_t)0x80281eu;
+ uint32_t instant=em9305_ram_8027e0.u16_80281e;
  if((uint16_t)(instant-anchor)>=32767u)return opencfw_em9305_receive_terminate_325c08(record,73u);
  if(first!=0){
   uint32_t supported=opencfw_em9305_phy_supported_31b39c();
   if((supported&(uint32_t)first)==0u)return opencfw_em9305_receive_terminate_325c08(record,74u);
-  second=*(volatile uint8_t *)(uintptr_t)0x80281du;
+  second=em9305_ram_8027e0.u8_80281d;
  }
  if((uint8_t)second!=0u){
   uint32_t supported=opencfw_em9305_phy_supported_31b39c();
   if((supported&(uint32_t)second)==0u)return opencfw_em9305_receive_terminate_325c08(record,74u);
  }
- uint32_t value=*(volatile uint8_t *)(uintptr_t)0x80281cu,valid=1u;
+ uint32_t value=em9305_ram_8027e0.u8_80281c,valid=1u;
  if(value>=5u||((0x17u>>value)&1u)==0u){
   (void)opencfw_em9305_receive_terminate_325c08(record,74u);valid=0u;
  }
- value=*(volatile uint8_t *)(uintptr_t)0x80281du;
+ value=em9305_ram_8027e0.u8_80281d;
  if(value>=5u||value==3u)return opencfw_em9305_receive_terminate_325c08(record,74u);
  if(valid==0u)return 0u;
- uint32_t directions=*(volatile uint16_t *)(uintptr_t)0x80281cu;
- instant=*(volatile uint16_t *)(uintptr_t)0x80281eu;
+ uint32_t directions=em9305_ram_8027e0.u16_80281c;
+ instant=em9305_ram_8027e0.u16_80281e;
  *(volatile uint16_t *)(record+722u)=(uint16_t)directions;
  *(volatile uint16_t *)(record+724u)=(uint16_t)instant;
  return instant;
@@ -19505,7 +19516,7 @@ uint32_t opencfw_em9305_slave_phy_apply_32cb58(uintptr_t record)
 /* Native3232dc/32317c reserve their original event frames before C executes.
  * Untouched native stack bytes remain untouched, never zero-initialized. */
 static inline uint32_t opencfw_em9305_phy_event_index(uintptr_t record)
-{int32_t delta=(int32_t)((uint32_t)record-*(volatile uint32_t *)(uintptr_t)0x805c70u);int32_t index;index=(uint32_t)((int32_t)delta/912);return (uint8_t)index;}
+{int32_t delta=(int32_t)((uint32_t)record-em9305_ram_805c5c.u32_805c70);int32_t index;index=(uint32_t)((int32_t)delta/912);return (uint8_t)index;}
 uint32_t opencfw_em9305_phy_response_frame_3232dc(uintptr_t record,uint32_t reason,uintptr_t event)
 {
  uint32_t index=opencfw_em9305_phy_event_index(record);
@@ -19553,24 +19564,24 @@ extern uint32_t opencfw_em9305_associated_event_32b4e4(uintptr_t);
 /* Native30a328..30a378. Return retains native incidental R0. */
 uint32_t opencfw_em9305_init_lower_30a328(uint32_t incoming)
 {
- (void)incoming;uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ (void)incoming;uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t version=*(volatile uint8_t *)(config+4u);
- *(volatile uint32_t *)(uintptr_t)0x802978u=(uint32_t)(uintptr_t)opencfw_em9305_associated_event_32b4e4;
- *(volatile uint32_t *)(uintptr_t)0x801310u=(uint32_t)(uintptr_t)opencfw_em9305_radio_record_available_307410;
- *(volatile uint32_t *)(uintptr_t)0x805224u=0u;
+ em9305_ram_802950.u32_802978=(uint32_t)(uintptr_t)opencfw_em9305_associated_event_32b4e4;
+ em9305_ram_8012c0.u32_801310=(uint32_t)(uintptr_t)opencfw_em9305_radio_record_available_307410;
+ em9305_ram_8051b8.u32_805224=0u;
  if(version<9u)return (uint32_t)config;
- uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805b30u;flags|=1u<<13u;
- *(volatile uint32_t *)(uintptr_t)0x805b30u=flags;
+ uint32_t flags=em9305_ram_805af0.u32_805b30;flags|=1u<<13u;
+ em9305_ram_805af0.u32_805b30=flags;
  if(version<12u)return flags;
- uint32_t second=*(volatile uint32_t *)(uintptr_t)0x805b34u;
- *(volatile uint32_t *)(uintptr_t)0x805b30u=flags;
- *(volatile uint32_t *)(uintptr_t)0x805b34u=second|(1u<<4u);
+ uint32_t second=em9305_ram_805af0.u32_805b34;
+ em9305_ram_805af0.u32_805b30=flags;
+ em9305_ram_805af0.u32_805b34=second|(1u<<4u);
  return flags;
 }
 /* Native32b4e4..32b536: event over one or every active2824B associated row. */
 uint32_t opencfw_em9305_associated_event_32b4e4(uintptr_t event)
 {
- *(volatile uint32_t *)(uintptr_t)0x805cc0u=(uint32_t)event;
+ em9305_ram_805c5c.u32_805cc0=(uint32_t)event;
  if(*(volatile uint8_t *)(event+2u)!=255u){
   uintptr_t record=opencfw_em9305_radio_record_find_31aa64(*(volatile uint8_t *)event);
   if(record==0u)return 0u;
@@ -19578,10 +19589,10 @@ uint32_t opencfw_em9305_associated_event_32b4e4(uintptr_t event)
  }
  uint32_t number=0u,offset=0u;
  for(;;){
-  uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+  uintptr_t config=em9305_ram_805c5c.u32_805cac;
   uint32_t count=*(volatile uint8_t *)(config+12u);
   if(number>=count)return count;
-  uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c38u;record+=offset;
+  uintptr_t record=em9305_ram_805be0.u32_805c38;record+=offset;
   if(*(volatile uint8_t *)record!=0u)(void)opencfw_em9305_associated_action_32b5ec(record,*(volatile uint8_t *)(event+3u));
   offset+=2824u;number++;
  }
@@ -19611,7 +19622,7 @@ extern uint32_t opencfw_em9305_associated_schedule_drop_3136ac(uint32_t);
 uint32_t opencfw_em9305_associated_release_324a60(uintptr_t record)
 {
  (void)opencfw_em9305_common_release_304588(1u);
- int32_t delta=(int32_t)((uint32_t)record-*(volatile uint32_t *)(uintptr_t)0x805c38u),index;
+ int32_t delta=(int32_t)((uint32_t)record-em9305_ram_805be0.u32_805c38),index;
  index=(uint32_t)((int32_t)delta/2824);
  (void)opencfw_em9305_associated_schedule_drop_3136ac((uint8_t)(index+4));
  return opencfw_em9305_command_count_down_30e48c();
@@ -19627,40 +19638,40 @@ uint32_t opencfw_em9305_associated_action_324c60(uintptr_t record)
 { return opencfw_em9305_command_periodic_status_30e878(*(volatile uint8_t *)(record+1u),0u); }
 
 /* Native 306c7c..306c8a: call event handler `index` from the table at
- * 0x802878 with r0 = the handler address; 0 when the slot is empty. */
+ * (uintptr_t)&em9305_ram_802878 with r0 = the handler address; 0 when the slot is empty. */
 uint32_t opencfw_em9305_init_event_dispatch_306c7c(uint32_t index)
 {
- uintptr_t callback=((volatile uint32_t *)(uintptr_t)0x802878u)[index];
+ uintptr_t callback=(&em9305_ram_802878.u32_802878)[index];
  if(callback==0u)return 0u;
  return ((uint32_t (*)(uintptr_t))callback)(callback);
 }
 
 uint32_t opencfw_em9305_event_reset_332cc0(uint32_t incoming)
-{(void)incoming;return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)0x8058dcu,0u,404u);}
+{(void)incoming;return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_8058c8 + 0x14u),0u,404u);}
 /* Native332c84..332cbc retains path-specific R0, including state before write4. */
 uint32_t opencfw_em9305_event_mode_332c84(uintptr_t event)
 {
  uint32_t operation=*(volatile uint8_t *)(event+3u);
  if(operation==1u){
-  *(volatile uint8_t *)(uintptr_t)0x805a78u=0u;
-  *(volatile uint8_t *)(uintptr_t)0x8058dcu=0u;
+  em9305_ram_805a6c.u8_805a78=0u;
+  em9305_ram_8058c8.u8_8058dc=0u;
   return opencfw_em9305_command_count_down_30e48c();
  }
- if(operation!=0u)return 0x805a70u;
- uint32_t enabled=*(volatile uint8_t *)(uintptr_t)0x805a78u;
+ if(operation!=0u)return ((uintptr_t)&em9305_ram_805a6c + 0x4u);
+ uint32_t enabled=em9305_ram_805a6c.u8_805a78;
  if(enabled==0u)return 0u;
  (void)opencfw_em9305_command_stop_30b654(0u);
- uint32_t state=*(volatile uint8_t *)(uintptr_t)0x8058dcu;
- if(state==3u)*(volatile uint8_t *)(uintptr_t)0x8058dcu=4u;
+ uint32_t state=em9305_ram_8058c8.u8_8058dc;
+ if(state==3u)em9305_ram_8058c8.u8_8058dc=4u;
  return state;
 }
 /* Native30e0e8..30e11c: clear404, callback registration, actual common-init. */
 uint32_t opencfw_em9305_init_event_state_30e0e8(uint32_t incoming)
 {
- (void)incoming;(void)opencfw_em9305_memset((void *)(uintptr_t)0x8058dcu,0u,404u);
- *(volatile uint32_t *)(uintptr_t)0x805210u=(uint32_t)(uintptr_t)opencfw_em9305_event_reset_332cc0;
- *(volatile uint32_t *)(uintptr_t)0x802964u=(uint32_t)(uintptr_t)opencfw_em9305_event_mode_332c84;
- return opencfw_em9305_common_init_303d2c(0x802964u);
+ (void)incoming;(void)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_8058c8 + 0x14u),0u,404u);
+ em9305_ram_8051b8.u32_805210=(uint32_t)(uintptr_t)opencfw_em9305_event_reset_332cc0;
+ em9305_ram_802950.u32_802964=(uint32_t)(uintptr_t)opencfw_em9305_event_mode_332c84;
+ return opencfw_em9305_common_init_303d2c(((uintptr_t)&em9305_ram_802950 + 0x14u));
 }
 
 /* Native324aa8..324b38: associated stop action. Capture timing source/count
@@ -19706,8 +19717,8 @@ uint32_t opencfw_em9305_associated_action_324b3c(uintptr_t record)
  *(volatile uint8_t *)(record+698u)=0u;
  uint32_t access=opencfw_em9305_radio_access_raw_318878();
  *(volatile uint32_t *)(record+372u)=access;
- uint32_t second=*(volatile uint32_t *)(uintptr_t)0x805aa4u;
- uint32_t first=*(volatile uint32_t *)(uintptr_t)0x805aa0u;
+ uint32_t second=em9305_ram_805a6c.u32_805aa4;
+ uint32_t first=em9305_ram_805a6c.u32_805aa0;
  *(volatile uint32_t *)(record+720u)=first;
  *(volatile uint8_t *)(record+799u)=0u;
  *(volatile uint16_t *)(record+752u)=0u;
@@ -19724,7 +19735,7 @@ uint32_t opencfw_em9305_associated_action_324b3c(uintptr_t record)
  uint32_t status;
  flag=*(volatile uint8_t *)(record+2809u);
  uintptr_t callback=0u;
- if(flag!=0u)callback=*(volatile uint32_t *)(uintptr_t)0x805cc4u;
+ if(flag!=0u)callback=em9305_ram_805c5c.u32_805cc4;
  if(callback!=0u)status=((uint32_t (*)(uintptr_t))callback)(record);
  else status=opencfw_em9305_associated_validate_32b2d4(record);
  if(status!=0u){
@@ -19777,7 +19788,7 @@ uint32_t opencfw_em9305_associated_channel_seed_324c98(uintptr_t channels,uint32
  * then retain callback-fresh counter and full decrement return. */
 uint32_t opencfw_em9305_associated_schedule_drop_3136ac(uint32_t id)
 {
- uintptr_t root=0x805f28u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x3cu);
  uint32_t existing=*(volatile uint32_t *)(root+8u);
  uint32_t selected=*(volatile uint32_t *)(root+(id&65535u)*12u+52u);
  if(selected==existing){
@@ -19799,7 +19810,7 @@ uint32_t opencfw_em9305_associated_cleanup_3266d0(uintptr_t record,uint32_t acti
 {
  uintptr_t event=opencfw_em9305_wsf_event_allocate(4u);
  if(event==0u)return 0u;
- uint32_t id=*(volatile uint8_t *)(record+1u),handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t id=*(volatile uint8_t *)(record+1u),handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint8_t *)(event+3u)=(uint8_t)action;
  *(volatile uint16_t *)event=(uint16_t)id;
  *(volatile uint8_t *)(event+2u)=10u;
@@ -19826,7 +19837,7 @@ uint32_t opencfw_em9305_associated_random_31896c(void)
 uint32_t opencfw_em9305_associated_slot_query_31b2fc(uint32_t id,uintptr_t output)
 {
  uint32_t offset=opencfw_em9305_native_mpywhl(id-4u,2824u);
- uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x805c38u;record+=offset;
+ uintptr_t record=em9305_ram_805be0.u32_805c38;record+=offset;
  if(*(volatile uint8_t *)(record+368u)!=1u)return 0u;
  uint32_t result=*(volatile uint32_t *)(record+388u);
  if(output!=0u){uint32_t extent=*(volatile uint32_t *)(record+392u);*(volatile uint32_t *)output=extent;}
@@ -19849,7 +19860,7 @@ uint32_t opencfw_em9305_associated_validate_32b2d4(uintptr_t record)
  int32_t power=*(volatile int8_t *)(record+60u);uint32_t channel=*(volatile uint8_t *)(record+697u);
  *(volatile uint8_t *)(record+696u)=(uint8_t)random;
  *(volatile uint8_t *)(record+428u)=8u;*(volatile uint8_t *)(record+429u)=(uint8_t)channel;
- if(power==127)power=*(volatile uint8_t *)(uintptr_t)0x805a9cu;
+ if(power==127)power=em9305_ram_805a6c.u8_805a9c;
  uint32_t access=*(volatile uint32_t *)(record+372u);
  *(volatile uint8_t *)(record+430u)=(uint8_t)power;
  *(volatile uint32_t *)(record+432u)=access;
@@ -19865,23 +19876,23 @@ uint32_t opencfw_em9305_associated_validate_32b2d4(uintptr_t record)
  *(volatile uint32_t *)(record+588u)=(uint32_t)(uintptr_t)opencfw_em9305_associated_packet_callback_32c69c;
  *(volatile uint8_t *)(record+441u)=(uint8_t)phy;*(volatile uint8_t *)(record+440u)=(uint8_t)phy;
  (void)opencfw_em9305_associated_object_init_312918(object,0u);
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t spacing=*(volatile uint16_t *)(config+20u),budget=*(volatile uint32_t *)(record+72u);
  uint32_t maximum=*(volatile uint32_t *)(record+712u),minimum=*(volatile uint32_t *)(record+708u);
  if(budget>spacing)spacing=budget;
  uint32_t timing=0u;
- if(*(volatile uint8_t *)(record+804u)!=0u){uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x801a14u;if(callback!=0u)timing=((uint32_t (*)(void))callback)();}
+ if(*(volatile uint8_t *)(record+804u)!=0u){uintptr_t callback=em9305_ram_801a14.u32_801a14;if(callback!=0u)timing=((uint32_t (*)(void))callback)();}
  uint32_t size=*(volatile uint16_t *)(record+1144u);
  phy=*(volatile uint8_t *)(record+63u);
  uint32_t duration=opencfw_em9305_radio_duration_312be4(phy,0u,timing,(uint16_t)spacing,size,1u,2u,0u);
- config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ config=em9305_ram_805c5c.u32_805cac;
  uint32_t chosen=*(volatile uint16_t *)(config+28u);
  if(chosen<duration){size=*(volatile uint16_t *)(record+1144u);phy=*(volatile uint8_t *)(record+63u);chosen=opencfw_em9305_radio_duration_312be4(phy,0u,timing,(uint16_t)spacing,size,1u,2u,0u);}
  uint32_t extent=*(volatile uint32_t *)(record+392u);if(chosen>extent)extent=chosen;
  *(volatile uint32_t *)(record+392u)=extent;
  if(maximum<chosen)return 69u;
  if(chosen>minimum)minimum=chosen;
- int32_t delta=(int32_t)((uint32_t)record-*(volatile uint32_t *)(uintptr_t)0x805c38u),row;
+ int32_t delta=(int32_t)((uint32_t)record-em9305_ram_805be0.u32_805c38),row;
  row=(uint32_t)((int32_t)delta/2824);
  volatile uint32_t allocation;
  uint32_t success=opencfw_em9305_associated_slot_allocate_3133b4((uint8_t)(row+4),1u,minimum,maximum,extent,(uintptr_t)&allocation,(uintptr_t)opencfw_em9305_associated_slot_query_31b2fc);
@@ -19889,7 +19900,7 @@ uint32_t opencfw_em9305_associated_validate_32b2d4(uintptr_t record)
  uint32_t base=*(volatile uint32_t *)(record+2476u),selected=allocation;
  *(volatile uint32_t *)(record+700u)=selected;*(volatile uint32_t *)(record+400u)=selected;
  if(base==0u){selected=*(volatile uint32_t *)(record+700u);base=opencfw_em9305_pal_current_time();}
- delta=(int32_t)((uint32_t)record-*(volatile uint32_t *)(uintptr_t)0x805c38u);
+ delta=(int32_t)((uint32_t)record-em9305_ram_805be0.u32_805c38);
  row=(uint32_t)((int32_t)delta/2824);
  uint32_t elapsed=opencfw_em9305_radio_schedule_313424(selected,(uint8_t)(row+4),base,0u,0u);
  uint32_t half=*(volatile uint32_t *)(record+36u);if(elapsed==half)elapsed=half>>1u;
@@ -19912,7 +19923,7 @@ static inline uint32_t opencfw_em9305_associated_slot_rem625(uint32_t value)
 uint64_t opencfw_em9305_associated_bitmap_3336d8(uintptr_t head,uint32_t special)
 {
  if(head==0u)return 0u;
- uint32_t quantum=*(volatile uint32_t *)(uintptr_t)0x805f2cu;
+ uint32_t quantum=em9305_ram_805eec.u32_805f2c;
  uint64_t bits=0u;
  for(uintptr_t node=head;node!=0u;node=*(volatile uint32_t *)(node+4u)){
   uint32_t period=*(volatile uint32_t *)(node+20u);
@@ -19937,9 +19948,9 @@ uint64_t opencfw_em9305_associated_bitmap_3336d8(uintptr_t head,uint32_t special
 }
 uint32_t opencfw_em9305_associated_available_33382c(uint32_t id,uint32_t value,uint32_t extent,uint32_t existing)
 {
- uintptr_t root=0x805f28u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x3cu);
  if(*(volatile uint8_t *)root==0u)return 1u;
- uintptr_t node=*(volatile uint32_t *)(uintptr_t)0x805f14u;
+ uintptr_t node=em9305_ram_805eec.u32_805f14;
  while(node!=0u&&*(volatile uint32_t *)(node+20u)==0u)node=*(volatile uint32_t *)(node+4u);
  uint64_t bits=opencfw_em9305_associated_bitmap_3336d8(node,1u);
  uint32_t quantum,occupied=0u;
@@ -19965,7 +19976,7 @@ uint32_t opencfw_em9305_associated_available_33382c(uint32_t id,uint32_t value,u
 }
 uint32_t opencfw_em9305_associated_set_3338f4(uint32_t id,uint32_t value,uint32_t extent)
 {
- uintptr_t root=0x805f28u,slot=root+(id&65535u)*12u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x3cu),slot=root+(id&65535u)*12u;
  uint32_t current=*(volatile uint32_t *)(root+8u);
  if(current==0u){(void)opencfw_em9305_radio_primary_timer_333bec(value);*(volatile uint8_t *)(slot+49u)=1u;}
  else if(current==value)*(volatile uint8_t *)(slot+49u)=1u;
@@ -19986,7 +19997,7 @@ uint32_t opencfw_em9305_associated_select_333948(uint32_t minimum,uint32_t maxim
  uint32_t largest=0u;
  for(uint32_t index=0u;index<8u;++index){
   if(index==exclude)continue;
-  uint32_t value=*(volatile uint32_t *)(uintptr_t)(0x805f38u+index*4u);
+  uint32_t value=*(volatile uint32_t *)(uintptr_t)(((uintptr_t)&em9305_ram_805eec + 0x4cu) + index*4u);
   if(value>=threshold&&value<=maximum&&value>=largest)largest=value;
  }
  if(largest!=0u)return largest;
@@ -19998,7 +20009,7 @@ uint32_t opencfw_em9305_associated_slot_allocate_3133b4(uint32_t id,uint32_t dir
  uint32_t choice=opencfw_em9305_associated_select_333948(minimum,maximum,625u,direction,id);
  if(opencfw_em9305_associated_available_33382c(id,choice,extent,0u)==0u)return 0u;
  (void)opencfw_em9305_associated_set_3338f4(id,choice,extent);
- uintptr_t root=0x805f28u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x3cu);
  uint32_t count=*(volatile uint8_t *)root;
  *(volatile uint32_t *)(root+16u+id*4u)=choice;
  *(volatile uint8_t *)root=(uint8_t)(count+1u);
@@ -20028,7 +20039,7 @@ uint32_t opencfw_em9305_associated_radio_callback_32b538(uintptr_t object)
  if(*(volatile uint8_t *)(record+698u)!=0u)return opencfw_em9305_associated_cleanup_3266d0(record,3u);
  uintptr_t packet=*(volatile uint32_t *)(object+44u);
  uint32_t power=*(volatile uint8_t *)(packet+15u);
- if(power==0u)power=*(volatile uint8_t *)(uintptr_t)0x805bedu;
+ if(power==0u)power=em9305_ram_805be0.u8_805bed;
  *(volatile uint8_t *)(packet+14u)=(uint8_t)power;
  if(*(volatile uint8_t *)(record+1164u)!=0u){
   uintptr_t destination=*(volatile uint32_t *)(record+1148u);
@@ -20040,7 +20051,7 @@ uint32_t opencfw_em9305_associated_radio_callback_32b538(uintptr_t object)
   *(volatile uint16_t *)(record+1144u)=(uint16_t)bytes;
   *(volatile uint16_t *)(record+706u)=(uint16_t)extent;
  }
- if(*(volatile uint8_t *)(uintptr_t)0x805beeu!=0u){
+ if(em9305_ram_805be0.u8_805bee!=0u){
   uint32_t timestamp=*(volatile uint32_t *)(object+8u),spacing=*(volatile uint32_t *)(record+700u);
   uint32_t count=*(volatile uint16_t *)(record+752u),id=*(volatile uint8_t *)(record+1u);
   (void)opencfw_em9305_associated_report_30e89c(id,count,0u,spacing,timestamp);
@@ -20081,7 +20092,7 @@ uint32_t opencfw_em9305_associated_channel_reset_3279c4(uintptr_t record)
 uint32_t opencfw_em9305_associated_channel_apply_3279d0(uintptr_t record)
 {
  if(*(volatile uint8_t *)(record+80u)==1u)return (uint32_t)record;
- uintptr_t event=*(volatile uint32_t *)(uintptr_t)0x805c34u;
+ uintptr_t event=em9305_ram_805be0.u32_805c34;
  uint32_t count=*(volatile uint16_t *)(record+752u);
  uint32_t lower=*(volatile uint32_t *)(event+4u),upper=*(volatile uint32_t *)(event+8u);
  *(volatile uint16_t *)(record+92u)=(uint16_t)(count+6u);
@@ -20230,7 +20241,7 @@ uint32_t opencfw_em9305_associated_priority_313310(uintptr_t object,uintptr_t ot
  * order and subtraction N-flag tests (BP/BN), including wrapped deadlines. */
 uint32_t opencfw_em9305_associated_schedule_insert_312da4(uintptr_t object,uintptr_t tie)
 {
- uintptr_t root=0x805f04u,current=*(volatile uint32_t *)(root+16u),next,previous,seek=0u,last=0u,boundary=0u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x18u),current=*(volatile uint32_t *)(root+16u),next,previous,seek=0u,last=0u,boundary=0u;
  uint32_t success=0u,end,target,guard;
  if(current==0u)goto empty;
 scan:
@@ -20355,8 +20366,8 @@ uint32_t opencfw_em9305_associated_packet_refill_3259fc(uintptr_t record)
   uint32_t correction=(uint32_t)((int32_t)(int16_t)quotient*-37);
   uint32_t channel=sum+correction;
   *(volatile uint8_t *)(record+697u)=(uint8_t)channel;
-  uint32_t low=*(volatile uint32_t *)(uintptr_t)0x805aa0u;
-  uint32_t high=*(volatile uint32_t *)(uintptr_t)0x805aa4u;
+  uint32_t low=em9305_ram_805a6c.u32_805aa0;
+  uint32_t high=em9305_ram_805a6c.u32_805aa4;
   uint64_t mask=((uint64_t)high<<32u)|low;
   uint32_t result=(uint32_t)(mask>>((uint8_t)channel&63u));
   if((result&1u)!=0u)return result;
@@ -20374,7 +20385,7 @@ uint32_t opencfw_em9305_associated_packet_continue_323ac8(uintptr_t record,uintp
 /* Native3243e0..324436: flags are full captured config/input then byte cast. */
 uint32_t opencfw_em9305_associated_packet_start_3243e0(uintptr_t record,uintptr_t payload,uintptr_t size,uint32_t count)
 {
- uint32_t policy=*(volatile uint32_t *)(uintptr_t)0x805a98u;
+ uint32_t policy=em9305_ram_805a6c.u32_805a98;
  uint32_t mode=*(volatile uint8_t *)(record+716u),enabled=*(volatile uint8_t *)(record+804u);
  uint8_t header[5] __attribute__((aligned(4)))={7u,0u,0u,0u,0u};
  uint32_t flags=((policy>>1u)&8u)|(mode&64u)|(enabled<<2u)|16u;
@@ -20395,7 +20406,7 @@ uint32_t opencfw_em9305_radio_compose_323dc0(uintptr_t record,uint32_t forced,ui
  uintptr_t channels=record+704u,cursor=output+4u,end=0u,body=output+3u;
  *(volatile uint8_t *)(header+4u)=0u;
  if(type==5u)type=count!=0u?4u:2u;
- else if((*(volatile uint8_t *)(uintptr_t)0x805a87u&1u)!=0u)enabled=0u;
+ else if((em9305_ram_805a6c.u8_805a87&1u)!=0u)enabled=0u;
  uint32_t include_address=record==0u?(type==3u||type==6u):((*(volatile uint16_t *)(record+32u)&32u)==0u||type==3u||type==6u);
  if(include_address!=0u&&((forced&1u)!=0u||(record!=0u&&(allowed&1u)!=0u&&(*(volatile uint8_t *)(channels+123u)&1u)==0u))){
   uint32_t low,high;
@@ -20582,7 +20593,7 @@ uint32_t opencfw_em9305_compose_finalize_32412c(uintptr_t record,uintptr_t curso
   phy=*(volatile uint8_t *)(record+2528u);
  }
  uint32_t piece=opencfw_em9305_compose_duration_guard_312bb4(phy,mode,length+2u);
- uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t configuration=em9305_ram_805c5c.u32_805cac;
  uint32_t record_guard=*(volatile uint32_t *)(record+72u);
  uint32_t config_guard=*(volatile uint16_t *)(configuration+20u);
  uint32_t duration=(record_guard>config_guard?record_guard:config_guard)+piece;
@@ -20602,10 +20613,10 @@ uint32_t opencfw_em9305_compose_finalize_32412c(uintptr_t record,uintptr_t curso
 /* Native318988..3189c8: clock accuracy class plus configured offset. */
 uint32_t opencfw_em9305_compose_accuracy_318988(void)
 {
- uintptr_t configuration=*(volatile uint32_t *)(uintptr_t)0x805c18u;
+ uintptr_t configuration=em9305_ram_805be0.u32_805c18;
  uint32_t metric=*(volatile uint16_t *)configuration;
  uint32_t value=metric<21u?7u:metric<31u?6u:metric<51u?5u:metric<76u?4u:metric<101u?3u:metric<151u?2u:metric<251u?1u:0u;
- return (uint8_t)(value+*(volatile uint8_t *)(uintptr_t)0x805aa8u);
+ return (uint8_t)(value+em9305_ram_805a6c.u8_805aa8);
 }
 /* Native324438..324590: full 18-byte auxiliary schedule descriptor. */
 uint32_t opencfw_em9305_compose_aux_encode_324438(uintptr_t record,uintptr_t output)
@@ -20668,7 +20679,7 @@ static uint32_t opencfw_em9305_schedule_remu(uint32_t value,uint32_t divisor,uin
 {(void)prior;return value%divisor;}
 uint32_t opencfw_em9305_radio_schedule_313424(uint32_t incoming,uint32_t index,uint32_t timestamp,uint32_t existing,uint32_t action)
 {
- uintptr_t original_head=*(volatile uint32_t *)(uintptr_t)0x805f14u;
+ uintptr_t original_head=em9305_ram_805eec.u32_805f14;
  if(original_head==0u)return incoming;
  uintptr_t first=original_head;
  while(*(volatile uint32_t *)(first+20u)==0u){first=*(volatile uint32_t *)(first+4u);if(first==0u)return incoming;}
@@ -20679,7 +20690,7 @@ uint32_t opencfw_em9305_radio_schedule_313424(uint32_t incoming,uint32_t index,u
  if(absent!=0u||first_special==0u)selected=first;
  uint64_t bitmap=opencfw_em9305_associated_bitmap_3336d8(selected,first_special&absent);
  uint32_t r13=0u,fp=0u;
- uintptr_t root=0x805f28u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x3cu);
  if(action==3u){
   uintptr_t node=original_head;
   while(node!=(uintptr_t)existing){node=*(volatile uint32_t *)(node+4u);if(node==0u)goto compose_offset;}
@@ -20782,22 +20793,22 @@ static const uint8_t opencfw_em9305_init_state_transitions_334f60[16]={0,1,0,0,3
 uint32_t opencfw_em9305_init_state_event_320580(uintptr_t event)
 {
  uint32_t index=*(volatile uint8_t *)(event+3u);
- uint32_t state=*(volatile uint8_t *)(uintptr_t)0x803bb8u;
+ uint32_t state=em9305_ram_803bb8.u8_803bb8;
  opencfw_em9305_init_state_action action=opencfw_em9305_init_state_actions_334f20[state*4u+index];
- if(action!=0){(void)action((uintptr_t)action,state);state=*(volatile uint8_t *)(uintptr_t)0x803bb8u;}
+ if(action!=0){(void)action((uintptr_t)action,state);state=em9305_ram_803bb8.u8_803bb8;}
  uint32_t next=opencfw_em9305_init_state_transitions_334f60[index+4u*state];
- *(volatile uint8_t *)(uintptr_t)0x803bb8u=(uint8_t)next;return next;
+ em9305_ram_803bb8.u8_803bb8=(uint8_t)next;return next;
 }
 /* Native3205b4..3205c0: genuine reset, full404-byte memset tail. */
 uint32_t opencfw_em9305_init_state_reset_3205b4(void)
-{return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)0x803b94u,0u,404u);}
+{return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)&em9305_ram_803b94,0u,404u);}
 /* Native307bdc..307c04: typed callback registrations and reset body. */
 uint32_t opencfw_em9305_init_lower_307bdc(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x80295cu=(uint32_t)(uintptr_t)opencfw_em9305_init_state_event_320580;
- *(volatile uint32_t *)(uintptr_t)0x805208u=(uint32_t)(uintptr_t)opencfw_em9305_init_state_reset_3205b4;
- return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)0x803b94u,0u,404u);
+ em9305_ram_802950.u32_80295c=(uint32_t)(uintptr_t)opencfw_em9305_init_state_event_320580;
+ em9305_ram_8051b8.u32_805208=(uint32_t)(uintptr_t)opencfw_em9305_init_state_reset_3205b4;
+ return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)&em9305_ram_803b94,0u,404u);
 }
 
 /* Native31b6b0..31b6c6: disabled zero return, otherwise trigger byte and
@@ -20805,10 +20816,10 @@ uint32_t opencfw_em9305_init_lower_307bdc(uint32_t incoming)
 uint32_t opencfw_em9305_init_state_action_31b6b0(uintptr_t incoming,uint32_t state)
 {
  (void)incoming;(void)state;
- uint32_t enabled=*(volatile uint8_t *)(uintptr_t)0x805a74u;
+ uint32_t enabled=em9305_ram_805a6c.u8_805a74;
  if(enabled==0u)return 0u;
- *(volatile uint8_t *)(uintptr_t)0x803c29u=1u;
- return opencfw_em9305_ll_schedule_notify_313354((uintptr_t)0x803c2cu);
+ em9305_ram_803c28.u8_803c29=1u;
+ return opencfw_em9305_ll_schedule_notify_313354((uintptr_t)((uintptr_t)&em9305_ram_803bd4 + 0x58u));
 }
 
 /* Native334458/33445e: six-byte state-status events with attributed
@@ -20837,7 +20848,7 @@ uint32_t opencfw_em9305_init_state_status_send_3257a4(uint32_t code,uint32_t id,
 uint32_t opencfw_em9305_init_state_action_31b4c8(uintptr_t incoming,uint32_t state)
 {
  (void)incoming;(void)state;
- uintptr_t request=*(volatile uint32_t *)(uintptr_t)0x805c78u;
+ uintptr_t request=em9305_ram_805c5c.u32_805c78;
  uint32_t high=*(volatile uint32_t *)(request+28u);
  uint32_t low=*(volatile uint32_t *)(request+24u);
  uint32_t id=*(volatile uint8_t *)(request+32u);
@@ -20846,8 +20857,8 @@ uint32_t opencfw_em9305_init_state_action_31b4c8(uintptr_t incoming,uint32_t sta
 /* Native30e49c..30e4a8: secondary byte counter and address return. */
 uint32_t opencfw_em9305_init_state_count_down_30e49c(void)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805a76u;
- *(volatile uint8_t *)(uintptr_t)0x805a76u=(uint8_t)(count-1u);return 0x805a76u;
+ uint32_t count=em9305_ram_805a6c.u8_805a76;
+ em9305_ram_805a6c.u8_805a76=(uint8_t)(count-1u);return ((uintptr_t)&em9305_ram_805a6c + 0xau);
 }
 /* Native322884..3228a4: clear each owned event before release, fresh second
  * event loaded after first release. Native zero/child R0 retained. */
@@ -20866,8 +20877,8 @@ uint32_t opencfw_em9305_init_state_events_clear_322884(uintptr_t record)
 uint32_t opencfw_em9305_init_state_cleanup_325740(uintptr_t record)
 {
  (void)opencfw_em9305_command_count_down_30e48c();
- if(record==(uintptr_t)0x804fd8u)*(volatile uint8_t *)(uintptr_t)0x805a73u=0u;
- else *(volatile uint8_t *)(uintptr_t)0x805a74u=0u;
+ if(record==(uintptr_t)((uintptr_t)&em9305_ram_803d58 + 0x1280u))em9305_ram_805a6c.u8_805a73=0u;
+ else em9305_ram_805a6c.u8_805a74=0u;
  if((*(volatile uint8_t *)(record+66u)&1u)!=0u)(void)opencfw_em9305_init_state_count_down_30e49c();
  (void)opencfw_em9305_init_state_events_clear_322884(record);
  volatile uint8_t handler;
@@ -20883,23 +20894,23 @@ uint32_t opencfw_em9305_init_state_cleanup_325740(uintptr_t record)
 uint32_t opencfw_em9305_init_state_action_31b614(uintptr_t incoming,uint32_t state)
 {
  (void)incoming;(void)state;
- uint32_t index=*(volatile uint16_t *)(uintptr_t)0x803c0cu;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uint32_t index=em9305_ram_803c00.u16_803c0c;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  (void)opencfw_em9305_receive_terminate_325c08(base+index*912u,76u);
  (void)opencfw_em9305_common_release_304588(1u);
- return opencfw_em9305_init_state_cleanup_325740((uintptr_t)0x803b94u);
+ return opencfw_em9305_init_state_cleanup_325740((uintptr_t)(uintptr_t)&em9305_ram_803b94);
 }
 uint32_t opencfw_em9305_init_state_action_31b648(uintptr_t incoming,uint32_t state)
 {
  (void)incoming;(void)state;
- uint32_t index=*(volatile uint16_t *)(uintptr_t)0x803c0cu;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uint32_t index=em9305_ram_803c00.u16_803c0c;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  (void)opencfw_em9305_receive_terminate_325c08(base+index*912u,77u);
  (void)opencfw_em9305_common_release_304588(1u);
- (void)opencfw_em9305_init_state_cleanup_325740((uintptr_t)0x803b94u);
+ (void)opencfw_em9305_init_state_cleanup_325740((uintptr_t)(uintptr_t)&em9305_ram_803b94);
  _Alignas(4) struct opencfw_em9305_init_state_status event=opencfw_em9305_init_state_status_33445e;
  (void)opencfw_em9305_ll_event_callback_30e79c((uintptr_t)&event);
- uintptr_t record=0x803cacu;
+ uintptr_t record=((uintptr_t)&em9305_ram_803bd4 + 0xd8u);
  uint32_t high=*(volatile uint32_t *)(record+16u),low=*(volatile uint32_t *)(record+12u);
  uint32_t kind=*(volatile uint8_t *)record;
  return opencfw_em9305_init_state_status_send_3257a4(2u,kind&15u,low,high);
@@ -20910,18 +20921,18 @@ uint32_t opencfw_em9305_init_state_action_31b648(uintptr_t incoming,uint32_t sta
 uint32_t opencfw_em9305_init_state_action_31b3b8(uintptr_t incoming,uint32_t state)
 {
  (void)incoming;(void)state;
- if(*(volatile uint8_t *)(uintptr_t)0x805a74u==0u)return opencfw_em9305_init_state_action_31b6b0(0u,0u);
+ if(em9305_ram_805a6c.u8_805a74==0u)return opencfw_em9305_init_state_action_31b6b0(0u,0u);
  uintptr_t message=opencfw_em9305_wsf_event_allocate(88u);
- uintptr_t record=0x803b94u;
+ uintptr_t record=(uintptr_t)&em9305_ram_803b94;
  if(message!=0u){
   uintptr_t input=record+68u;
   uint32_t index=*(volatile uint16_t *)(input+52u);
   *(volatile uint16_t *)(message+2u)=0x3f01u;
-  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+  uintptr_t base=em9305_ram_805c5c.u32_805c70;
   *(volatile uint16_t *)message=(uint8_t)index;
   *(volatile uint8_t *)(base+(uint16_t)index*912u+2u)=0u;
   (void)opencfw_em9305_memcpy((void *)(message+4u),(const void *)input,44u);
-  uintptr_t addresses=0x803d04u;
+  uintptr_t addresses=((uintptr_t)&em9305_ram_803bd4 + 0x130u);
   uint32_t original=*(volatile uint8_t *)(addresses+19u);
   *(volatile uint8_t *)(message+52u)=(uint8_t)original;
   uint32_t current=*(volatile uint8_t *)(addresses+19u);
@@ -20952,12 +20963,12 @@ uint32_t opencfw_em9305_init_state_action_31b3b8(uintptr_t incoming,uint32_t sta
    changed=((high_other^high_first)|(low_other^low_first))!=0u?1u:0u;
   }
   if(changed!=0u){*(volatile uint32_t *)(message+68u)=low_first;*(volatile uint32_t *)(message+72u)=high_first;}
-  uintptr_t parameters=0x803c04u;
+  uintptr_t parameters=((uintptr_t)&em9305_ram_803c00 + 0x4u);
   uint32_t high=*(volatile uint32_t *)(parameters+4u);
   uint32_t low=*(volatile uint32_t *)parameters;
   *(volatile uint32_t *)(message+80u)=high;*(volatile uint32_t *)(message+76u)=low;
   uint32_t flags=*(volatile uint8_t *)(parameters+13u);
-  uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+  uint32_t handler=em9305_ram_805af0.u8_805b18;
   *(volatile uint16_t *)(message+86u)=0xffffu;
   *(volatile uint8_t *)(message+53u)=(uint8_t)flags;
   *(volatile uint8_t *)(message+84u)=0xffu;
@@ -20974,7 +20985,7 @@ extern uint32_t opencfw_em9305_init_connection_release_31ad90(uintptr_t);
 extern uint32_t opencfw_em9305_init_connection_parameters_32074c(uintptr_t,uint32_t,uint32_t,uint32_t);
 uint32_t opencfw_em9305_init_connection_query_31b21c(uint32_t id,uintptr_t output)
 {
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uintptr_t record=base+(uint16_t)id*912u;
  if(*(volatile uint8_t *)record==0u)return 0u;
  if(*(volatile uint8_t *)(record+64u)!=4u)return 0u;
@@ -20983,10 +20994,10 @@ uint32_t opencfw_em9305_init_connection_query_31b21c(uint32_t id,uintptr_t outpu
  return value;
 }
 uint32_t opencfw_em9305_init_secondary_count_up_30e4cc(void)
-{uint32_t value=*(volatile uint8_t *)(uintptr_t)0x805a76u;*(volatile uint8_t *)(uintptr_t)0x805a76u=(uint8_t)(value+1u);return 0x805a76u;}
+{uint32_t value=em9305_ram_805a6c.u8_805a76;em9305_ram_805a6c.u8_805a76=(uint8_t)(value+1u);return ((uintptr_t)&em9305_ram_805a6c + 0xau);}
 uint32_t opencfw_em9305_init_schedule_start_320b08(void)
 {
- uint32_t guard=opencfw_em9305_auxiliary_guard_interval();uintptr_t record=0x803b94u;
+ uint32_t guard=opencfw_em9305_auxiliary_guard_interval();uintptr_t record=(uintptr_t)&em9305_ram_803b94;
  uint32_t period=*(volatile uint16_t *)(record+62u);
  *(volatile uint32_t *)(record+164u)=guard+1228u;
  period=(uint16_t)period*625u;
@@ -20999,12 +21010,12 @@ uint32_t opencfw_em9305_init_schedule_start_320b08(void)
 uint32_t opencfw_em9305_init_state_action_31b4e0(uintptr_t incoming,uint32_t state)
 {
  (void)incoming;(void)state;
- uintptr_t request=*(volatile uint32_t *)(uintptr_t)0x805c78u;
+ uintptr_t request=em9305_ram_805c5c.u32_805c78;
  uintptr_t connection=opencfw_em9305_init_connection_allocate_316c58();
  uint32_t status;
  if(connection==0u)status=9u;
  else {
-  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+  uintptr_t base=em9305_ram_805c5c.u32_805c70;
   uint32_t minimum=*(volatile uint16_t *)(request+4u)*1250u;
   uint32_t maximum=*(volatile uint16_t *)(request+6u)*1250u;
   uint32_t extent=*(volatile uint16_t *)(connection+592u);
@@ -21012,9 +21023,9 @@ uint32_t opencfw_em9305_init_state_action_31b4e0(uintptr_t incoming,uint32_t sta
   uint32_t allocation;
   uint32_t ok=opencfw_em9305_associated_slot_allocate_3133b4(id,0u,minimum,maximum,extent,(uintptr_t)&allocation,(uintptr_t)opencfw_em9305_init_connection_query_31b21c);
   if(ok!=0u){
-   base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+   base=em9305_ram_805c5c.u32_805c70;
    struct opencfw_em9305_native_product_pair product=opencfw_em9305_native_mpydu_329154(allocation,0x1a36e3u);
-   uintptr_t record=0x803bd0u;
+   uintptr_t record=((uintptr_t)&em9305_ram_803b94 + 0x3cu);
    id=(uint8_t)opencfw_em9305_associated_slot_sdiv((uint32_t)(connection-base),912u);
    *(volatile uint16_t *)(record+62u)=(uint16_t)((product.low>>31)|(product.high<<1));
    *(volatile uint16_t *)(record+60u)=(uint8_t)id;
@@ -21023,11 +21034,11 @@ uint32_t opencfw_em9305_init_state_action_31b4e0(uintptr_t incoming,uint32_t sta
    (void)opencfw_em9305_common_request_30455c(1u);
    (void)opencfw_em9305_command_count_30e4bc();
    uint32_t flags=*(volatile uint8_t *)(record+6u);
-   *(volatile uint8_t *)(uintptr_t)0x805a74u=1u;
+   em9305_ram_805a6c.u8_805a74=1u;
    if((flags&1u)!=0u)(void)opencfw_em9305_init_secondary_count_up_30e4cc();
    high=*(volatile uint32_t *)(request+28u);low=*(volatile uint32_t *)(request+24u);
    uint32_t kind=*(volatile uint8_t *)(request+32u);
-   *(volatile uint8_t *)(uintptr_t)0x803d24u=1u;*(volatile uint16_t *)(uintptr_t)0x803d22u=1u;
+   em9305_ram_803d20.u8_803d24=1u;em9305_ram_803d20.u16_803d22=1u;
    (void)opencfw_em9305_init_connection_parameters_32074c(request+4u,kind,low,high);
    (void)opencfw_em9305_radio_transfer_31dd88(connection,record+8u,0u);
    high=*(volatile uint32_t *)(request+28u);low=*(volatile uint32_t *)(request+24u);kind=*(volatile uint8_t *)(request+32u);
@@ -21035,7 +21046,7 @@ uint32_t opencfw_em9305_init_state_action_31b4e0(uintptr_t incoming,uint32_t sta
    *(volatile uint32_t *)(connection+520u)=high;*(volatile uint32_t *)(connection+516u)=low;
    *(volatile uint8_t *)(connection+524u)=(uint8_t)kind;
    uint32_t result=opencfw_em9305_init_schedule_start_320b08();
-   *(volatile uint8_t *)(uintptr_t)0x805a75u=1u;return result;
+   em9305_ram_805a6c.u8_805a75=1u;return result;
   }
   (void)opencfw_em9305_init_connection_release_31ad90(connection);status=13u;
  }
@@ -21044,7 +21055,7 @@ uint32_t opencfw_em9305_init_state_action_31b4e0(uintptr_t incoming,uint32_t sta
  uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
  if(message==0u)return 0u;
  *(volatile uint16_t *)(message+2u)=771u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  return opencfw_em9305_wsf_task_message_send(handler,message);
 }
 
@@ -21083,12 +21094,12 @@ uint32_t opencfw_em9305_init_callback_325898(uintptr_t record)
 uint32_t opencfw_em9305_init_lower_306ab4(uint32_t incoming)
 {
  (void)incoming;
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- *(volatile uint32_t *)(uintptr_t)0x8027e4u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_325898;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
+ em9305_ram_8027e0.u32_8027e4=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_325898;
  uint32_t feature=*(volatile uint8_t *)(config+4u);
  if(feature<9u)return feature;
- uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805b30u;
- *(volatile uint32_t *)(uintptr_t)0x805b30u=flags|(1u<<14u);return 0x805b30u;
+ uint32_t flags=em9305_ram_805af0.u32_805b30;
+ em9305_ram_805af0.u32_805b30=flags|(1u<<14u);return ((uintptr_t)&em9305_ram_805af0 + 0x40u);
 }
 
 /* Native3252b8..3252da: drain connection+368, count modulo256. */
@@ -21099,7 +21110,7 @@ uint32_t opencfw_em9305_init_connection_drain_3252b8(uintptr_t connection)
 }
 /* Native31ae64..31ae6e: return event's eight-byte header to recycle queue. */
 uint32_t opencfw_em9305_init_connection_recycle_31ae64(uintptr_t event)
-{return opencfw_em9305_wsf_queue_append(0x8056dcu,event-8u);}
+{return opencfw_em9305_wsf_queue_append(((uintptr_t)&em9305_ram_805688 + 0x54u),event-8u);}
 /* Native32d5f4..32d648: handler255 events have no nested payload/recycle. */
 uint32_t opencfw_em9305_init_connection_drain_32d5f4(uintptr_t connection)
 {
@@ -21112,8 +21123,8 @@ uint32_t opencfw_em9305_init_connection_drain_32d5f4(uintptr_t connection)
   (void)opencfw_em9305_wsf_event_release(payload-4u);
   (void)opencfw_em9305_init_connection_recycle_31ae64(event);
   (void)opencfw_em9305_wsf_critical_enter();
-  uint32_t value=*(volatile uint8_t *)(uintptr_t)0x805ab4u;
-  *(volatile uint8_t *)(uintptr_t)0x805ab4u=(uint8_t)(value+1u);
+  uint32_t value=em9305_ram_805a6c.u8_805ab4;
+  em9305_ram_805a6c.u8_805ab4=(uint8_t)(value+1u);
   (void)opencfw_em9305_wsf_critical_exit();count+=1u;
  }
 }
@@ -21123,33 +21134,33 @@ uint32_t opencfw_em9305_init_connection_release_31ad90(uintptr_t connection)
 {
  uint32_t drained=opencfw_em9305_init_connection_drain_3252b8(connection);
  (void)opencfw_em9305_wsf_critical_enter();
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805ab5u;
- *(volatile uint8_t *)(uintptr_t)0x805ab5u=(uint8_t)(count+drained);
+ uint32_t count=em9305_ram_805a6c.u8_805ab5;
+ em9305_ram_805a6c.u8_805ab5=(uint8_t)(count+drained);
  (void)opencfw_em9305_wsf_critical_exit();
  (void)opencfw_em9305_init_connection_drain_32d5f4(connection);
  uintptr_t queue=connection+352u;uint8_t handler;
  for(;;){
   uintptr_t event=opencfw_em9305_wsf_event_remove(queue,(uintptr_t)&handler);
   if(event==0u)break;
-  if(handler!=255u){(void)opencfw_em9305_wsf_critical_enter();count=*(volatile uint8_t *)(uintptr_t)0x805ab4u;*(volatile uint8_t *)(uintptr_t)0x805ab4u=(uint8_t)(count+1u);(void)opencfw_em9305_wsf_critical_exit();}
+  if(handler!=255u){(void)opencfw_em9305_wsf_critical_enter();count=em9305_ram_805a6c.u8_805ab4;em9305_ram_805a6c.u8_805ab4=(uint8_t)(count+1u);(void)opencfw_em9305_wsf_critical_exit();}
   (void)opencfw_em9305_wsf_event_release(event);
  }
  (void)opencfw_em9305_wsf_timer_stop(connection+384u);
  (void)opencfw_em9305_wsf_timer_stop(connection+728u);
  (void)opencfw_em9305_wsf_timer_stop(connection+476u);
  (void)opencfw_em9305_wsf_timer_stop(connection+496u);
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
- uintptr_t callbacks=*(volatile uint32_t *)(uintptr_t)0x805cd8u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
+ uintptr_t callbacks=em9305_ram_805c5c.u32_805cd8;
  uint32_t id=(uint8_t)opencfw_em9305_associated_slot_sdiv((uint32_t)(connection-base),912u);
  if(callbacks!=0u){uintptr_t callback=*(volatile uint32_t *)(callbacks+4u);if(callback!=0u)(void)((uint32_t(*)(uint32_t,uintptr_t))callback)(id,callback);}
- uintptr_t callback=*(volatile uint32_t *)(uintptr_t)0x8027f4u;
+ uintptr_t callback=em9305_ram_8027e0.u32_8027f4;
  if(callback!=0u)(void)((uint32_t(*)(uint32_t,uintptr_t))callback)(id,callback);
  uintptr_t event=*(volatile uint32_t *)(connection+760u);
  *(volatile uint8_t *)connection=0u;
  if(event!=0u)(void)opencfw_em9305_wsf_event_release(event);
  (void)opencfw_em9305_command_count_down_30e48c();
- count=*(volatile uint8_t *)(uintptr_t)0x805a70u;
- *(volatile uint8_t *)(uintptr_t)0x805a70u=(uint8_t)(count-1u);
+ count=em9305_ram_805a6c.u8_805a70;
+ em9305_ram_805a6c.u8_805a70=(uint8_t)(count-1u);
  return opencfw_em9305_common_release_304588(1u);
 }
 
@@ -21157,10 +21168,10 @@ uint32_t opencfw_em9305_init_connection_release_31ad90(uintptr_t connection)
  * slot stride uses native MPYWHL. Final base reload is deliberate. */
 uintptr_t opencfw_em9305_init_connection_allocate_316c58(void)
 {
- uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t config=em9305_ram_805c5c.u32_805cac;
  uint32_t count=*(volatile uint8_t *)(config+34u);
  if(count==0u)return 0u;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u,slot=0u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70,slot=0u;
  uint32_t index;
  for(index=0u;index<count;index++){
   slot=base+opencfw_em9305_native_mpywhl(index,912u);
@@ -21169,23 +21180,23 @@ uintptr_t opencfw_em9305_init_connection_allocate_316c58(void)
  if(index==count)return 0u;
  uintptr_t header=slot+544u;
  (void)opencfw_em9305_memset((void *)slot,0u,912u);
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
- uint32_t upper=*(volatile uint32_t *)(uintptr_t)0x805a94u;
- uint32_t lower=*(volatile uint32_t *)(uintptr_t)0x805a98u;
- uint32_t access=*(volatile uint32_t *)(uintptr_t)0x805a84u;
- uint32_t crc=*(volatile uint32_t *)(uintptr_t)0x805a88u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
+ uint32_t upper=em9305_ram_805a6c.u32_805a94;
+ uint32_t lower=em9305_ram_805a6c.u32_805a98;
+ uint32_t access=em9305_ram_805a6c.u32_805a84;
+ uint32_t crc=em9305_ram_805a6c.u32_805a88;
  *(volatile uint16_t *)(slot+502u)=0x5401u;
  *(volatile uint16_t *)(slot+482u)=0x5301u;
  *(volatile uint16_t *)(slot+390u)=0x4701u;
  *(volatile uint16_t *)(header+190u)=0x5101u;
- config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ config=em9305_ram_805c5c.u32_805cac;
  *(volatile uint16_t *)(header+36u)=328u;
  uint32_t cap=*(volatile uint16_t *)(config+38u);
  *(volatile uint16_t *)(header+32u)=328u;
  *(volatile uint32_t *)(slot+8u)=crc;
  if(cap>251u)cap=251u;
- uint32_t first=*(volatile uint16_t *)(uintptr_t)0x805ab6u;
- uint32_t second=*(volatile uint16_t *)(uintptr_t)0x805ab8u;
+ uint32_t first=em9305_ram_805a6c.u16_805ab6;
+ uint32_t second=em9305_ram_805a6c.u16_805ab8;
  *(volatile uint16_t *)(header+22u)=(uint16_t)cap;
  *(volatile uint16_t *)(header+24u)=(uint16_t)((cap<<6u)+976u);
  *(volatile uint8_t *)slot=1u;
@@ -21210,31 +21221,31 @@ uintptr_t opencfw_em9305_init_connection_allocate_316c58(void)
  first=opencfw_em9305_radio_limit_317b10(slot,slot+574u);
  *(volatile uint16_t *)(header+48u)=(uint16_t)first;
  second=opencfw_em9305_radio_limit_317b10(slot,slot+566u);
- uint32_t value=*(volatile uint32_t *)(uintptr_t)0x805accu;
- uint32_t interval=*(volatile uint16_t *)(uintptr_t)0x805ac8u;
- uint32_t accuracy=*(volatile uint8_t *)(uintptr_t)0x805acbu;
- uint32_t flags=*(volatile uint8_t *)(uintptr_t)0x805aa8u;
- uint32_t option=*(volatile uint8_t *)(uintptr_t)0x805acau;
+ uint32_t value=em9305_ram_805a6c.u32_805acc;
+ uint32_t interval=em9305_ram_805a6c.u16_805ac8;
+ uint32_t accuracy=em9305_ram_805a6c.u8_805acb;
+ uint32_t flags=em9305_ram_805a6c.u8_805aa8;
+ uint32_t option=em9305_ram_805a6c.u8_805aca;
  *(volatile uint16_t *)(header+46u)=(uint16_t)second;
  *(volatile uint8_t *)(header+54u)=2u;
  *(volatile uint8_t *)(header+55u)=2u;
  *(volatile uint8_t *)(header+56u)=2u;
  *(volatile uint16_t *)(header+50u)=(uint16_t)interval;
  *(volatile uint32_t *)(slot+616u)=value;
- uintptr_t callbacks=*(volatile uint32_t *)(uintptr_t)0x805cd8u;
+ uintptr_t callbacks=em9305_ram_805c5c.u32_805cd8;
  *(volatile uint8_t *)(header-142u)=6u;
  *(volatile uint8_t *)(header+52u)=(uint8_t)option;
  *(volatile uint8_t *)(header+202u)=(uint8_t)flags;
  *(volatile uint8_t *)(header+70u)=(uint8_t)accuracy;
  if(callbacks!=0u){uintptr_t callback=*(volatile uint32_t *)callbacks;if(callback!=0u)(void)((uint32_t(*)(uint32_t,uintptr_t))callback)((uint16_t)index,callback);}
  if((*(volatile uint8_t *)(header+4u)&2u)!=0u){
-  uint32_t control=*(volatile uint8_t *)(uintptr_t)0x805a85u;
+  uint32_t control=em9305_ram_805a6c.u8_805a85;
   if((control&128u)!=0u){
    uintptr_t original=base+opencfw_em9305_native_mpywhl(index,912u);
-   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   config=em9305_ram_805c5c.u32_805cac;
    value=*(volatile uint8_t *)(config+66u);
    *(volatile uint8_t *)(original+778u)=(uint8_t)value;
-   config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+   config=em9305_ram_805c5c.u32_805cac;
    *(volatile uint32_t *)(original+824u)=0u;
    *(volatile uint8_t *)(original+770u)=1u;
    *(volatile uint8_t *)(original+769u)=0u;
@@ -21253,18 +21264,18 @@ uintptr_t opencfw_em9305_init_connection_allocate_316c58(void)
   }
  }
  uintptr_t original=base+opencfw_em9305_native_mpywhl(index,912u);
- value=*(volatile uint32_t *)(uintptr_t)0x805ad0u;
+ value=em9305_ram_805a6c.u32_805ad0;
  *(volatile uint32_t *)(original+836u)=value;
- value=*(volatile uint32_t *)(uintptr_t)0x805ad4u;
+ value=em9305_ram_805a6c.u32_805ad4;
  *(volatile uint32_t *)(original+840u)=value;
- value=*(volatile uint16_t *)(uintptr_t)0x805ad8u;
+ value=em9305_ram_805a6c.u16_805ad8;
  *(volatile uint16_t *)(original+846u)=1u;
  *(volatile uint16_t *)(original+844u)=(uint16_t)value;
  (void)opencfw_em9305_command_count_30e4bc();
- value=*(volatile uint8_t *)(uintptr_t)0x805a70u;
- *(volatile uint8_t *)(uintptr_t)0x805a70u=(uint8_t)(value+1u);
+ value=em9305_ram_805a6c.u8_805a70;
+ em9305_ram_805a6c.u8_805a70=(uint8_t)(value+1u);
  (void)opencfw_em9305_common_request_30455c(1u);
- base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ base=em9305_ram_805c5c.u32_805c70;
  return base+opencfw_em9305_native_mpywhl(index,912u);
 }
 
@@ -21272,7 +21283,7 @@ extern uint32_t opencfw_em9305_init_callback_320908(uintptr_t,uint32_t);
 extern uint32_t opencfw_em9305_init_callback_3205c4(uintptr_t,uint32_t);
 /* Native31e5ec ignores its incoming registers, sets pending then signals. */
 uint32_t opencfw_em9305_init_callback_31e5ec(uintptr_t incoming,uint32_t state)
-{(void)incoming;(void)state;*(volatile uint8_t *)(uintptr_t)0x803c28u=1u;(void)opencfw_em9305_auxiliary_signal_304394();return 0u;}
+{(void)incoming;(void)state;em9305_ram_803c28.u8_803c28=1u;(void)opencfw_em9305_auxiliary_signal_304394();return 0u;}
 /* Native325708..32571c: exact bit-priority channel selector. */
 uint32_t opencfw_em9305_init_channel_first_325708(uint32_t flags)
 {if((flags&1u)==0u)return 37u;if((flags&2u)==0u)return 38u;if((flags&4u)==0u)return 39u;return 37u;}
@@ -21282,10 +21293,10 @@ static uint32_t opencfw_em9305_init_parameter_bit(uint32_t value)
  * callback identities use genuine relocations, never absolute code pointers. */
 uint32_t opencfw_em9305_init_connection_parameters_32074c(uintptr_t input,uint32_t kind,uint32_t low_in,uint32_t high_in)
 {
- uintptr_t record=0x803b94u,header=0x803bd5u,second=header+1u;
+ uintptr_t record=(uintptr_t)&em9305_ram_803b94,header=((uintptr_t)&em9305_ram_803bd4 + 0x1u),second=header+1u;
  (void)opencfw_em9305_memset((void *)(record+152u),0u,240u);
  *(volatile uint32_t *)(second+130u)=(uint32_t)(record+200u);
- uint32_t flags=*(volatile uint8_t *)(uintptr_t)0x805b00u;
+ uint32_t flags=em9305_ram_805af0.u8_805b00;
  *(volatile uint8_t *)(second+112u)=1u;
  *(volatile uint8_t *)(second+110u)=2u;
  *(volatile uint32_t *)(second+114u)=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_320908;
@@ -21295,13 +21306,13 @@ uint32_t opencfw_em9305_init_connection_parameters_32074c(uintptr_t input,uint32
  uint32_t type=*(volatile uint8_t *)second;
  *(volatile uint8_t *)(second+135u)=(uint8_t)channel;
  *(volatile uint32_t *)(second+142u)=0x555555u;
- uint32_t option=*(volatile uint8_t *)(uintptr_t)0x805a9cu;
+ uint32_t option=em9305_ram_805a6c.u8_805a9c;
  *(volatile uint16_t *)(second+210u)=3u;
  *(volatile uint16_t *)(second+146u)=257u;
  *(volatile uint32_t *)(second+138u)=0x8e89bed6u;
  *(volatile uint8_t *)(second+136u)=(uint8_t)option;
- if(type!=0u)*(volatile uint16_t *)(uintptr_t)0x803caau=3u;
- flags=*(volatile uint8_t *)(uintptr_t)0x805b00u;
+ if(type!=0u)em9305_ram_803ca8.u16_803caa=3u;
+ flags=em9305_ram_805af0.u8_805b00;
  uintptr_t event=header+284u;
  *(volatile uint8_t *)(event+2u)=(uint8_t)flags;
  *(volatile uint32_t *)(header+251u)=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3205c4;
@@ -21312,8 +21323,8 @@ uint32_t opencfw_em9305_init_connection_parameters_32074c(uintptr_t input,uint32
  uint32_t value=opencfw_em9305_radio_access_raw_318878();
  *(volatile uint32_t *)(header+19u)=value;
  value=opencfw_em9305_radio_crc_seed_318960();
- uint32_t upper=*(volatile uint32_t *)(uintptr_t)0x805aa4u;
- uint32_t lower=*(volatile uint32_t *)(uintptr_t)0x805aa0u;
+ uint32_t upper=em9305_ram_805a6c.u32_805aa4;
+ uint32_t lower=em9305_ram_805a6c.u32_805aa0;
  uint32_t period=*(volatile uint16_t *)(header+57u);
  uint32_t minimum=*(volatile uint16_t *)(input+4u);
  uint32_t maximum=*(volatile uint16_t *)(input+6u);
@@ -21328,17 +21339,17 @@ uint32_t opencfw_em9305_init_connection_parameters_32074c(uintptr_t input,uint32
  *(volatile uint8_t *)(header+45u)=(uint8_t)value;
  value=opencfw_em9305_compose_accuracy_318988();
  *(volatile uint8_t *)(header+46u)=(uint8_t)value;
- uintptr_t descriptor=0x803d1cu;
- uint32_t feature=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uintptr_t descriptor=((uintptr_t)&em9305_ram_803bd4 + 0x148u);
+ uint32_t feature=em9305_ram_805a6c.u32_805a94;
  *(volatile uint8_t *)(descriptor+4u)=34u;
  flags=*(volatile uint8_t *)header;header+=3u;
- uintptr_t address=0x803cacu;
+ uintptr_t address=((uintptr_t)&em9305_ram_803bd4 + 0xd8u);
  uint32_t bit=opencfw_em9305_init_parameter_bit(feature);
  *(volatile uint8_t *)descriptor=5u;
  *(volatile uint8_t *)(descriptor+1u)=(uint8_t)bit;
- if((flags&1u)==0u){upper=*(volatile uint32_t *)(uintptr_t)0x805b44u;lower=*(volatile uint32_t *)(uintptr_t)0x805b40u;value=*(volatile uint32_t *)address;*(volatile uint32_t *)(address+8u)=upper;*(volatile uint32_t *)(address+4u)=lower;}
- else {upper=*(volatile uint32_t *)(uintptr_t)0x805a90u;lower=*(volatile uint32_t *)(uintptr_t)0x805a8cu;value=*(volatile uint32_t *)address;*(volatile uint32_t *)(address+8u)=upper;*(volatile uint32_t *)(address+4u)=lower;value|=2u;}
- uint32_t privacy=*(volatile uint8_t *)(uintptr_t)0x805a9du;
+ if((flags&1u)==0u){upper=em9305_ram_805af0.u32_805b44;lower=em9305_ram_805af0.u32_805b40;value=*(volatile uint32_t *)address;*(volatile uint32_t *)(address+8u)=upper;*(volatile uint32_t *)(address+4u)=lower;}
+ else {upper=em9305_ram_805a6c.u32_805a90;lower=em9305_ram_805a6c.u32_805a8c;value=*(volatile uint32_t *)address;*(volatile uint32_t *)(address+8u)=upper;*(volatile uint32_t *)(address+4u)=lower;value|=2u;}
+ uint32_t privacy=em9305_ram_805a6c.u8_805a9d;
  uint32_t output_flags=value|1u;
  *(volatile uint32_t *)address=output_flags;
  if(privacy!=0u){output_flags=value|81u;*(volatile uint32_t *)address=output_flags;}
@@ -21347,7 +21358,7 @@ uint32_t opencfw_em9305_init_connection_parameters_32074c(uintptr_t input,uint32
  *(volatile uint32_t *)(second+6u)=upper;
  *(volatile uint8_t *)(descriptor+2u)=(uint8_t)((output_flags>>1u)&1u);
  if(type==0u){bit=kind&1u;*(volatile uint8_t *)(descriptor+3u)=(uint8_t)bit;output_flags|=(bit<<3u)|4u;*(volatile uint32_t *)(record+292u)=low_in;*(volatile uint32_t *)(record+76u)=low_in;*(volatile uint32_t *)(record+296u)=high_in;*(volatile uint32_t *)(record+80u)=high_in;*(volatile uint32_t *)(record+280u)=output_flags;}
- uintptr_t encoded=0x803cf1u;
+ uintptr_t encoded=((uintptr_t)&em9305_ram_803bd4 + 0x11du);
  uint32_t length=opencfw_em9305_radio_encode_3239d4(record,encoded+43u);
  (void)opencfw_em9305_radio_encode_323c94(record+length,header);
  *(volatile uint32_t *)(address+24u)=(uint32_t)record;
@@ -21362,9 +21373,9 @@ extern uint32_t opencfw_em9305_scan_callback_31ec40(uintptr_t);
 uint32_t opencfw_em9305_init_callback_320908(uintptr_t object,uint32_t incoming)
 {
  (void)incoming;
- if(*(volatile uint8_t *)(uintptr_t)0x803c28u!=0u){
-  uint32_t index=*(volatile uint16_t *)(uintptr_t)0x803c0cu;
-  uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ if(em9305_ram_803c28.u8_803c28!=0u){
+  uint32_t index=em9305_ram_803c00.u16_803c0c;
+  uintptr_t base=em9305_ram_805c5c.u32_805c70;
   uintptr_t connection=base+(uint32_t)(uint16_t)index*912u;
   uint32_t initial=*(volatile uint32_t *)(connection+24u);
   uintptr_t schedule=connection+16u;
@@ -21383,7 +21394,7 @@ uint32_t opencfw_em9305_init_callback_320908(uintptr_t object,uint32_t incoming)
    }while(1);
   }
  }
- *(volatile uint32_t *)(object+36u)=0x803b94u;
+ *(volatile uint32_t *)(object+36u)=(uintptr_t)&em9305_ram_803b94;
  return opencfw_em9305_scan_callback_31ec40(object);
 }
 
@@ -21434,7 +21445,7 @@ uint32_t opencfw_em9305_init_channel_next_325720(uint32_t channel,uint32_t mask)
  * list links are native previous@0,next@4. No invented iteration cap. */
 uint32_t opencfw_em9305_init_schedule_adjust_312f88(uintptr_t object,uint32_t minimum,uint32_t maximum)
 {
- uintptr_t root=0x805f04u,list=root+16u,node=0u,neighbor=0u,link=0u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x18u),list=root+16u,node=0u,neighbor=0u,link=0u;
  uint32_t original=*(volatile uint32_t *)(object+8u),candidate=original+minimum;
  *(volatile uint32_t *)(object+8u)=candidate;
  uint32_t now=opencfw_em9305_pal_current_time();
@@ -21534,19 +21545,19 @@ uint32_t opencfw_em9305_init_callback_3205c4(uintptr_t object,uint32_t argument)
  uintptr_t output=*(volatile uint32_t *)(record+104u);
  if(output==0u)return 0u;
  uintptr_t input=argument;
- uint32_t index=*(volatile uint16_t *)(uintptr_t)0x803c0cu;
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uint32_t index=em9305_ram_803c00.u16_803c0c;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  uint32_t offset=(uint32_t)(uint16_t)index*912u;
  uintptr_t slot=base+offset;
  uint32_t high=*(volatile uint32_t *)(extra+12u),low=*(volatile uint32_t *)(extra+8u);
  uint32_t origin=*(volatile uint32_t *)extra;
  uint32_t count=*(volatile uint8_t *)(record+185u);
  (void)opencfw_em9305_radio_address_write_3045e8(output+8u,low,high);
- uint32_t flags=*(volatile uint8_t *)(uintptr_t)0x803bd5u;
+ uint32_t flags=em9305_ram_803bd4.u8_803bd5;
  uint32_t kind=*(volatile uint8_t *)(record+186u);
- uintptr_t descriptor=0x803d1cu;
+ uintptr_t descriptor=((uintptr_t)&em9305_ram_803bd4 + 0x148u);
  *(volatile uint8_t *)(descriptor+3u)=(uint8_t)kind;
- if((flags&2u)==0u){*(volatile uint32_t *)(uintptr_t)0x803c08u=0u;*(volatile uint32_t *)(uintptr_t)0x803c04u=0u;}
+ if((flags&2u)==0u){em9305_ram_803c00.u32_803c08=0u;em9305_ram_803c00.u32_803c04=0u;}
  else {
   _Alignas(4) uint32_t pair[2];uint32_t identity;
   if(*(volatile uint8_t *)(extra+24u)==1u){
@@ -21556,18 +21567,18 @@ uint32_t opencfw_em9305_init_callback_3205c4(uintptr_t object,uint32_t argument)
    if((pair[1]&0xc000u)==0x4000u){
     high=*(volatile uint32_t *)(extra+20u);low=*(volatile uint32_t *)(extra+16u);
     kind=*(volatile uint8_t *)(record+187u);
-    *(volatile uint32_t *)(uintptr_t)0x803c08u=pair[1];
-    *(volatile uint32_t *)(uintptr_t)0x803c04u=pair[0];
+    em9305_ram_803c00.u32_803c08=pair[1];
+    em9305_ram_803c00.u32_803c04=pair[0];
     (void)opencfw_em9305_radio_peer_set_303cc0(kind,low,high,(uintptr_t)pair);
-   }else {*(volatile uint32_t *)(uintptr_t)0x803c08u=0u;*(volatile uint32_t *)(uintptr_t)0x803c04u=0u;}
+   }else {em9305_ram_803c00.u32_803c08=0u;em9305_ram_803c00.u32_803c04=0u;}
   }else {
    pair[0]=*(volatile uint32_t *)(record+84u);pair[1]=*(volatile uint32_t *)(record+88u);
    high=*(volatile uint32_t *)(extra+20u);low=*(volatile uint32_t *)(extra+16u);
    kind=*(volatile uint8_t *)(record+187u);
    uint32_t previous=*(volatile uint32_t *)(record+80u);
    uint32_t found=opencfw_em9305_radio_peer_pair_303a40(kind,low,high,(uintptr_t)pair);
-   if(found!=0u){identity=1u;*(volatile uint32_t *)(uintptr_t)0x803c08u=pair[1];*(volatile uint32_t *)(uintptr_t)0x803c04u=pair[0];}
-   else {identity=(previous>>1u)&1u;*(volatile uint32_t *)(uintptr_t)0x803c08u=0u;*(volatile uint32_t *)(uintptr_t)0x803c04u=0u;}
+   if(found!=0u){identity=1u;em9305_ram_803c00.u32_803c08=pair[1];em9305_ram_803c00.u32_803c04=pair[0];}
+   else {identity=(previous>>1u)&1u;em9305_ram_803c00.u32_803c08=0u;em9305_ram_803c00.u32_803c04=0u;}
   }
   output=*(volatile uint32_t *)(record+104u);
   (void)opencfw_em9305_radio_address_write_3045e8(output+2u,pair[0],pair[1]);
@@ -21576,7 +21587,7 @@ uint32_t opencfw_em9305_init_callback_3205c4(uintptr_t object,uint32_t argument)
  output=*(volatile uint32_t *)(record+104u);
  (void)opencfw_em9305_radio_encode_3239d4(output,descriptor);
  offset=(uint32_t)(uint16_t)index*912u;
- uintptr_t freshbase=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t freshbase=em9305_ram_805c5c.u32_805c70;
  uint32_t stamp=origin+(count<<3u);
  uintptr_t originalslot=base+offset;
  uint32_t slotindex=opencfw_em9305_associated_slot_sdiv((uint32_t)(slot-freshbase),912u);
@@ -21595,11 +21606,11 @@ uint32_t opencfw_em9305_init_callback_3205c4(uintptr_t object,uint32_t argument)
  uint32_t next=remainder+stamp;
  uint32_t type=*(volatile uint8_t *)(descriptor+1u);
  next+=1832u;
- *(volatile uint16_t *)(uintptr_t)0x803c00u=(uint16_t)quotient;
+ em9305_ram_803c00.u16_803c00=(uint16_t)quotient;
  *(volatile uint32_t *)(originalslot+24u)=next;
  uint32_t enabled=0u;
  if(type==1u)enabled=(*(volatile uint8_t *)input&32u)!=0u;
- *(volatile uint8_t *)(uintptr_t)0x803c11u=(uint8_t)enabled;
+ em9305_ram_803c00.u8_803c11=(uint8_t)enabled;
  return 1u;
 }
 
@@ -21617,49 +21628,49 @@ extern uint32_t opencfw_em9305_init_registered_324fb4(uintptr_t);
 /* Native307c18..307c5a. Delayed slot zero occurs on both version branches. */
 uint32_t opencfw_em9305_init_lower_307c18(uint32_t incoming)
 {
- (void)incoming;uintptr_t cfg=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ (void)incoming;uintptr_t cfg=em9305_ram_805c5c.u32_805cac;
  uint32_t version=*(volatile uint8_t *)(cfg+4u);
- *(volatile uint32_t *)(uintptr_t)0x80297cu=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_31e8fc;
- *(volatile uint32_t *)(uintptr_t)0x80130cu=(uint32_t)(uintptr_t)opencfw_em9305_address_busy_307cb8;
- *(volatile uint32_t *)(uintptr_t)0x805228u=0u;
+ em9305_ram_802950.u32_80297c=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_31e8fc;
+ em9305_ram_8012c0.u32_80130c=(uint32_t)(uintptr_t)opencfw_em9305_address_busy_307cb8;
+ em9305_ram_8051b8.u32_805228=0u;
  if(version<9u)return version;
- uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805b30u;
- *(volatile uint32_t *)(uintptr_t)0x805b30u=flags|(1u<<13u);
- return 0x805b30u;
+ uint32_t flags=em9305_ram_805af0.u32_805b30;
+ em9305_ram_805af0.u32_805b30=flags|(1u<<13u);
+ return ((uintptr_t)&em9305_ram_805af0 + 0x40u);
 }
 /* Native307cc8..307d0a. Callback identity stores precede version load. */
 uint32_t opencfw_em9305_init_lower_307cc8(uint32_t incoming)
 {
- (void)incoming;uintptr_t cfg=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- *(volatile uint32_t *)(uintptr_t)0x802984u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_321608;
+ (void)incoming;uintptr_t cfg=em9305_ram_805c5c.u32_805cac;
+ em9305_ram_802950.u32_802984=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_321608;
  uint32_t version=*(volatile uint8_t *)(cfg+4u);
- *(volatile uint32_t *)(uintptr_t)0x805230u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_32182c;
- if(version>=9u){uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805b30u;*(volatile uint32_t *)(uintptr_t)0x805b30u=flags|(1u<<13u);}
- *(volatile uint16_t *)(uintptr_t)0x805b22u=784u;
- return 0x805b0cu;
+ em9305_ram_8051b8.u32_805230=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_32182c;
+ if(version>=9u){uint32_t flags=em9305_ram_805af0.u32_805b30;em9305_ram_805af0.u32_805b30=flags|(1u<<13u);}
+ em9305_ram_805af0.u16_805b22=784u;
+ return ((uintptr_t)&em9305_ram_805af0 + 0x1cu);
 }
 /* Native307d2c..307d60, native capability bit25 threshold10. */
 uint32_t opencfw_em9305_init_lower_307d2c(uint32_t incoming)
 {
- (void)incoming;uintptr_t cfg=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- *(volatile uint32_t *)(uintptr_t)0x802980u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_322d68;
+ (void)incoming;uintptr_t cfg=em9305_ram_805c5c.u32_805cac;
+ em9305_ram_802950.u32_802980=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_322d68;
  uint32_t version=*(volatile uint8_t *)(cfg+4u);
- *(volatile uint32_t *)(uintptr_t)0x80522cu=0u;
+ em9305_ram_8051b8.u32_80522c=0u;
  if(version<10u)return version;
- uint32_t flags=*(volatile uint32_t *)(uintptr_t)0x805b30u;
- *(volatile uint32_t *)(uintptr_t)0x805b30u=flags|(1u<<25u);
- return 0x805b30u;
+ uint32_t flags=em9305_ram_805af0.u32_805b30;
+ em9305_ram_805af0.u32_805b30=flags|(1u<<25u);
+ return ((uintptr_t)&em9305_ram_805af0 + 0x40u);
 }
 /* Native307de8..307e2e, all five source relocation identities. */
 uint32_t opencfw_em9305_init_lower_307de8(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x8052bcu=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_32613c;
- *(volatile uint32_t *)(uintptr_t)0x8052c0u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_3263ec;
- *(volatile uint32_t *)(uintptr_t)0x8056d8u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_32ce04;
- *(volatile uint32_t *)(uintptr_t)0x8052c4u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_3266f8;
- *(volatile uint32_t *)(uintptr_t)0x8051f4u=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_324fb4;
- return 0x8051f4u;
+ em9305_ram_8052bc.u32_8052bc=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_32613c;
+ em9305_ram_8052bc.u32_8052c0=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_3263ec;
+ em9305_ram_805688.u32_8056d8=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_32ce04;
+ em9305_ram_8052bc.u32_8052c4=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_3266f8;
+ em9305_ram_8051b8.u32_8051f4=(uint32_t)(uintptr_t)opencfw_em9305_init_registered_324fb4;
+ return ((uintptr_t)&em9305_ram_8051b8 + 0x3cu);
 }
 
 /* Native334496: seven consumer-classified response data-type bytes. */
@@ -21670,25 +21681,25 @@ uint32_t opencfw_em9305_init_response_packet_326a84(uintptr_t record)
  uintptr_t packet=opencfw_em9305_phy_packet_alloc_32d2f0(2u);
  if(packet==0u)return 0u;
  *(volatile uint8_t *)packet=7u;
- *(volatile uint8_t *)(packet+1u)=*(volatile uint8_t *)(uintptr_t)0x802818u;
+ *(volatile uint8_t *)(packet+1u)=em9305_ram_8027e0.u8_802818;
  return opencfw_em9305_phy_packet_send_32d32c(record,packet);
 }
 /* Complete native324fb4..3250f2. Holes in allocated event remain unwritten. */
 uint32_t opencfw_em9305_init_registered_324fb4(uintptr_t record)
 {
- uintptr_t root=0x802818u;
+ uintptr_t root=((uintptr_t)&em9305_ram_8027e0 + 0x38u);
  uint32_t high=*(volatile uint32_t *)(root+36u),low=*(volatile uint32_t *)(root+32u);
  uint32_t kind=*(volatile uint8_t *)(root+29u),role=*(volatile uint8_t *)(root+28u);
  uint32_t duplicate=opencfw_em9305_command_duplicate_307c5c(role,kind,low,high);
  if(duplicate!=0u)return duplicate;
  uint32_t capacity=*(volatile uint8_t *)(record+614u),type=*(volatile uint8_t *)root;
  if(capacity==0u)goto reject;
- uint32_t features=*(volatile uint32_t *)(uintptr_t)0x805a94u;
+ uint32_t features=em9305_ram_805a6c.u32_805a94;
  uint32_t requested=*(volatile uint8_t *)(root+31u);
  uint32_t allowed=((features>>9u)&4u)|((features&(1u<<8u))!=0u?3u:1u);
  if((requested&~allowed)!=0u||requested>=5u||(0x16u&(1u<<requested))==0u)goto reject;
  if(type==42u){
-  uintptr_t config=0x802848u;
+  uintptr_t config=((uintptr_t)&em9305_ram_8027e0 + 0x68u);
   uint32_t a=*(volatile uint8_t *)config;
   if(a>=16u)goto packet_reject;
   uint32_t b=*(volatile uint8_t *)(config+1u);
@@ -21704,7 +21715,7 @@ uint32_t opencfw_em9305_init_registered_324fb4(uintptr_t record)
  uint32_t half=*(volatile uint16_t *)(root+4u);
  *(volatile uint16_t *)(event+4u)=(uint16_t)half;
  (void)opencfw_em9305_memcpy((void *)(event+6u),(const void *)(root+6u),18u);
- uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+ uintptr_t base=em9305_ram_805c5c.u32_805c70;
  half=*(volatile uint16_t *)(record+262u);
  uint32_t id=opencfw_em9305_associated_slot_sdiv((uint32_t)(record-base),912u);
  *(volatile uint16_t *)(event+24u)=(uint8_t)id;
@@ -21724,7 +21735,7 @@ uint32_t opencfw_em9305_init_registered_324fb4(uintptr_t record)
  value=*(volatile uint32_t *)(root+44u);*(volatile uint32_t *)(event+48u)=value;
  value=*(volatile uint8_t *)(root+48u);*(volatile uint8_t *)(event+52u)=(uint8_t)value;
  value=*(volatile uint8_t *)(root+49u);*(volatile uint8_t *)(event+53u)=(uint8_t)value;
- value=*(volatile uint8_t *)(root+50u);uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ value=*(volatile uint8_t *)(root+50u);uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint8_t *)(event+54u)=(uint8_t)value;
  value=*(volatile uint8_t *)(root+51u);
  *(volatile uint8_t *)(event+46u)=type==42u;
@@ -21754,17 +21765,17 @@ const uint8_t opencfw_em9305_init_secondary_transitions_335790[24]={0u,1u,0u,0u,
 /* Complete native31e90c..31e93c. Fresh state is read after action. */
 uint32_t opencfw_em9305_init_secondary_dispatch_31e90c(uint32_t event)
 {
- uint32_t state=*(volatile uint8_t *)(uintptr_t)0x8051a4u;
+ uint32_t state=em9305_ram_805194.u8_8051a4;
  opencfw_em9305_init_secondary_action action=opencfw_em9305_init_secondary_actions_334cac[state*6u+event];
- if(action!=0){(void)action((uintptr_t)action,state*24u+event*4u,state);state=*(volatile uint8_t *)(uintptr_t)0x8051a4u;}
+ if(action!=0){(void)action((uintptr_t)action,state*24u+event*4u,state);state=em9305_ram_805194.u8_8051a4;}
  uint32_t next=opencfw_em9305_init_secondary_transitions_335790[state*6u+event];
- *(volatile uint8_t *)(uintptr_t)0x8051a4u=(uint8_t)next;
+ em9305_ram_805194.u8_8051a4=(uint8_t)next;
  return next;
 }
 /* Complete native31e8fc..31e908 dispatch entry. */
 uint32_t opencfw_em9305_init_registered_31e8fc(uintptr_t message)
 {
- *(volatile uint32_t *)(uintptr_t)0x805c80u=(uint32_t)message;
+ em9305_ram_805c5c.u32_805c80=(uint32_t)message;
  uint32_t event=*(volatile uint8_t *)(message+3u);
  return opencfw_em9305_init_secondary_dispatch_31e90c(event);
 }
@@ -21772,8 +21783,8 @@ uint32_t opencfw_em9305_init_registered_31e8fc(uintptr_t message)
 uint32_t opencfw_em9305_init_secondary_action_319080(uintptr_t incoming,uint32_t offset,uint32_t state)
 {
  (void)incoming;(void)offset;(void)state;
- uint32_t prior=*(volatile uint8_t *)(uintptr_t)0x8051a5u;
- if(prior!=0u)*(volatile uint8_t *)(uintptr_t)0x8051a5u=0u;
+ uint32_t prior=em9305_ram_805194.u8_8051a5;
+ if(prior!=0u)em9305_ram_805194.u8_8051a5=0u;
  return prior;
 }
 
@@ -21783,7 +21794,7 @@ uint32_t opencfw_em9305_init_secondary_message_325d50(uintptr_t record,uint32_t 
  uintptr_t message=opencfw_em9305_wsf_event_allocate(4u);
  if(message==0u)return 0u;
  uint32_t event=*(volatile uint8_t *)(record+9u);
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
  *(volatile uint8_t *)(message+3u)=(uint8_t)reason;
  *(volatile uint8_t *)(message+2u)=(uint8_t)event;
  return opencfw_em9305_wsf_task_message_send(handler,message);
@@ -21792,7 +21803,7 @@ uint32_t opencfw_em9305_init_secondary_message_325d50(uintptr_t record,uint32_t 
 uint32_t opencfw_em9305_init_secondary_action_318fc0(uintptr_t incoming,uint32_t offset,uint32_t state)
 {
  (void)incoming;(void)offset;(void)state;
- uintptr_t root=0x8051a4u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805194 + 0x10u);
  uintptr_t record=*(volatile uint32_t *)(root+20u);
  uint32_t marked=*(volatile uint8_t *)(record+603u);
  if(marked==0u)*(volatile uint8_t *)(record+4u)=1u;
@@ -21807,16 +21818,16 @@ uint32_t opencfw_em9305_init_secondary_allocate_316e74(void)
 {
  uint32_t index;uintptr_t record=0u;
  for(index=0u;index<6u;index++){
-  uintptr_t candidate=0x803d78u+index*784u;
+  uintptr_t candidate=(((uintptr_t)&em9305_ram_803d58 + 0x20u) + index*784u);
   if(*(volatile uint8_t *)candidate==0u){record=candidate;break;}
  }
  if(record==0u)return 0u;
  (void)opencfw_em9305_memset((void *)record,0u,784u);
- uintptr_t first=0x803e90u+index*784u,second=0x804040u+index*784u;
+ uintptr_t first=(((uintptr_t)&em9305_ram_803d58 + 0x138u) + index*784u),second=(((uintptr_t)&em9305_ram_803d58 + 0x2e8u) + index*784u);
  *(volatile uint16_t *)(first-172u)=257u;
- uint32_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
- uint32_t option=*(volatile uint8_t *)(uintptr_t)0x805acau;
- uint32_t context=*(volatile uint32_t *)(uintptr_t)(0x803d58u+index*4u);
+ uint32_t handler=em9305_ram_805af0.u8_805b18;
+ uint32_t option=em9305_ram_805a6c.u8_805aca;
+ uint32_t context=*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_803d58 + index*4u);
  *(volatile uint8_t *)second=(uint8_t)handler;
  *(volatile uint8_t *)record=1u;
  *(volatile uint16_t *)(second-6u)=1037u;
@@ -21825,17 +21836,17 @@ uint32_t opencfw_em9305_init_secondary_allocate_316e74(void)
  *(volatile uint32_t *)(first-240u)=context;
  uintptr_t cursor=first;
  for(unsigned i=0u;i<15u;i++){*(volatile uint16_t *)cursor=4095u;cursor+=2u;}
- uintptr_t cfg=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t cfg=em9305_ram_805c5c.u32_805cac;
  *(volatile uint16_t *)(first+320u)=0u;
  uint32_t version=*(volatile uint8_t *)(cfg+4u);
  *(volatile uint8_t *)(second-110u)=0u;
  if(version>=13u){
-  uintptr_t extra=*(volatile uint32_t *)(uintptr_t)(0x805c44u+index*4u);
+  uintptr_t extra=*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_805c44 + index*4u);
   if(extra!=0u){
    *(volatile uint32_t *)(second+68u)=(uint32_t)extra;
    (void)opencfw_em9305_memset((void *)extra,0u,584u);
    extra=*(volatile uint32_t *)(second+68u);
-   uint32_t pointer=*(volatile uint32_t *)(uintptr_t)0x805cecu;
+   uint32_t pointer=em9305_ram_805c5c.u32_805cec;
    *(volatile uint8_t *)(extra+96u)=1u;
    *(volatile uint32_t *)(extra+92u)=pointer;
   }
@@ -21847,21 +21858,21 @@ extern uint32_t opencfw_em9305_init_secondary_start_3213f8(uintptr_t);
 /* Complete native30e4ac..30e4b8 byte count helper, native R0 is address. */
 uint32_t opencfw_em9305_init_secondary_count_up_30e4ac(void)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805a77u;
- *(volatile uint8_t *)(uintptr_t)0x805a77u=(uint8_t)(count+1u);
- return 0x805a77u;
+ uint32_t count=em9305_ram_805a6c.u8_805a77;
+ em9305_ram_805a6c.u8_805a77=(uint8_t)(count+1u);
+ return ((uintptr_t)&em9305_ram_805a6c + 0xbu);
 }
 /* Complete native318fe8..31907e source creation action. */
 uint32_t opencfw_em9305_init_secondary_action_318fe8(uintptr_t incoming,uint32_t offset,uint32_t state)
 {
  (void)incoming;(void)offset;(void)state;
- uintptr_t message=*(volatile uint32_t *)(uintptr_t)0x805c80u;
+ uintptr_t message=em9305_ram_805c5c.u32_805c80;
  (void)opencfw_em9305_common_request_30455c(1u);
  uint32_t flag=*(volatile uint8_t *)(message+4u);
  if(flag!=0u){(void)opencfw_em9305_init_secondary_count_up_30e4ac();flag=*(volatile uint8_t *)(message+4u);}
  uint32_t high=*(volatile uint32_t *)(message+12u),low=*(volatile uint32_t *)(message+8u);
  uint32_t b=*(volatile uint8_t *)(message+7u),a=*(volatile uint8_t *)(message+6u),option=*(volatile uint8_t *)(message+21u);
- uintptr_t root=0x8051a4u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805194 + 0x10u);
  *(volatile uint8_t *)(root+4u)=(uint8_t)flag;
  *(volatile uint32_t *)(root+12u)=high;*(volatile uint32_t *)(root+8u)=low;
  *(volatile uint8_t *)(root+6u)=(uint8_t)b;*(volatile uint8_t *)(root+5u)=(uint8_t)a;
@@ -21926,7 +21937,7 @@ extern uint32_t opencfw_em9305_init_secondary_event_30e928(uint32_t,uint32_t,uin
 uint32_t opencfw_em9305_init_secondary_action_319094(uintptr_t incoming,uint32_t offset,uint32_t state)
 {
  (void)incoming;(void)offset;(void)state;
- uintptr_t root=0x8051a4u;
+ uintptr_t root=((uintptr_t)&em9305_ram_805194 + 0x10u);
  if(*(volatile uint8_t *)(root+1u)!=0u){
   uintptr_t record=*(volatile uint32_t *)(root+20u);
   *(volatile uint8_t *)(record+4u)=0u;
@@ -21938,7 +21949,7 @@ uint32_t opencfw_em9305_init_secondary_action_319094(uintptr_t incoming,uint32_t
  uintptr_t record=*(volatile uint32_t *)(root+20u);
  (void)opencfw_em9305_init_secondary_fill_324768(record,response);
  record=*(volatile uint32_t *)(root+20u);
- int32_t difference=(int32_t)((uint32_t)record-0x803d78u);
+ int32_t difference=(int32_t)((uint32_t)record-((uintptr_t)&em9305_ram_803d58 + 0x20u));
  uint32_t slot=(uint8_t)(difference/784);
  uint32_t flag=*(volatile uint8_t *)(record+777u);
  return opencfw_em9305_init_secondary_event_30e928(62u,slot,response,flag);
@@ -21999,9 +22010,9 @@ extern uint32_t opencfw_em9305_init_secondary_event_30e928(uint32_t,uint32_t,uin
 extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
 uint32_t opencfw_em9305_init_secondary_count_down_30e47c(void)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x805a77u;
- *(volatile uint8_t *)(uintptr_t)0x805a77u=(uint8_t)(count-1u);
- return 0x805a77u;
+ uint32_t count=em9305_ram_805a6c.u8_805a77;
+ em9305_ram_805a6c.u8_805a77=(uint8_t)(count-1u);
+ return ((uintptr_t)&em9305_ram_805a6c + 0xbu);
 }
 /* Full321450..32148c; typed callback is original record slot+12. */
 uint32_t opencfw_em9305_init_secondary_cleanup_321450(uintptr_t record)
@@ -22009,7 +22020,7 @@ uint32_t opencfw_em9305_init_secondary_cleanup_321450(uintptr_t record)
  (void)opencfw_em9305_common_release_304588(1u);
  uintptr_t callback=*(volatile uint32_t *)(record+12u);
  if(callback!=0u){
-  int32_t difference=(int32_t)((uint32_t)record-0x803d78u);
+  int32_t difference=(int32_t)((uint32_t)record-((uintptr_t)&em9305_ram_803d58 + 0x20u));
   int32_t quotient=difference/784;
   (void)((uint32_t (*)(uint32_t,uint32_t,uintptr_t))callback)((uint8_t)quotient,(uint32_t)quotient,callback);
  }
@@ -22026,7 +22037,7 @@ uint32_t opencfw_em9305_init_secondary_cleanup_321450(uintptr_t record)
  * message children and native R0 at each return. */
 uint32_t opencfw_em9305_init_secondary_action_3190e0(uintptr_t incoming,uint32_t offset,uint32_t state)
 {
- (void)incoming;(void)offset;(void)state;uintptr_t root=0x8051a4u;
+ (void)incoming;(void)offset;(void)state;uintptr_t root=((uintptr_t)&em9305_ram_805194 + 0x10u);
  if(*(volatile uint8_t *)(root+1u)!=0u)*(volatile uint8_t *)(root+1u)=0u;
  uintptr_t record=*(volatile uint32_t *)(root+20u);
  (void)opencfw_em9305_init_secondary_cleanup_321450(record);
@@ -22034,7 +22045,7 @@ uint32_t opencfw_em9305_init_secondary_action_3190e0(uintptr_t incoming,uint32_t
  _Alignas(4) uint8_t response[20];
  if(*(volatile uint8_t *)(record+4u)!=0u){
   (void)opencfw_em9305_memset(response,0u,18u);
-  uint32_t slot=(uint8_t)((int32_t)((uint32_t)record-0x803d78u)/784);
+  uint32_t slot=(uint8_t)((int32_t)((uint32_t)record-((uintptr_t)&em9305_ram_803d58 + 0x20u))/784);
   uint32_t flag=*(volatile uint8_t *)(record+777u);
   (void)opencfw_em9305_init_secondary_event_30e928(68u,slot,response,flag);
   record=*(volatile uint32_t *)(root+20u);
@@ -22044,7 +22055,7 @@ uint32_t opencfw_em9305_init_secondary_action_3190e0(uintptr_t incoming,uint32_t
  uint32_t flags=*(volatile uint8_t *)(root+4u);
  if((flags&1u)==0u){
   (void)opencfw_em9305_memset(response,0u,18u);
-  uint32_t slot=(uint8_t)((int32_t)((uint32_t)record-0x803d78u)/784);
+  uint32_t slot=(uint8_t)((int32_t)((uint32_t)record-((uintptr_t)&em9305_ram_803d58 + 0x20u))/784);
   uint32_t flag=*(volatile uint8_t *)(record+777u);
   (void)opencfw_em9305_init_secondary_event_30e928(26u,slot,response,flag);
  }else{
@@ -22060,7 +22071,7 @@ uint32_t opencfw_em9305_init_secondary_action_3190e0(uintptr_t incoming,uint32_t
    uint32_t enabled=*(volatile uint8_t *)(freshrecord+6u);*(volatile uint8_t *)(message+5u)=(uint8_t)enabled;
    uint32_t period=*(volatile uint32_t *)(freshrecord+620u);*(volatile uint16_t *)(message+18u)=(uint16_t)period;
    uint32_t half=*(volatile uint16_t *)(freshrecord+616u);*(volatile uint16_t *)(message+16u)=(uint16_t)half;
-   uint32_t option=*(volatile uint8_t *)(root+16u),handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+   uint32_t option=*(volatile uint8_t *)(root+16u),handler=em9305_ram_805af0.u8_805b18;
    *(volatile uint8_t *)(message+21u)=(uint8_t)option;
    (void)opencfw_em9305_wsf_task_message_send(handler,message);
   }
@@ -22080,17 +22091,17 @@ extern void opencfw_em9305_callback_3227a4(void);
 uint32_t opencfw_em9305_init_lower_307d74(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x802958u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3228a8;
- *(volatile uint32_t *)(uintptr_t)0x805204u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3228f0;
- *(volatile uint32_t *)(uintptr_t)0x80289cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_3227e0;
- *(volatile uint32_t *)(uintptr_t)0x802898u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3227a4;
- (void)opencfw_em9305_memset((void *)0x804fd8u,0u,404u);
- uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ em9305_ram_802950.u32_802958=(uint32_t)(uintptr_t)opencfw_em9305_callback_3228a8;
+ em9305_ram_8051b8.u32_805204=(uint32_t)(uintptr_t)opencfw_em9305_callback_3228f0;
+ em9305_ram_802878.u32_80289c=(uint32_t)(uintptr_t)opencfw_em9305_callback_3227e0;
+ em9305_ram_802878.u32_802898=(uint32_t)(uintptr_t)opencfw_em9305_callback_3227a4;
+ (void)opencfw_em9305_memset((void *)((uintptr_t)&em9305_ram_803d58 + 0x1280u),0u,404u);
+ uintptr_t product=em9305_ram_805c5c.u32_805cac;
  uint32_t version=*(volatile uint8_t *)(product+4u);
  if(version<8u)return version;
- uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b30u;
- *(volatile uint32_t *)(uintptr_t)0x805b30u=old|128u;
- return 0x805b30u;
+ uint32_t old=em9305_ram_805af0.u32_805b30;
+ em9305_ram_805af0.u32_805b30=old|128u;
+ return ((uintptr_t)&em9305_ram_805af0 + 0x40u);
 }
 
 extern void opencfw_em9305_callback_32233c(void);
@@ -22106,30 +22117,30 @@ extern uint32_t opencfw_em9305_callback_304214(uintptr_t,uintptr_t,uint32_t,uint
 /* Full3042e8..304320: callback registration, nativeR0 slot address. */
 uint32_t opencfw_em9305_init_child_3042e8(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x805c14u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3042b4;
- *(volatile uint32_t *)(uintptr_t)0x805c10u=(uint32_t)(uintptr_t)opencfw_em9305_callback_30425c;
- *(volatile uint32_t *)(uintptr_t)0x805c08u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3041e0;
- *(volatile uint32_t *)(uintptr_t)0x805c0cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_304214;
- return 0x805c0cu;
+ em9305_ram_805be0.u32_805c14=(uint32_t)(uintptr_t)opencfw_em9305_callback_3042b4;
+ em9305_ram_805be0.u32_805c10=(uint32_t)(uintptr_t)opencfw_em9305_callback_30425c;
+ em9305_ram_805be0.u32_805c08=(uint32_t)(uintptr_t)opencfw_em9305_callback_3041e0;
+ em9305_ram_805be0.u32_805c0c=(uint32_t)(uintptr_t)opencfw_em9305_callback_304214;
+ return ((uintptr_t)&em9305_ram_805be0 + 0x2cu);
 }
 /* Full307e30..307ec4; loop post-stores six584-byte buffer identities. */
 uint32_t opencfw_em9305_init_lower_307e30(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x805c8cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_32233c;
- *(volatile uint32_t *)(uintptr_t)0x805c88u=(uint32_t)(uintptr_t)opencfw_em9305_callback_322184;
- *(volatile uint32_t *)(uintptr_t)0x805c84u=(uint32_t)(uintptr_t)opencfw_em9305_callback_322178;
- *(volatile uint32_t *)(uintptr_t)0x805c90u=(uint32_t)(uintptr_t)opencfw_em9305_callback_322580;
- *(volatile uint32_t *)(uintptr_t)0x805c94u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3225b0;
+ em9305_ram_805c5c.u32_805c8c=(uint32_t)(uintptr_t)opencfw_em9305_callback_32233c;
+ em9305_ram_805c5c.u32_805c88=(uint32_t)(uintptr_t)opencfw_em9305_callback_322184;
+ em9305_ram_805c5c.u32_805c84=(uint32_t)(uintptr_t)opencfw_em9305_callback_322178;
+ em9305_ram_805c5c.u32_805c90=(uint32_t)(uintptr_t)opencfw_em9305_callback_322580;
+ em9305_ram_805c5c.u32_805c94=(uint32_t)(uintptr_t)opencfw_em9305_callback_3225b0;
  (void)opencfw_em9305_init_child_3042e8();
- *(volatile uint32_t *)(uintptr_t)0x805ca8u=(uint32_t)(uintptr_t)opencfw_em9305_callback_3246f8;
- for(uint32_t i=0u;i<6u;i++)*(volatile uint32_t *)(uintptr_t)(0x805c44u+4u*i)=0x801a1cu+584u*i;
- uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ em9305_ram_805c5c.u32_805ca8=(uint32_t)(uintptr_t)opencfw_em9305_callback_3246f8;
+ for(uint32_t i=0u;i<6u;i++)*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_805c44+4u*i)=(uintptr_t)&em9305_ram_801a1c+584u*i;
+ uintptr_t product=em9305_ram_805c5c.u32_805cac;
  uint32_t version=*(volatile uint8_t *)(product+4u);
  if(version<13u)return version;
- uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b34u;
- *(volatile uint32_t *)(uintptr_t)0x805b34u=old|4096u;
- return 0x805b34u;
+ uint32_t old=em9305_ram_805af0.u32_805b34;
+ em9305_ram_805af0.u32_805b34=old|4096u;
+ return ((uintptr_t)&em9305_ram_805af0 + 0x44u);
 }
 
 extern void opencfw_em9305_callback_31c0e0(void);
@@ -22144,28 +22155,28 @@ extern uint32_t opencfw_em9305_radio_identity_control_303c9c(uint32_t);
 uint32_t opencfw_em9305_init_lower_3080f8(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x8056bcu=(uint32_t)(uintptr_t)opencfw_em9305_callback_31c0e0;
- *(volatile uint32_t *)(uintptr_t)0x803d48u=(uint32_t)(uintptr_t)opencfw_em9305_callback_31c0e0;
- uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b34u;
- *(volatile uint32_t *)(uintptr_t)0x805178u=(uint32_t)(uintptr_t)opencfw_em9305_callback_324628;
- *(volatile uint32_t *)(uintptr_t)0x8052c8u=(uint32_t)(uintptr_t)opencfw_em9305_callback_326904;
- *(volatile uint32_t *)(uintptr_t)0x805170u=(uint32_t)(uintptr_t)opencfw_em9305_callback_323620;
- *(volatile uint32_t *)(uintptr_t)0x805b34u=old|14u;
+ em9305_ram_805688.u32_8056bc=(uint32_t)(uintptr_t)opencfw_em9305_callback_31c0e0;
+ em9305_ram_803d20.u32_803d48=(uint32_t)(uintptr_t)opencfw_em9305_callback_31c0e0;
+ uint32_t old=em9305_ram_805af0.u32_805b34;
+ em9305_ram_805160.u32_805178=(uint32_t)(uintptr_t)opencfw_em9305_callback_324628;
+ em9305_ram_8052bc.u32_8052c8=(uint32_t)(uintptr_t)opencfw_em9305_callback_326904;
+ em9305_ram_805160.u32_805170=(uint32_t)(uintptr_t)opencfw_em9305_callback_323620;
+ em9305_ram_805af0.u32_805b34=old|14u;
  return opencfw_em9305_ll_command_pending_310634();
 }
 /* Full30814c..308196; captured product before four ordered clears. */
 uint32_t opencfw_em9305_init_lower_30814c(uint32_t incoming)
 {
- (void)incoming;uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- *(volatile uint32_t *)(uintptr_t)0x8051f0u=0u;
- *(volatile uint32_t *)(uintptr_t)0x8051ecu=0u;
- *(volatile uint32_t *)(uintptr_t)0x8051e8u=0u;
+ (void)incoming;uintptr_t product=em9305_ram_805c5c.u32_805cac;
+ em9305_ram_8051b8.u32_8051f0=0u;
+ em9305_ram_8051b8.u32_8051ec=0u;
+ em9305_ram_8051b8.u32_8051e8=0u;
  uint32_t version=*(volatile uint8_t *)(product+4u);
- *(volatile uint32_t *)(uintptr_t)0x802968u=(uint32_t)(uintptr_t)opencfw_em9305_callback_324dd4;
- *(volatile uint32_t *)(uintptr_t)0x8051e4u=0u;
- if(version>=8u){uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b30u;*(volatile uint32_t *)(uintptr_t)0x805b30u=old|64u;}
+ em9305_ram_802950.u32_802968=(uint32_t)(uintptr_t)opencfw_em9305_callback_324dd4;
+ em9305_ram_8051b8.u32_8051e4=0u;
+ if(version>=8u){uint32_t old=em9305_ram_805af0.u32_805b30;em9305_ram_805af0.u32_805b30=old|64u;}
  (void)opencfw_em9305_radio_identity_control_303c9c((uint32_t)(uintptr_t)opencfw_em9305_callback_324e3c);
- *(volatile uint16_t *)(uintptr_t)0x8051eau=262u;
+ em9305_ram_8051b8.u16_8051ea=262u;
  return 262u;
 }
 
@@ -22178,23 +22189,23 @@ extern uint32_t opencfw_em9305_init_child_317498(void);
 extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
 /* Full31b7d4..31b7e0, incoming R0 overwritten. */
 uint32_t opencfw_em9305_init_child_31b7d4(uint32_t incoming)
-{(void)incoming;return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)0x8028d0u,0u,128u);}
+{(void)incoming;return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)&em9305_ram_8028d0,0u,128u);}
 /* Full30a0a4..30a0fe, children ordered before fresh product read. */
 uint32_t opencfw_em9305_init_lower_30a0a4(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x802894u=(uint32_t)(uintptr_t)opencfw_em9305_callback_31bbb0;
- *(volatile uint32_t *)(uintptr_t)0x802990u=(uint32_t)(uintptr_t)opencfw_em9305_callback_328d78;
- *(volatile uint32_t *)(uintptr_t)0x80523cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_32922c;
+ em9305_ram_802878.u32_802894=(uint32_t)(uintptr_t)opencfw_em9305_callback_31bbb0;
+ em9305_ram_802950.u32_802990=(uint32_t)(uintptr_t)opencfw_em9305_callback_328d78;
+ em9305_ram_8051b8.u32_80523c=(uint32_t)(uintptr_t)opencfw_em9305_callback_32922c;
  (void)opencfw_em9305_init_child_3251dc((uint32_t)(uintptr_t)opencfw_em9305_callback_31ce10);
  uint32_t result=opencfw_em9305_init_child_317498();
  (void)opencfw_em9305_init_child_31b7d4(result);
- uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t product=em9305_ram_805c5c.u32_805cac;
  uint32_t version=*(volatile uint8_t *)(product+4u);
  if(version<11u)return version;
- uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b30u;
- *(volatile uint32_t *)(uintptr_t)0x805b30u=old|0x40000000u;
- return 0x805b30u;
+ uint32_t old=em9305_ram_805af0.u32_805b30;
+ em9305_ram_805af0.u32_805b30=old|0x40000000u;
+ return ((uintptr_t)&em9305_ram_805af0 + 0x40u);
 }
 
 extern void opencfw_em9305_callback_32bb9c(void);
@@ -22218,49 +22229,49 @@ extern uint32_t opencfw_em9305_init_child_318ab8(uint32_t);
 uint32_t opencfw_em9305_init_lower_30a1a0(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x802950u=(uint32_t)(uintptr_t)opencfw_em9305_callback_32bb9c;
- uint32_t prior=*(volatile uint32_t *)(uintptr_t)0x802954u;
- *(volatile uint32_t *)(uintptr_t)0x805200u=(uint32_t)(uintptr_t)opencfw_em9305_callback_32a218;
- if(prior==0u)*(volatile uint32_t *)(uintptr_t)0x802954u=(uint32_t)(uintptr_t)opencfw_em9305_callback_329844;
- prior=*(volatile uint32_t *)(uintptr_t)0x80280cu;
- *(volatile uint32_t *)(uintptr_t)0x802878u=(uint32_t)(uintptr_t)opencfw_em9305_callback_318f2c;
- *(volatile uint32_t *)(uintptr_t)0x80287cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_318c1c;
- *(volatile uint32_t *)(uintptr_t)0x8056c8u=(uint32_t)(uintptr_t)opencfw_em9305_mode_event_31bd78;
- *(volatile uint32_t *)(uintptr_t)0x8056a8u=(uint32_t)(uintptr_t)opencfw_em9305_callback_32ae70;
- if(prior==0u)*(volatile uint32_t *)(uintptr_t)0x80280cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_32bc6c;
- *(volatile uint32_t *)(uintptr_t)0x8027e0u=(uint32_t)(uintptr_t)opencfw_em9305_callback_325984;
+ em9305_ram_802950.u32_802950=(uint32_t)(uintptr_t)opencfw_em9305_callback_32bb9c;
+ uint32_t prior=em9305_ram_802950.u32_802954;
+ em9305_ram_8051b8.u32_805200=(uint32_t)(uintptr_t)opencfw_em9305_callback_32a218;
+ if(prior==0u)em9305_ram_802950.u32_802954=(uint32_t)(uintptr_t)opencfw_em9305_callback_329844;
+ prior=em9305_ram_8027e0.u32_80280c;
+ em9305_ram_802878.u32_802878=(uint32_t)(uintptr_t)opencfw_em9305_callback_318f2c;
+ em9305_ram_802878.u32_80287c=(uint32_t)(uintptr_t)opencfw_em9305_callback_318c1c;
+ em9305_ram_805688.u32_8056c8=(uint32_t)(uintptr_t)opencfw_em9305_mode_event_31bd78;
+ em9305_ram_805688.u32_8056a8=(uint32_t)(uintptr_t)opencfw_em9305_callback_32ae70;
+ if(prior==0u)em9305_ram_8027e0.u32_80280c=(uint32_t)(uintptr_t)opencfw_em9305_callback_32bc6c;
+ em9305_ram_8027e0.u32_8027e0=(uint32_t)(uintptr_t)opencfw_em9305_callback_325984;
  uint32_t value=opencfw_em9305_init_child_3251dc((uint32_t)(uintptr_t)opencfw_em9305_callback_3189f4);
  (void)opencfw_em9305_init_child_318ab8(value);
- uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t product=em9305_ram_805c5c.u32_805cac;
  uint32_t version=*(volatile uint8_t *)(product+4u);
  if(version<7u)return (uint32_t)product;
- uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b30u;
- value=old|14u;*(volatile uint32_t *)(uintptr_t)0x805b30u=value;
+ uint32_t old=em9305_ram_805af0.u32_805b30;
+ value=old|14u;em9305_ram_805af0.u32_805b30=value;
  if(version==7u)return value;
- uint32_t second=*(volatile uint32_t *)(uintptr_t)0x805b34u;
- value=old|46u;*(volatile uint32_t *)(uintptr_t)0x805b30u=value;
+ uint32_t second=em9305_ram_805af0.u32_805b34;
+ value=old|46u;em9305_ram_805af0.u32_805b30=value;
  if(version<9u)return value;
- value=old|0x1002eu;*(volatile uint32_t *)(uintptr_t)0x805b34u=second;*(volatile uint32_t *)(uintptr_t)0x805b30u=value;
+ value=old|0x1002eu;em9305_ram_805af0.u32_805b34=second;em9305_ram_805af0.u32_805b30=value;
  if(version==9u)return value;
- value=old|0x501002eu;*(volatile uint32_t *)(uintptr_t)0x805b34u=second;*(volatile uint32_t *)(uintptr_t)0x805b30u=value;
+ value=old|0x501002eu;em9305_ram_805af0.u32_805b34=second;em9305_ram_805af0.u32_805b30=value;
  if(version<12u)return value;
- *(volatile uint32_t *)(uintptr_t)0x805b30u=value;*(volatile uint32_t *)(uintptr_t)0x805b34u=second|128u;
+ em9305_ram_805af0.u32_805b30=value;em9305_ram_805af0.u32_805b34=second|128u;
  return value;
 }
 /* Full30a134..30a19a, then authentic fallthrough into30a1a0. */
 uint32_t opencfw_em9305_init_lower_30a134(uint32_t incoming)
 {
- (void)incoming;uint32_t prior=*(volatile uint32_t *)(uintptr_t)0x80280cu;
- *(volatile uint32_t *)(uintptr_t)0x8056a0u=(uint32_t)(uintptr_t)opencfw_em9305_callback_319890;
- *(volatile uint32_t *)(uintptr_t)0x80569cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_32a628;
- if(prior==0u)*(volatile uint32_t *)(uintptr_t)0x80280cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_32a5ac;
- uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- uint32_t old=*(volatile uint32_t *)(uintptr_t)0x805b30u;
+ (void)incoming;uint32_t prior=em9305_ram_8027e0.u32_80280c;
+ em9305_ram_805688.u32_8056a0=(uint32_t)(uintptr_t)opencfw_em9305_callback_319890;
+ em9305_ram_805688.u32_80569c=(uint32_t)(uintptr_t)opencfw_em9305_callback_32a628;
+ if(prior==0u)em9305_ram_8027e0.u32_80280c=(uint32_t)(uintptr_t)opencfw_em9305_callback_32a5ac;
+ uintptr_t product=em9305_ram_805c5c.u32_805cac;
+ uint32_t old=em9305_ram_805af0.u32_805b30;
  uint32_t version=*(volatile uint8_t *)(product+4u);
- *(volatile uint32_t *)(uintptr_t)0x8052ccu=(uint32_t)(uintptr_t)opencfw_em9305_callback_30fc20;
- *(volatile uint32_t *)(uintptr_t)0x8052d0u=(uint32_t)(uintptr_t)opencfw_em9305_callback_30fc24;
- uint32_t value=old|1u;*(volatile uint32_t *)(uintptr_t)0x805b30u=value;
- if(version>=7u){value=old|17u;*(volatile uint32_t *)(uintptr_t)0x805b30u=value;}
+ em9305_ram_8052bc.u32_8052cc=(uint32_t)(uintptr_t)opencfw_em9305_callback_30fc20;
+ em9305_ram_8052bc.u32_8052d0=(uint32_t)(uintptr_t)opencfw_em9305_callback_30fc24;
+ uint32_t value=old|1u;em9305_ram_805af0.u32_805b30=value;
+ if(version>=7u){value=old|17u;em9305_ram_805af0.u32_805b30=value;}
  return opencfw_em9305_init_lower_30a1a0(value);
 }
 
@@ -22275,8 +22286,8 @@ extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
 /* Full30a27c..30a29a; native MPYUW low halves, count is a byte. */
 uint32_t opencfw_em9305_init_child_30a27c(void)
 {
- uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
- uintptr_t output=*(volatile uint32_t *)(uintptr_t)0x805c38u;
+ uintptr_t product=em9305_ram_805c5c.u32_805cac;
+ uintptr_t output=em9305_ram_805be0.u32_805c38;
  uint32_t count=*(volatile uint8_t *)(product+12u);
  return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)output,0u,count*2824u);
 }
@@ -22284,22 +22295,22 @@ uint32_t opencfw_em9305_init_child_30a27c(void)
 uint32_t opencfw_em9305_init_lower_30a29c(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x802970u=(uint32_t)(uintptr_t)opencfw_em9305_callback_32aa48;
- *(volatile uint32_t *)(uintptr_t)0x802988u=(uint32_t)(uintptr_t)opencfw_em9305_callback_327a54;
- *(volatile uint32_t *)(uintptr_t)0x80521cu=(uint32_t)(uintptr_t)opencfw_em9305_callback_32ae3c;
- *(volatile uint32_t *)(uintptr_t)0x8028a0u=(uint32_t)(uintptr_t)opencfw_em9305_callback_32c148;
+ em9305_ram_802950.u32_802970=(uint32_t)(uintptr_t)opencfw_em9305_callback_32aa48;
+ em9305_ram_802950.u32_802988=(uint32_t)(uintptr_t)opencfw_em9305_callback_327a54;
+ em9305_ram_8051b8.u32_80521c=(uint32_t)(uintptr_t)opencfw_em9305_callback_32ae3c;
+ em9305_ram_802878.u32_8028a0=(uint32_t)(uintptr_t)opencfw_em9305_callback_32c148;
  (void)opencfw_em9305_init_child_3251dc((uint32_t)(uintptr_t)opencfw_em9305_callback_32bb40);
- uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t product=em9305_ram_805c5c.u32_805cac;
  uint32_t version=*(volatile uint8_t *)(product+4u);
- *(volatile uint32_t *)(uintptr_t)0x801300u=(uint32_t)(uintptr_t)opencfw_em9305_callback_306cbc;
+ em9305_ram_8012c0.u32_801300=(uint32_t)(uintptr_t)opencfw_em9305_callback_306cbc;
  if(version>=9u){
-  uint32_t first=*(volatile uint32_t *)(uintptr_t)0x805b30u|4096u;
-  *(volatile uint32_t *)(uintptr_t)0x805b30u=first;
+  uint32_t first=em9305_ram_805af0.u32_805b30|4096u;
+  em9305_ram_805af0.u32_805b30=first;
   if(version>=13u){
-   uint32_t second=*(volatile uint32_t *)(uintptr_t)0x805b34u;
-   *(volatile uint32_t *)(uintptr_t)0x805b30u=first;
-   *(volatile uint32_t *)(uintptr_t)0x805b34u=second|256u;
-   if(version!=13u){*(volatile uint32_t *)(uintptr_t)0x805b30u=first;*(volatile uint32_t *)(uintptr_t)0x805b34u=second|1280u;}
+   uint32_t second=em9305_ram_805af0.u32_805b34;
+   em9305_ram_805af0.u32_805b30=first;
+   em9305_ram_805af0.u32_805b34=second|256u;
+   if(version!=13u){em9305_ram_805af0.u32_805b30=first;em9305_ram_805af0.u32_805b34=second|1280u;}
   }
  }
  return opencfw_em9305_init_child_30a27c();
@@ -22310,22 +22321,22 @@ extern uint32_t opencfw_em9305_init_callback_325450(void);
 extern uint32_t opencfw_em9305_init_callback_325474(void);
 uint32_t opencfw_em9305_init_registration_31408c(uint32_t callback)
 {
- uint32_t count=*(volatile uint8_t *)(uintptr_t)0x80606cu;
+ uint32_t count=em9305_ram_80605c.u8_80606c;
  if(count<=2u){
-  *(volatile uint8_t *)(uintptr_t)0x80606cu=(uint8_t)(count+1u);
-  *(volatile uint32_t *)(uintptr_t)(0x806060u+count*4u)=callback;
+  em9305_ram_80605c.u8_80606c=(uint8_t)(count+1u);
+  *(volatile uint32_t *)(uintptr_t)(((uintptr_t)&em9305_ram_80605c + 0x4u)+count*4u)=callback;
  }
  return callback;
 }
 uint32_t opencfw_em9305_init_lower_308630(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x8028a8u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_325450;
+ em9305_ram_802878.u32_8028a8=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_325450;
  (void)opencfw_em9305_init_registration_31408c((uint32_t)(uintptr_t)opencfw_em9305_init_callback_325474);
- uint32_t state=*(volatile uint32_t *)(uintptr_t)0x805b30u;
- *(volatile uint8_t *)(uintptr_t)0x805b83u=0u;
+ uint32_t state=em9305_ram_805af0.u32_805b30;
+ em9305_ram_805b80.u8_805b83=0u;
  state|=UINT32_C(1)<<27u;
- *(volatile uint32_t *)(uintptr_t)0x805b30u=state;
+ em9305_ram_805af0.u32_805b30=state;
  return state;
 }
 /* Native309cb8..309cf6: four callback identities and tail buffer clear. */
@@ -22336,11 +22347,11 @@ extern uint32_t opencfw_em9305_init_callback_32c254(void);
 uint32_t opencfw_em9305_init_lower_309cb8(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x802960u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_327de0;
- *(volatile uint32_t *)(uintptr_t)0x80520cu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3280c8;
- *(volatile uint32_t *)(uintptr_t)0x8028b0u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_327dc8;
- *(volatile uint32_t *)(uintptr_t)0x8028a0u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_32c254;
- return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)0x8052d4u,0u,304u);
+ em9305_ram_802950.u32_802960=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_327de0;
+ em9305_ram_8051b8.u32_80520c=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3280c8;
+ em9305_ram_802878.u32_8028b0=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_327dc8;
+ em9305_ram_802878.u32_8028a0=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_32c254;
+ return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)&em9305_ram_8052d4,0u,304u);
 }
 
 extern uint32_t opencfw_em9305_init_callback_30e840(uintptr_t,uint32_t);
@@ -22362,35 +22373,35 @@ extern uint32_t opencfw_em9305_init_callback_31807c(uintptr_t);
 extern void opencfw_em9305_init_callback_318168(void);
 uint32_t opencfw_em9305_init_child_304324(void)
 {
- *(volatile uint32_t *)(uintptr_t)0x805c20u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_304430;
- *(volatile uint32_t *)(uintptr_t)0x805c28u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3044e8;
- *(volatile uint32_t *)(uintptr_t)0x805c1cu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3043ac;
- *(volatile uint32_t *)(uintptr_t)0x805c24u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_304468;
- return 0x805c24u;
+ em9305_ram_805be0.u32_805c20=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_304430;
+ em9305_ram_805be0.u32_805c28=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3044e8;
+ em9305_ram_805be0.u32_805c1c=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3043ac;
+ em9305_ram_805be0.u32_805c24=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_304468;
+ return ((uintptr_t)&em9305_ram_805be0 + 0x44u);
 }
 uint32_t opencfw_em9305_init_lower_307ec8(uint32_t incoming)
 {
  (void)incoming;
- *(volatile uint32_t *)(uintptr_t)0x805cdcu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_30e840;
- *(volatile uint32_t *)(uintptr_t)0x805cc4u=(uint32_t)(uintptr_t)opencfw_em9305_callback_32b61c;
- *(volatile uint32_t *)(uintptr_t)0x805cc8u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_32beb0;
- *(volatile uint32_t *)(uintptr_t)0x805cccu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_32bfc4;
- *(volatile uint32_t *)(uintptr_t)0x805c74u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_31ae84;
+ em9305_ram_805c5c.u32_805cdc=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_30e840;
+ em9305_ram_805c5c.u32_805cc4=(uint32_t)(uintptr_t)opencfw_em9305_callback_32b61c;
+ em9305_ram_805c5c.u32_805cc8=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_32beb0;
+ em9305_ram_805c5c.u32_805ccc=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_32bfc4;
+ em9305_ram_805c5c.u32_805c74=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_31ae84;
  (void)opencfw_em9305_init_child_304324();
- uintptr_t product=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+ uintptr_t product=em9305_ram_805c5c.u32_805cac;
  uint32_t version=*(volatile uint8_t *)(product+4u);
- *(volatile uint32_t *)(uintptr_t)0x805c60u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3183ec;
- *(volatile uint32_t *)(uintptr_t)0x805c5cu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_31836c;
- *(volatile uint32_t *)(uintptr_t)0x805c9cu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3245ec;
- *(volatile uint32_t *)(uintptr_t)0x805ca0u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_32468c;
- *(volatile uint32_t *)(uintptr_t)0x805ca4u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_324698;
- *(volatile uint32_t *)(uintptr_t)0x805248u=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_31810c;
- *(volatile uint32_t *)(uintptr_t)0x80299cu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_31807c;
+ em9305_ram_805c5c.u32_805c60=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3183ec;
+ em9305_ram_805c5c.u32_805c5c=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_31836c;
+ em9305_ram_805c5c.u32_805c9c=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_3245ec;
+ em9305_ram_805c5c.u32_805ca0=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_32468c;
+ em9305_ram_805c5c.u32_805ca4=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_324698;
+ em9305_ram_8051b8.u32_805248=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_31810c;
+ em9305_ram_802950.u32_80299c=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_31807c;
  if(version>=13u){
-  uint32_t state=*(volatile uint32_t *)(uintptr_t)0x805b34u;
- *(volatile uint32_t *)(uintptr_t)0x8028acu=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_318168;
+  uint32_t state=em9305_ram_805af0.u32_805b34;
+ em9305_ram_802878.u32_8028ac=(uint32_t)(uintptr_t)opencfw_em9305_init_callback_318168;
   state|=2048u;
-  *(volatile uint32_t *)(uintptr_t)0x805b34u=state;
+  em9305_ram_805af0.u32_805b34=state;
   return state;
  }
  return version;

@@ -1,0 +1,28 @@
+{
+  "stream": "ws-hwdrivers",
+  "date_cst": "2026-11-23 00:52 America/Chicago",
+  "subject": "Step 1: autogen prototype-comment misresolution fixed (false-EQUAL class) + full scan of tonight's passed specs",
+  "root_cause": "func_placed() treated a function PROTOTYPE with a trailing /*0xADDR*/ comment as a DEFINITION, because ln.rstrip().endswith(';') is false when a comment follows the ';'. It then walked up to the file-top '/* Stock 0x... */' block comment and misattributed the unit's OWN stock address to the prototype-declared callee. comment_addrs() also could not capture prototype trailing-comment addresses and gated on 'extern'. Net effect: a prototype callee could resolve to a wrong or self address. If that callee's path was never exercised by fuzzing (e.g. an error branch), the unit passed anyway = a false EQUAL.",
+  "fixes_in_stream_autogen_only": [
+    "func_placed(): strip trailing comment before the ';' prototype check (ln.split('/*')[0].rstrip().endswith(';')) so prototypes are skipped, not mined as defs.",
+    "comment_addrs(): added a prototype regex capturing 'name(args); /*0xADDR*/' (with type-keyword guard), and no longer gates prototype lines behind 'extern'.",
+    "defsym loop: added a self/cross-reference WARN guard (meta['misresolved']) that flags any callee resolving to a tested fn's own stock body; warn-only so legitimate same-address aliases still link."
+  ],
+  "verify_parser_fix": {
+    "g2_codec_pin_function": "now resolves 0x480f0c (was self 0x4c3074)",
+    "g2_gpio_critical_save": "now resolves 0x473940 (was self 0x509024)",
+    "self_fns_still_correct": "g2_codec_clock_enable=0x4c3074, g2_codec_gpio_write=0x509024"
+  },
+  "scan_of_tonight_passed_units": {
+    "method": "universal self-reference collision scan over all ~90 metas + re-autogen-and-defsym-diff for the tonight set (codecirq,cpdmclk,cheapa,cheapr,bsppdm,imufp,gluefg,npmxfg,cenable,cgpio)",
+    "AFFECTED": {
+      "cheapa": "g2_file_heap_error_log defsym 0x75165d -> 0x4733ef (correct per source comment /* 0x4733ee */). Only called on the mutex-acquire-FAIL branch (likely never fuzzed) = false-EQUAL risk. RERAN after fix: 12/12 PASS."
+    },
+    "LEGIT_ALIAS_flagged": {
+      "cheapr": "audio_file_heap_free=0x474d16 == tested codec_release (0x474d16). Source documents both as the native 0x474d16 body; our codec_release is a thin wrapper. Valid equivalence; 12/12 stays correct. Flagged in misresolved for review only."
+    },
+    "UNCHANGED_clean": ["codecirq","cpdmclk","bsppdm","imufp","gluefg","npmxfg","cenable","cgpio"]
+  },
+  "cenable_cgpio": "re-autogen'd WITHOUT the earlier codec_runstock.json override - the parser fix alone now resolves pin_function=0x480f0d and critical_save=0x473941 correctly (misresolved empty). codec_runstock.json deleted (redundant).",
+  "note": "autogen.py edited is the STREAM-PRIVATE copy under build/ws-hwdrivers-20261122/harness, NOT shared tools/build."
+}

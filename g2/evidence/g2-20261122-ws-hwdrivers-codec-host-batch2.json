@@ -1,0 +1,13 @@
+{
+  "stream":"ws-hwdrivers","timestamp_cst":"2026-11-22T21:50-06:00",
+  "batch":"codec-host largest-first (cont.)",
+  "units":{
+    "gx8002_host_commands.c":"8/8 fns, 48/48 cases, 0 mismatches",
+    "drv_gx8002b.c":"9/9 fns, 54/54, 0 mismatches",
+    "thread_audio_codec_ctrl.c":"7/7 fns, 42/42, 0 mismatches"
+  },
+  "fixes":{
+    "audio_uart_checksum_copy_addr":"GX8002_MicDelay1Bit 0/6 was a harness address-resolution bug, NOT a C bug: autogen global_index harvested a stray 0x439be4 for audio_uart_checksum_copy, but the source comment AND stock call site (bl 0x439c04 at 0x57d25a) agree it is 0x439c04. Pinned 'audio_uart_checksum_copy':(0x439C04,'K_MEMCPY') in KNOWN. -> 8/8. (A conflicting 0x439be4 decl exists in some other source file; worth reconciling.)",
+    "K_IDLEDELAY":"AUD_ThreadExit ends in for(;;) osDelay(0xffffffff) idle loop. osDelay can't be blanket-capped (also called finitely as osDelay(50)). Added K_IDLEDELAY kind: escapes (hw_longjmp) only when ticks arg core[0]==0xffffffff, else returns 0. KNOWN 'osDelay':(0x449376,'K_IDLEDELAY'). Surgical, no false escapes. -> 7/7."
+  }
+}

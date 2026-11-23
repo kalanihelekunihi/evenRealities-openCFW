@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern uint32_t opencfw_em9305_init_secondary_channel_324c68(uintptr_t);
 extern uint32_t opencfw_em9305_init_secondary_schedule_318ad8(uintptr_t,uint32_t);
@@ -39,11 +40,11 @@ static uint32_t divu_321e14(uint32_t numerator,uint32_t denominator)
  * review. R0 is the only live entry argument; R1-R3 are overwritten. */
 uint32_t opencfw_em9305_init_secondary_commit_321e14(uint32_t slot)
 {
-    uintptr_t slots=load32(0x805c70u);
+    uintptr_t slots=load32(((uintptr_t)&em9305_ram_805c5c + 0x14u));
     uintptr_t slot_record=slots+(uint16_t)slot*912u;
-    uintptr_t shared=0x8051c0u;
+    uintptr_t shared=((uintptr_t)&em9305_ram_8051b8 + 0x8u);
     uintptr_t record=load32(shared+16u);
-    uintptr_t config=0x805fbcu;
+    uintptr_t config=((uintptr_t)&em9305_ram_805fb8 + 0x4u);
     uintptr_t reference=record+690u;
     uintptr_t channel=record+644u;
     uint32_t kind=load8(slot_record+614u);

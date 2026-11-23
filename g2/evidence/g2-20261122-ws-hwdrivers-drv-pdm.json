@@ -1,0 +1,13 @@
+{
+  "stream":"ws-hwdrivers","unit":"drv_pdm (codec-host/drv-pdm/drv_pdm.c)","timestamp_cst":"2026-11-22T21:06-06:00",
+  "result":"4/4 functions equivalent, 24/24 cases, 0 mismatches",
+  "functions":{"DRV_PdmInit":"6/6","DRV_PdmDeinit":"6/6","PDM0_IRQHandler":"6/6","drv_pdm_buffer_get":"6/6"},
+  "drv_pdm_buffer_get_resolution":{
+    "prior":"0/6; firstdiff word stock=0x2006fc4c vs C=0xdead5742(poison)",
+    "root_cause":"the differing word is the base address of the driver-owned static scratch buffer pdm_pcm_block (drv_pdm.c:95, `static uint8_t pdm_pcm_block[320]`, comment 'stock RAM 0x2006fc4c'). Stock fixes it at 0x2006fc4c (literal [0x57ba84]); the C's static linked into harness .bss elsewhere, so *buffer returned a different (equally valid) address. NOT a logic bug: both bodies read the identical raw DMA buffer (run-stock am_hal_pdm_dma_get_buffer 0x59262c) and apply the identical 23..8/23..16 byte extraction.",
+    "proof":"bound the C static to the stock address via harness-only linker section placement (place_pdm.ld: .bss.pdm_pcm_block @0x2006fc4c; nm confirms pdm_pcm_block=0x2006fc4c). With both buffers co-located, all 6 seeds match fully (pointer + 320-byte PCM contents + length). Proven harness binding artifact; resolved; NO firmware edit.",
+    "classification":"harness artifact (static internal-scratch link address), PROVEN, resolved"
+  },
+  "preinit_note":"PREINIT['pdm']=('DRV_PdmInit',0x20071000,0x4000) runs the real DRV_PdmInit once before snapshot (instance table 0x200718c8 + handle cell 0x2007454c + init flag 0x20074fba all within the 0x4000 snap window), restored identically for both variants. Ran in Renode with NO hang on unmodeled PDM hardware (am_hal_pdm_dma_start is a pure descriptor->handle struct copy; register writes are ignored by Renode).",
+  "harness_generalization_todo":"autogen only auto-places EXTERNAL unit globals; file-static globals carrying a `stock RAM 0x...` comment (like pdm_pcm_block) are missed (placed=[]). Generalize autogen to parse `static ... /* stock RAM 0xADDR */` and emit a place_ entry, so other codec-host files with static stock-addressed buffers bind automatically."
+}

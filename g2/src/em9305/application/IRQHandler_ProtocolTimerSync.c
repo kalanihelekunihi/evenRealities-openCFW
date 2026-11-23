@@ -4,6 +4,7 @@
  * protocol timer sync interrupt: ack 0x200 at 0xf00820, emsys_noop_302d80(), then the callback at 0x801914 if set.
  */
 #include "em_irq_frame.h"
+#include "em9305_ram.h"
 extern void opencfw_em9305_emsys_noop_302d80(void);
 
 __attribute__((used)) void opencfw_em9305_IRQHandler_ProtocolTimerSync_body(void)
@@ -11,7 +12,10 @@ __attribute__((used)) void opencfw_em9305_IRQHandler_ProtocolTimerSync_body(void
   EM_R32(0xf00820u) = 512u;
   __builtin_arc_sync();
   opencfw_em9305_emsys_noop_302d80();
-  EM_IRQ_CALL_SLOT(0x801914u);
+  {
+    em_irq_cb_t cb_ = (em_irq_cb_t)(uintptr_t)em9305_ram_80190c.u32_801914;
+    if (cb_) cb_();
+  }
 }
 
 EM_IRQ_HANDLER(opencfw_em9305_IRQHandler_ProtocolTimerSync, opencfw_em9305_IRQHandler_ProtocolTimerSync_body);

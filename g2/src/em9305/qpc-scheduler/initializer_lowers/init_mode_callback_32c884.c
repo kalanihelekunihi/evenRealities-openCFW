@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32c884..0x32c904. Stock MPYWHL: low word of a 32 x 16 product,
  * the 16-bit operand sign-extended. */
@@ -20,13 +21,13 @@ uint32_t opencfw_em9305_mode_callback_32c884(uintptr_t context,
         *(volatile uint32_t *)(context+636u)=state&~(1u<<8);
         return opencfw_em9305_receive_terminate_325c08(context,110u);
     }
-    uint8_t direction=*(volatile uint8_t *)(uintptr_t)0x80281cu;
+    uint8_t direction=em9305_ram_8027e0.u8_80281c;
     if (direction>=2u)
         return opencfw_em9305_phy_reject_32698c(context,30u,1u);
-    uint8_t lower=*(volatile uint8_t *)(uintptr_t)0x80281du;
+    uint8_t lower=em9305_ram_8027e0.u8_80281d;
     if (lower<5u)
         return opencfw_em9305_phy_reject_32698c(context,30u,1u);
-    uint8_t upper=*(volatile uint8_t *)(uintptr_t)0x80281eu;
+    uint8_t upper=em9305_ram_8027e0.u8_80281e;
     if (upper>150u||upper<5u||lower>150u||upper<lower)
         return opencfw_em9305_phy_reject_32698c(context,30u,1u);
     uint32_t upper_ticks=multiply_whl(0x30d40u,upper);

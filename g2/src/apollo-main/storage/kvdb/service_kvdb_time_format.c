@@ -41,7 +41,7 @@ int32_t _kvdbUpdataTimeFormat(void) {
     (void)SVC_KvdbWriteTimeFormat(&g2_kvdb_time_format_record);
     return 0;
 }
-G2_KVDB_MIGRATION_EXPORT(_kvdbUpdataTimeFormat);
+/* _kvdbUpdataTimeFormat: migration slot 9 of the stock-ordered table in service_kvdb.c (ROM 0x746d20). */
 
 int32_t SVC_KvdbWriteTimeFormat(const g2_kvdb_word_record_t *record) {
     g2_kvdb_time_format_record = *record;

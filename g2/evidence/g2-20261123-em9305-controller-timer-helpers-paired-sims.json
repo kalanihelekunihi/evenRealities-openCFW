@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 12:47:30 AM CST (America/Chicago)",
+  "title": "Install typo-RAM rewrite of controller_timer_helpers (13 symbols EQUIVALENT 100, typo-RAM mutants KILLED); private p-cth rebuild; paired Renode sims both PASS (run_renode_rc=0)",
+  "scope": "Largest remaining unproven typo-RAM u-suffix file after the 80542c merge. Prove vs tree C, mutant-kill observed typo-RAM sites, install, private p-lowers, slot-fit, private NOR splice, both paired sims.",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-ram-80542c-28byte-paired-sims.json",
+  "prove": {
+    "file": "g2/src/em9305/qpc-scheduler/controller_timer_helpers.c",
+    "cand": "build/ws-em9305-20261122/u-suffix/rewritten/g2/src/em9305/qpc-scheduler/controller_timer_helpers.c",
+    "n": 100,
+    "sites": 17,
+    "log": "build/ws-em9305-20261122/u-suffix/prove/usuf_controller_timer_helpers.log",
+    "rc": 0,
+    "elapsed_s": 62.1,
+    "symbols": {
+      "opencfw_em9305_timer_calibrate_a": "EQUIVALENT 100  classes=48 calls=838",
+      "opencfw_em9305_timer_calibrate_b": "EQUIVALENT 100  classes=48 calls=838",
+      "opencfw_em9305_controller_timer_word": "EQUIVALENT 100  classes=1 calls=0 (vacuous)",
+      "opencfw_em9305_controller_timer_changed": "EQUIVALENT 100  classes=83 calls=7",
+      "opencfw_em9305_timer_select": "EQUIVALENT 100  classes=64 calls=214",
+      "opencfw_em9305_timer_apply": "EQUIVALENT 100  classes=79 calls=13",
+      "opencfw_em9305_timer_threshold_flags": "EQUIVALENT 100  classes=75 calls=0 (vacuous)",
+      "opencfw_em9305_timer_enable": "EQUIVALENT 100  classes=58 calls=366",
+      "opencfw_em9305_timer_initialize": "EQUIVALENT 100  classes=85 calls=0 (vacuous)",
+      "opencfw_em9305_timer_irq_enable": "EQUIVALENT 100  classes=2 calls=0 (vacuous)",
+      "opencfw_em9305_timer_config_pair": "EQUIVALENT 100  classes=76 calls=0 (vacuous)",
+      "opencfw_em9305_controller_prepare_timer": "EQUIVALENT 100  classes=100 calls=100",
+      "opencfw_em9305_controller_timer_reset": "EQUIVALENT 100  classes=76 calls=300"
+    },
+    "non_vacuous": 8,
+    "vacuous_calls_0": 5,
+    "vacuous_note": "Vacuous symbols were not used as the typo-RAM proof. Mutants were aimed at observed sites in controller_timer_reset and controller_prepare_timer."
+  },
+  "mutants": {
+    "timer_reset_u32_80fde0_to_u32_80fde8": "KILLED: opencfw_em9305_controller_timer_reset MISMATCH memhash:40, other symbols still EQUIVALENT",
+    "prepare_timer_u32_80fba0_to_u32_80fba4": "KILLED: opencfw_em9305_controller_prepare_timer MISMATCH callhash:99, other symbols still EQUIVALENT"
+  },
+  "install": {
+    "file": "g2/src/em9305/qpc-scheduler/controller_timer_helpers.c",
+    "sha256_before": "2f7db1e1ac13cfeddab0ece0fbb4a19d42157e302e539cf7947c069f87b63c51",
+    "sha256_after": "eaeef70014c2ec9f601cf37470e168f521a721532052cb5a4ec6ca150ed6162f",
+    "bytes": 9969
+  },
+  "tree_build": {
+    "command": "python3 -u build/ws-em9305-20261122/pbuild.py build/ws-em9305-20261122/p-cth -j 3",
+    "log": "build/ws-em9305-20261122/p-cth-build.log",
+    "started": "2026-11-23 12:44:25 AM CST (America/Chicago)",
+    "finished": "2026-11-23 12:44:31 AM CST (America/Chicago)",
+    "rc": 0,
+    "link_log_empty": true,
+    "text_bytes": 239332,
+    "text_delta_vs_p_80542c": -80,
+    "app_sha256": "f5c2d408f030366781a044fffe42f9bb83d5afa8ca6a55a84a82c970a586f308"
+  },
+  "package": {
+    "path": "build/ws-em9305-20261122/p-cth/g2-em9305-source-candidate-package.bin",
+    "bytes": 240664,
+    "sha256": "46bcd39084a1a9b3604035ba29de627a98508073e93582148ebe191795a61cbd",
+    "magic": "00020404",
+    "records": 3,
+    "erase_sector_count": 31
+  },
+  "slot_fit": {
+    "application_end": "0x0033CAE4",
+    "application_bytes": 239332,
+    "headroom_bytes": 275740,
+    "fits_nvm_slot": true,
+    "precomputed_programmed_nvm_crcs": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0x914ECF40",
+      "[0x00302400,0x0033CAE4)": "0x3B67DD7F"
+    }
+  },
+  "splice": {
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-cth.bin",
+    "nor_sha256": "497643e1d7edb82b76cae6e2bdba1fbbbceff73862196f265807e7fafe2a986b",
+    "lfs_inject_wrote_bytes": 240664
+  },
+  "sims": {
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/cth-match.resc",
+      "log": "build/ws-em9305-20261122/sim/cth-match.log",
+      "started": "2026-11-23 12:44:52 AM CST (America/Chicago)",
+      "finished": "2026-11-23 12:45:40 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "chiprev": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_frames": 2,
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/cth-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/cth-dfu-mismatch.log",
+      "started": "2026-11-23 12:45:40 AM CST (America/Chicago)",
+      "finished": "2026-11-23 12:47:30 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq_at": "2026-11-23 12:46:53.189 AM CST (America/Chicago)",
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0x914ECF40",
+        "[0x00302400,0x0033CAE4)": "0x3B67DD7F"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 1038
+    }
+  },
+  "compare": {
+    "version_match_baseline": "PASS",
+    "version_match_run_renode_rc": 0,
+    "forced_mismatch_dfu_baseline": "PASS",
+    "forced_mismatch_dfu_run_renode_rc": 0,
+    "dfu_protocol_completed": true,
+    "commit_00020404": true,
+    "sysresetreq": true,
+    "sbl_handoff": true,
+    "observed_crcs_identical_to_precomputed_our_records": true,
+    "verdict": "Version-match is a full baseline PASS (run_renode_rc=0) vs the p-80542c / official-rootI markers (CHIPREV 0x22, OTAP 0xAFD1363A then 0, HOST 0x3A, END_PC 0x543528, display hash 0c5cc90b\u2026, 56 HCI). Forced-mismatch DFU is a PASS (run_renode_rc=0): commit 00020404, SYSRESETREQ, SBL handoff, observed CRCs match the precomputed p-cth record extents, post-handoff display hash and HOST 0x3A unchanged."
+  },
+  "rules": {
+    "no_commit": true,
+    "no_push": true,
+    "no_flash": true,
+    "no_backups": true,
+    "official_app_not_overwritten": true,
+    "sources_json_approval_closed": true,
+    "other_streams_left_alone": true,
+    "this_stream_one_renode_at_a_time": true
+  }
+}

@@ -1,7 +1,8 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x321490..0x321608: start periodic-advertising sync on the sync
- * context (*0x8051b8) from a SyncInfo (third argument): load and transform
+ * context (*(uintptr_t)&em9305_ram_8051b8) from a SyncInfo (third argument): load and transform
  * the channel map (+644), derive the CRC seed (+692) and first channel
  * (+97, plus the receiver's byte +177 at +98 when flag 0x40 of +154 is
  * set), the PHY (+108/+109 from the sync request byte +6), the anchor
@@ -9,7 +10,7 @@
  * time) and the widened receive window. When the anchor is at least 300
  * us away, schedule it, advancing event by event (new channel, interval
  * +252 times the skip count) until the scheduler accepts, and mark the
- * sync pending (0x8051a5). */
+ * sync pending (((uintptr_t)&em9305_ram_805194 + 0x11u)). */
 extern uint32_t opencfw_em9305_radio_channel_transform_30e3fc(uintptr_t);
 extern uint32_t opencfw_em9305_associated_channel_seed_324c98(uintptr_t,uint32_t);
 extern uint32_t opencfw_em9305_mode_callback_child_317ea4(uint32_t);
@@ -29,7 +30,7 @@ static void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
 void opencfw_em9305_child_321490(uintptr_t receiver,uintptr_t request,uintptr_t info,
                                  uint32_t reference)
 {
-    uintptr_t sync=r32(0x8051b8u);
+    uintptr_t sync=r32((uintptr_t)&em9305_ram_8051b8);
     w32(sync+644u,r32(info+8u));
     w32(sync+648u,r32(info+0xcu));
     w8(sync+690u,1u);
@@ -87,5 +88,5 @@ void opencfw_em9305_child_321490(uintptr_t receiver,uintptr_t request,uintptr_t 
         w32(sync+204u,window);
         busy=opencfw_em9305_associated_schedule_insert_312da4(sync+0x30u,compare);
     }
-    w8(0x8051a5u,1u);
+    w8(((uintptr_t)&em9305_ram_805194 + 0x11u),1u);
 }

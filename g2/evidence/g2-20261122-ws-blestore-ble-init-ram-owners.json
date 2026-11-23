@@ -1,0 +1,57 @@
+{
+ "id": "g2-20261122-ws-blestore-ble-init-ram-owners",
+ "created": "2026-11-22T15:15-06:00 (America/Chicago)",
+ "request": "ramlayout initev.json: initialised stock RAM used by ble/ code with no owning source object",
+ "stock_ram_snapshot": {
+  "how": "Renode M55: stock image, PC=__iar_data_init3 0x5e42b5, LR=halt; dump 0x20000000+0x80000",
+  "file": "build/ws-blestore-20261122/raminit/dtcm.bin",
+  "sha256": "bceccf1ab84578e43c4ef8350d79384f3339cfc519cc2e25979fc2c44703988c"
+ },
+ "cells": [
+  {
+   "addr": "0x200003b0",
+   "size": 16,
+   "stock_init": "10 00 08 00 20 00 04 00 40 00 0a 00 e0 01 14 00",
+   "user": "_bleExactleStackInit 0x4b7f64 (lit 0x4b8768) -> WsfBufInit pool table",
+   "owner": "audio_wsf_product_pool_config_200003b0 (g2/src/apollo-main/ble/wsf-pool/display_wsf_pool_data.c), now non-const .data with stock-address suffix; old name kept as alias",
+   "verified": "compiled .data bytes == stock init bytes (16/16)"
+  },
+  {
+   "addr": "0x20000444",
+   "size": 4,
+   "stock_init": "0x0078f6d3",
+   "owner": "pAppMasterReqActCfg = &appReqActCfg (upstream Cordio app_main.c, built unit {gen}/cordio/ble-profiles/sources/apps/app/app_main.c)",
+   "note": "initev labels 0x20000444 as 1-byte audio_ble_master_pair_mode_cell_20000444; stock bytes are a 4-byte pointer to ROM 0x78f6d3 (appReqActCfg {APP_ACT_ACCEPT=0}); the ramlayout stream should recheck that label"
+  },
+  {
+   "addr": "0x20000448",
+   "size": 4,
+   "stock_init": "0x0078f6d3",
+   "user": "appSlaveRemoteConnParamReq 0x4b38f2 (lit 0x4b450c)",
+   "owner": "pAppSlaveReqActCfg = &appReqActCfg (upstream app_main.c); stock target byte 0x78f6d3 = 0x00 = APP_ACT_ACCEPT",
+   "verified": "matches upstream initialiser"
+  },
+  {
+   "addr": "0x2000044c",
+   "size": 16,
+   "stock_init": "fb 34 9b 5f 80 00 00 80 00 10 00 00 00 00 00 00",
+   "user": "attUuidCmp16to128 0x4b5014 writes bytes +12/+13 (0x20000458/0x20000459)",
+   "owner": "attBaseUuid[16] (upstream Cordio att_main.c, built unit)",
+   "verified": "upstream initialiser == stock bytes"
+  },
+  {
+   "addr": "0x2000045c",
+   "size": 72,
+   "stock_init": "18 function pointers",
+   "user": "attsDataCback 0x53498c (lit 0x535440)",
+   "owner": "attsProcFcnTbl[18] (upstream Cordio atts_main.c, built unit, non-const)",
+   "verified": "all 18 stock entries resolve to the same-named upstream entries (NULL x4, attsProcMtuReq..attsProcReadMultiVarReq, attsProcWrite twice)"
+  },
+  {
+   "addr": "0x20001004 / 0x20000e70 / 0x20000e8c / 0x200012a8 / 0x200012c4",
+   "owner": "not ble/storage/flash: 0x507c94 is inv_imu_edmp_gaf_decode_fifo (drivers/peripherals/imu-icm45608, invensense upstream); 0x20001004 user 0x55d7fc is unanchored (not BLE by call evidence). Left to the owning stream."
+  }
+ ],
+ "c_changes": [],
+ "status": "SKIPPED per parent correction 15:05 CST (ramlayout stream: addresses already owned); display_wsf_pool_data.c edit reverted, no C changes from this item"
+}

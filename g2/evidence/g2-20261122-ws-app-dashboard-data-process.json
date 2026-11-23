@@ -1,0 +1,40 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "source": "g2/src/apollo-main/app/a-38-dashboard-data-process/dashboard_data_process.c",
+ "source_sha256": "01e1a5a296bcddfe1a8162ca6b65a3ad6eeca9c02d8a3b9d43ae3dd924642811",
+ "spec": "build/ws-app-20261122/specs/dsh-a",
+ "verified_at": "2026-11-22 19:44 CST",
+ "result": {
+  "verdict": "EQUIVALENT",
+  "tests": 500,
+  "equal": 500,
+  "differ": 0,
+  "mutants": 9,
+  "killed": 9,
+  "surviving_mutants": [],
+  "done": true,
+  "overflow": false,
+  "harness_sha256": "d95acfb4cd654557aa3ca5254d02ad3dfd23a6e15315229f4e1745897202105b",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "method": "black-box sequences of 1-4 random ops over 9 entry points (package_reset, requesetAppUpgradeNewsInfo, notifyAppNewsStatus, parse_data_package, respond_encode, respond_to_app_serialize, respond_NewsInfo_to_app, send_to_app_serialize_internal, send_to_app_serialize); stock and C run identical sequences with scripted nanopb ostream/encode/istream/decode, mutex, BLE TX/notify, role and log-flag results; 500 tests + 60 per mutant",
+ "observed": "all callee args (stack addresses collapsed), nanopb stream sizes and encoded-record hashes, BLE payload hashes, logs, return values, package/parsed/staging/tx/buffer/global snapshots after every op",
+ "source_changes": "none needed",
+ "test_fixes": [
+  "encode hook no longer reports more bytes than the stream holds (7 earlier diffs hashed stack bytes past the 0x100 buffer)",
+  "mutant 7 replaced: 'memset(p+0x17c, 0x2e4)' -> 0x2e0 was equivalent (p+0x148 3000-byte clear covers it); now 'memset(p+0x148, 3000)' -> 2990"
+ ],
+ "harness_changes": [
+  "stub return values pointing into the test stack collapse to one marker (sret stream structs)",
+  "renode exit code appended to renode.log",
+  "run_seconds 60: longer runs under current load ended without output"
+ ],
+ "history": [
+  "18:39/18:55/19:13 CST: no results (Renode ended early)",
+  "19:19: 493/500, 9/9 (encode-hook artifact)",
+  "19:35: 500/500, 8/9 (equivalent mutant)",
+  "19:44: 500/500, 9/9"
+ ]
+}

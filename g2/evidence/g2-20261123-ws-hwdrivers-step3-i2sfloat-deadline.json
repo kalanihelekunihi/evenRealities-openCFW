@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 04:12 AM CST (America/Chicago)",
+  "title": "Step 3 complete: codec-deadline (deadline) 12/12 and codec-i2s-float-convert (i2sfloat/__aeabi_d2ulz) 14/14 verified against stock",
+  "source_completeness_proven": false,
+  "units": {
+    "deadline": {
+      "src": "g2/src/apollo-main/drivers/codec-host/codec-deadline/deadline.c",
+      "fn": "codec_read_byte_deadline @0x0058FAD2",
+      "result": "magic=48574844 (HWDD) ndone=12 realtests=12 ok=12 bad=0",
+      "externs_pinned_from_stock_disasm": {
+        "codec_tick64": "0x0058FAC8 (bl at 0x58fada + 0x58faee: start/now)",
+        "codec_delay_tick": "0x00449376 (movs r0,#1; bl at 0x58fae8)",
+        "codec_uart_read": "0x0058FB2A (bl at 0x58fb08)"
+      },
+      "note": "64-bit deadline add + unsigned 64-bit compare in stock (r2:r3 vs r0:r1) matches C deadline<=now path exactly. Both externs already in harness KNOWN; stale meta predated that."
+    },
+    "i2sfloat": {
+      "src": "g2/src/apollo-main/drivers/codec-host/codec-i2s/codec-i2s-float-convert.c",
+      "fn": "__aeabi_d2ulz @0x0059823C (stock self-contained leaf, no BL, inline shifts)",
+      "result": "magic=48574844 (HWDD) ndone=14 realtests=14 ok=14 bad=0",
+      "abi_finding": "Declared double but carries __attribute__((pcs(\"aapcs\"))) -> double passed in r0:r1 and u64 returned in r0:r1. The harness previously SKIPPED it as 'struct/double' and (hard-float build) could not express the ABI. This is a genuine harness-ABI limitation, not a C-correctness doubt.",
+      "harness_fix": "Stream-private, additive, GATED u64-return capture (no effect on other units): (1) hw.h struct call +ret_hi@64; (2) rt.S stores r1->ret_hi after blx; (3) harness.c emits 0xF1 return-hi record; (4) compareg.py compares ret_hi ONLY for fns in meta.u64ret (else masked to a constant, so u32-return units see no r1-scratch false diff); (5) autogen ABI_OVERRIDE treats __aeabi_d2ulz as two core uint32 words, seeds double bit-patterns across all branches, flags u64ret, resolves stock 0x59823C. __aeabi_llsl/__aeabi_llsr resolved by libgcc at link.",
+      "regression": "deadline re-run under the new harness = 12/12 unchanged (gating verified).",
+      "coverage": "14 seeded (hi,lo)-word doubles exercise: sign!=0 ->0; encoded<1023 ->0; encoded>=1087 ->UINT64_MAX; shift>=52 (significand<<) and shift<52 (significand>>); zero; inf/nan; negative. Full 64-bit result (r0+r1) compared bit-exact; readable C == stock optimized bit-twiddle on every pattern."
+    }
+  },
+  "c_changes": "NONE (driver C already correct; only stream-private harness extended). Therefore no paired-sim rerun required per the standing rule.",
+  "rules": {"no_commit": true, "no_push": true, "no_flash": true, "no_backups": true, "emulator_repo_not_edited": true, "one_renode_at_a_time": true}
+}

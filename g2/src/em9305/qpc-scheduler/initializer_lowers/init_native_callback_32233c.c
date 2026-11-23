@@ -1,14 +1,15 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32233c..0x322582: periodic-advertising sync event-end callback
  * (owner). A pending sync-lost (+3, reason 5) or terminate (+2: 326108
  * reason 3, stop timer +700) ends the event. Otherwise it reports a sync
  * timeout (reason 3) when +5 is clear and the event counter (+248) is
  * 5 (6 with +8) past the last received event (+278), latches a received
- * AUX_SYNC (0x803d71: anchor 0x803d74 -> +272, restart the supervision
+ * AUX_SYNC (((uintptr_t)&em9305_ram_803d70 + 0x1u): anchor ((uintptr_t)&em9305_ram_803d70 + 0x4u) -> +272, restart the supervision
  * timer, derive the skip step +616 or limit / interval), works out the
  * missed events and the sub-event channel position, optionally reports
- * the window widening (0x805bee, 30e89c), then for each scheduled event:
+ * the window widening (((uintptr_t)&em9305_ram_805be0 + 0xeu), 30e89c), then for each scheduled event:
  * notifies the three periodic-advertising slots (+312, +408, +504;
  * 324904), advances the channel position (+18 of the report at +780,
  * wrapping to a new event every +512 sub-events), recomputes anchor (+8),
@@ -43,7 +44,7 @@ extern uint32_t opencfw_em9305_associated_channel_seed_324c98(uintptr_t, uint32_
 extern uint32_t opencfw_em9305_associated_schedule_insert_312da4(uintptr_t, uintptr_t);
 extern uintptr_t opencfw_em9305_init_secondary_compare_3249e8(uintptr_t, uintptr_t);
 
-#define SYNC_TABLE 0x803d78u /* 784-byte sync records */
+#define SYNC_TABLE ((uintptr_t)&em9305_ram_803d58 + 0x20u) /* 784-byte sync records */
 
 uint32_t opencfw_em9305_callback_32233c(uintptr_t owner)
 {
@@ -67,10 +68,10 @@ uint32_t opencfw_em9305_callback_32233c(uintptr_t owner)
     uint32_t step = 1u;
     uint32_t wraps = 0u;
     U8(link + 8u) = 0u;
-    if (U8(0x803d71u) != 0u) {
+    if (U8(((uintptr_t)&em9305_ram_803d70 + 0x1u)) != 0u) {
         uintptr_t report = U32(link + 780u);
-        uint32_t anchor = U32(0x803d74u);
-        U8(0x803d71u) = 0u;
+        uint32_t anchor = U32(((uintptr_t)&em9305_ram_803d70 + 0x4u));
+        U8(((uintptr_t)&em9305_ram_803d70 + 0x1u)) = 0u;
         uint32_t event = U16(link + 248u);
         uint32_t channel = U8(report + 18u);
         uint32_t timeout = U32(link + 620u);
@@ -110,7 +111,7 @@ uint32_t opencfw_em9305_callback_32233c(uintptr_t owner)
     uint32_t interval = U32(link + 252u);
     uint32_t remainder = interval - spacing * per_event;
     uint32_t index;
-    if (U8(0x805beeu) != 0u) {
+    if (U8(((uintptr_t)&em9305_ram_805be0 + 0xeu)) != 0u) {
         uint32_t offset = interval * (uint16_t)lost + spacing * (uint16_t)position +
                           remainder * (uint32_t)(int32_t)(int16_t)wraps;
         uint32_t widening = opencfw_em9305_init_secondary_time_317ebc(

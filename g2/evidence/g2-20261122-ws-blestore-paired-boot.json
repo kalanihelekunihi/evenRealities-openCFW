@@ -1,0 +1,77 @@
+{
+ "id": "g2-20261122-ws-blestore-paired-boot",
+ "time": "2026-11-22 15:52 America/Chicago",
+ "stream": "ws-blestore",
+ "purpose": "Confirm the kvdb migration-order fix (stock-ordered g2_kvdb_migration_table) does not change boot; private full C rebuild including shared patch 04 (4-byte writable alignment).",
+ "build": {
+  "compile": "python3 tools/build/sources.py build --device g2 --payload g2-apollo-main --out build/ws-blestore-20261122/full-1541",
+  "compile_result": "2719/2719 compiled, 0 duplicate strong symbols, 21 unresolved (composed)",
+  "link": "python3 tools/build/link_g2_sources.py --source-out build/ws-blestore-20261122/full-1541 --out build/ws-blestore-20261122/full-1541-link --payload g2-apollo-main",
+  "image": "build/ws-blestore-20261122/full-1541-link/g2-apollo-main/g2-apollo-main.bin",
+  "image_sha256": "b155024e0552711efb2848040b38739bbd2b5746a0e6f9c1196c49cb2005bcb0",
+  "patch04_present": "tools/build/sources.py align_writable (minimum=4)"
+ },
+ "migration_table": {
+  "section": "kvdb_migration",
+  "addr": "0x77ad18",
+  "size": 44,
+  "order": [
+   "_kvdbUpdataAlsScale",
+   "SVC_KvdbReadMenuConfigureValue",
+   "SVC_KvdbReadDashboardAutoCloseValue",
+   "SVC_KvdbReadLanguage",
+   "_kvdbUpdataRing",
+   "_kvdbUpdataSetting",
+   "_kvdbUpdataTemperatureUnit",
+   "_kvdbUpdataTerminalMode",
+   "_kvdbUpdataTime",
+   "_kvdbUpdataTimeFormat",
+   "_kvdbUpdataUniversalSetting"
+  ],
+  "stock_table": "0x746d20 (same order, verified in kvnv spec)"
+ },
+ "sims": {
+  "script": "build/ws-blestore-20261122/paired.sh (adapted read-only from ws-ramlayout paired.sh; adds mspi1.nor SaveImage at end of match run)",
+  "openCFW": {
+   "match": "RC=0",
+   "dfu_mismatch": "DFU_SAME vs em9305-nor-20261122 reference",
+   "hci_packets_dfu": 922,
+   "OTAPOINTER_AFTER_0.01S": "0xAFD1363A",
+   "OTAPOINTER_AFTER_8S": "0x0",
+   "CHIPREV_AFTER_8S": "0x22",
+   "HOST_PACKET_COUNT": "0x3A",
+   "UNSUPPORTED_COUNT": "0x0",
+   "adv": 1,
+   "display_frames": 2,
+   "faults": 0
+  },
+  "stock": {
+   "match": "RC=0",
+   "dfu_mismatch": "DFU_SAME",
+   "hci_packets_dfu": 922,
+   "OTAPOINTER_AFTER_0.01S": "0x0",
+   "OTAPOINTER_AFTER_8S": "0x0",
+   "CHIPREV_AFTER_8S": "0x22",
+   "HOST_PACKET_COUNT": "0x3A",
+   "UNSUPPORTED_COUNT": "0x0",
+   "adv": 1,
+   "display_frames": 2,
+   "faults": 0
+  },
+  "reference_ws_ramlayout_full_a4b": "identical summary lines (read-only comparison of paired-full-a4b.out)",
+  "note": "OTAPOINTER_AFTER_0.01S differs by design (openCFW otap-disarm path), same as all prior openCFW sims."
+ },
+ "nor_after_8s_match": {
+  "fixture": "build/em9305-nor-20261122/nor-with-em9305.bin",
+  "stock_sha256": "4049ca4e899c7d069573bc4ca86e57c8b00f4b6564de5f2f8e9c9f983610758e",
+  "openCFW_sha256": "4049ca4e899c7d069573bc4ca86e57c8b00f4b6564de5f2f8e9c9f983610758e",
+  "changed_sectors_both": [
+   "0x1401000",
+   "0x16b8000",
+   "0x1fc0000"
+  ],
+  "stock_vs_openCFW_byte_diffs": 0,
+  "kvdb_change": "0x1fc0245..0x1fc0290: kvbootCount 1->2 (old KV marked deleted, new KV appended), identical bytes"
+ },
+ "verdict": "BOOT_UNCHANGED: identical boot summary and bit-identical 32 MiB NOR image stock vs openCFW"
+}

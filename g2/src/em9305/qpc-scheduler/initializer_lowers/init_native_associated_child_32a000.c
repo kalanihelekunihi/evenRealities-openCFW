@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32a000..0x32a216: slave link-layer control dispatcher for the
  * connection record. In state 0 (+1) a connection-indication (0x0b)
@@ -7,7 +8,7 @@
  * length above the defaults (+570 >= 28 or +572 >= 329) -> 0x68), or with
  * bit 9 defers them into +644, enters state 2 (or 1 when deferred) and
  * reports the connection complete event (323028) with the config
- * (*0x805c6c) parameters. In state 1 the procedure-start opcodes set
+ * (*((uintptr_t)&em9305_ram_805c5c + 0x10u)) parameters. In state 1 the procedure-start opcodes set
  * their bit in both +644 and +636 (0x15 bit 17, 0x1b..0x23 bits 2..7,
  * 21), 0x40 terminates (reason 0x70, state 2), 0x3d and 0x47/0x48 are
  * ignored and others go to 32b210. In state 2 every opcode except 0x3d,
@@ -65,8 +66,8 @@ static void connection_setup(uintptr_t record)
         if((features&0x40u)!=0u&&(r16(lengths)>=0x1cu||r16(lengths+2u)>=329u))
             (void)opencfw_em9305_mode_event_31bd78(record,0x68u);
     }
-    uintptr_t base=r32(0x805c70u);
-    uintptr_t config=r32(0x805c6cu);
+    uintptr_t base=r32(((uintptr_t)&em9305_ram_805c5c + 0x14u));
+    uintptr_t config=r32(((uintptr_t)&em9305_ram_805c5c + 0x10u));
     int32_t handle=(int32_t)(record-base)/912;
     *(volatile uint8_t *)(record+1u)=(uint8_t)state;
     uint32_t accuracy=r8(record+321u);

@@ -1,7 +1,8 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31c990..0x31c9f4: for an active connection (object+0x24, byte
- * +1), insert its 912-byte schedule entry (index +88 into *0x805c70) at
+ * +1), insert its 912-byte schedule entry (index +88 into *((uintptr_t)&em9305_ram_805c5c + 0x14u)) at
  * the anchor (+24); while the insert collides, move the anchor on by
  * n * interval (+266) * 1250 us from the saved anchor and count the skipped
  * event (+262). Finally run 31c9f4 on the object. */
@@ -13,7 +14,7 @@ uint32_t opencfw_em9305_child_31c990(uintptr_t object)
 {
     uintptr_t connection=*(volatile uint32_t *)(object+0x24u);
     if(*(volatile uint8_t *)(connection+1u)!=0u) {
-        uintptr_t entry=*(volatile uint32_t *)(uintptr_t)0x805c70u+
+        uintptr_t entry=*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_805c5c + 0x14u)+
                         *(volatile uint16_t *)(connection+88u)*912u;
         uintptr_t compare=(uintptr_t)opencfw_em9305_init_schedule_compare_318b78;
         uint32_t anchor=*(volatile uint32_t *)(entry+24u);

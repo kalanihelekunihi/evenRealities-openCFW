@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 extern uint32_t opencfw_em9305_auxiliary_ready_303f68(void);
 extern uint32_t opencfw_em9305_radio_cancel_30fab8(uint32_t);
 extern uint32_t opencfw_em9305_common_radio_finish_3045c0(uint32_t);
@@ -14,7 +15,7 @@ uint32_t opencfw_em9305_callback_3042b4(uint32_t incoming)
         if(value!=15u)return value;
     }
     if(incoming==0u) {
-        value=0x8015c4u;
+        value=(uintptr_t)&em9305_ram_8015c4;
         uint32_t flag=*(volatile uint8_t *)(uintptr_t)value;
         if(flag!=1u)return value;
         *(volatile uint8_t *)(uintptr_t)value=0u;

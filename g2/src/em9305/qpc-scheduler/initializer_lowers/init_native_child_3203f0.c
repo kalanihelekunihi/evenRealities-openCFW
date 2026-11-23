@@ -1,9 +1,10 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x3203f0..0x32042c: tear down a link record: release common
  * resource 1, count down the init state when flag +14 bit 0 is set, release
  * the two pending WSF events (+392, +400), then decrement the link count at
- * 0x805a73 and count down the command state. */
+ * ((uintptr_t)&em9305_ram_805a6c + 0x7u) and count down the command state. */
 extern uint32_t opencfw_em9305_common_release_304588(uint32_t);
 extern uint32_t opencfw_em9305_init_state_count_down_30e49c(void);
 extern uint32_t opencfw_em9305_wsf_event_release(uintptr_t);
@@ -24,7 +25,7 @@ uint32_t opencfw_em9305_child_3203f0(uintptr_t record)
         (void)opencfw_em9305_wsf_event_release(*event);
         *event = 0u;
     }
-    volatile uint8_t *links = (volatile uint8_t *)(uintptr_t)0x805a73u;
+    volatile uint8_t *links = &em9305_ram_805a6c.u8_805a73;
     *links = (uint8_t)(*links - 1u);
     return opencfw_em9305_command_count_down_30e48c();
 }

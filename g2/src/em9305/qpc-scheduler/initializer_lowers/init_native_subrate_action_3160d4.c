@@ -1,8 +1,9 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x3160d4..0x31628e: answer an LL_SUBRATE_REQ (parameters at
- * 0x802810: min +0xc, max +0xe, latency +0x10, continuation +0x12, timeout
- * +0x14). Without the subrating feature (0x805a98 bit 6) reject with 0x1a.
+ * ((uintptr_t)&em9305_ram_8027e0 + 0x30u): min +0xc, max +0xe, latency +0x10, continuation +0x12, timeout
+ * +0x14). Without the subrating feature (((uintptr_t)&em9305_ram_805a6c + 0x2cu) bit 6) reject with 0x1a.
  * Reject with 0x11 when the request is malformed (factor 1..500, max >= min,
  * latency < 500, continuation < 500, timeout 10..3200), outside the host
  * limits at +836..+844, or when the timeout does not cover the subrated
@@ -24,9 +25,9 @@ static int32_t subrate_max(int32_t a, int32_t b) { return a > b ? a : b; }
 
 void opencfw_em9305_subrate_action_3160d4(uintptr_t record)
 {
-    const uintptr_t request = 0x802810u;
+    const uintptr_t request = ((uintptr_t)&em9305_ram_8027e0 + 0x30u);
     uint32_t reason = 0x1au;
-    if ((*(volatile uint8_t *)(uintptr_t)0x805a98u & 0x40u) != 0u) {
+    if ((em9305_ram_805a6c.u8_805a98 & 0x40u) != 0u) {
         uint32_t latency = SUB_U16(request + 0x10u);
         uint32_t factor_min = SUB_U16(request + 0xcu);
         uint32_t factor_max = SUB_U16(request + 0xeu);
@@ -49,7 +50,7 @@ void opencfw_em9305_subrate_action_3160d4(uintptr_t record)
                 uintptr_t packet = opencfw_em9305_phy_packet_alloc_32d2f0(0xbu);
                 if (packet == 0u) {
                     (void)opencfw_em9305_receive_terminate_325c08(record, 0x6fu);
-                    uintptr_t base = *(volatile uint32_t *)(uintptr_t)0x805c70u;
+                    uintptr_t base = em9305_ram_805c5c.u32_805c70;
                     (void)opencfw_em9305_dispatch_child_323498((uint8_t)((int32_t)(record - base) / 912), 0xdu);
                     return;
                 }

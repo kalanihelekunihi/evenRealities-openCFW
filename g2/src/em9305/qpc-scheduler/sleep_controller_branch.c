@@ -2,6 +2,7 @@
  * 0x312824..0x3128e4. Child ABI contracts remain explicit; no ARC runtime
  * equivalence or complete controller image is claimed by compilation. */
 #include <stdint.h>
+#include "em9305_ram.h"
 extern uint32_t opencfw_em9305_sleep_metadata(uint32_t *,uint32_t *,uint32_t *); /* 0x3125a4 */
 extern uint32_t opencfw_em9305_sleep_metadata_action(uint32_t,uint32_t,uint32_t,uint32_t); /* 0x30f250 */
 extern void opencfw_em9305_sleep_controller_enable(uint32_t,uint32_t,uint32_t); /* 0x30f6ec */
@@ -11,7 +12,7 @@ static uint32_t save_irq(void) { uint32_t s; s=(uint32_t)__builtin_arc_clri(); _
 static void restore_irq(uint32_t s) { __builtin_arc_seti((int)s); }
 /* ILINK (r29) is a core register with no C or builtin access; asm stays. */
 static uint32_t link_state(void) { uint32_t s; __asm__ volatile("mov %0,ilink" : "=r"(s) :: "memory"); return s; }
-static uintptr_t object(void) { return *(volatile uint32_t *)(uintptr_t)0x801090u; }
+static uintptr_t object(void) { return em9305_ram_801090.u32_801090; }
 static uintptr_t callback(uintptr_t o,uint32_t offset) { return *(volatile uint32_t *)(o+offset); }
 static void notify(uint32_t event) { uintptr_t o=object(); if(o) { uintptr_t f=callback(o,12); if(f) ((void (*)(uint32_t,uintptr_t))f)(event,f); } }
 static uint32_t update(uintptr_t address,uint8_t clear,uint8_t set) {
@@ -47,7 +48,7 @@ metadata_action:
  }
  transient=1;
  if(link_state()!=0 || *(volatile uint32_t *)(uintptr_t)0xf0383cu!=0) goto restart_notify;
- opencfw_em9305_controller_sleep_mode(*(volatile uint8_t *)(uintptr_t)0x80fbbdu);
+ opencfw_em9305_controller_sleep_mode(em9305_ram_80fb8c.u8_80fbbd);
 loop_start:
  transient=0;
 restart_notify:

@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
 extern void *opencfw_em9305_memcpy(void *,const void *,uint32_t);
@@ -20,14 +21,14 @@ uint32_t opencfw_em9305_init_transition_31a434(uintptr_t request)
 {
     uintptr_t slot=request+0xafcu;
     uintptr_t initial_nested=*(volatile uint32_t *)slot;
-    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uintptr_t base=em9305_ram_805c5c.u32_805c70;
     uint16_t initial_id=*(volatile uint16_t *)(initial_nested+94u);
     uintptr_t event=opencfw_em9305_wsf_event_allocate(88u);
     uintptr_t connection;
     if(event!=0u) {
         *(volatile uint16_t *)(event+2u)=0x3f01u;
         uintptr_t nested=*(volatile uint32_t *)slot;
-        base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+        base=em9305_ram_805c5c.u32_805c70;
         uint16_t id=*(volatile uint16_t *)(nested+94u);
         *(volatile uint16_t *)event=(uint8_t)id;
         connection=base+(uint32_t)id*912u;
@@ -40,12 +41,12 @@ uint32_t opencfw_em9305_init_transition_31a434(uintptr_t request)
         uint8_t request_id=*(volatile uint8_t *)(request+1u);
         uint32_t high=*(volatile uint32_t *)(nested+112u);
         uint32_t low=*(volatile uint32_t *)(nested+108u);
-        uint8_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+        uint8_t handler=em9305_ram_805af0.u8_805b18;
         uint8_t selected=((high&0xc000u)==0x4000u);
         *(volatile uint8_t *)(event+52u)=selected;
         *(volatile uint32_t *)(event+60u)=low;
-        uint32_t shared_high=*(volatile uint32_t *)(uintptr_t)0x805be8u;
-        uint32_t shared_low=*(volatile uint32_t *)(uintptr_t)0x805be4u;
+        uint32_t shared_high=em9305_ram_805be0.u32_805be8;
+        uint32_t shared_low=em9305_ram_805be0.u32_805be4;
         *(volatile uint8_t *)(event+84u)=request_id;
         *(volatile uint32_t *)(event+72u)=0u;
         *(volatile uint32_t *)(event+76u)=shared_low;

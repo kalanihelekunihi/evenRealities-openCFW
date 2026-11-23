@@ -5,9 +5,10 @@
  * (DSP 32x16 multiply, LOW 32 bits of the product; settled wave 28 from this very 64-bit-multiply use plus the stride/625-us uses).
  */
 #include <stdint.h>
+#include "em9305_ram.h"
 #define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
 #define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
-#define LCTR_SLV_BIG_G 0x80542cu          /* 0x1c-byte scratch cleared on entry */
+#define LCTR_SLV_BIG_G ((uintptr_t)&em9305_ram_80542c)  /* 28-byte scratch cleared on entry */
 #define LCTR_SLV_BIG_RX_CB 0x8051e0u      /* function pointer: 4-arg PDU handler */
 #define LCTR_SLV_BIG_BUF 0x802858u        /* 2 + n byte PDU copy buffer */
 extern uint32_t opencfw_em9305_memset(uint32_t, uint32_t, uint32_t);

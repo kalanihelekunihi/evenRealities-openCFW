@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x325a68..0x325b12. This callback composes already selected
  * queue-count, capacity, timing, allocator, and sender providers. Native
@@ -25,7 +26,7 @@ uint32_t opencfw_em9305_mode_callback_325a68(uintptr_t context,
     uint32_t anchor=*(volatile uint16_t *)(context+262u);
     uintptr_t queue=context+360u;
     uint32_t count=opencfw_em9305_phy_queue_count_314114(queue);
-    uintptr_t root=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+    uintptr_t root=em9305_ram_805c5c.u32_805cac;
     uint32_t unit=*(volatile uint16_t *)(root+38u);
     uint32_t scaled=multiply_whul(count,unit);
     uint32_t capacity=opencfw_em9305_ll_event_mode_32d4b0(context);
@@ -33,7 +34,7 @@ uint32_t opencfw_em9305_mode_callback_325a68(uintptr_t context,
     if (timing<6u) timing=6u;
     else {
         count=opencfw_em9305_phy_queue_count_314114(queue);
-        root=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+        root=em9305_ram_805c5c.u32_805cac;
         unit=*(volatile uint16_t *)(root+38u);
         scaled=multiply_whul(count,unit);
         capacity=opencfw_em9305_ll_event_mode_32d4b0(context);

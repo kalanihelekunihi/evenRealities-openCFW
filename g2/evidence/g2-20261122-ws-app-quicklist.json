@@ -1,0 +1,134 @@
+{
+ "schema": 1,
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "platform": "Renode 1.17 cortex-m55 differential stub-patch harness (stock 2.2.6.10 app image vs C, same inputs, call/arg/memory trace compare, source mutants must be killed)",
+ "specs": {
+  "ql-a": {
+   "verdict": "EQUIVALENT",
+   "tests": 1200,
+   "equal": 1200,
+   "differ": 0,
+   "mutants": 8,
+   "killed": 8,
+   "surviving_mutants": [],
+   "harness_sha256": "b397f608b128c7a6010d115fcf06742e9e943c12f7e5e105a1f6b10350544bbb",
+   "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+   "sources": {
+    "g2/src/apollo-main/app/quicklist-refresh/quicklist_refresh_pending_4f5596.c": "fd8977a6ba7d9997e4732899437465cb8540f83db23a04417dfb34c81ddc4bf8",
+    "g2/src/apollo-main/app/quicklist-copy/quicklist_copy_record_4f55e0.c": "97aa6f53c2b617837b5042d4c29421ae1a888a574791e7796bb9521711b439a8",
+    "g2/src/apollo-main/app/quicklist-find/quicklist_find_record_4f5636.c": "c0bfa8c66b23f56faf64f7313eb3bf57a4b9f907a20e89919a7ee69adfb737b4",
+    "g2/src/apollo-main/app/quicklist-select/quicklist_select_records_4f5662.c": "ac6fa997e189215323136a30a80a00724b0387673c3e8287718b94056e48f210",
+    "g2/src/apollo-main/app/quicklist-refresh/quicklist_refresh_ready_4f5e18.c": "11f803644a499bb92491b4b0cd25d30eab9b8217a219676b6a7e1f33ed01585d",
+    "g2/src/apollo-main/app/quicklist-refresh/quicklist_refresh_enabled_4434d0.c": "9308b42802f433e400c95c85196b1282ca1c809079b09e8b6be9199ded903e45"
+   },
+   "report": "build/ws-app-20261122/specs/ql-a/report.json"
+  },
+  "ql-b": {
+   "verdict": "EQUIVALENT",
+   "tests": 800,
+   "equal": 800,
+   "differ": 0,
+   "mutants": 8,
+   "killed": 8,
+   "surviving_mutants": [],
+   "harness_sha256": "b4479d8a8b616fdb05b55591d8757bbb84a5f950348698d4bc885b7976254f97",
+   "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+   "sources": {
+    "g2/src/apollo-main/app/quicklist-mode/quicklist_mode_one_4f5718.c": "4321465b38de8390bd6586ba1a45717383c04144b9caf3b098ff248b3267ba5d",
+    "g2/src/apollo-main/app/quicklist-mode/quicklist_mode_two_4f5a1c.c": "898453c654130ec42e3283fc75898f4d87d41dcfa9102360928eae0a7e335878",
+    "g2/src/apollo-main/app/quicklist-mode/quicklist_mode_two_detail_4f5838.c": "3f9636c756a35f5e3a774b46260b4f7609d9ded0280f4a35ef19dac1600b9ebf",
+    "g2/src/apollo-main/app/quicklist-mode/quicklist_mode_three_4f5c4c.c": "e877fdf7ba9387228f578e1f2301741822ccd0bf6e93f290f1afd8567d3254ed",
+    "g2/src/apollo-main/app/quicklist-refresh/quicklist_refresh_4f5e84.c": "dc23aaa8ef010af056eb5caf50cdacb0f16baa66f32df606633261cb1b0e3847"
+   },
+   "report": "build/ws-app-20261122/specs/ql-b/report.json"
+  },
+  "ql-c": {
+   "verdict": "EQUIVALENT",
+   "tests": 600,
+   "equal": 600,
+   "differ": 0,
+   "mutants": 8,
+   "killed": 8,
+   "surviving_mutants": [],
+   "harness_sha256": "aae1eb1aa64050f3f0655d8628b5bd5ce0c73f6a1edabc1a2e739df53d2ad943",
+   "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+   "sources": {
+    "g2/src/apollo-main/app/quicklist-aux/quicklist_aux_update_4f6328.c": "fe154456f7f7097584aa2c7fb256f2e129009353aad4a97d329be4c4b6c28a9d",
+    "g2/src/apollo-main/app/quicklist-send/quicklist_send_completed_5591b0.c": "0eb63995dae2dcb8b04a6b2df367cd70d68bf3614d7b048bac4fc11492671421",
+    "g2/src/apollo-main/app/quicklist-rx/quicklist_rx_validators_558cb0.c": "0cfd8411c642764fea6f346235b7d53c0457a9e5d36c01fbcea0d1335e88c6b8",
+    "g2/src/apollo-main/app/onboarding-event/onboarding_event_encode_4a8368.c": "151fc1b16b52e64c99efe0d76f08f4c8528715891282ff4aa62bdee14fedb611"
+   },
+   "report": "build/ws-app-20261122/specs/ql-c/report.json"
+  }
+ },
+ "private_build": {
+  "source_out": "build/ws-app-20261122/b1",
+  "link_out": "build/ws-app-20261122/b1-link",
+  "units": 2719,
+  "compiled_ok": 2719,
+  "duplicate_strong": 0,
+  "composed_unresolved": 21,
+  "unresolved_same_as": "build/g2-apollo-recovery-20261122-fuel-gauge-process-c2",
+  "binary_sha256": "7caf26760e362790644ae661c1941b1b419ef02b7817db2288f0278214a76885",
+  "binary_bytes": 3627032,
+  "package_sha256": "056a33435851a09de8678617e46d495f1d50914a09a6e69f8ac4f831a23368b0",
+  "qualification": "source-linked image; hardware boot unverified; paired sims not rerun by this stream"
+ },
+ "ramlayout_patches": {
+  "01-quicklist-cache-extern": "applied (audio_quicklist_item_cache = g2_stock_ram_20101a18+4 in link)",
+  "02-case-reconnect-extern-size": "applied ([7u])",
+  "03-quicklist-select-first-row": "superseded: rewritten select scans from row 0 (verified in ql-a)"
+ },
+ "init_ram_0x200004bc": {
+  "owner": "third-party/upstream/cjson/cJSON.c static global_hooks (12 B), linked at 0x200130ac",
+  "stock_init": [
+   "0x474cd3",
+   "0x474d17",
+   "0x474d55"
+  ],
+  "stock_init_source": "decoded stock IAR LZ77 row 0x75d3f4 (dst 0x20000000, 0x4558 B) with tools/iar_init.py mirroring handler 0x43a11e",
+  "ours": [
+   "file_heap_allocate/codec_allocate (native 0x474cd2)",
+   "audio_file_heap_free (native 0x474d16)",
+   "audio_file_heap_realloc (native 0x474d54)"
+  ],
+  "note": "malloc/free/realloc are compose defsyms to these; same functions as stock values. 0x200004c4 = realloc slot of same object. Already owned; no app change."
+ },
+ "findings": [
+  "quicklist_rx PB_RxQuicklistItem log passed int64 timestamp as two words; stock aligns it (pad slot) in the compressed log; fixed",
+  "onboarding encode error format was \"%s.\" vs stock \"%s\\n\"; fixed",
+  "aux_update pb item now typed from stock log field names (uid,index,isCompleted,title.size,timestamp,ts_type)",
+  "43 RAM objects >=8 B linked at non-4-aligned addresses (list build/ws-app-20261122/misaligned.txt); quicklist tx_state patch pending"
+ ],
+ "post_fix_reverification": {
+  "note": "harness fix 16:12 CST (plain stub arguments now compared); re-run 16:36-16:52 CST",
+  "results": {
+   "ql-a": {
+    "verdict": "EQUIVALENT",
+    "tests": 1200,
+    "equal": 1200,
+    "mutants": 8,
+    "killed": 8,
+    "harness_sha256": "66fe0c6dd7a63eb622be14ca2652c8a41bea7ff1857321a2700ad78436258959"
+   },
+   "ql-b": {
+    "verdict": "EQUIVALENT",
+    "tests": 800,
+    "equal": 800,
+    "mutants": 8,
+    "killed": 8,
+    "harness_sha256": "aa9b4a7e42b83993ee5bd0892b831cc7e70990173bca028e448459a1644fac2c"
+   },
+   "ql-c": {
+    "verdict": "EQUIVALENT",
+    "tests": 600,
+    "equal": 600,
+    "mutants": 8,
+    "killed": 8,
+    "harness_sha256": "66bb97b6cdff28805a8f987b45b41d3d1934f5c4733d7f32a6708bd12726e1d5"
+   }
+  }
+ }
+}

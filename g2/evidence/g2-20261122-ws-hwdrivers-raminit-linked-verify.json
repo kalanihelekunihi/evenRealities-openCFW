@@ -1,0 +1,11 @@
+{"stream":"ws-hwdrivers","when_cst":"2026-11-22 ~23:10 CST",
+ "build":"sources.py build --device g2 --out full-2246 (manifest stable sha a6bd0a51, manifest_changed_during_build=False); g2-apollo-main 2719/2719 composed, 0 failures. g2-em9305 still FAILED (312 units, not ws-hwdrivers) - does not affect apollo-main.",
+ "link":"arm-none-eabi-gcc -T g2-apollo-main.ld ... --gc-sections (same invocation as ramlayout full-2158-link) -> full-2246-link/g2-apollo-main/{elf,bin,map}",
+ "linked_image_init_values":{
+   "audio_hub_imu_report_interval_cell":"linked@0x20002eb4 init=e8030000=1000 (stock 0x20000e60=1000) MATCH",
+   "audio_hub_motion_threshold_cell":"linked@0x20002ec0 init=19000000=25 (stock 0x20000e64=25) MATCH",
+   "audio_hub_motion_period_cell":"linked@0x20002eb8 init=e8030000=1000 (stock 0x20000e68=1000) MATCH",
+   "audio_hub_motion_duration_cell":"linked@0x20002ebc init=03000000=3 (stock 0x20000e6c=3) MATCH",
+   "fg_aux":"linked@0x200149e8 init=0000c07f 9a99993e a69b443b bd378635 6f12833a... = stock 16 words MATCH"},
+ "placement_note":"These globals link at compiler-chosen RAM addresses (0x20002eb4 etc.), not their stock absolute VAs (0x20000e60 etc.). Pinning to stock addresses is governed by the shared linker/place scripts (ramlayout territory, routed via pending). The INIT VALUES (the ws-hwdrivers fix) are now correct in the composed+linked image; the pending/10 'ours=0' condition is resolved for all 4 hub cells + fg_aux.",
+ "codec_uart_irq":"guard removal verified 20/20 in harness; symbol present in composed apollo-main"}

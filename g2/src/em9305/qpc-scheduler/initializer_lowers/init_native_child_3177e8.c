@@ -1,11 +1,12 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x3177e8..0x31788e: spend a byte budget of radio time on the
  * queued packets of a context (queue at +8). Each packet's progress byte +11
  * advances by its record timing (native 0x30c40c over length +8 and rate
  * +10) or by the remaining budget; a packet whose progress covers its length
  * is removed, released and completed (up to max packets, counted under
- * the critical section at 0x805adc). Without the busy flags +36/+108 every
+ * the critical section at ((uintptr_t)&em9305_ram_805a6c + 0x70u)). Without the busy flags +36/+108 every
  * finished packet bumps the idle count +16. Stops when the budget or the
  * queue runs out. */
 extern uintptr_t opencfw_em9305_wsf_event_at(uintptr_t,uint32_t,uintptr_t);
@@ -48,7 +49,7 @@ void opencfw_em9305_child_3177e8(uintptr_t context, uint32_t budget, uint32_t ma
             (void)opencfw_em9305_wsf_event_release(*(volatile uint32_t *)packet);
             opencfw_em9305_radio_packet_complete_31ae74(packet);
             (void)opencfw_em9305_wsf_critical_enter();
-            volatile uint8_t *completed = (volatile uint8_t *)(uintptr_t)0x805adcu;
+            volatile uint8_t *completed = &em9305_ram_805a6c.u8_805adc;
             *completed = (uint8_t)(*completed + 1u);
             (void)opencfw_em9305_wsf_critical_exit();
             ++removed;

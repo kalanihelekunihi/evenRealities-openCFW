@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Disjoint native table leaf set. The gate/count/short callbacks are already
  * selected; 0x30e988 lives in a separate authentic ARC frame wrapper. */
@@ -61,8 +62,8 @@ uint32_t opencfw_em9305_init_transition_3166d8(uintptr_t incoming)
     (void)incoming;
     (void)opencfw_em9305_common_request_30455c(1u);
     (void)opencfw_em9305_command_count_30e4bc();
-    uint32_t enabled=*(volatile uint8_t *)(uintptr_t)0x805b9du;
-    *(volatile uint8_t *)(uintptr_t)0x805a71u=1u;
+    uint32_t enabled=em9305_ram_805b80.u8_805b9d;
+    em9305_ram_805a6c.u8_805a71=1u;
     if(enabled!=0u)(void)opencfw_em9305_init_secondary_count_up_30e4cc();
     return opencfw_em9305_init_transition_start_327b60();
 }
@@ -70,10 +71,10 @@ uint32_t opencfw_em9305_init_transition_3166d8(uintptr_t incoming)
 uint32_t opencfw_em9305_init_transition_316894(uintptr_t incoming)
 {
     (void)incoming;
-    uint32_t enabled=*(volatile uint8_t *)(uintptr_t)0x805a71u;
+    uint32_t enabled=em9305_ram_805a6c.u8_805a71;
     if(enabled==0u)return 0u;
-    *(volatile uint8_t *)(uintptr_t)0x8052fdu=1u; /* STB.AB writes old R0. */
-    return opencfw_em9305_ll_schedule_notify_313354(0x805300u);
+    em9305_ram_8052f8.u8_8052fd=1u; /* STB.AB writes old R0. */
+    return opencfw_em9305_ll_schedule_notify_313354(((uintptr_t)&em9305_ram_8052d4 + 0x2cu));
 }
 
 uint32_t opencfw_em9305_init_transition_3168b0(uintptr_t incoming)
@@ -81,8 +82,8 @@ uint32_t opencfw_em9305_init_transition_3168b0(uintptr_t incoming)
     (void)incoming;
     (void)opencfw_em9305_common_request_30455c(1u);
     (void)opencfw_em9305_command_count_30e4bc();
-    uint32_t enabled=*(volatile uint8_t *)(uintptr_t)0x805b9du;
-    *(volatile uint8_t *)(uintptr_t)0x805a71u=1u;
+    uint32_t enabled=em9305_ram_805b80.u8_805b9d;
+    em9305_ram_805a6c.u8_805a71=1u;
     if(enabled!=0u)(void)opencfw_em9305_init_secondary_count_up_30e4cc();
     (void)opencfw_em9305_init_transition_start_327b60();
     return opencfw_em9305_command_advertising_error_30e758(0u);
@@ -93,14 +94,14 @@ uint32_t opencfw_em9305_init_transition_31a408(uintptr_t record)
 {
     uintptr_t nested=*(volatile uint32_t *)(record+0xafcu);
     uint32_t index=*(volatile uint16_t *)(nested+94u);
-    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uintptr_t base=em9305_ram_805c5c.u32_805c70;
     (void)opencfw_em9305_receive_terminate_325c08(base+index*912u,77u);
     return opencfw_em9305_init_transition_count_down_320068();
 }
 
 uint32_t opencfw_em9305_init_transition_31a538(uintptr_t record)
 {
-    uintptr_t global=*(volatile uint32_t *)(uintptr_t)0x805c78u;
+    uintptr_t global=em9305_ram_805c5c.u32_805c78;
     uint32_t id=*(volatile uint8_t *)(record+1u);
     uint32_t r4=*(volatile uint32_t *)(global+28u);
     uint32_t r3=*(volatile uint32_t *)(global+24u);
@@ -110,7 +111,7 @@ uint32_t opencfw_em9305_init_transition_31a538(uintptr_t record)
 
 uint32_t opencfw_em9305_init_transition_31a554(uintptr_t record)
 {
-    uintptr_t global=*(volatile uint32_t *)(uintptr_t)0x805c78u;
+    uintptr_t global=em9305_ram_805c5c.u32_805c78;
     uint32_t r3=*(volatile uint32_t *)(global+12u);
     uint32_t r2=*(volatile uint32_t *)(global+8u);
     uint32_t r5=*(volatile uint8_t *)(global+5u);
@@ -122,7 +123,7 @@ uint32_t opencfw_em9305_init_transition_31a554(uintptr_t record)
     r3=*(volatile uint32_t *)(global+12u);
     r2=*(volatile uint32_t *)(global+8u);
     r1=*(volatile uint8_t *)(global+6u);
-    uintptr_t output=0x802a54u;
+    uintptr_t output=((uintptr_t)&em9305_ram_802a2c + 0x28u);
     *(volatile uint8_t *)(output+9u)=0u;
     *(volatile uint32_t *)(output+4u)=r3;
     *(volatile uint32_t *)output=r2;
@@ -135,7 +136,7 @@ uint32_t opencfw_em9305_init_transition_31a58c(uintptr_t record)
     uintptr_t nested=*(volatile uint32_t *)(record+0xafcu);
     uint32_t state=*(volatile uint8_t *)(nested+80u);
     if(state!=3u) {
-        uintptr_t output=0x802a54u;
+        uintptr_t output=((uintptr_t)&em9305_ram_802a2c + 0x28u);
         uint32_t id=*(volatile uint8_t *)(record+1u);
         uint32_t r2=*(volatile uint8_t *)(output+8u);
         uint32_t r4=*(volatile uint32_t *)(output+4u);
@@ -151,7 +152,7 @@ uint32_t opencfw_em9305_init_transition_3249bc(uintptr_t record)
     *(volatile uint8_t *)(record+2u)=1u;
     (void)opencfw_em9305_ll_schedule_notify_313354(record+48u);
     (void)opencfw_em9305_wsf_timer_stop(record+700u);
-    uint32_t delta=(uint32_t)(record-0x803d78u);
+    uint32_t delta=(uint32_t)(record-((uintptr_t)&em9305_ram_803d58 + 0x20u));
     uint32_t id=(uint8_t)((int32_t)delta/784);
     return opencfw_em9305_init_transition_event_30e988(id);
 }
@@ -159,7 +160,7 @@ uint32_t opencfw_em9305_init_transition_3249bc(uintptr_t record)
 uint32_t opencfw_em9305_init_transition_32d0f4(uintptr_t incoming)
 {
     (void)incoming;
-    uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x8051d0u;
+    uintptr_t record=em9305_ram_8051b8.u32_8051d0;
     *(volatile uint8_t *)(record+3u)=1u;
     return opencfw_em9305_ll_schedule_notify_313354(record+48u);
 }
@@ -170,10 +171,10 @@ uint32_t opencfw_em9305_init_transition_32d108(uint32_t native_r0)
 uint32_t opencfw_em9305_init_transition_32d10c(uintptr_t incoming)
 {
     (void)incoming;
-    uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x8051d0u;
+    uintptr_t record=em9305_ram_8051b8.u32_8051d0;
     *(volatile uint8_t *)(record+3u)=1u;
     (void)opencfw_em9305_ll_schedule_notify_313354(record+48u);
-    record=*(volatile uint32_t *)(uintptr_t)0x8051d0u;
+    record=em9305_ram_8051b8.u32_8051d0;
     uint32_t index=*(volatile uint8_t *)(record+777u);
     return opencfw_em9305_init_transition_event_308664(62u,record,index);
 }
@@ -181,7 +182,7 @@ uint32_t opencfw_em9305_init_transition_32d10c(uintptr_t incoming)
 uint32_t opencfw_em9305_init_transition_32d2dc(uintptr_t incoming)
 {
     (void)incoming;
-    uintptr_t record=*(volatile uint32_t *)(uintptr_t)0x8051d0u;
+    uintptr_t record=em9305_ram_8051b8.u32_8051d0;
     uint32_t active=*(volatile uint8_t *)(record+3u);
     if(active!=0u)*(volatile uint8_t *)(record+3u)=0u;
     return opencfw_em9305_init_secondary_cleanup_321450(record);

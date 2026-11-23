@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 __attribute__((used, section(".g2_conversate_registry_context_200004d8")))
-uint8_t audio_uart_registry_context_200004d8[8];
+uint8_t audio_uart_registry_context_200004d8[8] = {0x0bu}; /* stock .data init 0x200004d8 = 0b 00 00 00 00 00 00 00 */
 
 __attribute__((used, section(".g2_conversate_ui_start_tick_20074390")))
 uint32_t audio_conversate_ui_start_tick_20074390;

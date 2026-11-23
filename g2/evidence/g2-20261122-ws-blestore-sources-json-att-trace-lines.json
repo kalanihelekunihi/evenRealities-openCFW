@@ -1,0 +1,28 @@
+{
+ "id": "g2-20261122-ws-blestore-sources-json-att-trace-lines",
+ "time": "2026-11-22 20:30 America/Chicago",
+ "stream": "ws-blestore",
+ "purpose": "Single-writer apply of pending/02-sources-json-att-trace-lines.patch only (15 #line N insertions in 7 of 12 generated ATT units). Approval closes after this write.",
+ "before_sha256": "d694e3a0aacce757d47df38928eeb21a7157d0ee264f56bfabd429c515b566be",
+ "after_sha256": "3242f534c218f7c9f71976c19a4c4f7f1043d1484cfab7738719ae11ebb5290c",
+ "patch": "build/ws-blestore-20261122/pending/02-sources-json-att-trace-lines.patch (deleted after apply)",
+ "apply": "patch -p1 from repo root; no git add/commit",
+ "check": {
+  "command": "python3 tools/build/sources.py check --device g2",
+  "result": "g2: 4880 units, 4542 source files, 2 not built",
+  "exit": 0
+ },
+ "pending_deleted": [
+  "build/ws-blestore-20261122/pending/02-sources-json-att-trace-lines.patch",
+  "build/ws-blestore-20261122/pending/02-sources-json-att-trace-lines.NOTE.md"
+ ],
+ "pending_left": [
+  "build/ws-blestore-20261122/pending/01-sources-json-apollo-main-fal-flashdb-gate.patch",
+  "build/ws-blestore-20261122/pending/01-sources-json-apollo-main-fal-flashdb-gate.NOTE.md"
+ ],
+ "notes": [
+  "sources.json had pre-existing staged and unstaged changes (MM); only this patch was applied to the worktree.",
+  "opencfw-otap-disarm.app.bin not touched.",
+  "Writer approval for g2/src/sources.json is now CLOSED."
+ ]
+}

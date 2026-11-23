@@ -1,0 +1,147 @@
+{
+ "id": "g2-20261122-ws-blestore-att",
+ "time": "2026-11-22 20:20 America/Chicago",
+ "stream": "ws-blestore",
+ "status": "VERIFIED",
+ "scope": "ATT: 12 generated Cordio att/attc/atts units (private gen-att2 tree with per-site #line) + G2 ble-att/ble-attc/ble-atts hand units and u-06/u-07 variants; 133 functions with stock addresses; 49 source units",
+ "harness": "per-function stub-patch differential (Renode 1.17 Cortex-M55, harness RAM 0x20360000). Shared control blocks at stock addresses (attCb 0x200610ac, attsCb 0x2006e5f0, attcCb 0x2006f904, attsCccCb 0x20073b00, attsSignCb 0x2007335c, attsCsfCb 0x20073e04). PREINIT: data_init BLX 0x5e42b5, then each side's AttHandlerInit+AttsInit+AttcInit+AttsIndInit snapshotted and restored per test; CCB fields, 3-group attribute DB, messages and packets randomised identically for both sides. External calls are recording stubs; WSF queue/lock/memcpy/memcmp and listed 'calls' run stock callees for both sides. NORMMAP/argfilter canonicalises stock-vs-C code addresses, const-table pointers (0xF00F00), stack frames (0x57AC0000) and C-string content (hrt_norm). Stub call-argument comparison records addr + arity-aware args + return. FPU enabled (CPACR 0x00F00000); stub_common saves r0-r3 (ATT sites are integer). Printf-like stubs (audio_log_extended arity 261, WsfTrace 256, compressed_log_output 257) count format conversions. Tests: 20 cases for no-arg targets, 50 otherwise.",
+ "compile": {
+  "profiles": "generated Cordio units: g2-apollo-main-70; G2 hand units: g2-apollo-main-1 (from sources.json via difft.py unit_flags)",
+  "note": "Those profiles do not contain -fno-common or -mllvm -arm-global-merge=false (shared sources.json; writer approval closed). Same as this stream's SMP VERIFIED run. Control blocks are relocated with place/redirect rather than merged commons. cflags not added to the passing run6 spec.",
+  "opt": "profile -O2 (spec opt unset)",
+  "gen_dir": "build/ws-blestore-20261122/gen-att2"
+ },
+ "externs": "stubs: WsfTrace/audio_log_extended/compressed_log_output, DmConn* (Register/IdByHandle/InUse/Role/SecLevel/SetIdle/CheckIdle), HciGetMaxRxAclLen, L2cDataReq/L2cRegister, SecCmac, WsfBufAlloc/Free, WsfMsgAlloc/DataAlloc/Free/Send, WsfTimerStartSec/Stop, AttsCsfSetClientChangeAwareState. calls (run-stock): memcpy 0x439be4, memcmp 0x4751c8, audio_l2c_strncmp 0x44b610, audio_ble_hci_vendor_log_enabled_4c9c50, audio_log_flags 0x43d0ce, WsfQueueCount/Deq/Enq/Insert, WsfTaskLock/Unlock, WStrReverse 0x56d8f0. data: pAttCfg 0x200004b4, audio_ble_trace_level_cell 0x2007502f, audio_ble_atts_connection_rows 0x200717b0, audio_ble_connection_state_table 0x20073e04.",
+ "verdict": "EQUIVALENT",
+ "final_run": {
+  "label": "run6",
+  "started": "2026-11-22 20:07 America/Chicago",
+  "finished": "2026-11-22 20:20 America/Chicago",
+  "command": "python3 harness/difft.py specs/att  (cwd build/ws-blestore-20261122); stdout specs/att/run6.out",
+  "tests": 6411,
+  "equal": 6411,
+  "differ": 0,
+  "targets": 133,
+  "mutants": 5,
+  "killed": 5,
+  "done": true,
+  "overflow": false,
+  "last_test": "0x7f040031",
+  "last_test_meaning": "mutant 4 (audio_ble_attc_ccb_by_handle_531a7c slot-stride), case 0x31",
+  "run_seconds": 45,
+  "timeout": 3600,
+  "harness_bin_sha256": "470348350870e180e13ea4106b17e5490d0f1b98c835c37fd51080569cb295a0",
+  "harness_elf_sha256": "2dc21927ff9fed52ffa8c4d7e2d4c05a20633be928620828ff3ea3a18778c29d",
+  "report_sha256": "56b1ec458bfa1618724ef67cb2d76df943baa6ffe364a50ac2446517f3eab618",
+  "tests_c_sha256": "98a4886874736c2c417a65cc99377408bcd11abf9632a54d13fecc4a1304b90c",
+  "overrides_sha256": "4b8cfaeb197bfb6d59166534297dca0f4af42be973b2ea9dcaff5f3cc45ef4f5",
+  "spec_sha256": "df6e2cc32d65a2a42bd3ef333a11b76cbf161f7d9144fa4c3a70ae7da4d3817f",
+  "difft_py_sha256": "d7b9d3271f17b3bbe7d80e24fe6e9bd9e5cf99da798a53b40d375ec4f0631b79",
+  "hrt_c_sha256": "c490022563914fcb986e511939a660101eefad0788bbe129797daf9d492e1c74",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "sources_json_sha256": "d694e3a0aacce757d47df38928eeb21a7157d0ee264f56bfabd429c515b566be",
+  "report": "build/ws-blestore-20261122/specs/att/report.json",
+  "run_out": "build/ws-blestore-20261122/specs/att/run6.out"
+ },
+ "mutants": [
+  "att_main.c attSetMtu: WSF_MIN(peerMtu, localMtu) -> WSF_MAX -> killed",
+  "atts_ccc.c AttsCccEnabled: DmConnSecLevel < secLevel -> <= -> killed",
+  "attc_proc.c attcProcInd: evt.valueLen = len - ATT_HDR_LEN - 2 -> - 1 -> killed",
+  "attsProcMtuReq_56c6fc.c: q[1] = (uint8_t)local_mtu -> (uint8_t)mtu -> killed",
+  "display_ble_attc_ccb_by_handle_531a7c_20261017.c: slot * 0x2c -> slot * 0x2b -> killed"
+ ],
+ "c_fixes": [
+  {
+   "kind": "real (log fidelity)",
+   "file": "g2/src/sources.json generated ATT replacements (PENDING, writer approval closed 19:26 America/Chicago)",
+   "what": "15 #line N insertions before ATT_TRACE_* in 7 of 12 generated units (att_main.c 1, attc_disc.c 2, attc_proc.c 1, atts_ccc.c 5, atts_ind.c 1, atts_main.c 3, atts_proc.c 1) so G2_WSF_TRACE passes the stock IAR __LINE__ to audio_log_extended. Applied only in the private gen-att2 tree used by this differential; not written to sources.json.",
+   "pending": "build/ws-blestore-20261122/pending/02-sources-json-att-trace-lines.patch",
+   "pending_note": "build/ws-blestore-20261122/pending/02-sources-json-att-trace-lines.NOTE.md",
+   "patch_sha256": "2613c7f3427e57a78dc266b24d986476a6edc3f1c8f13085a18383b617579840"
+  }
+ ],
+ "harness_artifacts": [
+  {
+   "what": "attsProcMtuReq_56c6fc tests 0x840001 and 0x840014 (run5): stub-arg 0x20 (stock) vs 0x0 (C) ahead of HciGetMaxRxAclLen. AttsCsfGetFeatures leaves the local 'features' unwritten for an invalid connId (upstream Cordio and stock alike). A received MTU request always has an open connection. Fix: valid_conn when the target name contains 'MtuReq' so those cases do not take the uninitialised-features path. Not a C mismatch.",
+   "where": "build/ws-blestore-20261122/specs/att/tests.c (valid_conn / has(..., \"MtuReq\"))"
+  },
+  {
+   "what": "attEvt_t fields the stack (Cordio and stock alike) leaves uninitialised are masked in the event callback: pValue when valueLen==0, handle when called from attcProcMultiVarNtf, mtu unless ATT_MTU_UPDATE_IND (0x16), padding byte at +13.",
+   "where": "cb_att in tests.c"
+  },
+  {
+   "what": "attsCccEvt_t hdr.status is never set by attsCccCback (Cordio and stock) and is masked.",
+   "where": "cb_ccc in tests.c"
+  },
+  {
+   "what": "Function-pointer and const-table arguments, plus stack frame addresses, differ by design (stock vs C code addresses / frame layout) and are canonicalised (0xF0000000|target, 0xF00F00, 0x57AC0000).",
+   "where": "argfilter in tests.c; hrt_norm in hrt.c"
+  }
+ ],
+ "run_history": [
+  {
+   "run": "run1",
+   "time": "19:41 America/Chicago",
+   "tests": 103,
+   "equal": 0,
+   "differ": 103,
+   "verdict": "DIFFERENT",
+   "note": "early pointer / init / callback-record mismatch"
+  },
+  {
+   "run": "run2",
+   "time": "19:44 America/Chicago",
+   "tests": 252,
+   "equal": 0,
+   "differ": 252,
+   "verdict": "DIFFERENT"
+  },
+  {
+   "run": "run3",
+   "time": "19:52 America/Chicago",
+   "tests": 5591,
+   "equal": 4977,
+   "differ": 614,
+   "verdict": "DIFFERENT",
+   "note": "includes stock-vs-C WSF __LINE__ and remaining uninit/callback masking gaps"
+  },
+  {
+   "run": "run4",
+   "time": "19:58 America/Chicago",
+   "tests": 5793,
+   "equal": 5657,
+   "differ": 136,
+   "verdict": "DIFFERENT",
+   "note": "still includes __LINE__ (e.g. 0x13f vs 0x140) before gen-att2 #line install"
+  },
+  {
+   "run": "run5",
+   "time": "20:04 America/Chicago",
+   "tests": 6411,
+   "equal": 6409,
+   "differ": 2,
+   "verdict": "DIFFERENT",
+   "differing_ids": [
+    "0x840001",
+    "0x840014"
+   ],
+   "note": "only attsProcMtuReq_56c6fc uninitialised-features path (0x20 vs 0x0); #line already in gen-att2"
+  },
+  {
+   "run": "run6",
+   "time": "20:20 America/Chicago",
+   "tests": 6411,
+   "equal": 6411,
+   "differ": 0,
+   "mutants": 5,
+   "killed": 5,
+   "verdict": "EQUIVALENT"
+  }
+ ],
+ "product_c": "no edits to ble-att / ble-attc / ble-atts / u-06 / u-07 product C for this verdict; only the pending sources.json #line replacements in the private generated tree",
+ "shared_files": "sources.json not modified (pending patch 02). opencfw-otap-disarm.app.bin not touched.",
+ "notes": [
+  "Task 1 (private full-1926 rebuild + both paired sims + 32 MiB NOR bit-identical vs stock) already recorded in g2/evidence/g2-20261122-ws-blestore-paired-boot-smp.json at 19:40 America/Chicago; not re-run.",
+  "Next: scripted HCI peer sim (connect, pair, bond, GATT write, NOR bond diff vs stock)."
+ ]
+}

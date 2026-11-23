@@ -34,7 +34,7 @@ extern void lv_obj_set_style_pad_bottom(uint32_t, uint32_t, uint32_t);
 extern void audio_conversate_prep_note_pool_bind_5b6ac0(uint32_t);
 extern void audio_uart_page_43f66c(uint32_t);
 extern void audio_conversate_prep_note_pool_show_5b6b58(uint32_t);
-extern void audio_uart_page_58c238(uint32_t, uint32_t, uint32_t);
+extern void audio_uart_page_58c238(uint32_t object, uint32_t duration, void (*completed_cb)(void)); /* common_fade_in_animation */
 extern uint32_t audio_uart_lv_obj_has_flag_43e0e0(uint32_t, uint32_t);
 
 static const char module[] = "conversate.prep";
@@ -127,10 +127,10 @@ uint32_t audio_conversate_prep_note_refresh_5b6cd0(uint32_t animate) {
     audio_conversate_prep_note_pool_show_5b6b58(0u);
     audio_uart_page_43dfa4(note, 1u);
     if ((uint8_t)animate != 0u)
-        audio_uart_page_58c238(note, 200u, 0u);
+        audio_uart_page_58c238(note, 200u, 0);
     if (audio_uart_lv_obj_has_flag_43e0e0(expanded, 1u) == 0u &&
             (uint8_t)animate != 0u)
-        audio_uart_page_58c238(expanded, 200u, 0u);
+        audio_uart_page_58c238(expanded, 200u, 0);
     if (audio_log_flags() & 2u)
         audio_log_extended(3u, module, path, function, 0x10du,
                            virtual_lines, count, 8u, 12u);

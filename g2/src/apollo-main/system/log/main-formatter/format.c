@@ -72,7 +72,8 @@ extern unsigned char g2ref_g2_stock_ram_20074f30[] __asm__("g2_stock_ram_20074f3
 typedef void (*am_util_stdio_print_char_t)(char *);
 #define g_pfnCharPrint (*(am_util_stdio_print_char_t volatile *)((uint32_t)(uintptr_t)g2ref_audio_uart_stdio_print_char_cell_200742f0))
 #define g_prfbuf ((char *)((uint32_t)(uintptr_t)g2ref_g2_flashdb_print_buffer))
-#define g_bTxtXlate (*(volatile bool *)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f30+0x4fu))
+/* Stock 0x473052 loads this byte and tests it != 0 (not == 1), so read it as a byte. */
+#define g_bTxtXlate (*(volatile uint8_t *)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20074f30+0x4fu))
 /* Stock 0x472C84 (divu64_10); AmbiqSuite R3.2.0 utils/am_util_stdio.c */
 static uint64_t
 divu64_10(uint64_t ui64Val)
@@ -679,8 +680,17 @@ audio_heap_formatter(char *pcBuf, const char *pcFmt, va_list pArgs)
         {
             stockStringPrecisionExplicit = true;
             ++pcFmt;
-            iPrecision = decstr_to_int(pcFmt, &ui32NumChars);
-            pcFmt += ui32NumChars;
+            if (*pcFmt == '*')
+            {
+                /* Stock 0x4730d0: ".*" takes the precision from the next int argument. */
+                iPrecision = va_arg(pArgs, int);
+                ++pcFmt;
+            }
+            else
+            {
+                iPrecision = decstr_to_int(pcFmt, &ui32NumChars);
+                pcFmt += ui32NumChars;
+            }
         }
 
         //

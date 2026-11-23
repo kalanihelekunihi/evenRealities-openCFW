@@ -1,9 +1,10 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x318440..0x3184f2: choose the own address for a connection
  * request. Address type +57 (bit 1 = resolvable) selects the request's
  * random address (+8/+12, type 1 with +4 set) or the public address at
- * 0x805b40, mirrored at 0x805be2 (type) / 0x805be4 (address). A resolvable
+ * ((uintptr_t)&em9305_ram_805af0 + 0x50u), mirrored at ((uintptr_t)&em9305_ram_805be0 + 0x2u) (type) / ((uintptr_t)&em9305_ram_805be0 + 0x4u) (address). A resolvable
  * type tries the peer-pair resolution (native 0x303a40) on +48/+52/+58. The
  * chosen address and peer fields go to the parameter block (+0x54..+96),
  * whose flags +0x50 get bit 0, bit 1 for a random address and bit 3 for a
@@ -12,8 +13,8 @@ extern uint32_t opencfw_em9305_radio_peer_pair_303a40(uint32_t,uint32_t,uint32_t
 
 uint32_t opencfw_em9305_child_318440(uintptr_t link, uintptr_t params, uintptr_t request)
 {
-    volatile uint8_t *own_type = (volatile uint8_t *)(uintptr_t)0x805be2u;
-    volatile uint32_t *own_address = (volatile uint32_t *)(uintptr_t)0x805be4u;
+    volatile uint8_t *own_type = &em9305_ram_805be0.u8_805be2;
+    volatile uint32_t *own_address = &em9305_ram_805be0.u32_805be4;
     uint32_t type = *(volatile uint8_t *)(request + 57u);
     uint32_t low, high, random;
     own_address[1] = 0u;
@@ -26,8 +27,8 @@ uint32_t opencfw_em9305_child_318440(uintptr_t link, uintptr_t params, uintptr_t
         *(volatile uint8_t *)(request + 3u) = 0u;
         random = 1u;
     } else {
-        high = *(volatile uint32_t *)(uintptr_t)0x805b44u;
-        low = *(volatile uint32_t *)(uintptr_t)0x805b40u;
+        high = em9305_ram_805af0.u32_805b44;
+        low = em9305_ram_805af0.u32_805b40;
         *(volatile uint8_t *)(link + 2u) = 0u;
         random = 0u;
     }

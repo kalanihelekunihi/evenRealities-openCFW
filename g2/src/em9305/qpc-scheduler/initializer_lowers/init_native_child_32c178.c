@@ -1,8 +1,9 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32c178..0x32c1d4: per-state completion check on the context
- * at +44. State 5: decode the received header into 0x8019fc and, for an
- * LL control opcode 0x22 on LLID 5 with the auxiliary hook (0x802954)
+ * at +44. State 5: decode the received header into ((uintptr_t)&em9305_ram_8019e8 + 0x14u) and, for an
+ * LL control opcode 0x22 on LLID 5 with the auxiliary hook (((uintptr_t)&em9305_ram_802950 + 0x4u))
  * armed, clear +2252 / set +2260 of the link (+36) and signal it. State 3
  * with +152 set: return 3257e4(record, +149). Otherwise returns 0. */
 extern uint32_t opencfw_em9305_child_32db0c(uintptr_t out, uintptr_t in);
@@ -15,10 +16,10 @@ uint32_t opencfw_em9305_child_32c178(uintptr_t record, uintptr_t pdu)
     uint32_t state=*(volatile uint8_t *)(context+148u);
     if(state==5u){
         uintptr_t link=*(volatile uint32_t *)(record+36u);
-        (void)opencfw_em9305_child_32db0c(0x8019fcu,pdu);
-        if(*(volatile uint8_t *)(uintptr_t)0x801a00u!=0x22u)return 0u;
-        if(*(volatile uint8_t *)(uintptr_t)0x8019fcu!=5u)return 0u;
-        if(*(volatile uint32_t *)(uintptr_t)0x802954u==0u)return 0u;
+        (void)opencfw_em9305_child_32db0c(((uintptr_t)&em9305_ram_8019e8 + 0x14u),pdu);
+        if(em9305_ram_8019e8.u8_801a00!=0x22u)return 0u;
+        if(em9305_ram_8019e8.u8_8019fc!=5u)return 0u;
+        if(em9305_ram_802950.u32_802954==0u)return 0u;
         *(volatile uint8_t *)(link+2252u)=0u;
         *(volatile uint8_t *)(link+2260u)=1u;
         (void)opencfw_em9305_auxiliary_signal_304394();

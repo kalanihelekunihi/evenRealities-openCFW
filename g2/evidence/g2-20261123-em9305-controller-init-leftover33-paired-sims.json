@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 2:18:44 AM CST (America/Chicago)",
+  "title": "Close wsf_os_active_333c44; retarget controller_init leftover typo literals plus 801398 nest byte in startup_hook/resume_hook; private p-left33; paired Renode sims both PASS",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-wsf-ao-boot-80139c-paired-sims.json",
+  "canon_check": "pending/em9305-qemu-arc-nrm-integer-args.md \u2014 nrm/mnorm cannot collapse pin 9 vs 10 the way hwdrivers did (image range starts at 0xc00000, not 0x8). No affected-proof rerun. Shared harness not patched.",
+  "wsf_os_active_333c44": "g2/evidence/g2-20261123-em9305-wsf-os-active-333c44.json \u2014 EQUIVALENT 100 classes=4 calls=454; typo-RAM mutants of 806034 and 806054 KILLED. Tree linkage stays static.",
+  "leftover33_classification": {
+    "occurrences": 33,
+    "unique_addrs": 10,
+    "not_typo_ram": {
+      "0x80000000": "14 uses \u2014 32-bit sign bit in elapsed/deadline compares, not a RAM address",
+      "0x80200005": "1 use \u2014 radio-schedule encoding constant",
+      "0x806567cb": "1 use \u2014 crypto/hash table constant among other non-address magic words"
+    },
+    "real_typo_sites": {
+      "0x801398": "8 uses in wsf_wake_lower and controller_timer_irq (plus startup_hook and resume_hook). New 1-byte typo-RAM object. Stock only ldb/stb at 0x801398; 0x801399..0x80139b have no stock immediates.",
+      "0x802a60 / 0x8035dc / 0x80389c": "scan context tables retargeted to existing 704-byte BSS objects opencfw_em9305_scan_context_*",
+      "0x802d20 / 0x802fe0 / 0x8032a0": "stream record table retargeted to opencfw_em9305_ext_init_records_802d20[3][704]"
+    }
+  },
+  "qemu_prove": {
+    "wake_lower": "EQUIVALENT 100 classes=4 calls=200 (after planting vptr/post pad and QF_newX_ ret 0x806400; first try timed out 0/0)",
+    "timer_irq": "EQUIVALENT 100 classes=18 calls=144",
+    "scan_available_307b9c": "EQUIVALENT 100 classes=15 calls=37",
+    "scan_config_307b70": "EQUIVALENT 100 classes=3 calls=0 nor0",
+    "ll_stream_configure_307a28": "EQUIVALENT 100 classes=3 calls=100",
+    "startup_hook": "EQUIVALENT 100 classes=3 calls=196 nor0",
+    "resume_hook": "EQUIVALENT 100 classes=6 calls=144 nor0",
+    "mutants_killed": [
+      "wake_lower 801398->801000 MISMATCH ret/memhash (80139c neighbor first RUN_FAIL 100/0 because it corrupted the planted vptr)",
+      "timer_irq 801398->80139c[0] MISMATCH memhash/ret",
+      "scan_available 802a60->80389c MISMATCH callhash",
+      "scan_config 8035dc->802a60 MISMATCH memhash",
+      "stream_configure records[0]->[1] MISMATCH ret/callhash/memhash",
+      "startup_hook 801398->80139c[0] MISMATCH memhash",
+      "resume_hook 801398->80139c[0] MISMATCH memhash"
+    ]
+  },
+  "install": {
+    "controller_init.c": {
+      "sha256_before": "17291cbfea1f76eecf243814236a744ac895e0a58373b1528af0c2ec73ac0261",
+      "sha256_after": "a189737ba48b4e03cf99a075c5dc6d3b1efea5bf49bf311bf24f65f26f82bcf0"
+    },
+    "startup_hook.c": {
+      "sha256_before": "846f3c693a91cae103264a92d8bd2ce0af1d9e162ef20f41583f4a10b9495df8",
+      "sha256_after": "46a698db39c9369dfa6a6111f5ccec26f5ab80f27fde66e45770a26e394b774f"
+    },
+    "resume.c": {
+      "sha256_before": "ec6818c3c5be43cb82303860281359330ce7a40a61c0235635fa22c0bf01ea3c",
+      "sha256_after": "34aafd7d104b386a4e08cca001ef7aafd7978b582dad5b734aef99d835f4e3fd"
+    },
+    "header_ld": "Added 1-byte em9305_ram_801398 at 0x00801398 in em9305_ram.h and g2-em9305.ld. framework_resume (_Noreturn idle loop) was not typo-changed."
+  },
+  "tree_build": {
+    "command": "python3 -u build/ws-em9305-20261122/pbuild.py build/ws-em9305-20261122/p-left33 -j 3",
+    "started": "2026-11-23 02:11:29 AM CST (America/Chicago)",
+    "rc": 0,
+    "units": 768,
+    "compiled_this_run": 768,
+    "link_log_empty": true,
+    "text_bytes": 239376,
+    "text_delta_vs_p_wsfboot": 60,
+    "app_sha256": "48929ba91b384ddbfd1decc0c83e80124fc1a3aa76f70e79beee63ff6e2890e7",
+    "note": ".text grew 60 B vs p-wsfboot (239316->239376) because the scan/stream tables now reference BSS symbols instead of packed immediates. Still fits NVM."
+  },
+  "package": {
+    "path": "build/ws-em9305-20261122/p-left33/g2-em9305-source-candidate-package.bin",
+    "bytes": 240708,
+    "sha256": "75c331330661c25d7bcd4764a113a254892556515e0f1ce0c3d57409e7bdd78c",
+    "records": 3,
+    "crcs": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0xEA6A0D8C",
+      "[0x00302400,0x0033cb10)": "0x5622A7F1"
+    }
+  },
+  "slot_fit": {
+    "application_end": "0x0033CB10",
+    "application_bytes": 239376,
+    "headroom_bytes": 275696,
+    "fits_nvm_slot": true
+  },
+  "splice": {
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-left33.bin",
+    "nor_sha256": "8d83b2057cf5f8fb07d53cbd2097fd674fa6c09af4db2de84dbcebcf4b683ec0",
+    "nor_source": "copy of build/em9305-nor-20261122/nor-stock-formatted.bin, then lfs_inject at 0x1400000 path /firmware/ble_em9305.bin",
+    "lfs_inject_wrote_bytes": 240708
+  },
+  "sims": {
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/left33-match.resc",
+      "log": "build/ws-em9305-20261122/sim/left33-match.log",
+      "started": "2026-11-23 02:17:10 AM CST (America/Chicago)",
+      "finished": "2026-11-23 02:17:55 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "chiprev_fixture": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/left33-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/left33-dfu-mismatch.log",
+      "started": "2026-11-23 02:17:55 AM CST (America/Chicago)",
+      "finished": "2026-11-23 02:18:44 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq": true,
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0xEA6A0D8C",
+        "[0x00302400,0x0033CB10)": "0x5622A7F1"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 1038,
+      "sysresetreq_at": "2026-11-23 02:18:35.017 AM CST (America/Chicago)"
+    }
+  },
+  "compare": {
+    "version_match_baseline": "PASS",
+    "forced_mismatch_dfu_baseline": "PASS",
+    "observed_crcs_identical_to_precomputed_our_records": true,
+    "verdict": "Version-match PASS (run_renode_rc=0) vs prior markers (CHIPREV 0x22, OTAP 0xAFD1363A then 0, HOST 0x3A, END_PC 0x543528, display 0c5cc90b\u2026, advertising 010A200101, 56 HCI). Forced-mismatch DFU PASS: commit 00020404, SYSRESETREQ at 2:18:35.017 AM CST, SBL handoff VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D, observed CRCs 1D6121C4 / EA6A0D8C / 5622A7F1 match precomputed extents (application ends at 0x0033CB10). HCI host packets 1038 (1037 on p-wsfboot)."
+  },
+  "not_started": "sleep cluster, NVM_InitCopy, IRQHandler_RcCalib (prove only, do not install while uncut).",
+  "rules": {
+    "no_commit": true,
+    "no_push": true,
+    "no_flash": true,
+    "no_backups": true,
+    "official_app_not_overwritten": true,
+    "sources_json_approval_closed": true,
+    "no_install_unproven_or_vacuous": true,
+    "no_git_show_HEAD_revert": true
+  }
+}

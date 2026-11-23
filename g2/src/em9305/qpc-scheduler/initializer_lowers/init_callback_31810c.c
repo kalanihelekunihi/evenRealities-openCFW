@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Complete native 0x31810c..0x318166. Two DBNZ iterations preserve
  * captured base and fresh slot rereads and the native native zero-fill contract. */
@@ -6,7 +7,7 @@ extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
 uint32_t opencfw_em9305_init_callback_31810c(uint32_t incoming)
 {
     (void)incoming;
-    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c38u;
+    uintptr_t base=em9305_ram_805be0.u32_805c38;
     for (uint32_t index=0;index<2u;++index) {
         if (base==0u) continue;
         uintptr_t slot=base+index*0xb08u+0xafcu;

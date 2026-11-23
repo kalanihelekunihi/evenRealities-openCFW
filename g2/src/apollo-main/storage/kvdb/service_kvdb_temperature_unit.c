@@ -41,7 +41,7 @@ int32_t _kvdbUpdataTemperatureUnit(void) {
     (void)SVC_KvdbWriteTemperatureUnit(&g2_kvdb_temperature_unit_record);
     return 0;
 }
-G2_KVDB_MIGRATION_EXPORT(_kvdbUpdataTemperatureUnit);
+/* _kvdbUpdataTemperatureUnit: migration slot 6 of the stock-ordered table in service_kvdb.c (ROM 0x746d20). */
 
 int32_t SVC_KvdbWriteTemperatureUnit(const g2_kvdb_word_record_t *record) {
     g2_kvdb_temperature_unit_record = *record;

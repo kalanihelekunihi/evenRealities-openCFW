@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "CST (America/Chicago)",
+  "logged_at": "2026-11-23 04:43:00 AM CST (America/Chicago)",
+  "title": "EM9305 ArcTimer0/1 typo-RAM 4-byte grow, typo-install, typed ini_record_335820, and p-arctimer-ini paired sims",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-irqhandler-typo-literals-paired-sims.json",
+  "reason": "Grow the 1-byte 801904/801908 objects that ArcTimer word-loads (same UB as 80faec/80fde0 hook slots), typo-install those handlers, and type ini_record_335820 as the NVM_InitCopy table by destination.",
+  "arctimer_grow": {
+    "stock_access_width": "Lowered stock is a 32-bit load in both handlers: ArcTimer0 `ld r0,[0x801904]` then breq_s/jl_s; ArcTimer1 `ld r0,[0x801908]` then the same. EM_IRQ_CALL_SLOT is EM_R32. No byte-width accesses or literals at 0x801905-0x801907 or 0x801909-0x80190b were found in g2/src/em9305. The GPIO slot at 0x80190c is also stored as uint32_t in em9305_link_closure.c.",
+    "change": "Grew em9305_ram_801904 and em9305_ram_801908 from 1-byte u8 objects to 4-byte unions {uint32_t u32_801904; uint8_t u8_801904;} and the same for 801908, with offsetof and sizeof==4 asserts. The implicit 3-byte gaps after each object are now part of the object. Left as two adjacent objects (not merged into em9305_ram_80190c, which already overlaps 801944). ld symbols and addresses unchanged.",
+    "object_count_before": 140,
+    "object_count_after": 140,
+    "header_pre_sha256": "dbc293825d96703922639ba0d5a4b1037cf5b28487f24f11f06d5dff668b09fc",
+    "header_post_sha256": "0f46b3691b8e9f7c7875887e93ac3a08380eec61bfd19442e0fe02e40854ae1f",
+    "ld_sha256_unchanged": "e15bdd399a333b2ad899ae15476b8d86510a8e2b07941eecfb8d58d1b01c2c76"
+  },
+  "arctimer_typo": {
+    "window": "2026-11-23 04:25:03 AM CST through 2026-11-23 04:26:05 AM CST (America/Chicago)",
+    "compared_to": "lowered stock, not typo-vs-typo",
+    "ArcTimer0": {
+      "typo_vs_stock": "EQUIVALENT 100  classes=98 calls=74",
+      "mutant": "KILLED u32_801904 -> u32_801908; ncalls:39 callhash:39",
+      "installed": "em9305_ram_801904.u32_801904 (CALL_SLOT expanded to a named-field call)",
+      "pre_sha256": "44d383b69df48f963430a3c151fbd1a54dacd127f3cb5c5e6c59b9feb4417f48",
+      "post_sha256": "fa36a61c798a51d000c98a84e6bc69eaec11eab7076e0c62e2a3b7b9ccd288fe"
+    },
+    "ArcTimer1": {
+      "typo_vs_stock": "EQUIVALENT 100  classes=98 calls=77",
+      "mutant": "KILLED u32_801908 -> u32_801904; ncalls:39 callhash:39",
+      "installed": "em9305_ram_801908.u32_801908",
+      "pre_sha256": "25b6c303e3ebc86df6d7da4dd7c9055d2ca34f30a3bd047eeabc1630621ce932",
+      "post_sha256": "56b544651e6af96d9394b7a4ac87f09e497073add4ad92602c57700410860c16"
+    }
+  },
+  "pmlsvld_80fde0": "Left as EM_R32(0x80fde0u). The loaded value only feeds a documented dead flags-gated reload; address mutants survived.",
+  "ini_record_335820": {
+    "file": "g2/src/em9305/application/stock_residual_data.c",
+    "pre_sha256": "10e990c70950b875e55282faa756006d238741bac181eb0ed1f56ddc9613a995",
+    "post_sha256": "32f12cebe94ccb0011255bb62f462b3765db8e17a11f54980144c8b6645609a1",
+    "model": "Version-2 NVM_InitCopy / stock_30ef44 table. application_boot.c is the only caller (stock_30ef44(record, flag, 1, 1)). Signature INI + version 2; entries start at +4. Walk of stock ble_em9305.bin application record at 0x335820 (936 B) yields four entries plus the end marker; no leftover after +0x3a8.",
+    "entries": [
+      {
+        "dest": "&em9305_ram_8012b8",
+        "size": 69,
+        "covers": "2-byte 8012b8 object (s8_8012b8/s8_8012b9, proved by init_native_child_310200), 6-byte hole 0x8012ba..0x8012bf (no typo-RAM object), then em9305_ram_8012c0 through u8_8012fc. Two relocated code pointers sit at 0x8012e4 and 0x8012f0, which the dest object still types as u8+gap; they stay symbols in the record."
+      },
+      {
+        "dest": "&em9305_ram_80faec",
+        "size": 776,
+        "covers": "15 typo-RAM objects 0x80faec..0x80fdf4. 23 code/rodata pointers are symbols. 12 typo-RAM addresses with no named field yet are left as integer literals (0x80fb64, 0x80fb80, 0x80fd20, 0x80fd60, 0x80fd74, 0x80ff54, 0x80110c, 0x8011c8, 0x8011f8, 0x801248, 0x801250, 0x8012a0). Remaining words are unproved table/scalar data and stay literals."
+      },
+      {
+        "dest": "&em9305_ram_80fde0.u32_80fdf4",
+        "size": 44,
+        "covers": "The rest of the 64-byte 80fde0 object: two zero words then the nine hook slots (application_main, stock_30ecf8, stock_31114c, QF_onResumeInternalHook, stock_3111a0, qf_on_startup_internal_hook, stock_31161c, QK_onIdleInternalHook, stock_3117e8), typo-proved as u32 in the earlier 80fde0 grow."
+      },
+      {
+        "dest": "&em9305_ram_8012c0.u32_801300",
+        "size": -19840,
+        "covers": "BSS clear 0x801300..0x806080. Dest is a named field at offsetof 0x40 of em9305_ram_8012c0."
+      }
+    ],
+    "sizeof_assert": 936,
+    "section_size_unchanged": 1872,
+    "byte_compare_unlinked": {
+      "result": "PASS",
+      "work": "build/ws-em9305-20261122/u-suffix/ini-record/byte-compare-stock.json",
+      "detail": "Compiled stock_residual_data.c with the unit's pbuild flags. Non-relocated bytes of the 936 B record are identical to stock firmware (ble_em9305.bin application at 0x335820). The 38 differing words are exactly the R_ARC_32 sites (4 dest typo-RAM relocs, including em9305_ram_80fde0+0x14 and em9305_ram_8012c0+0x40, plus the same 34 code/rodata pointer symbols as the previous verbatim record)."
+    },
+    "byte_compare_linked": {
+      "result": "PASS",
+      "detail": "p-arctimer-ini app.bin and the linked 936 B record are byte-identical to p-irqtypo (sha 1d838a0ec140e1f1cfdcd2536db32b2ea2d15efc0fb3d2b102d7c38c05c132d5). The typed source therefore emits the same walker input as the previous proven record. Versus stock, the only differences remain the relocated code-pointer values (addresses moved in the reconstruction); dest typo-RAM addresses and all literal payload bytes match stock."
+    }
+  },
+  "tree_build": {
+    "command": "python3 -u build/ws-em9305-20261122/pbuild.py build/ws-em9305-20261122/p-arctimer-ini -j 3",
+    "started": "2026-11-23 04:33:52 AM CST (America/Chicago)",
+    "finished": "2026-11-23 04:39:10 AM CST (America/Chicago)",
+    "rc": 0,
+    "units": 768,
+    "compiled_this_run": 768,
+    "link_log_empty": true,
+    "text_bytes": 239216,
+    "text_delta_vs_p_irqtypo": 0,
+    "app_sha256": "1d838a0ec140e1f1cfdcd2536db32b2ea2d15efc0fb3d2b102d7c38c05c132d5",
+    "app_identical_to_p_irqtypo": true,
+    "elf_sha256": "d93ac8b719eb5002267258494f3e4ebd5fba905f4a9a447c5d1adaba173f3ea0",
+    "note": "Application payload is bit-identical to p-irqtypo: ArcTimer typo-RAM loads assemble to the same addresses, and the typed ini_record links to the same bytes. The ELF hash differs (debug/metadata); .text and the 3-record package payloads do not."
+  },
+  "package": {
+    "path": "build/ws-em9305-20261122/p-arctimer-ini/g2-em9305-source-candidate-package.bin",
+    "bytes": 240548,
+    "sha256": "467bb1c9a461e65a44e6b8578706831a155f3a9ffc7af24fc6d75ab1374b7b40",
+    "identical_to_p_irqtypo": true,
+    "records": 3,
+    "crcs_from_dfu_log": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0x3816C591",
+      "[0x00302400,0x0033CA70)": "0xA26230CF"
+    }
+  },
+  "slot_fit": {
+    "application_end": "0x0033CA70",
+    "application_bytes": 239216,
+    "headroom_bytes": 275856,
+    "fits_nvm_slot": true
+  },
+  "splice": {
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-arctimer-ini.bin",
+    "nor_sha256": "5803c5f3d3bdb87c15fddea6e4f7bfd305f5b29b0cf16659223da3aa2b25d83a",
+    "nor_identical_to_p_irqtypo": true,
+    "lfs_inject_wrote_bytes": 240548
+  },
+  "sims": {
+    "renode": "g2-firmware-emulator scripts/run-renode.sh, Renode 1.17.0, 8 s virtual runs, 1200 s wall cap",
+    "image_note": "Package and NOR are bit-identical to p-irqtypo, which already passed. Sims were still rerun on the p-arctimer-ini resc files.",
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/arctimer-ini-match.resc",
+      "log": "build/ws-em9305-20261122/sim/arctimer-ini-match.log",
+      "started": "2026-11-23 04:40:00 AM CST (America/Chicago)",
+      "finished": "2026-11-23 04:40:57 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "chiprev_fixture": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/arctimer-ini-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/arctimer-ini-dfu-mismatch.log",
+      "started": "2026-11-23 04:41:02 AM CST (America/Chicago)",
+      "finished": "2026-11-23 04:42:38 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq": true,
+      "sysresetreq_at": "2026-11-23 04:42:09.707 AM CST (America/Chicago)",
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0x3816C591",
+        "[0x00302400,0x0033CA70)": "0xA26230CF"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 1037
+    }
+  },
+  "remaining": {
+    "tail_3357e0": "Not started. 64 B verbatim immediately before the ini_record in .rodata.opencfw_em9305_stock_data.",
+    "radio_rodata": "Not started. 700 B verbatim radio and small rodata tables at 0x333e9a in the same section.",
+    "typo_window_shims": "Not started. Known next: residual_code EM_CONFIG_PTR / EM_IRQ_SAVE_PTR / EM_RF_CFG_PTR and &obj+offset shims (including 80fb64 in gap_80fb61, which is also an untyped typo-RAM literal in the ini_record e1 payload); boot QF_maxPool_ for 0x801360; 80ff6c/80ffa8 only after RAMHI/ROM check."
+  },
+  "rules": {
+    "no_git": true,
+    "no_backups": true,
+    "official_app_untouched": true,
+    "source_completeness_proven": false,
+    "no_vacuous_install": true
+  }
+}

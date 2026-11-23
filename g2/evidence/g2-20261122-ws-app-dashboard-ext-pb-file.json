@@ -1,0 +1,30 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "source": "g2/src/apollo-main/app/a-39-dashboard-ext/dashboard_ext_pb_file.c",
+ "source_sha256": "170567db1cebef9f7e1e7e1b90ed3240c8eff9a83f5a57db151df917f5953356",
+ "spec": "build/ws-app-20261122/specs/dex-a",
+ "verified_at": "2026-11-22 20:00 CST",
+ "result": {
+  "verdict": "EQUIVALENT",
+  "tests": 500,
+  "equal": 500,
+  "differ": 0,
+  "mutants": 10,
+  "killed": 10,
+  "surviving_mutants": [],
+  "done": true,
+  "overflow": false,
+  "harness_sha256": "71fb972ae94026e6872f938502c78944b23ea75eeffb1440c81251541f3f2a7b",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "stock_ranges": "0x500824..0x501065, 0x501108..0x501165, 0x5011d0..0x5017a3",
+ "method": "black-box sequences of 1-8 random ops over 12 entry points (recv_ctx_reset, pb_tx_dispatch, tx_response, tx_notify, STEP1 file info, STEP2 upgrade, STEP3 transmit start, STEP5 update status, persist_layout_pb_file, check_recv_complete, send_pb_file_data_ack, STEP4 handle_send_pb_file_data); STEP4 fragments come from a test-side sequencer (coherent sessions with injected idx/session/total/compress/raw faults, totals incl. 0, 0x4fff, 0x5000, 0x5001); receive cache pre-seeded zero/random/active; scripted file I/O, role, BLE, encode results; 500 tests + 60 per mutant (mutant runs bias toward the mutated entry)",
+ "observed": "all callee args, file paths/modes by content, written data hash, handshake packet bytes, encoded tx-record hash, BLE payload hashes, logs, return values; receive cache (0x501c B), tx record, tx buffer and upgrade magic after every op",
+ "source_changes": "none needed",
+ "history": [
+  "19:41 CST: 500/500, 8/10 (two mutants under-exercised)",
+  "20:00 CST: 500/500, 10/10 after mutant-run bias"
+ ]
+}

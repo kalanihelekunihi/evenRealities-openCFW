@@ -1,0 +1,50 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "time_cst": "23:05",
+ "queue_item": "build/ws-ramlayout-20261122-1230/pending/10 (RAM-init comparison, app-owned)",
+ "items": 7,
+ "real_gaps_fixed": 5,
+ "not_gaps": [
+  {
+   "symbol": "g2_pb_time_sync_info +4",
+   "reason": "stock time_zone byte is 0 (matches); stock bytes +5..+7 are the start of the '2.2.6.10' string of another object at 0x20004399"
+  },
+  {
+   "symbol": "0x20003bec (system-close index)",
+   "reason": "this is g2_system_close_item_count, already = 2 in app/S3-app-data/service_data.c, matching stock; ramlayout pairing named selected_index"
+  }
+ ],
+ "fixed": [
+  {
+   "symbol": "audio_terminal_event_names[13]",
+   "file": "app/terminal-event/terminal_event_names_ram_20003e6c.c",
+   "init": "pointers to stock ROM strings TERMINAL_EVENT_NONE..SESSION_ID_CHANGED"
+  },
+  {
+   "symbol": "audio_terminal_ui_state_names[13]",
+   "file": "app/terminal-ui/terminal_ui_fsm_names_5e7b10.c",
+   "init": "TERMINAL_UI_STATE_CLOSED..NEW_SESSION_PENDING"
+  },
+  {
+   "symbol": "audio_terminal_ui_event_names[40]",
+   "file": "app/terminal-ui/terminal_ui_fsm_names_5e7b10.c",
+   "init": "TERMINAL_UI_EVENT_NONE..USER_EXIT"
+  },
+  {
+   "symbol": "audio_settings_terminal_record[4]",
+   "file": "app/settings-persist/settings_persist_terminal_record.c",
+   "init": "{1,0,0,0} (stock .data default, version 1); KVDB default/seal reads it before any writer"
+  },
+  {
+   "symbol": "audio_dashboard_layout_current[128]",
+   "file": "app/dashboard-layout/dashboard_layout_current_ram.c",
+   "init": "00 05 00 01 02 04 03 00 01 00 00 00 00 01 04 00 (= stock init = ROM default 0x6d52d8); no boot-time writer before readers"
+  }
+ ],
+ "verification": {
+  "build": "build/ws-app-20261122/b1 + b1-link, rc 0 (22:10)",
+  "elf_readback": "all five symbols carry the expected initial bytes in b1-link/g2-apollo-main/g2-apollo-main.elf",
+  "paired_sims": "paired8.log: match + dfu-mismatch RC=0, DFU_SAME, HCI 922, OTAPOINTER 0xAFD1363A->0, CHIPREV 0x22, HOST_PACKET_COUNT 0x3A, UNSUPPORTED 0, adv 1, display 2, faults 0 (identical to ws-app6 baseline)"
+ }
+}

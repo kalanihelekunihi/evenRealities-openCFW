@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31bd78..0x31c0dc, one connected callback body. The label names
  * identify native basic blocks; no interior address is exported as a fake
@@ -55,7 +56,7 @@ uint32_t opencfw_em9305_mode_event_31bd78(uintptr_t context,uint32_t event)
 
 event_twelve:
     {
-        uint32_t code=read8(0x802818u)-1u;
+        uint32_t code=read8(((uintptr_t)&em9305_ram_8027e0 + 0x38u))-1u;
         if(code>41u) return 0u;
         category=4u;
         switch(code) {

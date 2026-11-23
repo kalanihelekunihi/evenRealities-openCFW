@@ -1,0 +1,129 @@
+{
+ "schema_version": 1,
+ "date": "2026-11-23",
+ "timezone": "America/Chicago",
+ "logged_at": "2026-11-23 05:05 AM CST (America/Chicago)",
+ "title": "Semantic in-memory mutant pass (negative controls) - started, largest units first; i2sfloat and deadline done",
+ "method": "mutrun.sh <unit> <addr> <halfword>: inject sysbus WriteWord into the v=1 reconstructed-C body in ITCM after LoadELF (NO on-disk image modified); v=0 stock body untouched. A correct harness MUST then report a MISMATCH (bad>0). Mutations are semantic (flipped branch condition / changed constant / wrong offset), never early-return.",
+ "ordering": "Units ranked by fn count (largest first): bq27427(37, covered by splits a/b), imuall(31), bq25180(28), bq27427a(19), imufp/imufpALL(18), bq27427b(18), thraud(17), drvbuzz(16), imutriv(13), chgcommon(11), ... down to the 12-test singletons. i2sfloat and deadline explicitly included per request.",
+ "mutants_done": {
+  "i2sfloat": {
+   "fn": "__aeabi_d2ulz @C-body 0x000013e8",
+   "mutation": "0x000013f6 bcs.n->bcc.n (0xd202->0xd302): inverts the 'encoded < 1023 -> return 0' exponent-range branch",
+   "baseline": "14/14 ok",
+   "mutant_result": "ok=2 bad=12 -> MISMATCH (harness detects it, including the gated u64 r0+r1 return comparison)",
+   "verdict": "negative control PASS (semantic diff caught)"
+  },
+  "deadline": {
+   "fn": "codec_read_byte_deadline @C-body 0x000013e8",
+   "mutation": "0x00001400 bcs.n->bcc.n (0xd20b->0xd30b): inverts the 64-bit 'deadline <= now -> return UINT32_MAX' compare",
+   "baseline": "12/12 ok",
+   "mutant_result": "ok=0 bad=12 -> MISMATCH",
+   "verdict": "negative control PASS (semantic diff caught)"
+  }
+ },
+ "pending": "Remaining units (largest first): imuall, bq25180, bq27427a, imufp, bq27427b, thraud, drvbuzz, imutriv, chgcommon, gxb/boxcase/alscurve/hali2c, ... and the 12-test singletons. One semantic mutant each.",
+ "rules": {
+  "no_commit": true,
+  "no_push": true,
+  "no_flash": true,
+  "no_backups": true,
+  "emulator_repo_not_edited": true,
+  "one_renode_at_a_time": true,
+  "no_driver_c_change": true
+ },
+ "pass_run": {
+  "method": "Automated largest-first pass (mutpass.sh): per unit build2 + pick_multi.py (first flippable 16-bit Thumb b<cond> per fn) + mutrun.sh; on a behavior-neutral (dead) first site, advance to next fn's branch (MAXTRY=4). A unit is a TRUE survivor only if all candidates survive. Stops on first true survivor per instruction. Condition-flip = XOR 0x0100 on the cond nibble (beq<->bne, bcs<->bcc, bmi<->bpl, bhi<->bls, bge<->blt, bgt<->ble).",
+  "caught": 25,
+  "caught_star_multi_try": [
+   "imufpALL",
+   "bq27427b",
+   "thraud",
+   "chgcommon",
+   "lifecyc",
+   "imufpA",
+   "npmxrest",
+   "npmxfg"
+  ],
+  "caught_star_note": "CAUGHT* = first candidate branch(es) were control-flow-dead under the fuzz seeds (gated by seeded driver-state globals, e.g. imu compass/head-up event flags); a later arg-driven branch in the same unit was caught. Dead FIRST site is a seed-coverage property, not a harness defect.",
+  "skipped": {
+   "boxcase": "no 16-bit b<cond> in any fn (branches are cbz/cbnz or .w) - picker limitation, not a harness issue"
+  },
+  "true_survivor": "gxsvc",
+  "table_file": "build/ws-hwdrivers-20261122/mutpass_table.txt",
+  "not_yet_processed": "~40 smaller units after gxsvc in the largest-first order (pdmprod, npmxglue, gluefg, cbcharge, wearen, ringrd, npmx{ship,cfg,cb,be,bchg,adc}, codecreq, cgpio, alspeer, wearsc, wdstart, wdkick, imufp1, imu1/imu1b, i2srel, gxread, gluecs, cpdmclk, codecdrn, chgsync, cheap{r,a}, cenable, bsppdm, bq27427wb, als*) + dups. Pass stopped early at the gxsvc survivor, not at budget."
+ },
+ "gxsvc_investigation": {
+  "verdict": "SURVIVOR EXPLAINED - fuzz-coverage gap in the gxsvc stub model; NOT a harness equivalence blind spot and NOT a C defect.",
+  "structure": "Each wrapper (SVC_SwitchBFMode/SwitchWakeupMode/SetMicGain/CodecMicDelay1Bit): response=0; status=GX8002_<cmd>(&response,200); if(status==0 && response==EXPECTED){LOG_ok;return 0;} LOG_fail; return status;",
+  "root_cause": "The GX8002_<cmd> transport is a harness STUB that returns a pseudo-random NONZERO status and does not write the success 'response'. Compiled as 'cbnz status -> fail' (dominating) then 'cmp response,EXPECTED; b<cond> fail'. With status always != 0, the cbnz always routes to the fail path BEFORE the second-condition branch, so the success half of every wrapper is never exercised. Flipping the (second-condition) branch - or even the cbnz - is behavior-neutral because response is 0 != EXPECTED too. The only reachable path is the straight-line fail/error path, which has no post-call decision whose single-site flip changes the observable (return=status + fail LOG).",
+  "equivalence_impact": "The v0-stock-vs-v1-C equivalence for gxsvc is verified on the fail/error path (all 48 baseline tests pass). The SUCCESS path (status==0 && response==EXPECTED) is UNVERIFIED under the current stub model.",
+  "not_a_c_change": "No driver C change implied; the C matches stock on every exercised input.",
+  "recommended_followup": "Add a stub override so GX8002_SwitchBFMode/SwitchWakeupMode/SetMicGain/CodecMicDelay1Bit return status==0 and write response=EXPECTED for a subset of fuzz seeds (analogous to the u64/d2ulz harness extension). That exercises the success path, verifies stock==C there, and makes a success-path branch flip catchable. Deferred (no C change, past this turn's time box)."
+ },
+ "cycle_0502": {
+  "gxsvc_stub_override": {
+   "change": "Added K_SVCRESP kind (hw.h/harness.c/autogen). ~half seeds (g_seed even): GX8002_<cmd> stub returns status=0 and writes response=EXPECTED, identical v0/v1. fixed_ret=expected|(ptr_idx<<8)|((w-1)<<9).",
+   "svc_resp": {
+    "SwitchBFMode": "ptr0,w1,exp1",
+    "SwitchWakeupMode": "ptr0,w1,exp0",
+    "SetMicGain": "ptr1,w2,exp1",
+    "MicDelay1Bit": "ptr0,w1,exp1"
+   },
+   "baseline": "48/48 with success tuple executed -> success-path equivalence VERIFIED (stock==C)",
+   "mutant": "still survives; ROOT CAUSE: SVC wrappers return (status==0 && resp==EXPECTED)?0:status, and success requires status==0, so fail path returns status==0 exactly when success returns 0 -> return value is branch-independent by contract. Only diff is audio logging (audio_log_flags @0x43d0ce = *(u8*)0x20004543, device-gated OFF, sink not in equivalence surface). NOT a blind spot, NOT a defect."
+  },
+  "imufpm_survivor": {
+   "site": "semantic_transform_vector cmp r2,#12; beq @0x24d0 (loop exit), beq->bne",
+   "first_result": "SURVIVED (ok36/bad0); pick_multi offers only this one 16-bit cond branch so MAXTRY cannot advance",
+   "root_cause": "harness float-seeding artifact (proven): v=0x20250100,m=0x20250180 in captured+seeded SCRATCH window, but setup_data seeds words with &0x0f0f0f0f -> IEEE754 floats ~1e-30..1e-42 denormals -> vmul.f32 underflows to 0.0 -> stock transform==(0,0,0) for all seeds == mutant zeroed early-exit. baseline float compare was vacuous.",
+   "fix": "preload normal floats [-2.5,3.5] (never 0) into v/m @0x20250100 (164B) identical both sides",
+   "after_fix": {
+    "baseline": "36/36 (transform really verified stock==C)",
+    "mutant": "CAUGHT: semantic_transform_vector 0/12 (bad=12)"
+   },
+   "systemic": "0x0f0f0f0f SCRATCH mask kills float-array-ptr coverage generally; proper fix=autogen seed float-array ptr scratch with normal floats (g_data 0xfffffffe formula). Not applied globally mid-pass (would need re-verify of passing baselines)."
+  },
+  "pass_status": "gxsvc done; pdmprod CAUGHT; npmxglue CAUGHT; imufpm survivor investigated+resolved. 38 units remain queued (/tmp/mut_order_next.txt), largest-first."
+ },
+ "cycle_0525": {
+  "rule0": "all orchestrator state + scratch moved off /tmp into build/ws-hwdrivers-20261122/mutstate{,/scratch}; scripts repointed; 0 /tmp refs",
+  "rule1_global_float_fix": "hw.h struct fptr + g_fptr[]; autogen emits per-fn float-ptr mask by prototype type; harness.c seeds float/double ptr+array arg slots with normal floats, deterministic+identical both sides. Validated: imufpm baseline 36/36 + mutant CAUGHT via global mechanism (preload hack removed).",
+  "rule1_reverify": {
+   "clean": [
+    "imufpA 72/72",
+    "npmxadc 12/12",
+    "imufpm 36/36"
+   ],
+   "not_run_yet": [
+    "imufpALL",
+    "imufp"
+   ],
+   "C_DIFF_float_flagged": "imufpC DRV_IMUWriteCSVDataLine 0/12: stock calls g2_audio_dump_snprintf stub, C returns -1 first. snprintf+file_write are K_SEEDRET (identical len both sides) so branch should match; leading hypo = variadic 13xdouble ABI asymmetry (harness), NOT proven, nothing masked. Needs probe.",
+   "C_DIFF_preexisting": "imufpB DRV_IMUDataParserCallback 0/12: struct-ptr arg (not float-flagged, so pre-existing). stock count=5 vs C=4 @off828 in g2_imu_samples; likely g2_imu_samples_t struct-layout/index mismatch."
+  },
+  "steering_5b1150": "ws-app proposal targets drivers/display/** which is OUTSIDE my ownership (power/peripherals/codec-host/a-43-npmx-glue/a-19-box-detect/hal). NOT applied; ownership needs resolving.",
+  "queued": [
+   "Rule2 gxsvc log gate",
+   "Rule3 38-unit pass",
+   "Rule3 8 CAUGHT* gaps",
+   "imufpALL/imufp baselines",
+   "investigate both IMU C-diffs"
+  ]
+ },
+ "cycle_0540_final": {
+  "correction": "The two IMU \"C differences\" reported at 05:25 were FALSE ALARMS from my own stale-bq.elf diagnostic error (run.sh loads the shared generic bq.elf; the interrupted sweep left it mismatched to imufpB/imufpC results bins).",
+  "reverify_clean_all_float_ptr_units": {
+   "imufpA": "72/72",
+   "imufpB": "72/72",
+   "imufpC": "72/72",
+   "imufpm": "36/36",
+   "imufpALL": "216/216",
+   "imufp": "216/216",
+   "npmxadc": "12/12"
+  },
+  "DRV_IMUDataParserCallback": "stock vs C disasm compared: struct layout + indexing identical (count@+8, header 0xc, sample stride 0x70, count<20 guard, count++ wrap). No header/C bug.",
+  "rule1_status": "COMPLETE \u2014 global prototype-driven float seeding validated; no real C differences in any float-ptr unit.",
+  "repo_state": "no g2/src C changed this round (float fix is stream-private harness only); 5b1150 display patch authorized but NOT applied (separate queue item, final round)."
+ }
+}

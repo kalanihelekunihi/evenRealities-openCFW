@@ -4,6 +4,7 @@
  * protocol timer output-compare 4..7 interrupt (one handler for four vectors): acks bit (irq cause - 0x15) in 0xf00820, then calls the callback at 0x801910 if set, passing the index (cause - 0x15, low byte; stock leaves it in r0 at the call; harness-found, see step 19).
  */
 #include "em_irq_frame.h"
+#include "em9305_ram.h"
 
 __attribute__((used)) void opencfw_em9305_IRQHandler_ProtocolTimerOutCmp7_body(void)
 {
@@ -11,7 +12,7 @@ __attribute__((used)) void opencfw_em9305_IRQHandler_ProtocolTimerOutCmp7_body(v
   uint32_t index = (uint8_t)(cause - 0x15u);
   EM_R32(0xf00820u) = (uint8_t)(1u << (index & 31u));
   __builtin_arc_sync();
-  void (*cb)(uint32_t) = (void (*)(uint32_t))(uintptr_t)EM_R32(0x801910u);
+  void (*cb)(uint32_t) = (void (*)(uint32_t))(uintptr_t)em9305_ram_80190c.u32_801910;
   if (cb) cb(index);
 }
 

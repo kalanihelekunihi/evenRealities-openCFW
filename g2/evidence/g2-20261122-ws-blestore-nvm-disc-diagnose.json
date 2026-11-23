@@ -1,0 +1,94 @@
+{
+  "id": "g2-20261122-ws-blestore-nvm-disc-diagnose",
+  "time": "2026-11-22 20:58:27 America/Chicago",
+  "stream": "ws-blestore",
+  "purpose": "10 s hold after pair and after LTK reconnect; UpdateNVM/appDiscStart hooks; stock vs full-2055",
+  "script": "build/ws-blestore-20261122/hci-peer/diagnose_nvm_disc.py",
+  "result": "build/ws-blestore-20261122/hci-peer/diagnose/result.json",
+  "image": "/Users/kalani/Repo/evenRealities-OpenCFW/build/ws-blestore-20261122/full-2055-link/g2-apollo-main/g2-apollo-main.bin",
+  "verdict": "VERIFIED",
+  "discovery": {
+    "post_pair": "both immediate (finish_pairing_with_absent_phone_gatt succeeded; OpenCFW no longer deferred)",
+    "post_ltk_reconnect": "both immediate inside reconnect_renode_link (helper did not fail; 10 s hold saw no second PDU because it was already answered)",
+    "opencfw_appDiscStart": 4,
+    "stock_appDiscStart": 4,
+    "opencfw_AttcDiscService": 2,
+    "stock_AttcDiscService": 2,
+    "immediate_pair_caller": "audio_ble_discovery_complete_532174 (PAIR_CMPL)",
+    "immediate_reconnect_caller": "audio_ble_discovery_resume_53223c (ENCRYPT_IND)"
+  },
+  "programmed_words": {
+    "stock_before": 4,
+    "stock_after_pair": 260,
+    "stock_after_reconnect": 516,
+    "opencfw_before": 4,
+    "opencfw_after_pair": 260,
+    "opencfw_after_reconnect": 516
+  },
+  "programmed_words_note": "Previous 196 vs 260 was a harness timing artifact: the 4th 64-word record write is StartServiceDiscovery (1000 ms after ENCRYPT) -> ClearB -> _AppDbUpdateNVM. Holding 10 s, stock and OpenCFW are both 4 (boot) / 260 (after pair) / 516 (after reconnect). Callers match: SetKey/Validate, UpdateTimestamp, StartServiceDiscovery ClearB (pair and reconnect), ENCRYPT ClearB, plus one later write (CCC table / 0x47b405 path).",
+  "update_nvm_counts": {
+    "stock": 8,
+    "opencfw-2055": 8
+  },
+  "bond_table_after_pair_equal": true,
+  "auth_reconnect_ok": true,
+  "ltk_sha256_equal": true,
+  "c_fixes": [
+    "display_ble_profile_handler_init.c: dispatch_slot -> {0x01,0x00} (stock 0x5fa056 pad), not vRestoreContextOfFirstTask",
+    "display_ble_comm_handler.c: call audio_ble_discovery_event_5322bc before message_release (stock 0x4b7e52); previously unreferenced and GC'd"
+  ],
+  "compare": {
+    "ltk_sha256_equal": true,
+    "auth_reconnect_ok": {
+      "stock": true,
+      "opencfw-2055": true
+    },
+    "discovery_after_pair": {
+      "stock": true,
+      "stock_first_s": null,
+      "opencfw": true,
+      "opencfw_first_s": null
+    },
+    "discovery_after_reconnect": {
+      "stock": false,
+      "stock_first_s": null,
+      "opencfw": false,
+      "opencfw_first_s": null
+    },
+    "programmed_words": {
+      "stock_before": 4,
+      "stock_after_pair": 260,
+      "stock_after_reconnect": 516,
+      "opencfw_before": 4,
+      "opencfw_after_pair": 260,
+      "opencfw_after_reconnect": 516
+    },
+    "bond_table_after_pair_equal": true,
+    "stock_hooks": {
+      "ClearB": 5,
+      "UpdateNVM": 8,
+      "UpdateOneRecord": 8,
+      "SetKey": 1,
+      "ValidateRecord": 1,
+      "appDiscStart": 4,
+      "AttcDiscService": 2,
+      "UpdateTimestamp": 1,
+      "StartServiceDiscovery": 2
+    },
+    "opencfw_hooks": {
+      "DiscEvent": 29,
+      "ClearB": 5,
+      "UpdateNVM": 8,
+      "UpdateOneRecord": 8,
+      "SetKey": 1,
+      "ValidateRecord": 1,
+      "DiscComplete": 1,
+      "appDiscStart": 4,
+      "AttcDiscService": 2,
+      "UpdateTimestamp": 1,
+      "StartServiceDiscovery": 2
+    },
+    "stock_programs": [],
+    "opencfw_programs": []
+  }
+}

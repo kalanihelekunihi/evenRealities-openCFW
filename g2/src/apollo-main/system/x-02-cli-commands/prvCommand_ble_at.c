@@ -69,7 +69,7 @@ static const char s_hostreset[] = "HOSTRESET";             /* ROM 0x78b894 */
 static const char s_hostreset_log[] = "HOSTRESET\r\n";     /* ROM 0x78b8a0 */
 static const char s_bles_bad[] =
     "AT^BLES [Bondable/Disbondable/DISCONN/RESET9305/HOSTRESET/APPDB]: The parameter is incorrect. "
-    "Please enter the correct command %s %s\r\n"; /* ROM 0x6d50cc */
+    "Please enter the correct command\r\n"; /* ROM 0x6d50cc (stock has no conversions) */
 static const char s_scan[] = "Scan";                       /* ROM 0x78e004 */
 static const char s_scan_log[] = "APP_MasterScanEvent true\r\n";     /* ROM 0x76fd14 */
 static const char s_disscan[] = "DisScan";                 /* ROM 0x78e00c */
@@ -178,7 +178,7 @@ int32_t cli_cmd_ble_slave_58118a(char *write_buffer, size_t write_buffer_len, co
         audio_ble_hci_boot_log_4733ee(s_hostreset_log);
         app_ble_hw_error_reset_4b8224();
     } else {
-        audio_ble_hci_boot_log_4733ee(s_bles_bad); /* stock passes no arguments for the %s */
+        audio_ble_hci_boot_log_4733ee(s_bles_bad);
     }
     return 0;
 }

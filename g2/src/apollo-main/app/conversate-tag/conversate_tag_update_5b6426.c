@@ -6,8 +6,8 @@ extern uint32_t audio_conversate_tag_storage_count_59674e(void);
 extern uint32_t audio_conversate_ui_list_count_5b0c18(void);
 extern void *audio_conversate_tag_get_by_index_5964e2(uint32_t);
 extern uint32_t audio_conversate_tag_icon_get_5b0af6(uint32_t);
-extern uint32_t audio_conversate_prep_button_create_5b1150(uint32_t, uint32_t,
-                                                             uint32_t, uint32_t);
+extern uint32_t audio_conversate_prep_button_create_5b1150(uint32_t parent, uint32_t image,
+                                                             const char *label_text, uint32_t ignored);
 extern void audio_uart_page_44daca(uint32_t, uint32_t);
 extern uint32_t audio_conversate_tag_ai_cue_enabled_5967bc(void);
 extern void audio_conversate_tag_scroll_update_5b63d4(volatile uint8_t *);
@@ -62,7 +62,7 @@ uint32_t audio_conversate_ui_route_5b6426(uint32_t state, uint32_t value) {
     const uint32_t icon = audio_conversate_tag_icon_get_5b0af6(tag[0]);
     const uint32_t button = audio_conversate_prep_button_create_5b1150(
         word(ui, 0x64u), icon,
-        *(const uint32_t *)(const void *)(tag + 4u), 0u);
+        *(const char *const *)(const void *)(tag + 4u), 0u);
     if (button == 0u) {
         if (audio_log_flags() & 2u)
             audio_log_extended(1u, module, source, function, 0x126u,

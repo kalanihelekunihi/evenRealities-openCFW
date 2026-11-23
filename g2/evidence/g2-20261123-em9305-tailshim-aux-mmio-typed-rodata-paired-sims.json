@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 05:40:30 AM CST (America/Chicago)",
+  "title": "em9305 AUX/seti observability, 310aa8 MMIO paths, typed tail/radio rodata, typo-window shims, private p-tailshim paired sims",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-e1-typo-ram-fields-paired-sims.json",
+  "reason": "Make the stock_306924 and stock_310aa8 typo-site mutants observable, type the 0x3357e0 tail and proved radio/small rodata, typo leftover residual/RF typo-window slots, then one private pbuild plus both paired sims.",
+  "object_count": 148,
+  "object_count_note": "Unchanged. em9305_ram_805e6c +4 gained a u32_805e70 union (stock_333404 word-loads that slot as a callback pointer) without adding or growing an object.",
+  "survivors": {
+    "stock_306924": {
+      "diagnosis": "typo-vs-stock was already EQUIVALENT 100. The leftover r0 after seti is (u8_80fb78 & 0x0f) | 0x10 and already differed for the mutant, but nor0 discards ret for this void function. AUX sr/lr of SELECT (1035/0x40b), banked PRIORITY (518/0x206), ENABLE (1036/0x40c), and seti/clri were not rewritten or hashed, so memhash only saw random RAM fill.",
+      "harness": "osub in build/em-ctl/qm.py now models those aux and seti/clri as RAM (SELECT 0xfff018, ENABLE 0xfff01c, seti/status 0xfff020, spill 0xfff024/0xfff028, banked PRIORITY table at 0xfff100 indexed by select & 0xff). Immediate sr goes through a spilled register (ARC st cannot take two long immediates; st 51,[0xfff018] failed to assemble). JLI_BASE sr 2093056,[656] is not rewritten. driver.c zeroes and hashes the model cells after every test, including void/nor0 units. 1409/1411 path unchanged.",
+      "rerun": {
+        "typo_resid_irq": "EQUIVALENT 100 for 306924 (classes=16), 306968 (classes=1), 3069c4 (classes=1)",
+        "mut_resid_cfg": "KILLED: MISMATCH memhash:94(t=[0, 1, 2]) classes=16. The u32_80fb7c/u8_80fb78 mutant is now observable."
+      }
+    },
+    "stock_310aa8": {
+      "diagnosis": "Both timer < 3 and timer >= 3 already occurred under random u8_80fd34, but classes is unique (ret, callhash) only. leftover r0 is always 512 and there are no calls, so classes stayed 1. The saved-pointer mutant only changed values stored to unhashed 0xf018xx MMIO.",
+      "inputs": "spec mmio:1 (-DMMIO) so 0xf00000..0xf05000 is seeded and hashed (covers 0xf018xx and 0xf0047a/7c). pre_310aa8.h forces even tests t=0 (<3) and odd tests t=5 (>=3), and points u32_80fd2c at 0x00800200 so the 0xf018xx stores have a real record. The global class metric was not expanded to include memhash.",
+      "rerun": {
+        "typo_prottimer": "EQUIVALENT 100 for 310aa8 and 310c08, official classes still 1 (ret, callhash)",
+        "mut_prottimer": "KILLED: 310aa8 MISMATCH memhash:100(t=[0, 1, 2]); 310c08 MISMATCH memhash:100. Both timer-index paths ran (pre guarantees 50/50).",
+        "classes_note": "classes remains 1 because the metric is unique (ret, callhash) and this void function's leftover r0 is always 512 with no calls. Path coverage is observed in the MMIO memhash (the t<3 store to 0xf0047c, and the saved-record stores to 0xf018xx)."
+      }
+    }
+  },
+  "typed_rodata": {
+    "tail_3357e0": "struct { uint32_t thresholds[8]; uint32_t quanta[8]; } \u2014 values match radio_primary_timer_333bec's TU-local copies (2000000..0 and 1000000..625). Python struct pack == original 64 bytes.",
+    "rodata_3342d8": "struct { uint8_t irq_priority[50]; uint8_t pad_ffff[2]; uint32_t uart_baud[15]; }. stock_306924 walks the 50 priority bytes (irqs 16..65) via u32_80fb7c; EMSG_SetUartBaudRate now indexes .uart_baud instead of +52. Pack == original 112 bytes.",
+    "radio_table_333ea8": "uint16_t[40]; common_calibrate_311ffc loads uint16 at +32/+64/+72 and the field/channel-strided slots. Pack == original 80 bytes.",
+    "radio_table_333ef8": "packed struct { hw_init[20] of {index,value}; apply_nibble[40]; tail[332]; }. RF_InitHw walks 20 pairs (ini count 0x28); radio_finish_apply_3122c0 reads +80+index; radio_measured_level_311a40 loads uint16 entries 80 and 86 (byte +160/+172) from the untyped tail. Pack == original 452 bytes.",
+    "rodata_3344a4": "kind[6]+action[6] for associated_channel_state_327aac. Pack == original 12 bytes.",
+    "rodata_33445e": "first 6 bytes typed as the init_state_status event {handle=0,event=8,status=0,value=0}; remaining 16 bytes untyped (no in-tree walker). Pack == original 22 bytes.",
+    "left_verbatim": [
+      "radio_table_333e9a[2] (0xff 0xff, no in-tree walker)",
+      "radio_table_333e9c[12] (pointer installed at u32_80fd58, no in-tree walker)",
+      "rodata_3344c5[3] (0xff 0xff 0xff, no in-tree walker)"
+    ]
+  },
+  "typo_window_shims": {
+    "stock_30fa08": {
+      "field": "em9305_ram_805c5c.u32_805ce0 (was +0x84)",
+      "typo": "EQUIVALENT 100 classes=83",
+      "mutant": "u32_805ce4 KILLED ncalls:100 callhash:100"
+    },
+    "stock_311f70": {
+      "fields": "u16_805efc / u16_805efe (was +0x10 / +0x12)",
+      "typo": "EQUIVALENT 100 classes=76",
+      "mutant": "u16_805f1c KILLED memhash:100"
+    },
+    "stock_333404": {
+      "fields": "&u32_805e6c / &u32_805e70 / &u32_805e74",
+      "note": "channel-2 slot is a word load from what was a 1-byte u8_805e70 + gap; added u32 union, size unchanged.",
+      "typo": "EQUIVALENT 100 classes=66 calls=250 (pre forces channels 0,2,3 and an early-return 4; slots seeded to opencfw_test_cb)",
+      "mutant": "channel 3 uses u32_805e7c KILLED ncalls:25 callhash:25 (t=[3,7,11] \u2014 the channel-3 tests)"
+    },
+    "stock_311d2c_RF_InitHw": {
+      "fields": "u32_80fd4c / u8_80fd50 (were 0x80fd4c / 0x80fd50 literals)",
+      "typo": "EQUIVALENT 100 classes=99 calls=236 (pre seeds a 2-pair table and 0xf03838=0x03000000 so the boot wait cannot hang)",
+      "mutant": "u32_80fd54 KILLED memhash:100. First typo attempt timed out after 14 identical tests in the 0xf03838 wait; the MMIO seed fixed it."
+    },
+    "not_installed": {
+      "application_boot_QF_maxPool_": "RB8(0x801360u)=0 is only on the warm-boot else path (rom_boot_status bits 8-9 set and rom_boot_ready==0). Default ROM stubs take the QF_init path, so a typo mutant would be unobservable. Literal left in place.",
+      "application_boot_80ffa8": "Still a typo-window literal. It sits in RAMHI past the 80ff54 hook object; not typo'd this turn.",
+      "PmlSvld_80fde0": "Stays a literal (dead flags-gated reload).",
+      "controller_init_offsets": "Leftover &em9305_ram_805e6c+0x8 / +0x3c in controller_init not typo'd this turn (huge TU)."
+    }
+  },
+  "file_sha256_after": {
+    "g2/src/em9305/qpc-scheduler/em9305_ram.h": "7e682bb3179d7a199efca160c21e577b570d08139f691e14f67d24b82885c0cf",
+    "g2/src/em9305/link/g2-em9305.ld": "70e2e6e70075c9a0e629a9d446e215bae7a935da2ff5547386f5930fc03cc6f6",
+    "g2/src/em9305/application/stock_residual_data.c": "8313e0a04934ab91b1a823a3f7346303d420ca0b7dc660535e7d73166c7864d7",
+    "g2/src/em9305/application/stock_residual_code.c": "1268305a3e016cd5dc6f5f3e6f2ced8fee467d5ae6d61c92c89daa53e5bea173",
+    "g2/src/em9305/application/EMSG_SetUartBaudRate.c": "9368991c616ffa4cb2c716731a5460de37ae0613994290e88c99e189a568c760",
+    "g2/src/em9305/application/RF_InitHw.c": "978f2c092c26eedc60001f3ad8230d39380375b664bddb9167a3c2124174b374",
+    "g2/src/em9305/application/application_boot.c": "7f32deb95d3f3f1ce2bfcc8e0977935f4e07fdaaf00577792a5db82bf98920f9",
+    "build/em-ctl/qm.py": "eaeacdd10ae70fc5e78100703466abdcb1690f549e41c1fef046730df18ba8fd",
+    "build/em-ctl/h/driver.c": "d8b71c90c67fedfa04cae690950d7717091254a2af5de0eb6c3417167aed9718"
+  },
+  "tree_build": {
+    "command": "python3 -u build/ws-em9305-20261122/pbuild.py build/ws-em9305-20261122/p-tailshim -j 3",
+    "first_attempt": "2026-11-23 05:33:26 AM CST (America/Chicago), rc=2 after 279.9 s: stock_residual_data.c _Static_assert ran before the struct definitions. Asserts moved to the end of the file; objcache kept the other 767 units.",
+    "started": "2026-11-23 05:38:16 AM CST (America/Chicago) (successful rerun)",
+    "rc": 0,
+    "units": 768,
+    "compiled_this_run": 1,
+    "link_log_empty": true,
+    "text_bytes": 239140,
+    "text_delta_vs_p_e1typo": -12,
+    "app_sha256": "f7f1b422e32e954c9cf1902c131b051ac7138c25885fd2c5d64ad09532c79ee2",
+    "elf_sha256": "d4eec6654335b517672fcad1dbfc128ad503f9254685ce0ccd0b74f1965a1b8d",
+    "application_end": "0x0033CA24",
+    "headroom_bytes": 275932,
+    "fits_nvm_slot": true
+  },
+  "package": {
+    "path": "build/ws-em9305-20261122/p-tailshim/g2-em9305-source-candidate-package.bin",
+    "bytes": 240472,
+    "sha256": "f1c47a53b5e95cd21bb7b24745cddd96a2b215104a77dfb8e7a3606d54175b92",
+    "records": 3,
+    "record_lengths": {
+      "bootloader": 1160,
+      "record2": 56,
+      "application": 239140
+    },
+    "crcs_from_dfu_log": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0xC7B4E073",
+      "[0x00302400,0x0033CA24)": "0xE1C533E5"
+    },
+    "note": "Record-2 and application CRCs changed because the app is 12 bytes shorter than p-e1typo and ends at 0x0033CA24. Bootloader CRC is unchanged from p-e1typo/p-arctimer-ini/p-irqtypo (0x1D6121C4)."
+  },
+  "splice": {
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-tailshim.bin",
+    "nor_sha256": "0eb64087791202e5b59758a7d519bea2e66d67416c1fad1e6e97a9ea6c745e50",
+    "lfs_inject_wrote_bytes": 240472
+  },
+  "sims": {
+    "renode": "g2-firmware-emulator scripts/run-renode.sh, Renode 1.17.0, 8 s virtual runs, 1200 s wall cap",
+    "host_image": "build/ws-em9305-20261122/sim/opencfw-em9305-typed-ram.app.bin",
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/tailshim-match.resc",
+      "log": "build/ws-em9305-20261122/sim/tailshim-match.log",
+      "started": "2026-11-23 05:39:01 AM CST (America/Chicago)",
+      "finished": "2026-11-23 05:39:29 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "chiprev_fixture": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/tailshim-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/tailshim-dfu-mismatch.log",
+      "started": "2026-11-23 05:39:43 AM CST (America/Chicago)",
+      "finished": "2026-11-23 05:40:30 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq": true,
+      "sysresetreq_at": "2026-11-23 05:40:24.947 AM CST (America/Chicago)",
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0xC7B4E073",
+        "[0x00302400,0x0033CA24)": "0xE1C533E5"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 1037
+    }
+  },
+  "remaining": [
+    "application_boot still writes RB8(0x801360u) instead of QF_maxPool_ (warm-boot-only store; unobservable with default ROM stubs).",
+    "application_boot 0x80ffa8 / 0x80ff6c typo-RAM objects not added (RAMHI).",
+    "PmlSvld 0x80fde0 stays a literal.",
+    "radio_table_333e9a, radio_table_333e9c, rodata_3344c5, and 16 bytes of rodata_33445e stay verbatim (no in-tree walker proves a type).",
+    "controller_init leftover &em9305_ram_805e6c+0x8 / +0x3c not typo'd this turn.",
+    "source_completeness_proven remains false."
+  ],
+  "rules": [
+    "No git commit/push/stash/reset/checkout/restore/clean, no PRs, no backups, no /tmp copies, never flash hardware.",
+    "Official app opencfw-otap-disarm.app.bin was not written (sha 7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd, mtime 2026-11-22 07:55:05 AM CST).",
+    "Only this stream's qm.py and build/em-ctl/h were edited; .waves/qrun.py and .waves/qemu-arc/h were not."
+  ]
+}

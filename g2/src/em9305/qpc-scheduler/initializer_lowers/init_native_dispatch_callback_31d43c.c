@@ -1,8 +1,9 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31d43c..0x31d5e8: periodic-advertising-with-responses receive
  * completion for the owner's advertising set (+36). The response header
- * is decoded (317a98). Status 0 counts the event (0x8029ac +5 and the
+ * is decoded (317a98). Status 0 counts the event ((uintptr_t)&em9305_ram_8029ac +5 and the
  * per-subevent counter at +120) and resets +246. Only a role-2 set with
  * status 0, 3, 4 or 5 continues (6 reports event 6): the first such
  * event latches the response timing (+252), status 3 reschedules the
@@ -11,7 +12,7 @@
  * refresh the subevent's RSSI (+100; 4 also counts +76). Then the train
  * is advanced (31d150 or 31d2bc per +31) and the report produced
  * (31d5e8); failures signal the auxiliary hook. Status 0 keeps a new
- * response buffer at 0x8029c0 (filter +274); any other buffer is
+ * response buffer at ((uintptr_t)&em9305_ram_8029ac + 0x14u) (filter +274); any other buffer is
  * released. */
 extern uint32_t opencfw_em9305_dispatch_child_317a98(uintptr_t out, uintptr_t in);
 extern uint32_t opencfw_em9305_dispatch_event_send_31d128(uintptr_t set, uint32_t event);
@@ -25,7 +26,7 @@ extern uint32_t opencfw_em9305_ll_receive_buffer_release_31761c(uintptr_t buffer
 
 void opencfw_em9305_dispatch_callback_31d43c(uintptr_t owner, uintptr_t buffer, uint32_t status)
 {
-    const uintptr_t state=0x8029acu;
+    const uintptr_t state=(uintptr_t)&em9305_ram_8029ac;
     volatile uint8_t *s8=(volatile uint8_t *)state;
     volatile uint32_t *s32=(volatile uint32_t *)state;
     uint8_t header[8] __attribute__((aligned(4)));

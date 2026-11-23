@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32bb9c..0x32bc6a: connection-complete callback for a create
  * command. With a free connection entry, seed it from the command (PHY
@@ -30,7 +31,7 @@ void opencfw_em9305_callback_32bb9c(uintptr_t command)
         *(volatile uint8_t *)(entry+890u)=(uint8_t)channel;
         *(volatile uint16_t *)(entry+892u)=(uint16_t)handle;
         *(volatile uint8_t *)(entry+2u)=1u;
-        *(volatile uint32_t *)(uintptr_t)0x805c6cu=(uint32_t)command;
+        em9305_ram_805c5c.u32_805c6c=(uint32_t)command;
         *(volatile uint32_t *)(entry+520u)=second;
         *(volatile uint32_t *)(entry+516u)=first;
         (void)opencfw_em9305_child_32a000(entry,0xbu);
@@ -46,7 +47,7 @@ void opencfw_em9305_callback_32bb9c(uintptr_t command)
     if(*(volatile uint16_t *)(command+86u)!=0xffffu)return;
     (void)opencfw_em9305_common_release_304588(1u);
     if(*(volatile uint8_t *)(command+55u)==0u)return;
-    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uintptr_t base=em9305_ram_805c5c.u32_805c70;
     uint32_t status=*(volatile uint8_t *)(command+56u);
     uint32_t index=(uint8_t)((int32_t)(entry-base)/912);
     (void)opencfw_em9305_dispatch_child_30e774(*(volatile uint8_t *)command,0u,index,status);

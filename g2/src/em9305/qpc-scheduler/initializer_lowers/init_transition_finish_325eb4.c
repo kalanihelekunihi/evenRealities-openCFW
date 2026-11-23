@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern uintptr_t opencfw_em9305_wsf_event_allocate(uint32_t);
 extern uint32_t opencfw_em9305_wsf_task_message_send(uint32_t,uintptr_t);
@@ -11,7 +12,7 @@ uint32_t opencfw_em9305_init_transition_finish_325eb4(
     uintptr_t event=opencfw_em9305_wsf_event_allocate(4u);
     if(event==0u) return 0u;
     uint8_t identity=*(volatile uint8_t *)(request+1u);
-    uint8_t handler=*(volatile uint8_t *)(uintptr_t)0x805b18u;
+    uint8_t handler=em9305_ram_805af0.u8_805b18;
     *(volatile uint8_t *)(event+3u)=(uint8_t)reason;
     *(volatile uint16_t *)event=identity;
     *(volatile uint8_t *)(event+2u)=19u;

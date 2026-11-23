@@ -1,0 +1,94 @@
+{
+ "id": "g2-20261122-ws-blestore-hci-peer",
+ "time": "2026-11-22 20:27 America/Chicago",
+ "stream": "ws-blestore",
+ "status": "PARTIAL",
+ "purpose": "Scripted HCI peer sim: connect, LE Secure Connections pair, GATT CCCD + app-auth write, 32 MiB NOR compare vs stock and vs post-boot NOR.",
+ "script": "build/ws-blestore-20261122/hci-peer/peer.py",
+ "script_sha256": "e13914ce88bbac9be32062336a6a9c9a85fa0db1c577be64cab69105bbf35852",
+ "result": "build/ws-blestore-20261122/hci-peer/result.json",
+ "result_sha256": "78fc7bf5aef63a9a077afd1b8ab5ac9b42ca905ff173ced5c49930500f3ae6a3",
+ "images": {
+  "stock": {
+   "bin": "build/ws-blestore-20261122/stock.app.bin",
+   "sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+   "size": 3523364,
+   "pc": "0x005e4233"
+  },
+  "opencfw-1926": {
+   "bin": "build/ws-blestore-20261122/full-1926-link/g2-apollo-main/g2-apollo-main.bin",
+   "sha256": "8bf7d0db87a28568b6384094e1f462aaf31ef7581aab7f8c50f846afaa7e55b5",
+   "size": 3628548,
+   "pc": "0x0052c22d"
+  }
+ },
+ "peer": {
+  "address": "BC:9A:78:56:34:12 public",
+  "label": "g2-blestore-hci-peer",
+  "interval_units": 24,
+  "latency": 0,
+  "supervision": 500,
+  "auth_req": "080410641a0408011004"
+ },
+ "method": "Single-temple match-style resc (CHIPREV 0x22, same NOR/ITCM fixtures as paired-boot-smp) plus LoadPeerFixture/LoadPeerSignalFixture/LoadLinkEncryptionFixture/LoadPeerDataLengthFixture before the 8s boot. After boot: ConnectPeer 24/0/500, ATT MTU 247, g2emu.ble_smp.pair_renode_link (deterministic SecureConnectionsCentral label g2-blestore-hci-peer), CCCD write 1245080100 to handle 0x0845, ATT Write Command 0x52 to handle 0x0842 with AA21 SID 0x80 auth protobuf 080410641a0408011004. Imports emulator g2emu only; emulator repo not modified. OpenCFW boot emits already-accepted unmodeled nPM1300 TIMER [ERROR] lines (same as blestore-1926-match.log); the script tolerates only those two messages because RenodeConsole treats any [ERROR] as a failed command.",
+ "protocol": {
+  "stock": {
+   "OTAPOINTER_AFTER_0.01S": "0x00000000",
+   "OTAPOINTER_AFTER_8S": "0x00000000",
+   "CHIPREV": "0x22",
+   "HOST_PACKET_COUNT": "0x3A",
+   "UNSUPPORTED_COUNT": 0,
+   "connect_handle": 1,
+   "mtu": "firmware ATT MTU req 02f700, central rsp 03f700",
+   "pair": "complete; DHKey checks verified; controller AES-CCM authenticated; 9 identical SMP PDUs",
+   "cccd": "Write Rsp 0x13",
+   "auth_ok": true,
+   "auth_ack_payload": "080410641a00",
+   "ltk_sha256": "0a91cfb9e3be248056b45375b858cad46d81c7756b3822d760ebef379b23d004"
+  },
+  "opencfw-1926": {
+   "OTAPOINTER_AFTER_0.01S": "0xAFD1363A",
+   "OTAPOINTER_AFTER_8S": "0x00000000",
+   "CHIPREV": "0x22",
+   "HOST_PACKET_COUNT": "0x3A",
+   "UNSUPPORTED_COUNT": 0,
+   "connect_handle": 1,
+   "mtu": "firmware ATT MTU req 02f700, central rsp 03f700",
+   "pair": "complete; DHKey checks verified; controller AES-CCM authenticated; 9 SMP PDUs byte-identical to stock",
+   "cccd": "Write Rsp 0x13",
+   "auth_ok": true,
+   "auth_ack_payload": "080410641a00",
+   "ltk_sha256": "0a91cfb9e3be248056b45375b858cad46d81c7756b3822d760ebef379b23d004"
+  },
+  "smp_pdus_byte_identical": true,
+  "ltk_sha256_equal": true
+ },
+ "nor": {
+  "stock_after": "/Users/kalani/Repo/evenRealities-OpenCFW/build/ws-blestore-20261122/hci-peer/stock/after.nor.bin",
+  "opencfw_after": "/Users/kalani/Repo/evenRealities-OpenCFW/build/ws-blestore-20261122/hci-peer/opencfw-1926/after.nor.bin",
+  "sha256": "4049ca4e899c7d069573bc4ca86e57c8b00f4b6564de5f2f8e9c9f983610758e",
+  "stock_vs_opencfw": "bit-identical",
+  "vs_post_boot_match_nor": "bit-identical (same sha256 4049ca4e899c7d069573bc4ca86e57c8b00f4b6564de5f2f8e9c9f983610758e as blestore-1926-match.nor.bin / stock-match.nor.bin). Pairing did not persist a bond record to NOR in this short still-connected session.",
+  "bond_flush": "NOT_OBSERVED"
+ },
+ "differences_not_treated_as_c_mismatches": [
+  {
+   "what": "During the pairing window stock also emitted ATT Read By Group Type 060100ffff00280118 (cid 4); OpenCFW did not in that window. All 9 cid-6 SMP PDUs (Pairing Req/Rsp, both public keys, Confirm, both Random, both DHKey Check) are byte-identical, including the firmware public key.",
+   "kind": "ATT scheduling/timing during SMP"
+  },
+  {
+   "what": "App-auth AA12 sequence numbers differ (stock 43 then 143, OpenCFW 60 then 160). The required ack payload 080410641a00 matches. A follow-up SID 0x80 flag-1 notification payload differs in one protobuf varint (stock 0804108f011a020801 vs OpenCFW 080410a0011a020801). Not a failed auth.",
+   "kind": "AA frame counters / secondary notification field"
+  },
+  {
+   "what": "OpenCFW 8s boot logs unmodeled nPM1300 TIMER [ERROR] (ship mode with watchdog active / kick while stopped), already present in the accepted full-1926 match log; stock does not. Tolerated in the peer script only for those two messages.",
+   "kind": "emulator PMIC model gap, previously accepted"
+  }
+ ],
+ "verdict": "PROTOCOL_MATCH_NOR_UNCHANGED",
+ "notes": [
+  "Stock skipped on the successful OpenCFW resume; stock run was 20:25-20:26 America/Chicago, OpenCFW 20:27 America/Chicago.",
+  "emulator repo, sources.json, and opencfw-otap-disarm.app.bin were not modified.",
+  "Next: keep the link up longer or disconnect/bond-store and re-diff NOR for an actual bond-record persistence check."
+ ]
+}

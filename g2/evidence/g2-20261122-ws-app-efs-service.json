@@ -1,0 +1,19 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "time_cst": "23:02",
+ "unit": "g2/src/apollo-main/app/a-05-efs-service/efs_service.c",
+ "method": "differential harness (stock 0x438000 vs C) in Renode, 9 EFS entry points, file/CRC/heap stubs, 15 source mutants",
+ "spec": "build/ws-app-20261122/specs/efs-a",
+ "result": {
+  "verdict": "EQUIVALENT",
+  "tests": 700,
+  "equal": 700,
+  "differ": 0,
+  "done": true,
+  "mutants": 15,
+  "killed": 15,
+  "surviving_mutants": []
+ },
+ "notes": "Earlier runs: 12/15 then 14/15 killed; survivors were input-coverage gaps (sub=0 header path, full 32-bit CRC sizes, Android-type file_size == 0x2137 boundary), closed by biasing the generator. No C change needed."
+}

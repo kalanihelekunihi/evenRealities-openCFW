@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago (CST, UTC-6)",
+  "logged_at": "2026-11-23 02:48:47 AM CST (America/Chicago)",
+  "title": "em9305 sleep-cluster typo-RAM: 17 TUs proved, mutants killed, installed (no header/ld change)",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-controller-init-leftover33-paired-sims.json",
+  "canon_check": {
+    "note": "QEMU-ARC nrm cannot collapse small integer stub args the hwdrivers way (range starts at 0xc00000, 4-byte aligned, xors first word). Documented in pending/em9305-qemu-arc-nrm-integer-args.md. Shared driver.c not patched. No historical-proof rerun required for the pin 9 vs 10 failure mode.",
+    "harness_patched": false
+  },
+  "leftover33_evidence_correction": {
+    "file": "g2/evidence/g2-20261123-em9305-controller-init-leftover33-paired-sims.json",
+    "issue": "First sha256= regex had captured the OTP fixture hash 9a9a2d9a instead of the panel display hash; CRC auto-parse was empty.",
+    "corrected_display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+    "corrected_observed_crcs": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0xEA6A0D8C",
+      "[0x00302400,0x0033CB10)": "0x5622A7F1"
+    },
+    "sysresetreq_at": "2026-11-23 02:18:35.017 AM CST (America/Chicago)",
+    "source": "left33-match.log / left33-dfu-mismatch.log lines Latched real display-bus frame and EM9305 CRC32"
+  },
+  "classification": {
+    "header_ld_changed": false,
+    "new_objects": 0,
+    "note": "Every leftover typo-RAM address already had a field in an existing em9305_ram_* object except the 17-word lock table at 0x80faec (existing 1-byte object used as table base; not grown).",
+    "signbit_left_as_literal": [
+      "0x80000000 in sleep_metadata_sync.c"
+    ],
+    "lock_table_80faec": {
+      "access": "((volatile uint32_t *)(uintptr_t)&em9305_ram_80faec)[index] for index 0..16",
+      "span": "0x80faec..0x80fb30 (17 words)",
+      "overlap": "indices 7..8 alias existing em9305_ram_80fb08.u32_80fb08 / u32_80fb0c; table ends at em9305_ram_80fb30",
+      "grow": "not this turn (would overlap a placed typo-RAM object)"
+    }
+  },
+  "qemu_prove": {
+    "workspace": "build/ws-em9305-20261122/u-suffix/sleep-cluster",
+    "harness": "build/em-ctl/qm.py --n 100 --dztrap --mmio --hdir /w/build/em-ctl/h",
+    "pre": "build/ws-em9305-20261122/u-suffix/sleep-cluster/pre_sleep.h",
+    "equivalent_count": 27,
+    "nor0_note": "qm.py nor0 skips comparing the return value, not incoming r0. First mutant pass had false survivors on read-only functions. Reran all non-void symbols with nor0=0.",
+    "clamps": {
+      "opencfw_em9305_sleep_lock_update": "0=0x7",
+      "opencfw_em9305_sleep_refresh_slot": "1=0x3"
+    }
+  },
+  "mutants_killed_count": 21,
+  "install": {
+    "when": "2026-11-23 02:48:47 AM CST (America/Chicago)",
+    "header_ld": "unchanged",
+    "em9305_ram.h_sha256": "820f9f0297a2e564a14dfd2fdc95781687b162ea70bff3ce00362e307e9cc048",
+    "g2-em9305.ld_sha256": "4205528e4d363de32243c11c90f69ca0151c0b82c7253aeb201ce55c60650e70",
+    "files": {
+      "sleep_metadata_prepare.c": {
+        "before": "d793b97e5f03b1e07b755bd8bfa061a881363482b3b62cd301cfc44776c66980",
+        "after": "75673f39d018ea18a65dd946a3246a57f0e2c1cd77334c2a5704e0ef7bba14ad"
+      },
+      "sleep_queries.c": {
+        "before": "b4d1248f075e24575ce3dd1dd69b261c4e5c290ace0709db6e07543e4ebb9e2a",
+        "after": "102ac3b401c556c73c446497d4ab9185db6c3789ecbdd372c0e690a62411246e"
+      },
+      "sleep_controller_mode.c": {
+        "before": "70fb94a750f185f98173affa0090648ade94fe65dec7916bcf97aed6212f5e53",
+        "after": "02d8b879cdb2108261cddb13d78fd87cc51fcafa5f539de9dd491ce1edf74d82"
+      },
+      "sleep_enter_mode.c": {
+        "before": "abba14fd86f96408bc49096fbb04ba8e39182530a4b37f95738284b6ec75a1fc",
+        "after": "af7ed3684024db2c6fc35e9e59f265e421c5c5455bee6dd79fcfbdadfedde1b8"
+      },
+      "resume.c": {
+        "before": "34aafd7d104b386a4e08cca001ef7aafd7978b582dad5b734aef99d835f4e3fd",
+        "after": "b386d964d89b1c55df05a9042aa618a0680f30fa424ce2abf3433e1c79e3fd6e"
+      },
+      "sleep_registry.c": {
+        "before": "c515703211e5260573771779ec2e9a52ea5f7b9bcd2796253f618a5722f62d2c",
+        "after": "2d299cb294aca4f44226df064f6ffb69de90b002587f5d6b6253ba5a75dba45c"
+      },
+      "sleep_metadata_sync.c": {
+        "before": "81419df766d6c39eeba1f182f9f4335cfd538d9b59bc3ac23a014625e2cb27d0",
+        "after": "5a163bd33b5ff1ed3fb557e7223d43b5f9ebdc2eb5b1704fb1252a6f898dfb0b"
+      },
+      "sleep_sync_restore.c": {
+        "before": "9dfdf826fad11601dfec7802c5ed2bd7c288404af27eeaaf199fa5701e604725",
+        "after": "38fcd3119c5df440c9a87f8247213a5408d3f486dd0e547c51086431f6774c19"
+      },
+      "sleep_controller_branch.c": {
+        "before": "709fecce30dda76ebd25bbfa80e2e32f5467a42c18e4c1bcc07440b8c315c46c",
+        "after": "d30fea592dd3f38e5ed5d434fc409be8a8b1b82cb6f62b56581db91793fbb898"
+      },
+      "sleep_refresh.c": {
+        "before": "f67b600f02dc415e990c62a9bc35a297641eef2d939428b876b3b408f2e24137",
+        "after": "04af679a64900a48cc032e5c9fe2c5d6c61b02d32f4f7e9c1b55bcac761f63a3"
+      },
+      "sleep_mode_branch.c": {
+        "before": "19d00354dbe1641f0fed0ad11c3d4451dc6ed8868e7543da01d3263de30b7acd",
+        "after": "08e3eab0c700cf20e55ba9dd3b813294b3ca21d472b48f1de9fbad6bcd53e6b2"
+      },
+      "sleep_mode_ready.c": {
+        "before": "e3456bce4301ac089b0c3b83227a4b782d9f26dfb6ee4d437c4c437d1088bc0e",
+        "after": "97d5c8222aa46ca63812e103a30a3553df96441292b439d40188ef184999f8d6"
+      },
+      "sleep_registered_callback.c": {
+        "before": "20e74957c4bc63b455e99aa4ce19cfa9095c45a3baf0e5454834db73592662fc",
+        "after": "a0978c0c6c692a881d176ce4aff0b62cb602a057f6b555c717ae895654607465"
+      },
+      "sleep_slot_update.c": {
+        "before": "1009d719493b365e2c23019db11f675d2900130493667e2a8650b669439cccb4",
+        "after": "0895e24aafbe91cc724cd2a099adad1be42eb58f1bec4e18107a06a1694ffaea"
+      },
+      "sleep_sync_convert.c": {
+        "before": "d9911339da7b9740b23771005a2362e8c72f1a2f28733143232f716594d89442",
+        "after": "f97ab2061913cb7cbdb2c6bc9bcc9e1594321f786070e6caa4db9e65b09a1250"
+      },
+      "sleep_sync_query.c": {
+        "before": "658de661264a5ced2ae7ff7cf211be461454b818af78abf70f62a4e2ce44ee4f",
+        "after": "a781ad5df414817acd63ee3651b725c0f844f58b82a6cab9e4a9f4fe1b2ab92c"
+      },
+      "sleep_sync_update.c": {
+        "before": "58d881b611e9e0f4fea7af309a19e65f607f4e8ee639fc9f98dbd497e5879ac5",
+        "after": "9898de5938b4af57976e66d01c1e418712e6a48aedc2e3bc02d09211e20d6fe4"
+      }
+    },
+    "code_leftover_0x80": "only 0x80000000 sign-bit constant in sleep_metadata_sync.c"
+  },
+  "official_app": {
+    "path": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "untouched": true
+  },
+  "not_started": [
+    "private pbuild + paired Renode sims for this install",
+    "NVM_InitCopy typo/prove (range bounds 0x801000..0x80e978 are address-window checks, not object accesses)",
+    "IRQHandler_RcCalib (prove only; do not install while uncut). 805c30/8019b8/8019bc/805c2c already have typo-RAM fields; 805cf0 may need a new object."
+  ],
+  "rules": {
+    "official_app_not_overwritten": true,
+    "source_completeness_proven": false,
+    "no_git_commit_push": true
+  },
+  "workspace_results": {
+    "results.json": "build/ws-em9305-20261122/u-suffix/sleep-cluster/results.json",
+    "results_b.json": "build/ws-em9305-20261122/u-suffix/sleep-cluster/results_b.json",
+    "mutant_results.json": "build/ws-em9305-20261122/u-suffix/sleep-cluster/mutant_results.json",
+    "mutant_results_b.json": "build/ws-em9305-20261122/u-suffix/sleep-cluster/mutant_results_b.json"
+  }
+}

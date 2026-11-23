@@ -1,0 +1,17 @@
+{
+  "stream": "ws-hwdrivers",
+  "when_cst": "2026-11-22 22:xx CST",
+  "queue_item": "ws-ramlayout pending/10 raminit whole-image, hwdrivers rows",
+  "method": "For each flagged RAM cell: confirm stock .data init bytes from .waves/init_20000000.bin (offset=addr-0x20000000); locate our source definition; determine if runtime writes it before any read; fix init value only where a read-before-write path exists and stock relies on the .data default.",
+  "items": [
+    {"addr":"0x20000068","ramlayout_name":"audio_als_active_previous","actual_cell":"audio_als_scale_shadow","stock_init":"0x00000400","our_source":"display_als_state.c:10 uint32_t audio_als_scale_shadow = 0x400u;","verdict":"ALREADY CORRECT","fix":"none","note":"ramlayout name mislabel; audio_als_active_previous is a different cell at 0x200741e0"},
+    {"addr":"0x20000724","ramlayout_name":"g2_buzzer_voice","actual_cell":"g2_buzzer_pwm_pin_config","stock_init":"0x00000406","our_source":"S1-drivers-hal-ble-data/peripherals_data.c:26 uint32_t g2_buzzer_pwm_pin_config = 0x00000406u;","verdict":"ALREADY CORRECT","fix":"none","note":"const GPIO145/TIMER7 pad pincfg read at buzzer init (am_hal_gpio_pinconfig), never written at runtime; ramlayout name mislabel (g2_buzzer_voice is the pointer at 0x20074500)"},
+    {"addr":"0x20000e60","cell":"audio_hub_imu_report_interval_cell","stock_init":"1000 (0x3e8)","our_prev":"0 (bss)","read_before_write":"yes - imu_icm45608_fp.c:574 reads in the IMU report loop from boot; only writer is host-command handler hub_parameter_config_4a6e3c -> hub_imu_accel_config_4a52a2, no boot default-init","verdict":"REAL GAP","fix":"= 1000u in hub_imu_accel_config_4a52a2.c"},
+    {"addr":"0x20000e64","cell":"audio_hub_motion_threshold_cell","stock_init":"25 (0x19)","our_prev":"0 (bss)","read_before_write":"yes - imu_icm45608_fp.c:488,505 head-up pitch threshold; only writer is hub_parameter_config","verdict":"REAL GAP","fix":"= 25u in hub_semantic_motion_threshold_4a4e8c.c"},
+    {"addr":"0x20000e68","cell":"audio_hub_motion_period_cell","stock_init":"1000 (0x3e8)","our_prev":"0 (bss)","read_before_write":"yes - imu_icm45608_fp.c:543 compass check period; only writer is hub_parameter_config","verdict":"REAL GAP","fix":"= 1000u in hub_semantic_motion_period_4a4ec0.c"},
+    {"addr":"0x20000e6c","cell":"audio_hub_motion_duration_cell","stock_init":"3","our_prev":"0 (bss)","read_before_write":"yes - imu_icm45608_fp.c:553 compass report delta; only writer is hub_parameter_config","verdict":"REAL GAP","fix":"= 3u in hub_semantic_motion_period_4a4ec0.c"},
+    {"addr":"0x20004510","cell":"fg_aux[16]","stock_init":"7fc00000(NaN) 3e99999a(0.3f) 3b449ba6(0.003f) ...","our_prev":"0","verdict":"OUT OF MY OWNERSHIP","fix":"none - defined in drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c, which is carved out of ws-hwdrivers (npmx battery-model owner); deferred to parent"}
+  ],
+  "counts": {"flagged_for_hwdrivers": 7, "already_correct": 2, "real_gaps_fixed": 4, "out_of_ownership_deferred": 1},
+  "stock_init_source": ".waves/init_20000000.bin (read-only), verified byte values"
+}

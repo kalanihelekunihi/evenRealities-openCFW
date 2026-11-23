@@ -5,9 +5,10 @@
  * product, settled wave 28); {lo,hi} = 64-bit (+0x24:+0x20) * byte +0x18; macdu accumulates {hi,lo} + b1a*G[3] into the 64-bit callback argument.
  */
 #include <stdint.h>
+#include "em9305_ram.h"
 #define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
 #define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
-#define LCTR_SLV_BIG_CUR     0x80542cu
+#define LCTR_SLV_BIG_CUR     ((uintptr_t)&em9305_ram_80542c)
 #define BIS_TXENT_TAB        0x805448u
 #define LCTR_SLV_BIG_TIME_CB 0x8052d0u
 extern uint32_t opencfw_em9305_BbBleBisTxData(uint32_t ent, uint32_t kind, uint32_t a, uint32_t b);

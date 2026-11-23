@@ -1,0 +1,35 @@
+{
+  "id": "g2-20261122-ws-blestore-sources-json-01-and-03",
+  "time": "2026-11-22 20:47:55 America/Chicago",
+  "stream": "ws-blestore",
+  "purpose": "Single-writer apply of pending/01 and pending/03 only. Approval closes after this write.",
+  "before_sha256": "3242f534c218f7c9f71976c19a4c4f7f1043d1484cfab7738719ae11ebb5290c",
+  "after_sha256": "a795d6f95d54796927f488ca09da8692e7ebfe893f9a2ff6589bfe23511eaec5",
+  "pending_01": {
+    "already_in_tree": true,
+    "reason": "Applied earlier today at 17:34 CST (g2-20261122-ws-blestore-sources-json-writer.json, gates.apollo_main FAL/NOR/FlashDB gate). Current worktree already had the new gate string; patch not re-applied.",
+    "files_deleted": [
+      "build/ws-blestore-20261122/pending/01-sources-json-apollo-main-fal-flashdb-gate.patch",
+      "build/ws-blestore-20261122/pending/01-sources-json-apollo-main-fal-flashdb-gate.NOTE.md"
+    ]
+  },
+  "pending_03": {
+    "applied": true,
+    "apply": "patch -p1 --forward --batch from repo root; no git add/commit",
+    "change": "removed aliases[audio_ble_profile_handler_entry_5fa056] -> vRestoreContextOfFirstTask",
+    "files_deleted": [
+      "build/ws-blestore-20261122/pending/03-sources-json-drop-5fa056-rtos-alias.patch",
+      "build/ws-blestore-20261122/pending/03-sources-json-drop-5fa056-rtos-alias.NOTE.md"
+    ]
+  },
+  "check": {
+    "command": "python3 tools/build/sources.py check --device g2",
+    "result": "g2: 4880 units, 4542 source files, 2 not built",
+    "exit": 0
+  },
+  "notes": [
+    "C fix for discovery mode bytes is already in g2/src/apollo-main/ble/ble-profile/display_ble_profile_handler_init.c; this sources.json edit only drops the stale alias.",
+    "opencfw-otap-disarm.app.bin not touched.",
+    "Writer approval for g2/src/sources.json is now CLOSED."
+  ]
+}

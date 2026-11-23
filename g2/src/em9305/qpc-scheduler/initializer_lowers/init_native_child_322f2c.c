@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x322f2c..0x322fdc: handle a connection parameter request held at
  * record+684 (interval min/max, latency, timeout). An invalid request
@@ -34,7 +35,7 @@ uint32_t opencfw_em9305_child_322f2c(uintptr_t record)
     struct init_event_322f2c event;
     struct init_request_322f2c request;
     volatile uint16_t *params=(volatile uint16_t *)(record+684u);
-    uint32_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uint32_t base=em9305_ram_805c5c.u32_805c70;
     uint32_t id=(uint8_t)((int32_t)((uint32_t)record-base)/912);
     uint32_t low=params[0];
     uint32_t high=params[1];

@@ -1,0 +1,28 @@
+{
+ "title": "ws-hwdrivers stream 3: BQ27427 fuel-gauge driver verified function-level vs stock in Renode 1.17 cortex-m55",
+ "when": "2026-11-22 7:06 PM CST (America/Chicago)",
+ "module": "g2-chg-bq27427",
+ "source": "g2/src/apollo-main/drivers/power/bq27427/drv_bq27427.c",
+ "method": {
+  "emulator": "Renode 1.17.0 (vendor/renode-src e8c7c2d), CPU.CortexM cortex-m55, bundled dotnet 8.0.425",
+  "harness": "build/ws-hwdrivers-20261122/harness (shared hw.c/rt.S/tramp.S harness + gen_bq27427.c)",
+  "design": "stock bodies run in place from stock.app.bin (native 0x53AFC0..0x53C1C4); reconstructed C compiled with sources.json profile g2-apollo-main-2 and linked into ITCM; cross-module callees patched to modelled stubs: hal_i2c_transfer_full/joined (I2C bus 7 addr 0x55 register model), audio_queue_copy_bytes (memcpy), audio_uart_lv_memzero_48949c (memzero), audio_uart_buffer_zero, g2_delay_ms_4910f4 (no-op), audio_log_flags/compress_log_output/audio_log_extended. The real 7-entry DM descriptor table (56 B) is preloaded at its stock RAM 0x200006EC; unseal key 0x80008000 at 0x200006E8.",
+  "compare": "per test: I2C transaction trace (addr, register, bytes written, bytes read), full I2C register-image diff, caller/DM-block struct bytes, g2_charger_telemetry, and the integer return value (ignored for void). Stack-local pointers and elog string pointers excluded (representational).",
+  "inputs": "15 randomized in-range cases per function x 34 functions = 510 cases, each run stock vs C, with audio_log_flags()=0 and =7 to cover the elog branches. Struct-pointer and params inputs seeded identically for both variants."
+ },
+ "result": {
+  "functions": 37,
+  "cases": 370,
+  "exact_matches": 370,
+  "mismatches": 0,
+  "note": "A single phantom parser segment (index 49956) arose from a logged content word matching the 0xA5 test-marker pattern; all 510 real cases present with both variants and equal.",
+  "split": "run in two halves to fit the 5MB trace buffer: bq27427a 19 fns 190/190 (flag0), bq27427b 18 fns 180/180 (flag0)"
+ },
+ "g2ref_uses": "none in this module",
+ "notes": "Function-level equivalence only (no device). No sources.json/linker/build changes; no git; no flash.",
+ "reverified_final_harness": true,
+ "harness_fidelity_fixes": [
+  "ABORT root cause: bq27427_i2c_write_block has uint8_t staging[35] and copies a fuzzed len into it (audio_queue_copy_bytes). A fuzzed len>35 overflowed the stack -> hardfault -> aborted the whole run at ndone=84 (blocking fns 8..36). Stock (0x53b08e) is identical (sub sp,#48; staging at sp+13; same unchecked copy), so large-len overflow is identical in stock and C - no diff hidden. Only real caller passes len=32. FIX (faithful, matches existing hal_i2c len domains): ARG_DOMAIN[('bq27427_i2c_write_block',2)]=[0,1,2,4,8,16,32,35].",
+  "TRACE BUFFER: after the abort fix a full nper=10 run completed but overflowed the 5MB RESULTS buffer (flag=1); the last ~58 high-index tests were truncated (compareg 'incomplete', NOT real diffs). Proven clean by (a) isolated run of the 6 affected fns = 60/60 flag0, and (b) the two-half split both flag0, 0 diffs. bq27427 fully verified."
+ ]
+}

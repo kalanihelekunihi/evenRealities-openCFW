@@ -1,10 +1,11 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x320f78..0x321150: master-side connection update / PHY
  * procedure hook on an LL control opcode (the master counterpart of
  * 32ae70, with an 11-event 4-state table at 0x335038/0x3350e8). Unknown
- * response 0x0c maps the rejected opcode at 0x802818 (and error at
- * 0x80281c) to events 3, 4 or 7; deferred requests in +644 bits 17/18
+ * response 0x0c maps the rejected opcode at ((uintptr_t)&em9305_ram_8027e0 + 0x38u) (and error at
+ * ((uintptr_t)&em9305_ram_8027e0 + 0x3cu)) to events 3, 4 or 7; deferred requests in +644 bits 17/18
  * give events 8/9 on opcode 0x70. Idle (+620 = 0): step the tables and
  * enter the procedure (timer code 17 at +635). Running: for a rejected
  * request record the pending opcode bit, step the tables on the awaited
@@ -52,9 +53,9 @@ uint32_t opencfw_em9305_callback_320f78(uintptr_t record, int32_t opcode)
             return 0u;
         }
     }else if(opcode==12){
-        uint32_t rejected=*(volatile uint8_t *)(uintptr_t)0x802818u;
+        uint32_t rejected=em9305_ram_8027e0.u8_802818;
         if(rejected==7u){
-            if(*(volatile uint8_t *)(uintptr_t)0x80281cu!=15u)return 0u;
+            if(em9305_ram_8027e0.u8_80281c!=15u)return 0u;
             *(volatile uint32_t *)(record+544u)&=~2u;
             event=7u;
         }else if(rejected==13u){
@@ -66,7 +67,7 @@ uint32_t opencfw_em9305_callback_320f78(uintptr_t record, int32_t opcode)
         }else if(rejected==16u){
             event=4u;
         }else if(rejected==17u){
-            if(*(volatile uint8_t *)(uintptr_t)0x80281cu!=15u)return 0u;
+            if(em9305_ram_8027e0.u8_80281c!=15u)return 0u;
             event=7u;
         }else{
             return 0u;

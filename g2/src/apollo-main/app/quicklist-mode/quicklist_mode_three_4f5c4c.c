@@ -1,14 +1,11 @@
-/* Apollo QuickList modify path 0x4f5c4c..0x4f5e11. */
-#include <stdint.h>
-/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
- * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
-#include <stdint.h>
-extern unsigned char g2ref_g2_quicklist_flag_20075041[] __asm__("g2_quicklist_flag_20075041");
-extern unsigned char g2ref_g2_quicklist_ui_data_2012a72c[] __asm__("g2_quicklist_ui_data_2012a72c");
-extern unsigned char g2ref_g2_quicklist_word_20074e28[] __asm__("g2_quicklist_word_20074e28");
-extern unsigned char g2ref_g2_stock_ram_20101a18[] __asm__("g2_stock_ram_20101a18");
+/* Apollo QuickList modify 0x4f5c4c..0x4f5e11. Known UIDs are updated in place;
+ * unknown UIDs are inserted at the head (the shown count is not changed here;
+ * 0x4f5596 applies it later). Stock counts every handled record in `inserted`
+ * while fewer than 40 items were shown. Verified against stock on Renode 1.17
+ * M55 (build/ws-app-20261122/specs). */
+#include "../quicklist-common/quicklist_types.h"
 
-extern void audio_quicklist_copy_record_4f55e0(const void *, void *);
+extern void audio_quicklist_copy_record_4f55e0(const g2_quicklist_record_t *, g2_quicklist_item_t *);
 extern int32_t audio_quicklist_find_record_4f5636(uint32_t);
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t, const char *, const char *, const char *,
@@ -21,65 +18,51 @@ static const char function[] = "handle_modify";
 static const char message[] = "Modify: total: %d";
 static const char compact[] = "[quicklist.page]Modify: total: %d";
 
-uint32_t audio_quicklist_mode_three_4f5c4c(uint32_t detail) {
-    (void)detail;
-    const uint8_t *const input = (const uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_stock_ram_20101a18+0x4u);
-    uint8_t *const rows = (uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_ui_data_2012a72c);
-    volatile uint8_t *const state = (volatile uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_flag_20075041);
-    volatile uint32_t *const count_word = (volatile uint32_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_word_20074e28);
-    *state = 4u;
-    *count_word = 0u;
-    if (*(const volatile uint8_t *)(const void *)(input + 0x1220u) == 0u)
+uint32_t audio_quicklist_mode_three_4f5c4c(uint32_t direction) {
+    (void)direction;
+    g2_quicklist_storage_t *const storage = &g2_quicklist_ui_data_2012a72c;
+    const g2_quicklist_cache_t *const cache = &audio_quicklist_item_cache;
+    g2_quicklist_flag_20075041 = QL_CHANGE_MODIFY;
+    g2_quicklist_word_20074e28 = 0;
+    if (cache->total == 0u)
         return 5u;
-    const uint16_t old_count = *(volatile uint16_t *)(void *)rows;
-    uint32_t inserted = 0u;
-    uint32_t matched = 0u;
-    uint32_t missing = 0u;
-    if (old_count == 0u) {
-        for (uint32_t index = 0u; index < 20u && inserted < 40u; ++index) {
-            const uint8_t *const item = input + 232u * index;
-            if (*(const volatile uint8_t *)(const void *)(item + 228u) != 0u) {
-                audio_quicklist_copy_record_4f55e0(item, rows + 8u + 296u * inserted);
-                ++inserted;
-            }
-        }
-        *state = 1u;
+    const uint16_t shown = storage->count;
+    uint16_t inserted = 0u, matched = 0u;
+    int32_t missing = 0;
+    if (shown == 0u) {
+        for (uint16_t index = 0u; index < QL_CACHE_RECORDS && inserted < QL_UI_ITEMS; ++index)
+            if (cache->record[index].valid != 0u)
+                audio_quicklist_copy_record_4f55e0(&cache->record[index], &storage->item[inserted++]);
+        g2_quicklist_flag_20075041 = QL_CHANGE_FULL;
         matched = inserted;
     } else {
-        for (uint32_t index = 0u; index < 20u; ++index) {
-            const uint8_t *const item = input + 232u * index;
-            if (*(const volatile uint8_t *)(const void *)(item + 228u) == 0u)
+        for (int32_t index = 0; index < (int32_t)QL_CACHE_RECORDS; ++index) {
+            const g2_quicklist_record_t *const record = &cache->record[index];
+            if (record->valid == 0u)
                 continue;
-            const uint32_t id = *(const volatile uint32_t *)(const void *)item;
-            const int32_t slot = audio_quicklist_find_record_4f5636(id);
+            const int32_t slot = audio_quicklist_find_record_4f5636(record->uid);
             if (slot >= 0) {
-                audio_quicklist_copy_record_4f55e0(item, rows + 8u + 296u * (uint32_t)slot);
+                audio_quicklist_copy_record_4f55e0(record, &storage->item[slot]);
                 ++matched;
             } else {
-                *state = 2u;
+                g2_quicklist_flag_20075041 = QL_CHANGE_ADD_UP;
                 ++missing;
-                if (old_count < 40u) {
-                    for (uint32_t move = old_count; move > 0u; --move) {
-                        uint8_t *const destination = rows + 8u + 296u * move;
-                        const uint8_t *const source = destination - 296u;
-                        for (uint32_t byte = 0u; byte < 296u; ++byte)
-                            destination[byte] = source[byte];
-                    }
-                    ++inserted;
-                }
-                audio_quicklist_copy_record_4f55e0(item, rows + 8u);
+                for (int32_t move = shown; move >= 1; --move)
+                    if (shown < QL_UI_ITEMS)
+                        storage->item[move] = storage->item[move - 1];
+                audio_quicklist_copy_record_4f55e0(record, &storage->item[0]);
             }
+            if (shown < QL_UI_ITEMS)
+                ++inserted;
         }
     }
-    if (*state == 4u || *state == 1u)
-        *count_word = matched;
-    else if (*state == 2u)
-        *count_word = missing;
+    if (g2_quicklist_flag_20075041 == QL_CHANGE_MODIFY || g2_quicklist_flag_20075041 == QL_CHANGE_FULL)
+        g2_quicklist_word_20074e28 = matched;
+    else if (g2_quicklist_flag_20075041 == QL_CHANGE_ADD_UP)
+        g2_quicklist_word_20074e28 = missing;
     if ((audio_log_flags() & 2u) != 0u)
-        audio_log_extended(4u, module, path, function, 983u, message,
-                           (uint16_t)inserted);
+        audio_log_extended(4u, module, path, function, 983u, message, (uint32_t)inserted);
     if ((audio_log_flags() & 1u) != 0u || (audio_log_flags() & 4u) != 0u)
-        (void)compressed_log_output(0x10400000u, compact, compact,
-                                    (uint16_t)inserted);
+        (void)compressed_log_output(0x10400000u, compact, compact, (uint32_t)inserted);
     return 0u;
 }

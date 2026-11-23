@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern uintptr_t opencfw_em9305_init_connection_allocate_316c58(void);
 extern uint32_t opencfw_em9305_associated_slot_allocate_3133b4(
@@ -37,7 +38,7 @@ uint32_t opencfw_em9305_init_transition_prepare_31a700(
     uintptr_t connection=opencfw_em9305_init_connection_allocate_316c58();
     uint32_t status=9u;
     if(connection!=0u) {
-        uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+        uintptr_t base=em9305_ram_805c5c.u32_805c70;
         uint32_t minimum=*(volatile uint16_t *)(nested+82u)*1250u;
         uint32_t maximum=*(volatile uint16_t *)(nested+84u)*1250u;
         uint32_t id=(uint8_t)((int32_t)(connection-base)/912);
@@ -47,7 +48,7 @@ uint32_t opencfw_em9305_init_transition_prepare_31a700(
             id,0u,minimum,maximum,extent,(uintptr_t)&allocation,
             (uintptr_t)opencfw_em9305_init_connection_query_31b21c);
         if(accepted!=0u) {
-            base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+            base=em9305_ram_805c5c.u32_805c70;
             uint32_t selected=allocation;
             nested=*(volatile uint32_t *)request_slot;
             uint32_t relative=(uint32_t)(connection-base);
@@ -74,8 +75,8 @@ uint32_t opencfw_em9305_init_transition_prepare_31a700(
             uint16_t request_first=*(volatile uint16_t *)(initial_nested+86u);
             *(volatile uint32_t *)(nested+120u)=crc;
             *(volatile uint16_t *)(nested+136u)=request_second;
-            uint32_t shared_high=*(volatile uint32_t *)(uintptr_t)0x805aa4u;
-            uint32_t shared_low=*(volatile uint32_t *)(uintptr_t)0x805aa0u;
+            uint32_t shared_high=em9305_ram_805a6c.u32_805aa4;
+            uint32_t shared_low=em9305_ram_805a6c.u32_805aa0;
             uint16_t nested_value=*(volatile uint16_t *)(fresh_nested+96u);
             *(volatile uint8_t *)(nested+138u)=1u;
             *(volatile uint16_t *)(nested+134u)=request_first;
@@ -86,7 +87,7 @@ uint32_t opencfw_em9305_init_transition_prepare_31a700(
             *(volatile uint8_t *)(nested+142u)=(uint8_t)random;
             uint32_t accuracy=opencfw_em9305_compose_accuracy_318988();
             fresh_nested=*(volatile uint32_t *)request_slot;
-            base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+            base=em9305_ram_805c5c.u32_805c70;
             *(volatile uint8_t *)(nested+143u)=(uint8_t)accuracy;
             uint16_t target_id=*(volatile uint16_t *)(fresh_nested+94u);
             *(volatile uint8_t *)(request+2262u)=0u;
@@ -96,8 +97,8 @@ uint32_t opencfw_em9305_init_transition_prepare_31a700(
             *(volatile uint32_t *)(target+516u)=address_low;
             *(volatile uint8_t *)(target+524u)=(uint8_t)fresh;
             (void)opencfw_em9305_common_request_30455c(1u);
-            uint8_t pending=*(volatile uint8_t *)(uintptr_t)0x805a74u;
-            *(volatile uint8_t *)(uintptr_t)0x805a74u=(uint8_t)(pending+1u);
+            uint8_t pending=em9305_ram_805a6c.u8_805a74;
+            em9305_ram_805a6c.u8_805a74=(uint8_t)(pending+1u);
             (void)opencfw_em9305_command_count_30e4bc();
             return 0u;
         }

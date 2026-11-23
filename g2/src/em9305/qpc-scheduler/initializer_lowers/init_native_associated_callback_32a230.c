@@ -1,8 +1,9 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32a230..0x32a47c: associated-link receive callback (owner,
  * packet, kind). Records the kind (+269) and finishes a pending
- * termination (+628: hook 0x801314 with the link index in mode 1, then
+ * termination (+628: hook ((uintptr_t)&em9305_ram_8012c0 + 0x54u) with the link index in mode 1, then
  * reason 0x6e). Kind 2, kind 1/3 and a role-3 link that is not ready
  * drop the packet (kinds 3/4 also count +900). Otherwise the header is
  * decoded; kind 4 retries at most twice (+218, +908), kind 6 with even
@@ -37,9 +38,9 @@ uint32_t opencfw_em9305_associated_callback_32a230(uintptr_t owner, uintptr_t pa
         uint32_t mode = U8(link + 635u);
         U8(link + 628u) = 0u;
         if (mode == 1u) {
-            uintptr_t hook = U32(0x801314u);
+            uintptr_t hook = U32(((uintptr_t)&em9305_ram_8012c0 + 0x54u));
             if (hook != 0u) {
-                int32_t index = (int32_t)(link - U32(0x805c70u)) / 912;
+                int32_t index = (int32_t)(link - U32(((uintptr_t)&em9305_ram_805c5c + 0x14u))) / 912;
                 ((void (*)(uint32_t, int32_t))hook)((uint8_t)index, index);
             }
         }
@@ -91,7 +92,7 @@ uint32_t opencfw_em9305_associated_callback_32a230(uintptr_t owner, uintptr_t pa
         }
         U16(link + 906u) = (uint16_t)(U16(link + 906u) + 1u);
         if (U8(link + 349u) != 0u)
-            U16(0x805690u) = (uint16_t)(U16(0x805690u) + 1u);
+            U16(((uintptr_t)&em9305_ram_805688 + 0x8u)) = (uint16_t)(U16(((uintptr_t)&em9305_ram_805688 + 0x8u)) + 1u);
         if (U8(link + 632u) == 0u && U8(link + 344u) != 3u && (U8(link + 5u) & 2u) != 0u)
             U8(link + 633u) = 1u;
         uint32_t idle;

@@ -1,12 +1,12 @@
 /* SPDX-License-Identifier: MIT
  * Stock 0x329368 lctrSlvBisTxCompletionSequential (g2-2.2.6.10 firmware_ble_em9305.bin). Wave 28: converted
- * from the lowered ARC asm. Field names are not recovered (offsets only); G=0x80542c is the TX cursor
- * {u32 key; u8 idx; ...; u32 ptr@+0x14; u32 ts@+0x10; u32 flag@+0x18}.
+ * from the lowered ARC asm. Field names are not recovered (offsets only); G=&em9305_ram_80542c is the 28-byte TX cursor
+ * {u32 key@+0; u8 idx@+4; ...; u32 ts@+0x10; u32 ptr@+0x14; u32 flag@+0x18}.
  */
 #include <stdint.h>
+#include "em9305_ram.h"
 #define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
 #define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
-#define LCTR_SLV_BIG_CUR 0x80542cu
 extern uint32_t opencfw_em9305_dispatch_child_317418(uint32_t big, uint32_t cur);
 extern void opencfw_em9305_auxiliary_signal_304394(void);
 extern void opencfw_em9305_lctrSlvBisTxControl(uint32_t big);
@@ -19,20 +19,20 @@ void opencfw_em9305_lctrSlvBisTxCompletionSequential(uint32_t ctx, uint32_t kind
 
   if (kind == 1u) goto signal;
   big = W32(ctx + 0x24u);
-  if (B8(LCTR_SLV_BIG_CUR) >= B8(big + 0x34u)) goto signal;
-  if (opencfw_em9305_dispatch_child_317418(big, LCTR_SLV_BIG_CUR) == 0u) {
-    if (W32(LCTR_SLV_BIG_CUR + 0x18u) == 0u) goto signal;
+  if (em9305_ram_80542c.u8_80542c[0] >= B8(big + 0x34u)) goto signal;
+  if (opencfw_em9305_dispatch_child_317418(big, (uint32_t)(uintptr_t)&em9305_ram_80542c) == 0u) {
+    if (em9305_ram_80542c.u32_805444 == 0u) goto signal;
     opencfw_em9305_lctrSlvBisTxControl(big);
     return;
   }
-  tmp.key = W32(LCTR_SLV_BIG_CUR);
-  tmp.idx = B8(LCTR_SLV_BIG_CUR + 4u);
+  tmp.key = em9305_ram_80542c.u32_80542c;
+  tmp.idx = em9305_ram_80542c.u8_805430[0];
   if (opencfw_em9305_dispatch_child_317418(big, (uint32_t)(uintptr_t)&tmp) != 0u)
     ptr = W32(big + ((uint32_t)(*(volatile uint8_t *)&tmp.key) << 2) + 0x38u) + 0xb0u;
   else
-    ptr = (W32(LCTR_SLV_BIG_CUR + 0x18u) != 0u) ? big + 0x198u : 0u;
-  W32(LCTR_SLV_BIG_CUR + 0x14u) = ptr;
-  W32(LCTR_SLV_BIG_CUR + 0x10u) = W32(LCTR_SLV_BIG_CUR + 0x10u) + W32(big + 0x30u);
+    ptr = (em9305_ram_80542c.u32_805444 != 0u) ? big + 0x198u : 0u;
+  em9305_ram_80542c.u32_805440 = ptr;
+  em9305_ram_80542c.u32_80543c = em9305_ram_80542c.u32_80543c + W32(big + 0x30u);
   opencfw_em9305_lctrSlvBisTxData(big);
   return;
 signal:

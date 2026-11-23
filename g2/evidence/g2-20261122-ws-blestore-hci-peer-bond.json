@@ -1,0 +1,51 @@
+{
+ "id": "g2-20261122-ws-blestore-hci-peer-bond",
+ "time": "2026-11-22 20:35 America/Chicago",
+ "stream": "ws-blestore",
+ "status": "VERIFIED",
+ "purpose": "After LE SC pairing, observe the persisted bond, disconnect, and reconnect with the retained LTK (no SMP). Compare stock vs OpenCFW full-1926.",
+ "script": "build/ws-blestore-20261122/hci-peer/bond_reconnect.py",
+ "script_sha256": "7b1925b9c4cc3836bf97c7869aba7c26a91af3b5745db87038e69958f34a285d",
+ "result": "build/ws-blestore-20261122/hci-peer/bond/result.json",
+ "result_sha256": "911c20d88393ea402ae501545027f6250b9421e8b46a4e242cb866ed92bde7b9",
+ "storage": {
+  "bond_location": "internal MRAM bond table at 0x7FF000 (offset 0x3FF000 in a 4 MiB dump from 0x400000); 10 x 256-byte records, 200-byte payload. Identity 123456789abc00 (peer LE address + type).",
+  "nor": "external 32 MiB mspi1.nor is unchanged through pair/disconnect/reconnect (sha256 4049ca4e899c7d069573bc4ca86e57c8b00f4b6564de5f2f8e9c9f983610758e, same as post-boot match NOR). The earlier 'NOR bond diff' found no delta because bonds are not stored there.",
+  "ram_table_0x20068420": "dump succeeded but no 200-byte record at that canonical address on this stock/OpenCFW image; MRAM table is the evidence."
+ },
+ "protocol": {
+  "pair": "complete, DHKey verified, AES-CCM authenticated, same LTK sha256 0a91cfb9e3be248056b45375b858cad46d81c7756b3822d760ebef379b23d004",
+  "disconnect": "DisconnectPeer reason 19; advertising resumed",
+  "reconnect": "ConnectPeer new handle 2, ATT MTU 247, BeginPeerEncryption with retained LTK, no SMP. EncryptedConnectionCount=1, LastEncryptionStatus=0 on both images. Then CCCD write 0x0845 and app-auth Write Command; both returned ack payload 080410641a00."
+ },
+ "compare": {
+  "bond_table_after_pair_identical": true,
+  "bond_record_200_after_pair_sha256": "2396090e15784f51c15e138c5a4b60db3ee24a455e0a111aa3eb6f43d106b3d5",
+  "bond_table_after_pair_sha256": "2c16d9f6f178f908e11483e8c2fdbba6c7a2c67f14b984324f92d6ad97117625",
+  "bond_table_after_reconnect_identical": true,
+  "bond_table_after_reconnect_sha256": "b9401f45d0d0be06dc7522722817b24a5268e72c510c454d9639d724d11f1ce8",
+  "bond_table_changed_on_reconnect": true,
+  "nor_unchanged_both": true,
+  "ltk_sha256_equal": true,
+  "retained_ltk_authenticated": true,
+  "fresh_smp_started": false,
+  "auth_reconnect_ok": {
+   "stock": true,
+   "opencfw-1926": true
+  },
+  "programmed_words_after_pair": {
+   "stock": 196,
+   "opencfw-1926": 260,
+   "note": "counts differ (OpenCFW boot programs more) but the bond record bytes match"
+  }
+ },
+ "timing_differences": [
+  "OpenCFW defers the post-pair ATT Read By Group Type (060100ffff00280118) past the official 0.03s poll; this run answered it in a pre-disconnect drain. Stock sends it during/just after SMP.",
+  "After LTK reconnect, OpenCFW did not emit that discovery within 2s; stock does immediately. LTK auth and the subsequent CCCD+auth path still succeeded. Not treated as a C mismatch."
+ ],
+ "verdict": "BOND_RECORD_IDENTICAL_LTK_RECONNECT_OK",
+ "notes": [
+  "Stock completed 20:32 America/Chicago; OpenCFW resumed 20:35 after GATT-timing harness adjustments. Emulator repo and sources.json were not modified in this step (sources.json writer already closed).",
+  "dumps: build/ws-blestore-20261122/hci-peer/bond/{stock,opencfw-1926}/{before-pair,after-pair,after-reconnect}.{mram,nor}.bin"
+ ]
+}

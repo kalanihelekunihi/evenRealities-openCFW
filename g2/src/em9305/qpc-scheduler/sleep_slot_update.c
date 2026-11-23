@@ -2,10 +2,11 @@
  * Native delay-slot store occurs before clock call. Child timer-program
  * register facade 0x3137b4 remains explicit and unqualified. */
 #include <stdint.h>
+#include "em9305_ram.h"
 extern uint32_t opencfw_em9305_sleep_metadata_clock(uint32_t);
 extern uint64_t opencfw_em9305_sleep_sync_divide(uint32_t,uint32_t,uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_sleep_program_slot(uint32_t,uint32_t,uint32_t,uint32_t);
-static uintptr_t context(void) { return *(volatile uint32_t *)(uintptr_t)0x80fb8cu; }
+static uintptr_t context(void) { return em9305_ram_80fb8c.u32_80fb8c; }
 uint64_t opencfw_em9305_sleep_inverse_convert(uint32_t low,uint32_t high)
 {
  uintptr_t c=context(); uint32_t factor=*(volatile uint32_t *)(c+12u);

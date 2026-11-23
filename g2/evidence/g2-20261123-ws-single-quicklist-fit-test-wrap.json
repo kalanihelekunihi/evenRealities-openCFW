@@ -1,0 +1,19 @@
+{
+ "id": "g2-20261123-ws-single-quicklist-fit-test-wrap",
+ "date": "2026-11-23",
+ "workstream": "ws-single",
+ "unit": "g2/src/apollo-main/ui/a-36-quicklist-page/ui_quicklist_page.c",
+ "function": "QuicklistWidget_MainPage_init_4f891c",
+ "bug": "Item fit test used signed int adds/subs; clang folded the second test (avail - y < needed) as always-true after (avail < needed + y), so on wrapping values C built the dotted partial label where stock (0x4f8e76..0x4f8f40, adds.w/subs.w wrap) builds a second icon and takes the full-item path.",
+ "fix": "needed/needed+y/avail-y computed as uint32 wrapping arithmetic.",
+ "verification": {
+  "pre-fix (ag05, 09:32 CST)": "MainPage_init 5/10, Reflash 8/10 (same divergence: stock 0x498668 vs C 0x499416)",
+  "function-level (ag05, 09:50 CST)": "350/350 equal (harness also seeds g2_quicklist_rows_2006e370 fully, 0x280 B)",
+  "paired": "PASS on s6 (sha256 9d8ee907acd4...cff1; fixes 1-5): DFU_SAME, 924 HCI, OTAP 0xAFD1363A->0, CHIPREV 0x22, HOST 0x3A, unsupported 0, adv 1, display 2, faults 0 (identical to paired-s4)"
+ },
+ "artifacts": [
+  "build/ws-single-20261123/ag05-rerun.log",
+  "build/ws-single-20261123/agseq.py",
+  "build/ws-single-20261123/paired-s6.log"
+ ]
+}

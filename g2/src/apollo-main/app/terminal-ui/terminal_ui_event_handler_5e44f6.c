@@ -13,7 +13,7 @@ extern void audio_terminal_ui_status_5e7b74(uint32_t, uint32_t);
 extern void audio_terminal_ui_tick_5e8008(void);
 extern void audio_terminal_ui_stop_5e720c(void);
 extern void audio_terminal_ui_exit_sync_5e42ec(void);
-extern void audio_uart_page_58c238(uint32_t, uint32_t, uint32_t);
+extern void audio_uart_page_58c238(uint32_t object, uint32_t duration, void (*completed_cb)(void)); /* common_fade_in_animation */
 extern uint32_t audio_terminal_display_queue_handle;
 extern uint8_t audio_uart_registry_context_20003e50[];
 extern uint32_t audio_log_flags(void);
@@ -48,7 +48,7 @@ uint32_t audio_uart_registry_callback_5e44f6(uint32_t event,
         audio_terminal_ui_status_5e7b74(1u, 0u);
         *(uint32_t *)(void *)(audio_uart_registry_context_20003e50 + 4u) =
             audio_terminal_display_queue_handle;
-        audio_uart_page_58c238(audio_terminal_display_queue_handle, 250u, 0u);
+        audio_uart_page_58c238(audio_terminal_display_queue_handle, 250u, 0);
         audio_terminal_ui_exit_sync_5e42ec();
     } else if (event == 3u) {
         if (payload != 0 && length >= 8u) {

@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x325ccc..0x325d50: start the connection-update receive window.
  * Marks +672, copies +664/+666 to +678/+680, aligns the window offset
@@ -25,7 +26,7 @@ uint32_t opencfw_em9305_child_325ccc(uintptr_t record)
     *(volatile uint16_t *)(record+678u)=(uint16_t)first;
     *(volatile uint16_t *)(record+680u)=(uint16_t)second;
     uint32_t offset=opencfw_em9305_child_31340c(window*1250u);
-    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uintptr_t base=em9305_ram_805c5c.u32_805c70;
     uint32_t handle=(uint8_t)((int32_t)(record-base)/912);
     if(opencfw_em9305_child_3136fc(handle,minimum*1250u,maximum*1250u,offset,latency,
                                    (uintptr_t)&anchor)==0u)

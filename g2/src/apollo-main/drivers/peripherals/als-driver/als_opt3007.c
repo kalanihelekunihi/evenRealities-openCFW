@@ -28,8 +28,7 @@
 #define CALIBRATION_ONE 1000000u
 #define UNCALIBRATED_DIVISOR 10u
 
-extern uint32_t g2_codec_gpio_write(uint32_t channel, uint32_t value,
-                                    uint32_t unused_r2, uint32_t passthrough_r3); /* 0x509024 */
+extern uint32_t g2_codec_gpio_write(uint32_t channel, uint32_t value); /* 0x509024; stock callers set only r0/r1 */
 extern uint32_t audio_delay(uint32_t ticks); /* osDelay 0x449376 */
 extern void ti_opt3007_assignRegistermap(g2_opt3007_regmap_t *map); /* 0x5135e0 */
 extern uint16_t opt3007_register_get_5135d2(const g2_opt3007_field_t *field);
@@ -53,7 +52,7 @@ static const char no_calibration_short[] =
 int32_t als_function_25(void)
 {
     g2_opt3007_regmap_t *map = &g2_als_opt3007_regmap;
-    (void)g2_codec_gpio_write(SENSOR_POWER_CHANNEL, 1u, 0u, 0u);
+    (void)g2_codec_gpio_write(SENSOR_POWER_CHANNEL, 1u);
     (void)audio_delay(POWER_SETTLE_MS);
     ti_opt3007_assignRegistermap(map);
     uint16_t manufacturer = opt3007_register_get_5135d2(&map->manufacturer_id);
@@ -72,7 +71,7 @@ int32_t als_function_25(void)
 
 void als_function_26(void)
 {
-    (void)g2_codec_gpio_write(SENSOR_POWER_CHANNEL, 0u, 0u, 0u);
+    (void)g2_codec_gpio_write(SENSOR_POWER_CHANNEL, 0u);
 }
 
 uint32_t als_function_27(void)

@@ -409,8 +409,10 @@ static int32_t app_delete_all(uint8_t magic)
     return reply_send_app(length);
 }
 
-/* R arm: append the peer's names to the stored own list and reply to the app. */
-static void peer_file_list(void)
+/* R arm: append the peer's names to the stored own list and reply to the app.
+ * Returns the BLE TX error when the reply could not be sent, else 0 (stock
+ * hands that error back to the source-0x0b caller). */
+static int32_t peer_file_list(void)
 {
     const logger_setting_msg_t *rx = &g2_logger_setting_rx_msg;
     logger_setting_msg_t *tx = &g2_logger_setting_tx_msg;
@@ -418,7 +420,7 @@ static void peer_file_list(void)
     if (g2_master_file_list_stored_flag != 1) {
         if (audio_uart_device_role_get() == 1u)
             log0(2u, 0x1fdu, e_not_stored, c_not_stored);
-        return;
+        return 0;
     }
     log0(4u, 0x1e4u, e_peer_list, c_peer_list);
     for (int32_t i = 0; i < (int32_t)rx->payload.file_list.count; i++) {
@@ -432,14 +434,16 @@ static void peer_file_list(void)
         (uint16_t)(rx->payload.file_list.count + tx->payload.file_list.count);
     if (reply_encode(&length) == 0u) {
         log0(1u, 0x1edu, e_encode, c_encode);
-        return;
+        return 0;
     }
-    if (reply_send_app(length) != 0) {
+    int32_t result = reply_send_app(length);
+    if (result != 0) {
         log0(1u, 0x1f4u, e_to_master_fail, c_to_master_fail);
-        return;
+        return result;
     }
     log0(4u, 0x1f7u, e_to_master_ok, c_to_master_ok);
     g2_master_file_list_stored_flag = 0;
+    return 0;
 }
 
 int32_t loggerSetting_common_data_handler(uint32_t source, const void *data, uint32_t length)
@@ -477,9 +481,8 @@ int32_t loggerSetting_common_data_handler(uint32_t source, const void *data, uin
         uint8_t magic = g2_logger_setting_rx_msg.magic_random;
         log2(4u, 0x1e0u, e_cmd, c_cmd, cmd, magic);
         if (cmd == 4u)
-            peer_file_list();
-        else
-            log1(2u, 0x204u, e_unknown, c_unknown, cmd);
+            return peer_file_list();
+        log1(2u, 0x204u, e_unknown, c_unknown, cmd);
         return 0;
     }
     if (source == 0x0cu) {

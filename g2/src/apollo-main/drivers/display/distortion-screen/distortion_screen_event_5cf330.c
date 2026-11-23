@@ -40,9 +40,9 @@ extern void audio_uart_page_48ba92(uint32_t, uint32_t, uint32_t, uint32_t);
 extern uint32_t audio_uart_page_498668(uint32_t);
 extern void audio_uart_page_498680(uint32_t, const void *);
 extern uint32_t audio_uart_page_499416(uint32_t);
-extern void audio_uart_page_49942e(uint32_t, uint32_t);
+extern void audio_uart_page_49942e(uint32_t, const char *);
 extern uint32_t audio_uart_page_460084(const void *);
-extern uint32_t audio_uart_page_45fffe(const void *, uint32_t);
+extern const char *audio_uart_page_45fffe(const char *, uint32_t);
 /* The stock literal points at the ring-list primary head cell. */
 extern uint32_t audio_uart_ring_primary_head_cell;
 extern uint32_t audio_uart_registry_context_20003064[];
@@ -130,13 +130,13 @@ uint32_t audio_uart_registry_callback_5cf330(uint32_t event, uint32_t arg2,
     uint32_t label = audio_uart_page_499416(child);
     audio_uart_page_44140e(label, audio_uart_page_44104c(0xffffff), 0);
     audio_uart_page_49942e(label, audio_uart_page_45fffe(
-        audio_uart_distortion_text_736af4,
+        (const char *)audio_uart_distortion_text_736af4,
         audio_uart_page_460084(audio_uart_distortion_text_736af4)));
     audio_uart_page_44143e(label, audio_uart_ring_primary_head_cell, 0);
     label = audio_uart_page_499416(center);
     audio_uart_page_44140e(label, audio_uart_page_44104c(0xffffff), 0);
     audio_uart_page_49942e(label, audio_uart_page_45fffe(
-        audio_uart_distortion_text_736b24,
+        (const char *)audio_uart_distortion_text_736b24,
         audio_uart_page_460084(audio_uart_distortion_text_736b24)));
     audio_uart_page_44143e(label, audio_uart_ring_primary_head_cell, 0);
     audio_uart_page_44145a(label, 2, 0);

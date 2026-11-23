@@ -46,8 +46,8 @@ extern uint32_t audio_uart_display_audio_stop(void *state, uint32_t mode, uint32
 extern uint8_t display_registry_layer_get_442618(uint32_t id);
 extern void audio_uart_display_audio_schedule_44228a(uint32_t id, uint32_t operation, uint32_t arg0, uint32_t arg1);
 extern uint32_t audio_uart_page_460084(const char *key);
-extern uint32_t audio_uart_page_45fffe(uint32_t fallback, uint32_t index);
-extern int32_t menu_find_item_by_name_4628c4(uint32_t name);
+extern const char *audio_uart_page_45fffe(const char *fallback, uint32_t index);
+extern int32_t menu_find_item_by_name_4628c4(const char *item_name);
 extern void resume_menu_anim_time_460374(void);
 extern void dispThread_Fadeout_Anim_Start_464242(void *screen, uint32_t ms);
 extern uint32_t audio_uart_display_process(void); /* 0x464344 lv_timer_handler */
@@ -174,7 +174,7 @@ static void log2(uint8_t level, const char *fn, uint32_t line, const char *text,
 
 static int32_t menu_index(const char *name)
 {
-    return menu_find_item_by_name_4628c4(audio_uart_page_45fffe((uint32_t)(uintptr_t)name,
+    return menu_find_item_by_name_4628c4(audio_uart_page_45fffe(name,
                                                                 audio_uart_page_460084(name)));
 }
 

@@ -1,0 +1,1745 @@
+{
+ "workstream": "ws-ramlayout",
+ "time_cst": "2026-11-22 14:34 CST",
+ "build": {
+  "dir": "build/ws-ramlayout-20261122-1230/fv-1",
+  "elf_sha256_note": "fv-1 = tree with weak alias dropped (.globl/.set audio_quicklist_item_cache)"
+ },
+ "harness": {
+  "path": "build/ws-ramlayout-20261122-1230/fnh",
+  "method": "same M55 harness at 0x30000000 runs each case against stock and ours in Renode; compares status, ABI return regs per function, output regions",
+  "note": "first pass compared r1/d0 on every function; those are scratch regs for int/void returns. Re-scored with per-function return spec; all cases match."
+ },
+ "suites": {
+  "iar_general_format_481836": {
+   "n": 500,
+   "ran": 500,
+   "match": 500,
+   "stock_faults": 0,
+   "ours_faults": 0,
+   "first_mismatches": []
+  },
+  "am_util_vsprintf_473036": {
+   "n": 300,
+   "ran": 300,
+   "match": 300,
+   "stock_faults": 0,
+   "ours_faults": 0,
+   "first_mismatches": []
+  },
+  "iar_scan_core_4d1638": {
+   "n": 300,
+   "ran": 300,
+   "match": 300,
+   "stock_faults": 0,
+   "ours_faults": 0,
+   "first_mismatches": []
+  },
+  "md5_59544e_595578_595608": {
+   "n": 181,
+   "ran": 181,
+   "match": 181,
+   "stock_faults": 0,
+   "ours_faults": 0,
+   "first_mismatches": []
+  },
+  "strtod_family": {
+   "n": 1200,
+   "ran": 1200,
+   "match": 1200,
+   "stock_faults": 0,
+   "ours_faults": 0,
+   "first_mismatches": []
+  },
+  "sin_cos_fmod": {
+   "n": 750,
+   "ran": 750,
+   "match": 750,
+   "stock_faults": 0,
+   "ours_faults": 0,
+   "first_mismatches": []
+  }
+ },
+ "selftest": {
+  "stock": [
+   65541,
+   0
+  ],
+  "ours": [
+   65541,
+   0
+  ],
+  "complete": [
+   true,
+   true
+  ],
+  "ran": [
+   3233,
+   3233
+  ]
+ },
+ "orphan_routing": [
+  {
+   "stock": "0x200001e8",
+   "folders": [
+    "hal",
+    "system",
+    "ui"
+   ],
+   "functions": [
+    "(comment)",
+    "am_hal_sysctrl_sleep_44ab42"
+   ],
+   "sites": [
+    "0x44ac2a",
+    "0x44ac3e",
+    "0x47ef3c",
+    "0x47fcba"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": "hal (mine): g2_pwrctrl_trim_version, already owned, init 0xffffffff matches"
+  },
+  {
+   "stock": "0x200001ec",
+   "folders": [
+    "ui"
+   ],
+   "functions": [
+    "(comment)"
+   ],
+   "sites": [
+    "0x47fbd2",
+    "0x47fbd6",
+    "0x47fbd8"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": "third-party Ambiq am_hal_pwrctrl.c (low_power_init byte flag, stock 0x47fbd6)"
+  },
+  {
+   "stock": "0x200001f4",
+   "folders": [
+    "app",
+    "graphics"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5a1010"
+   ],
+   "how": "no g2/src function for stock 0x5a0fc4; module neighbours 0x59fae0:graphics, 0x5a4ef4:app",
+   "note": null
+  },
+  {
+   "stock": "0x20000244",
+   "folders": [
+    "app",
+    "graphics"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5a1020",
+    "0x5a125c",
+    "0x5a13a6"
+   ],
+   "how": "no g2/src function for stock 0x5a0fc4; module neighbours 0x59fae0:graphics, 0x5a4ef4:app",
+   "note": null
+  },
+  {
+   "stock": "0x200003b0",
+   "folders": [
+    "ble"
+   ],
+   "functions": [
+    "audio_ble_handler_4b7d32"
+   ],
+   "sites": [
+    "0x4b7f6e"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x20000448",
+   "folders": [
+    "ble"
+   ],
+   "functions": [
+    "appSlaveResolvedAddrInd_4b3792"
+   ],
+   "sites": [
+    "0x4b38f6",
+    "0x4b38fa",
+    "0x4b3932"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x2000044c",
+   "folders": [
+    "ble"
+   ],
+   "functions": [
+    "audio_ble_atts_callback_4b4ee6"
+   ],
+   "sites": [
+    "0x4b5016"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x20000458",
+   "folders": [
+    "ble"
+   ],
+   "functions": [
+    "audio_ble_atts_callback_4b4ee6"
+   ],
+   "sites": [
+    "0x4b501a"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x20000459",
+   "folders": [
+    "ble"
+   ],
+   "functions": [
+    "audio_ble_atts_callback_4b4ee6"
+   ],
+   "sites": [
+    "0x4b501e"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x2000045c",
+   "folders": [
+    "ble"
+   ],
+   "functions": [
+    "audio_ble_dm_lesc_msg_handler_534894"
+   ],
+   "sites": [
+    "0x534a4a"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x200004a4",
+   "folders": [
+    "runtime"
+   ],
+   "functions": [],
+   "sites": [
+    "0x598f26"
+   ],
+   "how": "no g2/src function for stock 0x598f14; module neighbours 0x598074:runtime, 0x59c7ac:runtime",
+   "note": null
+  },
+  {
+   "stock": "0x200004bc",
+   "folders": [
+    "app"
+   ],
+   "functions": [
+    "audio_message_notify_tx_whitelist_check_4d76cc"
+   ],
+   "sites": [
+    "0x4d7a24",
+    "0x4d7a3a",
+    "0x4d7a44",
+    "0x4d7efa"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x200004c0",
+   "folders": [
+    "app"
+   ],
+   "functions": [
+    "audio_message_notify_tx_whitelist_check_4d76cc"
+   ],
+   "sites": [
+    "0x4d7a28",
+    "0x4d7a3e",
+    "0x4d7a48",
+    "0x4d7efe"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x200004c4",
+   "folders": [
+    "app",
+    "runtime"
+   ],
+   "functions": [],
+   "sites": [
+    "0x4d7efe"
+   ],
+   "how": "no g2/src function for stock 0x4d7e9a; module neighbours 0x4d76cc:app, 0x4d914c:runtime",
+   "note": null
+  },
+  {
+   "stock": "0x20000e70",
+   "folders": [
+    "ble",
+    "runtime"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5084fa"
+   ],
+   "how": "no g2/src function for stock 0x507c94; module neighbours 0x503ea8:ble, 0x508b68:runtime",
+   "note": null
+  },
+  {
+   "stock": "0x20000e8c",
+   "folders": [
+    "ble",
+    "runtime"
+   ],
+   "functions": [],
+   "sites": [
+    "0x50852c"
+   ],
+   "how": "no g2/src function for stock 0x507c94; module neighbours 0x503ea8:ble, 0x508b68:runtime",
+   "note": null
+  },
+  {
+   "stock": "0x20001004",
+   "folders": [
+    "ble",
+    "hal"
+   ],
+   "functions": [],
+   "sites": [
+    "0x55d804"
+   ],
+   "how": "no g2/src function for stock 0x55d7d8; module neighbours 0x55cf40:ble, 0x55e244:hal",
+   "note": null
+  },
+  {
+   "stock": "0x200012a8",
+   "folders": [
+    "ble",
+    "runtime"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5083bc"
+   ],
+   "how": "no g2/src function for stock 0x507c94; module neighbours 0x503ea8:ble, 0x508b68:runtime",
+   "note": null
+  },
+  {
+   "stock": "0x200012c4",
+   "folders": [
+    "ble",
+    "runtime"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5083ec"
+   ],
+   "how": "no g2/src function for stock 0x507c94; module neighbours 0x503ea8:ble, 0x508b68:runtime",
+   "note": null
+  },
+  {
+   "stock": "0x20001534",
+   "folders": [
+    "system",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5c3e70"
+   ],
+   "how": "no g2/src function for stock 0x5c3dca; module neighbours 0x5c3798:ui, 0x5cdd14:system",
+   "note": null
+  },
+  {
+   "stock": "0x20001550",
+   "folders": [
+    "system",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5c4350",
+    "0x5c43bc"
+   ],
+   "how": "no g2/src function for stock 0x5c3dca,0x5c436c; module neighbours 0x5c3798:ui, 0x5cdd14:system, 0x5c3798:ui, 0x5cdd14:system",
+   "note": null
+  },
+  {
+   "stock": "0x20001580",
+   "folders": [
+    "system",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5c444c"
+   ],
+   "how": "no g2/src function for stock 0x5c436c; module neighbours 0x5c3798:ui, 0x5cdd14:system",
+   "note": null
+  },
+  {
+   "stock": "0x20001584",
+   "folders": [
+    "system",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5c4424"
+   ],
+   "how": "no g2/src function for stock 0x5c436c; module neighbours 0x5c3798:ui, 0x5cdd14:system",
+   "note": null
+  },
+  {
+   "stock": "0x20002b9c",
+   "folders": [
+    "system",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5c759a",
+    "0x5c75be",
+    "0x5c75e2",
+    "0x5c77d0"
+   ],
+   "how": "no g2/src function for stock 0x5c732c; module neighbours 0x5c3798:ui, 0x5cdd14:system",
+   "note": null
+  },
+  {
+   "stock": "0x20002ba0",
+   "folders": [
+    "system",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5c75c0"
+   ],
+   "how": "no g2/src function for stock 0x5c732c; module neighbours 0x5c3798:ui, 0x5cdd14:system",
+   "note": null
+  },
+  {
+   "stock": "0x20002ba4",
+   "folders": [
+    "system",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5c75e4"
+   ],
+   "how": "no g2/src function for stock 0x5c732c; module neighbours 0x5c3798:ui, 0x5cdd14:system",
+   "note": null
+  },
+  {
+   "stock": "0x20002bc4",
+   "folders": [
+    "system",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5c77fa",
+    "0x5c781c"
+   ],
+   "how": "no g2/src function for stock 0x5c77ec; module neighbours 0x5c3798:ui, 0x5cdd14:system",
+   "note": null
+  },
+  {
+   "stock": "0x20002e0c",
+   "folders": [
+    "drivers/power",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x55f4c4",
+    "0x55f4d4"
+   ],
+   "how": "no g2/src function for stock 0x55f4b8; module neighbours 0x55e99c:ui, 0x55f74c:drivers/power",
+   "note": null
+  },
+  {
+   "stock": "0x20002e1c",
+   "folders": [
+    "drivers/power",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x55f4cc"
+   ],
+   "how": "no g2/src function for stock 0x55f4b8; module neighbours 0x55e99c:ui, 0x55f74c:drivers/power",
+   "note": null
+  },
+  {
+   "stock": "0x20002e20",
+   "folders": [
+    "drivers/power",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x55f4ce"
+   ],
+   "how": "no g2/src function for stock 0x55f4b8; module neighbours 0x55e99c:ui, 0x55f74c:drivers/power",
+   "note": null
+  },
+  {
+   "stock": "0x20002e24",
+   "folders": [
+    "drivers/power",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x55f4d0"
+   ],
+   "how": "no g2/src function for stock 0x55f4b8; module neighbours 0x55e99c:ui, 0x55f74c:drivers/power",
+   "note": null
+  },
+  {
+   "stock": "0x20002e28",
+   "folders": [
+    "drivers/power",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x55f4d2"
+   ],
+   "how": "no g2/src function for stock 0x55f4b8; module neighbours 0x55e99c:ui, 0x55f74c:drivers/power",
+   "note": null
+  },
+  {
+   "stock": "0x20002e50",
+   "folders": [
+    "ui"
+   ],
+   "functions": [
+    "onboarding_animation_init_50f8cc"
+   ],
+   "sites": [
+    "0x50f900"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x20002e8c",
+   "folders": [
+    "ui"
+   ],
+   "functions": [
+    "onboarding_animation_init_50f8cc"
+   ],
+   "sites": [
+    "0x50f90a"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x20002f18",
+   "folders": [
+    "ui"
+   ],
+   "functions": [
+    "onboarding_animation_init_50f8cc"
+   ],
+   "sites": [
+    "0x50f914"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x20002f44",
+   "folders": [
+    "ui"
+   ],
+   "functions": [
+    "onboarding_animation_init_50f8cc"
+   ],
+   "sites": [
+    "0x50f91e"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x2000309c",
+   "folders": [
+    "audio",
+    "ui"
+   ],
+   "functions": [],
+   "sites": [
+    "0x442082",
+    "0x4420d6",
+    "0x4420ea",
+    "0x4421fc"
+   ],
+   "how": "no g2/src function for stock 0x44207c,0x4420d0,0x4420e8,0x4421e2; module neighbours 0x4410ee:ui, 0x44228a:audio, 0x4410ee:ui, 0x44228a:audio, 0x4410ee:ui, 0x44228a:audio, 0x4410ee:ui, 0x44228a:audio",
+   "note": "rtos (mine): FreeRTOS ulCriticalNesting @0x20013d44, init 0xaaaaaaaa matches"
+  },
+  {
+   "stock": "0x20004539",
+   "folders": [
+    "app",
+    "graphics"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5a1902",
+    "0x5a190c",
+    "0x5a4ad8",
+    "0x5a4ae2"
+   ],
+   "how": "no g2/src function for stock 0x5a1738,0x5a490c; module neighbours 0x59fae0:graphics, 0x5a4ef4:app, 0x59fae0:graphics, 0x5a4ef4:app",
+   "note": null
+  },
+  {
+   "stock": "0x2000453a",
+   "folders": [
+    "graphics"
+   ],
+   "functions": [
+    "gpu_nema_init_59fae0"
+   ],
+   "sites": [
+    "0x59fdea",
+    "0x59fe34",
+    "0x59fee0",
+    "0x59fefc"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x2000453b",
+   "folders": [
+    "graphics"
+   ],
+   "functions": [
+    "gpu_nema_init_59fae0"
+   ],
+   "sites": [
+    "0x59fdf6",
+    "0x59fe3a",
+    "0x59fee6",
+    "0x59ff02"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x2000453c",
+   "folders": [
+    "graphics"
+   ],
+   "functions": [
+    "gpu_nema_init_59fae0"
+   ],
+   "sites": [
+    "0x59fe20",
+    "0x59fe4c",
+    "0x59ff4c",
+    "0x59ff66"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x2000453d",
+   "folders": [
+    "graphics"
+   ],
+   "functions": [
+    "gpu_nema_init_59fae0"
+   ],
+   "sites": [
+    "0x59fe2c",
+    "0x59fe52",
+    "0x59ff52",
+    "0x59ff6c"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x2000453e",
+   "folders": [
+    "graphics"
+   ],
+   "functions": [
+    "gpu_nema_init_59fae0"
+   ],
+   "sites": [
+    "0x59fe04",
+    "0x59fe40",
+    "0x59ff16",
+    "0x59ff32"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x2000453f",
+   "folders": [
+    "graphics"
+   ],
+   "functions": [
+    "gpu_nema_init_59fae0"
+   ],
+   "sites": [
+    "0x59fe12",
+    "0x59fe46",
+    "0x59ff1c",
+    "0x59ff38"
+   ],
+   "how": "reconstructed function contains the access",
+   "note": null
+  },
+  {
+   "stock": "0x20004540",
+   "folders": [
+    "app",
+    "graphics"
+   ],
+   "functions": [],
+   "sites": [
+    "0x5a1fb4",
+    "0x5a23ee",
+    "0x5a245a",
+    "0x5a275c"
+   ],
+   "how": "no g2/src function for stock 0x5a1f04,0x5a22c0,0x5a23f8,0x5a26be; module neighbours 0x59fae0:graphics, 0x5a4ef4:app, 0x59fae0:graphics, 0x5a4ef4:app, 0x59fae0:graphics, 0x5a4ef4:app, 0x59fae0:graphics, 0x5a4ef4:app",
+   "note": null
+  }
+ ],
+ "paired_sims_fv1": [
+  "fv1 match RC=0",
+  "fv1 dfu-mismatch RC=0",
+  "DFU lines vs reference (ignoring handoff PC):",
+  "DFU_SAME",
+  "HCI packets: 922",
+  "OTAPOINTER_AFTER_0.01S 0xAFD1363A",
+  "OTAPOINTER_AFTER_8S 0x00000000",
+  "CHIPREV_AFTER_8S 0x00000022",
+  "HOST_PACKET_COUNT 0x0000003A",
+  "UNSUPPORTED_COUNT 0x00000000",
+  "adv 1 display        2 faults 0"
+ ],
+ "milestone4": {
+  "time_cst": "2026-11-22 3:05 PM CST",
+  "alignment": {
+   "root_cause": "clang gives uint8_t/char arrays and all-byte structs alignment 1; -fdata-sections + ld pack them byte-adjacent",
+   "before_fv2": 41,
+   "after_fv3": [
+    {
+     "addr": "0x20203119",
+     "size": 15,
+     "names": [
+      "g2_translate_lang_pair_text"
+     ]
+    }
+   ],
+   "fix": "pending/04-compose-align4.patch (tools/build/sources.py compose pass), privately via relink.py ALIGN4=1; 188 sections raised",
+   "static_scan": "alignscan.py: 0 alignment-requiring accesses with absolute base hit misaligned objects (pointer-based uses not covered)",
+   "build": {
+    "dir": "build/ws-ramlayout-20261122-1230/fv-3",
+    "sha256": "ba110c8bf5937c03acbc58c176a1ca5b5ae36733a0fb4b3dc6f76150d8205d31",
+    "bytes": 3627628
+   },
+   "paired_sims": [
+    "fv3 dfu-mismatch RC=0",
+    "DFU lines vs reference (ignoring handoff PC):",
+    "DFU_SAME",
+    "HCI packets: 924",
+    "OTAPOINTER_AFTER_0.01S 0xAFD1363A",
+    "OTAPOINTER_AFTER_8S 0x00000000",
+    "CHIPREV_AFTER_8S 0x00000022",
+    "HOST_PACKET_COUNT 0x0000003A",
+    "UNSUPPORTED_COUNT 0x00000000",
+    "adv 1 display        2 faults 0"
+   ],
+   "hci_count_note": "924 vs 922: Renode log collapsed 3 repeated 01182000 lines as \"(3)\" in fv-2; same packets"
+  },
+  "orphan_owners": [
+   {
+    "stock": "0x200001ec",
+    "owner": "g_DefaultMcuMemCfg",
+    "ok": true,
+    "detail": "0007000300 vs stock 0007000300"
+   },
+   {
+    "stock": "0x200001f4",
+    "owner": "g_ui32PwrStVddcVoltLvl",
+    "ok": true,
+    "detail": "0000000000000000010000000200000001000000 vs stock 0000000000000000010000000200000001000000"
+   },
+   {
+    "stock": "0x20000244",
+    "owner": "g_ui32PwrStVddfVoltLvl",
+    "ok": true,
+    "detail": "0100000000000000000000000000000003000000 vs stock 0100000000000000000000000000000003000000"
+   },
+   {
+    "stock": "0x20004539",
+    "owner": "g_bTempLessThan50C",
+    "ok": true,
+    "detail": "01 vs stock 01"
+   },
+   {
+    "stock": "0x2000453a",
+    "owner": "g_ui8VddcActLowTonTrim",
+    "ok": true,
+    "detail": "0d vs stock 0d"
+   },
+   {
+    "stock": "0x2000453b",
+    "owner": "g_ui8VddcActHighTonTrim",
+    "ok": true,
+    "detail": "0d vs stock 0d"
+   },
+   {
+    "stock": "0x2000453c",
+    "owner": "g_ui8VddcLvActLowTonTrim",
+    "ok": true,
+    "detail": "0b vs stock 0b"
+   },
+   {
+    "stock": "0x2000453d",
+    "owner": "g_ui8VddcLvActHighTonTrim",
+    "ok": true,
+    "detail": "0b vs stock 0b"
+   },
+   {
+    "stock": "0x2000453e",
+    "owner": "g_ui8VddfActLowTonTrim",
+    "ok": true,
+    "detail": "12 vs stock 12"
+   },
+   {
+    "stock": "0x2000453f",
+    "owner": "g_ui8VddfActHighTonTrim",
+    "ok": true,
+    "detail": "19 vs stock 19"
+   },
+   {
+    "stock": "0x20004540",
+    "owner": "eOngoingSeq",
+    "ok": true,
+    "detail": "1a vs stock 1a"
+   },
+   {
+    "stock": "0x20002b9c",
+    "owner": "kb_map",
+    "ok": true,
+    "detail": "10 entries, pointee strtab compared, bad=[]"
+   },
+   {
+    "stock": "0x20001534",
+    "owner": "day_names_def",
+    "ok": true,
+    "detail": "7 entries, pointee str compared, bad=[]"
+   },
+   {
+    "stock": "0x20001550",
+    "owner": "month_names_def",
+    "ok": true,
+    "detail": "12 entries, pointee str compared, bad=[]"
+   },
+   {
+    "stock": "0x200004a4",
+    "owner": "lc3_bwdet_run.bws_table",
+    "ok": true,
+    "detail": "4 entries, pointee bytes compared, bad=[]"
+   },
+   {
+    "stock": "0x20002bc4",
+    "owner": "kb_ctrl",
+    "ok": true,
+    "detail": "10 entries, ctrl words per button compared, bad=[]"
+   },
+   {
+    "stock": "0x20001580",
+    "owner": "lv_calendar_header_dropdown month_list (GCC folded the never-written pointer)",
+    "ok": true,
+    "detail": "string b'01\\n02\\n03\\n04\\n05\\n06\\n07\\n08\\n' present in our image"
+   },
+   {
+    "stock": "0x20001584",
+    "owner": "lv_calendar_header_dropdown year_list (GCC folded the never-written pointer)",
+    "ok": true,
+    "detail": "string b'2025\\n2024\\n2023\\n2022\\n2021' present in our image"
+   },
+   {
+    "stock": "0x20002e0c",
+    "owner": "code_to_value.code_to_value_funs (npmx_adc.c)",
+    "ok": true,
+    "detail": "ours ['code_to_vbat', 'code_to_bat_temp', 'code_to_die_temp', 'code_to_vsys', 'NULL', 'NULL', 'code_to_ibat', 'code_to_vbus', 'NULL', 'NULL']; stock nulls [4, 5, 8, 9]; stock fn constants 5000/log-NTC/0x1ef6/6375/ibat/7500 match npmx code_to_vbat/bat_temp/die_temp/vsys/ibat/vbus"
+   },
+   {
+    "stock": "0x20002e50",
+    "owner": "g2_onboarding_anim_frames_0",
+    "ok": true,
+    "detail": "15 entries, pointee bytes compared, bad=[]"
+   },
+   {
+    "stock": "0x20002e8c",
+    "owner": "g2_onboarding_anim_frames_1",
+    "ok": true,
+    "detail": "35 entries, pointee bytes compared, bad=[]"
+   },
+   {
+    "stock": "0x20002f18",
+    "owner": "g2_onboarding_anim_frames_2",
+    "ok": true,
+    "detail": "11 entries, pointee bytes compared, bad=[]"
+   },
+   {
+    "stock": "0x20002f44",
+    "owner": "g2_onboarding_anim_frames_3",
+    "ok": true,
+    "detail": "54 entries, pointee bytes compared, bad=[]"
+   }
+  ],
+  "cjson_global_hooks": {
+   "stock": "0x200004bc..0x200004c8",
+   "ours": "0x200130cc",
+   "values": "file_heap_allocate/file_heap_free/audio_file_heap_realloc, match stock 0x474cd3/0x474d17/0x474d55 roles",
+   "placement": "does not matter: static in cJSON.c, no absolute-address users in g2/src"
+  },
+  "transaction_extract": {
+   "n": 404,
+   "ran": [
+    404,
+    404
+   ],
+   "complete": [
+    true,
+    true
+   ],
+   "match": 404,
+   "stock_status": {
+    "0": 168,
+    "-2": 34,
+    "-5": 93,
+    "-1": 42,
+    "-3": 19,
+    "-4": 39,
+    "-7": 9
+   },
+   "faults": [
+    0,
+    0
+   ],
+   "first_mismatches": []
+  },
+  "suite1_fv3": [
+   "iar_general_format_481836 {'n': 500, 'ran': 500, 'match': 500, 'stock_faults': 0, 'ours_faults': 0}",
+   "am_util_vsprintf_473036 {'n': 300, 'ran': 300, 'match': 300, 'stock_faults': 0, 'ours_faults': 0}",
+   "iar_scan_core_4d1638 {'n': 300, 'ran': 300, 'match': 300, 'stock_faults': 0, 'ours_faults': 0}",
+   "md5_59544e_595578_595608 {'n': 181, 'ran': 181, 'match': 181, 'stock_faults': 0, 'ours_faults': 0}",
+   "strtod_family {'n': 1200, 'ran': 1200, 'match': 1200, 'stock_faults': 0, 'ours_faults': 0}",
+   "sin_cos_fmod {'n': 750, 'ran': 750, 'match': 750, 'stock_faults': 0, 'ours_faults': 0}",
+   "_selftest {'stock': [65541, 0], 'ours': [65541, 0], 'complete': (True, True), 'ran': (3233, 3233)}"
+  ]
+ },
+ "milestone5": {
+  "time": "2026-11-22 ~15:45 CST",
+  "patch04_applied": "tools/build/sources.py compose align_writable (approved single-writer change)",
+  "build": {
+   "dir": "build/ws-ramlayout-20261122-1230/full-a4b-link/g2-apollo-main",
+   "sha256": "b155024e0552711efb2848040b38739bbd2b5746a0e6f9c1196c49cb2005bcb0",
+   "bytes": 3626996,
+   "align4_sections": 188,
+   "align_err": 0,
+   "split_oob_dyn": 0
+  },
+  "paired_sims": "match rc0 DFU_SAME HCI 922 OTAP 0xAFD1363A->0 CHIPREV 0x22 host 0x3A unsupported 0 adv 1 display 2 faults 0",
+  "progress_doc": "prepended entry after line 1 (STATUS: IN-PROGRESS kept)",
+  "cell_20000444": "owner pAppMasterReqActCfg 4 B pointer; init &appReqActCfg (byte 00) equivalent to stock 0x0078f6d3 (ROM byte 00); 1-byte label was analysis artifact",
+  "suite2_transaction_extract": "404/404 (fv-3)",
+  "suite3_freertos_cli": "525/525 (fv-3)",
+  "suite4_hal_clock": {
+   "build": "full-a4b",
+   "random": "227/227",
+   "deep": "397/397",
+   "functions": 18,
+   "faults": 0,
+   "state_changed_cases": 131,
+   "masked": "20074228+0x38/0x3c/0x40 published &stack-local counter (frame depth differs by 4 B)",
+   "not_covered": "audio_clock_counter_wait/hfrc2_wait direct (exercised only via callers with STABILIZING mostly 0); audio_clock_bit_count inlined (covered via count)"
+  }
+ },
+ "milestone6": {
+  "time": "2026-11-22 ~16:05 CST",
+  "build": "full-a4b-link (sha b155024e..., includes 15:16 format.c edit; cmp #42 at 0x49463e)",
+  "suite5_audio_heap_formatter": {
+   "stock": "0x473036",
+   "ours": "0x494514",
+   "cases": 500,
+   "match": 500,
+   "dot_star_cases": 230,
+   "faults": 0,
+   "note": "incl. .* with negative/zero/large precision on %s %d %u %x %f %c %p, ll, widths, 0-pad, NULL buf, \\n->\\r\\n xlate. 15:16 edit matches stock; kept."
+  },
+  "suite6_cli_terminal_command_582b0c": {
+   "cases": 200,
+   "match": 200,
+   "faults": 0,
+   "subcommands": "all 18 + unknown; print captured via g_pfnCharPrint->h_puts; msg 0x20100954/0x850 and magic compared; sends return -1 (no link) identically"
+  },
+  "suite7_tracepoint_pure": {
+   "cases": 700,
+   "match": 700,
+   "functions": [
+    "parse_sequence_5edaf0",
+    "parse_file_entry_47de18",
+    "format_file_path_5edba2",
+    "format_list_name_5eddc8",
+    "format_pull_path_47de0a",
+    "insert_file_sorted_5edbb0"
+   ],
+   "note": "void fns compared by memory only"
+  },
+  "suite8_rtos_conversate_timer": {
+   "cases": 500,
+   "match": 500,
+   "functions": 11,
+   "state_changed": 283
+  }
+ },
+ "milestone7": {
+  "time": "2026-11-22 16:36 CST",
+  "build": "full-a4b-link",
+  "harness": "fnh recording stubs (callee entry -> movw r12,id; ldr pc,h_stub_entry); log id+r0..r3; return table; storage model (fread from file image, fwrite capture). Args compared up to callee C-prototype arity (unknown arity: r0 only); stack ptrs -> STK, RO ptrs -> RO, RAM/code ptrs mapped by stock-address symbol names. Seeded/dumped cells limited to owning object size.",
+  "stub_arg_check": "suite9 compared all args (arity-masked) from the start; autosuite first pass compared r0 only -> rerun with full args (auto10b). suites 1-8 use no stubs.",
+  "suite9_sync_timer": "240/240 (start + callback, all error paths)",
+  "auto10b_rtos": {
+   "functions": 19,
+   "cases": 228,
+   "match": 228,
+   "skipped": {
+    "conversate_mutex_init_5b0120": "stock calls log_flags 11x vs ours 10x (one extra flags read before 2nd extended log); not tested",
+    "log_transport_flush_448f98": "no symbol in our ELF",
+    "td_record_timer_clear": "ours calls 0x451990 helper where stock inlines"
+   },
+   "notes": "even_ai_common_timer_start: stock returns caller R3 (documented, callers discard) -> treated void"
+  },
+  "auto11c_tracepoint_fs": {
+   "functions": 18,
+   "cases": 288,
+   "match_functions": 14,
+   "open": {
+    "pull_write_batch_47e178": "5/16; call sequence differs on some paths (triage: real vs pairing)",
+    "delete_all_5ee7b4": "0/16: one callee arg set differs + unmapped RAM ptr (stock 0x2037cdc8 vs ours 0x201147a4)",
+    "delete_file_5ee488": "0/16 same signature as delete_all",
+    "storage_lock_47e088": "stock faults at 0x47e088 (usage fault): likely not a function entry; address/label to recheck"
+   },
+   "skipped_structure": [
+    "dir_close_474c66",
+    "pull_ready_48eb90",
+    "resolve_file_path_5eddf6",
+    "scan_files_5edc5a",
+    "storage_mkdir_474a76",
+    "storage_unlink_47498c",
+    "write_state_47df28",
+    "build_header_48ed00 (callee count differs: inlining/helpers)",
+    "crc32_48ecae (inlined)"
+   ]
+  }
+ },
+ "milestone8": {
+  "time": "2026-11-22 17:13 CST",
+  "build": "full-a4b-link (b155024e)",
+  "stub_args": "autosuite records stub calls (id,r0..r3); args compared to prototype arity; fn-pointer args compared as stock addr via FNMAP (unmapped visible). suite9 arity-masked from start; suites1-8 stub-free. auto10b rerun with FN+exact cells: 18/19 fns, 227/228.",
+  "tracepoint_boundary": {
+   "run": "auto12",
+   "result": "29/29 fns, 14 cases each, real callees except file/lfs/mutex/alloc boundary",
+   "notes": [
+    "0x47e088 storage_lock label correct; earlier stock fault was overlapping stubs",
+    "0x2037cdc8 was mis-hexed; actual 0x2037bbc8 = audio_tracepoint_reply_buffer, mapped",
+    "write_state: fwrite 16-byte TPS1 record byte-identical in 11/11 write cases; missing memset not observable, no C change"
+   ]
+  },
+  "rtos_boundary": {
+   "run": "auto13",
+   "result": {
+    "conversate_mutex_init_5b0120": "40/40 (missing log-flag read not observable)",
+    "td_record_timer_clear 0x597652": "40/40",
+    "ring_persist_event_set_47dd62": "40/40 (covers inlined log_transport_flush_448f98)",
+    "reset_pull_478110": "38/40"
+   },
+   "reset_pull_note": "2 diffs only with r0=0x20990100 (non-extended uint8_t); stock re-extends with uxtb, clang relies on AAPCS caller extension. Not reachable from conforming callers; no C change."
+  },
+  "auto10b_diff": "conversate_action_5b4d10 1/12 differs: harness passed arg1=2 as pointer, reads addr 7 (differs per image). Logic identical to stock disasm. Harness artifact."
+ },
+ "milestone9": {
+  "time": "2026-11-22 17:59 CST",
+  "build": "full-a4b-link (b155024e)",
+  "c_changes": "none",
+  "harness": [
+   "narrow uint8/16 args now ABI-extended per our prototype",
+   "per-config arity overrides",
+   "RAM pointers stored in dumped memory normalised ours->stock (only where the word changed)",
+   "pointer-cell seeding (ptrcells/nzptr), argch per-arg choices",
+   "fnh.c stub behaviour 3: fill a 40-byte output record (RTC calendar)"
+  ],
+  "log_output": {
+   "stub_mode": "auto14: 14 log leaf/port fns 20/20 each (flags, level, wake_allowed, lock enter/exit, elog_port_init/output/lock/unlock, sink_set, default_level_set, crash_record_recover, ext_flieStore_Init, time_snapshot)",
+   "boundary": "auto15d+15e: 21/21 fns match (transport_wake, port_output_level, thread_init, transport_ready, context, emit, epoch_seconds, audio_log_format, compressed_log_output, datetime_now, time_string, transport submit/alloc/free/enqueue/initialize, async dequeue/enqueue_log/drain, atomic cas/cas_ptr)",
+   "not_separate": [
+    "pool/pending_initialize, atomic store/load(_ptr) inlined in ours; covered via callers",
+    "audio_log_tick: stock 0x454efe/0x454f06 too close to stub both; disasm identical (IRQ_Context ? FromISR : TaskGetTickCount); used as boundary for the rest",
+    "elog_output 0x43d574 is generated upstream easylogger, not my folder"
+   ],
+   "artifacts": [
+    "diffs earlier traced to harness: invalid pointers (0/1/2 as pointers), overlapping stubs, uninitialised RTC record, ASCII words mistaken for RAM pointers"
+   ]
+  },
+  "rtos": {
+   "reset_pull": "auto13b 40/40 with ABI-valid byte args (other 3 rtos-boundary fns 40/40)",
+   "terminal_ui": "stub auto16: notification_restore, stop_timer, tick, action_5e6548, timer_expired 12/12; boundary auto17/17b: 5e5442, 5ed748, 5e66d8, 5e68dc, finish_5e5420 16/16 (finish stub-mode 10/12 from stub overlap; boundary 16/16)",
+   "wsf": "WsfTimerUpdate, NextExpiration, UpdateTicks 12/12",
+   "uart_shell": "shell_rx_callback 12/12; shell_task_541600 and uart_thread_handler are infinite task loops, not differentially testable as units",
+   "task_vote": "acquire_current/release_current 20/20 boundary (find/acquire/release inlined into them in ours)"
+  }
+ },
+ "milestone10": {
+  "time": "2026-11-22 18:26 CST",
+  "build": "full-a4b-link (b155024e)",
+  "c_changes": "none",
+  "harness": [
+   "stub behaviour 4: blocking-wait stub counts calls and longjmps to the harness on call N+1 (status 10); mode 1 feeds one byte per call into the rx pointer, mode 2 returns one event-bits word per call",
+   "call log moved to 0x30301000, max 100 calls (old 0x30302c00 log could overrun the file image at 0x30302d80 after 19 calls; earlier suites with >19 stub calls checked: none relied on the file image)",
+   "fixcells: fixed seed bytes (uart init callback pointer -> harness h_nop)"
+  ],
+  "shell_task_541600": {
+   "run": "auto19b boundary (27 stubs: stream receive, putchar, puts, CLI process, memset, 22 registrations)",
+   "result": "28/28, all escaped after N=1,2,3,5,8,12,20 iterations; per-iteration call sequence (putchar chars, prompt, CLI calls, memsets) and input/output line buffers identical; inputs mix printable, CR, LF, DEL, BS"
+  },
+  "uart_thread_handler": {
+   "run": "auto20 boundary (26 stubs)",
+   "result": "20/20: 10 init-failure/early-return cases (status 0) and 10 escaped after N=0..4 event waits (status 10); covers event bits 1/2/4, inner receive loop up to its 32-iteration cap, event clears"
+  }
+ },
+ "milestone11": {
+  "time": "2026-11-22 19:02 CST",
+  "build": "full-a4b-link (b155024e)",
+  "c_changes": "none",
+  "uart_command_branch": "auto22: 2/2; both images take the command path (pending==1, command[0]==1): transport_receive(transport, command+1 [stock 0x20074081], 10, 0), byte cleared, next pass takes the normal receive loop",
+  "rtos_batch": "auto21c, 13 functions on one image pair (stub mode): 12/13 match 12/12 cases: uart_shell_init, conversate display_tick, conversate_timer clear/expired/init/remove/start/stop, task_vote_init, task_vote_blocks_deep_sleep, td_bind_temp_session_response_timer, thread_terminate_selected",
+  "open": [
+   "td_dismiss_query_notification 5/12: not yet diagnosed",
+   "port/tickless group (xPortStimerTickHandler, stimer isr, vPortSetupTimerInterrupt, vPortSuppressTicksAndSleep, am_freertos_sleep/wakeup, idle hook) and uart_sync_irq_handler: need the peripheral memory map; first attempt produced no result file; not run since",
+   "even_ai_timer_start_all_4e31a0 and text_stream_tick_553054: callee structure differs, need boundary mode",
+   "vApplicationMallocFailedHook / StackOverflowHook: end in b . / bkpt loops (bkpt halts the emulator); disassembly instruction-for-instruction equivalent to stock 0x46d85e/0x46d86c; excluded from runs"
+  ],
+  "notes": [
+   "harness: extracells (explicit far offsets inside big objects), fixcells, void flags corrected for 4 conversate timer fns (earlier r0 diffs were from my JSON marking void fns non-void)",
+   "one Renode run exited early with no dump (no error); re-ran the same script by hand and it completed. Possibly contention with another stream's Renode; watching for it"
+  ]
+ },
+ "milestone12": {
+  "time": "2026-11-22 19:39 CST",
+  "build": "full-a4b-link (b155024e)",
+  "stock": "build/em9305-nor-20261122/stock.app.bin",
+  "harness_changes": [
+   "short 8-byte stubs (movw r12,#id; b.w MRAM-tail trampoline 0x7ffff0) so neighbours >=8 B apart no longer overlap; validated auto17c 16/16",
+   "blob window 0x20900000+1MB added to fnh.repl and fnh-periph.repl: 0x20990100 arg/pointer blob was UNMAPPED in all runs before 19:20 CST (reads 0, writes dropped, blob dump always 0 in both images)",
+   "explicit rammap now overrides auto span symbols (g2_uart_sync_started/write_error were mis-mapped to g2_stock_ram_20074fc8 span)",
+   "per-target forced cells and blobwords; stub behaviour 5 (write out-param word); arity 0 overrides for void-arg callees",
+   "Renode machines named wsram_fnh_<tag>_<img> with --pid-file"
+  ],
+  "results": {
+   "auto25 (real-callee/boundary, periph map, 11 fns x16)": "176 cases; all match except 1 xPortStimerTickHandler case where both images hit TICK_LIMIT",
+   "auto26 xPortStimerTickHandler constrained stimer cells": "21/21 completed match; 3 both-timeout (counter wrap, huge tick loop)",
+   "auto27 uart_sync_irq_handler with started=1 and status out-param": "24/24, 10 distinct callee paths",
+   "td_dismiss": "diagnosis: earlier 5/12 was harness artifact (stubbed find_record_index never wrote out-param; stock reads uninitialised stack). Real-callee run 16/16",
+   "even_ai_timer_start_all_4e31a0": "real-callee 16/16, both role paths",
+   "text_stream_tick_553054": "real-callee 16/16 (+24/24 auto24), copy path reached",
+   "fault hooks MallocFailed/StackOverflow": "accepted on instruction-level match (bkpt halts Renode)"
+  },
+  "c_changes": "none",
+  "open": [
+   "rerun blob-dependent earlier suites (auto15e, auto17b, auto18, auto19b, auto20, auto21c, auto22, auto13b) now that 0x20990100 is mapped",
+   "am_freertos_sleep only exercised blocks_deep_sleep==0 path"
+  ]
+ },
+ "milestone13_partial": {
+  "time": "2026-11-22 20:23 CST",
+  "rerun_with_mapped_blob": {
+   "m13 rtos-boundary": "160/160",
+   "m15e log-boundary-ptr": "90/90",
+   "m17 rtos2-boundary": "80/80",
+   "m17b 66d8": "16/16",
+   "m18 task_vote": "40/40",
+   "m19 shell_task loop": "28/28",
+   "m20 uart thread loop": "20/20",
+   "m22 uart cmd": "2/2",
+   "m21 rtos3-main": "td_dismiss 5/12 (known stub artifact, real-callee 16/16); rest match",
+   "m16 rtos2 stub mode": "120/120 (auto16 finish 10/12 now 12/12)",
+   "m15d log-boundary": "DIFF g2_log_datetime_now_44a19a 8/10, g2_log_transport_submit 8/10 - under investigation",
+   "m14 log-targets stub mode": "DIFF audio_log_level, audio_log_transport_wake, elog_async_thread_init_448f44 0/20 - suspected unseeded cross-case state (stock log byte 0x20074388 vs ours audio_log_policy_byte not cell-mapped); under investigation"
+  },
+  "queued": [
+   "m12 tp-boundary",
+   "m11 tp-targets",
+   "m10 rtos-targets",
+   "m9 suite9",
+   "s1 deep-sleep-blocked + UART RSR 0x40039004 dump",
+   "f1 sprintf 0x4b4728 full-formatter differential (next area: system/log full-formatter ~8KB)"
+  ],
+  "harness_changes": [
+   "forced cells may name peripheral registers (same address both images)",
+   "stub behaviour 5",
+   "fimgs/argpairs per-target options"
+  ],
+  "c_changes": "none"
+ },
+ "milestone13": {
+  "time": "2026-11-22 20:51 CST",
+  "reruns_mapped_blob": {
+   "m13": "160/160",
+   "m15e": "90/90",
+   "m17": "80/80",
+   "m17b": "16/16",
+   "m18": "40/40",
+   "m19": "28/28",
+   "m20": "20/20",
+   "m22": "2/2",
+   "m21": "match except td_dismiss stub-mode artifact (real-callee 16/16)",
+   "m16": "120/120",
+   "m12 tp-boundary": "406/406 (14 both-timeout)",
+   "m11 tp stub mode": "same 4 structure-differs fns as before (verified in boundary mode m12/m13)",
+   "m10": "570: only vApplicationGetIdleTaskMemory 29/30 = aliased out-pointer input (r0==r2), write order only",
+   "m9b suite9 (stub log address fixed)": "240/240 with call paths",
+   "m14t log stub mode (level byte seeded)": "all match except elog_async_thread_init stub-pairing artifact (ours tail-calls boot_log; boundary m15d 10/10)",
+   "m15h log boundary (valid RTC records)": "transport_submit 30/30; datetime_now 27/30 = stock copies 3 uninitialised stack words (rec+0,+8,+36) from epoch_to_calendar 0x449fda local; ours leaves them; stock UB, no fix"
+  },
+  "m15d_cause": "datetime_now: RTC stub not filled + invalid random calendar; transport_submit: non-pointer source address read low memory. Inputs fixed (beh 3 + valid records, pointer argch).",
+  "m14_cause": "log level byte stock 0x20004544 not cell-mapped (ours audio_log_policy_byte has no suffix); seeded via rammap -> match. transport_wake: ours stubs 0x491d04/0x491d08 4 bytes apart overlapped -> fixed by 4-byte stubs.",
+  "itcm_bin": "generated/boot/itcm.bin (rewritten 19:55) byte-identical to build/em9305-nor-20261122/itcm.bin (05:24), sha256 0676154418085b06..; cannot matter, no pinned copy needed",
+  "s1": {
+   "am_freertos_sleep (vote state seeded, deep-sleep-blocked path)": "24/24",
+   "uart_sync_irq + UART0_RSR 0x40039004 seeded/dumped": "24/24, 9 paths"
+  },
+  "f1": {
+   "sprintf 0x4b4728 (IAR full formatter core/float/integer/parse)": "240/240 (5 both-timeout on huge * width/precision); 27 float + 44 int/str formats incl NaN/inf/denormal/1e300/%a/%n"
+  },
+  "real_diffs_found": "stock .data initial values missing in ours (not ws-ramlayout files): pending/07-stock-data-initializers.patch (log level 3, exit prompt hold 750, registry ctx 0x0b); note alert page id 0xb4",
+  "harness_changes": [
+   "stubs now 4 bytes (b.w to per-id 16-byte slot at 0x7f0000+16*id)",
+   "suite9 stub log address updated"
+  ],
+  "c_changes": "none in ws-ramlayout files"
+ },
+ "milestone14": {
+  "time": "2026-11-22 21:34 CST",
+  "image": "full-a4b-link (pre-rebuild)",
+  "harness": "fnh autosuite: FNH_STRARGS=1 compares ROM/ITCM string arguments to stubs by content; printf-style stubs compare only args covered by the format conversions; return values never string-decoded",
+  "cli_commands_x02": {
+   "targets": 59,
+   "cases": 708,
+   "match": 660,
+   "cli_cmd_ble_slave_58118a": "real C diff fixed in system/x-02-cli-commands/prvCommand_ble_at.c: s_bles_bad had extra \" %s %s\" vs stock ROM 0x6d50cc (stock passes no varargs -> printf of garbage pointers). Needs rebuild to re-verify.",
+   "cli_cmd_single_start/reflash/stop": "36 cases: callee-internal only (app/slave-send send_display zeroes notice[3] by initializer; stock calls memset-like 0x43c0e4 twice). Same output string and same fault path; not a diff in x-02.",
+   "string_scan": "819 system/** string literals with ROM comments compared to stock bytes: only the ble_at one differed (1 more was a comment-attribution false hit)"
+  },
+  "iar_scanf": {
+   "sscanf->scanf_core/getstr/stoxflt/ranmatch": "120/120 (24 formats incl %f %lf %e %g %a %[..] %n %lld %hhd %*d %c %s, 26 inputs)"
+  },
+  "iar_strtox": {
+   "strtoul_48d874": "60/60",
+   "iar_strtol_595a2e": "60/60",
+   "strtoll_541e2c": "60/60 (r0 low word)",
+   "strtoull_541d84": "60/60 (r0 low word)"
+  },
+  "gc_live_in_stock_review": {
+   "items": 15,
+   "missing_calls": 0,
+   "inlined_or_equivalent": 12,
+   "comment_attribution": 2,
+   "suffix_collision": 1,
+   "note": "build/ws-ramlayout-20261122-1230/pending/09-gc-live-in-stock-ramlayout-review.md"
+  },
+  "cli_commands_x02_rerun_c3": {
+   "boundary": "display_start/refresh/stop stubbed at the app API (no memset artifact)",
+   "group0": "228/228",
+   "group1": "475/480",
+   "residual": {
+    "ble_slave 2": "the fixed string (old ELF)",
+    "udata 1": "harness: int arg 0x7d59 falls in ours ITCM rodata, decoded as string",
+    "alert 2": "ABI: stock passes the raw int, ours (uint8_t); callee 0x4d306c only strb-stores it, so equivalent"
+   }
+  },
+  "iar_strtof_595964": "not directly tested (VFP float return); stoxflt/strtod_541bc2/dtento covered via sscanf %f/%e/%g/%a 120/120"
+ },
+ "milestone15": {
+  "time": "2026-11-22 22:04 CST",
+  "images": {
+   "full-2135-link": "private rebuild with log-level 3, tracepoint sequence 1, registry contexts, BLES string fixes",
+   "full-2158-link": "plus format.c g_bTxtXlate byte test"
+  },
+  "paired_sims": {
+   "full-2135": "DFU_SAME, 0 faults, HOST_PACKET_COUNT 0x3A",
+   "full-2158": "DFU_SAME, 0 faults, HOST_PACKET_COUNT 0x3A"
+  },
+  "log_recheck": {
+   "n14 unseeded log targets": "320/340; audio_log_level and transport_wake now match without seeding (old m14 280/340); only remaining is elog_async_thread_init stub-pairing artifact (boundary mode 10/10)",
+   "n15h": "datetime 27/30 (known stock UB), transport_submit 30/30"
+  },
+  "cli_rerun_full-2135": {
+   "group1": "478/480 (ble_slave fix verified 12/12; 2 alert = uint8 vs int arg, callee strb only)",
+   "group0": "228/228",
+   "harness": "audio_string_length treated as pure (ours elog_output hoists strlen)"
+  },
+  "am_util_vformat_473036": {
+   "before": "157/200 (43 diffs: stock tests text-mode byte !=0, ours bool ==1)",
+   "fix": "system/log/main-formatter/format.c g_bTxtXlate read as uint8_t",
+   "after full-2158": "200/200"
+  },
+  "raminit_whole_image": {
+   "named": "14 mismatches across 882 named vars (none ws-ramlayout)",
+   "unnamed": "83 vars paired from 1859 functions; 15 differ (none ws-ramlayout); 85 ranges / 5956 B unmapped",
+   "note": "build/ws-ramlayout-20261122-1230/pending/10-raminit-whole-image-full-2135.md (identical on full-2158)"
+  },
+  "terminal_ui_state_base": "relocated 0x2006e0d0 -> 0x2008e8d0 in .bss; no absolute references; 10/10 alias offsets hold; see pending/11",
+  "mutation_harness": "not applicable: fnh compares separate whole images and builds no mutant copies"
+ },
+ "milestone16": {
+  "time": "2026-11-22T22:15-06:00",
+  "image": "build/ws-ramlayout-20261122-1230/full-2158-link",
+  "ui_items_pending10": {
+   "g2_even_ai_anim_frames_200009c0": "const MRAM 18/18 entries match stock init targets; stock only reads (0x553480 copies address into anim descriptor)",
+   "g2_even_ai_anim_frames_20000a54": "25/25 match; stock read-only (0x553494)",
+   "g2_navigation_calibrate_frames_20002d08": "64/64 match; only stock ref is const descriptor ROM 0x762870 {tbl,64,50,0}; ours const descriptor 0x6e0480 identical shape",
+   "g2_teleprompt_ui_state_names_20003dec": "4/4 strings match; stock read-only (0x5540ca indexed load)",
+   "audio_file_lfs_context_0x2f": "mispair in unnamed pass: stock 0x473548 literal 0x473668 = 0x20071ac8 (lfs_t, stock .bss, zero) == ours audio_file_lfs_context (.bss); the 0x2f byte is stock 0x200031b4 = g2_cli_cwd '/' which ours already initialises (.data 0x20013c10 = 2f00)",
+   "source_changes": 0,
+   "rebuild": "not needed (no changes); full-2158 paired sims already DFU_SAME, 0 faults"
+  },
+  "raminit_cmp_fix": "reads MRAM image for const tables, accepts even ITCM pointers, skips .text symbols with RAM suffixes: named mismatches 14 -> 2 (g2_pb_time_sync_info_20004394, g2_audio_first_hardware_context_20108948, already in pending/10 for owners)",
+  "iar_vsnprintf": {
+   "ours": "g2_log_vformat",
+   "stock": "0x44b76c",
+   "mode": "whole-run (formatter core + float render unstubbed)",
+   "cases": 200,
+   "match": 200,
+   "also": "g2_flashdb_vformat 200/200",
+   "formats": "%f %e %g %F %.*f %lld %p %#x widths/flags; outputs incl -nan, e+148"
+  },
+  "md5": {
+   "targets": [
+    "md5_init_59544e",
+    "md5_update_595578",
+    "md5_final_595608 (covers md5_body_5948d0)"
+   ],
+   "mode": "whole-run",
+   "match": "360/360",
+   "time": "2026-11-22T22:19-06:00"
+  },
+  "sscanf_fp": {
+   "ours": "sscanf",
+   "stock": "0x475fc0",
+   "mode": "whole-run, strtod-heavy inputs (exponent extremes, hex floats, inf/nan, long mantissas, widths, %n, %a)",
+   "match": "200/200",
+   "note": "22 cases end status 3 identically on both sides",
+   "covers": "stodx_542c20, stoxflt_585410, stopfx, dtento",
+   "time": "2026-11-22T22:24-06:00"
+  }
+ },
+ "milestone17": {
+  "time": "2026-11-22T23:03-06:00",
+  "image": "build/ws-ramlayout-20261122-1230/full-2158-link",
+  "source_changes": 0,
+  "hal_clock": {
+   "suites": [
+    "fnh/clk-summary.json",
+    "fnh/clkb-summary.json",
+    "fnh/clkc-summary.json"
+   ],
+   "cases": 920,
+   "exact_match": 905,
+   "residuals": "15 stack-frame address differences only: xtal_request 32/40, hfrc2_request 33/40; COUNTER_PTR=&counter at differing stack slot. Return values, calls, all other globals/registers match.",
+   "peripheral_model": "fnh-periph.repl, seed+dump plain registers",
+   "remaining": [
+    "clock_reset_recover",
+    "LFRC/XTAL-LS direct entrypoints"
+   ]
+  },
+  "fs_cli": {
+   "suite": "fnh/fs-summary.json",
+   "targets": "prvCommand md5/mv/cat/cd/ls/rm/mkdir/touch/pwd/df (u-07)",
+   "mode": "boundary, 18 lfs/helper stubs",
+   "match": "120/120"
+  },
+  "terminal_cli": {
+   "suite": "fnh/term-summary.json",
+   "target": "cli_terminal_command_582b0c",
+   "mode": "boundary, 20 stubs",
+   "match": "40/40"
+  },
+  "remaining_queue": [
+   "thread_manager",
+   "compress-log",
+   "xmodem"
+  ],
+  "tools_changed": [
+   "fnh/callpair.py (stock pairing heuristics, not proof)",
+   "fnh/aliastargets.py (resolve all same-address aliases)",
+   "fnh/gencli.py (directory/regex/callpair env params)"
+  ]
+ },
+ "milestone18": {
+  "time": "2026-11-22T23:48-06:00",
+  "source_changes": 0,
+  "stack_pointer_canonicalisation": {
+   "flag": "FNH_STKMEM=1 (autosuite.norm): unseeded words in harness stack window 0x30010000..0x3001ffff inside dumped memory -> marker, both images",
+   "slot_equivalence": "static: stock xtal_request stores sp+4 to COUNTER_PTR and passes sp+4 to wait 0x4c3d70; ours stores sp+8 to [r5,#56] and the inlined wait loop reads/writes [sp,#8]; both = the function counter local",
+   "result": {
+    "audio_xtal_request": "40/40",
+    "audio_hfrc2_request": "40/40"
+   },
+   "suite": "fnh/clkd-summary.json"
+  },
+  "mutants": {
+   "method": "FNH_PATCH writes the mutated Thumb halfword over the loaded real image in the ours Renode machine (real symbol, real linked globals, no copied image or private globals); fnh/mutants.py + fnh/mutrun.py",
+   "audio_hfrc_request": [
+    {
+     "patch": "48cdb0 movs r0,#4->#5",
+     "killed": true,
+     "match": "11/20"
+    },
+    {
+     "patch": "48ce56 movs r4,#1->#0",
+     "killed": true,
+     "match": "17/20"
+    }
+   ],
+   "audio_clock_set": {
+    "first_try": "2 mutants survived with clock id domain 0..6: real test gap (bound c>=7 never exercised)",
+    "fix": "clk2.json widens clock id to 0..8,0x106,255 and user to 0..63,0x139; baseline any/user/set 120/120",
+    "after": [
+     {
+      "patch": "48c9c2 cmp r0,#6->#7",
+      "killed": true,
+      "match": "38/40"
+     },
+     {
+      "patch": "48c9d0 movs r0,#6->#7",
+      "status": "running at report time"
+     }
+    ]
+   },
+   "fs_cli": "not run yet (host load average ~715)",
+   "terminal_cli": "not run yet"
+  }
+ },
+ "milestone19": {
+  "time": "2026-11-23T00:33-06:00",
+  "source_changes": 0,
+  "clock_set_mutants": [
+   {
+    "patch": "48c9c2 cmp #6->#7",
+    "killed": true,
+    "match": "38/40"
+   },
+   {
+    "patch": "48c9d0 movs #6->#7",
+    "killed": true,
+    "match": "18/40"
+   }
+  ],
+  "stkmem": "now per-target opt-in (config \"stkmem\": true), not env/global",
+  "clock_widened": {
+   "stub_suite_clkw-a": "200/200 (hfrc2_release, syspll_release, ext_request/release, xtal_status)",
+   "boundary_clkw-b": "357/360",
+   "residuals": "3 cases: harness seeding - COUNTER_PTR cells seeded with random bytes, so code dereferences an arbitrary address whose contents differ per image (ours read 0 -> no wait; stock nonzero -> spin to timeout); plus 2 both-timeout cases with different call counts; syspll publishes &c too (stack word)",
+   "fix_queued": "clkw-c: COUNTER_PTR cells fixed to a seeded harness word, counter word bounded {0,1,2,5,50}, stkmem on xtal/hfrc/hfrc2/syspll request"
+  },
+  "mutants_fs_first_pass": {
+   "killed": 1,
+   "of": 4,
+   "cause": "coverage gap: filesystem-ready word (0x200746a8 == 1) rarely seeded to 1, so most cases hit the not-mounted path",
+   "fix_queued": "fs-mounted.json fixcells ready=1, baseline + same 4 mutants"
+  },
+  "mutants_terminal_first_pass": {
+   "killed": 0,
+   "of": 3,
+   "cause": "coverage gap: generated inputs contain no terminal subcommand keywords, cases take the usage/error path"
+  },
+  "queued": "q-tm (thread_manager, 10 targets) running, then compress-log (14), xmodem (2), transaction (6), clkw-c, fs-mounted+mutants"
+ },
+ "milestone20": {
+  "time": "2026-11-23T01:15-06:00",
+  "source_changes": 0,
+  "coverage_metric": "autosuite FNH_COVER: per target deep = cases not on (min call count AND modal r0) path; distinct_paths = distinct (stub call sequence, r0); distinct_results = distinct (r0, 0x30303800 output) -> coverage key in each <tag>-summary.json",
+  "audit_earlier_passes": {
+   "rows": "fnh/audit-rows.json (suite, fn, match, n, deep, paths, results, timeouts)",
+   "cli_706_708": "VACUOUS for most: 43 of 59 cli_cmd targets have 1 path / 1 result across all cases (usage/error path only); only ~16 reach deeper paths. Needs per-command argument grammars before it counts.",
+   "scanf": "s2 deep 71/120, 46 distinct results; scanfp deep 67/200, 44 results",
+   "strtox": "deep 22-30 of 60, 15-18 paths each",
+   "vformat_flashdb": "v2 deep 91/100 (96 results) and 83/100; vsn g2_log_vformat deep 186/200 (171 results)",
+   "md5": "update 104 distinct results; final 1 distinct result (constant ctx input - weak), init trivially 1",
+   "sleep_uart": "am_freertos_sleep 1 path (weak); uart_sync_irq 9 paths",
+   "f1_ble_format": "deep 210/240, 153 results",
+   "terminal": "7 paths but 1 result; mutants 0/3 (see milestone19)",
+   "clock": "most 2-14 paths; hfrc_release, xtal_release, clock_stop 1 path (weak)"
+  },
+  "harness_fixes": [
+   "ITCM string decoding only at string starts (small ints like 10000 were decoded as strings)",
+   "void taken from C signature for new specs",
+   "targets removed from their own boundary list"
+  ],
+  "new_area_pilots_N12": {
+   "thread_manager": "tmb: 8/10 targets 12/12; service_init/threads_init 0/12 = unmapped thread-entry function pointers (fnmap added, tmb2 rerun running); resource_init 4/12 = APP_BleEusSendDataMsg unmapped (fnmap added)",
+   "compress_log": "many mismatches, all traced to harness mapping: our snprintf calls the stubbed vsnprintf boundary while stock snprintf formats inline; mutex/manager RAM objects not in rammap (both fixed in gb-cl-0b, rerun queued)",
+   "xmodem": "receive 10/12 (2 both-timeout), transmit 12/12 but 1 path: VACUOUS - the stream-buffer receive stub never writes a byte, so no packet is ever parsed; needs a scripted StreamBuffer input",
+   "transaction": "init/construct/cleanup 12/12; send_transaction/extract/exchange r0 differ - stock addresses for these came from comment hints and sizes disagree (extract 1312 vs 670 bytes), so the pairing is unverified; NOT reported as a bug yet"
+  },
+  "mutants_this_round": "queued (vsn core x3, scanf core x3, md5 body x1); none completed by 01:15"
+ },
+ "milestone21": {
+  "time_cst": "2026-11-23 01:47",
+  "source_changed": false,
+  "rebuild": "none (full-2158-link still current)",
+  "collected": {
+   "thread_manager_tmb2": "120/120 after arity{ulSetInterruptMask:0} re-analysis; coverage: 5/10 fns deep, resource/storage/sync/task_exit/sync_all single-path",
+   "compress_log_gb-cl-0b": "166/168 (export_notify 10/12; 3 timeouts both sides); service/timeout_callback/file_remove/path_format shallow",
+   "mut_vsn_core": "2/3 killed; survivor 0x492c70 cmp r0,#0->#1 after put-callback: harness callback never returns NULL, equivalent under harness",
+   "mut_scanf_core": "2/3 killed; survivor 0x4c3124 = 0x/0X prefix branch, not reached by strtod-heavy inputs (real coverage gap)",
+   "mut_md5_body": "1/1 killed (0x5c9100 movs r3,#1->#0, 34/60)"
+  },
+  "transaction": {
+   "method": "objdump caller/xref pairing: our callers GX8002_GetVoiceEvent, GX8002_MicDelay1Bit, AUD_CodecIntNotify, GX8002_SetMicGain vs stock 0x57da40/0x57d1cc/0x53ca72/0x57ccec BL sequences; then stock send 0x57c512 callee sequence",
+   "confirmed": {
+    "init": "0x57ba88",
+    "cleanup": "0x57baec",
+    "construct": "0x57c0d6",
+    "exchange": "0x57c442",
+    "send": "0x57c512",
+    "extract": "0x57bd06",
+    "release": "0x57c640",
+    "uart_read_blocking": "0x57c1fc"
+   },
+   "pilot_fault": "gb-tr-0/0b used callpair-derived stocks (extract->0x43d0ce audio_log_flags, send/exchange->0x43d574): the r0 diffs were a harness mispair, not C bugs; gb-tr-0b rerun killed",
+   "size_gap": "right function. Stock extract 0x57bd06..0x57c0d5 = 976 B (bltargets 0x57bfa4/0x57c000 are interior, so 670 was a wrong end). Stock calls helper 0x57baf4 (magic memcmp) and memcpy; ours inlines unpack_core + copy loops -> 1312 B",
+   "Ghidra_REA": "not used: not on PATH this session; REA needs GHIDRA_INSTALL_DIR+JDK21, ~2.5 min/call under load ~400",
+   "next": "gb-tr-0c.json: corrected stocks, extract fed 14 crafted BUXX frames (valid/invalid magic, hdr crc, body crc, >16 body) at 0x30302d80; queued chain0008 with mutants",
+   "tr0c_baseline": {
+    "result": "144/144, all faults 0",
+    "coverage_deep/paths/results": {
+     "send": "0/1/1 (vacuous: transaction ptr is stack arg 6, harness passes r0-r3 only, always -1)",
+     "init": "16/8/8",
+     "extract": "8/6/8",
+     "exchange": "7/4/3",
+     "construct": "9/2/2",
+     "cleanup": "0/1/1 (void, no inputs)"
+    },
+    "mutants": "extract and exchange running (chain0008)"
+   }
+  },
+  "new_specs": {
+   "cli-gram-0.json": "14 largest vacuous CLI cmds; strncmp 0x44b610 removed from boundary (was stubbed, so command text never mattered); keyword fimgs from each source file",
+   "gb-xm-1.json": "xStreamBufferReceive 0x57e136 stubbed with scripted bytes (beh4 mode1); inbyte/flush/crc16 now real; 7 CRC-valid 128/1024-byte packets via 64-byte wrap fixed point + EOT/CAN/garbage",
+   "md5f.json": "md5_final ctx at 0x20990100 with blobwords for lo/hi counts",
+   "clkrr.json": "clock_reset_recover via stock_clock_mux_reset<->0x44b158; callee pairing 1:1 verified; new autosuite cellch for 0x40008858 magic/bits",
+   "harness": "autosuite: per-target cellch option"
+  },
+  "queued": [
+   "chain0008: tr0c+2 mut sets, clkw-c+hfrc/xtal release mut, fs-mounted+cd/mkdir mut, term-kw+mut, compress_log_rotate mut, thread_manager service_init mut",
+   "chain0009: cli-gram + codec/get mut",
+   "chain0010: md5f+mut, xm1+receive/transmit mut",
+   "chain0011: clkrr+mut"
+  ],
+  "not_done": [
+   "am_freertos_sleep strengthening",
+   "clock_stop/hfrc_release/xtal_release beyond clkw-c"
+  ]
+ },
+ "milestone22": {
+  "time_cst": "2026-11-23 02:22",
+  "source_changed": false,
+  "canonicalization_audit": {
+   "small_int_collapse": "none: no sentinel covers small integers. Sentinels were RO=[0x438000,0x800000) and STK=[0x30010000,0x30020000); RAM words are remapped ours->stock object address (a 1:1 map, not a sentinel); ITCM string decoding only on our side at string starts (can only cause NOT-EQUAL)",
+   "RO_fix": "RO sentinel replaced by content: first target word compared, nested ROM pointer -> C string, nested RAM pointer -> stock address (FNH_ROLEGACY=1 restores old)",
+   "STK": "STK marker only when the value lies in the harness stack window; memory form is per-target opt-in (stkmem); equal only if both sides hold stack addresses",
+   "second_false_equal_found": "unknown-arity stubs compared r0 only, and arity was looked up by the first alias name only. Fixed: arity from any alias; printf-format trimming now also for format in r2",
+   "exposed": "CLI suites cli-real-0/1 (nc4g0/1): stock snprintf 0x44b728 was paired with our vsnprintf g2_log_candidate_common_format, so the stub saw a va_list pointer vs the value (e.g. set_gpio pin 255 vs stack ptr); hidden by r0-only compare. 8 CLI fns 12->0. Fixed boundary to g2_audio_dump_snprintf in cli-real-0/1, cli-boundary-0/1, cli-gram-0; rerun queued (chain0015). Not a C bug.",
+   "reaudit": "reaudit.py over 22 specs + 22 mutant tags (analyze only): all unchanged except nc4g0/1 (above); p2tmb2 now 120/120 with thread names compared via RO content; clkd needed stkmem flag (it predates per-target opt-in) -> 80/80; mutant kill/survive unchanged"
+  },
+  "harness": {
+   "fnh.elf": "rebuilt (-O2 -mfloat-abi=hard -T fnh.ld; byte-identical apart from new h_put_fail at 0x30000700, bss +0x48)",
+   "autosuite": "stackch (AAPCS stack args), pokes, logflags, cellch, RO content, alias arity"
+  },
+  "queued": {
+   "chain0012 (priority, chain0008 paused)": "vsnfail + survivor 0x492c70 + core mutants; tr-0d send stack args + alloc in compared RAM; scanf-hex + survivor 0x4c3124; tmb3 deep inputs + mutants",
+   "chain0013": "sleep2, clkrel (hfrc/xtal release user masks, clock_stop pin stub) + mutants",
+   "chain0014": "extract survivor 0x49882e on tr-0d",
+   "chain0015": "cli-real-0/1 rerun"
+  },
+  "tr0c_extract_mutants": "2/3 killed; survivor 0x49882e = body copy remainder into the allocated buffer, which was outside compared memory; tr-0d returns it inside 0x30303a00"
+ },
+ "milestone23": {
+  "milestone": "milestone23",
+  "time": "2026-11-23T03:00-06:00",
+  "vsnfail_hang_root_cause": "fnh.bin (raw image Renode loads) was not regenerated after fnh.elf rebuild; 0x30000700 h_put_fail was zeros -> runaway. Fixed: objcopy fnh.elf -> fnh.bin (1860 B). Harness-only, no C source change.",
+  "g2_iar_general_format_vsnfail": {
+   "n": 60,
+   "match": 60,
+   "faults": 0,
+   "deep_fail_path_cases": 14,
+   "distinct_paths": 12
+  },
+  "survivor_0x492c70": "killed (59/60, 1 fault on mutant)",
+  "chain": "chain0012 replaced by chain0012b (same steps, chain0008 still paused, resumes at end)",
+  "c_changes": 0,
+  "rebuild": "not needed"
+ },
+ "milestone24": {
+  "milestone": "milestone24",
+  "time": "2026-11-23T03:32-06:00",
+  "stale_bin_audit": "Rebuilt pre-01:48 fnh.c (h_put_fail stripped, same flags/order): text symbols identical 0x30000000-0x300006ff; only 5 literal-pool words differ (0x300002d4,0x30000340,0x30000380,0x3000053c,0x300006fc): .bss base 0x30000700 vs 0x30000748. Old bin self-consistent; python uses only h_stub_entry/h_reset (unchanged). Only vsnfail (h_put_fail) was affected and it was rerun. Suspect results: none.",
+  "drift_guard": "fnh/build-fnh.sh links + objcopies in one step; fnh.py refuses to run if fnh.bin != fnh.elf PT_LOAD bytes (negative-tested).",
+  "arity_fix": "autosuite arity() now scans all apollo-main .c/.h (was system/rtos .c only, unknown -> r0-only compare). reaudit2 (no sims) over 25 specs: no match changes except superseded nc4 CLI tags; f1 analyze error pre-existing.",
+  "tr0d": {
+   "n": 144,
+   "match": 144,
+   "send_deep": 19
+  },
+  "send_mutants": "1/3 killed; survivors 0x498a7a (exchange len) and 0x498b08 (log flag) -> construct's audio_uart_send_bytes and audio_log_flags ran real; gb-tr-0e stubs them (chain0016).",
+  "extract_mutants_tr0d": "3/3 killed (0x49882e now killed)",
+  "vsn_mutants": "0x492a3c,0x492d7e killed; 0x492c70 survives at N=40, killed at N=60 by 1 fault-only case",
+  "c_changes": 0
+ },
+ "milestone25": {
+  "milestone": "milestone25",
+  "time": "2026-11-23T04:10-06:00",
+  "vsn_492c70": "Site = right-justify pad loop; mutant ignores a failed pad put and keeps calling the callback with ctx=NULL (old fault source). h_put_fail now records call count + NULL-ctx calls at 0x303039f8 (inside compared output window); fnh rebuilt via build-fnh.sh (1884 B, in sync). vsnpad (12 padded formats, fail at calls 1-8): baseline 48/48 0 faults (1/48 non-error path, by design); survivor 0x492c70 10/48 match, 0 faults -> KILLED by output. vsnfail regression 60/60.",
+  "noproto_arity": "get_fmt_enabled=2 (level,set), elog_strcpy=3 (cur_len,dst,src): no C prototype in g2/src (vendored EasyLogger); from stock call sites (Ghidra 0x43d574/0x43d9f0) and our disasm. Reanalysed gb-cl-0b, tr-0c, tr-0d and transaction mutants: no match changes; no None arity left in those specs.",
+  "f1": "FIXED not retired: index error was reaudit's N = n/len(per) (fmt-sprintf has 2 targets with the same name -> 1 per row -> N doubled). Now N from config target count; f1 reanalyses 240/240.",
+  "scanf_hex": {
+   "base": "120/120, 0 faults, 37 deep",
+   "survivor_4c3124": "killed 55/120 (value diffs)",
+   "mutants": "0x4c2df2, 0x4c3124 killed; 0x4c33c8 survived on hex inputs -> on scanf-fp inputs 128/200 match, 12 extra timeouts, >=60 value diffs -> killed"
+  },
+  "tmb3": {
+   "base": "120/120 (8 timeouts both sides, resource_init)",
+   "non_error": {
+    "resource_init": 0,
+    "storage_init": 0,
+    "thread_sync": 16,
+    "task_exit": 19,
+    "sync_all": 14
+   },
+   "mutants": "thread_sync 2/2 killed, task_exit 2/2 killed; resource_init/storage_init/sync_all running"
+  },
+  "c_changes": 0
+ },
+ "milestone26": {
+  "milestone": "milestone26",
+  "time": "2026-11-23T04:58-06:00",
+  "coverage_metric": "COVER 'deep' was r0-based, so void targets always read 0. Void targets now: error path = timeout/fault, else shortest call sequence when lengths differ; a single straight-line sequence = all on path. Per-sequence counts reported (seqs). FNH_DEEPLEGACY=1 restores old.",
+  "resource_init": {
+   "gate": "stock 0x4c94d4 osEventFlagsNew(0) -> [0x200040d8+0x1c]; ==0 -> 0x5fa0a4 ulSetInterruptMask + store to 0xffffffff + spin (assert). The tmb3 '8 timeouts' were exactly this path (osEventFlagsNew ret 0 in 1/3 choices), identical both sides.",
+   "tmb3": "16/24 success (1,12,20 = mutex_init,EventFlagsNew,TPL_Init), 8/24 assert",
+   "tmb4": "handles [0,0x20990000,0x20990040,0x20990080]; state struct compared via rammap 0x200040d8<->audio_uart_thread_manager_state (0x24). 24/24 match, 19/24 success path, 5 assert timeouts both sides",
+   "mutants": "auto movs r0#0->1 (EventFlagsNew arg) killed 0/24; hand: str +28->+24 killed 0/24 (output), cbz->cbnz killed 0/24 (5 output + 19 path flips), TPL_Init r0 0->1 killed 5/24 match (19 output), drop TPL_Init killed 5/24 (19 output)"
+  },
+  "storage_init": {
+   "shape": "branchless: DRV_Mx25u25643g_init, SVC_FlashDBInit, littlefs_init, tail-call elog_async_ext_flieStore_Init; single path, 24/24 on it",
+   "tmb4": "24/24 match, 0 faults",
+   "mutants": "drop each of 4 calls (tail call -> bx lr): all killed 0/24 match, 0 faults"
+  },
+  "easylogger_upstream": "armink/EasyLogger master: elog.c 'static bool get_fmt_enabled(uint8_t level, size_t set)', elog_utils.c 'size_t elog_strcpy(size_t cur_len, char *dst, const char *src)' -> 2 and 3 args, matches call-site inference",
+  "known_gap": "stub call log records r0-r3 only; TPL_Init stack arg (sp[0] fn ptr) not compared",
+  "c_changes": 0
+ },
+ "milestone27": {
+  "milestone": "milestone27",
+  "time": "2026-11-23T05:47-06:00",
+  "stack_args": "fnh h_stub_c now takes the 4 caller stack words above {id,lr} (SP at stub entry) and logs them at 0x30301800 (4/call, 40 calls); autosuite compares params 5..8 for stubs with >4 fixed params (protoparse.py: balanced-paren prototypes from all apollo-main .c/.h). Pointer-typed (*, [], pointer/fn-pointer typedef, cfg ptrargs) canonicalised, others raw. Old bins auto-detected from cases-bin log length and analysed legacy; FNH_STKARGLEGACY=1 disables compare.",
+  ">4_arg_stubs": "TPL_Init(5), audio_log_extended(6+...), elog_output(6+...), audio_uart_master_request_core_464772(7), audio_uart_ring_persist_wait_event_47e7b0(5), stock_wait5(5)",
+  "TPL_Init_param5": "declared uint32_t but stock passes a callback (0x4be14f APP_BleEusDirectSendDataMsg): ptrargs override in tmb2/3/4 + pending/12 note to owner",
+  "gap_proof": "mutant 4e4d3e:0548 (only TPL_Init stack arg changes): legacy analysis 24/24 SURVIVES, with stack args 5/24 KILLED",
+  "reruns_stack_vs_legacy_identical": {
+   "tmb4": "48/48",
+   "tmb2": "120/120",
+   "tmb3": "120/120",
+   "rtos-boundary": "160/160 after strarg fix",
+   "log-boundary-ptr": "90/90",
+   "log-boundary": "197/210",
+   "log-boundary-fix": "57/60",
+   "rtos2-boundary": "80/80",
+   "rtos2-66d8": "16/16",
+   "loop-uart": "20/20",
+   "loop-uart-cmd": "2/2",
+   "rtos3-real": "131/132",
+   "rtos3-real2": "46/48"
+  },
+  "strarg_fix": "<=3-char 'string' whose bytes are a ROM pointer to a >=4-char string is a struct (osMutexAttr_t name ptr); left to rocontent. Removed false diff audio_conversate_mutex_init 39/40 -> 40/40.",
+  "REAL_C_DIFF_FIXED": "compressed_log_output 1/10 on 2158 link: our audio_log_policy (stock compress_log_export_active 0x44a9ae, reads 0x20074fa1 export flag) read audio_log_policy_byte = the LEVEL byte (stock 0x20004544, init 3) -> ours drops every compressed log by default. Fix (my files): new compress_log_export_active_flag (.g2_ram_20074fa1, bss) used by compress_log_port.c notify/timeout and log_policy_provider.c. Rebuild + paired sims + reruns pending.",
+  "float_audit": "vsn 30/88 doubles normal (26/400 cases), vfmt 26/54, vsnfail 10/34: most printf %f/%e/%g inputs denormal/zero/NaN (word-wise random va). scanf-fp 157/270 outputs normal (90/137 cases) ok. f1 120/120 normal. vfloat.json (all-normal doubles, 15 float formats, 4 formatters) queued chain0024.",
+  "c_changes": 2
+ },
+ "milestone28": {
+  "milestone": "milestone28",
+  "time": "2026-11-23T06:12-06:00",
+  "fix": "compress_log export-active flag: new volatile uint8_t compress_log_export_active_flag in section .g2_ram_20074fa1 (stock 0x20074fa1; set by export_notify 0x44a904, cleared by timeout cb 0x44a8b6 via literal 0x44aa0c, read by getter 0x44a9ae). Distinct from level byte audio_log_policy_byte (0x20004544, unchanged). Files: system/a-03-compress-log-port/compress_log_port.c, system/glue/log_policy_provider.c (audio_log_policy returns the flag). Uncommitted.",
+  "build": {
+   "dir": "build/ws-ramlayout-20261122-1230/full-0550-link",
+   "bin_sha256": "6285d8c4aaffe7196a92d2c11781f662bfc1643566494d09cf0bc82960bb4aa5",
+   "bytes": 3629048,
+   "note": ".data -36 B, .bss -32 B (packing); our symbol at 0x20012abc"
+  },
+  "paired_sims": "paired-full-0550.out: DFU_SAME, HCI 922, HOST_PACKET_COUNT 0x3A, CHIPREV 0x22, UNSUPPORTED 0, adv 1, display 2, faults 0; identical to full-2158",
+  "fnh": {
+   "log-boundary f0550lb": "205/210 (2158: 197/210). compressed_log_output 9/10 (was 1/10); remaining case r=[1,1,0xe6ffe384,2] seeds mutex handle in ROM range -> rocontent compares different image bytes (harness artifact). datetime_now 8/10, transport_submit 8/10 (known).",
+   "log-boundary-xf f0550lbxf (flag in rammap)": "206/210, faults 0 both. compressed_log_output 10/10 (non-error 1/10). datetime_now 9/10, transport_submit 8/10, NEW elog_async_dequeue_448b96 9/10 (case 161: first pointer blob @0x20990100 differs at byte 11 and tail; stock tail looks like Thumb code bytes -> likely blob overread past seeded buffer; not diagnosed).",
+   "gb-cl-0b f0550cl": "166/168 after 06:02 strarg fix (sync_to_files 12/12, was 11/12). export_notify 10/12: both sides timeout (status 3), only call counts differ (timeout-count artifact). timeout_callback 12/12.",
+   "gb-cl-0b-xf f0550clxf": "167/168, faults 0. export_notify 11/12 (non-error 10/12; remaining = timeout-count artifact). timeout_callback 12/12.",
+   "rtos-boundary c23m13 reanalysed with 06:02 strarg rule": "160/160 (unchanged)",
+   "strarg_rule_0602": "ours-side only: if our ELF object symbol at v is larger than len(t)+1 for a <=3-char string, treat as struct (no string compare). Fixes mutex-attr false diff without regressing 'w+b'."
+  },
+  "verdict": "fix verified: device sims unchanged/0 faults; compressed_log_output and export_notify match except harness artifacts",
+  "chains_paused": {
+   "note": "all SIGSTOPped (TN), none running; cd build/ws-ramlayout-20261122-1230/fnh; ensure FNH_REPL and FNH_STKMEM unset. Specs pin full-2158-link: for post-fix runs start fresh copies with full-0550-link (editing a running zsh script does not take effect).",
+   "chain0023 pid 2473": "all specs done; kill -CONT 2473 prints chain23-done and resumes chain0008 (kill -CONT 4536 89849)",
+   "chain0024 pid 10961": "vfloat + fcheck; waits for chain23-done, pauses chain0008, runs, resumes it. Start: kill -CONT 10961 then kill -CONT 2473",
+   "chain0008 pids 4536 (zsh) 89849 (mutrun)": "mid term-kw mutants; kill -CONT 89849 4536. fsm base, termkw base and fs-mounted mutants from 05:00-05:05 edit window are suspect: rerun",
+   "chain0009 5878, 0010 11355, 0011 12160, 0013 43983, 0014 44212, 0015 53754, 0016 7774": "waiters on predecessor -done line; kill -CONT <pid>, or fresh: nohup zsh chainNNNN.sh > chainNNNN.log 2>&1 &"
+  },
+  "open_items": [
+   "timeout call-count compare (xPortStimerTickHandler, vPortSuppressTicksAndSleep, export_notify)",
+   "ROM-range seed rocontent (compressed_log_output case)",
+   "varargs stack compare (audio_log_extended, elog_output)",
+   "vfloat not run (chain0024)",
+   "datetime_now 8/10, transport_submit 8/10",
+   "elog_async_dequeue 9/10 under -xf",
+   "suspect chain0008 fsm/termkw/fs results",
+   "clkw-c hfrc/xtal_release survivors 40/40"
+  ]
+ }
+}

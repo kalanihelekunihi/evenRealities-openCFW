@@ -5,7 +5,7 @@ extern uint8_t audio_conversate_ui_settings_extension_20071369[];
 extern void audio_uart_buffer_zero(void *, uint32_t, uint32_t);
 extern void audio_terminal_fade_out_58c426(uint32_t, uint32_t, uint32_t);
 extern uint32_t audio_uart_lv_obj_has_flag_43e0e0(uint32_t, uint32_t);
-extern void audio_uart_page_58c238(uint32_t, uint32_t, uint32_t);
+extern void audio_uart_page_58c238(uint32_t object, uint32_t duration, void (*completed_cb)(void)); /* common_fade_in_animation */
 extern void audio_uart_page_43dfa4(uint32_t, uint32_t);
 extern uint32_t audio_uart_lv_obj_width_43fd9e(uint32_t);
 extern uint32_t audio_uart_lv_obj_height_43fdda(uint32_t);
@@ -33,7 +33,7 @@ uint32_t audio_conversate_ui_route_5b7556(uint32_t ignored, uint32_t arg) {
     const uint32_t expanded = word(state, 0x2cu);
     if (expanded != 0u && audio_uart_lv_obj_has_flag_43e0e0(expanded, 1u) == 0u)
         audio_terminal_fade_out_58c426(expanded, 200u, 0u);
-    audio_uart_page_58c238(word(state, 8u), 200u, 0u);
+    audio_uart_page_58c238(word(state, 8u), 200u, 0);
     if (state[0x8du] != 0u)
         audio_uart_page_43dfa4(word(state, 0x20u), 1u);
     config[0] = 300u;

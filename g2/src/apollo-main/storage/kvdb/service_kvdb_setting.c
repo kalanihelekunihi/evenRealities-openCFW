@@ -42,7 +42,7 @@ int32_t _kvdbUpdataSetting(void) {
     (void)SVC_KvdbWriteSetting(&g2_kvdb_setting_record);
     return 0;
 }
-G2_KVDB_MIGRATION_EXPORT(_kvdbUpdataSetting);
+/* _kvdbUpdataSetting: migration slot 5 of the stock-ordered table in service_kvdb.c (ROM 0x746d20). */
 
 int32_t SVC_KvdbWriteSetting(const g2_kvdb_setting_t *setting) {
     audio_uart_display_area_copy_439c04(&g2_kvdb_setting_record, setting, sizeof(g2_kvdb_setting_record));

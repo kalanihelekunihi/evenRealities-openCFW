@@ -1,0 +1,80 @@
+{
+ "title": "ws-hwdrivers stream 3: ALS driver family + wear-detect + charge-callback glue verified function-level vs stock (Renode 1.17 cortex-m55)",
+ "when": "2026-11-22 02:42 PM CST (America/Chicago)",
+ "modules": [
+  "g2-als-driver (brightness-curve/opt3007/pitch-filter/driver/extreme-dark/peer-sync/sample-window)",
+  "g2-als-calculation",
+  "g2-als-manual",
+  "g2-wear-detect",
+  "g2-charger-common cb_charge"
+ ],
+ "method": {
+  "emulator": "Renode 1.17.0 (vendor/renode-src e8c7c2d), cortex-m55 FPU enabled, bundled dotnet 8.0.425",
+  "harness": "build/ws-hwdrivers-20261122/harness; autogen.py now resolves symbols from a repo-wide symbol->address index harvested from all apollo-main source address comments (RAM/ROM/Stock/native 0xADDR), not just the unit under test. opt3007 goes over I2C (modelled). All FP-aware (VFP s0-s3).",
+  "design": "stock bodies run in place from stock.app.bin @0x00438000; reconstructed C linked into ITCM. Cross-module callees stubbed at stock addresses; als RAM state globals (curve index/adjusted/nominal, scale active/shadow/clamped, manual level/target_count, recompute_pending, default/active previous, opt3007 regmap) seeded identically and diffed. Unit-defined globals that have a stock RAM address (e.g. audio_als_manual_target_count @0x200741fc) are now placed at that absolute address in the C link so both variants share the same storage.",
+  "inputs": "15-20 randomized cases per function, stock vs C, log flags 0 and 7; argument fuzzing restricted to valid firmware domains (e.g. curve index 0..5)."
+ },
+ "result": {
+  "functions": 36,
+  "cases": 605,
+  "mismatches": 0,
+  "als_brightness_curve": {
+   "fns": 9,
+   "note": "als_function_15 (g2_als_curve_table[index].percent) verified on the valid index domain 0..5; out-of-range index is an unguarded table read the firmware never issues."
+  },
+  "als_opt3007": [
+   "als_function_25",
+   "als_function_26",
+   "als_function_27"
+  ],
+  "als_pitch_filter": [
+   "als_function_08"
+  ],
+  "als_driver": [
+   "als_function_28",
+   "als_function_29",
+   "als_function_31",
+   "als_function_32",
+   "als_function_33",
+   "als_function_34"
+  ],
+  "als_extreme_dark": [
+   "als_function_11"
+  ],
+  "als_peer_sync": [
+   "als_function_01",
+   "als_function_23"
+  ],
+  "als_sample_window": [
+   "als_function_04",
+   "als_function_05",
+   "als_function_06",
+   "als_function_07",
+   "als_function_09",
+   "als_function_10",
+   "als_function_12"
+  ],
+  "als_calculation": [
+   "audio_als_apply_previous"
+  ],
+  "als_manual": [
+   "audio_als_manual_set_brightness_4ae81c",
+   "audio_als_manual_set_target_4ade36"
+  ],
+  "wear_detect": [
+   "audio_wear_detect_handle_status_change_49ebb6"
+  ],
+  "charger_common_cb_charge": [
+   "CB_CHG_DeinitBatInfoCallbacks",
+   "CB_CHG_NotifyBatInfo",
+   "CB_CHG_UnregisterBatInfoCallback"
+  ]
+ },
+ "g2ref_uses": "none in these modules",
+ "notes": "Function-level equivalence only. No sources.json/linker/build changes; no git; no flash.",
+ "reverified_final_harness": true,
+ "reverified_when": "2026-11-22 7:14 PM CST (America/Chicago)",
+ "reverification_notes": [
+  "Re-verified under the final arg-comparing + VFP-aware harness and the global-merge-off build (-fno-common -mllvm -arm-global-merge=false); 0 mismatches in the 2026-11-22 19:12 CST full batch re-run."
+ ]
+}

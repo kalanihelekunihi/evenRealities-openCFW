@@ -1,4 +1,5 @@
 #include "init_lower_native.h"
+#include "em9305_ram.h"
 
 extern uint32_t opencfw_em9305_common_init_303d18(uint32_t incoming);
 extern uint32_t opencfw_em9305_common_init_302ec8(void);
@@ -7,8 +8,8 @@ extern uint32_t opencfw_em9305_common_init_302ec8(void);
  * The full-word store is in the return delay slot, after the mode byte. */
 static uint32_t register_radio_mode(uint32_t value, uint32_t mode)
 {
-    *(volatile uint8_t *)0x805ebcu = (uint8_t)mode;
-    init_write32(0x805eb8u, value);
+    *(volatile uint8_t *)((uintptr_t)&em9305_ram_805e6c + 0x50u) = (uint8_t)mode;
+    init_write32(((uintptr_t)&em9305_ram_805e6c + 0x4cu), value);
     return value;
 }
 uint32_t opencfw_em9305_callback_30fc20(uint32_t value, uint32_t mode)

@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-22 10:55:00 PM CST (America/Chicago)",
+  "title": "Grow typo-RAM em9305_ram_801a04 to 16 bytes and retarget 32bdfc field access: source fix for -Werror=array-bounds, QEMU-ARC prove, private tree p-lowers with no --extra, NVM slot-fit, private NOR splice, paired Renode sims",
+  "scope": "em9305 leftover typo-RAM C. After the closed sources.json -I insert, grow em9305_ram_801a04 from the harvested 1-byte object to the 16-byte out-buffer used by leftover C (32e144 write / 32bdfc read), switch init_native_child_32bdfc.c to in-bounds typo-RAM word fields, rebuild from the tree without private --extra or -Wno-error=array-bounds, prove the affected function, package, both paired sims.",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261122-em9305-typed-ram-lowers-install-paired-sims.json",
+  "stock_check": {
+    "result": "16 bytes at 0x801a04 fit exactly and are what leftover C uses",
+    "writer": "init_native_child_32e144.c packs two 6-byte addresses into four uint32 words at the caller-supplied out pointer (stores at out+0,+4,+8,+12; returns 12, the packed-address length, not the buffer size)",
+    "reader": "init_native_child_32bdfc.c is the only HEAD / tree user of 0x801a04; it calls 32e144(0x801a04, pdu+2) and reads parsed[0..3] (stock) from that buffer",
+    "head_literals": "git grep of HEAD found 0x801a04 only in 32bdfc; no independent literals at 0x801a08, 0x801a0c, or 0x801a10. 0x801a00 uses sit in em9305_ram_8019e8. Next typo-RAM object is em9305_ram_801a14 at 0x801a14",
+    "neighbor_placement": "sizeof(struct em9305_ram_8019e8)==28 so it ends at 0x801a04; grown sizeof(struct em9305_ram_801a04)==16 ends at 0x801a14; no overlap (host gcc -std=c11)",
+    "harvest_gap": "widen plan.json added[61] recorded base 0x00801a04 end 0x00801a05 size 1 (literal harvest missed the out-parameter extent)",
+    "ld": "g2-em9305.ld only assigns absolute symbol addresses (em9305_ram_801a04 = 0x00801a04). Growing sizeof does not change the symbol address. Header objects are extern with a section attribute to keep them out of gp small-data; the linker script provides the addresses. ld was not rewritten and remains sha256 6f89db8801e136608cb98afbdeee3b9860d6f2ccbbeef1ff3148b4f51f1d4ccb"
+  },
+  "source_fix": {
+    "array_bounds": "Fixed in source. No -Wno-error=array-bounds on this rebuild. gcc -Werror=array-bounds fired because em9305_ram_801a04 was a 1-byte object while 32bdfc indexed a 16-byte view. The object is now 16 bytes and 32bdfc reads u32_801a04/u32_801a08/u32_801a0c/u32_801a10",
+    "header": "g2/src/em9305/qpc-scheduler/em9305_ram.h",
+    "header_sha256": "faab333ec042cd4e1ae6a9b2936261b193443808e39b4bbfac42ac2a1af15c1d",
+    "header_bytes": 210718,
+    "object_count": 147,
+    "em9305_ram_801a04": "four u32/u8 unions at +0,+4,+8,+0xc plus offsetof asserts and _Static_assert(sizeof==16). Targeted text replace of the old 1-byte struct only; no full header re-serialize",
+    "c_unit": "g2/src/em9305/qpc-scheduler/initializer_lowers/init_native_child_32bdfc.c",
+    "c_unit_sha256": "b33cc85ac9c434c86d8623f6e8fd5392477d20760dd8871e17122f9425d2b9c9",
+    "ld_rewritten": false,
+    "sources_json_rewritten_this_pass": false,
+    "sources_json_sha256": "a6bd0a517d4eda297ed71cb68cff95f009fa149fa31443a77341bb4a73433266",
+    "sources_json_note": "The earlier approved targeted -I insert (profiles g2-em9305-1 and g2-em9305-2) is already in the tree; approval is closed. This pass did not write sources.json."
+  },
+  "prove": {
+    "function": "opencfw_em9305_child_32bdfc",
+    "orig": "git HEAD stock leftover C (literals at 0x801a04) saved as build/ws-em9305-20261122/lowers/prove/orig_32bdfc.c",
+    "cand": "tree init_native_child_32bdfc.c after typo-RAM field access",
+    "n": 100,
+    "flags": "-mdiv-rem -mbarrel-shifter -mswap -mnorm -mmpy-option=wlh1 --dztrap",
+    "vacuous_default_stubs": "A first run against the shared chunks/spec.json and default auto-stubs was EQUIVALENT 100 but only ncalls=1 (32db0c stub, then the LLID/opcode gates fail). That does not exercise the typo-RAM word copies. Not used as the proof.",
+    "forced_path": {
+      "extra": "build/ws-em9305-20261122/lowers/prove/extra_32bdfc.c (test-only: 32db0c forces llid=3 opcode=12; real 32e144 pack-into-out body; 30301c stub_hit-observes the 20-byte request). Shared extra_cb1.c and chunks/spec.json were not modified",
+      "private_spec": "build/ws-em9305-20261122/lowers/prove/spec_32bdfc.json lists those helpers under real so qm.py objcopy -N strips them from stubs.o (unit symbols are --weaken-symbols, so unstripped stubs would otherwise win)",
+      "grown_vs_stock": "EQUIVALENT 100  classes=93 calls=400  at 10:48:33\u201310:48:56 PM CST (America/Chicago)  log 32bdfc_grown_real.log",
+      "mutant_wrong_word0": "request.words[0] reads u32_801a08 instead of u32_801a04: MISMATCH callhash:100(t=[0, 1, 2])  classes=93 calls=400  log mut_32bdfc_wrong_word0_real.log",
+      "mutant_drop_word3": "drops request.words[3]=u32_801a10: MISMATCH callhash:100(t=[0, 1, 2])  classes=93 calls=400  log mut_32bdfc_drop_word3_real.log"
+    },
+    "32e144": "Not itself a typo-RAM unit (generic out pointer). Unchanged this pass; exercised as a real helper inside the 32bdfc prove."
+  },
+  "tree_build": {
+    "tool": "build/ws-em9305-20261122/pbuild.py (default --ld is the tree linker script)",
+    "outdir": "build/ws-em9305-20261122/p-lowers",
+    "extra": null,
+    "extra_note": "No --extra. Include path comes from sources.json profile flags. No -Wno-error=array-bounds. All 768 units recompiled after the header growth (cache key includes the header).",
+    "started": "2026-11-22 10:42:07 PM CST (America/Chicago)",
+    "finished": "2026-11-22 10:48:47 PM CST (America/Chicago)",
+    "returncode": 0,
+    "units": 768,
+    "link_log_empty": true,
+    "pbuild_log": "build/ws-em9305-20261122/p-lowers/pbuild-grown.log",
+    "elf": "build/ws-em9305-20261122/p-lowers/g2-em9305.elf",
+    "elf_sha256": "8da9e0188b06ff3328af4f7aae1ec7778b7174c6b6f167af072379ea4bfc36c7",
+    "flat_bin": "build/ws-em9305-20261122/p-lowers/g2-em9305.bin",
+    "flat_bin_sha256": "635fab71e621e4a435cb41c96950af47fa3ab07a2fee385e48fac3be1305f4bb",
+    "application_bytes": 239508,
+    "application_sha256": "a05770aa225719f6890877d56cde90f709f3aaa0fce9cd30efa516a93be738a8",
+    "section_sizes": {
+      ".nvm_bootloader": 1160,
+      ".programHeader": 40,
+      ".nvm_entry": 16,
+      ".text": 239508
+    },
+    "vs_previous_lowers_application_bytes": {
+      "previous_p_lowers_pre_growth": 239608,
+      "ours": 239508,
+      "delta": -100
+    },
+    "vs_previous_widen_application_bytes": {
+      "previous_p_widen": 241436,
+      "ours": 239508,
+      "delta": -1928
+    },
+    "vs_stock_application_bytes": {
+      "stock": 210888,
+      "ours": 239508,
+      "delta": 28620
+    }
+  },
+  "package": {
+    "method": "em9305_record2.split_bootloader_image + record_package.build_package with last_page=(APP_BASE+len(app)-NVM_BASE+0x1FFF)//0x2000",
+    "path": "build/ws-em9305-20261122/p-lowers/g2-em9305-source-candidate-package.bin",
+    "also": "build/ws-em9305-20261122/sim/ble_em9305.lowers.roundtrip.bin",
+    "bytes": 240840,
+    "sha256": "82c73dca290763ad04ea2b4c069e17187a50e86a164070b228bf6e3ccb6e0c5c",
+    "magic": "00020404",
+    "records": [
+      {
+        "address": "0x00300000",
+        "bytes": 1160
+      },
+      {
+        "address": "0x00302000",
+        "bytes": 56
+      },
+      {
+        "address": "0x00302400",
+        "bytes": 239508
+      }
+    ],
+    "erase_sector_count": 31
+  },
+  "slot_fit": {
+    "nvm_window": [
+      "0x00300000",
+      "0x00380000"
+    ],
+    "nvm_capacity_bytes": 524288,
+    "bootloader_end": "0x00300488",
+    "boot_fits_before_record2_0x00302000": true,
+    "record2_bytes": 56,
+    "application_end": "0x0033CB94",
+    "application_bytes": 239508,
+    "app_fits_before_nvm_end": true,
+    "headroom_bytes": 275564,
+    "fits_nvm_slot": true,
+    "note": "Fit is against the EM9305 main NVM window 0x00300000..0x00380000 and the official record2 ASSERTs (bootloader must not reach 0x00302000; app must not pass 0x00380000). Precomputed programmed-NVM CRCs of our record extents: [0x00300000,0x00300488)=1D6121C4, [0x00302000,0x00302038)=D0CFF430, [0x00302400,0x0033CB94)=DEEF4351."
+  },
+  "splice": {
+    "private_g2_app": "build/ws-em9305-20261122/sim/opencfw-em9305-typed-ram.app.bin",
+    "private_g2_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "private_g2_app_note": "Byte-identical private copy of official opencfw-otap-disarm.app.bin. Official file was not opened for write. Host app was left unchanged this turn.",
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "reset_pc": "0x0059427d",
+    "sp": "0x2007FB00",
+    "vtor": "0x00438000",
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-lowers.bin",
+    "nor_sha256": "313d7250dd4ec71a57920ff68d59933165ce1d649b707b2c1756abf1734e0bc1",
+    "nor_source": "copy of build/em9305-nor-20261122/nor-stock-formatted.bin, then lfs_inject at 0x1400000 path /firmware/ble_em9305.bin",
+    "lfs_inject_wrote_bytes": 240840,
+    "itcm": "build/em9305-nor-20261122/itcm.bin (read-only fixture)",
+    "platform": "build/em9305-nor-20261122/platform.repl (read-only fixture)"
+  },
+  "sims": {
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/lowers-match.resc",
+      "log": "build/ws-em9305-20261122/sim/lowers-match.log",
+      "started": "2026-11-22 10:51:50 PM CST (America/Chicago)",
+      "finished": "2026-11-22 10:53:01 PM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "chiprev": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_frames": 2,
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/lowers-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/lowers-dfu-mismatch.log",
+      "started": "2026-11-22 10:53:01 PM CST (America/Chicago)",
+      "finished": "2026-11-22 10:55:00 PM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq_at": "2026-11-22 10:54:31.645 PM CST (America/Chicago)",
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0xD0CFF430",
+        "[0x00302400,0x0033CB94)": "0xDEEF4351"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "hci_host_packets": 1038
+    }
+  },
+  "compare": {
+    "version_match_baseline": "PASS",
+    "version_match_vs": "prior lowers-match and widen-match (same CHIPREV 0x22, OTAP 0xAFD1363A then 0, HOST 0x3A, END_PC 0x543528, 2 display frames, display hash 0c5cc90b\u2026, 56 HCI host packets)",
+    "dfu_protocol_completed": true,
+    "commit_00020404": true,
+    "sysresetreq": true,
+    "sbl_handoff": true,
+    "post_dfu_display_hash": "matches baseline 0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+    "crc_results_identical_to_stock_baseline": false,
+    "crc_results_identical_to_previous_widen": false,
+    "crc_results_identical_to_previous_lowers_pre_growth": false,
+    "observed_crcs_identical_to_precomputed_our_records": true,
+    "hci_packet_count_identical_to_previous_lowers_dfu": false,
+    "verdict": "Version-match is a full baseline pass versus the 7:54 PM CST widen-install run and the 10:32 PM CST pre-growth lowers run. Forced-mismatch DFU completed the known handshake (commit 00020404, SYSRESETREQ at 10:54:31.645 PM CST, SBL app handoff, display hash, HOST 0x3A after handoff). Record2/app CRC windows and DFU HCI counts differ from the pre-growth lowers image, as required by splicing the new 3-record package (app 239508 B, 100 B smaller). Observed record CRCs equal the precomputed slot-fit digests. Bootloader CRC 1D6121C4 is unchanged. DFU HCI host packets are 1038 versus 1039 on the pre-growth 239608 B image."
+  },
+  "rules": {
+    "no_commit": true,
+    "no_push": true,
+    "no_flash": true,
+    "no_backups": true,
+    "official_app_not_overwritten": true,
+    "sources_json_approval_closed": true,
+    "other_streams_left_alone": true
+  }
+}

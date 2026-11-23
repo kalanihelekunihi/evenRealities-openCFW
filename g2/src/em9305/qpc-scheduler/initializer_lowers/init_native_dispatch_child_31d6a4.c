@@ -1,22 +1,23 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31d6a4..0x31db9c: deliver the packets received in a group
  * event (group +0x18 subevents, +52 links at +0x38[i], +6 timing) to the
  * links. For each link and subevent j the received buffer (3174d8) is
- * checked by the MIC hook (0x8051dc; on failure the buffer is released,
+ * checked by the MIC hook (((uintptr_t)&em9305_ram_8051b8 + 0x24u); on failure the buffer is released,
  * event 6 is sent and the group closed). The 64-bit event counter
  * (counter * subevents + j) is published at link +232. Links whose
  * configuration (+4)->+0x1e is set take the buffer through 316f70
  * (counting deliveries per link) or, in the framed/ISO-test mode (+44 ==
- * 1), drain the completed SDUs (317624) to the host data hook 0x802804
- * (credits at 0x805add). Other links decode the PDU header (317a98),
+ * 1), drain the completed SDUs (317624) to the host data hook ((uintptr_t)&em9305_ram_8027e0 + 0x24u)
+ * (credits at ((uintptr_t)&em9305_ram_805a6c + 0x71u)). Other links decode the PDU header (317a98),
  * build an SDU descriptor (status by mode +252 and the LLID), queue it
  * (31b9ac, 302664, 3250f4) and, on the last subevent of a missed link,
- * insert an empty/lost SDU when enabled (0x805a86 bit 1, 0x802a24[i]).
+ * insert an empty/lost SDU when enabled (((uintptr_t)&em9305_ram_805a6c + 0x1au) bit 1, (uintptr_t)&em9305_ram_802a24[i]).
  * Completed SDUs from the link queue (+0x20) go to the HCI queue (+48)
  * or are reassembled (31ba78/31ba54) and passed to the host hook. Each
  * subevent ends with 31db9c. Links with deliveries are reported to the
- * hook 0x805b3c (count, handles, counts). Returns the stock r0. */
+ * hook ((uintptr_t)&em9305_ram_805af0 + 0x4cu) (count, handles, counts). Returns the stock r0. */
 extern uintptr_t opencfw_em9305_dispatch_child_3174d8(uintptr_t object,
                                                      uint32_t tag);
 extern uint32_t opencfw_em9305_dispatch_child_316f70(uintptr_t output,
@@ -77,7 +78,7 @@ static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
 static void credit_add(int32_t delta)
 {
     (void)opencfw_em9305_wsf_critical_enter();
-    w8(0x805addu,r8(0x805addu)+(uint32_t)delta);
+    w8(((uintptr_t)&em9305_ram_805a6c + 0x71u),r8(((uintptr_t)&em9305_ram_805a6c + 0x71u))+(uint32_t)delta);
     (void)opencfw_em9305_wsf_critical_exit();
 }
 
@@ -92,7 +93,7 @@ static void deliver(uintptr_t handle_field,uintptr_t event,uint32_t anchor,
         length=sdu->sdu_length;
     }
     uint32_t handle=r16(handle_field);
-    ((opencfw_em9305_data_hook_31d6a4)(uintptr_t)r32(0x802804u))(handle,sdu->data,
+    ((opencfw_em9305_data_hook_31d6a4)(uintptr_t)r32(((uintptr_t)&em9305_ram_8027e0 + 0x24u)))(handle,sdu->data,
                                                                 length,anchor);
     (void)opencfw_em9305_pal_hook_two(0x16u);
     (void)opencfw_em9305_wsf_event_release(event);
@@ -165,7 +166,7 @@ uint32_t opencfw_em9305_dispatch_child_31d6a4(uintptr_t group,uint32_t counter,
             event_counter[0]=low;
             event_counter[1]=low<j;
             if(buffer!=0u){
-                uintptr_t hook=r32(0x8051dcu);
+                uintptr_t hook=r32(((uintptr_t)&em9305_ram_8051b8 + 0x24u));
                 if(hook!=0u&&((opencfw_em9305_mic_hook_31d6a4)hook)(link+196u,
                                                                   buffer)==0u){
                     (void)opencfw_em9305_ll_receive_buffer_release_31761c(buffer);
@@ -240,7 +241,7 @@ uint32_t opencfw_em9305_dispatch_child_31d6a4(uintptr_t group,uint32_t counter,
                     if(opencfw_em9305_dispatch_child_3250f4(link+0x10u,0u)!=0u){
                         drain(link,event_counter[0],anchor,delivered,&sdu,
                               (uint8_t *)&decoded);
-                    }else if((r8(0x805a86u)&2u)!=0u&&r8(0x802a24u+i)==0u){
+                    }else if((r8(((uintptr_t)&em9305_ram_805a6c + 0x1au))&2u)!=0u&&r8((uintptr_t)&em9305_ram_802a24+i)==0u){
                         uintptr_t lost=opencfw_em9305_ll_receive_buffer_allocate_3175f0();
                         if(lost!=0u){
                             sdu.anchor=anchor;
@@ -273,7 +274,7 @@ uint32_t opencfw_em9305_dispatch_child_31d6a4(uintptr_t group,uint32_t counter,
             }
         }
     }
-    uintptr_t hook=r32(0x805b3cu);
+    uintptr_t hook=r32(((uintptr_t)&em9305_ram_805af0 + 0x4cu));
     if(hook==0u)return count;
     if((uint8_t)reported==0u)return 0u;
     return ((opencfw_em9305_report_hook_31d6a4)hook)((uint8_t)reported,

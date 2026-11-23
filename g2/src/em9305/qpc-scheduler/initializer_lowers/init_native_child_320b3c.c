@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x320b3c..0x320d68: complete an AUX_CONNECT_RSP-style reply on
  * the initiator's periodic link. The PDU header and extended header go to
@@ -85,7 +86,7 @@ uint32_t opencfw_em9305_child_320b3c(uintptr_t object,uintptr_t pdu)
     uintptr_t anchor=initiator+140u;
     uint32_t handle=r16(link+88u);
     uint32_t end=r32(anchor);
-    uintptr_t base=r32(0x805c70u);
+    uintptr_t base=r32(((uintptr_t)&em9305_ram_805c5c + 0x14u));
     uint32_t request_time=opencfw_em9305_radio_duration_piece_312b88(start_phy,
         coded,length+2u);
     uint32_t reply_coded=r8(initiator+15u);
@@ -136,7 +137,7 @@ uint32_t opencfw_em9305_child_320b3c(uintptr_t object,uintptr_t pdu)
     }
     (void)opencfw_em9305_radio_encode_3239d4(link+112u,link+192u);
     uint32_t spacing=r8(initiator+13u)==3u?3750u:2500u;
-    uintptr_t current=r32(0x805c70u);
+    uintptr_t current=r32(((uintptr_t)&em9305_ram_805c5c + 0x14u));
     int32_t index=(int32_t)(connection-current)/912;
     uint32_t window=r16(connection+266u);
     uint32_t start=end+request_time+reply_time+spacing;

@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 01:10:00 AM CST (America/Chicago)",
+  "title": "controller_timer_helpers typo-RAM gates and remaining mutants (already installed)",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-controller-timer-helpers-paired-sims.json",
+  "tree_unchanged": true,
+  "file": "g2/src/em9305/qpc-scheduler/controller_timer_helpers.c",
+  "file_sha256": "eaeef70014c2ec9f601cf37470e168f521a721532052cb5a4ec6ca150ed6162f",
+  "prove": {
+    "orig": "build/ws-em9305-20261122/u-suffix/timer-gates/orig_controller_timer_helpers.c",
+    "orig_sha256": "2f7db1e1ac13cfeddab0ece0fbb4a19d42157e302e539cf7947c069f87b63c51",
+    "cand": "build/ws-em9305-20261122/u-suffix/timer-gates/cand_controller_timer_helpers.c",
+    "pre": "build/ws-em9305-20261122/u-suffix/timer-gates/pre_timer_helpers.h",
+    "spec": "build/ws-em9305-20261122/u-suffix/timer-gates/spec.json",
+    "spec_note": "Private copy only; shared lowers/chunks/spec.json was not written.",
+    "n": 100,
+    "mmio": 1,
+    "tag": "timer_gates_eq",
+    "log": "build/ws-em9305-20261122/u-suffix/timer-gates/eq.log",
+    "rc": 0,
+    "elapsed_s": 79.8,
+    "result": "all 13 symbols EQUIVALENT 100 vs HEAD literals, with the gate-opening PRE_H",
+    "lines": [
+      "opencfw_em9305_timer_calibrate_a EQUIVALENT 100 classes=27 calls=850",
+      "opencfw_em9305_timer_calibrate_b EQUIVALENT 100 classes=27 calls=850",
+      "opencfw_em9305_controller_timer_word EQUIVALENT 100 classes=2 calls=0",
+      "opencfw_em9305_controller_timer_changed EQUIVALENT 100 classes=35 calls=40 nor0",
+      "opencfw_em9305_timer_select EQUIVALENT 100 classes=83 calls=280",
+      "opencfw_em9305_timer_apply EQUIVALENT 100 classes=92 calls=74",
+      "opencfw_em9305_timer_threshold_flags EQUIVALENT 100 classes=1 calls=0",
+      "opencfw_em9305_timer_enable EQUIVALENT 100 classes=42 calls=395",
+      "opencfw_em9305_timer_initialize EQUIVALENT 100 classes=2 calls=0",
+      "opencfw_em9305_timer_irq_enable EQUIVALENT 100 classes=2 calls=0",
+      "opencfw_em9305_timer_config_pair EQUIVALENT 100 classes=83 calls=0",
+      "opencfw_em9305_controller_prepare_timer EQUIVALENT 100 classes=100 calls=100",
+      "opencfw_em9305_controller_timer_reset EQUIVALENT 100 classes=83 calls=300"
+    ]
+  },
+  "gates": {
+    "controller_timer_word": "Previously classes=1 (always update). PRE_H sets 0xf00414 to packed on even t and ~packed on odd t. Now rets 0 and 1 are 50/50; both the no-update and update gates run. No typo-RAM site.",
+    "timer_threshold_flags": "PRE_H plants timer_context at RB+0x2000 with count=6 and mask=0x3f. ret is always the planted pointer (classes=1) but memhash is unique on all 100 cases, so the threshold loop ran. Mutant of u32_80fde0->u32_80fde8 KILLED memhash:100 ret:100.",
+    "timer_initialize": "Mode cycles 0..4. Banks 0/1 and 2/3 return context (80 cases); the other-mode gate returns last (20 cases ret=4). 100 unique memhashes. Mode mutant u32_80199c->u32_8019b0 KILLED ret:89 memhash:77.",
+    "timer_irq_enable": "No typo-RAM. Already classes=2; with MMIO fill, previous enable bit returns 0 on 85 cases and 1 on 15. Both enable and previous-bit gates run. No typo-RAM mutant.",
+    "timer_config_pair": "Already 76-83 classes from typo-RAM stores. Mutant u32_8019b0->u32_8019b8 KILLED memhash:100.",
+    "timer_changed": "Mode 0 or 2 is now 40/100 cases (was 7 timer_word calls). Product tables planted at RB+0x2200/0x2300. Mutant u32_8012c4->u32_8012c0 KILLED callhash:40."
+  },
+  "mutants": {
+    "log": "build/ws-em9305-20261122/u-suffix/timer-gates/mutant_summary.txt",
+    "results": "build/ws-em9305-20261122/u-suffix/timer-gates/mutant_results.json",
+    "previously_killed": [
+      "controller_timer_reset u32_80fde0->u32_80fde8",
+      "controller_prepare_timer u32_80fba0->u32_80fba4"
+    ],
+    "newly_killed": [
+      "timer_calibrate_a &em9305_ram_80fdd4->&em9305_ram_80fb8c callhash:86",
+      "timer_calibrate_b &em9305_ram_80fdd4->&em9305_ram_80fb8c callhash:86",
+      "controller_timer_changed u32_8012c4->u32_8012c0 callhash:40",
+      "timer_select u32_80199c->u32_8019b0 ret:58 ncalls:71 callhash:77",
+      "timer_apply u32_80199c->u32_8019b0 ret:65 ncalls:66 callhash:71",
+      "timer_enable u8_8019a0->u8_8019a1 memhash:98 ncalls:12 callhash:12",
+      "timer_threshold_flags u32_80fde0->u32_80fde8 ret:100 memhash:100",
+      "timer_initialize u32_80199c->u32_8019b0 ret:89 memhash:77",
+      "timer_config_pair u32_8019b0->u32_8019b8 memhash:100"
+    ],
+    "survived_then_retried": "timer_enable interval u32_80fde8->u32_80fdf4 SURVIVED (update=0 path is rare when enable!=0). Retried on the observed u8_8019a0 selected field and KILLED.",
+    "no_typo_ram_mutant": [
+      "controller_timer_word",
+      "timer_irq_enable"
+    ]
+  }
+}

@@ -1,9 +1,10 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31f538..0x31f868: periodic-sync receive handler for the
- * owner's link (+36) and context (+44); G = 0x803b68 holds the last
- * advertiser/target addresses, K = 0x8051a4 the sync-transfer filter.
- * LLID 9 PDUs go to the hook at 0x80516c and, when accepted with a
+ * owner's link (+36) and context (+44); G = (uintptr_t)&em9305_ram_803b68 holds the last
+ * advertiser/target addresses, K = ((uintptr_t)&em9305_ram_805194 + 0x10u) the sync-transfer filter.
+ * LLID 9 PDUs go to the hook at ((uintptr_t)&em9305_ram_805160 + 0xcu) and, when accepted with a
  * SyncInfo (+154 bit 4), arm the next receive; LLID 7 PDUs are parsed
  * (32df24, flags local) and, for a new sync, cache AdvA/TargetA in G and
  * offer the request to 30301c. With an established filter (K[0] = 1 and
@@ -70,10 +71,10 @@ void opencfw_em9305_child_31f538(uintptr_t owner, uintptr_t pdu)
 {
     uint8_t header[8] __attribute__((aligned(4)));
     uint8_t flags;
-    const uintptr_t g=0x803b68u,k=0x8051a4u;
+    const uintptr_t g=(uintptr_t)&em9305_ram_803b68,k=((uintptr_t)&em9305_ram_805194 + 0x10u);
     volatile uint8_t *g8=(volatile uint8_t *)g;
     volatile uint8_t *k8=(volatile uint8_t *)k;
-    volatile uint8_t *busy=(volatile uint8_t *)(uintptr_t)0x803d70u;
+    volatile uint8_t *busy=&em9305_ram_803d70.u8_803d70;
     uintptr_t link=*(volatile uint32_t *)(owner+36u);
     uintptr_t context=*(volatile uint32_t *)(owner+44u);
     volatile uint8_t *l8=(volatile uint8_t *)link;
@@ -82,7 +83,7 @@ void opencfw_em9305_child_31f538(uintptr_t owner, uintptr_t pdu)
     uint32_t llid=*(volatile uint8_t *)&header[0];
     g8[1]=0u;
     if(llid==9u){
-        uintptr_t hook=*(volatile uint32_t *)(uintptr_t)0x80516cu;
+        uintptr_t hook=em9305_ram_805160.u32_80516c;
         uint32_t accepted=0u;
         if(hook!=0u)
             accepted=((uint32_t (*)(uintptr_t,uintptr_t,uintptr_t,uintptr_t))hook)
@@ -133,7 +134,7 @@ void opencfw_em9305_child_31f538(uintptr_t owner, uintptr_t pdu)
                     *(volatile uint32_t *)(g+20u)=0u;
                     g8[36]=0u;
                 }
-                *(volatile uint8_t *)(uintptr_t)0x803b8du=(uint8_t)adv_type;
+                em9305_ram_803b8c.u8_803b8d=(uint8_t)adv_type;
                 if((present&2u)!=0u){
                     uint32_t target_type=*(volatile uint8_t *)&header[3];
                     uint32_t high=cache[3],low=cache[2];

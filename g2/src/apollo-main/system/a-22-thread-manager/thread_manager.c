@@ -90,7 +90,9 @@ extern uint32_t osEventFlagsWait(void *ef, uint32_t flags, uint32_t options, uin
 extern uint32_t ulSetInterruptMask(void);
 extern void compress_log_mutex_init(void);
 extern void compress_log_set_output_flags_43d0c8(uint8_t flags);
-extern uint64_t TPL_Init(uint8_t service, ...);
+typedef void (*tpl_callback_fn)(void); /* see app/tpl-initialize/display_tpl_initialize.c */
+extern uint64_t TPL_Init(uint8_t service, tpl_callback_fn send_status, tpl_callback_fn rx_from_ble,
+                         tpl_callback_fn send_data, tpl_callback_fn direct_send);
 extern int32_t audio_ble_send_status_message(uint32_t, const uint8_t *, uint32_t, uint32_t); /* SendDataToBoth 0x464d1c */
 extern int32_t Thread_MsgRxFromBle(uint32_t id, const void *bytes, uint32_t length); /* 0x48f12c */
 extern void APP_BleEusSendDataMsg(void);        /* 0x4bdff4 */
@@ -176,8 +178,8 @@ void thread_manager_resource_init_4c94c8(void)
     audio_uart_thread_manager_state.event_flags = osEventFlagsNew(NULL);
     if (audio_uart_thread_manager_state.event_flags == NULL)
         thread_manager_fatal();
-    (void)TPL_Init(0u, audio_ble_send_status_message, Thread_MsgRxFromBle, APP_BleEusSendDataMsg,
-                   APP_BleEusDirectSendDataMsg);
+    (void)TPL_Init(0u, (tpl_callback_fn)audio_ble_send_status_message, (tpl_callback_fn)Thread_MsgRxFromBle,
+                   APP_BleEusSendDataMsg, APP_BleEusDirectSendDataMsg);
 }
 
 /* Storage bring-up: external flash, FlashDB, littlefs, crash-log file store. */

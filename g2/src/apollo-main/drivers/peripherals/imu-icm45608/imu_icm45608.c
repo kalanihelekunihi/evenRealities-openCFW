@@ -45,8 +45,7 @@ extern int inv_imu_edmp_aid_get_data_device_508830(g2_inv_imu_device_t *s, uint8
 extern int invn_mag_get_whoami_508a4e(uint8_t *who_am_i);
 
 /* ---- product callees ---- */
-extern uint32_t g2_codec_gpio_write(uint32_t channel, uint32_t value,
-                                    uint32_t unused_r2, uint32_t passthrough_r3); /* 0x509024 */
+extern uint32_t g2_codec_gpio_write(uint32_t channel, uint32_t value); /* 0x509024; stock callers set only r0/r1 */
 extern void g2_delay_us_491102(uint32_t us);
 extern uint16_t hub_role_get(void);                     /* 0x4a6d50 */
 extern uint32_t audio_wear_child_46b0ec(void);          /* SVC_Settings_InputEventCheck */
@@ -219,15 +218,15 @@ int32_t semantic_apply_odr_config(const g2_imu_mode_row_t *row)
 /* IMU rail off for 100 ms, then on with 5 ms settle. */
 void semantic_sensor_power_cycle(void)
 {
-    (void)g2_codec_gpio_write(IMU_POWER_CHANNEL, 0u, 0u, 0u);
+    (void)g2_codec_gpio_write(IMU_POWER_CHANNEL, 0u);
     (void)osDelay(100u);
-    (void)g2_codec_gpio_write(IMU_POWER_CHANNEL, 1u, 0u, 0u);
+    (void)g2_codec_gpio_write(IMU_POWER_CHANNEL, 1u);
     (void)osDelay(5u);
 }
 
 void semantic_sensor_reset_line(void)
 {
-    (void)g2_codec_gpio_write(IMU_POWER_CHANNEL, 0u, 0u, 0u);
+    (void)g2_codec_gpio_write(IMU_POWER_CHANNEL, 0u);
 }
 
 int32_t semantic_imu_init(uint8_t mode)

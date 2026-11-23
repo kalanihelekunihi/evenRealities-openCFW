@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-22 12:46 PM CST (America/Chicago)",
+  "title": "Rebuilt apollo-main with typographic C fuel-gauge (process in leaves, MVE profile; 3,645,112 B); version-match and forced-mismatch DFU paired sims PASS; 43bb14 count 4..8 typographic compare 0 mismatches",
+  "scope": "Emulator only. No hardware flash. No commit. Official opencfw-otap-disarm.app.bin was not overwritten. source_completeness_proven stays false. Link was apollo-main only.",
+  "sources_json": {
+    "dropped": "g2c_fuel_gauge_cores.S unit",
+    "leaves_profile": "g2-apollo-main-mve-1",
+    "mve_profile_fix": "Removed -mfpu=fpv5-d16 from g2-apollo-main-mve-1. On Apple clang that flag set __ARM_FEATURE_MVE=1 (integer only) and rejected vmulq_f32 / vmul.f32 q. Without it, -mcpu=cortex-m55 -mfloat-abi=hard sets __ARM_FEATURE_MVE=3 and ACLE compiles.",
+    "notes_updated": "source.c no longer points at cores.S; leaves note mentions process + MVE ACLE."
+  },
+  "leaves_freestanding_fix": "g2c_fuel_gauge_leaves.c dropped #include <string.h> (not present on the Apple-clang arm-none-eabi freestanding profile) and declares memcpy/memset plus stddef.h.",
+  "linker_report": {
+    "tool": "tools/build/link_g2_sources.py",
+    "docstring_and_qualification": "Replaced the canned 'source-only uncalibrated' / 'not the stock Nordic algorithm' wording. Qualification now says the fuel gauge is typographic C, bit-exact versus typographic stock on Renode 1.17 M55 (hardware calibration unproven).",
+    "source_completeness_proven": false
+  },
+  "build": {
+    "source_out": "build/g2-apollo-recovery-20261122-fuel-gauge-process-c2",
+    "link_out": "build/g2-apollo-recovery-20261122-fuel-gauge-process-c2-link",
+    "payload_scope": "g2-apollo-main only (sources.py --payload and link_g2_sources.py --payload). A first full-device compile into build/g2-apollo-recovery-20261122-fuel-gauge-process-c failed leaves (string.h / MVE.fp) and codec/em9305/touch (docker/colima socket down).",
+    "compiled": "2719/2719, 0 failures, 0 duplicate strong symbols, 21 composed unresolved (linker-script symbols)",
+    "binary_bytes": 3645112,
+    "binary_sha256": "14b662c5e11ea984e73bf80acfc03d74ad505219c3f5cf7dc696190f87b58c39",
+    "elf_sha256": "f3c6765382b63362dec2f48ecf85a4decb01e13eacd1bdcce0a6542f46c71aab",
+    "package_bytes": 3645144,
+    "package_sha256": "35318f218b296137b6b7b82744ade775b75c7c6d851e172e4ce5a2140da81a20",
+    "reset_pc": "0x0052C3CD",
+    "sp": "0x2007FB00",
+    "vs_fuel_gauge_c_bytes": "3,645,112 vs 3,629,904 typographic-cores image (+15,208)",
+    "source_report_sha256": "331cccb103208d30003961f54ed9f0f2ac8b666de7093fb363f3855adb00cd07",
+    "link_report_sha256": "fc327bd97ee7ed21ce70e028189ff56788c2f57055a5a5fffbbe00593b6db77e"
+  },
+  "linked_symbols": {
+    "nrf_fuel_gauge_init": "0x005CF6F0",
+    "nrf_fuel_gauge_ext_state_update": "0x005CF810",
+    "nrf_fuel_gauge_process": "0x005CF8C0",
+    "nrf_fuel_gauge_tte_get": "0x005CFA04",
+    "nrf_fuel_gauge_ttf_get": "0x005CFA10",
+    "nrf_model_init_43a1b0": "0x005D0F04",
+    "nrf_model_process_43a698": "0x005D17C4",
+    "nrf_model_ttf_58eac4": "0x005D0AB8",
+    "nrf_model_tte_cached_58eabc": "0x005D5C38",
+    "fg_43bb14": "0x005D00B8"
+  },
+  "fixture": {
+    "app_bin": "build/em9305-nor-20261122/opencfw-fuel-gauge-process-c.app.bin",
+    "app_bin_sha256": "14b662c5e11ea984e73bf80acfc03d74ad505219c3f5cf7dc696190f87b58c39",
+    "official_untouched": {
+      "path": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+      "bytes": 3819448,
+      "sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+      "mtime_america_chicago": "2026-11-22 07:55:05 CST"
+    },
+    "controller_word": "00010304",
+    "nor": "nor-with-em9305.bin",
+    "renode": "g2-firmware-emulator scripts/run-renode.sh, Renode 1.17.0+20261102gite8c7c2d28, 8 s runs (same completed-DFU fixture as stock-dfu-mismatch)"
+  },
+  "bb14_count_4_to_8": {
+    "status": "SETTLED",
+    "method": "Direct C vs typographic stock_fg_43bb14 on Renode 1.17 M55. Typographic body copied with a widened 0x50-byte frame (index at sp+4, abs/temp at sp+0x10, raw at sp+0x30) so count 4..8 do not overlap. Control flow unchanged.",
+    "cases": 315,
+    "fails": 0,
+    "counts_tested": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "magic": "0xF6A11E14",
+    "note": "Stock only considers the first two abs values unless count==3 (which also considers index 2). The mid6 'max-abs at last index' property was not typographic behavior and was dropped from mid6_harness.c. Production fg_43bb14 was not changed.",
+    "artifacts": {
+      "harness": "build/fuel-gauge-recon-20261122/c-leaves/bb14_count48_harness.c",
+      "wideframe": "build/fuel-gauge-recon-20261122/c-leaves/stock_43bb14_wideframe.S",
+      "bin": "build/fuel-gauge-recon-20261122/c-leaves/bb14_count48_test.bin",
+      "bin_sha256": "0ff756d9bb62d90c025a267ecf61a1fc299528d085221c02a467307b6ce699cd",
+      "results": "build/fuel-gauge-recon-20261122/c-leaves/bb14_count48_results.bin",
+      "results_sha256": "28e7d60bab74811fd7d9f9b42e37edbd1467589cfe51ea965f9d5e3cebf7432d",
+      "log": "build/fuel-gauge-recon-20261122/c-leaves/bb14_count48.log",
+      "log_sha256": "961fddfc7f21f928ee75c78b5dd5c89723beddc67772a3d1f1995cd87ea6a889"
+    }
+  },
+  "version_match": {
+    "resc": "build/em9305-nor-20261122/opencfw-fuel-gauge-process-c-match.resc",
+    "log": "build/em9305-nor-20261122/opencfw-fuel-gauge-process-c-match.log",
+    "log_sha256": "28478ae4ac6a7bc6d4f0a7d89ced5f0524033080f31c8dbdd8b1c09c42f96565",
+    "chiprev_fixture": "0x00000022",
+    "chiprev_after_8s": "0x00000022",
+    "otap_after_0_01s": "0xAFD1363A",
+    "otap_after_8s": "0x00000000",
+    "host_packet_count": "0x0000003A",
+    "unsupported_count": "0x00000000",
+    "advertising_010A200101": 1,
+    "display_frame_sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+    "end_pc": "0x4cc084",
+    "compared_to": "opencfw-fuel-gauge-c-match, opencfw-gc-fnsec-match, and stock-chiprev22/stock-match: same CHIPREV, OTAP-at-8s 0, host 0x3A, unsupported 0, advertising, and display hash. End PC differs by image layout (this 0x4cc084, fuel-gauge-c 0x4ce6ec, gc 0x4cbdd4, stock 0x44adfa)."
+  },
+  "forced_mismatch_dfu": {
+    "resc": "build/em9305-nor-20261122/opencfw-fuel-gauge-process-c-dfu-mismatch.resc",
+    "log": "build/em9305-nor-20261122/opencfw-fuel-gauge-process-c-dfu-mismatch.log",
+    "log_sha256": "d390a5e954014fb962c047f2e2315ebbfd4d18755219bf0d57d32e444937f4b0",
+    "stock_log": "build/em9305-nor-20261122/stock-dfu-mismatch.log",
+    "hci_host_packets": 922,
+    "opcode_histogram_identical_to_stock": true,
+    "hci_packet_sequence_identical_to_stock": true,
+    "fd06_erase_main": 1,
+    "fd03_nvm_program_writes": 857,
+    "fc4e_crc_commands": 4,
+    "crc32_results": [
+      "[0x00300000,0x003000E0) = 0xD2C17B4C",
+      "[0x00300400,0x00300690) = 0x6E09DDA8",
+      "[0x00302000,0x00302038) = 0xDA9653E5",
+      "[0x00302400,0x00335BC8) = 0xE498BC06"
+    ],
+    "fd07_info_erase": "NVMErasePage INFO sel=1 page=1 @0x00402000",
+    "fd03_commit_402000": {
+      "count": 1,
+      "index": 856,
+      "data_prefix": "00020404ffffffff",
+      "identical_to_stock": true
+    },
+    "sysresetreq": true,
+    "sbl_application_handoff": true,
+    "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0052C3CD",
+    "sbl_wired_load": false,
+    "advertising_010A200101": 1,
+    "display_frame_sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+    "otap_after_0_01s": "0xAFD1363A",
+    "otap_after_8s": "0x00000000",
+    "config_mode_after_8s": false,
+    "nvm_main_erased_after_8s": false,
+    "unsupported_count": "0x00000000",
+    "host_packet_count": "0x0000003A",
+    "end_pc": "0x4cc084"
+  },
+  "compare": {
+    "crc_results_identical": true,
+    "fd03_commit_payload_prefix_identical": true,
+    "fd03_write_count_identical": true,
+    "dfu_hci_completed_both": true,
+    "opcode_histogram_identical_to_stock": true,
+    "hci_packet_sequence_identical_to_stock": true,
+    "dfu_hci_markers": "1x FD06 erase, 857x FD03 NVM program, 4x FC4E CRC (same digests), 1x FD07 INFO erase @0x00402000, 1x FD03 commit @0x00402000 starting 00020404 (stock 4.4.2.0 version word, replacing the 00010304 mismatch fixture), then SYSRESETREQ",
+    "post_dfu_handoff": "SBL application handoff (not wired-load) at VTOR 0x00438000 SP 0x2007FB00 PC=0x0052C3CD, then advertise 010A200101. OTAP 0, config mode false, NVM_MAIN_ERASED false, unsupported 0, host packet monitor 0x3A. End PC and handoff PC differ from stock/gc/prior fuel-gauge-c only by image layout (stock 0x005E4233/0x44adfa, gc 0x0052C11D/0x4cbdd4, fuel-gauge-c 0x0052EA35/0x4ce6ec, this image 0x0052C3CD/0x4cc084).",
+    "verdict": "PASS. Version-match bring-up and the completed forced-mismatch DFU path (erase, CRC, commit, post-DFU application handoff with advertising) match stock. OTAP SBL wired-load remains disarmed."
+  }
+}

@@ -58,7 +58,7 @@ int32_t _kvdbUpdataRing(void) {
     (void)SVC_KvdbWriteRing(g2_kvdb_ring_record.mac, g2_kvdb_ring_record.name);
     return 0;
 }
-G2_KVDB_MIGRATION_EXPORT(_kvdbUpdataRing);
+/* _kvdbUpdataRing: migration slot 4 of the stock-ordered table in service_kvdb.c (ROM 0x746d20). */
 
 /* A NULL MAC or name erases that field to 0xff. */
 int32_t SVC_KvdbWriteRing(const uint8_t *mac, const char *name) {

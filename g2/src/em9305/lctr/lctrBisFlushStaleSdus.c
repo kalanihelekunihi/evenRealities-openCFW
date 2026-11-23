@@ -3,6 +3,7 @@
  * against it in the QEMU-ARC harness (.waves/w28). Field names are not recovered (offsets only).
  */
 #include <stdint.h>
+#include "em9305_ram.h"
 #define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
 #define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
 extern uint32_t opencfw_em9305_wsf_event_peek(uint32_t queue, uint32_t out_u8);
@@ -26,7 +27,7 @@ void opencfw_em9305_lctrBisFlushStaleSdus(uint32_t ctx)
     opencfw_em9305_wsf_event_release(W32(ev));
     opencfw_em9305_radio_packet_complete_31ae74(ev);
     opencfw_em9305_wsf_critical_enter();
-    B8(0x805adcu) = (uint8_t)(B8(0x805adcu) + 1u);
+    B8(((uintptr_t)&em9305_ram_805a6c + 0x70u)) = (uint8_t)(B8(((uintptr_t)&em9305_ram_805a6c + 0x70u)) + 1u);
     opencfw_em9305_wsf_critical_exit();
   }
 }

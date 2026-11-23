@@ -1,0 +1,16 @@
+{
+  "stream":"ws-hwdrivers","when_cst":"2026-11-22 ~22:42 CST",
+  "task":"private rebuild incl IMU defaults + codec_uart_irq guard + fg_aux; verify .data init landed",
+  "build_invocation":"python3 tools/build/sources.py build --device g2 --out build/ws-hwdrivers-20261122/full-2227 (same invocation ramlayout full-2158 / blestore full-raminit-ble used; NOT build_firmware.py which fails on 'unqualified relocations')",
+  "build_outcome":"4572 objects compiled incl full g2-apollo-main payload; FINAL COMPOSE FAILED for reasons external to ws-hwdrivers: (1) two g2-em9305 units failed to compile (init_transition_table_leaves_disjoint.c, stock_residual_code.c); (2) 'source manifest changed during the build' - the em9305 stream is actively rewriting sources.json. Neither is a ws-hwdrivers issue.",
+  "object_level_verification":{
+    "note":"objdump -s of the build's own .o files proves each .data init landed exactly",
+    "audio_hub_imu_report_interval_cell":"e8030000 = 1000 (stock 0x20000e60)",
+    "audio_hub_motion_threshold_cell":"19000000 = 25 (stock 0x20000e64)",
+    "audio_hub_motion_period_cell":"e8030000 = 1000 (stock 0x20000e68)",
+    "audio_hub_motion_duration_cell":"03000000 = 3 (stock 0x20000e6c)",
+    "fg_aux":"0000c07f 9a99993e a69b443b bd378635 6f12833a 000a0300 13000400 0e000800 08001b00 c0010101 01010d0d 0b0b1219 1aa4a401 030101ff ff010101 01010101 = all 16 stock words (stock 0x20004510)",
+    "codec_uart_irq":"symbol defined (T); spurious channel>=4 guard removed; already 20/20 in harness"
+  },
+  "paired_sims_status":"npmxfg/gluefg/imufp per-function paired sims NOT yet run: box load average 300-700 (unrelated Xcode SwiftCompile + 4-5 other-stream Renodes); waiting out load per instruction, not killing non-owned processes. Whole-image paired raminit sim blocked on em9305 settling."
+}

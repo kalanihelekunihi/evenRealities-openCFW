@@ -1,9 +1,10 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x323374..: report mode event 9 for a connection record as
  * {u16 handle, u16 9, u8 0, -, u16 handle, u8 mode, -, u16 a, u16 b},
  * taking mode/a/b from +528/+530/+532. The handle is the record index
- * ((record - base at 0x805c70) / 912). */
+ * ((record - base at ((uintptr_t)&em9305_ram_805c5c + 0x14u)) / 912). */
 extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t event);
 
 struct opencfw_em9305_mode_event_9 {
@@ -19,7 +20,7 @@ struct opencfw_em9305_mode_event_9 {
 uint32_t opencfw_em9305_mode_event_323374(uintptr_t record)
 {
     struct opencfw_em9305_mode_event_9 event;
-    uintptr_t base=*(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uintptr_t base=em9305_ram_805c5c.u32_805c70;
     event.status=0u;
     event.code=9u;
     uint32_t handle=(uint8_t)((int32_t)(record-base)/912);

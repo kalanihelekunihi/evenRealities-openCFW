@@ -18,15 +18,15 @@ extern void audio_conversate_menu_style_5b5720(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_43dfa4(uint32_t, uint32_t);
 extern void audio_uart_page_44d878(uint32_t);
 extern uint32_t audio_lv_label_create_499416(uint32_t);
-extern void audio_lv_label_text_49942e(uint32_t, uint32_t);
+extern void audio_lv_label_text_49942e(uint32_t, const char *);
 extern uint32_t audio_uart_page_460084(const char *);
-extern uint32_t audio_uart_page_45fffe(const char *, uint32_t);
+extern const char *audio_uart_page_45fffe(const char *, uint32_t);
 extern uint32_t audio_uart_page_44104c(uint32_t);
 extern void audio_uart_page_44140e(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_44143e(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_44145a(uint32_t, uint32_t, uint32_t);
-extern uint32_t audio_conversate_prep_button_create_5b1150(uint32_t, uint32_t,
-                                                             uint32_t, uint32_t);
+extern uint32_t audio_conversate_prep_button_create_5b1150(uint32_t parent, uint32_t image,
+                                                             const char *label_text, uint32_t ignored);
 extern uint32_t audio_conversate_ui_main_list_container_5b12ba(uint32_t);
 extern void audio_conversate_ui_slot_fade_5b1072(uint32_t, uint32_t);
 extern void audio_terminal_ui_scroll_to_view_44ea2e(uint32_t, uint32_t);
@@ -68,7 +68,7 @@ uint32_t audio_conversate_ui_route_5b59fa(uint32_t state, uint32_t value) {
     audio_uart_page_44143e(label, audio_uart_ring_primary_head_cell, 0u);
     audio_uart_page_44145a(label, 2u, 0u);
     const uint32_t skip_len = audio_uart_page_460084(skip_key);
-    const uint32_t skip_text = audio_uart_page_45fffe(skip_key, skip_len);
+    const char *const skip_text = audio_uart_page_45fffe(skip_key, skip_len);
     const uint32_t skip_button = audio_conversate_prep_button_create_5b1150(
         root, (uint32_t)(uintptr_t)&audio_conversate_menu_icon_76a2a0,
         skip_text, 0u);
@@ -88,7 +88,7 @@ uint32_t audio_conversate_ui_route_5b59fa(uint32_t state, uint32_t value) {
         const uint8_t *const item = replies + i * 0x88u;
         const uint32_t button = audio_conversate_prep_button_create_5b1150(
             list, (uint32_t)(uintptr_t)&audio_conversate_prep_icon_76a47c,
-            (uint32_t)(uintptr_t)(item + 0xau), 0u);
+            (const char *)(item + 0xau), 0u);
         if (button != 0u && word(replies, 0xaa4u) == word(item, 4u)) {
             put_word(ui, 0x80u, button);
             put_word(ui, 0x84u, i);

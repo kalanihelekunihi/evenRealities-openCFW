@@ -1,4 +1,5 @@
 #include "init_lower_native.h"
+#include "em9305_ram.h"
 
 extern uint8_t *const opencfw_em9305_ext_init_records_3357a8[3];
 extern uint8_t *const opencfw_em9305_stream_objects_3357b4[3];
@@ -10,12 +11,12 @@ extern void *opencfw_em9305_memset(void *destination, uint32_t value, uint32_t b
  * A zero entry is explicitly skipped, including its 704-byte clear. */
 uint32_t opencfw_em9305_init_child_307980(void)
 {
-    uint32_t result = 0x802a54u;
-    init_write32(0x802a5cu, 0u);
-    init_write32(0x802a58u, 0u);
-    init_write32(0x802a54u, 0u);
-    *(volatile uint8_t *)0x805a7cu = 1u;
-    *(volatile uint8_t *)0x802a5eu = 1u;
+    uint32_t result = ((uintptr_t)&em9305_ram_802a2c + 0x28u);
+    init_write32(((uintptr_t)&em9305_ram_802a2c + 0x30u), 0u);
+    init_write32(((uintptr_t)&em9305_ram_802a2c + 0x2cu), 0u);
+    init_write32(((uintptr_t)&em9305_ram_802a2c + 0x28u), 0u);
+    *(volatile uint8_t *)((uintptr_t)&em9305_ram_805a6c + 0x10u) = 1u;
+    *(volatile uint8_t *)((uintptr_t)&em9305_ram_802a2c + 0x32u) = 1u;
     for (uint32_t index = 0; index < 3u; ++index) {
         uintptr_t context = (uintptr_t)opencfw_em9305_ext_init_records_3357a8[index];
         if (context != 0u) {
@@ -30,23 +31,23 @@ uint32_t opencfw_em9305_init_child_307980(void)
  * 0x3357b4 table are dereferenced unconditionally by the stock loop. */
 uint32_t opencfw_em9305_init_child_307a68(void)
 {
-    (void)opencfw_em9305_memset((void *)0x803560u, 0u, 124u);
+    (void)opencfw_em9305_memset((void *)(uintptr_t)&em9305_ram_803560, 0u, 124u);
     for (uint32_t index = 0; index < 3u; ++index) {
         uintptr_t context = (uintptr_t)opencfw_em9305_stream_objects_3357b4[index];
         (void)opencfw_em9305_memset((void *)context, 0u, 704u);
-        uint32_t slot = init_read32(0x803b5cu + 4u * index);
+        uint32_t slot = init_read32((uintptr_t)&em9305_ram_803b5c + 4u * index);
         *(volatile uint8_t *)(context + 16u) = (uint8_t)index;
         init_write32(context + 148u, slot);
     }
     init_write32(0x8035e4u, 0x00100010u);
     init_write32(0x8035e8u, 0u);
-    uint8_t task = init_read8(0x805b18u);
-    *(volatile uint8_t *)0x803560u = 1u;
-    *(volatile uint8_t *)0x805a7cu = 1u;
-    init_write16(0x8035c2u, 1287u);
-    init_write16(0x8035d2u, 1543u);
-    *(volatile uint8_t *)0x8019f8u = 0u;
-    *(volatile uint8_t *)0x8035c8u = task;
-    *(volatile uint8_t *)0x8035d8u = task;
+    uint8_t task = init_read8(((uintptr_t)&em9305_ram_805af0 + 0x28u));
+    *(volatile uint8_t *)(uintptr_t)&em9305_ram_803560 = 1u;
+    *(volatile uint8_t *)((uintptr_t)&em9305_ram_805a6c + 0x10u) = 1u;
+    init_write16(((uintptr_t)&em9305_ram_8035c0 + 0x2u), 1287u);
+    init_write16(((uintptr_t)&em9305_ram_8035c0 + 0x12u), 1543u);
+    *(volatile uint8_t *)((uintptr_t)&em9305_ram_8019e8 + 0x10u) = 0u;
+    *(volatile uint8_t *)((uintptr_t)&em9305_ram_8035c0 + 0x8u) = task;
+    *(volatile uint8_t *)((uintptr_t)&em9305_ram_803560 + 0x78u) = task;
     return task;
 }

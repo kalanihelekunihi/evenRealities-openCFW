@@ -1,0 +1,209 @@
+{
+ "id": "g2-20261122-ws-blestore-storage-fal-nor-lowers",
+ "workstream": "ws-blestore (BLE host + persistent storage)",
+ "created": "2026-11-22T14:10-06:00 (America/Chicago)",
+ "method": "Renode 1.17 Cortex-M55 stub-patch differential harness: stock 2.2.6.10 body (called by address) and openCFW C body (per-unit sources.json flags) run in identical environment with stock callees trampolined to recording stubs; call sequence/args/returns/state compared in-harness (FNV + 2048-word capture); mutants compiled from C must be detected.",
+ "stock_image": {
+  "path": "build/ws-blestore-20261122/stock.app.bin",
+  "sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "load": "0x438000"
+ },
+ "functions": {
+  "nor-lowers": [
+   "0x4709c8 read lower",
+   "0x4708a8 write lower",
+   "0x47075c erase lower"
+  ],
+  "fal-a": [
+   "0x540ed0 init cb",
+   "0x540ed4 read cb",
+   "0x540f2c write cb",
+   "0x540f84 erase cb",
+   "0x597e54 device_find",
+   "0x597d10 selector",
+   "0x597c6c check_cache",
+   "0x597cae partition_init",
+   "0x597cde partition_find",
+   "0x597e1c flash_init",
+   "0x597dec fal_init",
+   "data: product rows 0x6d5358, device table 0x78f0a4, count 0x78f0a8"
+  ],
+  "fal-b": [
+   "0x597d34 partition read",
+   "0x597d72 partition write",
+   "0x597db0 partition erase"
+  ]
+ },
+ "results": {
+  "nor-lowers": {
+   "verdict": "EQUIVALENT",
+   "tests": 1600,
+   "equal": 1600,
+   "differ": 0,
+   "done": true,
+   "overflow": false,
+   "mutants": 12,
+   "killed": 12,
+   "surviving_mutants": [],
+   "sources": {
+    "g2/src/apollo-main/drivers/flash/nor/nor-read-lower.c": "e37dff6ebf26f77fd9e655deb667a9cf8a09c1219604bc74551298060ef98844",
+    "g2/src/apollo-main/drivers/flash/nor/nor-write-lower.c": "e0c41600d2ffa1db8e14412bef3b6390abe1d037121ea13aaa0c84e3745dd1db",
+    "g2/src/apollo-main/drivers/flash/fal-norflash/fal-norflash-erase-lower.c": "dd674cdef88260c281a02d965f66d17889d8f2edb63a1d0d4a9eb92a3679e722"
+   },
+   "stubbed_stock_callees": {
+    "0x43ce9e": [
+     "audio_log_simple"
+    ],
+    "0x43d0ce": [
+     "g2_flashdb_candidate_flags"
+    ],
+    "0x43d574": [
+     "g2_flashdb_candidate_log"
+    ],
+    "0x46f65e": [
+     "g2_norflash_lock_46f65e"
+    ],
+    "0x46f674": [
+     "g2_norflash_unlock_46f674"
+    ],
+    "0x470168": [
+     "g2_norflash_command_470168"
+    ],
+    "0x47021c": [
+     "g2_norflash_erase_command_47021c"
+    ],
+    "0x470368": [
+     "g2_norflash_wait_status_470368"
+    ],
+    "0x4703ba": [
+     "g2_norflash_wait_idle_4703ba"
+    ],
+    "0x470670": [
+     "g2_norflash_write_enable_470670"
+    ],
+    "0x4706e0": [
+     "g2_norflash_write_disable_4706e0"
+    ],
+    "0x470e90": [
+     "g2_norflash_exit_470e90"
+    ],
+    "0x470f68": [
+     "g2_norflash_enter_470f68"
+    ],
+    "0x4733ee": [
+     "g2_norflash_diagnostic_4733ee"
+    ]
+   },
+   "real_stock_calls": {},
+   "data_checks": {
+    "g2_norflash_controller_handle_20074544": "0x20074544"
+   },
+   "profiles": {
+    "g2/src/apollo-main/drivers/flash/nor/nor-read-lower.c": "g2-apollo-main-2",
+    "g2/src/apollo-main/drivers/flash/nor/nor-write-lower.c": "g2-apollo-main-2",
+    "g2/src/apollo-main/drivers/flash/fal-norflash/fal-norflash-erase-lower.c": "g2-apollo-main-2"
+   },
+   "harness_sha256": "bb5ecaf904838290c7d7104946149893ca211e0c5c22d8cd7186eadc86c87a51",
+   "report": "build/ws-blestore-20261122/specs/nor-lowers/report.json"
+  },
+  "fal-a": {
+   "verdict": "EQUIVALENT",
+   "tests": 2225,
+   "equal": 2225,
+   "differ": 0,
+   "done": true,
+   "overflow": false,
+   "mutants": 8,
+   "killed": 8,
+   "surviving_mutants": [],
+   "sources": {
+    "g2/src/apollo-main/drivers/flash/fal-norflash/fal-norflash-init.c": "c1d95cd4cbf049ceb02f081af24d4d543e20f4a668616f297fe8be6ae186d43d",
+    "g2/src/apollo-main/drivers/flash/fal-norflash/fal-norflash-read.c": "76588bb52bb9b339a71357c3c0d670d8718c08b7b1d406f20a2aa22b0161b608",
+    "g2/src/apollo-main/drivers/flash/fal-norflash/fal-norflash-write.c": "a8fa8abe27c80195bc93bcfbaebbee9758b1de54f2ef191a2986870403c5df12",
+    "g2/src/apollo-main/drivers/flash/fal-norflash/fal-norflash-erase.c": "7e56d20cfd655ebea7d94f9ea2c5b4259ef32ea0b28d51a11017fc661ac3dcb3",
+    "g2/src/apollo-main/drivers/flash/fal/fal-device-find.c": "56b3d72448fe0d95ffc01cf0727d14e56f8aab4a517afeb9aab83eb004bcc98a",
+    "g2/src/apollo-main/drivers/flash/fal/fal-device-selector.c": "509ef4e1205faa2d3e746bf7e9f213fd26800f4732bd08974da5e7de182e96c9",
+    "g2/src/apollo-main/drivers/flash/fal/fal-partition-state.c": "31c8fb1aec297c4d0675b05a8ec4a3e524b6c1841ae6eb85029e9486f08f7cef",
+    "g2/src/apollo-main/drivers/flash/fal/fal-product-config/product_tables.c": "ff80e20bac545c4986aca0a9bfa0be14d58af113f30e2d60aae91a5525cbb390",
+    "g2/src/apollo-main/drivers/p-11-fal/fal_init.c": "0674f28b9db75c1652b667fb3f93e01272e9a85d02f23548f920f5223c6dd8db"
+   },
+   "stubbed_stock_callees": {
+    "0x43ce9e": [
+     "audio_log_simple"
+    ],
+    "0x43d0ce": [
+     "g2_flashdb_candidate_flags"
+    ],
+    "0x43d574": [
+     "g2_flashdb_candidate_log"
+    ],
+    "0x47075c": [
+     "g2_norflash_erase_lower_47075c"
+    ],
+    "0x4708a8": [
+     "g2_norflash_write_lower_4708a8"
+    ],
+    "0x4709c8": [
+     "g2_norflash_read_lower_4709c8"
+    ]
+   },
+   "real_stock_calls": {
+    "audio_uart_font_path_compare": "0x46cacc"
+   },
+   "data_checks": {
+    "g2_fal_flash_init_ok": "0x20074fc6",
+    "g2_fal_init_ok": "0x20074fc5"
+   },
+   "profiles": {
+    "g2/src/apollo-main/drivers/flash/fal-norflash/fal-norflash-init.c": "g2-apollo-main-2",
+    "g2/src/apollo-main/drivers/flash/fal-norflash/fal-norflash-read.c": "g2-apollo-main-2",
+    "g2/src/apollo-main/drivers/flash/fal-norflash/fal-norflash-write.c": "g2-apollo-main-2",
+    "g2/src/apollo-main/drivers/flash/fal-norflash/fal-norflash-erase.c": "g2-apollo-main-2",
+    "g2/src/apollo-main/drivers/flash/fal/fal-device-find.c": "g2-apollo-main-2",
+    "g2/src/apollo-main/drivers/flash/fal/fal-device-selector.c": "g2-apollo-main-2",
+    "g2/src/apollo-main/drivers/flash/fal/fal-partition-state.c": "g2-apollo-main-2",
+    "g2/src/apollo-main/drivers/flash/fal/fal-product-config/product_tables.c": "g2-apollo-main-2",
+    "g2/src/apollo-main/drivers/p-11-fal/fal_init.c": "g2-apollo-main-2"
+   },
+   "harness_sha256": "05d0cb3f66b8d6c5a15c1bb0dfa88f5dc89be1d9c0b74519040d593a9f556885",
+   "report": "build/ws-blestore-20261122/specs/fal-a/report.json"
+  },
+  "fal-b": {
+   "verdict": "EQUIVALENT",
+   "tests": 1500,
+   "equal": 1500,
+   "differ": 0,
+   "done": true,
+   "overflow": false,
+   "mutants": 3,
+   "killed": 3,
+   "surviving_mutants": [],
+   "sources": {
+    "g2/src/apollo-main/storage/flashdb/flashdb-partition-read.c": "a9849782a5f16156adf7fa82b473a3db9fd6241490902dd4c0eccde08607f850",
+    "g2/src/apollo-main/storage/flashdb/flashdb-partition-write.c": "ee77e3137fb1eda60b97048f78cc81f5fcaca70c605c4de3a4b4dd68de8d788a",
+    "g2/src/apollo-main/app/settings-fal/settings_fal_partition_erase.c": "d903d2fcdbca999470b5c6799eb9fedc9eaa2810cc1c97f46d87a6554f53adb0"
+   },
+   "stubbed_stock_callees": {
+    "0x540ed4": [],
+    "0x540f2c": [],
+    "0x540f84": [],
+    "0x597d10": [
+     "g2_fal_device_for_partition"
+    ]
+   },
+   "real_stock_calls": {},
+   "data_checks": {},
+   "profiles": {
+    "g2/src/apollo-main/storage/flashdb/flashdb-partition-read.c": "g2-apollo-main-2",
+    "g2/src/apollo-main/storage/flashdb/flashdb-partition-write.c": "g2-apollo-main-2",
+    "g2/src/apollo-main/app/settings-fal/settings_fal_partition_erase.c": "g2-apollo-main-1"
+   },
+   "harness_sha256": "e8d5e3a32100ea5d2e54ccb6eca6b9a44bd6b6b90b6b86b393d5397d9a917556",
+   "report": "build/ws-blestore-20261122/specs/fal-b/report.json"
+  }
+ },
+ "notes": [
+  "drivers/p-11-fal/fal_init.c and app/settings-fal/settings_fal_partition_erase.c are owned by other streams: verified only, not edited.",
+  "Closes FAL product-config, partition read/write/erase and NOR lower read/write/erase portion of the sources.json apollo_main gate item; NOR controller/MSPI init path (nor-hw) still in progress."
+ ]
+}

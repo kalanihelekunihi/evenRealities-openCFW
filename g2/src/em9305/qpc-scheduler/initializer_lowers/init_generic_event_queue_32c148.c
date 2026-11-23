@@ -1,6 +1,7 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
-/* Native 0x32c148..0x32c174: drain the LL event queue at 0x805694. Each
+/* Native 0x32c148..0x32c174: drain the LL event queue at ((uintptr_t)&em9305_ram_805688 + 0xcu). Each
  * removed event is handed to the LL event callback through a frame whose
  * first word is the event pointer (handler byte from the queue at frame+7),
  * then released (re-read from the frame); finally run 32c254. */
@@ -19,7 +20,7 @@ uint32_t opencfw_em9305_callback_32c148(void)
 {
     struct init_event_frame_32c148 frame;
     for(;;) {
-        uintptr_t event=opencfw_em9305_wsf_event_remove((uintptr_t)0x805694u,
+        uintptr_t event=opencfw_em9305_wsf_event_remove((uintptr_t)((uintptr_t)&em9305_ram_805688 + 0xcu),
                                                         (uintptr_t)&frame.handler);
         frame.event=event;
         if(event==0u) break;

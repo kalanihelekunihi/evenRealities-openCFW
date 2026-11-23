@@ -1,8 +1,9 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x317214..0x317280: step the per-PHY transmit power slot
  * (+332 + PHY index) by delta. 0x7f marks an unsupported PHY (returns 0),
- * 0x7e takes the configured default (+40 of 0x805cac); otherwise the
+ * 0x7e takes the configured default (+40 of ((uintptr_t)&em9305_ram_805c5c + 0x50u)); otherwise the
  * radio power level is looked up. A positive step below the maximum
  * saturates at 0x7f. The 310200-normalised level is stored back (and in
  * +66 for the active PHY, +76); returns the change against the level. */
@@ -17,7 +18,7 @@ int32_t opencfw_em9305_child_317214(uintptr_t record, uint32_t phy, int32_t delt
     uint32_t base,reference;
     if(current==0x7f)return 0;
     if(current==0x7e){
-        base=*(volatile uint8_t *)(*(volatile uint32_t *)(uintptr_t)0x805cacu+40u);
+        base=*(volatile uint8_t *)(*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_805c5c + 0x50u)+40u);
         reference=base;
     }else{
         reference=opencfw_em9305_ll_signed_clamp_310230((uint32_t)current);

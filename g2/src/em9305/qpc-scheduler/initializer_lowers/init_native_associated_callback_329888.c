@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x329888..0x329fd6: connection-event-closed handler for a
  * connection in the central/peripheral associated state (object +0x24
@@ -6,23 +7,23 @@
  * After a late wake-up (+217) the events missed since the time alias
  * (30fd34) are taken off the event counter (+262) and the peripheral's
  * accumulated clock drift (+270/+271) is adjusted. It then samples the
- * RSSI (+268/+269, +784/+780 or the 0x805178 hook), resets the timing
+ * RSSI (+268/+269, +784/+780 or the ((uintptr_t)&em9305_ram_805160 + 0x18u) hook), resets the timing
  * state on a new connection (+219), restarts the supervision timer (+384,
  * +382 ms; +400 seen, +218/+220), runs the event-end hooks (+812 and
- * *0x805cd8 +0x1c), terminates a peripheral that must stop (reason 0x4c,
+ * *((uintptr_t)&em9305_ram_805c5c + 0x7cu) +0x1c), terminates a peripheral that must stop (reason 0x4c,
  * +629/+630/+620/+360) or after an MIC failure (+633/+632, reason 0x40),
- * runs a pending data-length/PHY hook (0x8052bc/0x8052c0), applies a
+ * runs a pending data-length/PHY hook ((uintptr_t)&em9305_ram_8052bc/((uintptr_t)&em9305_ram_8052bc + 0x4u)), applies a
  * connection update at its instant (+635 == 0x11, 3294fc/32a4c0) and
  * posts a channel-classification report (message 0x6b01, 37 channels of
- * 0x805aa0) when due (+565, +228..+240). Events skipped through the
- * latency hook (0x801a18) or peripheral latency (+260, +11 bit 4, queued
- * data at +360, instants) advance the counter (role table 0x8027e0).
+ * ((uintptr_t)&em9305_ram_805a6c + 0x34u)) when due (+565, +228..+240). Events skipped through the
+ * latency hook (((uintptr_t)&em9305_ram_801a14 + 0x4u)) or peripheral latency (+260, +11 bit 4, queued
+ * data at +360, instants) advance the counter (role table (uintptr_t)&em9305_ram_8027e0).
  * Then, for each event until the scheduler (312da4) accepts the next
  * anchor, the counter, anchor and window widening (317ebc, guard
  * interval) advance (terminating when the window exceeds half the
  * interval), the procedure instant (+635: 1 channel map, 0xe, 0x11
- * connection update, 0x15 PHY update with TX power 0x805cac and hook
- * 0x8052c8) is applied, the authenticated-payload counter (+772) may post
+ * connection update, 0x15 PHY update with TX power ((uintptr_t)&em9305_ram_805c5c + 0x50u) and hook
+ * ((uintptr_t)&em9305_ram_8052bc + 0xcu)) is applied, the authenticated-payload counter (+772) may post
  * message 0x6901 and the supervision state (+401) is refreshed. Finally
  * the ping timer (+748..+754, +77) may post message 0x6d01 and the close
  * hook (state +124, when +894) runs. Returns the stock r0 at each exit. */
@@ -70,10 +71,10 @@ static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;
 static inline void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
 static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
 
-/* Connection index of conn in the 912-byte table at *0x805c70. */
+/* Connection index of conn in the 912-byte table at *((uintptr_t)&em9305_ram_805c5c + 0x14u). */
 static uint32_t conn_index(uintptr_t conn)
 {
-    return (uint32_t)((int32_t)(conn-r32(0x805c70u))/912);
+    return (uint32_t)((int32_t)(conn-r32(((uintptr_t)&em9305_ram_805c5c + 0x14u)))/912);
 }
 
 /* Run an index hook: r0 = byte index, r1 = full quotient (stock). */
@@ -90,13 +91,13 @@ static uint32_t post(uintptr_t conn,uint32_t length,uint32_t code)
     if(message==0u)return 0u;
     w16(message+2u,code);
     w16(message,(uint8_t)conn_index(conn));
-    return opencfw_em9305_wsf_task_message_send(r8(0x805b18u),message);
+    return opencfw_em9305_wsf_task_message_send(r8(((uintptr_t)&em9305_ram_805af0 + 0x28u)),message);
 }
 
 static uint32_t role_hook(uintptr_t conn,uint32_t value)
 {
     opencfw_em9305_hook2_329888 hook=(opencfw_em9305_hook2_329888)(uintptr_t)
-        r32(0x8027e0u+r8(conn+321u)*4u);
+        r32((uintptr_t)&em9305_ram_8027e0+r8(conn+321u)*4u);
     return hook(conn,value);
 }
 
@@ -146,8 +147,8 @@ static void catch_up(uintptr_t object,uintptr_t conn)
 }
 
 /* PHY update at its instant (+635 == 0x15): new TX/RX PHYs (+723/+722),
- * TX power for the new PHY (+332.., 0x7e = from 0x805cac +40, hook
- * 0x8052c8), and the limits (317b10) for both directions. */
+ * TX power for the new PHY (+332.., 0x7e = from ((uintptr_t)&em9305_ram_805c5c + 0x50u) +40, hook
+ * ((uintptr_t)&em9305_ram_8052bc + 0xcu)), and the limits (317b10) for both directions. */
 static void phy_update(uintptr_t conn)
 {
     uint32_t tx_word=phy_word(r8(conn+76u));
@@ -167,12 +168,12 @@ static void phy_update(uintptr_t conn)
         w32(conn+636u,flags|0x200000u);
         w8(conn+66u,(uint32_t)power);
         if(power==0x7e){
-            int32_t level=*(volatile int8_t *)(r32(0x805cacu)+40u);
+            int32_t level=*(volatile int8_t *)(r32(((uintptr_t)&em9305_ram_805c5c + 0x50u))+40u);
             w8(conn+66u,(uint32_t)level);
             w8(conn+331u+phy,(uint32_t)level);
-            if(coded)w8(conn+335u,r8(r32(0x805cacu)+40u));
+            if(coded)w8(conn+335u,r8(r32(((uintptr_t)&em9305_ram_805c5c + 0x50u))+40u));
             if((r8(conn+548u)&4u)!=0u){
-                uintptr_t hook=r32(0x8052c8u);
+                uintptr_t hook=r32(((uintptr_t)&em9305_ram_8052bc + 0xcu));
                 if(hook!=0u)
                     ((opencfw_em9305_hook5_329888)hook)(conn,phy,0u,
                                                         (uint32_t)level,1u);
@@ -215,7 +216,7 @@ static void apply_instant(uintptr_t conn)
 }
 
 /* Channel classification report (message 0x6b01): 37 bytes, 0 for a used
- * channel and 3 for an unused one in the map at 0x805aa0. */
+ * channel and 3 for an unused one in the map at ((uintptr_t)&em9305_ram_805a6c + 0x34u). */
 static void report_channels(uintptr_t object,uintptr_t conn)
 {
     if(r8(conn+565u)==0u||r32(conn+240u)==0u)return;
@@ -231,11 +232,11 @@ static void report_channels(uintptr_t object,uintptr_t conn)
             w16(message+2u,0x6b01u);
             w16(message,(uint8_t)conn_index(conn));
             for(uint32_t channel=0u;channel<37u;channel++){
-                uint64_t bits=opencfw_em9305_child_3027f4(r32(0x805aa0u),
-                    r32(0x805aa4u),channel);
+                uint64_t bits=opencfw_em9305_child_3027f4(r32(((uintptr_t)&em9305_ram_805a6c + 0x34u)),
+                    r32(((uintptr_t)&em9305_ram_805a6c + 0x38u)),channel);
                 w8(message+4u+channel,((uint32_t)bits&1u)?0u:3u);
             }
-            (void)opencfw_em9305_wsf_task_message_send(r8(0x805b18u),message);
+            (void)opencfw_em9305_wsf_task_message_send(r8(((uintptr_t)&em9305_ram_805af0 + 0x28u)),message);
         }
     }
     w32(conn+240u,0u);
@@ -291,7 +292,7 @@ uint32_t opencfw_em9305_associated_callback_329888(uintptr_t object)
         }
         uint32_t mode=r8(conn+769u);
         if(mode==1u){
-            ((opencfw_em9305_hook1_329888)(uintptr_t)r32(0x805178u))(conn);
+            ((opencfw_em9305_hook1_329888)(uintptr_t)r32(((uintptr_t)&em9305_ram_805160 + 0x18u)))(conn);
         }else if(mode==0u&&rssi!=0x7fu){
             uint32_t count=r16(conn+780u);
             w32(conn+784u,r32(conn+784u)+(uint32_t)(int32_t)(int8_t)rssi);
@@ -315,7 +316,7 @@ uint32_t opencfw_em9305_associated_callback_329888(uintptr_t object)
     }else if(active!=0u||r8(conn+218u)!=0u){
         if(r8(conn+12u)==0x3eu)w8(conn+12u,8u);
         (void)opencfw_em9305_wsf_timer_start_ms(timer,r16(conn+382u));
-        uint32_t features=r32(0x805a84u);
+        uint32_t features=r32(((uintptr_t)&em9305_ram_805a6c + 0x18u));
         if((features&0x100u)==0u&&r8(conn+770u)==1u&&r8(conn+769u)==0u&&
            (features&0x8000u)!=0u)
             w8(conn+772u,opencfw_em9305_radio_record_timing_30c40c(800u,
@@ -331,7 +332,7 @@ uint32_t opencfw_em9305_associated_callback_329888(uintptr_t object)
         if(terminate)goto terminate;
     }
     {
-        uintptr_t table=r32(0x805cd8u);
+        uintptr_t table=r32(((uintptr_t)&em9305_ram_805c5c + 0x7cu));
         if(table!=0u){
             uintptr_t hook=r32(table+0x1cu);
             if(hook!=0u)index_hook(conn,hook);
@@ -344,7 +345,7 @@ uint32_t opencfw_em9305_associated_callback_329888(uintptr_t object)
     if(r8(conn+608u)!=0u){
         uint32_t phy=r8(conn+609u);
         w8(conn+608u,0u);
-        uintptr_t hook=phy!=0u?r32(0x8052bcu):r32(0x8052c0u);
+        uintptr_t hook=phy!=0u?r32((uintptr_t)&em9305_ram_8052bc):r32(((uintptr_t)&em9305_ram_8052bc + 0x4u));
         if(hook!=0u)((opencfw_em9305_hook1_329888)hook)(conn);
     }
     if(r8(conn+635u)==0x11u&&opencfw_em9305_associated_child_3294fc(conn)!=0u&&
@@ -352,10 +353,10 @@ uint32_t opencfw_em9305_associated_callback_329888(uintptr_t object)
         opencfw_em9305_associated_child_32a4c0(conn,1u);
     report_channels(object,conn);
     uint32_t events=r16(conn+262u)-r16(conn+202u);
-    uintptr_t latency_hook=r32(0x801a18u);
+    uintptr_t latency_hook=r32(((uintptr_t)&em9305_ram_801a14 + 0x4u));
     uint32_t skip,window,latency;
     if(latency_hook!=0u){
-        uint32_t pending=(uint16_t)(r16(0x805690u)+r16(0x80568cu));
+        uint32_t pending=(uint16_t)(r16(((uintptr_t)&em9305_ram_805688 + 0x8u))+r16(((uintptr_t)&em9305_ram_805688 + 0x4u)));
         skip=((opencfw_em9305_hook3_329888)latency_hook)(conn,pending,1u);
         latency=r16(conn+260u);
         window=skip+(uint32_t)(uint16_t)r16(conn+846u)*(uint16_t)latency;
@@ -368,7 +369,7 @@ uint32_t opencfw_em9305_associated_callback_329888(uintptr_t object)
     if(r8(conn+217u)!=0u||latency_skip(conn,latency,window,&skip)==0){
         if((uint16_t)skip!=0u){
             opencfw_em9305_hook2_329888 hook=(opencfw_em9305_hook2_329888)(uintptr_t)
-                r32(0x8027e0u+r8(conn+321u)*4u);
+                r32((uintptr_t)&em9305_ram_8027e0+r8(conn+321u)*4u);
             w16(conn+262u,r16(conn+262u)+skip);
             (void)hook(conn,(uint16_t)(skip-1u));
             events+=skip;
@@ -397,7 +398,7 @@ uint32_t opencfw_em9305_associated_callback_329888(uintptr_t object)
         w32(state+100u,r32(conn+204u)+widening*2u);
         w8(object+0x18u,procedure!=0x11u);
         apply_instant(conn);
-        if(r8(conn+770u)==1u&&r8(conn+769u)==0u&&(r8(0x805a85u)&0x80u)!=0u){
+        if(r8(conn+770u)==1u&&r8(conn+769u)==0u&&(r8(((uintptr_t)&em9305_ram_805a6c + 0x19u))&0x80u)!=0u){
             uint32_t count=(uint8_t)(r8(conn+772u)-1u);
             w8(conn+772u,count);
             if(count==0u)(void)post(conn,8u,0x6901u);

@@ -47,7 +47,7 @@ int32_t _kvdbUpdataTime(void) {
     (void)SVC_KvdbWriteTime(g2_kvdb_time_record.timestamp, g2_kvdb_time_record.timezone);
     return 0;
 }
-G2_KVDB_MIGRATION_EXPORT(_kvdbUpdataTime);
+/* _kvdbUpdataTime: migration slot 8 of the stock-ordered table in service_kvdb.c (ROM 0x746d20). */
 
 int32_t SVC_KvdbWriteTime(uint32_t timestamp, int8_t timezone) {
     g2_kvdb_time_record.timezone = timezone;

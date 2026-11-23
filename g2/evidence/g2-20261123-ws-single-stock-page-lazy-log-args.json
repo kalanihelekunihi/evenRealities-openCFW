@@ -1,0 +1,17 @@
+{
+ "id": "g2-20261123-ws-single-stock-page-lazy-log-args",
+ "date": "2026-11-23",
+ "workstream": "ws-single",
+ "unit": "g2/src/apollo-main/ui/a-31-stock-page/ui_stock_page.c",
+ "function": "ext_click 0x3cf / page_reset 0x420 / page_clamp 0x41a / page_created 0x4b8 log sites",
+ "bug": "Log arguments (incl. stock_page_get_count_4e9fd6) were evaluated eagerly before audio_log_flags; stock evaluates them inside each enabled log branch (0x4eb834..0x4eb8a2: bl 0x43d0ce; bl 0x4ebf20; bl 0x43d574 ... bl 0x4ebf20; bl 0x43ce9e), so getter calls and their order differed.",
+ "fix": "LOG1_LAZY/LOG4_LAZY macros: call audio_log_flags first, evaluate the argument expression inside each branch.",
+ "verification": {
+  "function-level (hwdrivers autogen ag03, 09:32 CST)": "190/190 tests equal stock (was mismatching before the fix; harness g2_stock_scroll sized 0x128)",
+  "paired": "PASS on s6 (sha256 9d8ee907acd4...cff1; fixes 1-5): DFU_SAME, 924 HCI, OTAP 0xAFD1363A->0, CHIPREV 0x22, HOST 0x3A, unsupported 0, adv 1, display 2, faults 0 (identical to paired-s4)"
+ },
+ "artifacts": [
+  "build/ws-single-20261123/ag03-rerun.log",
+  "build/ws-single-20261123/paired-s6.log"
+ ]
+}

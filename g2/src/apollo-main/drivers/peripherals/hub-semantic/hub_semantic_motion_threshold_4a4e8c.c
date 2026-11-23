@@ -1,7 +1,7 @@
 /* Stock semantic_set_motion_threshold, 0x4a4e8c..0x4a4ec0. */
 #include <stdint.h>
 
-uint32_t audio_hub_motion_threshold_cell; /* stock RAM 0x20000e64 */
+uint32_t audio_hub_motion_threshold_cell = 25u; /* stock RAM 0x20000e64 (.data) = 25, power-on default head-up pitch threshold (deg) */
 float audio_hub_motion_threshold_sine_cell; /* stock RAM 0x200731a8 */
 
 extern __attribute__((pcs("aapcs-vfp"))) float

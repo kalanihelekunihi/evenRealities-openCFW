@@ -4,8 +4,9 @@
  * Eight bytes is only the observed minimum, not the complete allocation. */
 #include <stdint.h>
 
-uint32_t audio_uart_registry_context_20003080[2];
-uint32_t audio_uart_registry_context_200030a0[2];
+/* stock .data init word0 = registry id (0x10f / 0x10b) */
+uint32_t audio_uart_registry_context_20003080[2] = {0x10fu, 0u};
+uint32_t audio_uart_registry_context_200030a0[2] = {0x10bu, 0u};
 
 _Static_assert(sizeof(audio_uart_registry_context_20003080) == 8u,
                "gray-screen observed context minimum");

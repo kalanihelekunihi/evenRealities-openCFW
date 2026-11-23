@@ -42,7 +42,7 @@ int32_t _kvdbUpdataUniversalSetting(void) {
     (void)SVC_KvdbWriteUniversalSetting(&g2_kvdb_universal_setting_record);
     return 0;
 }
-G2_KVDB_MIGRATION_EXPORT(_kvdbUpdataUniversalSetting);
+/* _kvdbUpdataUniversalSetting: migration slot 10 of the stock-ordered table in service_kvdb.c (ROM 0x746d20). */
 
 int32_t SVC_KvdbWriteUniversalSetting(const g2_kvdb_universal_setting_t *setting) {
     audio_queue_copy_bytes(&g2_kvdb_universal_setting_record, setting, sizeof(g2_kvdb_universal_setting_record));

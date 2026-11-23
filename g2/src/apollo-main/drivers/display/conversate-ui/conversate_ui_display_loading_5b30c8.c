@@ -25,9 +25,9 @@ extern void audio_uart_page_44143e(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_44145a(uint32_t, uint32_t, uint32_t);
 extern void audio_lv_label_mode_499678(uint32_t, uint32_t);
 extern uint32_t audio_uart_page_460084(const char *);
-extern uint32_t audio_uart_page_45fffe(const char *, uint32_t);
+extern const char *audio_uart_page_45fffe(const char *, uint32_t);
 extern int32_t g2_audio_dump_snprintf(char *, uint32_t, const char *, ...);
-extern void audio_lv_label_text_49942e(uint32_t, uint32_t);
+extern void audio_lv_label_text_49942e(uint32_t, const char *);
 extern void audio_uart_page_58c238(uint32_t, uint32_t, uint32_t);
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint32_t, const char *, const char *,
@@ -102,7 +102,7 @@ uint32_t audio_conversate_ui_route_5b30c8(uint32_t state, uint32_t value) {
     audio_lv_label_mode_499678(label, 0u);
 
     uint32_t first_length = audio_uart_page_460084(start_key);
-    const char *first = (const char *)(uintptr_t)
+    const char *first =
         audio_uart_page_45fffe(start_key, first_length);
     int32_t written = g2_audio_dump_snprintf(
         (char *)audio_conversate_loading_text_200711dc, 0xc8u, format, first);
@@ -110,7 +110,7 @@ uint32_t audio_conversate_ui_route_5b30c8(uint32_t state, uint32_t value) {
         audio_conversate_loading_text_200711dc[written] = '\n';
         const uint32_t start = (uint32_t)written + 1u;
         const uint32_t second_length = audio_uart_page_460084(prep_name_key);
-        const char *second = (const char *)(uintptr_t)
+        const char *second =
             audio_uart_page_45fffe(prep_name_key, second_length);
         written = g2_audio_dump_snprintf(
             (char *)audio_conversate_loading_text_200711dc + start,
@@ -118,7 +118,7 @@ uint32_t audio_conversate_ui_route_5b30c8(uint32_t state, uint32_t value) {
     }
     audio_conversate_loading_text_200711dc[written] = 0u;
     audio_lv_label_text_49942e(label,
-        (uint32_t)(uintptr_t)audio_conversate_loading_text_200711dc);
+        (const char *)audio_conversate_loading_text_200711dc);
     audio_uart_page_58c238(root, 0xfau, 0u);
     return 0u;
 }

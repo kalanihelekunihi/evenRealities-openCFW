@@ -3,12 +3,13 @@
  * native operation port, not an inferred multiply. ARC/hardware runtime
  * equality and child ABIs remain unqualified. */
 #include <stdint.h>
+#include "em9305_ram.h"
 extern uint32_t opencfw_em9305_sleep_mode_ready(uint32_t,uint32_t); /* 0x30f57c */
 extern uint32_t opencfw_em9305_sleep_refresh(uint32_t); /* 0x30f9d0 */
 extern uint32_t opencfw_em9305_sleep_enter_mode(uint32_t); /* 0x30f468 */
 extern uint32_t opencfw_em9305_native_clock_product(uint32_t,uint32_t);
 extern uint64_t opencfw_em9305_sleep_sync_divide(uint32_t,uint32_t,uint32_t,uint32_t);
-static uintptr_t context(void) { return *(volatile uint32_t *)(uintptr_t)0x80fb8cu; }
+static uintptr_t context(void) { return em9305_ram_80fb8c.u32_80fb8c; }
 static uint32_t save_irq(void) { uint32_t s; s=(uint32_t)__builtin_arc_clri(); __builtin_arc_sync(); return s; }
 static void restore_irq(uint32_t s) { __builtin_arc_seti((int)s); }
 void opencfw_em9305_controller_sleep_mode(uint32_t mode)
@@ -29,11 +30,11 @@ void opencfw_em9305_controller_sleep_mode(uint32_t mode)
      uint32_t masked=irq&31u; __builtin_arc_sleep((int)masked);
     }
     restore_irq(irq);
-    uint32_t ticks=*(volatile uint32_t *)(uintptr_t)0x8019bcu;
-    int32_t trim=*(volatile int16_t *)(uintptr_t)0x80fbacu;
+    uint32_t ticks=em9305_ram_801994.u32_8019bc;
+    int32_t trim=em9305_ram_80fb8c.s16_80fbac;
     uintptr_t destination=context();
     uintptr_t denominator_context=context();
-    uint32_t count=*(volatile uint32_t *)(uintptr_t)0x8019b8u;
+    uint32_t count=em9305_ram_801994.u32_8019b8;
     uint32_t denominator=opencfw_em9305_native_clock_product(ticks,400);
     uint64_t numerator=(uint64_t)count*UINT32_C(200000000);
     *(volatile uint32_t *)(denominator_context+12u)=denominator;

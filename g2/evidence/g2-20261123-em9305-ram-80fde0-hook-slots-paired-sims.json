@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 03:31:02 AM CST (America/Chicago)",
+  "title": "Grow typo-RAM 80fde0 through the 80fe0c..80fe1c hook slots (object_count 145\u2192140); typo startup/idle/assert; p-hookmerge paired sims both PASS",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-non-c-inventory.json",
+  "model": "g2/evidence/g2-20261123-em9305-ram-80faec-17word-merge.json",
+  "reason": "startup_hook/idle/assert load 0x80fe0c..0x80fe1c as uint32_t callback pointers, but those typo-RAM objects were 1 byte each. That is the same undefined behavior as indexing past the 1-byte em9305_ram_80faec. em9305_ram_80fde0 already covered the earlier one-word hook slots through u32_80fe08 (resume/controller_init already typo'd those fields). Grew it by five words to 0x80fe20 and retired the five 1-byte objects. All observed accesses are 32-bit.",
+  "object_count_before": 145,
+  "object_count_after": 140,
+  "em9305_ram_80fde0": "64-byte object (sizeof assert) covering 0x80fde0..0x80fe20. Added u32/u8 unions for 80fe0c, 80fe10, 80fe14, 80fe18, 80fe1c at offsets 0x2c, 0x30, 0x34, 0x38, 0x3c. Existing u32_80fe08 offset 0x28 unchanged. Retired struct em9305_ram_80fe0c..80fe1c from the header and their five ld symbols. Kept em9305_ram_80fde0=0x0080fde0.",
+  "install": {
+    "when": "2026-11-23 03:23:25 AM CST (America/Chicago)",
+    "files": {
+      "g2/src/em9305/qpc-scheduler/em9305_ram.h": {
+        "before": "5f6bf02f69b076460d53dd2fa2524b5b1daff6e35ab2efb1182c4128e9b47b81",
+        "after": "b108a601de18abd5edc58c6e59c895bef0e68a4cdfcb15077f1b51981aeea272"
+      },
+      "g2/src/em9305/link/g2-em9305.ld": {
+        "before": "b9cf0658b0c2b05ad938579ab5717e2ecc81a2394b479c18098f77e9085eb1ff",
+        "after": "e15bdd399a333b2ad899ae15476b8d86510a8e2b07941eecfb8d58d1b01c2c76"
+      },
+      "g2/src/em9305/qpc-scheduler/startup_hook.c": {
+        "before": "46a698db39c9369dfa6a6111f5ccec26f5ab80f27fde66e45770a26e394b774f",
+        "after": "3d42392db649aedc763531e1ce8bbe24daf67333147ace33caf7138c6a932c63"
+      },
+      "g2/src/em9305/qpc-scheduler/idle.c": {
+        "before": "ac00b36c07a1741dc5e2e3abe5d21481b267c48dff662be2cc629f0e540fed9e",
+        "after": "5d120c9e1cbcb859dcdd3d1a7dd793e5db99f360a9934dcbef0bc1ab2a030e3b"
+      },
+      "g2/src/em9305/qpc-scheduler/assert.c": {
+        "before": "e95f4795e5397d47c7e07f2540d0b099269c3197e56886bba4ff16ad683b323f",
+        "after": "4aca10eb7376dd99102e7984012558b798a15491795596827166731089ffd0fa"
+      }
+    }
+  },
+  "qemu_prove": {
+    "workspace": "build/ws-em9305-20261122/u-suffix/hook-merge/",
+    "started": "2026-11-23 03:20:39 AM CST (America/Chicago)",
+    "finished": "2026-11-23 03:23:13 AM CST (America/Chicago)",
+    "symbols": {
+      "opencfw_em9305_startup_hook": "EQUIVALENT 100 classes=4 calls=200 nor0",
+      "QK_onIdle": "EQUIVALENT 100 classes=90 calls=216 nor0",
+      "opencfw_em9305_assert": "EQUIVALENT 100 classes=93 calls=48 nor0"
+    },
+    "note": "nor0 is correct: all three symbols are void. Existing u32_80fe08/u32_80fe04 offsets in resume.c / controller_init.c were not changed and were not re-proved this turn."
+  },
+  "mutants": [
+    {
+      "tag": "fe10",
+      "sym": "opencfw_em9305_startup_hook",
+      "edit": "u32_80fe10 -> u32_80fe0c",
+      "status": "KILLED",
+      "detail": "MISMATCH ncalls:50 callhash:75 classes=4 calls=200"
+    },
+    {
+      "tag": "fe0c",
+      "sym": "opencfw_em9305_startup_hook",
+      "edit": "u32_80fe0c -> u32_80fe10",
+      "status": "KILLED",
+      "detail": "MISMATCH ncalls:50 callhash:75 classes=4 calls=200"
+    },
+    {
+      "tag": "fe18",
+      "sym": "QK_onIdle",
+      "edit": "u32_80fe18 -> u32_80fe14",
+      "status": "KILLED",
+      "detail": "MISMATCH ncalls:52 callhash:84 classes=90 calls=216"
+    },
+    {
+      "tag": "fe14",
+      "sym": "QK_onIdle",
+      "edit": "u32_80fe14 -> u32_80fe18",
+      "status": "KILLED",
+      "detail": "MISMATCH ncalls:52 callhash:84 classes=90 calls=216"
+    },
+    {
+      "tag": "fe1c",
+      "sym": "opencfw_em9305_assert",
+      "edit": "u32_80fe1c -> u32_80fe18",
+      "status": "KILLED",
+      "detail": "MISMATCH ncalls:52 callhash:84 classes=93 calls=48"
+    }
+  ],
+  "mutants_killed_count": 5,
+  "tree_build": {
+    "command": "python3 -u build/ws-em9305-20261122/pbuild.py build/ws-em9305-20261122/p-hookmerge -j 3",
+    "started": "2026-11-23 03:23:25 AM CST (America/Chicago)",
+    "finished": "2026-11-23 03:28:02 AM CST (America/Chicago)",
+    "rc": 0,
+    "units": 768,
+    "compiled_this_run": 768,
+    "link_log_empty": true,
+    "text_bytes": 239240,
+    "text_delta_vs_p_sleep": -16,
+    "app_sha256": "991258f99e493997e67e57daf0bf2e7e1ad1f423a04eae1c27fe7aad2b8f496d",
+    "note": ".text shrank 16 B vs p-sleep (239256->239240) after typo-RAM of the hook slots. Still fits NVM."
+  },
+  "package": {
+    "path": "build/ws-em9305-20261122/p-hookmerge/g2-em9305-source-candidate-package.bin",
+    "bytes": 240572,
+    "sha256": "2207ba5d12ffad45b7fadab90df9ed7ff5af2630d6995701faf72e93473764dc",
+    "records": 3,
+    "crcs": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0x3816C591",
+      "[0x00302400,0x0033ca88)": "0x4952B4BC"
+    }
+  },
+  "slot_fit": {
+    "application_end": "0x0033CA88",
+    "application_bytes": 239240,
+    "headroom_bytes": 275832,
+    "fits_nvm_slot": true
+  },
+  "splice": {
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-hookmerge.bin",
+    "nor_sha256": "18b73fd75a5012bae311ec41de5c5785bed6dbb3979d529aa446cdd120d0ef0f",
+    "nor_source": "copy of build/em9305-nor-20261122/nor-stock-formatted.bin, then lfs_inject at 0x1400000 path /firmware/ble_em9305.bin",
+    "lfs_inject_wrote_bytes": 240572
+  },
+  "sims": {
+    "renode": "g2-firmware-emulator scripts/run-renode.sh, Renode 1.17.0 (1.17.0+20261102gite8c7c2d28), 8 s virtual runs, 1200 s wall cap",
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/hookmerge-match.resc",
+      "log": "build/ws-em9305-20261122/sim/hookmerge-match.log",
+      "started": "2026-11-23 03:28:24 AM CST (America/Chicago)",
+      "finished": "2026-11-23 03:28:57 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "chiprev_fixture": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "display_hash_source": "Latched real display-bus frame (not the OTP fixture sha 9a9a2d9a\u2026)",
+      "advertising": "010A200101",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/hookmerge-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/hookmerge-dfu-mismatch.log",
+      "started": "2026-11-23 03:29:02 AM CST (America/Chicago)",
+      "finished": "2026-11-23 03:30:11 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq": true,
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0x3816C591",
+        "[0x00302400,0x0033CA88)": "0x4952B4BC"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 1037,
+      "sysresetreq_at": "2026-11-23 03:29:56.534 AM CST (America/Chicago)"
+    }
+  },
+  "irqhandler_rccalib": "Still uninstalled. Frame still uncut. See g2/evidence/g2-20261123-em9305-non-c-inventory.json.",
+  "rules": "No git writes. No backups or /tmp copies. Official opencfw-otap-disarm.app.bin was not overwritten and was not a splice target. source_completeness_proven remains false."
+}

@@ -1,7 +1,8 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x324904..0x324964: periodic-advertising slot event for the
- * 784-byte slot (event +6) of the table at 0x803f70. Kind 2 clears the
+ * 784-byte slot (event +6) of the table at ((uintptr_t)&em9305_ram_803d58 + 0x218u). Kind 2 clears the
  * slot's first byte, kind 1 the byte at -96. Kind 0 commits a pending
  * channel map when the event's window (+2) reaches the slot's due count
  * (-180) minus the event count (+0, signed): copy the staged map words
@@ -12,7 +13,7 @@ extern uint32_t opencfw_em9305_radio_channel_transform_30e3fc(uintptr_t);
 void opencfw_em9305_child_324904(uintptr_t event)
 {
     uint32_t kind=*(volatile uint8_t *)(event+4u);
-    uintptr_t slot=(uintptr_t)0x803f70u+*(volatile uint16_t *)(event+6u)*784u;
+    uintptr_t slot=(uintptr_t)((uintptr_t)&em9305_ram_803d58 + 0x218u)+*(volatile uint16_t *)(event+6u)*784u;
     if(kind==2u) {
         *(volatile uint8_t *)slot=0u;
         return;

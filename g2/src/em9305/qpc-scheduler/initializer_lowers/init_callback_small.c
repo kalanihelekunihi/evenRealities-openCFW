@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
 extern uint32_t opencfw_em9305_common_init_302e90(void);
 extern uint32_t opencfw_em9305_init_lower_30e9e0(uint32_t);
@@ -23,13 +24,13 @@ uint32_t opencfw_em9305_init_callback_327dc8(void)
 uint32_t opencfw_em9305_init_callback_3280c8(void)
 {
  (void)opencfw_em9305_common_init_302e90();
- uint32_t value=(uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)0x8052d4u,0u,304u);
+ uint32_t value=(uint32_t)(uintptr_t)opencfw_em9305_memset((void *)(uintptr_t)&em9305_ram_8052d4,0u,304u);
  return opencfw_em9305_init_lower_30e9e0(value);
 }
 /* Native325450..325472: full 32 byte record initialized by native memset. */
 uint32_t opencfw_em9305_init_callback_325450(void)
 {
- uint32_t state=*(volatile uint8_t *)(uintptr_t)0x805b82u;
+ uint32_t state=em9305_ram_805b80.u8_805b82;
  if(state!=0u)return state;
  _Alignas(4) uint8_t record[32];
  (void)opencfw_em9305_memset(record,255,32u);

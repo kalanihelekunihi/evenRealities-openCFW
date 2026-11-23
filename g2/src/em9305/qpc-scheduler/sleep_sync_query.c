@@ -1,7 +1,8 @@
 /* Native 0x310b08..0x310b54. Explicit volatile register write sequence;
  * static native correspondence, without physical peripheral qualification. */
 #include <stdint.h>
-static uintptr_t context(void) { return *(volatile uint32_t *)(uintptr_t)0x80fd2cu; }
+#include "em9305_ram.h"
+static uintptr_t context(void) { return em9305_ram_80fd2c.u32_80fd2c; }
 uint32_t opencfw_em9305_sleep_sync_query(uint32_t incoming)
 {
  (void)incoming;

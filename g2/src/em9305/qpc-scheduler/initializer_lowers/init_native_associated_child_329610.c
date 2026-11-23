@@ -1,13 +1,14 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x329610..0x329840: associated-link start. Clears the schedule
  * node (+16, 0xb8 bytes) and seeds the link from the current
- * configuration (0x805c6c): PHY slot count, intervals, timing words,
+ * configuration (((uintptr_t)&em9305_ram_805c5c + 0x10u)): PHY slot count, intervals, timing words,
  * selector (+321), peer clock accuracy (304868, else +47 -> 317ea4), the
  * 30000 slot adjustment, the supervision timer (+384, 5/4 of the
  * interval rounded up), radio channel/PHY tables and limits, and the
  * anchor/window times (317ebc). Installs the associated callbacks, then
- * repeatedly picks the role from slot table 0x8027e0 (callback receives
+ * repeatedly picks the role from slot table (uintptr_t)&em9305_ram_8027e0 (callback receives
  * the link and literal zero) and inserts the node (318b78 compare); each
  * refused insert advances the event counter (+262) by one interval. */
 #define U8(a) (*(volatile uint8_t *)(uintptr_t)(a))
@@ -34,7 +35,7 @@ extern void opencfw_em9305_associated_callback_329560(void);
 
 uint32_t opencfw_em9305_associated_child_329610(uintptr_t link)
 {
-    uintptr_t config = U32(0x805c6cu);
+    uintptr_t config = U32(((uintptr_t)&em9305_ram_805c5c + 0x10u));
     (void)opencfw_em9305_memset(link + 16u, 0u, 0xb8u);
 
     uint32_t slots = 1u;
@@ -68,9 +69,9 @@ uint32_t opencfw_em9305_associated_child_329610(uintptr_t link)
     (void)opencfw_em9305_wsf_timer_start_ms(link + 384u, timeout);
     (void)opencfw_em9305_radio_channels_317ac0(link);
 
-    uintptr_t peer_cfg = U32(0x805cacu);
+    uintptr_t peer_cfg = U32(((uintptr_t)&em9305_ram_805c5c + 0x50u));
     uint32_t access = U32(config + 20u);
-    uintptr_t current = U32(0x805c6cu);
+    uintptr_t current = U32(((uintptr_t)&em9305_ram_805c5c + 0x10u));
     U32(link + 72u) = U32(config + 24u);
     U32(link + 68u) = access;
     U8(link + 64u) = 5u;
@@ -92,10 +93,10 @@ uint32_t opencfw_em9305_associated_child_329610(uintptr_t link)
     U16(link + 590u) = (uint16_t)limit;
     uint32_t widening = opencfw_em9305_init_secondary_time_317ebc(base + extra, sca);
 
-    uint32_t anchor = U32(U32(0x805c6cu) + 48u);
+    uint32_t anchor = U32(U32(((uintptr_t)&em9305_ram_805c5c + 0x10u)) + 48u);
     uint32_t period = (uint32_t)U16(link + 266u) * 1250u;
-    uint32_t t0 = U32(0x805cb4u);
-    uint32_t t1 = U32(0x805cb8u);
+    uint32_t t0 = U32(((uintptr_t)&em9305_ram_805c5c + 0x58u));
+    uint32_t t1 = U32(((uintptr_t)&em9305_ram_805c5c + 0x5cu));
     uint32_t start = base + (widening << 1);
     uint32_t next = start + 1u;
     uint32_t end = start + 806u;
@@ -122,7 +123,7 @@ uint32_t opencfw_em9305_associated_child_329610(uintptr_t link)
 
     for (;;) {
         U32(link + 24u) = offset;
-        uintptr_t role = U32(0x8027e0u + 4u * U8(link + 321u));
+        uintptr_t role = U32((uintptr_t)&em9305_ram_8027e0 + 4u * U8(link + 321u));
         U8(link + 65u) = (uint8_t)((uint32_t (*)(uintptr_t, uint32_t))role)(link, 0u);
         uint32_t done = opencfw_em9305_associated_schedule_insert_312da4(
             link + 16u, (uintptr_t)opencfw_em9305_init_schedule_compare_318b78);

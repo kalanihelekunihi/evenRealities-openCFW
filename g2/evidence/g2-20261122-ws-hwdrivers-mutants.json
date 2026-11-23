@@ -1,0 +1,29 @@
+{
+  "stream":"ws-hwdrivers","date_cst":"2026-11-23 01:28 America/Chicago",
+  "subject":"Step 2: in-Renode-memory single-instruction mutants (no ELF modified)",
+  "mechanism":"mutrun.sh builds run_mut.resc = run.resc + an injected 'sysbus WriteWord <itcm_addr> <halfword>' after LoadELF, patching ONE instruction of our reconstructed C body (v=1) in emulator memory. Shares the real loaded stock globals. No ELF/image on disk is modified or copied (as ramlayout does).",
+  "mutants_caught":{
+    "codecirq (codec_uart_irq, C-fix unit)":{
+      "M1_early_return":"0x13c0 push{..}->bx lr (0x4770): 0/12 CAUGHT (v=1 returns arg0, no side-effects; firstdiff@0)",
+      "M2_branch_flip":"0x13f2 bpl->bmi (0xd505->0xd405): 0/12 CAUGHT (inverts status-bit test; v=1 calls receive() where stock does not; firstdiff@13) -> proves that branch IS exercised"
+    },
+    "gluefg (npmx_interrupt_handler, npmx C-fix path)":{
+      "M1_early_return":"0x13c0 push->bx lr: handler 12/12 CAUGHT (v=1 returns arg0 0x20070f78 vs stock 0x2bad..); other 2 fns unaffected (ok=24)",
+      "M2_cbz_flip":"0x13c8 cbz->cbnz (0xb108->0xb908): 12/12 CAUGHT (inverts byte==0 core-path test; ok=24 bad=12)"
+    },
+    "cgpio (g2_codec_gpio_write)":{
+      "M1_early_return":"0x13d8 push->bx lr: gpio_write 0/12 CAUGHT; g2_codec_pin_write unaffected 12/12 (ok=12 bad=12)",
+      "M2":"pending"
+    }
+  },
+  "error_branch_coverage":{
+    "cheapa (codec_allocate)":{
+      "finding":"ERROR branch (mutex-acquire fail -> g2_file_heap_error_log + g2_file_close_error) is UNREACHABLE under current fuzzing. audio_file_mutex_acquire is stubbed K_RET (always returns 0=success), so the normal branch (g2_file_pool_allocate) is always taken.",
+      "path_counts":"non-error(normal) 12/12 ; error 0/12",
+      "why_it_matters":"this is exactly why the old wrong g2_file_heap_error_log defsym survived as a false EQUAL (step 1).",
+      "to_reach_equivalently":"patch the SHARED mutex_acquire entry 0x4497b6 in Renode memory to a seeded non-zero return so BOTH v=0 and v=1 take the error branch for some inputs (a paired in-memory override); then the error-branch code is exercised equivalently and a mutant there would be caught. Not yet implemented."
+    }
+  },
+  "remaining":"cgpio M2, cenable (2 mutants), imufp/npmxfg mutants; per-unit non-error/error path-count instrumentation (a per-branch counter in the harness); cheapa error-branch paired override; then Step 3 (i2sfloat, deadline).",
+  "images_untouched":"bq.elf and stock.app.bin on disk are unmodified; mutations exist only in emulator RAM during the run."
+}

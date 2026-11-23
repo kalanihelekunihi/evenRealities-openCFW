@@ -1,0 +1,71 @@
+{
+ "title": "ws-hwdrivers stream 3: hal_i2c core + buzzer driver verified function-level vs stock (Renode 1.17 cortex-m55), VFP float path",
+ "when": "2026-11-22 7:06 PM CST (America/Chicago)",
+ "modules": [
+  "g2-hal-i2c (hal_i2c)",
+  "g2-buzzer (drv_buzzer)"
+ ],
+ "sources": [
+  "g2/src/apollo-main/drivers/peripherals/hal-i2c/hal_i2c.c",
+  "g2/src/apollo-main/drivers/peripherals/buzzer/drv_buzzer.c"
+ ],
+ "method": {
+  "emulator": "Renode 1.17.0 (vendor/renode-src e8c7c2d), cortex-m55 FPU enabled, bundled dotnet 8.0.425",
+  "harness": "build/ws-hwdrivers-20261122/harness; gen_hali2c.c / gen_drvbuzz.c from autogen.py; meta-driven build2.sh links aeabi mem helpers + matching arm-none-eabi libgcc multilib (64-bit divmod, uint->float).",
+  "float_support": "call_target now loads s0-s3 from the test's float bit-patterns (AAPCS hard-float order: integer/pointer args in r0-r3, float args in s0-s3 by appearance) and, for float-returning functions, moves s0 into the captured return. drv_buzzer exercises this (DRV_BuzzerPlayNote/float frequency, period math).",
+  "design": "stock bodies run in place from stock.app.bin @0x00438000; reconstructed C linked into ITCM. Intra-module calls resolve within each variant. Cross-module callees patched to logging/modelled stubs at their stock addresses: am_hal_iom_* IOM HAL, am_hal_gpio_pinconfig, am_hal_timer/ctimer stubs, osMutex*/osSemaphore*, g2_delay_ms, audio_log_flags/compress_log_output/audio_log_extended. ROM-resident rodata (g2_audio_clock_pin_config @0x78ee48) is left in the loaded stock image (defsym only, no stub/reseed). RAM state (g2_i2c_bus_table 0x20000c4c, g2_i2c_bus_mutex 0x200738fc, g2_i2c4_semaphore 0x2007460c, g2_buzzer_timer_clock_hz 0x20074120, reload tables, repeat/queue state) seeded identically and diffed.",
+  "compare": "return value (void ignored; float return via s0), caller output struct, every seeded RAM region, I2C/stub semantic traces, with stack-temporary address normalization and segment-header validation.",
+  "inputs": "20 randomized cases per function, stock vs C, log flags 0 and 7. Fuzzing restricted to each argument's valid firmware domain (e.g. buzzer_pwm_config clock_select in 0..3)."
+ },
+ "result": {
+  "hal_i2c": {
+   "functions": 9,
+   "cases": 180,
+   "exact_matches": 180,
+   "mismatches": 0,
+   "verified": [
+    "HAL_I2CInit",
+    "hal_i2c_irq_enable",
+    "hal_i2c_irq_handler",
+    "hal_i2c_power_down",
+    "hal_i2c_power_up",
+    "hal_i2c_transfer_full",
+    "hal_i2c_transfer_joined",
+    "hal_i2c_transfer_read",
+    "hal_i2c_transfer_write"
+   ],
+   "not_yet": "all 9 public functions verified; the 6-arg transfer_full/joined now pass via the new stack-argument harness support. begin/finish are inlined-only (no standalone stock symbol), exercised transitively."
+  },
+  "drv_buzzer": {
+   "functions": 16,
+   "cases": 320,
+   "exact_matches": 320,
+   "mismatches": 0,
+   "verified": [
+    "DRV_BuzzerInit",
+    "DRV_BuzzerPlayAfterQueue",
+    "DRV_BuzzerPlayNote",
+    "DRV_BuzzerStart",
+    "DRV_BuzzerStop",
+    "_buzzerPlayStart",
+    "_buzzerPlayStop",
+    "_buzzerPlayVoice",
+    "buzzer_beep_start",
+    "buzzer_beep_stop",
+    "buzzer_play_next",
+    "buzzer_pwm_config",
+    "buzzer_pwm_start",
+    "buzzer_pwm_stop",
+    "buzzer_pwm_update",
+    "buzzer_timer_callback"
+   ],
+   "note": "buzzer_period is inlined-only (no stock symbol), exercised via callers. Out-of-domain clock_select (>=16) makes 4<<(clock<<1) a source-level shift >= width = C UB that stock and C compilations resolve differently; this is not a reconstruction defect (guarding it in C would itself diverge from stock). Equivalence holds on the valid clock_select 0..3 domain the firmware uses."
+  }
+ },
+ "g2ref_uses": "none in these modules",
+ "notes": "Function-level equivalence only. No sources.json/linker/build changes; no git; no flash.",
+ "reverified_final_harness": true,
+ "harness_fidelity_fixes": [
+  "autogen now treats only GLOBAL ('T') nm symbols as direct test targets; static ('t') helpers (e.g. begin()) are excluded (cannot take &begin from gen.o) and are exercised transitively via public callers. hali2c rebuilt and re-verified 90/90, 0 diffs."
+ ]
+}

@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern uint32_t opencfw_em9305_child_3191dc(uint32_t context,
                                                uint32_t packet,
@@ -13,7 +14,7 @@ uint32_t opencfw_em9305_callback_32bc6c(uint32_t record, uint32_t packet)
     uint32_t first = *(volatile const uint8_t *)(uintptr_t)record;
     if (first == 0u) return 0u;
     uint32_t mode = *(volatile const uint8_t *)(uintptr_t)(record + 2u);
-    uint32_t result = opencfw_em9305_child_3191dc(0x802810u, packet, mode);
+    uint32_t result = opencfw_em9305_child_3191dc(((uintptr_t)&em9305_ram_8027e0 + 0x30u), packet, mode);
     uint32_t code = result == 0x1eu ? 0xeu : result == 0u ? 0xcu : 0xdu;
     return opencfw_em9305_child_32a000(record, code);
 }

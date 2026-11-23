@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 1:49:08 AM CST (America/Chicago)",
+  "title": "Grow typo-RAM 0x80139c to the 36-byte WsfOs QActive; re-prove and install wsf_os_ao; prove application_boot 30ed80 with a loop-branch landing pad (no -DEM_AGAIN=0) and install; private p-wsfboot rebuild; paired Renode sims both PASS (run_renode_rc=0)",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-aoad-init-paired-sims.json",
+  "stock_users_80139c": "g2/evidence/g2-20261123-em9305-ram-80139c-qactive-36-stock-users.json",
+  "wsf_os_ao_preinstall_confirm": {
+    "note": "Current tree bytes before this install equalled the recorded pre-install sha256_before from the failed previous install attempt, the prove orig copy, and HEAD. Confirmation was against the pre-install sha, not merely HEAD. No other uncommitted work was present on this file. The earlier git-show-HEAD overwrite happened to restore those same bytes; this turn did not use git show HEAD to revert or install.",
+    "sha256_preinstall": "597a1916876f00c0b44abf9399de6346b258d487def64f73489b8b86e48738b5",
+    "sha256_installed": "0741ff336192501305407a6b693c03a6d97086317646046cae1c0a16c9e46d8c"
+  },
+  "ram_80139c_grow": {
+    "from_bytes": 4,
+    "to_bytes": 36,
+    "header": "g2/src/em9305/qpc-scheduler/em9305_ram.h",
+    "ld_unchanged": "em9305_ram_80139c = 0x0080139c",
+    "reason": "Stock QActive_ctor 0x310d18 zeros r1=0x24 bytes at me; WsfOsInitOnly 0x314078 passes me=0x80139c; QActive_start_ stores prio at me+32 and inits eQueue at me+0xC. Neighbor 0x801398 is a separate nest byte; next typo-RAM object is 0x8013d0 (32 B). 0x8013c0..0x8013cf left as a 16-byte gap.",
+    "controller_init": "Already used u32_80139c and &em9305_ram_80139c; still valid after the grow."
+  },
+  "qemu_prove": {
+    "harness": "build/em-ctl/qm.py, 100 cases, dztrap, extra_next3.c, pre_wsf.h / pre_boot.h",
+    "wsf_os_ao": {
+      "file": "g2/src/em9305/qpc-scheduler/wsf_os_ao.c",
+      "result": "all 6 exported symbols EQUIVALENT 100 after the 36-byte grow",
+      "symbols": [
+        "wsf_os_init_only_314068 EQUIVALENT 100 classes=70 calls=200 nor0",
+        "wsf_os_set_init_cback_3140a8 EQUIVALENT 100 classes=76 calls=0 nor0",
+        "wsf_os_start_only_3140d0 EQUIVALENT 100 classes=60 calls=100 nor0",
+        "wsf_os_init_only_veneer_30460c EQUIVALENT 100 classes=60 calls=100 nor0",
+        "wsf_os_register_start_304610 EQUIVALENT 100 classes=70 calls=200 nor0",
+        "wsfOsRunIdleTasks EQUIVALENT 100 classes=3 calls=50"
+      ],
+      "mutants_killed": [
+        "wsf_os_init_only_314068 &em9305_ram_805ff4 -> &em9305_ram_80139c MISMATCH callhash+memhash",
+        "wsf_os_start_only_3140d0 &em9305_ram_80139c -> &em9305_ram_805ff4 MISMATCH callhash",
+        "wsfOsRunIdleTasks &em9305_ram_80605c -> &em9305_ram_805ff4 MISMATCH memhash/ncalls/callhash/ret"
+      ],
+      "static_unexported": "wsf_os_active_333c44 is static and is not in the harness SYM list. It is the only user of typo-RAM objects 806034 and 806054 (handler event bits and message queue). Production reaches it through QActive dispatch; the harness pads start() so this path is not directly compared. WSF_OS_INIT_CBACK remains the literal 0x8019e4."
+    },
+    "application_boot": {
+      "file": "g2/src/em9305/application/application_boot.c",
+      "boot_init_nvm": "30ecf8, 30ee78, 30ef04, 30ef0c EQUIVALENT 100 (unchanged vs prior prove; typo-RAM mutants of 80fb08 and 80f98c on 30ecf8 KILLED)",
+      "boot_loop_30ed80": {
+        "method": "Test-only -include em_again.h defines EM_AGAIN as opencfw_em_again(). PRE_H sets opencfw_em_again_left=1 so the do-while back-edge is taken once, then the function returns. Production source is unchanged and still uses default EM_AGAIN 1. This is not -DEM_AGAIN=0 (which compiled the back-edge away).",
+        "result": "EQUIVALENT 100 classes=100 calls=5759 nor0 (re-proven after mutant-safe PRE_H pads). Prior -DEM_AGAIN=0 cut proof had calls=1355; the higher call count is the second iteration.",
+        "mutants_killed": [
+          "30ed80 &em9305_ram_801104 -> &em9305_ram_80139c MISMATCH memhash/ncalls/callhash",
+          "30ed80 &em9305_ram_801000 -> &em9305_ram_80139c MISMATCH callhash",
+          "30ed80 &em9305_ram_806080 -> &em9305_ram_80139c MISMATCH callhash",
+          "30ed80 &em9305_ram_80e978 -> &em9305_ram_80fb08 MISMATCH callhash",
+          "30ed80 &em9305_ram_80fde0 -> &em9305_ram_80fb08: first attempt RUN FAILED (short 100/0) because the mutant loaded wild callback words; PRE_H then zeroed 80fb08+0x1c/+0x20 so the mutant stays in-bounds and was KILLED (ncalls/callhash/memhash). Eq re-prove after that PRE_H change stayed EQUIVALENT 100."
+        ]
+      }
+    }
+  },
+  "install": {
+    "wsf_os_ao.c": {
+      "sha256_before": "597a1916876f00c0b44abf9399de6346b258d487def64f73489b8b86e48738b5",
+      "sha256_after": "0741ff336192501305407a6b693c03a6d97086317646046cae1c0a16c9e46d8c"
+    },
+    "application_boot.c": {
+      "sha256_before": "0679194b04a3b692c2a2ad02de79649020016036e1255ffda85a92246a12d8fd",
+      "sha256_after": "b49fdd7a7591c8fdbdc23e451282cb7ce2a84b62b6c3af166d5e1a48b21f22a2"
+    },
+    "method": "Wrote the already-proven typo-RAM cand bytes over the tree files (targeted install of this stream's own rewrite, not a git checkout)."
+  },
+  "tree_build": {
+    "command": "python3 -u build/ws-em9305-20261122/pbuild.py build/ws-em9305-20261122/p-wsfboot -j 3",
+    "started": "2026-11-23 01:41:12 AM CST (America/Chicago)",
+    "finished": "2026-11-23 01:46:43 AM CST (America/Chicago)",
+    "rc": 0,
+    "units": 768,
+    "compiled_this_run": 768,
+    "link_log_empty": true,
+    "text_bytes": 239316,
+    "text_delta_vs_p_aoad": 0,
+    "app_sha256": "409a8d67dff1b353867ac108fbe8a849e8dca5e594554210cb975cd9d2388199",
+    "note": "Same .text size as p-aoad (239316) but different sha (409a8d67\u2026 vs f7c64def\u2026). Growing 80139c and installing wsf_os_ao compiled cleanly; the previous -Werror=array-bounds failure is gone."
+  },
+  "package": {
+    "path": "build/ws-em9305-20261122/p-wsfboot/g2-em9305-source-candidate-package.bin",
+    "bytes": 240648,
+    "sha256": "74700b9f796e6001f255e0ed648b5a9a6ad5b85787bfaf6e7ea759d267fbf487",
+    "records": 3,
+    "crcs": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0x7D3BAA56",
+      "[0x00302400,0x0033cad4)": "0xAFCEF151"
+    }
+  },
+  "slot_fit": {
+    "application_end": "0x0033CAD4",
+    "application_bytes": 239316,
+    "headroom_bytes": 275756,
+    "fits_nvm_slot": true
+  },
+  "splice": {
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-wsfboot.bin",
+    "nor_sha256": "56c793d677b94f0c597740791edbf9969305fc7cbbcbcfeb570edf85442d46ae",
+    "nor_source": "copy of build/em9305-nor-20261122/nor-stock-formatted.bin, then lfs_inject at 0x1400000 path /firmware/ble_em9305.bin",
+    "lfs_inject_wrote_bytes": 240648,
+    "lfs_inject_offset": "0x1400000",
+    "lfs_path": "/firmware/ble_em9305.bin"
+  },
+  "sims": {
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/wsfboot-match.resc",
+      "log": "build/ws-em9305-20261122/sim/wsfboot-match.log",
+      "started": "2026-11-23 01:47:09 AM CST (America/Chicago)",
+      "finished": "2026-11-23 01:47:52 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "chiprev_fixture": "0x22",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x0",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/wsfboot-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/wsfboot-dfu-mismatch.log",
+      "started": "2026-11-23 01:47:52 AM CST (America/Chicago)",
+      "finished": "2026-11-23 01:49:08 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq_at": "2026-11-23 01:48:55.436 AM CST (America/Chicago)",
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0x7D3BAA56",
+        "[0x00302400,0x0033cad4)": "0xAFCEF151"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 1037
+    }
+  },
+  "compare": {
+    "version_match_baseline": "PASS",
+    "version_match_run_renode_rc": 0,
+    "forced_mismatch_dfu_baseline": "PASS",
+    "forced_mismatch_dfu_run_renode_rc": 0,
+    "dfu_protocol_completed": true,
+    "commit_00020404": true,
+    "sysresetreq": true,
+    "sbl_handoff": true,
+    "observed_crcs_identical_to_precomputed_our_records": true,
+    "verdict": "Version-match is a full baseline PASS (run_renode_rc=0) vs the p-aoad / official-rootI markers (CHIPREV 0x22, OTAP 0xAFD1363A then 0, HOST 0x3A, END_PC 0x543528, display hash 0c5cc90b\u2026, advertising 010A200101, HOST count 0x3A). Forced-mismatch DFU is a PASS (run_renode_rc=0): commit 00020404, SYSRESETREQ, SBL handoff VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D, observed CRCs 1D6121C4 / 7D3BAA56 / AFCEF151 match precomputed extents (application ends at 0x0033CAD4). Record-2 zlib CRC changed vs p-aoad (7D3BAA56 vs 914ECF40) because the application image CRC is now AFCEF151."
+  },
+  "rules": {
+    "no_commit": true,
+    "no_push": true,
+    "no_flash": true,
+    "no_backups": true,
+    "official_app_not_overwritten": true,
+    "sources_json_approval_closed": true,
+    "other_streams_left_alone": true,
+    "this_stream_one_renode_at_a_time": true,
+    "no_install_unproven_or_vacuous": true,
+    "no_git_show_HEAD_revert": true
+  }
+}

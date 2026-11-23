@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-22 11:54:48 PM CST (America/Chicago)",
+  "title": "Paired Renode sims on the official sources.py {root} include-path image: version-match baseline PASS and forced-mismatch DFU protocol completed",
+  "scope": "Run both official-rootI paired sims sequentially against the already-packaged official sources.py output (full-rootI-232930, {root} include path). Image, package, and NOR are byte-identical to the 10:55 PM CST p-lowers 801a04-grow image. This is a fresh official-resc run, not just identity.",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261122-em9305-official-rootI-build-package.json",
+  "official_build": {
+    "out": "build/ws-em9305-20261122/full-rootI-232930",
+    "manifest_sha256": "0271ee7ac3fe15f019cb97b06559c3222bc808983509331bcdd0bab2b29c3f40",
+    "g2-em9305": "768/768 compiled",
+    "g2-apollo-main": "2719/2719 compiled",
+    "package": "build/ws-em9305-20261122/full-rootI-232930/link/g2-em9305-source-candidate-package.bin",
+    "package_bytes": 240840,
+    "package_sha256": "82c73dca290763ad04ea2b4c069e17187a50e86a164070b228bf6e3ccb6e0c5c",
+    "application_sha256": "a05770aa225719f6890877d56cde90f709f3aaa0fce9cd30efa516a93be738a8",
+    "application_bytes": 239508,
+    "byte_identical_to_p_lowers_801a04_grow": true
+  },
+  "slot_fit": {
+    "nvm_window": [
+      "0x00300000",
+      "0x00380000"
+    ],
+    "bootloader_end": "0x00300488",
+    "application_end": "0x0033CB94",
+    "application_bytes": 239508,
+    "headroom_bytes": 275564,
+    "fits_nvm_slot": true,
+    "precomputed_programmed_nvm_crcs": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0xD0CFF430",
+      "[0x00302400,0x0033CB94)": "0xDEEF4351"
+    }
+  },
+  "splice": {
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "private_g2_app": "build/ws-em9305-20261122/sim/opencfw-em9305-typed-ram.app.bin",
+    "private_g2_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-official-rootI.bin",
+    "nor_sha256": "313d7250dd4ec71a57920ff68d59933165ce1d649b707b2c1756abf1734e0bc1",
+    "lfs_inject_wrote_bytes": 240840,
+    "nor_source": "copy of build/em9305-nor-20261122/nor-stock-formatted.bin, then lfs_inject at 0x1400000 path /firmware/ble_em9305.bin"
+  },
+  "sims": {
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/official-rootI-match.resc",
+      "log": "build/ws-em9305-20261122/sim/official-rootI-match.log",
+      "started": "2026-11-22 11:52:32 PM CST (America/Chicago)",
+      "finished": "2026-11-22 11:53:38 PM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "chiprev": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_frames": 2,
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/official-rootI-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/official-rootI-dfu-mismatch.log",
+      "started": "2026-11-22 11:53:46 PM CST (America/Chicago)",
+      "finished": "2026-11-22 11:54:48 PM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq_at": "2026-11-22 11:54:41.301 PM CST (America/Chicago)",
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0xD0CFF430",
+        "[0x00302400,0x0033CB94)": "0xDEEF4351"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 1038
+    }
+  },
+  "compare": {
+    "version_match_baseline": "PASS",
+    "version_match_vs": "prior lowers-801a04-grow match (same CHIPREV 0x22, OTAP 0xAFD1363A then 0, HOST 0x3A, END_PC 0x543528, 2 display frames, display hash 0c5cc90b\u2026, advertising 010A200101, 56 HCI)",
+    "dfu_protocol_completed": true,
+    "commit_00020404": true,
+    "sysresetreq": true,
+    "sbl_handoff": true,
+    "post_dfu_display_hash": "matches baseline 0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+    "observed_crcs_identical_to_precomputed_our_records": true,
+    "hci_packet_count_identical_to_previous_lowers_dfu": true,
+    "verdict": "Version-match is a full baseline pass versus the 10:55 PM CST p-lowers 801a04-grow official-equivalent image. Forced-mismatch DFU completed the protocol (commit 00020404, SYSRESETREQ, SBL handoff) with observed programmed-NVM CRCs identical to the precomputed record extents and the same post-handoff display hash and HOST 0x3A."
+  },
+  "rules": {
+    "no_commit": true,
+    "no_push": true,
+    "no_flash": true,
+    "no_backups": true,
+    "official_app_not_overwritten": true,
+    "sources_json_approval_closed": true,
+    "other_streams_left_alone": true,
+    "other_renode_not_stopped": true,
+    "this_stream_one_renode_at_a_time": true
+  }
+}

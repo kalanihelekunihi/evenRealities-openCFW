@@ -5,10 +5,10 @@ extern uint8_t audio_ux_get_system_ble_status(void);
 extern uint8_t audio_conversate_ui_settings_extension_20071369[];
 extern uint32_t audio_conversate_ui_app_id_200743a0;
 extern uint32_t audio_uart_page_460084(const char *);
-extern uint32_t audio_uart_page_45fffe(const char *, uint32_t);
-extern uint32_t audio_conversate_ui_message_send_58bfb2(uint32_t, uint32_t,
-                                                          uint32_t, uint32_t,
-                                                          uint32_t);
+extern const char *audio_uart_page_45fffe(const char *, uint32_t);
+extern uint32_t audio_conversate_ui_message_send_58bfb2(void *parent, const char *text,
+                                                          uint32_t app_id, uint32_t animated,
+                                                          uint32_t hold_ms); /* common_exit_prompt_show */
 extern uint32_t audio_uart_page_43de82(uint32_t);
 extern void audio_uart_page_43f4c0(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_43f09a(uint32_t, uint32_t, uint32_t);
@@ -45,9 +45,9 @@ uint32_t audio_conversate_ui_route_5b58e8(uint32_t state, uint32_t value) {
             (void)compressed_log_output(0x04000000u, disconnected_short,
                                         disconnected_short);
         const uint32_t length = audio_uart_page_460084(disconnect_key);
-        const uint32_t text = audio_uart_page_45fffe(disconnect_key, length);
+        const char *const text = audio_uart_page_45fffe(disconnect_key, length);
         (void)audio_conversate_ui_message_send_58bfb2(
-            audio_conversate_ui_app_id_200743a0, text, 11u, 0u, 0x1388u);
+            (void *)(uintptr_t)audio_conversate_ui_app_id_200743a0, text, 11u, 0u, 0x1388u);
         return UINT32_MAX;
     }
 

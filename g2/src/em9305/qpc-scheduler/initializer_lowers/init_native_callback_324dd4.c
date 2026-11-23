@@ -1,10 +1,11 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x324dd4..0x324e3a: privacy work-item callback. Kind 1 refreshes
  * every resolving-list address and restarts the command timer; kind 3
  * refreshes all entries (zero identity) or the matching one; kind 2
  * resolves (+4 set) or projects an address from {+16, +20, +5, +8} and
- * then retires one outstanding item (0x805b5c) in a critical section. */
+ * then retires one outstanding item (((uintptr_t)&em9305_ram_805af0 + 0x6cu)) in a critical section. */
 extern void opencfw_em9305_child_303a80(void);
 extern uint32_t opencfw_em9305_command_timer_325268(void);
 extern void opencfw_em9305_child_303ad8(uint32_t type, uint32_t low, uint32_t high);
@@ -32,7 +33,7 @@ void opencfw_em9305_callback_324dd4(uintptr_t item)
         else
             (void)opencfw_em9305_radio_address_project_303b7c(first,second,item+5u,item+8u);
         opencfw_em9305_wsf_critical_enter();
-        volatile uint8_t *outstanding=(volatile uint8_t *)(uintptr_t)0x805b5cu;
+        volatile uint8_t *outstanding=&em9305_ram_805af0.u8_805b5c;
         *outstanding=(uint8_t)(*outstanding-1u);
         opencfw_em9305_wsf_critical_exit();
         return;

@@ -1,0 +1,28 @@
+{
+  "stream": "ws-hwdrivers",
+  "time_cst": "2026-11-22 21:30 America/Chicago",
+  "task": "Review 11 hwdrivers-owned (drivers/, hal/) functions listed GC'd-but-reachable-in-stock in build/ws-blestore-20261122/pending/04-gc-sections-live-in-stock.md. Rule out harmless cases; fix only real missing calls at the stock call site; do not edit the pending note.",
+  "source_note": "build/ws-blestore-20261122/pending/04-gc-sections-live-in-stock.md (owned by ws-blestore; NOT edited)",
+  "result": {"real_missing_calls_fixed": 0, "harmless_ruled_out": 11, "c_edits": 0, "out_of_my_ownership": 3},
+  "by_category": {
+    "wrong_comment_address": ["offline_mask_set@0x439be4", "codec_host_initialize@0x58fab6"],
+    "address_collision_caller_calls_equivalent_name": ["codec_send@0x58fb38"],
+    "caller_does_check_inline_or_inlined": ["semantic_gx8002_magic_matches@0x57baf4"],
+    "getter_caller_reads_global_directly": ["box_detect_peer_in_case_4acac0@0x4acac0"],
+    "call_already_present_in_c_dead_caller_chain": ["box_uart_send_53a010@0x53a010","audio_clock_bit_count@0x4c3750","audio_xtal_wait@0x4c387e","fg_43a5a0@0x43a5a0","fg_4397a8@0x4397a8","fg_439fb4@0x439fb4"]
+  },
+  "findings": [
+    {"fn":"offline_mask_set","addr":"0x439be4","class":"wrong_comment_address","evidence":"support.c line 5 shows 0x439be4 = offline_copy (an alias of audio_uart_checksum_copy = memcpy, kept). offline_mask_set (line 8) is a separate BASEPRI mask-set routine at a different address. Classifier grabbed the nearby 0x439be4 comment. The BL callers call memcpy, not offline_mask_set."},
+    {"fn":"codec_send","addr":"0x58fb38","class":"address_collision","evidence":"request.c line 26/31: codec_send is the stock 0x58FB38 codec UART3 send. codec_dfu.c and gx8002 already call this exact function under the extern name audio_uart_send_bytes (resolved to 0x58fb38). Call site exists under an equivalent name; GC only drops the unused name codec_send."},
+    {"fn":"codec_host_initialize","addr":"0x58fab6","class":"wrong_comment_address","evidence":"lifecycle.c line 58 comment Stock 0x58FAB6 belongs to codec_uart_baud (defined just above). codec_host_initialize (line 60) is a composite {codec_uart_initialize(); codec_uart_baud(115200);} that DOES call codec_uart_baud. BL's to 0x58fab6 are calls to codec_uart_baud, which is present and called."},
+    {"fn":"semantic_gx8002_magic_matches","addr":"0x57baf4","class":"inlined_equivalent","evidence":"Caller audio_transaction_extract (system/transaction/transaction-extract.c, another stream) performs the magic validation inside static unpack_core() returning status==-2 for invalid magic. The magic compare is inlined into unpack_core, not a call to semantic_gx8002_magic_matches. Body present in my folder; no missing call. Other-stream file not edited."},
+    {"fn":"box_detect_peer_in_case_4acac0","addr":"0x4acac0","class":"getter_caller_reads_global","evidence":"Defined box_detect_case_state.c line 79 (6-byte getter over g2_box_case_state). Caller audio_uart_case_status (app/case-status, another stream) accesses case state directly/builds frames directly; does not need the getter symbol. Getter body present and correct; not a missing call in my code."},
+    {"fn":"box_uart_send_53a010","addr":"0x53a010","class":"call_present","evidence":"box_uart_mgr.c line 133 defines it and line 188 calls it from DEV_BoxRevcMsgProcess. Call site present in C; GC is a dead caller-chain, not a missing call."},
+    {"fn":"audio_clock_bit_count","addr":"0x4c3750","class":"call_present","evidence":"ownership.c line 15 def, called line 17 by audio_clock_count. Call present; GC is dead caller-chain."},
+    {"fn":"audio_xtal_wait","addr":"0x4c387e","class":"call_present","evidence":"xtal-request/request.c line 22 def, called lines 28 and 39 in-file. Call present; GC is dead caller-chain."},
+    {"fn":"fg_43a5a0","addr":"0x43a5a0","class":"call_present_out_of_ownership","evidence":"g2c_fuel_gauge_leaves.c line 181 def, called lines 504, 1141 in-file. Battery-model is carved out of my ownership; harmless regardless (call present)."},
+    {"fn":"fg_4397a8","addr":"0x4397a8","class":"call_present_out_of_ownership","evidence":"line 223 def, called line 2064 in-file (also shows as collision with graphics g2c_nema math). Battery-model, not my ownership; harmless (call present)."},
+    {"fn":"fg_439fb4","addr":"0x439fb4","class":"call_present_out_of_ownership","evidence":"line 289 def, called lines 703, 1223, 1417 in-file. Battery-model, not my ownership; harmless (call present)."}
+  ],
+  "conclusion": "No real missing call sites among the 11 hwdrivers-owned GC'd functions. Zero product-C edits. Three (fg_*) are in drivers/power/npm1300/battery-model, which is outside my editable ownership, but are harmless regardless. Pending note left unedited."
+}

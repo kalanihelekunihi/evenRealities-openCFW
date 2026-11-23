@@ -1,0 +1,86 @@
+{
+  "title": "nrf_fuel_gauge mid helpers: 43a5dc NaN payload fix, 439fe4, 43bfac",
+  "status": "VERIFIED",
+  "when": "2026-11-22 10:54 AM CST (America/Chicago)",
+  "approach": "Bottom-up continuation. 43a5dc now uses typographic vsub/vdiv/vfms/vfma operand order (inline VFP) so input NaN payloads propagate (e.g. sNaN 0x7F800001 quiets to 0x7FC00001) instead of collapsing to a constant canonical NaN. 439fe4 is the two-channel form of the same interpolator. 43bfac is a short all-nonzero byte scan. Renode 1.17 Cortex-M55, no fg_call.",
+  "verified": [
+    {
+      "symbol": "fg_43a5dc",
+      "cases": 288,
+      "fails": 0,
+      "notes": "Quadratic interpolation. Previous 1-case NaN-payload miss (0x7FC00001 vs 0x7FC00000) is fixed by VFP op order. MAGIC 0xF6A11E02 mid_results.bin."
+    },
+    {
+      "symbol": "fg_43bfac",
+      "cases": 545,
+      "fails": 0,
+      "notes": "Return 1 if n<=0 or the first n bytes are all nonzero; 0 if a zero byte is found."
+    },
+    {
+      "symbol": "fg_439fe4",
+      "cases": 276,
+      "fails": 0,
+      "notes": "Two-channel quadratic interpolation at t; y packed as 3+3. 43a0f4 on x[] returns without writing out; on t writes fg_aux[0] to both outputs."
+    }
+  ],
+  "production_replace": {
+    "updated": [
+      {
+        "path": "/Users/kalani/Repo/evenRealities-OpenCFW/g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+        "sha256": "6939d9efc2776ad2351a25813189c14ec40dd6b690bd99d5868393402917a4bf",
+        "bytes": 15251
+      },
+      {
+        "path": "/Users/kalani/Repo/evenRealities-OpenCFW/g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.h",
+        "sha256": "53d175a721c660184491d9061c1c944c84630a821d477b7acd2a9b5ce56553f3",
+        "bytes": 1284
+      },
+      {
+        "path": "/Users/kalani/Repo/evenRealities-OpenCFW/g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_cores.S",
+        "sha256": "bf7c1f56a665974fe87582f09a1d01d6489104604e415157ad42aaa55db115d0",
+        "bytes": 50353
+      }
+    ],
+    "cores_remaining_globals": [
+      "fg_439ce0",
+      "nrf_model_init_43a1b0",
+      "nrf_model_process_43a698",
+      "fg_43bb14",
+      "fg_43bc84",
+      "fg_43be18",
+      "nrf_model_ttf_58eac4"
+    ]
+  },
+  "artifacts": {
+    "mid_results_43a5dc": {
+      "path": "/Users/kalani/Repo/evenRealities-OpenCFW/build/fuel-gauge-recon-20261122/c-leaves/mid_results.bin",
+      "sha256": "908017aa270fa1ac085f77b1f36b32f2fa0069df12f6d8da373d266d4a1ef697",
+      "bytes": 2048
+    },
+    "mid_log": {
+      "path": "/Users/kalani/Repo/evenRealities-OpenCFW/build/fuel-gauge-recon-20261122/c-leaves/mid.log",
+      "sha256": "83868f5d85de1e30ec68c4865b35d54a5f8b14b7d1968eb8d24af85352b96655",
+      "bytes": 861
+    },
+    "mid2_results": {
+      "path": "/Users/kalani/Repo/evenRealities-OpenCFW/build/fuel-gauge-recon-20261122/c-leaves/mid2_results.bin",
+      "sha256": "57ec5ead4c58de6ba751c0c395b38ae028980966369901711b845c7ed87246a7",
+      "bytes": 2048
+    },
+    "mid2_log": {
+      "path": "/Users/kalani/Repo/evenRealities-OpenCFW/build/fuel-gauge-recon-20261122/c-leaves/mid2.log",
+      "sha256": "981f657dba32d39618bf7495d888e8ee70bef3caef2fc865fc6317aba0137ff5",
+      "bytes": 865
+    },
+    "mid2_test_bin": {
+      "path": "/Users/kalani/Repo/evenRealities-OpenCFW/build/fuel-gauge-recon-20261122/c-leaves/mid2_test.bin",
+      "sha256": "23bdaf946cb476a7fc571efa300a2df2aea9eabe6d342b345e92f90883a33558",
+      "bytes": 2408
+    }
+  },
+  "not_done": [
+    "Remaining typographic: fg_439ce0, fg_43bb14, fg_43bc84, fg_43be18, nrf_model_ttf_58eac4, nrf_model_init_43a1b0, nrf_model_process_43a698.",
+    "apollo-main was not rebuilt; version-match and DFU paired sims were not run (deferred until those cores are C, or as a later 'every few batches' check).",
+    "Linker-report canned string unchanged. Official opencfw-otap-disarm.app.bin not overwritten. No flash, no git."
+  ]
+}

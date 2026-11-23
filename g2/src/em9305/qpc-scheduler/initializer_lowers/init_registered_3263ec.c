@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x3263ec..0x3266ce: complete second connection packet constructor.
  * The ARC DSP operations are written as C arithmetic. Resident radio
@@ -55,8 +56,8 @@ uint32_t opencfw_em9305_init_registered_3263ec(uintptr_t root)
 {
     uint32_t slot=*(volatile uint16_t *)(root+612u);
     uint32_t slot_offset=(uint32_t)(uint16_t)slot*784u;
-    uintptr_t state=0x803ddcu+slot_offset;
-    uintptr_t product=0x804080u+slot_offset;
+    uintptr_t state=((uintptr_t)&em9305_ram_803d58 + 0x84u)+slot_offset;
+    uintptr_t product=((uintptr_t)&em9305_ram_803d58 + 0x328u)+slot_offset;
     uint32_t custom=*(volatile uint8_t *)(product+1u);
     uintptr_t packet=opencfw_em9305_phy_packet_alloc_32d2f0(35u+(custom!=0u?8u:0u));
     if(packet==0u)return 0u;
@@ -69,11 +70,11 @@ uint32_t opencfw_em9305_init_registered_3263ec(uintptr_t root)
         uintptr_t product_ptr=*(volatile uint32_t *)(product+4u);
         uint32_t slots=*(volatile uint8_t *)(product_ptr+18u);
         if((slots&127u)==0u) {
-            slots=*(volatile uint8_t *)(uintptr_t)(0x803f78u+slot_offset);
+            slots=*(volatile uint8_t *)(uintptr_t)(((uintptr_t)&em9305_ram_803d58 + 0x220u)+slot_offset);
             if(slots<2u)goto no_custom_step;
         }
         uint32_t stride_product=slots*(uint32_t)-1250;
-        uint32_t timing=*(volatile uint8_t *)(uintptr_t)(0x803f79u+slot_offset);
+        uint32_t timing=*(volatile uint8_t *)(uintptr_t)(((uintptr_t)&em9305_ram_803d58 + 0x221u)+slot_offset);
         uint32_t period=*(volatile uint32_t *)(state+152u);
         ++count;
         scheduled=period+scheduled+native_mpywhl(stride_product+1250u,timing);

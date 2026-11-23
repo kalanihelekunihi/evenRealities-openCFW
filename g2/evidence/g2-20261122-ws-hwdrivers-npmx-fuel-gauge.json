@@ -1,0 +1,32 @@
+{
+ "title": "ws-hwdrivers stream 3: npmx fuel-gauge wrapper (process_fuel_gauge_51201c + 3 fg fns) verified vs stock",
+ "when": "2026-11-22 7:06 PM CST (America/Chicago)",
+ "module": "g2-npmx-fuel-gauge",
+ "source": "g2/src/apollo-main/drivers/power/npm1300/npmx_main_driver.c",
+ "method": {
+  "emulator": "Renode 1.17.0, CPU CortexM cortex-m55, FPU on",
+  "harness": "build/ws-hwdrivers-20261122/harness (hw.repl/harness.c/rt.S/tramp.S + per-unit gen_<unit>.c), final arg-comparing + VFP-aware harness",
+  "compare": "per test: return value, stub-call arg lists (0xB7), i2c transaction + 128x256 register-image diff, caller/global dump images, register diffs. Stack-local and elog string-literal pointers canonicalized.",
+  "build_flags": "clang -Oz -mcpu=cortex-m55+nomve -mthumb -mfpu=fpv5-d16 -mfloat-abi=hard -ffp-contract=off -ffunction-sections -fdata-sections -fno-common -mllvm -arm-global-merge=false",
+  "runstock": "npmx library fns (incl nrf_fuel_gauge_process_55f848, npmx_adc_meas_all_get 0x55f654) defsym'd to stock addresses and executed as real stock code for BOTH variants; PREINIT=npmx_backend_init_511108; snapshot region (0x20070ce0,0x3c00) covers the nrf model state + backend + ref_time, restored per variant."
+ },
+ "result": {
+  "functions": 4,
+  "cases": 48,
+  "exact_matches": 48,
+  "mismatches": 0,
+  "verified_functions": [
+   "check_fuel_gauge_init_51283c",
+   "fuel_gauge_ref_time_update_512892",
+   "initialize_fuel_gauge_511c24",
+   "process_fuel_gauge_51201c"
+  ],
+  "unit": "npmxfg 48/48"
+ },
+ "harness_fidelity_fixes": [
+  "ROOT CAUSE of process_fuel_gauge 0/12: NOT a float diff and NOT a reconstruction defect. The first diff was at g2_charger_telemetry.temperature (0x20073b28), with absurd values and a test-N-C==test-N+1-stock carryover signature (stack reuse). temperature=(int)(temp*100); temp=meas.values[1] from the reconstructed get_adc -> run-stock npmx_adc_meas_all_get (0x55f654). That function stores a channel only if a per-channel handler fn-ptr in a RAM table at 0x20002e0c (literal @0x55f744) is non-NULL. Lazy-init only fills table[4..7]; table[0..3] (ch0 voltage, ch1 temp) are set only by full ADC config, which PREINIT never runs -> ch0/ch1 skipped -> meas.values[0]/[1] left as uninitialized stack, differing between IAR(stock) and clang(C) frames. 0x20002e0c is outside the snapshot region and not a g_data entry, so nothing reset it.",
+  "FIX (proven harness artifact): PRELOAD_WORDS['npmxfg'] seeds the ADC handler table 0x20002e0c[0..7] = 0x55f319 (the generic stock convert handler the lazy-init itself uses), applied per variant by setup_data. All ADC channels now convert deterministically from the seeded i2c codes, identically for both variants. This does NOT mask any real C-vs-stock diff because npmx_adc_meas_all_get is run-stock for both variants; it only makes the ADC INPUT deterministic+identical.",
+  "Also widened npmxfg snapshot to (0x20070ce0,0x3c00) and grew g_isnap to 0x4000 to cover the nrf model state."
+ ],
+ "relation_to_prior_proof": "The earlier bit-exact proof g2-20261122-fuel-gauge-process-c.json was for the MATH LEAF nrf_model_process_43a698 (explicit float inputs) - a different function from this wrapper. No conflict."
+}

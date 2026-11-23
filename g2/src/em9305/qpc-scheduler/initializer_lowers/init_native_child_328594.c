@@ -1,10 +1,11 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x328594..0x3286e4: initialise the periodic-advertising train of an
  * advertising set. Clear the 312-byte train object (+2468) and fill its
  * header (kinds 2/1/7, owner, data pointers +2248/+2516, completion callback
  * 0x3280e8, sync-info byte +2784); set the sync packet parameters: TX power
- * (+60, 0x7f -> default 0x805a9c), SID (+63), PHY code (1/2/1/2 for PHY +69
+ * (+60, 0x7f -> default ((uintptr_t)&em9305_ram_805a6c + 0x30u)), SID (+63), PHY code (1/2/1/2 for PHY +69
  * 1..4, else 0), access address 0x8e89bed6, CRC init 0x555555 and length 8
  * (also +2594 for a coded, chained set). Encode the first PDU (native
  * 0x3239fc) into +945 / +2616, allocate the 18-byte sync message (failure
@@ -36,7 +37,7 @@ uint32_t opencfw_em9305_child_328594(uintptr_t set)
     *(volatile uint32_t *)(train + 0x20u) = complete;
     *(volatile uint32_t *)(train + 0x1cu) = complete;
     *(volatile uint8_t *)(train + 49u) = (uint8_t)info;
-    if (power == 0x7fu) power = *(volatile uint8_t *)(uintptr_t)0x805a9cu;
+    if (power == 0x7fu) power = em9305_ram_805a6c.u8_805a9c;
     uint32_t sid = *(volatile uint8_t *)(set + 63u);
     uint32_t phy = *(volatile uint8_t *)(set + 69u) - 1u;
     uint32_t properties = *(volatile uint16_t *)(set + 0x20u);

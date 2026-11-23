@@ -1,7 +1,8 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31ca28..0x31cb1e: create the BIG streams. Load the stream
- * parameters (322c94/322bac) from the pending request (*0x805c7c + 4);
+ * parameters (322c94/322bac) from the pending request (*((uintptr_t)&em9305_ram_805c5c + 0x20u) + 4);
  * for each stream number i+1 below the request count (+20) that is listed
  * in the record's selection (count +202, list +203), allocate and set up
  * a stream from the request's access address, CRC, channel words and PHY,
@@ -28,7 +29,7 @@ extern uint32_t opencfw_em9305_dispatch_child_322e80(uintptr_t big,
 
 uint32_t opencfw_em9305_dispatch_callback_31ca28(uintptr_t record)
 {
-    uintptr_t request=*(volatile uint32_t *)0x805c7cu;
+    uintptr_t request=*(volatile uint32_t *)((uintptr_t)&em9305_ram_805c5c + 0x20u);
     (void)opencfw_em9305_dispatch_child_322c94(record,request+4u);
     opencfw_em9305_dispatch_child_322bac(record,request+4u);
     for(uint32_t index=0u;index<*(volatile uint8_t *)(request+20u);++index){
@@ -71,7 +72,7 @@ uint32_t opencfw_em9305_dispatch_callback_31ca28(uintptr_t record)
         }
     }
     (void)opencfw_em9305_dispatch_child_31ccf4(record,
-                                               *(volatile uint32_t *)0x805c7cu+4u);
+                                               *(volatile uint32_t *)((uintptr_t)&em9305_ram_805c5c + 0x20u)+4u);
     (void)opencfw_em9305_wsf_timer_start_ms(record+208u,
                                             *(volatile uint32_t *)(record+224u));
     return opencfw_em9305_dispatch_child_322e80(record,0u);

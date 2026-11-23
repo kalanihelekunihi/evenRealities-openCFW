@@ -1,0 +1,39 @@
+{
+  "stream": "ws-hwdrivers",
+  "stamp": "20261122",
+  "unit": "imu-icm45608 / imu_icm45608_fp.c (DSP float functions)",
+  "status": "COMPLETE",
+  "method": "Renode M55 per-function equivalence. 18 DSP/float functions. inv_imu_*/TDK + filesystem + log callees run-stock/stubbed; hal_i2c modelled. g2_imu_* state placed+seeded; float-bearing structs (g2_imu_samples 0x8cc, g2_imu_mount_matrix, biquad, bias vectors) seeded with FINITE floats; g2_imu_samples.count bounded to 4 (<IMU_SAMPLE_SLOTS=20). Build uses -ffp-contract=off to match stock IAR non-fused vmla.f32 semantics.",
+  "result": "18/18 functions, 0 diffs, re-verified in chunks imufpA/B/C under the FINAL harness (gpio arity fix + VFP-aware arg-logging). Each chunk magic=complete.",
+  "functions_verified_18": [
+    "DRV_IMUCheckCompassEvent@0x4a5114",
+    "DRV_IMUCheckHeadUpEvent@0x4a4efe",
+    "DRV_IMUDataParserCallback@0x4a56d4",
+    "DRV_IMUSetSensorParameters@0x4a3820",
+    "DRV_IMUWriteCSVDataLine@0x4a5ef4",
+    "semantic_filter_init",
+    "semantic_filter_update",
+    "semantic_fixed_vector_to_float@0x4a5908",
+    "semantic_forward_periodic_sample",
+    "semantic_get_heading_degrees",
+    "semantic_get_heading_float",
+    "semantic_get_latest_complete_sample",
+    "semantic_get_orientation_vector",
+    "semantic_postprocess_samples",
+    "semantic_quaternion_to_euler",
+    "semantic_set_heading",
+    "semantic_set_orientation_matrix",
+    "semantic_transform_vector@0x4a54a0"
+  ],
+  "harness_extensions_this_turn": [
+    "tramp.S: trampoline table grown 64->192 (fp.c needs 76 stubs; >64 silently branched past the table -> INVSTATE lockup). autogen guards stubs>192.",
+    "autogen GLOBAL_SIZES: seed full struct extents (g2_imu_samples 0x8cc etc.) so pointer/float fields past the old 48B default are deterministic across both variant runs.",
+    "autogen FLOAT_SEED + harness ptr_to sentinel 0xFFFFFFFE: seed float-bearing globals with finite small floats so DSP results are compiler-stable (no NaN/Inf-payload divergence from garbage bits).",
+    "PRELOAD_WORDS prefix-match + imu count bound (g2_imu_samples.count=4) so sample loops terminate.",
+    "build2.sh: -ffp-contract=off so clang emits vmul+vadd (two roundings) matching stock vmla.f32, eliminating 1-7 ULP diffs.",
+    "ARGUMENT LOGGING (addresses parent/app-stream steering): stub_dispatch now logs each callee's declared arg count (via clang-AST declarations; 0=unknown->no check), compareg canonicalizes pointer args (stock MRAM 0x400000-0x800000 and C ITCM) so string/rodata placement doesn't false-diff while value-arg mutants are caught.",
+    "VFP-AWARE ARG LOGGING: scalar float/double params are passed in s0-s3 (hard-float AAPCS), not core r0-r3, so they are excluded from the core-register arg log. Before this, semantic_forward_periodic_sample false-diffed (0/10): it calls imu_accel_report_send_4da6d4(float,float,float) and the logged core regs held leftover sample pointers that differed stock-vs-C. With float params excluded it is 10/10. LIMITATION: float args to STUBBED callees are not value-compared (would require capturing s0-s3 in the asm stub). Float args to RUN-STOCK callees are fully exercised."
+  ],
+  "total_diffs": 0,
+  "gpio_write_arity_finding": "g2_codec_gpio_write @0x509024 is semantically (channel,value): disasm reads only r0,r1 for known channels; r2 is explicitly unused and r3 is only a default-case passthrough for UNKNOWN channels. imu passes channel 1 (known), so trailing regs are don't-care. KNOWN_NARGS pins its logged core args to 2, resolving benign trailing-arg false diffs."
+}

@@ -1,13 +1,14 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31c88c..0x31c98e: initialise the link's advertising/initiating
  * block (+484, 216 bytes): completion callbacks (31c990 twice, 320b3c,
  * 320d68), owner, channel/access defaults (access address 0x8e89bed6,
  * CRC init 0x555555, 384 us windows, the second one only for PHY modes
- * 1, 3 and 4 of +98), the clock-accuracy byte (0x805a9c) and the own
- * address: the static (0x805b40) or public (0x805a8c) one by bit 0 of
+ * 1, 3 and 4 of +98), the clock-accuracy byte (((uintptr_t)&em9305_ram_805a6c + 0x30u)) and the own
+ * address: the static (((uintptr_t)&em9305_ram_805af0 + 0x50u)) or public (((uintptr_t)&em9305_ram_805a6c + 0x20u)) one by bit 0 of
  * +99, with address-type flags (+612) extended by 0x51 when resolution is
- * enabled (0x805a9d) and, for PHY mode 0, by the peer address type and
+ * enabled (((uintptr_t)&em9305_ram_805a6c + 0x31u)) and, for PHY mode 0, by the peer address type and
  * the peer address (+624/+628). Clears the state bytes and returns 0. */
 extern void *opencfw_em9305_memset(void *dst,uint32_t value,uint32_t count);
 extern uint32_t opencfw_em9305_child_31c990(uintptr_t object);
@@ -30,7 +31,7 @@ uint32_t opencfw_em9305_child_31c88c(uintptr_t link,uint32_t unused,
     uint32_t done=(uint32_t)(uintptr_t)opencfw_em9305_child_31c990;
     w32(link+516u,done);
     w32(link+512u,done);
-    uint32_t accuracy=r8(0x805a9cu);
+    uint32_t accuracy=r8(((uintptr_t)&em9305_ram_805a6c + 0x30u));
     w8(link+510u,1u);
     w8(link+508u,2u);
     w8(link+532u,6u);
@@ -49,13 +50,13 @@ uint32_t opencfw_em9305_child_31c88c(uintptr_t link,uint32_t unused,
     w8(link+664u,1u);
     uint32_t low,high;
     if(random==0u){
-        high=r32(0x805b44u);
-        low=r32(0x805b40u);
+        high=r32(((uintptr_t)&em9305_ram_805af0 + 0x54u));
+        low=r32(((uintptr_t)&em9305_ram_805af0 + 0x50u));
     }else{
-        high=r32(0x805a90u);
-        low=r32(0x805a8cu);
+        high=r32(((uintptr_t)&em9305_ram_805a6c + 0x24u));
+        low=r32(((uintptr_t)&em9305_ram_805a6c + 0x20u));
     }
-    uint32_t resolve=r8(0x805a9du);
+    uint32_t resolve=r8(((uintptr_t)&em9305_ram_805a6c + 0x31u));
     w32(link+616u,low);
     uint32_t flags=type+1u;
     w32(link+620u,high);

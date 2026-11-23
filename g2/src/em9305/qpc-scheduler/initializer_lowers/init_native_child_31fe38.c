@@ -1,14 +1,15 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31fe38..0x31ff2a: schedule the next event of a stream link.
  * Remember the anchor (+4 -> +252) and the deadline (now + 1228 -> +256);
  * while a latency window is open (+8 != +10) and the accumulated delay of
  * the session (+288, +164) fits in it, keep the slot. Otherwise, unless the
  * link is paused (+3), rotate to the next stream enabled in the mask at
- * 0x8019f8 (starting after slot 0 or 2 by link type +16, current slot in
- * 0x8019f9, objects from the ROM table 0x3357b4) and hop its channel. Then
+ * ((uintptr_t)&em9305_ram_8019e8 + 0x10u) (starting after slot 0 or 2 by link type +16, current slot in
+ * ((uintptr_t)&em9305_ram_8019e8 + 0x11u), objects from the ROM table 0x3357b4) and hop its channel. Then
  * either re-insert the node (+244) or step the anchor by +8 * 625 us; the
- * first run of each stream slot is recorded in 0x8019fa, later runs store
+ * first run of each stream slot is recorded in ((uintptr_t)&em9305_ram_8019e8 + 0x12u), later runs store
  * the anchor slip as the session delay. Clears +3. */
 extern uint32_t opencfw_em9305_scan_current_303f80(void);
 extern uint32_t opencfw_em9305_init_schedule_adjust_312f88(uintptr_t,uint32_t,uint32_t);
@@ -19,7 +20,7 @@ extern const uintptr_t opencfw_em9305_stream_objects_3357b4[3];
 
 void opencfw_em9305_child_31fe38(uintptr_t link)
 {
-    volatile uint8_t *streams = (volatile uint8_t *)(uintptr_t)0x8019f8u;
+    volatile uint8_t *streams = &em9305_ram_8019e8.u8_8019f8;
     uint32_t type = *(volatile uint8_t *)(link + 16u);
     uintptr_t session = *(volatile uint32_t *)(link + 288u);
     *(volatile uint32_t *)(link + 252u) = *(volatile uint32_t *)(link + 4u);

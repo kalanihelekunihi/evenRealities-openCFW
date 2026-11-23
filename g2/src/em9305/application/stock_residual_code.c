@@ -10,6 +10,7 @@
  * a negative quotient ran on into the next routine; the C version returns as stock does. */
 
 #include <stdint.h>
+#include "em9305_ram.h"
 
 #define R8(a)  (*(volatile uint8_t *)(uintptr_t)(a))
 #define R16(a) (*(volatile uint16_t *)(uintptr_t)(a))
@@ -23,10 +24,10 @@
 #define AUX_VENDOR_682   0x682u /* EM9305 vendor aux register written by RF_TestModeStop; name not known */
 
 /* Stock RAM words that hold pointers to configuration records. */
-#define EM_CONFIG_PTR    0x80fb64u /* +0x14 interrupt level byte, +0x18 interrupt priority table */
-#define EM_IRQ_SAVE_PTR  0x80fb70u
-#define EM_PML_CTX_PTR   0x80fb8cu
-#define EM_RF_CFG_PTR    0x80fd44u
+#define EM_CONFIG_PTR    ((uintptr_t)&em9305_ram_80fb48.u32_80fb64) /* +0x14 interrupt level byte, +0x18 interrupt priority table */
+#define EM_IRQ_SAVE_PTR  ((uintptr_t)&em9305_ram_80fb48.u32_80fb70)
+#define EM_PML_CTX_PTR   (uintptr_t)&em9305_ram_80fb8c
+#define EM_RF_CFG_PTR    ((uintptr_t)&em9305_ram_80fd2c.u32_80fd44)
 
 /* Stock 0x302508 / 0x302510: two empty handlers after the vector table (stock bytes push_s blink;
  * pop_s blink; j_s [blink]). 0x302510 is called from application_boot.c. */
@@ -71,7 +72,7 @@ int64_t opencfw_em9305_stock_302760(int64_t a, int64_t b)
 
 /* Stock 0x302fa8 BbBleBisTxData: build a 20-byte BIS transmit record on the stack (kind 2 with data
  * pointer and length, or all zero when the length is 0), hand it to the radio, then queue the request
- * through 0x30fcd8 when the flag byte at 0x8015c4 is set, else through 0x30fc68. Bytes 1..3 of the
+ * through 0x30fcd8 when the flag byte at (uintptr_t)&em9305_ram_8015c4 is set, else through 0x30fc68. Bytes 1..3 of the
  * record are left unwritten in the kind-2 case, as in stock. */
 extern uint32_t opencfw_em9305_memset(uintptr_t dst, uint32_t value, uint32_t size);
 extern uint32_t opencfw_em9305_radio_record_30fc28(uintptr_t record);
@@ -99,7 +100,7 @@ uint32_t opencfw_em9305_BbBleBisTxData(uintptr_t descriptor, uint32_t selector, 
     (void)opencfw_em9305_memset((uintptr_t)&record, 0u, sizeof record);
   }
   (void)opencfw_em9305_radio_record_30fc28((uintptr_t)&record);
-  if (R8(0x8015c4u) != 0u)
+  if (R8((uintptr_t)&em9305_ram_8015c4) != 0u)
     return opencfw_em9305_radio_request_30fcd8(descriptor, selector);
   return opencfw_em9305_radio_record_request_30fc68(descriptor, selector);
 }
@@ -141,7 +142,7 @@ uint32_t opencfw_em9305_stock_305ab4(int32_t power, uint32_t phy, uint32_t chann
 void opencfw_em9305_stock_306924(void)
 {
   for (uint32_t i = 0u; i < 50u; i++) {
-    const volatile uint8_t *priority = (const volatile uint8_t *)(uintptr_t)R32(EM_CONFIG_PTR + 0x18u);
+    const volatile uint8_t *priority = (const volatile uint8_t *)(uintptr_t)em9305_ram_80fb48.u32_80fb7c;
     uint32_t level = priority[i];
     __builtin_arc_sr(i + 16u, AUX_IRQ_SELECT);
     __builtin_arc_sr(level, AUX_IRQ_PRIORITY);
@@ -150,15 +151,15 @@ void opencfw_em9305_stock_306924(void)
   __builtin_arc_sync();
   R32(0xf0099cu) = 0x0eu;
   R32(0xf00990u) = 0x0eu;
-  __builtin_arc_seti((int)((R8(EM_CONFIG_PTR + 0x14u) & 0x0fu) | 0x10u));
+  __builtin_arc_seti((int)((em9305_ram_80fb48.u8_80fb78 & 0x0fu) | 0x10u));
 }
 
 /* Stock 0x306968 IRQ_Restore: write back 17 interrupt-controller register pairs (stride 0x24 from
  * 0xf00800, words +0 and +0xc) and the priorities of interrupts 16..65 from the save area that
- * 0x80fb70 points to (layout: 17 words, 17 words, 50 priority bytes, saved status byte). */
+ * em9305_ram_80fb48.u32_80fb70 points to (layout: 17 words, 17 words, 50 priority bytes, saved status byte; typo object em9305_ram_80110c). */
 void opencfw_em9305_stock_306968(void)
 {
-  const volatile uint32_t *save = (const volatile uint32_t *)(uintptr_t)R32(EM_IRQ_SAVE_PTR);
+  const volatile uint32_t *save = (const volatile uint32_t *)(uintptr_t)em9305_ram_80fb48.u32_80fb70;
   for (uint32_t i = 0u; i < 17u; i++) {
     uintptr_t reg = 0xf00800u + i * 0x24u;
     R32(reg) = save[i];
@@ -177,7 +178,7 @@ void opencfw_em9305_stock_306968(void)
  * status that clri returned. */
 uint32_t opencfw_em9305_stock_3069c4(void)
 {
-  volatile uint32_t *save = (volatile uint32_t *)(uintptr_t)R32(EM_IRQ_SAVE_PTR);
+  volatile uint32_t *save = (volatile uint32_t *)(uintptr_t)em9305_ram_80fb48.u32_80fb70;
   for (uint32_t i = 0u; i < 17u; i++) {
     uintptr_t reg = 0xf00800u + i * 0x24u;
     save[i] = R32(reg);
@@ -274,7 +275,7 @@ uint32_t opencfw_em9305_stock_30f1cc(uint32_t mask, uint32_t set)
 
 /* Stock 0x30fa08 PML_UseLfXtalClk: with interrupts off, set (on != 0) or clear bit 3 of 0xf00404
  * (low-frequency crystal select); record the choice in PML context byte +37 and pass it to the
- * callback stored at 0x805ce0 when one is registered. */
+ * callback stored at em9305_ram_805c5c.u32_805ce0 when one is registered. */
 void opencfw_em9305_stock_30fa08(uint32_t on)
 {
   uint32_t status = (uint32_t)__builtin_arc_clri();
@@ -284,7 +285,7 @@ void opencfw_em9305_stock_30fa08(uint32_t on)
   R8(0xf00404u) = (uint8_t)clock;
   __builtin_arc_seti((int)status);
   volatile uint8_t *ctx = (volatile uint8_t *)(uintptr_t)R32(EM_PML_CTX_PTR);
-  void (*callback)(uint32_t) = (void (*)(uint32_t))(uintptr_t)R32(0x805ce0u);
+  void (*callback)(uint32_t) = (void (*)(uint32_t))(uintptr_t)em9305_ram_805c5c.u32_805ce0;
   ctx[37] = (uint8_t)on;
   if (callback != 0) callback(on);
 }
@@ -322,7 +323,7 @@ __attribute__((noreturn)) void opencfw_em9305_stock_3117e8(void)
     __builtin_arc_kflag(1u);
 }
 
-/* Stock 0x311ce8 RF_Init: clear the two 16-byte radio state blocks at 0x8019d4 and 0x8019c4, reset the
+/* Stock 0x311ce8 RF_Init: clear the two 16-byte radio state blocks at (uintptr_t)&em9305_ram_8019d4 and (uintptr_t)&em9305_ram_8019c4, reset the
  * RF configuration record (bytes 0..4 = 0, 0, 10, 0, 0x3a) and continue in RF_InitHw (0x311d2c). Stock
  * reaches RF_InitHw by a tail branch with r0 still holding 0x3a; RF_InitHw reads r0, so it is passed. */
 extern void opencfw_em9305_stock_311d2c(uint32_t incoming);
@@ -338,8 +339,8 @@ static void em_rf_clear_state(uintptr_t block)
 
 void opencfw_em9305_stock_311ce8(void)
 {
-  em_rf_clear_state(0x8019d4u);
-  em_rf_clear_state(0x8019c4u);
+  em_rf_clear_state((uintptr_t)&em9305_ram_8019d4);
+  em_rf_clear_state((uintptr_t)&em9305_ram_8019c4);
   R8(R32(EM_RF_CFG_PTR) + 0u) = 0u;
   R8(R32(EM_RF_CFG_PTR) + 1u) = 0u;
   R8(R32(EM_RF_CFG_PTR) + 2u) = 10u;
@@ -360,28 +361,28 @@ void opencfw_em9305_stock_311db8(void)
   R32(0xf00858u) = 0x2610011u;
 }
 
-/* Stock 0x311ee0 SPIM_RegisterModule: register the SPI master module descriptor 0x80fd38. */
+/* Stock 0x311ee0 SPIM_RegisterModule: register the SPI master module descriptor at u8_80fd38. */
 void opencfw_em9305_stock_311ee0(void)
 {
-  R32(0x80fb0cu) = 0x80fd38u;
+  em9305_ram_80faec.u32_80fb0c = (uintptr_t)&em9305_ram_80fd2c.u8_80fd38;
 }
 
 /* Stock 0x311f70 RF_SetCteDeltaRxTime: store the two CTE receive timing offsets (halfwords). */
 void opencfw_em9305_stock_311f70(int32_t first, int32_t second)
 {
-  R16(0x805efcu) = (uint16_t)second;
-  R16(0x805efeu) = (uint16_t)first;
+  em9305_ram_805eec.u16_805efc = (uint16_t)second;
+  em9305_ram_805eec.u16_805efe = (uint16_t)first;
 }
 
 /* Stock 0x3124bc RF_TestModeStop: stop the radio test mode (control byte 0xf04400 = 4, vendor aux 0x682
- * written 4 then 8, 0xf040bc cleared), mark it stopped at 0x805fb8 and return 1. */
+ * written 4 then 8, 0xf040bc cleared), mark it stopped at (uintptr_t)&em9305_ram_805fb8 and return 1. */
 uint32_t opencfw_em9305_stock_3124bc(void)
 {
   R8(0xf04400u) = 4u;
   __builtin_arc_sr(4u, AUX_VENDOR_682);
   __builtin_arc_sr(8u, AUX_VENDOR_682);
   R32(0xf040b8u) = 0u;
-  R8(0x805fb8u) = 1u;
+  R8((uintptr_t)&em9305_ram_805fb8) = 1u;
   return 1u;
 }
 
@@ -430,7 +431,7 @@ uint32_t opencfw_em9305_stock_315658(uint32_t *next)
 
 /* Stock 0x333404 palFrcExpiryHandler: protocol-timer compare expiry for PAL channel 0, 2 or 3. Calls
  * hook 0x10, disables the channel's compare and runs the callback registered for it
- * (0x805e6c / 0x805e70 / 0x805e74) if any. Other channels only get the hook call. */
+ * (u32_805e6c / u32_805e70 / u32_805e74) if any. Other channels only get the hook call. */
 extern uint32_t opencfw_em9305_pal_hook_three(uint32_t value);
 extern uint32_t opencfw_em9305_pal_timer_channel(uint32_t index, uint32_t enable);
 
@@ -438,9 +439,9 @@ void opencfw_em9305_stock_333404(uint32_t channel)
 {
   uintptr_t slot;
   (void)opencfw_em9305_pal_hook_three(0x10u);
-  if (channel == 3u) slot = 0x805e74u;
-  else if (channel == 2u) slot = 0x805e70u;
-  else if (channel == 0u) slot = 0x805e6cu;
+  if (channel == 3u) slot = (uintptr_t)&em9305_ram_805e6c.u32_805e74;
+  else if (channel == 2u) slot = (uintptr_t)&em9305_ram_805e6c.u32_805e70;
+  else if (channel == 0u) slot = (uintptr_t)&em9305_ram_805e6c.u32_805e6c;
   else return;
   (void)opencfw_em9305_pal_timer_channel(channel, 0u);
   void (*callback)(void) = (void (*)(void))(uintptr_t)R32(slot);

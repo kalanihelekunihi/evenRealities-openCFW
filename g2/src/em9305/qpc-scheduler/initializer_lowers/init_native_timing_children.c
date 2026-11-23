@@ -1,10 +1,11 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x303f80..0x303f8a: guard interval, the halfword at +6 of the
- * timing configuration (*0x805c18). */
+ * timing configuration (*((uintptr_t)&em9305_ram_805be0 + 0x38u)). */
 uint32_t opencfw_em9305_auxiliary_guard_interval(void)
 {
-    uintptr_t timing=*(volatile uint32_t *)(uintptr_t)0x805c18u;
+    uintptr_t timing=em9305_ram_805be0.u32_805c18;
     return *(volatile uint16_t *)(timing+6u);
 }
 

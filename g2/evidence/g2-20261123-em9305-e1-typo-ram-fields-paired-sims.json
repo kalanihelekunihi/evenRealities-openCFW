@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "CST (America/Chicago)",
+  "logged_at": "2026-11-23 05:09:35 AM CST (America/Chicago)",
+  "title": "EM9305 name the 12 e1 typo-RAM pointer literals, reserve 0x8012ba-0x8012bb, typo-install proved users, and p-e1typo paired sims",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-arctimer-ini-record-paired-sims.json",
+  "reason": "Name the 12 untyped typo-RAM literals in ini_record e1 where code users prove a field; reserve the boot-written 8012ba hole in g2-em9305.ld without overlapping g2_em_qf_next_priority at 8012bc; typo residual/ProtTimer/System_SaveRestore/controller_init shims that those fields enable; one private pbuild plus paired sims.",
+  "object_count": {
+    "before": 140,
+    "after": 148,
+    "added": [
+      "em9305_ram_80110c (188 B IRQ save area)",
+      "em9305_ram_8011c8 (48 B PML context)",
+      "em9305_ram_8011f8 (80 B ProtTimer saved block)",
+      "em9305_ram_801248 (8 B RF config bytes)",
+      "em9305_ram_801250 (80 B System_Save record)",
+      "em9305_ram_8012a0 (24 B timer context)",
+      "em9305_ram_80fd20 (12 B ProtTimer/sleep_lock_update hooks)",
+      "em9305_ram_80ff54 (8 B RAMHI sleep_lock_update hooks)"
+    ],
+    "grown_in_place": [
+      "em9305_ram_80fb48 through 0x80fb8c (u32_80fb64..u32_80fb88, sizeof 0x44)",
+      "em9305_ram_80fd2c through u32_80fd80 (hook records at 80fd60/80fd74 and System_Save pointer)"
+    ]
+  },
+  "e1_twelve": {
+    "all_named": true,
+    "users": {
+      "0x80fb64": "sleep_lock_update table index 5; IRQ_Init record base (EM_CONFIG_PTR). Fields u32_80fb64/68/6c plus level u8_80fb78 and priority-table u32_80fb7c.",
+      "0x80fb80": "sleep_lock_update table index 0; grew 80fb48. u32_80fb80 (PML_Init hook) and companions 80fb84/80fb88. The PML_Init comment that called 0x80fb80 the parameter record is stale: the parameter record is em9305_ram_80fb8c (already typo'd).",
+      "0x80fd20": "sleep_lock_update table index 3 and ProtTimer hook record (pal_metadata_reset / Store / Restore). New 12-byte object; not merged into 80fd2c so existing field offsets stay put. ProtTimer typo uses u32_80fd2c and u8_80fd34 and does not index the 12-byte object past its end.",
+      "0x80fd60": "sleep_lock_update table index 4; field u32_80fd60 on grown 80fd2c.",
+      "0x80fd74": "sleep_lock_update table index 1; field u32_80fd74. App treats 80fd74 and 80ff54 as two distinct hook objects, not a ROM range. The ld ROM-range claim stays UNVERIFIED (ROM is not in the repo).",
+      "0x80ff54": "sleep_lock_update table index 2 in RAMHI. p-arctimer-ini and p-e1typo RAMHI .sdata/.data/.bss are empty (__bss_end=0x80fe20). ld ASSERT(__bss_end <= 0x80ff54). Object is 8 bytes only; 0x80ffa8 (boot-written table entry) is not merged.",
+      "0x80110c": "IRQ_Store/Restore save area. After e1, u32_80fb70 points here. 188-byte gap to 8011c8 (17+17 words, 50 priority bytes, status, 1 pad).",
+      "0x8011c8": "PML context. After e1, em9305_ram_80fb8c holds this address. 48-byte gap to 8011f8; +38 written by controller_timer_helpers.",
+      "0x8011f8": "ProtTimer saved-configuration block and sleep_sync context. After e1, u32_80fd2c points here. 80-byte gap to 801248.",
+      "0x801248": "RF config bytes written through u32_80fd44 / EM_RF_CFG_PTR. 8-byte gap to 801250.",
+      "0x801250": "System_Save/Restore record. After e1, u32_80fd80 points here. Offsets through 0x4c; 80-byte gap to 8012a0.",
+      "0x8012a0": "timer context via u32_80fde0. Word 0 and bytes +4, +5+bit, +11, +13, +14; 24-byte gap to 8012b8."
+    }
+  },
+  "hole_8012ba": {
+    "user_request": "Reserve 0x8012ba-0x8012bf so nothing is placed there later (e0 writes it at boot).",
+    "layout": "em9305_ram_8012b8 is 2 bytes at 0x8012b8-0x8012b9. 0x8012ba-0x8012bb was an unreserved 2-byte gap. 0x8012bc-0x8012bf is already the 4-byte .bss.stock_8012bc pin for g2_em_qf_next_priority. Growing 8012b8 to 8 bytes would overlap that pin, so it was not grown.",
+    "ld": "Added .bss.stock_8012ba 0x008012ba (NOLOAD) { . += 2; } and ASSERTs: size 2, adjacent to 8012bc, 8012bc+4==8012c0. p-e1typo map shows the 2-byte section at 0x8012ba and all three ASSERTs true.",
+    "e0": "Retyped hole_8012ba[6] as pad_8012ba[2]={0,0} plus qf_next_priority=0x00000010u (value, not a reloc to the RAM cell). Unlinked and linked bytes at 8012ba-8012bf remain 00 00 10 00 00 00.",
+    "link_closure_comment": "Updated: e0 now writes 0x10 into 0x8012bc at boot."
+  },
+  "file_sha256_after": {
+    "em9305_ram.h": "c600a83619c3df97d2ab88c3c5598e460c96a5f22f5e152f3b18a3c62c42f168",
+    "g2-em9305.ld": "70e2e6e70075c9a0e629a9d446e215bae7a935da2ff5547386f5930fc03cc6f6",
+    "stock_residual_data.c": "674a966a02880c34098bbf0623544a1504ea6b824b8336307d980724bdc8cf7c",
+    "stock_residual_code.c": "a8fd65687fc3b5f7da15361df08ddd4b447bc7425a8eb6909693deaa22b7bc2f",
+    "ProtTimer_Config.c": "38b0c213a4b5a81488cd64e340bc836afb96d374d0841e6c08e25e56c5bb6dfd",
+    "System_SaveRestore.c": "452c9985998d17a679a4b668658f0620770ec3a025bd17f0e8de3e1e7348230c",
+    "controller_init.c": "9e5064bb0fa758299124fefb353a4c98322b3756694cfaba7c098a6e38fca366",
+    "em9305_link_closure.c": "78ebef92e34280497f22b0c7b541ba3137e1fb8db138760f0a0be1a2b2170fe2",
+    "official": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "app": "8876a4e385fb58b5c24bcab96323fb5c0a04dc882cfdc674fe7449e439c4aa6b",
+    "elf": "0a05ba30bc3b5f0ec3bbd56af45b30c64c578a80abe6f999ffef0c23b6bd680b",
+    "pkg": "b1f6fe871768a6404612ec92b1391245c96f9610fe18f3b73b7845a23434d758",
+    "nor": "6ba87d76051471969fe89d6ddbd4ea2e1a6c43d7352ce5cea89944bd708aed1d"
+  },
+  "typo_proofs": {
+    "work": "build/ws-em9305-20261122/u-suffix/e1-typo/",
+    "compared_to": "pre-typo C kept only in the workspace (not a tree revert); mutants vs that stock, not typo-vs-typo",
+    "results": [
+      {
+        "tag": "typo_resid_irq",
+        "status": "EQUIVALENT",
+        "elapsed_s": 22.1,
+        "lines": [
+          "opencfw_em9305_stock_306924                                  EQUIVALENT 100  classes=16 calls=0 nor0",
+          "opencfw_em9305_stock_306968                                  EQUIVALENT 100  classes=1 calls=0 nor0",
+          "opencfw_em9305_stock_3069c4                                  EQUIVALENT 100  classes=1 calls=0"
+        ]
+      },
+      {
+        "tag": "mut_resid_irqsave",
+        "status": "MISMATCH",
+        "elapsed_s": 16.8,
+        "lines": [
+          "opencfw_em9305_stock_306968                                  EQUIVALENT 100  classes=1 calls=0 nor0",
+          "opencfw_em9305_stock_3069c4                                  MISMATCH memhash:68(t=[0, 2, 3])  classes=1 calls=0"
+        ]
+      },
+      {
+        "tag": "mut_resid_cfg",
+        "status": "EQUIVALENT",
+        "elapsed_s": 11.2,
+        "lines": [
+          "opencfw_em9305_stock_306924                                  EQUIVALENT 100  classes=16 calls=0 nor0"
+        ]
+      },
+      {
+        "tag": "typo_resid_rf",
+        "status": "EQUIVALENT",
+        "elapsed_s": 15.2,
+        "lines": [
+          "opencfw_em9305_stock_311ce8                                  EQUIVALENT 100  classes=60 calls=100 nor0",
+          "opencfw_em9305_stock_311ee0                                  EQUIVALENT 100  classes=1 calls=0 nor0"
+        ]
+      },
+      {
+        "tag": "mut_resid_rf",
+        "status": "MISMATCH",
+        "elapsed_s": 15.7,
+        "lines": [
+          "opencfw_em9305_stock_311ce8                                  MISMATCH memhash:66(t=[0, 1, 3])  classes=60 calls=100",
+          "opencfw_em9305_stock_311ee0                                  MISMATCH memhash:100(t=[0, 1, 2])  classes=1 calls=0"
+        ]
+      }
+    ],
+    "notes": [
+      "ProtTimer typo vs stock EQUIVALENT 100 both symbols. Mutant u32_80fd2c->u32_80fd44 KILLED stock_310c08 (memhash:67); stock_310aa8 survived (classes=1, weak observation) but uses the same field.",
+      "System_SaveRestore typo vs stock EQUIVALENT 100 both symbols. Mutant u32_80fd80->u32_80fd74 KILLED both (memhash:64 and callhash:58).",
+      "IRQ_Init/Store/Restore typo vs stock EQUIVALENT 100. Mutant u32_80fb70->u32_80fb64 KILLED stock_3069c4 (memhash:68); stock_306968 survived (classes=1, restore path poorly observed).",
+      "stock_306924 typo vs stock EQUIVALENT 100, but the u32_80fb7c/u8_80fb78 mutant SURVIVED (EQUIVALENT 100). AUX_IRQ_PRIORITY and seti are likely unobserved in the harness. The typo is address-identical to the previous EM_CONFIG_PTR+offset form; left installed with this observation gap noted. Not treated as a vacuous typo-vs-typo run.",
+      "RF_CFG / SPIM typo vs stock EQUIVALENT 100 both symbols. Mutant u32_80fd44/u8_80fd38 KILLED both (memhash:66 and memhash:100).",
+      "controller_init radio_apply_3120a0 typo of &80fd2c+0xc to &u8_80fd38 is the same address; not separately QEMU-proved (huge TU)."
+    ]
+  },
+  "ini_record_byte_compare": {
+    "unlinked": "PASS",
+    "work": "build/ws-em9305-20261122/u-suffix/e1-typo/byte-compare-prev.json",
+    "section_bytes": 1872,
+    "record_bytes": 936,
+    "detail": "Compiled with the unit pbuild flags. The only differences versus the p-arctimer-ini object are the 12 typo-RAM pointer words, which became R_ARC_32 sites (unlinked value 0) at record offsets 0x5c,0x60,0x64,0x68,0x6c,0x70,0xe0,0xfc,0x29c,0x2b4,0x2f0,0x350. All other record and section bytes match, including e0's 00 00 10 00 00 00 at 8012ba-8012bf. After link those 12 resolve to the same addresses as the previous literals.",
+    "linked": "Not bit-identical to p-arctimer-ini: .text shrank 64 bytes (239216 -> 239152) because typo'd C in ProtTimer, residual_code, System_SaveRestore, and controller_init changed codegen. Application end is now 0x0033CA30. The record VMA moved with it (0x0033c65c). Relocated code pointers in the record therefore differ; typo-RAM addresses stay the same."
+  },
+  "tree_build": {
+    "command": "python3 -u build/ws-em9305-20261122/pbuild.py build/ws-em9305-20261122/p-e1typo -j 3",
+    "started": "2026-11-23 04:59:28 AM CST (America/Chicago)",
+    "finished": "2026-11-23 05:04:23 AM CST (America/Chicago)",
+    "rc": 0,
+    "units": 768,
+    "compiled_this_run": 768,
+    "link_log_empty": true,
+    "text_bytes": 239152,
+    "text_delta_vs_p_arctimer_ini": -64,
+    "app_sha256": "8876a4e385fb58b5c24bcab96323fb5c0a04dc882cfdc674fe7449e439c4aa6b",
+    "elf_sha256": "0a05ba30bc3b5f0ec3bbd56af45b30c64c578a80abe6f999ffef0c23b6bd680b",
+    "application_end": "0x0033CA30",
+    "headroom_bytes": 275920,
+    "fits_nvm_slot": true
+  },
+  "package": {
+    "path": "build/ws-em9305-20261122/p-e1typo/g2-em9305-source-candidate-package.bin",
+    "bytes": 240484,
+    "sha256": "b1f6fe871768a6404612ec92b1391245c96f9610fe18f3b73b7845a23434d758",
+    "records": 3,
+    "crcs_from_dfu_log": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0xA6ACC231",
+      "[0x00302400,0x0033CA30)": "0xDB4B1A60"
+    },
+    "note": "Record-2 and application CRCs changed because the app is 64 bytes shorter. Bootloader CRC is unchanged from p-arctimer-ini/p-irqtypo (0x1D6121C4)."
+  },
+  "splice": {
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-e1typo.bin",
+    "nor_sha256": "6ba87d76051471969fe89d6ddbd4ea2e1a6c43d7352ce5cea89944bd708aed1d",
+    "lfs_inject_wrote_bytes": 240484
+  },
+  "sims": {
+    "renode": "g2-firmware-emulator scripts/run-renode.sh, Renode 1.17.0, 8 s virtual runs, 1200 s wall cap",
+    "host_image": "build/ws-em9305-20261122/sim/opencfw-em9305-typed-ram.app.bin",
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/e1typo-match.resc",
+      "log": "build/ws-em9305-20261122/sim/e1typo-match.log",
+      "started": "2026-11-23 05:07:59 AM CST (America/Chicago)",
+      "finished": "2026-11-23 05:08:27 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "chiprev_fixture": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/e1typo-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/e1typo-dfu-mismatch.log",
+      "started": "2026-11-23 05:08:43 AM CST (America/Chicago)",
+      "finished": "2026-11-23 05:09:25 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq": true,
+      "sysresetreq_at": "2026-11-23 05:09:21.525 AM CST (America/Chicago)",
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0xA6ACC231",
+        "[0x00302400,0x0033CA30)": "0xDB4B1A60"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 1037
+    }
+  },
+  "remaining": {
+    "tail_3357e0": "Not started. 64 B verbatim immediately before the ini_record in .rodata.opencfw_em9305_stock_data.",
+    "radio_rodata": "Not started. 700 B verbatim radio and small rodata tables in the same section.",
+    "typo_window_shims": "Partial. Installed this pass: residual_code EM_CONFIG_PTR / EM_IRQ_SAVE_PTR / EM_RF_CFG_PTR and the 80fb7c/80fb78 / u8_80fd38 accesses; ProtTimer PT_STATE; System_SaveRestore 80fd80; controller_init radio_apply root. Still leftover: other residual_code &obj+offset (805c5c+0x84, 805eec+0x10/+0x12, 805e6c slots), application_boot 0x80ffa8 (RAMHI, after 80ff54; not typo'd this pass), QF_maxPool_ for 0x801360, and the remaining controller_init / initializer &obj+offset cluster. PmlSvld 0x80fde0 stays a literal (dead-reload note unchanged)."
+  },
+  "rules": {
+    "no_git": true,
+    "no_backups": true,
+    "official_app_untouched": true,
+    "source_completeness_proven": false,
+    "no_vacuous_install": true
+  }
+}

@@ -1,12 +1,13 @@
 /* Native prepare 0x30f288..0x30f2b8, config setter 0x31183c..0x311848,
  * timer reset 0x30fa40..0x30fa78. Actual timer children stay explicit. */
 #include <stdint.h>
+#include "em9305_ram.h"
 extern uint32_t opencfw_em9305_timer_initialize(uint32_t); /* 0x313a0c */
 extern uint32_t opencfw_em9305_timer_enable(uint32_t); /* 0x313ae4 */
 extern uint32_t opencfw_em9305_timer_irq_enable(uint32_t); /* 0x313c4c */
 static uintptr_t timer_context(void)
 {
- return *(volatile uint32_t *)(uintptr_t)0x80fde0u;
+ return em9305_ram_80fde0.u32_80fde0;
 }
 extern uint32_t opencfw_em9305_timer_calibrate_a(void); /* 0x313bc0 */
 extern uint32_t opencfw_em9305_timer_calibrate_b(void); /* 0x313bec */
@@ -21,7 +22,7 @@ static uint32_t timer_probe(uint32_t value,int alternate)
  else (void)opencfw_em9305_timer_rom_set_a(value);
  uint32_t clock=*(volatile uint32_t *)(uintptr_t)0xf03800u;
  uint32_t offset=(clock & 1u)!=0u ? 24u : 26u;
- uint32_t count=*(volatile uint16_t *)(uintptr_t)(0x80fdd4u+offset);
+ uint32_t count=*(volatile uint16_t *)(uintptr_t)((uintptr_t)&em9305_ram_80fdd4+offset);
  /* Stock computes EXTH(count - 1) + 1 before LP: EXTH is unsigned, so
   * every nonzero halfword reaches the ROM probe unchanged. A zero
   * halfword skips LP and reaches the ROM probe as zero. */
@@ -81,11 +82,11 @@ uint32_t opencfw_em9305_controller_timer_word(uint32_t a,uint32_t b,
 void opencfw_em9305_controller_timer_changed(uint32_t incoming)
 {
  (void)incoming;
- volatile uint32_t *mode=(volatile uint32_t *)(uintptr_t)0x80199cu;
+ volatile uint32_t *mode=&em9305_ram_801994.u32_80199c;
  if (*mode!=0u && *mode!=2u) return;
- uintptr_t second=*(volatile uint32_t *)(uintptr_t)0x8012c8u;
- uintptr_t first=*(volatile uint32_t *)(uintptr_t)0x8012c4u;
- int32_t value=*(volatile int8_t *)(uintptr_t)0x8019a0u;
+ uintptr_t second=em9305_ram_8012c0.u32_8012c8;
+ uintptr_t first=em9305_ram_8012c0.u32_8012c4;
+ int32_t value=em9305_ram_801994.s8_8019a0;
  uint32_t offset=value<1 ? 0u : ((uint32_t)value<<1)&254u;
  if (offset>30u) return;
  uint32_t d=*(volatile uint8_t *)(second+offset+1u);
@@ -97,7 +98,7 @@ void opencfw_em9305_controller_timer_changed(uint32_t incoming)
 /* Native 0x313c18..0x313c4c: mode is captured before IRQ masking. */
 uint32_t opencfw_em9305_timer_select(void)
 {
- uint32_t mode=*(volatile uint32_t *)(uintptr_t)0x80199cu;
+ uint32_t mode=em9305_ram_801994.u32_80199c;
  uint32_t irq_enabled=opencfw_em9305_timer_irq_enable(0);
  uint32_t selected=0;
  if (mode<2u) selected=opencfw_em9305_timer_calibrate_a();
@@ -109,7 +110,7 @@ uint32_t opencfw_em9305_timer_select(void)
 uint32_t opencfw_em9305_timer_apply(int32_t value)
 {
  if (value<0) return (uint32_t)value;
- uint32_t mode=*(volatile uint32_t *)(uintptr_t)0x80199cu;
+ uint32_t mode=em9305_ram_801994.u32_80199c;
  if (mode<2u) return opencfw_em9305_timer_rom_set_a((uint32_t)value);
  if ((mode & ~1u)==2u) return opencfw_em9305_timer_rom_set_b((uint32_t)value);
  return (uint32_t)value;
@@ -140,14 +141,14 @@ uint32_t opencfw_em9305_timer_enable(uint32_t enable)
  volatile uint32_t *clock=(volatile uint32_t *)(uintptr_t)0xf0045cu;
  uint32_t now,confirm;
  do { now=*clock; confirm=*clock; } while (now!=confirm);
- volatile uint32_t *interval=(volatile uint32_t *)(uintptr_t)0x80fde8u;
+ volatile uint32_t *interval=&em9305_ram_80fde0.u32_80fde8;
  int update=1;
  if (*interval!=0u) {
   uint32_t bound=*interval;
   uint32_t last=*(volatile uint32_t *)timer_context();
   if (bound >= now-last && enable==0u) update=0;
  }
- volatile uint8_t *selected=(volatile uint8_t *)(uintptr_t)0x8019a0u;
+ volatile uint8_t *selected=&em9305_ram_801994.u8_8019a0;
  if (update) {
   uintptr_t before=timer_context();
   uint32_t old=*selected;
@@ -169,7 +170,7 @@ uint32_t opencfw_em9305_timer_initialize(uint32_t incoming)
  (void)incoming;
  *(volatile uint8_t *)(timer_context()+11u)=0;
  *(volatile uint8_t *)(timer_context()+13u)=7;
- volatile uint32_t *mode=(volatile uint32_t *)(uintptr_t)0x80199cu;
+ volatile uint32_t *mode=&em9305_ram_801994.u32_80199c;
  if (*mode==0u || *mode==1u) {
   *(volatile uint8_t *)(timer_context()+4u)=6;
   for (uint32_t bit=0;bit<6u;bit++) {
@@ -210,8 +211,8 @@ uint32_t opencfw_em9305_timer_irq_enable(uint32_t enable)
 }
 uint32_t opencfw_em9305_timer_config_pair(uint32_t first,uint32_t second)
 {
- *(volatile uint32_t *)(uintptr_t)0x8019b0u=first;
- *(volatile uint32_t *)(uintptr_t)0x8019b4u=second;
+ em9305_ram_801994.u32_8019b0=first;
+ em9305_ram_801994.u32_8019b4=second;
  return first;
 }
 uint32_t opencfw_em9305_controller_prepare_timer(void)
@@ -220,17 +221,17 @@ uint32_t opencfw_em9305_controller_prepare_timer(void)
  __builtin_arc_sync();
  *(volatile uint32_t *)(uintptr_t)0xf00954u=1;
  *(volatile uint32_t *)(uintptr_t)0xf00948u=1;
- uint32_t first=*(volatile uint32_t *)(uintptr_t)0x80fba0u;
- uint32_t second=*(volatile uint32_t *)(uintptr_t)0x80fba4u;
+ uint32_t first=em9305_ram_80fb8c.u32_80fba0;
+ uint32_t second=em9305_ram_80fb8c.u32_80fba4;
  (void)opencfw_em9305_timer_config_pair(first,second);
- uintptr_t context=*(volatile uint32_t *)(uintptr_t)0x80fb8cu;
+ uintptr_t context=em9305_ram_80fb8c.u32_80fb8c;
  *(volatile uint8_t *)(context+38u)=0;
  return (uint32_t)context;
 }
 uint32_t opencfw_em9305_controller_timer_reset(uint32_t incoming)
 {
  (void)opencfw_em9305_timer_initialize(incoming);
- uintptr_t context=*(volatile uint32_t *)(uintptr_t)0x80fde0u;
+ uintptr_t context=em9305_ram_80fde0.u32_80fde0;
  *(volatile uint8_t *)(context+14u)=0;
  (void)opencfw_em9305_timer_enable(1);
  (void)opencfw_em9305_timer_irq_enable(1);

@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31a5bc..0x31a6f8: create a connection for an initiator/advertiser
  * link. Take a free connection entry (native 0x316c58, status 9 when none)
@@ -37,7 +38,7 @@ uint32_t opencfw_em9305_child_31a5bc(uintptr_t link, uint32_t peer_type, uint32_
         status = 9u;
     } else {
         uintptr_t interval = link + 0x18u;
-        uint32_t index = (uint8_t)((int32_t)(entry - *(volatile uint32_t *)(uintptr_t)0x805c70u) / 912);
+        uint32_t index = (uint8_t)((int32_t)(entry - em9305_ram_805c5c.u32_805c70) / 912);
         uint32_t minimum = *(volatile uint16_t *)interval * 1250u;
         uint32_t maximum = *(volatile uint16_t *)(interval + 2u) * 1250u;
         if (opencfw_em9305_associated_slot_allocate_3133b4(
@@ -46,7 +47,7 @@ uint32_t opencfw_em9305_child_31a5bc(uintptr_t link, uint32_t peer_type, uint32_
             (void)opencfw_em9305_init_connection_release_31ad90(entry);
             status = 13u;
         } else {
-            uintptr_t base = *(volatile uint32_t *)(uintptr_t)0x805c70u;
+            uintptr_t base = em9305_ram_805c5c.u32_805c70;
             index = (uint8_t)((int32_t)(entry - base) / 912);
             *(volatile uint8_t *)(link + 242u) = 0u;
             *(volatile uint8_t *)(link + 241u) = 0u;
@@ -71,7 +72,7 @@ uint32_t opencfw_em9305_child_31a5bc(uintptr_t link, uint32_t peer_type, uint32_
                 uint32_t kind = *(volatile uint8_t *)(link + 98u);
                 if (kind < 5u && ((0x1au >> kind) & 1u) != 0u)
                     (void)opencfw_em9305_init_secondary_count_up_30e4cc();
-                volatile uint8_t *links = (volatile uint8_t *)(uintptr_t)0x805a74u;
+                volatile uint8_t *links = &em9305_ram_805a6c.u8_805a74;
                 *links = (uint8_t)(*links + 1u);
                 (void)opencfw_em9305_command_count_30e4bc();
                 return 0u;

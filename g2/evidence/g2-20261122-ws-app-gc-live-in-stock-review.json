@@ -1,0 +1,76 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "input": "build/ws-blestore-20261122/pending/04-gc-sections-live-in-stock.md (### app, 36 items)",
+ "reviewed": 36,
+ "real_missing_calls": 0,
+ "c_changes": "none",
+ "classes": {
+  "inlined_same_tu_call (real caller's C calls it by name; compiler inlined, standalone copy GC'd)": 17,
+  "caller_does_equivalent_inline (direct field/global decode or inline body)": 14,
+  "calls_inner_or_duplicate_function": 2,
+  "wrong_comment_address_or_collision": 3
+ },
+ "items": {
+  "inlined_same_tu_call (real caller's C calls it by name; compiler inlined, standalone copy GC'd)": {
+   "teleprompt_event_name_58c892": "teleprompt_machine_handler_58c89e calls it (proved by tf-a)",
+   "audio_dashboard_widget_valid": "audio_dashboard_layout_set calls it (stock 0x5584da)",
+   "audio_message_notify_cached_crc_get_4d6a20": "whitelist_check_4d76cc calls it",
+   "translate_event_name_get_596b00": "translate_machine_handler_596b0c calls it",
+   "evenhub_main_shutdown_state_get_4e0caa": "registry_callback_4e1490 calls it",
+   "onboarding_news_page_fifo_is_empty_50b168": "fifo_pop/peek_at call it",
+   "health_data_convert_from_pb_559d82": "save_single/save_mult call it",
+   "health_data_convert_highlight_from_pb_55a230": "save_single_highlight/save_mult_highlight call it",
+   "health_data_slot_get_559836": "save_single/save_mult call it",
+   "health_data_type_name_559854": "save_single/save_mult/save_single_highlight call it",
+   "audio_uart_lv_draw_task_independent_4848b2": "draw_next_available_484656 calls it",
+   "audio_uart_nema_child_523c88": "nema_gpu_reinit_4b11b0 calls it",
+   "system_close_fifo_empty_00469c98": "stock BL 0x46a428 is in the selection-change anim-ready callback (static, after the 4-byte noop 0x46a3d6), which calls it (system_close_page.c:440)",
+   "terminal_ui_agent_scroll_pack_5e4f02": "called from the static agent-scroll helper (terminal_ui_input.c:334) inlined into terminal_input_event_handler_5e7324",
+   "uart_sync_dma_start_584a38": "stock BL 0x584d50 is inside audio_uart_sync_write 0x584c98 (not the 0x541790 send wrapper); sync_write.c:71 calls it",
+   "g2c_nema_vg_emit_tri_516bde": "g2c_nema_vg_path_bounds_5639e8 body calls it (line 161 of the lifted body)",
+   "g2c_nema_vg_sqrt_524218": "g2c_nema_vg_path_bounds_5639e8 body calls it (line 55 of the lifted body)"
+  },
+  "caller_does_equivalent_inline (direct field/global decode or inline body)": {
+   "terminal_ui_confirm_scroll_y_5e4e06": "5e6dd0/5e6e30 decode (uint16_t)payload",
+   "terminal_ui_confirm_scroll_moved_5e4e0a": "5e6dd0/5e6e30 decode bit31",
+   "terminal_ui_confirm_scroll_selection_5e4e10": "5e6dd0/5e6e30 decode bits 28/29/30 else current, same order",
+   "terminal_ui_query_scroll_y_5e4cd4": "5e6e88/5e6f60 payload & 0xffff",
+   "terminal_ui_query_scroll_moved_5e4cd8": "5e6e88/5e6f60 bit31",
+   "terminal_ui_query_scroll_browsing_5e4cde": "5e6e88/5e6f60 bit30",
+   "terminal_ui_query_scroll_index_5e4ce6": "5e6e88/5e6f60 bits 16..23",
+   "terminal_ui_query_click_index_5e4d00": "5e69a0 (uint8_t)payload",
+   "terminal_ui_query_click_output_active_5e4d04": "5e69a0 bit31",
+   "terminal_ui_query_click_output_mode_5e4d0a": "5e69a0 bits 8..15",
+   "conversate_timer_auto_extend_active_5b3a5a": "cleanup_commit_5b3a88 timer_should_tick(): same four loads (timer+0x10, state 0x20071368==4, +0x96==0, +0xa4==1)",
+   "service_even_ai_fn_004982f2": "even_ai_local_decode_498092 VAD branch builds {p[2],0} and calls encode_vad_4e3b80(0,..) like the wrapper",
+   "lv_memzero_484380": "render_layer_base_init_4846de zeroes 0x58 bytes inline",
+   "lv_memzero_48890c": "ambiq_image_options_init_488918 zeroes 0x6c bytes inline"
+  },
+  "calls_inner_or_duplicate_function": {
+   "audio_td_temp_record_invalidate": "td_flag_b_set_597572 -> audio_td_flag_set_with_reset, which calls it when enabled (same TU, inlined)",
+   "audio_ble_master_child_47a47c": "ble callers use audio_ble_pair_record_clear_full: clears +0x2f/+0x30 then privacy_rewrite (0x479b74) and record_validate (0x47b730), identical; call order vs DmPrivRemDevFromResList matches stock in both create (0x47a7ac/0x47a7b2) and remove (0x47b63e/0x47b648)"
+  },
+  "wrong_comment_address_or_collision": {
+   "audio_dashboard_face_slot_valid": "comment parser took 0x558030 (widget_valid); face_slot_valid is the v<10 helper, called by layout_set in the same TU",
+   "audio_uart_display_lock_init": "0x4417ee is xQueueGenericSend (audio_uart_queue_send), not lock_init; lock_init is called by display_clock_finish",
+   "audio_uart_display_pin_config": "0x44d254 is lv_log_register_print_cb (alias audio_uart_display_board_config, kept at 0x592770 and called by display_setup0); pin_config is stock 0x442256 __NVIC_SetPriority"
+  }
+ },
+ "ownership_note": "11 of the 36 are outside app/ (ui/, graphics/, audio/master-dispatch); reviewed read-only, none needs a change",
+ "proof": "differential spec build/ws-app-20261122/specs/gcp-a covers the inline-decode callers 5e6dd0/5e6e30/5e6e88/5e6f60 and 5b3a88 against stock (which BLs the GC'd getters); tf-a covers teleprompt_event_name",
+ "proof_result": {
+  "tests": 600,
+  "equal": 600,
+  "differ": 0,
+  "mutants": 6,
+  "killed": 6,
+  "surviving_mutants": [],
+  "verdict": "EQUIVALENT",
+  "harness_sha256": "312e6f4b0324fb44353a2321387d87744317f31a8ae314599c0aa8c8a0360bca",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "verified_at": "2026-11-22 21:24 CST"
+ },
+ "proof_note": "stock 5b3a88 is void; its r0 is not compared"
+}

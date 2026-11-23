@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x322bac..0x322c94: set up a new connection record from the
  * connect parameters: mark the procedure (+408 = 12), derive the access
@@ -7,7 +8,7 @@
  * hop byte. When encryption is resumed (+484), copy the stored SKD/IV
  * material (+485 -> +444 with the access address mixed into bytes 0..3,
  * +92 -> +428), set both 0x201 lengths and notify the key hook at
- * *0x8028c0 with the record's 512-byte slot id + 6. */
+ * *((uintptr_t)&em9305_ram_802878 + 0x48u) with the record's 512-byte slot id + 6. */
 extern uint32_t opencfw_em9305_radio_access_mix_3188b8(uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_radio_channel_transform_30e3fc(uintptr_t);
 extern void *opencfw_em9305_memcpy(void *,const void *,uint32_t);
@@ -47,9 +48,9 @@ void opencfw_em9305_dispatch_child_322bac(uintptr_t record,uintptr_t parameters)
     w8(record+446u,(access>>16)^b2);
     w8(record+447u,(access>>24)^b3);
     (void)opencfw_em9305_memcpy((void *)(record+428u),(const void *)(record+92u),16u);
-    uintptr_t hook=r32(0x8028c0u);
+    uintptr_t hook=r32(((uintptr_t)&em9305_ram_802878 + 0x48u));
     w16(record+468u,513u);
     if(hook==0u) return;
-    uint32_t slot=(uint8_t)((((uint32_t)record-r32(0x805c3cu))>>9)+6u);
+    uint32_t slot=(uint8_t)((((uint32_t)record-r32(((uintptr_t)&em9305_ram_805be0 + 0x5cu)))>>9)+6u);
     ((void (*)(uintptr_t,uint32_t,uint32_t))hook)(record+428u,slot,1u);
 }

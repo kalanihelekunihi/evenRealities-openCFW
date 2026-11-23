@@ -23,6 +23,9 @@
 #pragma clang diagnostic ignored "-Winvalid-unary-operand-type"
 #pragma clang diagnostic ignored "-Wbad-function-cast"
 #pragma clang diagnostic ignored "-Wvarargs"
+/* Stock (IAR, FPv5) uses only single-precision, non-fused VMUL/VMLA/VMLS in this module:
+ * no .f64 and no VFMA anywhere in its stock bodies. Forbid FMA contraction so rounding matches. */
+#pragma clang fp contract(off)
 typedef unsigned char undefined1, byte;
 typedef unsigned short undefined2, ushort;
 typedef unsigned int undefined4, uint, undefined, uintptr_t;
@@ -191,181 +194,20 @@ uint g2c_nema_vg_paint_apply_567230(uint a, int b);
 
 /* ---- lifted 0x4b14ca ---- */
 
+/* Stock 0x4b14ca..0x4b14fe (52 B): emit register 0x158 = clipped (a, b) origin, then tail-call
+ * 0x514846(0x15c, pkhbt(a + c, (b + d) << 16)) (b.w at 0x4b14fa). The earlier Ghidra lift had
+ * merged a private copy of 0x514846's body specialised for 0x15c here, and that copy diverged from
+ * the real 0x514846 (e.g. it emitted via 0x523e92 when no command list was bound); nvg-a caught it.
+ * The stock return value is 0x514846's r0, which no caller (all in this file) reads. */
 int g2c_nema_cl_submit_node_4b14ca(uint a,int b,int c,int d)
-
 {
-  byte bVar1;
-  int *piVar2;
-  uint uVar3;
-  int iVar4;
-  int *piVar5;
-  int iVar6;
-  uint uVar7;
-  int iVar8;
-  uint uVar9;
-  int iStack_38;
-  int iStack_34;
-  int iStack_30;
-  int iStack_2c;
-  
-  if ((int)a < 1) {
-    uVar3 = 0;
-  }
-  else {
-    uVar3 = a & 0xffff;
-  }
-  if (0 < b) {
-    uVar3 = uVar3 | b << 0x10;
-  }
-  audio_uart_nema_child_514846(0x158,uVar3);
-  piVar2 = (((int *)audio_uart_nema_context_cell));
-  uVar3 = c + a & 0xffff | (d + b) * 0x10000;
-  iVar6 = *(((int *)audio_uart_nema_context_cell));
-  iVar4 = *(int *)(iVar6 + 4);
-  if (iVar4 == 0) {
-    audio_uart_nema_register_emit_523e92(0x15c,uVar3);
-    return 0;
-  }
-  piVar5 = (int *)(iVar4 + 0x10);
-  *(uint *)(iVar4 + 0x18) = *(uint *)(iVar4 + 0x18) & 0xfffffff7;
-  if ((int)((uint)*(byte *)(iVar4 + 0x18) << 0x1a) < 0) {
-    iVar8 = *(int *)(iVar4 + 0x2c);
-    iVar8 = iVar8 * (*(int *)(iVar4 + 0x14) / iVar8) + (iVar8 - *(int *)(iVar4 + 0x14));
-  }
-  else {
-    iVar8 = *piVar5 - *(int *)(iVar4 + 0x14);
-  }
-  if (*(int *)(iVar4 + 0x18) << 0x1a < 0) {
-    if (iVar8 / 2 < 2) {
-      *(undefined1 *)(iVar6 + 0xf9) = 0;
-      audio_uart_nema_sector_rollover_5147b0(*(uint *)(*piVar2 + 4));
-    }
-  }
-  else if (*(int *)(iVar4 + 0x18) << 0x1e < 0) {
-    if (*piVar5 <= *(int *)(iVar4 + 0x14) + 4) {
-      if ((int)((uint)*(byte *)(iVar4 + 0x18) << 0x1a) < 0) {
-        iVar6 = *(int *)(iVar4 + 0x2c);
-        iVar6 = iVar6 * (*(int *)(iVar4 + 0x14) / iVar6) + (iVar6 - *(int *)(iVar4 + 0x14));
-      }
-      else {
-        iVar6 = *piVar5 - *(int *)(iVar4 + 0x14);
-      }
-      uVar7 = iVar6 / 2 - 2;
-      if (0 < (int)uVar7) {
-        for (uVar9 = uVar7 & 3; uVar9 != 0; uVar9 = uVar9 - 1) {
-          iVar6 = *(int *)(iVar4 + 0x14);
-          *(undefined4 *)(*(int *)(iVar4 + 8) + iVar6 * 4) = 0x10000;
-          *(undefined4 *)(*(int *)(iVar4 + 8) + (iVar6 + 1) * 4) = 0;
-          *(int *)(iVar4 + 0x14) = iVar6 + 2;
-        }
-        for (uVar7 = uVar7 >> 2; uVar7 != 0; uVar7 = uVar7 - 1) {
-          iVar6 = *(int *)(iVar4 + 0x14);
-          *(undefined4 *)(*(int *)(iVar4 + 8) + iVar6 * 4) = 0x10000;
-          *(undefined4 *)(*(int *)(iVar4 + 8) + (iVar6 + 1) * 4) = 0;
-          *(int *)(iVar4 + 0x14) = iVar6 + 2;
-          *(undefined4 *)(*(int *)(iVar4 + 8) + (iVar6 + 2) * 4) = 0x10000;
-          *(undefined4 *)(*(int *)(iVar4 + 8) + (iVar6 + 3) * 4) = 0;
-          *(int *)(iVar4 + 0x14) = iVar6 + 4;
-          *(undefined4 *)(*(int *)(iVar4 + 8) + (iVar6 + 4) * 4) = 0x10000;
-          *(undefined4 *)(*(int *)(iVar4 + 8) + (iVar6 + 5) * 4) = 0;
-          *(int *)(iVar4 + 0x14) = iVar6 + 6;
-          *(undefined4 *)(*(int *)(iVar4 + 8) + (iVar6 + 6) * 4) = 0x10000;
-          *(undefined4 *)(*(int *)(iVar4 + 8) + (iVar6 + 7) * 4) = 0;
-          *(int *)(iVar4 + 0x14) = iVar6 + 8;
-        }
-      }
-      piVar5 = *(int **)(iVar4 + 0x20);
-      if (piVar5 == (int *)0x0) {
-        piVar5 = (int *)audio_uart_nema_node_allocate_51416c(0x3c);
-        if (piVar5 == (int *)0x0) {
-          uVar3 = 0x10;
-          goto LAB_005148ea;
-        }
-        audio_uart_nema_buffer_create_514070((uint)&iStack_38,0,0x400);
-        *piVar5 = iStack_38;
-        piVar5[1] = iStack_34;
-        piVar5[2] = iStack_30;
-        piVar5[3] = iStack_2c;
-        piVar5[4] = ((int)(iStack_38 + ((uint)(iStack_38 >> 2) >> 0x1d)) >> 3) << 1;
-        piVar5[5] = 0;
-        piVar5[7] = -1;
-        piVar5[0xd] = -1;
-        piVar5[0xe] = -1;
-        piVar5[6] = 2;
-        piVar5[8] = 0;
-        piVar5[9] = 0;
-        piVar5[10] = 0;
-        piVar5[0xb] = 0;
-        piVar5[0xc] = 0;
-        if (piVar5[2] == 0) {
-          audio_uart_nema_error_set_4b127c(0x10);
-          /* Evidence: FUN_00514846 @ 0x514846 decomp return cl_node_release. */
-          return audio_uart_nema_cl_node_release_514178((void *)piVar5);
-        }
-        iVar8 = *piVar2;
-        iVar4 = *(int *)(iVar8 + 4);
-        iVar6 = *(int *)(iVar4 + 0x24);
-        if (iVar6 != 0) {
-          iVar4 = iVar6;
-        }
-        piVar5[9] = iVar4;
-        piVar5[6] = *(uint *)(*(int *)(iVar8 + 4) + 0x18) & 0xfffffff3;
-      }
-      iVar4 = *(int *)(*piVar2 + 4);
-      if (iVar4 == 0) {
-        audio_uart_nema_error_set_4b127c(0x2000);
-      }
-      else {
-        *(uint *)(iVar4 + 0x18) = *(uint *)(iVar4 + 0x18) | 4;
-      }
-      iVar4 = *piVar2;
-      iVar6 = *(int *)(iVar4 + 4);
-      iVar8 = *(int *)(iVar6 + 0x14);
-      *(undefined4 *)(*(int *)(iVar6 + 8) + iVar8 * 4) = 0xf0;
-      *(int *)(*(int *)(iVar6 + 8) + (iVar8 + 1) * 4) = piVar5[3];
-      *(int *)(iVar6 + 0x14) = iVar8 + 2;
-      *(undefined4 *)(*(int *)(iVar6 + 8) + (iVar8 + 2) * 4) = 0xf4;
-      *(int *)(*(int *)(iVar6 + 8) + (iVar8 + 3) * 4) = piVar5[4];
-      *(int *)(iVar6 + 0x14) = iVar8 + 4;
-      *(int **)(iVar6 + 0x20) = piVar5;
-      if (piVar5 == (int *)0x0) {
-        uVar7 = 0x2000;
-      }
-      else {
-        if ((*(byte *)(piVar5 + 3) & 7) == 0) {
-          if (*(int *)(iVar4 + 4) != 0) {
-            audio_uart_nema_cl_unbind_5144ba();
-          }
-          bVar1 = *(byte *)(piVar5 + 6);
-          while (((((int)((uint)bVar1 << 0x1d) < 0 &&
-                   (piVar5 = (int *)piVar5[8], (int)((uint)*(byte *)(piVar5 + 6) << 0x1d) < 0)) &&
-                  (piVar5 = (int *)piVar5[8], (int)((uint)*(byte *)(piVar5 + 6) << 0x1d) < 0)) &&
-                 (piVar5 = (int *)piVar5[8], (int)((uint)*(byte *)(piVar5 + 6) << 0x1d) < 0))) {
-            piVar5 = (int *)piVar5[8];
-            bVar1 = *(byte *)(piVar5 + 6);
-          }
-          *(int **)(*piVar2 + 4) = piVar5;
-          goto LAB_005148bc;
-        }
-        uVar7 = 0x4000;
-      }
-      audio_uart_nema_error_set_4b127c(uVar7);
-    }
-  }
-  else if (*piVar5 < *(int *)(iVar4 + 0x14) + 2) {
-    uVar3 = 8;
-LAB_005148ea:
-    /* Evidence: FUN_00514846 LAB_005148ea decomp return error_set status. */
-    return audio_uart_nema_error_set_4b127c(uVar3);
-  }
-LAB_005148bc:
-  iVar4 = *(int *)(*piVar2 + 4);
-  iVar6 = *(int *)(iVar4 + 0x14);
-  *(undefined4 *)(*(int *)(iVar4 + 8) + iVar6 * 4) = 0x15c;
-  *(uint *)(*(int *)(iVar4 + 8) + (iVar6 + 1) * 4) = uVar3;
-  *(int *)(iVar4 + 0x14) = iVar6 + 2;
-  return iVar4;
+  uint origin = (int)a < 1 ? 0u : (a & 0xffffu);
+  if (0 < b) origin |= (uint)b << 0x10;
+  audio_uart_nema_child_514846(0x158, origin);
+  audio_uart_nema_child_514846(0x15c, ((uint)c + a) & 0xffffu | ((uint)d + (uint)b) << 0x10);
+  return 0;
 }
+
 
   
 
@@ -752,16 +594,21 @@ uint g2c_nema_vg_path_cmd_5156b8(uint *path,uint cmd,float *coords)
   undefined8 uVar27;
   float fVar28;
   float fVar29;
-  float fStack_94;
-  uint *puStack_90;
-  float fStack_8c;
-  float fStack_88;
-  float fStack_84;
-  float fStack_80;
-  float fStack_7c;
-  float fStack_78;
-  float fStack_74;
-  float fStack_70;
+  /* Stock frame of 0x5156b8 as one block: locals keep the entry-SP offsets Ghidra named them by
+   * (X_Stack_NN at g2c_frame_5156b8[0x98-0xNN]) so &local passed to callees spans its stock neighbours. */
+  unsigned char g2c_frame_5156b8[0x98] __attribute__((aligned(8)));
+  typedef float __attribute__((may_alias)) g2c_fa_float;
+#define fStack_94 (*(g2c_fa_float *)(void *)&g2c_frame_5156b8[0x98-0x94])
+  typedef uint *__attribute__((may_alias)) g2c_fa_uint_p;
+#define puStack_90 (*(g2c_fa_uint_p *)(void *)&g2c_frame_5156b8[0x98-0x90])
+#define fStack_8c (*(g2c_fa_float *)(void *)&g2c_frame_5156b8[0x98-0x8c])
+#define fStack_88 (*(g2c_fa_float *)(void *)&g2c_frame_5156b8[0x98-0x88])
+#define fStack_84 (*(g2c_fa_float *)(void *)&g2c_frame_5156b8[0x98-0x84])
+#define fStack_80 (*(g2c_fa_float *)(void *)&g2c_frame_5156b8[0x98-0x80])
+#define fStack_7c (*(g2c_fa_float *)(void *)&g2c_frame_5156b8[0x98-0x7c])
+#define fStack_78 (*(g2c_fa_float *)(void *)&g2c_frame_5156b8[0x98-0x78])
+#define fStack_74 (*(g2c_fa_float *)(void *)&g2c_frame_5156b8[0x98-0x74])
+#define fStack_70 (*(g2c_fa_float *)(void *)&g2c_frame_5156b8[0x98-0x70])
   
   coords[3] = coords[5];
   coords[4] = coords[6];
@@ -773,11 +620,11 @@ uint g2c_nema_vg_path_cmd_5156b8(uint *path,uint cmd,float *coords)
   if (uVar10 == 1) {
     if (*(char *)((int)coords + 1) == '\x01') {
       cVar1 = '\0';
-      if (coords[1] != 0.0) {
+      if (g2c_float_to_bits(coords[1]) != 0u) {
         uVar7 = *(((int *)&audio_uart_nema_vg_context_cell));
         cVar1 = *(char *)(uVar7 + 0x7c);
       }
-      if (coords[1] != 0.0 && cVar1 != '\0') {
+      if (g2c_float_to_bits(coords[1]) != 0u && cVar1 != '\0') {
         uVar26 = CONCAT44((0x0u),(0x0u));
         if (*(char *)coords == '\0') {
           uVar26 = *(undefined8 *)(coords + 0xf);
@@ -796,10 +643,10 @@ uint g2c_nema_vg_path_cmd_5156b8(uint *path,uint cmd,float *coords)
           *puVar6 = 800;
           fVar9 = coords[3];
           puVar6[2] = 0x324;
-          puVar6[1] = fVar9;
+          puVar6[1] = g2c_float_to_bits(fVar9);
           fVar9 = coords[4];
           puVar6[4] = 0x330;
-          puVar6[3] = fVar9;
+          puVar6[3] = g2c_float_to_bits(fVar9);
           puVar6[6] = 0x334;
           puVar6[8] = 0x140;
           uVar3 = (0xff000100u);
@@ -819,18 +666,18 @@ uint g2c_nema_vg_path_cmd_5156b8(uint *path,uint cmd,float *coords)
     coords[2] = coords[1];
     fVar9 = coords[1];
     uVar7 = path[3];
-    fVar15 = *(float *)(uVar7 + (int)fVar9 * 4);
+    fVar15 = *(float *)(uVar7 + (int)g2c_float_to_bits(fVar9) * 4);
     if (bVar13) {
       coords[5] = fVar15;
-      coords[1] = (float)((int)fVar9 + 1);
-      coords[6] = *(float *)(uVar7 + ((int)fVar9 + 1) * 4);
+      coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar9) + 1)));
+      coords[6] = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar9) + 1) * 4);
     }
     else {
       coords[5] = coords[0xb] + fVar15;
-      coords[1] = (float)((int)fVar9 + 1);
-      coords[6] = coords[0xc] + *(float *)(uVar7 + ((int)fVar9 + 1) * 4);
+      coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar9) + 1)));
+      coords[6] = coords[0xc] + *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar9) + 1) * 4);
     }
-    coords[1] = (float)((int)fVar9 + 2);
+    coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar9) + 2)));
     coords[0xb] = coords[5];
     coords[0xc] = coords[6];
     coords[0xf] = coords[5];
@@ -839,8 +686,8 @@ uint g2c_nema_vg_path_cmd_5156b8(uint *path,uint cmd,float *coords)
   }
   if (cmd == 0 || cmd == 0x80) {
     if (*(char *)coords == '\x01') {
-      coords[5] = 0.0;
-      coords[6] = 0.0;
+      coords[5] = 0.0f;
+      coords[6] = 0.0f;
     }
     else {
       coords[5] = coords[0xf];
@@ -852,7 +699,7 @@ uint g2c_nema_vg_path_cmd_5156b8(uint *path,uint cmd,float *coords)
     *(undefined1 *)((int)coords + 2) = 0;
   }
   else {
-    if (coords[1] == 0.0) {
+    if (g2c_float_to_bits(coords[1]) == 0u) {
       *(undefined4 *)(*(((int *)&audio_uart_nema_vg_context_cell)) + 0x120) = 0xffffffff;
       *(undefined1 *)coords = 1;
     }
@@ -861,14 +708,14 @@ uint g2c_nema_vg_path_cmd_5156b8(uint *path,uint cmd,float *coords)
     if (uVar10 == 6) {
       fVar15 = coords[1];
       uVar7 = path[3];
-      fVar16 = *(float *)(uVar7 + (int)fVar15 * 4);
+      fVar16 = *(float *)(uVar7 + (int)g2c_float_to_bits(fVar15) * 4);
       coords[7] = fVar16;
-      fVar18 = *(float *)(uVar7 + ((int)fVar15 + 1) * 4);
+      fVar18 = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar15) + 1) * 4);
       coords[8] = fVar18;
-      fVar20 = *(float *)(uVar7 + ((int)fVar15 + 2) * 4);
+      fVar20 = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar15) + 2) * 4);
       coords[9] = fVar20;
-      fVar9 = *(float *)(uVar7 + ((int)fVar15 + 3) * 4);
-      coords[1] = (float)((int)fVar15 + 4);
+      fVar9 = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar15) + 3) * 4);
+      coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar15) + 4)));
       if (!bVar13) {
         coords[7] = fVar16 + coords[0xb];
         coords[8] = fVar18 + coords[0xc];
@@ -883,10 +730,10 @@ uint g2c_nema_vg_path_cmd_5156b8(uint *path,uint cmd,float *coords)
       if (uVar10 == 5) {
         fVar18 = coords[1];
         uVar7 = path[3];
-        fVar15 = *(float *)(uVar7 + (int)fVar18 * 4);
+        fVar15 = *(float *)(uVar7 + (int)g2c_float_to_bits(fVar18) * 4);
         coords[7] = fVar15;
-        fVar16 = *(float *)(uVar7 + ((int)fVar18 + 1) * 4);
-        coords[1] = (float)((int)fVar18 + 2);
+        fVar16 = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar18) + 1) * 4);
+        coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar18) + 2)));
         if (!bVar13) {
           fVar15 = fVar15 + coords[0xb];
           fVar16 = fVar16 + coords[0xc];
@@ -896,8 +743,8 @@ uint g2c_nema_vg_path_cmd_5156b8(uint *path,uint cmd,float *coords)
         if (uVar10 != 7) {
           if (uVar10 == 8) {
             if ((uVar7 == 5 || uVar7 == 7) || (uVar7 == 6 || uVar7 == 8)) {
-              fVar9 = coords[0xb] * 2.0 - coords[0xd];
-              fVar15 = coords[0xc] * 2.0 - coords[0xe];
+              fVar9 = coords[0xb] * 2.0f - coords[0xd];
+              fVar15 = coords[0xc] * 2.0f - coords[0xe];
             }
             else {
               fVar9 = coords[0xb];
@@ -907,10 +754,10 @@ uint g2c_nema_vg_path_cmd_5156b8(uint *path,uint cmd,float *coords)
             coords[8] = fVar15;
             fVar15 = coords[1];
             uVar7 = path[3];
-            fVar16 = *(float *)(uVar7 + (int)fVar15 * 4);
+            fVar16 = *(float *)(uVar7 + (int)g2c_float_to_bits(fVar15) * 4);
             coords[9] = fVar16;
-            fVar9 = *(float *)(uVar7 + ((int)fVar15 + 1) * 4);
-            coords[1] = (float)((int)fVar15 + 2);
+            fVar9 = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar15) + 1) * 4);
+            coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar15) + 2)));
             if (!bVar13) {
               fVar16 = fVar16 + coords[0xb];
               fVar9 = fVar9 + coords[0xc];
@@ -922,10 +769,10 @@ uint g2c_nema_vg_path_cmd_5156b8(uint *path,uint cmd,float *coords)
           else if ((cmd & 0xf) == 9) {
             fVar15 = coords[1];
             uVar7 = path[3];
-            coords[7] = *(float *)(uVar7 + (int)fVar15 * 4);
-            coords[8] = *(float *)(uVar7 + ((int)fVar15 + 1) * 4);
-            fVar16 = *(float *)(uVar7 + ((int)fVar15 + 2) * 4);
-            coords[1] = (float)((int)fVar15 + 3);
+            coords[7] = *(float *)(uVar7 + (int)g2c_float_to_bits(fVar15) * 4);
+            coords[8] = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar15) + 1) * 4);
+            fVar16 = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar15) + 2) * 4);
+            coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar15) + 3)));
             coords[9] = fVar16;
             fVar15 = audio_uart_float_two_input_angle_50969c
                                (*(float *)(*puVar2 + 0xf8),*(float *)(*puVar2 + 0xec));
@@ -937,8 +784,8 @@ uint g2c_nema_vg_path_cmd_5156b8(uint *path,uint cmd,float *coords)
           goto LAB_00515a4c;
         }
         if ((uVar7 == 5 || uVar7 == 7) || (uVar7 == 6 || uVar7 == 8)) {
-          fVar15 = coords[0xb] * 2.0 - coords[0xd];
-          fVar16 = coords[0xc] * 2.0 - coords[0xe];
+          fVar15 = coords[0xb] * 2.0f - coords[0xd];
+          fVar16 = coords[0xc] * 2.0f - coords[0xe];
         }
         else {
           fVar15 = coords[0xb];
@@ -956,12 +803,12 @@ LAB_00515a4c:
       coords[5] = coords[0xb];
       fVar15 = coords[1];
       if (bVar13) {
-        coords[6] = *(float *)(path[3] + (int)fVar15 * 4);
+        coords[6] = *(float *)(path[3] + (int)g2c_float_to_bits(fVar15) * 4);
       }
       else {
-        coords[6] = coords[0xc] + *(float *)(path[3] + (int)fVar15 * 4);
+        coords[6] = coords[0xc] + *(float *)(path[3] + (int)g2c_float_to_bits(fVar15) * 4);
       }
-      fVar15 = (float)((int)fVar15 + 1);
+      fVar15 = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar15) + 1)));
 LAB_00515a7c:
       coords[1] = fVar15;
     }
@@ -969,9 +816,9 @@ LAB_00515a7c:
       if (uVar10 != 3) {
         fVar9 = coords[1];
         uVar7 = path[3];
-        fVar15 = *(float *)(uVar7 + (int)fVar9 * 4);
+        fVar15 = *(float *)(uVar7 + (int)g2c_float_to_bits(fVar9) * 4);
         if (uVar10 == 10) {
-          coords[1] = (float)((int)fVar9 + 1);
+          coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar9) + 1)));
           fVar9 = (0.05000000447034836f);
           iVar8 = (int)fVar15 / 2;
           if (0 < iVar8) {
@@ -980,18 +827,18 @@ LAB_00515a7c:
             do {
               fVar15 = coords[1];
               uVar7 = puStack_90[3];
-              fVar16 = *(float *)(uVar7 + (int)fVar15 * 4);
+              fVar16 = *(float *)(uVar7 + (int)g2c_float_to_bits(fVar15) * 4);
               if (bVar13) {
                 coords[5] = fVar16;
-                coords[1] = (float)((int)fVar15 + 1);
-                coords[6] = *(float *)(uVar7 + ((int)fVar15 + 1) * 4);
+                coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar15) + 1)));
+                coords[6] = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar15) + 1) * 4);
               }
               else {
                 coords[5] = fVar16 + coords[0xb];
-                coords[1] = (float)((int)fVar15 + 1);
-                coords[6] = *(float *)(uVar7 + ((int)fVar15 + 1) * 4) + coords[0xc];
+                coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar15) + 1)));
+                coords[6] = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar15) + 1) * 4) + coords[0xc];
               }
-              coords[1] = (float)((int)fVar15 + 2);
+              coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar15) + 2)));
               coords[0xb] = coords[5];
               coords[0xc] = coords[6];
               *(undefined1 *)(coords + 0x11) = ((byte *)&(fStack_94))[0];
@@ -1017,11 +864,11 @@ LAB_00515a7c:
                       puVar6[2] = 0x324;
                       puVar6[4] = 0x330;
                       uVar11 = (0xff000100u);
-                      puVar6[1] = fVar20;
-                      puVar6[3] = fVar15;
-                      puVar6[5] = fVar16;
+                      puVar6[1] = g2c_float_to_bits(fVar20);
+                      puVar6[3] = g2c_float_to_bits(fVar15);
+                      puVar6[5] = g2c_float_to_bits(fVar16);
                       puVar6[6] = 0x334;
-                      puVar6[7] = fVar18;
+                      puVar6[7] = g2c_float_to_bits(fVar18);
                       puVar6[8] = uVar11;
                       puVar6[9] = uVar10 | 10;
                     }
@@ -1032,9 +879,9 @@ LAB_00515a7c:
                     fVar28 = fVar29 * fVar29 + fVar17 * fVar17;
                     if ((ABS(fVar28) < (1.0000000656873453e-05f))) {
                       *(float *)(uVar7 + 0x198) = fVar20;
-                      *(float *)(uVar7 + 0x19c) = fVar15 + *(float *)(uVar7 + 0x130) * -0.5;
+                      *(float *)(uVar7 + 0x19c) = fVar15 + *(float *)(uVar7 + 0x130) * -0.5f;
                       *(float *)(uVar7 + 0x1a0) = fVar20;
-                      *(float *)(uVar7 + 0x1a4) = fVar15 + *(float *)(uVar7 + 0x130) * 0.5;
+                      *(float *)(uVar7 + 0x1a4) = fVar15 + *(float *)(uVar7 + 0x130) * 0.5f;
                       *(undefined4 *)(uVar7 + 400) = *(undefined4 *)(uVar7 + 0x198);
                       *(undefined4 *)(uVar7 + 0x194) = *(undefined4 *)(uVar7 + 0x19c);
                       uVar7 = *puVar2;
@@ -1043,13 +890,13 @@ LAB_00515a7c:
                     }
                     else {
                       fVar28 = audio_uart_float_sqrt_4397a8(fVar28);
-                      fVar29 = fVar29 * (1.0 / fVar28);
-                      fVar17 = fVar17 * (1.0 / fVar28);
-                      fVar19 = *(float *)(uVar7 + 0x130) * 0.5 * fVar17;
+                      fVar29 = fVar29 * (1.0f / fVar28);
+                      fVar17 = fVar17 * (1.0f / fVar28);
+                      fVar19 = *(float *)(uVar7 + 0x130) * 0.5f * fVar17;
                       fVar23 = fVar20 - fVar19;
-                      fVar22 = *(float *)(uVar7 + 0x134) * 0.5 * fVar29;
+                      fVar22 = *(float *)(uVar7 + 0x134) * 0.5f * fVar29;
                       fVar24 = fVar22 + fVar15;
-                      uVar26 = CONCAT44(fVar24,fVar23);
+                      uVar26 = CONCAT44(g2c_float_to_bits(fVar24),g2c_float_to_bits(fVar23));
                       *(float *)(uVar7 + 400) = fVar23;
                       *(float *)(uVar7 + 0x194) = fVar24;
                       uVar7 = *puVar2;
@@ -1065,7 +912,7 @@ LAB_00515a7c:
                       uVar7 = *puVar2;
                       fVar19 = fVar19 + fVar20;
                       fVar15 = fVar15 - fVar22;
-                      uVar27 = CONCAT44(fVar15,fVar19);
+                      uVar27 = CONCAT44(g2c_float_to_bits(fVar15),g2c_float_to_bits(fVar19));
                       *(float *)(uVar7 + 0x1a8) = fVar19;
                       *(float *)(uVar7 + 0x1ac) = fVar15;
                       uVar7 = *puVar2;
@@ -1078,7 +925,7 @@ LAB_00515a7c:
                         bVar14 = -1 < (int)((uint)*(byte *)(uVar7 + 0x7d) << 0x1b);
                         uVar7 = audio_uart_nema_stencil_save_52266e((uint)bVar14,0,(uint)bVar14,0);
                         uVar10 = *puVar2;
-                        if (0.0 < *(float *)(uVar10 + 0x184)) {
+                        if (0.0f < *(float *)(uVar10 + 0x184)) {
                           fStack_74 = *(float *)(uVar10 + 0x164);
                           fStack_70 = *(float *)(uVar10 + 0x168);
                           fStack_7c = *(float *)(uVar10 + 0x16c);
@@ -1119,7 +966,7 @@ LAB_00516006:
                         }
 LAB_00515e32:
                         uVar10 = *puVar2;
-                        if ((0.0 < *(float *)(uVar10 + 0x158)) && (*(int *)(uVar10 + 0x128) == 1)) {
+                        if ((0.0f < *(float *)(uVar10 + 0x158)) && (*(int *)(uVar10 + 0x128) == 1)) {
                           if ((int)((uint)(ABS(*(float *)(uVar10 + 0x15c) * fVar17 -
                                                *(float *)(uVar10 + 0x160) * fVar29) < fVar9) << 0x1f
                                    ) < 0) {
@@ -1129,12 +976,12 @@ LAB_00515e32:
                           else {
                             fStack_74 = *(float *)(uVar10 + 0x140);
                             fStack_70 = *(float *)(uVar10 + 0x144);
-                            fStack_7c = (float)uVar26;
-                            fStack_78 = (float)((ulonglong)uVar26 >> 0x20);
+                            fStack_7c = (float)g2c_bits_to_float((uint)(uVar26));
+                            fStack_78 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar26 >> 0x20)));
                             fStack_84 = *(float *)(uVar10 + 0x148);
                             fStack_80 = *(float *)(uVar10 + 0x14c);
-                            fStack_8c = (float)uVar27;
-                            fStack_88 = (float)((ulonglong)uVar27 >> 0x20);
+                            fStack_8c = (float)g2c_bits_to_float((uint)(uVar27));
+                            fStack_88 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar27 >> 0x20)));
                             uVar10 = g2c_nema_vg_stroke_join_5179d0
                                                (&fStack_74,(uint *)&fStack_7c,&fStack_84,
                                                 (uint *)&fStack_8c,0);
@@ -1145,7 +992,7 @@ LAB_00515e32:
                         *(int *)(uVar10 + 0x128) = *(int *)(uVar10 + 0x128) + 1;
                         uVar12 = (undefined4)((ulonglong)uVar26 >> 0x20);
                         uVar11 = (undefined4)((ulonglong)uVar27 >> 0x20);
-                        if (*(float *)(uVar10 + 0x158) == 0.0) {
+                        if (*(float *)(uVar10 + 0x158) == 0.0f) {
                           *(int *)(uVar10 + 0x138) = (int)uVar26;
                           *(undefined4 *)(uVar10 + 0x13c) = uVar12;
                           uVar10 = *puVar2;
@@ -1200,16 +1047,16 @@ LAB_00515e32:
                   *puVar6 = 800;
                   fVar15 = coords[3];
                   puVar6[2] = 0x324;
-                  puVar6[1] = fVar15;
+                  puVar6[1] = g2c_float_to_bits(fVar15);
                   fVar15 = coords[4];
                   puVar6[4] = 0x330;
-                  puVar6[3] = fVar15;
+                  puVar6[3] = g2c_float_to_bits(fVar15);
                   fVar15 = coords[5];
                   puVar6[6] = 0x334;
-                  puVar6[5] = fVar15;
+                  puVar6[5] = g2c_float_to_bits(fVar15);
                   fVar15 = coords[6];
                   puVar6[8] = 0x140;
-                  puVar6[7] = fVar15;
+                  puVar6[7] = g2c_float_to_bits(fVar15);
                   puVar6[9] = uVar12;
                   puVar6[10] = 0x144;
                   puVar6[0xb] = uVar11;
@@ -1223,7 +1070,7 @@ LAB_00516018:
               iVar8 = iVar8 + -1;
             } while (iVar8 != 0);
           }
-          if ((coords[0xb] - coords[0xf] == 0.0) && (coords[0xc] - coords[0x10] == 0.0)) {
+          if ((coords[0xb] - coords[0xf] == 0.0f) && (coords[0xc] - coords[0x10] == 0.0f)) {
 LAB_00516558:
             *(undefined1 *)((int)coords + 1) = 0;
             return 0;
@@ -1247,16 +1094,16 @@ LAB_00516558:
               *puVar6 = 800;
               fVar9 = coords[3];
               puVar6[2] = 0x324;
-              puVar6[1] = fVar9;
+              puVar6[1] = g2c_float_to_bits(fVar9);
               fVar9 = coords[4];
               puVar6[4] = 0x330;
-              puVar6[3] = fVar9;
+              puVar6[3] = g2c_float_to_bits(fVar9);
               fVar9 = coords[5];
               puVar6[6] = 0x334;
-              puVar6[5] = fVar9;
+              puVar6[5] = g2c_float_to_bits(fVar9);
               fVar9 = coords[6];
               puVar6[8] = 0x140;
-              puVar6[7] = fVar9;
+              puVar6[7] = g2c_float_to_bits(fVar9);
               uVar3 = (0xff000100u);
               puVar6[9] = uVar11;
               puVar6[10] = 0x144;
@@ -1291,11 +1138,11 @@ LAB_00516558:
               puVar6[2] = 0x324;
               puVar6[4] = 0x330;
               uVar11 = (0xff000100u);
-              puVar6[1] = fVar16;
-              puVar6[3] = fVar18;
-              puVar6[5] = fVar9;
+              puVar6[1] = g2c_float_to_bits(fVar16);
+              puVar6[3] = g2c_float_to_bits(fVar18);
+              puVar6[5] = g2c_float_to_bits(fVar9);
               puVar6[6] = 0x334;
-              puVar6[7] = fVar15;
+              puVar6[7] = g2c_float_to_bits(fVar15);
               puVar6[8] = uVar11;
               puVar6[9] = uVar10 | 10;
               *(undefined1 *)((int)coords + 1) = 0;
@@ -1308,9 +1155,9 @@ LAB_00516558:
           fVar20 = fVar28 * fVar28 + fVar29 * fVar29;
           if ((ABS(fVar20) < (1.0000000656873453e-05f))) {
             *(float *)(uVar7 + 0x198) = fVar16;
-            *(float *)(uVar7 + 0x19c) = fVar18 + *(float *)(uVar7 + 0x130) * -0.5;
+            *(float *)(uVar7 + 0x19c) = fVar18 + *(float *)(uVar7 + 0x130) * -0.5f;
             *(float *)(uVar7 + 0x1a0) = fVar16;
-            *(float *)(uVar7 + 0x1a4) = fVar18 + *(float *)(uVar7 + 0x130) * 0.5;
+            *(float *)(uVar7 + 0x1a4) = fVar18 + *(float *)(uVar7 + 0x130) * 0.5f;
             *(undefined4 *)(uVar7 + 400) = *(undefined4 *)(uVar7 + 0x198);
             *(undefined4 *)(uVar7 + 0x194) = *(undefined4 *)(uVar7 + 0x19c);
             uVar7 = *puVar2;
@@ -1320,13 +1167,13 @@ LAB_00516558:
             return 0;
           }
           fVar20 = audio_uart_float_sqrt_4397a8(fVar20);
-          fVar28 = fVar28 * (1.0 / fVar20);
-          fVar29 = fVar29 * (1.0 / fVar20);
-          fVar17 = *(float *)(uVar7 + 0x130) * 0.5 * fVar29;
+          fVar28 = fVar28 * (1.0f / fVar20);
+          fVar29 = fVar29 * (1.0f / fVar20);
+          fVar17 = *(float *)(uVar7 + 0x130) * 0.5f * fVar29;
           fVar22 = fVar16 - fVar17;
-          fVar19 = *(float *)(uVar7 + 0x134) * 0.5 * fVar28;
+          fVar19 = *(float *)(uVar7 + 0x134) * 0.5f * fVar28;
           fVar23 = fVar19 + fVar18;
-          uVar26 = CONCAT44(fVar23,fVar22);
+          uVar26 = CONCAT44(g2c_float_to_bits(fVar23),g2c_float_to_bits(fVar22));
           *(float *)(uVar7 + 400) = fVar22;
           *(float *)(uVar7 + 0x194) = fVar23;
           uVar7 = *puVar2;
@@ -1342,7 +1189,7 @@ LAB_00516558:
           uVar7 = *puVar2;
           fVar17 = fVar17 + fVar16;
           h = (uint *)g2c_float_as_ptr((fVar18)-(fVar19));
-          uVar27 = CONCAT44(h,fVar17);
+          uVar27 = CONCAT44(h,g2c_float_to_bits(fVar17));
           *(float *)(uVar7 + 0x1a8) = fVar17;
           *(uint **)(uVar7 + 0x1ac) = h;
           uVar7 = *puVar2;
@@ -1354,7 +1201,7 @@ LAB_00516558:
             bVar13 = -1 < (int)((uint)*(byte *)(uVar7 + 0x7d) << 0x1b);
             uVar7 = audio_uart_nema_stencil_save_52266e((uint)bVar13,0,(uint)bVar13,0);
             uVar10 = *puVar2;
-            if (0.0 < *(float *)(uVar10 + 0x184)) {
+            if (0.0f < *(float *)(uVar10 + 0x184)) {
               fStack_7c = *(float *)(uVar10 + 0x164);
               fStack_78 = *(float *)(uVar10 + 0x168);
               fStack_84 = *(float *)(uVar10 + 0x16c);
@@ -1387,7 +1234,7 @@ LAB_00516558:
               }
             }
             uVar10 = *puVar2;
-            if ((0.0 < *(float *)(uVar10 + 0x158)) && (*(int *)(uVar10 + 0x128) == 1)) {
+            if ((0.0f < *(float *)(uVar10 + 0x158)) && (*(int *)(uVar10 + 0x128) == 1)) {
               if ((ABS(*(float *)(uVar10 + 0x15c) * fVar29 -
                                    *(float *)(uVar10 + 0x160) * fVar28) < (0.05000000447034836f))) {
                 uVar26 = *(undefined8 *)(uVar10 + 0x140);
@@ -1396,11 +1243,11 @@ LAB_00516558:
               else {
                 fStack_7c = *(float *)(uVar10 + 0x140);
                 fStack_78 = *(float *)(uVar10 + 0x144);
-                fStack_84 = (float)uVar26;
-                fStack_80 = (float)((ulonglong)uVar26 >> 0x20);
+                fStack_84 = (float)g2c_bits_to_float((uint)(uVar26));
+                fStack_80 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar26 >> 0x20)));
                 fStack_8c = *(float *)(uVar10 + 0x148);
                 fStack_88 = *(float *)(uVar10 + 0x14c);
-                fStack_94 = (float)uVar27;
+                fStack_94 = (float)g2c_bits_to_float((uint)(uVar27));
                 puStack_90 = (uint *)((ulonglong)uVar27 >> 0x20);
                 uVar10 = g2c_nema_vg_stroke_join_5179d0
                                    (&fStack_7c,(uint *)&fStack_84,&fStack_8c,(uint *)&fStack_94,0);
@@ -1419,7 +1266,7 @@ LAB_005164da:
             *(int *)(uVar10 + 0x128) = *(int *)(uVar10 + 0x128) + 1;
             uVar12 = (undefined4)((ulonglong)uVar26 >> 0x20);
             uVar11 = (undefined4)((ulonglong)uVar27 >> 0x20);
-            if (*(float *)(uVar10 + 0x158) == 0.0) {
+            if (*(float *)(uVar10 + 0x158) == 0.0f) {
               *(int *)(uVar10 + 0x138) = (int)uVar26;
               *(undefined4 *)(uVar10 + 0x13c) = uVar12;
               uVar10 = *puVar2;
@@ -1459,7 +1306,7 @@ LAB_005164da:
           return 0;
         }
         if (uVar10 == 0xb) {
-          coords[1] = (float)((int)fVar9 + 1);
+          coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar9) + 1)));
           fVar9 = (0.05000000447034836f);
           iVar8 = (int)fVar15 / 2;
           if (0 < iVar8) {
@@ -1468,18 +1315,18 @@ LAB_005164da:
             do {
               fVar15 = coords[1];
               uVar7 = puStack_90[3];
-              fVar16 = *(float *)(uVar7 + (int)fVar15 * 4);
+              fVar16 = *(float *)(uVar7 + (int)g2c_float_to_bits(fVar15) * 4);
               if (bVar13) {
                 coords[5] = fVar16;
-                coords[1] = (float)((int)fVar15 + 1);
-                coords[6] = *(float *)(uVar7 + ((int)fVar15 + 1) * 4);
+                coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar15) + 1)));
+                coords[6] = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar15) + 1) * 4);
               }
               else {
                 coords[5] = fVar16 + coords[0xb];
-                coords[1] = (float)((int)fVar15 + 1);
-                coords[6] = *(float *)(uVar7 + ((int)fVar15 + 1) * 4) + coords[0xc];
+                coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar15) + 1)));
+                coords[6] = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar15) + 1) * 4) + coords[0xc];
               }
-              coords[1] = (float)((int)fVar15 + 2);
+              coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar15) + 2)));
               coords[0xb] = coords[5];
               coords[0xc] = coords[6];
               *(undefined1 *)(coords + 0x11) = ((byte *)&(fStack_94))[0];
@@ -1505,11 +1352,11 @@ LAB_005164da:
                       puVar6[2] = 0x324;
                       puVar6[4] = 0x330;
                       uVar11 = (0xff000100u);
-                      puVar6[1] = fVar20;
-                      puVar6[3] = fVar15;
-                      puVar6[5] = fVar16;
+                      puVar6[1] = g2c_float_to_bits(fVar20);
+                      puVar6[3] = g2c_float_to_bits(fVar15);
+                      puVar6[5] = g2c_float_to_bits(fVar16);
                       puVar6[6] = 0x334;
-                      puVar6[7] = fVar18;
+                      puVar6[7] = g2c_float_to_bits(fVar18);
                       puVar6[8] = uVar11;
                       puVar6[9] = uVar10 | 10;
                     }
@@ -1520,9 +1367,9 @@ LAB_005164da:
                     fVar28 = fVar29 * fVar29 + fVar17 * fVar17;
                     if ((ABS(fVar28) < (1.0000000656873453e-05f))) {
                       *(float *)(uVar7 + 0x198) = fVar20;
-                      *(float *)(uVar7 + 0x19c) = fVar15 + *(float *)(uVar7 + 0x130) * -0.5;
+                      *(float *)(uVar7 + 0x19c) = fVar15 + *(float *)(uVar7 + 0x130) * -0.5f;
                       *(float *)(uVar7 + 0x1a0) = fVar20;
-                      *(float *)(uVar7 + 0x1a4) = fVar15 + *(float *)(uVar7 + 0x130) * 0.5;
+                      *(float *)(uVar7 + 0x1a4) = fVar15 + *(float *)(uVar7 + 0x130) * 0.5f;
                       *(undefined4 *)(uVar7 + 400) = *(undefined4 *)(uVar7 + 0x198);
                       *(undefined4 *)(uVar7 + 0x194) = *(undefined4 *)(uVar7 + 0x19c);
                       uVar7 = *puVar2;
@@ -1531,13 +1378,13 @@ LAB_005164da:
                     }
                     else {
                       fVar28 = audio_uart_float_sqrt_4397a8(fVar28);
-                      fVar29 = fVar29 * (1.0 / fVar28);
-                      fVar17 = fVar17 * (1.0 / fVar28);
-                      fVar19 = *(float *)(uVar7 + 0x130) * 0.5 * fVar17;
+                      fVar29 = fVar29 * (1.0f / fVar28);
+                      fVar17 = fVar17 * (1.0f / fVar28);
+                      fVar19 = *(float *)(uVar7 + 0x130) * 0.5f * fVar17;
                       fVar23 = fVar20 - fVar19;
-                      fVar22 = *(float *)(uVar7 + 0x134) * 0.5 * fVar29;
+                      fVar22 = *(float *)(uVar7 + 0x134) * 0.5f * fVar29;
                       fVar24 = fVar22 + fVar15;
-                      uVar26 = CONCAT44(fVar24,fVar23);
+                      uVar26 = CONCAT44(g2c_float_to_bits(fVar24),g2c_float_to_bits(fVar23));
                       *(float *)(uVar7 + 400) = fVar23;
                       *(float *)(uVar7 + 0x194) = fVar24;
                       uVar7 = *puVar2;
@@ -1553,7 +1400,7 @@ LAB_005164da:
                       uVar7 = *puVar2;
                       fVar19 = fVar19 + fVar20;
                       fVar15 = fVar15 - fVar22;
-                      uVar27 = CONCAT44(fVar15,fVar19);
+                      uVar27 = CONCAT44(g2c_float_to_bits(fVar15),g2c_float_to_bits(fVar19));
                       *(float *)(uVar7 + 0x1a8) = fVar19;
                       *(float *)(uVar7 + 0x1ac) = fVar15;
                       uVar7 = *puVar2;
@@ -1566,7 +1413,7 @@ LAB_005164da:
                         bVar14 = -1 < (int)((uint)*(byte *)(uVar7 + 0x7d) << 0x1b);
                         uVar7 = audio_uart_nema_stencil_save_52266e((uint)bVar14,0,(uint)bVar14,0);
                         uVar10 = *puVar2;
-                        if (0.0 < *(float *)(uVar10 + 0x184)) {
+                        if (0.0f < *(float *)(uVar10 + 0x184)) {
                           fStack_74 = *(float *)(uVar10 + 0x164);
                           fStack_70 = *(float *)(uVar10 + 0x168);
                           fStack_7c = *(float *)(uVar10 + 0x16c);
@@ -1607,7 +1454,7 @@ LAB_00516a6a:
                         }
 LAB_00516896:
                         uVar10 = *puVar2;
-                        if ((0.0 < *(float *)(uVar10 + 0x158)) && (*(int *)(uVar10 + 0x128) == 1)) {
+                        if ((0.0f < *(float *)(uVar10 + 0x158)) && (*(int *)(uVar10 + 0x128) == 1)) {
                           if ((int)((uint)(ABS(*(float *)(uVar10 + 0x15c) * fVar17 -
                                                *(float *)(uVar10 + 0x160) * fVar29) < fVar9) << 0x1f
                                    ) < 0) {
@@ -1617,12 +1464,12 @@ LAB_00516896:
                           else {
                             fStack_74 = *(float *)(uVar10 + 0x140);
                             fStack_70 = *(float *)(uVar10 + 0x144);
-                            fStack_7c = (float)uVar26;
-                            fStack_78 = (float)((ulonglong)uVar26 >> 0x20);
+                            fStack_7c = (float)g2c_bits_to_float((uint)(uVar26));
+                            fStack_78 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar26 >> 0x20)));
                             fStack_84 = *(float *)(uVar10 + 0x148);
                             fStack_80 = *(float *)(uVar10 + 0x14c);
-                            fStack_8c = (float)uVar27;
-                            fStack_88 = (float)((ulonglong)uVar27 >> 0x20);
+                            fStack_8c = (float)g2c_bits_to_float((uint)(uVar27));
+                            fStack_88 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar27 >> 0x20)));
                             uVar10 = g2c_nema_vg_stroke_join_5179d0
                                                (&fStack_74,(uint *)&fStack_7c,&fStack_84,
                                                 (uint *)&fStack_8c,0);
@@ -1633,7 +1480,7 @@ LAB_00516896:
                         *(int *)(uVar10 + 0x128) = *(int *)(uVar10 + 0x128) + 1;
                         uVar12 = (undefined4)((ulonglong)uVar26 >> 0x20);
                         uVar11 = (undefined4)((ulonglong)uVar27 >> 0x20);
-                        if (*(float *)(uVar10 + 0x158) == 0.0) {
+                        if (*(float *)(uVar10 + 0x158) == 0.0f) {
                           *(int *)(uVar10 + 0x138) = (int)uVar26;
                           *(undefined4 *)(uVar10 + 0x13c) = uVar12;
                           uVar10 = *puVar2;
@@ -1688,16 +1535,16 @@ LAB_00516896:
                   *puVar6 = 800;
                   fVar15 = coords[3];
                   puVar6[2] = 0x324;
-                  puVar6[1] = fVar15;
+                  puVar6[1] = g2c_float_to_bits(fVar15);
                   fVar15 = coords[4];
                   puVar6[4] = 0x330;
-                  puVar6[3] = fVar15;
+                  puVar6[3] = g2c_float_to_bits(fVar15);
                   fVar15 = coords[5];
                   puVar6[6] = 0x334;
-                  puVar6[5] = fVar15;
+                  puVar6[5] = g2c_float_to_bits(fVar15);
                   fVar15 = coords[6];
                   puVar6[8] = 0x140;
-                  puVar6[7] = fVar15;
+                  puVar6[7] = g2c_float_to_bits(fVar15);
                   puVar6[9] = uVar12;
                   puVar6[10] = 0x144;
                   puVar6[0xb] = uVar11;
@@ -1711,8 +1558,8 @@ LAB_00516a7c:
               iVar8 = iVar8 + -1;
             } while (iVar8 != 0);
           }
-          if (((*(char *)(*puVar2 + 0x7c) == '\0') || (coords[0xb] - coords[0xf] != 0.0)) ||
-             (coords[0xc] - coords[0x10] != 0.0)) {
+          if (((*(char *)(*puVar2 + 0x7c) == '\0') || (coords[0xb] - coords[0xf] != 0.0f)) ||
+             (coords[0xc] - coords[0x10] != 0.0f)) {
             uVar5 = 1;
           }
           else {
@@ -1723,28 +1570,28 @@ LAB_00516a7c:
         }
         if (bVar13) {
           coords[5] = fVar15;
-          coords[1] = (float)((int)fVar9 + 1);
-          fVar15 = (float)((int)fVar9 + 2);
-          coords[6] = *(float *)(uVar7 + ((int)fVar9 + 1) * 4);
+          coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar9) + 1)));
+          fVar15 = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar9) + 2)));
+          coords[6] = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar9) + 1) * 4);
         }
         else {
           coords[5] = fVar15 + coords[0xb];
-          coords[1] = (float)((int)fVar9 + 1);
-          coords[6] = *(float *)(uVar7 + ((int)fVar9 + 1) * 4) + coords[0xc];
-          fVar15 = (float)((int)fVar9 + 2);
+          coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar9) + 1)));
+          coords[6] = *(float *)(uVar7 + ((int)g2c_float_to_bits(fVar9) + 1) * 4) + coords[0xc];
+          fVar15 = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(fVar9) + 2)));
         }
         goto LAB_00515a7c;
       }
-      fVar9 = *(float *)(path[3] + (int)coords[1] * 4);
+      fVar9 = *(float *)(path[3] + (int)g2c_float_to_bits(coords[1]) * 4);
       if (!bVar13) {
         fVar9 = coords[0xb] + fVar9;
       }
       coords[5] = fVar9;
-      coords[1] = (float)((int)coords[1] + 1);
+      coords[1] = (float)g2c_bits_to_float((uint)(((int)g2c_float_to_bits(coords[1]) + 1)));
       coords[6] = coords[0xc];
     }
-    if (((*(char *)(*puVar2 + 0x7c) == '\0') || (coords[5] - coords[0xf] != 0.0)) ||
-       (coords[6] - coords[0x10] != 0.0)) {
+    if (((*(char *)(*puVar2 + 0x7c) == '\0') || (coords[5] - coords[0xf] != 0.0f)) ||
+       (coords[6] - coords[0x10] != 0.0f)) {
       uVar4 = 1;
     }
     else {
@@ -1758,6 +1605,17 @@ LAB_00516b1a:
   *(undefined1 *)(coords + 0x11) = uVar5;
   return 0;
 }
+#undef fStack_94
+#undef puStack_90
+#undef fStack_8c
+#undef fStack_88
+#undef fStack_84
+#undef fStack_80
+#undef fStack_7c
+#undef fStack_78
+#undef fStack_74
+#undef fStack_70
+
 
   
 
@@ -1782,14 +1640,15 @@ uint g2c_nema_vg_emit_verts_516b34(float a,float b,float c,float d,float e,float
   puVar2[0xc] = 0x350;
   puVar2[0xe] = 0x354;
   uVar1 = (0xff000100u);
-  puVar2[1] = a;
-  puVar2[3] = b;
-  puVar2[5] = c;
-  puVar2[7] = d;
-  puVar2[9] = e;
-  puVar2[0xb] = f;
-  puVar2[0xd] = g;
-  puVar2[0xf] = h;
+  /* Stock 0x516b34 stores the float registers s16..s23 raw (vstr), not converted integers. */
+  puVar2[1] = g2c_float_to_bits(a);
+  puVar2[3] = g2c_float_to_bits(b);
+  puVar2[5] = g2c_float_to_bits(c);
+  puVar2[7] = g2c_float_to_bits(d);
+  puVar2[9] = g2c_float_to_bits(e);
+  puVar2[0xb] = g2c_float_to_bits(f);
+  puVar2[0xd] = g2c_float_to_bits(g);
+  puVar2[0xf] = g2c_float_to_bits(h);
   puVar2[0x10] = uVar1;
   puVar2[0x11] = *(uint *)(*(((int *)audio_uart_nema_context_cell)) + 0x18) | 5;
   return 0;
@@ -1832,11 +1691,12 @@ uint g2c_nema_vg_emit_tri_516bde(float a,float b,float c,float d,int e,int f)
   puVar2[2] = 0x324;
   puVar2[4] = 0x330;
   uVar1 = (0xff000100u);
-  puVar2[1] = a;
-  puVar2[3] = b;
-  puVar2[5] = c;
+  /* Stock 0x516bde stores the float args raw (vstr), not converted integers. */
+  puVar2[1] = g2c_float_to_bits(a);
+  puVar2[3] = g2c_float_to_bits(b);
+  puVar2[5] = g2c_float_to_bits(c);
   puVar2[6] = 0x334;
-  puVar2[7] = d;
+  puVar2[7] = g2c_float_to_bits(d);
   puVar2[8] = uVar1;
   puVar2[9] = uVar3 | uVar4;
   return 0;
@@ -1999,8 +1859,8 @@ uint g2c_nema_vg_tess_fill_516e0c(uint *a)
   
   piVar2 = (((int *)&audio_uart_nema_vg_context_cell));
   iVar3 = *(((int *)&audio_uart_nema_vg_context_cell));
-  iVar13 = (int)(((float)a[0x10] + (float)a[0x12]) * 0.5);
-  iVar12 = (int)(((float)a[0x11] + (float)a[0x13]) * 0.5);
+  iVar13 = (int)(((float)g2c_bits_to_float((uint)(a[0x10])) + (float)g2c_bits_to_float((uint)(a[0x12]))) * 0.5f);
+  iVar12 = (int)(((float)g2c_bits_to_float((uint)(a[0x11])) + (float)g2c_bits_to_float((uint)(a[0x13]))) * 0.5f);
   iVar7 = iVar13 << 0x10;
   iVar6 = iVar12 << 0x10;
   *(int *)(iVar3 + 0x2c8) = iVar13;
@@ -2239,22 +2099,28 @@ uint g2c_nema_vg_tess_stroke_5171f8(uint *a)
   undefined4 uVar20;
   float fVar21;
   float fVar22;
-  float fStack_d4;
-  float fStack_d0;
-  float fStack_cc;
-  float fStack_c8;
-  float fStack_c4;
-  float fStack_c0;
-  float fStack_bc;
-  float fStack_b8;
-  undefined1 auStack_b4 [2];
-  char cStack_b2;
-  float fStack_a8;
-  float fStack_a4;
-  float fStack_a0;
-  float fStack_9c;
-  float fStack_98;
-  float fStack_94;
+  /* Stock frame of 0x5171f8 as one block: locals keep the entry-SP offsets Ghidra named them by
+   * (X_Stack_NN at g2c_frame_5171f8[0xd8-0xNN]) so &local passed to callees spans its stock neighbours. */
+  unsigned char g2c_frame_5171f8[0xd8] __attribute__((aligned(8)));
+  typedef float __attribute__((may_alias)) g2c_fa_float;
+#define fStack_d4 (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0xd4])
+#define fStack_d0 (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0xd0])
+#define fStack_cc (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0xcc])
+#define fStack_c8 (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0xc8])
+#define fStack_c4 (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0xc4])
+#define fStack_c0 (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0xc0])
+#define fStack_bc (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0xbc])
+#define fStack_b8 (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0xb8])
+  typedef undefined1 __attribute__((may_alias)) g2c_fa_undefined1;
+#define auStack_b4 (((g2c_fa_undefined1 *)(void *)&g2c_frame_5171f8[0xd8-0xb4]))
+  typedef char __attribute__((may_alias)) g2c_fa_char;
+#define cStack_b2 (*(g2c_fa_char *)(void *)&g2c_frame_5171f8[0xd8-0xb2])
+#define fStack_a8 (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0xa8])
+#define fStack_a4 (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0xa4])
+#define fStack_a0 (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0xa0])
+#define fStack_9c (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0x9c])
+#define fStack_98 (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0x98])
+#define fStack_94 (*(g2c_fa_float *)(void *)&g2c_frame_5171f8[0xd8-0x94])
   
   audio_uart_lv_memzero_48949c((uint)auStack_b4,0x48);
   piVar2 = (((int *)&audio_uart_nema_vg_context_cell));
@@ -2315,13 +2181,13 @@ LAB_0051726c:
         puVar6[6] = 0x334;
         puVar6[8] = 0x340;
         uVar18 = (0xff000100u);
-        puVar6[1] = fVar3;
-        puVar6[3] = fVar13;
-        puVar6[5] = fVar11;
-        puVar6[7] = fVar21;
-        puVar6[9] = fVar15;
+        puVar6[1] = g2c_float_to_bits(fVar3);
+        puVar6[3] = g2c_float_to_bits(fVar13);
+        puVar6[5] = g2c_float_to_bits(fVar11);
+        puVar6[7] = g2c_float_to_bits(fVar21);
+        puVar6[9] = g2c_float_to_bits(fVar15);
         puVar6[10] = 0x344;
-        puVar6[0xb] = fVar16;
+        puVar6[0xb] = g2c_float_to_bits(fVar16);
         puVar6[0xc] = uVar18;
         puVar6[0xd] = uVar4 | uVar7;
       }
@@ -2340,9 +2206,9 @@ LAB_0051726c:
             fVar11 = fVar21 * fVar21 + fVar22 * fVar22;
             if ((ABS(fVar11) < (1.0000000656873453e-05f))) {
               *(float *)(iVar5 + 0x198) = fStack_a8;
-              *(float *)(iVar5 + 0x19c) = fStack_a4 + *(float *)(iVar5 + 0x130) * -0.5;
+              *(float *)(iVar5 + 0x19c) = fStack_a4 + *(float *)(iVar5 + 0x130) * -0.5f;
               *(float *)(iVar5 + 0x1a0) = fStack_a8;
-              *(float *)(iVar5 + 0x1a4) = fStack_a4 + *(float *)(iVar5 + 0x130) * 0.5;
+              *(float *)(iVar5 + 0x1a4) = fStack_a4 + *(float *)(iVar5 + 0x130) * 0.5f;
               *(undefined4 *)(iVar5 + 400) = *(undefined4 *)(iVar5 + 0x198);
               *(undefined4 *)(iVar5 + 0x194) = *(undefined4 *)(iVar5 + 0x19c);
               iVar5 = *piVar2;
@@ -2351,13 +2217,13 @@ LAB_0051726c:
               goto LAB_0051726c;
             }
             fVar11 = audio_uart_float_sqrt_4397a8(fVar11);
-            fVar21 = fVar21 * (1.0 / fVar11);
-            fVar22 = fVar22 * (1.0 / fVar11);
-            fVar12 = *(float *)(iVar5 + 0x130) * 0.5 * fVar22;
+            fVar21 = fVar21 * (1.0f / fVar11);
+            fVar22 = fVar22 * (1.0f / fVar11);
+            fVar12 = *(float *)(iVar5 + 0x130) * 0.5f * fVar22;
             a_00 = fVar3 - fVar12;
-            fVar14 = *(float *)(iVar5 + 0x134) * 0.5 * fVar21;
+            fVar14 = *(float *)(iVar5 + 0x134) * 0.5f * fVar21;
             b = fVar14 + fVar13;
-            uVar19 = CONCAT44(b,a_00);
+            uVar19 = CONCAT44(g2c_float_to_bits(b),g2c_float_to_bits(a_00));
             *(float *)(iVar5 + 400) = a_00;
             *(float *)(iVar5 + 0x194) = b;
             iVar5 = *piVar2;
@@ -2373,7 +2239,7 @@ LAB_0051726c:
             iVar5 = *piVar2;
             fVar12 = fVar12 + fVar3;
             fVar13 = fVar13 - fVar14;
-            uVar17 = CONCAT44(fVar13,fVar12);
+            uVar17 = CONCAT44(g2c_float_to_bits(fVar13),g2c_float_to_bits(fVar12));
             *(float *)(iVar5 + 0x1a8) = fVar12;
             *(float *)(iVar5 + 0x1ac) = fVar13;
             iVar5 = *piVar2;
@@ -2385,7 +2251,7 @@ LAB_0051726c:
               bVar10 = -1 < (int)((uint)*(byte *)(iVar5 + 0x7d) << 0x1b);
               uVar4 = audio_uart_nema_stencil_save_52266e((uint)bVar10,0,(uint)bVar10,0);
               iVar5 = *piVar2;
-              if (0.0 < *(float *)(iVar5 + 0x184)) {
+              if (0.0f < *(float *)(iVar5 + 0x184)) {
                 fStack_bc = *(float *)(iVar5 + 0x164);
                 fStack_b8 = *(float *)(iVar5 + 0x168);
                 fStack_c4 = *(float *)(iVar5 + 0x16c);
@@ -2424,7 +2290,7 @@ LAB_0051772c:
               }
 LAB_0051759a:
               iVar5 = *piVar2;
-              if ((0.0 < *(float *)(iVar5 + 0x158)) && (*(int *)(iVar5 + 0x128) == 1)) {
+              if ((0.0f < *(float *)(iVar5 + 0x158)) && (*(int *)(iVar5 + 0x128) == 1)) {
                 if ((ABS(*(float *)(iVar5 + 0x15c) * fVar22 -
                                      *(float *)(iVar5 + 0x160) * fVar21) < fVar1)) {
                   uVar19 = *(undefined8 *)(iVar5 + 0x140);
@@ -2433,12 +2299,12 @@ LAB_0051759a:
                 else {
                   fStack_bc = *(float *)(iVar5 + 0x140);
                   fStack_b8 = *(float *)(iVar5 + 0x144);
-                  fStack_c4 = (float)uVar19;
-                  fStack_c0 = (float)((ulonglong)uVar19 >> 0x20);
+                  fStack_c4 = (float)g2c_bits_to_float((uint)(uVar19));
+                  fStack_c0 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar19 >> 0x20)));
                   fStack_cc = *(float *)(iVar5 + 0x148);
                   fStack_c8 = *(float *)(iVar5 + 0x14c);
-                  fStack_d4 = (float)uVar17;
-                  fStack_d0 = (float)((ulonglong)uVar17 >> 0x20);
+                  fStack_d4 = (float)g2c_bits_to_float((uint)(uVar17));
+                  fStack_d0 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar17 >> 0x20)));
                   uVar7 = g2c_nema_vg_stroke_join_5179d0
                                     (&fStack_bc,(uint *)&fStack_c4,&fStack_cc,(uint *)&fStack_d4,0);
                   if (uVar7 != 0) goto LAB_0051772c;
@@ -2448,7 +2314,7 @@ LAB_0051759a:
               *(int *)(iVar5 + 0x128) = *(int *)(iVar5 + 0x128) + 1;
               uVar20 = (undefined4)((ulonglong)uVar19 >> 0x20);
               uVar18 = (undefined4)((ulonglong)uVar17 >> 0x20);
-              if (*(float *)(iVar5 + 0x158) == 0.0) {
+              if (*(float *)(iVar5 + 0x158) == 0.0f) {
                 *(int *)(iVar5 + 0x138) = (int)uVar19;
                 *(undefined4 *)(iVar5 + 0x13c) = uVar20;
                 iVar5 = *piVar2;
@@ -2500,11 +2366,11 @@ LAB_0051759a:
             puVar6[2] = 0x324;
             puVar6[4] = 0x330;
             uVar18 = (0xff000100u);
-            puVar6[1] = fVar3;
-            puVar6[3] = fVar13;
-            puVar6[5] = fVar15;
+            puVar6[1] = g2c_float_to_bits(fVar3);
+            puVar6[3] = g2c_float_to_bits(fVar13);
+            puVar6[5] = g2c_float_to_bits(fVar15);
             puVar6[6] = 0x334;
-            puVar6[7] = fVar16;
+            puVar6[7] = g2c_float_to_bits(fVar16);
             puVar6[8] = uVar18;
             puVar6[9] = uVar4 | 10;
           }
@@ -2523,6 +2389,23 @@ LAB_00517294:
     }
   } while( true );
 }
+#undef fStack_d4
+#undef fStack_d0
+#undef fStack_cc
+#undef fStack_c8
+#undef fStack_c4
+#undef fStack_c0
+#undef fStack_bc
+#undef fStack_b8
+#undef auStack_b4
+#undef cStack_b2
+#undef fStack_a8
+#undef fStack_a4
+#undef fStack_a0
+#undef fStack_9c
+#undef fStack_98
+#undef fStack_94
+
 
   
 
@@ -2574,7 +2457,7 @@ int g2c_nema_vg_near_5177a4(float *a,float *b)
     abs_a0 = abs_b0;
   }
   fVar5 = fVar3 - fVar4;
-  if ((fVar5 < 0.0)) {
+  if ((fVar5 < 0.0f)) {
     fVar5 = fVar4 - fVar3;
   }
   if (fVar5 <= abs_a0 * (9.999999747378752e-06f)) {
@@ -2583,7 +2466,7 @@ int g2c_nema_vg_near_5177a4(float *a,float *b)
       fVar3 = ABS(b[1]);
     }
     fVar4 = a[1] - b[1];
-    if ((fVar4 < 0.0)) {
+    if ((fVar4 < 0.0f)) {
       fVar4 = b[1] - a[1];
     }
     if (fVar4 <= fVar3 * (9.999999747378752e-06f)) {
@@ -2687,32 +2570,37 @@ uint g2c_nema_vg_stroke_join_5179d0(float *a,uint *b,float *c,uint *d,int e)
   float b_01;
   float g;
   float h;
-  float fStack_b0;
-  float fStack_ac;
-  float fStack_a8;
-  float fStack_a4;
-  float fStack_a0;
-  float fStack_9c;
-  float fStack_98;
-  float fStack_94;
-  float fStack_90;
-  float fStack_8c;
-  float fStack_88;
-  float fStack_84;
-  undefined4 uStack_80;
-  undefined4 uStack_7c;
-  undefined4 uStack_78;
-  float fStack_74;
-  float fStack_70;
-  float fStack_6c;
-  float fStack_68;
-  float fStack_64;
-  float fStack_60;
-  float fStack_5c;
-  float fStack_58;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
+  /* Stock frame of 0x5179d0 as one block: locals keep the entry-SP offsets Ghidra named them by
+   * (X_Stack_NN at g2c_frame_5179d0[0xb0-0xNN]) so &local passed to callees spans its stock neighbours. */
+  unsigned char g2c_frame_5179d0[0xb0] __attribute__((aligned(8)));
+  typedef float __attribute__((may_alias)) g2c_fa_float;
+#define fStack_b0 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0xb0])
+#define fStack_ac (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0xac])
+#define fStack_a8 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0xa8])
+#define fStack_a4 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0xa4])
+#define fStack_a0 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0xa0])
+#define fStack_9c (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x9c])
+#define fStack_98 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x98])
+#define fStack_94 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x94])
+#define fStack_90 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x90])
+#define fStack_8c (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x8c])
+#define fStack_88 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x88])
+#define fStack_84 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x84])
+  typedef undefined4 __attribute__((may_alias)) g2c_fa_undefined4;
+#define uStack_80 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5179d0[0xb0-0x80])
+#define uStack_7c (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5179d0[0xb0-0x7c])
+#define uStack_78 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5179d0[0xb0-0x78])
+#define fStack_74 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x74])
+#define fStack_70 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x70])
+#define fStack_6c (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x6c])
+#define fStack_68 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x68])
+#define fStack_64 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x64])
+#define fStack_60 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x60])
+#define fStack_5c (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x5c])
+#define fStack_58 (*(g2c_fa_float *)(void *)&g2c_frame_5179d0[0xb0-0x58])
+#define uStack_54 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5179d0[0xb0-0x54])
+#define uStack_50 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5179d0[0xb0-0x50])
+#define uStack_4c (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5179d0[0xb0-0x4c])
   
   piVar2 = (((int *)&audio_uart_nema_vg_context_cell));
   iVar3 = *(((int *)&audio_uart_nema_vg_context_cell));
@@ -2725,14 +2613,14 @@ uint g2c_nema_vg_stroke_join_5179d0(float *a,uint *b,float *c,uint *d,int e)
     if (-1 < (int)((uint)*(byte *)(iVar3 + 0x7d) << 0x1b)) {
       previous = audio_uart_nema_stencil_save_52266e(1,0,1,0);
     }
-    g2c_nema_vg_emit_verts_516b34(*a,a[1],(float)*b,(float)b[1],*c,c[1],(float)*d,(float)d[1]);
+    g2c_nema_vg_emit_verts_516b34(*a,a[1],(float)g2c_bits_to_float((uint)(*b)),(float)g2c_bits_to_float((uint)(b[1])),*c,c[1],(float)g2c_bits_to_float((uint)(*d)),(float)g2c_bits_to_float((uint)(d[1])));
     goto LAB_00517a30;
   }
   if (cVar1 == '\x02') {
     fStack_b0 = *(g2c_nvg_zero_pair_0);
     fStack_ac = (g2c_nvg_zero_pair_0)[1];
     iVar3 = g2c_nema_vg_cubic_approx_522f50
-                      (*a,a[1],*c,c[1],(float)*b,(float)b[1],(float)*d,(float)d[1],&fStack_b0,
+                      (*a,a[1],*c,c[1],(float)g2c_bits_to_float((uint)(*b)),(float)g2c_bits_to_float((uint)(b[1])),(float)g2c_bits_to_float((uint)(*d)),(float)g2c_bits_to_float((uint)(d[1])),&fStack_b0,
                        &fStack_ac);
     if (iVar3 == 0) {
       return 0;
@@ -2752,7 +2640,7 @@ uint g2c_nema_vg_stroke_join_5179d0(float *a,uint *b,float *c,uint *d,int e)
     if (bVar11) {
       g2c_nema_vg_set_flag_522622(1);
     }
-    fVar13 = *(float *)(*piVar2 + 0x2d8) * 0.5;
+    fVar13 = *(float *)(*piVar2 + 0x2d8) * 0.5f;
     if ((int)((uint)*(byte *)(*piVar2 + 0x7d) << 0x1b) < 0) {
       g2c_nema_vg_move_to_522fb4(fStack_b0,fStack_ac,fVar13);
     }
@@ -2770,7 +2658,7 @@ uint g2c_nema_vg_stroke_join_5179d0(float *a,uint *b,float *c,uint *d,int e)
   }
   if (*(char *)(iVar3 + 0x2e4) == '\0') {
     fVar13 = *(float *)(iVar3 + 0x158);
-    if ((fVar13 <= 0.0) || (*(int *)(iVar3 + 0x128) != 1)) {
+    if ((fVar13 <= 0.0f) || (*(int *)(iVar3 + 0x128) != 1)) {
       if (e == 1) {
         /* stock 0x517b72 vcmp [0x158],#0; ittt gt; vldrgt [0x184]; vcmpgt #0; ble 0x517bac:
            enter iff both > 0 (ordered). */
@@ -2925,10 +2813,10 @@ LAB_00517c84:
     if (-1 < (int)((uint)*(byte *)(iVar6 + 0x7d) << 0x1b)) {
       previous = audio_uart_nema_stencil_save_52266e(1,0,1,0);
     }
-    fVar10 = (float)*d;
-    f = (float)d[1];
-    a_00 = (float)*b;
-    b_00 = (float)b[1];
+    fVar10 = (float)g2c_bits_to_float((uint)(*d));
+    f = (float)g2c_bits_to_float((uint)(d[1]));
+    a_00 = (float)g2c_bits_to_float((uint)(*b));
+    b_00 = (float)g2c_bits_to_float((uint)(b[1]));
     fVar13 = *a;
     fVar14 = a[1];
     fVar8 = *c;
@@ -2954,6 +2842,33 @@ LAB_00517a30:
   }
   return 0;
 }
+#undef fStack_b0
+#undef fStack_ac
+#undef fStack_a8
+#undef fStack_a4
+#undef fStack_a0
+#undef fStack_9c
+#undef fStack_98
+#undef fStack_94
+#undef fStack_90
+#undef fStack_8c
+#undef fStack_88
+#undef fStack_84
+#undef uStack_80
+#undef uStack_7c
+#undef uStack_78
+#undef fStack_74
+#undef fStack_70
+#undef fStack_6c
+#undef fStack_68
+#undef fStack_64
+#undef fStack_60
+#undef fStack_5c
+#undef fStack_58
+#undef uStack_54
+#undef uStack_50
+#undef uStack_4c
+
 
   
 
@@ -3004,50 +2919,55 @@ uint g2c_nema_vg_stroke_path_517e18(float a,float b,float c,float d,float e,floa
   undefined4 uVar36;
   float h_01;
   float g_00;
-  float fStack_120;
-  float fStack_11c;
-  float fStack_118;
-  float fStack_114;
-  float fStack_110;
-  float fStack_10c;
-  float fStack_104;
-  float fStack_100;
-  float fStack_fc;
-  float fStack_f8;
-  float fStack_f4;
-  float fStack_f0;
-  float fStack_ec;
-  float fStack_e8;
-  float fStack_e4;
-  float fStack_e0;
-  float fStack_dc;
-  float fStack_d8;
-  float fStack_d4;
-  float fStack_d0;
-  float fStack_cc;
-  float fStack_c8;
-  float fStack_c4;
-  float fStack_c0;
-  float fStack_bc;
-  float fStack_b8;
-  float fStack_b4;
-  float fStack_b0;
-  float fStack_ac;
-  float fStack_a8;
-  float fStack_a4;
-  float fStack_a0;
-  float fStack_9c;
-  float fStack_98;
-  float fStack_94;
-  float fStack_90;
-  float fStack_8c;
-  float fStack_88;
-  float fStack_84;
-  float fStack_80;
-  float fStack_7c;
-  undefined4 uStack_78;
-  undefined4 uStack_74;
-  undefined4 uStack_70;
+  /* Stock frame of 0x517e18 as one block: locals keep the entry-SP offsets Ghidra named them by
+   * (X_Stack_NN at g2c_frame_517e18[0x120-0xNN]) so &local passed to callees spans its stock neighbours. */
+  unsigned char g2c_frame_517e18[0x120] __attribute__((aligned(8)));
+  typedef float __attribute__((may_alias)) g2c_fa_float;
+#define fStack_120 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x120])
+#define fStack_11c (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x11c])
+#define fStack_118 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x118])
+#define fStack_114 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x114])
+#define fStack_110 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x110])
+#define fStack_10c (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x10c])
+#define fStack_104 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x104])
+#define fStack_100 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x100])
+#define fStack_fc (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xfc])
+#define fStack_f8 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xf8])
+#define fStack_f4 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xf4])
+#define fStack_f0 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xf0])
+#define fStack_ec (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xec])
+#define fStack_e8 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xe8])
+#define fStack_e4 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xe4])
+#define fStack_e0 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xe0])
+#define fStack_dc (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xdc])
+#define fStack_d8 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xd8])
+#define fStack_d4 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xd4])
+#define fStack_d0 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xd0])
+#define fStack_cc (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xcc])
+#define fStack_c8 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xc8])
+#define fStack_c4 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xc4])
+#define fStack_c0 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xc0])
+#define fStack_bc (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xbc])
+#define fStack_b8 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xb8])
+#define fStack_b4 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xb4])
+#define fStack_b0 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xb0])
+#define fStack_ac (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xac])
+#define fStack_a8 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xa8])
+#define fStack_a4 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xa4])
+#define fStack_a0 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0xa0])
+#define fStack_9c (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x9c])
+#define fStack_98 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x98])
+#define fStack_94 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x94])
+#define fStack_90 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x90])
+#define fStack_8c (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x8c])
+#define fStack_88 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x88])
+#define fStack_84 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x84])
+#define fStack_80 (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x80])
+#define fStack_7c (*(g2c_fa_float *)(void *)&g2c_frame_517e18[0x120-0x7c])
+  typedef undefined4 __attribute__((may_alias)) g2c_fa_undefined4;
+#define uStack_78 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_517e18[0x120-0x78])
+#define uStack_74 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_517e18[0x120-0x74])
+#define uStack_70 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_517e18[0x120-0x70])
   
   piVar5 = (((int *)&audio_uart_nema_vg_context_cell));
   iVar10 = 1;
@@ -3062,21 +2982,21 @@ uint g2c_nema_vg_stroke_path_517e18(float a,float b,float c,float d,float e,floa
   fStack_104 = a;
   fStack_100 = b;
   do {
-    fVar15 = (fStack_104 + fStack_10c) * 0.5;
-    fVar17 = (fStack_100 + fStack_110) * 0.5;
-    fVar28 = (fStack_10c + fStack_114) * 0.5;
-    fVar32 = (fStack_110 + fStack_118) * 0.5;
-    fVar18 = (fStack_114 + fStack_120) * 0.5;
-    fVar20 = (fStack_118 + fStack_11c) * 0.5;
-    fVar26 = (fVar15 + fVar28) * 0.5;
-    fVar27 = (fVar17 + fVar32) * 0.5;
-    fVar29 = (fVar28 + fVar18) * 0.5;
-    fVar32 = (fVar32 + fVar20) * 0.5;
-    c_00 = (fVar26 + fVar29) * 0.5;
-    fVar28 = (fVar27 + fVar32) * 0.5;
+    fVar15 = (fStack_104 + fStack_10c) * 0.5f;
+    fVar17 = (fStack_100 + fStack_110) * 0.5f;
+    fVar28 = (fStack_10c + fStack_114) * 0.5f;
+    fVar32 = (fStack_110 + fStack_118) * 0.5f;
+    fVar18 = (fStack_114 + fStack_120) * 0.5f;
+    fVar20 = (fStack_118 + fStack_11c) * 0.5f;
+    fVar26 = (fVar15 + fVar28) * 0.5f;
+    fVar27 = (fVar17 + fVar32) * 0.5f;
+    fVar29 = (fVar28 + fVar18) * 0.5f;
+    fVar32 = (fVar32 + fVar20) * 0.5f;
+    c_00 = (fVar26 + fVar29) * 0.5f;
+    fVar28 = (fVar27 + fVar32) * 0.5f;
     iVar11 = *piVar5;
-    if ((((!bVar3) && (ABS((fStack_104 + fStack_120) * 0.5 - c_00) < 0.5)) &&
-        (ABS((fStack_100 + fStack_11c) * 0.5 - fVar28) < 0.5)) || (9 < *(int *)(iVar11 + 700))) {
+    if ((((!bVar3) && (ABS((fStack_104 + fStack_120) * 0.5f - c_00) < 0.5f)) &&
+        (ABS((fStack_100 + fStack_11c) * 0.5f - fVar28) < 0.5f)) || (9 < *(int *)(iVar11 + 700))) {
       iVar10 = iVar10 + -1;
       if (*(char *)(iVar11 + 0x2e4) == '\0') {
         if ((bVar13) && (*(char *)(iVar11 + 0x1c0) == '\x01')) {
@@ -3085,9 +3005,9 @@ uint g2c_nema_vg_stroke_path_517e18(float a,float b,float c,float d,float e,floa
           fVar15 = fVar18 * fVar18 + fVar17 * fVar17;
           if ((ABS(fVar15) < (1.0000000656873453e-05f))) {
             *(float *)(iVar11 + 0x198) = fStack_104;
-            *(float *)(iVar11 + 0x19c) = fStack_100 + *(float *)(iVar11 + 0x130) * -0.5;
+            *(float *)(iVar11 + 0x19c) = fStack_100 + *(float *)(iVar11 + 0x130) * -0.5f;
             *(float *)(iVar11 + 0x1a0) = fStack_104;
-            *(float *)(iVar11 + 0x1a4) = fStack_100 + *(float *)(iVar11 + 0x130) * 0.5;
+            *(float *)(iVar11 + 0x1a4) = fStack_100 + *(float *)(iVar11 + 0x130) * 0.5f;
             *(undefined4 *)(iVar11 + 400) = *(undefined4 *)(iVar11 + 0x198);
             *(undefined4 *)(iVar11 + 0x194) = *(undefined4 *)(iVar11 + 0x19c);
             iVar11 = *piVar5;
@@ -3097,13 +3017,13 @@ uint g2c_nema_vg_stroke_path_517e18(float a,float b,float c,float d,float e,floa
           }
           else {
             fVar15 = audio_uart_float_sqrt_4397a8(fVar15);
-            fVar18 = fVar18 * (1.0 / fVar15);
-            fVar17 = fVar17 * (1.0 / fVar15);
-            fVar20 = *(float *)(iVar11 + 0x130) * 0.5 * fVar17;
+            fVar18 = fVar18 * (1.0f / fVar15);
+            fVar17 = fVar17 * (1.0f / fVar15);
+            fVar20 = *(float *)(iVar11 + 0x130) * 0.5f * fVar17;
             fVar27 = fStack_104 - fVar20;
-            fVar26 = *(float *)(iVar11 + 0x134) * 0.5 * fVar18;
+            fVar26 = *(float *)(iVar11 + 0x134) * 0.5f * fVar18;
             fVar29 = fVar26 + fStack_100;
-            uVar35 = CONCAT44(fVar29,fVar27);
+            uVar35 = CONCAT44(g2c_float_to_bits(fVar29),g2c_float_to_bits(fVar27));
             fStack_ec = c_00 - fVar20;
             fStack_e8 = fVar26 + fVar28;
             fStack_f4 = fVar20 + c_00;
@@ -3113,7 +3033,7 @@ uint g2c_nema_vg_stroke_path_517e18(float a,float b,float c,float d,float e,floa
             fVar20 = fVar20 + fStack_104;
             iVar11 = *piVar5;
             fVar26 = fStack_100 - fVar26;
-            uVar33 = CONCAT44(fVar26,fVar20);
+            uVar33 = CONCAT44(g2c_float_to_bits(fVar26),g2c_float_to_bits(fVar20));
             *(float *)(iVar11 + 0x198) = fStack_ec;
             *(float *)(iVar11 + 0x19c) = fStack_e8;
             iVar11 = *piVar5;
@@ -3132,7 +3052,7 @@ uint g2c_nema_vg_stroke_path_517e18(float a,float b,float c,float d,float e,floa
               bVar13 = -1 < (int)((uint)*(byte *)(iVar11 + 0x7d) << 0x1b);
               uVar6 = audio_uart_nema_stencil_save_52266e((uint)bVar13,0,(uint)bVar13,0);
               iVar11 = *piVar5;
-              if (0.0 < *(float *)(iVar11 + 0x184)) {
+              if (0.0f < *(float *)(iVar11 + 0x184)) {
                 g2c_nema_vg_emit_verts_516b34
                           (*(float *)(iVar11 + 0x164),*(float *)(iVar11 + 0x168),
                            *(float *)(iVar11 + 0x16c),*(float *)(iVar11 + 0x170),
@@ -3151,10 +3071,10 @@ uint g2c_nema_vg_stroke_path_517e18(float a,float b,float c,float d,float e,floa
                   if (*(int *)(iVar11 + 0x110) != 0) {
                     cVar1 = *(char *)(iVar11 + 0x2e2);
                     uVar12 = 0;
-                    fVar25 = (float)((ulonglong)*(undefined8 *)(iVar11 + 0x174) >> 0x20);
-                    fVar23 = (float)((ulonglong)uVar4 >> 0x20);
-                    fVar24 = (float)*(undefined8 *)(iVar11 + 0x174);
-                    fVar32 = (float)uVar4;
+                    fVar25 = (float)g2c_bits_to_float((uint)(((ulonglong)*(undefined8 *)(iVar11 + 0x174) >> 0x20)));
+                    fVar23 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar4 >> 0x20)));
+                    fVar24 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar11 + 0x174)));
+                    fVar32 = (float)g2c_bits_to_float((uint)(uVar4));
                     if ((cVar1 == '\0') || (*(int *)(iVar11 + 0x118) != 0)) {
                       if (-1 < (int)((uint)*(byte *)(iVar11 + 0x7d) << 0x1b)) {
                         uVar12 = audio_uart_nema_stencil_save_52266e(1,0,1,0);
@@ -3188,7 +3108,7 @@ joined_r0x005183a0:
                         if (bVar13) {
                           g2c_nema_vg_set_flag_522622(1);
                         }
-                        fVar20 = *(float *)(*piVar5 + 0x2d8) * 0.5;
+                        fVar20 = *(float *)(*piVar5 + 0x2d8) * 0.5f;
                         if ((int)((uint)*(byte *)(*piVar5 + 0x7d) << 0x1b) < 0) {
                           g2c_nema_vg_move_to_522fb4(fStack_fc,fStack_f8,fVar20);
                         }
@@ -3203,7 +3123,7 @@ joined_r0x005183a0:
                     else {
                       if (cVar1 != '\x01') goto LAB_005184da;
                       if (*(char *)(iVar11 + 0x2e4) == '\0') {
-                        if ((*(float *)(iVar11 + 0x158) <= 0.0) || (*(int *)(iVar11 + 0x128) != 1))
+                        if ((*(float *)(iVar11 + 0x158) <= 0.0f) || (*(int *)(iVar11 + 0x128) != 1))
                         {
                           fStack_98 = *(float *)(iVar11 + 0x164);
                           fStack_94 = *(float *)(iVar11 + 0x168);
@@ -3355,7 +3275,7 @@ LAB_005186ea:
                 }
               }
               iVar11 = *piVar5;
-              if ((0.0 < *(float *)(iVar11 + 0x158)) && (*(int *)(iVar11 + 0x128) == 1)) {
+              if ((0.0f < *(float *)(iVar11 + 0x158)) && (*(int *)(iVar11 + 0x128) == 1)) {
                 if ((ABS(*(float *)(iVar11 + 0x15c) * fVar17 -
                                      *(float *)(iVar11 + 0x160) * fVar18) < (0.05000000447034836f))) {
                   uVar35 = *(undefined8 *)(iVar11 + 0x140);
@@ -3363,17 +3283,17 @@ LAB_005186ea:
                 }
                 else {
                   uVar4 = *(undefined8 *)(iVar11 + 0x140);
-                  fVar27 = (float)uVar35;
-                  fVar29 = (float)((ulonglong)uVar35 >> 0x20);
-                  fVar20 = (float)uVar33;
-                  fVar26 = (float)((ulonglong)uVar33 >> 0x20);
+                  fVar27 = (float)g2c_bits_to_float((uint)(uVar35));
+                  fVar29 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar35 >> 0x20)));
+                  fVar20 = (float)g2c_bits_to_float((uint)(uVar33));
+                  fVar26 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar33 >> 0x20)));
                   if (*(int *)(iVar11 + 0x110) != 0) {
                     cVar1 = *(char *)(iVar11 + 0x2e2);
                     uVar12 = 0;
-                    fVar25 = (float)((ulonglong)*(undefined8 *)(iVar11 + 0x148) >> 0x20);
-                    fVar23 = (float)((ulonglong)uVar4 >> 0x20);
-                    fVar24 = (float)*(undefined8 *)(iVar11 + 0x148);
-                    fVar32 = (float)uVar4;
+                    fVar25 = (float)g2c_bits_to_float((uint)(((ulonglong)*(undefined8 *)(iVar11 + 0x148) >> 0x20)));
+                    fVar23 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar4 >> 0x20)));
+                    fVar24 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar11 + 0x148)));
+                    fVar32 = (float)g2c_bits_to_float((uint)(uVar4));
                     if ((cVar1 == '\0') || (*(int *)(iVar11 + 0x118) != 0)) {
                       if (-1 < (int)((uint)*(byte *)(iVar11 + 0x7d) << 0x1b)) {
                         uVar12 = audio_uart_nema_stencil_save_52266e(1,0,1,0);
@@ -3407,7 +3327,7 @@ joined_r0x00518834:
                         if (bVar13) {
                           g2c_nema_vg_set_flag_522622(1);
                         }
-                        fVar20 = *(float *)(*piVar5 + 0x2d8) * 0.5;
+                        fVar20 = *(float *)(*piVar5 + 0x2d8) * 0.5f;
                         if ((int)((uint)*(byte *)(*piVar5 + 0x7d) << 0x1b) < 0) {
                           g2c_nema_vg_move_to_522fb4(fStack_fc,fStack_f8,fVar20);
                         }
@@ -3568,7 +3488,7 @@ LAB_00518b36:
               *(int *)(iVar11 + 0x128) = *(int *)(iVar11 + 0x128) + 1;
               uVar36 = (undefined4)((ulonglong)uVar35 >> 0x20);
               uVar34 = (undefined4)((ulonglong)uVar33 >> 0x20);
-              if (*(float *)(iVar11 + 0x158) == 0.0) {
+              if (*(float *)(iVar11 + 0x158) == 0.0f) {
                 *(int *)(iVar11 + 0x138) = (int)uVar35;
                 *(undefined4 *)(iVar11 + 0x13c) = uVar36;
                 iVar11 = *piVar5;
@@ -3613,9 +3533,9 @@ LAB_00518b36:
           fVar15 = fVar17 * fVar17 + fVar18 * fVar18;
           if ((ABS(fVar15) < (1.0000000656873453e-05f))) {
             *(float *)(iVar11 + 0x198) = fStack_104;
-            *(float *)(iVar11 + 0x19c) = fStack_100 + *(float *)(iVar11 + 0x130) * -0.5;
+            *(float *)(iVar11 + 0x19c) = fStack_100 + *(float *)(iVar11 + 0x130) * -0.5f;
             *(float *)(iVar11 + 0x1a0) = fStack_104;
-            *(float *)(iVar11 + 0x1a4) = fStack_100 + *(float *)(iVar11 + 0x130) * 0.5;
+            *(float *)(iVar11 + 0x1a4) = fStack_100 + *(float *)(iVar11 + 0x130) * 0.5f;
             *(undefined4 *)(iVar11 + 400) = *(undefined4 *)(iVar11 + 0x198);
             *(undefined4 *)(iVar11 + 0x194) = *(undefined4 *)(iVar11 + 0x19c);
             iVar11 = *piVar5;
@@ -3624,13 +3544,13 @@ LAB_00518b36:
           }
           else {
             fVar15 = audio_uart_float_sqrt_4397a8(fVar15);
-            fVar17 = fVar17 * (1.0 / fVar15);
-            fVar18 = fVar18 * (1.0 / fVar15);
-            fVar20 = *(float *)(iVar11 + 0x130) * 0.5 * fVar18;
+            fVar17 = fVar17 * (1.0f / fVar15);
+            fVar18 = fVar18 * (1.0f / fVar15);
+            fVar20 = *(float *)(iVar11 + 0x130) * 0.5f * fVar18;
             fVar27 = fStack_104 - fVar20;
-            fVar26 = *(float *)(iVar11 + 0x134) * 0.5 * fVar17;
+            fVar26 = *(float *)(iVar11 + 0x134) * 0.5f * fVar17;
             fVar29 = fVar26 + fStack_100;
-            uVar35 = CONCAT44(fVar29,fVar27);
+            uVar35 = CONCAT44(g2c_float_to_bits(fVar29),g2c_float_to_bits(fVar27));
             *(float *)(iVar11 + 400) = fVar27;
             *(float *)(iVar11 + 0x194) = fVar29;
             iVar11 = *piVar5;
@@ -3646,7 +3566,7 @@ LAB_00518b36:
             iVar11 = *piVar5;
             fVar20 = fVar20 + fStack_104;
             fVar26 = fStack_100 - fVar26;
-            uVar33 = CONCAT44(fVar26,fVar20);
+            uVar33 = CONCAT44(g2c_float_to_bits(fVar26),g2c_float_to_bits(fVar20));
             *(float *)(iVar11 + 0x1a8) = fVar20;
             *(float *)(iVar11 + 0x1ac) = fVar26;
             iVar11 = *piVar5;
@@ -3659,7 +3579,7 @@ LAB_00518b36:
               bVar14 = -1 < (int)((uint)*(byte *)(iVar11 + 0x7d) << 0x1b);
               uVar6 = audio_uart_nema_stencil_save_52266e((uint)bVar14,0,(uint)bVar14,0);
               iVar11 = *piVar5;
-              if (0.0 < *(float *)(iVar11 + 0x184)) {
+              if (0.0f < *(float *)(iVar11 + 0x184)) {
                 g2c_nema_vg_emit_verts_516b34
                           (*(float *)(iVar11 + 0x164),*(float *)(iVar11 + 0x168),
                            *(float *)(iVar11 + 0x16c),*(float *)(iVar11 + 0x170),
@@ -3678,7 +3598,7 @@ LAB_00518b36:
                 }
               }
               iVar11 = *piVar5;
-              if ((0.0 < *(float *)(iVar11 + 0x158)) && (*(int *)(iVar11 + 0x128) == 1)) {
+              if ((0.0f < *(float *)(iVar11 + 0x158)) && (*(int *)(iVar11 + 0x128) == 1)) {
                 if ((ABS(*(float *)(iVar11 + 0x15c) * fVar18 -
                                      *(float *)(iVar11 + 0x160) * fVar17) < (0.05000000447034836f))) {
                   uVar35 = *(undefined8 *)(iVar11 + 0x140);
@@ -3686,17 +3606,17 @@ LAB_00518b36:
                 }
                 else {
                   g2c_nema_vg_emit_verts_516b34
-                            (*(float *)(iVar11 + 0x140),*(float *)(iVar11 + 0x144),(float)uVar35,
-                             (float)((ulonglong)uVar35 >> 0x20),*(float *)(iVar11 + 0x148),
-                             *(float *)(iVar11 + 0x14c),(float)uVar33,
-                             (float)((ulonglong)uVar33 >> 0x20));
+                            (*(float *)(iVar11 + 0x140),*(float *)(iVar11 + 0x144),(float)g2c_bits_to_float((uint)(uVar35)),
+                             (float)g2c_bits_to_float((uint)(((ulonglong)uVar35 >> 0x20))),*(float *)(iVar11 + 0x148),
+                             *(float *)(iVar11 + 0x14c),(float)g2c_bits_to_float((uint)(uVar33)),
+                             (float)g2c_bits_to_float((uint)(((ulonglong)uVar33 >> 0x20))));
                 }
               }
               iVar11 = *piVar5;
               *(int *)(iVar11 + 0x128) = *(int *)(iVar11 + 0x128) + 1;
               uVar36 = (undefined4)((ulonglong)uVar35 >> 0x20);
               uVar34 = (undefined4)((ulonglong)uVar33 >> 0x20);
-              if (*(float *)(iVar11 + 0x158) == 0.0) {
+              if (*(float *)(iVar11 + 0x158) == 0.0f) {
                 *(int *)(iVar11 + 0x138) = (int)uVar35;
                 *(undefined4 *)(iVar11 + 0x13c) = uVar36;
                 iVar11 = *piVar5;
@@ -3740,9 +3660,9 @@ LAB_00518b36:
         if ((ABS(fVar15) < (1.0000000656873453e-05f))) {
           iVar11 = *piVar5;
           *(float *)(iVar11 + 0x198) = c_00;
-          *(float *)(iVar11 + 0x19c) = fVar28 + *(float *)(iVar11 + 0x130) * -0.5;
+          *(float *)(iVar11 + 0x19c) = fVar28 + *(float *)(iVar11 + 0x130) * -0.5f;
           *(float *)(iVar11 + 0x1a0) = c_00;
-          *(float *)(iVar11 + 0x1a4) = fVar28 + *(float *)(iVar11 + 0x130) * 0.5;
+          *(float *)(iVar11 + 0x1a4) = fVar28 + *(float *)(iVar11 + 0x130) * 0.5f;
           *(undefined4 *)(iVar11 + 400) = *(undefined4 *)(iVar11 + 0x198);
           *(undefined4 *)(iVar11 + 0x194) = *(undefined4 *)(iVar11 + 0x19c);
           iVar11 = *piVar5;
@@ -3752,13 +3672,13 @@ LAB_00518b36:
         else {
           fVar15 = audio_uart_float_sqrt_4397a8(fVar15);
           iVar11 = *piVar5;
-          fVar17 = fVar17 * (1.0 / fVar15);
-          fVar18 = fVar18 * (1.0 / fVar15);
-          fVar20 = *(float *)(iVar11 + 0x130) * 0.5 * fVar18;
+          fVar17 = fVar17 * (1.0f / fVar15);
+          fVar18 = fVar18 * (1.0f / fVar15);
+          fVar20 = *(float *)(iVar11 + 0x130) * 0.5f * fVar18;
           fVar27 = c_00 - fVar20;
-          fVar26 = *(float *)(iVar11 + 0x134) * 0.5 * fVar17;
+          fVar26 = *(float *)(iVar11 + 0x134) * 0.5f * fVar17;
           fVar29 = fVar26 + fVar28;
-          uVar35 = CONCAT44(fVar29,fVar27);
+          uVar35 = CONCAT44(g2c_float_to_bits(fVar29),g2c_float_to_bits(fVar27));
           *(float *)(iVar11 + 400) = fVar27;
           *(float *)(iVar11 + 0x194) = fVar29;
           iVar11 = *piVar5;
@@ -3774,7 +3694,7 @@ LAB_00518b36:
           iVar11 = *piVar5;
           fVar20 = fVar20 + c_00;
           fVar28 = fVar28 - fVar26;
-          uVar33 = CONCAT44(fVar28,fVar20);
+          uVar33 = CONCAT44(g2c_float_to_bits(fVar28),g2c_float_to_bits(fVar20));
           *(float *)(iVar11 + 0x1a8) = fVar20;
           *(float *)(iVar11 + 0x1ac) = fVar28;
           iVar11 = *piVar5;
@@ -3786,7 +3706,7 @@ LAB_00518b36:
             bVar14 = -1 < (int)((uint)*(byte *)(iVar11 + 0x7d) << 0x1b);
             uVar6 = audio_uart_nema_stencil_save_52266e((uint)bVar14,0,(uint)bVar14,0);
             iVar11 = *piVar5;
-            if (0.0 < *(float *)(iVar11 + 0x184)) {
+            if (0.0f < *(float *)(iVar11 + 0x184)) {
               g2c_nema_vg_emit_verts_516b34
                         (*(float *)(iVar11 + 0x164),*(float *)(iVar11 + 0x168),
                          *(float *)(iVar11 + 0x16c),*(float *)(iVar11 + 0x170),
@@ -3805,7 +3725,7 @@ LAB_00518b36:
               }
             }
             iVar11 = *piVar5;
-            if ((0.0 < *(float *)(iVar11 + 0x158)) && (*(int *)(iVar11 + 0x128) == 1)) {
+            if ((0.0f < *(float *)(iVar11 + 0x158)) && (*(int *)(iVar11 + 0x128) == 1)) {
               if ((ABS(*(float *)(iVar11 + 0x15c) * fVar18 -
                                    *(float *)(iVar11 + 0x160) * fVar17) < (0.05000000447034836f))
                  ) {
@@ -3814,17 +3734,17 @@ LAB_00518b36:
               }
               else {
                 g2c_nema_vg_emit_verts_516b34
-                          (*(float *)(iVar11 + 0x140),*(float *)(iVar11 + 0x144),(float)uVar35,
-                           (float)((ulonglong)uVar35 >> 0x20),*(float *)(iVar11 + 0x148),
-                           *(float *)(iVar11 + 0x14c),(float)uVar33,
-                           (float)((ulonglong)uVar33 >> 0x20));
+                          (*(float *)(iVar11 + 0x140),*(float *)(iVar11 + 0x144),(float)g2c_bits_to_float((uint)(uVar35)),
+                           (float)g2c_bits_to_float((uint)(((ulonglong)uVar35 >> 0x20))),*(float *)(iVar11 + 0x148),
+                           *(float *)(iVar11 + 0x14c),(float)g2c_bits_to_float((uint)(uVar33)),
+                           (float)g2c_bits_to_float((uint)(((ulonglong)uVar33 >> 0x20))));
               }
             }
             iVar11 = *piVar5;
             *(int *)(iVar11 + 0x128) = *(int *)(iVar11 + 0x128) + 1;
             uVar36 = (undefined4)((ulonglong)uVar35 >> 0x20);
             uVar34 = (undefined4)((ulonglong)uVar33 >> 0x20);
-            if (*(float *)(iVar11 + 0x158) == 0.0) {
+            if (*(float *)(iVar11 + 0x158) == 0.0f) {
               *(int *)(iVar11 + 0x138) = (int)uVar35;
               *(undefined4 *)(iVar11 + 0x13c) = uVar36;
               iVar11 = *piVar5;
@@ -3911,6 +3831,51 @@ LAB_00518b36:
     }
   } while( true );
 }
+#undef fStack_120
+#undef fStack_11c
+#undef fStack_118
+#undef fStack_114
+#undef fStack_110
+#undef fStack_10c
+#undef fStack_104
+#undef fStack_100
+#undef fStack_fc
+#undef fStack_f8
+#undef fStack_f4
+#undef fStack_f0
+#undef fStack_ec
+#undef fStack_e8
+#undef fStack_e4
+#undef fStack_e0
+#undef fStack_dc
+#undef fStack_d8
+#undef fStack_d4
+#undef fStack_d0
+#undef fStack_cc
+#undef fStack_c8
+#undef fStack_c4
+#undef fStack_c0
+#undef fStack_bc
+#undef fStack_b8
+#undef fStack_b4
+#undef fStack_b0
+#undef fStack_ac
+#undef fStack_a8
+#undef fStack_a4
+#undef fStack_a0
+#undef fStack_9c
+#undef fStack_98
+#undef fStack_94
+#undef fStack_90
+#undef fStack_8c
+#undef fStack_88
+#undef fStack_84
+#undef fStack_80
+#undef fStack_7c
+#undef uStack_78
+#undef uStack_74
+#undef uStack_70
+
 
   
 
@@ -3960,48 +3925,53 @@ uint g2c_nema_vg_fill_path_519290(float a,float b,float c,float d,float e,float 
   undefined4 uVar35;
   float h_00;
   float g;
-  float fStack_120;
-  float fStack_11c;
-  float fStack_110;
-  float fStack_10c;
-  float fStack_108;
-  float fStack_104;
-  float fStack_fc;
-  float fStack_f8;
-  float fStack_f4;
-  float fStack_f0;
-  float fStack_ec;
-  float fStack_e8;
-  float fStack_e4;
-  float fStack_e0;
-  float fStack_dc;
-  float fStack_d8;
-  float fStack_d4;
-  float fStack_d0;
-  float fStack_cc;
-  float fStack_c8;
-  float fStack_c4;
-  float fStack_c0;
-  float fStack_bc;
-  float fStack_b8;
-  float fStack_b4;
-  float fStack_b0;
-  float fStack_ac;
-  float fStack_a8;
-  float fStack_a4;
-  float fStack_a0;
-  float fStack_9c;
-  float fStack_98;
-  float fStack_94;
-  float fStack_90;
-  float fStack_8c;
-  float fStack_88;
-  float fStack_84;
-  float fStack_80;
-  float fStack_7c;
-  undefined4 uStack_78;
-  undefined4 uStack_74;
-  undefined4 uStack_70;
+  /* Stock frame of 0x519290 as one block: locals keep the entry-SP offsets Ghidra named them by
+   * (X_Stack_NN at g2c_frame_519290[0x120-0xNN]) so &local passed to callees spans its stock neighbours. */
+  unsigned char g2c_frame_519290[0x120] __attribute__((aligned(8)));
+  typedef float __attribute__((may_alias)) g2c_fa_float;
+#define fStack_120 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x120])
+#define fStack_11c (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x11c])
+#define fStack_110 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x110])
+#define fStack_10c (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x10c])
+#define fStack_108 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x108])
+#define fStack_104 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x104])
+#define fStack_fc (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xfc])
+#define fStack_f8 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xf8])
+#define fStack_f4 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xf4])
+#define fStack_f0 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xf0])
+#define fStack_ec (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xec])
+#define fStack_e8 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xe8])
+#define fStack_e4 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xe4])
+#define fStack_e0 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xe0])
+#define fStack_dc (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xdc])
+#define fStack_d8 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xd8])
+#define fStack_d4 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xd4])
+#define fStack_d0 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xd0])
+#define fStack_cc (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xcc])
+#define fStack_c8 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xc8])
+#define fStack_c4 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xc4])
+#define fStack_c0 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xc0])
+#define fStack_bc (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xbc])
+#define fStack_b8 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xb8])
+#define fStack_b4 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xb4])
+#define fStack_b0 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xb0])
+#define fStack_ac (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xac])
+#define fStack_a8 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xa8])
+#define fStack_a4 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xa4])
+#define fStack_a0 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0xa0])
+#define fStack_9c (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x9c])
+#define fStack_98 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x98])
+#define fStack_94 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x94])
+#define fStack_90 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x90])
+#define fStack_8c (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x8c])
+#define fStack_88 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x88])
+#define fStack_84 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x84])
+#define fStack_80 (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x80])
+#define fStack_7c (*(g2c_fa_float *)(void *)&g2c_frame_519290[0x120-0x7c])
+  typedef undefined4 __attribute__((may_alias)) g2c_fa_undefined4;
+#define uStack_78 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_519290[0x120-0x78])
+#define uStack_74 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_519290[0x120-0x74])
+#define uStack_70 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_519290[0x120-0x70])
   
   piVar5 = (((int *)&audio_uart_nema_vg_context_cell));
   iVar10 = 1;
@@ -4013,12 +3983,12 @@ uint g2c_nema_vg_fill_path_519290(float a,float b,float c,float d,float e,float 
   fStack_108 = a;
   fStack_104 = b;
   do {
-    fVar14 = (fStack_108 + fStack_10c) * 0.5;
-    fVar16 = (fStack_104 + fStack_110) * 0.5;
-    fVar17 = (fStack_10c + fStack_120) * 0.5;
-    fVar19 = (fStack_110 + fStack_11c) * 0.5;
-    fVar26 = (fVar16 + fVar19) * 0.5;
-    c_00 = (fVar14 + fVar17) * 0.5;
+    fVar14 = (fStack_108 + fStack_10c) * 0.5f;
+    fVar16 = (fStack_104 + fStack_110) * 0.5f;
+    fVar17 = (fStack_10c + fStack_120) * 0.5f;
+    fVar19 = (fStack_110 + fStack_11c) * 0.5f;
+    fVar26 = (fVar16 + fVar19) * 0.5f;
+    c_00 = (fVar14 + fVar17) * 0.5f;
     fVar27 = fStack_120 - fStack_108;
     fVar28 = fStack_11c - fStack_104;
     iVar11 = *piVar5;
@@ -4037,13 +4007,13 @@ LAB_00519504:
           bVar4 = false;
           if (!(ABS(fVar14) < (1.0000000656873453e-05f))) {
             fVar14 = audio_uart_float_sqrt_4397a8(fVar14);
-            fVar17 = fVar17 * (1.0 / fVar14);
-            fVar16 = fVar16 * (1.0 / fVar14);
-            fVar19 = *(float *)(iVar11 + 0x130) * 0.5 * fVar16;
+            fVar17 = fVar17 * (1.0f / fVar14);
+            fVar16 = fVar16 * (1.0f / fVar14);
+            fVar19 = *(float *)(iVar11 + 0x130) * 0.5f * fVar16;
             fVar28 = fStack_108 - fVar19;
-            fVar27 = *(float *)(iVar11 + 0x134) * 0.5 * fVar17;
+            fVar27 = *(float *)(iVar11 + 0x134) * 0.5f * fVar17;
             fVar29 = fVar27 + fStack_104;
-            uVar34 = CONCAT44(fVar29,fVar28);
+            uVar34 = CONCAT44(g2c_float_to_bits(fVar29),g2c_float_to_bits(fVar28));
             fStack_ec = c_00 - fVar19;
             fStack_e8 = fVar27 + fVar26;
             fStack_f4 = fVar19 + c_00;
@@ -4053,7 +4023,7 @@ LAB_00519504:
             fVar19 = fVar19 + fStack_108;
             iVar11 = *piVar5;
             fVar27 = fStack_104 - fVar27;
-            uVar32 = CONCAT44(fVar27,fVar19);
+            uVar32 = CONCAT44(g2c_float_to_bits(fVar27),g2c_float_to_bits(fVar19));
             *(float *)(iVar11 + 0x198) = fStack_ec;
             *(float *)(iVar11 + 0x19c) = fStack_e8;
             iVar11 = *piVar5;
@@ -4072,7 +4042,7 @@ LAB_00519504:
             bVar13 = -1 < (int)((uint)*(byte *)(iVar11 + 0x7d) << 0x1b);
             uVar6 = audio_uart_nema_stencil_save_52266e((uint)bVar13,0,(uint)bVar13,0);
             iVar11 = *piVar5;
-            if (0.0 < *(float *)(iVar11 + 0x184)) {
+            if (0.0f < *(float *)(iVar11 + 0x184)) {
               g2c_nema_vg_emit_verts_516b34
                         (*(float *)(iVar11 + 0x164),*(float *)(iVar11 + 0x168),
                          *(float *)(iVar11 + 0x16c),*(float *)(iVar11 + 0x170),
@@ -4091,10 +4061,10 @@ LAB_00519504:
                 if (*(int *)(iVar11 + 0x110) != 0) {
                   cVar1 = *(char *)(iVar11 + 0x2e2);
                   uVar12 = 0;
-                  fVar25 = (float)((ulonglong)*(undefined8 *)(iVar11 + 0x174) >> 0x20);
-                  fVar23 = (float)((ulonglong)uVar3 >> 0x20);
-                  fVar24 = (float)*(undefined8 *)(iVar11 + 0x174);
-                  fVar22 = (float)uVar3;
+                  fVar25 = (float)g2c_bits_to_float((uint)(((ulonglong)*(undefined8 *)(iVar11 + 0x174) >> 0x20)));
+                  fVar23 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar3 >> 0x20)));
+                  fVar24 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar11 + 0x174)));
+                  fVar22 = (float)g2c_bits_to_float((uint)(uVar3));
                   if ((cVar1 == '\0') || (*(int *)(iVar11 + 0x118) != 0)) {
                     if (-1 < (int)((uint)*(byte *)(iVar11 + 0x7d) << 0x1b)) {
                       uVar12 = audio_uart_nema_stencil_save_52266e(1,0,1,0);
@@ -4128,7 +4098,7 @@ joined_r0x00519764:
                       if (bVar13) {
                         g2c_nema_vg_set_flag_522622(1);
                       }
-                      fVar19 = *(float *)(*piVar5 + 0x2d8) * 0.5;
+                      fVar19 = *(float *)(*piVar5 + 0x2d8) * 0.5f;
                       if ((int)((uint)*(byte *)(*piVar5 + 0x7d) << 0x1b) < 0) {
                         g2c_nema_vg_move_to_522fb4(fStack_fc,fStack_f8,fVar19);
                       }
@@ -4143,7 +4113,7 @@ joined_r0x00519764:
                   else {
                     if (cVar1 != '\x01') goto LAB_0051989a;
                     if (*(char *)(iVar11 + 0x2e4) == '\0') {
-                      if ((*(float *)(iVar11 + 0x158) <= 0.0) || (*(int *)(iVar11 + 0x128) != 1)) {
+                      if ((*(float *)(iVar11 + 0x158) <= 0.0f) || (*(int *)(iVar11 + 0x128) != 1)) {
                         fStack_98 = *(float *)(iVar11 + 0x164);
                         fStack_94 = *(float *)(iVar11 + 0x168);
                         fStack_90 = *(float *)(iVar11 + 0x16c);
@@ -4292,7 +4262,7 @@ LAB_00519aaa:
               }
             }
             iVar11 = *piVar5;
-            if ((0.0 < *(float *)(iVar11 + 0x158)) && (*(int *)(iVar11 + 0x128) == 1)) {
+            if ((0.0f < *(float *)(iVar11 + 0x158)) && (*(int *)(iVar11 + 0x128) == 1)) {
               if ((ABS(*(float *)(iVar11 + 0x15c) * fVar16 -
                                    *(float *)(iVar11 + 0x160) * fVar17) < (0.05000000447034836f))) {
                 uVar34 = *(undefined8 *)(iVar11 + 0x140);
@@ -4300,17 +4270,17 @@ LAB_00519aaa:
               }
               else {
                 uVar3 = *(undefined8 *)(iVar11 + 0x140);
-                fVar28 = (float)uVar34;
-                fVar29 = (float)((ulonglong)uVar34 >> 0x20);
-                fVar19 = (float)uVar32;
-                fVar27 = (float)((ulonglong)uVar32 >> 0x20);
+                fVar28 = (float)g2c_bits_to_float((uint)(uVar34));
+                fVar29 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar34 >> 0x20)));
+                fVar19 = (float)g2c_bits_to_float((uint)(uVar32));
+                fVar27 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar32 >> 0x20)));
                 if (*(int *)(iVar11 + 0x110) != 0) {
                   cVar1 = *(char *)(iVar11 + 0x2e2);
                   uVar12 = 0;
-                  fVar25 = (float)((ulonglong)*(undefined8 *)(iVar11 + 0x148) >> 0x20);
-                  fVar23 = (float)((ulonglong)uVar3 >> 0x20);
-                  fVar24 = (float)*(undefined8 *)(iVar11 + 0x148);
-                  fVar22 = (float)uVar3;
+                  fVar25 = (float)g2c_bits_to_float((uint)(((ulonglong)*(undefined8 *)(iVar11 + 0x148) >> 0x20)));
+                  fVar23 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar3 >> 0x20)));
+                  fVar24 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar11 + 0x148)));
+                  fVar22 = (float)g2c_bits_to_float((uint)(uVar3));
                   if ((cVar1 == '\0') || (*(int *)(iVar11 + 0x118) != 0)) {
                     if (-1 < (int)((uint)*(byte *)(iVar11 + 0x7d) << 0x1b)) {
                       uVar12 = audio_uart_nema_stencil_save_52266e(1,0,1,0);
@@ -4344,7 +4314,7 @@ joined_r0x00519bf4:
                       if (bVar13) {
                         g2c_nema_vg_set_flag_522622(1);
                       }
-                      fVar19 = *(float *)(*piVar5 + 0x2d8) * 0.5;
+                      fVar19 = *(float *)(*piVar5 + 0x2d8) * 0.5f;
                       if ((int)((uint)*(byte *)(*piVar5 + 0x7d) << 0x1b) < 0) {
                         g2c_nema_vg_move_to_522fb4(fStack_fc,fStack_f8,fVar19);
                       }
@@ -4503,7 +4473,7 @@ LAB_00519ef6:
             *(int *)(iVar11 + 0x128) = *(int *)(iVar11 + 0x128) + 1;
             uVar35 = (undefined4)((ulonglong)uVar34 >> 0x20);
             uVar33 = (undefined4)((ulonglong)uVar32 >> 0x20);
-            if (*(float *)(iVar11 + 0x158) == 0.0) {
+            if (*(float *)(iVar11 + 0x158) == 0.0f) {
               *(int *)(iVar11 + 0x138) = (int)uVar34;
               *(undefined4 *)(iVar11 + 0x13c) = uVar35;
               iVar11 = *piVar5;
@@ -4540,10 +4510,10 @@ LAB_00519ef6:
             goto LAB_0051a2d0;
           }
           *(float *)(iVar11 + 0x198) = fStack_108;
-          *(float *)(iVar11 + 0x19c) = fStack_104 + *(float *)(iVar11 + 0x130) * -0.5;
+          *(float *)(iVar11 + 0x19c) = fStack_104 + *(float *)(iVar11 + 0x130) * -0.5f;
           *(float *)(iVar11 + 0x1a0) = fStack_108;
 LAB_005194b4:
-          *(float *)(iVar11 + 0x1a4) = fStack_104 + *(float *)(iVar11 + 0x130) * 0.5;
+          *(float *)(iVar11 + 0x1a4) = fStack_104 + *(float *)(iVar11 + 0x130) * 0.5f;
           *(undefined4 *)(iVar11 + 400) = *(undefined4 *)(iVar11 + 0x198);
           *(undefined4 *)(iVar11 + 0x194) = *(undefined4 *)(iVar11 + 0x19c);
           iVar11 = *piVar5;
@@ -4556,18 +4526,18 @@ LAB_005194b4:
           fVar14 = fVar16 * fVar16 + fVar17 * fVar17;
           if ((ABS(fVar14) < (1.0000000656873453e-05f))) {
             *(float *)(iVar11 + 0x198) = fStack_108;
-            *(float *)(iVar11 + 0x19c) = fStack_104 + *(float *)(iVar11 + 0x130) * -0.5;
+            *(float *)(iVar11 + 0x19c) = fStack_104 + *(float *)(iVar11 + 0x130) * -0.5f;
             *(float *)(iVar11 + 0x1a0) = fStack_108;
             goto LAB_005194b4;
           }
           fVar14 = audio_uart_float_sqrt_4397a8(fVar14);
-          fVar16 = fVar16 * (1.0 / fVar14);
-          fVar17 = fVar17 * (1.0 / fVar14);
-          fVar19 = *(float *)(iVar11 + 0x130) * 0.5 * fVar17;
+          fVar16 = fVar16 * (1.0f / fVar14);
+          fVar17 = fVar17 * (1.0f / fVar14);
+          fVar19 = *(float *)(iVar11 + 0x130) * 0.5f * fVar17;
           fVar28 = fStack_108 - fVar19;
-          fVar27 = *(float *)(iVar11 + 0x134) * 0.5 * fVar16;
+          fVar27 = *(float *)(iVar11 + 0x134) * 0.5f * fVar16;
           fVar29 = fVar27 + fStack_104;
-          uVar34 = CONCAT44(fVar29,fVar28);
+          uVar34 = CONCAT44(g2c_float_to_bits(fVar29),g2c_float_to_bits(fVar28));
           *(float *)(iVar11 + 400) = fVar28;
           *(float *)(iVar11 + 0x194) = fVar29;
           iVar11 = *piVar5;
@@ -4583,7 +4553,7 @@ LAB_005194b4:
           iVar11 = *piVar5;
           fVar19 = fVar19 + fStack_108;
           fVar27 = fStack_104 - fVar27;
-          uVar32 = CONCAT44(fVar27,fVar19);
+          uVar32 = CONCAT44(g2c_float_to_bits(fVar27),g2c_float_to_bits(fVar19));
           *(float *)(iVar11 + 0x1a8) = fVar19;
           *(float *)(iVar11 + 0x1ac) = fVar27;
           iVar11 = *piVar5;
@@ -4595,7 +4565,7 @@ LAB_005194b4:
             bVar13 = -1 < (int)((uint)*(byte *)(iVar11 + 0x7d) << 0x1b);
             uVar6 = audio_uart_nema_stencil_save_52266e((uint)bVar13,0,(uint)bVar13,0);
             iVar11 = *piVar5;
-            if (0.0 < *(float *)(iVar11 + 0x184)) {
+            if (0.0f < *(float *)(iVar11 + 0x184)) {
               g2c_nema_vg_emit_verts_516b34
                         (*(float *)(iVar11 + 0x164),*(float *)(iVar11 + 0x168),
                          *(float *)(iVar11 + 0x16c),*(float *)(iVar11 + 0x170),
@@ -4614,7 +4584,7 @@ LAB_005194b4:
               }
             }
             iVar11 = *piVar5;
-            if ((0.0 < *(float *)(iVar11 + 0x158)) && (*(int *)(iVar11 + 0x128) == 1)) {
+            if ((0.0f < *(float *)(iVar11 + 0x158)) && (*(int *)(iVar11 + 0x128) == 1)) {
               if ((ABS(*(float *)(iVar11 + 0x15c) * fVar17 -
                                    *(float *)(iVar11 + 0x160) * fVar16) < (0.05000000447034836f))) {
                 uVar34 = *(undefined8 *)(iVar11 + 0x140);
@@ -4622,17 +4592,17 @@ LAB_005194b4:
               }
               else {
                 g2c_nema_vg_emit_verts_516b34
-                          (*(float *)(iVar11 + 0x140),*(float *)(iVar11 + 0x144),(float)uVar34,
-                           (float)((ulonglong)uVar34 >> 0x20),*(float *)(iVar11 + 0x148),
-                           *(float *)(iVar11 + 0x14c),(float)uVar32,
-                           (float)((ulonglong)uVar32 >> 0x20));
+                          (*(float *)(iVar11 + 0x140),*(float *)(iVar11 + 0x144),(float)g2c_bits_to_float((uint)(uVar34)),
+                           (float)g2c_bits_to_float((uint)(((ulonglong)uVar34 >> 0x20))),*(float *)(iVar11 + 0x148),
+                           *(float *)(iVar11 + 0x14c),(float)g2c_bits_to_float((uint)(uVar32)),
+                           (float)g2c_bits_to_float((uint)(((ulonglong)uVar32 >> 0x20))));
               }
             }
             iVar11 = *piVar5;
             *(int *)(iVar11 + 0x128) = *(int *)(iVar11 + 0x128) + 1;
             uVar35 = (undefined4)((ulonglong)uVar34 >> 0x20);
             uVar33 = (undefined4)((ulonglong)uVar32 >> 0x20);
-            if (*(float *)(iVar11 + 0x158) == 0.0) {
+            if (*(float *)(iVar11 + 0x158) == 0.0f) {
               *(int *)(iVar11 + 0x138) = (int)uVar34;
               *(undefined4 *)(iVar11 + 0x13c) = uVar35;
               iVar11 = *piVar5;
@@ -4676,9 +4646,9 @@ LAB_0051a2d0:
         if ((ABS(fVar14) < (1.0000000656873453e-05f))) {
           iVar11 = *piVar5;
           *(float *)(iVar11 + 0x198) = c_00;
-          *(float *)(iVar11 + 0x19c) = fVar26 + *(float *)(iVar11 + 0x130) * -0.5;
+          *(float *)(iVar11 + 0x19c) = fVar26 + *(float *)(iVar11 + 0x130) * -0.5f;
           *(float *)(iVar11 + 0x1a0) = c_00;
-          *(float *)(iVar11 + 0x1a4) = fVar26 + *(float *)(iVar11 + 0x130) * 0.5;
+          *(float *)(iVar11 + 0x1a4) = fVar26 + *(float *)(iVar11 + 0x130) * 0.5f;
           *(undefined4 *)(iVar11 + 400) = *(undefined4 *)(iVar11 + 0x198);
           *(undefined4 *)(iVar11 + 0x194) = *(undefined4 *)(iVar11 + 0x19c);
           iVar11 = *piVar5;
@@ -4688,13 +4658,13 @@ LAB_0051a2d0:
         else {
           fVar14 = audio_uart_float_sqrt_4397a8(fVar14);
           iVar11 = *piVar5;
-          fVar16 = fVar16 * (1.0 / fVar14);
-          fVar17 = fVar17 * (1.0 / fVar14);
-          fVar19 = *(float *)(iVar11 + 0x130) * 0.5 * fVar17;
+          fVar16 = fVar16 * (1.0f / fVar14);
+          fVar17 = fVar17 * (1.0f / fVar14);
+          fVar19 = *(float *)(iVar11 + 0x130) * 0.5f * fVar17;
           fVar28 = c_00 - fVar19;
-          fVar27 = *(float *)(iVar11 + 0x134) * 0.5 * fVar16;
+          fVar27 = *(float *)(iVar11 + 0x134) * 0.5f * fVar16;
           fVar29 = fVar27 + fVar26;
-          uVar34 = CONCAT44(fVar29,fVar28);
+          uVar34 = CONCAT44(g2c_float_to_bits(fVar29),g2c_float_to_bits(fVar28));
           *(float *)(iVar11 + 400) = fVar28;
           *(float *)(iVar11 + 0x194) = fVar29;
           iVar11 = *piVar5;
@@ -4710,7 +4680,7 @@ LAB_0051a2d0:
           iVar11 = *piVar5;
           fVar19 = fVar19 + c_00;
           fVar26 = fVar26 - fVar27;
-          uVar32 = CONCAT44(fVar26,fVar19);
+          uVar32 = CONCAT44(g2c_float_to_bits(fVar26),g2c_float_to_bits(fVar19));
           *(float *)(iVar11 + 0x1a8) = fVar19;
           *(float *)(iVar11 + 0x1ac) = fVar26;
           iVar11 = *piVar5;
@@ -4722,7 +4692,7 @@ LAB_0051a2d0:
             bVar13 = -1 < (int)((uint)*(byte *)(iVar11 + 0x7d) << 0x1b);
             uVar6 = audio_uart_nema_stencil_save_52266e((uint)bVar13,0,(uint)bVar13,0);
             iVar11 = *piVar5;
-            if (0.0 < *(float *)(iVar11 + 0x184)) {
+            if (0.0f < *(float *)(iVar11 + 0x184)) {
               g2c_nema_vg_emit_verts_516b34
                         (*(float *)(iVar11 + 0x164),*(float *)(iVar11 + 0x168),
                          *(float *)(iVar11 + 0x16c),*(float *)(iVar11 + 0x170),
@@ -4742,7 +4712,7 @@ LAB_0051a2d0:
               }
             }
             iVar11 = *piVar5;
-            if ((0.0 < *(float *)(iVar11 + 0x158)) && (*(int *)(iVar11 + 0x128) == 1)) {
+            if ((0.0f < *(float *)(iVar11 + 0x158)) && (*(int *)(iVar11 + 0x128) == 1)) {
               if ((ABS(*(float *)(iVar11 + 0x15c) * fVar17 -
                                    *(float *)(iVar11 + 0x160) * fVar16) < (0.05000000447034836f))
                  ) {
@@ -4751,17 +4721,17 @@ LAB_0051a2d0:
               }
               else {
                 g2c_nema_vg_emit_verts_516b34
-                          (*(float *)(iVar11 + 0x140),*(float *)(iVar11 + 0x144),(float)uVar34,
-                           (float)((ulonglong)uVar34 >> 0x20),*(float *)(iVar11 + 0x148),
-                           *(float *)(iVar11 + 0x14c),(float)uVar32,
-                           (float)((ulonglong)uVar32 >> 0x20));
+                          (*(float *)(iVar11 + 0x140),*(float *)(iVar11 + 0x144),(float)g2c_bits_to_float((uint)(uVar34)),
+                           (float)g2c_bits_to_float((uint)(((ulonglong)uVar34 >> 0x20))),*(float *)(iVar11 + 0x148),
+                           *(float *)(iVar11 + 0x14c),(float)g2c_bits_to_float((uint)(uVar32)),
+                           (float)g2c_bits_to_float((uint)(((ulonglong)uVar32 >> 0x20))));
               }
             }
             iVar11 = *piVar5;
             *(int *)(iVar11 + 0x128) = *(int *)(iVar11 + 0x128) + 1;
             uVar35 = (undefined4)((ulonglong)uVar34 >> 0x20);
             uVar33 = (undefined4)((ulonglong)uVar32 >> 0x20);
-            if (*(float *)(iVar11 + 0x158) == 0.0) {
+            if (*(float *)(iVar11 + 0x158) == 0.0f) {
               *(int *)(iVar11 + 0x138) = (int)uVar34;
               *(undefined4 *)(iVar11 + 0x13c) = uVar35;
               iVar11 = *piVar5;
@@ -4825,7 +4795,7 @@ LAB_0051a2d0:
       }
     }
     else {
-      if (fVar29 <= fVar27 * 0.5) goto LAB_00519504;
+      if (fVar29 <= fVar27 * 0.5f) goto LAB_00519504;
 LAB_00519384:
       if (*(int *)(iVar11 + 700) < 10) {
         *(float *)(iVar11 + *(int *)(iVar11 + 700) * 0x18 + 0x1cc) = c_00;
@@ -4847,6 +4817,49 @@ LAB_00519384:
     }
   } while( true );
 }
+#undef fStack_120
+#undef fStack_11c
+#undef fStack_110
+#undef fStack_10c
+#undef fStack_108
+#undef fStack_104
+#undef fStack_fc
+#undef fStack_f8
+#undef fStack_f4
+#undef fStack_f0
+#undef fStack_ec
+#undef fStack_e8
+#undef fStack_e4
+#undef fStack_e0
+#undef fStack_dc
+#undef fStack_d8
+#undef fStack_d4
+#undef fStack_d0
+#undef fStack_cc
+#undef fStack_c8
+#undef fStack_c4
+#undef fStack_c0
+#undef fStack_bc
+#undef fStack_b8
+#undef fStack_b4
+#undef fStack_b0
+#undef fStack_ac
+#undef fStack_a8
+#undef fStack_a4
+#undef fStack_a0
+#undef fStack_9c
+#undef fStack_98
+#undef fStack_94
+#undef fStack_90
+#undef fStack_8c
+#undef fStack_88
+#undef fStack_84
+#undef fStack_80
+#undef fStack_7c
+#undef uStack_78
+#undef uStack_74
+#undef uStack_70
+
 
   
 
@@ -4890,15 +4903,15 @@ uint g2c_nema_vg_cubic_to_51a694(float a,float b,float c,float d,float e,float f
   
   fVar6 = a * (0.01745329238474369f);
   fVar5 = b * (0.01745329238474369f) - fVar6;
-  fVar2 = audio_uart_float_tangent_563f40(fVar5 * 0.25);
+  fVar2 = audio_uart_float_tangent_563f40(fVar5 * 0.25f);
   fVar2 = fVar2 * (1.3333333730697632f);
   fVar3 = audio_uart_float_trig_mode1_50968c(fVar5);
   fStack_60 = audio_uart_float_trig_mode0_509690(fVar5);
-  fStack_6c = 1.0;
-  fStack_5c = 1.0;
+  fStack_6c = 1.0f;
+  fStack_5c = 1.0f;
   fStack_54 = fVar3 + fVar2 * fStack_60;
   fStack_50 = fStack_60 - fVar2 * fVar3;
-  fStack_68 = 0.0;
+  fStack_68 = 0.0f;
   fVar7 = (*(float *)(h + 0x24) / (180.0f)) * (3.1415927410125732f);
   fStack_64 = fVar3;
   fStack_58 = fVar2;
@@ -4911,8 +4924,8 @@ uint g2c_nema_vg_cubic_to_51a694(float a,float b,float c,float d,float e,float f
     fStack_68 = *(float *)(h + 0x10);
   }
   else {
-    fVar7 = (fVar3 + fVar2 * (0x0u)) * f;
-    fVar4 = (fVar2 - fVar3 * (0x0u)) * e;
+    fVar7 = (fVar3 + fVar2 * g2c_bits_to_float((uint)((0x0u)))) * f;
+    fVar4 = (fVar2 - fVar3 * g2c_bits_to_float((uint)((0x0u)))) * e;
     fStack_68 = fVar4 * fVar6 + fVar7 * fVar5 + d;
     fStack_6c = (fVar4 * fVar5 - fVar7 * fVar6) + c;
   }
@@ -4987,14 +5000,18 @@ uint g2c_nema_vg_arc_to_51a8ec(uint a,int b)
   float fVar29;
   float fVar30;
   float fVar31;
-  float fStack_7c;
-  float fStack_78;
-  float fStack_74;
-  float fStack_70;
-  float fStack_6c;
-  float fStack_68;
-  float fStack_64;
-  float fStack_60;
+  /* Stock frame of 0x51a8ec as one block: locals keep the entry-SP offsets Ghidra named them by
+   * (X_Stack_NN at g2c_frame_51a8ec[0x80-0xNN]) so &local passed to callees spans its stock neighbours. */
+  unsigned char g2c_frame_51a8ec[0x80] __attribute__((aligned(8)));
+  typedef float __attribute__((may_alias)) g2c_fa_float;
+#define fStack_7c (*(g2c_fa_float *)(void *)&g2c_frame_51a8ec[0x80-0x7c])
+#define fStack_78 (*(g2c_fa_float *)(void *)&g2c_frame_51a8ec[0x80-0x78])
+#define fStack_74 (*(g2c_fa_float *)(void *)&g2c_frame_51a8ec[0x80-0x74])
+#define fStack_70 (*(g2c_fa_float *)(void *)&g2c_frame_51a8ec[0x80-0x70])
+#define fStack_6c (*(g2c_fa_float *)(void *)&g2c_frame_51a8ec[0x80-0x6c])
+#define fStack_68 (*(g2c_fa_float *)(void *)&g2c_frame_51a8ec[0x80-0x68])
+#define fStack_64 (*(g2c_fa_float *)(void *)&g2c_frame_51a8ec[0x80-0x64])
+#define fStack_60 (*(g2c_fa_float *)(void *)&g2c_frame_51a8ec[0x80-0x60])
   
   piVar2 = (((int *)&audio_uart_nema_vg_context_cell));
   /* Evidence (wave11): the entry value of s17 (d8 high half) is dead in stock. It is written by
@@ -5030,16 +5047,16 @@ uint g2c_nema_vg_arc_to_51a8ec(uint a,int b)
     bVar1 = bVar4 >> 6;
     fVar9 = fVar11 + fVar13;
     bVar4 = bVar4 >> 5 & 1;
-    if (fVar21 == 0.0) {
+    if (fVar21 == 0.0f) {
       iVar5 = *piVar2;
       *(undefined4 *)(iVar5 + 0x114) = 0;
       *(undefined4 *)(iVar5 + 0x118) = 0;
       audio_uart_nema_vg_set_error_51565c(0x100);
       return 0x100;
     }
-    fVar30 = 1.0 / fVar21 + -0.25;
-    if ((fVar30 < 0.0)) {
-      fVar21 = audio_uart_float_sqrt_4397a8(fVar21 * 0.25);
+    fVar30 = 1.0f / fVar21 + -0.25f;
+    if ((fVar30 < 0.0f)) {
+      fVar21 = audio_uart_float_sqrt_4397a8(fVar21 * 0.25f);
       fVar17 = fVar17 * fVar21;
       fVar15 = fVar15 * fVar21;
       fVar10 = fVar14 / fVar15;
@@ -5050,26 +5067,26 @@ uint g2c_nema_vg_arc_to_51a8ec(uint a,int b)
       fVar9 = fVar11 + fVar13;
       fVar27 = fVar10 - fVar12;
       fVar29 = fVar11 - fVar13;
-      fVar30 = (0x0u);
+      fVar30 = g2c_bits_to_float((uint)((0x0u)));
     }
     fVar14 = fVar17;
     fStack_7c = fVar15;
     fVar24 = audio_uart_float_sqrt_4397a8(fVar30);
-    fVar23 = fVar22 * 0.5 + fVar24 * fVar29;
-    fVar25 = fVar9 * 0.5 - fVar24 * fVar27;
+    fVar23 = fVar22 * 0.5f + fVar24 * fVar29;
+    fVar25 = fVar9 * 0.5f - fVar24 * fVar27;
     fVar31 = audio_uart_float_two_input_angle_50969c(fVar11 - fVar25,fVar10 - fVar23);
     fVar21 = audio_uart_float_two_input_angle_50969c(fVar13 - fVar25,fVar12 - fVar23);
     fVar8 = (57.295780181884766f);
     fVar31 = fVar31 * (57.295780181884766f);
     fVar21 = fVar21 * (57.295780181884766f);
     fVar30 = fVar21 - fVar31;
-    if ((fVar30 < 0.0)) {
+    if ((fVar30 < 0.0f)) {
       fVar30 = fVar30 + (360.0f);
     }
     if (((!(fVar30 < (180.0f))) || (bVar4 == (bVar1 & 1))) &&
        ((fVar30 < (180.0f) || (bVar4 != (bVar1 & 1))))) {
-      fVar23 = fVar22 * 0.5 - fVar24 * fVar29;
-      fVar25 = fVar9 * 0.5 + fVar24 * fVar27;
+      fVar23 = fVar22 * 0.5f - fVar24 * fVar29;
+      fVar25 = fVar9 * 0.5f + fVar24 * fVar27;
       fVar31 = audio_uart_float_two_input_angle_50969c(fVar11 - fVar25,fVar10 - fVar23);
       fVar21 = audio_uart_float_two_input_angle_50969c(fVar13 - fVar25,fVar12 - fVar23);
       fVar31 = fVar31 * fVar8;
@@ -5208,11 +5225,11 @@ LAB_0051ada8:
     puVar3[2] = 0x324;
     puVar3[4] = 0x330;
     uVar18 = (0xff000100u);
-    puVar3[1] = fVar28;
-    puVar3[3] = fVar17;
-    puVar3[5] = fVar15;
+    puVar3[1] = g2c_float_to_bits(fVar28);
+    puVar3[3] = g2c_float_to_bits(fVar17);
+    puVar3[5] = g2c_float_to_bits(fVar15);
     puVar3[6] = 0x334;
-    puVar3[7] = fVar26;
+    puVar3[7] = g2c_float_to_bits(fVar26);
     puVar3[8] = uVar18;
     uVar6 = uVar6 | 10;
     goto LAB_0051ada8;
@@ -5222,9 +5239,9 @@ LAB_0051ada8:
   fVar8 = fVar21 * fVar21 + fVar22 * fVar22;
   if ((ABS(fVar8) < (1.0000000656873453e-05f))) {
     *(float *)(iVar5 + 0x198) = fVar28;
-    *(float *)(iVar5 + 0x19c) = fVar17 + *(float *)(iVar5 + 0x130) * -0.5;
+    *(float *)(iVar5 + 0x19c) = fVar17 + *(float *)(iVar5 + 0x130) * -0.5f;
     *(float *)(iVar5 + 0x1a0) = fVar28;
-    *(float *)(iVar5 + 0x1a4) = fVar17 + *(float *)(iVar5 + 0x130) * 0.5;
+    *(float *)(iVar5 + 0x1a4) = fVar17 + *(float *)(iVar5 + 0x130) * 0.5f;
     *(undefined4 *)(iVar5 + 400) = *(undefined4 *)(iVar5 + 0x198);
     *(undefined4 *)(iVar5 + 0x194) = *(undefined4 *)(iVar5 + 0x19c);
     iVar5 = *piVar2;
@@ -5233,13 +5250,13 @@ LAB_0051ada8:
     return 0;
   }
   fVar8 = audio_uart_float_sqrt_4397a8(fVar8);
-  fVar21 = fVar21 * (1.0 / fVar8);
-  fVar22 = fVar22 * (1.0 / fVar8);
-  fVar9 = *(float *)(iVar5 + 0x130) * 0.5 * fVar22;
+  fVar21 = fVar21 * (1.0f / fVar8);
+  fVar22 = fVar22 * (1.0f / fVar8);
+  fVar9 = *(float *)(iVar5 + 0x130) * 0.5f * fVar22;
   fVar11 = fVar28 - fVar9;
-  fVar10 = *(float *)(iVar5 + 0x134) * 0.5 * fVar21;
+  fVar10 = *(float *)(iVar5 + 0x134) * 0.5f * fVar21;
   fVar12 = fVar10 + fVar17;
-  uVar19 = CONCAT44(fVar12,fVar11);
+  uVar19 = CONCAT44(g2c_float_to_bits(fVar12),g2c_float_to_bits(fVar11));
   *(float *)(iVar5 + 400) = fVar11;
   *(float *)(iVar5 + 0x194) = fVar12;
   iVar5 = *piVar2;
@@ -5255,7 +5272,7 @@ LAB_0051ada8:
   iVar5 = *piVar2;
   fVar9 = fVar9 + fVar28;
   fVar17 = fVar17 - fVar10;
-  uVar16 = CONCAT44(fVar17,fVar9);
+  uVar16 = CONCAT44(g2c_float_to_bits(fVar17),g2c_float_to_bits(fVar9));
   *(float *)(iVar5 + 0x1a8) = fVar9;
   *(float *)(iVar5 + 0x1ac) = fVar17;
   iVar5 = *piVar2;
@@ -5267,7 +5284,7 @@ LAB_0051ada8:
     bVar7 = -1 < (int)((uint)*(byte *)(iVar5 + 0x7d) << 0x1b);
     uVar6 = audio_uart_nema_stencil_save_52266e((uint)bVar7,0,(uint)bVar7,0);
     iVar5 = *piVar2;
-    if (0.0 < *(float *)(iVar5 + 0x184)) {
+    if (0.0f < *(float *)(iVar5 + 0x184)) {
       fStack_64 = *(float *)(iVar5 + 0x164);
       fStack_60 = *(float *)(iVar5 + 0x168);
       fStack_6c = *(float *)(iVar5 + 0x16c);
@@ -5299,7 +5316,7 @@ LAB_0051ada8:
       }
     }
     iVar5 = *piVar2;
-    if ((0.0 < *(float *)(iVar5 + 0x158)) && (*(int *)(iVar5 + 0x128) == 1)) {
+    if ((0.0f < *(float *)(iVar5 + 0x158)) && (*(int *)(iVar5 + 0x128) == 1)) {
       if ((ABS(*(float *)(iVar5 + 0x15c) * fVar22 - *(float *)(iVar5 + 0x160) * fVar21)
                       < (0.05000000447034836f))) {
         uVar19 = *(undefined8 *)(iVar5 + 0x140);
@@ -5308,12 +5325,12 @@ LAB_0051ada8:
       else {
         fStack_64 = *(float *)(iVar5 + 0x140);
         fStack_60 = *(float *)(iVar5 + 0x144);
-        fStack_6c = (float)uVar19;
-        fStack_68 = (float)((ulonglong)uVar19 >> 0x20);
+        fStack_6c = (float)g2c_bits_to_float((uint)(uVar19));
+        fStack_68 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar19 >> 0x20)));
         fStack_74 = *(float *)(iVar5 + 0x148);
         fStack_70 = *(float *)(iVar5 + 0x14c);
-        fStack_7c = (float)uVar16;
-        fStack_78 = (float)((ulonglong)uVar16 >> 0x20);
+        fStack_7c = (float)g2c_bits_to_float((uint)(uVar16));
+        fStack_78 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar16 >> 0x20)));
         error = g2c_nema_vg_stroke_join_5179d0
                           (&fStack_64,(uint *)&fStack_6c,&fStack_74,(uint *)&fStack_7c,0);
         if (error != 0) {
@@ -5330,7 +5347,7 @@ LAB_0051acca:
     *(int *)(iVar5 + 0x128) = *(int *)(iVar5 + 0x128) + 1;
     uVar20 = (undefined4)((ulonglong)uVar19 >> 0x20);
     uVar18 = (undefined4)((ulonglong)uVar16 >> 0x20);
-    if (*(float *)(iVar5 + 0x158) == 0.0) {
+    if (*(float *)(iVar5 + 0x158) == 0.0f) {
       *(int *)(iVar5 + 0x138) = (int)uVar19;
       *(undefined4 *)(iVar5 + 0x13c) = uVar20;
       iVar5 = *piVar2;
@@ -5368,6 +5385,15 @@ LAB_0051acca:
   audio_uart_nema_stencil_restore_5226b2(uVar6);
   return 0;
 }
+#undef fStack_7c
+#undef fStack_78
+#undef fStack_74
+#undef fStack_70
+#undef fStack_6c
+#undef fStack_68
+#undef fStack_64
+#undef fStack_60
+
 
   
 
@@ -5428,10 +5454,10 @@ void g2c_nema_vg_bezier_subdiv_51b140(float a,float b,float c,int d)
     if (bVar6 != 0) {
       fVar9 = *(float *)(iVar4 + 0x2d8);
       fVar8 = (fVar13 - fVar14) / fVar9;
-      fVar14 = (fVar13 + fVar14) * 0.5;
+      fVar14 = (fVar13 + fVar14) * 0.5f;
       fVar13 = (c - fVar16) / fVar9;
-      fVar9 = fVar9 * 0.5;
-      fVar16 = (c + fVar16) * 0.5;
+      fVar9 = fVar9 * 0.5f;
+      fVar16 = (c + fVar16) * 0.5f;
       if (d == 1) {
         uVar2 = g2c_nema_vg_f2u_522f1c(fVar9);
         iVar4 = (int)uVar2 / 2;
@@ -5531,10 +5557,10 @@ void g2c_nema_vg_bezier_subdiv_51b140(float a,float b,float c,int d)
   fVar13 = *(float *)(iVar4 + 0x2d8);
   if (d == 1) {
     fVar16 = (*(float *)(iVar4 + 0x1a0) - fVar8) / fVar13;
-    fVar9 = (*(float *)(iVar4 + 0x1a0) + fVar8) * 0.5;
-    fVar11 = fVar13 * 0.5;
+    fVar9 = (*(float *)(iVar4 + 0x1a0) + fVar8) * 0.5f;
+    fVar11 = fVar13 * 0.5f;
     fVar13 = (*(float *)(iVar4 + 0x1a4) - *(float *)(iVar4 + 0x19c)) / fVar13;
-    fVar10 = (*(float *)(iVar4 + 0x1a4) + *(float *)(iVar4 + 0x19c)) * 0.5;
+    fVar10 = (*(float *)(iVar4 + 0x1a4) + *(float *)(iVar4 + 0x19c)) * 0.5f;
     uVar2 = g2c_nema_vg_f2u_522f1c(fVar11);
     iVar4 = (int)uVar2 / 2;
     fVar8 = (float)VectorSignedToFloat(iVar4,(byte)(uVar5 >> 0x16) & 3);
@@ -5582,10 +5608,10 @@ void g2c_nema_vg_bezier_subdiv_51b140(float a,float b,float c,int d)
   }
   else {
     fVar8 = (*(float *)(iVar4 + 0x150) - *(float *)(iVar4 + 0x138)) / fVar13;
-    fVar9 = (*(float *)(iVar4 + 0x150) + *(float *)(iVar4 + 0x138)) * 0.5;
-    fVar11 = fVar13 * 0.5;
+    fVar9 = (*(float *)(iVar4 + 0x150) + *(float *)(iVar4 + 0x138)) * 0.5f;
+    fVar11 = fVar13 * 0.5f;
     fVar13 = (*(float *)(iVar4 + 0x154) - *(float *)(iVar4 + 0x13c)) / fVar13;
-    fVar10 = (*(float *)(iVar4 + 0x154) + *(float *)(iVar4 + 0x13c)) * 0.5;
+    fVar10 = (*(float *)(iVar4 + 0x154) + *(float *)(iVar4 + 0x13c)) * 0.5f;
     uVar2 = g2c_nema_vg_f2u_522f1c(fVar11);
     iVar4 = (int)uVar2 / 2;
     fVar16 = (float)VectorSignedToFloat(iVar4,(byte)(uVar5 >> 0x16) & 3);
@@ -5715,10 +5741,10 @@ uint g2c_nema_vg_arc_seg_51b8f0(float a,float b,float c,float d,float e)
       if (bVar10 != 0) {
         fVar20 = *(float *)(iVar8 + 0x2d8);
         fVar18 = (fVar12 - fVar16) / fVar20;
-        fVar16 = (fVar12 + fVar16) * 0.5;
-        fVar13 = fVar20 * 0.5;
+        fVar16 = (fVar12 + fVar16) * 0.5f;
+        fVar13 = fVar20 * 0.5f;
         fVar20 = (fVar15 - fVar17) / fVar20;
-        fVar17 = (fVar15 + fVar17) * 0.5;
+        fVar17 = (fVar15 + fVar17) * 0.5f;
         uVar6 = g2c_nema_vg_f2u_522f1c(fVar13);
         iVar8 = (int)uVar6 / 2;
         fVar15 = (float)VectorSignedToFloat(iVar8,(byte)(uVar9 >> 0x16) & 3);
@@ -5772,10 +5798,10 @@ uint g2c_nema_vg_arc_seg_51b8f0(float a,float b,float c,float d,float e)
     }
     fVar12 = *(float *)(iVar8 + 0x2d8);
     fVar15 = (*(float *)(iVar8 + 0x150) - *(float *)(iVar8 + 0x138)) / fVar12;
-    fVar18 = (*(float *)(iVar8 + 0x150) + *(float *)(iVar8 + 0x138)) * 0.5;
-    fVar13 = fVar12 * 0.5;
+    fVar18 = (*(float *)(iVar8 + 0x150) + *(float *)(iVar8 + 0x138)) * 0.5f;
+    fVar13 = fVar12 * 0.5f;
     fVar12 = (*(float *)(iVar8 + 0x154) - *(float *)(iVar8 + 0x13c)) / fVar12;
-    fVar20 = (*(float *)(iVar8 + 0x154) + *(float *)(iVar8 + 0x13c)) * 0.5;
+    fVar20 = (*(float *)(iVar8 + 0x154) + *(float *)(iVar8 + 0x13c)) * 0.5f;
     uVar6 = g2c_nema_vg_f2u_522f1c(fVar13);
     iVar8 = (int)uVar6 / 2;
     fVar17 = (float)VectorSignedToFloat(iVar8,(byte)(uVar9 >> 0x16) & 3);
@@ -5842,7 +5868,7 @@ uint g2c_nema_vg_arc_seg_51b8f0(float a,float b,float c,float d,float e)
       e = *(float *)(iVar8 + 0x1ac);
     }
     if (bVar11 && (bVar11 && fVar17 == e)) {
-      fVar18 = *(float *)(iVar8 + 300) * -0.5;
+      fVar18 = *(float *)(iVar8 + 300) * -0.5f;
       bVar11 = -1 < (int)((uint)*(byte *)(iVar8 + 0x7d) << 0x1b);
       uVar6 = audio_uart_nema_stencil_save_52266e((uint)bVar11,0,(uint)bVar11,(uint)bVar11);
       g2c_nema_vg_emit_verts_516b34
@@ -5850,8 +5876,8 @@ uint g2c_nema_vg_arc_seg_51b8f0(float a,float b,float c,float d,float e)
       goto LAB_0051b9d8;
     }
   }
-  fVar15 = 0.5;
-  fVar16 = *(float *)(iVar8 + 300) * 0.5;
+  fVar15 = 0.5f;
+  fVar16 = *(float *)(iVar8 + 300) * 0.5f;
   bVar11 = *(float *)(iVar8 + 0x140) <= *(float *)(iVar8 + 0x138);
   uVar2 = *(undefined8 *)(iVar8 + 0x138);
   uVar3 = *(undefined8 *)(iVar8 + 0x150);
@@ -5861,14 +5887,14 @@ uint g2c_nema_vg_arc_seg_51b8f0(float a,float b,float c,float d,float e)
   if (!bVar11) {
     fVar15 = *(float *)(iVar8 + 0x148);
   }
-  fVar13 = (float)uVar4;
+  fVar13 = (float)g2c_bits_to_float((uint)(uVar4));
   fVar19 = fVar12 - fVar13;
-  fVar14 = (float)((ulonglong)uVar4 >> 0x20);
+  fVar14 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar4 >> 0x20)));
   fVar20 = fVar17 - fVar14;
   fVar18 = g2c_nema_vg_sqrt_524218(fVar19 * fVar19 + fVar20 * fVar20);
   fVar20 = -(fVar20 / fVar18);
   if (bVar11 || (bVar11 || fVar15 <= fVar12)) {
-    if (0.0 < fVar20) goto LAB_0051ba64;
+    if (0.0f < fVar20) goto LAB_0051ba64;
 LAB_0051baa6:
     fVar12 = fVar12 - fVar16 * fVar20;
     fVar15 = fVar16 * (fVar19 / fVar18);
@@ -5877,7 +5903,7 @@ LAB_0051baa6:
     fVar15 = fVar14 - fVar15;
   }
   else {
-    if (0.0 < fVar20) goto LAB_0051baa6;
+    if (0.0f < fVar20) goto LAB_0051baa6;
 LAB_0051ba64:
     fVar12 = fVar16 * fVar20 + fVar12;
     fVar15 = fVar16 * (fVar19 / fVar18);
@@ -5888,8 +5914,8 @@ LAB_0051ba64:
   bVar11 = -1 < (int)((uint)*(byte *)(*piVar5 + 0x7d) << 0x1b);
   uVar6 = audio_uart_nema_stencil_save_52266e(0,(uint)bVar11,(uint)bVar11,(uint)bVar11);
   g2c_nema_vg_emit_verts_516b34
-            ((float)uVar2,(float)((ulonglong)uVar2 >> 0x20),(float)uVar3,
-             (float)((ulonglong)uVar3 >> 0x20),fVar12,fVar17,fVar13,fVar15);
+            ((float)g2c_bits_to_float((uint)(uVar2)),(float)g2c_bits_to_float((uint)(((ulonglong)uVar2 >> 0x20))),(float)g2c_bits_to_float((uint)(uVar3)),
+             (float)g2c_bits_to_float((uint)(((ulonglong)uVar3 >> 0x20))),fVar12,fVar17,fVar13,fVar15);
   if ((int)((uint)*(byte *)(*piVar5 + 0x7d) << 0x1b) < 0) {
     return 0;
   }
@@ -5974,10 +6000,10 @@ uint g2c_nema_vg_arc_seg2_51bf7c(float a,float b,float c,float d,float e)
       if (bVar9 != 0) {
         fVar18 = *(float *)(iVar7 + 0x2d8);
         fVar12 = (fVar17 - fVar14) / fVar18;
-        fVar14 = (fVar17 + fVar14) * 0.5;
-        fVar20 = fVar18 * 0.5;
+        fVar14 = (fVar17 + fVar14) * 0.5f;
+        fVar20 = fVar18 * 0.5f;
         fVar18 = (d - fVar15) / fVar18;
-        fVar13 = (d + fVar15) * 0.5;
+        fVar13 = (d + fVar15) * 0.5f;
         uVar5 = g2c_nema_vg_f2u_522f1c(fVar20);
         iVar7 = (int)uVar5 / 2;
         fVar17 = (float)VectorSignedToFloat(iVar7,(byte)(uVar8 >> 0x16) & 3);
@@ -6029,10 +6055,10 @@ uint g2c_nema_vg_arc_seg2_51bf7c(float a,float b,float c,float d,float e)
       }
     }
     fVar15 = *(float *)(iVar7 + 0x2d8);
-    fVar14 = (*(float *)(iVar7 + 0x1a0) + fVar18) * 0.5;
-    fVar20 = fVar15 * 0.5;
+    fVar14 = (*(float *)(iVar7 + 0x1a0) + fVar18) * 0.5f;
+    fVar20 = fVar15 * 0.5f;
     fVar17 = (*(float *)(iVar7 + 0x1a4) - fVar12) / fVar15;
-    fVar13 = (*(float *)(iVar7 + 0x1a4) + fVar12) * 0.5;
+    fVar13 = (*(float *)(iVar7 + 0x1a4) + fVar12) * 0.5f;
     fVar15 = (*(float *)(iVar7 + 0x1a0) - fVar18) / fVar15;
     uVar5 = g2c_nema_vg_f2u_522f1c(fVar20);
     iVar7 = (int)uVar5 / 2;
@@ -6099,7 +6125,7 @@ uint g2c_nema_vg_arc_seg2_51bf7c(float a,float b,float c,float d,float e)
       e = *(float *)(iVar7 + 0x1ac);
     }
     if (bVar11 && (bVar11 && fVar15 == e)) {
-      fVar18 = *(float *)(iVar7 + 300) * 0.5;
+      fVar18 = *(float *)(iVar7 + 300) * 0.5f;
       uVar8 = (uint)(-1 < (int)((uint)*(byte *)(iVar7 + 0x7d) << 0x1b));
       uVar5 = audio_uart_nema_stencil_save_52266e(uVar8,uVar8,uVar8,0);
       g2c_nema_vg_emit_verts_516b34(fVar12,b,fVar18 + fVar12,b,fVar18 + fVar14,fVar15,fVar14,fVar15)
@@ -6112,7 +6138,7 @@ uint g2c_nema_vg_arc_seg2_51bf7c(float a,float b,float c,float d,float e)
   bVar11 = (fVar12 >= fVar18);
   uVar2 = *(undefined8 *)(iVar7 + 0x198);
   uVar3 = *(undefined8 *)(iVar7 + 0x1a0);
-  fVar14 = *(float *)(iVar7 + 300) * 0.5;
+  fVar14 = *(float *)(iVar7 + 300) * 0.5f;
   fVar12 = *(float *)(iVar7 + 0x1a0);
   fVar15 = *(float *)(iVar7 + 0x1a4);
   if (bVar11) {
@@ -6123,7 +6149,7 @@ uint g2c_nema_vg_arc_seg2_51bf7c(float a,float b,float c,float d,float e)
   fVar13 = g2c_nema_vg_sqrt_524218(fVar19 * fVar19 + fVar20 * fVar20);
   fVar20 = -(fVar20 / fVar13);
   if (bVar11) {
-    if (0.0 < fVar20) goto LAB_0051c120;
+    if (0.0f < fVar20) goto LAB_0051c120;
 LAB_0051c0de:
     fVar12 = fVar14 * fVar20 + fVar12;
     fVar13 = fVar14 * (fVar19 / fVar13);
@@ -6132,7 +6158,7 @@ LAB_0051c0de:
     fVar13 = fVar13 + fVar17;
   }
   else {
-    if (0.0 < fVar20) goto LAB_0051c0de;
+    if (0.0f < fVar20) goto LAB_0051c0de;
 LAB_0051c120:
     fVar12 = fVar12 - fVar14 * fVar20;
     fVar13 = fVar14 * (fVar19 / fVar13);
@@ -6143,8 +6169,8 @@ LAB_0051c120:
   bVar11 = -1 < (int)((uint)*(byte *)(*piVar4 + 0x7d) << 0x1b);
   uVar5 = audio_uart_nema_stencil_save_52266e(0,(uint)bVar11,(uint)bVar11,(uint)bVar11);
   g2c_nema_vg_emit_verts_516b34
-            ((float)uVar2,(float)((ulonglong)uVar2 >> 0x20),(float)uVar3,
-             (float)((ulonglong)uVar3 >> 0x20),fVar12,fVar15,fVar18,fVar13);
+            ((float)g2c_bits_to_float((uint)(uVar2)),(float)g2c_bits_to_float((uint)(((ulonglong)uVar2 >> 0x20))),(float)g2c_bits_to_float((uint)(uVar3)),
+             (float)g2c_bits_to_float((uint)(((ulonglong)uVar3 >> 0x20))),fVar12,fVar15,fVar18,fVar13);
   if ((int)((uint)*(byte *)(*piVar4 + 0x7d) << 0x1b) < 0) {
     return 0;
   }
@@ -6220,7 +6246,7 @@ uint g2c_nema_vg_arc_seg3_51c5ec(float a,float b,float c,float d,float e)
           bVar10 = (byte)(fVar18 == *(float *)(iVar9 + 0x1ac));
         }
         if (bVar10 != 0) {
-          fVar20 = *(float *)(iVar9 + 300) * -0.5;
+          fVar20 = *(float *)(iVar9 + 300) * -0.5f;
           bVar12 = -1 < (int)((uint)*(byte *)(iVar9 + 0x7d) << 0x1b);
           uVar6 = audio_uart_nema_stencil_save_52266e((uint)bVar12,0,(uint)bVar12,(uint)bVar12);
           g2c_nema_vg_emit_verts_516b34
@@ -6232,7 +6258,7 @@ uint g2c_nema_vg_arc_seg3_51c5ec(float a,float b,float c,float d,float e)
       afStack_1dc[0] = *(float *)(iVar9 + 0x13c);
       afStack_1f4[3] = *(float *)(iVar9 + 0x150);
       fStack_1e4 = *(float *)(iVar9 + 0x154);
-      fVar18 = *(float *)(iVar9 + 300) * 0.5;
+      fVar18 = *(float *)(iVar9 + 300) * 0.5f;
       fVar16 = *(float *)(iVar9 + 0x150);
       uVar2 = *(undefined8 *)(iVar9 + 0x138);
       fVar13 = *(float *)(iVar9 + 0x154);
@@ -6240,9 +6266,9 @@ uint g2c_nema_vg_arc_seg3_51c5ec(float a,float b,float c,float d,float e)
       if (*(float *)(iVar9 + 0x138) < *(float *)(iVar9 + 0x140)) {
         bVar10 = (byte)(fVar16 < *(float *)(iVar9 + 0x148));
       }
-      fVar14 = (float)uVar2;
+      fVar14 = (float)g2c_bits_to_float((uint)(uVar2));
       fVar21 = fVar16 - fVar14;
-      fVar22 = (float)((ulonglong)uVar2 >> 0x20);
+      fVar22 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar2 >> 0x20)));
       fVar20 = fVar13 - fVar22;
       fVar17 = g2c_nema_vg_sqrt_524218(fVar21 * fVar21 + fVar20 * fVar20);
       fVar20 = -(fVar20 / fVar17);
@@ -6296,10 +6322,10 @@ LAB_0051c810:
         if (bVar10 != 0) {
           fVar14 = *(float *)(iVar9 + 0x2d8);
           fVar20 = (fVar13 - fVar17) / fVar14;
-          fVar17 = (fVar13 + fVar17) * 0.5;
-          fVar21 = fVar14 * 0.5;
+          fVar17 = (fVar13 + fVar17) * 0.5f;
+          fVar21 = fVar14 * 0.5f;
           fVar14 = (fVar16 - fVar18) / fVar14;
-          fVar22 = (fVar16 + fVar18) * 0.5;
+          fVar22 = (fVar16 + fVar18) * 0.5f;
           uVar6 = g2c_nema_vg_f2u_522f1c(fVar21);
           iVar9 = (int)uVar6 / 2;
           fVar16 = (float)VectorSignedToFloat(iVar9,G2C_FPSCR_RMODE_RN);
@@ -6312,7 +6338,7 @@ LAB_0051c810:
           fVar16 = (float)(iVar9 - 1);
           if (1 < iVar9) {
             pfVar7 = afStack_1f4 + 6;
-            for (uVar6 = (uint)fVar16 & 3; uVar6 != 0; uVar6 = uVar6 - 1) {
+            for (uVar6 = (uint)g2c_float_to_bits(fVar16) & 3; uVar6 != 0; uVar6 = uVar6 - 1) {
               *pfVar7 = fVar17 + fVar21 * fVar20;
               pfVar7[1] = fVar22 + fVar21 * fVar14;
               fVar15 = fVar18 * fVar20;
@@ -6320,7 +6346,7 @@ LAB_0051c810:
               pfVar7 = pfVar7 + 2;
               fVar14 = fVar15 + fVar13 * fVar14;
             }
-            for (uVar6 = (uint)fVar16 >> 2; afStack_1f4[3] = fVar16, uVar6 != 0; uVar6 = uVar6 - 1)
+            for (uVar6 = (uint)g2c_float_to_bits(fVar16) >> 2; afStack_1f4[3] = fVar16, uVar6 != 0; uVar6 = uVar6 - 1)
             {
               *pfVar7 = fVar17 + fVar21 * fVar20;
               pfVar7[1] = fVar22 + fVar21 * fVar14;
@@ -6343,7 +6369,7 @@ LAB_0051c810:
           }
           uVar6 = audio_uart_nema_stencil_save_52266e
                             (0,-(uint)((*(byte *)(*piVar5 + 0x7d) & 0x10) == 0) >> 0x1f,0,0);
-          g2c_nema_vg_path_transform_523a34(afStack_1f4 + 4,(int)fVar16,2);
+          g2c_nema_vg_path_transform_523a34(afStack_1f4 + 4,(int)g2c_float_to_bits(fVar16),2);
           bVar12 = -1 < (int)((uint)*(byte *)(*piVar5 + 0x7d) << 0x1b);
           audio_uart_nema_stencil_save_52266e(0,(uint)bVar12,(uint)bVar12,0);
           g2c_nema_raster_triangle_f_522a24
@@ -6354,10 +6380,10 @@ LAB_0051c810:
       }
       fVar13 = *(float *)(iVar9 + 0x2d8);
       fVar16 = (*(float *)(iVar9 + 0x150) - *(float *)(iVar9 + 0x138)) / fVar13;
-      fVar14 = (*(float *)(iVar9 + 0x150) + *(float *)(iVar9 + 0x138)) * 0.5;
-      fVar21 = fVar13 * 0.5;
+      fVar14 = (*(float *)(iVar9 + 0x150) + *(float *)(iVar9 + 0x138)) * 0.5f;
+      fVar21 = fVar13 * 0.5f;
       fVar13 = (*(float *)(iVar9 + 0x154) - *(float *)(iVar9 + 0x13c)) / fVar13;
-      fVar22 = (*(float *)(iVar9 + 0x154) + *(float *)(iVar9 + 0x13c)) * 0.5;
+      fVar22 = (*(float *)(iVar9 + 0x154) + *(float *)(iVar9 + 0x13c)) * 0.5f;
       uVar6 = g2c_nema_vg_f2u_522f1c(fVar21);
       iVar9 = (int)uVar6 / 2;
       fVar18 = (float)VectorSignedToFloat(iVar9,G2C_FPSCR_RMODE_RN);
@@ -6370,7 +6396,7 @@ LAB_0051c810:
       fVar18 = (float)(iVar9 - 1);
       if (1 < iVar9) {
         pfVar7 = afStack_1f4 + 6;
-        for (uVar6 = (uint)fVar18 & 3; uVar6 != 0; uVar6 = uVar6 - 1) {
+        for (uVar6 = (uint)g2c_float_to_bits(fVar18) & 3; uVar6 != 0; uVar6 = uVar6 - 1) {
           *pfVar7 = fVar14 + fVar21 * fVar16;
           pfVar7[1] = fVar22 + fVar21 * fVar13;
           fVar15 = fVar20 * fVar16;
@@ -6378,7 +6404,7 @@ LAB_0051c810:
           pfVar7 = pfVar7 + 2;
           fVar13 = fVar15 + fVar17 * fVar13;
         }
-        for (uVar6 = (uint)fVar18 >> 2; afStack_1f4[3] = fVar18, uVar6 != 0; uVar6 = uVar6 - 1) {
+        for (uVar6 = (uint)g2c_float_to_bits(fVar18) >> 2; afStack_1f4[3] = fVar18, uVar6 != 0; uVar6 = uVar6 - 1) {
           *pfVar7 = fVar14 + fVar21 * fVar16;
           pfVar7[1] = fVar22 + fVar21 * fVar13;
           fVar15 = fVar17 * fVar16 - fVar20 * fVar13;
@@ -6400,7 +6426,7 @@ LAB_0051c810:
       }
       uVar6 = audio_uart_nema_stencil_save_52266e
                         (0,-(uint)((*(byte *)(*piVar5 + 0x7d) & 0x10) == 0) >> 0x1f,0,0);
-      g2c_nema_vg_path_transform_523a34(afStack_1f4 + 4,(int)fVar18,2);
+      g2c_nema_vg_path_transform_523a34(afStack_1f4 + 4,(int)g2c_float_to_bits(fVar18),2);
       bVar12 = -1 < (int)((uint)*(byte *)(*piVar5 + 0x7d) << 0x1b);
       audio_uart_nema_stencil_save_52266e(0,(uint)bVar12,(uint)bVar12,0);
       g2c_nema_raster_triangle_f_522a24
@@ -6453,10 +6479,10 @@ LAB_0051cd0a:
       if (bVar10 != 0) {
         fVar20 = *(float *)(iVar9 + 0x2d8);
         fVar16 = (fVar13 - fVar17) / fVar20;
-        fVar14 = (fVar13 + fVar17) * 0.5;
-        fVar21 = fVar20 * 0.5;
+        fVar14 = (fVar13 + fVar17) * 0.5f;
+        fVar21 = fVar20 * 0.5f;
         fVar20 = (c - fVar18) / fVar20;
-        fVar22 = (c + fVar18) * 0.5;
+        fVar22 = (c + fVar18) * 0.5f;
         uVar8 = g2c_nema_vg_f2u_522f1c(fVar21);
         iVar9 = (int)uVar8 / 2;
         fVar13 = (float)VectorSignedToFloat(iVar9,(byte)(uVar6 >> 0x16) & 3);
@@ -6468,7 +6494,7 @@ LAB_0051cd0a:
         fVar13 = (float)(iVar9 - 1);
         if (1 < iVar9) {
           pfVar7 = afStack_1f4 + 6;
-          for (uVar6 = (uint)fVar13 & 3; uVar6 != 0; uVar6 = uVar6 - 1) {
+          for (uVar6 = (uint)g2c_float_to_bits(fVar13) & 3; uVar6 != 0; uVar6 = uVar6 - 1) {
             *pfVar7 = fVar14 + fVar21 * fVar16;
             pfVar7[1] = fVar22 + fVar21 * fVar20;
             fVar15 = fVar17 * fVar16;
@@ -6476,7 +6502,7 @@ LAB_0051cd0a:
             pfVar7 = pfVar7 + 2;
             fVar20 = fVar15 + fVar18 * fVar20;
           }
-          for (uVar6 = (uint)fVar13 >> 2; afStack_1f4[3] = fVar13, uVar6 != 0; uVar6 = uVar6 - 1) {
+          for (uVar6 = (uint)g2c_float_to_bits(fVar13) >> 2; afStack_1f4[3] = fVar13, uVar6 != 0; uVar6 = uVar6 - 1) {
             *pfVar7 = fVar14 + fVar21 * fVar16;
             pfVar7[1] = fVar22 + fVar21 * fVar20;
             fVar15 = fVar18 * fVar16 - fVar17 * fVar20;
@@ -6498,7 +6524,7 @@ LAB_0051cd0a:
         }
         uVar6 = audio_uart_nema_stencil_save_52266e
                           (0,-(uint)((*(byte *)(*piVar5 + 0x7d) & 0x10) == 0) >> 0x1f,0,0);
-        g2c_nema_vg_path_transform_523a34(afStack_1f4 + 4,(int)fVar13,2);
+        g2c_nema_vg_path_transform_523a34(afStack_1f4 + 4,(int)g2c_float_to_bits(fVar13),2);
         bVar12 = -1 < (int)((uint)*(byte *)(*piVar5 + 0x7d) << 0x1b);
         audio_uart_nema_stencil_save_52266e(0,(uint)bVar12,(uint)bVar12,0);
         g2c_nema_raster_triangle_f_522a24
@@ -6509,10 +6535,10 @@ LAB_0051cd0a:
     }
     fVar18 = *(float *)(iVar9 + 0x2d8);
     fVar13 = (*(float *)(iVar9 + 0x1a0) - fVar16) / fVar18;
-    fVar14 = (*(float *)(iVar9 + 0x1a0) + fVar16) * 0.5;
-    fVar21 = fVar18 * 0.5;
+    fVar14 = (*(float *)(iVar9 + 0x1a0) + fVar16) * 0.5f;
+    fVar21 = fVar18 * 0.5f;
     fVar18 = (*(float *)(iVar9 + 0x1a4) - *(float *)(iVar9 + 0x19c)) / fVar18;
-    fVar22 = (*(float *)(iVar9 + 0x1a4) + *(float *)(iVar9 + 0x19c)) * 0.5;
+    fVar22 = (*(float *)(iVar9 + 0x1a4) + *(float *)(iVar9 + 0x19c)) * 0.5f;
     uVar8 = g2c_nema_vg_f2u_522f1c(fVar21);
     iVar9 = (int)uVar8 / 2;
     fVar16 = (float)VectorSignedToFloat(iVar9,(byte)(uVar6 >> 0x16) & 3);
@@ -6524,7 +6550,7 @@ LAB_0051cd0a:
     fVar16 = (float)(iVar9 - 1);
     if (1 < iVar9) {
       pfVar7 = afStack_1f4 + 6;
-      for (uVar6 = (uint)fVar16 & 3; uVar6 != 0; uVar6 = uVar6 - 1) {
+      for (uVar6 = (uint)g2c_float_to_bits(fVar16) & 3; uVar6 != 0; uVar6 = uVar6 - 1) {
         *pfVar7 = fVar14 + fVar21 * fVar13;
         pfVar7[1] = fVar22 + fVar21 * fVar18;
         fVar15 = fVar20 * fVar13;
@@ -6532,7 +6558,7 @@ LAB_0051cd0a:
         pfVar7 = pfVar7 + 2;
         fVar18 = fVar15 + fVar17 * fVar18;
       }
-      for (uVar6 = (uint)fVar16 >> 2; afStack_1f4[3] = fVar16, uVar6 != 0; uVar6 = uVar6 - 1) {
+      for (uVar6 = (uint)g2c_float_to_bits(fVar16) >> 2; afStack_1f4[3] = fVar16, uVar6 != 0; uVar6 = uVar6 - 1) {
         *pfVar7 = fVar14 + fVar21 * fVar13;
         pfVar7[1] = fVar22 + fVar21 * fVar18;
         fVar15 = fVar17 * fVar13 - fVar20 * fVar18;
@@ -6554,7 +6580,7 @@ LAB_0051cd0a:
     }
     uVar6 = audio_uart_nema_stencil_save_52266e
                       (0,-(uint)((*(byte *)(*piVar5 + 0x7d) & 0x10) == 0) >> 0x1f,0,0);
-    g2c_nema_vg_path_transform_523a34(afStack_1f4 + 4,(int)fVar16,2);
+    g2c_nema_vg_path_transform_523a34(afStack_1f4 + 4,(int)g2c_float_to_bits(fVar16),2);
     bVar12 = -1 < (int)((uint)*(byte *)(*piVar5 + 0x7d) << 0x1b);
     audio_uart_nema_stencil_save_52266e(0,(uint)bVar12,(uint)bVar12,0);
     g2c_nema_raster_triangle_f_522a24
@@ -6578,7 +6604,7 @@ LAB_0051cd0a:
       e = *(float *)(iVar9 + 0x1ac);
     }
     if (bVar12 && (bVar12 && fVar18 == e)) {
-      fVar13 = *(float *)(iVar9 + 300) * 0.5;
+      fVar13 = *(float *)(iVar9 + 300) * 0.5f;
       afStack_1f4[3] = fVar13 + fVar16;
       uVar6 = (uint)(-1 < (int)((uint)*(byte *)(iVar9 + 0x7d) << 0x1b));
       fStack_1e4 = b;
@@ -6596,7 +6622,7 @@ LAB_0051cd0a:
   bVar12 = (fVar16 >= fVar13);
   uVar2 = *(undefined8 *)(iVar9 + 0x198);
   uVar4 = *(undefined8 *)(iVar9 + 0x1a0);
-  fVar17 = *(float *)(iVar9 + 300) * 0.5;
+  fVar17 = *(float *)(iVar9 + 300) * 0.5f;
   fVar16 = *(float *)(iVar9 + 0x1a0);
   fVar20 = *(float *)(iVar9 + 0x19c);
   fVar18 = *(float *)(iVar9 + 0x1a4);
@@ -6608,7 +6634,7 @@ LAB_0051cd0a:
   fVar14 = g2c_nema_vg_sqrt_524218(fVar21 * fVar21 + fVar22 * fVar22);
   fVar22 = -(fVar22 / fVar14);
   if (bVar12) {
-    if (0.0 < fVar22) goto LAB_0051ce1c;
+    if (0.0f < fVar22) goto LAB_0051ce1c;
 LAB_0051cdda:
     fVar16 = fVar17 * fVar22 + fVar16;
     fVar14 = fVar17 * (fVar21 / fVar14);
@@ -6617,7 +6643,7 @@ LAB_0051cdda:
     fVar14 = fVar14 + fVar20;
   }
   else {
-    if (0.0 < fVar22) goto LAB_0051cdda;
+    if (0.0f < fVar22) goto LAB_0051cdda;
 LAB_0051ce1c:
     fVar16 = fVar16 - fVar17 * fVar22;
     fVar14 = fVar17 * (fVar21 / fVar14);
@@ -6628,8 +6654,8 @@ LAB_0051ce1c:
   bVar12 = -1 < (int)((uint)*(byte *)(*piVar5 + 0x7d) << 0x1b);
   uVar6 = audio_uart_nema_stencil_save_52266e(0,(uint)bVar12,(uint)bVar12,(uint)bVar12);
   g2c_nema_vg_emit_verts_516b34
-            ((float)uVar2,(float)((ulonglong)uVar2 >> 0x20),(float)uVar4,
-             (float)((ulonglong)uVar4 >> 0x20),fVar16,fVar18,fVar13,fVar14);
+            ((float)g2c_bits_to_float((uint)(uVar2)),(float)g2c_bits_to_float((uint)(((ulonglong)uVar2 >> 0x20))),(float)g2c_bits_to_float((uint)(uVar4)),
+             (float)g2c_bits_to_float((uint)(((ulonglong)uVar4 >> 0x20))),fVar16,fVar18,fVar13,fVar14);
   if ((int)((uint)*(byte *)(*piVar5 + 0x7d) << 0x1b) < 0) {
     return 0;
   }
@@ -6701,56 +6727,62 @@ uint g2c_nema_vg_draw_fill_51d2e0(uint *a)
   float fVar41;
   float fVar42;
   float g;
-  float *pfStack_2cc;
-  float fStack_2c8;
-  float *pfStack_2c4;
-  float fStack_2c0;
-  float fStack_2bc;
-  float fStack_2b8;
-  float fStack_2b4;
-  float fStack_2b0;
-  float fStack_2ac;
-  float fStack_2a8;
-  float fStack_2a4;
-  float fStack_2a0;
-  float fStack_29c;
-  float fStack_298;
-  float fStack_294;
-  float fStack_290;
-  float fStack_28c;
-  float fStack_288;
-  float fStack_284;
-  float fStack_280;
-  float fStack_27c;
-  float fStack_278;
-  float fStack_274;
-  float fStack_270;
-  float fStack_26c;
-  float fStack_268;
-  float fStack_264;
-  float fStack_260;
-  float fStack_25c;
-  float fStack_258;
-  float fStack_254;
-  float fStack_250;
-  float fStack_24c;
-  float fStack_248;
-  undefined4 uStack_244;
-  undefined4 uStack_240;
-  undefined4 uStack_23c;
-  undefined4 uStack_238;
-  float fStack_22c;
-  float fStack_228;
-  float fStack_224;
-  float fStack_220;
-  float fStack_21c;
-  float fStack_218;
-  float fStack_214;
-  float fStack_210;
-  float afStack_200 [4];
-  float fStack_1f0;
-  float fStack_1ec;
-  float afStack_1e8 [96];
+  /* Stock frame of 0x51d2e0 as one block: locals keep the entry-SP offsets Ghidra named them by
+   * (X_Stack_NN at g2c_frame_51d2e0[0x2d0-0xNN]) so &local passed to callees spans its stock neighbours. */
+  unsigned char g2c_frame_51d2e0[0x2d0] __attribute__((aligned(8)));
+  typedef float *__attribute__((may_alias)) g2c_fa_float_p;
+#define pfStack_2cc (*(g2c_fa_float_p *)(void *)&g2c_frame_51d2e0[0x2d0-0x2cc])
+  typedef float __attribute__((may_alias)) g2c_fa_float;
+#define fStack_2c8 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x2c8])
+#define pfStack_2c4 (*(g2c_fa_float_p *)(void *)&g2c_frame_51d2e0[0x2d0-0x2c4])
+#define fStack_2c0 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x2c0])
+#define fStack_2bc (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x2bc])
+#define fStack_2b8 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x2b8])
+#define fStack_2b4 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x2b4])
+#define fStack_2b0 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x2b0])
+#define fStack_2ac (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x2ac])
+#define fStack_2a8 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x2a8])
+#define fStack_2a4 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x2a4])
+#define fStack_2a0 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x2a0])
+#define fStack_29c (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x29c])
+#define fStack_298 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x298])
+#define fStack_294 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x294])
+#define fStack_290 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x290])
+#define fStack_28c (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x28c])
+#define fStack_288 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x288])
+#define fStack_284 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x284])
+#define fStack_280 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x280])
+#define fStack_27c (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x27c])
+#define fStack_278 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x278])
+#define fStack_274 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x274])
+#define fStack_270 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x270])
+#define fStack_26c (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x26c])
+#define fStack_268 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x268])
+#define fStack_264 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x264])
+#define fStack_260 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x260])
+#define fStack_25c (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x25c])
+#define fStack_258 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x258])
+#define fStack_254 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x254])
+#define fStack_250 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x250])
+#define fStack_24c (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x24c])
+#define fStack_248 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x248])
+  typedef undefined4 __attribute__((may_alias)) g2c_fa_undefined4;
+#define uStack_244 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_51d2e0[0x2d0-0x244])
+#define uStack_240 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_51d2e0[0x2d0-0x240])
+#define uStack_23c (*(g2c_fa_undefined4 *)(void *)&g2c_frame_51d2e0[0x2d0-0x23c])
+#define uStack_238 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_51d2e0[0x2d0-0x238])
+#define fStack_22c (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x22c])
+#define fStack_228 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x228])
+#define fStack_224 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x224])
+#define fStack_220 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x220])
+#define fStack_21c (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x21c])
+#define fStack_218 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x218])
+#define fStack_214 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x214])
+#define fStack_210 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x210])
+#define afStack_200 (((g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x200]))
+#define fStack_1f0 (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x1f0])
+#define fStack_1ec (*(g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x1ec])
+#define afStack_1e8 (((g2c_fa_float *)(void *)&g2c_frame_51d2e0[0x2d0-0x1e8]))
   
   audio_uart_lv_memzero_48949c((uint)&uStack_238,0x48);
   piVar3 = (((int *)&audio_uart_nema_vg_context_cell));
@@ -6777,14 +6809,14 @@ LAB_0051d332:
         if (*(int *)(iVar7 + 0x110) == 0) goto LAB_0051e59c;
         cVar1 = *(char *)(iVar7 + 0x2e2);
         uVar4 = 0;
-        fVar27 = (float)*(undefined8 *)(iVar7 + 0x150);
-        fVar19 = (float)((ulonglong)*(undefined8 *)(iVar7 + 0x150) >> 0x20);
-        fVar31 = (float)*(undefined8 *)(iVar7 + 0x174);
+        fVar27 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar7 + 0x150)));
+        fVar19 = (float)g2c_bits_to_float((uint)(((ulonglong)*(undefined8 *)(iVar7 + 0x150) >> 0x20)));
+        fVar31 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar7 + 0x174)));
         pfVar25 = (float *)((ulonglong)*(undefined8 *)(iVar7 + 0x174) >> 0x20);
-        fVar41 = (float)*(undefined8 *)(iVar7 + 0x138);
-        fVar42 = (float)((ulonglong)*(undefined8 *)(iVar7 + 0x138) >> 0x20);
-        fVar22 = (float)*(undefined8 *)(iVar7 + 0x16c);
-        fVar21 = (float)((ulonglong)*(undefined8 *)(iVar7 + 0x16c) >> 0x20);
+        fVar41 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar7 + 0x138)));
+        fVar42 = (float)g2c_bits_to_float((uint)(((ulonglong)*(undefined8 *)(iVar7 + 0x138) >> 0x20)));
+        fVar22 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar7 + 0x16c)));
+        fVar21 = (float)g2c_bits_to_float((uint)(((ulonglong)*(undefined8 *)(iVar7 + 0x16c) >> 0x20)));
         if ((cVar1 == '\0') || (*(int *)(iVar7 + 0x118) != 0)) {
           if (-1 < (int)((uint)*(byte *)(iVar7 + 0x7d) << 0x1b)) {
             uVar4 = audio_uart_nema_stencil_save_52266e(1,0,1,0);
@@ -6818,7 +6850,7 @@ LAB_0051e58c:
             if (bVar15 == bVar16) {
               g2c_nema_vg_set_flag_522622(1);
             }
-            fVar22 = *(float *)(*piVar3 + 0x2d8) * 0.5;
+            fVar22 = *(float *)(*piVar3 + 0x2d8) * 0.5f;
             if ((int)((uint)*(byte *)(*piVar3 + 0x7d) << 0x1b) < 0) {
               g2c_nema_vg_move_to_522fb4(fStack_2c8,g2c_ptr_as_float(pfStack_2c4),fVar22);
             }
@@ -7075,13 +7107,13 @@ LAB_0051e59c:
         if (*(int *)(iVar7 + 0x110) != 0) {
           cVar1 = *(char *)(iVar7 + 0x2e2);
           uVar11 = 0;
-          fVar21 = (float)*(undefined8 *)(iVar7 + 0x17c);
-          fVar31 = (float)((ulonglong)*(undefined8 *)(iVar7 + 0x17c) >> 0x20);
-          fVar27 = (float)*(undefined8 *)(iVar7 + 0x148);
+          fVar21 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar7 + 0x17c)));
+          fVar31 = (float)g2c_bits_to_float((uint)(((ulonglong)*(undefined8 *)(iVar7 + 0x17c) >> 0x20)));
+          fVar27 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar7 + 0x148)));
           pfVar10 = (float *)((ulonglong)*(undefined8 *)(iVar7 + 0x148) >> 0x20);
-          fVar19 = (float)*(undefined8 *)(iVar7 + 0x164);
-          fVar41 = (float)((ulonglong)*(undefined8 *)(iVar7 + 0x164) >> 0x20);
-          fVar22 = (float)*(undefined8 *)(iVar7 + 0x140);
+          fVar19 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar7 + 0x164)));
+          fVar41 = (float)g2c_bits_to_float((uint)(((ulonglong)*(undefined8 *)(iVar7 + 0x164) >> 0x20)));
+          fVar22 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar7 + 0x140)));
           pfVar25 = (float *)((ulonglong)*(undefined8 *)(iVar7 + 0x140) >> 0x20);
           if ((cVar1 == '\0') || (*(int *)(iVar7 + 0x118) != 0)) {
             if (-1 < (int)((uint)*(byte *)(iVar7 + 0x7d) << 0x1b)) {
@@ -7115,7 +7147,7 @@ LAB_0051ea72:
               if (bVar15 == bVar16) {
                 g2c_nema_vg_set_flag_522622(1);
               }
-              fVar22 = *(float *)(*piVar3 + 0x2d8) * 0.5;
+              fVar22 = *(float *)(*piVar3 + 0x2d8) * 0.5f;
               if ((int)((uint)*(byte *)(*piVar3 + 0x7d) << 0x1b) < 0) {
                 g2c_nema_vg_move_to_522fb4(fStack_2d0,g2c_ptr_as_float(pfStack_2cc),fVar22); /* 0x51e7b0 */
               }
@@ -7302,7 +7334,7 @@ LAB_0051e8c4:
             bVar15 = (fVar31 == *(float *)(iVar7 + 0x1ac));
           }
           if (bVar15 != 0) {
-            fVar19 = *(float *)(iVar7 + 300) * -0.5;
+            fVar19 = *(float *)(iVar7 + 300) * -0.5f;
             bVar18 = -1 < (int)((uint)*(byte *)(iVar7 + 0x7d) << 0x1b);
             uVar11 = audio_uart_nema_stencil_save_52266e((uint)bVar18,0,(uint)bVar18,(uint)bVar18);
             g2c_nema_vg_emit_verts_516b34
@@ -7314,7 +7346,7 @@ LAB_0051e8c4:
         pfStack_2c4 = *(float **)(iVar7 + 0x13c);
         fVar22 = *(float *)(iVar7 + 0x150);
         pfStack_2cc = *(float **)(iVar7 + 0x154);
-        fVar27 = *(float *)(iVar7 + 300) * 0.5;
+        fVar27 = *(float *)(iVar7 + 300) * 0.5f;
         fVar21 = *(float *)(iVar7 + 0x150);
         uVar39 = *(undefined8 *)(iVar7 + 0x138);
         fVar31 = *(float *)(iVar7 + 0x154);
@@ -7326,9 +7358,9 @@ LAB_0051e8c4:
         if (bVar15 != 0) {
           iVar6 = 1;
         }
-        fVar42 = (float)uVar39;
+        fVar42 = (float)g2c_bits_to_float((uint)(uVar39));
         fVar24 = fVar21 - fVar42;
-        fVar20 = (float)((ulonglong)uVar39 >> 0x20);
+        fVar20 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar39 >> 0x20)));
         fVar41 = fVar31 - fVar20;
         fVar19 = g2c_nema_vg_sqrt_524218(fVar24 * fVar24 + fVar41 * fVar41);
         fVar41 = -(fVar41 / fVar19);
@@ -7374,10 +7406,10 @@ LAB_0051eca8:
 LAB_0051ef96:
           fVar21 = *(float *)(iVar7 + 0x2d8);
           fVar22 = (*(float *)(iVar7 + 0x150) - *(float *)(iVar7 + 0x138)) / fVar21;
-          fVar19 = (*(float *)(iVar7 + 0x150) + *(float *)(iVar7 + 0x138)) * 0.5;
-          fVar42 = fVar21 * 0.5;
+          fVar19 = (*(float *)(iVar7 + 0x150) + *(float *)(iVar7 + 0x138)) * 0.5f;
+          fVar42 = fVar21 * 0.5f;
           fVar21 = (*(float *)(iVar7 + 0x154) - *(float *)(iVar7 + 0x13c)) / fVar21;
-          fVar41 = (*(float *)(iVar7 + 0x154) + *(float *)(iVar7 + 0x13c)) * 0.5;
+          fVar41 = (*(float *)(iVar7 + 0x154) + *(float *)(iVar7 + 0x13c)) * 0.5f;
           uVar12 = g2c_nema_vg_f2u_522f1c(fVar42);
           iVar5 = (int)uVar12 / 2;
           fVar31 = (float)VectorSignedToFloat(iVar5,0 /* rounding arg ignored (line 37) */);
@@ -7439,10 +7471,10 @@ LAB_0051ef96:
           if (bVar15 == 0) goto LAB_0051ef96;
           fVar41 = *(float *)(iVar7 + 0x2d8);
           fVar19 = (fVar21 - fVar27) / fVar41;
-          fVar27 = (fVar21 + fVar27) * 0.5;
-          fVar42 = fVar41 * 0.5;
+          fVar27 = (fVar21 + fVar27) * 0.5f;
+          fVar42 = fVar41 * 0.5f;
           fVar41 = (fVar22 - fVar31) / fVar41;
-          fVar31 = (fVar22 + fVar31) * 0.5;
+          fVar31 = (fVar22 + fVar31) * 0.5f;
           uVar12 = g2c_nema_vg_f2u_522f1c(fVar42);
           iVar5 = (int)uVar12 / 2;
           fVar22 = (float)VectorSignedToFloat(iVar5,0 /* rounding arg ignored (line 37) */);
@@ -7523,7 +7555,7 @@ LAB_0051eb76:
             fVar21 = *(float *)(iVar7 + 0x1ac);
           }
           if (bVar18 && (bVar18 && fVar22 == fVar21)) {
-            fVar27 = *(float *)(iVar7 + 300) * 0.5;
+            fVar27 = *(float *)(iVar7 + 300) * 0.5f;
             fVar21 = fVar27 + fVar31;
             uVar12 = (uint)(-1 < (int)((uint)*(byte *)(iVar7 + 0x7d) << 0x1b));
             pfStack_2cc = pfVar25;
@@ -7541,7 +7573,7 @@ LAB_0051eb76:
         bVar18 = (fVar31 >= fVar27);
         uVar39 = *(undefined8 *)(iVar7 + 0x198);
         uVar37 = *(undefined8 *)(iVar7 + 0x1a0);
-        fVar31 = *(float *)(iVar7 + 300) * 0.5;
+        fVar31 = *(float *)(iVar7 + 300) * 0.5f;
         fVar22 = *(float *)(iVar7 + 0x1a0);
         fVar19 = *(float *)(iVar7 + 0x19c);
         fVar21 = *(float *)(iVar7 + 0x1a4);
@@ -7574,8 +7606,8 @@ LAB_0051f298:
         bVar18 = -1 < (int)((uint)*(byte *)(*piVar3 + 0x7d) << 0x1b);
         uVar4 = audio_uart_nema_stencil_save_52266e(0,(uint)bVar18,(uint)bVar18,(uint)bVar18);
         g2c_nema_vg_emit_verts_516b34
-                  ((float)uVar39,(float)((ulonglong)uVar39 >> 0x20),(float)uVar37,
-                   (float)((ulonglong)uVar37 >> 0x20),fVar22,fVar21,fVar27,fVar41);
+                  ((float)g2c_bits_to_float((uint)(uVar39)),(float)g2c_bits_to_float((uint)(((ulonglong)uVar39 >> 0x20))),(float)g2c_bits_to_float((uint)(uVar37)),
+                   (float)g2c_bits_to_float((uint)(((ulonglong)uVar37 >> 0x20))),fVar22,fVar21,fVar27,fVar41);
         if ((int)((uint)*(byte *)(*piVar3 + 0x7d) << 0x1b) < 0) {
           return 0;
         }
@@ -7604,10 +7636,10 @@ LAB_0051f1ce:
           if (bVar15 != 0) {
             fVar41 = *(float *)(iVar7 + 0x2d8);
             fVar21 = (fVar31 - fVar19) / fVar41;
-            fVar19 = (fVar31 + fVar19) * 0.5;
-            fVar42 = fVar41 * 0.5;
+            fVar19 = (fVar31 + fVar19) * 0.5f;
+            fVar42 = fVar41 * 0.5f;
             fVar41 = (fVar22 - fVar27) / fVar41;
-            fVar27 = (fVar22 + fVar27) * 0.5;
+            fVar27 = (fVar22 + fVar27) * 0.5f;
             uVar4 = g2c_nema_vg_f2u_522f1c(fVar42);
             iVar5 = (int)uVar4 / 2;
             fVar22 = (float)VectorSignedToFloat(iVar5,0 /* rounding arg ignored (line 37) */);
@@ -7660,10 +7692,10 @@ LAB_0051f1ce:
         }
         fVar31 = *(float *)(iVar7 + 0x2d8);
         fVar22 = (*(float *)(iVar7 + 0x1a0) - fVar21) / fVar31;
-        fVar19 = (*(float *)(iVar7 + 0x1a0) + fVar21) * 0.5;
-        fVar42 = fVar31 * 0.5;
+        fVar19 = (*(float *)(iVar7 + 0x1a0) + fVar21) * 0.5f;
+        fVar42 = fVar31 * 0.5f;
         fVar31 = (*(float *)(iVar7 + 0x1a4) - *(float *)(iVar7 + 0x19c)) / fVar31;
-        fVar41 = (*(float *)(iVar7 + 0x1a4) + *(float *)(iVar7 + 0x19c)) * 0.5;
+        fVar41 = (*(float *)(iVar7 + 0x1a4) + *(float *)(iVar7 + 0x19c)) * 0.5f;
         uVar4 = g2c_nema_vg_f2u_522f1c(fVar42);
         iVar5 = (int)uVar4 / 2;
         fVar21 = (float)VectorSignedToFloat(iVar5,0 /* rounding arg ignored (line 37) */);
@@ -7861,13 +7893,13 @@ LAB_0051e0fc:
       if ((1.0000000656873453e-05f) <= ABS(fVar19)) {
         fVar19 = audio_uart_float_sqrt_4397a8(fVar19);
         iVar5 = *piVar3;
-        fVar42 = fVar42 * (1.0 / fVar19);
-        fVar41 = fVar41 * (1.0 / fVar19);
-        fVar20 = *(float *)(iVar5 + 0x130) * 0.5 * fVar41;
+        fVar42 = fVar42 * (1.0f / fVar19);
+        fVar41 = fVar41 * (1.0f / fVar19);
+        fVar20 = *(float *)(iVar5 + 0x130) * 0.5f * fVar41;
         fVar28 = fVar22 - fVar20;
-        fVar24 = *(float *)(iVar5 + 0x134) * 0.5 * fVar42;
+        fVar24 = *(float *)(iVar5 + 0x134) * 0.5f * fVar42;
         fVar29 = fVar24 + fVar21;
-        uVar39 = CONCAT44(fVar29,fVar28);
+        uVar39 = CONCAT44(g2c_float_to_bits(fVar29),g2c_float_to_bits(fVar28));
         fStack_2b8 = fVar31 - fVar20;
         fStack_2b4 = fVar24 + fVar27;
         fStack_2c0 = fVar20 + fVar31;
@@ -7877,7 +7909,7 @@ LAB_0051e0fc:
         fVar20 = fVar20 + fVar22;
         iVar5 = *piVar3;
         fVar21 = fVar21 - fVar24;
-        uVar37 = CONCAT44(fVar21,fVar20);
+        uVar37 = CONCAT44(g2c_float_to_bits(fVar21),g2c_float_to_bits(fVar20));
         *(float *)(iVar5 + 0x198) = fStack_2b8;
         *(float *)(iVar5 + 0x19c) = fStack_2b4;
         iVar5 = *piVar3;
@@ -7918,9 +7950,9 @@ LAB_0051e0fc:
             cVar1 = *(char *)(iVar5 + 0x2e2);
             uVar13 = 0;
             pfVar25 = (float *)((ulonglong)*(undefined8 *)(iVar5 + 0x174) >> 0x20);
-            fVar31 = (float)((ulonglong)uVar2 >> 0x20);
-            fVar27 = (float)*(undefined8 *)(iVar5 + 0x174);
-            fVar22 = (float)uVar2;
+            fVar31 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar2 >> 0x20)));
+            fVar27 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar5 + 0x174)));
+            fVar22 = (float)g2c_bits_to_float((uint)(uVar2));
             if ((cVar1 == '\0') || (*(int *)(iVar5 + 0x118) != 0)) {
               if (-1 < (int)((uint)*(byte *)(iVar5 + 0x7d) << 0x1b)) {
                 uVar13 = audio_uart_nema_stencil_save_52266e(1,0,1,0);
@@ -7955,7 +7987,7 @@ joined_r0x0051d790:
                 if (bVar15 == bVar16) {
                   g2c_nema_vg_set_flag_522622(1);
                 }
-                fVar22 = *(float *)(*piVar3 + 0x2d8) * 0.5;
+                fVar22 = *(float *)(*piVar3 + 0x2d8) * 0.5f;
                 if ((int)((uint)*(byte *)(*piVar3 + 0x7d) << 0x1b) < 0) {
                   g2c_nema_vg_move_to_522fb4(fStack_2c8,g2c_ptr_as_float(pfStack_2c4),fVar22);
                 }
@@ -8141,17 +8173,17 @@ LAB_0051d794:
             if ((0.05000000447034836f) <=
                 ABS(*(float *)(iVar5 + 0x15c) * fVar41 - *(float *)(iVar5 + 0x160) * fVar42)) {
               uVar2 = *(undefined8 *)(iVar5 + 0x140);
-              fVar31 = (float)uVar39;
-              fVar27 = (float)((ulonglong)uVar39 >> 0x20);
-              fVar22 = (float)uVar37;
-              fVar21 = (float)((ulonglong)uVar37 >> 0x20);
+              fVar31 = (float)g2c_bits_to_float((uint)(uVar39));
+              fVar27 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar39 >> 0x20)));
+              fVar22 = (float)g2c_bits_to_float((uint)(uVar37));
+              fVar21 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar37 >> 0x20)));
               if (*(int *)(iVar5 + 0x110) != 0) {
                 cVar1 = *(char *)(iVar5 + 0x2e2);
                 uVar14 = 0;
                 pfVar25 = (float *)((ulonglong)*(undefined8 *)(iVar5 + 0x148) >> 0x20);
-                fVar24 = (float)((ulonglong)uVar2 >> 0x20);
-                fVar28 = (float)*(undefined8 *)(iVar5 + 0x148);
-                fVar20 = (float)uVar2;
+                fVar24 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar2 >> 0x20)));
+                fVar28 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar5 + 0x148)));
+                fVar20 = (float)g2c_bits_to_float((uint)(uVar2));
                 if ((cVar1 == '\0') || (*(int *)(iVar5 + 0x118) != 0)) {
                   if (-1 < (int)((uint)*(byte *)(iVar5 + 0x7d) << 0x1b)) {
                     uVar14 = audio_uart_nema_stencil_save_52266e(1,0,1,0);
@@ -8187,7 +8219,7 @@ joined_r0x0051dbfc:
                     if (bVar15 == bVar16) {
                       g2c_nema_vg_set_flag_522622(1);
                     }
-                    fVar22 = *(float *)(*piVar3 + 0x2d8) * 0.5;
+                    fVar22 = *(float *)(*piVar3 + 0x2d8) * 0.5f;
                     if ((int)((uint)*(byte *)(*piVar3 + 0x7d) << 0x1b) < 0) {
                       g2c_nema_vg_move_to_522fb4(fStack_2c8,g2c_ptr_as_float(pfStack_2c4),fVar22);
                     }
@@ -8387,9 +8419,9 @@ LAB_0051deec:
       else {
         iVar5 = *piVar3;
         *(float *)(iVar5 + 0x198) = fStack_22c;
-        *(float *)(iVar5 + 0x19c) = fStack_228 + *(float *)(iVar5 + 0x130) * -0.5;
+        *(float *)(iVar5 + 0x19c) = fStack_228 + *(float *)(iVar5 + 0x130) * -0.5f;
         *(float *)(iVar5 + 0x1a0) = fStack_22c;
-        *(float *)(iVar5 + 0x1a4) = fStack_228 + *(float *)(iVar5 + 0x130) * 0.5;
+        *(float *)(iVar5 + 0x1a4) = fStack_228 + *(float *)(iVar5 + 0x130) * 0.5f;
         *(undefined4 *)(iVar5 + 400) = *(undefined4 *)(iVar5 + 0x198);
         *(undefined4 *)(iVar5 + 0x194) = *(undefined4 *)(iVar5 + 0x19c);
         iVar5 = *piVar3;
@@ -8399,6 +8431,57 @@ LAB_0051deec:
     }
   } while( true );
 }
+#undef pfStack_2cc
+#undef fStack_2c8
+#undef pfStack_2c4
+#undef fStack_2c0
+#undef fStack_2bc
+#undef fStack_2b8
+#undef fStack_2b4
+#undef fStack_2b0
+#undef fStack_2ac
+#undef fStack_2a8
+#undef fStack_2a4
+#undef fStack_2a0
+#undef fStack_29c
+#undef fStack_298
+#undef fStack_294
+#undef fStack_290
+#undef fStack_28c
+#undef fStack_288
+#undef fStack_284
+#undef fStack_280
+#undef fStack_27c
+#undef fStack_278
+#undef fStack_274
+#undef fStack_270
+#undef fStack_26c
+#undef fStack_268
+#undef fStack_264
+#undef fStack_260
+#undef fStack_25c
+#undef fStack_258
+#undef fStack_254
+#undef fStack_250
+#undef fStack_24c
+#undef fStack_248
+#undef uStack_244
+#undef uStack_240
+#undef uStack_23c
+#undef uStack_238
+#undef fStack_22c
+#undef fStack_228
+#undef fStack_224
+#undef fStack_220
+#undef fStack_21c
+#undef fStack_218
+#undef fStack_214
+#undef fStack_210
+#undef afStack_200
+#undef fStack_1f0
+#undef fStack_1ec
+#undef afStack_1e8
+
 
   
 
@@ -8452,43 +8535,50 @@ uint g2c_nema_vg_draw_stroke_51f798(uint *a)
   float g_00;
   float b_00;
   float a_01;
-  float fStack_118;
-  float fStack_114;
-  float fStack_110;
-  float fStack_10c;
-  float fStack_108;
-  float fStack_104;
-  float fStack_100;
-  float fStack_fc;
-  float fStack_f8;
-  float fStack_f4;
-  float fStack_f0;
-  float fStack_ec;
-  float fStack_e8;
-  float fStack_e4;
-  float fStack_e0;
-  float fStack_dc;
-  float fStack_d8;
-  float fStack_d4;
-  float fStack_d0;
-  float fStack_cc;
-  float fStack_c8;
-  float fStack_c4;
-  float fStack_c0;
-  undefined4 uStack_bc;
-  undefined4 uStack_b8;
-  undefined4 uStack_b4;
-  undefined1 uStack_b0;
-  char cStack_af;
-  char cStack_ae;
-  float fStack_a4;
-  float fStack_a0;
-  float fStack_9c;
-  float fStack_98;
-  float fStack_94;
-  float fStack_90;
-  float fStack_8c;
-  float fStack_88;
+  /* Stock frame of 0x51f798 as one block: locals keep the entry-SP offsets Ghidra named them by
+   * (X_Stack_NN at g2c_frame_51f798[0x118-0xNN]) so &local passed to callees spans its stock neighbours. */
+  unsigned char g2c_frame_51f798[0x118] __attribute__((aligned(8)));
+  typedef float __attribute__((may_alias)) g2c_fa_float;
+#define fStack_118 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0x118])
+#define fStack_114 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0x114])
+#define fStack_110 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0x110])
+#define fStack_10c (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0x10c])
+#define fStack_108 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0x108])
+#define fStack_104 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0x104])
+#define fStack_100 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0x100])
+#define fStack_fc (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xfc])
+#define fStack_f8 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xf8])
+#define fStack_f4 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xf4])
+#define fStack_f0 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xf0])
+#define fStack_ec (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xec])
+#define fStack_e8 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xe8])
+#define fStack_e4 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xe4])
+#define fStack_e0 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xe0])
+#define fStack_dc (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xdc])
+#define fStack_d8 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xd8])
+#define fStack_d4 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xd4])
+#define fStack_d0 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xd0])
+#define fStack_cc (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xcc])
+#define fStack_c8 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xc8])
+#define fStack_c4 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xc4])
+#define fStack_c0 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xc0])
+  typedef undefined4 __attribute__((may_alias)) g2c_fa_undefined4;
+#define uStack_bc (*(g2c_fa_undefined4 *)(void *)&g2c_frame_51f798[0x118-0xbc])
+#define uStack_b8 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_51f798[0x118-0xb8])
+#define uStack_b4 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_51f798[0x118-0xb4])
+  typedef undefined1 __attribute__((may_alias)) g2c_fa_undefined1;
+#define uStack_b0 (*(g2c_fa_undefined1 *)(void *)&g2c_frame_51f798[0x118-0xb0])
+  typedef char __attribute__((may_alias)) g2c_fa_char;
+#define cStack_af (*(g2c_fa_char *)(void *)&g2c_frame_51f798[0x118-0xaf])
+#define cStack_ae (*(g2c_fa_char *)(void *)&g2c_frame_51f798[0x118-0xae])
+#define fStack_a4 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xa4])
+#define fStack_a0 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0xa0])
+#define fStack_9c (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0x9c])
+#define fStack_98 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0x98])
+#define fStack_94 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0x94])
+#define fStack_90 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0x90])
+#define fStack_8c (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0x8c])
+#define fStack_88 (*(g2c_fa_float *)(void *)&g2c_frame_51f798[0x118-0x88])
   
   piVar6 = (((int *)&audio_uart_nema_vg_context_cell));
   iVar10 = *(((int *)&audio_uart_nema_vg_context_cell));
@@ -8583,7 +8673,7 @@ LAB_0051f93c:
                 fStack_114 = *(float *)(iVar11 + 0x19c);
                 bVar20 = fVar29 <= fVar21;
                 uVar3 = *(undefined8 *)(iVar11 + 0x1a0);
-                fVar26 = *(float *)(iVar11 + 300) * 0.5;
+                fVar26 = *(float *)(iVar11 + 300) * 0.5f;
                 fVar24 = *(float *)(iVar11 + 0x1a0);
                 fVar25 = *(float *)(iVar11 + 0x19c);
                 fVar23 = *(float *)(iVar11 + 0x1a4);
@@ -8595,7 +8685,7 @@ LAB_0051f93c:
                 fVar22 = g2c_nema_vg_sqrt_524218(fVar27 * fVar27 + fVar28 * fVar28);
                 fVar28 = -(fVar28 / fVar22);
                 if (!bVar20 || (!bVar20 || fVar21 < fVar24)) {
-                  if (0.0 < fVar28) goto LAB_0051f9c0;
+                  if (0.0f < fVar28) goto LAB_0051f9c0;
 LAB_0051fc4c:
                   fVar24 = fVar24 - fVar26 * fVar28;
                   fVar21 = fVar26 * (fVar27 / fVar22);
@@ -8604,7 +8694,7 @@ LAB_0051fc4c:
                   fVar21 = fVar25 - fVar21;
                 }
                 else {
-                  if (0.0 < fVar28) goto LAB_0051fc4c;
+                  if (0.0f < fVar28) goto LAB_0051fc4c;
 LAB_0051f9c0:
                   fVar24 = fVar26 * fVar28 + fVar24;
                   fVar21 = fVar26 * (fVar27 / fVar22);
@@ -8616,7 +8706,7 @@ LAB_0051f9c0:
                 uVar7 = audio_uart_nema_stencil_save_52266e
                                   (0,(uint)bVar20,(uint)bVar20,(uint)bVar20);
                 g2c_nema_vg_emit_verts_516b34
-                          (fStack_118,fStack_114,(float)uVar3,(float)((ulonglong)uVar3 >> 0x20),
+                          (fStack_118,fStack_114,(float)g2c_bits_to_float((uint)(uVar3)),(float)g2c_bits_to_float((uint)(((ulonglong)uVar3 >> 0x20))),
                            fVar24,fVar23,fVar29,fVar21);
                 if ((int)((uint)*(byte *)(*piVar6 + 0x7d) << 0x1b) < 0) goto LAB_0051fcb0;
               }
@@ -8629,7 +8719,7 @@ LAB_0051f9c0:
                   fVar26 = *(float *)(iVar11 + 0x1ac);
                 }
                 if (!bVar20 || (!bVar20 || fVar24 != fVar26)) goto LAB_0051f93c;
-                fVar26 = *(float *)(iVar11 + 300) * 0.5;
+                fVar26 = *(float *)(iVar11 + 300) * 0.5f;
                 uVar7 = (uint)(-1 < (int)((uint)*(byte *)(iVar11 + 0x7d) << 0x1b));
                 uVar7 = audio_uart_nema_stencil_save_52266e(uVar7,uVar7,uVar7,0);
                 g2c_nema_vg_emit_verts_516b34
@@ -8731,7 +8821,7 @@ LAB_0051fcb0:
               if ((bVar20 || (bVar20 || fVar23 != fVar21)) ||
                  (fVar21 = *(float *)(iVar11 + 0x1a4), fVar21 != *(float *)(iVar11 + 0x1ac)))
               goto LAB_0051fd40;
-              fVar29 = *(float *)(iVar11 + 300) * -0.5;
+              fVar29 = *(float *)(iVar11 + 300) * -0.5f;
               fStack_110 = fVar29 + fVar24;
               bVar20 = -1 < (int)((uint)*(byte *)(iVar11 + 0x7d) << 0x1b);
               fStack_118 = fVar24;
@@ -8744,7 +8834,7 @@ LAB_0051fcb0:
             }
             else {
 LAB_0051fd40:
-              fVar26 = *(float *)(iVar11 + 300) * 0.5;
+              fVar26 = *(float *)(iVar11 + 300) * 0.5f;
               bVar20 = false;
               uVar3 = *(undefined8 *)(iVar11 + 0x138);
               uVar4 = *(undefined8 *)(iVar11 + 0x150);
@@ -8755,14 +8845,14 @@ LAB_0051fd40:
                  (fVar24 < *(float *)(iVar11 + 0x148))) {
                 bVar20 = true;
               }
-              fVar25 = (float)uVar5;
+              fVar25 = (float)g2c_bits_to_float((uint)(uVar5));
               fVar28 = fVar24 - fVar25;
-              fVar22 = (float)((ulonglong)uVar5 >> 0x20);
+              fVar22 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar5 >> 0x20)));
               fVar29 = fVar23 - fVar22;
               fVar21 = g2c_nema_vg_sqrt_524218(fVar28 * fVar28 + fVar29 * fVar29);
               fVar29 = -(fVar29 / fVar21);
               if (bVar20) {
-                if (0.0 < fVar29) goto LAB_0051ff44;
+                if (0.0f < fVar29) goto LAB_0051ff44;
 LAB_0051fdb8:
                 fVar24 = fVar26 * fVar29 + fVar24;
                 fVar21 = fVar26 * (fVar28 / fVar21);
@@ -8771,7 +8861,7 @@ LAB_0051fdb8:
                 fVar21 = fVar21 + fVar22;
               }
               else {
-                if (0.0 < fVar29) goto LAB_0051fdb8;
+                if (0.0f < fVar29) goto LAB_0051fdb8;
 LAB_0051ff44:
                 fVar24 = fVar24 - fVar26 * fVar29;
                 fVar21 = fVar26 * (fVar28 / fVar21);
@@ -8782,8 +8872,8 @@ LAB_0051ff44:
               bVar20 = -1 < (int)((uint)*(byte *)(*piVar6 + 0x7d) << 0x1b);
               uVar7 = audio_uart_nema_stencil_save_52266e(0,(uint)bVar20,(uint)bVar20,(uint)bVar20);
               g2c_nema_vg_emit_verts_516b34
-                        ((float)uVar3,(float)((ulonglong)uVar3 >> 0x20),(float)uVar4,
-                         (float)((ulonglong)uVar4 >> 0x20),fVar24,fVar23,fVar25,fVar21);
+                        ((float)g2c_bits_to_float((uint)(uVar3)),(float)g2c_bits_to_float((uint)(((ulonglong)uVar3 >> 0x20))),(float)g2c_bits_to_float((uint)(uVar4)),
+                         (float)g2c_bits_to_float((uint)(((ulonglong)uVar4 >> 0x20))),fVar24,fVar23,fVar25,fVar21);
               if ((int)((uint)*(byte *)(*piVar6 + 0x7d) << 0x1b) < 0) goto LAB_0051faf0;
             }
             audio_uart_nema_stencil_restore_5226b2(uVar7);
@@ -8831,14 +8921,14 @@ LAB_0051faf0:
   } while (*(int *)(iVar11 + 0x110) == 0);
   cVar1 = *(char *)(iVar11 + 0x2e2);
   uVar7 = 0;
-  fVar28 = (float)((ulonglong)*(undefined8 *)(iVar10 + 0x378) >> 0x20);
-  fVar25 = (float)((ulonglong)uVar4 >> 0x20);
-  fVar21 = (float)((ulonglong)*(undefined8 *)(iVar10 + 0x360) >> 0x20);
-  fVar23 = (float)((ulonglong)uVar3 >> 0x20);
-  fVar22 = (float)*(undefined8 *)(iVar10 + 0x378);
-  fVar29 = (float)uVar4;
-  fVar26 = (float)*(undefined8 *)(iVar10 + 0x360);
-  fVar24 = (float)uVar3;
+  fVar28 = (float)g2c_bits_to_float((uint)(((ulonglong)*(undefined8 *)(iVar10 + 0x378) >> 0x20)));
+  fVar25 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar4 >> 0x20)));
+  fVar21 = (float)g2c_bits_to_float((uint)(((ulonglong)*(undefined8 *)(iVar10 + 0x360) >> 0x20)));
+  fVar23 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar3 >> 0x20)));
+  fVar22 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar10 + 0x378)));
+  fVar29 = (float)g2c_bits_to_float((uint)(uVar4));
+  fVar26 = (float)g2c_bits_to_float((uint)(*(undefined8 *)(iVar10 + 0x360)));
+  fVar24 = (float)g2c_bits_to_float((uint)(uVar3));
   if ((cVar1 == '\0') || (*(int *)(iVar11 + 0x118) != 0)) {
     if (-1 < (int)((uint)*(byte *)(iVar11 + 0x7d) << 0x1b)) {
       uVar7 = audio_uart_nema_stencil_save_52266e(1,0,1,0);
@@ -8847,8 +8937,8 @@ LAB_0051faf0:
   }
   else {
     if (cVar1 == '\x02') {
-      fStack_118 = (0x0u);
-      fStack_114 = (0x0u);
+      fStack_118 = g2c_bits_to_float((uint)((0x0u)));
+      fStack_114 = g2c_bits_to_float((uint)((0x0u)));
       iVar11 = g2c_nema_vg_cubic_approx_522f50
                          (fVar24,fVar23,fVar29,fVar25,fVar26,fVar21,fVar22,fVar28,&fStack_118,
                           &fStack_114);
@@ -8867,7 +8957,7 @@ LAB_0051faf0:
         if (bVar20) {
           g2c_nema_vg_set_flag_522622(1);
         }
-        fVar24 = *(float *)(*piVar6 + 0x2d8) * 0.5;
+        fVar24 = *(float *)(*piVar6 + 0x2d8) * 0.5f;
         if ((int)((uint)*(byte *)(*piVar6 + 0x7d) << 0x1b) < 0) {
           g2c_nema_vg_move_to_522fb4(fStack_118,fStack_114,fVar24);
         }
@@ -8887,7 +8977,7 @@ LAB_0051faf0:
       return 0x1000000;
     }
     if (*(char *)(iVar11 + 0x2e4) == '\0') {
-      if ((*(float *)(iVar11 + 0x158) <= 0.0) || (*(int *)(iVar11 + 0x128) != 1)) {
+      if ((*(float *)(iVar11 + 0x158) <= 0.0f) || (*(int *)(iVar11 + 0x128) != 1)) {
         fStack_dc = *(float *)(iVar11 + 0x164);
         fStack_d8 = *(float *)(iVar11 + 0x168);
         fStack_d4 = *(float *)(iVar11 + 0x16c);
@@ -8986,10 +9076,10 @@ LAB_005200d8:
         b = fStack_c8;
       }
     }
-    fStack_110 = (0x0u);
-    fStack_10c = (0x0u);
-    fStack_118 = (0x0u);
-    fStack_114 = (0x0u);
+    fStack_110 = g2c_bits_to_float((uint)((0x0u)));
+    fStack_10c = g2c_bits_to_float((uint)((0x0u)));
+    fStack_118 = g2c_bits_to_float((uint)((0x0u)));
+    fStack_114 = g2c_bits_to_float((uint)((0x0u)));
     iVar11 = g2c_nema_vg_cubic_approx_522f50(a_00,b,fVar27,d,e,f,g,h,&fStack_110,&fStack_10c);
     iVar8 = g2c_nema_vg_cubic_approx_522f50(a_01,b_00,a_00,b,e,f,g_00,h_00,&fStack_118,&fStack_114);
     fVar27 = g2c_nema_vg_sqrt_524218
@@ -9026,6 +9116,44 @@ LAB_005200d8:
   }
   goto LAB_0051f7ee;
 }
+#undef fStack_118
+#undef fStack_114
+#undef fStack_110
+#undef fStack_10c
+#undef fStack_108
+#undef fStack_104
+#undef fStack_100
+#undef fStack_fc
+#undef fStack_f8
+#undef fStack_f4
+#undef fStack_f0
+#undef fStack_ec
+#undef fStack_e8
+#undef fStack_e4
+#undef fStack_e0
+#undef fStack_dc
+#undef fStack_d8
+#undef fStack_d4
+#undef fStack_d0
+#undef fStack_cc
+#undef fStack_c8
+#undef fStack_c4
+#undef fStack_c0
+#undef uStack_bc
+#undef uStack_b8
+#undef uStack_b4
+#undef uStack_b0
+#undef cStack_af
+#undef cStack_ae
+#undef fStack_a4
+#undef fStack_a0
+#undef fStack_9c
+#undef fStack_98
+#undef fStack_94
+#undef fStack_90
+#undef fStack_8c
+#undef fStack_88
+
 
   
 
@@ -9085,24 +9213,31 @@ uint audio_uart_ambiq_vector_shape_draw_5202ec(uint *path,int paint)
   float f;
   float h;
   float *const afStack_c4 = (float *)&g2c_sp_frame_5202ec[3]; /* sp+0xc */
-  uint uStack_b0;
-  uint uStack_ac;
-  float fStack_a8;
-  int iStack_a4;
-  float fStack_a0;
-  undefined4 uStack_9c;
-  uint uStack_98;
-  undefined4 uStack_94;
-  undefined4 uStack_90;
-  undefined4 uStack_8c;
-  undefined4 uStack_88;
-  undefined4 uStack_84;
-  undefined4 uStack_80;
-  undefined4 uStack_7c;
-  uint uStack_78;
-  undefined4 uStack_74;
-  undefined4 uStack_70;
-  undefined4 uStack_6c;
+  /* Stock frame of 0x5202ec as one block: locals keep the entry-SP offsets Ghidra named them by
+   * (X_Stack_NN at g2c_frame_5202ec[0xb0-0xNN]) so &local passed to callees spans its stock neighbours. */
+  unsigned char g2c_frame_5202ec[0xb0] __attribute__((aligned(8)));
+  typedef uint __attribute__((may_alias)) g2c_fa_uint;
+#define uStack_b0 (*(g2c_fa_uint *)(void *)&g2c_frame_5202ec[0xb0-0xb0])
+#define uStack_ac (*(g2c_fa_uint *)(void *)&g2c_frame_5202ec[0xb0-0xac])
+  typedef float __attribute__((may_alias)) g2c_fa_float;
+#define fStack_a8 (*(g2c_fa_float *)(void *)&g2c_frame_5202ec[0xb0-0xa8])
+  typedef int __attribute__((may_alias)) g2c_fa_int;
+#define iStack_a4 (*(g2c_fa_int *)(void *)&g2c_frame_5202ec[0xb0-0xa4])
+#define fStack_a0 (*(g2c_fa_float *)(void *)&g2c_frame_5202ec[0xb0-0xa0])
+  typedef undefined4 __attribute__((may_alias)) g2c_fa_undefined4;
+#define uStack_9c (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5202ec[0xb0-0x9c])
+#define uStack_98 (*(g2c_fa_uint *)(void *)&g2c_frame_5202ec[0xb0-0x98])
+#define uStack_94 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5202ec[0xb0-0x94])
+#define uStack_90 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5202ec[0xb0-0x90])
+#define uStack_8c (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5202ec[0xb0-0x8c])
+#define uStack_88 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5202ec[0xb0-0x88])
+#define uStack_84 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5202ec[0xb0-0x84])
+#define uStack_80 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5202ec[0xb0-0x80])
+#define uStack_7c (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5202ec[0xb0-0x7c])
+#define uStack_78 (*(g2c_fa_uint *)(void *)&g2c_frame_5202ec[0xb0-0x78])
+#define uStack_74 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5202ec[0xb0-0x74])
+#define uStack_70 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5202ec[0xb0-0x70])
+#define uStack_6c (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5202ec[0xb0-0x6c])
   
   puVar9 = (undefined4 *)((byte *)&g2c_sp_frame_5202ec[0]);
   uVar16 = 0;
@@ -9122,12 +9257,12 @@ uint audio_uart_ambiq_vector_shape_draw_5202ec(uint *path,int paint)
   if (path[1] == 0 || uVar7 == 0) {
     uVar16 = uVar16 | 0x10;
   }
-  fVar25 = (float)path[0x14];
-  bVar24 = 0.0 <= fVar25;
+  fVar25 = (float)g2c_bits_to_float((uint)(path[0x14]));
+  bVar24 = 0.0f <= fVar25;
   if (bVar24) {
-    fVar25 = (float)path[0x15];
+    fVar25 = (float)g2c_bits_to_float((uint)(path[0x15]));
   }
-  if (!bVar24 || (!bVar24 || fVar25 < 0.0)) {
+  if (!bVar24 || (!bVar24 || fVar25 < 0.0f)) {
     uVar16 = uVar16 | 0x400;
   }
   /* Evidence (wave10): stock 0x520352 vcmp s1,s0 + bge, 0x520364 vcmp + bmi,
@@ -9135,18 +9270,18 @@ uint audio_uart_ambiq_vector_shape_draw_5202ec(uint *path,int paint)
    * compares (N==V is ge: false when unordered). uVar7 holds only NZCV
    * scratch, and later code masks it with 0xfffffff before it tests flags. */
   uVar7 = 0;
-  if (((float)path[6] >= (32767.001953125f)) || ((float)path[4] < (-32768.0f)) ||
-      ((float)path[7] >= (32767.001953125f)) || ((float)path[5] < (-32768.0f))) {
+  if (((float)g2c_bits_to_float((uint)(path[6])) >= (32767.001953125f)) || ((float)g2c_bits_to_float((uint)(path[4])) < (-32768.0f)) ||
+      ((float)g2c_bits_to_float((uint)(path[7])) >= (32767.001953125f)) || ((float)g2c_bits_to_float((uint)(path[5])) < (-32768.0f))) {
     uVar16 = uVar16 | 0x4000;
   }
   if ((*(char *)(*(((int *)&audio_uart_nema_vg_context_cell)) + 0x7c) == '\0') &&
      (fVar25 = *(float *)(*(((int *)&audio_uart_nema_vg_context_cell)) + 0x2d8),
-     uVar7 = uVar7 & 0xfffffff | (uint)(fVar25 == 0.0) << 0x1e | (uint)(0.0 <= fVar25) << 0x1d,
+     uVar7 = uVar7 & 0xfffffff | (uint)(fVar25 == 0.0f) << 0x1e | (uint)(0.0f <= fVar25) << 0x1d,
      bVar21 = (byte)(uVar7 >> 0x18), !(bool)(bVar21 >> 5 & 1) || (bool)(bVar21 >> 6))) {
     uVar16 = uVar16 | 0x200000;
   }
   uVar7 = uVar7 & 0xfffffff;
-  if (*(float *)(paint + 0xd0) < 0.0) {
+  if (*(float *)(paint + 0xd0) < 0.0f) {
     uVar16 = uVar16 | 0x400000;
   }
   uVar8 = *(((int *)&audio_uart_nema_vg_framebuffer_context_cell_20074f08));
@@ -9208,15 +9343,15 @@ uint audio_uart_ambiq_vector_shape_draw_5202ec(uint *path,int paint)
   *(uint *)(uVar8 + 0x124) = uVar16;
   fVar25 = *(float *)(paint + 0xd0);
   uVar7 = uVar7 & 0xfffffff;
-  if (fVar25 < 1.0) {
-    uVar7 = uVar7 | (uint)(fVar25 == 0.0) << 0x1e | (uint)(0.0 <= fVar25) << 0x1d;
+  if (fVar25 < 1.0f) {
+    uVar7 = uVar7 | (uint)(fVar25 == 0.0f) << 0x1e | (uint)(0.0f <= fVar25) << 0x1d;
     bVar21 = (byte)(uVar7 >> 0x18);
     if (!(bool)(bVar21 >> 5 & 1) || (bool)(bVar21 >> 6)) {
       audio_uart_nema_vg_set_error_51565c(0x400000);
       return 0x400000;
     }
     fVar31 = (float)VectorSignedToFloat(uVar16 >> 0x18,(byte)(uVar7 >> 0x16) & 3);
-    *(uint *)(uVar8 + 0x124) = uVar16 & 0xffffff | (int)(fVar31 * fVar25 + 0.5) << 0x18;
+    *(uint *)(uVar8 + 0x124) = uVar16 & 0xffffff | (int)(fVar31 * fVar25 + 0.5f) << 0x18;
   }
   uVar16 = *(int *)(uVar8 + 0x84) << 5;
   if ((int)uVar16 < 0) {
@@ -9254,8 +9389,8 @@ uint audio_uart_ambiq_vector_shape_draw_5202ec(uint *path,int paint)
           fVar32 = audio_uart_float_sqrt_4397a8
                              (*(float *)(uVar8 + 0xf8) * *(float *)(uVar8 + 0xf8) +
                               *(float *)(uVar8 + 0xfc) * *(float *)(uVar8 + 0xfc));
-          *(float *)(uVar8 + 0x130) = fVar25 * (1.0 / ABS(fVar36));
-          *(float *)(uVar8 + 0x134) = (1.0 / ABS(fVar32)) * fVar25;
+          *(float *)(uVar8 + 0x130) = fVar25 * (1.0f / ABS(fVar36));
+          *(float *)(uVar8 + 0x134) = (1.0f / ABS(fVar32)) * fVar25;
         }
       }
       else {
@@ -9280,13 +9415,13 @@ uint audio_uart_ambiq_vector_shape_draw_5202ec(uint *path,int paint)
       fVar36 = ABS(fVar26);
     }
     fVar32 = fVar31 - fVar26;
-    if (fVar32 < 0.0) {
+    if (fVar32 < 0.0f) {
       fVar32 = fVar26 - fVar31;
     }
     /* stock 0x520676 vcmp s0(min*1e-5),s1(|diff|); blt 0x520714 => GE path; 0x520684 vcmp s17,#1.0; bpl 0x520714
        => taken when ordered <. NZCV word dropped: only bits 0..27 (RMode) are read later (wave19). */
     uVar7 = uVar16;
-    if ((fVar36 * (9.999999747378752e-06f) >= fVar32) && fVar31 < 1.0) {
+    if ((fVar36 * (9.999999747378752e-06f) >= fVar32) && fVar31 < 1.0f) {
       uVar12 = *(uint *)(uVar8 + 0x124);
       fVar25 = (float)VectorUnsignedToFloat(uVar12 & 0xff,(byte)(uVar16 >> 0x16) & 3);
       uVar27 = VectorFloatToUnsigned(fVar25 * fVar31,3);
@@ -9296,11 +9431,11 @@ uint audio_uart_ambiq_vector_shape_draw_5202ec(uint *path,int paint)
       uVar29 = VectorFloatToUnsigned(fVar25 * fVar31,3);
       fVar25 = (float)VectorUnsignedToFloat(uVar12 >> 0x18,(byte)(uVar16 >> 0x16) & 3);
       iVar13 = VectorFloatToUnsigned(fVar25 * fVar31,3);
-      fVar25 = 1.0;
-      fVar31 = 1.0;
+      fVar25 = 1.0f;
+      fVar31 = 1.0f;
       *(uint *)(uVar8 + 0x124) =
            uVar27 & 0xff | (uVar28 & 0xff) << 8 | (uVar29 & 0xff) << 0x10 | iVar13 << 0x18;
-      fVar26 = 1.0;
+      fVar26 = 1.0f;
     }
   }
   if ((*(char *)(uVar8 + 0x1bc) == '\0') && (*(char *)(uVar8 + 0x1be) != '\0')) {
@@ -9356,23 +9491,23 @@ LAB_0052075c:
   }
 LAB_005207e4:
   uVar12 = *(uint *)(uVar16 + 0x110);
-  fVar25 = *(float *)(uVar16 + 300) * 0.5;
+  fVar25 = *(float *)(uVar16 + 300) * 0.5f;
   bVar24 = uVar12 == 1;
   if (bVar24) {
     uVar12 = (uint)*(byte *)(uVar16 + 0x1bf);
   }
   if (bVar24 && uVar12 == 1) {
-    fVar25 = *(float *)(uVar16 + 300) + 1.0 + fVar25;
+    fVar25 = *(float *)(uVar16 + 300) + 1.0f + fVar25;
   }
-  fVar26 = 4.0;
-  fVar31 = 1.0;
+  fVar26 = 4.0f;
+  fVar31 = 1.0f;
   *(undefined4 *)(uVar16 + 0x1c4) = 0;
   *(undefined4 *)(uVar16 + 0x1c8) = 0;
   if (*(char *)(uVar16 + 0x1bc) != '\0') {
     fVar30 = audio_uart_float_sqrt_4397a8
                        (*(float *)(uVar16 + 0xec) * *(float *)(uVar16 + 0xec) +
                         *(float *)(uVar16 + 0xf0) * *(float *)(uVar16 + 0xf0));
-    fVar26 = 4.0;
+    fVar26 = 4.0f;
     fVar32 = audio_uart_float_sqrt_4397a8
                        (*(float *)(uVar16 + 0xf8) * *(float *)(uVar16 + 0xf8) +
                         *(float *)(uVar16 + 0xfc) * *(float *)(uVar16 + 0xfc));
@@ -9384,33 +9519,33 @@ LAB_005207e4:
     /* stock 0x52086a vcmp |s21|,0.001f (lit 0x520bd8); itt ge; vdivge s20 = 4/s0. The decompile had dropped
        the compare (only !NAN remained); wave19 restores it from stock. */
     if (fVar30 >= fVar36) {
-      fVar26 = 4.0 / fVar30;
+      fVar26 = 4.0f / fVar30;
     }
     /* stock 0x520884 vcmp s1,s2; itt ge; vdivge s19 = 4/s1 (wave19). */
     uVar7 = uVar7 & 0xfffffff;
     if (fVar32 >= fVar36) {
-      fVar31 = 4.0 / fVar32;
+      fVar31 = 4.0f / fVar32;
     }
   }
   uVar12 = *puVar4;
   fVar26 = fVar26 + fVar25;
-  fVar35 = (float)path[4] - fVar26;
+  fVar35 = (float)g2c_bits_to_float((uint)(path[4])) - fVar26;
   *(float *)(uVar12 + 0x1c) = fVar35;
   fVar31 = fVar31 + fVar25;
-  fVar32 = (float)path[5] - fVar31;
+  fVar32 = (float)g2c_bits_to_float((uint)(path[5])) - fVar31;
   *(float *)(uVar12 + 0x20) = fVar32;
-  fVar30 = (float)path[4] + (float)path[0x14] + fVar26;
+  fVar30 = (float)g2c_bits_to_float((uint)(path[4])) + (float)g2c_bits_to_float((uint)(path[0x14])) + fVar26;
   *(float *)(uVar12 + 0x24) = fVar30;
-  fVar33 = (float)path[5] - fVar31;
+  fVar33 = (float)g2c_bits_to_float((uint)(path[5])) - fVar31;
   *(float *)(uVar12 + 0x28) = fVar33;
-  fVar34 = (float)path[4] + (float)path[0x14] + fVar26;
+  fVar34 = (float)g2c_bits_to_float((uint)(path[4])) + (float)g2c_bits_to_float((uint)(path[0x14])) + fVar26;
   *(float *)(uVar12 + 0x2c) = fVar34;
-  fVar25 = (float)path[5] + (float)path[0x15] + fVar31;
+  fVar25 = (float)g2c_bits_to_float((uint)(path[5])) + (float)g2c_bits_to_float((uint)(path[0x15])) + fVar31;
   *(float *)(uVar12 + 0x30) = fVar25;
-  fVar26 = (float)path[4] - fVar26;
+  fVar26 = (float)g2c_bits_to_float((uint)(path[4])) - fVar26;
   *(float *)(uVar12 + 0x34) = fVar26;
-  fVar36 = (float)path[5];
-  fVar31 = fVar36 + (float)path[0x15] + fVar31;
+  fVar36 = (float)g2c_bits_to_float((uint)(path[5]));
+  fVar31 = fVar36 + (float)g2c_bits_to_float((uint)(path[0x15])) + fVar31;
   *(float *)(uVar12 + 0x38) = fVar31;
   if (*(char *)(uVar16 + 0x1bc) != '\0') {
     *(float *)(uVar12 + 0x1c) =
@@ -9439,27 +9574,27 @@ LAB_005207e4:
          *(float *)(uVar16 + 0x100);
   }
   fVar26 = *(float *)(uVar12 + 0x1c);
-  uVar27 = uVar7 & 0xfffffff | (uint)(fVar26 == 0.0) << 0x1e | (uint)(0.0 <= fVar26) << 0x1d;
+  uVar27 = uVar7 & 0xfffffff | (uint)(fVar26 == 0.0f) << 0x1e | (uint)(0.0f <= fVar26) << 0x1d;
   bVar21 = (byte)(uVar27 >> 0x18);
   bVar24 = (bool)(bVar21 >> 6);
   bVar22 = (bool)(bVar21 >> 5 & 1);
   if (!bVar22 || bVar24) {
-    uVar27 = uVar7 & 0xfffffff | (uint)(*(float *)(uVar12 + 0x24) == 0.0) << 0x1e |
-             (uint)(0.0 <= *(float *)(uVar12 + 0x24)) << 0x1d;
+    uVar27 = uVar7 & 0xfffffff | (uint)(*(float *)(uVar12 + 0x24) == 0.0f) << 0x1e |
+             (uint)(0.0f <= *(float *)(uVar12 + 0x24)) << 0x1d;
     bVar21 = (byte)(uVar27 >> 0x18);
     bVar24 = (bool)(bVar21 >> 6);
     bVar22 = (bool)(bVar21 >> 5 & 1);
   }
   if (!bVar22 || bVar24) {
     uVar7 = uVar27 & 0xfffffff;
-    uVar27 = uVar7 | (uint)(*(float *)(uVar12 + 0x2c) == 0.0) << 0x1e |
-             (uint)(0.0 <= *(float *)(uVar12 + 0x2c)) << 0x1d;
+    uVar27 = uVar7 | (uint)(*(float *)(uVar12 + 0x2c) == 0.0f) << 0x1e |
+             (uint)(0.0f <= *(float *)(uVar12 + 0x2c)) << 0x1d;
     bVar21 = (byte)(uVar27 >> 0x18);
     bVar24 = (bool)(bVar21 >> 6);
     bVar22 = (bool)(bVar21 >> 5 & 1);
     if (!bVar22 || bVar24) {
-      uVar27 = uVar7 | (uint)(*(float *)(uVar12 + 0x34) == 0.0) << 0x1e |
-               (uint)(0.0 <= *(float *)(uVar12 + 0x34)) << 0x1d;
+      uVar27 = uVar7 | (uint)(*(float *)(uVar12 + 0x34) == 0.0f) << 0x1e |
+               (uint)(0.0f <= *(float *)(uVar12 + 0x34)) << 0x1d;
       bVar21 = (byte)(uVar27 >> 0x18);
       bVar24 = (bool)(bVar21 >> 6);
       bVar22 = (bool)(bVar21 >> 5 & 1);
@@ -9469,27 +9604,27 @@ LAB_005207e4:
     }
   }
   fVar32 = *(float *)(uVar12 + 0x20);
-  uVar7 = uVar27 & 0xfffffff | (uint)(fVar32 == 0.0) << 0x1e | (uint)(0.0 <= fVar32) << 0x1d;
+  uVar7 = uVar27 & 0xfffffff | (uint)(fVar32 == 0.0f) << 0x1e | (uint)(0.0f <= fVar32) << 0x1d;
   bVar21 = (byte)(uVar7 >> 0x18);
   bVar24 = (bool)(bVar21 >> 6);
   bVar22 = (bool)(bVar21 >> 5 & 1);
   if (!bVar22 || bVar24) {
-    uVar7 = uVar27 & 0xfffffff | (uint)(*(float *)(uVar12 + 0x28) == 0.0) << 0x1e |
-            (uint)(0.0 <= *(float *)(uVar12 + 0x28)) << 0x1d;
+    uVar7 = uVar27 & 0xfffffff | (uint)(*(float *)(uVar12 + 0x28) == 0.0f) << 0x1e |
+            (uint)(0.0f <= *(float *)(uVar12 + 0x28)) << 0x1d;
     bVar21 = (byte)(uVar7 >> 0x18);
     bVar24 = (bool)(bVar21 >> 6);
     bVar22 = (bool)(bVar21 >> 5 & 1);
   }
   if (!bVar22 || bVar24) {
     uVar27 = uVar7 & 0xfffffff;
-    uVar7 = uVar27 | (uint)(*(float *)(uVar12 + 0x30) == 0.0) << 0x1e |
-            (uint)(0.0 <= *(float *)(uVar12 + 0x30)) << 0x1d;
+    uVar7 = uVar27 | (uint)(*(float *)(uVar12 + 0x30) == 0.0f) << 0x1e |
+            (uint)(0.0f <= *(float *)(uVar12 + 0x30)) << 0x1d;
     bVar21 = (byte)(uVar7 >> 0x18);
     bVar24 = (bool)(bVar21 >> 6);
     bVar22 = (bool)(bVar21 >> 5 & 1);
     if (!bVar22 || bVar24) {
-      uVar7 = uVar27 | (uint)(*(float *)(uVar12 + 0x38) == 0.0) << 0x1e |
-              (uint)(0.0 <= *(float *)(uVar12 + 0x38)) << 0x1d;
+      uVar7 = uVar27 | (uint)(*(float *)(uVar12 + 0x38) == 0.0f) << 0x1e |
+              (uint)(0.0f <= *(float *)(uVar12 + 0x38)) << 0x1d;
       bVar21 = (byte)(uVar7 >> 0x18);
       bVar24 = (bool)(bVar21 >> 6);
       bVar22 = (bool)(bVar21 >> 5 & 1);
@@ -9731,7 +9866,7 @@ LAB_00520ef2:
           fVar36 = ABS(fVar26);
         }
         fVar32 = fVar25 - fVar26;
-        if (fVar32 < 0.0) {
+        if (fVar32 < 0.0f) {
           fVar32 = fVar26 - fVar25;
         }
         uVar8 = uVar7 | (uint)(fVar36 * (9.999999747378752e-06f) < fVar32) << 0x1f;
@@ -9750,7 +9885,7 @@ LAB_00520f5a:
       }
       else {
         fVar32 = fVar36;
-        if (fVar36 < 0.0) {
+        if (fVar36 < 0.0f) {
           fVar32 = -fVar36;
         }
         fVar30 = ABS(afStack_c4[1]);
@@ -9758,7 +9893,7 @@ LAB_00520f5a:
           fVar30 = fVar32;
         }
         fVar32 = fVar36 - afStack_c4[1];
-        if (fVar32 < 0.0) {
+        if (fVar32 < 0.0f) {
           fVar32 = afStack_c4[1] - fVar36;
         }
         uVar7 = uVar8 | (uint)(fVar30 * (9.999999747378752e-06f) < fVar32) << 0x1f;
@@ -9774,14 +9909,14 @@ LAB_00520fc2:
       }
       else {
         fVar32 = fVar36;
-        if (fVar36 < 0.0) {
+        if (fVar36 < 0.0f) {
           fVar32 = -fVar36;
         }
         if (ABS(afStack_c4[3]) <= fVar32) {
           fVar32 = ABS(afStack_c4[3]);
         }
         fVar30 = fVar36 - afStack_c4[3];
-        if (fVar30 < 0.0) {
+        if (fVar30 < 0.0f) {
           fVar30 = afStack_c4[3] - fVar36;
         }
         uVar8 = uVar7 | (uint)(fVar32 * (9.999999747378752e-06f) < fVar30) << 0x1f;
@@ -9791,7 +9926,7 @@ LAB_00520fc2:
       iVar19 = (iVar13 + 1U) - (iVar13 + 1U & 0xfffffffc);
       iVar15 = (iVar13 + 3U) - (iVar13 + 3U & 0xfffffffc);
       uVar8 = uVar8 & 0xfffffff;
-      if (0.0 < (*(float *)(((byte *)&g2c_sp_frame_5202ec[0]) + iVar15 * 8) -
+      if (0.0f < (*(float *)(((byte *)&g2c_sp_frame_5202ec[0]) + iVar15 * 8) -
                 *(float *)(((byte *)&g2c_sp_frame_5202ec[0]) + iVar13 * 8)) *
                 (*(float *)(((byte *)&g2c_sp_frame_5202ec[1]) + iVar19 * 8) -
                 *(float *)(((byte *)&g2c_sp_frame_5202ec[1]) + iVar13 * 8)) +
@@ -9811,7 +9946,7 @@ LAB_00520fc2:
       if (afStack_c4[0] < fVar31) {
 LAB_005210f6:
         pfVar11 = (float *)((byte *)&g2c_sp_frame_5202ec[2]);
-        fStack_a8 = 1.4013e-45;
+        fStack_a8 = 1.4013e-45f;
         uVar16 = uVar8;
       }
       else {
@@ -9820,7 +9955,7 @@ LAB_005210f6:
           fVar36 = ABS(afStack_c4[0]);
         }
         fVar32 = fVar31 - afStack_c4[0];
-        if (fVar32 < 0.0) {
+        if (fVar32 < 0.0f) {
           fVar32 = afStack_c4[0] - fVar31;
         }
         uVar16 = uVar8 | (uint)(fVar36 * (9.999999747378752e-06f) < fVar32) << 0x1f;
@@ -9834,7 +9969,7 @@ LAB_005210f6:
       if (afStack_c4[2] < fVar36) {
 LAB_0052115e:
         pfVar11 = afStack_c4 + 1;
-        fStack_a8 = 2.8026e-45;
+        fStack_a8 = 2.8026e-45f;
         uVar7 = uVar16;
       }
       else {
@@ -9843,7 +9978,7 @@ LAB_0052115e:
           fVar32 = ABS(pfVar11[1]);
         }
         fVar30 = fVar36 - afStack_c4[2];
-        if (fVar30 < 0.0) {
+        if (fVar30 < 0.0f) {
           fVar30 = afStack_c4[2] - fVar36;
         }
         uVar7 = uVar16 | (uint)(fVar32 * (9.999999747378752e-06f) < fVar30) << 0x1f;
@@ -9855,7 +9990,7 @@ LAB_0052115e:
       if (afStack_c4[4] < fVar36) {
 LAB_005211c6:
         pfVar11 = afStack_c4 + 3;
-        fStack_a8 = 4.2039e-45;
+        fStack_a8 = 4.2039e-45f;
         uVar16 = uVar7;
       }
       else {
@@ -9864,7 +9999,7 @@ LAB_005211c6:
           fVar32 = ABS(afStack_c4[4]);
         }
         fVar30 = fVar36 - afStack_c4[4];
-        if (fVar30 < 0.0) {
+        if (fVar30 < 0.0f) {
           fVar30 = afStack_c4[4] - fVar36;
         }
         uVar16 = uVar7 | (uint)(fVar32 * (9.999999747378752e-06f) < fVar30) << 0x1f;
@@ -9884,7 +10019,7 @@ LAB_0052122a:
           fVar36 = ABS(afStack_c4[0]);
         }
         fVar32 = fVar31 - afStack_c4[0];
-        if (fVar32 < 0.0) {
+        if (fVar32 < 0.0f) {
           fVar32 = afStack_c4[0] - fVar31;
         }
         uVar7 = uVar16 | (uint)(fVar36 * (9.999999747378752e-06f) < fVar32) << 0x1f;
@@ -9907,7 +10042,7 @@ LAB_00521292:
           fVar32 = ABS(pfVar18[1]);
         }
         fVar30 = fVar36 - afStack_c4[2];
-        if (fVar30 < 0.0) {
+        if (fVar30 < 0.0f) {
           fVar30 = afStack_c4[2] - fVar36;
         }
         uVar16 = uVar7 | (uint)(fVar32 * (9.999999747378752e-06f) < fVar30) << 0x1f;
@@ -9928,7 +10063,7 @@ LAB_005212fa:
           fVar32 = ABS(afStack_c4[4]);
         }
         fVar30 = fVar36 - afStack_c4[4];
-        if (fVar30 < 0.0) {
+        if (fVar30 < 0.0f) {
           fVar30 = afStack_c4[4] - fVar36;
         }
         uVar7 = uVar16 | (uint)(fVar32 * (9.999999747378752e-06f) < fVar30) << 0x1f;
@@ -9948,7 +10083,7 @@ LAB_0052135e:
           fVar36 = ABS(afStack_c4[0]);
         }
         fVar32 = fVar31 - afStack_c4[0];
-        if (fVar32 < 0.0) {
+        if (fVar32 < 0.0f) {
           fVar32 = afStack_c4[0] - fVar31;
         }
         uVar16 = uVar7 | (uint)(fVar36 * (9.999999747378752e-06f) < fVar32) << 0x1f;
@@ -9971,7 +10106,7 @@ LAB_005213c6:
           fVar32 = ABS(pfVar20[1]);
         }
         fVar30 = fVar36 - afStack_c4[2];
-        if (fVar30 < 0.0) {
+        if (fVar30 < 0.0f) {
           fVar30 = afStack_c4[2] - fVar36;
         }
         uVar7 = uVar16 | (uint)(fVar32 * (9.999999747378752e-06f) < fVar30) << 0x1f;
@@ -9992,7 +10127,7 @@ LAB_0052142e:
           fVar32 = ABS(afStack_c4[4]);
         }
         fVar30 = fVar36 - afStack_c4[4];
-        if (fVar30 < 0.0) {
+        if (fVar30 < 0.0f) {
           fVar30 = afStack_c4[4] - fVar36;
         }
         uVar16 = uVar7 | (uint)(fVar32 * (9.999999747378752e-06f) < fVar30) << 0x1f;
@@ -10003,7 +10138,7 @@ LAB_0052142e:
       if (fVar31 < afStack_c4[0]) {
 LAB_00521492:
         pfVar17 = (float *)((byte *)&g2c_sp_frame_5202ec[2]);
-        fStack_a0 = 1.4013e-45;
+        fStack_a0 = 1.4013e-45f;
         uVar7 = uVar16;
       }
       else {
@@ -10012,7 +10147,7 @@ LAB_00521492:
           fVar36 = ABS(afStack_c4[0]);
         }
         fVar32 = fVar31 - afStack_c4[0];
-        if (fVar32 < 0.0) {
+        if (fVar32 < 0.0f) {
           fVar32 = afStack_c4[0] - fVar31;
         }
         uVar7 = uVar16 | (uint)(fVar36 * (9.999999747378752e-06f) < fVar32) << 0x1f;
@@ -10026,7 +10161,7 @@ LAB_00521492:
       if (fVar25 < afStack_c4[2]) {
 LAB_005214fa:
         pfVar17 = afStack_c4 + 1;
-        fStack_a0 = 2.8026e-45;
+        fStack_a0 = 2.8026e-45f;
         uVar16 = uVar7;
       }
       else {
@@ -10035,7 +10170,7 @@ LAB_005214fa:
           fVar31 = ABS(pfVar17[1]);
         }
         fVar26 = fVar25 - afStack_c4[2];
-        if (fVar26 < 0.0) {
+        if (fVar26 < 0.0f) {
           fVar26 = afStack_c4[2] - fVar25;
         }
         uVar16 = uVar7 | (uint)(fVar31 * (9.999999747378752e-06f) < fVar26) << 0x1f;
@@ -10047,7 +10182,7 @@ LAB_005214fa:
       if (fVar25 < afStack_c4[4]) {
 LAB_00521562:
         pfVar17 = afStack_c4 + 3;
-        fStack_a0 = 4.2039e-45;
+        fStack_a0 = 4.2039e-45f;
         uVar8 = uVar16;
       }
       else {
@@ -10056,7 +10191,7 @@ LAB_00521562:
           fVar31 = ABS(afStack_c4[4]);
         }
         fVar26 = fVar25 - afStack_c4[4];
-        if (fVar26 < 0.0) {
+        if (fVar26 < 0.0f) {
           fVar26 = afStack_c4[4] - fVar25;
         }
         /* stock 0x521546 vcmp s0(min*1e-5),s4; blt 0x52156c => GE path; 0x521558 vcmp; bpl 0x52156c falls to
@@ -10064,14 +10199,14 @@ LAB_00521562:
         uVar8 = uVar16;
         if ((fVar31 * (9.999999747378752e-06f) >= fVar26) && afStack_c4[3] < *pfVar17) goto LAB_00521562;
       }
-      iVar13 = (int)fStack_a8 + 1;
+      iVar13 = (int)g2c_float_to_bits(fStack_a8) + 1;
       if (pfVar11 == pfVar18) {
         fVar36 = pfVar11[1];
         fVar25 = *pfVar11;
         iVar13 = iVar13 - (iVar13 + ((uint)(iVar13 >> 1) >> 0x1e) & 0xfffffffc);
         fVar32 = *(float *)(((byte *)&g2c_sp_frame_5202ec[0]) + iVar13 * 8);
         fVar30 = *(float *)(((byte *)&g2c_sp_frame_5202ec[1]) + iVar13 * 8);
-        iVar13 = (int)fStack_a8 + 3;
+        iVar13 = (int)g2c_float_to_bits(fStack_a8) + 3;
         iVar13 = iVar13 - (iVar13 + ((uint)(iVar13 >> 1) >> 0x1e) & 0xfffffffc);
         fVar33 = *(float *)(((byte *)&g2c_sp_frame_5202ec[0]) + iVar13 * 8);
         fVar34 = *(float *)(((byte *)&g2c_sp_frame_5202ec[1]) + iVar13 * 8);
@@ -10085,7 +10220,7 @@ LAB_00521562:
         fVar32 = *(float *)(((byte *)&g2c_sp_frame_5202ec[0]) + iVar13 * 8);
         fVar30 = *(float *)(((byte *)&g2c_sp_frame_5202ec[1]) + iVar13 * 8);
         fVar26 = *pfVar18;
-        iVar13 = (int)fStack_a8 + 2;
+        iVar13 = (int)g2c_float_to_bits(fStack_a8) + 2;
         iVar13 = iVar13 - (iVar13 + ((uint)(iVar13 >> 1) >> 0x1e) & 0xfffffffc);
         fVar33 = *(float *)(((byte *)&g2c_sp_frame_5202ec[0]) + iVar13 * 8);
         fVar34 = *(float *)(((byte *)&g2c_sp_frame_5202ec[1]) + iVar13 * 8);
@@ -10093,8 +10228,8 @@ LAB_00521562:
       }
       fVar37 = *pfVar20;
       iVar13 = iStack_a4 + 3;
-      fVar40 = fVar37 + 4.0;
-      fVar35 = 1.0;
+      fVar40 = fVar37 + 4.0f;
+      fVar35 = 1.0f;
       if (pfVar20 == pfVar17) {
         iVar15 = iStack_a4 + 1;
         d = pfVar20[1];
@@ -10115,18 +10250,18 @@ LAB_00521562:
       fVar39 = *(float *)(((byte *)&g2c_sp_frame_5202ec[0]) + iVar13 * 8);
       h = *(float *)(((byte *)&g2c_sp_frame_5202ec[1]) + iVar13 * 8);
       g2c_nema_vg_emit_verts_516b34
-                ((fVar25 + 4.0) * 0.25,fVar36,(fVar32 + 4.0) * 0.25,fVar30,(fVar33 + -4.0) * 0.25,
-                 fVar34,(fVar26 + -4.0) * 0.25,fVar31);
+                ((fVar25 + 4.0f) * 0.25f,fVar36,(fVar32 + 4.0f) * 0.25f,fVar30,(fVar33 + -4.0f) * 0.25f,
+                 fVar34,(fVar26 + -4.0f) * 0.25f,fVar31);
       g2c_nema_vg_emit_verts_516b34
-                (fVar40 * 0.25,fStack_a8,(fVar37 + -4.0) * 0.25,d,(fVar38 + -4.0) * 0.25,f,
-                 (fVar39 + 4.0) * 0.25,h);
+                (fVar40 * 0.25f,fStack_a8,(fVar37 + -4.0f) * 0.25f,d,(fVar38 + -4.0f) * 0.25f,f,
+                 (fVar39 + 4.0f) * 0.25f,h);
       audio_uart_nema_stencil_restore_5226b2(uStack_98);
       audio_uart_display_graphics_finish_4b1548();
       audio_uart_nema_child_514846(0x34,uStack_ac & 0xffff | 0x9000000);
       audio_uart_nema_child_514846(0x38,uStack_ac | uStack_b0 << 0x10);
       uVar16 = *puVar3;
-      fVar31 = ((float)path[4] + (float)path[6]) * 0.5 + 0.5;
-      fVar25 = ((float)path[5] + (float)path[7]) * 0.5 + 0.5;
+      fVar31 = ((float)g2c_bits_to_float((uint)(path[4])) + (float)g2c_bits_to_float((uint)(path[6]))) * 0.5f + 0.5f;
+      fVar25 = ((float)g2c_bits_to_float((uint)(path[5])) + (float)g2c_bits_to_float((uint)(path[7]))) * 0.5f + 0.5f;
       *(float *)(uVar16 + 0x2c4) = fVar25;
       *(int *)(uVar16 + 0x2cc) = (int)fVar25;
       *(float *)(uVar16 + 0x2c0) = fVar31;
@@ -10137,72 +10272,72 @@ LAB_00521562:
       g2c_nema_vg_paint_setup_516c82((uint *)(uVar16 + 0xec));
       uVar7 = *puVar3;
       uVar16 = *(uint *)(uVar7 + 0x110);
-      fVar25 = *(float *)(uVar7 + 300) * 0.5;
+      fVar25 = *(float *)(uVar7 + 300) * 0.5f;
       bVar24 = uVar16 == 1;
       if (bVar24) {
         uVar16 = (uint)*(byte *)(uVar7 + 0x1bf);
       }
       if (bVar24 && uVar16 == 1) {
-        fVar25 = *(float *)(uVar7 + 300) + 1.0 + fVar25;
+        fVar25 = *(float *)(uVar7 + 300) + 1.0f + fVar25;
       }
-      fVar31 = 1.0;
+      fVar31 = 1.0f;
       /* stock 0x521864 vcmp [r1+0x1c4],0.001f; it ge; vdivge. Decompile had dropped the compare (wave19). */
       if (*(float *)(uVar7 + 0x1c4) >= (0.0010000001639127731f)) {
-        fVar31 = 1.0 / *(float *)(uVar7 + 0x1c4);
+        fVar31 = 1.0f / *(float *)(uVar7 + 0x1c4);
       }
       fVar26 = *(float *)(uVar7 + 0x1c8);
       /* stock 0x52187a vcmp [r1+0x1c8],0.001f; itt ge; vdivge s16 (wave19). uVar12/uVar16 are reassigned
          before any later read (uVar12 = uVar8 & mask; uVar16 = call results). */
       if (fVar26 >= (0.0010000001639127731f)) {
-        fVar35 = 1.0 / fVar26;
+        fVar35 = 1.0f / fVar26;
       }
       fVar31 = fVar31 + fVar25;
       fVar35 = fVar35 + fVar25;
-      path[8] = (uint)((float)path[4] - fVar31);
-      path[9] = (uint)((float)path[5] - fVar35);
-      path[10] = (uint)((float)path[4] + (float)path[0x14] + fVar31);
-      path[0xb] = (uint)((float)path[5] - fVar35);
-      path[0xc] = (uint)((float)path[4] + (float)path[0x14] + fVar31);
-      path[0xd] = (uint)((float)path[5] + (float)path[0x15] + fVar35);
-      path[0xe] = (uint)((float)path[4] - fVar31);
-      path[0xf] = (uint)((float)path[5] + (float)path[0x15] + fVar35);
-      path[0x10] = (uint)((float)path[4] - fVar31);
-      path[0x11] = (uint)((float)path[5] - fVar35);
-      path[0x12] = (uint)((float)path[6] + fVar31);
-      path[0x13] = (uint)((float)path[7] + fVar35);
-      path[0x16] = (uint)((float)path[0x14] + fVar31 * 2.0);
-      path[0x17] = (uint)((float)path[0x15] + fVar35 * 2.0);
+      path[8] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[4])) - fVar31));
+      path[9] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[5])) - fVar35));
+      path[10] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[4])) + (float)g2c_bits_to_float((uint)(path[0x14])) + fVar31));
+      path[0xb] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[5])) - fVar35));
+      path[0xc] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[4])) + (float)g2c_bits_to_float((uint)(path[0x14])) + fVar31));
+      path[0xd] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[5])) + (float)g2c_bits_to_float((uint)(path[0x15])) + fVar35));
+      path[0xe] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[4])) - fVar31));
+      path[0xf] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[5])) + (float)g2c_bits_to_float((uint)(path[0x15])) + fVar35));
+      path[0x10] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[4])) - fVar31));
+      path[0x11] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[5])) - fVar35));
+      path[0x12] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[6])) + fVar31));
+      path[0x13] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[7])) + fVar35));
+      path[0x16] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[0x14])) + fVar31 * 2.0f));
+      path[0x17] = (uint)g2c_float_to_bits(((float)g2c_bits_to_float((uint)(path[0x15])) + fVar35 * 2.0f));
       if (*(char *)(uVar7 + 0x1bc) != '\0') {
         pfVar11 = (float *)(uVar7 + 0xec);
-        fVar25 = (float)path[8];
-        path[8] = (uint)(*pfVar11 * fVar25 + *(float *)(uVar7 + 0xf0) * (float)path[9] +
-                        *(float *)(uVar7 + 0xf4));
-        path[9] = (uint)(*(float *)(uVar7 + 0xf8) * fVar25 +
-                         *(float *)(uVar7 + 0xfc) * (float)path[9] + *(float *)(uVar7 + 0x100));
-        fVar25 = (float)path[10];
-        path[10] = (uint)(*pfVar11 * fVar25 + *(float *)(uVar7 + 0xf0) * (float)path[0xb] +
-                         *(float *)(uVar7 + 0xf4));
-        path[0xb] = (uint)(*(float *)(uVar7 + 0xf8) * fVar25 +
-                           *(float *)(uVar7 + 0xfc) * (float)path[0xb] + *(float *)(uVar7 + 0x100));
-        fVar25 = (float)path[0xc];
-        path[0xc] = (uint)(*pfVar11 * fVar25 + *(float *)(uVar7 + 0xf0) * (float)path[0xd] +
-                          *(float *)(uVar7 + 0xf4));
-        path[0xd] = (uint)(*(float *)(uVar7 + 0xf8) * fVar25 +
-                           *(float *)(uVar7 + 0xfc) * (float)path[0xd] + *(float *)(uVar7 + 0x100));
-        fVar25 = (float)path[0xe];
-        path[0xe] = (uint)(*pfVar11 * fVar25 + *(float *)(uVar7 + 0xf0) * (float)path[0xf] +
-                          *(float *)(uVar7 + 0xf4));
-        fVar31 = (float)path[10];
-        fVar36 = (float)path[8];
-        fVar25 = *(float *)(uVar7 + 0xf8) * fVar25 + *(float *)(uVar7 + 0xfc) * (float)path[0xf] +
+        fVar25 = (float)g2c_bits_to_float((uint)(path[8]));
+        path[8] = (uint)g2c_float_to_bits((*pfVar11 * fVar25 + *(float *)(uVar7 + 0xf0) * (float)g2c_bits_to_float((uint)(path[9])) +
+                        *(float *)(uVar7 + 0xf4)));
+        path[9] = (uint)g2c_float_to_bits((*(float *)(uVar7 + 0xf8) * fVar25 +
+                         *(float *)(uVar7 + 0xfc) * (float)g2c_bits_to_float((uint)(path[9])) + *(float *)(uVar7 + 0x100)));
+        fVar25 = (float)g2c_bits_to_float((uint)(path[10]));
+        path[10] = (uint)g2c_float_to_bits((*pfVar11 * fVar25 + *(float *)(uVar7 + 0xf0) * (float)g2c_bits_to_float((uint)(path[0xb])) +
+                         *(float *)(uVar7 + 0xf4)));
+        path[0xb] = (uint)g2c_float_to_bits((*(float *)(uVar7 + 0xf8) * fVar25 +
+                           *(float *)(uVar7 + 0xfc) * (float)g2c_bits_to_float((uint)(path[0xb])) + *(float *)(uVar7 + 0x100)));
+        fVar25 = (float)g2c_bits_to_float((uint)(path[0xc]));
+        path[0xc] = (uint)g2c_float_to_bits((*pfVar11 * fVar25 + *(float *)(uVar7 + 0xf0) * (float)g2c_bits_to_float((uint)(path[0xd])) +
+                          *(float *)(uVar7 + 0xf4)));
+        path[0xd] = (uint)g2c_float_to_bits((*(float *)(uVar7 + 0xf8) * fVar25 +
+                           *(float *)(uVar7 + 0xfc) * (float)g2c_bits_to_float((uint)(path[0xd])) + *(float *)(uVar7 + 0x100)));
+        fVar25 = (float)g2c_bits_to_float((uint)(path[0xe]));
+        path[0xe] = (uint)g2c_float_to_bits((*pfVar11 * fVar25 + *(float *)(uVar7 + 0xf0) * (float)g2c_bits_to_float((uint)(path[0xf])) +
+                          *(float *)(uVar7 + 0xf4)));
+        fVar31 = (float)g2c_bits_to_float((uint)(path[10]));
+        fVar36 = (float)g2c_bits_to_float((uint)(path[8]));
+        fVar25 = *(float *)(uVar7 + 0xf8) * fVar25 + *(float *)(uVar7 + 0xfc) * (float)g2c_bits_to_float((uint)(path[0xf])) +
                  *(float *)(uVar7 + 0x100);
-        path[0xf] = (uint)fVar25;
+        path[0xf] = (uint)g2c_float_to_bits(fVar25);
         fVar26 = fVar36;
         if (fVar31 <= fVar36) {
           fVar26 = fVar31;
         }
-        fVar30 = (float)path[0xe];
-        fVar33 = (float)path[0xc];
+        fVar30 = (float)g2c_bits_to_float((uint)(path[0xe]));
+        fVar33 = (float)g2c_bits_to_float((uint)(path[0xc]));
         fVar32 = fVar33;
         if (fVar30 <= fVar33) {
           fVar32 = fVar30;
@@ -10210,13 +10345,13 @@ LAB_00521562:
         if (fVar32 <= fVar26) {
           fVar26 = fVar32;
         }
-        fVar32 = (float)path[0xb];
-        fVar35 = (float)path[9];
+        fVar32 = (float)g2c_bits_to_float((uint)(path[0xb]));
+        fVar35 = (float)g2c_bits_to_float((uint)(path[9]));
         fVar34 = fVar35;
         if (fVar32 <= fVar35) {
           fVar34 = fVar32;
         }
-        fVar40 = (float)path[0xd];
+        fVar40 = (float)g2c_bits_to_float((uint)(path[0xd]));
         fVar37 = fVar40;
         if (fVar25 <= fVar40) {
           fVar37 = fVar25;
@@ -10242,12 +10377,12 @@ LAB_00521562:
         if (fVar25 < fVar32) {
           fVar25 = fVar32;
         }
-        path[0x13] = (uint)fVar25;
-        path[0x10] = (uint)fVar26;
-        path[0x11] = (uint)fVar34;
-        path[0x12] = (uint)fVar31;
-        path[0x16] = (uint)(fVar31 - fVar26);
-        path[0x17] = (uint)(fVar25 - fVar34);
+        path[0x13] = (uint)g2c_float_to_bits(fVar25);
+        path[0x10] = (uint)g2c_float_to_bits(fVar26);
+        path[0x11] = (uint)g2c_float_to_bits(fVar34);
+        path[0x12] = (uint)g2c_float_to_bits(fVar31);
+        path[0x16] = (uint)g2c_float_to_bits((fVar31 - fVar26));
+        path[0x17] = (uint)g2c_float_to_bits((fVar25 - fVar34));
         uVar12 = uVar8 & 0xfffffff;
       }
       bVar21 = *(byte *)(uVar7 + 0x7c);
@@ -10346,9 +10481,9 @@ LAB_00521d5a:
                 uVar16 = (uVar16 & 0xfff) >> 8;
                 iVar13 = 2;
                 if (uVar16 != 0) {
-                  afStack_c4[1] = 0.0;
+                  afStack_c4[1] = 0.0f;
                   iVar13 = 3;
-                  afStack_c4[2] = (float)(*(uint *)((0x6d5dd8u) + uVar16 * 4) | (0xa581606u));
+                  afStack_c4[2] = (float)g2c_bits_to_float((uint)((*(uint *)((0x6d5dd8u) + uVar16 * 4) | (0xa581606u))));
                 }
                 *(undefined4 *)(((byte *)&g2c_sp_frame_5202ec[0]) + iVar13 * 8) = (0x18001000u);
                 *(undefined4 *)(((byte *)&g2c_sp_frame_5202ec[1]) + iVar13 * 8) = (0xa916426u);
@@ -10366,17 +10501,17 @@ LAB_00521d5a:
               if ((int)(uVar16 << 1) < 0) {
                 uVar7 = 0x100000;
               }
-              fStack_a0 = (0x110bu);
+              fStack_a0 = g2c_bits_to_float((uint)((0x110bu)));
               uStack_9c = (0x0u);
               uStack_98 = (0x100c1183u);
               uStack_94 = (0x92004u);
               uStack_90 = (0x80c0002u);
               uStack_8c = (0x8081a046u);
-              afStack_c4[3] = (0x110bu);
+              afStack_c4[3] = g2c_bits_to_float((uint)((0x110bu)));
               afStack_c4[4] = (0x0u);
               uStack_b0 = (0x100c1183u);
               uStack_ac = (0x92000u);
-              fStack_a8 = (0x80c0002u);
+              fStack_a8 = g2c_bits_to_float((uint)((0x80c0002u)));
               iStack_a4 = (0x8081a046u);
               uStack_88 = (0x110bu);
               uStack_84 = (0x0u);
@@ -10386,12 +10521,12 @@ LAB_00521d5a:
               uStack_74 = (0x92004u);
               uStack_70 = (0x80c0002u);
               uStack_6c = (0x8081a046u);
-              afStack_c4[1] = (0x80c0002u);
-              afStack_c4[2] = (0x8081a046u);
+              afStack_c4[1] = g2c_bits_to_float((uint)((0x80c0002u)));
+              afStack_c4[2] = g2c_bits_to_float((uint)((0x8081a046u)));
               /* stock 0x521e26 vcmp [r5+0xd0],#1.0; blt 0x521e8c => GE path (ldrb [r5+0xd5] at 0x521e34) (wave19).
                  NZCV word dropped: uVar8 is reassigned on both paths, uVar12 next read masked. */
               uVar12 = uVar12 & 0xfffffff;
-              if (*(float *)(paint + 0xd0) >= 1.0) {
+              if (*(float *)(paint + 0xd0) >= 1.0f) {
                 cVar1 = *(char *)(paint + 0xd5);
                 iVar13 = 8;
                 uVar8 = 2;
@@ -10438,7 +10573,7 @@ LAB_00521d5a:
                 audio_uart_nema_instruction_upload_522920((uint)((int)puVar9 + iVar13),uVar8,0);
                 display_driver_nema_mode_commit_52294c(uVar27 | (0x20 - uVar8) * 0x10000);
                 audio_uart_ambiq_image_alpha_513e2e
-                          ((int)(*(float *)(paint + 0xd0) * (255.0f) + 0.5) << 0x18);
+                          ((int)(*(float *)(paint + 0xd0) * (255.0f) + 0.5f) << 0x18);
               }
             }
             else {
@@ -10489,7 +10624,7 @@ LAB_00521d5a:
               uVar16 = g2c_nema_cl_get_error_4b14fe();
               uVar12 = uVar12 & 0xfffffff;
               fVar25 = *(float *)(paint + 0xc4);
-              if (*(float *)(paint + 0xc4) < 0.0) {
+              if (*(float *)(paint + 0xc4) < 0.0f) {
                 fVar25 = (0x0u);
               }
               fVar31 = (float)VectorSignedToFloat(*(undefined4 *)(*puVar4 + 0x10),
@@ -10498,7 +10633,7 @@ LAB_00521d5a:
                 fVar25 = fVar31;
               }
               fVar26 = *(float *)(paint + 200);
-              if (*(float *)(paint + 200) < 0.0) {
+              if (*(float *)(paint + 200) < 0.0f) {
                 fVar26 = (0x0u);
               }
               fVar36 = (float)VectorSignedToFloat(*(undefined4 *)(*puVar4 + 0x14),
@@ -10506,11 +10641,11 @@ LAB_00521d5a:
               if (fVar36 < fVar26) {
                 fVar26 = fVar36;
               }
-              fVar31 = (fVar31 - fVar25) + 0.5;
-              fVar36 = (fVar36 - fVar26) + 0.5;
+              fVar31 = (fVar31 - fVar25) + 0.5f;
+              fVar36 = (fVar36 - fVar26) + 0.5f;
               /* stock 0x522190 vcmp s18,#0; itt gt; vcmpgt 0x52219e s19,#0; ble 0x522204 (wave19). GT = !Z && N==V. */
               uVar8 = uVar12;
-              if (fVar31 > 0.0 && fVar36 > 0.0) {
+              if (fVar31 > 0.0f && fVar36 > 0.0f) {
                 audio_uart_nema_matrix_upload_5226e8(paint + 0x34);
                 uVar7 = VectorFloatToUnsigned(fVar36,3);
                 uVar12 = VectorFloatToUnsigned(fVar31,3);
@@ -10521,19 +10656,19 @@ LAB_00521d5a:
                   g2c_nema_cl_submit_node_4b14ca((int)fVar25,(int)fVar26,uVar12,uVar7);
                 }
                 g2c_nema_vg_emit_verts_516b34
-                          ((float)path[8],(float)path[9],(float)path[10],(float)path[0xb],
-                           (float)path[0xc],(float)path[0xd],(float)path[0xe],(float)path[0xf]);
+                          ((float)g2c_bits_to_float((uint)(path[8])),(float)g2c_bits_to_float((uint)(path[9])),(float)g2c_bits_to_float((uint)(path[10])),(float)g2c_bits_to_float((uint)(path[0xb])),
+                           (float)g2c_bits_to_float((uint)(path[0xc])),(float)g2c_bits_to_float((uint)(path[0xd])),(float)g2c_bits_to_float((uint)(path[0xe])),(float)g2c_bits_to_float((uint)(path[0xf])));
               }
-              fVar36 = fVar25 + 0.5;
+              fVar36 = fVar25 + 0.5f;
               /* stock 0x52220e vcmp s18(=x+0.5),#0; ble 0x5222c6; 0x522228 vcmp s19,#0; bgt 0x522268 (upload +0x58 at
                  0x52226c) (wave19; GT). RMode bits 22..23 of uVar12 are unchanged by dropping NZCV. */
               uVar12 = uVar8 & 0xfffffff;
               fVar31 = (float)VectorSignedToFloat(*(undefined4 *)(*puVar4 + 0x14),
                                                   (byte)(uVar12 >> 0x16) & 3);
-              fVar31 = (fVar31 - fVar26) + 0.5;
-              if (fVar36 > 0.0) {
+              fVar31 = (fVar31 - fVar26) + 0.5f;
+              if (fVar36 > 0.0f) {
                 uVar8 = uVar8 & 0xfffffff;
-                if (fVar31 > 0.0) {
+                if (fVar31 > 0.0f) {
                   audio_uart_nema_matrix_upload_5226e8(paint + 0x58);
                   uVar7 = VectorFloatToUnsigned(fVar31,3);
                   uVar12 = VectorFloatToUnsigned(fVar36,3);
@@ -10544,13 +10679,13 @@ LAB_00521d5a:
                     g2c_nema_cl_submit_node_4b14ca(0,(int)fVar26,uVar12,uVar7);
                   }
                   g2c_nema_vg_emit_verts_516b34
-                            ((float)path[8],(float)path[9],(float)path[10],(float)path[0xb],
-                             (float)path[0xc],(float)path[0xd],(float)path[0xe],(float)path[0xf]);
+                            ((float)g2c_bits_to_float((uint)(path[8])),(float)g2c_bits_to_float((uint)(path[9])),(float)g2c_bits_to_float((uint)(path[10])),(float)g2c_bits_to_float((uint)(path[0xb])),
+                             (float)g2c_bits_to_float((uint)(path[0xc])),(float)g2c_bits_to_float((uint)(path[0xd])),(float)g2c_bits_to_float((uint)(path[0xe])),(float)g2c_bits_to_float((uint)(path[0xf])));
                 }
-                fVar31 = fVar26 + 0.5;
+                fVar31 = fVar26 + 0.5f;
                 /* stock 0x522236 vcmp s17(=fVar26+0.5),#0; ble 0x5222fc; upload +0x7c at 0x522244 (wave19; GT). */
                 uVar12 = uVar8 & 0xfffffff;
-                if (fVar31 > 0.0) {
+                if (fVar31 > 0.0f) {
                   audio_uart_nema_matrix_upload_5226e8(paint + 0x7c);
                   uVar7 = VectorFloatToUnsigned(fVar31,3);
                   uVar8 = VectorFloatToUnsigned(fVar36,3);
@@ -10561,18 +10696,18 @@ LAB_00521d5a:
                     g2c_nema_cl_submit_node_4b14ca(0,0,uVar8,uVar7);
                   }
                   g2c_nema_vg_emit_verts_516b34
-                            ((float)path[8],(float)path[9],(float)path[10],(float)path[0xb],
-                             (float)path[0xc],(float)path[0xd],(float)path[0xe],(float)path[0xf]);
+                            ((float)g2c_bits_to_float((uint)(path[8])),(float)g2c_bits_to_float((uint)(path[9])),(float)g2c_bits_to_float((uint)(path[10])),(float)g2c_bits_to_float((uint)(path[0xb])),
+                             (float)g2c_bits_to_float((uint)(path[0xc])),(float)g2c_bits_to_float((uint)(path[0xd])),(float)g2c_bits_to_float((uint)(path[0xe])),(float)g2c_bits_to_float((uint)(path[0xf])));
                 }
               }
-              fVar26 = fVar26 + 0.5;
+              fVar26 = fVar26 + 0.5f;
               fVar31 = (float)VectorSignedToFloat(*(undefined4 *)(*puVar4 + 0x10),
                                                   (byte)(uVar12 >> 0x16) & 3);
-              fVar36 = (fVar31 - fVar25) + 0.5;
+              fVar36 = (fVar31 - fVar25) + 0.5f;
               /* stock 0x522312 vcmp s18,#0; itt gt; vcmpgt 0x52231c s17,#0; ble 0x522382; upload +0xa0 at 0x52232a
                  (wave19; GT both, replaces the decompile's Z/N/NAN split). */
               fVar31 = fVar36;
-              if (fVar36 > 0.0 && fVar26 > 0.0) {
+              if (fVar36 > 0.0f && fVar26 > 0.0f) {
                 audio_uart_nema_matrix_upload_5226e8(paint + 0xa0);
                 uVar7 = VectorFloatToUnsigned(fVar26,3);
                 uVar8 = VectorFloatToUnsigned(fVar36,3);
@@ -10583,8 +10718,8 @@ LAB_00521d5a:
                   g2c_nema_cl_submit_node_4b14ca((int)fVar25,0,uVar8,uVar7);
                 }
                 g2c_nema_vg_emit_verts_516b34
-                          ((float)path[8],(float)path[9],(float)path[10],(float)path[0xb],
-                           (float)path[0xc],(float)path[0xd],(float)path[0xe],(float)path[0xf]);
+                          ((float)g2c_bits_to_float((uint)(path[8])),(float)g2c_bits_to_float((uint)(path[9])),(float)g2c_bits_to_float((uint)(path[10])),(float)g2c_bits_to_float((uint)(path[0xb])),
+                           (float)g2c_bits_to_float((uint)(path[0xc])),(float)g2c_bits_to_float((uint)(path[0xd])),(float)g2c_bits_to_float((uint)(path[0xe])),(float)g2c_bits_to_float((uint)(path[0xf])));
               }
               uVar16 = g2c_nema_cl_get_error_4b14fe();
               if (uVar16 == 0) {
@@ -10596,8 +10731,8 @@ LAB_00521d5a:
             }
             else {
               g2c_nema_vg_emit_verts_516b34
-                        ((float)path[8],(float)path[9],(float)path[10],(float)path[0xb],
-                         (float)path[0xc],(float)path[0xd],(float)path[0xe],(float)path[0xf]);
+                        ((float)g2c_bits_to_float((uint)(path[8])),(float)g2c_bits_to_float((uint)(path[9])),(float)g2c_bits_to_float((uint)(path[10])),(float)g2c_bits_to_float((uint)(path[0xb])),
+                         (float)g2c_bits_to_float((uint)(path[0xc])),(float)g2c_bits_to_float((uint)(path[0xd])),(float)g2c_bits_to_float((uint)(path[0xe])),(float)g2c_bits_to_float((uint)(path[0xf])));
             }
 LAB_00520ce6:
             if (*(char *)(*puVar3 + 0x1bd) != '\0') {
@@ -10636,8 +10771,8 @@ LAB_00520ce6:
               audio_uart_nema_float_position_5228b0
                         (*(float *)(*puVar3 + 0x98),*(float *)(*puVar3 + 0x9c));
               g2c_nema_vg_emit_verts_516b34
-                        ((float)path[8],(float)path[9],(float)path[10],(float)path[0xb],
-                         (float)path[0xc],(float)path[0xd],(float)path[0xe],(float)path[0xf]);
+                        ((float)g2c_bits_to_float((uint)(path[8])),(float)g2c_bits_to_float((uint)(path[9])),(float)g2c_bits_to_float((uint)(path[10])),(float)g2c_bits_to_float((uint)(path[0xb])),
+                         (float)g2c_bits_to_float((uint)(path[0xc])),(float)g2c_bits_to_float((uint)(path[0xd])),(float)g2c_bits_to_float((uint)(path[0xe])),(float)g2c_bits_to_float((uint)(path[0xf])));
               if (bVar24) {
                 audio_uart_nema_child_514846(0x34,*(uint *)(*puVar4 + 0x10) & 0xffff | 0x8000000);
               }
@@ -10662,6 +10797,25 @@ LAB_00520d64:
   audio_uart_nema_vg_set_error_51565c(uVar16);
   return uVar16;
 }
+#undef uStack_b0
+#undef uStack_ac
+#undef fStack_a8
+#undef iStack_a4
+#undef fStack_a0
+#undef uStack_9c
+#undef uStack_98
+#undef uStack_94
+#undef uStack_90
+#undef uStack_8c
+#undef uStack_88
+#undef uStack_84
+#undef uStack_80
+#undef uStack_7c
+#undef uStack_78
+#undef uStack_74
+#undef uStack_70
+#undef uStack_6c
+
 
   
 
@@ -10683,7 +10837,7 @@ uint g2c_nema_vg_f2u_522f1c(float a)
 {
   int iVar1;
   
-  iVar1 = (int)(a * (0.9424778819084167f) + 0.5);
+  iVar1 = (int)(a * (0.9424778819084167f) + 0.5f);
   if (0x60 < iVar1) {
     return 0x60;
   }
@@ -10749,7 +10903,7 @@ void g2c_nema_vg_move_to_522fb4(float a,float b,float c)
   float fVar14;
   float value_00;
   
-  iVar13 = (int)(c * (0.9424778819084167f) + 0.5);
+  iVar13 = (int)(c * (0.9424778819084167f) + 0.5f);
   if (iVar13 < 0x61) {
     if (iVar13 < 0x20) {
       iVar13 = 8;
@@ -10784,7 +10938,7 @@ void g2c_nema_vg_move_to_522fb4(float a,float b,float c)
       do {
         value_00 = fVar3 * value + fVar8 * fVar14;
         value = fVar8 * value - fVar3 * fVar14;
-        if ((0.5 <= value_00 - fVar14) ||
+        if ((0.5f <= value_00 - fVar14) ||
            (iVar4 = iVar10, iVar11 = iVar12, *(char *)(*piVar2 + 0xfa) != '\0')) {
           iVar4 = audio_uart_nema_float_fixed_5242cc(value);
           iVar11 = audio_uart_nema_float_fixed_5242cc(value_00);
@@ -11054,8 +11208,11 @@ float g2c_nema_vg_sqrt_524218(float x)
 {
   float fVar1;
   
-  fVar1 = (float)((0x5f3759dfu) - ((uint)x >> 1));
-  return x * fVar1 * (1.5 - x * 0.5 * fVar1 * fVar1);
+  /* Stock 0x524218: the classic bit-level estimate (x spilled with vpush, reloaded with ldr;
+   * result stored with str and reloaded with vldr), then one single-precision Newton step:
+   * s1=x*y, s3=(x*0.5)*y, s2=1.5-s3*y (vmls), return s1*s2. */
+  fVar1 = g2c_bits_to_float((0x5f3759dfu) - (g2c_float_to_bits(x) >> 1));
+  return x * fVar1 * (1.5f - x * 0.5f * fVar1 * fVar1);
 }
 
   
@@ -11078,40 +11235,48 @@ void audio_uart_ambiq_draw_box_shadow_540036(int task,int dsc,int *coords,uint c
   /* Evidence (wave10): FPSCR scratch was declared here but never read; removed. */
   float fVar10;
   float fVar11;
-  int iStack_d4;
-  int iStack_d0;
-  int iStack_cc;
-  int iStack_c8;
-  int iStack_c4;
-  int iStack_c0;
-  int iStack_bc;
-  int iStack_b8;
-  int iStack_b4;
-  int iStack_b0;
-  int iStack_ac;
-  int iStack_a8;
-  int iStack_a4;
-  int iStack_a0;
-  int iStack_9c;
-  int iStack_98;
-  uint uStack_94;
-  byte bStack_90;
-  int iStack_8c;
-  uint uStack_88;
-  int iStack_84;
-  int iStack_80;
-  uint uStack_74;
-  undefined4 auStack_70 [2];
-  undefined4 uStack_68;
-  undefined4 uStack_60;
-  undefined4 uStack_5c;
-  int iStack_4c;
-  int iStack_48;
-  int iStack_44;
-  int iStack_40;
-  uint uStack_3c;
-  undefined1 auStack_38 [16];
-  uint uStack_28;
+  /* Stock frame of 0x540036 as one block: locals keep the entry-SP offsets Ghidra named them by
+   * (X_Stack_NN at g2c_frame_540036[0xd8-0xNN]) so &local passed to callees spans its stock neighbours. */
+  unsigned char g2c_frame_540036[0xd8] __attribute__((aligned(8)));
+  typedef int __attribute__((may_alias)) g2c_fa_int;
+#define iStack_d4 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xd4])
+#define iStack_d0 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xd0])
+#define iStack_cc (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xcc])
+#define iStack_c8 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xc8])
+#define iStack_c4 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xc4])
+#define iStack_c0 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xc0])
+#define iStack_bc (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xbc])
+#define iStack_b8 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xb8])
+#define iStack_b4 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xb4])
+#define iStack_b0 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xb0])
+#define iStack_ac (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xac])
+#define iStack_a8 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xa8])
+#define iStack_a4 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xa4])
+#define iStack_a0 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0xa0])
+#define iStack_9c (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0x9c])
+#define iStack_98 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0x98])
+  typedef uint __attribute__((may_alias)) g2c_fa_uint;
+#define uStack_94 (*(g2c_fa_uint *)(void *)&g2c_frame_540036[0xd8-0x94])
+  typedef byte __attribute__((may_alias)) g2c_fa_byte;
+#define bStack_90 (*(g2c_fa_byte *)(void *)&g2c_frame_540036[0xd8-0x90])
+#define iStack_8c (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0x8c])
+#define uStack_88 (*(g2c_fa_uint *)(void *)&g2c_frame_540036[0xd8-0x88])
+#define iStack_84 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0x84])
+#define iStack_80 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0x80])
+#define uStack_74 (*(g2c_fa_uint *)(void *)&g2c_frame_540036[0xd8-0x74])
+  typedef undefined4 __attribute__((may_alias)) g2c_fa_undefined4;
+#define auStack_70 (((g2c_fa_undefined4 *)(void *)&g2c_frame_540036[0xd8-0x70]))
+#define uStack_68 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_540036[0xd8-0x68])
+#define uStack_60 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_540036[0xd8-0x60])
+#define uStack_5c (*(g2c_fa_undefined4 *)(void *)&g2c_frame_540036[0xd8-0x5c])
+#define iStack_4c (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0x4c])
+#define iStack_48 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0x48])
+#define iStack_44 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0x44])
+#define iStack_40 (*(g2c_fa_int *)(void *)&g2c_frame_540036[0xd8-0x40])
+#define uStack_3c (*(g2c_fa_uint *)(void *)&g2c_frame_540036[0xd8-0x3c])
+  typedef undefined1 __attribute__((may_alias)) g2c_fa_undefined1;
+#define auStack_38 (((g2c_fa_undefined1 *)(void *)&g2c_frame_540036[0xd8-0x38]))
+#define uStack_28 (*(g2c_fa_uint *)(void *)&g2c_frame_540036[0xd8-0x28])
   
   iStack_4c = (*(int *)(dsc + 0x2c) + *coords) - *(int *)(dsc + 0x28);
   iStack_44 = *(int *)(dsc + 0x28) + *(int *)(dsc + 0x2c) + coords[2];
@@ -11221,10 +11386,10 @@ void audio_uart_ambiq_draw_box_shadow_540036(int task,int dsc,int *coords,uint c
          (uVar5 = audio_uart_lv_area_contains_450f28((uint)&iStack_c4,(uint)&iStack_84,uVar8),
          uVar5 == 0)) {
         audio_uart_nema_matrix_identity_561810((uint)auStack_70);
-        uStack_60 = ((-1.0f));
-        uStack_68 = VectorSignedToFloat(iStack_d4 - iVar6,G2C_FPSCR_RMODE_RN);
-        uStack_5c = VectorSignedToFloat((iStack_d0 + uVar9 + -1) - iVar7,
-                                        G2C_FPSCR_RMODE_RN);
+        uStack_60 = g2c_float_to_bits(((-1.0f)));
+        uStack_68 = g2c_float_to_bits(VectorSignedToFloat(iStack_d4 - iVar6,G2C_FPSCR_RMODE_RN));
+        uStack_5c = g2c_float_to_bits(VectorSignedToFloat((iStack_d0 + uVar9 + -1) - iVar7,
+                                        G2C_FPSCR_RMODE_RN));
         audio_uart_nema_matrix_finalize_561b38((uint)auStack_70);
         audio_uart_nema_matrix_upload_5226e8((uint)auStack_70);
         audio_uart_nema_mask_rectangle_522ae0
@@ -11251,10 +11416,10 @@ void audio_uart_ambiq_draw_box_shadow_540036(int task,int dsc,int *coords,uint c
         audio_uart_nema_matrix_identity_561810((uint)auStack_70);
         auStack_70[0] = 0xbf800000;
         uStack_60 = 0xbf800000;
-        uStack_68 = VectorSignedToFloat((iStack_d4 + uVar9 + -1) - iVar6,
-                                        G2C_FPSCR_RMODE_RN);
-        uStack_5c = VectorSignedToFloat((iStack_d0 + uVar9 + -1) - iVar7,
-                                        G2C_FPSCR_RMODE_RN);
+        uStack_68 = g2c_float_to_bits(VectorSignedToFloat((iStack_d4 + uVar9 + -1) - iVar6,
+                                        G2C_FPSCR_RMODE_RN));
+        uStack_5c = g2c_float_to_bits(VectorSignedToFloat((iStack_d0 + uVar9 + -1) - iVar7,
+                                        G2C_FPSCR_RMODE_RN));
         audio_uart_nema_matrix_finalize_561b38((uint)auStack_70);
         audio_uart_nema_matrix_upload_5226e8((uint)auStack_70);
         audio_uart_nema_mask_rectangle_522ae0
@@ -11279,10 +11444,10 @@ void audio_uart_ambiq_draw_box_shadow_540036(int task,int dsc,int *coords,uint c
          (uVar5 = audio_uart_lv_area_contains_450f28((uint)&iStack_c4,(uint)&iStack_84,uVar8),
          uVar5 == 0)) {
         audio_uart_nema_matrix_identity_561810((uint)auStack_70);
-        auStack_70[0] = ((-1.0f));
-        uStack_68 = VectorSignedToFloat((iStack_d4 + uVar9 + -1) - iVar6,
-                                        G2C_FPSCR_RMODE_RN);
-        uStack_5c = VectorSignedToFloat(iStack_d0 - iVar7,G2C_FPSCR_RMODE_RN);
+        auStack_70[0] = g2c_float_to_bits(((-1.0f)));
+        uStack_68 = g2c_float_to_bits(VectorSignedToFloat((iStack_d4 + uVar9 + -1) - iVar6,
+                                        G2C_FPSCR_RMODE_RN));
+        uStack_5c = g2c_float_to_bits(VectorSignedToFloat(iStack_d0 - iVar7,G2C_FPSCR_RMODE_RN));
         audio_uart_nema_matrix_finalize_561b38((uint)auStack_70);
         audio_uart_nema_matrix_upload_5226e8((uint)auStack_70);
         audio_uart_nema_mask_rectangle_522ae0
@@ -11325,10 +11490,10 @@ void audio_uart_ambiq_draw_box_shadow_540036(int task,int dsc,int *coords,uint c
          (uVar5 = audio_uart_lv_area_contains_450f28((uint)&iStack_c4,(uint)&iStack_84,uVar8),
          uVar5 == 0)) {
         audio_uart_nema_matrix_identity_561810((uint)auStack_70);
-        uStack_60 = ((-1.0f));
-        uStack_68 = VectorSignedToFloat(iStack_cc - iVar6,G2C_FPSCR_RMODE_RN);
-        uStack_5c = VectorSignedToFloat((iStack_d0 + uVar9 + -1) - iVar7,
-                                        G2C_FPSCR_RMODE_RN);
+        uStack_60 = g2c_float_to_bits(((-1.0f)));
+        uStack_68 = g2c_float_to_bits(VectorSignedToFloat(iStack_cc - iVar6,G2C_FPSCR_RMODE_RN));
+        uStack_5c = g2c_float_to_bits(VectorSignedToFloat((iStack_d0 + uVar9 + -1) - iVar7,
+                                        G2C_FPSCR_RMODE_RN));
         audio_uart_nema_matrix_finalize_561b38((uint)auStack_70);
         audio_uart_nema_matrix_upload_5226e8((uint)auStack_70);
         audio_uart_nema_mask_rectangle_522ae0
@@ -11388,11 +11553,11 @@ void audio_uart_ambiq_draw_box_shadow_540036(int task,int dsc,int *coords,uint c
          (uVar5 = audio_uart_lv_area_contains_450f28((uint)&iStack_c4,(uint)&iStack_84,uVar8),
          uVar5 == 0)) {
         audio_uart_nema_matrix_identity_561810((uint)auStack_70);
-        auStack_70[0] = ((-1.0f));
-        uStack_68 = VectorSignedToFloat((iStack_d4 + uVar9 + -1) - iVar6,
-                                        G2C_FPSCR_RMODE_RN);
-        uStack_5c = VectorSignedToFloat(((iStack_d0 - uVar9) + 1) - iVar7,
-                                        G2C_FPSCR_RMODE_RN);
+        auStack_70[0] = g2c_float_to_bits(((-1.0f)));
+        uStack_68 = g2c_float_to_bits(VectorSignedToFloat((iStack_d4 + uVar9 + -1) - iVar6,
+                                        G2C_FPSCR_RMODE_RN));
+        uStack_5c = g2c_float_to_bits(VectorSignedToFloat(((iStack_d0 - uVar9) + 1) - iVar7,
+                                        G2C_FPSCR_RMODE_RN));
         audio_uart_nema_matrix_finalize_561b38((uint)auStack_70);
         audio_uart_nema_matrix_upload_5226e8((uint)auStack_70);
         audio_uart_nema_mask_rectangle_522ae0
@@ -11468,6 +11633,41 @@ void audio_uart_ambiq_draw_box_shadow_540036(int task,int dsc,int *coords,uint c
   }
   return;
 }
+#undef iStack_d4
+#undef iStack_d0
+#undef iStack_cc
+#undef iStack_c8
+#undef iStack_c4
+#undef iStack_c0
+#undef iStack_bc
+#undef iStack_b8
+#undef iStack_b4
+#undef iStack_b0
+#undef iStack_ac
+#undef iStack_a8
+#undef iStack_a4
+#undef iStack_a0
+#undef iStack_9c
+#undef iStack_98
+#undef uStack_94
+#undef bStack_90
+#undef iStack_8c
+#undef uStack_88
+#undef iStack_84
+#undef iStack_80
+#undef uStack_74
+#undef auStack_70
+#undef uStack_68
+#undef uStack_60
+#undef uStack_5c
+#undef iStack_4c
+#undef iStack_48
+#undef iStack_44
+#undef iStack_40
+#undef uStack_3c
+#undef auStack_38
+#undef uStack_28
+
 
   
 
@@ -11548,12 +11748,12 @@ void g2c_nema_vg_path_clear_56395c(void)
   *(undefined4 *)(iVar2 + 0x2f8) = 0;
   *(undefined1 *)(iVar2 + 0x2e8) = 0;
   *(undefined1 *)(iVar2 + 0x2e9) = 0;
-  if (*(float *)(iVar2 + 0x300) < 0.0) {
+  if (*(float *)(iVar2 + 0x300) < 0.0f) {
     fVar4 = -*(float *)(iVar2 + 0x300);
     fVar5 = *(float *)(iVar2 + 0x2f4);
     fVar6 = fVar4 / fVar5;
     fVar7 = (float)VectorSignedToFloat((int)fVar6,G2C_FPSCR_RMODE_RN);
-    if (0.0 <= fVar6) {
+    if (0.0f <= fVar6) {
       uVar3 = -(uint)(fVar6 < fVar7);
     }
     else {
@@ -11614,21 +11814,27 @@ uint g2c_nema_vg_path_bounds_5639e8(float a,float b,float c,float d)
   float fVar27;
   float fVar28;
   float fVar29;
-  float fStack_8c;
-  float fStack_88;
-  float fStack_84;
-  float fStack_80;
-  uint uStack_7c;
-  undefined4 uStack_78;
-  float fStack_74;
-  undefined4 uStack_70;
+  /* Stock frame of 0x5639e8 as one block: locals keep the entry-SP offsets Ghidra named them by
+   * (X_Stack_NN at g2c_frame_5639e8[0x90-0xNN]) so &local passed to callees spans its stock neighbours. */
+  unsigned char g2c_frame_5639e8[0x90] __attribute__((aligned(8)));
+  typedef float __attribute__((may_alias)) g2c_fa_float;
+#define fStack_8c (*(g2c_fa_float *)(void *)&g2c_frame_5639e8[0x90-0x8c])
+#define fStack_88 (*(g2c_fa_float *)(void *)&g2c_frame_5639e8[0x90-0x88])
+#define fStack_84 (*(g2c_fa_float *)(void *)&g2c_frame_5639e8[0x90-0x84])
+#define fStack_80 (*(g2c_fa_float *)(void *)&g2c_frame_5639e8[0x90-0x80])
+  typedef uint __attribute__((may_alias)) g2c_fa_uint;
+#define uStack_7c (*(g2c_fa_uint *)(void *)&g2c_frame_5639e8[0x90-0x7c])
+  typedef undefined4 __attribute__((may_alias)) g2c_fa_undefined4;
+#define uStack_78 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5639e8[0x90-0x78])
+#define fStack_74 (*(g2c_fa_float *)(void *)&g2c_frame_5639e8[0x90-0x74])
+#define uStack_70 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_5639e8[0x90-0x70])
   
   iVar9 = *(((int *)&audio_uart_nema_vg_context_cell));
   fVar27 = c - a;
   fVar28 = d - b;
   fVar22 = g2c_nema_vg_sqrt_524218(fVar27 * fVar27 + fVar28 * fVar28);
   fVar6 = (0.05000000447034836f);
-  fVar22 = (float)VectorSignedToFloat((int)(fVar22 + 0.5),G2C_FPSCR_RMODE_RN);
+  fVar22 = (float)VectorSignedToFloat((int)(fVar22 + 0.5f),G2C_FPSCR_RMODE_RN);
   fVar28 = fVar28 / fVar22;
   fVar27 = fVar27 / fVar22;
   do {
@@ -11645,7 +11851,7 @@ uint g2c_nema_vg_path_bounds_5639e8(float a,float b,float c,float d)
       fVar29 = (float)VectorUnsignedToFloat(*(int *)(iVar9 + 0x2f8),G2C_FPSCR_RMODE_RN) /* vcvt.f32.u32 @0x563e1a; RMode RN, see G2C_FPSCR_RMODE_RN */;
       uVar15 = -(uint)(*(char *)(iVar9 + 0x2e8) == '\0') >> 0x1f;
     }
-    if (0.0 <= fVar22 - fVar29) {
+    if (0.0f <= fVar22 - fVar29) {
       uVar12 = 1;
       uVar11 = *(int *)(iVar9 + 0x2fc) + 1;
       if (uVar11 < *(uint *)(iVar9 + 0x2f0)) {
@@ -11738,8 +11944,8 @@ uint g2c_nema_vg_path_bounds_5639e8(float a,float b,float c,float d)
           fVar26 = fVar29 - a;
           fVar25 = fVar24 - b;
           fVar23 = audio_uart_float_sqrt_4397a8(fVar26 * fVar26 + fVar25 * fVar25);
-          fVar25 = *(float *)(iVar10 + 0x130) * 0.5 * fVar25 * (1.0 / fVar23);
-          fVar23 = *(float *)(iVar10 + 0x134) * 0.5 * fVar26 * (1.0 / fVar23);
+          fVar25 = *(float *)(iVar10 + 0x130) * 0.5f * fVar25 * (1.0f / fVar23);
+          fVar23 = *(float *)(iVar10 + 0x134) * 0.5f * fVar26 * (1.0f / fVar23);
           *(float *)(iVar10 + 0x308) = a - fVar25;
           *(float *)(iVar10 + 0x30c) = fVar23 + b;
           *(float *)(iVar10 + 0x310) = fVar29 - fVar25;
@@ -11807,10 +12013,10 @@ uint g2c_nema_vg_path_bounds_5639e8(float a,float b,float c,float d)
               bVar21 = -1 < (int)((uint)*(byte *)(iVar10 + 0x7d) << 0x1b);
               uVar13 = audio_uart_nema_stencil_save_52266e((uint)bVar21,0,(uint)bVar21,0);
               g2c_nema_vg_emit_verts_516b34
-                        ((float)uVar2,(float)((ulonglong)uVar2 >> 0x20),(float)uVar3,
-                         (float)((ulonglong)uVar3 >> 0x20),(float)uVar4,
-                         (float)((ulonglong)uVar4 >> 0x20),(float)uVar5,
-                         (float)((ulonglong)uVar5 >> 0x20));
+                        ((float)g2c_bits_to_float((uint)(uVar2)),(float)g2c_bits_to_float((uint)(((ulonglong)uVar2 >> 0x20))),(float)g2c_bits_to_float((uint)(uVar3)),
+                         (float)g2c_bits_to_float((uint)(((ulonglong)uVar3 >> 0x20))),(float)g2c_bits_to_float((uint)(uVar4)),
+                         (float)g2c_bits_to_float((uint)(((ulonglong)uVar4 >> 0x20))),(float)g2c_bits_to_float((uint)(uVar5)),
+                         (float)g2c_bits_to_float((uint)(((ulonglong)uVar5 >> 0x20))));
               audio_uart_nema_stencil_restore_5226b2(uVar13);
             }
           }
@@ -11819,9 +12025,9 @@ uint g2c_nema_vg_path_bounds_5639e8(float a,float b,float c,float d)
       else {
         *(float *)(iVar9 + 0x310) = a;
         iVar10 = *piVar7;
-        *(float *)(iVar9 + 0x314) = b + *(float *)(iVar10 + 0x130) * -0.5;
+        *(float *)(iVar9 + 0x314) = b + *(float *)(iVar10 + 0x130) * -0.5f;
         *(float *)(iVar9 + 0x318) = a;
-        *(float *)(iVar9 + 0x31c) = b + *(float *)(iVar10 + 0x130) * 0.5;
+        *(float *)(iVar9 + 0x31c) = b + *(float *)(iVar10 + 0x130) * 0.5f;
         *(undefined4 *)(iVar9 + 0x308) = *(undefined4 *)(iVar9 + 0x310);
         *(undefined4 *)(iVar9 + 0x30c) = *(undefined4 *)(iVar9 + 0x314);
         *(undefined4 *)(iVar9 + 800) = *(undefined4 *)(iVar9 + 0x318);
@@ -11951,6 +12157,15 @@ LAB_00563ea2:
     }
   } while( true );
 }
+#undef fStack_8c
+#undef fStack_88
+#undef fStack_84
+#undef fStack_80
+#undef uStack_7c
+#undef uStack_78
+#undef fStack_74
+#undef uStack_70
+
 
   
 
@@ -11984,13 +12199,13 @@ uint g2c_nema_vg_ellipse_5640e4(float a,float b,float c,float d,float *out)
   fVar8 = ((b - fVar6) * fVar4 + (fVar6 - a) * fVar5) / fVar12;
   uVar2 = 0;
   fVar12 = ((b - fVar6) * fVar9 + (fVar6 - a) * (fVar6 - fVar6)) / fVar12;
-  if ((((0.0 <= fVar8) && ((fVar8 < (1.0000001192092896f)))) && (0.0 <= fVar12)) &&
+  if ((((0.0f <= fVar8) && ((fVar8 < (1.0000001192092896f)))) && (0.0f <= fVar12)) &&
      ((fVar12 < (1.0000001192092896f)))) {
     *out = a + fVar12 * fVar4;
     fVar6 = b + fVar12 * fVar5;
     out[1] = fVar6;
     fVar9 = *out;
-    iVar1 = (uint)(fVar9 < 0.0) << 0x1f;
+    iVar1 = (uint)(fVar9 < 0.0f) << 0x1f;
     if (iVar1 < 0) {
       fVar8 = -fVar9;
     }
@@ -12002,7 +12217,7 @@ uint g2c_nema_vg_ellipse_5640e4(float a,float b,float c,float d,float *out)
       fVar12 = fVar8;
     }
     fVar10 = a - fVar9;
-    if ((fVar10 < 0.0)) {
+    if ((fVar10 < 0.0f)) {
       fVar10 = fVar9 - a;
     }
     if (fVar10 <= fVar12 * (9.999999747378752e-06f)) {
@@ -12011,7 +12226,7 @@ uint g2c_nema_vg_ellipse_5640e4(float a,float b,float c,float d,float *out)
         fVar12 = ABS(out[1]);
       }
       fVar10 = b - fVar6;
-      if ((fVar10 < 0.0)) {
+      if ((fVar10 < 0.0f)) {
         fVar10 = fVar6 - b;
       }
       if (fVar10 <= fVar12 * (9.999999747378752e-06f)) goto LAB_0056428c;
@@ -12020,7 +12235,7 @@ uint g2c_nema_vg_ellipse_5640e4(float a,float b,float c,float d,float *out)
       fVar8 = ABS(c);
     }
     fVar12 = c - fVar9;
-    if ((fVar12 < 0.0)) {
+    if ((fVar12 < 0.0f)) {
       fVar12 = fVar9 - c;
     }
     if (fVar12 <= fVar8 * (9.999999747378752e-06f)) {
@@ -12029,7 +12244,7 @@ uint g2c_nema_vg_ellipse_5640e4(float a,float b,float c,float d,float *out)
         fVar8 = ABS(out[1]);
       }
       fVar9 = d - fVar6;
-      if ((fVar9 < 0.0)) {
+      if ((fVar9 < 0.0f)) {
         fVar9 = fVar6 - d;
       }
       if (fVar9 <= fVar8 * (9.999999747378752e-06f)) goto LAB_0056428c;
@@ -12046,11 +12261,11 @@ LAB_0056428c:
   fVar13 = fVar4 * fVar9 - fVar12 * fVar5;
   fVar10 = (fVar6 * fVar4 + fVar11 * fVar5) / fVar13;
   fVar13 = (fVar6 * fVar12 + fVar11 * fVar9) / fVar13;
-  if (((0.0 <= fVar10) && ((fVar10 < fVar7))) &&
-     ((0.0 <= fVar13 && ((fVar13 < fVar7))))) {
+  if (((0.0f <= fVar10) && ((fVar10 < fVar7))) &&
+     ((0.0f <= fVar13 && ((fVar13 < fVar7))))) {
     if (uVar2 == 1) {
       fVar12 = *out;
-      iVar1 = (uint)(fVar12 < 0.0) << 0x1f;
+      iVar1 = (uint)(fVar12 < 0.0f) << 0x1f;
       if (iVar1 < 0) {
         fVar9 = -fVar12;
       }
@@ -12058,7 +12273,7 @@ LAB_0056428c:
         fVar9 = fVar12;
       }
       fVar10 = a + fVar13 * fVar4;
-      iVar1 = (uint)(fVar10 < 0.0) << 0x1f;
+      iVar1 = (uint)(fVar10 < 0.0f) << 0x1f;
       if (iVar1 < 0) {
         fVar6 = -fVar10;
       }
@@ -12069,12 +12284,12 @@ LAB_0056428c:
         fVar9 = fVar6;
       }
       fVar6 = fVar12 - fVar10;
-      if ((fVar6 < 0.0)) {
+      if ((fVar6 < 0.0f)) {
         fVar6 = fVar10 - fVar12;
       }
       if (fVar6 <= fVar9 * (9.999999747378752e-06f)) {
         fVar9 = b + fVar13 * fVar5;
-        iVar1 = (uint)(fVar9 < 0.0) << 0x1f;
+        iVar1 = (uint)(fVar9 < 0.0f) << 0x1f;
         if (iVar1 < 0) {
           fVar6 = -fVar9;
         }
@@ -12086,7 +12301,7 @@ LAB_0056428c:
           fVar12 = fVar6;
         }
         fVar6 = out[1] - fVar9;
-        if ((fVar6 < 0.0)) {
+        if ((fVar6 < 0.0f)) {
           fVar6 = fVar9 - out[1];
         }
         if (fVar6 <= fVar12 * (9.999999747378752e-06f)) goto LAB_005644d2;
@@ -12095,7 +12310,7 @@ LAB_0056428c:
     out[uVar2 * 2] = a + fVar13 * fVar4;
     out[uVar2 * 2 + 1] = b + fVar13 * fVar5;
     fVar9 = *out;
-    iVar1 = (uint)(fVar9 < 0.0) << 0x1f;
+    iVar1 = (uint)(fVar9 < 0.0f) << 0x1f;
     fVar6 = fVar4;
     if (iVar1 < 0) {
       fVar6 = -fVar9;
@@ -12108,7 +12323,7 @@ LAB_0056428c:
       fVar12 = fVar6;
     }
     fVar10 = a - fVar9;
-    if ((fVar10 < 0.0)) {
+    if ((fVar10 < 0.0f)) {
       fVar10 = fVar9 - a;
     }
     if (fVar10 <= fVar12 * fVar8) {
@@ -12117,7 +12332,7 @@ LAB_0056428c:
         fVar12 = ABS(out[1]);
       }
       fVar10 = b - out[1];
-      if ((fVar10 < 0.0)) {
+      if ((fVar10 < 0.0f)) {
         fVar10 = out[1] - b;
       }
       if (fVar10 <= fVar12 * fVar8) goto LAB_005644d2;
@@ -12126,7 +12341,7 @@ LAB_0056428c:
       fVar6 = ABS(c);
     }
     fVar12 = c - fVar9;
-    if ((fVar12 < 0.0)) {
+    if ((fVar12 < 0.0f)) {
       fVar12 = fVar9 - c;
     }
     if (fVar12 <= fVar6 * fVar8) {
@@ -12135,7 +12350,7 @@ LAB_0056428c:
         fVar6 = ABS(out[1]);
       }
       fVar9 = d - out[1];
-      if ((fVar9 < 0.0)) {
+      if ((fVar9 < 0.0f)) {
         fVar9 = out[1] - d;
       }
       if (fVar9 <= fVar6 * fVar8) goto LAB_005644d2;
@@ -12150,11 +12365,11 @@ LAB_005644d2:
   fVar9 = fVar4 * fVar11 - (fVar12 - fVar12) * fVar5;
   fVar10 = (fVar6 * fVar4 + (fVar12 - a) * fVar5) / fVar9;
   fVar12 = (fVar6 * (fVar12 - fVar12) + (fVar12 - a) * fVar11) / fVar9;
-  if (((0.0 <= fVar10) && ((fVar10 < fVar7))) &&
-     ((0.0 <= fVar12 && (((fVar12 < fVar7) && (uVar2 < 2)))))) {
+  if (((0.0f <= fVar10) && ((fVar10 < fVar7))) &&
+     ((0.0f <= fVar12 && (((fVar12 < fVar7) && (uVar2 < 2)))))) {
     if (uVar2 == 1) {
       fVar10 = *out;
-      iVar1 = (uint)(fVar10 < 0.0) << 0x1f;
+      iVar1 = (uint)(fVar10 < 0.0f) << 0x1f;
       if (iVar1 < 0) {
         fVar9 = -fVar10;
       }
@@ -12162,7 +12377,7 @@ LAB_005644d2:
         fVar9 = fVar10;
       }
       fVar11 = a + fVar12 * fVar4;
-      iVar1 = (uint)(fVar11 < 0.0) << 0x1f;
+      iVar1 = (uint)(fVar11 < 0.0f) << 0x1f;
       if (iVar1 < 0) {
         fVar6 = -fVar11;
       }
@@ -12173,12 +12388,12 @@ LAB_005644d2:
         fVar9 = fVar6;
       }
       fVar6 = fVar10 - fVar11;
-      if ((fVar6 < 0.0)) {
+      if ((fVar6 < 0.0f)) {
         fVar6 = fVar11 - fVar10;
       }
       if (fVar6 <= fVar9 * (9.999999747378752e-06f)) {
         fVar9 = b + fVar12 * fVar5;
-        iVar1 = (uint)(fVar9 < 0.0) << 0x1f;
+        iVar1 = (uint)(fVar9 < 0.0f) << 0x1f;
         if (iVar1 < 0) {
           fVar6 = -fVar9;
         }
@@ -12190,7 +12405,7 @@ LAB_005644d2:
           fVar10 = fVar6;
         }
         fVar6 = out[1] - fVar9;
-        if ((fVar6 < 0.0)) {
+        if ((fVar6 < 0.0f)) {
           fVar6 = fVar9 - out[1];
         }
         if (fVar6 <= fVar10 * (9.999999747378752e-06f)) goto LAB_00564724;
@@ -12199,7 +12414,7 @@ LAB_005644d2:
     out[uVar2 * 2] = a + fVar12 * fVar4;
     out[uVar2 * 2 + 1] = b + fVar12 * fVar5;
     fVar9 = *out;
-    iVar1 = (uint)(fVar9 < 0.0) << 0x1f;
+    iVar1 = (uint)(fVar9 < 0.0f) << 0x1f;
     fVar6 = fVar4;
     if (iVar1 < 0) {
       fVar6 = -fVar9;
@@ -12212,7 +12427,7 @@ LAB_005644d2:
       fVar12 = fVar6;
     }
     fVar10 = a - fVar9;
-    if ((fVar10 < 0.0)) {
+    if ((fVar10 < 0.0f)) {
       fVar10 = fVar9 - a;
     }
     if (fVar10 <= fVar12 * fVar8) {
@@ -12221,7 +12436,7 @@ LAB_005644d2:
         fVar12 = ABS(out[1]);
       }
       fVar10 = b - out[1];
-      if ((fVar10 < 0.0)) {
+      if ((fVar10 < 0.0f)) {
         fVar10 = out[1] - b;
       }
       if (fVar10 <= fVar12 * fVar8) goto LAB_00564724;
@@ -12230,7 +12445,7 @@ LAB_005644d2:
       fVar6 = ABS(c);
     }
     fVar12 = c - fVar9;
-    if ((fVar12 < 0.0)) {
+    if ((fVar12 < 0.0f)) {
       fVar12 = fVar9 - c;
     }
     if (fVar12 <= fVar6 * fVar8) {
@@ -12239,7 +12454,7 @@ LAB_005644d2:
         fVar6 = ABS(out[1]);
       }
       fVar9 = d - out[1];
-      if ((fVar9 < 0.0)) {
+      if ((fVar9 < 0.0f)) {
         fVar9 = out[1] - d;
       }
       if (fVar9 <= fVar6 * fVar8) goto LAB_00564724;
@@ -12255,11 +12470,11 @@ LAB_00564724:
   fVar12 = (fVar11 * fVar4 + (fVar6 - a) * fVar5) / fVar9;
   fVar6 = fVar11 * (fVar6 - fVar6) + (fVar6 - a) * fVar10;
   fVar10 = fVar6 / fVar9;
-  if ((((0.0 <= fVar12) && ((fVar12 < fVar7))) && (0.0 <= fVar10)) &&
+  if ((((0.0f <= fVar12) && ((fVar12 < fVar7))) && (0.0f <= fVar10)) &&
      (((fVar10 < fVar7) && (uVar2 < 2)))) {
     if (uVar2 == 1) {
       fVar7 = *out;
-      iVar3 = (uint)(fVar7 < 0.0) << 0x1f;
+      iVar3 = (uint)(fVar7 < 0.0f) << 0x1f;
       if (iVar3 < 0) {
         fVar6 = -fVar7;
       }
@@ -12267,7 +12482,7 @@ LAB_00564724:
         fVar6 = fVar7;
       }
       fVar12 = a + fVar10 * fVar4;
-      iVar3 = (uint)(fVar12 < 0.0) << 0x1f;
+      iVar3 = (uint)(fVar12 < 0.0f) << 0x1f;
       if (iVar3 < 0) {
         fVar9 = -fVar12;
       }
@@ -12278,12 +12493,12 @@ LAB_00564724:
         fVar6 = fVar9;
       }
       fVar9 = fVar7 - fVar12;
-      if ((fVar9 < 0.0)) {
+      if ((fVar9 < 0.0f)) {
         fVar9 = fVar12 - fVar7;
       }
       if (fVar9 <= fVar6 * (9.999999747378752e-06f)) {
         fVar7 = b + fVar10 * fVar5;
-        iVar3 = (uint)(fVar7 < 0.0) << 0x1f;
+        iVar3 = (uint)(fVar7 < 0.0f) << 0x1f;
         if (iVar3 < 0) {
           fVar9 = -fVar7;
         }
@@ -12295,7 +12510,7 @@ LAB_00564724:
           fVar6 = fVar9;
         }
         fVar9 = out[1] - fVar7;
-        if ((fVar9 < 0.0)) {
+        if ((fVar9 < 0.0f)) {
           fVar9 = fVar7 - out[1];
         }
         if (fVar9 <= fVar6 * (9.999999747378752e-06f)) {
@@ -12307,7 +12522,7 @@ LAB_00564724:
     fVar7 = b + fVar10 * fVar5;
     out[uVar2 * 2 + 1] = fVar7;
     fVar4 = *out;
-    iVar3 = (uint)(fVar4 < 0.0) << 0x1f;
+    iVar3 = (uint)(fVar4 < 0.0f) << 0x1f;
     if (iVar3 < 0) {
       fVar7 = -fVar4;
     }
@@ -12319,7 +12534,7 @@ LAB_00564724:
       fVar5 = fVar7;
     }
     fVar6 = a - fVar4;
-    if ((fVar6 < 0.0)) {
+    if ((fVar6 < 0.0f)) {
       fVar6 = fVar4 - a;
     }
     if (fVar6 <= fVar5 * fVar8) {
@@ -12328,7 +12543,7 @@ LAB_00564724:
         fVar5 = ABS(out[1]);
       }
       fVar6 = b - out[1];
-      if ((fVar6 < 0.0)) {
+      if ((fVar6 < 0.0f)) {
         fVar6 = out[1] - b;
       }
       if (fVar6 <= fVar5 * fVar8) {
@@ -12339,7 +12554,7 @@ LAB_00564724:
       fVar7 = ABS(c);
     }
     fVar5 = c - fVar4;
-    if ((fVar5 < 0.0)) {
+    if ((fVar5 < 0.0f)) {
       fVar5 = fVar4 - c;
     }
     if (fVar5 <= fVar7 * fVar8) {
@@ -12348,7 +12563,7 @@ LAB_00564724:
         fVar7 = ABS(out[1]);
       }
       fVar4 = d - out[1];
-      if ((fVar4 < 0.0)) {
+      if ((fVar4 < 0.0f)) {
         fVar4 = out[1] - d;
       }
       if (fVar4 <= fVar7 * fVar8) {
@@ -12389,10 +12604,15 @@ uint g2c_nema_vg_arc_build_564974(float a,float b,float c,float d)
   float fVar16;
   float fVar17;
   float fVar18;
-  float fStack_38;
-  float fStack_34;
-  undefined4 uStack_30;
-  undefined4 uStack_2c;
+  /* Stock frame of 0x564974 as one block: locals keep the entry-SP offsets Ghidra named them by
+   * (X_Stack_NN at g2c_frame_564974[0x38-0xNN]) so &local passed to callees spans its stock neighbours. */
+  unsigned char g2c_frame_564974[0x38] __attribute__((aligned(8)));
+  typedef float __attribute__((may_alias)) g2c_fa_float;
+#define fStack_38 (*(g2c_fa_float *)(void *)&g2c_frame_564974[0x38-0x38])
+#define fStack_34 (*(g2c_fa_float *)(void *)&g2c_frame_564974[0x38-0x34])
+  typedef undefined4 __attribute__((may_alias)) g2c_fa_undefined4;
+#define uStack_30 (*(g2c_fa_undefined4 *)(void *)&g2c_frame_564974[0x38-0x30])
+#define uStack_2c (*(g2c_fa_undefined4 *)(void *)&g2c_frame_564974[0x38-0x2c])
   
   piVar4 = (((int *)&audio_uart_nema_vg_context_cell));
   bVar2 = false;
@@ -12412,8 +12632,8 @@ uint g2c_nema_vg_arc_build_564974(float a,float b,float c,float d)
      (fVar13 = ((float *)(puVar6))[0xc], c < fVar13 || (c < fVar13 || fVar17 < fVar13))) {
     bVar3 = true;
   }
-  fStack_38 = 0.0;
-  fStack_34 = 0.0;
+  fStack_38 = 0.0f;
+  fStack_34 = 0.0f;
   uStack_30 = 0;
   uStack_2c = 0;
   if (!bVar3 && !bVar2) {
@@ -12739,7 +12959,7 @@ uint g2c_nema_vg_arc_build_564974(float a,float b,float c,float d)
       fVar15 = ABS(fStack_38);
     }
     fVar18 = fVar17 - fStack_38;
-    if ((fVar18 < 0.0)) {
+    if ((fVar18 < 0.0f)) {
       fVar18 = fStack_38 - fVar17;
     }
     if (fVar18 <= fVar15 * (9.999999747378752e-06f)) {
@@ -12804,7 +13024,7 @@ LAB_00565286:
         fVar17 = ABS(fStack_34);
       }
       fVar15 = fVar14 - fStack_34;
-      if ((fVar15 < 0.0)) {
+      if ((fVar15 < 0.0f)) {
         fVar15 = fStack_34 - fVar14;
       }
       if (fVar15 <= fVar17 * (9.999999747378752e-06f)) goto LAB_00565162;
@@ -12895,7 +13115,7 @@ LAB_00565234:
       fVar15 = ABS(fVar16);
     }
     fVar18 = fVar17 - fVar16;
-    if ((fVar18 < 0.0)) {
+    if ((fVar18 < 0.0f)) {
       fVar18 = fVar16 - fVar17;
     }
     if (fVar15 * (9.999999747378752e-06f) < fVar18) {
@@ -12904,7 +13124,7 @@ LAB_00565234:
         fVar15 = ABS(fVar13);
       }
       fVar18 = fVar14 - fVar13;
-      if ((fVar18 < 0.0)) {
+      if ((fVar18 < 0.0f)) {
         fVar18 = fVar13 - fVar14;
       }
       if (fVar15 * (9.999999747378752e-06f) < fVar18) {
@@ -13024,6 +13244,11 @@ LAB_00565370:
   *(undefined4 *)(iVar7 + 0x2c) = 1;
   return 0;
 }
+#undef fStack_38
+#undef fStack_34
+#undef uStack_30
+#undef uStack_2c
+
 
   
 
@@ -13059,7 +13284,7 @@ uint g2c_nema_vg_arc_draw_5653a0(float a,float b,float c,float d,float e,float f
   fVar4 = (50.0f);
   fVar3 = (-50.0f);
   iVar11 = 1;
-  uVar21 = CONCAT44(f,e);
+  uVar21 = CONCAT44(g2c_float_to_bits(f),g2c_float_to_bits(e));
   fVar20 = d;
   do {
     puVar9 = (uint *)*piVar5;
@@ -13070,8 +13295,8 @@ uint g2c_nema_vg_arc_draw_5653a0(float a,float b,float c,float d,float e,float f
     if (bVar13) {
       bVar13 = (fVar14 >= b);
     }
-    fVar16 = (float)uVar21;
-    fVar17 = (float)((ulonglong)uVar21 >> 0x20);
+    fVar16 = (float)g2c_bits_to_float((uint)(uVar21));
+    fVar17 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar21 >> 0x20)));
     if (bVar13) {
       fVar15 = ((float *)(puVar9))[0xc];
       /* stock 0x565404/0x56540e itt ge; blt 0x565494 (GE ordered; wave19) */
@@ -13275,26 +13500,26 @@ LAB_005655c8:
     else {
       if (!(bool)(bVar2 ^ 1)) goto LAB_005655b8;
       if (9 < (int)puVar9[0xaf]) goto LAB_0056556a;
-      fVar14 = (c + fVar16) * 0.5;
-      fVar15 = (fVar20 + fVar17) * 0.5;
-      fVar16 = (fVar16 + g) * 0.5;
-      fVar17 = (fVar17 + h) * 0.5;
-      fVar18 = (fVar14 + fVar16) * 0.5;
-      puVar9[puVar9[0xaf] * 6 + 0x73] = (uint)fVar18;
-      fVar19 = (fVar15 + fVar17) * 0.5;
-      puVar9[puVar9[0xaf] * 6 + 0x74] = (uint)fVar19;
-      fVar20 = (b + fVar20) * 0.5;
-      puVar9[puVar9[0xaf] * 6 + 0x75] = (uint)fVar16;
-      puVar9[puVar9[0xaf] * 6 + 0x76] = (uint)fVar17;
-      c = (a + c) * 0.5;
-      puVar9[puVar9[0xaf] * 6 + 0x77] = (uint)g;
-      fVar14 = (c + fVar14) * 0.5;
-      fVar16 = (fVar20 + fVar15) * 0.5;
-      uVar21 = CONCAT44(fVar16,fVar14);
-      puVar9[puVar9[0xaf] * 6 + 0x78] = (uint)h;
+      fVar14 = (c + fVar16) * 0.5f;
+      fVar15 = (fVar20 + fVar17) * 0.5f;
+      fVar16 = (fVar16 + g) * 0.5f;
+      fVar17 = (fVar17 + h) * 0.5f;
+      fVar18 = (fVar14 + fVar16) * 0.5f;
+      puVar9[puVar9[0xaf] * 6 + 0x73] = (uint)g2c_float_to_bits(fVar18);
+      fVar19 = (fVar15 + fVar17) * 0.5f;
+      puVar9[puVar9[0xaf] * 6 + 0x74] = (uint)g2c_float_to_bits(fVar19);
+      fVar20 = (b + fVar20) * 0.5f;
+      puVar9[puVar9[0xaf] * 6 + 0x75] = (uint)g2c_float_to_bits(fVar16);
+      puVar9[puVar9[0xaf] * 6 + 0x76] = (uint)g2c_float_to_bits(fVar17);
+      c = (a + c) * 0.5f;
+      puVar9[puVar9[0xaf] * 6 + 0x77] = (uint)g2c_float_to_bits(g);
+      fVar14 = (c + fVar14) * 0.5f;
+      fVar16 = (fVar20 + fVar15) * 0.5f;
+      uVar21 = CONCAT44(g2c_float_to_bits(fVar16),g2c_float_to_bits(fVar14));
+      puVar9[puVar9[0xaf] * 6 + 0x78] = (uint)g2c_float_to_bits(h);
       d = fVar14 + fVar18;
-      g = d * 0.5;
-      h = (fVar16 + fVar19) * 0.5;
+      g = d * 0.5f;
+      h = (fVar16 + fVar19) * 0.5f;
       puVar9[0xaf] = puVar9[0xaf] + 1;
       iVar11 = iVar11 + 1;
     }
@@ -13352,42 +13577,50 @@ uint g2c_nema_vg_draw_path_inner_5657d8(uint *a)
   float fVar30;
   float fVar31;
   undefined8 uVar32;
-  char cStack_108;
-  char cStack_107;
-  undefined1 uStack_106;
-  byte bStack_105;
-  int iStack_104;
-  int iStack_100;
-  float fStack_fc;
-  float fStack_f8;
-  float fStack_f4;
-  float fStack_f0;
-  float fStack_ec;
-  float fStack_e8;
-  float fStack_e4;
-  float fStack_e0;
-  float fStack_dc;
-  float fStack_d8;
-  float fStack_d4;
-  float fStack_d0;
-  float fStack_cc;
-  float fStack_c8;
-  byte bStack_c4;
-  float fStack_c0;
-  float fStack_bc;
-  float fStack_b8;
-  float fStack_b4;
-  float fStack_b0;
-  float fStack_ac;
-  float fStack_a8;
-  float fStack_a4;
-  float fStack_a0;
-  float fStack_9c;
-  float fStack_98;
-  float fStack_94;
-  float fStack_90;
-  float fStack_70;
-  float fStack_6c;
+  /* Stock frame of 0x5657d8 as one block: locals keep the entry-SP offsets Ghidra named them by
+   * (X_Stack_NN at g2c_frame_5657d8[0x108-0xNN]) so &local passed to callees spans its stock neighbours. */
+  unsigned char g2c_frame_5657d8[0x108] __attribute__((aligned(8)));
+  typedef char __attribute__((may_alias)) g2c_fa_char;
+#define cStack_108 (*(g2c_fa_char *)(void *)&g2c_frame_5657d8[0x108-0x108])
+#define cStack_107 (*(g2c_fa_char *)(void *)&g2c_frame_5657d8[0x108-0x107])
+  typedef undefined1 __attribute__((may_alias)) g2c_fa_undefined1;
+#define uStack_106 (*(g2c_fa_undefined1 *)(void *)&g2c_frame_5657d8[0x108-0x106])
+  typedef byte __attribute__((may_alias)) g2c_fa_byte;
+#define bStack_105 (*(g2c_fa_byte *)(void *)&g2c_frame_5657d8[0x108-0x105])
+  typedef int __attribute__((may_alias)) g2c_fa_int;
+#define iStack_104 (*(g2c_fa_int *)(void *)&g2c_frame_5657d8[0x108-0x104])
+#define iStack_100 (*(g2c_fa_int *)(void *)&g2c_frame_5657d8[0x108-0x100])
+  typedef float __attribute__((may_alias)) g2c_fa_float;
+#define fStack_fc (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xfc])
+#define fStack_f8 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xf8])
+#define fStack_f4 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xf4])
+#define fStack_f0 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xf0])
+#define fStack_ec (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xec])
+#define fStack_e8 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xe8])
+#define fStack_e4 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xe4])
+#define fStack_e0 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xe0])
+#define fStack_dc (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xdc])
+#define fStack_d8 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xd8])
+#define fStack_d4 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xd4])
+#define fStack_d0 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xd0])
+#define fStack_cc (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xcc])
+#define fStack_c8 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xc8])
+#define bStack_c4 (*(g2c_fa_byte *)(void *)&g2c_frame_5657d8[0x108-0xc4])
+#define fStack_c0 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xc0])
+#define fStack_bc (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xbc])
+#define fStack_b8 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xb8])
+#define fStack_b4 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xb4])
+#define fStack_b0 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xb0])
+#define fStack_ac (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xac])
+#define fStack_a8 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xa8])
+#define fStack_a4 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xa4])
+#define fStack_a0 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0xa0])
+#define fStack_9c (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0x9c])
+#define fStack_98 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0x98])
+#define fStack_94 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0x94])
+#define fStack_90 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0x90])
+#define fStack_70 (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0x70])
+#define fStack_6c (*(g2c_fa_float *)(void *)&g2c_frame_5657d8[0x108-0x6c])
   
   audio_uart_lv_memzero_48949c((uint)&cStack_108,0x48);
   piVar2 = (((int *)&audio_uart_nema_vg_context_cell));
@@ -13395,14 +13628,14 @@ uint g2c_nema_vg_draw_path_inner_5657d8(uint *a)
   uStack_106 = 1;
   uVar9 = 0;
   do {
-    fStack_b0 = (float)d15_pair;
-    fStack_ac = (float)((ulonglong)d15_pair >> 0x20);
+    fStack_b0 = (float)g2c_bits_to_float((uint)(d15_pair));
+    fStack_ac = (float)g2c_bits_to_float((uint)(((ulonglong)d15_pair >> 0x20)));
 LAB_0056580e:
     iVar4 = iStack_104;
     if (*a <= uVar9) {
       if (cStack_107 == '\x01') {
-        fVar25 = (0x0u);
-        fStack_6c = (0x0u);
+        fVar25 = g2c_bits_to_float((uint)((0x0u)));
+        fStack_6c = g2c_bits_to_float((uint)((0x0u)));
         if (cStack_108 == '\0') {
           fVar25 = fStack_cc;
           fStack_6c = fStack_c8;
@@ -13433,8 +13666,8 @@ LAB_0056580e:
     bVar13 = bStack_c4 & 0x6f;
     if (uVar7 == 1) {
       if ((cStack_107 == '\x01') && (iStack_104 != 0)) {
-        fVar25 = (0x0u);
-        fStack_bc = (0x0u);
+        fVar25 = g2c_bits_to_float((uint)((0x0u)));
+        fStack_bc = g2c_bits_to_float((uint)((0x0u)));
         if (cStack_108 == '\0') {
           fVar25 = fStack_cc;
           fStack_bc = fStack_c8;
@@ -13479,8 +13712,8 @@ LAB_00566188:
     else {
       if (uVar12 == 0 || uVar12 == 0x80) {
         if (cStack_108 == '\x01') {
-          fStack_f4 = 0.0;
-          fStack_f0 = 0.0;
+          fStack_f4 = 0.0f;
+          fStack_f0 = 0.0f;
         }
         else {
           fStack_f4 = fStack_cc;
@@ -13538,8 +13771,8 @@ LAB_00565bd0:
           if (uVar7 != 7) {
             if (uVar7 == 8) {
               if ((bVar13 == 5 || bVar13 == 7) || (bVar13 == 6 || bVar13 == 8)) {
-                fStack_ec = fStack_dc * 2.0 - fStack_d4;
-                fStack_e8 = fStack_d8 * 2.0 - fStack_d0;
+                fStack_ec = fStack_dc * 2.0f - fStack_d4;
+                fStack_e8 = fStack_d8 * 2.0f - fStack_d0;
               }
               else {
                 fStack_ec = fStack_dc;
@@ -13567,8 +13800,8 @@ LAB_00565bd0:
             goto LAB_00565c84;
           }
           if ((bVar13 == 5 || bVar13 == 7) || (bVar13 == 6 || bVar13 == 8)) {
-            fStack_ec = fStack_dc * 2.0 - fStack_d4;
-            fStack_e8 = fStack_d8 * 2.0 - fStack_d0;
+            fStack_ec = fStack_dc * 2.0f - fStack_d4;
+            fStack_e8 = fStack_d8 * 2.0f - fStack_d0;
           }
           else {
             fStack_ec = fStack_dc;
@@ -13699,11 +13932,11 @@ LAB_00566156:
         fVar16 = fStack_f0;
         fVar17 = fStack_f4;
         fVar25 = fStack_dc - fStack_cc;
-        bVar15 = fVar25 == 0.0;
+        bVar15 = fVar25 == 0.0f;
         if (bVar15) {
           fVar25 = fStack_d8 - fStack_c8;
         }
-        if (!bVar15 || (!bVar15 || fVar25 != 0.0)) {
+        if (!bVar15 || (!bVar15 || fVar25 != 0.0f)) {
           fStack_f0 = fStack_c8;
           fStack_fc = fStack_f4;
           fStack_f8 = fVar16;
@@ -13896,10 +14129,10 @@ LAB_005658d2:
       fStack_b0 = fStack_f4;
       fStack_ac = fStack_f0;
       iVar4 = 1;
-      uVar24 = CONCAT44(fStack_e8,fStack_ec);
+      uVar24 = CONCAT44(g2c_float_to_bits(fStack_e8),g2c_float_to_bits(fStack_ec));
       fStack_b8 = fStack_fc;
       fStack_b4 = fStack_f8;
-      uVar32 = CONCAT44(fStack_f0,fStack_f4);
+      uVar32 = CONCAT44(g2c_float_to_bits(fStack_f0),g2c_float_to_bits(fStack_f4));
       do {
         puVar6 = (uint *)*piVar2;
         bVar1 = false;
@@ -13909,10 +14142,10 @@ LAB_005658d2:
         if (bVar15) {
           bVar15 = (fVar16 >= fStack_b4);
         }
-        fVar19 = (float)uVar24;
-        fVar22 = (float)((ulonglong)uVar24 >> 0x20);
-        fVar23 = (float)((ulonglong)uVar32 >> 0x20);
-        fVar21 = (float)uVar32;
+        fVar19 = (float)g2c_bits_to_float((uint)(uVar24));
+        fVar22 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar24 >> 0x20)));
+        fVar23 = (float)g2c_bits_to_float((uint)(((ulonglong)uVar32 >> 0x20)));
+        fVar21 = (float)g2c_bits_to_float((uint)(uVar32));
         if (bVar15) {
           fVar18 = ((float *)(puVar6))[0xc];
           /* stock 0x566308/0x566312 itt ge; blt 0x566370 (GE ordered; wave19) */
@@ -14076,26 +14309,26 @@ LAB_005665ee:
         else {
           if (!bVar15) goto LAB_00566446;
           if (9 < (int)puVar6[0xaf]) goto LAB_00566424;
-          fVar18 = (fStack_b4 + fVar22) * 0.5;
-          fVar16 = (fStack_b8 + fVar19) * 0.5;
-          fVar21 = (fVar19 + fVar21) * 0.5;
-          fVar19 = (fVar22 + fVar23) * 0.5;
-          fVar22 = (fVar16 + fVar21) * 0.5;
-          puVar6[puVar6[0xaf] * 6 + 0x73] = (uint)fVar22;
-          fVar23 = (fVar18 + fVar19) * 0.5;
-          puVar6[puVar6[0xaf] * 6 + 0x74] = (uint)fVar23;
-          uVar24 = CONCAT44(fVar18,fVar16);
-          puVar6[puVar6[0xaf] * 6 + 0x75] = (uint)fVar21;
-          uVar32 = CONCAT44(fVar23,fVar22);
+          fVar18 = (fStack_b4 + fVar22) * 0.5f;
+          fVar16 = (fStack_b8 + fVar19) * 0.5f;
+          fVar21 = (fVar19 + fVar21) * 0.5f;
+          fVar19 = (fVar22 + fVar23) * 0.5f;
+          fVar22 = (fVar16 + fVar21) * 0.5f;
+          puVar6[puVar6[0xaf] * 6 + 0x73] = (uint)g2c_float_to_bits(fVar22);
+          fVar23 = (fVar18 + fVar19) * 0.5f;
+          puVar6[puVar6[0xaf] * 6 + 0x74] = (uint)g2c_float_to_bits(fVar23);
+          uVar24 = CONCAT44(g2c_float_to_bits(fVar18),g2c_float_to_bits(fVar16));
+          puVar6[puVar6[0xaf] * 6 + 0x75] = (uint)g2c_float_to_bits(fVar21);
+          uVar32 = CONCAT44(g2c_float_to_bits(fVar23),g2c_float_to_bits(fVar22));
           iVar4 = iVar4 + 1;
-          puVar6[puVar6[0xaf] * 6 + 0x76] = (uint)fVar19;
-          puVar6[puVar6[0xaf] * 6 + 0x77] = (uint)fVar25;
-          puVar6[puVar6[0xaf] * 6 + 0x78] = (uint)fVar17;
+          puVar6[puVar6[0xaf] * 6 + 0x76] = (uint)g2c_float_to_bits(fVar19);
+          puVar6[puVar6[0xaf] * 6 + 0x77] = (uint)g2c_float_to_bits(fVar25);
+          puVar6[puVar6[0xaf] * 6 + 0x78] = (uint)g2c_float_to_bits(fVar17);
           puVar6[0xaf] = puVar6[0xaf] + 1;
         }
       } while (iVar4 != 0);
-      fStack_b0 = (float)uVar32;
-      fStack_ac = (float)((ulonglong)uVar32 >> 0x20);
+      fStack_b0 = (float)g2c_bits_to_float((uint)(uVar32));
+      fStack_ac = (float)g2c_bits_to_float((uint)(((ulonglong)uVar32 >> 0x20)));
       goto LAB_0056580e;
     }
     if (uVar7 == 6 || uVar7 == 8) {
@@ -14175,7 +14408,7 @@ joined_r0x0056717a:
       fVar25 = ABS(fStack_dc);
     }
     fVar17 = fStack_d4 - fStack_dc;
-    if ((fVar17 < 0.0)) {
+    if ((fVar17 < 0.0f)) {
       fVar17 = fStack_dc - fStack_d4;
     }
     if (fVar17 <= fVar25 * (9.999999747378752e-06f)) {
@@ -14184,18 +14417,18 @@ joined_r0x0056717a:
         fVar25 = ABS(fStack_d8);
       }
       fVar17 = fStack_d0 - fStack_d8;
-      if ((fVar17 < 0.0)) {
+      if ((fVar17 < 0.0f)) {
         fVar17 = fStack_d8 - fStack_d0;
       }
       if (fVar17 <= fVar25 * (9.999999747378752e-06f)) goto LAB_0056580e;
     }
-    fVar25 = (float)d10_pair;
+    fVar25 = (float)g2c_bits_to_float((uint)(d10_pair));
     fVar17 = ABS(fStack_ec);
     bVar15 = (1.0000000656873453e-05f) <= fVar17;
     if (bVar15) {
       fVar25 = ABS(fStack_e8);
     }
-    d10_pair = CONCAT44(fVar17,fVar25);
+    d10_pair = CONCAT44(g2c_float_to_bits(fVar17),g2c_float_to_bits(fVar25));
     fVar23 = fStack_e8;
     if (bVar15) {
       fVar23 = (1.0000000656873453e-05f);
@@ -14226,17 +14459,17 @@ joined_r0x0056717a:
     fVar30 = fVar20 - fVar28;
     fVar31 = fVar26 - fVar29;
     fVar19 = fVar30 * fVar30 + fVar31 * fVar31;
-    if (fVar19 == 0.0) {
+    if (fVar19 == 0.0f) {
       uVar7 = 0x100;
       goto LAB_005671fc;
     }
-    fStack_b8 = 1.0 / fVar19 + -0.25;
-    if ((fStack_b8 < 0.0)) {
-      fStack_b8 = 0.0;
-      fVar16 = audio_uart_float_sqrt_4397a8(fVar19 * 0.25);
+    fStack_b8 = 1.0f / fVar19 + -0.25f;
+    if ((fStack_b8 < 0.0f)) {
+      fStack_b8 = 0.0f;
+      fVar16 = audio_uart_float_sqrt_4397a8(fVar19 * 0.25f);
       fVar25 = fVar25 * fVar16;
       fVar17 = fVar17 * fVar16;
-      d10_pair = CONCAT44(fVar17,fVar25);
+      d10_pair = CONCAT44(g2c_float_to_bits(fVar17),g2c_float_to_bits(fVar25));
       fVar20 = fVar21 / fVar17;
       fVar26 = fStack_a8 / fVar25;
       fVar28 = fVar27 / fVar17;
@@ -14248,20 +14481,20 @@ joined_r0x0056717a:
     }
     fVar17 = audio_uart_float_sqrt_4397a8(fStack_b8);
     fStack_b8 = fVar17 * fVar30;
-    fVar27 = fVar22 * 0.5 + fVar17 * fVar31;
-    fVar30 = fVar16 * 0.5 - fStack_b8;
+    fVar27 = fVar22 * 0.5f + fVar17 * fVar31;
+    fVar30 = fVar16 * 0.5f - fStack_b8;
     fVar19 = audio_uart_float_two_input_angle_50969c(fVar26 - fVar30,fVar20 - fVar27);
     fVar25 = audio_uart_float_two_input_angle_50969c(fVar29 - fVar30,fVar28 - fVar27);
     fVar19 = fVar19 * (57.295780181884766f);
     fVar25 = fVar25 * (57.295780181884766f);
     fVar21 = fVar25 - fVar19;
-    if ((fVar21 < 0.0)) {
+    if ((fVar21 < 0.0f)) {
       fVar21 = fVar21 + (360.0f);
     }
     if (((!(fVar21 < (180.0f))) || (bVar10 == 0)) &&
        ((fVar21 < (180.0f) || (bVar10 != 0)))) {
-      fVar27 = fVar22 * 0.5 - fVar17 * fVar31;
-      fVar30 = fVar16 * 0.5 + fStack_b8;
+      fVar27 = fVar22 * 0.5f - fVar17 * fVar31;
+      fVar30 = fVar16 * 0.5f + fStack_b8;
       fVar19 = audio_uart_float_two_input_angle_50969c(fVar26 - fVar30,fVar20 - fVar27);
       fVar25 = audio_uart_float_two_input_angle_50969c(fVar29 - fVar30,fVar28 - fVar27);
       fVar19 = fVar19 * (57.295780181884766f);
@@ -14269,8 +14502,8 @@ joined_r0x0056717a:
     }
     fVar16 = (0.01745329238474369f);
     fVar17 = (0.01745329238474369f);
-    fVar28 = (float)((ulonglong)d10_pair >> 0x20);
-    fVar26 = (float)d10_pair;
+    fVar28 = (float)g2c_bits_to_float((uint)(((ulonglong)d10_pair >> 0x20)));
+    fVar26 = (float)g2c_bits_to_float((uint)(d10_pair));
     fVar20 = fVar27 * fVar28 * fVar23 - fVar30 * fVar26 * fVar18;
     fVar21 = fVar27 * fVar28 * fVar18 + fVar30 * fVar26 * fVar23;
     fVar22 = fVar19;
@@ -14283,7 +14516,7 @@ joined_r0x0056717a:
     }
     fVar19 = (fStack_e4 / (180.0f)) * (3.1415927410125732f);
     if (bVar13 == 0) {
-      d15_pair = CONCAT44(fStack_ac,fStack_b0);
+      d15_pair = CONCAT44(g2c_float_to_bits(fStack_ac),g2c_float_to_bits(fStack_b0));
       iVar4 = 1;
       while ((fVar22 < fVar25)) {
         fVar23 = fVar25 + (-90.0f);
@@ -14300,15 +14533,15 @@ joined_r0x0056717a:
         }
         fVar25 = fVar25 * fVar16;
         fVar27 = fVar17 * fVar16 - fVar25;
-        fVar17 = audio_uart_float_tangent_563f40(fVar27 * 0.25);
+        fVar17 = audio_uart_float_tangent_563f40(fVar27 * 0.25f);
         fVar17 = fVar17 * (1.3333333730697632f);
         fVar18 = audio_uart_float_trig_mode1_50968c(fVar27);
         fStack_a0 = audio_uart_float_trig_mode0_509690(fVar27);
         fStack_94 = fVar18 + fVar17 * fStack_a0;
         fStack_90 = fStack_a0 - fVar17 * fVar18;
-        fStack_ac = 1.0;
-        fStack_a8 = 0.0;
-        fStack_9c = 1.0;
+        fStack_ac = 1.0f;
+        fStack_a8 = 0.0f;
+        fStack_9c = 1.0f;
         fStack_a4 = fVar18;
         fStack_98 = fVar17;
         fVar17 = audio_uart_float_trig_mode1_50968c(fVar25);
@@ -14320,7 +14553,7 @@ joined_r0x0056717a:
           fStack_a8 = fStack_f8;
         }
         else {
-          g2c_nema_vg_quad_to_51a660(fVar17,fVar25,1.0,1.0,(0x0u),(0x0u),&fStack_ac);
+          g2c_nema_vg_quad_to_51a660(fVar17,fVar25,1.0f,1.0f,g2c_bits_to_float((uint)((0x0u))),g2c_bits_to_float((uint)((0x0u))),&fStack_ac);
           g2c_nema_vg_quad_to_51a660(fVar18,fVar27,fVar28,fVar26,fVar20,fVar21,&fStack_ac);
           iVar5 = *piVar2;
           if (*(char *)(iVar5 + 0x21) != '\0') {
@@ -14330,16 +14563,16 @@ joined_r0x0056717a:
             fStack_ac = *(float *)(iVar5 + 0x38) * fStack_ac + fVar29 + *(float *)(iVar5 + 0x40);
           }
         }
-        g2c_nema_vg_quad_to_51a660(fVar17,fVar25,1.0,1.0,(0x0u),(0x0u),&fStack_9c);
+        g2c_nema_vg_quad_to_51a660(fVar17,fVar25,1.0f,1.0f,g2c_bits_to_float((uint)((0x0u))),g2c_bits_to_float((uint)((0x0u))),&fStack_9c);
         g2c_nema_vg_quad_to_51a660(fVar18,fVar27,fVar28,fVar26,fVar20,fVar21,&fStack_9c);
-        g2c_nema_vg_quad_to_51a660(fVar17,fVar25,1.0,1.0,(0x0u),(0x0u),&fStack_94);
+        g2c_nema_vg_quad_to_51a660(fVar17,fVar25,1.0f,1.0f,g2c_bits_to_float((uint)((0x0u))),g2c_bits_to_float((uint)((0x0u))),&fStack_94);
         g2c_nema_vg_quad_to_51a660(fVar18,fVar27,fVar28,fVar26,fVar20,fVar21,&fStack_94);
         if (iVar4 << 0x1e < 0) {
           fStack_a4 = fStack_f4;
           fStack_a0 = fStack_f0;
         }
         else {
-          g2c_nema_vg_quad_to_51a660(fVar17,fVar25,1.0,1.0,(0x0u),(0x0u),&fStack_a4);
+          g2c_nema_vg_quad_to_51a660(fVar17,fVar25,1.0f,1.0f,g2c_bits_to_float((uint)((0x0u))),g2c_bits_to_float((uint)((0x0u))),&fStack_a4);
           g2c_nema_vg_quad_to_51a660(fVar18,fVar27,fVar28,fVar26,fVar20,fVar21,&fStack_a4);
           iVar4 = *piVar2;
           if (*(char *)(iVar4 + 0x21) != '\0') {
@@ -14369,7 +14602,7 @@ joined_r0x0056717a:
       }
     }
     else {
-      d15_pair = CONCAT44(fStack_ac,fStack_b0);
+      d15_pair = CONCAT44(g2c_float_to_bits(fStack_ac),g2c_float_to_bits(fStack_b0));
       iVar4 = 1;
       while ((fVar22 < fVar25)) {
         fVar23 = fVar22 + (90.0f);
@@ -14386,15 +14619,15 @@ joined_r0x0056717a:
         }
         fVar22 = fVar22 * fVar17;
         fVar27 = fVar16 * fVar17 - fVar22;
-        fVar16 = audio_uart_float_tangent_563f40(fVar27 * 0.25);
+        fVar16 = audio_uart_float_tangent_563f40(fVar27 * 0.25f);
         fVar16 = fVar16 * (1.3333333730697632f);
         fVar18 = audio_uart_float_trig_mode1_50968c(fVar27);
         fStack_a0 = audio_uart_float_trig_mode0_509690(fVar27);
         fStack_94 = fVar18 + fVar16 * fStack_a0;
         fStack_90 = fStack_a0 - fVar16 * fVar18;
-        fStack_ac = 1.0;
-        fStack_a8 = 0.0;
-        fStack_9c = 1.0;
+        fStack_ac = 1.0f;
+        fStack_a8 = 0.0f;
+        fStack_9c = 1.0f;
         fStack_a4 = fVar18;
         fStack_98 = fVar16;
         fVar16 = audio_uart_float_trig_mode1_50968c(fVar22);
@@ -14406,7 +14639,7 @@ joined_r0x0056717a:
           fStack_a8 = fStack_f8;
         }
         else {
-          g2c_nema_vg_quad_to_51a660(fVar16,fVar22,1.0,1.0,(0x0u),(0x0u),&fStack_ac);
+          g2c_nema_vg_quad_to_51a660(fVar16,fVar22,1.0f,1.0f,g2c_bits_to_float((uint)((0x0u))),g2c_bits_to_float((uint)((0x0u))),&fStack_ac);
           g2c_nema_vg_quad_to_51a660(fVar18,fVar27,fVar28,fVar26,fVar20,fVar21,&fStack_ac);
           iVar5 = *piVar2;
           if (*(char *)(iVar5 + 0x21) != '\0') {
@@ -14416,16 +14649,16 @@ joined_r0x0056717a:
             fStack_ac = *(float *)(iVar5 + 0x38) * fStack_ac + fVar29 + *(float *)(iVar5 + 0x40);
           }
         }
-        g2c_nema_vg_quad_to_51a660(fVar16,fVar22,1.0,1.0,(0x0u),(0x0u),&fStack_9c);
+        g2c_nema_vg_quad_to_51a660(fVar16,fVar22,1.0f,1.0f,g2c_bits_to_float((uint)((0x0u))),g2c_bits_to_float((uint)((0x0u))),&fStack_9c);
         g2c_nema_vg_quad_to_51a660(fVar18,fVar27,fVar28,fVar26,fVar20,fVar21,&fStack_9c);
-        g2c_nema_vg_quad_to_51a660(fVar16,fVar22,1.0,1.0,(0x0u),(0x0u),&fStack_94);
+        g2c_nema_vg_quad_to_51a660(fVar16,fVar22,1.0f,1.0f,g2c_bits_to_float((uint)((0x0u))),g2c_bits_to_float((uint)((0x0u))),&fStack_94);
         g2c_nema_vg_quad_to_51a660(fVar18,fVar27,fVar28,fVar26,fVar20,fVar21,&fStack_94);
         if (iVar4 << 0x1e < 0) {
           fStack_a4 = fStack_f4;
           fStack_a0 = fStack_f0;
         }
         else {
-          g2c_nema_vg_quad_to_51a660(fVar16,fVar22,1.0,1.0,(0x0u),(0x0u),&fStack_a4);
+          g2c_nema_vg_quad_to_51a660(fVar16,fVar22,1.0f,1.0f,g2c_bits_to_float((uint)((0x0u))),g2c_bits_to_float((uint)((0x0u))),&fStack_a4);
           g2c_nema_vg_quad_to_51a660(fVar18,fVar27,fVar28,fVar26,fVar20,fVar21,&fStack_a4);
           iVar4 = *piVar2;
           if (*(char *)(iVar4 + 0x21) != '\0') {
@@ -14469,6 +14702,43 @@ LAB_005671fc:
   audio_uart_nema_vg_set_error_51565c(uVar7);
   return uVar7;
 }
+#undef cStack_108
+#undef cStack_107
+#undef uStack_106
+#undef bStack_105
+#undef iStack_104
+#undef iStack_100
+#undef fStack_fc
+#undef fStack_f8
+#undef fStack_f4
+#undef fStack_f0
+#undef fStack_ec
+#undef fStack_e8
+#undef fStack_e4
+#undef fStack_e0
+#undef fStack_dc
+#undef fStack_d8
+#undef fStack_d4
+#undef fStack_d0
+#undef fStack_cc
+#undef fStack_c8
+#undef bStack_c4
+#undef fStack_c0
+#undef fStack_bc
+#undef fStack_b8
+#undef fStack_b4
+#undef fStack_b0
+#undef fStack_ac
+#undef fStack_a8
+#undef fStack_a4
+#undef fStack_a0
+#undef fStack_9c
+#undef fStack_98
+#undef fStack_94
+#undef fStack_90
+#undef fStack_70
+#undef fStack_6c
+
 
   
 
@@ -14490,15 +14760,15 @@ uint g2c_nema_vg_paint_apply_567230(uint a,int b)
   
   piVar1 = (((int *)&audio_uart_nema_vg_context_cell));
   iVar5 = *(((int *)&audio_uart_nema_vg_context_cell));
-  *(undefined4 *)(iVar5 + 0x34) = (1535.0f);
-  *(undefined4 *)(iVar5 + 0x30) = ((-511.0f));
+  *(undefined4 *)(iVar5 + 0x34) = g2c_float_to_bits((1535.0f));
+  *(undefined4 *)(iVar5 + 0x30) = g2c_float_to_bits(((-511.0f)));
   bVar7 = *(int *)(iVar5 + 0x10) != 0;
   iVar2 = 0;
   if (bVar7) {
     iVar2 = *(int *)(iVar5 + 0x1c);
   }
   if (bVar7 && iVar2 != 0) {
-    fVar8 = *(float *)(iVar5 + 0x2d8) * 0.5;
+    fVar8 = *(float *)(iVar5 + 0x2d8) * 0.5f;
     fVar9 = fVar8 + (-507.0f);
     fVar8 = (1531.0f) - fVar8;
     *(undefined4 *)(iVar5 + 0x2c) = 0;
@@ -14546,7 +14816,7 @@ uint g2c_nema_vg_paint_apply_567230(uint a,int b)
     }
   }
   else {
-    fVar8 = *(float *)(iVar5 + 0x2d8) * 0.5;
+    fVar8 = *(float *)(iVar5 + 0x2d8) * 0.5f;
     fVar9 = fVar8 + (-507.0f);
     fVar8 = (1531.0f) - fVar8;
     *(undefined4 *)(iVar5 + 0x2c) = 1;
@@ -14601,7 +14871,7 @@ LAB_00567316:
     *(uint *)(iVar2 + 0x10) = uVar4;
     if (*(uint *)(iVar2 + 0x1c) != 0) {
       if (*(int *)(iVar2 + 0x10) != 0) {
-        fVar8 = *(float *)(iVar2 + 0x2d8) * 0.5;
+        fVar8 = *(float *)(iVar2 + 0x2d8) * 0.5f;
         fVar9 = fVar8 + (-507.0f);
         fVar8 = (1531.0f) - fVar8;
         *(undefined4 *)(iVar2 + 0x2c) = 0;

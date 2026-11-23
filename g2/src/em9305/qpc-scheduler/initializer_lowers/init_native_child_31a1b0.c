@@ -1,9 +1,10 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31a1b0..0x31a1fe: PAwR report filter. For an active sync record
  * (byte 0 == 1) build the match key from the report (address at +7, type +6,
  * bytes +4/+15) and the record halfword +174, then look it up in the PAwR
- * table at 0x80356c. A miss sets *missed = 1. Returns the lookup result with
+ * table at ((uintptr_t)&em9305_ram_803560 + 0xcu). A miss sets *missed = 1. Returns the lookup result with
  * bit 0 inverted, or 0 for an inactive record. */
 extern uint64_t opencfw_em9305_controller_pack_address(uintptr_t);
 extern uint32_t opencfw_em9305_child_316a68(uintptr_t key, uint32_t type,
@@ -22,7 +23,7 @@ uint32_t opencfw_em9305_child_31a1b0(uintptr_t record, uintptr_t report, uintptr
                                       *(volatile uint8_t *)(report + 4u),
                                       *(volatile uint8_t *)(report + 15u),
                                       *(volatile uint16_t *)(record + 174u));
-    uint32_t match = opencfw_em9305_pawr_match_3169b4(0x80356cu, key[0], key[1]);
+    uint32_t match = opencfw_em9305_pawr_match_3169b4(((uintptr_t)&em9305_ram_803560 + 0xcu), key[0], key[1]);
     if (match == 0u) *(volatile uint8_t *)missed = 1u;
     return match ^ 1u;
 }

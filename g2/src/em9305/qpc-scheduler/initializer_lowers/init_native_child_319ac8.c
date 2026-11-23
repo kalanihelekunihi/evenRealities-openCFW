@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x319ac8..0x319de6: finish an extended-initiation connect attempt
  * for connection record conn. When the initiator is no longer active
@@ -8,12 +9,12 @@
  * connection-complete event (323028) sent. Otherwise the received
  * AUX_CONNECT_RSP (+0x970) or, failing that, the stored AUX_CONNECT_REQ
  * (+0xa48) is unpacked; a resolvable TargetA with RxAdd set seeds the
- * local RPA (0x805be4) when it is still empty. A rejected response
+ * local RPA (((uintptr_t)&em9305_ram_805be0 + 0x4u)) when it is still empty. A rejected response
  * (303404) sends message 776 for the PDU and releases the record.
  * Otherwise a 0x58-byte enhanced-connection-complete message is filled
  * (PDU copy at +4, peer identity/type +52/+60/+68, PHYs +53/+54, local
  * RPA +76, interval +48, latency +56, SCA +57) and sent to the LL task
- * (0x805b18), and the record is closed (319ea0). */
+ * (((uintptr_t)&em9305_ram_805af0 + 0x28u)), and the record is closed (319ea0). */
 extern uint32_t opencfw_em9305_child_32db0c(uintptr_t out,uintptr_t in);
 extern uint32_t opencfw_em9305_init_transition_packet_copy_32dd54(uintptr_t out,
                                                                  uintptr_t in);
@@ -46,11 +47,11 @@ static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;
 static inline void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
 static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
 
-/* Seed the local resolvable address (0x805be4/0x805be8) from a TargetA
+/* Seed the local resolvable address (((uintptr_t)&em9305_ram_805be0 + 0x4u)/((uintptr_t)&em9305_ram_805be0 + 0x8u)) from a TargetA
  * with RxAdd set when it is resolvable and none is stored yet. */
 static int rpa_empty(void)
 {
-    return (r32(0x805be8u)|r32(0x805be4u))==0u;
+    return (r32(((uintptr_t)&em9305_ram_805be0 + 0x8u))|r32(((uintptr_t)&em9305_ram_805be0 + 0x4u)))==0u;
 }
 
 /* Peer identity from the address block at b (+0/+4 peer, +8/+12 identity,
@@ -110,8 +111,8 @@ void opencfw_em9305_child_319ac8(uintptr_t conn)
         if(header[3]!=0u){
             uint32_t high=packet[3];
             if((high&0xc000u)==0x4000u&&rpa_empty()){
-                w32(0x805be8u,high);
-                w32(0x805be4u,packet[2]);
+                w32(((uintptr_t)&em9305_ram_805be0 + 0x8u),high);
+                w32(((uintptr_t)&em9305_ram_805be0 + 0x4u),packet[2]);
             }
         }
         if(accepted==0u)goto reject;
@@ -133,8 +134,8 @@ void opencfw_em9305_child_319ac8(uintptr_t conn)
             request.adv_type=header[2];
             request.target_type=(uint8_t)target_type;
             if(target_type!=0u&&(high&0xc000u)==0x4000u&&rpa_empty()){
-                w32(0x805be4u,low);
-                w32(0x805be8u,high);
+                w32(((uintptr_t)&em9305_ram_805be0 + 0x4u),low);
+                w32(((uintptr_t)&em9305_ram_805be0 + 0x8u),high);
             }
             (void)opencfw_em9305_child_30301c((uintptr_t)&request,conn+0x954u,1u,
                                               conn+0xa8cu);
@@ -158,20 +159,20 @@ void opencfw_em9305_child_319ac8(uintptr_t conn)
         w8(message+55u,1u);
         w16(message+86u,0xffffu);
         w8(message+84u,0xffu);
-        w32(message+80u,r32(0x805be8u));
-        w32(message+76u,r32(0x805be4u));
+        w32(message+80u,r32(((uintptr_t)&em9305_ram_805be0 + 0x8u)));
+        w32(message+76u,r32(((uintptr_t)&em9305_ram_805be0 + 0x4u)));
         uintptr_t params=conn+0x8d0u;
         w32(message+48u,r32(params));
         w8(message+53u,r8(params+5u));
         w8(message+56u,r8(timer+17u));
         w8(message+57u,r8(params-4u));
-        (void)opencfw_em9305_wsf_task_message_send(r8(0x805b18u),message);
+        (void)opencfw_em9305_wsf_task_message_send(r8(((uintptr_t)&em9305_ram_805af0 + 0x28u)),message);
         opencfw_em9305_child_319ea0(conn);
         return;
     }
 reject:
     w16(pdu-2u,776u);
     w16(pdu-4u,r8(conn+1u));
-    (void)opencfw_em9305_wsf_task_message_send(r8(0x805b18u),pdu-4u);
+    (void)opencfw_em9305_wsf_task_message_send(r8(((uintptr_t)&em9305_ram_805af0 + 0x28u)),pdu-4u);
     (void)opencfw_em9305_common_release_304588(1u);
 }

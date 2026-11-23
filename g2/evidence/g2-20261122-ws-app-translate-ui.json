@@ -1,0 +1,29 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "source": "g2/src/apollo-main/app/p-13-translate-ui/translate_ui.c",
+ "source_sha256": "52269b159a8967e7fbbb7ce7029f92fdce454a9bcb2e1e579694d99d83fd8eb0",
+ "spec": "build/ws-app-20261122/specs/tui-a",
+ "verified_at": "2026-11-22 18:48 CST",
+ "result": {
+  "verdict": "EQUIVALENT",
+  "tests": 400,
+  "equal": 400,
+  "differ": 0,
+  "mutants": 9,
+  "killed": 9,
+  "surviving_mutants": []
+ },
+ "method": "black-box sequences over 27 translate_ui entry points; stock and C run identical op sequences with fake LVGL object handles (0x20050000+0x40*n), scripted heights, anim struct pattern-filled; 400 tests + 60 per mutant, hram 0x20300000,0x80000, hrt_cap 2048",
+ "observed": "all LVGL/style setter args (normalized callbacks), anim_start struct words, label text (content hash any length), return values",
+ "source_changes": [
+  "translate_ui_action_text_update_59dfa0: container height now queried before label height (stock/IAR evaluates subtrahend first); previous run differed 62/400 on call order only"
+ ],
+ "history": [
+  "run 1 pre-fix: 338/400 equal, 9/9 killed",
+  "run 2 post-fix 18:48 CST: 400/400 equal, 9/9 killed"
+ ],
+ "build_note": "built 19:25 CST: b1 2719/2719 compiled (214 recompiled, 21 unresolved), b1-link g2-apollo-main 3,628,548 B, bin sha256 8ac90d813e03bcaedce7c90d3496310d7cde36b1f653fca843c547b64b0e8d76, package 332c55fbc0ee328e5c3056c16859920b3e17d4e787466158f7a7dda546ab301c",
+ "paired_sims": "ws-app3 19:39 CST: DFU_SAME, 922 HCI packets, OTAPOINTER 0xAFD1363A/0, CHIPREV 0x22, HOST_PACKET 0x3A, UNSUPPORTED 0, adv 1, display 2, faults 0 (identical to reference)"
+}

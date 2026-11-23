@@ -1,3 +1,7 @@
+/* Nordic nrf_fuel_gauge (GCC-built in stock, 0x439fe4..0x43bfa8) uses fused VFMA, so this unit
+ * keeps clang's default in-expression contraction; the g2-apollo-main profiles set -ffp-contract=off
+ * because the IAR-built remainder of the image never emits VFMA. */
+#pragma clang fp contract(on)
 /* g2c: battery model data extracted verbatim from stock image ROM 0x646bf8
  * (5632 bytes, struct battery_model of nrf_fuel_gauge 1.0.1). Data only; the
  * Nordic library itself is linked unmodified from third-party/upstream/nrf-fuel-gauge-1.0.1.

@@ -1,0 +1,17 @@
+{
+  "stream":"ws-hwdrivers","unit":"thraud (codec-host/audio-thread-codec/thread_audio.c)","timestamp_cst":"2026-11-22T21:02-06:00",
+  "result":"17/17 functions equivalent, 102/102 cases, 0 mismatches, no trace overflow",
+  "prior":"overflowed at test 18 (infinite for(;;) thread bodies: AUD_ThreadHandler on osThreadFlagsWait, aud_message_loop on osMessageQueueGet)",
+  "mechanism_added":{
+    "K_SENTINEL":"new stub kind; per-stub-id call counter (g_sent_cnt), caps each loop driver at g_loopcap=2 (one body iteration) then escapes",
+    "escape":"asm hw_setjmp/hw_longjmp in rt.S saving/restoring r4-r11+sp+lr (bare-metal-correct; __builtin_setjmp/longjmp did NOT restore callee-saved regs and crashed). hw_main wraps call_target in hw_setjmp; sentinel longjmps out, falling through to normal post-call logging. Deterministic+identical for both variants.",
+    "autogen_SENTINEL":"{'thraud','thrau2'}: osThreadFlagsWait/osMessageQueueGet -> K_SENTINEL for these units only",
+    "K_GPIOGET":"new stub kind writing *level=0 (deterministic) for hal_gpio_input_get_53a590 out-param"
+  },
+  "AUD_CodecIntNotify_resolution":{
+    "prior":"5/6; test-0 diverged: stock proceeded past `if(level!=0) return` to call audio_transaction_init (stub id14), C returned",
+    "root_cause":"level is written by stubbed hal_gpio_input_get_53a590(PIN,&level) which (as K_SEEDRET) did not model the out-param write; source comment confirms 'level left unwritten (stale stack byte) if read fails'. Both variants then read an uninitialized stack byte that differs by build/stack-layout. NOT a C logic bug (C matches stock source).",
+    "fix":"K_GPIOGET models the out-param (*level=0, the low/proceed path). Both variants now read level=0 -> identical path. 6/6.",
+    "classification":"harness-model gap (unmodeled stub out-param causing uninitialized-stack divergence), resolved; no firmware edit"
+  }
+}

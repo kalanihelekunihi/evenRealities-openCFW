@@ -1,23 +1,24 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31ceb4..0x31d0fc: BIG/CIG receive event completion for the
  * group (object +36). Received PDUs left in the per-stream buffer table
- * (0x8029ac + 24 + 24 i + 4 j, streams +52, subevents +24) are handed to
+ * ((uintptr_t)&em9305_ram_8029ac + 24 + 24 i + 4 j, streams +52, subevents +24) are handed to
  * live streams (317524, slot cleared) or released. Outside state 2 the
  * group reports status 7 (31d128), stops its timer (+208) and drops the
- * control PDU (0x8029ac +20). In state 2 a received control PDU is first
- * checked by the MIC hook (*0x8051dc, with the 64-bit event counter
+ * control PDU ((uintptr_t)&em9305_ram_8029ac +20). In state 2 a received control PDU is first
+ * checked by the MIC hook (*((uintptr_t)&em9305_ram_8051b8 + 0x24u), with the 64-bit event counter
  * +32/+36 times +24 published through +464) when encryption is on (+484);
  * a rejected PDU is released with status 6 and ends the event. Otherwise
  * an unhandled channel-map (0) or terminate (1) BIG control PDU is parsed
  * (317a44 / 317a84) and its instant (+276 / +288) recorded in the pending
  * mask +272 unless already past (a past terminate reports status 4 and
  * state 30 at +290), the PDU is released, and the timeout timer restarted
- * when 0x8029b1 is set. Then the group advances event by event (counter
+ * when ((uintptr_t)&em9305_ram_8029ac + 0x5u) is set. Then the group advances event by event (counter
  * +32/+36, anchor +252, object timing +8/+20, offset +172), applying a
  * due channel map (32520c) and reporting a pending terminate, until the
  * schedule insert succeeds; finally 31d6a4 runs and, when enabled
- * (0x805aaf), the event counter is reported (32324c). */
+ * (((uintptr_t)&em9305_ram_805a6c + 0x43u)), the event counter is reported (32324c). */
 extern uint32_t opencfw_em9305_dispatch_child_317524(uint32_t a,uint32_t b,uint32_t c);
 extern uint32_t opencfw_em9305_ll_receive_buffer_release_31761c(uintptr_t buffer);
 extern uint32_t opencfw_em9305_dispatch_event_send_31d128(uintptr_t record,
@@ -46,7 +47,7 @@ static inline uint32_t r32(uintptr_t a){return *(volatile uint32_t *)a;}
 static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
 static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
 
-#define RX 0x8029acu
+#define RX (uintptr_t)&em9305_ram_8029ac
 
 void opencfw_em9305_dispatch_callback_31ceb4(uintptr_t object)
 {
@@ -83,7 +84,7 @@ void opencfw_em9305_dispatch_callback_31ceb4(uintptr_t object)
     if(control!=0u){
         uint32_t rejected=0u;
         if(r8(group+484u)!=0u){
-            uintptr_t hook=r32(0x8051dcu);
+            uintptr_t hook=r32(((uintptr_t)&em9305_ram_8051b8 + 0x24u));
             if(hook!=0u){
                 uint32_t burst=r8(group+24u);
                 uint64_t counter=((uint64_t)r32(group+36u)<<32|r32(group+32u))*burst;
@@ -167,6 +168,6 @@ void opencfw_em9305_dispatch_callback_31ceb4(uintptr_t object)
         }
     }
     (void)opencfw_em9305_dispatch_child_31d6a4(group,first_counter,anchor);
-    if(r8(0x805aafu)!=0u)
+    if(r8(((uintptr_t)&em9305_ram_805a6c + 0x43u))!=0u)
         (void)opencfw_em9305_dispatch_child_32324c(r8(group+2u),r32(group+32u));
 }

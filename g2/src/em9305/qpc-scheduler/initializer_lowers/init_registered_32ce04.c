@@ -1,10 +1,11 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32ce04..0x32ce22. R0 is changed to context+610 and the
  * final STH delay slot executes before returning that address. */
 uint32_t opencfw_em9305_init_registered_32ce04(uintptr_t context)
 {
-    uintptr_t source=*(volatile uint32_t *)(uintptr_t)0x805c6cu;
+    uintptr_t source=em9305_ram_805c5c.u32_805c6c;
     uint8_t first=*(volatile uint8_t *)(source+4u);
     *(volatile uint8_t *)(context+609u)=first;
     uint16_t second=*(volatile uint16_t *)(source+8u);

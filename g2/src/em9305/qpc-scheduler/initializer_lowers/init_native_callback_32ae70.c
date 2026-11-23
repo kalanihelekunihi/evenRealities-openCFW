@@ -1,8 +1,9 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32ae70..0x32b04a: connection-parameter / PHY update procedure
  * hook on an LL control opcode. The opcode (and, for an unknown/reject
- * response 0x0c, the rejected opcode at 0x802818 and error at 0x80281c)
+ * response 0x0c, the rejected opcode at ((uintptr_t)&em9305_ram_8027e0 + 0x38u) and error at ((uintptr_t)&em9305_ram_8027e0 + 0x3cu))
  * selects an event 0..7; unrelated opcodes return 0. Idle (+620 = 0):
  * run the 4x8 action/transition tables at 0x3354c4/0x335544 on the
  * state byte +623 and enter the procedure (timer code 17 at +635) on a
@@ -48,13 +49,13 @@ uint32_t opencfw_em9305_callback_32ae70(uintptr_t record, int32_t opcode)
             return 0u;
         }
     }else if(opcode==12){
-        int32_t rejected=*(volatile uint8_t *)(uintptr_t)0x802818u;
+        int32_t rejected=em9305_ram_8027e0.u8_802818;
         if(rejected<13){
             if(rejected==0){
                 event=4u;
             }else{
                 if(rejected!=7)return 0u;
-                if(*(volatile uint8_t *)(uintptr_t)0x80281cu!=15u)return 0u;
+                if(em9305_ram_8027e0.u8_80281c!=15u)return 0u;
                 *(volatile uint32_t *)(record+544u)&=~2u;
                 event=5u;
             }
@@ -62,7 +63,7 @@ uint32_t opencfw_em9305_callback_32ae70(uintptr_t record, int32_t opcode)
             if(r[635]!=0x11u)return 0u;
             event=5u;
         }else if(rejected==17){
-            if((uint32_t)(*(volatile uint8_t *)(uintptr_t)0x80281cu-15u)>=2u)return 0u;
+            if((uint32_t)(em9305_ram_8027e0.u8_80281c-15u)>=2u)return 0u;
             event=5u;
         }else if(rejected==15){
             event=1u;
@@ -131,7 +132,7 @@ uint32_t opencfw_em9305_callback_32ae70(uintptr_t record, int32_t opcode)
         *(volatile uint32_t *)(record+648u)=0u;
         *pending=word&~(1u<<17);
         if(state!=0u)r[623]=0u;
-        (void)opencfw_em9305_mode_event_322fdc(record,*(volatile uint8_t *)(uintptr_t)0x80281du);
+        (void)opencfw_em9305_mode_event_322fdc(record,em9305_ram_8027e0.u8_80281d);
     }else if(event==4u){
         (void)opencfw_em9305_phy_reject_32698c(record,0x2au,0u);
     }

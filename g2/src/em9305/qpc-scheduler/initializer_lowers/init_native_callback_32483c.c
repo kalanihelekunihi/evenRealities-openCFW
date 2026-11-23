@@ -1,7 +1,8 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32483c..0x324904: ECU procedure state machine (enabled by bit
- * 6 of 0x805a98). Event 0x70 resumes a deferred procedure (flag bit 29 at
+ * 6 of ((uintptr_t)&em9305_ram_805a6c + 0x2cu)). Event 0x70 resumes a deferred procedure (flag bit 29 at
  * +644, clearing +648), event 0x29 starts one, and event 0x0c starts one
  * for a peer request 0x27, or for 0x07/0x11 requests of type 0x26 (0x07
  * also rewrites the request type halfword to 0x1a26). With the procedure
@@ -18,7 +19,7 @@ static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;
 
 uint32_t opencfw_em9305_callback_32483c(uintptr_t record,uint32_t event)
 {
-    if((r8(0x805a98u)&0x40u)==0u)return 0u;
+    if((r8(((uintptr_t)&em9305_ram_805a6c + 0x2cu))&0x40u)==0u)return 0u;
     uint32_t kind;
     if(event==0x70u){
         uint32_t flags=*(volatile uint32_t *)(record+644u);
@@ -29,16 +30,16 @@ uint32_t opencfw_em9305_callback_32483c(uintptr_t record,uint32_t event)
     }else if(event==0x29u){
         kind=0u;
     }else if(event==0x0cu){
-        uint32_t request=r8(0x802818u);
+        uint32_t request=r8(((uintptr_t)&em9305_ram_8027e0 + 0x38u));
         if(request==7u){
-            if(r8(0x80281cu)!=0x26u)return 0u;
-            *(volatile uint16_t *)0x80281cu=0x1a26u;
+            if(r8(((uintptr_t)&em9305_ram_8027e0 + 0x3cu))!=0x26u)return 0u;
+            *(volatile uint16_t *)((uintptr_t)&em9305_ram_8027e0 + 0x3cu)=0x1a26u;
             kind=2u;
         }else if(request==0x27u){
             kind=1u;
         }else{
             if(request!=0x11u)return 0u;
-            if(r8(0x80281cu)!=0x26u)return 0u;
+            if(r8(((uintptr_t)&em9305_ram_8027e0 + 0x3cu))!=0x26u)return 0u;
             kind=2u;
         }
     }else return 0u;

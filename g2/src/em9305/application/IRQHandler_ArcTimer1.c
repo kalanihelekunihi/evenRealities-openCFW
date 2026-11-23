@@ -4,10 +4,14 @@
  * ARC timer 1 interrupt: calls the callback stored at 0x801908 if set.
  */
 #include "em_irq_frame.h"
+#include "em9305_ram.h"
 
 __attribute__((used)) void opencfw_em9305_IRQHandler_ArcTimer1_body(void)
 {
-  EM_IRQ_CALL_SLOT(0x801908u);
+  {
+    em_irq_cb_t cb_ = (em_irq_cb_t)(uintptr_t)em9305_ram_801908.u32_801908;
+    if (cb_) cb_();
+  }
 }
 
 EM_IRQ_HANDLER(opencfw_em9305_IRQHandler_ArcTimer1, opencfw_em9305_IRQHandler_ArcTimer1_body);

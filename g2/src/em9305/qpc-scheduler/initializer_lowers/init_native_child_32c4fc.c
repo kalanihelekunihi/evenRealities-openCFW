@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32c4fc..0x32c5a4: prepare the next periodic-advertising train
  * PDU for the link (+0x24). Without a pending anchor (+2780) only a restart
@@ -18,7 +19,7 @@ uint32_t opencfw_em9305_child_32c4fc(uintptr_t context, uint32_t more)
     uintptr_t train = *(volatile uint32_t *)(context + 0x24u);
     uint32_t anchor = *(volatile uint32_t *)(train + 0xadcu);
     if (anchor == 0u && more != 0u) return 0u;
-    uintptr_t config = *(volatile uint32_t *)(uintptr_t)0x805cacu;
+    uintptr_t config = em9305_ram_805c5c.u32_805cac;
     uint32_t info = *(volatile uint8_t *)(train + 0xae0u);
     uint32_t next = anchor + *(volatile uint16_t *)(config + 0x16u);
     volatile uint32_t *data = (volatile uint32_t *)(train + 1424u);

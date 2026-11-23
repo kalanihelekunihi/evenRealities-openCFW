@@ -66,7 +66,7 @@ extern uint8_t audio_uart_device_role_get(void);                             /* 
 extern uint32_t audio_quicklist_refresh_enabled_4434d0(uint32_t app);        /* app running query */
 extern uint32_t audio_uart_master_display_refresh(uint32_t, const void *, uint16_t, uint32_t); /* 0x464bb2 */
 extern void audio_uart_ring_wear_persist_48eb32(uint32_t, uint32_t, const void *); /* event report */
-extern void audio_uart_display_audio_reset_441488(uint32_t, uint32_t, uint32_t); /* lv opa set */
+extern void audio_uart_display_audio_reset_441488(void *obj, uint32_t opa, uint32_t sel); /* lv opa set */
 extern void audio_tracepoint_reset_pull_478110(uint8_t);                     /* ble_state_skip_manual_start */
 extern void audio_ble_param_reset_delayed_event(uint32_t);                   /* 0x478252 */
 extern uint32_t audio_terminal_reset_mode_notice_54f50e(uint32_t);           /* AUDM_appRelease */
@@ -337,13 +337,13 @@ uint32_t translate_page_event_handler_59efe0(uint32_t unused0, uint32_t unused1,
                 foreground = *param;
             LOGN(3u, fn_page, 0xe4u, msg_foreground, 0xc400000u, short_foreground, foreground);
             if (g2_translate_root_object != NULL && foreground != 0u && foreground != 0x21u)
-                audio_uart_display_audio_reset_441488((uint32_t)(uintptr_t)g2_translate_root_object,
+                audio_uart_display_audio_reset_441488(g2_translate_root_object,
                                                       0x7fu, 0u);
         }
         break;
     case 0x43u:
         if (translate_ui_0059db5c() != 2u)
-            audio_uart_display_audio_reset_441488((uint32_t)(uintptr_t)g2_translate_root_object,
+            audio_uart_display_audio_reset_441488(g2_translate_root_object,
                                                   0xffu, 0u);
         break;
     case 0x4fu:

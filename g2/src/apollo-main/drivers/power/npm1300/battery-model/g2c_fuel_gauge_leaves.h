@@ -24,5 +24,19 @@ int      fg_439fb4(const uint8_t *s, int32_t *out);
 void     fg_43ba6c(const float *src, const int32_t *count_ptr, float *dst, int32_t out[2]);
 void     fg_43bc58(const float *src, const int32_t *p, float *dst, int32_t out[2]);
 int      fg_43baf4(uint32_t lo0, uint32_t hi0, uint32_t lo1, uint32_t hi1);
+float    fg_43a5dc(float t, const float x[3], const float y[3]);
+int      fg_43bfac(const uint8_t *s, int n);
+void     fg_439fe4(float t, const float x[3], const float y6[6], float out[2]);
+float    fg_43bc84(float query, float k, const float *x, const float *y1, const float *y2);
+float    fg_43be18(float query, float k, const float *x, const float *y1, const float *y2);
+void     fg_43bb14(const float *src, int count, float *dst, int32_t out[2], float scale);
+void     fg_439ce0(int count, const float *xwin, const float *ysrc,
+                  float *out_buf, int32_t *out_pair, float t_in);
+float    nrf_model_ttf_58eac4(void *state, int mode, const void *model, float term);
+void     nrf_model_init_43a1b0(float v, float i, float T, const void *opt,
+                              const void *model, void *state, float *adjusted_v);
+void     nrf_model_process_43a698(float v, float i, float T, float dt,
+                                 void *state, const void *model, float *soc,
+                                 void *scratch, void *opt);
 
 #endif

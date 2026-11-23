@@ -1,12 +1,13 @@
 /* Native metadata synchronization 0x310990..0x310a4c. Child ABI
  * facades remain unresolved; direct peripheral behavior is unverified. */
 #include <stdint.h>
+#include "em9305_ram.h"
 extern uint32_t opencfw_em9305_sleep_rom_start(uint32_t); /* 0x103b20 */
 extern uint32_t opencfw_em9305_sleep_rom_configure(uint32_t); /* 0x103b54 */
 extern uint32_t opencfw_em9305_sleep_sync_query(uint32_t); /* 0x310b08 */
 extern uint32_t opencfw_em9305_sleep_sync_restore(uint32_t); /* 0x310cec */
 extern uint32_t opencfw_em9305_sleep_sync_update(uint32_t); /* 0x310a4c */
-static uintptr_t context(void) { return *(volatile uint32_t *)(uintptr_t)0x80fd2cu; }
+static uintptr_t context(void) { return em9305_ram_80fd2c.u32_80fd2c; }
 uint32_t opencfw_em9305_sleep_metadata_sync(uint32_t incoming)
 {
  (void)incoming;
@@ -26,7 +27,7 @@ uint32_t opencfw_em9305_sleep_metadata_sync(uint32_t incoming)
  result=opencfw_em9305_sleep_sync_restore(irq);
  (void)opencfw_em9305_sleep_sync_update(result);
  uint32_t now=*(volatile uint32_t *)(uintptr_t)0xf01808u;
- uint32_t period=*(volatile uint16_t *)(uintptr_t)0x80fd36u;
+ uint32_t period=em9305_ram_80fd2c.u16_80fd36;
  uint32_t divisor=*(volatile uint8_t *)(uintptr_t)0xf01804u+1u;
  uint32_t enabled=*(volatile uint8_t *)(uintptr_t)0xf01818u;
  uint32_t numerator=period*24u,end,mask=0;

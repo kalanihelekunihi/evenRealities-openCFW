@@ -1,15 +1,16 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x321648..0x3217f0: periodic-advertising sync event callback for
  * the secondary context (object +36). A pending stop (+3) sends message 5
  * and a pending terminate (+2) runs 326108 and stops the sync timer; both
  * return. Otherwise a sync that missed its expected number of events
  * (+248 - +278 == 5, or 6 with +8) sends message 3. A received sync
- * (0x803d71) restarts the timeout timer (+700, +620 ms), records the
- * event counter (+276) and anchor (0x803d74 -> +272) and derives the skip
+ * (((uintptr_t)&em9305_ram_803d70 + 0x1u)) restarts the timeout timer (+700, +620 ms), records the
+ * event counter (+276) and anchor (((uintptr_t)&em9305_ram_803d70 + 0x4u) -> +272) and derives the skip
  * (+616 within the timeout, else timeout*1000 / interval). The elapsed
  * events (+248 - +276) are reported (30e89c) when reporting is enabled
- * (0x805bee). Then, for each skip step, the three subevent streams
+ * (((uintptr_t)&em9305_ram_805be0 + 0xeu)). Then, for each skip step, the three subevent streams
  * (+312 + 96 k) receive event 324904, the event counter advances, the
  * object is re-timed (+8/+12/+20, context +204/+264/+268) and a channel
  * is selected, until the schedule insert succeeds. */
@@ -59,13 +60,13 @@ uint32_t opencfw_em9305_callback_321648(uintptr_t object)
     }
     uint32_t skip=1u;
     w8(context+8u,0u);
-    if(r8(0x803d71u)!=0u){
+    if(r8(((uintptr_t)&em9305_ram_803d70 + 0x1u))!=0u){
         uint32_t counter=r16(context+248u);
-        uint32_t anchor=r32(0x803d74u);
+        uint32_t anchor=r32(((uintptr_t)&em9305_ram_803d70 + 0x4u));
         uint32_t timeout=r32(context+620u);
         w16(context+276u,counter);
         w32(context+272u,anchor);
-        w8(0x803d71u,0u);
+        w8(((uintptr_t)&em9305_ram_803d70 + 0x1u),0u);
         (void)opencfw_em9305_wsf_timer_start_ms(context+700u,timeout);
         uint32_t interval=r32(context+260u);
         if(interval!=0u){
@@ -79,8 +80,8 @@ uint32_t opencfw_em9305_callback_321648(uintptr_t object)
         }
     }
     uint32_t elapsed=r16(context+248u)-r16(context+276u);
-    int32_t index=(int32_t)(context-0x803d78u)/784;
-    if(r8(0x805beeu)!=0u){
+    int32_t index=(int32_t)(context-((uintptr_t)&em9305_ram_803d58 + 0x20u))/784;
+    if(r8(((uintptr_t)&em9305_ram_805be0 + 0xeu))!=0u){
         uint32_t span=r32(context+252u)*(uint16_t)elapsed;
         uint32_t factor=opencfw_em9305_mode_callback_child_317ea4(r8(context+256u));
         uint32_t time=opencfw_em9305_init_secondary_time_317ebc(span,factor);

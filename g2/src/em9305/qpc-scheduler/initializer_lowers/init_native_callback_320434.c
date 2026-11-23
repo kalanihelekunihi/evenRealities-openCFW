@@ -1,12 +1,13 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x320434..0x320540: stream control event callback. Event kinds
- * 6/5/2 map to stream modes 1/2/2 (kind 2 also bumps 0x803561); others
+ * 6/5/2 map to stream modes 1/2/2 (kind 2 also bumps ((uintptr_t)&em9305_ram_803560 + 0x1u)); others
  * are passed through. The mode goes to 320540 for the addressed stream
- * object, or for every object enabled in 0x803560 when the handle (+0)
+ * object, or for every object enabled in (uintptr_t)&em9305_ram_803560 when the handle (+0)
  * or index (+2) is 0xff or the mode is 1/2. Then kind 1 (re)configures
- * the scan ring (0x80356c) and the two timers at 0x8035bc/0x8035cc with
- * the periods at +8/+12 (kept at 0x8035b4/0x8035b8), kind 6 restarts
+ * the scan ring (((uintptr_t)&em9305_ram_803560 + 0xcu)) and the two timers at ((uintptr_t)&em9305_ram_803560 + 0x5cu)/((uintptr_t)&em9305_ram_8035c0 + 0xcu) with
+ * the periods at +8/+12 (kept at ((uintptr_t)&em9305_ram_803560 + 0x54u)/((uintptr_t)&em9305_ram_803560 + 0x58u)), kind 6 restarts
  * them, kind 2 stops them, and kind 3 finishes through 30e910 once both
  * the counter and the second period are clear. */
 extern uint32_t opencfw_em9305_child_320540(uintptr_t object, uint32_t mode);
@@ -18,9 +19,9 @@ extern uint8_t *const opencfw_em9305_stream_objects_3357b4[3];
 
 void opencfw_em9305_callback_320434(uintptr_t event)
 {
-    volatile uint8_t *control=(volatile uint8_t *)(uintptr_t)0x803560u;
-    volatile uint32_t *periods=(volatile uint32_t *)(uintptr_t)0x8035b4u;
-    const uintptr_t first_timer=0x8035bcu,second_timer=0x8035ccu;
+    volatile uint8_t *control=&em9305_ram_803560.u8_803560;
+    volatile uint32_t *periods=&em9305_ram_803560.u32_8035b4;
+    const uintptr_t first_timer=((uintptr_t)&em9305_ram_803560 + 0x5cu),second_timer=((uintptr_t)&em9305_ram_8035c0 + 0xcu);
     uint32_t kind=*(volatile uint8_t *)(event+3u);
     uint32_t mode=kind;
     if(kind==6u)mode=1u;
@@ -43,7 +44,7 @@ void opencfw_em9305_callback_320434(uintptr_t event)
     }
     kind=*(volatile uint8_t *)(event+3u);
     if(kind==6u){
-        if(control[9]==2u)(void)opencfw_em9305_scan_ring_init_316a54(0x80356cu,1u);
+        if(control[9]==2u)(void)opencfw_em9305_scan_ring_init_316a54(((uintptr_t)&em9305_ram_803560 + 0xcu),1u);
         (void)opencfw_em9305_wsf_timer_start_ms(first_timer,periods[0]);
         (void)opencfw_em9305_wsf_timer_start_ms(second_timer,periods[1]);
     }else if(kind==2u){
@@ -56,7 +57,7 @@ void opencfw_em9305_callback_320434(uintptr_t event)
         uint32_t scan=*(volatile uint8_t *)(event+4u);
         control[9]=(uint8_t)scan;
         control[1]=0u;
-        (void)opencfw_em9305_scan_ring_init_316a54(0x80356cu,scan!=0u);
+        (void)opencfw_em9305_scan_ring_init_316a54(((uintptr_t)&em9305_ram_803560 + 0xcu),scan!=0u);
         (void)opencfw_em9305_wsf_timer_stop(first_timer);
         (void)opencfw_em9305_wsf_timer_stop(second_timer);
         uint32_t period=*(volatile uint32_t *)(event+8u);

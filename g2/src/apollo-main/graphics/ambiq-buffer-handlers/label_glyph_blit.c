@@ -62,7 +62,8 @@ void audio_uart_ambiq_label_glyph_blit_53fb18(uint32_t unit,void *bitmap,
         matrix[1]=(float)(int32_t)width;
         const int32_t offset=(int32_t)(0u-(uint32_t)clip[0]-
                                        width*(uint32_t)clip[1]);
-        matrix[2]=(float)offset-(float)(int32_t)width*0.5f;
+        /* Stock 0x53fc7e..0x53fc96: vcvt.f64.s32 offset and width, vmla.f64 by -0.5, one vcvt.f32.f64. */
+        matrix[2]=(float)((double)offset+(double)(int32_t)width*-0.5);
     }
     audio_uart_nema_matrix_upload_5226e8(matrix);
     display_driver_nema_clear_522ae0((uint32_t)clip[0],(uint32_t)clip[1],

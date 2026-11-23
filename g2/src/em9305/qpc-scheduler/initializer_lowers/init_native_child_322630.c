@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x322630..0x322752: apply a completed PHY update. The current TX
  * (+76) and RX (+77) PHYs become the requested ones (+722/+723, mapped
@@ -8,7 +9,7 @@
  * TX power (+66) from the per-PHY table at +332 (coded PHY indexed by the
  * S2/S8 choice +78); the unset marker 0x7e is replaced by the default
  * power (config byte 40), which is reported to the power hook at
- * *0x8052c8 when enabled (+548 bit 2). Finally recompute both radio
+ * *((uintptr_t)&em9305_ram_8052bc + 0xcu) when enabled (+548 bit 2). Finally recompute both radio
  * limits (+592, +590, mirrored into +0x1c) and mark +628. */
 extern const uint8_t opencfw_em9305_phy_mode_table_33448f[];
 extern uint32_t opencfw_em9305_radio_limit_317b10(uintptr_t,uintptr_t);
@@ -38,16 +39,16 @@ void opencfw_em9305_child_322630(uintptr_t record)
         *(volatile uint32_t *)(record+636u)|=1u<<21;
         rec[66]=(uint8_t)power;
         if(power==0x7e) {
-            uint32_t power_default=*(volatile uint8_t *)(*(volatile uint32_t *)(uintptr_t)0x805cacu+40u);
+            uint32_t power_default=*(volatile uint8_t *)(*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_805c5c + 0x50u)+40u);
             rec[66]=(uint8_t)power_default;
             rec[331u+phy]=(uint8_t)power_default;
             if(coded)
-                rec[335]=*(volatile uint8_t *)(*(volatile uint32_t *)(uintptr_t)0x805cacu+40u);
+                rec[335]=*(volatile uint8_t *)(*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_805c5c + 0x50u)+40u);
             if(rec[548]&4u) {
-                uintptr_t hook=*(volatile uint32_t *)(uintptr_t)0x8052c8u;
+                uintptr_t hook=em9305_ram_8052bc.u32_8052c8;
                 if(hook!=0u)
                     ((void (*)(uintptr_t,uint32_t,uint32_t,int32_t,uint32_t))hook)(record,phy,0u,
-                        *(volatile int8_t *)(*(volatile uint32_t *)(uintptr_t)0x805cacu+40u),1u);
+                        *(volatile int8_t *)(*(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_805c5c + 0x50u)+40u),1u);
             }
         }
     }

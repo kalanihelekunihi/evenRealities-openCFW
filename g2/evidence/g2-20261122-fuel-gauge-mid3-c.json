@@ -1,0 +1,83 @@
+{
+  "title": "nrf_fuel_gauge mid helpers: 439ce0, 43bb14, 43bc84, 43be18",
+  "status": "VERIFIED",
+  "when": "2026-11-22 11:12 AM CST (America/Chicago)",
+  "approach": "Bottom-up continuation. Idiomatic scalar-float C vs typographic stock on Renode 1.17 Cortex-M55, normal AAPCS, no fg_call. VFP helpers (vsub/vadd/vmul/vdiv/vfma/vfms/vabs/vcvt) keep typographic operand order so NaN payloads propagate. 43bc84/43be18 delayed-vmrs CFG: the 0x30 blt is N!=V (true LT or unordered), so a NaN query takes path 0x15e and the 0x16e bpl selects a constant +0 result. 43be18 is the same interpolator with the two y-tables swapped. 43bb14 count>=4 is a typographic frame overlap and was not compared. 439ce0 bit7/0x3fc smash path was not exercised.",
+  "verified": [
+    {
+      "symbol": "fg_43bc84",
+      "cases": 354,
+      "fails": 0,
+      "notes": "201-point table interpolator, r1=yA (scaled by k), r2=yB. Interior uses 43a5a0 floor plus wrapped vcvt indices; low/high ends extrapolate with dx=x[1]-x[0]. NaN query returns +0."
+    },
+    {
+      "symbol": "fg_43be18",
+      "cases": 130,
+      "fails": 0,
+      "notes": "Same as 43bc84 with y-tables swapped."
+    },
+    {
+      "symbol": "fg_43bb14",
+      "cases": 430,
+      "fails": 0,
+      "notes": "Max-abs one-hot: dst[i]=scale/src[i] at the winning index, others 0, unless |sel|*count*0x35A00000 >= |sel| (zero/Inf) which zeros dst. count==1 is the single-element path; count<=0 writes out={1,count} and does not touch dst. Counts tested: -1,0,1,2,3 (count>=4 overlaps typographic stack)."
+    },
+    {
+      "symbol": "fg_439ce0",
+      "cases": 392,
+      "fails": 0,
+      "notes": "Clamp t into the 3-point x window (439e9c/439efc/439f24/439f88), then gather y samples at equal knots or two-channel interpolate via 439fe4. count==3 copies 6 packed y words; other small counts use the typographic split layout."
+    }
+  ],
+  "totals": {
+    "cases": 1306,
+    "fails": 0,
+    "magic": "0xF6A11E04"
+  },
+  "production_replace": {
+    "updated": [
+      {
+        "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+        "sha256": "74cc364c309981541454c37c0034fb9f42d0699eadc4faf6244fbd9afb1ba009",
+        "bytes": 24756
+      },
+      {
+        "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.h",
+        "sha256": "074e2209cf76b28144ffe6401c38e1a68f976a1477b90857ecb1cfb74b9113f7",
+        "bytes": 1692
+      },
+      {
+        "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_cores.S",
+        "sha256": "cafb1f4e2aac74c277c1fb030705f5e04b656ad81723b59c79ebaf6648cb9339",
+        "bytes": 40684
+      }
+    ],
+    "cores_remaining_globals": [
+      "nrf_model_init_43a1b0",
+      "nrf_model_process_43a698",
+      "nrf_model_ttf_58eac4"
+    ]
+  },
+  "artifacts": {
+    "mid3_results": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid3_results.bin",
+      "sha256": "56a5f0859c169ff2640c2349d541269e76f5cfdf1a0b168446599bf91aea3a9d",
+      "bytes": 2048
+    },
+    "mid3_log": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid3.log",
+      "sha256": "d0533e56b269a1665842a052ec1c188b226491e54635c8e835e7335e8b5f5a97",
+      "bytes": 865
+    },
+    "mid3_test_bin": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid3_test.bin",
+      "sha256": "91842a4b2ccc301ca66d71363429ec7572daf81bca76bdf51cc56386aa4a58a1",
+      "bytes": 8248
+    }
+  },
+  "not_done": [
+    "Remaining typographic: nrf_model_ttf_58eac4, nrf_model_init_43a1b0, nrf_model_process_43a698.",
+    "apollo-main was not rebuilt; version-match and DFU paired sims were not run (deferred until cores.S has no typographic globals left).",
+    "Linker-report canned string unchanged. Official opencfw-otap-disarm.app.bin not overwritten. No flash, no git."
+  ]
+}

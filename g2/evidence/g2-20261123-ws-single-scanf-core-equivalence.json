@@ -1,0 +1,27 @@
+{
+ "id": "g2-20261123-ws-single-scanf-core-equivalence",
+ "date": "2026-11-23",
+ "workstream": "ws-single",
+ "unit": "g2/src/apollo-main/runtime/iar-dlib-gaps/iar_scanf.c",
+ "function": "scanf_core_4d1638 (stock 0x4d1638)",
+ "result": "EQUIVALENT: 1509/1509 stock-vs-C traces equal (1500 random format/input cases + 9 directed EOF/%%/%ll cases), 4/4 mutants killed. No C change needed.",
+ "method": "difft spec build/ws-single-20261123/specs/scf-a: string getter callback, 8 destination slots; numeric helpers (getn/ungetn/ranmatch/counted/strchr/memchr/strtod/ldexp/double_to_float/strtoull/strtoll) run stock on both sides; locale hooked to C-locale isspace/isalpha/tolower with '.' decimal point (stock ctype table 0x200044c0 via 0x4d43a4 is unset in the harness).",
+ "mutants": [
+  "width>0 ? width-1 : unlimited -> width",
+  "hh qual 'b' -> 'h'",
+  "'%%' at EOF returns EOF -> 0",
+  "ll qual 'q' -> 'l' (replaces an observationally equivalent width<=WIDTH_MAX mutant)"
+ ],
+ "hashes": {
+  "tests.c": "d7901e100b02b6205c8b539be8c6e47f52c4cd194f9994d65eb2a4b5f4a22290",
+  "spec.json": "0345d903075ade055920fc5780122bf9bdc187b2806ed22ab6e44b66a20c2d34",
+  "iar_scanf.c": "c37f38e021444f667c2f4f23dd9d7b888f6c665d63b858fed6e3002f74d8ac9a",
+  "harness": "50ecf29e296b9a413de1036e557a54dabccb8d8aec11181763de040f7af2e7b2",
+  "stock": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "run": "queue 10:30-10:32 CST",
+ "artifacts": [
+  "build/ws-single-20261123/specs/scf-a/report.json",
+  "build/ws-single-20261123/specs/scf-a.out"
+ ]
+}

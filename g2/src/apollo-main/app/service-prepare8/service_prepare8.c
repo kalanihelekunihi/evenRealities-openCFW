@@ -38,9 +38,9 @@ static const char *const audio_uart_dashboard_compact_format[8]={
 extern uint32_t audio_uart_pb_file_exists(void); /* selected 0x55876a */
 extern void *audio_file_open(const char *,const char *); /* 0x474550 */
 extern int32_t audio_file_close(void *); /* selected 0x4745f4 */
-extern int32_t audio_file_seek(void *,int32_t,uint32_t); /* 0x474634 */
-extern int32_t audio_file_tell(void *); /* 0x474814 */
-extern uint32_t audio_file_read(void *,uint32_t,uint32_t,void *); /* 0x474870 */
+extern int32_t audio_file_seek(void *,int32_t,uint32_t); /* 0x474814 */
+extern int32_t audio_file_tell(void *); /* 0x474870 */
+extern uint32_t audio_file_read(void *,uint32_t,uint32_t,void *); /* 0x474634 */
 extern void audio_uart_buffer_zero(void *,uint32_t,uint32_t); /* selected 0x43c0e4 */
 extern void *audio_queue_copy_bytes(void *,const void *,uint32_t); /* selected 0x439c04 equivalent */
 extern void audio_uart_pb_stream_init(void *,const void *,uint32_t); /* 0x48f49c */

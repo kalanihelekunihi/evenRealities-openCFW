@@ -1,0 +1,61 @@
+{
+ "title": "ws-hwdrivers stream 3: BQ25180 charger driver verified function-level vs stock in Renode 1.17 cortex-m55",
+ "when": "2026-11-22 12:56 PM CST (America/Chicago)",
+ "module": "g2-chg-bq25180",
+ "source": "g2/src/apollo-main/drivers/power/bq25180/drv_bq25180.c",
+ "method": {
+  "emulator": "Renode 1.17.0 (vendor/renode-src e8c7c2d), CPU.CortexM cortex-m55, FPU on, bundled dotnet 8.0.425",
+  "harness": "build/ws-hwdrivers-20261122/harness (hw.repl/hw.c/rt.S/tramp.S + per-module gen_bq25180.c)",
+  "design": "stock bodies run in place from stock.app.bin at their stock MRAM addresses (0x53A670..0x53AF4C); reconstructed C bodies compiled with sources.json profile g2-apollo-main-2 and linked into ITCM; every cross-module callee (hal_i2c_transfer_full 0x50436E, hal_i2c_transfer_joined 0x5044B4, audio_log_flags 0x43D0CE, compress_log_output 0x43CE9E, audio_log_extended 0x43D574, audio_uart_buffer_zero 0x43C0E4, audio_ble_radio_ready_44b0ae 0x44B0AE) patched at its stock address with a B.W into a logging/modelled stub. A deterministic per-test I2C register model (bus 7 / addr 0x6A) services reads so both variants see identical register contents.",
+  "compare": "per test: I2C transaction trace (device addr, register, transferred bytes, read bytes), full 128x256 I2C register-image diff, caller output struct bytes, g2_charger_runtime/g2_charger_telemetry images, and the integer return value (ignored for void functions). Stack-local pointer identities and elog string-literal pointers are not compared (representational, not behavioural).",
+  "inputs": "10 randomized cases per function x 28 functions = 280 cases, run twice each (stock vs C), elog states 0 and 7. Integer args are extended to their declared param width per AAPCS (as real callers do); this replaced the original 'in-range only' fuzzing, so out-of-range/assert paths are now exercised too."
+ },
+ "result": {
+  "functions": 28,
+  "cases": 280,
+  "exact_matches": 280,
+  "mismatches": 0,
+  "verified_functions": [
+   "bq25180_write_register",
+   "bq25180_read_register",
+   "bq25180_update_field",
+   "bq25180_configure_event_mask",
+   "bq25180_mask_events",
+   "bq25180_read_device_id",
+   "DRV_Bq25180ReadEvent",
+   "DRV_Bq25180ReadStatet",
+   "DRV_Bq25180SetChargeEnabled",
+   "DRV_Bq25180SetTsEnabled",
+   "DRV_Bq25180SetSafetyTimer",
+   "DRV_Bq25180SetWatchdog",
+   "DRV_Bq25180SetBatteryRegulationVoltage",
+   "DRV_Bq25180SetBatteryOvercurrent",
+   "DRV_Bq25180SetBatteryUnderVoltage_lockout",
+   "DRV_Bq25180SetPrechargeThreshold",
+   "DRV_Bq25180SetPrechargeRatio",
+   "DRV_Bq25180SetFastchargeCurrent",
+   "DRV_Bq25180SetTerminationPercent",
+   "DRV_Bq25180SetVindpm",
+   "DRV_Bq25180SetVdppmEnabled",
+   "DRV_Bq25180SetInputCurrentLimit",
+   "DRV_Bq25180SetSystemMode",
+   "DRV_Bq25180SetSystemVoltage",
+   "DRV_Bq25180SetTsAutoEnabled",
+   "bq25180_apply_defaults",
+   "DRV_Bq25180RefreshStatus",
+   "DRV_Bq25180HwInit"
+  ]
+ },
+ "g2ref_uses": "none in this module",
+ "notes": "Function-level equivalence only (no device). No sources.json/linker/build changes. Private harness under build/ws-hwdrivers-20261122/. No git, no flash.",
+ "artifacts": {
+  "harness_elf_sha256": "89b905fa7febc4dc96bcd6f6837ecf8c88b2dcc6498cbd2271043ee6ad39e112",
+  "results_bin": "build/ws-hwdrivers-20261122/harness/bq25180-results.bin",
+  "results_sha256": "28c0dc242e204254d18cdaf7b482f2ffbd108216dfd2a13e5233da28d20be7af"
+ },
+ "reverified": "2026-11-22 05:57 PM CST under the final arg-comparing harness (stub call-argument logging + AAPCS narrow-arg extension + fn-ptr-hook/uninit-ptr seeding).",
+ "harness_fidelity_fixes": [
+  "AAPCS narrow-arg extension: DRV_Bq25180SetFastchargeCurrent diverged only when the harness fed a uint16_t param with non-zero upper bits (clang assumes caller-extended and divides the full reg; stock IAR uxth's). No real caller sends that. autogen now extends integer args to their declared width. Proven harness artifact; stock==C on all ABI-valid inputs.",
+  "Uninitialized pointer-to-struct seeding: g2_charger_runtime (ptr at RAM 0x200744fc) was garbage-seeded, so DRV_Bq25180RefreshStatus wrote ReadEvent/ReadStatet output through a bad pointer (chg_stat 0 vs 1/2/3). Seeded the pointer to valid dumped scratch, replicating the runtime init the per-function harness skips. Proven harness setup gap; ReadEvent/ReadStatet already pass with a valid pointer."
+ ]
+}

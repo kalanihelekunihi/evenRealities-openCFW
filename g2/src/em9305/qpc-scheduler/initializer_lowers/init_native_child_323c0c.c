@@ -1,9 +1,10 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x323c0c..0x323c76: compose a type-3 radio PDU for the record.
  * A 5-byte header (7, then zeros) is filled by children 318440 and
  * 3184f4 from the record's request block (+2516); the compose call is
- * forced to 9 when bit 11 of the controller options (*0x805a84) is set,
+ * forced to 9 when bit 11 of the controller options (*((uintptr_t)&em9305_ram_805a6c + 0x18u)) is set,
  * otherwise 1, with 0x50 allowed bits, no prefix and source +1696. */
 extern uint32_t opencfw_em9305_child_318440(uintptr_t link,uintptr_t params,
                                             uintptr_t request);
@@ -18,7 +19,7 @@ uint32_t opencfw_em9305_child_323c0c(uintptr_t record,uintptr_t output,
 {
     _Alignas(4) uint8_t header[8];
     uintptr_t request=record+0x9d4u;
-    uint32_t options=*(volatile uint32_t *)0x805a84u;
+    uint32_t options=*(volatile uint32_t *)((uintptr_t)&em9305_ram_805a6c + 0x18u);
     header[4]=0u;
     header[3]=0u;
     header[2]=0u;

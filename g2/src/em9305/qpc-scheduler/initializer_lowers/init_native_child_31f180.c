@@ -1,7 +1,8 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31f180..0x31f296: parse the extended header of a received
- * advertising PDU into the scan report state at 0x803b68 (skipped while
+ * advertising PDU into the scan report state at (uintptr_t)&em9305_ram_803b68 (skipped while
  * busy +1). A continuation (+9) only advances the data pointer (+4) and
  * recomputes the RSSI-adjusted byte (+8); otherwise the header (+0xc) and
  * extended fields (+0xa) are decoded first. For ADV_EXT_IND (type 7) the
@@ -29,7 +30,7 @@ struct init_aux_pointer_31f180 {
 
 uint32_t opencfw_em9305_child_31f180(uintptr_t object,uintptr_t data)
 {
-    volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0x803b68u;
+    volatile uint8_t *state=&em9305_ram_803b68.u8_803b68;
     if(data==0u||state[1]!=0u) return 0u;
     uintptr_t scanner=*(volatile uint32_t *)(object+0x24u);
     uintptr_t window=*(volatile uint32_t *)(object+44u);

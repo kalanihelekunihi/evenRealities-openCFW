@@ -1,9 +1,10 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x322a30..0x322b6e: stream reset callback. When the LL stream
  * gate is closed defer to 3227a4. Otherwise stop the running (state 2)
  * timers at +60/+20 of each of the three stream objects enabled in
- * 0x8019f8, then for each of the six 784-byte stream records at 0x803d7e
+ * ((uintptr_t)&em9305_ram_8019e8 + 0x10u), then for each of the six 784-byte stream records at ((uintptr_t)&em9305_ram_803d58 + 0x26u)
  * in state 2 (+30): release an unowned record (+0 clear) at +10 and, when
  * it carries a pending 0x2c completion (+404, +403), report LL event 0x32
  * with its parameters; finally return the record to state 0. */
@@ -34,7 +35,7 @@ void opencfw_em9305_callback_322a30(void)
         return;
     }
     for(uint32_t index=0u;index<3u;++index){
-        if(((*(volatile uint8_t *)(uintptr_t)0x8019f8u>>index)&1u)==0u)continue;
+        if(((em9305_ram_8019e8.u8_8019f8>>index)&1u)==0u)continue;
         uintptr_t object=(uintptr_t)opencfw_em9305_stream_objects_3357b4[index];
         if(*(volatile uint8_t *)(object+96u)==2u){
             (void)opencfw_em9305_stream_stop_30e7ec(object+60u);
@@ -46,7 +47,7 @@ void opencfw_em9305_callback_322a30(void)
         }
     }
     for(uint32_t index=0u;index<6u;++index){
-        uintptr_t stream=0x803d7eu+index*784u;
+        uintptr_t stream=(((uintptr_t)&em9305_ram_803d58 + 0x26u) + index*784u);
         volatile uint8_t *s=(volatile uint8_t *)stream;
         if(s[30]!=2u)continue;
         if(s[0]==0u){

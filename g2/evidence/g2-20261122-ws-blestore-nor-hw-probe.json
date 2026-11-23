@@ -1,0 +1,26 @@
+{
+ "id": "g2-20261122-ws-blestore-nor-hw-probe",
+ "created": "2026-11-22T14:16-06:00 (America/Chicago)",
+ "status": "PARTIAL (probe; full nor-hw rerun pending)",
+ "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+ "functions": [
+  "0x4700b4 mx25u25643g_get_device_id",
+  "0x46f9f6 mspi_timing_auto_check",
+  "0x46fe38 DRV_Mx25u25643g_init"
+ ],
+ "result": {
+  "verdict": "EQUIVALENT",
+  "tests": 18,
+  "equal": 18,
+  "differ": 0,
+  "done": true,
+  "overflow": false
+ },
+ "harness_sha256": "e60d1088a875c54658aa0e39d0d854a86b0ce9e59def9e0f4ccb6e65a1a217f0",
+ "resolved_harness_artifacts": [
+  "am_hal_mspi_control (0x4c0f78) payload hash now sized per request: 0x10 timing record = 6 bytes, 0x18 = 1 byte (was 8 bytes, hashed stack garbage)",
+  "0x20000826..27 masked: stock 46fa12 strd copies 8 bytes from a 6-byte-zeroed stack local, so bytes 6-7 are uninitialised stack in both stock and C (padding, not a C defect)",
+  "dumps now windowed around first divergence (hrt_cap_skip) so >2048-word traces can be inspected"
+ ],
+ "c_changes": "none"
+}

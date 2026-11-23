@@ -70,7 +70,7 @@ extern void *audio_uart_page_layout_499678(void *label, uint32_t mode);     /* l
 /* --- product helpers ------------------------------------------------------ */
 extern uint32_t display_driver_uled_mode_45a568(void);       /* 1 = master role */
 extern uint32_t audio_uart_page_460084(const char *key);     /* locale index of a text ID */
-extern uint32_t audio_uart_page_45fffe(uint32_t fallback, uint32_t index); /* text lookup */
+extern const char *audio_uart_page_45fffe(const char *fallback, uint32_t index); /* text lookup: ROM string id in, localized string out */
 extern void system_close_page_factory_0046ae9c(uint32_t, uint32_t);
 extern uint8_t audio_ux_get_system_ble_status(void);         /* 0x47d8ce UX_GetSystemBLEStatus */
 extern uint32_t audio_conversate_ui_message_send_58bfb2(void *parent, const char *text,
@@ -571,6 +571,8 @@ int32_t translate_ui_action_text_update_59dfa0(uint8_t state, uint32_t arg)
     const char *dst_text;
     int32_t src_target_y;
     int32_t dst_target_y;
+    int32_t src_box_h;
+    int32_t dst_box_h;
 
     (void)state;
     if (arg == 1u)
@@ -587,10 +589,12 @@ int32_t translate_ui_action_text_update_59dfa0(uint8_t state, uint32_t arg)
     (void)audio_uart_page_49942e(ctx->dst_label, dst_text);
     audio_uart_page_43f66c(ctx->dst_container);
     audio_uart_page_43f6d6(ctx->src_container, ctx->dst_container, 11u, 0, -12);
-    src_target_y = audio_uart_lv_obj_height_43fdda(ctx->src_label) -
-                   audio_uart_lv_obj_height_43fdda(ctx->src_container);
-    dst_target_y = audio_uart_lv_obj_height_43fdda(ctx->dst_label) -
-                   audio_uart_lv_obj_height_43fdda(ctx->dst_container);
+    /* Stock queries the container before the label (IAR evaluates the
+     * subtrahend first); keep that call order explicit. */
+    src_box_h = audio_uart_lv_obj_height_43fdda(ctx->src_container);
+    src_target_y = audio_uart_lv_obj_height_43fdda(ctx->src_label) - src_box_h;
+    dst_box_h = audio_uart_lv_obj_height_43fdda(ctx->dst_container);
+    dst_target_y = audio_uart_lv_obj_height_43fdda(ctx->dst_label) - dst_box_h;
     TUI_LOG(4u, 0x1f8u, 0x10800000u, fn_text, m_target, s_target, src_target_y,
             dst_target_y);
     audio_uart_lv_scroll_to_y_44ea04(ctx->src_container, src_target_y, 0u);
@@ -601,8 +605,7 @@ int32_t translate_ui_action_text_update_59dfa0(uint8_t state, uint32_t arg)
 
 static const char *translate_ui_text(const char *id)
 {
-    return (const char *)(uintptr_t)audio_uart_page_45fffe((uint32_t)(uintptr_t)id,
-                                                          audio_uart_page_460084(id));
+    return audio_uart_page_45fffe(id, audio_uart_page_460084(id));
 }
 
 /* Event 7 (to state 2): arg 1 = BLE dropped (5 s prompt), otherwise

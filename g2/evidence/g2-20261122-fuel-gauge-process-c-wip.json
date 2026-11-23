@@ -1,0 +1,45 @@
+{
+  "title": "nrf_fuel_gauge process: nrf_model_process_43a698",
+  "status": "NOT VERIFIED",
+  "when": "2026-11-22 11:46 AM CST (America/Chicago)",
+  "approach": "Bottom-up continuation after verified init. Typographic process (5076B) was extracted from cores.S, converted to .inst, and decompiled into scalar C with 4-wide MVE helpers (q_mul/q_add, VLD4/VST4) and delayed-vmrs CFG. Compared typographic process vs C process on Renode 1.17 M55, both using already-verified C callees (including C 43bb14). Not installed.",
+  "result": {
+    "magic": "0xF6A11E07",
+    "cases": 1232,
+    "fails": 1232,
+    "first_fail": "soc stock=0 vs C=-0.05 (0xBD4CCCCD). One-case dump (init then process, v=3.2 i=0.05 T=0 dt=1 count=1): stock writes qNaN 0x7FC00000 through state[0x08..0x44] and state[0xC0/C4]; C writes -Inf/finite/0 instead. Also state+0x90/0xCC and opt[0]/opt[2] differ. Mid-function MVE/state+8 and 43bc84 residual path is not yet bit-exact."
+  },
+  "43bb14_count_ge_4": "Typographic process passes r8 = first 439fb4 result (0..3, three temp flags) to all three 43bb14 calls; it never calls 43bb14 with count>=4. Process-level harness still included state[0xB4] in {1,2,3,4,5,8} so 439ce0/memcpy sizes are exercised. Direct 43bb14 count=4..8 property checks were also present but are not a typographic golden.",
+  "artifacts": {
+    "process_anno": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid/process_anno.dump",
+      "sha256": "c9a725b47d04fabad194816963f9e47ac748630f0c6bde88e410695949607027",
+      "bytes": 56798
+    },
+    "mid6_process_c": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_process.c",
+      "sha256": "a0db8ea6d89c89803b50ca2130b0bfc7531bcab49039b5ca26ad00e8e00c80de",
+      "bytes": 33229
+    },
+    "mid6_results": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_results.bin",
+      "sha256": "f8308893a12cb32f5948d206a57a2e877235c9c849fe8804ad91277b5d071e31",
+      "bytes": 2048
+    },
+    "mid6_dbg_results": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid6_dbg_results.bin",
+      "sha256": "75f0be8ead76dab9016c766f2f697a4e9a8b7016a6155ed439e88e9787a3ec98",
+      "bytes": 2048
+    },
+    "stock_process_S": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/stock_process.S",
+      "sha256": "28f8670289e60f4745e8fba2b637d17d5883ebfc81c6c1b4e356e6192ab30a1f",
+      "bytes": 30706
+    }
+  },
+  "not_done": [
+    "C process is WIP in the test tree only (c-leaves/g2c_fuel_gauge_leaves.c and mid6_process.c). Production leaves/header/cores.S were not changed.",
+    "Do not install this body. cores.S still has typographic nrf_model_process_43a698.",
+    "apollo-main was not rebuilt; version-match and DFU paired sims were not run. Linker-report string unchanged. Official opencfw-otap-disarm.app.bin not overwritten. No flash, no git."
+  ]
+}

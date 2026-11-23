@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 static uint32_t extract_kind(uint32_t high)
 {
@@ -16,11 +17,11 @@ uint32_t opencfw_em9305_init_callback_31836c(uintptr_t context,
     uintptr_t settings,uintptr_t third)
 {
     uint32_t high=*(volatile uint32_t *)(third+752u);
-    uint8_t enabled=*(volatile uint8_t *)(uintptr_t)0x805a9du;
+    uint8_t enabled=em9305_ram_805a6c.u8_805a9d;
     uint32_t kind=extract_kind(high);
     *(volatile uint8_t *)(context+3u)=(uint8_t)kind;
     if (enabled==0u) return kind;
-    uint8_t policy=*(volatile uint8_t *)(uintptr_t)0x805afdu;
+    uint8_t policy=em9305_ram_805af0.u8_805afd;
     if ((policy&2u)!=0u) {
         uint32_t low=*(volatile uint32_t *)(third+748u);
         volatile uint32_t pair[2];

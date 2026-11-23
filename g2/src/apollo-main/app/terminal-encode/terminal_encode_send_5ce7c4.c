@@ -74,7 +74,7 @@ uint32_t audio_terminal_send_message_5ce7c4(uint32_t command, uint32_t tag,
     struct pb_ostream_candidate stream;
     audio_pb_ostream_from_buffer(&initialized, audio_terminal_tx_encoded, 0x878u);
     audio_uart_checksum_copy(&stream, &initialized, 20u);
-    if (audio_pb_encode(&stream, &audio_terminal_tx_pb_descriptor, staging) == 0u) {
+    if ((uint8_t)audio_pb_encode(&stream, &audio_terminal_tx_pb_descriptor, staging) == 0u) {
         const char *why = stream.errmsg != 0 ? stream.errmsg : none;
         if (audio_log_flags() & 2u)
             audio_log_extended(1u, module, path, function, 0x5au,

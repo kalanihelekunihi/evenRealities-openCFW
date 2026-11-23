@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "time_local": "2026-11-22 17:07 CST",
+  "title": "EM9305 workstream: typed RAM objects for controller_init.c installed; all recorded functions accounted for",
+  "scope": "Installed em9305_ram.h and the rewritten controller_init.c into g2/src/em9305/qpc-scheduler/. Tree linker script not edited. No hardware, no git writes.",
+  "baseline": {
+    "private_rebuild": "build/ws-em9305-20261122/p0 (pbuild.py) reproduced the 2026-11-12 diagnostic g2-em9305.elf; app .text 244,708 B vs stock 210,888 B"
+  },
+  "size_levers_measured": {
+    "codegen_flag_sweep_controller_init": "best -780 B (-fno-inline...), not pursued",
+    "duplicate_identical_bodies": "693 B",
+    "gc_sections_all_units": "-2,140 B",
+    "gp_small_data": "rejected: stock never sets gp; ROM gp use unknown",
+    "typed_ram_structs_controller_init": "121,360 -> 119,520 B text (-1,840 B); confirmed on the post-install private rebuild: app .text 244,708 -> 242,868 B (-1,840 B). Still 31,980 B over stock 210,888 B."
+  },
+  "change": {
+    "generator": "build/ws-em9305-20261122/ramgen.py",
+    "objects": 77,
+    "fields": 706,
+    "rewritten_sites_controller_init": 1603,
+    "remaining_0x80_literals_controller_init": 423,
+    "form": "extern volatile struct em9305_ram_<base> em9305_ram_<base> (section .bss.em9305_ram, keeps them out of gp small data); fields <type>_<addr>; _Static_assert offset per field; linker symbol per object in g2-em9305.ld"
+  },
+  "installed": {
+    "header": "g2/src/em9305/qpc-scheduler/em9305_ram.h",
+    "source": "g2/src/em9305/qpc-scheduler/controller_init.c",
+    "tree_ld_edited": false,
+    "pending_linker_patch": "build/ws-em9305-20261122/pending/g2-em9305.ld.patch",
+    "pending_note": "build/ws-em9305-20261122/pending/NOTE.txt"
+  },
+  "private_rebuild": {
+    "outdir": "build/ws-em9305-20261122/p-ram",
+    "command": "pbuild.py build/ws-em9305-20261122/p-ram --ld build/ws-em9305-20261122/t2/g2-em9305.ld -j 3",
+    "started_local": "2026-11-22 16:58:10 CST",
+    "finished_local": "2026-11-22 17:03:13 CST",
+    "exit_code": 0,
+    "app_text_bytes": 242868,
+    "p0_app_text_bytes": 244708,
+    "delta_vs_p0": -1840,
+    "stock_app_text_bytes": 210888,
+    "delta_vs_stock": 31980,
+    "link_log": "empty (no unresolved-symbol reports)",
+    "em9305_ram_symbols_in_map": 77,
+    "sizecmp": {
+      "script": "build/ws-em9305-20261122/sizecmp.py",
+      "output": "build/ws-em9305-20261122/p-ram/sizecmp.txt",
+      "p0_text_sym_bytes": 239886,
+      "p_ram_text_sym_bytes": 238060,
+      "matched_bytes": 194050,
+      "stock_of_matched": 182048,
+      "unmatched_bytes": 44010,
+      "stock_total": 201992,
+      "note": "Slot sizes vs stock are still generally over; the typed-RAM change is a 1,840 B reduction, not a full slot-fit to stock."
+    }
+  },
+  "verification": {
+    "harness": "build/em-ctl/qm.py (100 random tests per function, production -mdiv-rem... flags, --dztrap, extra_cb1.c); --qtimeout 120 on rerun/retry; landing pad fills low memory including ROM with j_s [blink] (0x7ee07ee0)",
+    "functions_to_prove": 596,
+    "results_recorded": 597,
+    "results_file": "build/ws-em9305-20261122/t2/results.json",
+    "results_so_far": {
+      "EQUIVALENT": 595,
+      "NO_OUTPUT_qemu_unrunnable": 2,
+      "MISMATCH": 0,
+      "PARTIAL_AGREE": 0
+    },
+    "qemu_equivalent_100_cases": 595,
+    "instruction_level": {
+      "opencfw_em9305_common_radio_restore_312410": {
+        "status": "INSTRUCTION_EQUIVALENT",
+        "qemu": "cannot run (sr to aux register 1666; qemu-arc helper_sr abort)",
+        "note": "objdump of t2/o_orig.o vs t2/o_cand.o identical except stb 1,[0x805fb8] vs stb 1,[em9305_ram_805fb8]; same sr 0x4/0x8,[1666], write 4 to 0xf04400, return 4",
+        "not_a_qemu_proof": true
+      },
+      "opencfw_em9305_controller_startup": {
+        "status": "INSTRUCTION_COMPARED",
+        "qemu": "cannot run (kflag, lr/sr of COUNT0, ROM boot calls)",
+        "note": "disassembly differs only in register allocation (enter_s [r13,blink] vs push_s blink; COUNT0 in r0 vs r1) and typed-RAM addressing (absolute 0x801108/0x80fdf4/0x80fdf8 vs em9305_ram_* relocs). Callees and control flow match the source, which differs only by those field rewrites.",
+        "not_a_qemu_proof": true
+      }
+    },
+    "mutants": {
+      "file": "build/ws-em9305-20261122/t2/ci_mut.c",
+      "count": 6,
+      "log": "build/ws-em9305-20261122/t2/mut.log",
+      "all_caught": true
+    },
+    "notes": [
+      "All 597 recorded functions are accounted for: 595 proven equal to stock in QEMU-ARC (100 random cases each); 2 cannot run in QEMU and were compared at the instruction level (not QEMU proofs).",
+      "Safe-callback rerun (3:22-4:34 PM CST, QT=120) converted 32 previous timeouts to EQUIVALENT.",
+      "Retry r1 (4:38-4:48 PM CST) used the landing pad, all-args safe callback, bounded 0x80164c table, empty wsf_event_remove queue, and specialized clamps; 15 more EQUIVALENT.",
+      "Retry r2 (4:54-4:55 PM CST) finished the last 2 timeouts (link-process length clamp; planted channel-callback record) and re-ran the 2 earlier 1-in-100 mismatches after widening driver nrm/mnorm image window from 0xc40000 to 0xfe0000 (328 KB images extend past 0xc40000). All 4 EQUIVALENT 100. Those 2 mismatches were harness false diffs, not C-body diffs.",
+      "common_radio_restore_312410 and controller_startup remain QEMU-unrunnable (sr / kflag / COUNT0)."
+    ],
+    "harness_changes": [
+      "qm.py: em9305_ram_<addr> PROVIDE; --qtimeout; link-error check no longer trips on symbol names containing 'error'; spec defs; --extra-stubs puts opencfw_test_cb in the shared stubs",
+      "build/em-ctl/h/driver.c: T0 start index; nrm/mnorm image window 0xc00000-0xfe0000 (was 0xc40000) so function pointers in the upper part of a ~328 KB image compare equal",
+      "pre headers under build/ws-em9305-20261122/pre/: pad.h, cbobj_all.h, auxtab.h, retry_*.h"
+    ]
+  },
+  "source_completeness_proven": false
+}

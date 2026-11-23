@@ -4,13 +4,14 @@
  * Handler signature (r0..r4): op, plen (param byte count), params, ctx, resp; it writes the status at resp[3] and hands (op, resp length, ctx, resp, after-callback) to the resident ROM reply routine 0x102588. Status 0x12 = bad parameters, 0x2f = not allowed in this boot state.
  */
 #include <stdint.h>
+#include "em9305_ram.h"
 #define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
 #define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
 extern uint32_t opencfw_em9305_rom_em_cmd_reply_102588(uint32_t op, uint32_t len, uint32_t ctx, uint8_t *resp, uint32_t after);
 uint32_t opencfw_em9305_emsys_ack_if_unlocked_cmd_30516c(uint32_t op, uint32_t plen, const uint8_t *params, uint32_t ctx, uint8_t *resp)
 {
   (void)plen; (void)params;
-  uint32_t magic = W32(W32(0x801098u) + 0x68u);
+  uint32_t magic = W32(W32(((uintptr_t)&em9305_ram_801090 + 0x8u)) + 0x68u);
   uint8_t st = 0x2fu;
   if (magic == 0x53535353u || magic == 0xa9a9a9a9u) st = 1u;
   resp[3] = st;

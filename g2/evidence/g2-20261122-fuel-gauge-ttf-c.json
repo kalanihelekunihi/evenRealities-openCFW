@@ -1,0 +1,66 @@
+{
+  "title": "nrf_fuel_gauge ttf: nrf_model_ttf_58eac4",
+  "status": "VERIFIED",
+  "when": "2026-11-22 11:19 AM CST (America/Chicago)",
+  "approach": "Bottom-up continuation. Idiomatic scalar-float C vs typographic stock on Renode 1.17 Cortex-M55, normal AAPCS, no fg_call. logf is the already-reconstructed IAR DLIB body (iar_logf_598074). VFP helpers keep typographic operand order, including vnmul and the mode-0 mid[0]+0.0 vs mode-1 addend+mid[0] add order. The typographic 0x55F9A0 wrapper loads the terminator current (ext_block+0x10) into s0 and tail-calls; the C prototype now takes that float and nrf_fuel_gauge_ttf_get passes term so s0 is not lost.",
+  "verified": [
+    {
+      "symbol": "nrf_model_ttf_58eac4",
+      "cases": 408,
+      "fails": 0,
+      "notes": "TTF. Early-outs: 43a0f4(state[0x88]), state[0x88]>=0, state[0x98]==0, then 439ce0 on model temps (xwin at +0x324) and param_10 (ysrc at +0x1584) with count=state[0xB4]. Mode 1 (CC) computes addend (1-s[0x90])/((s[0x90]-s[0xA0])/s[0x98]) with LT/EQ early-outs. logf(term/state[0x88]), vnmul mid by log, accept if one of the first n-1 flags is 0, else fg_aux[0]. MAGIC 0xF6A11E05."
+    }
+  ],
+  "production_replace": {
+    "updated": [
+      {
+        "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+        "sha256": "b26dd4e4b57607b1e4eda2529229a06004cb71b048ab599a80334305c7b7abcd",
+        "bytes": 28554
+      },
+      {
+        "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.h",
+        "sha256": "a3c5f66abbea3360a7bdf5ae83c70e7a485dcc8d7208c699eede454044361bb9",
+        "bytes": 1777
+      },
+      {
+        "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_cores.S",
+        "sha256": "5a46022bd15ba0a1927bc491e08742287e3f1ac8b22497f6eb92e132dbf7bb5c",
+        "bytes": 38006
+      },
+      {
+        "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_source.c",
+        "sha256": "89d2879c245b06664094531a0a74433bec638dffa765160a8568fab9a3c97b7a",
+        "bytes": 12380
+      }
+    ],
+    "cores_remaining_globals": [
+      "nrf_model_init_43a1b0",
+      "nrf_model_process_43a698"
+    ],
+    "wrapper_fix": "nrf_fuel_gauge_ttf_get now passes term (ext_block+0x10) as the 4th argument so it lands in s0, matching the typographic tail-call at 0x55F9A0."
+  },
+  "artifacts": {
+    "mid4_results": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid4_results.bin",
+      "sha256": "947be0be6b499e852e36fb5989588a91d4668f74487de8bc76ded67f404a8c49",
+      "bytes": 2048
+    },
+    "mid4_log": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid4.log",
+      "sha256": "1f40e853db5e7a2e0a5ccc2ece5d27943be8df3da34a36f04a5251f8cbe43d8d",
+      "bytes": 865
+    },
+    "mid4_test_bin": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid4_test.bin",
+      "sha256": "ecfde758f6998d97388fb1bb673d76def02f4a05ff29738de50ce65343f33881",
+      "bytes": 5040
+    }
+  },
+  "not_done": [
+    "Remaining typographic: nrf_model_init_43a1b0, nrf_model_process_43a698.",
+    "43bb14 count>=4 coverage is deferred to the process/init-level golden comparisons.",
+    "apollo-main was not rebuilt; version-match and DFU paired sims were not run (deferred until cores.S has no typographic globals left).",
+    "Linker-report canned string unchanged. Official opencfw-otap-disarm.app.bin not overwritten. No flash, no git."
+  ]
+}

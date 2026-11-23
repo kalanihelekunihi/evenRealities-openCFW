@@ -1,7 +1,8 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x323620..0x323660: report LL event 0x2f for a 912-byte connection
- * entry (index in the table at *0x805c70) with a status byte and five
+ * entry (index in the table at *((uintptr_t)&em9305_ram_805c5c + 0x14u)) with a status byte and five
  * parameter bytes. */
 extern uint32_t opencfw_em9305_ll_event_callback_30e79c(uintptr_t);
 
@@ -18,7 +19,7 @@ struct ll_event_2f {
 uint32_t opencfw_em9305_callback_323620(uintptr_t entry, uint32_t status, uint32_t p0,
                                         uint32_t p1, uint32_t p2, uint32_t p3, uint32_t p4)
 {
-    uintptr_t base = *(volatile uint32_t *)(uintptr_t)0x805c70u;
+    uintptr_t base = em9305_ram_805c5c.u32_805c70;
     struct ll_event_2f event;
     event.status = (uint8_t)status;
     uint8_t index = (uint8_t)((int32_t)(entry - base) / 912);

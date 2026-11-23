@@ -41,7 +41,7 @@ int32_t _kvdbUpdataAlsScale(void) {
     (void)SVC_KvdbWriteAlsScale(&g2_kvdb_als_scale_record);
     return 0;
 }
-G2_KVDB_MIGRATION_EXPORT(_kvdbUpdataAlsScale);
+/* _kvdbUpdataAlsScale: migration slot 0 of the stock-ordered table in service_kvdb.c (ROM 0x746d20). */
 
 int32_t SVC_KvdbWriteAlsScale(const g2_kvdb_word_record_t *record) {
     g2_kvdb_als_scale_record = *record;

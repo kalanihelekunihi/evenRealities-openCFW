@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x320274..0x3202e0: while the link (+0x24) requests (+1) and is not
  * on hold (+241), insert its connection entry's schedule node (+16) into the
@@ -14,7 +15,7 @@ void opencfw_em9305_child_320274(uintptr_t context)
     uintptr_t link = *(volatile uint32_t *)(context + 0x24u);
     if (*(volatile uint8_t *)(link + 1u) != 0u && *(volatile uint8_t *)(link + 241u) == 0u) {
         uint32_t handle = *(volatile uint16_t *)(link + 88u);
-        uintptr_t entry = *(volatile uint32_t *)(uintptr_t)0x805c70u + handle * 912u;
+        uintptr_t entry = *(volatile uint32_t *)(uintptr_t)((uintptr_t)&em9305_ram_805c5c + 0x14u) + handle * 912u;
         uintptr_t compare = (uintptr_t)opencfw_em9305_init_schedule_compare_318b78;
         uint32_t anchor = *(volatile uint32_t *)(entry + 24u);
         uintptr_t node = entry + 16u;

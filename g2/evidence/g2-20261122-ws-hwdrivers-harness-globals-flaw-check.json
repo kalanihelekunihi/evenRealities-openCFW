@@ -1,0 +1,15 @@
+{
+  "stream":"ws-hwdrivers","time_cst":"2026-11-22 21:52 America/Chicago",
+  "task":"App-stream steering: app's difft.py gave mutant copies private copies of a file's globals, so mutants could look 'killed' falsely. Check whether ws-hwdrivers harness has the same issue; if so, make mutants share real globals and rerun mutant checks.",
+  "finding":"ws-hwdrivers harness does NOT have the flaw.",
+  "reasons":[
+    "No mutation-testing infrastructure exists in ws-hwdrivers (no difft.py analog; only a similarly-named 'imutriv' IMU unit). Methodology is per-function stock-vs-C equivalence, not mutant kill-rate, so there are no 'mutant copies' to give private globals.",
+    "The analogous risk (reconstructed C operating on PRIVATE global copies -> false PASS) is absent by construction. The stock body (v=0) and reconstructed C (v=1) execute against the SAME physical stock RAM: every stock global the C touches is bound via --defsym to its stock address (nm shows type 'A' absolute), and file-static scratch is placed at its stock RAM address via static_placed/place_*.ld. Verified across 6 recent units (ringrd, lifecyc, pdmprod, gxsvc, uartstop, gxread): the only reconstructed data global at a RAM address is pdm_production_pcm_block @ 0x20062a20 (its real stock address). Shared globals resolve to stock addresses: g2_uart_channels@0x20000d2c, g2_stock_ram_200731b0@0x200731b0, audio_queue_copy_bytes@0x439be5, g2_pdm_production_handle@0x20074550, etc.",
+    "The memory/stub-arg/return comparison dumps those stock addresses, so any C-vs-stock divergence in a shared global is observed."
+  ],
+  "positive_controls":[
+    "Live: rebuilt lifecyc with g2_uart_channels defsym'd to a private unseeded address 0x20260000. The harness KILLED it (codec_channel_disable firstdiff@2: C read 00000000 from the private copy vs stock's seeded fe64f000 from shared 0x20000d2c). Restoring the shared defsym -> clean 40/40. A private global copy is caught as a FAILURE, not masked.",
+    "Natural (on record this session): drv_pdm_buffer_get FAILED 0/6 precisely because the file-static pdm_pcm_block linked to a private address instead of the shared stock 0x2006fc4c; binding it to the shared stock address (place_pdm.ld) made it pass 24/24."
+  ],
+  "action":"None required. No private-global blind spot; no reruns needed. The harness detects private/wrong-global cases as failures (opposite of the app false-kill flaw)."
+}

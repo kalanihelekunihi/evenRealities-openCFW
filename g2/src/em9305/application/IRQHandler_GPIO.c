@@ -5,6 +5,7 @@
  * calls the callback stored at 0x80190c, if any, with the bit index.
  */
 #include "em_irq_frame_e.h"
+#include "em9305_ram.h"
 
 extern void opencfw_em9305_controller_irq_action(uint32_t);
 
@@ -18,7 +19,7 @@ __attribute__((used)) void opencfw_em9305_IRQHandler_GPIO_body(void)
   EM_R32(0xf008d4u) = mask;
   __builtin_arc_sync();
   opencfw_em9305_controller_irq_action(mask);
-  void (*cb)(uint32_t) = (void (*)(uint32_t))(uintptr_t)EM_R32(0x80190cu);
+  void (*cb)(uint32_t) = (void (*)(uint32_t))(uintptr_t)em9305_ram_80190c.u32_80190c;
   if (cb) cb(index);
 }
 

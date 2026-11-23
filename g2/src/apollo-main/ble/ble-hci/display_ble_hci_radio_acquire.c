@@ -3,7 +3,7 @@
  * 0x52ea24 -> live 0x20074224. Vendor stack children remain real imports. */
 #include <stdint.h>
 extern uint8_t audio_ble_hci_radio_resource_state_20073dc4[];
-extern const uint8_t audio_ble_hci_radio_resource_config_200001b4[20];
+extern uint8_t audio_ble_hci_radio_resource_config_200001b4[20];
 extern volatile uint32_t audio_ble_hci_radio_revision_word_20074224;
 extern const uint8_t audio_ble_hci_radio_resource_log_768a90[];
 extern const uint8_t audio_ble_hci_radio_resource_log5_77d90c[];

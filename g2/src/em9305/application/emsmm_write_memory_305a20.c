@@ -4,6 +4,7 @@
  * Helper of the em_system memory commands (not a command handler itself).
  */
 #include <stdint.h>
+#include "em9305_ram.h"
 #define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
 extern uint32_t opencfw_em9305_emsmm_region_id_305944(uint32_t addr, uint32_t len);
 extern uint32_t opencfw_em9305_stock_30f014(uint32_t bank, uint32_t index, const uint8_t *src, uint32_t nwords);
@@ -11,7 +12,7 @@ extern void opencfw_em9305_rom_copy_words_100d20(void *dst, const void *src, uin
 extern void *opencfw_em9305_memcpy(void *destination, const void *source, uint32_t bytes);
 uint32_t opencfw_em9305_emsmm_write_memory_305a20(const uint8_t *src, uint32_t count)
 {
-  uint32_t obj = W32(0x801098u);
+  uint32_t obj = W32(((uintptr_t)&em9305_ram_801090 + 0x8u));
   uint32_t addr = W32(obj + 0x70u);
   uint32_t reg, r;
   W32(obj + 0x70u) = addr + count;

@@ -1,10 +1,11 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31e4a0..0x31e5ec: connection state machine event (state +1).
  * State 0 (initiating): connect-complete 0x3f runs the setup children,
  * raises the feature/PHY events (0x66/0x67/0x68, from flags +4 and the
  * data length +570/+572) and reports the new connection through 323028
- * with the pending connect command (*0x805c6c), moving to state 2. State 2
+ * with the pending connect command (*((uintptr_t)&em9305_ram_805c5c + 0x10u)), moving to state 2. State 2
  * forwards events other than 0x3d/0x3f/0x47/0x48 to 3212f0 (0x3d goes to
  * 32279c). State 3 handles 0x51 (clear pending procedure +640/+636 bit 0,
  * 32cadc, clear +620). In every state 0x4c tears down via 31ac3c/3231c4
@@ -31,7 +32,7 @@ static uint32_t r8(uintptr_t a){return *(volatile uint8_t *)a;}
 
 static uint32_t index_31e4a0(uintptr_t record)
 {
-    uint32_t base=r32(0x805c70u);
+    uint32_t base=r32(((uintptr_t)&em9305_ram_805c5c + 0x14u));
     return (uint8_t)((int32_t)((uint32_t)record-base)/912);
 }
 
@@ -50,7 +51,7 @@ static void connect_complete_31e4a0(uintptr_t record)
     }
     if((features&0x40u)&&(r16(record+570u)>=0x1cu||r16(record+572u)>=329u))
         (void)opencfw_em9305_mode_event_31bd78(record,0x68u);
-    uintptr_t command=r32(0x805c6cu);
+    uintptr_t command=r32(((uintptr_t)&em9305_ram_805c5c + 0x10u));
     uint32_t value892=r16(record+892u);
     uint32_t value321=r8(record+321u);
     uint32_t value890=r8(record+890u);

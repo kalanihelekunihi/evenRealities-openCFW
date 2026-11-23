@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 extern uint32_t opencfw_em9305_radio_cancel_30fab8(uint32_t);
 extern uint32_t opencfw_em9305_common_radio_bind_30fc10(uintptr_t);
 extern uint32_t opencfw_em9305_radio_request_30faec(uintptr_t,uint32_t);
@@ -30,8 +31,8 @@ uint32_t opencfw_em9305_init_callback_3043ac(uint32_t incoming,
  uint32_t first=rd(fields+12u);
  uint32_t second=rd(fields+20u);
  uint32_t product=multiply(interval,next);
- wb(0x8015c4u,1u);
- uintptr_t binding=0x8015ccu;
+ wb((uintptr_t)&em9305_ram_8015c4,1u);
+ uintptr_t binding=((uintptr_t)&em9305_ram_8015c4 + 0x8u);
  wr(binding+12u,half<<1u);
  wr(binding+8u,second+first+product-half);
  (void)opencfw_em9305_common_radio_bind_30fc10(binding);

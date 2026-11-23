@@ -1,13 +1,14 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x317f5c..0x31807a: PHY-update procedure state machine. Event
  * 0x70 resumes a deferred procedure (bit 29 of +644) or a parked peer
  * request (bit 30: the saved 10-byte request at +866 is restored to
- * 0x80281c), event 0x29 starts a local procedure and event 0x0c a peer
+ * ((uintptr_t)&em9305_ram_8027e0 + 0x3cu)), event 0x29 starts a local procedure and event 0x0c a peer
  * request of type 0x26; +648 is cleared on resume. With the procedure
  * idle (+620 == 0) the request is run by 317f2c and, if work is pending
  * (+624), the procedure becomes active in state 29 (+635) - unless another
- * procedure owns the link (bit 6 of 0x805a98 with bit 2 of 0x805a87 and
+ * procedure owns the link (bit 6 of ((uintptr_t)&em9305_ram_805a6c + 0x2cu) with bit 2 of ((uintptr_t)&em9305_ram_805a6c + 0x1bu) and
  * +534 clear), in which case the local procedure is deferred (bit 29) or
  * the peer request parked (bit 30, saved to +866) and mode event 0x67 is
  * raised. An active procedure in state 29 runs 317f2c and, when nothing
@@ -38,7 +39,7 @@ uint32_t opencfw_em9305_callback_317f5c(uintptr_t record,uint32_t event)
             if((flags&0x40000000u)==0u)return 0u;
             w32(record+648u,0u);
             w32(record+644u,flags&~0x40000000u);
-            (void)opencfw_em9305_memcpy((void *)0x80281cu,(const void *)(record+866u),10u);
+            (void)opencfw_em9305_memcpy((void *)((uintptr_t)&em9305_ram_8027e0 + 0x3cu),(const void *)(record+866u),10u);
             local=0u;
             selector=1u;
         }
@@ -47,7 +48,7 @@ uint32_t opencfw_em9305_callback_317f5c(uintptr_t record,uint32_t event)
         selector=0u;
     }else{
         if(event!=0x0cu)return 0u;
-        if(r8(0x802818u)!=0x26u)return 0u;
+        if(r8(((uintptr_t)&em9305_ram_8027e0 + 0x38u))!=0x26u)return 0u;
         local=0u;
         selector=1u;
     }
@@ -65,8 +66,8 @@ uint32_t opencfw_em9305_callback_317f5c(uintptr_t record,uint32_t event)
         return 1u;
     }
     if(active!=0u)return 1u;
-    if((r8(0x805a87u)&4u)==0u&&r8(record+534u)==0u
-       &&(r8(0x805a98u)&0x40u)!=0u){
+    if((r8(((uintptr_t)&em9305_ram_805a6c + 0x1bu))&4u)==0u&&r8(record+534u)==0u
+       &&(r8(((uintptr_t)&em9305_ram_805a6c + 0x2cu))&0x40u)!=0u){
         uint32_t pending=r32(record+648u);
         uint32_t flags=r32(record+644u);
         if(local!=0u){
@@ -75,7 +76,7 @@ uint32_t opencfw_em9305_callback_317f5c(uintptr_t record,uint32_t event)
         }else{
             w32(record+648u,pending);
             w32(record+644u,flags|0x40000000u);
-            (void)opencfw_em9305_memcpy((void *)(record+866u),(const void *)0x80281cu,10u);
+            (void)opencfw_em9305_memcpy((void *)(record+866u),(const void *)((uintptr_t)&em9305_ram_8027e0 + 0x3cu),10u);
         }
         (void)opencfw_em9305_mode_event_31bd78(record,0x67u);
         return 1u;

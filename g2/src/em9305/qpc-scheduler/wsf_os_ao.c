@@ -11,17 +11,18 @@
  *   0x333d7c..0x333db6  wsfOsRunIdleTasks
  *   0x333db8..0x333dc2  AO initial pseudo-state
  *
- * WSF OS context at RAM 0x805ff4 (0x7c bytes, cleared by WsfOsInitOnly):
- *   +0x00 handler table [16]      (0x805ff4, WsfOsSetNextHandler 0x3140b4)
- *   +0x40 handler event bits [16] (0x806034, uint16 each)
- *   +0x60 message queue           (0x806054); +0x68 task event mask byte (0x80605c)
- *   +0x69 handler count           (0x80605d)
- *   +0x6c idle task table [3]     (0x806060, count byte 0x80606c, pending flag 0x80606d)
- * The AO object (36 B) is RAM 0x80139c and its 16-entry queue RAM 0x80faac,
+ * WSF OS context at RAM (uintptr_t)&em9305_ram_805ff4 (0x7c bytes, cleared by WsfOsInitOnly):
+ *   +0x00 handler table [16]      ((uintptr_t)&em9305_ram_805ff4, WsfOsSetNextHandler 0x3140b4)
+ *   +0x40 handler event bits [16] ((uintptr_t)&em9305_ram_806034, uint16 each)
+ *   +0x60 message queue           ((uintptr_t)&em9305_ram_806054); +0x68 task event mask byte ((uintptr_t)&em9305_ram_80605c)
+ *   +0x69 handler count           (((uintptr_t)&em9305_ram_80605c + 0x1u))
+ *   +0x6c idle task table [3]     (((uintptr_t)&em9305_ram_80605c + 0x4u), count byte ((uintptr_t)&em9305_ram_80605c + 0x10u), pending flag ((uintptr_t)&em9305_ram_80605c + 0x11u))
+ * The AO object (36 B) is RAM (uintptr_t)&em9305_ram_80139c and its 16-entry queue RAM 0x80faac,
  * both stock addresses that other units already address absolutely.
  *
  * Profile g2-em9305-1. */
 #include <stddef.h>
+#include "em9305_ram.h"
 #include <stdint.h>
 
 typedef uint16_t g2_em_qsignal;
@@ -51,16 +52,16 @@ enum { Q_ENTRY_SIG = 1, WSF_OS_DISPATCH_SIG = 8 };
 enum { Q_RET_SUPER = 0, Q_RET_HANDLED = 3, Q_RET_TRAN = 8 };
 enum { WSF_EVT_MSG = 0x01, WSF_EVT_TIMER = 0x02, WSF_EVT_HANDLER = 0x04 };
 
-#define WSF_OS_CONTEXT       0x805ff4u
-#define WSF_OS_HANDLERS      0x805ff4u
-#define WSF_OS_HANDLER_EVTS  0x806034u
-#define WSF_OS_MSG_QUEUE     0x806054u
-#define WSF_OS_TASK_EVENTS   0x80605cu
-#define WSF_OS_IDLE_TASKS    0x806060u
-#define WSF_OS_IDLE_COUNT    0x80606cu
-#define WSF_OS_IDLE_PENDING  0x80606du
+#define WSF_OS_CONTEXT       (uintptr_t)&em9305_ram_805ff4
+#define WSF_OS_HANDLERS      (uintptr_t)&em9305_ram_805ff4
+#define WSF_OS_HANDLER_EVTS  (uintptr_t)&em9305_ram_806034
+#define WSF_OS_MSG_QUEUE     (uintptr_t)&em9305_ram_806054
+#define WSF_OS_TASK_EVENTS   (uintptr_t)&em9305_ram_80605c
+#define WSF_OS_IDLE_TASKS    ((uintptr_t)&em9305_ram_80605c + 0x4u)
+#define WSF_OS_IDLE_COUNT    ((uintptr_t)&em9305_ram_80605c + 0x10u)
+#define WSF_OS_IDLE_PENDING  ((uintptr_t)&em9305_ram_80605c + 0x11u)
 #define WSF_OS_INIT_CBACK    0x8019e4u
-#define WSF_OS_AO            ((struct g2_em_qactive *)(uintptr_t)0x80139cu)
+#define WSF_OS_AO            ((struct g2_em_qactive *)(uintptr_t)(uintptr_t)&em9305_ram_80139c)
 #define WSF_OS_AO_QUEUE      ((const g2_em_qevt **)(uintptr_t)0x80faacu)
 
 typedef void (*wsf_handler_t)(uint32_t event, uintptr_t msg);

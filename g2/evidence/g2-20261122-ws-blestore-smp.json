@@ -1,0 +1,86 @@
+{
+ "id": "g2-20261122-ws-blestore-smp",
+ "time": "2026-11-22 19:26 America/Chicago",
+ "status": "VERIFIED",
+ "scope": "SMP: generated Cordio smp_main.c/smp_act.c + pinned smpi/smpr/smp_sc tables (ble/smp-tables), smp-sc-rows, G2 ble-smp, smp-db; 150 functions with stock addresses",
+ "harness": "per-function stub-patch differential; smpCb (stock 0x20070aec, 3 x smpCcb_t 0x4c, sizes match C) shared, interface tail initialised per side by that side's SmpHandlerInit+Smpi/Smpr(Sc)Init; CCB fields randomised within protocol invariants (pair PDU maxKeySize 7..16, pScr always allocated, encKeyLen 7..16); all externs recording stubs",
+ "externs_resolved": "32 by symbol table, plus call-sequence alignment: SecRand 0x53634e, SecCmac 0x53665c, SecAes 0x536426, SecEccGenSharedSecret 0x536774, BdaIsZeros 0x4d2974, BdaCpy 0x4d293c, Calc128Cpy 0x542a44, Calc128Cpy64 0x542a52, WsfTimerStartSec lower 0x52a424, calc128Zeros 0x7856b0, pSmpCfg 0x200004b8",
+ "run_3": {
+  "tests": 683,
+  "equal": 669,
+  "differ": 14,
+  "stopped_at": "target 13 (smpL2cCtrlCback) test 0x1f: harness memory wipe, investigating"
+ },
+ "findings": [
+  {
+   "kind": "harness",
+   "what": "function-pointer arguments to DmConnRegister/L2cRegister differ by design (stock vs C code addresses); to be canonicalised via the target address map"
+  },
+  {
+   "kind": "harness",
+   "what": "HciSendAclData 0x52ad04 arity is 1 (pData); arity 3 recorded garbage registers"
+  },
+  {
+   "kind": "real (log fidelity)",
+   "what": "SmpHandler trace passes __LINE__ 0x136 (310) in C vs 0x133 (307) in stock: the generated smp_main.c replacements shift lines by 3 before SmpHandler. Fix belongs in sources.json generated replacements (shared) -> pending patch"
+  }
+ ],
+ "verdict": "EQUIVALENT",
+ "final_run": {
+  "tests": 7412,
+  "equal": 7412,
+  "differ": 0,
+  "targets": 150,
+  "mutants": 5,
+  "killed": 5,
+  "done": true,
+  "overflow": false,
+  "harness_sha256": "c5b92670c4ca8221ad7de437d19fd47f5ccf7e23e84309bcdc4d7b30d8b99ce6",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "report": "build/ws-blestore-20261122/specs/smp/report-verdict.json",
+  "sources_json_sha256": "d694e3a0aacce757d47df38928eeb21a7157d0ee264f56bfabd429c515b566be"
+ },
+ "mutants": [
+  "smp_main.c smpSendPkt: L2cDataReq handle ^ 1 -> killed",
+  "smp_main.c smpCcbByConnId: ccb[connId % 3] -> killed",
+  "smp_act.c smpStartRspTimer: SMP_TIMEOUT + 1 -> killed",
+  "smp_act.c smpActCheckAttempts: if (attempts > 1) -> killed",
+  "ble-smp/display_ble_smp_cancel_record.c SmpScGetCancelMsgWithReattempt: attempts += 2 -> killed"
+ ],
+ "c_fixes": [
+  {
+   "kind": "real (log fidelity)",
+   "file": "g2/src/sources.json generated smp_main.c",
+   "what": "__LINE__ of the 4 SMP traces now equals stock elog constants 119/307/597/885 via per-site #line (was 120/310/599/890)"
+  },
+  {
+   "kind": "real (missing traces)",
+   "file": "g2/src/apollo-main/ble/smp-tables/{smp_sc_act,smpi_sc_act,smpr_sc_act}.c",
+   "what": "SMP_TRACE_128/256 -> smpLogByteArray_56d478 (stock has 30 BL calls to 0x56d478 in these units; C had none because the unit profile has no WSF trace)",
+   "sha256": {
+    "smp_sc_act.c": "85044a3aa0e5d4f8386d9cf9cdfef2d709d1e6ef07532e7596f1f0f1757b6392",
+    "smpi_sc_act.c": "92587b68799c0252c2a2d916082e303ed387e8ce2e3c070a09bd9964c60b6ab4",
+    "smpr_sc_act.c": "8c639e607dbab0224cc1d533169d6d4be9cea23c7df866fed52b57b7c8b2f16c"
+   }
+  },
+  {
+   "kind": "real (missing trace)",
+   "file": "g2/src/apollo-main/ble/smp-tables/smpr_act.c",
+   "what": "smprActProcPairReq SMP_TRACE_ERR0(\"pScr already allocated\") routed through the G2 cascade (wsf_trace_g2.h) with the stock IAR file path; stock 0x5e3926 elog line 98",
+   "sha256": "4659c9e7611ed494a7e6b96ab6d61dab500b903048cc0fdd117276bcf20f6bb2"
+  }
+ ],
+ "harness_changes": [
+  "argfilter canonicalises stock/C code-pointer args (target index) and masks smpLogByteArray pArray outside RAM (shared upstream/stock UB: smpiScActOobCalcCb leaves secCmacMsg_t.pCiphertext uninitialised; only logged)",
+  "HciSendAclData 0x52ad04 arity 1; DmSmpEncryptReq 0x55bbc4 arity 3; smpScAuthReq is void",
+  "elog gate 0x4c9c50 and log-flags 0x43d0ce are byte getters (ldr/ldrb/bx): run for real, bytes 0x2007502f/0x20004543 randomised",
+  "inputs within protocol invariants: DmConnIdByHandle 0..3, msg connId 0..3, SM state < table rows (smpi 14 / sc 38), valid SMP code in packets, pScCcb set for LESC targets",
+  "low memory 0x0..0x100 restored per test (NULL-CCB paths write ccb fields there in both stock and C)",
+  "SmpScInit 0x56cf74 stays a stub; its effect applied per side in init_side. Stock body and C SmpScInit (ble-conn/display_ble_conn_hci_sc_init.c) identical by inspection; aliases resolve to C smpScProcPairing/smpScAuthReq in the full link",
+  "word-level end-state locator (address, stock, C) on differing state",
+  "stack below SP zeroed before each target call",
+  "result buffer 0x30000 (harness RAM moved to 0x20360000)"
+ ],
+ "run_history": "run3 683 tests/14 differ (stopped at a crash) -> run5 4559/544 -> run7 4703/130 -> run8 4703/42 -> run10 4703/2 (crash at 0x5e0001 = blx 0 from stubbed SmpScInit) -> run13 7412/0, 5/5 mutants",
+ "stub_args": "stub call arguments are recorded and compared (arity table); transparent calls are not recorded"
+}

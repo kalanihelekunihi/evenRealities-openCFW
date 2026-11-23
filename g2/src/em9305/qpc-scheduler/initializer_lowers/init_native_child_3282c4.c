@@ -1,9 +1,10 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x3282c4..0x32841c: initialise the record's 312-byte connection
  * setup block (+2468) for an advertiser start (as 32841c, with role 2) and
  * its connection request block (+2524): access address 0x8e89bed6, CRC
- * init 0x555555, clock accuracy (+60, or 0x805a9c when 0x7f), channel map
+ * init 0x555555, clock accuracy (+60, or ((uintptr_t)&em9305_ram_805a6c + 0x30u) when 0x7f), channel map
  * (+63), PHY code for PHY index +69 (1,2,1,2 for 1..4), a 0x20 window at
  * +2592 (and at +2594 for legacy connectable events with bit 1 of +59),
  * the advertising PDU (+945, built by 3239fc from +1420) and scan
@@ -43,7 +44,7 @@ uint32_t opencfw_em9305_child_3282c4(uintptr_t record)
     w32(setup+28u,done);
     w8(setup+49u,phy);
     uint32_t sca=(uint32_t)accuracy;
-    if(accuracy==0x7f)sca=r8(0x805a9cu);
+    if(accuracy==0x7f)sca=r8(((uintptr_t)&em9305_ram_805a6c + 0x30u));
     uint32_t channel=r8(record+63u);
     uint32_t index=r8(record+69u)-1u;
     uintptr_t connect=record+0x9dcu;

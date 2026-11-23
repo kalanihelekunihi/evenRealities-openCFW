@@ -1,9 +1,10 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31c0e0..0x31c41e: PHY / data-length procedure event handler
  * (record, event). Event 0x69 records the response timing (+772) and
- * signals the 0x8027f0 hook when feature bit 1 of 0x805a98 is set and the
- * procedure is idle. Events 0x0c (LL control opcode 0x802818), 0x28 and
+ * signals the ((uintptr_t)&em9305_ram_8027e0 + 0x10u) hook when feature bit 1 of ((uintptr_t)&em9305_ram_805a6c + 0x2cu) is set and the
+ * procedure is idle. Events 0x0c (LL control opcode ((uintptr_t)&em9305_ram_8027e0 + 0x38u)), 0x28 and
  * 0x70 (pending masks +644/+648/+652/+656) select an opcode (0x1b or
  * 0x1c) and a step. With no procedure running (+620 = 0) the step starts
  * it through the action table 0x335300 (five actions per opcode); with
@@ -39,7 +40,7 @@ uint32_t opencfw_em9305_callback_31c0e0(uintptr_t record, int32_t event)
     if (event < 0x28) {
         if (event != 0xc)
             return 0u;
-        uint32_t control = U8(0x802818u);
+        uint32_t control = U8(((uintptr_t)&em9305_ram_8027e0 + 0x38u));
         if (control >= 0x23u) {
             step = 4u;
             if (control == 0x25u) {
@@ -56,7 +57,7 @@ uint32_t opencfw_em9305_callback_31c0e0(uintptr_t record, int32_t event)
         } else {
             step = 7u;
             if (control == 7u) {
-                if ((uint32_t)(U8(0x80281cu) - 0x23u) >= 3u)
+                if ((uint32_t)(U8(((uintptr_t)&em9305_ram_8027e0 + 0x3cu)) - 0x23u) >= 3u)
                     return 0u;
             } else if (control != 0xdu && control != 0x11u) {
                 return 0u;
@@ -85,11 +86,11 @@ uint32_t opencfw_em9305_callback_31c0e0(uintptr_t record, int32_t event)
         }
         U32(record + 644u) = flags;
     } else if (event == 0x69) {
-        if ((U8(0x805a98u) & 2u) == 0u || U8(state + 135u) != 1u || U8(state + 134u) != 0u)
+        if ((U8(((uintptr_t)&em9305_ram_805a6c + 0x2cu)) & 2u) == 0u || U8(state + 135u) != 1u || U8(state + 134u) != 0u)
             return 1u;
         U8(state + 137u) = (uint8_t)opencfw_em9305_radio_record_timing_30c40c(800u, U16(record + 266u));
         opencfw_em9305_child_318d80(record);
-        uintptr_t hook = U32(0x8027f0u);
+        uintptr_t hook = U32(((uintptr_t)&em9305_ram_8027e0 + 0x10u));
         if (hook != 0u)
             ((void (*)(uintptr_t))hook)(record);
         return 1u;

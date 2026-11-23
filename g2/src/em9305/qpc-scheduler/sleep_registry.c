@@ -2,10 +2,11 @@
  * 0x311848..0x311876. Direct volatile widths and native IRQ/NOP operations.
  * Compilation does not establish physical timer behavior. */
 #include <stdint.h>
+#include "em9305_ram.h"
 uintptr_t opencfw_em9305_sleep_metadata_head(uint32_t incoming)
-{ (void)incoming; return *(volatile uint32_t *)(uintptr_t)0x801998u; }
+{ (void)incoming; return em9305_ram_801994.u32_801998; }
 uint32_t opencfw_em9305_sleep_register(uintptr_t callback)
-{ *(volatile uint32_t *)(uintptr_t)0x805c2cu=(uint32_t)callback; return (uint32_t)callback; }
+{ em9305_ram_805be0.u32_805c2c=(uint32_t)callback; return (uint32_t)callback; }
 static uint32_t latch(void)
 {
  uint32_t irq; irq=(uint32_t)__builtin_arc_clri(); __builtin_arc_sync();
@@ -18,7 +19,7 @@ static uint32_t latch(void)
 uint32_t opencfw_em9305_sleep_finalize(uint32_t incoming)
 {
  (void)incoming;
- volatile uint32_t *config=(volatile uint32_t *)(uintptr_t)0x8019b0u;
+ volatile uint32_t *config=&em9305_ram_801994.u32_8019b0;
  *(volatile uint32_t *)(uintptr_t)0xf01c10u=config[1];
  *(volatile uint32_t *)(uintptr_t)0xf01c0cu=config[0];
  uint32_t high=config[1],low=config[0];

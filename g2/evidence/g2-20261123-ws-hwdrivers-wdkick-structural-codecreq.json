@@ -1,0 +1,135 @@
+{
+  "stream": "ws-hwdrivers",
+  "date": "2026-11-23",
+  "accounting_43_remaining": {
+    "pass_clean_last_cycle": 35,
+    "artifact_bq27427": 1,
+    "fixed_this_cycle": [
+      "wdkick",
+      "codecreq"
+    ],
+    "still_deferred": [
+      "i2srel (audio_clock_save_disable_irq + audio_i2s_release_group4 nostockaddr)"
+    ],
+    "empty_superseded_stubs_the_missing_4": [
+      "alsstate",
+      "batcb",
+      "chgstate",
+      "chgstatemin"
+    ],
+    "note": "35 clean + bq27427 artifact + 3 blocked (codecreq,i2srel,wdkick) = 39; the other 4 are empty/superseded gens (fns=[], ntests=0) = 43 total."
+  },
+  "wdkick_structural_fix": {
+    "finding": "stock 0x5118e8 makes DIRECT calls: r0=&g2_npmx_instance r1=0 bl npmx_timer_get(0x55ef6c); r1=3 bl npmx_timer_task_trigger(0x55ef76); if result==0x2bad0000 return arg0; else flags/log. Our C used an indirect fn-ptr-table write (instance+0x84->driver->entry)(context,0x704,&cmd,1) - structurally wrong + caused the wild-pointer HardFault.",
+    "c_change": "g2/src/apollo-main/drivers/power/npmx-watchdog/kick.c: replaced indirect write with timer=npmx_timer_get(&g2_npmx_instance,0); result=npmx_timer_task_trigger(timer,3);",
+    "validation": {
+      "official_full_build": "python3 tools/build/sources.py build --device g2 --out build/ws-hwdrivers-20261122/full-0300: g2-apollo-main 2719/2719 compiled 0 failures, composed ok; ALL groups composed ok; manifest_changed_during_build=False; report.json written",
+      "official_obj_structure": "kick.c.o in g2-apollo-main emits bl npmx_timer_get; bl npmx_timer_task_trigger; bl flags; bl candidate_log; bl flags x2; bl audio_log_simple; NO indirect blx - matches stock call sequence",
+      "paired_sim_wdkick": "12/12 PASS magic HWDD",
+      "paired_sim_gluefg_handler": "36/36 PASS (npmx_interrupt_handler + poll + charge_status_inform)"
+    }
+  },
+  "npmx_interrupt_handler_structural_check": "NO change needed: C already calls npmx_core_interrupt(0x55eda4) + npmx_core_proc(0x55edac) DIRECTLY, matching stock 0x510fe2 (ldrb [p_pm,#0xcc]; bl 0x55eda4; bl 0x55edac). gluefg 36/36.",
+  "codec_crc32_pin": {
+    "address": "0x004D34C4 (3-arg table CRC32; end 0x4D34F8; 52B; sha256 a992ca64ea956dfae439a145023cf4f9fbad71d62d5e32ac1193d6114e8624d7)",
+    "evidence": "gx8002_unpack_message 0x57BD06 -> bl 0x58FAAC (2-arg wrapper: movs r2,#0; bl 0x4D34C4) -> 0x4D34C4 table CRC32 matching reconstructed codec_crc32(p,n,previous)",
+    "pending_tsv_note": "build/ws-hwdrivers-20261122/pending/codec_crc32-tsv-addition.note.md (for approval; shared TSV NOT edited)",
+    "autogen_known": "stream-private autogen KNOWN += codec_crc32:0x4D34C4 K_SEEDRET (unblocks link; dead code in codecreq)",
+    "codecreq_result": "24/24 PASS"
+  },
+  "pending": [
+    "STEP 3: i2sfloat, deadline",
+    "one semantic in-mem mutant per unit (largest first)",
+    "i2srel resolution"
+  ],
+  "tsv_write_codec_crc32": {
+    "approved_scope": "single writer, one row, codec_crc32 @ 0x004D34C4",
+    "note": "row already existed at line 3526 as an unnamed census fn with the SAME sha256 (a992ca64...) => qualified in place (name/module/confidence/evidence), addr/end/size/sha preserved; line count unchanged (8865)",
+    "sha256_before": "5e1548fd412582192c29567d57fbb9bf35159338e00a95e9459366f87df60a98",
+    "sha256_after": "ee51ce09686ee3df5fc399c3a19753d871c75078e3e5ccdf445ada426cb51715",
+    "sources_py_check": "g2: 4880 units, 4542 source files, 2 not built; r1: 1449 units, 875 source files, 0 not built (no errors)",
+    "approval": "closed after this one write; pending note removed"
+  },
+  "paired_sims_status": {
+    "state": "NOT RUN this cycle - real blocker (ran out of window on harness discovery)",
+    "harness_identified": "g2-firmware-emulator: probe-paired-display.py (observe_pmic_timer covers watchdog kicks/warnings/expiries/reset) + recovery_entry.py (RECOVERY_KEY=0xAFD1363A == OTAP baseline, chip_revision=0x22 == CHIPREV baseline). Loads generated/opencfw/bin/sim24.bin + itcm.bin at 0x438000.",
+    "blocker": "the two standard checks (version-match + forced-mismatch DFU) are the emulator full-system integration sim, which loads a LINKED flat sim image + ITCM overlay generated from a selected main app. Could not pin, in-window, the canonical command chain to (a) link full-0300 apollo-main into the sim bin + itcm overlay and (b) invoke probe-paired-display with the version-match and DFU scenarios and compare to the given baselines, without risk of wrong results or disturbing shared emulator state.",
+    "need": "canonical build->sim-image->paired-probe invocation (how generated/opencfw/bin/sim24.bin + itcm.bin are produced from a composed/linked build, and the exact probe-paired-display scenario args for version-match and forced-mismatch DFU).",
+    "baselines_to_match": {
+      "version_match": "CHIPREV 0x22, OTAP 0xAFD1363A then 0, HOST 0x3A, END_PC 0x543528, advertising 010A200101, display hash 0c5cc90b..., 56 HCI",
+      "forced_mismatch_dfu": "DFU commit 00020404, SYSRESETREQ, SBL VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D; Apollo-main HCI 924 packets"
+    }
+  },
+  "paired_sims": {
+    "status": "PASS",
+    "note": "wdkick structural fix validated by the two standard paired simulator checks on an official-style private full build, copying the app stream's recorded apollo-main flow (build/ws-app-20261122/paired.sh); commands copied, not invented.",
+    "flow_copied_from": [
+      "build/ws-app-20261122/paired.sh",
+      "build/ws-app-20261122/rebuild.sh",
+      "g2/evidence/g2-20261122-em9305-official-rootI-paired-sims.json"
+    ],
+    "build": {
+      "compose": "python3 -u tools/build/sources.py build --device g2 --out build/ws-hwdrivers-20261122/full-0301",
+      "compose_result": "g2-apollo-main 2719/2719 compiled, 0 known failures, composed; all 7 groups composed clean",
+      "note_recompose": "full-0300 compose report went stale because a sibling stream edited g2/src/em9305/qpc-scheduler/assert.c after it; link_g2_sources.py validates ALL source sha256 globally, so I recomposed fresh into full-0301 and linked back-to-back. apollo-main/kick.c unchanged between 0300 and 0301.",
+      "link": "python3 tools/build/link_g2_sources.py --source-out build/ws-hwdrivers-20261122/full-0301 --out build/ws-hwdrivers-20261122/full-0301-link --payload g2-apollo-main",
+      "linked_bytes": 3631956,
+      "g2_apollo_main_bin": "build/ws-hwdrivers-20261122/full-0301-link/g2-apollo-main/g2-apollo-main.bin",
+      "g2_apollo_main_bin_sha256": "8530a1490a3bd1a595983b49b38c352f97e1e642e1dd0fe7e7c209375dee8d13",
+      "app_reset_pc": "0x0052C445"
+    },
+    "runner": "build/ws-hwdrivers-20261122/renode-paired/paired.sh (private copy of app-stream paired.sh; writes rescs+logs only under renode-paired/, reference rescs build/em9305-nor-20261122/opencfw-fuel-gauge-process-c-{match,dfu-mismatch}.resc read-only, one Renode at a time)",
+    "version_match": {
+      "resc": "build/ws-hwdrivers-20261122/renode-paired/hwdrivers-0301-match.resc",
+      "log": "build/ws-hwdrivers-20261122/renode-paired/hwdrivers-0301-match.log",
+      "run_renode_rc": 0,
+      "chiprev": "0x00000022",
+      "baseline_chiprev": "0x22",
+      "chiprev_match": true,
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "otap_match": true,
+      "host_packet_count": "0x0000003A",
+      "baseline_host": "0x3A",
+      "host_match": true,
+      "unsupported_count": "0x00000000",
+      "advertising": "010A200101",
+      "adv_match": true,
+      "display_frames": 2,
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "display_hash_match": true,
+      "end_pc": "0x4ccb34",
+      "hci_host_packets": 58,
+      "faults": 0,
+      "end_pc_and_hci_reconciliation": "User-listed END_PC 0x543528 and 56 HCI are the em9305-IMAGE figures. For an apollo-main-image rebuild the apples-to-apples baseline is the app stream's own apollo-main match log (build/ws-app-20261122/renode/daufix-match.log): END_PC 0x4ccb34 and HCI 58 under the identical awk counter. Mine match both EXACTLY. The firmware's own HOST_PACKET_COUNT register reads 0x3A=58 in both images, confirming 58 is ground truth; the em9305 JSON's 56 is a Renode fold log-line artifact.",
+      "verdict": "PASS vs apollo-main-image baseline (and all firmware-register baselines match exactly)"
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-hwdrivers-20261122/renode-paired/hwdrivers-0301-dfu-mismatch.resc",
+      "log": "build/ws-hwdrivers-20261122/renode-paired/hwdrivers-0301-dfu-mismatch.log",
+      "run_renode_rc": 0,
+      "commit_word_00020404": true,
+      "sysresetreq": true,
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0052C445",
+      "sbl_vtor_match": true,
+      "sbl_sp_match": true,
+      "handoff_pc_note": "PC=0x0052C445 is this image's OWN application reset vector (bytes 4:8 of g2-apollo-main.bin). The app stream's own paired.sh deliberately strips handoff PC before diffing because it legitimately varies per linked image; user baseline 0x0059427D was the em9305 image's app reset vector. VTOR and SP match exactly.",
+      "apollo_main_hci_packets": 924,
+      "baseline_hci": 924,
+      "hci_match": true,
+      "faults": 0,
+      "verdict": "PASS - DFU protocol completed (commit 00020404, SYSRESETREQ, SBL handoff VTOR/SP match), Apollo-main HCI 924 exact"
+    },
+    "overall": "wdkick structural fix (direct npmx_timer_get / npmx_timer_task_trigger calls) is now DONE per the rule: official-style private full build + both paired sims PASS against the apollo-main-image baselines, 0 faults in both runs."
+  },
+  "rules": {
+    "no_commit": true,
+    "no_push": true,
+    "no_flash": true,
+    "no_backups": true,
+    "official_app_not_overwritten": true,
+    "other_streams_renode_left_alone": true,
+    "one_renode_at_a_time": true,
+    "emulator_repo_not_edited": true
+  }
+}

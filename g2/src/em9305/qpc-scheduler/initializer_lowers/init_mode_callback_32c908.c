@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32c908..0x32c974. The BRHS.D at 0x32c94c writes the first
  * two-bit field even for index 9, then returns that low-two-bit value.
@@ -23,7 +24,7 @@ uint32_t opencfw_em9305_mode_callback_32c908(uintptr_t context,
     uint32_t limit=*(volatile uint32_t *)(context+236u);
     if (elapsed<limit) return elapsed;
     for (uint32_t index=0;index<9u;++index) {
-        uintptr_t source=(uintptr_t)0x80281cu+index;
+        uintptr_t source=(uintptr_t)((uintptr_t)&em9305_ram_8027e0 + 0x3cu)+index;
         uintptr_t target=context+193u+4u*index;
         uint8_t first=*(volatile uint8_t *)source;
         *(volatile uint8_t *)target=first&0x03u;
@@ -34,7 +35,7 @@ uint32_t opencfw_em9305_mode_callback_32c908(uintptr_t context,
         uint8_t fourth=*(volatile uint8_t *)source;
         *(volatile uint8_t *)(target+3u)=fourth&0xc0u;
     }
-    uint8_t last=*(volatile uint8_t *)(uintptr_t)0x802825u;
+    uint8_t last=em9305_ram_8027e0.u8_802825;
     uint8_t value=last&0x03u;
     *(volatile uint8_t *)(context+229u)=value;
     return value;

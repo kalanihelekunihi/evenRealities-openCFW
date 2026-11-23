@@ -1,9 +1,10 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31ed34..0x31ef5c: handle a received AUX_SYNC_IND-style PDU
  * (LLID 7) for the owner's periodic-sync link (+36) and context (+44).
- * The header goes to 0x803b74 and the extended header to link+152 with
- * its flags at 0x803b72 (state block G = 0x803b68, H = 0x803b8c). With an
+ * The header goes to ((uintptr_t)&em9305_ram_803b68 + 0xcu) and the extended header to link+152 with
+ * its flags at ((uintptr_t)&em9305_ram_803b68 + 0xau) (state block G = (uintptr_t)&em9305_ram_803b68, H = (uintptr_t)&em9305_ram_803b8c). With an
  * established sync (+153) the cached addresses (+156..+168) are used
  * unless the stored flags lack bit 0; otherwise AdvA/TargetA are cached
  * in G (+20..+39) under the H filters and the flags/addresses refreshed.
@@ -34,7 +35,7 @@ uint32_t opencfw_em9305_child_31ed34(uintptr_t owner, uintptr_t pdu)
 {
     struct opencfw_em9305_request_31ed34 request;
     uint32_t peer[2];
-    const uintptr_t g=0x803b68u,h=0x803b8cu;
+    const uintptr_t g=(uintptr_t)&em9305_ram_803b68,h=(uintptr_t)&em9305_ram_803b8c;
     volatile uint8_t *g8=(volatile uint8_t *)g;
     volatile uint8_t *h8=(volatile uint8_t *)h;
     uintptr_t context=*(volatile uint32_t *)(owner+44u);

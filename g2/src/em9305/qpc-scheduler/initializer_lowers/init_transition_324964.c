@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern uint32_t opencfw_em9305_init_secondary_fill_324768(uintptr_t,uint8_t *);
 extern uint32_t opencfw_em9305_init_secondary_event_30e928(
@@ -19,7 +20,7 @@ uint32_t opencfw_em9305_init_transition_324964_body(
     }
     if(state!=11u)return state;
     (void)opencfw_em9305_init_secondary_fill_324768(record,response);
-    uint32_t id=(uint8_t)((int32_t)(record-0x803d78u)/784);
+    uint32_t id=(uint8_t)((int32_t)(record-((uintptr_t)&em9305_ram_803d58 + 0x20u))/784);
     uint32_t feature=*(volatile uint8_t *)(record+777u);
     return opencfw_em9305_init_secondary_event_30e928(
         0u,id,response,feature);

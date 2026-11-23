@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_radio_record_30fc28(uintptr_t);
 extern uint32_t opencfw_em9305_radio_request_30fcd8(uintptr_t,uint32_t);
@@ -7,7 +8,7 @@ extern uint32_t opencfw_em9305_radio_request_30fcd8(uintptr_t,uint32_t);
 uint32_t opencfw_em9305_callback_3041e0(uintptr_t owner)
 {
     uint8_t frame[20];
-    *(volatile uint8_t *)(uintptr_t)0x8015c4u=1u;
+    em9305_ram_8015c4.u8_8015c4=1u;
     *(volatile uint8_t *)(owner+136u)=0u;
     (void)opencfw_em9305_memset(frame,0u,20u);
     (void)opencfw_em9305_radio_record_30fc28((uintptr_t)frame);

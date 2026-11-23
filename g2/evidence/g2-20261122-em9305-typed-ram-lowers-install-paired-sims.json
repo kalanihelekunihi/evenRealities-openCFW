@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-22 10:37:42 PM CST (America/Chicago)",
+  "title": "Leftover typo-RAM initializer_lowers + stock_residual_code installed: QEMU-ARC prove, private p-lowers rebuild, NVM slot-fit, private NOR splice, paired Renode sims",
+  "scope": "em9305 leftover typo-RAM C (312 rewritten units). Header and g2-em9305.ld were already at the widen install and were not rewritten (byte-identical). qf_port.h has no code literals (comment-only); header pass is N/A.",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261122-em9305-typed-ram-widen-install-paired-sims.json",
+  "sources_json_note": {
+    "unauthorized_write_at": "2026-11-22 10:14:34 PM CST (America/Chicago)",
+    "sha256_then": "1d1270d0f456bd6b1af3e7e16de196be9e73dbb420eb7eb7e78fb2a55121503a",
+    "what_changed": "Appended -Ig2/src/em9305/qpc-scheduler to profiles g2-em9305-1 and g2-em9305-2, and accidentally re-serialized the whole manifest with json.dumps indent=2 (whole-file reindent). Other streams' already-uncommitted semantic content was preserved in the JSON object.",
+    "reverted_at": "2026-11-22 10:24 PM CST (America/Chicago)",
+    "sha256_after_revert": "109554906f091599bf33c46bcf2ac1bf7af0167bdf8f39831e10b7f8f0b9ef6f",
+    "revert": "Removed the two -I flags and wrote the file back with indent=1 (HEAD style), keeping other streams' uncommitted semantic edits.",
+    "pending": "build/ws-em9305-20261122/pending/sources-json-em9305-ram-include.NOTE.md (flag-only proposal, not applied)",
+    "sources_py_check": {
+      "command": "python3 tools/build/sources.py check --device g2",
+      "returncode": 0,
+      "summary": "g2: 4880 units, 4542 source files, 2 not built"
+    },
+    "going_forward": "This stream is not an approved sources.json writer; further sources.json changes go through pending/ only."
+  },
+  "prove": {
+    "harness": "QEMU-ARC qm.py, production flags -mdiv-rem -mbarrel-shifter -mswap -mnorm -mmpy-option=wlh1, --dztrap, --extra extra_cb1.c, n=100, first pass QT=20",
+    "files": 312,
+    "symbols_equivalent_100": 344,
+    "classified_mismatch_addressing_equiv_unaligned_code_ptr": [
+      "opencfw_em9305_child_31fbb8 (CHUNKS dump of test 4; 9 packed CODE pointers, layout delta 0x18)",
+      "opencfw_em9305_child_320088 (same memhash:11 fingerprint t=[4,22,32])",
+      "opencfw_em9305_child_31c88c (same fingerprint; stores (uint32_t)(uintptr_t) of child helpers)"
+    ],
+    "precedence_bug_fixed_then_equivalent": {
+      "bug": "Rewriter parenthesized *ptr + index*stride as *(addr + index*stride). Orig is load-then-add (table base stored at the typo-RAM word).",
+      "files_fixed_in_workspace_then_installed": [
+        "init_native_child_303ad8.c \u2014 after fix EQUIVALENT 100; had been MISMATCH memhash:2 ncalls:1 callhash:1",
+        "init_native_callback_328d78.c \u2014 still EQUIVALENT 100 (index==0 hid the bug on the first pass)",
+        "init_native_callback_318f2c.c \u2014 both-sides RUN FAILED 0/0 (not a MISMATCH)"
+      ]
+    },
+    "void_star_fn_re": "init_native_child_32cb2c.c was NO_SYMS (return type void *name(); FN_RE patched) then EQUIVALENT 100",
+    "both_sides_run_failed": 42,
+    "mutants": {
+      "init_native_scan_child_31eac8 kind-byte 3to4": "MISMATCH memhash:100 \u2014 real kill",
+      "init_native_child_32cb2c typo-RAM 0x10to0x14": "MISMATCH callhash:100 memhash:26 \u2014 real kill",
+      "init_native_child_303ad8 stride 72to73": "EQUIVALENT 100 (write path is a rare identity match on random RAM)",
+      "init_native_child_303ad8 identity-gate if(0)": "MISMATCH ncalls:81 callhash:81 memhash:39 \u2014 real kill"
+    },
+    "notes_dir": "build/ws-em9305-20261122/lowers/NOTE.md"
+  },
+  "tree_install": {
+    "applied_at": "2026-11-22 10:07:05 PM CST (America/Chicago)",
+    "units_installed": 312,
+    "manifest": "build/ws-em9305-20261122/lowers/install_manifest.json",
+    "header": {
+      "path": "g2/src/em9305/qpc-scheduler/em9305_ram.h",
+      "sha256": "720ae726fa2f72d9c782853372dddfbbdc1f22322bd3747fcebfde3e4a770efe",
+      "bytes": 209723,
+      "rewritten_this_pass": false,
+      "note": "Already installed at the widen pass; SHA identical; not rewritten."
+    },
+    "linker_script": {
+      "path": "g2/src/em9305/link/g2-em9305.ld",
+      "sha256": "6f89db8801e136608cb98afbdeee3b9860d6f2ccbbeef1ff3148b4f51f1d4ccb",
+      "rewritten_this_pass": false,
+      "note": "Already at the widen-install SHA; not rewritten. git diff vs HEAD is the earlier uncommitted widen install."
+    },
+    "qf_port_h": "No code literals (comment-only docs of pinned QF_pool_/QK_attr_). Header pass N/A.",
+    "remaining_pinned_literals": [
+      "init_stream_children.c 0x8035e4/0x8035e8 (PINNED 0x8035dc..0x80389c)",
+      "nvm_bootloader.c RESET_FLAGS 0x80fe22 (PINNED 0x80fe20..0x810000)"
+    ]
+  },
+  "tree_build": {
+    "tool": "build/ws-em9305-20261122/pbuild.py (default --ld is the tree linker script)",
+    "outdir": "build/ws-em9305-20261122/p-lowers",
+    "extra_private_only": "-I/w/g2/src/em9305/qpc-scheduler -Wno-error=array-bounds",
+    "extra_reason": "Include path not in sources.json (pending). -Wno-error=array-bounds: em9305_ram_801a04 is a 1-byte typo-RAM object but leftover C uses 16 bytes at 0x801a04 (gap before em9305_ram_801a14); one unit (init_native_child_32bdfc.c) trips -Werror=array-bounds. Coverage gap, not a rewrite logic bug. Header not grown this pass.",
+    "started": "2026-11-22 10:24:54 PM CST (America/Chicago)",
+    "finished": "2026-11-22 10:29:46 PM CST (America/Chicago)",
+    "returncode": 0,
+    "units": 768,
+    "link_log_empty": true,
+    "elf": "build/ws-em9305-20261122/p-lowers/g2-em9305.elf",
+    "elf_sha256": "af7af27d4f8b858980751fdd2d07db3cf23e5dec0c4b2ad617916f293558b487",
+    "flat_bin": "build/ws-em9305-20261122/p-lowers/g2-em9305.bin",
+    "flat_bin_sha256": "4c98eb6a7ee8e8dd59a3f998cca1c4122eefdcd0ff572d57acc9571cd26571cc",
+    "application_bytes": 239608,
+    "application_sha256": "5d498c3693416b38f986215dbc73e226a0fb64c04b8c9d3dc95ecc3bea3c7d6a",
+    "section_sizes": {
+      ".nvm_bootloader": 1160,
+      ".programHeader": 40,
+      ".nvm_entry": 16,
+      ".text": 239608
+    },
+    "vs_previous_widen_application_bytes": {
+      "previous_p_widen": 241436,
+      "ours": 239608,
+      "delta": -1828
+    },
+    "vs_stock_application_bytes": {
+      "stock": 210888,
+      "ours": 239608,
+      "delta": 28720
+    }
+  },
+  "package": {
+    "method": "em9305_record2.split_bootloader_image + record_package.build_package with last_page=(APP_BASE+len(app)-NVM_BASE+0x1FFF)//0x2000",
+    "path": "build/ws-em9305-20261122/p-lowers/g2-em9305-source-candidate-package.bin",
+    "also": "build/ws-em9305-20261122/sim/ble_em9305.lowers.roundtrip.bin",
+    "bytes": 240940,
+    "sha256": "bcdfc31a9260d887ef5af109c9d73dede42d7b7a7715ee4f85da49407a3b0a53",
+    "magic": "00020404",
+    "records": [
+      {
+        "address": "0x00300000",
+        "bytes": 1160
+      },
+      {
+        "address": "0x00302000",
+        "bytes": 56
+      },
+      {
+        "address": "0x00302400",
+        "bytes": 239608
+      }
+    ],
+    "erase_sector_count": 31
+  },
+  "slot_fit": {
+    "nvm_window": [
+      "0x00300000",
+      "0x00380000"
+    ],
+    "nvm_capacity_bytes": 524288,
+    "bootloader_end": "0x00300488",
+    "boot_fits_before_record2_0x00302000": true,
+    "record2_bytes": 56,
+    "application_end": "0x0033CBF8",
+    "app_fits_before_nvm_end": true,
+    "headroom_bytes": 275464,
+    "fits_nvm_slot": true,
+    "note": "Fit is against the EM9305 main NVM window 0x00300000..0x00380000 and the official record2 ASSERTs (bootloader must not reach 0x00302000; app must not pass 0x00380000). Precomputed programmed-NVM CRCs of our record extents: [0x00300000,0x00300488)=1D6121C4, [0x00302000,0x00302038)=0B589C57, [0x00302400,0x0033CBF8)=A054728E."
+  },
+  "splice": {
+    "private_g2_app": "build/ws-em9305-20261122/sim/opencfw-em9305-typed-ram.app.bin",
+    "private_g2_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "private_g2_app_note": "Byte-identical private copy of official opencfw-otap-disarm.app.bin. Official file was not opened for write. Host app was left unchanged this turn.",
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "reset_pc": "0x0059427d",
+    "sp": "0x2007FB00",
+    "vtor": "0x00438000",
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-lowers.bin",
+    "nor_sha256": "7f39485771d48b66f6b7946be6879771edd5151ded3bd4fac6a50653eb15aa39",
+    "nor_source": "copy of build/em9305-nor-20261122/nor-stock-formatted.bin, then lfs_inject at 0x1400000 path /firmware/ble_em9305.bin",
+    "lfs_inject_wrote_bytes": 240940,
+    "itcm": "build/em9305-nor-20261122/itcm.bin (read-only fixture)",
+    "platform": "build/em9305-nor-20261122/platform.repl (read-only fixture)"
+  },
+  "sims": {
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/lowers-match.resc",
+      "log": "build/ws-em9305-20261122/sim/lowers-match.log",
+      "started": "2026-11-22 10:32:05 PM CST (America/Chicago)",
+      "finished": "2026-11-22 10:32:33 PM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "chiprev": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_frames": 2,
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/lowers-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/lowers-dfu-mismatch.log",
+      "started": "2026-11-22 10:32:33 PM CST (America/Chicago)",
+      "finished": "2026-11-22 10:34:21 PM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq_at": "2026-11-22 10:34:12.882 PM CST (America/Chicago)",
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0x0B589C57",
+        "[0x00302400,0x0033CBF8)": "0xA054728E"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "hci_host_packets": 1039
+    }
+  },
+  "compare": {
+    "version_match_baseline": "PASS",
+    "version_match_vs": "widen-match.log (same CHIPREV, OTAP 0xAFD1363A then 0, HOST 0x3A, END_PC 0x543528, 2 display frames, display hash, 56 HCI host packets)",
+    "dfu_protocol_completed": true,
+    "commit_00020404": true,
+    "sysresetreq": true,
+    "sbl_handoff": true,
+    "post_dfu_display_hash": "matches baseline 0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+    "crc_results_identical_to_stock_baseline": false,
+    "crc_results_identical_to_previous_widen": false,
+    "observed_crcs_identical_to_precomputed_our_records": true,
+    "hci_packet_count_identical_to_widen_dfu": false,
+    "verdict": "Version-match is a full baseline pass versus the 7:54 PM CST widen-install run. Forced-mismatch DFU completed the known handshake (commit 00020404, SYSRESETREQ at 10:34:12 PM CST, SBL app handoff, display hash, HOST 0x3A after handoff). CRC windows/values and DFU HCI counts differ from the stock-image and previous widen baselines, as required by splicing our 3-record source package (app 239608 B, 1828 B smaller than p-widen). Observed record CRCs equal the precomputed slot-fit digests. Bootloader CRC 1D6121C4 is unchanged from the previous typo-RAM images."
+  }
+}

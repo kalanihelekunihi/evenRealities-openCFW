@@ -1,0 +1,65 @@
+{
+ "stream": "ws-hwdrivers",
+ "date": "2026-11-23",
+ "artifact": "re-verify remaining 43 units under fixed compareg + autogen log-alias fixes",
+ "pass_clean": 35,
+ "results": {
+  "clean_pass": [
+   "bq25180",
+   "bq27427t",
+   "bq27427wb",
+   "bsppdm",
+   "cenable",
+   "cgpio",
+   "cheapa",
+   "cheapr",
+   "chgsync",
+   "codecdrn",
+   "cpdmclk",
+   "gluecs",
+   "gluefg",
+   "gxb",
+   "gxcmd",
+   "gxread",
+   "gxsvc",
+   "imu1",
+   "imu1b",
+   "imufp",
+   "imufp1",
+   "imufpA",
+   "imufpALL",
+   "imufpB",
+   "imufpC",
+   "imufpm",
+   "lifecyc",
+   "npmxglue",
+   "pdm",
+   "pdmprod",
+   "ringrd",
+   "thrau2",
+   "thraud",
+   "wear",
+   "wdstart"
+  ],
+  "harness_artifact_not_cbug": {
+   "bq27427": "combined 37-fn unit overflows 5MB trace buffer (dump 98.7% full, ndone=444 but only 396 end-markers; clean positional cliff). All 37 fns verified clean via split bq27427a(19/19)+bq27427b(18/18) this session. No C divergence."
+  },
+  "build_or_stage_gaps_not_cbug": {
+   "codecreq": "link fails on external codec_crc32 (response.c, not tested as a unit; addr not in TSV/harness). Only dead code (codec_pack/codec_send, unreachable from tested codec_channel_tx/codec_uart_tx) references it. Deferred (needs addr or gc-sections).",
+   "i2srel": "known-deferred: unresolved audio_clock_save_disable_irq + audio_i2s_release_group4 nostockaddr.",
+   "wdkick": "sim HardFault (magic 48574831) at first test: C indirect-calls npmx instance fn-ptr table (instance+0x84->driver->entry) which is unstaged in standalone harness. Same class as flagged npmx_interrupt_handler staging gap. Stock @0x5118e8 uses direct bl 0x55ef6c/0x55ef76. NOT masked; needs npmx-instance staging + structural check."
+  }
+ },
+ "autogen_fixes_stream_private": {
+  "audio_log_simple": "0x43CE9E K_RET (alias of compress_log_output; confirmed via start.c@0x53c316 mask 0x04000000 + kick@0x511940 mask 0x04400000)",
+  "g2_flashdb_candidate_flags": "0x43D0CE K_LOGFLAGS (alias of audio_log_flags; kick bl@0x511900/924/92c = 3 flags() reads)",
+  "g2_flashdb_candidate_log": "0x43D574 K_RET (alias of audio_log_extended; was MISRESOLVED to 0x77f0a4 which is not a BL target in kick) - dormant-misresolution fixed"
+ },
+ "cumulative_reverified_clean_this_date": 82,
+ "pending": [
+  "step3: i2sfloat, deadline",
+  "one semantic in-memory mutant per unit (largest first)",
+  "wdkick npmx staging",
+  "codecreq codec_crc32 resolution"
+ ]
+}

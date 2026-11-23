@@ -4,6 +4,7 @@
  * software interrupt 2..7 handler (one handler for six vectors): acks bit (irq cause - 0x38) in 0xf00a84, then calls the callback at 0x801918 if set, passing the index (found by the harness).
  */
 #include "em_irq_frame.h"
+#include "em9305_ram.h"
 
 __attribute__((used)) void opencfw_em9305_IRQHandler_SWI7_body(void)
 {
@@ -11,7 +12,7 @@ __attribute__((used)) void opencfw_em9305_IRQHandler_SWI7_body(void)
   uint32_t index = cause - 0x38u;
   EM_R32(0xf00a84u) = 1u << (index & 31u);
   __builtin_arc_sync();
-  void (*cb)(uint32_t) = (void (*)(uint32_t))(uintptr_t)EM_R32(0x801918u);
+  void (*cb)(uint32_t) = (void (*)(uint32_t))(uintptr_t)em9305_ram_80190c.u32_801918;
   if (cb) cb(index);
 }
 

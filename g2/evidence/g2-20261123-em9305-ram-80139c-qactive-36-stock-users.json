@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 1:32:00 AM CST (America/Chicago)",
+  "title": "Stock-user pass for typo-RAM 0x80139c: grow the harvested 4-byte object to the 36-byte WsfOs QActive",
+  "source_completeness_proven": false,
+  "range": {
+    "start": "0x80139c",
+    "end_inclusive": "0x8013bf",
+    "size_bytes": 36
+  },
+  "neighbors": {
+    "0x801398": "Separate nest/wake byte. Stock QActive_start_ 0x310ee8 and wsf_wake_lower 0x333d22 use ldb/stb at 0x801398; not part of the AO.",
+    "0x8013c0..0x8013cf": "16-byte gap. No stock immediates and no typo-RAM object. Not grown into.",
+    "0x8013d0": "Next typo-RAM object, 32 bytes. Stock mov_s r1,0x8013d0 at 0x303258; controller_init memcpy 32 bytes."
+  },
+  "stock_users": [
+    {
+      "addr": "0x310d18",
+      "name": "QActive_ctor",
+      "evidence": "mov_s r1,0x24 then tail to 0x310fac/0x33301c (QF_bzero/memset). Zeros 36 bytes at me."
+    },
+    {
+      "addr": "0x314068",
+      "name": "WsfOsInitOnly",
+      "evidence": "0x314078 mov_s r0,0x80139c; bl QActive_ctor. me of the 36-byte bzero is 0x80139c."
+    },
+    {
+      "addr": "0x310ee4",
+      "name": "QActive_start_",
+      "evidence": "add_s r0,r13,0xc (QEQueue at me+12); stb r15,[r13,32] (prio at me+32); ld_s r0,[r13,0] (vptr)."
+    },
+    {
+      "addr": "0x3140d0",
+      "name": "WsfOsStartOnly",
+      "evidence": "0x3140d2 mov_s r13,0x80139c; ld vptr at [me+0]; load start at vptr+8; jl start(me=0x80139c, prio, qsto=0x80faac, qlen=0x10)."
+    },
+    {
+      "addr": "0x333d18",
+      "name": "wsf_wake_lower / opencfw_em9305_wsf_wake_lower",
+      "evidence": "0x333d40 mov_s r2,0x80139c; ld vptr; ld post at vptr+0xC; jl post(me=0x80139c, event, 0xffff). C already uses em9305_ram_80139c.u32_80139c and &em9305_ram_80139c."
+    }
+  ],
+  "layout": {
+    "+0x00": "vptr",
+    "+0x04": "QHsm state",
+    "+0x08": "QHsm temp",
+    "+0x0C": "QEQueue (20 bytes; QEQueueCtr is uint16 so 2 pointers + 5 counters + 2 pad)",
+    "+0x20": "prio (uint8) plus 3 pad to 36"
+  },
+  "objdump": "g2/research/corpus/em9305/objdump/open-2026-09-29/em9305-0x302400-0x335BC8.s",
+  "tree_users_after_grow": [
+    "g2/src/em9305/qpc-scheduler/controller_init.c (u32_80139c and &object; still valid)",
+    "g2/src/em9305/qpc-scheduler/wsf_os_ao.c (pending typo-RAM install once re-proven; WSF_OS_AO is a 36-byte g2_em_qactive at this address)"
+  ],
+  "ld": "em9305_ram_80139c = 0x0080139c unchanged (absolute symbol, no size)."
+}

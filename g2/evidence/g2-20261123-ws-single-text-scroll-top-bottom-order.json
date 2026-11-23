@@ -1,0 +1,17 @@
+{
+ "id": "g2-20261123-ws-single-text-scroll-top-bottom-order",
+ "date": "2026-11-23",
+ "workstream": "ws-single",
+ "unit": "g2/src/apollo-main/ui/a-28-common-text-scroll/common_text_scroll.c",
+ "function": "try_extend_animation",
+ "bug": "C called scroll_bottom before scroll_top (argument evaluation order); stock calls top at 0x4e00bc then bottom at 0x4e00c4.",
+ "fix": "Read scroll_top into a local first, then max_scroll = bottom + top.",
+ "verification": {
+  "function-level (ag33, 09:37 CST)": "90/90 equal",
+  "paired": "PASS on s6 (sha256 9d8ee907acd4...cff1; fixes 1-5): DFU_SAME, 924 HCI, OTAP 0xAFD1363A->0, CHIPREV 0x22, HOST 0x3A, unsupported 0, adv 1, display 2, faults 0 (identical to paired-s4)"
+ },
+ "artifacts": [
+  "build/ws-single-20261123/ag33-rerun.log",
+  "build/ws-single-20261123/paired-s6.log"
+ ]
+}

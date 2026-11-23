@@ -41,8 +41,8 @@ uint32_t audio_uart_registry_callback_472102(uint32_t event,
     struct sync_info_stream stream, decoding;
     audio_uart_pb_stream_init(&stream, bytes, length);
     (void)audio_uart_display_area_copy_439c04(&decoding, &stream, 16u);
-    if (audio_uart_pb_decode(&decoding, audio_sync_info_pb_descriptor_77c1cc,
-                             audio_sync_info_state_200740bc) == 0u) {
+    if ((uint8_t)audio_uart_pb_decode(&decoding, audio_sync_info_pb_descriptor_77c1cc,
+                                      audio_sync_info_state_200740bc) == 0u) {
         const char *error = decoding.errmsg ? decoding.errmsg : none;
         if (audio_log_flags() & 2u)
             audio_log_extended(1u, module, file, function, 140u,

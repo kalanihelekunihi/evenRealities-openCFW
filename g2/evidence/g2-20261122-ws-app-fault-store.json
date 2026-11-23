@@ -1,0 +1,150 @@
+{
+ "stream": "ws-app (OpenCFW workstream 5, g2/src/apollo-main/app/**)",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "sources": {
+  "g2/src/apollo-main/app/fault-lookup/fault_lookup_overrun_509b48.c": "38efbf56b56abd0e5bf232b51c0b3d8bf63e649b1ceaef8af3554c215373df9e",
+  "g2/src/apollo-main/app/fault-handler/fault_handler_509b48.c": "3176f096345fb944002f748b8170878facc36aa03a79d5aa605e8796179a8377",
+  "g2/src/apollo-main/app/quicklist-store/quicklist_store_one_58d51c.c": "5e54b7bc9f3fa8b6efa3144fb49325ee96aae0adc9919576ca1b6d877c12dd9e",
+  "g2/src/apollo-main/app/quicklist-store/quicklist_store_many_58d668.c": "2df82f693dc904c4d75724d7d45e19940b4c9be96c89d61347d8e5a5cb6c7a60",
+  "g2/src/apollo-main/app/quicklist-common/quicklist_types.h": "2117cb06698a3f2a2da24ee51fb8086703ca18a80044a00f3607a92bf51cefe7"
+ },
+ "specs": {
+  "fault-a": {
+   "verdict": "EQUIVALENT",
+   "tests": 400,
+   "equal": 400,
+   "differ": 0,
+   "mutants": 6,
+   "killed": 6,
+   "surviving_mutants": [],
+   "harness_sha256": "9c073b6378a96fcb061b9119f017c5836539017ab311d62a690481081df100a9",
+   "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+   "functions": "APP_errorFaultHandler / audio_ring_pb_assert_509b48 + audio_fault_code_message vs stock 0x509b49",
+   "note": "first run left mutant 1 (log line 0x71->0x72) alive because the log hook did not record the line argument; hook now records level and line, 6/6 killed"
+  },
+  "ql-d": {
+   "verdict": "EQUIVALENT",
+   "tests": 600,
+   "equal": 600,
+   "differ": 0,
+   "mutants": 8,
+   "killed": 8,
+   "surviving_mutants": [],
+   "harness_sha256": "fc5336df57ff58983a50c4f1d9eabbe6fa682266756a65e04da9b365cffa2da9",
+   "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+   "functions": "quicklist store_one 0x58d51d, store_many 0x58d669 (typed rewrite, byte-indexed cache)"
+  }
+ },
+ "fault_lookup": {
+  "change": "213 stock overrun rows removed; audio_fault_code_message is a wrapping scan of audio_fault_code_table identical to stock",
+  "call_site_scan": "all 103 stock call sites of 0x509b48 pass type 0, detail 1, so the overrun rows are never reachable from stock callers",
+  "removed_symbol": "audio_fault_unmapped_code_message (no remaining references)"
+ },
+ "ota_mram_0x605000": {
+  "finding": "OTA_MRAM_APP_ADDR 0x605000 with area 0x1fb000 overlaps the running app image in stock too (stock app 0x438000..0x794324); faithful to stock, documented only",
+  "ours_end": "0x7ad818 (+0x19500 B vs stock)",
+  "mram_records": "0x7fe000 bootloader and 0x7ff000 BLE records lie above our image end",
+  "OTA_MAX_IMAGE_SIZE": "0x1f4000"
+ },
+ "init_ram_0x200004bc": {
+  "finding": "0x200004bc/c0/c4 are cJSON global_hooks (12 B), owned by third-party/upstream/cjson/cJSON.c, linked at 0x200130ac",
+  "stock_init": [
+   "0x474cd3",
+   "0x474d17",
+   "0x474d55"
+  ],
+  "ours": "malloc=codec_allocate (0x474cd2), free=audio_file_heap_free (0x474d16), realloc=audio_file_heap_realloc (0x474d54)",
+  "action": "already owned, no app change"
+ },
+ "build": {
+  "dir": "build/ws-app-20261122/b1",
+  "compile": "2719/2719 compiled, 0 duplicate strong symbols, 21 unresolved (same set as before), 232 recompiled / 2487 reused",
+  "link": "3627092 bytes",
+  "bin_sha256": "8bb6266c78d6077e5eb94975db0e990270558461b409ff3f99b09e021ebc6fc2",
+  "package_sha256": "80f977cd53d64ffabc6110889569a21823754207ac6acc93b34e0a5839aaab41"
+ },
+ "paired_sims": {
+  "variant": "ws-app2",
+  "match": {
+   "OTAPOINTER_AFTER_0.01S": "0xAFD1363A",
+   "OTAPOINTER_AFTER_8S": "0x00000000",
+   "CHIPREV_AFTER_8S": "0x00000022",
+   "HOST_PACKET_COUNT": "0x0000003A",
+   "UNSUPPORTED_COUNT": "0x00000000",
+   "adv": 1,
+   "display": 2,
+   "faults": 0
+  },
+  "dfu_mismatch": {
+   "dfu_lines_vs_reference": "DFU_SAME",
+   "hci_packets": 922
+  },
+  "reference": "identical to build/em9305-nor-20261122 fuel-gauge-process-c match/dfu-mismatch logs on every metric"
+ },
+ "misalignment": "owned centrally by ramlayout stream; no app-side per-object fixes",
+ "harness_fix_1612": {
+  "bug": "hrt_stub_dispatch never recorded plain (non-printf) stub arguments; spec 'arity' only affected printf-style stubs, so ql-a/b/c/d and fault-a verdicts compared call order, return values, memory and hook-recorded data but not ordinary callee arguments",
+  "fix": "declared arity args now recorded; stack addresses (0x2007C000..0x2007FB00) collapse to one marker; harness stub labels mapped back to stock entry addresses (callback args); unlisted stubs default to arity 0",
+  "status": "fault-a, ql-a, ql-b, ql-c, ql-d re-run 16:32-16:52 CST with the fixed harness: all EQUIVALENT, all mutants killed; verdicts are final; pair-a EQUIVALENT 17:10 CST"
+ },
+ "pair_mgr": {
+  "spec": "build/ws-app-20261122/specs/pair-a",
+  "functions": "14 PB_Rx*/PB_TxEncode* in app/a-20-pb-pair-mgr/pb_service_pair_mgr.c vs stock 0x4bb3dc..0x4bcf9c",
+  "pre_fix_run": "840/840 equal, 8/10 mutants killed (survivors were argument-only mutants, which exposed the harness bug)",
+  "post_fix_run": "796/840 equal, 10/10 killed; all 44 diffs are RING_ConnectPolicy{ShouldBlock,MarkProcessed}RingConnectInfo receiving raw connectRing byte (stock) vs bool (C); callees only test nonzero, so C is correct; harness now compares truthiness; rerun queued",
+  "final": "17:10 CST: 840/840 equal, 10/10 mutants killed (EQUIVALENT); see g2-20261122-ws-app-pair-mgr.json"
+ },
+ "post_fix_reverification": {
+  "fault-a": {
+   "verdict": "EQUIVALENT",
+   "tests": 400,
+   "equal": 400,
+   "differ": 0,
+   "mutants": 6,
+   "killed": 6,
+   "surviving_mutants": [],
+   "harness_sha256": "9c073b6378a96fcb061b9119f017c5836539017ab311d62a690481081df100a9"
+  },
+  "ql-a": {
+   "verdict": "EQUIVALENT",
+   "tests": 1200,
+   "equal": 1200,
+   "differ": 0,
+   "mutants": 8,
+   "killed": 8,
+   "surviving_mutants": [],
+   "harness_sha256": "66fe0c6dd7a63eb622be14ca2652c8a41bea7ff1857321a2700ad78436258959"
+  },
+  "ql-b": {
+   "verdict": "EQUIVALENT",
+   "tests": 800,
+   "equal": 800,
+   "differ": 0,
+   "mutants": 8,
+   "killed": 8,
+   "surviving_mutants": [],
+   "harness_sha256": "aa9b4a7e42b83993ee5bd0892b831cc7e70990173bca028e448459a1644fac2c"
+  },
+  "ql-c": {
+   "verdict": "EQUIVALENT",
+   "tests": 600,
+   "equal": 600,
+   "differ": 0,
+   "mutants": 8,
+   "killed": 8,
+   "surviving_mutants": [],
+   "harness_sha256": "66bb97b6cdff28805a8f987b45b41d3d1934f5c4733d7f32a6708bd12726e1d5"
+  },
+  "ql-d": {
+   "verdict": "EQUIVALENT",
+   "tests": 600,
+   "equal": 600,
+   "differ": 0,
+   "mutants": 8,
+   "killed": 8,
+   "surviving_mutants": [],
+   "harness_sha256": "fc5336df57ff58983a50c4f1d9eabbe6fa682266756a65e04da9b365cffa2da9"
+  }
+ }
+}

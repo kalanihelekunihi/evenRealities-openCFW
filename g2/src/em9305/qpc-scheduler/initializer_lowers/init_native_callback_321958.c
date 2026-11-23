@@ -1,15 +1,16 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x321958..0x321c30: periodic-sync receive callback (owner, pdu,
  * status). Records the status (+44) and the channel index in the report
- * buffer. Decodes the extended header (32df24) into 0x803b68: data
+ * buffer. Decodes the extended header (32df24) into (uintptr_t)&em9305_ram_803b68: data
  * pointer (+4), data length (+8) and header flags (+10). An AUX_SYNC
  * report (type 7) on a listening, mapped channel consumes it from the
- * pending channel map, copies the AD data, runs the 0x805c9c report hook
+ * pending channel map, copies the AD data, runs the ((uintptr_t)&em9305_ram_805c5c + 0x40u) report hook
  * and computes the anchor offset; a first sync arms the record (+5,
  * 325d50/326108) or reports a filtered-out sync (reason 2). It then
- * stores the first AUX pointer (0x803d70), forwards a pending sync-lost
- * event (+408, task 0x805b18), and for a header with an AuxPtr computes
+ * stores the first AUX pointer ((uintptr_t)&em9305_ram_803d70), forwards a pending sync-lost
+ * event (+408, task ((uintptr_t)&em9305_ram_805af0 + 0x28u)), and for a header with an AuxPtr computes
  * the next window (+108) and returns its offset. Type 5 goes to 321830. */
 #define U8(a) (*(volatile uint8_t *)(uintptr_t)(a))
 #define U16(a) (*(volatile uint16_t *)(uintptr_t)(a))
@@ -28,9 +29,9 @@ extern uint32_t opencfw_em9305_init_secondary_time_317ebc(uint32_t, uint32_t);
 extern uint32_t opencfw_em9305_init_secondary_message_325d50(uintptr_t record, uint32_t reason);
 extern uint32_t opencfw_em9305_child_326108(uintptr_t record, uint32_t value);
 
-#define EXT_HEADER 0x803b68u /* +4 data, +8 data length, +10 header flags */
-#define AUX_POINTER 0x803d70u
-#define SCAN_FILTER 0x8051a4u
+#define EXT_HEADER (uintptr_t)&em9305_ram_803b68 /* +4 data, +8 data length, +10 header flags */
+#define AUX_POINTER (uintptr_t)&em9305_ram_803d70
+#define SCAN_FILTER ((uintptr_t)&em9305_ram_805194 + 0x10u)
 
 uint32_t opencfw_em9305_callback_321958(uintptr_t owner, uintptr_t pdu, uint32_t status)
 {
@@ -81,7 +82,7 @@ uint32_t opencfw_em9305_callback_321958(uintptr_t owner, uintptr_t pdu, uint32_t
         U8(link + 5u) = 1u;
         (void)opencfw_em9305_init_secondary_message_325d50(link, 4u);
         (void)opencfw_em9305_child_326108(link, 1u);
-        if (U8(0x8051c0u) == 1u)
+        if (U8(((uintptr_t)&em9305_ram_8051b8 + 0x8u)) == 1u)
             U32(link + 260u) = U32(link + 252u) * U16(sync);
     }
 
@@ -101,7 +102,7 @@ uint32_t opencfw_em9305_callback_321958(uintptr_t owner, uintptr_t pdu, uint32_t
             U16(report + 88u) = (uint16_t)size;
             (void)opencfw_em9305_memcpy((void *)data, (const void *)(report + 112u), size);
             report = U32(link + 780u);
-            uintptr_t hook = U32(0x805c9cu);
+            uintptr_t hook = U32(((uintptr_t)&em9305_ram_805c5c + 0x40u));
             U32(session + 124u) = report + 22u;
             U16(session + 120u) = (uint16_t)((uint32_t (*)(uint32_t, uintptr_t, uintptr_t, uint32_t))hook)(
                 U16(report + 366u), report + 22u, report + 88u, 0u);
@@ -130,7 +131,7 @@ uint32_t opencfw_em9305_callback_321958(uintptr_t owner, uintptr_t pdu, uint32_t
         if (message != 0u) {
             U32(message) = 0x3110000u;
             (void)opencfw_em9305_memcpy((void *)(message + 4u), (const void *)lost, 0x60u);
-            (void)opencfw_em9305_wsf_task_message_send(U8(0x805b18u), message);
+            (void)opencfw_em9305_wsf_task_message_send(U8(((uintptr_t)&em9305_ram_805af0 + 0x28u)), message);
         }
     }
 

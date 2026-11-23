@@ -33,7 +33,10 @@ _Static_assert(sizeof(g2_clog_manager_t) == 12u, "compress_manager.bin record");
 
 extern g2_clog_manager_t g2_clog_manager;        /* RAM 0x20073f9c */
 extern volatile uint8_t g2_clog_manager_loaded;  /* RAM 0x20074fa0 */
-extern volatile uint8_t audio_log_policy_byte;   /* RAM 0x20074fa1 export in progress */
+/* Export-in-progress flag, stock RAM 0x20074fa1 (.bss, 0 at boot): written by export_notify 0x44a904 and
+ * export_timeout_callback 0x44a8b6 (strb via literal 0x44aa0c), read by compress_log_export_active 0x44a9ae.
+ * Distinct from the log level byte 0x20004544 (compress_log_set_level 0x43d0d4, literal 0x43d140). */
+volatile uint8_t compress_log_export_active_flag __attribute__((section(".g2_ram_20074fa1")));
 
 extern int32_t g2_audio_dump_snprintf(char *buf, uint32_t size, const char *fmt, ...); /* 0x44b728 */
 extern void *file_open(const char *path, const char *mode);                 /* 0x474550 */
@@ -273,7 +276,7 @@ void compress_log_export_timeout_callback(void)
 {
     CLOG_LOG(timeout_fn, 2u, 0x157u, 0x08000000u,
              "[EXPORT] export timeout, reset sync flag"); /* ROM 0x73cb90 / 0x727984 */
-    audio_log_policy_byte = 0u;
+    compress_log_export_active_flag = 0u;
 }
 
 /* While an export runs the ring is not flushed to files; a 120 s timer
@@ -290,5 +293,5 @@ void compress_log_export_notify(uint8_t is_start_export)
     } else {
         (void)audio_event_loop_remove_delayed(compress_log_export_timeout_callback);
     }
-    audio_log_policy_byte = is_start_export;
+    compress_log_export_active_flag = is_start_export;
 }

@@ -14,6 +14,7 @@ extern void audio_ble_comm_master_dispatch_a(void *);/* 0x503b92 */
 extern void audio_ble_comm_master_dispatch_b(void *);/* 0x503c32 */
 extern void audio_ble_comm_slave_dispatch(void *);   /* 0x4b3ca4 */
 extern void audio_ble_comm_slave_finish(void *);     /* 0x4b45b0 */
+extern void audio_ble_discovery_event_5322bc(const uint8_t *); /* 0x5322bc */
 extern void audio_ble_comm_message_release(void *);  /* 0x4b75ce */
 extern uint32_t audio_ble_comm_forward_a(uint8_t,void *,uint32_t,uint32_t);/* 0x46ef74 */
 extern uint32_t audio_ble_comm_forward_b(uint8_t,void *,uint32_t,uint32_t);/* 0x4a19c0 */
@@ -57,6 +58,7 @@ void audio_ble_handler_4b7d32(uint8_t handler,void *message) {
             audio_ble_comm_slave_finish(message);
         }
     }
+    audio_ble_discovery_event_5322bc(bytes);
     audio_ble_comm_message_release(message);
     (void)audio_ble_comm_forward_a(handler,message,0u,0u);
     (void)audio_ble_comm_forward_b(handler,message,0u,0u);

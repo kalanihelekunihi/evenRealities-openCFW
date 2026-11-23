@@ -1,0 +1,41 @@
+{
+ "stream": "ws-hwdrivers",
+ "stamp": "20261122",
+ "unit": "npmx_main_driver",
+ "method": "per-function Renode M55 equivalence; npmx_* library callees resolved to recovered STOCK addresses and executed as real stock code (run-stock) for BOTH variants; hal_i2c_transfer_full/joined modelled as common stub boundary; g2_npmx_backend record preloaded (write=0x00511085, read=0x00511003, p_context=0) at RAM 0x20074068 for both variants",
+ "functions_verified": [
+  {
+   "name": "npmx_backend_i2c_read_511002",
+   "cases": 20,
+   "diffs": 0,
+   "note": "pure hal_i2c_transfer_full wrapper"
+  },
+  {
+   "name": "npmx_backend_i2c_write_511084",
+   "cases": 20,
+   "diffs": 0,
+   "note": "pure hal_i2c_transfer_joined wrapper"
+  },
+  {
+   "name": "npmx_bchg_vbat_low_charge_enable_512a34",
+   "cases": 20,
+   "diffs": 0,
+   "note": "calls npmx_backend_register_write run-stock @0x55fc2c via preloaded backend"
+  },
+  {
+   "name": "npmx_bchg_ntc_enable_512a4c",
+   "cases": 20,
+   "diffs": 0,
+   "note": "calls npmx_backend_register_write run-stock @0x55fc2c via preloaded backend"
+  }
+ ],
+ "total_cases": 80,
+ "total_diffs": 0,
+ "runstock_map": "harness/npmx_runstock.json (17 recovered high-confidence addresses + placeholders)",
+ "deferred": "instance-dependent wrappers (charger enable/disable, enter_ship_mode, get_device_id, get_adc_measurements, configure_buck2/lsdw1, int_pin_configure, backend_init, application_configure, main_driver_init) need a populated g2_npmx_instance snapshot; fuel-gauge callees belong to the fuel-gauge stream",
+ "reverified_final_harness": true,
+ "reverified_when": "2026-11-22 7:14 PM CST (America/Chicago)",
+ "reverification_notes": [
+  "Re-verified under the final arg-comparing + VFP-aware harness and the global-merge-off build (-fno-common -mllvm -arm-global-merge=false); 0 mismatches in the 2026-11-22 19:12 CST full batch re-run."
+ ]
+}

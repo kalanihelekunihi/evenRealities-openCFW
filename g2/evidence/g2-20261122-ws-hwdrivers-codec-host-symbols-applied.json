@@ -1,0 +1,40 @@
+{
+  "stream": "ws-hwdrivers",
+  "action": "apply codec-host cross-module callee symbols to g2/symbols/apollo_main.tsv",
+  "timestamp_cst": "2026-11-22T20:55-06:00",
+  "writer_approval": "single-writer apollo_main.tsv for pending/codec-host-callee-addrs.json items; closed after this apply",
+  "file_sha256_before": "e1d2204f9a733302bd03b7842de034e11875455944d23da2e1fab58e93dd275d",
+  "file_sha256_after": "a5a16f5e681f6a3fa2060ce545c18ea0176c3112b2bcb0e2cba4f8c3ebc4887e",
+  "rows_before": 8861, "rows_after": 8864,
+  "validation": {
+    "sources_py_check": "clean; g2 4880 units/4542 src/2 not-built, IDENTICAL for orig vs applied (the 2 not-built are pre-existing, unrelated to this edit)",
+    "sha_self_check_code_rows": "0 mismatches",
+    "existing_rows_sha_revalidated": "all 9 named-in-place rows: stored stock_sha256 == sha256(stock.app.bin[VA-0x438000:+size]) BEFORE naming (bytes unchanged by naming)"
+  },
+  "named_in_place_unnamed_or_placeholder_rows": {
+    "0x491102": {"name":"codec_wrapper_delay","size":8,"module_kept":"nanopb","sha":"(unchanged, validated)"},
+    "0x58e2d8": {"name":"codec_fifo_read","size":70,"module_kept":"first-party"},
+    "0x58e3f8": {"name":"codec_hal_blocking","size":72,"alias":"am_hal_uart_transfer"},
+    "0x58e7e4": {"name":"codec_irq_clear","size":42},
+    "0x58e80e": {"name":"codec_irq_status","size":58},
+    "0x58e860": {"name":"codec_irq_service","size":176},
+    "0x58fac8": {"name":"codec_tick64","size":10,"alias":"codec_tick_snapshot"},
+    "0x598160": {"name":"ring_buffer_init","size":44,"was":"FUN_00598160"},
+    "0x5981c4": {"name":"ring_buffer_queue_arr","size":28,"was":"investigation-required placeholder"}
+  },
+  "added_rows": {
+    "0x590a24": {"name":"g2_codec_i2s_dma_configure","end":"0x590b6c","size":328,"sha":"9059020841cbe57a43882cb17a592fdae57252c0f5a8294582e335df566ea438","extent":"Thumb return analysis, clean pop/bx lr at 0x590b6a, capped at next start 0x590b6c","alias":"am_hal_i2s_dma_configure"},
+    "0x2007436c": {"name":"g2_codec_shared_enable_mask","size":4,"sha":"(RAM addr; no binary-backed sha)"},
+    "0x200748f8": {"name":"g2_codec_heap_mutex","size":4,"sha":"(RAM addr; no binary-backed sha)"}
+  },
+  "confirmed_already_canonical_NOT_regressed": {
+    "0x449376": "osDelay (cmsis-freertos) == codec_delay_tick alias",
+    "0x474cd2": "file_heap_allocate (g2-file-runtime) == codec_allocate (source literally aliases them)",
+    "0x474d16": "file_heap_free == codec_release",
+    "0x57bd06": "gx8002_unpack_message == audio_transaction_extract",
+    "0x57c442": "gx8002_read_uart_data == audio_transaction_exchange",
+    "0x57c512": "gx8002_send_and_wait_response == audio_send_transaction",
+    "_note": "These 6 of the 16 already carried confident canonical names; recovery confirms identity; kept canonical names, recorded codec-host aliases here rather than regress the table."
+  },
+  "notes_on_data_globals": "apollo_main.tsv had ZERO RAM rows before; these 2 are the first. RAM globals cannot carry a binary-backed stock_sha256 (address not in app image). Added with size=4 and empty sha + RAM note. sources.py check accepts them (does not sha apollo rows)."
+}

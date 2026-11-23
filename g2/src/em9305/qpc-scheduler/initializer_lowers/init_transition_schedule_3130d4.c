@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern uint32_t opencfw_em9305_pal_current_time(void);
 extern uint32_t opencfw_em9305_auxiliary_guard_interval(void);
@@ -14,7 +15,7 @@ static void wr(uintptr_t p,uint32_t v){*(volatile uint32_t *)p=v;}
 uint32_t opencfw_em9305_init_schedule_latest_3130d4(
     uintptr_t object,uint32_t minimum,uint32_t maximum)
 {
-    uintptr_t root=0x805f04u, link=root+20u;
+    uintptr_t root=((uintptr_t)&em9305_ram_805eec + 0x18u), link=root+20u;
     uint32_t original=rd(object+8u);
     uint32_t candidate=original+maximum;
     uintptr_t tail=rd(link);

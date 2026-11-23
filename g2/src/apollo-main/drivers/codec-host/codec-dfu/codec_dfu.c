@@ -410,12 +410,12 @@ int32_t semantic_CodecLoadFirmwarePackage(void)
             return -1;
         }
         if (info.type == CODEC_FW_TYPE_BOOT) {
-            audio_uart_checksum_copy(&boot_info, &info, sizeof(info));
+            boot_info = info; /* stock: inline struct copy, no helper call */
             boot_found = true;
             DFU_LOG(4u, 0x10c00000u, fn_load, 127u, found_boot, found_boot_s, info.size,
                     info.offset, info.crc32);
         } else if (info.type == CODEC_FW_TYPE_FLASH) {
-            audio_uart_checksum_copy(&fw_info, &info, sizeof(info));
+            fw_info = info; /* stock: inline struct copy, no helper call */
             fw_found = true;
             DFU_LOG(4u, 0x10c00000u, fn_load, 132u, found_fw, found_fw_s, info.size,
                     info.offset, info.crc32);

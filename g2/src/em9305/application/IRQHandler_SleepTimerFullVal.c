@@ -4,12 +4,16 @@
  * sleep timer full-value interrupt: ack 16 at 0xf00844, then the callback at 0x80191c if set.
  */
 #include "em_irq_frame.h"
+#include "em9305_ram.h"
 
 __attribute__((used)) void opencfw_em9305_IRQHandler_SleepTimerFullVal_body(void)
 {
   EM_R32(0xf00844u) = 16u;
   __builtin_arc_sync();
-  EM_IRQ_CALL_SLOT(0x80191cu);
+  {
+    em_irq_cb_t cb_ = (em_irq_cb_t)(uintptr_t)em9305_ram_80190c.u32_80191c;
+    if (cb_) cb_();
+  }
 }
 
 EM_IRQ_HANDLER(opencfw_em9305_IRQHandler_SleepTimerFullVal, opencfw_em9305_IRQHandler_SleepTimerFullVal_body);

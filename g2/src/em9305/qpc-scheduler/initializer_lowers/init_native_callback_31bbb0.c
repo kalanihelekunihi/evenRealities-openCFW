@@ -1,7 +1,8 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31bbb0..0x31bc28: drain the six-entry received-test-packet
- * ring at 0x8028d0 (tail +0, head +4, 20-byte entries from +8). Each
+ * ring at (uintptr_t)&em9305_ram_8028d0 (tail +0, head +4, 20-byte entries from +8). Each
  * entry becomes a type-258 report (id +8, length +0x18, timestamp +0x10,
  * status +0xc) for the message 12 bytes before the stored buffer (+0x14);
  * the buffer slot is cleared and the test timer restarted. */
@@ -24,12 +25,12 @@ struct init_test_report_31bbb0 {
 
 void opencfw_em9305_callback_31bbb0(void)
 {
-    volatile uint32_t *ring=(volatile uint32_t *)(uintptr_t)0x8028d0u;
+    volatile uint32_t *ring=&em9305_ram_8028d0.u32_8028d0;
     uint32_t head=ring[1];
     if(head==ring[0]) return;
     struct init_test_report_31bbb0 report;
     do {
-        uintptr_t entry=(uintptr_t)0x8028d0u+head*20u;
+        uintptr_t entry=(uintptr_t)(uintptr_t)&em9305_ram_8028d0+head*20u;
         report.extra=0u;
         report.flag=0u;
         report.id=*(volatile uint16_t *)(entry+8u);
@@ -42,7 +43,7 @@ void opencfw_em9305_callback_31bbb0(void)
         report.status=(uint16_t)*(volatile uint32_t *)(entry+0xcu);
         (void)opencfw_em9305_dispatch_child_31b9ac(message,(uintptr_t)&report);
         (void)opencfw_em9305_ll_received_event_active(message);
-        *(volatile uint32_t *)((uintptr_t)0x8028d0u+ring[1]*20u+0x14u)=0u;
+        *(volatile uint32_t *)((uintptr_t)(uintptr_t)&em9305_ram_8028d0+ring[1]*20u+0x14u)=0u;
         (void)opencfw_em9305_ll_test_timer_31c490(report.id,report.timestamp);
         head=(ring[1]+1u)%6u;
         ring[1]=head;

@@ -1,0 +1,48 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "verified_at": "2026-11-22 20:53 CST",
+ "origin": "ws-ramlayout build/ws-ramlayout-20261122-1230/pending/07-stock-data-initializers.patch (app/ hunks) + README note on system-alert page id; pending file not edited; audio/master-dispatch hunk (audio_log_policy_byte = 3) left to ws-ramlayout",
+ "sources": {
+  "g2/src/apollo-main/app/conversate-ui/conversate_ui_message_send_58bfb2.c": "b7b003aabd6273e35de25766a31079433674e86e3b1563c5e5a0a2c708e650b3",
+  "g2/src/apollo-main/app/conversate-ui/conversate_ui_callback_ram_20261016.c": "69a766ed7fcfe7b342cfb306666004da71ce4e4247955017b4ddc12e1ca0d57d",
+  "g2/src/apollo-main/app/system-alert/system_alert_ui_event_4d3354.c": "cb8f0b3a558517ec25745af15a6b410451a680b8c6abcab55e91bb48b123ef0d"
+ },
+ "changes": [
+  {
+   "symbol": "audio_conversate_exit_prompt_hold_20000be4",
+   "stock_addr": "0x20000be4",
+   "stock_init_bytes": "ee020000",
+   "value": "750u",
+   "file": "g2/src/apollo-main/app/conversate-ui/conversate_ui_message_send_58bfb2.c"
+  },
+  {
+   "symbol": "audio_uart_registry_context_200004d8",
+   "stock_addr": "0x200004d8",
+   "stock_init_bytes": "0b00000000000000",
+   "value": "{0x0bu}",
+   "file": "g2/src/apollo-main/app/conversate-ui/conversate_ui_callback_ram_20261016.c"
+  },
+  {
+   "symbol": "audio_system_alert_page_id_20003bcc",
+   "stock_addr": "0x20003bcc",
+   "stock_init_bytes": "b4000000",
+   "value": "0xb4u",
+   "file": "g2/src/apollo-main/app/system-alert/system_alert_ui_event_4d3354.c"
+  }
+ ],
+ "stock_source": ".waves/init_20000000.bin (stock .data init image, 17752 B) read at the offsets above",
+ "build": {
+  "at": "2026-11-22 20:52 CST",
+  "compiled": "2719/2719 (210 recompiled), 0 duplicate strong symbols, 21 unresolved",
+  "bin": "build/ws-app-20261122/b1-link/g2-apollo-main/g2-apollo-main.bin 3,628,564 B sha256 c475819c0c4b1c278967f96c86107e27373cc8a3e753288dac8efaef2e5087d9",
+  "linked_data_image": {
+   "audio_conversate_exit_prompt_hold_20000be4 @0x20023c84": "ee020000",
+   "audio_uart_registry_context_200004d8 @0x20023c5c": "0b000000 00000000",
+   "audio_system_alert_page_id_20003bcc @0x200004b0": "b4000000"
+  },
+  "section_check": "all three input sections are PROGBITS (CONTENTS, ALLOC, LOAD, DATA) inside output .data (load address 0x7847bc), so the values are copied at startup; app/terminal-ram/*.ld (NOLOAD placement at 0x20003bcc) is not used by the link"
+ },
+ "paired_sims": "ws-app6 (20:53 CST): DFU_SAME, 922 HCI packets, OTAPOINTER 0xAFD1363A/0x0, CHIPREV 0x22, HOST_PACKET 0x3A, UNSUPPORTED 0, adv 1, display 2, faults 0 (identical to reference)"
+}

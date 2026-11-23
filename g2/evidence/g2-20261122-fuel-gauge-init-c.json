@@ -1,0 +1,59 @@
+{
+  "title": "nrf_fuel_gauge init: nrf_model_init_43a1b0",
+  "status": "VERIFIED",
+  "when": "2026-11-22 11:30 AM CST (America/Chicago)",
+  "approach": "Bottom-up continuation after ttf. Idiomatic scalar-float C vs typographic stock on Renode 1.17 Cortex-M55, normal AAPCS, no fg_call. Typographic delayed-vmrs CFG (bge/bmi, not blt) for the temps window, typographic-order VFP helpers for the param_2/6/7 voltage interpolator (no 0x3FFFFFFF wrap; delayed bls uses last?v). The 439e9c-window clamp is only the param_9 query; voltage still uses the first-clamp T. Compared state[0x00..0xDF] and adjusted_v; unwritten 0xE0-0xE7 prefills were identical. No zero_s16 around calls. Init does not call 43bb14.",
+  "verified": [
+    {
+      "symbol": "nrf_model_init_43a1b0",
+      "cases": 464,
+      "fails": 0,
+      "notes": "Init. Copies opt into state, records temps {hi,lo,count} at 0xAC/0xB0/0xB4, gathers or 43a5dc-interpolates param_9, v += i*param_9, then delayed-vmrs interp of param_2/6/7. 43a0f4(v) may zero the interp result. Writes state through 0xDC and *adjusted_v. Default opt, uniform EVENBAT-like tables, inverted/equal temps, IEEE specials and NaN payloads, 200 random cases. MAGIC 0xF6A11E06."
+    }
+  ],
+  "production_replace": {
+    "updated": [
+      {
+        "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+        "sha256": "20cde9ab857b396a4fa8ca16ba53199647653778ffa372aa2f2810bd0acdce7a",
+        "bytes": 37099
+      },
+      {
+        "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.h",
+        "sha256": "44bb99b48347058e216d10ef146f481d5d7e1cbea7420d9e8ed1dd44c557ebe1",
+        "bytes": 1934
+      },
+      {
+        "path": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_cores.S",
+        "sha256": "5d4d10d063227e81295f18779cedb0bcc0a90ce0e1ab09c91fbc88571c787d83",
+        "bytes": 31848
+      }
+    ],
+    "cores_remaining_globals": [
+      "nrf_model_process_43a698"
+    ]
+  },
+  "artifacts": {
+    "mid5_results": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid5_results.bin",
+      "sha256": "31163a3fd4ded4f7c41f0456d98faf76664b60f69bbbefb16e0c3ec570040585",
+      "bytes": 2048
+    },
+    "mid5_log": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid5.log",
+      "sha256": "9411e5ac3e7953227540f3a9118f14cf00de8c8dd3c79a685a4d51976de45a2c",
+      "bytes": 865
+    },
+    "mid5_test_bin": {
+      "path": "build/fuel-gauge-recon-20261122/c-leaves/mid5_test.bin",
+      "sha256": "6923925d48e26cc2fab5a6df688037f2a515beeb5c6d0695e8770a05da83cdf9",
+      "bytes": 6328
+    }
+  },
+  "not_done": [
+    "Remaining typographic: nrf_model_process_43a698.",
+    "43bb14 count>=4 coverage is deferred to the process-level golden comparisons (init does not call 43bb14).",
+    "apollo-main was not rebuilt; version-match and DFU paired sims were not run (deferred until cores.S has no typographic globals left).",
+    "Linker-report canned string unchanged. Official opencfw-otap-disarm.app.bin not overwritten. No flash, no git."
+  ]
+}

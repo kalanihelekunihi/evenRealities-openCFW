@@ -1,11 +1,12 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31e84c..0x31e8fa: decode a received PAwR response PDU. The
  * header (native 0x32db0c) must have length 6..37 and an accepted PDU type
  * (0, 1, 2, 4, 6 -> kinds 0, 1, 3, 4, 2); the report gets kind (+10), data
  * length (+8, 0 for type 1), data pointer (+4 = event +8) and channel (+9 =
  * event +39). After the address check (native 0x303404 with policy
- * 0x8050ec) the report gets the address type (+11, bit 1 when resolved) and
+ * (uintptr_t)&em9305_ram_8050ec) the report gets the address type (+11, bit 1 when resolved) and
  * address (+12), and *flag the check's flag byte. Returns the check result,
  * or 0 when rejected. */
 extern uint32_t opencfw_em9305_dispatch_child_32db0c(uintptr_t,uintptr_t);
@@ -51,7 +52,7 @@ uint32_t opencfw_em9305_pawr_decode_31e84c(uintptr_t event, uintptr_t report, ui
     out[8] = (uint8_t)data_length;
     *(volatile uint32_t *)(report + 4u) = (uint32_t)(event + 8u);
     out[9] = *(volatile uint8_t *)(event + 39u);
-    uint32_t result = opencfw_em9305_radio_packet_check_303404(event, 0x8050ecu, 1u, (uintptr_t)&check);
+    uint32_t result = opencfw_em9305_radio_packet_check_303404(event, (uintptr_t)&em9305_ram_8050ec, 1u, (uintptr_t)&check);
     if (result == 0u) return 0u;
     uint32_t address_type = check.resolved_type;
     if (address_type != check.type ||

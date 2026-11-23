@@ -1,0 +1,30 @@
+{
+  "id": "g2-20261122-ws-blestore-sources-json-dm-scan-int-max",
+  "time": "2026-11-22 21:42:39 America/Chicago",
+  "stream": "ws-blestore",
+  "purpose": "Record after-the-fact evidence for the dm_scan.c DM_GAP_SCAN_FAST_INT_MIN-to-INT_MAX replace written into g2/src/sources.json after writer approval had closed. No other writer was open. Parent will treat it as approved after the fact.",
+  "before_sha256": "a795d6f95d54796927f488ca09da8692e7ebfe893f9a2ff6589bfe23511eaec5",
+  "after_sha256": "2857a1e980bbed1957ea000a7fe5f15ad86880826309eb599a470ffa87180a84",
+  "change": {
+    "file": "g2/src/sources.json",
+    "generated_output": "cordio/ble-host/sources/stack/dm/dm_scan.c",
+    "replace_added": [
+      "    dmScanCb.scanInterval[i] = DM_GAP_SCAN_FAST_INT_MIN;\\n",
+      "    dmScanCb.scanInterval[i] = DM_GAP_SCAN_FAST_INT_MAX;\\n"
+    ],
+    "mirrors": "existing generated[cordio/ble-host/sources/stack/dm/dm_conn.c] INT_MIN-to-INT_MAX override",
+    "reason": "stock dmScanInit writes 96 (FAST_INT_MAX) into dmScanCb.scanInterval[]; upstream/local-vendor Cordio and the unpatched generated file write 48 (FAST_INT_MIN). Confirmed by differential harness vs stock 0x55ba71."
+  },
+  "check": {
+    "command": "python3 tools/build/sources.py check --device g2",
+    "result": "g2: 4880 units, 4542 source files, 2 not built",
+    "exit": 0,
+    "time": "2026-11-22 22:03 America/Chicago"
+  },
+  "notes": [
+    "before_sha256 equals after_sha256 of g2-20261122-ws-blestore-sources-json-01-and-03.json (last closed writer session). The only sources.json edit since that write is this replace.",
+    "The same substitution was applied to the private generated file build/ws-blestore-20261122/full-2055/generated/g2/cordio/ble-host/sources/stack/dm/dm_scan.c for immediate harness use; sources.py check validates the manifest, not a regen.",
+    "opencfw-otap-disarm.app.bin not touched.",
+    "No git add/commit."
+  ]
+}

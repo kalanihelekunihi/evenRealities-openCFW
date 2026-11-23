@@ -1,0 +1,30 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "source": "g2/src/apollo-main/app/a-62-teleprompt/teleprompt_page_data.c",
+ "source_sha256": "8d44b30697b835a759f7b8fc1cbd8aa3b5179023d1f24a13dd1736080c89800c",
+ "spec": "build/ws-app-20261122/specs/tp-a",
+ "stock_range": "0x58a8e0..0x58bc06",
+ "result": {
+  "verdict": "EQUIVALENT",
+  "tests": 300,
+  "equal": 300,
+  "differ": 0,
+  "mutants": 9,
+  "killed": 9,
+  "surviving_mutants": [],
+  "done": true,
+  "overflow": false,
+  "harness_sha256": "a1c065eb5a83ae028043b29730abc8ed58fc8de61ed589f070bdd990020f84e8",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "method": "black-box sequences: each test deinit+init then 4-15 random ops across 13 entry points (init, deinit, update, get, set_window, request, preload timer callback, page_in_ensure_window, clamp, request_locked, range_ready, find_next_request, loading_timed_out), then get() of every page; stock and C run identical sequences with identical scripted tick/mutex/timer/role results",
+ "observed": "all callee args (mutex/timer handles, timer start ticks, page request ids, controller posts), osTimerNew callback/attr, formatted logs, return values, returned page copies (content hash)",
+ "source_changes": "none needed",
+ "harness_changes": [
+  "optional per-spec harness RAM window (spec 'hram'), needed for 10 copies of the 0x51a4-byte cache",
+  "streams longer than the capture cap now compare by count plus running hash of the tail (previously always 'differ'); dumps show a window around the first divergence; per-spec capture cap ('hrt_cap')"
+ ],
+ "run_completed": "17:47 CST"
+}

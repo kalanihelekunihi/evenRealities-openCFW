@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "CST (America/Chicago)",
+  "logged_at": "2026-11-23 04:20:00 AM CST (America/Chicago)",
+  "title": "EM9305 IRQ remaining 15 whole-handler proofs, typo-RAM literals, and batched p-irqtypo paired sims",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-irqhandler-rccalib-whole-handler-paired-sims.json",
+  "reason": "Confirm whole-handler typo-vs-stock / as-built-vs-stock executes the real _body; prove the other 15 handlers whole with one frame mutant each; typo-install per handler once proved; one private pbuild and paired sims for all typo installs together.",
+  "body_not_stubbed": {
+    "result": "The typo-vs-stock and as-built-vs-stock whole-handler paths execute the real _body. qm.py stubs same-TU callees that are in both orig and cand; TARGET itself is stripped from stubs.o. For typo-vs-stock, _body is only in cand, so it is not stubbed. Typo-vs-typo is the vacuous path (body in both, stub not stripped). No RcCalib rerun was required.",
+    "trace": {
+      "method": "QEMU -d in_asm, typo cand ELF build/em-ctl/w/rccalib_typo_whole/cand.trace.elf, T0=1 NTESTS=1",
+      "log": "build/ws-em9305-20261122/u-suffix/irq-whole/rccalib_t1_in_asm.log",
+      "excerpt": "build/ws-em9305-20261122/u-suffix/irq-whole/rccalib_t1_body_trace.txt",
+      "t1_out": "build/ws-em9305-20261122/u-suffix/irq-whole/rccalib_t1.out",
+      "t1_line": "00000001 00000008 00000000 811c9dc5 45506ef9 2dbd3169",
+      "observed": "handler 0xc00b0c bl 108 ; 0xc00bd8 to real opencfw_em9305_IRQHandler_RcCalib_body (not stub_hit at 0xc00418). Body executed st 1,[0xf00964,0], mov_s r2,0x801994, st_s r0,[r2,0x24] (0x8019b8), st_s r1,[r2,0x28] (0x8019bc), then restored and j [blink]. stubs.c has no _body; st_*.o has the handler stub stripped. Linked cand nm: handler 00c00b0c W, body 00c00bd8 W, stub_hit 00c00418 T."
+    }
+  },
+  "qemu_whole_15": {
+    "window": "2026-11-23 03:56:09 AM CST through 2026-11-23 04:03:36 AM CST (America/Chicago)",
+    "harness": "build/em-ctl/qm.py --hdir /w/build/em-ctl/h, irq=1, n=100, nor0=0, frame mutant drops r0 restore (88-frame: drop ld.ab r0,[sp,88] / unwind add sp,sp,88; E-frame: pop_s r0 -> add sp,sp,4)",
+    "orig": "lowered stock extents vs tree cands (frame kept)",
+    "result": "All 15 EQUIVALENT 100; all 15 frame mutants KILLED (ret+reghash; typically 99/100, GPIO 100/100).",
+    "handlers": {
+      "ArcTimer0": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=98 calls=74",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_installed": false,
+        "notes": "Skipped typo: 0x801904 is a 1-byte typo-RAM object loaded as uint32_t callback (word-load UB). Same for ArcTimer1 at 0x801908. Needs a grow/merge of the 0x801900-0x801930 slot table first."
+      },
+      "ArcTimer1": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=98 calls=77",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_installed": false,
+        "notes": "Skipped typo: 0x801908 is a 1-byte typo-RAM object. See ArcTimer0."
+      },
+      "GPIO": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=99 calls=174",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_vs_stock": "EQUIVALENT 100  classes=99 calls=174",
+        "typo_mutant": "KILLED u32_80190c -> u32_801910; ncalls:45 callhash:45",
+        "typo_installed": "em9305_ram_80190c.u32_80190c"
+      },
+      "PmlClock": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=90 calls=78",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_installed": false,
+        "notes": "No typo-window literals (MMIO / calls only)."
+      },
+      "PmlSvld": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=90 calls=222",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_vs_stock": "EQUIVALENT 100  classes=90 calls=222 (cand had both 80fde0 and 8019a0 typos)",
+        "typo_mutant": "KILLED s8_8019a0 -> u8_8019a1 (memhash:31 callhash:29). SURVIVED u32_80fde0 -> u32_80fde8, also zero-context and far typo-RAM word (all EQUIVALENT 100). Store mutant of 80fde0 was KILLED on memhash but does not prove the load address.",
+        "typo_installed": "em9305_ram_801994.s8_8019a0 only; EM_R32(0x80fde0u) left as a literal",
+        "notes": "The 80fde0 word is loaded only as a context pointer for flags at context+14, which gates a documented dead volatile reload. Address mutants are unobservable in this harness, so that typo was not installed."
+      },
+      "ProtocolTimerOutCmp7": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=96 calls=65",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_vs_stock": "EQUIVALENT 100  classes=96 calls=65",
+        "typo_mutant": "KILLED u32_801910 -> u32_80190c; ncalls:45 callhash:45",
+        "typo_installed": "em9305_ram_80190c.u32_801910"
+      },
+      "ProtocolTimerOutCmp0": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=83 calls=100",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_installed": false,
+        "notes": "No typo-window literals (MMIO / calls only)."
+      },
+      "ProtocolTimerOutCmp2": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=83 calls=100",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_installed": false,
+        "notes": "No typo-window literals (MMIO / calls only)."
+      },
+      "ProtocolTimerOutCmp3": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=83 calls=100",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_installed": false,
+        "notes": "No typo-window literals (MMIO / calls only)."
+      },
+      "ProtocolTimerSync": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=96 calls=181",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_vs_stock": "EQUIVALENT 100  classes=96 calls=181",
+        "typo_mutant": "KILLED u32_801914 -> u32_801910; ncalls:44 callhash:44",
+        "typo_installed": "em9305_ram_80190c.u32_801914 (EM_IRQ_CALL_SLOT expanded to a named-field call, not &obj+offset)",
+        "notes": "Required a u32 union on former u8_801914+gap_801915[3]; object size unchanged."
+      },
+      "RadioRx": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=83 calls=100",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_installed": false,
+        "notes": "IRQ file has no typo-window literals. Typo of RF_HandleInterrupt_Rx REC at 0x8019c4 was not done this turn; the as-built whole proof stubs the RF handle."
+      },
+      "RadioTx": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=83 calls=100",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_installed": false,
+        "notes": "IRQ file has no typo-window literals. Typo of RF_HandleInterrupt_Tx CH2 at 0x8019d4 was not done this turn; the as-built whole proof stubs the RF handle."
+      },
+      "SWI7": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=99 calls=79",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_vs_stock": "EQUIVALENT 100  classes=99 calls=79",
+        "typo_mutant": "KILLED u32_801918 -> u32_801920; ncalls:33 callhash:33",
+        "typo_installed": "em9305_ram_80190c.u32_801918"
+      },
+      "SleepTimerFullVal": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=98 calls=75",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_vs_stock": "EQUIVALENT 100  classes=98 calls=75",
+        "typo_mutant": "KILLED u32_80191c -> u32_801918; ncalls:34 callhash:34",
+        "typo_installed": "em9305_ram_80190c.u32_80191c (EM_IRQ_CALL_SLOT expanded to a named-field call)",
+        "notes": "Required a u32 union on former u8_80191c+gap_80191d[3]; object size unchanged."
+      },
+      "SleepTimerOutCmp3": {
+        "whole": "EQUIVALENT 100",
+        "whole_line": "EQUIVALENT 100  classes=96 calls=178",
+        "frame_mutant": "KILLED (drop r0 restore)",
+        "typo_vs_stock": "EQUIVALENT 100  classes=96 calls=178",
+        "typo_mutant": "KILLED u32_801920 -> u32_801918; ncalls:33 callhash:33",
+        "typo_installed": "em9305_ram_80190c.u32_801920"
+      },
+      "RcCalib": {
+        "whole": "already proved and typo-installed in predecessor (EQUIVALENT 100, typo mutants KILLED, p-rccalib sims PASS)",
+        "typo_installed": "already in tree; not rebuilt this turn except as part of the batched p-irqtypo image",
+        "body_not_stubbed": true
+      }
+    },
+    "work": "build/ws-em9305-20261122/u-suffix/irq-whole/h15/"
+  },
+  "typo_proves": {
+    "window": "2026-11-23 04:04:56 AM CST through 2026-11-23 04:08:08 AM CST (America/Chicago); extra PmlSvld 80fde0 mutants 04:09:31-04:09:46 AM CST",
+    "compared_to": "lowered stock, not typo-vs-typo",
+    "header_unions": {
+      "file": "g2/src/em9305/qpc-scheduler/em9305_ram.h",
+      "sha256": "dbc293825d96703922639ba0d5a4b1037cf5b28487f24f11f06d5dff668b09fc",
+      "change": "Replaced u8_801914+gap_801915[3] and u8_80191c+gap_80191d[3] with union { uint32_t u32_801914; uint8_t u8_801914; } and the same for 80191c, plus offsetof asserts at 0x8 and 0x10. Object size unchanged. typo-RAM object count still 140 (140 extern EM9305_RAM_OBJECT)."
+    },
+    "installed_fields": [
+      "GPIO u32_80190c",
+      "ProtocolTimerOutCmp7 u32_801910",
+      "ProtocolTimerSync u32_801914",
+      "SWI7 u32_801918",
+      "SleepTimerFullVal u32_80191c",
+      "SleepTimerOutCmp3 u32_801920",
+      "PmlSvld s8_8019a0"
+    ],
+    "not_installed": {
+      "PmlSvld_80fde0": "typo-vs-stock EQ 100, but address mutants SURVIVED (adjacent, zero, far) because the loaded value only feeds a documented dead flags-gated reload. Literal left in place.",
+      "ArcTimer0_801904": "1-byte typo-RAM object, word-load UB",
+      "ArcTimer1_801908": "1-byte typo-RAM object, word-load UB",
+      "PmlClock_OutCmp0_2_3": "no typo-window literals",
+      "Radio_RF_Handle_8019c4_8019d4": "not typo-proved this turn; would need a typo prove that includes the typo'd RF handle, not the stub-only as-built path"
+    },
+    "install_shas": {
+      "when": "2026-11-23 04:10:25",
+      "pre": {
+        "IRQHandler_GPIO.c": "719367d906922dc390a79ced64b66a6e179c2596fe7502f831811db69d01c0c6",
+        "IRQHandler_ProtocolTimerOutCmp7.c": "ad9d3738972a117f2e1be14615dbf6ee137b380bf116386a7644c43cf95ff3d2",
+        "IRQHandler_ProtocolTimerSync.c": "bd8d6faecd7a13d96f453280f8c304a11251a94467b7cce40dcc8d189703ef1a",
+        "IRQHandler_SWI7.c": "6eec52f64cb3c90e3feef7cce05089483084cfbc677876a9136f26da11f72324",
+        "IRQHandler_SleepTimerFullVal.c": "cb25012d672630ed24156e355cddaab7a0e0feb356fbff220ca4805247dd8ec8",
+        "IRQHandler_SleepTimerOutCmp3.c": "53f7381566f140749efb39883b34baab3b22c464a0da0d40efbb2997981b56e1",
+        "IRQHandler_PmlSvld.c": "2fbf40a26e0c37f0b67fefeba851ff4533f6aeb824808e80a15ff7f376e4422b",
+        "em9305_ram.h": "dbc293825d96703922639ba0d5a4b1037cf5b28487f24f11f06d5dff668b09fc"
+      },
+      "post": {
+        "IRQHandler_GPIO.c": "0c0f59aa0623f53a6d55033bd8609bbb2d97bfe8903537c6b463cd4ef19fec11",
+        "IRQHandler_ProtocolTimerOutCmp7.c": "fbbb3adc92f1f0f832b07e049aa10084d0e2bbc271169748fdc414429de88bbd",
+        "IRQHandler_ProtocolTimerSync.c": "83483a1d78e42e849a668c13be200d4297dd3de131e274ad89888bd39fea2924",
+        "IRQHandler_SWI7.c": "4ab8b7475d957192a97269e7760a41ad4e28f907a76646a7317f0e195444d3ba",
+        "IRQHandler_SleepTimerFullVal.c": "e0719e26b96bf8d018e1cfab8392f45583949d572985d236704b874b86365458",
+        "IRQHandler_SleepTimerOutCmp3.c": "83e6f7991dfa30c37e60ab40f9f3147a000309763abe2713d9f1d29d4acfd316",
+        "IRQHandler_PmlSvld.c": "595795df11b56d8fb7212bdfc5ab2e428d13ae808a73836df7f9e1f9929cb90b",
+        "em9305_ram.h": "dbc293825d96703922639ba0d5a4b1037cf5b28487f24f11f06d5dff668b09fc"
+      },
+      "official_pre": {
+        "sha": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+        "mtime": "2026-11-22 07:55:05",
+        "size": 3819448
+      }
+    }
+  },
+  "tree_build": {
+    "command": "python3 -u build/ws-em9305-20261122/pbuild.py build/ws-em9305-20261122/p-irqtypo -j 3",
+    "started": "2026-11-23 04:11:00 AM CST (America/Chicago)",
+    "finished": "2026-11-23 04:15:38 AM CST (America/Chicago)",
+    "rc": 0,
+    "units": 768,
+    "compiled_this_run": 768,
+    "compile_note": "All 768 units recompiled because em9305_ram.h is in the objcache header hash (u32 unions for 801914/80191c).",
+    "link_log_empty": true,
+    "text_bytes": 239216,
+    "text_delta_vs_p_rccalib": -4,
+    "app_sha256": "1d838a0ec140e1f1cfdcd2536db32b2ea2d15efc0fb3d2b102d7c38c05c132d5",
+    "elf_sha256": "349caab6579c0e4bf7775df6f72c9b8aba407f12f36e9afb3ea46fb2f43c2c6b",
+    "note": ".text shrank 4 B vs p-rccalib (239220->239216) after typo-RAM of the seven proved IRQ sites. Still fits NVM."
+  },
+  "package": {
+    "path": "build/ws-em9305-20261122/p-irqtypo/g2-em9305-source-candidate-package.bin",
+    "bytes": 240548,
+    "sha256": "467bb1c9a461e65a44e6b8578706831a155f3a9ffc7af24fc6d75ab1374b7b40",
+    "records": 3,
+    "crcs_from_dfu_log": {
+      "[0x00300000,0x00300488)": "0x1D6121C4",
+      "[0x00302000,0x00302038)": "0x3816C591",
+      "[0x00302400,0x0033CA70)": "0xA26230CF"
+    },
+    "record2_bytes_differ_from_p_rccalib": true,
+    "record2_diffbytes": 9,
+    "record2_range_crc_same_as_p_rccalib_note": "Record 2 content differs 9 bytes from p-rccalib (size and firmware CRC fields), but the logged NVM CRC32 of [0x00302000,0x00302038) was also 0x3816C591. Reported as observed."
+  },
+  "slot_fit": {
+    "application_end": "0x0033CA70",
+    "application_bytes": 239216,
+    "headroom_bytes": 275856,
+    "fits_nvm_slot": true
+  },
+  "splice": {
+    "official_app": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "official_app_sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "official_app_mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "official_untouched": true,
+    "host_app": "build/ws-em9305-20261122/sim/opencfw-em9305-typed-ram.app.bin",
+    "nor": "build/ws-em9305-20261122/sim/nor-with-em9305-irqtypo.bin",
+    "nor_sha256": "5803c5f3d3bdb87c15fddea6e4f7bfd305f5b29b0cf16659223da3aa2b25d83a",
+    "nor_source": "copy of build/em9305-nor-20261122/nor-stock-formatted.bin, then lfs_inject at 0x1400000 path /firmware/ble_em9305.bin",
+    "lfs_inject_wrote_bytes": 240548
+  },
+  "sims": {
+    "renode": "g2-firmware-emulator scripts/run-renode.sh, Renode 1.17.0, 8 s virtual runs, 1200 s wall cap",
+    "match": {
+      "resc": "build/ws-em9305-20261122/sim/irqtypo-match.resc",
+      "log": "build/ws-em9305-20261122/sim/irqtypo-match.log",
+      "started": "2026-11-23 04:16:42 AM CST (America/Chicago)",
+      "finished": "2026-11-23 04:17:55 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "chiprev_fixture": "0x00000022",
+      "otapointer_after_0_01s": "0xAFD1363A",
+      "otapointer_after_8s": "0x00000000",
+      "host_packet_count": "0x0000003A",
+      "end_pc": "0x543528",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "display_hash_source": "Latched real display-bus frame (not the OTP fixture sha 9a9a2d9a\u2026)",
+      "advertising": "010A200101",
+      "hci_host_packets": 56
+    },
+    "forced_mismatch_dfu": {
+      "resc": "build/ws-em9305-20261122/sim/irqtypo-dfu-mismatch.resc",
+      "log": "build/ws-em9305-20261122/sim/irqtypo-dfu-mismatch.log",
+      "started": "2026-11-23 04:18:03 AM CST (America/Chicago)",
+      "finished": "2026-11-23 04:18:51 AM CST (America/Chicago)",
+      "run_renode_rc": 0,
+      "result": "PASS",
+      "commit_word": "0103FDFC0020400000020404 + 0xFF padding",
+      "sysresetreq": true,
+      "sysresetreq_at": "2026-11-23 04:18:48.134 AM CST (America/Chicago)",
+      "sbl_handoff": "VTOR=0x00438000 SP=0x2007FB00 PC=0x0059427D",
+      "observed_crcs": {
+        "[0x00300000,0x00300488)": "0x1D6121C4",
+        "[0x00302000,0x00302038)": "0x3816C591",
+        "[0x00302400,0x0033CA70)": "0xA26230CF"
+      },
+      "host_packet_count_after_handoff": "0x0000003A",
+      "display_hash": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "advertising": "010A200101",
+      "hci_host_packets": 1037
+    }
+  },
+  "remaining": {
+    "ini_record_335820": "Not started.",
+    "remaining_typo_shims": "Not started. Known next: residual_code EM_CONFIG_PTR / EM_IRQ_SAVE_PTR / EM_RF_CFG_PTR and &obj+offset shims; boot QF_maxPool_ for 0x801360; 80ff6c/80ffa8 only after RAMHI/ROM check. Radio RF_Handle typo of 8019c4/8019d4 if proved against the typo'd handle, not a stub. ArcTimer0/1 typo blocked on 1-byte objects.",
+    "pmlsvld_80fde0": "Literal left in place until a consumer of the loaded value can kill an address mutant."
+  },
+  "rules": {
+    "no_git": true,
+    "no_backups": true,
+    "official_app_untouched": true,
+    "source_completeness_proven": false,
+    "no_vacuous_install": true
+  }
+}

@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x328a74..0x328d76: start a slave BIG on the record. Clear the
  * schedule (+296, 48 bytes) and descriptor (+72, 108 bytes) blocks, copy
@@ -46,7 +47,7 @@ static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;
 static inline void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
 static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
 #define CODE(f) ((uint32_t)(uintptr_t)(f))
-#define BIGS 0x805c3cu
+#define BIGS ((uintptr_t)&em9305_ram_805be0 + 0x5cu)
 
 uint32_t opencfw_em9305_child_328a74(uintptr_t big)
 {
@@ -68,7 +69,7 @@ uint32_t opencfw_em9305_child_328a74(uintptr_t big)
     uint32_t phy;
     uint32_t offset;
     if(r8(big+29u)!=0u){
-        uintptr_t config=r32(0x805cacu);
+        uintptr_t config=r32(((uintptr_t)&em9305_ram_805c5c + 0x50u));
         uintptr_t bigs=r32(BIGS);
         uint32_t deadline=train_anchor+now;
         uint32_t busy=r16(config+50u);
@@ -209,7 +210,7 @@ uint32_t opencfw_em9305_child_328a74(uintptr_t big)
     uint32_t gap=0u;
     if(previous==0u){
         uintptr_t train_now=r32(big+180u);
-        uintptr_t config=r32(0x805cacu);
+        uintptr_t config=r32(((uintptr_t)&em9305_ram_805c5c + 0x50u));
         uint32_t used=r32(train_now+392u);
         uint32_t busy=r16(config+50u);
         previous=train_now+380u;

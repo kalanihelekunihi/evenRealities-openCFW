@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32ad68..0x32ae3c: schedule the next periodic-sync receive window.
  * A fully enabled sync (flags +0x20 & 0x1d) with time left (+0x2c) advances
@@ -6,7 +7,7 @@
  * accepts a slot or the timeout runs out, which reports status 0x3c (+826,
  * event 4). Otherwise the window is twice the skew (context +0xc, plus +2480
  * when +2785 is set) but at least +0x24; a pending re-insert (+2787) takes
- * priority, and with feature bit 1 of 0x805a8b the anchor gets a random
+ * priority, and with feature bit 1 of ((uintptr_t)&em9305_ram_805a6c + 0x1fu) the anchor gets a random
  * 625 us jitter before the window is scheduled. */
 extern uint32_t opencfw_em9305_init_schedule_latest_3130d4(uintptr_t,uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_auxiliary_elapsed_303f8c(uint32_t,uint32_t);
@@ -61,7 +62,7 @@ void opencfw_em9305_child_32ad68(uintptr_t context)
         (void)opencfw_em9305_auxiliary_insert_313220(context);
         return;
     }
-    if ((*(volatile uint8_t *)(uintptr_t)0x805a8bu & 2u) != 0u) {
+    if ((em9305_ram_805a6c.u8_805a8b & 2u) != 0u) {
         uint32_t jitter = opencfw_em9305_init_transition_random_317afc();
         *anchor = jitter * 625u + *anchor;
     }

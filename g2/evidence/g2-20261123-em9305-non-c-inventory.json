@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 03:19:31 AM CST (America/Chicago)",
+  "title": "What 'frame still uncut' means for IRQHandler_RcCalib; inventory of remaining non-C in g2/src/em9305",
+  "source_completeness_proven": false,
+  "official_app": {
+    "path": "build/em9305-nor-20261122/opencfw-otap-disarm.app.bin",
+    "sha256": "7c691d8ce955479f748554628107e977cc723ef945b6509dcd00dae1aac625dd",
+    "mtime": "2026-11-22 07:55:05 AM CST (America/Chicago)",
+    "untouched": true,
+    "reconfirmed_at": "2026-11-23 03:31:02 AM CST (America/Chicago)"
+  },
+  "irqhandler_rccalib_frame": {
+    "meaning": "Stock 0x3064fc is one function: the 88-byte register save (r0-r12, r30, blink, r58/r59, lp_count, aux lp_start/lp_end/1411/1409), the RC-calib body inlined, then restore and rtie. The tree uses EM_IRQ_HANDLER: the same save/restore is a shared inline-asm template in em_irq_frame.h, and the typo'd body would live in a separate C function reached by bl. That is a few bytes larger than stock, puts an extra blink save and a body prologue/epilogue on the stack during the body, and is the same pattern used by all 16 wave-28 IRQ handlers (RadioRx/Tx also note the last aux register is saved before the call, not in the delay slot). Wave 28 harness-checked the lowered body (60 qemu-arc tests); the comment on every handler says the frame itself is not covered. 'Frame still uncut' means the entry-point symbol has not been made a single inlined-body handler and has not been proved as a whole (save + body + restore + rtie) against stock, so typo-RAM of the body was left uninstalled.",
+    "what_would_cut_it": [
+      "Inline the typo'd C body between EM_IRQ_SAVE and EM_IRQ_RESTORE so opencfw_em9305_IRQHandler_RcCalib is one function with no _body thunk, matching stock control flow (no bl).",
+      "Extend the qemu-arc harness to compare that complete handler, including rtie and aux 1409/1411, against lowered stock, EQUIVALENT 100, with typo-site mutants killed.",
+      "Only then typo-install the body and run private pbuild + paired sims."
+    ],
+    "why_not_this_turn": [
+      "em_irq_frame.h documents that the ARC gcc interrupt attribute does not emit this stock frame, so a pure-C handler is not available.",
+      "C statements inside a naked function (the only way to suppress gcc's own prologue and still end in rtie) are unsupported. A linker script can place sections but cannot emit the stock prologue or turn a C function's j [blink] epilogue into fall-through into RESTORE.",
+      "Changing the shared EM_IRQ_HANDLER template would affect all 16 handlers plus the unused-vector handler stock_30f170, and would need a full-handler proof for each.",
+      "Proving the complete handler needs harness support for rtie / those aux registers. That lives in build/em-ctl/qm.py and the QEMU-ARC compare, which this stream does not own (notes would go in pending/).",
+      "Therefore typo-RAM of IRQHandler_RcCalib was not installed. Tree file still literals, sha 23d53bafe7d14a3e20c0740dc952e5df5d595dcf22218fefa12e76d48a9299e0. Workspace prove remains valid for the body only."
+    ],
+    "p_sleep_sizes": {
+      "handler": "0x00337d58",
+      "body": "0x00337e14",
+      "frame_bytes": 188,
+      "body_bytes": 124
+    }
+  },
+  "inventory_ranked_by_linked_bytes": [
+    {
+      "rank": 1,
+      "kind": "inline_asm",
+      "item": "Shared IRQ frames (em_irq_frame.h / em_irq_frame_e.h) around 16 handlers plus unused-vector stock_30f170",
+      "linked_bytes": 3172,
+      "how_measured": "p-sleep map: 13 standard frames * 188 B + 3 enter_s frames (PmlSvld, SleepTimerOutCmp3, GPIO) * 180 B + stock_30f170 188 B (0x336dd0..0x336e8c). RadioRx/Tx are 188 B frames with no local _body (they bl RF_HandleInterrupt_*).",
+      "note": "Bodies are already C (632 B of _body symbols in p-sleep, excluding RF_HandleInterrupt_* which live in their own TUs). Cannot cut this turn; see irqhandler_rccalib_frame."
+    },
+    {
+      "rank": 2,
+      "kind": "byte_blob",
+      "item": "application/stock_residual_data.c .rodata.opencfw_em9305_stock_data",
+      "linked_bytes": 1872,
+      "how_measured": "p-sleep map section size 0x750 at 0x0033c31c..0x0033ca6c",
+      "breakdown": {
+        "verbatim_radio_and_small_rodata": "700 B (radio tables 2+12+80+452, rodata 112+22+12+3, pads 2+2+1)",
+        "lctr_decode_actions_334d0c": "172 B (43 symbolic function pointers \u2014 relatively real C)",
+        "tail_3357e0": "64 B verbatim",
+        "ini_record_335820": "936 B verbatim fields named by byte offset; FLAG: consumers not all identified"
+      },
+      "also": "vector table is separate: 66 * 4 = 264 B at 0x302400, symbolic ISR pointers (real C). No .incbin and no standalone .S files anywhere under g2/src/em9305."
+    },
+    {
+      "rank": 3,
+      "kind": "inline_asm",
+      "item": "application/qk_port_swi.c (IRQHandler_SWI0 / QK_noPreemption / QK_restoreContext / IRQHandler_SWI1)",
+      "linked_bytes": 328,
+      "how_measured": "p-sleep map 0x00336660..0x003367a8 (stock_30251c..next stock_3335f4)",
+      "note": "Kept as assembly on purpose: stock is qk_port.s; the SWI0/SWI1 frame hand-over and rtie into QK_activate_ cannot be expressed as a compiler-generated interrupt prologue/epilogue."
+    },
+    {
+      "rank": 4,
+      "kind": "real_C_with_shims",
+      "item": "application/stock_residual_code.c",
+      "source_bytes": 19293,
+      "note": "Already rewritten in C from wave-26 lowered asm and QEMU-ARC-checked. Not a byte blob. Remaining issues are &obj+offset / R32 shims (same class as the 80faec UB if they step outside the object; 80fb48 is large enough for +0x1c/+0x28 but +0x1c sits in gap_80fb61 and has no named field)."
+    }
+  ],
+  "other_inline_asm": [
+    "Smaller __asm__ sites remain in qk_port_swi already counted, em_irq_frame*.h, bootloader/nvm_bootloader.c, boot-header/nvm_header_entry.c, application_boot.c, qpc-port/qf_port.h, qpc-port/qep_port.h, sleep_controller_*.c, sleep_mode_branch.c, sleep_outer.c, idle.c (ILINK), initializer lowers, controller_timer_helpers.c, PML_Init.c. These are short sequences (sleep, clri, ILINK, vendor aux), not large leftovers."
+  ],
+  "literal_address_shims_typo_window": {
+    "window": "0x800000..0x80FFFF",
+    "c_files_with_0x80xxxx_literals": 58,
+    "unique_addresses": 54,
+    "note": "Counts comment-stripped 0x80 + 4 hex digits in .c only. 0x801000/0x80e978 in NVM_InitCopy are window checks, not object accesses. 0x80ffa8 is stored as a pointer value and also used as a record base. 0x801360 is already QF_maxPool_ (1-byte pinned BSS); boot still writes RB8(0x801360u). 0x801394 is QK_attr_ in qk_port_swi.s. IRQ typo literals (RcCalib, PmlSvld, ArcTimer0/1, GPIO, protocol/sleep timers, SWI7) stay uninstalled while frames are uncut.",
+    "largest_non_irq_clusters": [
+      {
+        "site": "application_boot.c 0x80ff6c record + 0x80ffa8 record",
+        "hits": "10 stores at 80ff6c+0..+34 and RB8(80ffa8+33); also u32_80fb08=0x80ffa8",
+        "objects": "none yet. Both sit in RAMHI 0x80fe20..0x80ffff. ld FLAG: still UNVERIFIED whether the ROM uses [0x80fd74,0x80ff54). Do not place typo-RAM objects there without a stock-user/ROM check."
+      },
+      {
+        "site": "hook slots 0x80fe0c..0x80fe1c (startup_hook, idle, assert)",
+        "issue": "Loaded as 32-bit callback pointers, but typo-RAM objects are 1 byte each. That is the same UB as indexing past the 1-byte 80faec. 80fde0 already covers word slots through u32_80fe08 (resume/controller_init typo'd). Next reduction: grow em9305_ram_80fde0 to 64 B (through 0x80fe20), add u32_80fe0c..u32_80fe1c, retire the five 1-byte objects (object count 145\u2192140), typo the three hook TUs, re-prove with mutants.",
+        "users": [
+          "startup_hook.c 80fe10/80fe0c",
+          "idle.c 80fe18/80fe14",
+          "assert.c 80fe1c"
+        ]
+      },
+      {
+        "site": "stock_residual_code.c &obj+offset shims",
+        "examples": [
+          "EM_CONFIG_PTR = &em9305_ram_80fb48+0x1c (in gap_80fb61; object is large enough)",
+          "EM_IRQ_SAVE_PTR = &em9305_ram_80fb48+0x28 (=u32_80fb70)",
+          "EM_RF_CFG_PTR = &em9305_ram_80fd2c+0x18",
+          "&em9305_ram_805c5c+0x84",
+          "&em9305_ram_805eec+0x10/0x12",
+          "&em9305_ram_805e6c+0/4/8"
+        ]
+      }
+    ]
+  },
+  "not_done_this_turn": [
+    "IRQHandler_RcCalib typo-RAM not installed (frame uncut).",
+    "application_boot 80ff6c/80ffa8 typo-RAM objects not added (RAMHI; ROM use of [0x80fd74,0x80ff54) still UNVERIFIED).",
+    "application_boot still writes RB8(0x801360u) instead of QF_maxPool_."
+  ],
+  "rules": "No git writes. No backups or /tmp copies. Official opencfw-otap-disarm.app.bin was not overwritten. Did not edit sources.json, tools, docs, or g2-em9305.ld this turn. source_completeness_proven remains false.",
+  "follow_on": "g2/evidence/g2-20261123-em9305-ram-80fde0-hook-slots-paired-sims.json: 80fde0 hook-slot grow installed, object_count 145\u2192140, proves EQ 100, 5 mutants KILLED, p-hookmerge paired sims PASS"
+}

@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Full native 0x325b98..0x325c04: 9 packed four-field bytes plus the
  * tenth terminal byte, optional packet send, then clear receive bit9 and
@@ -15,7 +16,7 @@ uint32_t opencfw_em9305_mode_callback_325b98(uintptr_t context,
     if (packet!=0u) {
         *(volatile uint8_t *)packet=0x29u;
         for (uint32_t index=0;index<9u;++index) {
-            uintptr_t source=*(volatile uint32_t *)(uintptr_t)0x805c6cu;
+            uintptr_t source=em9305_ram_805c5c.u32_805c6c;
             source+=index*4u;
             uint32_t field0=*(volatile uint8_t *)(source+4u);
             uint32_t field1=*(volatile uint8_t *)(source+5u);
@@ -24,7 +25,7 @@ uint32_t opencfw_em9305_mode_callback_325b98(uintptr_t context,
             *(volatile uint8_t *)(packet+index+1u)=
                 (uint8_t)(field0|(field1<<2)|(field2<<4)|(field3<<6));
         }
-        uintptr_t source=*(volatile uint32_t *)(uintptr_t)0x805c6cu;
+        uintptr_t source=em9305_ram_805c5c.u32_805c6c;
         *(volatile uint8_t *)(packet+10u)=*(volatile uint8_t *)(source+40u);
         (void)opencfw_em9305_phy_packet_send_32d32c(context,packet);
     }

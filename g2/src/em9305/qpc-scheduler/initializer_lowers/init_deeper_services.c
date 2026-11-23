@@ -1,4 +1,5 @@
 #include "init_lower_native.h"
+#include "em9305_ram.h"
 
 extern void *opencfw_em9305_memset(void *destination, uint32_t value, uint32_t bytes);
 
@@ -7,12 +8,12 @@ extern void *opencfw_em9305_memset(void *destination, uint32_t value, uint32_t b
  * caller/product capacity contract rather than inventing a guard. */
 uint32_t opencfw_em9305_init_child_3251dc(uint32_t callback)
 {
-    uint32_t count = init_read8(0x8027ccu);
+    uint32_t count = init_read8((uintptr_t)&em9305_ram_8027cc);
     for (uint32_t index = 0u; index < count; ++index)
-        if (init_read32(0x8027d0u + 4u * index) == callback)
+        if (init_read32((uintptr_t)&em9305_ram_8027d0 + 4u * index) == callback)
             return callback;
-    *(volatile uint8_t *)0x8027ccu = (uint8_t)(count + 1u);
-    init_write32(0x8027d0u + 4u * count, callback);
+    *(volatile uint8_t *)(uintptr_t)&em9305_ram_8027cc = (uint8_t)(count + 1u);
+    init_write32((uintptr_t)&em9305_ram_8027d0 + 4u * count, callback);
     return callback;
 }
 
@@ -21,9 +22,9 @@ uint32_t opencfw_em9305_init_child_3251dc(uint32_t callback)
 uint32_t opencfw_em9305_init_child_318ab8(uint32_t previous_result)
 {
     (void)previous_result;
-    uintptr_t product = (uintptr_t)init_read32(0x805cacu);
+    uintptr_t product = (uintptr_t)init_read32(((uintptr_t)&em9305_ram_805c5c + 0x50u));
     uint32_t count = init_read8(product + 34u);
-    uintptr_t destination = (uintptr_t)init_read32(0x805c70u);
+    uintptr_t destination = (uintptr_t)init_read32(((uintptr_t)&em9305_ram_805c5c + 0x14u));
     uint32_t bytes = count * 912u;
     return (uint32_t)(uintptr_t)opencfw_em9305_memset((void *)destination, 0u, bytes);
 }

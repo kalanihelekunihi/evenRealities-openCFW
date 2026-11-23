@@ -70,13 +70,13 @@ extern void audio_uart_page_44143e(void *obj, uint32_t font, uint32_t sel);     
 extern void lv_obj_set_style_radius(void *obj, int32_t v, uint32_t sel);         /* radius */
 extern void audio_uart_page_44d878(void *obj);                                  /* lv_obj_clean */
 extern void *audio_uart_page_499416(void *parent);                              /* lv_label_create */
-extern void audio_uart_page_49942e(void *label, uint32_t text);                 /* lv_label_set_text */
+extern void audio_uart_page_49942e(void *label, const char *text);               /* lv_label_set_text */
 extern void evenhub_obj_set_style_pad_all_4935cc(void *obj, int32_t v, uint32_t sel); /* pad l/r/t/b */
 extern uint32_t audio_uart_ring_primary_head_cell; /* RAM 0x200746dc: active lv_font_t * */
 
 /* i18n. */
 extern uint32_t audio_uart_page_460084(const char *key);                 /* i18n index of key */
-extern uint32_t audio_uart_page_45fffe(const char *key, uint32_t index); /* localized text */
+extern const char *audio_uart_page_45fffe(const char *key, uint32_t index); /* localized text */
 
 /* Common containers. */
 extern int32_t common_list_container_inject_event_4de354(void *list, uint8_t event);

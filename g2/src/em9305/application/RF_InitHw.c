@@ -8,6 +8,7 @@
  * 0xf04404, 0xf04800.. and 0x805fe0 and the wait until bits 24..25 of 0xf03838 are both set are named by address only.
  */
 #include <stdint.h>
+#include "em9305_ram.h"
 
 #define RW32(a) (*(volatile uint32_t *)(uintptr_t)(a))
 #define RW16(a) (*(volatile uint16_t *)(uintptr_t)(a))
@@ -26,9 +27,9 @@ void opencfw_em9305_stock_311d2c(uint32_t incoming)
   }
   RW32(0x805fe0u) = 0u;
   RW32(0xf04404u) = 0u;
-  uint32_t count = RB8(0x80fd50u);
+  uint32_t count = em9305_ram_80fd2c.u8_80fd50;
   if (count != 0u) {
-    const uint16_t *entry = (const uint16_t *)(uintptr_t)RW32(0x80fd4cu);
+    const uint16_t *entry = (const uint16_t *)(uintptr_t)em9305_ram_80fd2c.u32_80fd4c;
     uint32_t pairs = ((count - 1u) >> 1) + 1u;
     do {
       uint32_t index = entry[0];

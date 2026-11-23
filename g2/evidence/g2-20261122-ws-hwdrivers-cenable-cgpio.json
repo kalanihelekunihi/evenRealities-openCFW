@@ -1,0 +1,21 @@
+{
+  "stream": "ws-hwdrivers",
+  "date_cst": "2026-11-23 00:25 America/Chicago",
+  "subject": "cenable + cgpio root-caused to harness defsym self-reference bugs (no C change)",
+  "imufp_rerun": {"magic":"0x48574844","result":"216/216 PASS (all 18 DRV_IMU*/semantic_* fns)","note":"fresh run validates hub-cell default edits (report_interval/motion cells) in current tree"},
+  "cenable": {
+    "unit_result": "12/12 PASS (g2_codec_clock_enable)",
+    "root_cause": "autogen defsym'd callee g2_codec_pin_function to 0x004c3075 (= g2_codec_clock_enable itself +thumb). global_index mis-resolved the function-PROTOTYPE declaration ('name(args); /* 0x480f0c */') which the comment/fnptr regexes don't match. Stock clock_enable (0x4c3074) calls bl 0x480f0c for every pin_function call.",
+    "fix": "run-stock table codec_runstock.json: g2_codec_pin_function=0x480f0c -> defsym 0x00480f0d (real stock, no stub). C logic already matched stock exactly (pin numbers, descriptor order, group>=2 guard).",
+    "c_changed": false
+  },
+  "cgpio": {
+    "unit_result": "24/24 PASS (g2_codec_gpio_write 12/12, g2_codec_pin_write 12/12)",
+    "root_cause": "autogen defsym'd g2_gpio_critical_save to 0x00509025 (= g2_codec_gpio_write itself +thumb), same prototype-parse misfire. Stock gpio_write case 6/9 calls bl 0x473940 (am_hal_interrupt_master_disable).",
+    "fix": "run-stock table: g2_gpio_critical_save=0x473940 -> defsym 0x00473941 (real stock).",
+    "c_investigation": "Transiently edited gpio.c returns thinking stock returned (uint8_t)channel / pin_write-result, then DISASM of epilogue 0x509130 = 'pop {r0,r4,r5,pc}' paired with entry 'push {r3,r4,r5,lr}' proved the push{r3}/pop{r0} idiom returns the saved passthrough_r3 (r3) for single-pin + default cases, and prior for 6/9. Original C (return passthrough_r3 / return prior) was CORRECT. Edit fully reverted.",
+    "c_changed": false
+  },
+  "latent_autogen_issue": "global_index/comment_addrs cannot resolve callee addresses from FUNCTION-PROTOTYPE declarations with trailing /* 0xADDR */ comments (only variable/fnptr decls); such callees silently mis-resolve to a nearby/self address. Worked around per-unit via run-stock table; broader autogen fix deferred (shared harness logic, higher blast radius).",
+  "rebuild_paired_sims": "not required - no C file changed (gpio.c reverted to HEAD; cenable needed none)."
+}

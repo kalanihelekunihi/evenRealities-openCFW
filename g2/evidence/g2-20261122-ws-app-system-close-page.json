@@ -1,0 +1,19 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "time_cst": "22:24",
+ "unit": "g2/src/apollo-main/app/a-11-system-close/system_close_page.c",
+ "method": "differential harness (stock 0x438000 vs C) in Renode, 20 entry points + ready_cb, LVGL stubbed, 16 source mutants",
+ "spec": "build/ws-app-20261122/specs/sc-a",
+ "result": {
+  "verdict": "EQUIVALENT",
+  "tests": 800,
+  "equal": 800,
+  "differ": 0,
+  "done": true,
+  "mutants": 16,
+  "killed": 16,
+  "surviving_mutants": []
+ },
+ "notes": "item_count at 0x20003bec is a shared defsym in the harness, so its init value (2, service_data.c, matching stock .data) rests on the init image, not this run."
+}

@@ -1,12 +1,13 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31d5e8..0x31d6a4: prepare a receive buffer (allocated when none
- * is given; 0 if that fails) for the record: notify the hook at *0x8052cc
- * with the pending pair at 0x802a2c when the record is encrypted (+484),
+ * is given; 0 if that fails) for the record: notify the hook at *((uintptr_t)&em9305_ram_8052bc + 0x10u)
+ * with the pending pair at (uintptr_t)&em9305_ram_802a2c when the record is encrypted (+484),
  * set up the buffer for the received length (+4, plus 4 for the MIC) at
  * the anchor time, choose the next channel (from the stream selected by
- * 0x8029ac when it is below the stream count +52, else the record's
- * channel +409) into 0x802a28, and unless a pending flag (0x8029b2) is
+ * (uintptr_t)&em9305_ram_8029ac when it is below the stream count +52, else the record's
+ * channel +409) into (uintptr_t)&em9305_ram_802a28, and unless a pending flag (((uintptr_t)&em9305_ram_8029ac + 0x6u)) is
  * set without a buffer, restart the timer from the doubled secondary
  * time. Returns 1. */
 extern uintptr_t opencfw_em9305_ll_receive_buffer_allocate_3175f0(void);
@@ -24,20 +25,20 @@ uint32_t opencfw_em9305_dispatch_child_31d5e8(uintptr_t record,uint32_t given,ui
     }
     uint32_t encrypted=*(volatile uint8_t *)(record+484u);
     if(encrypted!=0u) {
-        uintptr_t hook=*(volatile uint32_t *)(uintptr_t)0x8052ccu;
+        uintptr_t hook=em9305_ram_8052bc.u32_8052cc;
         if(hook!=0u) {
-            ((void (*)(uint32_t,uint32_t))hook)(*(volatile uint32_t *)(uintptr_t)0x802a2cu,
-                                                *(volatile uint32_t *)(uintptr_t)0x802a30u);
+            ((void (*)(uint32_t,uint32_t))hook)(em9305_ram_802a2c.u32_802a2c,
+                                                em9305_ram_802a2c.u32_802a30);
             encrypted=*(volatile uint8_t *)(record+484u);
         }
     }
-    volatile uint8_t *state=(volatile uint8_t *)(uintptr_t)0x8029acu;
+    volatile uint8_t *state=&em9305_ram_8029ac.u8_8029ac;
     uint32_t anchor=*(volatile uint32_t *)(record+252u)+*(volatile uint32_t *)(record+264u);
     uint32_t length=*(volatile uint16_t *)(record+4u)+((encrypted!=0u)?4u:0u)+2u;
     (void)opencfw_em9305_dispatch_child_302f00(buffer,(uint16_t)length,
         *(volatile uint32_t *)(state+0xcu)+anchor,*(volatile uint32_t *)(state+0x10u),given);
     uint32_t stream=state[0];
-    volatile uint8_t *channel=(volatile uint8_t *)(uintptr_t)0x802a28u;
+    volatile uint8_t *channel=&em9305_ram_802a28.u8_802a28;
     if(stream>=*(volatile uint8_t *)(record+52u)) {
         *channel=*(volatile uint8_t *)(record+409u);
     } else {

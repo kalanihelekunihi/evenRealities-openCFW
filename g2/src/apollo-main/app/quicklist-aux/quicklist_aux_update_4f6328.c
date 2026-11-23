@@ -1,14 +1,14 @@
-/* Apollo QuickList completed-UID batch sender, 0x4f6328..0x4f657d.
- * Packet fields and RAM addresses are bound to the authenticated Main image.
- */
-#include <stdint.h>
-/* Stock-RAM literals rewritten to named objects (sim-test wave 2026-10-26,
- * .waves/sim-fix/apply.py): g2ref_X is the linker symbol X. */
-#include <stdint.h>
-extern unsigned char g2ref_g2_quicklist_completed_201303cc[] __asm__("g2_quicklist_completed_201303cc");
+/* Apollo QuickList completed-UID batch sender, 0x4f6328..0x4f657d: the
+ * completed list goes to the phone in batches of 20 as a quicklist pb items
+ * message (kind 3, records marked completed), then the list is cleared.
+ * Verified against stock on Renode 1.17 M55 (build/ws-app-20261122/specs). */
+#include "../quicklist-common/quicklist_types.h"
+
+
+_Static_assert(sizeof(g2_quicklist_pb_items_t) == 0x1230u, "pb items frame");
 
 extern void audio_uart_buffer_zero(void *, uint32_t, uint32_t); /* 0x43c0e4 */
-extern uint32_t audio_quicklist_send_completed_5591b0(uint32_t, const void *);
+extern uint32_t audio_quicklist_send_completed_5591b0(uint32_t, const g2_quicklist_pb_items_t *);
 extern uint32_t audio_log_flags(void); /* 0x43d0ce */
 extern void audio_log_extended(uint8_t, const char *, const char *, const char *,
                                uint32_t, const char *, ...); /* 0x43d574 */
@@ -27,46 +27,43 @@ static const char done_message[] = "Successfully sent completed UIDs batch %d (%
 static const char done_compact[] = "[quicklist.page]Successfully sent completed UIDs batch %d (%d items)";
 
 uint32_t audio_quicklist_aux_update_4f6328(void) {
-    uint8_t *const completed = (uint8_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_completed_201303cc);
-    const uint32_t count = *(volatile uint16_t *)(uintptr_t)((uint32_t)(uintptr_t)g2ref_g2_quicklist_completed_201303cc+0x280u);
-    if (count == 0u) {
+    g2_quicklist_uid_cache_t *const done = &g2_quicklist_completed_201303cc;
+    if (done->count == 0u) {
         if ((audio_log_flags() & 2u) != 0u)
             audio_log_extended(4u, module, path, function, 1218u, empty_message);
         if ((audio_log_flags() & 1u) != 0u || (audio_log_flags() & 4u) != 0u)
             (void)compressed_log_output(0x10000000u, empty_compact, empty_compact);
         return 0u;
     }
-
-    const uint32_t batches = (count + 19u) / 20u;
+    const int32_t batches = ((int32_t)done->count + (int32_t)QL_CACHE_RECORDS - 1) / (int32_t)QL_CACHE_RECORDS;
     if ((audio_log_flags() & 2u) != 0u)
         audio_log_extended(4u, module, path, function, 1234u, start_message,
-                           count, batches);
+                           (uint32_t)done->count, batches);
     if ((audio_log_flags() & 1u) != 0u || (audio_log_flags() & 4u) != 0u)
         (void)compressed_log_output(0x10800000u, start_compact, start_compact,
-                                    count, batches);
-
-    uint32_t offset = 0u;
-    for (uint32_t batch = 0u; batch < batches; ++batch) {
-        const uint32_t remaining = count - offset;
-        const uint32_t items = remaining < 21u ? remaining : 20u;
-        uint8_t packet[0x1230];
-        audio_uart_buffer_zero(packet, sizeof packet, 0u);
-        packet[0] = 3u;
-        packet[1] = (uint8_t)count;
-        *(uint16_t *)(void *)(packet + 2u) = (uint16_t)items;
-        packet[0x1228u] = 0u;
-        for (uint32_t index = 0u; index < items; ++index) {
-            const uint8_t *const entry = completed + (offset + index) * 16u;
-            uint8_t *const record = packet + 8u + index * 232u;
-            *(uint32_t *)(void *)(record + 0u) = *(volatile uint32_t *)(const void *)(entry + 0u);
-            *(uint32_t *)(void *)(record + 4u) = 0u;
-            *(uint32_t *)(void *)(record + 8u) = 1u;
-            *(uint32_t *)(void *)(record + 16u) = *(volatile uint32_t *)(const void *)(entry + 8u);
-            *(uint32_t *)(void *)(record + 20u) = *(volatile uint32_t *)(const void *)(entry + 12u);
-            record[24u] = 0u;
-            record[228u] = 0u;
+                                    (uint32_t)done->count, batches);
+    int32_t sent = 0;
+    for (int32_t batch = 0; batch < batches; ++batch) {
+        const int32_t remaining = (int32_t)done->count - sent;
+        const int32_t items = remaining > (int32_t)QL_CACHE_RECORDS ? (int32_t)QL_CACHE_RECORDS : remaining;
+        g2_quicklist_pb_items_t message;
+        audio_uart_buffer_zero(&message, sizeof message, 0u);
+        message.data_type = 3u;
+        message.total_count = (uint8_t)done->count;
+        message.items_count = (uint16_t)items;
+        message.at_1228 = 0u;
+        for (int32_t index = 0; index < items; ++index) {
+            const g2_quicklist_uid_entry_t *const entry = &done->entries[sent + index];
+            g2_quicklist_pb_item_t *const item = &message.item[index];
+            item->uid = entry->uid;
+            item->index = 0u;
+            item->is_completed = 1u;
+            item->timestamp[0] = entry->timestamp[0];
+            item->timestamp[1] = entry->timestamp[1];
+            item->title_size = 0u;
+            item->at_e4 = 0u;
         }
-        const uint32_t result = audio_quicklist_send_completed_5591b0(0u, packet);
+        const uint32_t result = audio_quicklist_send_completed_5591b0(0u, &message);
         if (result != 0u) {
             if ((audio_log_flags() & 2u) != 0u)
                 audio_log_extended(1u, module, path, function, 1265u, fail_message,
@@ -82,8 +79,8 @@ uint32_t audio_quicklist_aux_update_4f6328(void) {
         if ((audio_log_flags() & 1u) != 0u || (audio_log_flags() & 4u) != 0u)
             (void)compressed_log_output(0x10800000u, done_compact, done_compact,
                                         batch, items);
-        offset += items;
+        sent += items;
     }
-    audio_uart_buffer_zero(completed, 0x288u, 0u);
+    audio_uart_buffer_zero(done, sizeof *done, 0u);
     return 0u;
 }

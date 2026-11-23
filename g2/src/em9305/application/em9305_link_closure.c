@@ -104,11 +104,11 @@ void em9305_rom_102b00(uint32_t index, uint32_t value)
  * 0x80f98c = 0x80f97c+16, so the 36 B and 16 B sizes are bounded by stock. */
 uint8_t g2_em_myapp_ao[36] __attribute__((section(".bss.opencfw_myapp_ao_801970")));
 const void *g2_em_myapp_queue[4] __attribute__((section(".bss.opencfw_myapp_queue_80f97c")));
-/* ROM-owned RAM cells, pinned at their stock addresses (g2-em9305.ld). The stock
- * image never writes either: 0x8012bc is only read and decremented (0x30ead6,
- * 0x3140ec) and 0x8010a4 is only read (0x30ec6c ld r12,[0x8010a4]); the package
- * has no RAM record, so the ROM initialises them. The earlier `= 16u` in .sdata
- * was never copied to RAM by any startup code. */
+/* ROM-owned RAM cells, pinned at their stock addresses (g2-em9305.ld).
+ * 0x8010a4 is only read by this image (0x30ec6c ld r12,[0x8010a4]). 0x8012bc
+ * is read and decremented (0x30ead6, 0x3140ec); ini_record e0 now writes
+ * 0x00000010 there at boot (2-byte pad at 0x8012ba is reserved in the ld).
+ * The earlier `= 16u` in .sdata was never copied to RAM by any startup code. */
 uint32_t g2_em_qf_next_priority __attribute__((section(".bss.opencfw_qf_next_priority_8012bc")));
 void (*g2_em_app_start_callback)(uint32_t, uint32_t, uint8_t *, uint32_t)
     __attribute__((section(".bss.opencfw_app_start_callback_8010a4")));

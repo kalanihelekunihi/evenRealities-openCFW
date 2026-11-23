@@ -1,11 +1,12 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
-/* Native 0x31d2bc..0x31d438: advance the CIG event cursor (0x8029ac:
+/* Native 0x31d2bc..0x31d438: advance the CIG event cursor ((uintptr_t)&em9305_ram_8029ac:
  * stream +0, subevent +1, flags +3/+7/+8, state pointer +0x10, anchor
  * +0xc, per-stream subevent table from +0x18, 24 bytes per stream). Each
  * round finds the next active stream with 317418, publishes the 64-bit
  * event counter (record +0x20/+0x24 times +0x18, plus the subevent unless
- * the cursor is on the group itself, +408) at 0x802a2c, looks ahead for
+ * the cursor is on the group itself, +408) at (uintptr_t)&em9305_ram_802a2c, looks ahead for
  * the following stream to advance the anchor by interval (+0x30) times
  * the streams skipped, and hops the stream's channel when it has a
  * pending subevent. After at least one full round with a valid stream
@@ -24,7 +25,7 @@ static void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
 
 uint32_t opencfw_em9305_dispatch_child_31d2bc(uintptr_t record,uintptr_t done)
 {
-    const uintptr_t cursor=(uintptr_t)0x8029acu;
+    const uintptr_t cursor=(uintptr_t)(uintptr_t)&em9305_ram_8029ac;
     uintptr_t group=record+408u;
     int32_t round=-1;
     uint32_t ok=1u,current=0u,previous=0u,anchor_base=0u;
@@ -53,8 +54,8 @@ uint32_t opencfw_em9305_dispatch_child_31d2bc(uintptr_t record,uintptr_t done)
             high+=sum<low;
             low=sum;
         }
-        w32(0x802a2cu,low);
-        w32(0x802a30u,high);
+        w32((uintptr_t)&em9305_ram_802a2c,low);
+        w32(((uintptr_t)&em9305_ram_802a2c + 0x4u),high);
         if(ok==0u) {
             current=previous;
             break;
@@ -81,7 +82,7 @@ uint32_t opencfw_em9305_dispatch_child_31d2bc(uintptr_t record,uintptr_t done)
         uint32_t interval=r32(record+0x30u);
         anchor_base=r32(cursor+0xcu);
         w32(cursor+0xcu,interval*(uint8_t)steps+anchor_base);
-        if(r8(0x805a86u)&1u) break;
+        if(r8(((uintptr_t)&em9305_ram_805a6c + 0x1au))&1u) break;
         uint32_t index=r8(cursor);
         uintptr_t stream=r32(record+0x38u+4u*index);
         if(stream!=0u&&r8(stream+101u)!=0u) break;

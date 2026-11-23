@@ -1,10 +1,11 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x3235bc..0x323620: collect the completed-packet counts of the
  * object's streams (table +56, count +52): for each live stream (+36
  * clear) with a non-zero count (+16), record its handle (+2) and count and
  * clear the count. When any were found and a host callback is registered
- * at 0x805b38, report them as (number, handles[4], counts[4]). The stock
+ * at ((uintptr_t)&em9305_ram_805af0 + 0x48u), report them as (number, handles[4], counts[4]). The stock
  * frame holds four entries; more than four live streams overflow it. */
 typedef void (*opencfw_em9305_completed_callback_t)(uint32_t number,
                                                     uint16_t *handles,
@@ -25,7 +26,7 @@ void opencfw_em9305_child_3235bc(uintptr_t object)
         ++found;
         *(volatile uint8_t *)(stream+16u)=0u;
     }
-    uintptr_t callback=*(volatile uint32_t *)0x805b38u;
+    uintptr_t callback=*(volatile uint32_t *)((uintptr_t)&em9305_ram_805af0 + 0x48u);
     if(callback==0u||(uint8_t)found==0u)return;
     ((opencfw_em9305_completed_callback_t)callback)((uint8_t)found,handles,counts);
 }

@@ -1,0 +1,79 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "timezone": "America/Chicago",
+ "sources": {
+  "g2/src/apollo-main/app/p-09-teleprompt/teleprompt_fsm_actions.c": "0efe460437cdaa4b7fb9e77438f28d7ccf277211096106475ccbaab17f4995d6"
+ },
+ "spec": "build/ws-app-20261122/specs/ta-a",
+ "verified_at": "2026-11-22 21:03 CST",
+ "result": {
+  "tests": 600,
+  "equal": 600,
+  "differ": 0,
+  "done": true,
+  "overflow": false,
+  "mutants": 9,
+  "killed": 9,
+  "surviving_mutants": [],
+  "verdict": "EQUIVALENT",
+  "harness_sha256": "726a3af35ebd9157581c63fd1373e2a6ffc9f18d91bdd881b6a85c92f8c5d154",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "stock_entries": {
+  "page_data": "0x58d000",
+  "ai_sync": "0x58d0d0",
+  "scroll_sync": "0x58d228",
+  "heartbeat": "0x58d2f4"
+ },
+ "method": "random 1-3 op sequences; UI window/ctrl randomised (page window edges, jump pending/page match), UI state 0..5, NULL data; 600 tests + 80 per mutant",
+ "observed": "callee args/returns (page update, controller posts, jump clear), logs, ctrl (0x48) and UI window (0x40) hashes after every op",
+ "mutants": [
+  {
+   "sym": "teleprompt_action_page_data_58d000",
+   "from": "page < first + 4u",
+   "to": "page <= first + 4u"
+  },
+  {
+   "sym": "teleprompt_action_page_data_58d000",
+   "from": "ctrl->jump_pending != 0u &&",
+   "to": "ctrl->jump_pending == 1u &&"
+  },
+  {
+   "sym": "teleprompt_action_page_data_58d000",
+   "from": "if (is_jump)\n            teleprompt_fsm_jump_clear_58c882();",
+   "to": "if (0)\n            teleprompt_fsm_jump_clear_58c882();"
+  },
+  {
+   "sym": "teleprompt_action_ai_sync_58d0d0",
+   "from": "sync->page_id * 10u + sync->line_id);",
+   "to": "sync->page_id * 10u + sync->char_id);"
+  },
+  {
+   "sym": "teleprompt_action_ai_sync_58d0d0",
+   "from": "if (ctrl->mode != 0u) {",
+   "to": "if (ctrl->mode > 1u) {"
+  },
+  {
+   "sym": "teleprompt_action_ai_sync_58d0d0",
+   "from": "0x15fu",
+   "to": "0x160u"
+  },
+  {
+   "sym": "teleprompt_action_scroll_sync_58d228",
+   "from": "TELEPROMPT_EVT_SCROLL_SYNC, sync->page_id * 10u",
+   "to": "TELEPROMPT_EVT_SCROLL_SYNC, sync->page_id * 9u"
+  },
+  {
+   "sym": "teleprompt_action_heartbeat_58d2f4",
+   "from": "if (state == 0u || state == 3u) {",
+   "to": "if (state == 0u || state == 4u) {"
+  },
+  {
+   "sym": "teleprompt_action_heartbeat_58d2f4",
+   "from": "400u",
+   "to": "401u"
+  }
+ ],
+ "source_changes": "none needed"
+}

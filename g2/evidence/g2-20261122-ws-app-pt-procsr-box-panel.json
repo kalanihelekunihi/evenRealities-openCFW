@@ -1,0 +1,19 @@
+{
+ "stream": "ws-app",
+ "date": "2026-11-22",
+ "time_cst": "22:34",
+ "unit": "g2/src/apollo-main/app/a-58-pt-protocol/pt_procsr_box_panel.c",
+ "method": "differential harness (stock 0x438000 vs C) in Renode, 22 PT handlers, pt_handler_result called in stock (0x575428), 14 source mutants",
+ "spec": "build/ws-app-20261122/specs/ptb-a",
+ "result": {
+  "verdict": "EQUIVALENT",
+  "tests": 800,
+  "equal": 800,
+  "differ": 0,
+  "done": true,
+  "mutants": 14,
+  "killed": 14,
+  "surviving_mutants": []
+ },
+ "notes": "First run 788/800: the 12 diffs were a harness artifact (stock low-battery log format ends in a bare '%' so the extended-log record reads an uninitialised vararg); that path now runs with the extended log off."
+}

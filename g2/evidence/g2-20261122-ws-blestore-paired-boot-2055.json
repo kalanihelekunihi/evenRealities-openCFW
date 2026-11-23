@@ -1,0 +1,46 @@
+{
+  "id": "g2-20261122-ws-blestore-paired-boot-2055",
+  "time": "2026-11-22 20:58:57 America/Chicago",
+  "stream": "ws-blestore",
+  "purpose": "Private full C rebuild after _bleCommHandler gained the missing 0x5322bc discovery-event call, then both paired boot sims.",
+  "sources_json_sha256": "a795d6f95d54796927f488ca09da8692e7ebfe893f9a2ff6589bfe23511eaec5",
+  "prior_image": "build/ws-blestore-20261122/full-2048-link (mode-byte fix only)",
+  "build": {
+    "compile": "python3 tools/build/sources.py build --device g2 --payload g2-apollo-main --out build/ws-blestore-20261122/full-2055 --jobs 4",
+    "compile_result": "g2-apollo-main: 2719/2719 compiled (0 known failures), 0 duplicate strong symbols, 21 unresolved: ok (composed; 1291 before aliases)",
+    "link": "python3 tools/build/link_g2_sources.py --source-out build/ws-blestore-20261122/full-2055 --out build/ws-blestore-20261122/full-2055-link --payload g2-apollo-main",
+    "link_result": "linked 3629092 bytes (full-2048 was 3628564; +528 for previously GC'd discovery event functions)",
+    "image": "build/ws-blestore-20261122/full-2055-link/g2-apollo-main/g2-apollo-main.bin",
+    "image_sha256": "636dd42889a308a0664e0763c03b5d1192d27a51c87e39a338cfc48390312877",
+    "elf_sha256": "48597002e0e638eaaf54238da37152013433bef87a16c1ceb96f1097481f5bf4",
+    "pc": "0x0052c42d",
+    "c_fix": "display_ble_comm_handler.c: audio_ble_discovery_event_5322bc(message) immediately before audio_ble_comm_message_release, matching stock 0x4b7e52. The dispatcher was previously unreferenced and dropped by --gc-sections."
+  },
+  "sims": {
+    "script": "build/ws-blestore-20261122/paired.sh blestore-2055 <image>",
+    "openCFW": {
+      "match": "RC=0",
+      "dfu_mismatch": "RC=0, DFU_SAME vs em9305-nor-20261122 reference",
+      "hci_packets_dfu": 922,
+      "OTAPOINTER_AFTER_0.01S": "0xAFD1363A",
+      "OTAPOINTER_AFTER_8S": "0x0",
+      "CHIPREV_AFTER_8S": "0x22",
+      "HOST_PACKET_COUNT": "0x3A",
+      "UNSUPPORTED_COUNT": "0x0",
+      "adv": 1,
+      "display_frames": 2,
+      "faults": 0
+    },
+    "vs_stock": "identical except OTAPOINTER_AFTER_0.01S (by design, otap-disarm path)"
+  },
+  "nor_after_8s_match": {
+    "file": "build/ws-blestore-20261122/renode/blestore-2055-match.nor.bin",
+    "sha256": "4049ca4e899c7d069573bc4ca86e57c8b00f4b6564de5f2f8e9c9f983610758e",
+    "cmp_stock_match": "bit-identical"
+  },
+  "verdict": "BOOT_UNCHANGED",
+  "notes": [
+    "opencfw-otap-disarm.app.bin not touched",
+    "sources.json writer CLOSED"
+  ]
+}

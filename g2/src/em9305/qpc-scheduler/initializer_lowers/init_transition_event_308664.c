@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern uintptr_t opencfw_em9305_radio_address_write_3045e8(
     uintptr_t,uint32_t,uint32_t);
@@ -23,17 +24,17 @@ static uint32_t transition_event_308664_body(
     event[4]=(uint8_t)kind;
     put_word(event,0x13u<<17u);
     uint32_t period=*(volatile uint32_t *)(record+252u);
-    uint16_t shared_second=*(volatile uint16_t *)(uintptr_t)0x8051c4u;
+    uint16_t shared_second=em9305_ram_8051b8.u16_8051c4;
     uint8_t recorded_c=*(volatile uint8_t *)(record+256u);
     uint8_t recorded_b=*(volatile uint8_t *)(record+776u);
-    uint16_t shared_first=*(volatile uint16_t *)(uintptr_t)0x8051c2u;
+    uint16_t shared_first=em9305_ram_8051b8.u16_8051c2;
     uint16_t shift=*(volatile uint16_t *)(record+716u);
     event[24]=recorded_c;
     event[20]=recorded_b;
     put_half(event+12u,shift);
     put_half(event+8u,shared_second);
     put_half(event+6u,shared_first);
-    put_half(event+10u,(uint8_t)((int32_t)(record-0x803d78u)/784));
+    put_half(event+10u,(uint8_t)((int32_t)(record-((uintptr_t)&em9305_ram_803d58 + 0x20u))/784));
     put_half(event+14u,0u);
     put_half(event+16u,0u);
     put_half(event+18u,0u);

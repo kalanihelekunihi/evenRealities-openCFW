@@ -1,18 +1,19 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32aa9c..0x32ad38: advertising event completion for the set
  * (object +36) and its PDU object (+44). A set that is not running
  * (+2785) counts the event (+825, unless +2787), and ends with status 4
  * (325a40, +2262 set) when terminating (+2262/+2260) or when the maximum
  * event count (+824) is reached (status 0x43 at +826). Otherwise the
- * advertising PDU is rebuilt: the channel index (+15, default 0x805bed)
+ * advertising PDU is rebuilt: the channel index (+15, default ((uintptr_t)&em9305_ram_805be0 + 0xdu))
  * is copied to +14; for legacy sets pending data (+1440, length +1441,
  * DID +1442) is installed into the data buffer (*(+1424) <- +1444) and
- * the PDU is composed by the host hook (*0x805174, for event property bit
+ * the PDU is composed by the host hook (*((uintptr_t)&em9305_ram_805160 + 0x14u), for event property bit
  * 7) or 32387c, its length stored at +124; a pending start (32841c) and a
  * deferred DID update (+2786) are then applied. Extended sets refresh
  * their resolvable addresses (new local RPA on request at +3 when
- * 0x805be2 is 1, or a resolved peer pair when bit 1 of 0x805be2 is set,
+ * ((uintptr_t)&em9305_ram_805be0 + 0x2u) is 1, or a resolved peer pair when bit 1 of ((uintptr_t)&em9305_ram_805be0 + 0x2u) is set,
  * copied to +842/+908 and the PDU +84/+88; peer identity into +848 and
  * +24/+28 for directed sets with bits 0x44 at +80), and copy pending AUX
  * data (+1440/+1441 into *(+100) for PDU types 0, 2, 6; +1716/+1717 from
@@ -73,7 +74,7 @@ void opencfw_em9305_child_32aa9c(uintptr_t object)
         }
     }
     uint32_t channel=r8(pdu+15u);
-    if(channel==0u)channel=r8(0x805bedu);
+    if(channel==0u)channel=r8(((uintptr_t)&em9305_ram_805be0 + 0xdu));
     w8(pdu+14u,channel);
     uint32_t properties=r16(set+32u);
     uintptr_t data=set+0x5a0u;
@@ -97,7 +98,7 @@ void opencfw_em9305_child_32aa9c(uintptr_t object)
         if((properties&0x80u)==0u){
             w8(pdu+124u,opencfw_em9305_child_32387c(set,set+840u,0u));
         }else{
-            uintptr_t hook=r32(0x805174u);
+            uintptr_t hook=r32(((uintptr_t)&em9305_ram_805160 + 0x14u));
             if(hook!=0u)
                 w8(pdu+124u,((opencfw_em9305_compose_hook_t)hook)(set,set+840u,
                                                                   set+1972u,0u));
@@ -119,7 +120,7 @@ void opencfw_em9305_child_32aa9c(uintptr_t object)
         }
     }else{
         uint32_t request=r8(set+3u);
-        uint32_t privacy=r8(0x805be2u);
+        uint32_t privacy=r8(((uintptr_t)&em9305_ram_805be0 + 0x2u));
         if(request!=0u&&privacy==1u){
             uint32_t high=r32(set+12u),low=r32(set+8u);
             w8(set+3u,0u);
@@ -133,8 +134,8 @@ void opencfw_em9305_child_32aa9c(uintptr_t object)
                 uint32_t high=pair[1],low=pair[0];
                 w32(set+20u,high);
                 w32(set+16u,low);
-                w32(0x805be8u,high);
-                w32(0x805be4u,low);
+                w32(((uintptr_t)&em9305_ram_805be0 + 0x8u),high);
+                w32(((uintptr_t)&em9305_ram_805be0 + 0x4u),low);
                 set_local_address(set,pdu,low,high);
             }
         }

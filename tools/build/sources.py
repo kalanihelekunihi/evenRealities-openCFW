@@ -22,6 +22,7 @@ from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import shlex
 import shutil
@@ -291,6 +292,27 @@ def finish(unit, obj, argv, rc, log, gen):
     return row
 
 
+_SECTION_ROW = re.compile(
+    r"\s*\[\s*\d+\]\s+(\S+)\s+(?:PROGBITS|NOBITS)\s+\S+\s+\S+\s+([0-9a-f]+)\s+\S+\s+(\S+)\s+\S+\s+\S+\s+(\d+)\s*$")
+
+
+def align_writable(ld, obj, minimum=4):
+    """Set sh_addralign=minimum on writable, allocated, non-executable sections of at least minimum
+    bytes whose alignment is lower. Returns the number of sections raised."""
+    tool = lambda name: str(ld.with_name(ld.name[:-2] + name)) if ld.name.endswith("ld") else name
+    listing = subprocess.run([tool("readelf"), "-SW", str(obj)], capture_output=True, text=True, check=True).stdout
+    names = []
+    for line in listing.splitlines():
+        m = _SECTION_ROW.match(line)
+        if m and "W" in m.group(3) and "A" in m.group(3) and "X" not in m.group(3) \
+                and int(m.group(2), 16) >= minimum and int(m.group(4)) < minimum:
+            names.append(m.group(1))
+    for i in range(0, len(names), 200):
+        args = [a for n in names[i:i + 200] for a in ("--set-section-alignment", f"{n}={minimum}")]
+        subprocess.run([tool("objcopy"), *args, str(obj)], check=True)
+    return len(names)
+
+
 def compose(manifest, toolchains, payload, rows, out, gen):
     spec = manifest.get("payloads", {}).get(payload, {}).get("compose")
     linked = [r for r in rows if r.get("object") and r.get("link", True)]
@@ -309,6 +331,12 @@ def compose(manifest, toolchains, payload, rows, out, gen):
     proc = subprocess.run(argv, cwd=ROOT, capture_output=True, text=True)
     result = {"returncode": proc.returncode, "argv": argv[:12] + [f"... {len(objects)} objects"],
               "log": (proc.stdout + proc.stderr)[-4000:]}
+    if proc.returncode == 0 and not tc.docker:
+        # Word-align writable data. clang gives uint8_t/char arrays and all-byte structs alignment 1, so
+        # the final link packed RAM objects (nanopb messages, WSF timers, DMA buffers) at odd addresses;
+        # LDRD/STRD/LDM/STM/VLDR/LDREX on them fault on the M55. Raise (never lower) to 4 every writable
+        # allocated section of 4 B or more. See build/ws-ramlayout-20261122-1230/pending/README.md (04).
+        result["align4"] = align_writable(Path(tc.host_path(spec["ld"])), out / target)
     if proc.returncode == 0:
         result.update(output=str(out / target), sha256=sha(out / target), **elf_symbols(out / target))
         result.pop("strong"); result.pop("weak")

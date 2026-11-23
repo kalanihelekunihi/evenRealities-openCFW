@@ -5,8 +5,8 @@ extern uint8_t audio_conversate_ui_state_20071368;
 extern uint32_t audio_lv_child_44dce2(uint32_t, uint32_t);
 extern uint32_t audio_terminal_ui_object_valid_43e2ea(void *);
 extern uint32_t audio_uart_page_460084(const char *);
-extern uint32_t audio_uart_page_45fffe(uint32_t, uint32_t);
-extern void audio_lv_label_set_text_fmt_49954c(uint32_t, uint32_t, uint32_t);
+extern const char *audio_uart_page_45fffe(const char *, uint32_t);
+extern void audio_lv_label_set_text_fmt_49954c(uint32_t label, const char *fmt, ...);
 
 static const char close_in_seconds[] = "ID_CONVERSATE_CLOSE_IN_X_SEC";
 
@@ -23,8 +23,7 @@ uint32_t audio_conversate_ui_route_5b68d6(uint32_t ignored, uint32_t seconds) {
     if (audio_terminal_ui_object_valid_43e2ea((void *)(uintptr_t)label) == 0u)
         return UINT32_MAX;
     const uint32_t index = audio_uart_page_460084(close_in_seconds);
-    const uint32_t format = audio_uart_page_45fffe(
-        (uint32_t)(uintptr_t)close_in_seconds, index);
+    const char *const format = audio_uart_page_45fffe(close_in_seconds, index);
     audio_lv_label_set_text_fmt_49954c(label, format, seconds);
     return 0u;
 }

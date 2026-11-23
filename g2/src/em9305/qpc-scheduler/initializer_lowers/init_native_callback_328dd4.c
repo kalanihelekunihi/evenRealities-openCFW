@@ -1,8 +1,9 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x328dd4..0x329034: isochronous-group event-end callback (owner).
  * Steps the stream queues of every stream (+56[i]) that has pending
- * traffic in 0x805434, then (unless the group is idle) advances the
+ * traffic in em9305_ram_80542c.u8_805434, then (unless the group is idle) advances the
  * 64-bit event counter (+32), the anchor (+8 += interval +16), applies a
  * pending channel-map update at its instant (+276, +280/+284) and pending
  * terminate/encryption requests (+273 -> 32909c 2/3), and reinserts the
@@ -10,8 +11,8 @@
  * flushes or counts the received-event bookkeeping of each stream (+108,
  * +112, 31aeb4 per sub-event), mirrors the counters into the peer group
  * (+180), refills the transmit queues (32d598/317124/317680, dropping
- * events when no buffer is free and counting them in 0x805adc) and
- * reports the event (32324c) when 0x805aaf is set. */
+ * events when no buffer is free and counting them in ((uintptr_t)&em9305_ram_805a6c + 0x70u)) and
+ * reports the event (32324c) when ((uintptr_t)&em9305_ram_805a6c + 0x43u) is set. */
 #define U8(a) (*(volatile uint8_t *)(uintptr_t)(a))
 #define U16(a) (*(volatile uint16_t *)(uintptr_t)(a))
 #define U32(a) (*(volatile uint32_t *)(uintptr_t)(a))
@@ -49,16 +50,16 @@ uint32_t opencfw_em9305_callback_328dd4(uintptr_t owner)
 
     for (;;) {
         for (uint32_t i = 0u; i < U8(link + 52u); i++) {
-            if (U8(0x805434u + i) == 0u)
+            if (U8((uintptr_t)&em9305_ram_80542c.u8_805434[0] + i) == 0u)
                 continue;
             uintptr_t stream = STREAM(link, i);
             U8(stream + 32u) = 1u;
             uint32_t mode = U8(link + 26u);
-            uint32_t budget = U8(0x805434u + i);
+            uint32_t budget = U8((uintptr_t)&em9305_ram_80542c.u8_805434[0] + i);
             if (mode == 0u)
                 opencfw_em9305_radio_stream_queue_step_317980(stream, budget);
             else
-                opencfw_em9305_child_3177e8(stream, budget, U8(0x805438u + i));
+                opencfw_em9305_child_3177e8(stream, budget, U8((uintptr_t)&em9305_ram_80542c.u8_805438[0] + i));
         }
         opencfw_em9305_child_3235bc(link);
         opencfw_em9305_child_317304(link);
@@ -159,7 +160,7 @@ mirror:;
                     while ((dropped = opencfw_em9305_wsf_event_remove(queue, out)) != 0u) {
                         (void)opencfw_em9305_wsf_event_release(dropped);
                         (void)opencfw_em9305_wsf_critical_enter();
-                        U8(0x805adcu) = (uint8_t)(U8(0x805adcu) + 1u);
+                        U8(((uintptr_t)&em9305_ram_805a6c + 0x70u)) = (uint8_t)(U8(((uintptr_t)&em9305_ram_805a6c + 0x70u)) + 1u);
                         (void)opencfw_em9305_wsf_critical_exit();
                     }
                     continue;
@@ -177,7 +178,7 @@ mirror:;
         }
     }
 
-    if (U8(0x805aafu) == 0u)
+    if (U8(((uintptr_t)&em9305_ram_805a6c + 0x43u)) == 0u)
         return 0u;
     return opencfw_em9305_dispatch_child_32324c(U8(link + 2u), U32(link + 32u));
 }

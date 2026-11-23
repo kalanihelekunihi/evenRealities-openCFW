@@ -1,6 +1,384 @@
 STATUS: IN-PROGRESS
 
+## RAM alignment guard and stock data owners verified — 2026-11-22 (3:25 PM CST)
+
+Applied the approved `tools/build/sources.py` compose alignment pass: raises writable allocated
+sections >=4 B from alignment <4 to 4. Root cause was byte-array/all-byte-struct definitions at
+alignment 1, not linker ALIGN(1). Full private build `build/ws-ramlayout-20261122-1230/full-a4b-link/`
+compiled 2719/2719 (0 failures), raised 188 sections, gives 0 ALIGN-ERR, and paired M55 sims match:
+DFU_SAME, 922 HCI log lines, CHIPREV 0x22, OTAP 0xAFD1363A->0, host 0x3A, adv 1, display 2, no faults.
+Image SHA-256 `b155024e0552711efb2848040b38739bbd2b5746a0e6f9c1196c49cb2005bcb0`, 3,626,996 B.
+
+Stock owner/start values verified (23 groups): 0x200004a4 is liblc3 `lc3_bwdet_run.bws_table`, not
+runtime; Ambiq `g_DefaultMcuMemCfg`, voltage tables, temperature/trim bytes, `eOngoingSeq`; LVGL
+calendar and keyboard maps; npmx ADC conversion callbacks; onboarding frame tables. Existing owners
+match stock; no duplicate definitions added. cJSON `global_hooks` is private to cJSON.c, so its RAM
+placement is not a contract. Evidence: `g2/evidence/g2-20261122-ws-ramlayout-functions.json`.
+Emulator only; device behavior and source completeness remain unproven. Official OTA image untouched.
+
+
 # G2 compilable-C reconstruction ledger
+
+## RAM alignment pass + stock-RAM orphan owners verified — 2026-11-22 (3:11 PM CST, America/Chicago)
+
+Workstream ws-ramlayout. Emulator only; no flash; no commit. Official
+`opencfw-otap-disarm.app.bin` not touched.
+
+**Alignment.** 41 writable RAM objects of 8 B or more linked at addresses that
+were not 4-aligned (e.g. `audio_quicklist_tx_state` 0x20097a51; stock
+0x200f7484). Cause: clang gives `uint8_t`/`char` arrays and all-byte structs
+section alignment 1, and `-fdata-sections` + ld pack them byte-adjacent.
+LDRD/STRD/LDM/STM/VLDR/LDREX fault on these (CCR.UNALIGN_TRP is clear, so
+plain LDR/STR do not). `tools/build/sources.py` compose now raises (never
+lowers) the alignment of every writable section of 4 B or more to 4 after
+`ld -r` (188 sections). Private full build
+`build/ws-ramlayout-20261122-1230/full-a4-link`: 2719/2719, 0 duplicate
+strong symbols, 21 unresolved; image 3,627,092 B, SHA-256
+`7f753ec17928b4bc87133476a04af14e7087ec282f30d9ba371f9d366c91985c`;
+0 misaligned objects (mapcheck/alignchk). Paired sims match: DFU lines same
+as reference, 922 HCI packets, CHIPREV 0x22, OTAP 0xAFD1363A then 0, host
+packets 0x3A, unsupported 0, adv 1, display 2, no faults.
+
+**Stock-RAM orphan owners verified.** The stock .data objects between the
+sized stock-RAM cells all have owners in compiled code. Start values match
+`.waves/init_20000000.bin` (23/23, `orphanverify.py`):
+0x200004a4 liblc3 `bws_table`; 0x200001ec `g_DefaultMcuMemCfg`;
+0x200001f4/0x20000244 spotmgr Vddc/Vddf voltage tables; 0x20004539..0x20004540
+spotmgr trims and `eOngoingSeq`; LVGL `day_names_def`, `month_names_def`,
+`month_list`, `year_list` (0x20001534..0x20001584), `kb_map`/`kb_ctrl`
+(0x20002b9c/0x20002bc4); npmx `code_to_value_funs` 0x20002e0c; onboarding
+frames 0x20002e50..; FreeRTOS `ulCriticalNesting` 0x2000309c;
+`g2_pwrctrl_trim_version` 0x200001e8; cJSON `global_hooks` 0x200004bc
+(pointers match stock roles; placement does not matter). Evidence:
+`g2/evidence/g2-20261122-ws-ramlayout-functions.json`.
+
+## Process C rebuilt into apollo-main + paired sims; 43bb14 count 4..8 settled — 2026-11-22 (12:46 PM CST, America/Chicago)
+
+Follow-on to the verified `nrf_model_process_43a698` install. Emulator
+only; no flash; no commit. Official `opencfw-otap-disarm.app.bin` was not
+overwritten (still 3,819,448 B, SHA-256 `7c691d8c…`, mtime 7:55 AM CST).
+`source_completeness_proven` stays **false**.
+
+**sources.json.** Dropped the `g2c_fuel_gauge_cores.S` unit (4880 units
+left). Leaves now use profile `g2-apollo-main-mve-1`. That profile had
+to drop `-mfpu=fpv5-d16`: on Apple clang it forced `__ARM_FEATURE_MVE=1`
+(integer only) and rejected `vmulq_f32`. Without it, `-mcpu=cortex-m55
+-mfloat-abi=hard` yields `__ARM_FEATURE_MVE=3` and ACLE compiles.
+`leaves.c` also dropped `#include <string.h>` (missing on the
+freestanding Apple-clang profile) and declares `memcpy`/`memset`.
+
+**Linker report.** Replaced the canned “source-only uncalibrated” /
+“not the stock Nordic algorithm” wording in `link_g2_sources.py`. The
+qualification now says the fuel gauge is typographic C, bit-exact
+versus typographic stock on Renode 1.17 M55 (hardware calibration
+unproven).
+
+**Build.** `sources.py --payload g2-apollo-main` 2719/2719, 0 failures,
+0 duplicate strong symbols, 21 composed unresolved. Linked image
+`build/g2-apollo-recovery-20261122-fuel-gauge-process-c2-link/g2-apollo-main/g2-apollo-main.bin`
+is **3,645,112 B**, SHA-256
+`14b662c5e11ea984e73bf80acfc03d74ad505219c3f5cf7dc696190f87b58c39`,
+reset PC `0x0052C3CD` (SP `0x2007FB00`). That is +15,208 B versus the
+09:54 typographic-cores image. Installed only as
+`build/em9305-nor-20261122/opencfw-fuel-gauge-process-c.app.bin`.
+Codec/em9305/touch were not rebuilt in this output (docker/colima was
+down); the link was apollo-main only.
+
+**43bb14 count 4..8.** Direct C vs typographic stock on Renode 1.17 M55
+with a widened 0x50-byte typographic frame (no index/abs/raw overlap).
+**315 cases, 0 mismatches, MAGIC `0xF6A11E14`.** Counts 2..8, including
+the mid6 property pattern. Stock only picks a winner among the first
+two elements unless `count==3`, so the mid6 “max-abs at last index”
+property was not typographic; it was dropped from `mid6_harness.c`.
+Production `fg_43bb14` was not changed.
+
+**Version-match (8 s).** CHIPREV stays `0x22`. OTAP `0xAFD1363A` at 0.01 s
+and `0` at 8 s. Host packets `0x3A`, unsupported `0`, advertising
+`010A200101`, display frame
+`0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492`.
+End PC `0x4cc084` (layout; fuel-gauge-c was `0x4ce6ec`, gc `0x4cbdd4`,
+stock `0x44adfa`).
+
+**Forced-mismatch DFU (controller word `00010304`, 8 s, completed path).**
+922 HCI host packets, identical opcode histogram *and* identical packet
+sequence to stock: 1× FD06 `NVMEraseMain`; 857× FD03; 4× FC4E CRC32 with
+the same digests (`0xD2C17B4C`, `0x6E09DDA8`, `0xDA9653E5`,
+`0xE498BC06`); 1× FD07 INFO erase at `0x00402000`; 1× FD03 commit at
+`0x00402000` starting `00020404`; SYSRESETREQ; SBL *application*
+handoff (not wired-load) VTOR `0x00438000` SP `0x2007FB00` PC
+`0x0052C3CD`; then advertising `010A200101`. At 8 s: OTAP `0`, config
+mode false, `NvmMainErased` false, unsupported 0, host monitor `0x3A`.
+Same display hash.
+
+Verdict: PASS. Evidence:
+[`g2-20261122-fuel-gauge-process-c-rebuild-paired-sims.json`](../evidence/g2-20261122-fuel-gauge-process-c-rebuild-paired-sims.json).
+
+
+
+## Verified nrf_model_process_43a698 — 2026-11-22 (12:18 PM CST, America/Chicago)
+
+Idiomatic scalar-float C for model process, with MVE ACLE 4-wide
+`vmulq_f32`/`vaddq_f32`/`vsubq_f32` where typographic uses `vmul.f32` q
+(NaN signs). Renode 1.17 M55, no `fg_call`. Emulator only; no flash;
+no commit.
+
+**Verified (1,232 cases, 0 typographic mismatches, MAGIC `0xF6A11E07`).**
+Compared SoC, `state[0x00..0xDF]`, scratch (8 B), and opt (16 B) against
+typographic stock. Structured counts `{1,2,3,4,5,8}` × v/i/T/dt plus 80
+specials/random. The one-case trace (`v=3.2`, `i=0.05`, `T=0`, `dt=1`,
+`count=1`) also matches end to end, including opt[2].
+
+**Tail fix.** The apparent `state[0x88/8C/90]` snap diffs were hook
+timing (C at `0xEB2` before those stores; stock at `0xEDC` after). Final
+state already matched. opt[2] is typographic `r5`: `0xF50` loads it from
+`[sp,#0x194]`; `0xBB6` sets it to 0.
+
+**Production sources.** Process C is in `g2c_fuel_gauge_leaves.c` / `.h`.
+Typographic `nrf_model_process_43a698` was removed; `cores.S` is a
+comment stub so `sources.json` still resolves. `sources.json` was not
+edited.
+
+**Stopped before shared build work.** apollo-main was not rebuilt;
+paired sims were not run; linker-report string unchanged. Official
+`opencfw-otap-disarm.app.bin` was not overwritten. Before a rebuild:
+drop `g2c_fuel_gauge_cores.S` from `sources.json` and compile leaves
+with the MVE profile (`g2-apollo-main-mve-1`); leaves is currently
+`g2-apollo-main-1`.
+
+Evidence:
+[`g2-20261122-fuel-gauge-process-c.json`](../evidence/g2-20261122-fuel-gauge-process-c.json).
+
+
+
+## WIP process region-split (0x09A8-0x0D4E qNaN smear) — 2026-11-22 (12:11 PM CST, America/Chicago)
+
+Interior hooks in typographic `0x09A8-0x0D4E` on Renode 1.17 M55, same
+one-case input (`v=3.2`, `i=0.05`, `T=0`, `dt=1`, `count=1`). Emulator
+only; no flash; no commit. **Not a full process verification and not
+installed.**
+
+**Path.** `43bfac` returned 0. Stock took `0xF50` (reload `q5` from the
+`0xB16` vdiv outputs at `sp+0x188`) and fell into `0xBC6`; it did not
+take the `0xBB6` zero-`q5` path. The C draft already branched on
+`r0i==0` but then skipped `0xBC6-0xD18` with `goto L0d4e`.
+
+The smear is not a separate reset of `state+8`. After `s18` becomes
+qNaN in the `0xB16` reduction, `0xBC6` does
+`state+0xC0 += vdup(*[sp,#0x68]) * q5` (`*yp` is `+Inf` here, `q5` is
+those vdiv qNaNs), so `C0/C4/C8/CC` all become `0x7FC00000`. The
+`439f88`/`439efc` clamps then write `state[0xC8]=-1` and
+`state[0xCC]=0`. `0xC56-0xD14` vst4's
+`(vld4(state+8) - (q5*s18)*load(sp+0x188))` back onto `state+8`,
+smearing qNaN across `state[0x08..0x44]`. `cbz r7` at `0xD18` skips
+`0xD38` because `43bfac` was 0.
+
+**Matched on this case (state `0x00..0xDF` bit-exact):** previous
+regions through `0x09A8`, plus `0x0BB0`, `0x0BC6`, `0x0D18`, and
+`0x0D4E`. SoC is now stock `0` and C `0`. Scratch matches.
+
+**Fix.** Implemented `L0f50` and the `0xBC6-0xD18` body, typographic
+`0xB2E` operand order, the `0xB7C` dest (`v-g` stored into the `p9`
+buffer before the mul reloads `p9[0]`), and the missing
+`0x5BC-0x5E4` pointer slots (`[sp,#0x80]` must be `state+0xC0` or the
+`0xBC6` add does not land on `C0/C4`).
+
+**Still open.** The SoC/output tail `0xD4E-0xEDC`: at epilogue,
+`state[0x88]` is stock `0.05` vs C `0.25`, and `state[0x8C]` /
+`state[0x90]` are stock `0` vs C `0.25`. `opt[2]` is stock qNaN vs
+C `0`. The 1232-case suite has not been re-run.
+
+**Not in this batch.** Production leaves / header / `cores.S` were
+not changed. apollo-main was not rebuilt; paired sims were not run.
+Linker-report string unchanged. Official
+`opencfw-otap-disarm.app.bin` was not overwritten.
+
+Evidence:
+[`g2-20261122-fuel-gauge-process-region-d4e-wip.json`](../evidence/g2-20261122-fuel-gauge-process-region-d4e-wip.json).
+
+
+
+## WIP process region-split (entry through 0x9A8) — 2026-11-22 (12:02 PM CST, America/Chicago)
+
+Region-by-region comparison of typographic `nrf_model_process_43a698`
+against the C draft on Renode 1.17 M55, instead of treating process as
+one unit. Stock was hooked at basic-block boundaries (`cpu AddHook` at
+the linked typographic base plus typographic offsets; each hook dumps
+GP, s0–s31, FPSCR, VPR, and `state[0x00..0xDF]`). C snapshots state at
+the same labels. One-case input only: init, then process with
+`v=3.2`, `i=0.05`, `T=0`, `dt=1`, `count=1`. Emulator only; no flash;
+no commit. **Not a full process verification and not installed.**
+
+**Matched on this case (state `0x00..0xDF` bit-exact):** `0x003C`,
+`0x0470`, `0x05B6` (already matched before the body fix), then
+`0x07E4` (first MVE / `state+0xC0` update), `0x0926` (state+8 add),
+and `0x09A8` (`43bc84` residual; state unchanged from `0x0926`).
+
+**Fix.** The draft's `0x718–0x7E0` loop only wrote the `state+0xC0`
+scalar sums and skipped the typographic column stores of the two
+4-wide mixes to `sp+0x280` and `sp+0x240`. The later `0x8D4–0x926`
+loop adds `sp+0x240` into `state+8`, so the stale buffer produced
+`-Inf` / wrong finites. After transliterating that loop, the only
+remaining diffs at `0x07E4` / `0x0926` were NaN signs (`0xFFC00000`
+vs stock `0x7FC00000`). Switching `q_mul` / `q_add` / `q_sub` from
+four scalar `vmul`/`vadd` to MVE ACLE `vmulq_f32` / `vaddq_f32` /
+`vsubq_f32` made those regions bit-exact on this case.
+
+**Still open.** First remaining divergence is `0x09A8–0x0D4E`: stock
+smears qNaN `0x7FC00000` across `state[0x08..0x44]` and
+`state[0xC0/C4]`, and writes `state[0xCC]=0`; C still holds the
+matched `0x926` values. SoC on this case is still stock `0` vs C
+`-0.05`. The 1232-case suite has not been re-run.
+
+**Not in this batch.** Production leaves / header / `cores.S` were
+not changed. apollo-main was not rebuilt; paired sims were not run.
+Linker-report string unchanged. Official
+`opencfw-otap-disarm.app.bin` was not overwritten.
+
+Evidence:
+[`g2-20261122-fuel-gauge-process-regions-wip.json`](../evidence/g2-20261122-fuel-gauge-process-regions-wip.json).
+
+
+
+## Verified nrf_model_init_43a1b0 — 2026-11-22 (11:30 AM CST, America/Chicago)
+
+Idiomatic scalar-float C for model init, typographic delayed-vmrs CFG
+(bge/bmi, not blt) for the temps window, and typographic VFP operand
+order for the param_2/6/7 voltage interpolator (no `0x3FFFFFFF` wrap;
+the delayed `bls` uses `last ? v`). The `439e9c`-window clamp is only
+the param_9 query; voltage still uses the first-clamp T. Renode M55,
+no `fg_call`. Emulator only; no flash; no commit.
+
+**Verified (464 cases, 0 mismatches, MAGIC `0xF6A11E06`).**
+
+`nrf_model_init_43a1b0` copies 0x6C bytes of `opt` into `state`, writes
+the default constants (`1.0`, `2.0`, `5.0`, `3.0`, `4.0`) and
+`fg_aux[0]` into the reserved slots, records temps `{hi,lo,count}` at
+`0xAC`/`0xB0`/`0xB4`, then either gathers `param_9` at the 1-based
+`439fb4` hits or interpolates it with `43a5dc`. Adjusted voltage is
+`v + i*param_9`. The 122-point voltage interpolator uses delayed-vmrs
+low/high/interior paths and may zero the result when `43a0f4(v)` is
+nonzero. Compared `state[0x00..0xDF]` and `*adjusted_v` (unwritten
+`0xE0-0xE7` prefills were identical). Init does not call `43bb14`.
+
+**Production replace.** Extended `g2c_fuel_gauge_leaves.c` / `.h` and
+removed typographic `nrf_model_init_43a1b0`. One typographic global
+remains: `nrf_model_process_43a698`.
+
+**Not in this batch.** Process is still typographic, so apollo-main was
+not rebuilt and the version-match / DFU paired sims were not run.
+`43bb14` `count>=4` coverage is deferred to the process-level golden
+comparisons. Linker-report string unchanged. Official
+`opencfw-otap-disarm.app.bin` was not overwritten.
+
+Evidence:
+[`g2-20261122-fuel-gauge-init-c.json`](../evidence/g2-20261122-fuel-gauge-init-c.json).
+Harness: `c-leaves/mid5_test.bin`.
+
+
+## Verified nrf_model_ttf_58eac4 — 2026-11-22 (11:19 AM CST, America/Chicago)
+
+Idiomatic scalar-float C for time-to-full, typographic VFP operand
+order (including `vnmul` and the mode-0 `mid[0]+0` vs mode-1
+`addend+mid[0]` add order). `logf` is the already-reconstructed IAR
+DLIB body. Renode M55, no `fg_call`. Emulator only; no flash; no commit.
+
+**Verified (408 cases, 0 mismatches, MAGIC `0xF6A11E05`).**
+
+`nrf_model_ttf_58eac4` early-outs on `fg_43a0f4(state[0x88])`,
+`state[0x88] >= 0`, or `state[0x98] == 0`, otherwise runs `fg_439ce0`
+on the model `temps` window (`+0x324`) and `param_10` (`+0x1584`) with
+`count = state[0xB4]`. Mode 1 (CC) computes the addend
+`(1-s[0x90])/((s[0x90]-s[0xA0])/s[0x98])`. Then `logf(term/state[0x88])`,
+`vnmul` onto the mid samples, and accept only if one of the first
+`n-1` flags is zero (else `fg_aux[0]`).
+
+The typographic wrapper at `0x55F9A0` loads the terminator current
+(`ext_block+0x10`) into `s0` and tail-calls. The C prototype now takes
+that float, and `nrf_fuel_gauge_ttf_get` passes `term` so `s0` is not
+lost.
+
+**Production replace.** Extended `g2c_fuel_gauge_leaves.c` / `.h`,
+updated `g2c_fuel_gauge_source.c`, and removed typographic
+`nrf_model_ttf_58eac4`. Two typographic globals remain:
+`nrf_model_init_43a1b0`, `nrf_model_process_43a698`.
+
+**Not in this batch.** Those two are still typographic, so apollo-main
+was not rebuilt and the version-match / DFU paired sims were not run.
+`43bb14` `count>=4` coverage is deferred to the process/init-level
+golden comparisons. Linker-report string unchanged. Official
+`opencfw-otap-disarm.app.bin` was not overwritten.
+
+Evidence:
+[`g2-20261122-fuel-gauge-ttf-c.json`](../evidence/g2-20261122-fuel-gauge-ttf-c.json).
+Harness: `c-leaves/mid4_test.bin`.
+
+
+## Verified 439ce0, 43bb14, 43bc84, 43be18 — 2026-11-22 (11:12 AM CST, America/Chicago)
+
+Next mid-level helper batch after the 43a5dc / 439fe4 / 43bfac install.
+Idiomatic scalar-float C, typographic VFP operand order (inline `vsub` /
+`vadd` / `vmul` / `vdiv` / `vfma` / `vfms` / `vabs` / `vcvt`) so NaN
+payloads propagate. Renode M55, no `fg_call`. Emulator only; no flash;
+no commit.
+
+**Verified (1,306 cases, 0 mismatches, MAGIC `0xF6A11E04`).**
+
+| Symbol | Cases | Notes |
+| --- | ---: | --- |
+| `fg_43bc84` | 354 | 201-point interpolator (r1=yA scaled by k, r2=yB). Delayed-vmrs `blt` is N!=V, so a NaN query takes the constant-+0 path. |
+| `fg_43be18` | 130 | same interpolator with the y-tables swapped |
+| `fg_43bb14` | 430 | max-abs one-hot (`dst[i]=scale/src[i]` or all-zero). Counts -1,0,1,2,3. `count>=4` overlaps the typographic frame and was not compared. |
+| `fg_439ce0` | 392 | clamp t into a 3-point x window, then gather equal knots or two-channel interpolate via `fg_439fe4` |
+
+**Production replace.** Extended `g2c_fuel_gauge_leaves.c` / `.h` and
+removed typographic `fg_439ce0`, `fg_43bb14`, `fg_43bc84`, and
+`fg_43be18`. Three typographic globals remain: `nrf_model_ttf_58eac4`,
+`nrf_model_init_43a1b0`, `nrf_model_process_43a698`.
+
+**Not in this batch.** Those three are still typographic, so
+apollo-main was not rebuilt and the version-match / DFU paired sims
+were not run. Linker-report string unchanged. Official
+`opencfw-otap-disarm.app.bin` was not overwritten.
+
+Evidence:
+[`g2-20261122-fuel-gauge-mid3-c.json`](../evidence/g2-20261122-fuel-gauge-mid3-c.json).
+Harness: `c-leaves/mid3_test.bin`.
+
+
+## Verified 43a5dc NaN-payload fix, 439fe4, 43bfac — 2026-11-22 (10:54 AM CST, America/Chicago)
+
+Continuation of the mid-level bottom-up batch. The previous 43a5dc miss
+was a NaN payload, not a wrong finite value: GCC had reordered
+`vfma` multiply operands, so a quieted sNaN (`0x7F800001` →
+`0x7FC00001`) collapsed to a constant canonical qNaN (`0x7FC00000`).
+The typographic body does VFP arithmetic that propagates the input
+payload; the C now uses the same `vsub` / `vdiv` / `vfms` / `vfma`
+operand order (inline VFP). Renode M55, no `fg_call`. Emulator only;
+no flash; no commit.
+
+**Verified (1,109 cases, 0 mismatches).**
+
+| Symbol | Cases | Notes |
+| --- | ---: | --- |
+| `fg_43a5dc` | 288 | quadratic interp; NaN payload now matches (MAGIC `0xF6A11E02`) |
+| `fg_43bfac` | 545 | 1 if `n<=0` or first `n` bytes are all nonzero, else 0 |
+| `fg_439fe4` | 276 | two-channel form of the same interpolator (MAGIC `0xF6A11E03`) |
+
+**Production replace.** Extended `g2c_fuel_gauge_leaves.c` / `.h` and
+removed typographic `fg_43a5dc`, `fg_439fe4`, and `fg_43bfac`. Seven
+typographic globals remain: `fg_439ce0`, `fg_43bb14`, `fg_43bc84`,
+`fg_43be18`, `nrf_model_ttf_58eac4`, `nrf_model_init_43a1b0`,
+`nrf_model_process_43a698`.
+
+**Not in this batch.** Those seven are still typographic, so
+apollo-main was not rebuilt and the version-match / DFU paired sims
+were not run. Linker-report string unchanged. Official
+`opencfw-otap-disarm.app.bin` was not overwritten.
+
+Evidence:
+[`g2-20261122-fuel-gauge-mid2-c.json`](../evidence/g2-20261122-fuel-gauge-mid2-c.json).
+Harnesses: `c-leaves/mid_test.bin` (43a5dc), `c-leaves/mid2_test.bin`.
+
 
 ## Verified mid-level helpers + standard memcpy/memset — 2026-11-22 (10:48 AM CST, America/Chicago)
 

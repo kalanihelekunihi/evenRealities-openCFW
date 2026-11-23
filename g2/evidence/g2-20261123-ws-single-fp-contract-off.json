@@ -1,0 +1,61 @@
+{
+ "workstream": "ws-single",
+ "time_cst": "2026-11-23 07:30 CST",
+ "topic": "FP contraction: stock IAR never fuses multiply-add outside the Nordic fuel-gauge library (0x439fe4-0x43bfa8); clang default -ffp-contract=on fused a*b+c into VFMA, changing rounding",
+ "fix": {
+  "g2/src/sources.json": "'-ffp-contract=off' after '-mfloat-abi=hard' in all 44 g2-apollo-main-* profiles",
+  "battery-model (5 files)": "#pragma clang fp contract(on) keeps the GCC-built Nordic library fused (stock VFMA there); objects identical to before",
+  "harness PROFILE": "ws-app difft.py, ws-blestore difft.py, ws-hwdrivers autogen.py gained -ffp-contract=off",
+  "build": "build/ws-single-20261123/s3 (rc=0 07:07 CST, 2719/2719, linked 3,642,676 B)"
+ },
+ "spec": "build/ws-single-20261123/specs/fma-a (Nema 3x3 matrix rotate/translate/scale/shear/point/finalize, nema cos/sin, float_fixed)",
+ "result_contract_off": {
+  "equal": 1500,
+  "differ": 0,
+  "mutants": 13,
+  "killed": 11,
+  "surviving_mutants": [
+   11,
+   12
+  ],
+  "verdict": "INCOMPLETE",
+  "harness_sha256": "96ccae17aa18d8db57ebf6960c1b369da447bc725ddde81fcb4d82943b1c99ae",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ },
+ "surviving_mutant_analysis": {
+  "11": "sin: result>=0x1.000002p0 branch is unreachable (result<=1.0): equivalent; replaced with a double-literal mutant",
+  "12": "float_fixed: value*65536 is exact, so fused and unfused are identical: equivalent; replaced with a double-evaluation mutant",
+  "rerun": "queued in build/ws-single-20261123/queue.list after paired s3"
+ },
+ "control_contract_on": {
+  "spec": "specs/fma-a-pre (same tests, cflags -ffp-contract=on)",
+  "equal": 500,
+  "differ": 1000,
+  "verdict": "DIFFERENT",
+  "note": "1000 of 1500 tests differ by 1 ulp (e.g. 0x486357ab vs 0x486357ac) - the pre-fix compile was not bit-exact"
+ },
+ "paired_sims_s3": {
+  "time_cst": "2026-11-23 07:38-07:39 CST",
+  "image": "build/ws-single-20261123/s3-link/g2-apollo-main",
+  "log": "build/ws-single-20261123/paired-s3.log",
+  "result": "match RC=0, dfu-mismatch RC=0, DFU_SAME vs reference (handoff PC ignored), HCI packets 924, OTAP 0xAFD1363A->0, CHIPREV 0x22, HOST_PACKET_COUNT 0x3A, unsupported 0, adv 1, display 2, faults 0",
+  "includes": "fp-contract off, g2c_nema_vg_path float bit-cast/stack-frame fixes, label_glyph_blit f64 fix"
+ },
+ "also_in_s3": {
+  "g2c_nema_vg_path.c": "486 double literals -> f; ~400 Ghidra float<->int value conversions -> bit casts (verified per site vs stock vcvt/vmov); 14 functions moved to stock-layout frame blocks (stack locals stock passes by address); vcvt counts per function now match stock except inlining artifacts",
+  "label_glyph_blit.c": "matrix[2] computed in double (stock 0x53fc7e..0x53fc96 f64 vmla)",
+  "function_level_spec": "specs/nvg-a written (8 ops, 7 mutants); first run hit the harness 900 s Renode timeout at run_seconds 400; requeued with run_seconds 200/timeout 1800"
+ },
+ "tpl_init_retype": "app/tpl-initialize/display_tpl_initialize.c + system/a-22-thread-manager/thread_manager.c: TPL_Init params 2-5 typed as function pointers (stock caller 0x4c94c8 passes 0x464d1d/0x48f12d/0x4bdff5/0x4be14f); objects byte-identical (recomp SAME)",
+ "result_contract_off_rerun": {
+  "time_cst": "2026-11-23 07:57 CST",
+  "equal": 1500,
+  "differ": 0,
+  "mutants": 13,
+  "killed": 13,
+  "surviving_mutants": [],
+  "verdict": "EQUIVALENT",
+  "harness_sha256": "64c31c1461f1b84b857eba6a7b5d0b10db553a8b63efb4af8e87776193395f81",
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+ }
+}

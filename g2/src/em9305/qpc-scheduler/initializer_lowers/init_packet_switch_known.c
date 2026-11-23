@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
+#include "em9305_ram.h"
 
 /* A connected switch fragment for native 0x3191dc's 43-row dispatch.
  * This is deliberately not the public 0x3191dc provider: false means
@@ -78,7 +79,7 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
         *status = status_for_state(observed, 2u); return true;
     }
     case 17: { /* Native 0x319620. */
-        if ((read8(0x805a94u) & 4u) == 0u) { *status = 25u; return true; }
+        if ((read8(((uintptr_t)&em9305_ram_805a6c + 0x28u)) & 4u) == 0u) { *status = 25u; return true; }
         uint8_t first = read8(payload + 1u);
         uint8_t observed = read8(context + 5u);
         write8(context + 12u, first);
@@ -103,7 +104,7 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
         *status = expected_state(context, 9u); return true;
     case 14: { /* Native 0x3194cc. */
         if (mode == 1u) { *status = 25u; return true; }
-        uint32_t fresh_flag = read8(0x805a94u);
+        uint32_t fresh_flag = read8(((uintptr_t)&em9305_ram_805a6c + 0x28u));
         if ((fresh_flag & 8u) == 0u)
             { *status = 25u; return true; }
         (void)opencfw_em9305_packet_child_32dfe8((uint32_t)(context + 12u), payload, fresh_flag);
@@ -111,7 +112,7 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
     }
     case 15: case 16: { /* Native 0x319338/0x31935c. */
         if (opcode == 16u && mode == 1u) { *status = 25u; return true; }
-        uint32_t fresh_flag = read8(0x805a94u);
+        uint32_t fresh_flag = read8(((uintptr_t)&em9305_ram_805a6c + 0x28u));
         if ((fresh_flag & 2u) == 0u)
             { *status = 25u; return true; }
         (void)opencfw_em9305_packet_child_32de08((uint32_t)(context + 12u), payload, fresh_flag);
@@ -122,7 +123,7 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
         *status = expected_state(context, 9u); return true;
     case 22: case 23: { /* Native 0x31953c/0x319564. */
         if (opcode == 23u && mode == 1u) { *status = 25u; return true; }
-        uint32_t fresh_flag = read8(0x805a95u);
+        uint32_t fresh_flag = read8(((uintptr_t)&em9305_ram_805a6c + 0x29u));
         if ((fresh_flag & 9u) == 0u)
             { *status = 25u; return true; }
         (void)opencfw_em9305_packet_child_32e114((uint32_t)(context + 12u), payload, fresh_flag);
@@ -130,14 +131,14 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
     }
     case 24: { /* Native 0x319574. */
         if (mode == 0u) { *status = 25u; return true; }
-        uint32_t fresh_flag = read8(0x805a95u);
+        uint32_t fresh_flag = read8(((uintptr_t)&em9305_ram_805a6c + 0x29u));
         if ((fresh_flag & 9u) == 0u)
             { *status = 25u; return true; }
         (void)opencfw_em9305_packet_child_32e128((uint32_t)(context + 12u), payload, fresh_flag);
         *status = expected_state(context, 5u); return true;
     }
     case 25: { /* Native 0x319450. */
-        if (mode == 1u || (read8(0x805a96u) & 1u) == 0u)
+        if (mode == 1u || (read8(((uintptr_t)&em9305_ram_805a6c + 0x2au)) & 1u) == 0u)
             { *status = 25u; return true; }
         uint8_t first = read8(payload + 1u);
         uint8_t masked = (uint8_t)(first & 7u);
@@ -153,7 +154,7 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
         return true;
     }
     case 28: { /* Native 0x3194f4. */
-        uint32_t fresh_flag = read8(0x805a97u);
+        uint32_t fresh_flag = read8(((uintptr_t)&em9305_ram_805a6c + 0x2bu));
         if ((fresh_flag & 2u) == 0u)
             { *status = 25u; return true; }
         (void)opencfw_em9305_packet_child_32dffc((uint32_t)(context + 12u), payload, fresh_flag);
@@ -161,7 +162,7 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
     }
     case 31: { /* Native 0x3192c0. */
         if (mode == 0u) { *status = 25u; return true; }
-        uint32_t fresh_flag = read32(0x805a94u);
+        uint32_t fresh_flag = read32(((uintptr_t)&em9305_ram_805a6c + 0x28u));
         if ((fresh_flag & (1u << 29)) == 0u)
             { *status = 25u; return true; }
         (void)opencfw_em9305_packet_child_32dc40((uint32_t)(context + 12u), payload, fresh_flag);
@@ -169,7 +170,7 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
     }
     case 32: { /* Native 0x3192e8. */
         if (mode == 1u) { *status = 25u; return true; }
-        uint32_t fresh_flag = read32(0x805a94u);
+        uint32_t fresh_flag = read32(((uintptr_t)&em9305_ram_805a6c + 0x28u));
         if ((fresh_flag & (1u << 28)) == 0u)
             { *status = 25u; return true; }
         (void)opencfw_em9305_packet_child_32dd20((uint32_t)(context + 12u), payload, fresh_flag);
@@ -177,14 +178,14 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
     }
     case 33: { /* Native 0x319298. */
         if (mode == 0u) { *status = 25u; return true; }
-        uint32_t fresh_flag = read32(0x805a94u);
+        uint32_t fresh_flag = read32(((uintptr_t)&em9305_ram_805a6c + 0x28u));
         if ((fresh_flag & (1u << 29)) == 0u)
             { *status = 25u; return true; }
         (void)opencfw_em9305_packet_child_32dbe4((uint32_t)(context + 12u), payload, fresh_flag);
         *status = expected_state(context, 16u); return true;
     }
     case 42: { /* Native 0x319518. */
-        uint32_t fresh_flag = read8(0x805a97u);
+        uint32_t fresh_flag = read8(((uintptr_t)&em9305_ram_805a6c + 0x2bu));
         if ((fresh_flag & 2u) == 0u)
             { *status = 25u; return true; }
         (void)opencfw_em9305_packet_child_32e068((uint32_t)(context + 12u), payload, fresh_flag);
@@ -192,7 +193,7 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
     }
     case 38: case 39: { /* Native 0x319698/0x319644. */
         if ((opcode == 38u ? mode == 1u : mode == 0u) ||
-            (read8(0x805a98u) & 32u) == 0u)
+            (read8(((uintptr_t)&em9305_ram_805a6c + 0x2cu)) & 32u) == 0u)
             { *status = 25u; return true; }
         uint8_t observed = 0u;
         for (uint32_t i = 0; i < 5u; ++i) {
@@ -205,7 +206,7 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
         *status = status_for_state(observed, 11u); return true;
     }
     case 40: { /* Native 0x319208. */
-        if (mode == 0u || (read8(0x805a98u) & 128u) == 0u)
+        if (mode == 0u || (read8(((uintptr_t)&em9305_ram_805a6c + 0x2cu)) & 128u) == 0u)
             { *status = 25u; return true; }
         uint8_t first = read8(payload + 1u);
         uint8_t observed = read8(context + 5u);
@@ -215,13 +216,13 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
         *status = status_for_state(observed, 4u); return true;
     }
     case 41: /* Native 0x319234; AW pre-load and AB post-store. */
-        if (mode == 1u || (read8(0x805a98u) & 128u) == 0u)
+        if (mode == 1u || (read8(((uintptr_t)&em9305_ram_805a6c + 0x2cu)) & 128u) == 0u)
             { *status = 25u; return true; }
         for (uint32_t i = 0; i < 10u; ++i)
             write8(context + 12u + i, read8(payload + 1u + i));
         *status = expected_state(context, 11u); return true;
     case 26: { /* Native 0x3193d8. */
-        if ((read8(0x805a96u) & 4u) == 0u) { *status = 25u; return true; }
+        if ((read8(((uintptr_t)&em9305_ram_805a6c + 0x2au)) & 4u) == 0u) { *status = 25u; return true; }
         uint8_t value = read8(payload + 1u);
         uint8_t observed = read8(context + 5u);
         write8(context + 13u, (uint8_t)(value >> 6));
@@ -229,15 +230,15 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
         *status = status_for_state(observed, 2u); return true;
     }
     case 27: /* Native 0x319400. */
-        *status = (read8(0x805a96u) & 2u) != 0u ? 0u : 25u; return true;
+        *status = (read8(((uintptr_t)&em9305_ram_805a6c + 0x2au)) & 2u) != 0u ? 0u : 25u; return true;
     case 29: case 30: { /* Native 0x31948c/0x3194ac. */
-        if ((read8(0x805a97u) & 4u) == 0u) { *status = 25u; return true; }
+        if ((read8(((uintptr_t)&em9305_ram_805a6c + 0x2bu)) & 4u) == 0u) { *status = 25u; return true; }
         uint8_t observed = read8(context + 5u);
         write8(context + 12u, read8(payload + 1u));
         *status = status_for_state(observed, 2u); return true;
     }
     case 34: { /* Native 0x319310. */
-        if ((read8(0x805a97u) & 0x30u) == 0u) { *status = 25u; return true; }
+        if ((read8(((uintptr_t)&em9305_ram_805a6c + 0x2bu)) & 0x30u) == 0u) { *status = 25u; return true; }
         write8(context + 12u, read8(payload + 1u));
         uint8_t second = read8(payload + 2u);
         uint8_t observed = read8(context + 5u);
@@ -246,7 +247,7 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
         *status = status_for_state(observed, 4u); return true;
     }
     case 35: { /* Native 0x3195cc. */
-        if ((read8(0x805a98u) & 2u) == 0u) { *status = 25u; return true; }
+        if ((read8(((uintptr_t)&em9305_ram_805a6c + 0x2cu)) & 2u) == 0u) { *status = 25u; return true; }
         write8(context + 12u, read8(payload + 1u));
         uint8_t second = read8(payload + 2u);
         uint8_t observed = read8(context + 5u);
@@ -255,7 +256,7 @@ bool opencfw_em9305_packet_switch_known(uint8_t opcode, uintptr_t context,
         *status = status_for_state(observed, 4u); return true;
     }
     case 36: case 37: { /* Native 0x3195f4/0x3195a0. */
-        if ((read8(0x805a98u) & (opcode == 36u ? 2u : 4u)) == 0u)
+        if ((read8(((uintptr_t)&em9305_ram_805a6c + 0x2cu)) & (opcode == 36u ? 2u : 4u)) == 0u)
             { *status = 25u; return true; }
         write8(context + 12u, read8(payload + 1u));
         write8(context + 13u, read8(payload + 2u));

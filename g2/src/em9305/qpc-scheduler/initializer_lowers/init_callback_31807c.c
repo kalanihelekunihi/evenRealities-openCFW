@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31807c..0x31810a. The two ROM transition tables at 0x334e80
  * (words) and 0x334ec0 (bytes) remain typed data contracts. Each row has
@@ -38,7 +39,7 @@ uint32_t opencfw_em9305_init_callback_31807c(uintptr_t event)
         return opencfw_em9305_init_callback_step_3180d4(record,selector);
     }
     for(uint32_t index=0u,id=0u;;++index,++id) {
-        uintptr_t config=*(volatile uint32_t *)(uintptr_t)0x805cacu;
+        uintptr_t config=em9305_ram_805c5c.u32_805cac;
         uint32_t count=*(volatile uint8_t *)(config+13u);
         if(index>=count)return (uint8_t)id;
         uintptr_t record=opencfw_em9305_radio_record_find_31aa64((uint8_t)id);

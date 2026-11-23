@@ -1,19 +1,20 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31ef5c..0x31f17e: periodic-advertising sync establishment from
- * a received AUX_ADV_IND (report header 0x803b68; anything but type 7 marks
+ * a received AUX_ADV_IND (report header (uintptr_t)&em9305_ram_803b68; anything but type 7 marks
  * the report rejected). The advertiser (scanner object +44: address
  * +152/+156, type +163 with bit 1 set when it differs from the original
  * +144/+148/+162) is matched against the pending create-sync request
- * (0x8051a4: active, +4 list mode, SID +5, type +6, address +8/+12) once
- * per request (0x803d70); with the filter-accept list mode the address is
+ * (((uintptr_t)&em9305_ram_805194 + 0x10u): active, +4 list mode, SID +5, type +6, address +8/+12) once
+ * per request ((uintptr_t)&em9305_ram_803d70); with the filter-accept list mode the address is
  * looked up (3036b4). On a match the sync context (object +36) gets its
  * SyncInfo encoded (32e164 when bit 5 of +154), and if valid the receiver
- * (*0x8051b8) is set up: copy of the 40-byte SyncInfo, timing (+212 * 1250,
+ * (*(uintptr_t)&em9305_ram_8051b8) is set up: copy of the 40-byte SyncInfo, timing (+212 * 1250,
  * skip +616), PHY, counters (+248/+278), clock accuracy and the advertiser
  * identity when matched; the first event is scheduled through the host
- * hook (*0x805c88, with *0x805c90 notified) or 321490, from the
- * advertiser's end time plus the packet duration. Clears 0x803d71. */
+ * hook (*((uintptr_t)&em9305_ram_805c5c + 0x2cu), with *((uintptr_t)&em9305_ram_805c5c + 0x34u) notified) or 321490, from the
+ * advertiser's end time plus the packet duration. Clears ((uintptr_t)&em9305_ram_803d70 + 0x1u). */
 extern uint32_t opencfw_em9305_address_contains_3036b4(uint32_t type,
     uint32_t low,uint32_t high);
 extern uint32_t opencfw_em9305_radio_secondary_encode_32e164(uintptr_t,uintptr_t);
@@ -35,9 +36,9 @@ static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;
 static inline void w16(uintptr_t a,uint32_t v){*(volatile uint16_t *)a=(uint16_t)v;}
 static inline void w32(uintptr_t a,uint32_t v){*(volatile uint32_t *)a=v;}
 
-#define REPORT 0x803b68u
-#define REQUEST 0x8051a4u
-#define ONCE 0x803d70u
+#define REPORT (uintptr_t)&em9305_ram_803b68
+#define REQUEST ((uintptr_t)&em9305_ram_805194 + 0x10u)
+#define ONCE (uintptr_t)&em9305_ram_803d70
 
 void opencfw_em9305_child_31ef5c(uintptr_t object)
 {
@@ -131,9 +132,9 @@ void opencfw_em9305_child_31ef5c(uintptr_t object)
     uintptr_t window=context+208u;
     uint32_t start=opencfw_em9305_radio_duration_piece_312b88(aux_phy,coded,length)+end;
     if(r8(sync+41u)!=0u){
-        uintptr_t hook=r32(0x805c88u);
-        uint32_t second=r32(0x805c8cu),first=r32(0x805c84u);
-        uint32_t clock=r32(0x805c10u);
+        uintptr_t hook=r32(((uintptr_t)&em9305_ram_805c5c + 0x2cu));
+        uint32_t second=r32(((uintptr_t)&em9305_ram_805c5c + 0x30u)),first=r32(((uintptr_t)&em9305_ram_805c5c + 0x28u));
+        uint32_t clock=r32(((uintptr_t)&em9305_ram_805be0 + 0x30u));
         uintptr_t state=r32(receiver+780u);
         w32(receiver+76u,second);
         w32(receiver+80u,first);
@@ -141,7 +142,7 @@ void opencfw_em9305_child_31ef5c(uintptr_t object)
         w32(state+16u,0u);
         if(hook!=0u)
             ((opencfw_em9305_sync_hook_t)hook)(context,request,window,r32(timing),start);
-        uintptr_t notify=r32(0x805c90u);
+        uintptr_t notify=r32(((uintptr_t)&em9305_ram_805c5c + 0x34u));
         if(notify!=0u)((opencfw_em9305_sync_notify_t)notify)(receiver);
     }else{
         opencfw_em9305_child_321490(context,request,window,r32(timing));

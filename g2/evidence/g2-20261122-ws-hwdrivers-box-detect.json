@@ -1,0 +1,60 @@
+{
+ "title": "ws-hwdrivers stream 3: charging-case box-detect trio verified function-level vs stock (Renode 1.17 cortex-m55)",
+ "when": "2026-11-22 01:27 PM CST (America/Chicago)",
+ "modules": [
+  "g2-box-detect (a-19 box_detect_case_state)",
+  "g2-service-box-detect (service_box_detect)",
+  "g2-box-uart-mgr (box_uart_mgr)"
+ ],
+ "sources": [
+  "g2/src/apollo-main/drivers/a-19-box-detect/box_detect_case_state.c",
+  "g2/src/apollo-main/drivers/power/box-detect/service_box_detect.c",
+  "g2/src/apollo-main/drivers/power/box-detect/box_uart_mgr.c"
+ ],
+ "method": {
+  "emulator": "Renode 1.17.0 (vendor/renode-src e8c7c2d), cortex-m55, bundled dotnet 8.0.425",
+  "harness": "build/ws-hwdrivers-20261122/harness; gen_boxcase.c, gen_svcbox.c, gen_uartmgr.c produced by autogen.py (callee/data stock addresses resolved from name suffix, apollo_main.tsv, source RAM/Stock comments, and a known-callee table; arg types from clang AST)",
+  "design": "stock bodies run in place from stock.app.bin @0x00438000; reconstructed C linked into ITCM. Intra-module calls resolve within each variant (stock-for-stock, C-for-C). Cross-module callees patched to logging/modelled stubs at their stock addresses for both variants (osTimer*/osDelay no-op; audio_log_flags/compress_log_output/audio_log_extended; audio_queue_copy_bytes memcpy; audio_uart_buffer_zero; hal_uart_* ; pt_protocol_dispatch / pt_production_mode_orchestrate; audio_ble_device_manager_send @0x4C659A; npmx_interrupt_handler; display/sync/reset callees). RAM state globals (box case state 0x20074928, timers 0x20074920/24, rx slot 0x20074f96, rx buffers 0x2005ba68, g2_npmx_instance 0x20070f78, sensor/local scratch) seeded identically before each test and diffed after.",
+  "compare": "per test: return value (void ignored), caller output struct (SCRATCH), every seeded RAM region, I2C/stub semantic traces (device addr/register/bytes, buffer lengths/fill, request app/len/payload). Comparator normalizes differing stack-temporary addresses and validates segment framing.",
+  "inputs": "25 randomized cases per function, run stock vs C, with audio_log_flags()=0 and =7."
+ },
+ "result": {
+  "functions": 19,
+  "cases": 475,
+  "exact_matches": 475,
+  "mismatches": 0,
+  "box_detect_case_state": [
+   "box_detect_get_in_case_4ac59a",
+   "box_detect_local_case_status_4ac75a",
+   "box_detect_peer_in_case_4acac0",
+   "box_detect_set_charging_4ac72e",
+   "box_detect_set_in_case_4abfac",
+   "box_detect_set_lid_open_4ac744",
+   "box_detect_set_soc_4ac718",
+   "box_detect_vbus_connected_4ac130",
+   "box_detect_vbus_removed_4ac154"
+  ],
+  "service_box_detect": [
+   "BoxDetect_Deinit_4ac0f8",
+   "BoxDetect_GetForceOutBox_4ac66a",
+   "BoxDetect_SyncForceOutBox_4ac672",
+   "DEV_BoxDetectMsgProcess_4ac278",
+   "_BoxDetect_ClearForceOutBoxOnRealOut_4abfba"
+  ],
+  "box_uart_mgr": [
+   "comm_read_539e92",
+   "box_uart_send_53a010",
+   "box_uart_rx_callback_53a01c",
+   "box_uart_init_53a09c",
+   "DEV_BoxRevcMsgProcess_53a0b6"
+  ]
+ },
+ "intentional_divergence": "box_uart_mgr DEV_BoxRevcMsgProcess_53a0b6 adds a non-stock openCFW call g2_recovery_disarm_healthy() on a successful product-test response (system/self-recovery/self_recovery.c, documented 'not stock'). Under harness conditions that function is observably inert (recovery not armed -> early return; otherwise touches only MCUCTRL_OTAPOINTER, outside any dumped region), so stock-vs-C traces are identical. Modeled as a local no-op shim; divergence is intended and preserved, not 'fixed'.",
+ "g2ref_uses": "none in these modules",
+ "notes": "Function-level equivalence only. No sources.json/linker/build changes; no git; no flash.",
+ "reverified_final_harness": true,
+ "reverified_when": "2026-11-22 7:14 PM CST (America/Chicago)",
+ "reverification_notes": [
+  "Re-verified under the final arg-comparing + VFP-aware harness and the global-merge-off build (-fno-common -mllvm -arm-global-merge=false); 0 mismatches in the 2026-11-22 19:12 CST full batch re-run."
+ ]
+}

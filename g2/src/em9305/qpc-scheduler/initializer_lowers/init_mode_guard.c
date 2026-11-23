@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Complete native 0x31a988..0x31aa3e. Selector is one-based in its
  * nine-entry inline branch table; out-of-range selectors return one. */
@@ -33,7 +34,7 @@ uint32_t opencfw_em9305_mode_guard_31a988(uintptr_t context,
     case 5u:
         if(category==4u) return 0u;
         if(category!=0u) return 1u;
-        return (*(volatile uint8_t *)(uintptr_t)0x805a97u&1u)!=0u;
+        return (em9305_ram_805a6c.u8_805a97&1u)!=0u;
     case 6u:
         return (*(volatile uint8_t *)(context+547u)&(1u<<2u))!=0u;
     case 7u:case 8u:

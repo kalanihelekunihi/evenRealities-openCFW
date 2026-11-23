@@ -92,8 +92,8 @@ void *g2_layout3_hour_img;               /* RAM 0x20074480 */
 void *g2_layout3_minute_img;             /* RAM 0x20074484 */
 void *g2_layout3_time_label;             /* RAM 0x20074488 */
 void *g2_layout3_ble_off_img;            /* RAM 0x2007448c */
-void *g2_layout3_weather_label;          /* RAM 0x20074490 */
-void *g2_layout3_date_label;             /* RAM 0x20074494 */
+void *g2_layout3_date_label;             /* RAM 0x20074490 (stock set_date 0x5ba83c reads it) */
+void *g2_layout3_weather_label;          /* RAM 0x20074494 (stock set_weather 0x5ba8a0 reads it) */
 void *g2_layout3_status_row;             /* RAM 0x20074498 */
 void *g2_layout3_glasses_battery_img;    /* RAM 0x2007449c */
 void *g2_layout3_ring_battery_img;       /* RAM 0x200744a0 */

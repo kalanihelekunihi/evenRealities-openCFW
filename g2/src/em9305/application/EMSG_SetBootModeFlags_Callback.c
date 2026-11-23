@@ -4,6 +4,7 @@
  * ROM calls go through opencfw_em9305_rom_* facades (em9305_link_closure.c).
  */
 #include <stdint.h>
+#include "em9305_ram.h"
 #define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
 #define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
 extern uint32_t opencfw_em9305_rom_em_cmd_reply_102588(uint32_t op, uint32_t len, uint32_t ctx, uint8_t *resp, uint32_t after);
@@ -14,7 +15,7 @@ void opencfw_em9305_EMSG_SetBootModeFlags_Callback(void)
 {
   volatile uint32_t *r = (volatile uint32_t *)(uintptr_t)PML_MODE_REG;
   uint32_t v;
-  switch (B8(0x801994u)) {
+  switch (B8((uintptr_t)&em9305_ram_801994)) {
   case 3u:
     v = *r; v &= ~0x10000u; v &= ~0x20000u; *r = v;
     v = *r; v |= 0x10000u; v |= 0x20000u; *r = v;

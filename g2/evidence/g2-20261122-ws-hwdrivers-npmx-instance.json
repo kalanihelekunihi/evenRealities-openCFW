@@ -1,0 +1,69 @@
+{
+ "stream": "ws-hwdrivers",
+ "stamp": "20261122",
+ "unit": "npmx_main_driver (instance-dependent wrappers)",
+ "method": "Added harness preinit+instance-snapshot hook: harness_preinit() runs the reconstructed npmx_backend_init once (invoking run-stock npmx_core_init @0x55eb3f with restore_values=true over the modelled I2C), populating g2_npmx_instance @0x20070f78; that region (0x3900 bytes, through g2_npmx_backend/context) is snapshotted and restored before each variant run so both variants start from an identical populated instance. npmx_* library callees run as real stock code at recovered addresses. hal_i2c modelled as common stub. compareg canonicalizes stored function-pointer words (stock MRAM addr vs reconstructed ITCM addr of the same _XXXXXX function, from nm) so a pointer to an already-verified-equivalent sibling is not a false diff.",
+ "functions_verified": [
+  {
+   "name": "npmx_backend_init_511108",
+   "cases": 15,
+   "diffs": 0,
+   "note": "npmx_core_init + 8x core_event_interrupt_disable; stored i2c fn-pointers normalized"
+  },
+  {
+   "name": "npmx_charger_disable_5128f8",
+   "cases": 15,
+   "diffs": 0,
+   "note": "npmx_charger_get @0x55eff1 + module_disable_set @0x55f0d9"
+  },
+  {
+   "name": "npmx_charger_enable_51299c",
+   "cases": 15,
+   "diffs": 0,
+   "note": "npmx_charger_get + module_enable_set @0x55f07b"
+  },
+  {
+   "name": "npmx_int_pin_configure_5111e6",
+   "cases": 15,
+   "diffs": 0,
+   "note": "gpio_get/gpio_mode_set; required correcting recovered gpio addresses (see note)"
+  },
+  {
+   "name": "npmx_enter_ship_mode_512a70",
+   "cases": 15,
+   "diffs": 0,
+   "note": "npmx_ship_get @0x55fc60 + ship_task_trigger @0x55fc6a (disasm-confirmed)"
+  },
+  {
+   "name": "npmx_get_device_id_512b20",
+   "cases": 15,
+   "diffs": 0,
+   "note": "npmx_backend_register_read @0x55fc38 (disasm-confirmed); ptr-arg + 0x00/0xff->0x13 remap"
+  }
+ ],
+ "address_correction": {
+  "finding": "zip-recovered npmx map had npmx_gpio_get and npmx_gpio_mode_set SWAPPED. Disassembly of carved library region 0x55e000-0x560000 shows 0x55ee74 = getter (returns instance+40+idx*8) = npmx_gpio_get; 0x55ee7e = push{r7,lr};bl 0x55ee54(register-write helper) = npmx_gpio_mode_set.",
+  "corrected": {
+   "npmx_gpio_get": "0x55ee74",
+   "npmx_gpio_mode_set": "0x55ee7e"
+  },
+  "also_suspect": "0x55ee8c is a getter (instance+136+idx*4), NOT npmx_vbusin_task_trigger as the recovered map labels it; the recovered map needs a full disassembly audit before the remaining config/driver-init wrappers (application_configure, configure_buck2/lsdw1, watchdog_enable, main_driver_init) can be verified, since those call npmx_* currently mapped to placeholder 0x511003.",
+  "confirmed_correct": {
+   "npmx_ship_get": "0x55fc60",
+   "npmx_ship_task_trigger": "0x55fc6a",
+   "npmx_backend_register_read": "0x55fc38",
+   "npmx_backend_register_write": "0x55fc2c",
+   "npmx_charger_get": "0x55eff1",
+   "npmx_charger_module_enable_set": "0x55f07b",
+   "npmx_charger_module_disable_set": "0x55f0d9",
+   "npmx_core_init": "0x55eb3f"
+  }
+ },
+ "total_cases": 90,
+ "total_diffs": 0,
+ "reverified_final_harness": true,
+ "reverified_when": "2026-11-22 7:14 PM CST (America/Chicago)",
+ "reverification_notes": [
+  "Re-verified under the final arg-comparing + VFP-aware harness and the global-merge-off build (-fno-common -mllvm -arm-global-merge=false); 0 mismatches in the 2026-11-22 19:12 CST full batch re-run."
+ ]
+}

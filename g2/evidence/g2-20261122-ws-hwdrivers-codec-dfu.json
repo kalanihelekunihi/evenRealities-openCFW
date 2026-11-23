@@ -1,0 +1,50 @@
+{
+  "title": "codec_dfu: full equivalence (pure + filesystem/FWPK + GX8002 UART-token paths), stock vs reconstructed C",
+  "when": "2026-11-22 19:53 America/Chicago",
+  "module": "g2/src/apollo-main/drivers/codec-host/codec-dfu/codec_dfu.c",
+  "source": "stock.app.bin native range 0x577d7c..0x57a35f",
+  "method": {
+    "emulator": "Renode (g2 simulator), per-function equivalence harness: stock bodies execute in place from stock.app.bin, reconstructed C linked into ITCM; v=0 stock vs v=1 C compared on return value, memory, and semantic bus/stub traces.",
+    "harness": "build/ws-hwdrivers-20261122/harness (autogen.py + harness.c + build2.sh), global-merge-off CFLAGS (-fno-common -mllvm -arm-global-merge=false), hard-float VFP, -ffp-contract=off.",
+    "compare": "compareg.py trace+retval+memory diff, 12 fuzzed cases per function.",
+    "inputs": "fuzzed args; fs/FWPK callees served by a new deterministic filesystem model (see harness_fidelity_fixes)."
+  },
+  "result": {
+    "functions": 15,
+    "verified_functions": [
+      "semantic_CodecByteSwap32 (0x578aac) 12/12",
+      "HostToBigEndian32 (0x578ac8) 12/12",
+      "HostIsLittleEndian (0x578a6c) 12/12",
+      "FormatVersion (0x57856c) 12/12",
+      "ParseVersionBytes (0x5785a2) 12/12",
+      "ValidateFirmwareHeader/print_bootheader (0x578810) 12/12",
+      "semantic_CodecGetPackageVersion (0x531-body) 12/12",
+      "semantic_CodecReadBootHeader 12/12",
+      "semantic_CodecLoadFirmwarePackage 12/12",
+      "semantic_CodecWaitForUartToken (0x578ae0) 6/6",
+      "semantic_CodecDownloadBootStage1 (0x578ca4) 6/6",
+      "semantic_CodecDownloadBootStage2 (0x5791a0) 6/6",
+      "semantic_CodecFlashImage 6/6",
+      "SVC_CodecDfu 4/4",
+      "SVC_CodecCheckAndUpgrade 4/4",
+      "semantic_CodecDownloadBootStage1 cooperative/post-token 6/6",
+      "semantic_CodecDownloadBootStage2 cooperative/post-token 6/6",
+      "semantic_CodecFlashImage cooperative/post-token 6/6"
+    ],
+    "cases": 158,
+    "exact_matches": 158,
+    "mismatches": 0
+  },
+  "harness_fidelity_fixes": [
+    "fs/FWPK model (additive K_FOPEN/K_FREAD/K_FSEEK/K_FCLOSE/K_FHEAPALLOC/K_FHEAPFREE stub kinds): file_open returns a fixed non-NULL handle and resets position+bump-heap; file_read serves a deterministic synthetic FWPK image (16B header magic=FWPK ver count=2, two 16B BOOT/FLASH records, blob bytes) from a tracked file position and returns count; file_seek sets position (origin 0/1); file_heap_allocate bump-allocates from 0x20270000 (safe gap, not RESULTS); file_close/file_heap_free no-op. Both variants take the identical path regardless of CRC outcome, so the model needs only deterministic bytes, not valid CRCs.",
+    "comment_addrs/suffix_addr RAM-resolve range widened to 0x20800000 so codec data globals (e.g. g2_codec_dfu_xfer_buffer @0x2035ee18) resolve.",
+    "GX8002 UART-token model (additive K_TICK/K_READBYTE/K_UARTSEND stub kinds): codec_tick_snapshot returns a per-variant-reset monotonic low word that jumps far past any token timeout (its uint64 high word is clobbered identically for both variants by the shared stub_common trampoline, so the 64-bit value compares equal); codec_read_byte_deadline returns 0 (no byte) -> deterministic timeout path; audio_uart_send_bytes logs sent-buffer content (<256B) to catch payload diffs; codec_porting_uart_set_baud returns 0. Both variants take the identical deterministic path.",
+    "RESULTS/trace buffer relocated for codec I/O units only (RESULTS_BASE=0x20380000, above the firmware global g2_codec_dfu_xfer_buffer 0x2035ee18..0x20360e18) via an overridable -DRESULTS in build2.sh; default stays 0x20300000 (full 5MB) so no prior unit regresses. The firmware global was NOT moved (per instruction). fs-heap also moved to 0x20368000 (out of the .data/.bss region).",
+    "codecio PRELOAD seeds g2_codec_dfu_boot_header (stage1_size=0x100, stage2_size=0x100) and boot/flash image pointers+sizes to bound the chunk send/flash loops; both variants use identical seeds.",
+    "Cooperating GX8002 responder (adds post-token-path coverage): codec_read_byte_deadline now serves a per-unit scripted token byte stream (-DUART_STREAM compile define; empty stream keeps the prior deterministic timeout path, no regression), and codec_uart_read answers 'M' for the bring-up sync loop. Streams match each function's protocol: Stage1 'FwfbOKOKGET', Stage2 'readyOboot>', FlashImage '~sta~~fin~~sta~~fin~[Result]:SUCC'. Each WaitForUartToken now returns 0 so the download/flash bodies run to completion for BOTH variants."
+  ],
+  "c_corrections": [
+    "semantic_CodecLoadFirmwarePackage record-classification: reconstructed C used audio_uart_checksum_copy(&boot_info/&fw_info,&info,sizeof(info)) to stash each 16-byte FWPK record; stock emits no helper call there (its next trace event after the record read is the next file_read), i.e. stock does an inline struct copy. Harness caught the extra stub call (stock file_read id19 vs C audio_uart_checksum_copy id5) at trace index 31; fixed C to `boot_info = info;` / `fw_info = info;`. Real C divergence fixed (not masked); re-proved 12/12."
+  ],
+  "coverage_boundary": "Both the deterministic timeout path (first token wait -> -1) AND the cooperative post-token path (all token waits succeed, bodies run to the end) are now proven equivalent for DownloadBootStage1/2 and FlashImage. SVC_CodecDfu/CheckAndUpgrade are proven on the timeout path (4/4); full SVC post-token integration additionally needs a crafted synthetic FWPK boot-header blob (so ReadBootHeader yields a small valid header) and is deferred. No input where C and stock diverge was suppressed."
+}

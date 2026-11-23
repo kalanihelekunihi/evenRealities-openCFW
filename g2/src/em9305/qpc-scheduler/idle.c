@@ -2,14 +2,15 @@
  * callback R0 is its own address, and sleep-return R0 feeds SETI.
  */
 #include <stdint.h>
+#include "em9305_ram.h"
 extern uint32_t opencfw_em9305_sleep_lower(uint32_t irq_state,uint32_t ilink); /* 0x3126e0 */
 void QK_onIdle(void)
 {
     /* ILINK (r29) is a core register with no C or builtin access; asm stays. */
     __asm__ volatile("mov ilink,0" ::: "r29","memory");
-    uintptr_t callback = *(volatile uint32_t *)(uintptr_t)UINT32_C(0x80fe18);
+    uintptr_t callback = em9305_ram_80fde0.u32_80fe18;
     if (callback != 0) ((void (*)(uintptr_t))callback)(callback);
-    callback = *(volatile uint32_t *)(uintptr_t)UINT32_C(0x80fe14);
+    callback = em9305_ram_80fde0.u32_80fe14;
     if (callback != 0) ((void (*)(uintptr_t))callback)(callback);
     uint32_t irq;
     irq=(uint32_t)__builtin_arc_clri(); __builtin_arc_sync();

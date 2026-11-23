@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern uint32_t opencfw_em9305_radio_packet_check_303404(
     uint32_t,uintptr_t,uint32_t,uintptr_t);
@@ -28,9 +29,9 @@ static void wr32(uintptr_t p,uint32_t v) { *(volatile uint32_t *)p=v; }
  * by the entry below.  Every child remains a genuine source identity. */
 uint32_t opencfw_em9305_init_transition_dispatch_316704_body(uint8_t *frame)
 {
-    if(rd8(0x805a71u)==0u) return 0u;
-    uint8_t state=rd8(0x8052fcu);
-    const uintptr_t config=0x805b84u;
+    if(rd8(((uintptr_t)&em9305_ram_805a6c + 0x5u))==0u) return 0u;
+    uint8_t state=rd8(((uintptr_t)&em9305_ram_8052f8 + 0x4u));
+    const uintptr_t config=((uintptr_t)&em9305_ram_805b80 + 0x4u);
     if(state==0u) {
         (void)opencfw_em9305_init_transition_refresh_327dbc();
         if(rd8(config+12u)==1u) {
@@ -52,12 +53,12 @@ uint32_t opencfw_em9305_init_transition_dispatch_316704_body(uint8_t *frame)
         return opencfw_em9305_init_transition_gate_3168e4();
     }
 
-    /* LD.AB at 31672e advances R15 from 0x805398 to 0x8053b4. */
-    const uintptr_t snapshot=0x8053b4u;
-    uintptr_t packet=rd32(0x805398u);
+    /* LD.AB at 31672e advances R15 from (uintptr_t)&em9305_ram_805398 to ((uintptr_t)&em9305_ram_8052d4 + 0xe0u). */
+    const uintptr_t snapshot=((uintptr_t)&em9305_ram_8052d4 + 0xe0u);
+    uintptr_t packet=rd32((uintptr_t)&em9305_ram_805398);
     if(packet==0u) return opencfw_em9305_init_transition_gate_3168e4();
     uint32_t check=opencfw_em9305_radio_packet_check_303404(
-        (uint32_t)packet,0x80537cu,1u,snapshot);
+        (uint32_t)packet,(uintptr_t)&em9305_ram_80537c,1u,snapshot);
     uint32_t fail=check^1u; /* Native BXOR bit zero. */
     uintptr_t event=opencfw_em9305_wsf_event_allocate(88u);
     if(event!=0u) {
@@ -74,7 +75,7 @@ uint32_t opencfw_em9305_init_transition_dispatch_316704_body(uint8_t *frame)
     }
     if(fail!=0u) goto error_event;
 
-    const uintptr_t advertised=0x8053bcu;
+    const uintptr_t advertised=((uintptr_t)&em9305_ram_8052d4 + 0xe8u);
     uint8_t advertised11=rd8(advertised+11u);
     uint32_t first_high=rd32(advertised+16u);
     wr8(event+2u,0u);
@@ -131,10 +132,10 @@ uint32_t opencfw_em9305_init_transition_dispatch_316704_body(uint8_t *frame)
     wr8(event+57u,0u);
     wr16(event+54u,1u);
     uint32_t product100=rd32(config+100u);
-    uint8_t state2=rd8(0x8052feu);
+    uint8_t state2=rd8(((uintptr_t)&em9305_ram_8052f8 + 0x6u));
     wr32(event+80u,product100);
     uint32_t product96=rd32(config+96u);
-    uint8_t handler=rd8(0x805b18u);
+    uint8_t handler=rd8(((uintptr_t)&em9305_ram_805af0 + 0x28u));
     wr8(event+53u,state2);
     wr32(event+76u,product96);
     (void)opencfw_em9305_wsf_task_message_send(handler,event);
@@ -145,7 +146,7 @@ error_event:
     event=opencfw_em9305_wsf_event_allocate(4u);
     if(event!=0u) {
         wr16(event+2u,772u);
-        uint8_t handler=rd8(0x805b18u);
+        uint8_t handler=rd8(((uintptr_t)&em9305_ram_805af0 + 0x28u));
         (void)opencfw_em9305_wsf_task_message_send(handler,event);
     }
     (void)opencfw_em9305_common_release_304588(1u);

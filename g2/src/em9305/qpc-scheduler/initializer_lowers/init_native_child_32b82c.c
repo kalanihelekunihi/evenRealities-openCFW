@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32b82c..0x32b9a4: start an associated (periodic) cycle for the
  * record. Stamp the object (+8) and record (+800) with the scheduled
@@ -38,7 +39,7 @@ uint32_t opencfw_em9305_child_32b82c(uintptr_t record,uintptr_t object)
     uintptr_t packet=r32(object+44u);
     w16(packet+224u,0u);
     uint32_t now=opencfw_em9305_associated_time_alias_30fd34();
-    int32_t offset=(int32_t)(record-r32(0x805c38u));
+    int32_t offset=(int32_t)(record-r32(((uintptr_t)&em9305_ram_805be0 + 0x58u)));
     uint32_t row=(uint8_t)((uint32_t)(offset/2824)+4u);
     uint32_t elapsed=opencfw_em9305_radio_schedule_313424(r32(record+792u),row,
                                                           now,0u,0u);

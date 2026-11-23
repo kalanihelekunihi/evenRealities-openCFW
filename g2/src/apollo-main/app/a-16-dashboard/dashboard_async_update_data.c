@@ -353,7 +353,10 @@ static uint32_t update_stock(const uint8_t *p)
     log_pair(4u, 0x2c7u, 0x10800000u, stock_received, stock_received_short,
              g2_dashboard_stock_received_200743ac, g2_dashboard_stock_total_200743b0);
     all_received = g2_dashboard_stock_total_200743b0 <= g2_dashboard_stock_received_200743ac;
-    if (all_received && dashboard_ui_ready()) {
+    /* Stock (0x49d834) reads the service mode before it tests all_received. */
+    const uint8_t mode = (uint8_t)audio_uart_service_mode();
+    if (all_received && mode == 1u && audio_log_wake_allowed() == 1u &&
+        audio_quicklist_refresh_enabled_4434d0(DASHBOARD_APP) == 1u) {
         int32_t ret = post_event(DASHBOARD_MSG_STOCK);
         log_value(3u, 0x2d8u, 0x0c400000u, stock_refresh, stock_refresh_short, (uint32_t)ret);
     } else if (!all_received) {

@@ -1,7 +1,7 @@
 /* Native DRV_IMUAccelConfig, 0x4a52a2..0x4a5308. */
 #include <stdint.h>
 
-uint32_t audio_hub_imu_report_interval_cell; /* stock RAM 0x20000e60 */
+uint32_t audio_hub_imu_report_interval_cell = 1000u; /* stock RAM 0x20000e60 (.data) = 1000, power-on default report interval (ms) */
 extern uint32_t audio_log_flags(void);
 extern void audio_log_extended(uint8_t, const char *, const char *, const char *,
                                uint32_t, const char *, ...);

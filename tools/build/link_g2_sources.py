@@ -2,8 +2,10 @@
 """Strictly link the seven G2 source-build relocatables into payload images.
 
 The input is a completed ``sources.py build --device g2`` report. This link
-does not prove source completeness or hardware behavior. Apollo main uses an
-uncalibrated source-only fuel-gauge candidate, not the stock Nordic algorithm.
+does not prove source completeness or hardware behavior. Apollo main uses a typographic C reconstruction of the stock Nordic
+nrf_fuel_gauge (c205a2) algorithm, verified bit-exact versus typographic
+stock on Renode 1.17 M55; hardware calibration and device behavior remain
+unproven.
 """
 
 from __future__ import annotations
@@ -599,7 +601,7 @@ def main() -> int:
                "external_binary_archive_used": False,
                "binary_fuel_gauge_sha256": None,
                "payloads": results,
-               "qualification": "Compilation and final linkage of all seven source payload groups, plus a separately emitted C-authored codec A NPU command region. Codec B is source-linked; complete codec packaging requires verified weight input. Stock equivalence and hardware boot remain unproven. EM9305 bootloader is a C candidate spanning stock records 0 and 1; source-only fuel gauge is uncalibrated; whole-artifact C completeness remains unproven."}
+               "qualification": "Compilation and final linkage of all seven source payload groups, plus a separately emitted C-authored codec A NPU command region. Codec B is source-linked; complete codec packaging requires verified weight input. Stock equivalence and hardware boot remain unproven. EM9305 bootloader is a C candidate spanning stock records 0 and 1; fuel gauge is typographic C, bit-exact versus typographic stock on Renode 1.17 M55 (hardware calibration unproven); whole-artifact C completeness remains unproven."}
     if bundle_receipt is not None:
         receipt["g2_bundle_source_candidate"] = bundle_receipt
     out_root.mkdir(parents=True, exist_ok=True)

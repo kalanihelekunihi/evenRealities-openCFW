@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31ccf4..0x31ce0e: set up a periodic-sync/BIG receiver object from
  * its parameters. Clear the 124-byte state (+72) and the 44-byte schedule
@@ -47,7 +48,7 @@ uint32_t opencfw_em9305_dispatch_child_31ccf4(uintptr_t object, uintptr_t params
     uint32_t step = coded == 0u ? (uint32_t)-30 : (uint32_t)-300;
     uint32_t start = *(volatile uint32_t *)(params + 4u) + step * units;
     uint32_t offset = *(volatile uint32_t *)(object + 264u);
-    uint32_t policy = *(volatile uint32_t *)(uintptr_t)0x805c98u;
+    uint32_t policy = em9305_ram_805c5c.u32_805c98;
     *(volatile uint32_t *)(object + 248u) = start;
     uint32_t margin = *(volatile uint8_t *)(params + 12u) == 0u ? 30u : 300u;
     uint32_t window = anchor + offset - start + margin;

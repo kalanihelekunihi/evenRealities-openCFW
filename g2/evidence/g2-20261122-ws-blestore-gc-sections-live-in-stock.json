@@ -1,0 +1,2426 @@
+{
+  "id": "g2-20261122-ws-blestore-gc-sections-live-in-stock",
+  "time": "2026-11-22 21:11 America/Chicago",
+  "stream": "ws-blestore",
+  "status": "SCAN-COMPLETE",
+  "scope": "full-2055 g2-apollo-main discarded .text vs stock reachability",
+  "method": {
+    "map": "build/ws-blestore-20261122/full-2055-link/g2-apollo-main/g2-apollo-main.map",
+    "map_sha256": "742130e8ec69caf28d296b6a9fd3845c225310cfab9a4a91198b6f7330a31aea",
+    "stock": "build/ws-blestore-20261122/stock.app.bin",
+    "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "stock_bytes": 3523364,
+    "notes": "Used the link map Discarded input sections (equivalent to --print-gc-sections). Mapped addresses from function-name hex suffixes or the immediate Stock/native 0x comment. Reachability from Thumb BL and 4-byte-aligned Thumb pointers in stock.app.bin. Same-TU inlining detected from source call + missing reloc + kept caller. True containers recovered by walking back from the BL to a push-LR prologue."
+  },
+  "counts": {
+    "discarded_text": 2288,
+    "kept_text": 9255,
+    "reachable_discarded_with_addr": 392,
+    "by_class": {
+      "caller-also-unmapped-or-gc": 122,
+      "missing-call": 90,
+      "inlined-same-tu": 163,
+      "needs-review": 17
+    },
+    "by_stream_class": {
+      "app": {
+        "missing-call": 51,
+        "inlined-same-tu": 116,
+        "caller-also-unmapped-or-gc": 107,
+        "needs-review": 13
+      },
+      "blestore": {
+        "inlined-same-tu": 18,
+        "missing-call": 5,
+        "needs-review": 1,
+        "caller-also-unmapped-or-gc": 1
+      },
+      "hwdrivers": {
+        "inlined-same-tu": 21,
+        "missing-call": 18,
+        "caller-also-unmapped-or-gc": 4,
+        "needs-review": 2
+      },
+      "ramlayout": {
+        "caller-also-unmapped-or-gc": 10,
+        "missing-call": 16,
+        "inlined-same-tu": 8,
+        "needs-review": 1
+      }
+    },
+    "inlined_same_tu": {
+      "app": 116,
+      "blestore": 18,
+      "hwdrivers": 21,
+      "ramlayout": 8
+    },
+    "prologue_walk_high_confidence": 66,
+    "pending_other_streams": {
+      "app": 36,
+      "hwdrivers": 11,
+      "ramlayout": 15
+    },
+    "blestore_c_fixes": 0
+  },
+  "blestore_reviewed": [
+    {
+      "name": "app_ble_comm_state_get_4b8122",
+      "resolution": "Callers already use audio_ble_controller / the 0x200727f0 block directly and test byte +0x56. Same as the 6-byte getter that returns that address. Equivalent, not a missing call.",
+      "c_changed": false
+    },
+    {
+      "name": "app_ble_connection_tick_get_4b8204",
+      "resolution": "audio_ble_ancc_value_update_4befce already subtracts audio_ble_ancc_connection_tick from osKernelGetTickCount and compares to 5000. Same as calling the 12-byte getter. Equivalent.",
+      "c_changed": false
+    },
+    {
+      "name": "audio_ble_hci_conn_free",
+      "resolution": "Stock hciCoreConnClose (0x52a762) BL's this; our audio_ble_hci_conn_close is kept at size 0x50, which is the inlined body of conn_free. Classifier pointed at conn_open because close's stock address was a few bytes later. Not a missing call.",
+      "c_changed": false
+    },
+    {
+      "name": "audio_ble_master_ring_link_event",
+      "resolution": "Comment parser picked the extern 'native 0x4a1b60' (audio_ble_master_connect_event, kept, size 0x474). This C symbol is the 4-byte 0x4a153c forwarder, and audio_ble_central_emit_ring_link_event_4a153c is already kept.",
+      "c_changed": false
+    },
+    {
+      "name": "app_slave_reload_resolving_list_4b4720",
+      "resolution": "8-byte stock wrapper that only BL's audio_ble_pair_storage_refresh (0x47b4d4). audio_ble_pair_failure_clear already calls storage_refresh directly; that symbol is kept. Equivalent.",
+      "c_changed": false
+    },
+    {
+      "name": "audio_ble_dm_conn_update_invalid_event_action",
+      "resolution": "Not the stock function at 0x4b2df8. It is a C helper that reconstructs a 4-byte action table at 0x78eff0 plus the adjacent Thumb pointer 0x004b2df9 (dmDevActReset). dmDevActReset is kept; this helper being GC'd is not a missing call site.",
+      "c_changed": false
+    }
+  ],
+  "pending_notes": "build/ws-blestore-20261122/pending/04-gc-sections-live-in-stock.md",
+  "pending_by_stream": {
+    "app": [
+      {
+        "name": "system_close_fifo_empty_00469c98",
+        "stock_addr": "0x469c98",
+        "size": 20,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-11-system-close/system_close_page.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x46a428",
+            "container": "system_close_anim_exec_noop_46a3d6",
+            "container_src": "g2/src/apollo-main/app/a-11-system-close/system_close_page.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "service_even_ai_fn_004982f2",
+        "stock_addr": "0x4982f2",
+        "size": 20,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-15-even-ai-service/service_even_ai.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x498248",
+            "container": "audio_even_ai_local_decode_498092",
+            "container_src": "g2/src/apollo-main/app/even-ai/even_ai_local_decode_498092.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "teleprompt_event_name_58c892",
+        "stock_addr": "0x58c892",
+        "size": 12,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-62-teleprompt/teleprompt_fsm.c",
+        "bl_count": 4,
+        "callers": [
+          {
+            "site": "0x58c906",
+            "container": "teleprompt_machine_handler_58c89e",
+            "container_src": "g2/src/apollo-main/app/a-62-teleprompt/teleprompt_fsm.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "conversate_timer_auto_extend_active_5b3a5a",
+        "stock_addr": "0x5b3a5a",
+        "size": 48,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-63-conversate-ui/conversate_timer_mgr_auto_extend.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x5b3afa",
+            "container": "audio_conversate_ui_cleanup_commit_5b3a88",
+            "container_src": "g2/src/apollo-main/app/conversate-ui/conversate_ui_cleanup_commit_5b3a88.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "terminal_ui_agent_scroll_pack_5e4f02",
+        "stock_addr": "0x5e4f02",
+        "size": 10,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "bl_count": 3,
+        "callers": [
+          {
+            "site": "0x5e74d2",
+            "container": "terminal_input_event_handler_5e7324",
+            "container_src": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "terminal_ui_confirm_scroll_moved_5e4e0a",
+        "stock_addr": "0x5e4e0a",
+        "size": 4,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x5e6dee",
+            "container": "audio_terminal_ui_action_5e6dd0",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_scroll_actions_5e6dd0_5e6e30.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5e6e4e",
+            "container": "audio_terminal_ui_action_5e6e30",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_scroll_actions_5e6dd0_5e6e30.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "terminal_ui_confirm_scroll_selection_5e4e10",
+        "stock_addr": "0x5e4e10",
+        "size": 26,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x5e6dfa",
+            "container": "audio_terminal_ui_action_5e6dd0",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_scroll_actions_5e6dd0_5e6e30.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5e6e5a",
+            "container": "audio_terminal_ui_action_5e6e30",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_scroll_actions_5e6dd0_5e6e30.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "terminal_ui_confirm_scroll_y_5e4e06",
+        "stock_addr": "0x5e4e06",
+        "size": 4,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x5e6de6",
+            "container": "audio_terminal_ui_action_5e6dd0",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_scroll_actions_5e6dd0_5e6e30.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5e6e46",
+            "container": "audio_terminal_ui_action_5e6e30",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_scroll_actions_5e6dd0_5e6e30.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "terminal_ui_query_click_index_5e4d00",
+        "stock_addr": "0x5e4d00",
+        "size": 4,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x5e69c0",
+            "container": "audio_terminal_ui_action_5e69a0",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_action_query_reply_5e69a0.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "terminal_ui_query_click_output_active_5e4d04",
+        "stock_addr": "0x5e4d04",
+        "size": 4,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x5e69c8",
+            "container": "audio_terminal_ui_action_5e69a0",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_action_query_reply_5e69a0.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "terminal_ui_query_click_output_mode_5e4d0a",
+        "stock_addr": "0x5e4d0a",
+        "size": 6,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x5e69d0",
+            "container": "audio_terminal_ui_action_5e69a0",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_action_query_reply_5e69a0.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "terminal_ui_query_scroll_browsing_5e4cde",
+        "stock_addr": "0x5e4cde",
+        "size": 6,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x5e6eb2",
+            "container": "audio_terminal_ui_action_5e6e88",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_query_scroll_actions_5e6e88_5e6f60.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5e6f8a",
+            "container": "audio_terminal_ui_action_5e6f60",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_query_scroll_actions_5e6e88_5e6f60.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "terminal_ui_query_scroll_index_5e4ce6",
+        "stock_addr": "0x5e4ce6",
+        "size": 6,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x5e6eba",
+            "container": "audio_terminal_ui_action_5e6e88",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_query_scroll_actions_5e6e88_5e6f60.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5e6f92",
+            "container": "audio_terminal_ui_action_5e6f60",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_query_scroll_actions_5e6e88_5e6f60.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "terminal_ui_query_scroll_moved_5e4cd8",
+        "stock_addr": "0x5e4cd8",
+        "size": 4,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x5e6eaa",
+            "container": "audio_terminal_ui_action_5e6e88",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_query_scroll_actions_5e6e88_5e6f60.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5e6f82",
+            "container": "audio_terminal_ui_action_5e6f60",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_query_scroll_actions_5e6e88_5e6f60.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "terminal_ui_query_scroll_y_5e4cd4",
+        "stock_addr": "0x5e4cd4",
+        "size": 4,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/a-67-terminal-ui/terminal_ui_input.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x5e6e96",
+            "container": "audio_terminal_ui_action_5e6e88",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_query_scroll_actions_5e6e88_5e6f60.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5e6f6e",
+            "container": "audio_terminal_ui_action_5e6f60",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_query_scroll_actions_5e6e88_5e6f60.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "audio_dashboard_face_slot_valid",
+        "stock_addr": "0x558030",
+        "size": 8,
+        "addr_from": "comment",
+        "source": "g2/src/apollo-main/app/dashboard-layout/dashboard_layout_set.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x5584da",
+            "container": "audio_dashboard_layout_set",
+            "container_src": "g2/src/apollo-main/app/dashboard-layout/dashboard_layout_set.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "audio_dashboard_widget_valid",
+        "stock_addr": "0x558030",
+        "size": 8,
+        "addr_from": "comment",
+        "source": "g2/src/apollo-main/app/dashboard-layout/dashboard_layout_set.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x5584da",
+            "container": "audio_dashboard_layout_set",
+            "container_src": "g2/src/apollo-main/app/dashboard-layout/dashboard_layout_set.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "audio_uart_display_lock_init",
+        "stock_addr": "0x4417ee",
+        "size": 68,
+        "addr_from": "comment",
+        "source": "g2/src/apollo-main/app/init/display_init.c",
+        "bl_count": 15,
+        "callers": [
+          {
+            "site": "0x4841d0",
+            "container": "audio_uart_lv_pool_allocate_484180",
+            "container_src": "g2/src/apollo-main/ui/freetype/font-alloc/display_font_alloc.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x484294",
+            "container": "audio_uart_lv_pool_realloc_484234",
+            "container_src": "g2/src/apollo-main/ui/lvgl/lv-realloc/display_lv_realloc.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4842e0",
+            "container": "audio_uart_lv_pool_free_48429e",
+            "container_src": "g2/src/apollo-main/ui/freetype/font-alloc/display_font_alloc.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "audio_message_notify_cached_crc_get_4d6a20",
+        "stock_addr": "0x4d6a20",
+        "size": 42,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/message-notify/message_notify_tx_whitelist_check_4d76cc.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x4d776e",
+            "container": "audio_message_notify_tx_whitelist_check_4d76cc",
+            "container_src": "g2/src/apollo-main/app/message-notify/message_notify_tx_whitelist_check_4d76cc.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "translate_event_name_get_596b00",
+        "stock_addr": "0x596b00",
+        "size": 12,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/p-10-translate-fsm/translate_fsm.c",
+        "bl_count": 4,
+        "callers": [
+          {
+            "site": "0x596b74",
+            "container": "translate_machine_handler_596b0c",
+            "container_src": "g2/src/apollo-main/app/p-10-translate-fsm/translate_fsm.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "audio_uart_display_pin_config",
+        "stock_addr": "0x44d254",
+        "size": 44,
+        "addr_from": "comment",
+        "source": "g2/src/apollo-main/app/setup/display_setup.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x44469c",
+            "container": "audio_uart_display_setup0",
+            "container_src": "g2/src/apollo-main/app/setup/display_setup.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "uart_sync_dma_start_584a38",
+        "stock_addr": "0x584a38",
+        "size": 48,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/app/sync-write/sync_write.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x584d50",
+            "container": "audio_uart_sync_send",
+            "container_src": "g2/src/apollo-main/app/sync-send/sync_send.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "audio_td_temp_record_invalidate",
+        "stock_addr": "0x5971f6",
+        "size": 322,
+        "addr_from": "comment",
+        "source": "g2/src/apollo-main/app/td-flag/td_flag_set_with_reset.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x59757a",
+            "container": "audio_td_flag_b_set_597572",
+            "container_src": "g2/src/apollo-main/app/td-flag/td_flag_b_set_alias_597572.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "audio_ble_master_child_47a47c",
+        "stock_addr": "0x47a47c",
+        "size": 30,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/audio/master-dispatch/close_chain.c",
+        "bl_count": 3,
+        "callers": [
+          {
+            "site": "0x47a7b2",
+            "container": "audio_ble_pair_record_create_47a71c",
+            "container_src": "g2/src/apollo-main/ble/ble-pair/display_ble_pair_record_create.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x47b63e",
+            "container": "audio_ble_remove_pair",
+            "container_src": "g2/src/apollo-main/ble/ble-pair/display_ble_pair_remove.c",
+            "container_stream": "blestore"
+          }
+        ]
+      },
+      {
+        "name": "g2c_nema_vg_emit_tri_516bde",
+        "stock_addr": "0x516bde",
+        "size": 202,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x563c40",
+            "container": "g2c_nema_vg_path_bounds_5639e8",
+            "container_src": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "g2c_nema_vg_sqrt_524218",
+        "stock_addr": "0x524218",
+        "size": 74,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+        "bl_count": 19,
+        "callers": [
+          {
+            "site": "0x563a1a",
+            "container": "g2c_nema_vg_path_bounds_5639e8",
+            "container_src": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "evenhub_main_shutdown_state_get_4e0caa",
+        "stock_addr": "0x4e0caa",
+        "size": 12,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/ui/a-28-evenhub-main/evenhub_main.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x4e1876",
+            "container": "audio_uart_registry_callback_4e1490",
+            "container_src": "g2/src/apollo-main/ui/a-28-evenhub-main/evenhub_main.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "onboarding_news_page_fifo_is_empty_50b168",
+        "stock_addr": "0x50b168",
+        "size": 16,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/ui/a-41-onboarding-news/ui_onboarding_news_page.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x50affc",
+            "container": "onboarding_news_page_fifo_pop_50afa4",
+            "container_src": "g2/src/apollo-main/ui/a-41-onboarding-news/ui_onboarding_news_page.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x50b0ae",
+            "container": "onboarding_news_page_fifo_peek_at_50b054",
+            "container_src": "g2/src/apollo-main/ui/a-41-onboarding-news/ui_onboarding_news_page.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "health_data_convert_from_pb_559d82",
+        "stock_addr": "0x559d82",
+        "size": 150,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/ui/a-55-health-data-manager/health_data_manager.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x5599d4",
+            "container": "health_data_save_single_5598cc",
+            "container_src": "g2/src/apollo-main/ui/a-55-health-data-manager/health_data_manager.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x559c1a",
+            "container": "health_data_save_mult_559ad2",
+            "container_src": "g2/src/apollo-main/ui/a-55-health-data-manager/health_data_manager.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "health_data_convert_highlight_from_pb_55a230",
+        "stock_addr": "0x55a230",
+        "size": 156,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/ui/a-55-health-data-manager/health_data_manager.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x559ec4",
+            "container": "health_data_save_single_highlight_559dfc",
+            "container_src": "g2/src/apollo-main/ui/a-55-health-data-manager/health_data_manager.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x55a09e",
+            "container": "health_data_save_mult_highlight_559fb8",
+            "container_src": "g2/src/apollo-main/ui/a-55-health-data-manager/health_data_manager.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "health_data_slot_get_559836",
+        "stock_addr": "0x559836",
+        "size": 34,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/ui/a-55-health-data-manager/health_data_manager.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x559976",
+            "container": "health_data_save_single_5598cc",
+            "container_src": "g2/src/apollo-main/ui/a-55-health-data-manager/health_data_manager.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x559cd2",
+            "container": "health_data_save_mult_559ad2",
+            "container_src": "g2/src/apollo-main/ui/a-55-health-data-manager/health_data_manager.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "health_data_type_name_559854",
+        "stock_addr": "0x559854",
+        "size": 32,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/ui/a-55-health-data-manager/health_data_manager.c",
+        "bl_count": 6,
+        "callers": [
+          {
+            "site": "0x559a3c",
+            "container": "health_data_save_single_5598cc",
+            "container_src": "g2/src/apollo-main/ui/a-55-health-data-manager/health_data_manager.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x559b82",
+            "container": "health_data_save_mult_559ad2",
+            "container_src": "g2/src/apollo-main/ui/a-55-health-data-manager/health_data_manager.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x559f30",
+            "container": "health_data_save_single_highlight_559dfc",
+            "container_src": "g2/src/apollo-main/ui/a-55-health-data-manager/health_data_manager.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "audio_uart_lv_draw_task_independent_4848b2",
+        "stock_addr": "0x4848b2",
+        "size": 72,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/ui/lvgl/display-lv/display_lv_init_children.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x4846ce",
+            "container": "audio_uart_lv_draw_next_available_484656",
+            "container_src": "g2/src/apollo-main/ui/lvgl/display-lv/display_lv_init_children.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "audio_uart_nema_child_523c88",
+        "stock_addr": "0x523c88",
+        "size": 126,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/ui/lvgl/display-lv/display_lv_init_children.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x4b11e4",
+            "container": "audio_uart_nema_gpu_reinit_4b11b0",
+            "container_src": "g2/src/apollo-main/ui/lvgl/display-lv/display_lv_init_children.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "lv_memzero_484380",
+        "stock_addr": "0x484380",
+        "size": 8,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/ui/lvgl/p-07-lvgl-inline/lvgl_inline_copies.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x48470e",
+            "container": "audio_uart_lv_render_layer_base_init_4846de",
+            "container_src": "g2/src/apollo-main/graphics/render-layer/display_render_layer_init_4847c4.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "lv_memzero_48890c",
+        "stock_addr": "0x48890c",
+        "size": 8,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/ui/lvgl/p-07-lvgl-inline/lvgl_inline_copies.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x488920",
+            "container": "audio_uart_ambiq_image_options_init_488918",
+            "container_src": "g2/src/apollo-main/graphics/ambiq-buffer-handlers/image_options_init.c",
+            "container_stream": "app"
+          }
+        ]
+      }
+    ],
+    "hwdrivers": [
+      {
+        "name": "box_detect_peer_in_case_4acac0",
+        "stock_addr": "0x4acac0",
+        "size": 12,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/drivers/a-19-box-detect/box_detect_case_state.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x4acade",
+            "container": "audio_uart_case_status",
+            "container_src": "g2/src/apollo-main/app/case-status/case_status_source.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "codec_send",
+        "stock_addr": "0x58fb38",
+        "size": 152,
+        "addr_from": "comment",
+        "source": "g2/src/apollo-main/drivers/codec-host/codec-request/request.c",
+        "bl_count": 16,
+        "callers": [
+          {
+            "site": "0x578d2e",
+            "container": "semantic_CodecDownloadBootStage1",
+            "container_src": "g2/src/apollo-main/drivers/codec-host/codec-dfu/codec_dfu.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x5792c4",
+            "container": "semantic_CodecDownloadBootStage2",
+            "container_src": "g2/src/apollo-main/drivers/codec-host/codec-dfu/codec_dfu.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x57984a",
+            "container": "semantic_CodecFlashImage",
+            "container_src": "g2/src/apollo-main/drivers/codec-host/codec-dfu/codec_dfu.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x579dcc",
+            "container": "SVC_CodecDfu",
+            "container_src": "g2/src/apollo-main/drivers/codec-host/codec-dfu/codec_dfu.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x57c160",
+            "container": "audio_transaction_construct",
+            "container_src": "g2/src/apollo-main/system/transaction/transaction-construct/construct.c",
+            "container_stream": "ramlayout"
+          }
+        ]
+      },
+      {
+        "name": "codec_host_initialize",
+        "stock_addr": "0x58fab6",
+        "size": 70,
+        "addr_from": "comment",
+        "source": "g2/src/apollo-main/drivers/codec-host/codec-uart-lifecycle/lifecycle.c",
+        "bl_count": 3,
+        "callers": [
+          {
+            "site": "0x578fa8",
+            "container": "semantic_CodecDownloadBootStage1",
+            "container_src": "g2/src/apollo-main/drivers/codec-host/codec-dfu/codec_dfu.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x579d6a",
+            "container": "SVC_CodecDfu",
+            "container_src": "g2/src/apollo-main/drivers/codec-host/codec-dfu/codec_dfu.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x57bae2",
+            "container": "audio_transaction_init",
+            "container_src": "g2/src/apollo-main/system/transaction/transaction-session.c",
+            "container_stream": "ramlayout"
+          }
+        ]
+      },
+      {
+        "name": "semantic_gx8002_magic_matches",
+        "stock_addr": "0x57baf4",
+        "size": 20,
+        "addr_from": "comment",
+        "source": "g2/src/apollo-main/drivers/codec-host/gx8002-host/gx8002_host_commands.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x57bd36",
+            "container": "audio_transaction_extract",
+            "container_src": "g2/src/apollo-main/system/transaction/transaction-extract.c",
+            "container_stream": "ramlayout"
+          }
+        ]
+      },
+      {
+        "name": "box_uart_send_53a010",
+        "stock_addr": "0x53a010",
+        "size": 4,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/drivers/power/box-detect/box_uart_mgr.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x53a26e",
+            "container": "DEV_BoxRevcMsgProcess_53a0b6",
+            "container_src": "g2/src/apollo-main/drivers/power/box-detect/box_uart_mgr.c",
+            "container_stream": "hwdrivers"
+          }
+        ]
+      },
+      {
+        "name": "fg_4397a8",
+        "stock_addr": "0x4397a8",
+        "size": 54,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+        "bl_count": 68,
+        "callers": [
+          {
+            "site": "0x51748c",
+            "container": "g2c_nema_vg_tess_stroke_5171f8",
+            "container_src": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x517aa6",
+            "container": "g2c_nema_vg_stroke_join_5179d0",
+            "container_src": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5181ac",
+            "container": "g2c_nema_vg_stroke_path_517e18",
+            "container_src": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x519584",
+            "container": "g2c_nema_vg_fill_path_519290",
+            "container_src": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x51aa2c",
+            "container": "g2c_nema_vg_arc_to_51a8ec",
+            "container_src": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x51d5b0",
+            "container": "g2c_nema_vg_draw_fill_51d2e0",
+            "container_src": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x52059e",
+            "container": "audio_uart_ambiq_vector_shape_draw_5202ec",
+            "container_src": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x563c58",
+            "container": "g2c_nema_vg_path_bounds_5639e8",
+            "container_src": "g2/src/apollo-main/graphics/g2c-nema/g2c_nema_vg_path.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "fg_439fb4",
+        "stock_addr": "0x439fb4",
+        "size": 52,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+        "bl_count": 5,
+        "callers": [
+          {
+            "site": "0x43a74c",
+            "container": "nrf_model_process_43a698",
+            "container_src": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+            "container_stream": "hwdrivers"
+          }
+        ]
+      },
+      {
+        "name": "fg_43a5a0",
+        "stock_addr": "0x43a5a0",
+        "size": 104,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+        "bl_count": 7,
+        "callers": [
+          {
+            "site": "0x43a3ea",
+            "container": "nrf_model_init_43a1b0",
+            "container_src": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+            "container_stream": "hwdrivers"
+          }
+        ]
+      },
+      {
+        "name": "audio_clock_bit_count",
+        "stock_addr": "0x4c3750",
+        "size": 42,
+        "addr_from": "comment",
+        "source": "g2/src/apollo-main/hal/clock/clock/clock-manager-ownership/ownership.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x4c37e8",
+            "container": "audio_clock_set",
+            "container_src": "g2/src/apollo-main/hal/clock/clock/clock-manager-ownership/ownership.c",
+            "container_stream": "hwdrivers"
+          }
+        ]
+      },
+      {
+        "name": "audio_xtal_wait",
+        "stock_addr": "0x4c387e",
+        "size": 74,
+        "addr_from": "comment",
+        "source": "g2/src/apollo-main/hal/clock/xtal-request/request.c",
+        "bl_count": 3,
+        "callers": [
+          {
+            "site": "0x4c4068",
+            "container": "audio_hfrc_request",
+            "container_src": "g2/src/apollo-main/hal/clock/hfrc-syspll/clocks.c",
+            "container_stream": "hwdrivers"
+          }
+        ]
+      },
+      {
+        "name": "offline_mask_set",
+        "stock_addr": "0x439be4",
+        "size": 20,
+        "addr_from": "comment",
+        "source": "g2/src/apollo-main/hal/uart/uart-rx/uart-rx-stream/support.c",
+        "bl_count": 790,
+        "callers": [
+          {
+            "site": "0x43e6dc",
+            "container": "audio_uart_lv_scrollbar_draw_descriptor_43e6a6",
+            "container_src": "g2/src/apollo-main/ui/lvgl/lv-scrollbar/display_lv_scrollbar_descriptor_43e6a6.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x442612",
+            "container": "audio_uart_display_service_init",
+            "container_src": "g2/src/apollo-main/system/registry-init/display_registry_init.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x448c3c",
+            "container": "elog_async_dequeue_448b96",
+            "container_src": "g2/src/apollo-main/system/a-03-elog-async/elog_async_transport.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x448d1a",
+            "container": "elog_async_enqueue_log_448ccc",
+            "container_src": "g2/src/apollo-main/system/a-03-elog-async/elog_async_transport.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x448d9c",
+            "container": "g2_log_transport_submit",
+            "container_src": "g2/src/apollo-main/system/log/extended-log/extended-log-runtime/transport.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x449fd2",
+            "container": "audio_time_epoch_to_calendar_449ed4",
+            "container_src": "g2/src/apollo-main/app/time-epoch/time_epoch_to_calendar_449ed4_44a100.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x44a0f8",
+            "container": "audio_time_epoch_to_calendar_449fda",
+            "container_src": "g2/src/apollo-main/app/time-epoch/time_epoch_to_calendar_449fda.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x451bb6",
+            "container": "audio_uart_lv_draw_task_init_451b9c",
+            "container_src": "g2/src/apollo-main/ui/lvgl/lv-draw/display_lv_draw_task_init_451b9c.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x451de2",
+            "container": "audio_uart_lv_draw_task_render_451c6e",
+            "container_src": "g2/src/apollo-main/ui/lvgl/lv-draw/display_lv_draw_task_render_451c6e.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x45a798",
+            "container": "audio_uart_user_response",
+            "container_src": "g2/src/apollo-main/app/user-response/user_response.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x45a974",
+            "container": "audio_system_alert_command_45a8ee",
+            "container_src": "g2/src/apollo-main/app/system-alert/system_alert_command_45a8ee.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x45ab50",
+            "container": "async_request_display_reflash_45aaca",
+            "container_src": "g2/src/apollo-main/app/a-06-sync-async/sync_async_requests.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x46049a",
+            "container": "menu_builtin_app_info_get_460450",
+            "container_src": "g2/src/apollo-main/ui/a-08-menu-page/menu_page.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x460994",
+            "container": "audio_uart_registry_callback_460638",
+            "container_src": "g2/src/apollo-main/ui/a-08-menu-page/menu_page.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x46333e",
+            "container": "audio_uart_registry_callback_46327e",
+            "container_src": "g2/src/apollo-main/ui/a-09-menu-page/menu_page_ui.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x463dc8",
+            "container": "generic_animation_create_463c68",
+            "container_src": "g2/src/apollo-main/ui/a-10-generic-animation/generic_animation.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x463fe4",
+            "container": "generic_animation_apply_style_463fb0",
+            "container_src": "g2/src/apollo-main/ui/a-10-generic-animation/generic_animation.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x464966",
+            "container": "audio_uart_master_request_core_464772",
+            "container_src": "g2/src/apollo-main/app/master-request/display_master_request_core.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x464eaa",
+            "container": "audio_uart_input_event_send_464d1c",
+            "container_src": "g2/src/apollo-main/app/input-event/display_input_event_send.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4650ea",
+            "container": "audio_sync_send_to_both_ext_464f76",
+            "container_src": "g2/src/apollo-main/app/sync-send/sync_send_to_both_ext_464f76.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x465370",
+            "container": "audio_uart_request_send",
+            "container_src": "g2/src/apollo-main/app/send-core/send_core.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x46561c",
+            "container": "audio_uart_handshake_send",
+            "container_src": "g2/src/apollo-main/app/send-core/send_core.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x46609e",
+            "container": "svc_universal_setting_save_to_kv_46607c",
+            "container_src": "g2/src/apollo-main/app/a-10-universal-setting/service_universal_setting.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4661da",
+            "container": "audio_uart_ring_unpair_publish_hand_4661a6",
+            "container_src": "g2/src/apollo-main/drivers/peripherals/ring-hand/display_ring_hand_publish.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x466430",
+            "container": "audio_uart_registry_child_466412",
+            "container_src": "g2/src/apollo-main/system/registry-child/registry_child_466412.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x46667c",
+            "container": "audio_uart_hand_initialize_466660",
+            "container_src": "g2/src/apollo-main/drivers/peripherals/ring-hand/display_ring_hand_initialize.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x4678aa",
+            "container": "audio_setting_dispatch_type11_467540",
+            "container_src": "g2/src/apollo-main/app/setting-dominant/setting_dominant_hand_467540.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x46d958",
+            "container": "audio_uart_input_ring_write_core",
+            "container_src": "g2/src/apollo-main/app/input-ring/input_ring_write.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x46dc6e",
+            "container": "audio_ble_psn_into_advertisement",
+            "container_src": "g2/src/apollo-main/ble/ble-adv/display_ble_adv_name_children.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x46dc9e",
+            "container": "audio_ble_adv_format_data",
+            "container_src": "g2/src/apollo-main/ble/ble-adv/display_ble_adv_name_children.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x46dcc6",
+            "container": "audio_ble_adv_set_scan_response",
+            "container_src": "g2/src/apollo-main/ble/ble-adv/display_ble_adv_name_children.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x46dd3c",
+            "container": "audio_ble_slave_adv_handler_prepare",
+            "container_src": "g2/src/apollo-main/ble/ble-adv/display_ble_adv_name_children.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x46dda8",
+            "container": "audio_ble_adv_name_set",
+            "container_src": "g2/src/apollo-main/ble/ble-adv/display_ble_adv_name_set.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x47580c",
+            "container": "audio_ble_msg_tx",
+            "container_src": "g2/src/apollo-main/ble/ble-msg/display_ble_msg_tx.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x4797a8",
+            "container": "audio_ble_privacy_load_rows",
+            "container_src": "g2/src/apollo-main/ble/ble-privacy/display_ble_privacy_loader.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x47af4e",
+            "container": "audio_ble_master_child_47aed4",
+            "container_src": "g2/src/apollo-main/audio/master-dispatch/key_store.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x47b3ba",
+            "container": "audio_ble_pair_record_update_name_47b3ae",
+            "container_src": "g2/src/apollo-main/ble/ble-discovery/display_ble_discovery_pair_children.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x47b478",
+            "container": "audio_ble_dm_database_hash_copy_47b468",
+            "container_src": "g2/src/apollo-main/ble/ble-dm/display_ble_dm_short.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x47b49a",
+            "container": "audio_ble_pair_record_attach",
+            "container_src": "g2/src/apollo-main/ble/ble-discovery/display_ble_discovery_record_attach.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x47daec",
+            "container": "crash_record_commit_47dac0",
+            "container_src": "g2/src/apollo-main/system/p-05-crash-record/crash_record.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x488932",
+            "container": "audio_uart_ambiq_image_options_init_488918",
+            "container_src": "g2/src/apollo-main/graphics/ambiq-buffer-handlers/image_options_init.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x489008",
+            "container": "audio_uart_lv_image_decoder_open_488f9c",
+            "container_src": "g2/src/apollo-main/graphics/ambiq-buffer-handlers/decoder_open.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x48dbc8",
+            "container": "ota_transport_receive_48d8d8",
+            "container_src": "g2/src/apollo-main/app/a-12-ota-transport/ota_transport.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x48decc",
+            "container": "ota_transport_send_48de40",
+            "container_src": "g2/src/apollo-main/app/a-12-ota-transport/ota_transport.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x48f25a",
+            "container": "audio_uart_thread_msg_rx_from_ble_48f12c",
+            "container_src": "g2/src/apollo-main/drivers/display/display-thread/display_thread_msg_rx_ble.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x4936b8",
+            "container": "evenhub_create_container_node_493606",
+            "container_src": "g2/src/apollo-main/ui/a-13-evenhub/evenhub_ui_containers.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x497d0e",
+            "container": "audio_even_ai_ancc_state_sync_497cf0",
+            "container_src": "g2/src/apollo-main/app/even-ai/even_ai_ancc_state_sync_497cf0.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x497f8a",
+            "container": "audio_even_ai_service_dispatch_497ea2",
+            "container_src": "g2/src/apollo-main/app/even-ai/even_ai_service_dispatch_497ea2.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x498176",
+            "container": "audio_even_ai_local_decode_498092",
+            "container_src": "g2/src/apollo-main/app/even-ai/even_ai_local_decode_498092.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4984ba",
+            "container": "service_even_ai_fn_0049832e",
+            "container_src": "g2/src/apollo-main/app/a-15-even-ai-service/service_even_ai.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x49e0fc",
+            "container": "Dashboard_common_data_handler_49ddb8",
+            "container_src": "g2/src/apollo-main/app/a-16-dashboard/dashboard_handlers.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x49ed62",
+            "container": "WearDetect_DataHandler_49ed04",
+            "container_src": "g2/src/apollo-main/app/a-16-wear-detect/wear_detect_sync.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4a21a2",
+            "container": "audio_uart_ring_target_addr_copy_4a2190",
+            "container_src": "g2/src/apollo-main/drivers/peripherals/ring-send/display_ring_send_packet_children.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x4a240c",
+            "container": "audio_ble_master_start_try_connect_ring",
+            "container_src": "g2/src/apollo-main/ble/ble-master/display_ble_master_start_connect.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x4a2a02",
+            "container": "audio_ble_master_hand_changed_4a2948",
+            "container_src": "g2/src/apollo-main/ble/ble-master/ble_master_hand_changed_4a2948.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x4a2fee",
+            "container": "audio_uart_ring_mac_ready",
+            "container_src": "g2/src/apollo-main/drivers/peripherals/ring-mac/ring_mac_ready.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x4a31d2",
+            "container": "audio_uart_box_reconnect_attempt_4a316c",
+            "container_src": "g2/src/apollo-main/ble/ble-master/ble_master_try_reconnect_4a316c_20261017.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x4a93d2",
+            "container": "ui_onboarding_main_sub_004A93B0",
+            "container_src": "g2/src/apollo-main/ui/a-18-onboarding-main-page/ui_onboarding_main_weather.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4b74be",
+            "container": "bleDmCback",
+            "container_src": "g2/src/apollo-main/ble/app-ble-startup/app_ble_startup.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x4b750c",
+            "container": "bleAttCback",
+            "container_src": "g2/src/apollo-main/ble/app-ble-startup/app_ble_startup.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x4b7576",
+            "container": "bleCccCback",
+            "container_src": "g2/src/apollo-main/ble/app-ble-startup/app_ble_startup.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x4b8d46",
+            "container": "audio_tpl_rx_next_packet_timeout",
+            "container_src": "g2/src/apollo-main/app/tpl-timeout/display_tpl_timeout_callback.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4bebf6",
+            "container": "audio_ble_ancc_get_app_attribute_4bebc4",
+            "container_src": "g2/src/apollo-main/ble/ble-ancc/display_ble_ancc_app_attribute.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x4bf098",
+            "container": "audio_ble_ancc_attr_callback_4bf06c",
+            "container_src": "g2/src/apollo-main/ble/ble-ancc/display_ble_ancc_parser_children.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x4bf326",
+            "container": "audio_ble_ancc_attr_handler_4bf228",
+            "container_src": "g2/src/apollo-main/ble/ble-ancc/display_ble_ancc_attr_parser.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x4c3980",
+            "container": "audio_hfrc_config",
+            "container_src": "g2/src/apollo-main/hal/clock/xtal-request/request.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x4c3a96",
+            "container": "audio_hfrc2_config",
+            "container_src": "g2/src/apollo-main/hal/clock/clock/clock-driver-config/config.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x4c3ba2",
+            "container": "audio_syspll_config",
+            "container_src": "g2/src/apollo-main/hal/clock/clock/clock-driver-config/config.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x4c45f4",
+            "container": "audio_clock_board_set",
+            "container_src": "g2/src/apollo-main/hal/clock/xtal-request/request.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x4c5de4",
+            "container": "audio_uart_registry_callback_4c5dbc",
+            "container_src": "g2/src/apollo-main/app/a-21-input-manager/service_input_manager.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4d1068",
+            "container": "efs_transport_receive_4d0d80",
+            "container_src": "g2/src/apollo-main/app/a-23-efs-transport/efs_transport.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4d136a",
+            "container": "efs_transport_send_4d12de",
+            "container_src": "g2/src/apollo-main/app/a-23-efs-transport/efs_transport.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4d2944",
+            "container": "audio_ble_copy_address6_4d293c",
+            "container_src": "g2/src/apollo-main/ble/ble-master/display_ble_master_link_notify.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x4d7272",
+            "container": "audio_ble_ancc_not_whitelisted_4d71bc",
+            "container_src": "g2/src/apollo-main/ble/ble-ancc/display_ble_ancc_not_whitelisted.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x4da6ec",
+            "container": "imu_accel_report_send_4da6d4",
+            "container_src": "g2/src/apollo-main/ui/a-25-evenhub-data-parser/evenhub_data_parser_fp.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4e134c",
+            "container": "audio_uart_registry_callback_4e1192",
+            "container_src": "g2/src/apollo-main/ui/a-28-evenhub-main/evenhub_main_fp.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4e2444",
+            "container": "audio_even_ai_ready_4e20f2",
+            "container_src": "g2/src/apollo-main/app/even-ai/even_ai_ready_4e20f2.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4e806a",
+            "container": "ui_Screen1_Deinit_4e8000",
+            "container_src": "g2/src/apollo-main/ui/a-30-dashboard-main-screen/ui_dashboard_main_screen.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4e8994",
+            "container": "dashboard_status_data_apply_4e8970",
+            "container_src": "g2/src/apollo-main/ui/a-30-dashboard-main-screen/ui_dashboard_main_screen_weather.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4e9ea8",
+            "container": "stock_page_push_data_4e9e32",
+            "container_src": "g2/src/apollo-main/ui/a-31-stock-page/ui_stock_page.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4e9fcc",
+            "container": "stock_page_peek_data_at_4e9eb8",
+            "container_src": "g2/src/apollo-main/ui/a-31-stock-page/ui_stock_page.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4efd64",
+            "container": "Calendar_expire_update_4efcb8",
+            "container_src": "g2/src/apollo-main/ui/a-33-calendar-page/ui_calendar_page_ext.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4f2c48",
+            "container": "Start_NewsUpdating_Animation_4f2bbc",
+            "container_src": "g2/src/apollo-main/ui/a-34-news-widget/ui_widget_news_page_detail.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4f562a",
+            "container": "audio_quicklist_copy_record_4f55e0",
+            "container_src": "g2/src/apollo-main/app/quicklist-copy/quicklist_copy_record_4f55e0.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4f596e",
+            "container": "audio_quicklist_mode_two_detail_4f5838",
+            "container_src": "g2/src/apollo-main/app/quicklist-mode/quicklist_mode_two_detail_4f5838.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4f5b50",
+            "container": "audio_quicklist_mode_two_4f5a1c",
+            "container_src": "g2/src/apollo-main/app/quicklist-mode/quicklist_mode_two_4f5a1c.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4f8210",
+            "container": "quicklist_init_loading_animation_4f81f0",
+            "container_src": "g2/src/apollo-main/ui/a-36-quicklist-page/ui_quicklist_page.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x4f8580",
+            "container": "quicklist_remove_completed_items_from_ui_4f84cc",
+            "container_src": "g2/src/apollo-main/ui/a-36-quicklist-page/ui_quicklist_page.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x500224",
+            "container": "page_state_sync_quicklist_expanded_5001d2",
+            "container_src": "g2/src/apollo-main/app/a-39-page-state-sync/page_state_sync.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x501492",
+            "container": "handle_send_pb_file_data_5011d0",
+            "container_src": "g2/src/apollo-main/app/a-39-dashboard-ext/dashboard_ext_pb_file.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x502f3a",
+            "container": "gesture_touch_event_process_502ef4",
+            "container_src": "g2/src/apollo-main/app/a-40-gesture-processor/service_gesture_processor.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x50b01c",
+            "container": "onboarding_news_page_fifo_pop_50afa4",
+            "container_src": "g2/src/apollo-main/ui/a-41-onboarding-news/ui_onboarding_news_page.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x50b140",
+            "container": "onboarding_news_page_fifo_peek_at_50b054",
+            "container_src": "g2/src/apollo-main/ui/a-41-onboarding-news/ui_onboarding_news_page.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x50cb1e",
+            "container": "ui_onboarding_stock_sub_0050CA56",
+            "container_src": "g2/src/apollo-main/ui/a-42-onboarding-stock-page/ui_onboarding_stock_page.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x50f942",
+            "container": "onboarding_animation_init_50f8cc",
+            "container_src": "g2/src/apollo-main/ui/a-43-onboarding-animation/onboarding_animation.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x52b4ae",
+            "container": "HciVscSetRfPowerLevelEx",
+            "container_src": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_init_commands.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x52d4c2",
+            "container": "audio_ble_slave_apply_flags_52d370",
+            "container_src": "g2/src/apollo-main/audio/master-dispatch/atts_csf_open.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x52d8e8",
+            "container": "AttsCsfGetFeatures_52d7c4",
+            "container_src": "g2/src/apollo-main/ble/u-06-cordio-variants/atts_csf_variants.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x52e192",
+            "container": "audio_ble_radio_exchange_begin_52e0d2",
+            "container_src": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_radio_exchange_begin.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x52ead8",
+            "container": "audio_ble_radio_read_command_52ea28",
+            "container_src": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_radio_read_revision.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x52eb5a",
+            "container": "audio_ble_radio_write_command_52eaf8",
+            "container_src": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_radio_write_command.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x52ef3c",
+            "container": "audio_ble_radio_commit_52eefa",
+            "container_src": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_radio_commit.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x52efb0",
+            "container": "audio_ble_radio_recover_set_52ef74",
+            "container_src": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_radio_recover_commands.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x52f066",
+            "container": "audio_ble_radio_recover_commit_52efec",
+            "container_src": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_radio_recover_commands.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x52f0d0",
+            "container": "audio_ble_radio_recover_read_52f094",
+            "container_src": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_radio_recover_commands.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x52f874",
+            "container": "audio_ble_radio_header_copy_52f86a",
+            "container_src": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_radio_header_copy.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x530e8c",
+            "container": "audio_ble_attc_send_continuing_530e64",
+            "container_src": "g2/src/apollo-main/ble/ble-attc/display_ble_attc_send_continuing_530e64_20261017.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x5310c6",
+            "container": "audio_ble_attc_send_prepare_write_531088",
+            "container_src": "g2/src/apollo-main/ble/ble-attc/display_ble_attc_send_prepare_write_531088_20261017.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x531180",
+            "container": "audio_ble_attc_setup_req_531160",
+            "container_src": "g2/src/apollo-main/ble/ble-attc/display_ble_attc_setup_req_531160_20261017.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x531f00",
+            "container": "audio_ble_service_discovery_start",
+            "container_src": "g2/src/apollo-main/ble/ble-service/display_ble_service_discovery_start.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x532b3a",
+            "container": "audio_ble_discovery_process_532924",
+            "container_src": "g2/src/apollo-main/ble/ble-discovery/display_ble_discovery_process.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x538ad8",
+            "container": "Thread_SendMsgToBleProductionTask",
+            "container_src": "g2/src/apollo-main/ble/thread-ble-production/thread_ble_production.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x539e2c",
+            "container": "audio_ble_attc_write_command_539dea",
+            "container_src": "g2/src/apollo-main/ble/ble-att/display_ble_att_write_command_539dea.c",
+            "container_stream": "blestore"
+          },
+          {
+            "site": "0x539f2e",
+            "container": "comm_read_539e92",
+            "container_src": "g2/src/apollo-main/drivers/power/box-detect/box_uart_mgr.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x53a046",
+            "container": "box_uart_rx_callback_53a01c",
+            "container_src": "g2/src/apollo-main/drivers/power/box-detect/box_uart_mgr.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x53d7b8",
+            "container": "audio_uart_ambiq_label_vector_draw_53d708",
+            "container_src": "g2/src/apollo-main/graphics/ambiq-buffer-handlers/label_vector_draw.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x53f5f0",
+            "container": "audio_uart_ambiq_draw_image_core_53f548",
+            "container_src": "g2/src/apollo-main/graphics/ambiq-buffer-handlers/image_core.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x53fd0a",
+            "container": "audio_uart_ambiq_label_pixel_53fcc4",
+            "container_src": "g2/src/apollo-main/graphics/ambiq-buffer-handlers/label_pixel.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x54675a",
+            "container": "navigation_ui_create_calibrate_compass_page_546620",
+            "container_src": "g2/src/apollo-main/ui/a-48-navigation-ui/navigation_ui_pages.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5495f0",
+            "container": "navigation_ui_sync_navigation_info_5495a8",
+            "container_src": "g2/src/apollo-main/ui/a-49-navigation-ui/navigation_ui_pages.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x54982c",
+            "container": "store_mini_map_data_549708",
+            "container_src": "g2/src/apollo-main/ui/a-49-navigation-ui/navigation_ui_pages.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x549a2e",
+            "container": "store_max_map_data_549994",
+            "container_src": "g2/src/apollo-main/ui/a-49-navigation-ui/navigation_ui_pages.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5532cc",
+            "container": "audio_text_stream_copy_bytes_553274",
+            "container_src": "g2/src/apollo-main/app/text-stream/text_stream_copy_bytes_553274.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5560a2",
+            "container": "teleprompt_ui_action_file_select_556010",
+            "container_src": "g2/src/apollo-main/ui/a-54-teleprompt-ui/teleprompt_ui_actions.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x558156",
+            "container": "audio_dashboard_layout_reset",
+            "container_src": "g2/src/apollo-main/app/dashboard-layout/dashboard_layout_set.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x55838e",
+            "container": "audio_dashboard_layout_set",
+            "container_src": "g2/src/apollo-main/app/dashboard-layout/dashboard_layout_set.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x559288",
+            "container": "audio_quicklist_send_completed_5591b0",
+            "container_src": "g2/src/apollo-main/app/quicklist-send/quicklist_send_completed_5591b0.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x55b6a0",
+            "container": "DRV_TouchReadReport_55b676",
+            "container_src": "g2/src/apollo-main/drivers/peripherals/touch-cy8c4046/drv_cy8c4046fni.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x55b6d4",
+            "container": "DRV_TouchReadSensorDiff_55b6a8",
+            "container_src": "g2/src/apollo-main/drivers/peripherals/touch-cy8c4046/drv_cy8c4046fni_helpers.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x55bc42",
+            "container": "audio_ble_vendor_link_activate_55bc1e",
+            "container_src": "g2/src/apollo-main/audio/master-dispatch/vendor_ops.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x567a74",
+            "container": "audio_uart_ft_sort_core_56798c",
+            "container_src": "g2/src/apollo-main/ui/lvgl/display-lv/display_lv_init_children.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x578c1c",
+            "container": "semantic_CodecReadBootHeader",
+            "container_src": "g2/src/apollo-main/drivers/codec-host/codec-dfu/codec_dfu.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x578d90",
+            "container": "semantic_CodecDownloadBootStage1",
+            "container_src": "g2/src/apollo-main/drivers/codec-host/codec-dfu/codec_dfu.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x57940e",
+            "container": "semantic_CodecDownloadBootStage2",
+            "container_src": "g2/src/apollo-main/drivers/codec-host/codec-dfu/codec_dfu.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x57bbb0",
+            "container": "audio_packet_pack",
+            "container_src": "g2/src/apollo-main/app/packet-pack/alias.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x57bd30",
+            "container": "audio_transaction_extract",
+            "container_src": "g2/src/apollo-main/system/transaction/transaction-extract.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x57e97e",
+            "container": "prvCommand_cat_57e920",
+            "container_src": "g2/src/apollo-main/system/u-07/prvCommand_filesystem.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x57ea6e",
+            "container": "prvCommand_rm_57ea0a",
+            "container_src": "g2/src/apollo-main/system/u-07/prvCommand_filesystem.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x57ece0",
+            "container": "prvCommand_mkdir_57ec7c",
+            "container_src": "g2/src/apollo-main/system/u-07/prvCommand_filesystem.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x57ed8a",
+            "container": "prvCommand_touch_57ed26",
+            "container_src": "g2/src/apollo-main/system/u-07/prvCommand_filesystem.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x57f6fa",
+            "container": "cli_cmd_rename_57f68c",
+            "container_src": "g2/src/apollo-main/system/x-02-cli-commands/prvCommand_filesystem_xip.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x57f9f8",
+            "container": "cli_cmd_file2xip_57f980",
+            "container_src": "g2/src/apollo-main/system/x-02-cli-commands/prvCommand_filesystem_xip.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x57fd38",
+            "container": "cli_cmd_xip2file_57fcac",
+            "container_src": "g2/src/apollo-main/system/x-02-cli-commands/prvCommand_filesystem_xip.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x5819bc",
+            "container": "cli_copy_token_58198c",
+            "container_src": "g2/src/apollo-main/system/x-02-cli-commands/prvCommand_touch.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x582350",
+            "container": "cli_cmd_translate_5822e6",
+            "container_src": "g2/src/apollo-main/system/a-59-cli-commands/prvCommand_app.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x582a12",
+            "container": "terminal_text_copy_5829e0",
+            "container_src": "g2/src/apollo-main/system/a-59-cli-commands/terminal_cli.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x584d08",
+            "container": "audio_uart_sync_send",
+            "container_src": "g2/src/apollo-main/app/sync-send/sync_send.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x58a1e2",
+            "container": "audio_uart_registry_callback_58a130",
+            "container_src": "g2/src/apollo-main/app/a-61-teleprompt/teleprompt.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x58cae0",
+            "container": "teleprompt_action_app_start_58ca2a",
+            "container_src": "g2/src/apollo-main/app/a-62-teleprompt/teleprompt_fsm.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x58d20e",
+            "container": "teleprompt_action_ai_sync_58d0d0",
+            "container_src": "g2/src/apollo-main/app/p-09-teleprompt/teleprompt_fsm_actions.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x58dab8",
+            "container": "audio_quicklist_convert_pb",
+            "container_src": "g2/src/apollo-main/app/quicklist-convert/quicklist_convert_58da28.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x58f1fe",
+            "container": "product_flash_read_58f1ec",
+            "container_src": "g2/src/apollo-main/app/p-09-product-test/product_common.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5955bc",
+            "container": "md5_update_595578",
+            "container_src": "g2/src/apollo-main/system/C3-cli-support/md5.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x595fda",
+            "container": "audio_conversate_tag_node_from_pb_595f4c",
+            "container_src": "g2/src/apollo-main/app/conversate-tag/conversate_tag_node_from_pb_595f4c.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x596dc8",
+            "container": "translate_action_app_open_596c98",
+            "container_src": "g2/src/apollo-main/app/p-10-translate-fsm/translate_fsm.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5977fa",
+            "container": "audio_td_state_sync",
+            "container_src": "g2/src/apollo-main/app/td-state/td_state_sync.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x597bfa",
+            "container": "audio_td_session_struct_copy_out",
+            "container_src": "g2/src/apollo-main/app/td-session/td_session_struct_copy_out.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x59ca3a",
+            "container": "display_driver_uled_quad_mode_59ca2c",
+            "container_src": "g2/src/apollo-main/drivers/display/display-uled/display_driver_uled_option_type0_mspi_modes.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x59e8aa",
+            "container": "translate_data_update_59e6d0",
+            "container_src": "g2/src/apollo-main/app/p-13-translate-ui/translate_data.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x59f2e8",
+            "container": "audio_uart_registry_callback_59f236",
+            "container_src": "g2/src/apollo-main/app/p-14-translate/translate.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5a4f4a",
+            "container": "ota_mram_read_5a4f30",
+            "container_src": "g2/src/apollo-main/app/C3-ota-mram/ota_mram_backend.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5b076a",
+            "container": "audio_uart_registry_callback_5b06aa",
+            "container_src": "g2/src/apollo-main/app/conversate-ui/conversate_ui_event_callback_5b06aa.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5b4280",
+            "container": "audio_conversate_transcribe_update_5b41be",
+            "container_src": "g2/src/apollo-main/app/conversate-transcribe/conversate_transcribe_update_5b41be.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5b43ce",
+            "container": "audio_conversate_prep_note_list_update_5b4378",
+            "container_src": "g2/src/apollo-main/app/conversate-prep/conversate_prep_note_list_data_update_5b4378.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5b4446",
+            "container": "audio_conversate_prep_note_update_5b43ee",
+            "container_src": "g2/src/apollo-main/app/conversate-prep/conversate_prep_note_data_update_5b43ee.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5b467c",
+            "container": "audio_conversate_prep_note_packet_update_5b44d8",
+            "container_src": "g2/src/apollo-main/app/conversate-prep/conversate_prep_note_packet_update_5b44d8.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5b4834",
+            "container": "audio_conversate_prep_note_line_text_5b4776",
+            "container_src": "g2/src/apollo-main/app/conversate-prep/conversate_prep_note_line_text_5b4776.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5b4b7e",
+            "container": "audio_conversate_action_5b4a90",
+            "container_src": "g2/src/apollo-main/app/conversate-action/conversate_action_app_open_5b4a90.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5b4e1a",
+            "container": "audio_conversate_action_5b4dba",
+            "container_src": "g2/src/apollo-main/app/conversate-action/conversate_action_app_config_5b4dba.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5bbe1c",
+            "container": "display_driver_uled_type1_write_register_5bbdf0",
+            "container_src": "g2/src/apollo-main/drivers/display/display-uled/display_driver_uled_type1_write_register.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x5bf0da",
+            "container": "auto_init_table_run_5bf0bc",
+            "container_src": "g2/src/apollo-main/system/x-03-init/init_table_run.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x5bf7d6",
+            "container": "audio_uart_registry_callback_5bf7b8",
+            "container_src": "g2/src/apollo-main/drivers/display/legal-regulatory/legal_regulatory_event_5bf7b8.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x5bf9a6",
+            "container": "audio_uart_logger_ble_handler_5bf972",
+            "container_src": "g2/src/apollo-main/system/log/logger-ble/display_logger_ble_handler_5bf972.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x5ce5ac",
+            "container": "audio_ring_command_dispatch_5ce4e6",
+            "container_src": "g2/src/apollo-main/drivers/peripherals/ring-command/ring_command_dispatch_5ce4e6.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x5d9a14",
+            "container": "segger_rtt_write_blocking_5d99c0",
+            "container_src": "g2/src/apollo-main/runtime/p-18-segger-rtt/segger_rtt.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x5d9a68",
+            "container": "segger_rtt_write_no_check_5d9a44",
+            "container_src": "g2/src/apollo-main/runtime/p-18-segger-rtt/segger_rtt.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x5e45a0",
+            "container": "audio_uart_registry_callback_5e44f6",
+            "container_src": "g2/src/apollo-main/app/terminal-ui/terminal_ui_event_handler_5e44f6.c",
+            "container_stream": "app"
+          },
+          {
+            "site": "0x5ecca4",
+            "container": "audio_terminal_session_row_text_5ecc74",
+            "container_src": "g2/src/apollo-main/app/terminal-session/terminal_session_selector_leaf_20261016.c",
+            "container_stream": "app"
+          }
+        ]
+      }
+    ],
+    "ramlayout": [
+      {
+        "name": "audio_log_transport_flush_448f98",
+        "stock_addr": "0x448f98",
+        "size": 20,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/rtos/rtos-glue-gaps/log_transport_flush.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x47dd84",
+            "container": "audio_uart_ring_persist_event_set_47dd62",
+            "container_src": "g2/src/apollo-main/drivers/peripherals/ring-persist/display_ring_persist_event_set.c",
+            "container_stream": "hwdrivers"
+          }
+        ]
+      },
+      {
+        "name": "lwrb_init_46d8a0",
+        "stock_addr": "0x46d8a0",
+        "size": 28,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/runtime/a-11-lwrb/lwrb_ring.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x44479a",
+            "container": "audio_uart_service_prepare0",
+            "container_src": "g2/src/apollo-main/app/service-prepare0/service_prepare0.c",
+            "container_stream": "app"
+          }
+        ]
+      },
+      {
+        "name": "lwrb_read_ex_46d9c8",
+        "stock_addr": "0x46d9c8",
+        "size": 154,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/runtime/a-11-lwrb/lwrb_ring.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x46d9b8",
+            "container": "audio_uart_display_ring_read",
+            "container_src": "g2/src/apollo-main/drivers/peripherals/ring-read/display_ring_read.c",
+            "container_stream": "hwdrivers"
+          }
+        ]
+      },
+      {
+        "name": "aeabi_dmul_4d4354",
+        "stock_addr": "0x4d4354",
+        "size": 18,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/runtime/a-24-iar-dlib/iar_double_a24.c",
+        "bl_count": 3,
+        "callers": [
+          {
+            "site": "0x48264c",
+            "container": "g2_main_fp_pow10",
+            "container_src": "g2/src/apollo-main/system/log/full-formatter/full-formatter-native/fp_primitives.c",
+            "container_stream": "ramlayout"
+          }
+        ]
+      },
+      {
+        "name": "aeabi_llsl_4d914c",
+        "stock_addr": "0x4d914c",
+        "size": 58,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/runtime/a-25-iar-llsl/iar_llsl_4d914c.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x55c204",
+            "container": "audio_ble_vendor_transfer_guard_55c1e0",
+            "container_src": "g2/src/apollo-main/ble/ble-hci/display_ble_hci_vendor_transfer_children.c",
+            "container_stream": "blestore"
+          }
+        ]
+      },
+      {
+        "name": "g2_putchars",
+        "stock_addr": "0x567c64",
+        "size": 44,
+        "addr_from": "comment",
+        "source": "g2/src/apollo-main/runtime/iar-runtime/runtime.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x57f1b4",
+            "container": "prvCommand_mv_57ee0c",
+            "container_src": "g2/src/apollo-main/system/u-07/prvCommand_filesystem.c",
+            "container_stream": "ramlayout"
+          }
+        ]
+      },
+      {
+        "name": "g2_zero_init3",
+        "stock_addr": "0x4d2112",
+        "size": 70,
+        "addr_from": "comment",
+        "source": "g2/src/apollo-main/runtime/iar-runtime/runtime.c",
+        "bl_count": 2,
+        "callers": [
+          {
+            "site": "0x4d2274",
+            "container": "getstr_4d2158",
+            "container_src": "g2/src/apollo-main/runtime/iar-dlib-gaps/iar_scanf.c",
+            "container_stream": "ramlayout"
+          }
+        ]
+      },
+      {
+        "name": "aeabi_f2d_43a110",
+        "stock_addr": "0x43a110",
+        "size": 112,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/runtime/p-01-iar-runtime/iar_runtime_p01.c",
+        "bl_count": 3,
+        "callers": [
+          {
+            "site": "0x43a9da",
+            "container": "nrf_model_process_43a698",
+            "container_src": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+            "container_stream": "hwdrivers"
+          }
+        ]
+      },
+      {
+        "name": "memcpy_439e90",
+        "stock_addr": "0x439e90",
+        "size": 12,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/runtime/p-01-iar-runtime/iar_runtime_p01.c",
+        "bl_count": 9,
+        "callers": [
+          {
+            "site": "0x439d28",
+            "container": "fg_439ce0",
+            "container_src": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x43a1e4",
+            "container": "nrf_model_init_43a1b0",
+            "container_src": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x43a818",
+            "container": "nrf_model_process_43a698",
+            "container_src": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x43bc36",
+            "container": "fg_43bb14",
+            "container_src": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_fuel_gauge_leaves.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x43c190",
+            "container": "nrf_fuel_gauge_init_43c150",
+            "container_src": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_nrf_fuel_gauge_shim.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x55f922",
+            "container": "nrf_fuel_gauge_process_55f848",
+            "container_src": "g2/src/apollo-main/drivers/power/npm1300/battery-model/g2c_nrf_fuel_gauge_shim.c",
+            "container_stream": "hwdrivers"
+          }
+        ]
+      },
+      {
+        "name": "iar_ascii_fold_lower_481830",
+        "stock_addr": "0x481830",
+        "size": 6,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/runtime/p-06-iar-dlib/iar_dlib_p06.c",
+        "bl_count": 1,
+        "callers": [
+          {
+            "site": "0x48252c",
+            "container": "g2_main_format_integer_render",
+            "container_src": "g2/src/apollo-main/system/log/full-formatter/full-formatter-native/integer_render.c",
+            "container_stream": "ramlayout"
+          }
+        ]
+      },
+      {
+        "name": "elog_atomic_load_ptr_448938",
+        "stock_addr": "0x448938",
+        "size": 8,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/system/a-03-elog-async/elog_async_transport.c",
+        "bl_count": 10,
+        "callers": [
+          {
+            "site": "0x448a16",
+            "container": "g2_log_transport_node_allocate",
+            "container_src": "g2/src/apollo-main/system/log/extended-log/extended-log-runtime/transport_queue.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x448aa6",
+            "container": "g2_log_transport_node_free",
+            "container_src": "g2/src/apollo-main/system/log/extended-log/extended-log-runtime/transport_queue.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x448b20",
+            "container": "g2_log_transport_node_enqueue",
+            "container_src": "g2/src/apollo-main/system/log/extended-log/extended-log-runtime/transport_queue.c",
+            "container_stream": "ramlayout"
+          }
+        ]
+      },
+      {
+        "name": "elog_atomic_store_4488ec",
+        "stock_addr": "0x4488ec",
+        "size": 8,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/system/a-03-elog-async/elog_async_transport.c",
+        "bl_count": 7,
+        "callers": [
+          {
+            "site": "0x448a7e",
+            "container": "g2_log_transport_node_allocate",
+            "container_src": "g2/src/apollo-main/system/log/extended-log/extended-log-runtime/transport_queue.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x448a9c",
+            "container": "g2_log_transport_node_free",
+            "container_src": "g2/src/apollo-main/system/log/extended-log/extended-log-runtime/transport_queue.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x448b02",
+            "container": "g2_log_transport_node_enqueue",
+            "container_src": "g2/src/apollo-main/system/log/extended-log/extended-log-runtime/transport_queue.c",
+            "container_stream": "ramlayout"
+          }
+        ]
+      },
+      {
+        "name": "elog_atomic_store_ptr_448930",
+        "stock_addr": "0x448930",
+        "size": 8,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/system/a-03-elog-async/elog_async_transport.c",
+        "bl_count": 10,
+        "callers": [
+          {
+            "site": "0x448a86",
+            "container": "g2_log_transport_node_allocate",
+            "container_src": "g2/src/apollo-main/system/log/extended-log/extended-log-runtime/transport_queue.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x448ab0",
+            "container": "g2_log_transport_node_free",
+            "container_src": "g2/src/apollo-main/system/log/extended-log/extended-log-runtime/transport_queue.c",
+            "container_stream": "ramlayout"
+          },
+          {
+            "site": "0x448b0a",
+            "container": "g2_log_transport_node_enqueue",
+            "container_src": "g2/src/apollo-main/system/log/extended-log/extended-log-runtime/transport_queue.c",
+            "container_stream": "ramlayout"
+          }
+        ]
+      },
+      {
+        "name": "g2_irq_save_47dce4",
+        "stock_addr": "0x47dce4",
+        "size": 8,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/system/p-05-tracepoint-defer/tracepoint_defer.c",
+        "bl_count": 6,
+        "callers": [
+          {
+            "site": "0x47dc76",
+            "container": "audio_uart_ring_persist_clock_snapshot_47dc74",
+            "container_src": "g2/src/apollo-main/drivers/peripherals/ring-persist/display_ring_persist_clock.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x48e9dc",
+            "container": "audio_uart_ring_persist_append_48e9be",
+            "container_src": "g2/src/apollo-main/drivers/peripherals/ring-persist/display_ring_persist_append.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x48eaca",
+            "container": "audio_uart_ring_persist_initialize_48eac8",
+            "container_src": "g2/src/apollo-main/drivers/peripherals/ring-persist/display_ring_persist_initialize.c",
+            "container_stream": "hwdrivers"
+          },
+          {
+            "site": "0x48eba4",
+            "container": "audio_tracepoint_pull_ready_48eb90",
+            "container_src": "g2/src/apollo-main/system/log/tracepoint-pull/tracepoint_pull_ready_48eb90.c",
+            "container_stream": "ramlayout"
+          }
+        ]
+      },
+      {
+        "name": "audio_ble_radio_ready_44b0ae",
+        "stock_addr": "0x44b0ae",
+        "size": 4,
+        "addr_from": "suffix",
+        "source": "g2/src/apollo-main/system/self-recovery/self_recovery.c",
+        "bl_count": 27,
+        "callers": [
+          {
+            "site": "0x569ac2",
+            "container": "audio_ble_wsf_assert",
+            "container_src": "g2/src/apollo-main/ble/ble-wsf/display_ble_wsf_assert.c",
+            "container_stream": "blestore"
+          }
+        ]
+      }
+    ]
+  },
+  "scan_outputs": {
+    "classified": "build/ws-blestore-20261122/gc-scan/gc-classified.json",
+    "classified_txt": "build/ws-blestore-20261122/gc-scan/gc-classified.txt",
+    "refined": "build/ws-blestore-20261122/gc-scan/gc-refined-missing.json",
+    "first_pass": "build/ws-blestore-20261122/gc-scan/gc-live-in-stock.json"
+  },
+  "shared_files": "not edited",
+  "product_c": "no edits; all blestore automated hits were inlining, equivalent direct access, or a wrong mapped address"
+}

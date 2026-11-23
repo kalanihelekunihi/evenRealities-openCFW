@@ -1,11 +1,12 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x32cbf0..0x32ccdc: power-control request handler. The PHY bit
- * (0x80281c) selects PHY index 1..4 (255 when not a single known bit);
- * an invalid PHY sets status 0x20 (+747) and a power of 0x7e (0x80281e)
+ * (((uintptr_t)&em9305_ram_8027e0 + 0x3cu)) selects PHY index 1..4 (255 when not a single known bit);
+ * an invalid PHY sets status 0x20 (+747) and a power of 0x7e (((uintptr_t)&em9305_ram_8027e0 + 0x3eu))
  * sets status 30. Otherwise a changed remote power for that PHY (+553 +
  * index) is reported through 323620 when reporting is on (+768), the new
- * power is stored, the local adjustment (317214, delta 0x80281d) is kept
+ * power is stored, the local adjustment (317214, delta ((uintptr_t)&em9305_ram_8027e0 + 0x3du)) is kept
  * at +764 with the PHY index at +766 and, when non-zero with local
  * reporting on (+767), the local power for the current PHY (+332 table;
  * index 4 uses the coded entry) is reported as well. */
@@ -22,8 +23,8 @@ static inline void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;
 void opencfw_em9305_child_32cbf0(uintptr_t record)
 {
     uintptr_t status=record+747u;
-    uint32_t bit=r8(0x80281cu);
-    int32_t power=*(volatile int8_t *)0x80281eu;
+    uint32_t bit=r8(((uintptr_t)&em9305_ram_8027e0 + 0x3cu));
+    int32_t power=*(volatile int8_t *)((uintptr_t)&em9305_ram_8027e0 + 0x3eu);
     w8(status,0u);
     uint32_t phy=0xffu;
     for(uint32_t candidate=1u;candidate<=4u;++candidate){
@@ -48,7 +49,7 @@ void opencfw_em9305_child_32cbf0(uintptr_t record)
         (void)opencfw_em9305_callback_323620(record,0u,1u,index,power,level,change);
     }
     w8(remote,(uint32_t)power);
-    int32_t delta=*(volatile int8_t *)0x80281du;
+    int32_t delta=*(volatile int8_t *)((uintptr_t)&em9305_ram_8027e0 + 0x3du);
     int32_t adjust=opencfw_em9305_child_317214(record,index,delta);
     w8(record+766u,phy);
     w8(record+764u,(uint32_t)adjust);

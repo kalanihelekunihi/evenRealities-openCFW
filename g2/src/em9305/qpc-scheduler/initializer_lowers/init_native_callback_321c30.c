@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x321c30..0x321e12: periodic advertising report assembly for the
  * sync context at object+0x24. The channel-map check (PAwR +777: bit of
@@ -9,9 +10,9 @@
  * stored DID (+280 table, receiver +758/+777). Then, when reporting is
  * enabled (+5), start a fresh report (+0x10..: index, power, RSSI, CTE,
  * event counter, subevent) or continue one (+26 bytes so far), append the
- * received data (0x803b6c/+0x803b70) while it fits the configured length,
+ * received data (((uintptr_t)&em9305_ram_803b68 + 0x4u)/+((uintptr_t)&em9305_ram_803b68 + 0x8u)) while it fits the configured length,
  * mark truncation (status 2) otherwise, and flush via 324734 unless more
- * data follows (0x803b72 bit 4). Returns 1 when data was appended. */
+ * data follows (((uintptr_t)&em9305_ram_803b68 + 0xau) bit 4). Returns 1 when data was appended. */
 extern uint64_t opencfw_em9305_child_3027f4(uint32_t,uint32_t,uint32_t);
 extern uint32_t opencfw_em9305_child_32db0c(uintptr_t,uintptr_t);
 extern void *opencfw_em9305_memset(void *,uint32_t,uint32_t);
@@ -27,14 +28,14 @@ static void w8(uintptr_t a,uint32_t v){*(volatile uint8_t *)a=(uint8_t)v;}
 
 static uint32_t slot_321c30(uintptr_t base)
 {
-    return (uint8_t)((int32_t)((uint32_t)base-0x803d78u)/784);
+    return (uint8_t)((int32_t)((uint32_t)base-((uintptr_t)&em9305_ram_803d58 + 0x20u))/784);
 }
 
 uint32_t opencfw_em9305_callback_321c30(uintptr_t object,uintptr_t data)
 {
     uintptr_t sync=r32(object+0x24u);
     uintptr_t pdu=r32(object+44u);
-    const uintptr_t report=(uintptr_t)0x803b68u;
+    const uintptr_t report=(uintptr_t)(uintptr_t)&em9305_ram_803b68;
     uint32_t pawr=r8(sync+777u);
     uint32_t in_map=1u;
     if(pawr!=0u) {
@@ -65,7 +66,7 @@ uint32_t opencfw_em9305_callback_321c30(uintptr_t object,uintptr_t data)
     if(header[0]!=7u) return 0u;
     uintptr_t receiver=r32(object+36u);
     uintptr_t response=receiver+758u;
-    if(r8(receiver+1u)==1u&&r8(receiver+7u)!=0u&&(r8(0x803b72u)&8u)) {
+    if(r8(receiver+1u)==1u&&r8(receiver+7u)!=0u&&(r8(((uintptr_t)&em9305_ram_803b68 + 0xau))&8u)) {
         uint32_t enabled=r8(response+0x13u);
         uint32_t did=r16(response);
         uint32_t slot=0u;
@@ -109,7 +110,7 @@ uint32_t opencfw_em9305_callback_321c30(uintptr_t object,uintptr_t data)
         offset=r16(sync+26u);
     }
     uint32_t length=r8(report+8u);
-    if((uint16_t)(r16(r32(0x805cacu)+0x20u)-offset)<length) {
+    if((uint16_t)(r16(r32(((uintptr_t)&em9305_ram_805c5c + 0x50u))+0x20u)-offset)<length) {
         w8(sync+25u,2u);
         (void)opencfw_em9305_child_324734(sync);
         return 0u;

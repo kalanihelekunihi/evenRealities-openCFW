@@ -1,8 +1,9 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x3284ec..0x328592: schedule the associated object. The window
  * is the floor at +2276 plus the scan window (at least 300) plus the
- * larger of +72 and the configured minimum (+20 of 0x805cac), capped at
+ * larger of +72 and the configured minimum (+20 of ((uintptr_t)&em9305_ram_805c5c + 0x50u)), capped at
  * 0x257ed4 and aligned by 312c5c. After initialising the object (seed
  * +76 unless +1432) at time +2272, it is inserted either at the latest
  * slot (step +836, 3130d4) or by adjustment (step +40, 312f88), moving
@@ -20,7 +21,7 @@ uint32_t opencfw_em9305_child_3284ec(uintptr_t record, uintptr_t object)
     uint32_t floor=*(volatile uint32_t *)(record+2276u);
     uint32_t scan=opencfw_em9305_scan_current_303f80();
     scan=scan<301u?300u:opencfw_em9305_scan_current_303f80();
-    volatile uintptr_t *config=(volatile uintptr_t *)(uintptr_t)0x805cacu;
+    volatile uintptr_t *config=(volatile uintptr_t *)(uintptr_t)((uintptr_t)&em9305_ram_805c5c + 0x50u);
     uint32_t minimum=*(volatile uint16_t *)(*config+20u);
     uint32_t requested=*(volatile uint32_t *)(record+72u);
     if(requested>minimum)minimum=requested;

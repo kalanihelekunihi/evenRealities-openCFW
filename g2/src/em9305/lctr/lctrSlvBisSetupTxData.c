@@ -1,14 +1,15 @@
 /* SPDX-License-Identifier: MIT
  * Stock 0x329230 lctrSlvBisSetupTxData (g2-2.2.6.10 firmware_ble_em9305.bin). Wave 28: converted from the
  * lowered ARC asm. Field names are not recovered (offsets only); the 0x805448 table has 0x90-byte rows of
- * 0x18-byte entries, the per-stream counters live at 0x805434/0x805438 (+index).
+ * 0x18-byte entries, the per-stream counters live at em9305_ram_80542c.u8_805434 / u8_805438 (+index), fields of the 28-byte 0x80542c scratch.
  */
 #include <stdint.h>
+#include "em9305_ram.h"
 #define B8(a)  (*(volatile uint8_t  *)(uintptr_t)(a))
 #define W32(a) (*(volatile uint32_t *)(uintptr_t)(a))
 #define BIS_TXENT_TAB 0x805448u
-#define BIS_CNT_A 0x805434u
-#define BIS_CNT_B 0x805438u
+#define BIS_CNT_A ((uintptr_t)&em9305_ram_80542c.u8_805434[0])
+#define BIS_CNT_B ((uintptr_t)&em9305_ram_80542c.u8_805438[0])
 extern uint32_t opencfw_em9305_lctrBisFlushStaleSdus(uint32_t queue, uint32_t a, uint32_t b);
 extern uint32_t opencfw_em9305_lctrBisTxQueuePeek(uint32_t queue, uint32_t b, uint32_t entry);
 extern uint32_t opencfw_em9305_wsf_event_at(uint32_t queue, uint32_t index, uint32_t out_u8);

@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-22 8:03 PM CST (America/Chicago)",
+  "title": "Instruction-level compares of residual both-sides QEMU RUN FAILs after typo-RAM widen",
+  "scope": "Emulator/harness only. Compared already-built orig/cand QEMU-ARC ELFs under build/em-ctl/w/widen_retry_failed2 (and widen_batch_ae for native_stack_check). docker arc-elf32-objdump -d, one batch, opencfw/iar-base:10.10.2-local. No hardware flash, no git commit, no official-app overwrite, other streams left alone. source_completeness_proven stays false.",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261122-em9305-typed-ram-widen-install-paired-sims.json",
+  "method": {
+    "tool": "vendor-cache arc-elf32-objdump -d and nm -n via docker opencfw/iar-base:10.10.2-local --platform linux/amd64",
+    "script": "build/ws-em9305-20261122/widen/prove/instcmp/dump.sh",
+    "workdir": "build/ws-em9305-20261122/widen/prove/instcmp",
+    "normalization": [
+      "Compare the named function's objdump body (next symbol bounds; native_stack_check's actual body is the first 6 instructions \u2014 later unsyboled TU code is in the same dump range on both sides)",
+      "Treat (idx+A)<<N as equivalent to (idx<<N)+(A<<N), e.g. 0x1002a7<<3 == 0x801538",
+      "Treat mov typo-RAM; ld/st [reg,0] as equivalent to ld/st [absolute typo-RAM]",
+      "Treat add base; ld [r] as equivalent to ld [r, base] and object-base + field-offset as equivalent to an orig field literal inside that typo-RAM object",
+      "Ignore register allocation, enter_s save-set size, and branch displacements that shrink when an absolute st/ld becomes a register form",
+      "Compare callee symbol sets from objdump comments and typo-RAM (0x800000-0x80FFFF) immediate sets"
+    ]
+  },
+  "verdict": "No residual both-sides RUN FAIL is a demonstrated C mismatch. All 18 functions have identical callee-symbol sets. Line-level INST_DIFF on every function is expected: typo-RAM symbol refs compile to mov+ld/st or base+offset, not the orig absolute [0xADDR] form, and that cascades register allocation. After folding, 10 are same typo-RAM immediates (4 of those also hand-reviewed as fully semantic-equivalent). The other 8 are object-base vs field-address (or orig table-stride / just-past-object literals vs cand base+offset). Both-sides QEMU RUN FAILs remain harness/environment (timeouts, decoder asserts, SP outside the 4 KiB window, AUX/kflag MMIO spin).",
+  "functions": [
+    {
+      "name": "opencfw_em9305_common_callback_3143f4",
+      "elf_dir": "widen_retry_failed2",
+      "class": "SEMANTIC_EQUIV",
+      "insn_count": "14==14",
+      "note": "orig add 0x1002a7; asl 3; ld [r2] == cand asl 3; ld [0x801538+r2] because (idx+0x1002a7)<<3 == (idx<<3)+0x801538. Same tst/jeq_s/j_s [r2] tail."
+    },
+    {
+      "name": "opencfw_em9305_common_callback_314408",
+      "elf_dir": "widen_retry_failed2",
+      "class": "SEMANTIC_EQUIV",
+      "insn_count": "12->11",
+      "note": "orig asl 3; add 0x801534; ld [r2] == cand asl 3; ld [r2,0x801534]. Same tail."
+    },
+    {
+      "name": "opencfw_em9305_common_channel_callback_315260",
+      "elf_dir": "widen_retry_failed2",
+      "class": "SEMANTIC_EQUIV",
+      "insn_count": "53==53",
+      "note": "Identical control flow and callees (auxiliary_ready_303f68, jl [callback], radio_finish_3045c0, memcpy, radio_record_30fc28, radio_followup_30fb3c, radio_cancel_30fab8). orig st 0,[0x8015e0] vs cand st 0,[r14] after mov r14,0x8015e0. Branch displacements shrink by 4. Trailing 3 insns after leave_s are the next unsyboled fragment on both sides."
+    },
+    {
+      "name": "opencfw_em9305_native_stack_check_302820",
+      "elf_dir": "widen_batch_ae",
+      "class": "SEMANTIC_EQUIV",
+      "insn_count": "actual body 6 insns (objdump range also swallows later unsyboled TU code)",
+      "note": "C is sp=__builtin_stack_address()-4; brk if sp is outside &em9305_ram_80e978..&em9305_ram_80f978 (orig used the same 0x80e978/0x80f978 literals). Orig folds to add r0,sp,0xff7f1684 (= raw_sp-0x80e97c); cmp 0x1000; jls blink; brk. Cand is sub2 r0,sp,1 (=raw_sp-4); cmp 0x80e978 / 0x80f978; jls/brk. Effective raw-SP window is [0x80e97c, 0x80f97c] on both sides. Harness SP is outside that window, so both sides still brk and cannot be memhashed here."
+    },
+    {
+      "name": "opencfw_em9305_common_channel_callback_3146d4",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV",
+      "insn_delta": 4,
+      "note": "Same typo-RAM immediates and callees. mov+ld vs abs ld; enter_s / regalloc."
+    },
+    {
+      "name": "opencfw_em9305_common_channel_callback_314758",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV",
+      "insn_delta": 3,
+      "note": "Same typo-RAM immediates and callees."
+    },
+    {
+      "name": "opencfw_em9305_common_channel_callback_3147b4",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV",
+      "insn_delta": 0,
+      "note": "Same typo-RAM immediates and callees. orig st 0,[0x8015e0] vs cand st 0,[r15]."
+    },
+    {
+      "name": "opencfw_em9305_common_channel_callback_3151a0",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV",
+      "insn_delta": 1,
+      "note": "Same typo-RAM immediates and callees."
+    },
+    {
+      "name": "opencfw_em9305_common_channel_callback_3151fc",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV",
+      "insn_delta": 0,
+      "note": "Same typo-RAM immediates and callees."
+    },
+    {
+      "name": "opencfw_em9305_common_channel_callback_315544",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV",
+      "insn_delta": 1,
+      "note": "Same typo-RAM immediates and callees."
+    },
+    {
+      "name": "opencfw_em9305_common_radio_finish_3045c0",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV",
+      "insn_delta": 5,
+      "note": "Same typo-RAM immediates and callees. orig push_s blink; ld r0,[0x80163c] vs cand enter_s [r13,blink]; mov r13,0x80163c; ld [r13]."
+    },
+    {
+      "name": "opencfw_em9305_auxiliary_prepare_303ef0",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV_BASE_PLUS_OFF",
+      "insn_delta": 9,
+      "note": "Callees match. Orig-only typo-RAM immediates all sit inside typo-RAM objects (em9305_ram_801534+4, 801638+0x14, 805e6c+0x64, 805eec+0x19/0x30/0x34/0x38). Cand materializes object base 0x805eec."
+    },
+    {
+      "name": "opencfw_em9305_common_channel_callback_314a88",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV_BASE_PLUS_OFF",
+      "insn_delta": 54,
+      "note": "Callees match. Orig-only field addresses all lie in em9305_ram_803d58 or em9305_ram_8058c8; cand uses those object bases + offsets. Larger insn delta is extra lea for typo-RAM symbols."
+    },
+    {
+      "name": "opencfw_em9305_common_channel_callback_3155c4",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV_BASE_PLUS_OFF",
+      "insn_delta": 61,
+      "note": "Same pattern as 314a88: orig-only fields in em9305_ram_803d58 and em9305_ram_8058c8."
+    },
+    {
+      "name": "opencfw_em9305_common_channel_callback_314c04",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV_BASE_PLUS_OFF",
+      "insn_delta": 3,
+      "note": "Callees match. Table walk is equivalent: orig mpy 0x4e2 (=1250); add 0x803ffc / 0x804000; ld pair == cand mov 0x803ffc; mpy 1250; ld [base+idx] and ld [row+4]. Later orig ld r3,[r14,-100] / add3 r14,1309 (= +0x28e8 if <<3) then ld [r14] vs cand ld r3,[r14,0x802850] / ld [0x80519c+r14]; those bases equal 0x8028b4-100 and 0x8028b4+0x28e8, i.e. pointer vs typo-RAM base+index."
+    },
+    {
+      "name": "opencfw_em9305_common_channel_callback_314d18",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV_BASE_PLUS_OFF",
+      "insn_delta": 3,
+      "note": "Same 0x803ffc/0x804000 table fold and same 0x802850 / 0x80519c vs r14-relative form as 314c04."
+    },
+    {
+      "name": "opencfw_em9305_controller_startup",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV_BASE_PLUS_OFF",
+      "insn_delta": 23,
+      "note": "Callees match. Example: orig mov 0x80199c; ld [r1,0] vs cand mov 0x801994; ld [r1,8]. Most orig-only immediates are fields of typo-RAM objects (801534, 8018bc, 8028d0, 803d20, 805688, 805e6c, 805eec). Orig 0x8028dc..0x8028e8 sit just past em9305_ram_8028d0 (size 10); consistent with cand using base+offset past the current sizeof."
+    },
+    {
+      "name": "opencfw_em9305_associated_schedule_insert_312da4",
+      "elf_dir": "widen_retry_failed2",
+      "class": "ADDRESSING_EQUIV_BASE_PLUS_OFF",
+      "insn_delta": 18,
+      "note": "Callees match. Most orig-only immediates are fields of em9305_ram_8027e0, 803bd4, 803d58, 805c44. Leftover orig literals: 0x248-stride table 0x801c64,0x801eac,0x8020f4,0x80233c,0x802584 (cand can index a base without emitting each element address); 0x805c4c..0x805c58 just past em9305_ram_805c44 (size 8); 0x805f60 = 0x805eec+0x74, past em9305_ram_805eec (size 80). Not treated as a C mismatch; object-map coverage is slightly short of a few orig field addresses."
+    }
+  ],
+  "class_counts": {
+    "SEMANTIC_EQUIV": 4,
+    "ADDRESSING_EQUIV": 7,
+    "ADDRESSING_EQUIV_BASE_PLUS_OFF": 7,
+    "demonstrated_c_mismatch": 0
+  },
+  "not_a_c_mismatch": true,
+  "next_em9305_gap": {
+    "initializer_lowers": "next; top file init_native_scan_child_31eac8.c still has 71 typo-RAM literal sites / 50 unique after counting 0x80xxxxyu forms",
+    "initializer_lowers_totals": {
+      "c_files": 564,
+      "sites": 1538,
+      "unique_addresses": 360,
+      "top_file": "init_native_scan_child_31eac8.c (71 sites / 50 unique)"
+    },
+    "also": "residual/copied C: stock_residual_code.c (26 sites / 16 unique), bootloader (1), qpc-port (2), plus other scheduler files such as wsf_os_ao.c",
+    "source_completeness_proven": false
+  }
+}

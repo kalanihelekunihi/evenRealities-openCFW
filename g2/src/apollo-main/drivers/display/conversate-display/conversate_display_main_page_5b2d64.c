@@ -32,14 +32,14 @@ extern void audio_uart_page_43f6d6(uint32_t, uint32_t, uint32_t, uint32_t);
 extern void audio_conversate_route_scroll_5b22fa(uint32_t, uint32_t);
 extern uint32_t audio_conversate_ui_main_list_container_5b12ba(uint32_t);
 extern uint32_t audio_uart_page_460084(const char *);
-extern uint32_t audio_uart_page_45fffe(const char *, uint32_t);
-extern uint32_t audio_conversate_prep_button_create_5b1150(uint32_t, uint32_t, uint32_t, uint32_t);
+extern const char *audio_uart_page_45fffe(const char *, uint32_t);
+extern uint32_t audio_conversate_prep_button_create_5b1150(uint32_t parent, uint32_t image, const char *label_text, uint32_t ignored);
 extern void audio_uart_page_4411aa(uint32_t, uint32_t, uint32_t);
 extern void lv_obj_set_style_shadow_width(uint32_t, uint32_t, uint32_t);
 extern void audio_uart_page_44e368(uint32_t, uint32_t);
 extern void audio_uart_page_43ded4(uint32_t, uint32_t);
 extern void audio_uart_page_499678(uint32_t, uint32_t);
-extern void audio_uart_page_49942e(uint32_t, uint32_t);
+extern void audio_uart_page_49942e(uint32_t, const char *);
 extern void audio_uart_page_44144c(uint32_t, int32_t, uint32_t);
 extern void audio_uart_page_43f6ac(uint32_t, uint32_t);
 extern void audio_conversate_ui_main_list_layout_5b0d86(void);
@@ -131,7 +131,7 @@ uint32_t audio_conversate_ui_route_5b2d64(uint32_t ignored, uint32_t elapsed,
     if (*(const volatile uint16_t *)(const void *)notes == 0u || word(notes, 0x84u) == 0u) {
         audio_uart_page_43f6b8(list, 2u, 0u, 0u);
     } else {
-        const uint32_t item = audio_uart_page_45fffe(
+        const char *const item = audio_uart_page_45fffe(
             prep_id, audio_uart_page_460084(prep_id));
         const uint32_t button = audio_conversate_prep_button_create_5b1150(
             root, (uint32_t)(uintptr_t)&audio_conversate_prep_icon_76a47c, item, 0u);
@@ -154,7 +154,7 @@ uint32_t audio_conversate_ui_route_5b2d64(uint32_t ignored, uint32_t elapsed,
     audio_uart_page_43dfa4(footer, 0x360u);
     const uint32_t footer_label = audio_lv_label_create_499416(footer);
     audio_uart_page_49942e(footer_label,
-                           (uint32_t)(uintptr_t)audio_conversate_title_label_5b3334);
+                           (const char *)audio_conversate_title_label_5b3334);
     audio_uart_page_44140e(footer_label, audio_uart_page_44104c(0xffffffu), 0u);
     audio_uart_page_43f4c0(footer_label, 0x240u, 0x3fffffffu);
     audio_lv_label_mode_499678(footer_label, 0u);

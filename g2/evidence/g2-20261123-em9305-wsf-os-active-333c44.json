@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "logged_at": "2026-11-23 1:53:24 AM CST (America/Chicago)",
+  "title": "Close the wsf_os_active_333c44 caveat: harness-direct compare of typo-RAM 806034 and 806054",
+  "source_completeness_proven": false,
+  "predecessor": "g2/evidence/g2-20261123-em9305-wsf-ao-boot-80139c-paired-sims.json",
+  "method": "Workspace-only destatic copies of already-installed typo-RAM cand and pre-install literal orig (tree linkage stays static). Test-only PRE_H plants me/event, cycles entry/dispatch/super, sets MSG+TIMER+HANDLER on dispatch, and forces wsf_event_remove / wsf_timer_expired to return 0 so those loops do not hang. Production wsf_os_ao.c was not changed this step.",
+  "prove": {
+    "symbol": "wsf_os_active_333c44",
+    "result": "EQUIVALENT 100  classes=4 calls=454",
+    "log": "build/ws-em9305-20261122/u-suffix/next3/wsf_active_333c44.log",
+    "tree_unchanged_sha256": "0741ff336192501305407a6b693c03a6d97086317646046cae1c0a16c9e46d8c"
+  },
+  "mutants_killed": [
+    {
+      "old": "&em9305_ram_806034",
+      "new": "&em9305_ram_80139c",
+      "status": "KILLED",
+      "detail": "MISMATCH ncalls/callhash/memhash 34 cases (dispatch t=0,3,6,\u2026)"
+    },
+    {
+      "old": "&em9305_ram_806054",
+      "new": "&em9305_ram_80139c",
+      "status": "KILLED",
+      "detail": "MISMATCH callhash 34 cases (the MSG-queue pointer passed to wsf_event_remove)"
+    }
+  ]
+}

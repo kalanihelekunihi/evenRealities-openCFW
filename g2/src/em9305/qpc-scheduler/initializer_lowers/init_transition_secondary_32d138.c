@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 extern uint32_t opencfw_em9305_init_secondary_allocate_316e74(void);
 extern uint32_t opencfw_em9305_common_request_30455c(uint32_t);
@@ -22,8 +23,8 @@ static void wr32(uintptr_t p,uint32_t v) { *(volatile uint32_t *)p=v; }
  * stack state; the resolver may inspect or overwrite this same frame. */
 uint32_t opencfw_em9305_init_transition_secondary_32d138_body(uint8_t *local)
 {
-    uintptr_t message=rd32(0x805c80u);
-    /* Native incoming R0=0x805c80 is overwritten before first use by the
+    uintptr_t message=rd32(((uintptr_t)&em9305_ram_805c5c + 0x24u));
+    /* Native incoming R0=((uintptr_t)&em9305_ram_805c5c + 0x24u) is overwritten before first use by the
      * source-owned 316e74 allocator; its canonical selected ABI is void. */
     uintptr_t record=opencfw_em9305_init_secondary_allocate_316e74();
     if(record==0u) return 0u;
@@ -37,15 +38,15 @@ uint32_t opencfw_em9305_init_transition_secondary_32d138_body(uint8_t *local)
     wr8(out,0u);
     wr16(out-8u,0u);
     wr8(record+9u,12u);
-    wr32(0x8051d0u,(uint32_t)record);
+    wr32(((uintptr_t)&em9305_ram_8051b8 + 0x18u),(uint32_t)record);
     wr32(record+620u,1000u);
     wr32(record+632u,high);
     wr32(record+628u,low);
     /* Native writes out+1 in the encode call's delay slot. */
     wr8(out+1u,flag32);
-    (void)opencfw_em9305_radio_secondary_encode_32e164(0x805fbcu,message+6u);
+    (void)opencfw_em9305_radio_secondary_encode_32e164(((uintptr_t)&em9305_ram_805fb8 + 0x4u),message+6u);
 
-    uint32_t period=rd16(0x805fc0u);
+    uint32_t period=rd16(((uintptr_t)&em9305_ram_805fb8 + 0x8u));
     flag33=rd8(message+33u);
     high=rd32(message+40u);
     low=rd32(message+36u);
@@ -79,14 +80,14 @@ uint32_t opencfw_em9305_init_transition_secondary_32d138_body(uint8_t *local)
     wr8(record+513u,rd8(message+53u));
     wr8(record+514u,rd8(message+54u));
     uint8_t b55=rd8(message+55u);
-    uintptr_t current=rd32(0x8051d0u);
+    uintptr_t current=rd32(((uintptr_t)&em9305_ram_8051b8 + 0x18u));
     wr8(record+515u,b55); /* BL delay slot before 3213f8. */
     (void)opencfw_em9305_init_secondary_start_3213f8(current);
     if(rd8(out+153u)!=0u) {
-        uint32_t callback=rd32(0x805c90u);
-        uint32_t global8c=rd32(0x805c8cu);
-        uint32_t global84=rd32(0x805c84u);
-        uint32_t global10=rd32(0x805c10u);
+        uint32_t callback=rd32(((uintptr_t)&em9305_ram_805c5c + 0x34u));
+        uint32_t global8c=rd32(((uintptr_t)&em9305_ram_805c5c + 0x30u));
+        uint32_t global84=rd32(((uintptr_t)&em9305_ram_805c5c + 0x28u));
+        uint32_t global10=rd32(((uintptr_t)&em9305_ram_805be0 + 0x30u));
         uintptr_t target=rd32(record+92u);
         message_word=rd32(message+48u);
         wr32(record+76u,global8c);
@@ -106,18 +107,18 @@ uint32_t opencfw_em9305_init_transition_secondary_32d138_body(uint8_t *local)
     b52=rd8(message+52u);
     uint8_t b53=rd8(message+53u),b54=rd8(message+54u);
     b55=rd8(message+55u);
-    wr16(0x8051c2u,h24);
-    wr16(0x8051c4u,h4);
-    wr16(0x8051c6u,h26);
-    wr16(0x8051c8u,h28);
-    wr16(0x8051cau,h44);
-    wr8(0x8051ccu,b34);
-    wr16(0x8051ceu,h30);
-    wr32(0x8051d4u,message_word);
-    wr8(0x8051d8u,b52);
-    wr8(0x8051d9u,b53);
-    wr8(0x8051dau,b54);
-    wr8(0x8051dbu,b55); /* BL delay slot before 321e14. */
+    wr16(((uintptr_t)&em9305_ram_8051b8 + 0xau),h24);
+    wr16(((uintptr_t)&em9305_ram_8051b8 + 0xcu),h4);
+    wr16(((uintptr_t)&em9305_ram_8051b8 + 0xeu),h26);
+    wr16(((uintptr_t)&em9305_ram_8051b8 + 0x10u),h28);
+    wr16(((uintptr_t)&em9305_ram_8051b8 + 0x12u),h44);
+    wr8(((uintptr_t)&em9305_ram_8051b8 + 0x14u),b34);
+    wr16(((uintptr_t)&em9305_ram_8051b8 + 0x16u),h30);
+    wr32(((uintptr_t)&em9305_ram_8051b8 + 0x1cu),message_word);
+    wr8(((uintptr_t)&em9305_ram_8051b8 + 0x20u),b52);
+    wr8(((uintptr_t)&em9305_ram_8051b8 + 0x21u),b53);
+    wr8(((uintptr_t)&em9305_ram_8051b8 + 0x22u),b54);
+    wr8(((uintptr_t)&em9305_ram_8051b8 + 0x23u),b55); /* BL delay slot before 321e14. */
     /* Native 321e14 reads only entry R0 (slot); R1-R3 are overwritten. */
     (void)opencfw_em9305_init_secondary_commit_321e14(h24);
     /* Native 321820 overwrites R0 before use; commit's result is ignored. */

@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x320978..0x320b08: complete a connection request sent by the
  * initiator (object +44) for the link (object +36). Requires an address
@@ -9,7 +10,7 @@
  * through 303cc0) or resolved from the peer pair (303a40), and written to
  * the PDU with its type (+194); otherwise the resolved pair (+80/+84) is
  * cleared. The PDU is encoded with the channel-selection bit (bit 14 of
- * 0x805a94, +193), the first anchor is scheduled from the transmit window
+ * ((uintptr_t)&em9305_ram_805a6c + 0x28u), +193), the first anchor is scheduled from the transmit window
  * (+90 * 1250 us after the request end) and stored in the PDU (window
  * offset bytes 22/23), the link (+76) and the connection (+24); the CSA
  * flag (+97), started flag (+96) and PHY (+100) are set. Returns 1 when
@@ -41,7 +42,7 @@ uint32_t opencfw_em9305_child_320978(uintptr_t object,uintptr_t pdu)
     uint32_t length=r8(initiator+185u);
     uint32_t coded=r8(initiator+153u);
     uint32_t phy=r8(initiator+13u);
-    uintptr_t base=r32(0x805c70u);
+    uintptr_t base=r32(((uintptr_t)&em9305_ram_805c5c + 0x14u));
     uint32_t end=r32(initiator+160u);
     uint32_t handle=r16(link+88u);
     uint32_t duration=opencfw_em9305_radio_duration_piece_312b88(phy,coded,length+2u);
@@ -90,10 +91,10 @@ uint32_t opencfw_em9305_child_320978(uintptr_t object,uintptr_t pdu)
                                                        pair[0],pair[1]);
         w8(link+194u,type);
     }
-    uint32_t csa=(r32(0x805a94u)>>14)&1u;
+    uint32_t csa=(r32(((uintptr_t)&em9305_ram_805a6c + 0x28u))>>14)&1u;
     w8(link+193u,csa);
     (void)opencfw_em9305_radio_encode_3239d4(r32(initiator+104u),link+192u);
-    uintptr_t current=r32(0x805c70u);
+    uintptr_t current=r32(((uintptr_t)&em9305_ram_805c5c + 0x14u));
     uint32_t window=r16(link+90u);
     uint32_t start=end+duration;
     int32_t index=(int32_t)(connection-current)/912;

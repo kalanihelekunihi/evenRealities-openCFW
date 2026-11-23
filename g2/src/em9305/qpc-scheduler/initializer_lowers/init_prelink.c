@@ -1,4 +1,5 @@
 #include "init_lower_native.h"
+#include "em9305_ram.h"
 
 /* Native 0x3251dc and 0x318ab8 are genuine side-effect children. The
  * latter receives the former's R0 without an intervening move. */
@@ -10,33 +11,33 @@ extern uint32_t opencfw_em9305_init_child_318ab8(uint32_t previous_result);
  * All stores below preserve the native repeated state writes. */
 void opencfw_em9305_init_child_3078a0(void)
 {
-    init_write32(0x802880u, (uint32_t)(uintptr_t)opencfw_em9305_callback_31e7fc);
-    init_write32(0x80287cu, init_code_address(opencfw_em9305_callback_318c1c));
-    init_write32(0x802878u, init_code_address(opencfw_em9305_callback_318f2c));
-    init_write32(0x802954u, init_code_address(opencfw_em9305_callback_31df8c));
-    init_write32(0x805200u, (uint32_t)(uintptr_t)opencfw_em9305_callback_31e604);
-    init_write32(0x803d54u, (uint32_t)(uintptr_t)opencfw_em9305_mode_event_31bd78);
-    init_write32(0x803d34u, init_code_address(opencfw_em9305_callback_320f78));
-    init_write32(0x80280cu, init_code_address(opencfw_em9305_callback_322754));
-    init_write32(0x8027e0u, init_code_address(opencfw_em9305_callback_325984));
+    init_write32(((uintptr_t)&em9305_ram_802878 + 0x8u), (uint32_t)(uintptr_t)opencfw_em9305_callback_31e7fc);
+    init_write32(((uintptr_t)&em9305_ram_802878 + 0x4u), init_code_address(opencfw_em9305_callback_318c1c));
+    init_write32((uintptr_t)&em9305_ram_802878, init_code_address(opencfw_em9305_callback_318f2c));
+    init_write32(((uintptr_t)&em9305_ram_802950 + 0x4u), init_code_address(opencfw_em9305_callback_31df8c));
+    init_write32(((uintptr_t)&em9305_ram_8051b8 + 0x48u), (uint32_t)(uintptr_t)opencfw_em9305_callback_31e604);
+    init_write32(((uintptr_t)&em9305_ram_803d20 + 0x34u), (uint32_t)(uintptr_t)opencfw_em9305_mode_event_31bd78);
+    init_write32(((uintptr_t)&em9305_ram_803d20 + 0x14u), init_code_address(opencfw_em9305_callback_320f78));
+    init_write32(((uintptr_t)&em9305_ram_8027e0 + 0x2cu), init_code_address(opencfw_em9305_callback_322754));
+    init_write32((uintptr_t)&em9305_ram_8027e0, init_code_address(opencfw_em9305_callback_325984));
     uint32_t previous = opencfw_em9305_init_child_3251dc(
         init_code_address(opencfw_em9305_callback_3189f4));
     (void)opencfw_em9305_init_child_318ab8(previous);
-    uintptr_t product = (uintptr_t)init_read32(0x805cacu);
+    uintptr_t product = (uintptr_t)init_read32(((uintptr_t)&em9305_ram_805c5c + 0x50u));
     uint8_t version = init_read8(product + 4u);
     if (version < 7u) return;
-    uint32_t old = init_read32(0x805b30u);
-    init_write32(0x805b30u, old | 0xeu);
+    uint32_t old = init_read32(((uintptr_t)&em9305_ram_805af0 + 0x40u));
+    init_write32(((uintptr_t)&em9305_ram_805af0 + 0x40u), old | 0xeu);
     if (version == 7u) return;
-    uint32_t second = init_read32(0x805b34u);
-    init_write32(0x805b30u, old | 0x2eu);
+    uint32_t second = init_read32(((uintptr_t)&em9305_ram_805af0 + 0x44u));
+    init_write32(((uintptr_t)&em9305_ram_805af0 + 0x40u), old | 0x2eu);
     if (version < 9u) return;
-    init_write32(0x805b34u, second);
-    init_write32(0x805b30u, old | 0x1002eu);
+    init_write32(((uintptr_t)&em9305_ram_805af0 + 0x44u), second);
+    init_write32(((uintptr_t)&em9305_ram_805af0 + 0x40u), old | 0x1002eu);
     if (version == 9u) return;
-    init_write32(0x805b34u, second);
-    init_write32(0x805b30u, old | 0x501002eu);
+    init_write32(((uintptr_t)&em9305_ram_805af0 + 0x44u), second);
+    init_write32(((uintptr_t)&em9305_ram_805af0 + 0x40u), old | 0x501002eu);
     if (version < 12u) return;
-    init_write32(0x805b30u, old | 0x501002eu);
-    init_write32(0x805b34u, second | (1u << 7));
+    init_write32(((uintptr_t)&em9305_ram_805af0 + 0x40u), old | 0x501002eu);
+    init_write32(((uintptr_t)&em9305_ram_805af0 + 0x44u), second | (1u << 7));
 }

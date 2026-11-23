@@ -1,12 +1,13 @@
 /* Native enter-mode 0x30f468..0x30f4b0 and lock aggregation
  * 0x302df4..0x302e14. ROM and actual lock-child ABI remain contracts. */
 #include <stdint.h>
+#include "em9305_ram.h"
 /* Native 0x302d20..0x302d40: seventeen optional callback table entries. */
 uint32_t opencfw_em9305_sleep_lock_update(uint32_t selector)
 {
  uint32_t result=selector;
  for(uint32_t index=0;index<17;index++) {
-  uintptr_t object=*(volatile uint32_t *)(uintptr_t)(0x80faecu+4u*index);
+  uintptr_t object=em9305_ram_80faec.u32[index];
   result=(uint32_t)object;
   if(object!=0) {
    uintptr_t callback=*(volatile uint32_t *)(object+selector*4u);
@@ -21,10 +22,10 @@ extern uint32_t opencfw_em9305_sleep_rom_enter(uint32_t); /* 0x103724 */
 uint32_t opencfw_em9305_sleep_aggregate_locks(void)
 {
  (void)opencfw_em9305_sleep_lock_update(1);
- uint32_t low=*(volatile uint32_t *)(uintptr_t)0x8018ecu;
- uint32_t high=*(volatile uint32_t *)(uintptr_t)0x8018f0u;
+ uint32_t low=em9305_ram_8018bc.u32_8018ec;
+ uint32_t high=em9305_ram_8018bc.u32_8018f0;
  uint32_t locks=high|low;
- *(volatile uint32_t *)(uintptr_t)0x801104u=locks;
+ em9305_ram_801104.u32_801104=locks;
  return locks;
 }
 static void set_state(uint32_t bit)

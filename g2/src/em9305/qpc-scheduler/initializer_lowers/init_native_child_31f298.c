@@ -1,15 +1,16 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Native 0x31f298..0x31f400: process a received periodic/extended
  * advertising report for a scanner link (+0x24, session +44) while the
- * scanner (0x803b68) is not paused. Without data (more == 0) only a
+ * scanner ((uintptr_t)&em9305_ram_803b68) is not paused. Without data (more == 0) only a
  * pending chain (state +56 == 1) is marked complete (+24 bit 6); state 2
  * is ignored. For a fresh report (state 0) the advertiser type (+163, bit 1
  * when it differs from the identity) and address (+152/+156) are checked
  * against the filter (native 0x319ee8) for the target (+60, when filter
- * flag bit 1 at 0x803b90 is set) and the report (+20), with the
+ * flag bit 1 at ((uintptr_t)&em9305_ram_803b8c + 0x4u) is set) and the report (+20), with the
  * report filters (natives 0x31a1b0, 0x31a1fc). Accepted data from the
- * buffer at 0x803b6c (length 0x803b70) is appended to the link's report
+ * buffer at ((uintptr_t)&em9305_ram_803b68 + 0x4u) (length ((uintptr_t)&em9305_ram_803b68 + 0x8u)) is appended to the link's report
  * (+148, offset +48) unless it would exceed the configured maximum
  * (config +0x20), which marks it truncated. Returns 1 when data was
  * appended, else 0. */
@@ -22,7 +23,7 @@ extern void *opencfw_em9305_memcpy(void *destination, const void *source, uint32
 
 uint32_t opencfw_em9305_child_31f298(uintptr_t context, uint32_t more)
 {
-    const uintptr_t scanner = 0x803b68u;
+    const uintptr_t scanner = (uintptr_t)&em9305_ram_803b68;
     if (*(volatile uint8_t *)(scanner + 1u) != 0u) return 0u;
     uintptr_t link = *(volatile uint32_t *)(context + 0x24u);
     uintptr_t state = link + 0x38u;
@@ -42,7 +43,7 @@ uint32_t opencfw_em9305_child_31f298(uintptr_t context, uint32_t more)
     if (mode == 0u) {
         uint32_t type = *(volatile uint8_t *)(session + 163u);
         uint32_t identity_type = *(volatile uint8_t *)(session + 162u);
-        uint32_t filter = *(volatile uint8_t *)(uintptr_t)0x803b90u;
+        uint32_t filter = em9305_ram_803b8c.u8_803b90;
         uint32_t high = *(volatile uint32_t *)(session + 156u);
         uint32_t low = *(volatile uint32_t *)(session + 152u);
         *(volatile uint8_t *)(link + 153u) = (uint8_t)filter;
@@ -73,7 +74,7 @@ uint32_t opencfw_em9305_child_31f298(uintptr_t context, uint32_t more)
             return 0u;
         }
     }
-    uintptr_t config = *(volatile uint32_t *)(uintptr_t)0x805cacu;
+    uintptr_t config = em9305_ram_805c5c.u32_805cac;
     uint32_t used = *(volatile uint16_t *)(link + 0x30u);
     uint32_t length = *(volatile uint8_t *)(scanner + 8u);
     if ((uint16_t)(*(volatile uint16_t *)(config + 0x20u) - used) < length) {

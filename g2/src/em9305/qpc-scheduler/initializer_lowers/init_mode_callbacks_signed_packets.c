@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "em9305_ram.h"
 
 /* Complete native callback envelopes 0x326090..0x326106. The 0x318920
  * packet-value child is an independently reviewed selected source provider. */
@@ -12,7 +13,7 @@ uint32_t opencfw_em9305_mode_callback_326090(uintptr_t context,
     uint8_t mode=*(volatile uint8_t *)(context+744u);
     if (mode==0u||mode==1u) {
         int32_t current=(int8_t)*(volatile uint8_t *)(context+746u);
-        int32_t limit=(int8_t)*(volatile uint8_t *)(uintptr_t)0x805aa8u;
+        int32_t limit=(int8_t)em9305_ram_805a6c.u8_805aa8;
         if ((mode==0u&&current<limit)||(mode==1u&&limit<current))
             *(volatile uint8_t *)(context+746u)=(uint8_t)limit;
     }

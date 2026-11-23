@@ -5,7 +5,7 @@
 
 /* Stock RAM 0x20075010..12 are the first three bytes of the state block
  * also used by the codec UART and radio lifecycle code. */
-extern uint8_t g2_stock_ram_20075010[0x10u];
+extern uint8_t g2_stock_ram_20075010[7u];
 
 #define audio_box_reconnect_suppressed_20075010 \
     (*(volatile uint8_t *)(void *)&g2_stock_ram_20075010[0])
